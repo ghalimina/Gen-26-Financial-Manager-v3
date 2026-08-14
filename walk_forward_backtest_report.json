@@ -1,0 +1,131 @@
+{
+  "timestamp": "2026-08-14T16:17:17.880932",
+  "period_full_3y": {
+    "start_date": "2023-11-07",
+    "end_date": "2026-08-13",
+    "bars_count": 671,
+    "initial_capital": 100000.0,
+    "final_equity": 203999.92,
+    "total_net_return_pct": 104.0,
+    "cagr_pct": 29.41,
+    "total_trades": 353,
+    "win_rate_pct": 59.49,
+    "avg_win_pct": 6.37,
+    "avg_loss_pct": -5.75,
+    "win_loss_ratio": 1.11,
+    "profit_factor": 1.89,
+    "max_drawdown_pct": -35.0,
+    "sharpe_ratio": 1.06,
+    "sortino_ratio": 1.75,
+    "round_trip_cost_pct": 0.9,
+    "benchmark_egx30_buy_hold_pct": 0.0,
+    "alpha_vs_benchmark_pct": 104.0
+  },
+  "period_recent_1y": {
+    "start_date": "2024-03-28",
+    "end_date": "2026-08-13",
+    "bars_count": 572,
+    "initial_capital": 100000.0,
+    "final_equity": 176597.32,
+    "total_net_return_pct": 76.6,
+    "cagr_pct": 27.04,
+    "total_trades": 295,
+    "win_rate_pct": 59.66,
+    "avg_win_pct": 5.81,
+    "avg_loss_pct": -5.44,
+    "win_loss_ratio": 1.07,
+    "profit_factor": 1.87,
+    "max_drawdown_pct": -35.02,
+    "sharpe_ratio": 1.05,
+    "sortino_ratio": 1.71,
+    "round_trip_cost_pct": 0.9,
+    "benchmark_egx30_buy_hold_pct": 0.0,
+    "alpha_vs_benchmark_pct": 76.6
+  },
+  "period_unfiltered_baseline": {
+    "start_date": "2023-11-07",
+    "end_date": "2026-08-13",
+    "bars_count": 671,
+    "initial_capital": 100000.0,
+    "final_equity": 169707.58,
+    "total_net_return_pct": 69.71,
+    "cagr_pct": 21.08,
+    "total_trades": 459,
+    "win_rate_pct": 54.47,
+    "avg_win_pct": 6.27,
+    "avg_loss_pct": -5.8,
+    "win_loss_ratio": 1.08,
+    "profit_factor": 1.47,
+    "max_drawdown_pct": -36.96,
+    "sharpe_ratio": 1.13,
+    "sortino_ratio": 2.01,
+    "round_trip_cost_pct": 0.9,
+    "benchmark_egx30_buy_hold_pct": 0.0,
+    "alpha_vs_benchmark_pct": 69.71
+  },
+  "cost_sensitivity_analysis": [
+    {
+      "friction_round_trip_pct": "0.00%",
+      "net_return_pct": 184.33,
+      "win_rate_pct": 64.31,
+      "profit_factor": 2.21,
+      "sharpe_ratio": 1.12,
+      "max_drawdown_pct": -33.76,
+      "alpha_vs_egx30_pct": 184.33
+    },
+    {
+      "friction_round_trip_pct": "0.25%",
+      "net_return_pct": 159.42,
+      "win_rate_pct": 63.17,
+      "profit_factor": 2.11,
+      "sharpe_ratio": 1.1,
+      "max_drawdown_pct": -33.95,
+      "alpha_vs_egx30_pct": 159.42
+    },
+    {
+      "friction_round_trip_pct": "0.50%",
+      "net_return_pct": 136.48,
+      "win_rate_pct": 62.04,
+      "profit_factor": 2.02,
+      "sharpe_ratio": 1.09,
+      "max_drawdown_pct": -34.27,
+      "alpha_vs_egx30_pct": 136.48
+    },
+    {
+      "friction_round_trip_pct": "0.75%",
+      "net_return_pct": 115.71,
+      "win_rate_pct": 60.06,
+      "profit_factor": 1.94,
+      "sharpe_ratio": 1.07,
+      "max_drawdown_pct": -34.72,
+      "alpha_vs_egx30_pct": 115.71
+    },
+    {
+      "friction_round_trip_pct": "0.90%",
+      "net_return_pct": 104.0,
+      "win_rate_pct": 59.49,
+      "profit_factor": 1.89,
+      "sharpe_ratio": 1.06,
+      "max_drawdown_pct": -35.0,
+      "alpha_vs_egx30_pct": 104.0
+    },
+    {
+      "friction_round_trip_pct": "1.25%",
+      "net_return_pct": 79.19,
+      "win_rate_pct": 58.07,
+      "profit_factor": 1.77,
+      "sharpe_ratio": 1.03,
+      "max_drawdown_pct": -35.65,
+      "alpha_vs_egx30_pct": 79.19
+    },
+    {
+      "friction_round_trip_pct": "1.50%",
+      "net_return_pct": 63.38,
+      "win_rate_pct": 55.81,
+      "profit_factor": 1.7,
+      "sharpe_ratio": 1.01,
+      "max_drawdown_pct": -36.11,
+      "alpha_vs_egx30_pct": 63.38
+    }
+  ]
+}

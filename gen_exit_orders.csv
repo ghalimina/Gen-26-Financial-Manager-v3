@@ -1,0 +1,2 @@
+﻿mode,date,valid_until_date,order_type,ticker,name,data_verification_status,action,trigger_price,stop_loss,reduction_pct,shares_to_sell,resulting_weight_after_reduction_pct,estimated_freed_cash_egp,exit_reason,notes
+SIMULATION,2026-08-14 18:18,2026-08-16,SELL_STOP_MARKET,COMI.CA,التجاري الدولي,CONFIRMED_BY_USER,EXIT 🔴,139.27,135.9,100.0%,50,0.0%,6963.5,إشارة CASH من الذكاء الاصطناعي — تصفية كاملة بنسبة 100.0% (من 100.0% إلى 0.0%),تصفية المركز وتحويله إلى كاش حر

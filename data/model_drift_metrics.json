@@ -1,0 +1,14 @@
+{
+  "rolling_20": {
+    "win_rate": 0.0,
+    "profit_factor": 0.0,
+    "brier_score": 0.260334925,
+    "ece": 0.51015
+  },
+  "rolling_60": {
+    "win_rate": 0.0,
+    "profit_factor": 0.0,
+    "brier_score": 0.260334925,
+    "ece": 0.51015
+  }
+}

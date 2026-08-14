@@ -1,0 +1,17 @@
+{
+  "cash_egp": 2000.0,
+  "buying_power_t0": 2000.0,
+  "unsettled_cash": 400.0,
+  "withdrawable_cash_t2": 1600.0,
+  "last_confirmed_date": "2026-08-14",
+  "holdings": [
+    {
+      "stock": "التجاري الدولي",
+      "ticker": "COMI.CA",
+      "qty": 50,
+      "avg_price": 15.0,
+      "data_verification_status": "CONFIRMED_BY_USER",
+      "confirmed_date": "2026-08-14"
+    }
+  ]
+}

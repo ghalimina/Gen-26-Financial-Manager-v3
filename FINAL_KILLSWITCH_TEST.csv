@@ -1,0 +1,3 @@
+test,present,status
+DD <= -10%,True,PASS
+Stale Data > 24h,True,PASS

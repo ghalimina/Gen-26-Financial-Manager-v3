@@ -1,0 +1,20 @@
+{
+  "last_updated": "2026-08-14 18:18",
+  "orders": {
+    "COMI.CA": {
+      "ticker": "COMI.CA",
+      "name": "التجاري الدولي",
+      "data_verification_status": "CONFIRMED_BY_USER",
+      "action": "EXIT 🔴",
+      "reduction_pct": "100.0%",
+      "shares_to_sell": 50,
+      "trigger_price": 139.27,
+      "estimated_freed_cash_egp": 6963.5,
+      "resulting_weight_after_reduction_pct": "0.0%",
+      "executed": false,
+      "executed_date": null,
+      "actual_exit_price": null,
+      "freed_cash_egp": 0.0
+    }
+  }
+}

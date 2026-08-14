@@ -1,0 +1,2 @@
+2296: st.download_button("⬇️ تحميل أوامر الشراء كملف Excel / CSV", f_tr.read(), "gen_trade_orders.csv", "text/csv", key="dl_trades_csv")
+2317: st.download_button("⬇️ تحميل أوامر البيع كملف Excel / CSV", f_ex.read(), "gen_exit_orders.csv", "text/csv", key="dl_exits_csv")

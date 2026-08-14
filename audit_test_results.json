@@ -1,0 +1,349 @@
+{
+  "test_matrix": {
+    "A_Empty_Portfolio": {
+      "status": "PASS",
+      "result": "Returned 0 exit signals for empty portfolio.",
+      "location": "app.py:compute_exit_signals"
+    },
+    "B_Single_Stock_Portfolio": {
+      "status": "PASS",
+      "result": "Single stock returned action: HOLD 🟢",
+      "location": "app.py:compute_exit_signals"
+    },
+    "D_Cash_Zero": {
+      "status": "PASS",
+      "result": "Cash 0.0 resulted in is_approved=False (Cost=725.0 vs Cash=0.0)",
+      "location": "app.py:export_trade_orders"
+    },
+    "E_Cash_Very_Small": {
+      "status": "PASS",
+      "result": "Cash 10.0 resulted in is_approved=False (Cost=725.0 vs Cash=10.0)",
+      "location": "app.py:export_trade_orders"
+    },
+    "F_Cash_Large": {
+      "status": "PASS",
+      "result": "Cash 1000000.0 resulted in is_approved=True (Cost=50725.0 vs Cash=1000000.0)",
+      "location": "app.py:export_trade_orders"
+    },
+    "G_Strong_Buy": {
+      "status": "PASS",
+      "result": "Signal '🟢 اقتناص القمة (STRONG BUY)' with agree '✅ اتفاق كامل' and Price 100.0 vs Stop 90.0 -> Action: 'HOLD 🟢' (Expected: 'HOLD 🟢')",
+      "location": "app.py:compute_exit_signals"
+    },
+    "H_Hold": {
+      "status": "PASS",
+      "result": "Signal '🟢 دخول خفيف (BUY)' with agree '🟡 اتفاق جزئي' and Price 100.0 vs Stop 90.0 -> Action: 'HOLD 🟢' (Expected: 'HOLD 🟢')",
+      "location": "app.py:compute_exit_signals"
+    },
+    "I_Reduce": {
+      "status": "PASS",
+      "result": "Signal '🟢 دخول خفيف (BUY)' with agree '⚠️ تعارض — تحقق' and Price 100.0 vs Stop 90.0 -> Action: 'REDUCE ⚠️' (Expected: 'REDUCE ⚠️')",
+      "location": "app.py:compute_exit_signals"
+    },
+    "J_Exit_Cash": {
+      "status": "PASS",
+      "result": "Signal '🟡 احتفاظ كاش (CASH)' with agree '—' and Price 100.0 vs Stop 90.0 -> Action: 'EXIT 🔴' (Expected: 'EXIT 🔴')",
+      "location": "app.py:compute_exit_signals"
+    },
+    "J_Exit_Stop": {
+      "status": "PASS",
+      "result": "Signal '🟢 اقتناص القمة (STRONG BUY)' with agree '✅ اتفاق كامل' and Price 85.0 vs Stop 90.0 -> Action: 'EXIT 🔴 (STOP HIT)' (Expected: 'EXIT 🔴 (STOP HIT)')",
+      "location": "app.py:compute_exit_signals"
+    },
+    "K_Data_Insufficient_Rows": {
+      "status": "PASS",
+      "result": "DQ Gate rejected <30 rows: ok=False, reason=بيانات غير كافية (أقل من 30 جلسة)",
+      "location": "app.py:run_data_quality_gate"
+    },
+    "L_Date_Gap_Over_Limit": {
+      "status": "PASS",
+      "result": "DQ Gate rejected gap > 12 days: ok=False, reason=فجوة تواريخ غير طبيعية: 21 يوم بدون بيانات",
+      "location": "app.py:run_data_quality_gate"
+    },
+    "AE_Price_Outlier_ZScore": {
+      "status": "PASS",
+      "result": "DQ Gate caught outlier: ok=False, reason=سعر اليوم خارج النطاق الطبيعي (z=932.7 > 3.8) — شذوذ سعري",
+      "location": "app.py:run_data_quality_gate"
+    },
+    "N_Zero_Volume_Liquidity": {
+      "status": "PASS",
+      "result": "Liquidity filter returned: flag=REJECT, adj_alloc=0.0, reason=حجم تداول يومي = صفر",
+      "location": "app.py:compute_liquidity_flag"
+    },
+    "T_Duplicate_Buy_Existing_Holding": {
+      "status": "PASS",
+      "result": "Candidates generated: 0 (Zero overlap confirmed).",
+      "location": "app.py:export_trade_orders"
+    },
+    "U_Buy_Exceeds_Cash_Gating": {
+      "status": "PASS",
+      "result": "Order cost exceeding free cash is marked as: 'PENDING_LIQUIDATION ⏳'",
+      "location": "app.py:export_trade_orders"
+    },
+    "V_Max_Total_Allocation_Cap": {
+      "status": "PASS",
+      "result": "Total 70.0% correctly flagged exceeded=True",
+      "location": "app.py:compute_combined_allocation"
+    },
+    "W_Stop_Loss_Sanity": {
+      "status": "PASS",
+      "result": "Stop 96.2 < Entry 99.2 < Current 100.0",
+      "location": "app.py:run_engine_pipeline"
+    },
+    "X_Target_Price_Sanity": {
+      "status": "PASS",
+      "result": "Peak 105.0 > Entry 99.2 and > Current 100.0",
+      "location": "app.py:run_engine_pipeline"
+    },
+    "AF_FX_Stress_Test": {
+      "status": "PASS",
+      "result": "FX stress calculated for 4 positions. Columns: ['stock', 'ticker', 'qty', 'avg_price', 'position_value_EGP', 'beta_to_usdegp', 'impact_devalue_5pct_EGP', 'impact_devalue_10pct_EGP', 'impact_devalue_20pct_EGP', 'impact_devalue_30pct_EGP', 'date_computed']",
+      "location": "app.py:run_fx_stress_test"
+    }
+  },
+  "math_verification": {
+    "Risk_Parity_Formula": {
+      "formula": "w_i = min(MAX_POS, (1/vol_i) / sum(1/vol))",
+      "expected": {
+        "A.CA": 0.1,
+        "B.CA": 0.1
+      },
+      "actual": {
+        "A.CA": 0.1,
+        "B.CA": 0.1
+      },
+      "status": "PASS"
+    },
+    "Slippage_Formula": {
+      "formula": "round((base + vol_impact + min(0.003, atr_pct/100*0.05)) * 100, 2)",
+      "expected": 0.45,
+      "actual": 0.45,
+      "status": "PASS"
+    },
+    "Dynamic_Reduction_Sizing": {
+      "formula": "req_red = ((cur_w - target_cap) / cur_w) * 100; shares = ceil(qty * req_red/100)",
+      "expected_reduction_pct": 50.0,
+      "expected_shares_to_sell": 50,
+      "actual_reduction_pct": 50.0,
+      "actual_shares_to_sell": 50,
+      "status": "PASS"
+    }
+  },
+  "ai_ml_audit": {
+    "is_real_ml": true,
+    "model_types": [
+      "HistGradientBoostingRegressor (Multi-Horizon 1D, 2D, 3D, 4D, 5D, 20D, 60D, Peak)",
+      "VotingClassifier (Ensemble of HistGradientBoosting + ExtraTrees + RandomForest)",
+      "CalibratedClassifierCV (Isotonic probability calibration)"
+    ],
+    "feature_count": 18,
+    "features": [
+      "Weekly_Trend_Confirm",
+      "Cross_Sectional_Rank",
+      "Gold_Macro_Momentum",
+      "EGX30_Index_Momentum",
+      "USD_EGP_Mom_5D",
+      "USD_EGP_Mom_20D",
+      "Mom_1D",
+      "Mom_5D",
+      "Mom_10D",
+      "Mom_20D",
+      "Volume_ZScore",
+      "Institutional_Flow_Proxy",
+      "ATR_Percent",
+      "MACD_Hist_Norm",
+      "RSI_14",
+      "Distance_From_OrderBlock",
+      "SMC_Liquidity_Sweep",
+      "Market_Regime"
+    ],
+    "scaling": "RobustScaler (fit on concatenated multi-asset cross-sectional pool)",
+    "training_mode": "Cross-sectional pooled training over all liquid EGX stocks",
+    "leakage_analysis": {
+      "scaler_leakage": "Mild: RobustScaler fits on full_df containing all historical bars concatenated. Because full_df is across time without walk-forward window inside app.py real-time inference, features are stationary percentage changes (returns, z-scores, momentum), but cross-sectional scaling is fitted on all data.",
+      "target_leakage": "Clean: Targets are forward-shifted returns (shift(-h)), properly dropped with dropna before training.",
+      "holdout_test_note": "WARNING: run_portfolio_equity_holdout_test in app.py line 1309 returns a hardcoded dictionary {'clean_acc':63.1, 'clean_sharpe':1.97, 'clean_mdd':-6.05, 'portfolio_return':8.48} rather than running dynamic backtest on the fly."
+    }
+  },
+  "trading_logic_audit": {},
+  "red_team_stress": {
+    "Negative_Input_Filtering": {
+      "status": "PASS",
+      "result": "Negative entries correctly rejected. Saved 1 valid holdings.",
+      "saved_holdings": [
+        {
+          "stock": "UNKNOWN_TICKER",
+          "ticker": "UNKNOWN_TICKER.CA",
+          "qty": 100,
+          "avg_price": 10.0,
+          "data_verification_status": "CONFIRMED_BY_USER",
+          "confirmed_date": "2026-08-14"
+        }
+      ]
+    },
+    "Corrupted_History_Handling": {
+      "status": "PASS",
+      "result": "Gracefully returned df with 94 rows and acc=63.1%"
+    }
+  },
+  "backtest_audit": {},
+  "bugs": [],
+  "file_inventory": [
+    {
+      "file": "app.py",
+      "size_bytes": 130359
+    },
+    {
+      "file": "audit_log_20260814_044451.txt",
+      "size_bytes": 6513
+    },
+    {
+      "file": "audit_log_20260814_044627.txt",
+      "size_bytes": 6523
+    },
+    {
+      "file": "audit_log_20260814_045522.txt",
+      "size_bytes": 6513
+    },
+    {
+      "file": "audit_log_20260814_050722.txt",
+      "size_bytes": 6489
+    },
+    {
+      "file": "audit_log_20260814_052616.txt",
+      "size_bytes": 6513
+    },
+    {
+      "file": "audit_log_20260814_155122.txt",
+      "size_bytes": 6525
+    },
+    {
+      "file": "audit_test_results.json",
+      "size_bytes": 10694
+    },
+    {
+      "file": "backtest_empirical_results.json",
+      "size_bytes": 552
+    },
+    {
+      "file": "compliance_checklist.md",
+      "size_bytes": 3483
+    },
+    {
+      "file": "daily_paper_trade_logger.py",
+      "size_bytes": 16006
+    },
+    {
+      "file": "egx_cib_lstm_engine.py",
+      "size_bytes": 11906
+    },
+    {
+      "file": "egx_fundamentals.csv",
+      "size_bytes": 1588
+    },
+    {
+      "file": "egx_fundamentals_builder.py",
+      "size_bytes": 3132
+    },
+    {
+      "file": "egx_screener.py",
+      "size_bytes": 15571
+    },
+    {
+      "file": "execution_status.json",
+      "size_bytes": 2054
+    },
+    {
+      "file": "full_results_report.md",
+      "size_bytes": 12232
+    },
+    {
+      "file": "FULL_SYSTEM_AUDIT_REPORT.md",
+      "size_bytes": 34085
+    },
+    {
+      "file": "gen_daily_ranking.csv",
+      "size_bytes": 5497
+    },
+    {
+      "file": "gen_decision_log.csv",
+      "size_bytes": 7054
+    },
+    {
+      "file": "gen_exit_orders.csv",
+      "size_bytes": 1568
+    },
+    {
+      "file": "gen_fx_stress_test.csv",
+      "size_bytes": 513
+    },
+    {
+      "file": "gen_portfolio_state.csv",
+      "size_bytes": 1549
+    },
+    {
+      "file": "gen_trade_orders.csv",
+      "size_bytes": 6169
+    },
+    {
+      "file": "my_portfolio.json",
+      "size_bytes": 314
+    },
+    {
+      "file": "my_portfolio_backup_20260814_035315.json",
+      "size_bytes": 871
+    },
+    {
+      "file": "my_portfolio_backup_20260814_041015.json",
+      "size_bytes": 871
+    },
+    {
+      "file": "my_portfolio_backup_pre_reset_20260814_043611.json",
+      "size_bytes": 1193
+    },
+    {
+      "file": "my_portfolio_backup_pre_reset_20260814_043636.json",
+      "size_bytes": 996
+    },
+    {
+      "file": "my_portfolio_backup_pre_reset_20260814_045310.json",
+      "size_bytes": 996
+    },
+    {
+      "file": "paper_trading_journal.json",
+      "size_bytes": 751
+    },
+    {
+      "file": "predictions_history.json",
+      "size_bytes": 166381
+    },
+    {
+      "file": "run_all.bat",
+      "size_bytes": 543
+    },
+    {
+      "file": "RUN_AUDIT.bat",
+      "size_bytes": 289
+    },
+    {
+      "file": "run_daily_logger.bat",
+      "size_bytes": 97
+    },
+    {
+      "file": "settings.json",
+      "size_bytes": 402
+    },
+    {
+      "file": "show_my_results.py",
+      "size_bytes": 6552
+    },
+    {
+      "file": "START_APP.bat",
+      "size_bytes": 276
+    },
+    {
+      "file": "system_full_audit.py",
+      "size_bytes": 36488
+    }
+  ]
+}

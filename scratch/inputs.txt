@@ -1,0 +1,5 @@
+2207: cash_input = st.number_input("💵 الكاش الحر المتاح في المحفظة (ج.م):", min_value=0.0, value=float(get_portfolio_cash()), step=500.0, key="wizard_cash_input")
+2255: with co2: qt_single = st.number_input("الكمية:", min_value=1, value=50, step=10, key="single_q")
+2256: with co3: ag_single = st.number_input("متوسط سعر الشراء:", min_value=0.1, value=15.0, step=0.5, key="single_a")
+2296: st.download_button("⬇️ تحميل أوامر الشراء كملف Excel / CSV", f_tr.read(), "gen_trade_orders.csv", "text/csv", key="dl_trades_csv")
+2317: st.download_button("⬇️ تحميل أوامر البيع كملف Excel / CSV", f_ex.read(), "gen_exit_orders.csv", "text/csv", key="dl_exits_csv")
