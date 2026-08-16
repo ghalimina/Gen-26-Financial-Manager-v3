@@ -1,2 +1,2 @@
 ﻿mode,date,ticker,name,data_verification_status,signal,action_on_existing_position,exit_reason,current_price,entry_price,stop_loss,stop_loss_type,current_invested_weight_pct,target_recommended_weight_pct,risk_parity_weight_pct,liquidity_flag
-SIMULATION,2026-08-14 18:18,COMI.CA,التجاري الدولي,CONFIRMED_BY_USER,🟡 احتفاظ كاش (CASH),EXIT 🔴,إشارة CASH من الذكاء الاصطناعي — السهم لم يعد في قائمة الشراء,139.27,15.0,135.9,🟢 Trailing Profit Lock (حجز أرباح),100.0,0.0,0.0,N/A
+SIMULATION,2026-08-16 23:52,COMI.CA,التجاري الدولي,CONFIRMED_BY_USER,🟡 احتفاظ كاش (CASH),EXIT 🔴,إشارة CASH من الذكاء الاصطناعي — السهم لم يعد في قائمة الشراء,139.96,15.0,136.57,🟢 Trailing Profit Lock (حجز أرباح),100.0,0.0,0.0,N/A
