@@ -30,8 +30,8 @@ def main():
         
         # 1. Run Data Fetch & Prediction Engine Snapshot
         logger.info("Executing run_engine_pipeline() for snapshots and predictions...")
-        processed_data, df_rank = app.run_engine_pipeline()
-        if processed_data and not df_rank.empty:
+        decision_objects, processed_dict, metrics = app.run_engine_pipeline()
+        if decision_objects:
             logger.info("Engine Pipeline completed successfully. Snapshot generated.")
         else:
             logger.warning("Engine Pipeline returned empty or encountered a data fetch issue (e.g., weekend/offline).")
