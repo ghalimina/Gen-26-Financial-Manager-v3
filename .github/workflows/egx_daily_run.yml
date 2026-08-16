@@ -1,6 +1,9 @@
 name: EGX Daily Autonomous Execution
 
 on:
+  push:
+    branches:
+      - main
   schedule:
     # 09:45 AM Cairo Time (UTC+3) -> 06:45 UTC
     - cron: '45 6 * * 0-4'
