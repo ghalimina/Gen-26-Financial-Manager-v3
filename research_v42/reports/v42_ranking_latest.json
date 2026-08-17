@@ -34,7 +34,7 @@
         "Revenue growth trend: needs multi-period data (TODO)",
         "No valid pullback condition currently (Entry must be < Current)"
       ],
-      "computed_at": "2026-08-17T02:27:00.567095Z"
+      "computed_at": "2026-08-17T07:33:40.925530Z"
     },
     {
       "rank": 2,
@@ -68,7 +68,7 @@
         "Revenue growth trend: needs multi-period data (TODO)",
         "No valid pullback condition currently (Entry must be < Current)"
       ],
-      "computed_at": "2026-08-17T02:26:48.829314Z"
+      "computed_at": "2026-08-17T07:33:27.090511Z"
     },
     {
       "rank": 3,
@@ -104,7 +104,7 @@
         "Cannot assess earnings quality — missing OCF or NI",
         "No valid pullback condition currently (Entry must be < Current)"
       ],
-      "computed_at": "2026-08-17T02:27:10.904293Z"
+      "computed_at": "2026-08-17T07:33:53.240915Z"
     },
     {
       "rank": 4,
@@ -140,7 +140,7 @@
         "Extreme volatility regime — wider uncertainty",
         "No valid pullback condition currently (Entry must be < Current)"
       ],
-      "computed_at": "2026-08-17T02:27:09.003080Z"
+      "computed_at": "2026-08-17T07:33:50.710574Z"
     },
     {
       "rank": 5,
@@ -175,7 +175,7 @@
         "Negative operating cash flow",
         "Low OCF/NI ratio (-1.30) — possible earnings manipulation risk"
       ],
-      "computed_at": "2026-08-17T02:27:04.472226Z"
+      "computed_at": "2026-08-17T07:33:46.139479Z"
     },
     {
       "rank": 6,
@@ -209,7 +209,7 @@
         "Revenue growth trend: needs multi-period data (TODO)",
         "No valid pullback condition currently (Entry must be < Current)"
       ],
-      "computed_at": "2026-08-17T02:26:52.649083Z"
+      "computed_at": "2026-08-17T07:33:31.014242Z"
     },
     {
       "rank": 7,
@@ -241,10 +241,10 @@
       ],
       "warnings": [
         "Revenue growth trend: needs multi-period data (TODO)",
-        "RSI overbought: 80.1",
+        "RSI overbought: 79.6",
         "No valid pullback condition currently (Entry must be < Current)"
       ],
-      "computed_at": "2026-08-17T02:27:13.418612Z"
+      "computed_at": "2026-08-17T07:33:55.740337Z"
     },
     {
       "rank": 8,
@@ -277,10 +277,10 @@
       ],
       "warnings": [
         "Revenue growth trend: needs multi-period data (TODO)",
-        "RSI overbought: 82.9",
+        "RSI overbought: 82.5",
         "No valid pullback condition currently (Entry must be < Current)"
       ],
-      "computed_at": "2026-08-17T02:27:15.906518Z"
+      "computed_at": "2026-08-17T07:33:58.112723Z"
     },
     {
       "rank": 9,
@@ -314,7 +314,7 @@
         "Revenue growth trend: needs multi-period data (TODO)",
         "No valid pullback condition currently (Entry must be < Current)"
       ],
-      "computed_at": "2026-08-17T02:26:58.412065Z"
+      "computed_at": "2026-08-17T07:33:38.406746Z"
     },
     {
       "rank": 10,
@@ -351,7 +351,7 @@
         "Downtrend detected",
         "No valid pullback condition currently (Entry must be < Current)"
       ],
-      "computed_at": "2026-08-17T02:26:56.543088Z"
+      "computed_at": "2026-08-17T07:33:35.937786Z"
     },
     {
       "rank": 11,
@@ -387,7 +387,7 @@
         "Negative FCF",
         "No valid pullback condition currently (Entry must be < Current)"
       ],
-      "computed_at": "2026-08-17T02:26:54.789234Z"
+      "computed_at": "2026-08-17T07:33:33.331039Z"
     },
     {
       "rank": 12,
@@ -422,7 +422,7 @@
         "RSI overbought: 85.6",
         "No valid pullback condition currently (Entry must be < Current)"
       ],
-      "computed_at": "2026-08-17T02:27:06.484758Z"
+      "computed_at": "2026-08-17T07:33:48.456535Z"
     },
     {
       "rank": 13,
@@ -457,7 +457,7 @@
         "P/E (21.1) >> sector median (12.0)",
         "P/B not available"
       ],
-      "computed_at": "2026-08-17T02:27:02.205683Z"
+      "computed_at": "2026-08-17T07:33:43.219117Z"
     }
   ]
 }
