@@ -1,2 +1,16 @@
-﻿mode,date,ticker,name,data_verification_status,signal,action_on_existing_position,exit_reason,current_price,entry_price,stop_loss,stop_loss_type,current_invested_weight_pct,target_recommended_weight_pct,risk_parity_weight_pct,liquidity_flag
-SIMULATION,2026-08-16 23:52,COMI.CA,التجاري الدولي,CONFIRMED_BY_USER,🟡 احتفاظ كاش (CASH),EXIT 🔴,إشارة CASH من الذكاء الاصطناعي — السهم لم يعد في قائمة الشراء,139.96,15.0,136.57,🟢 Trailing Profit Lock (حجز أرباح),100.0,0.0,0.0,N/A
+﻿date,ticker,name,shares,current_price,market_value_egp,allocation_pct,status,action,notes
+2026-08-17 02:42,GBCO.CA,غبور أوتو,0,30.7,0.0,5.0,APPROVED,WAIT FOR PULLBACK,APPROVED_FOR_EXECUTION
+2026-08-17 02:42,AMOC.CA,أموك للبترول,0,10.93,0.0,4.6,APPROVED,WAIT FOR PULLBACK,APPROVED_FOR_EXECUTION
+2026-08-17 02:42,MFPC.CA,موبكو للأسمدة,0,40.8,0.0,5.8,APPROVED,WAIT FOR PULLBACK,APPROVED_FOR_EXECUTION
+2026-08-17 02:42,ETEL.CA,المصرية للاتصالات,0,118.1,0.0,5.0,APPROVED,WAIT FOR PULLBACK,APPROVED_FOR_EXECUTION
+2026-08-17 02:42,EGAL.CA,مصر للالومنيوم,0,348.06,0.0,5.4,APPROVED,WAIT FOR PULLBACK,APPROVED_FOR_EXECUTION
+2026-08-17 02:42,RAYA.CA,راية القابضة,159,7.23,1149.57,0.0,HOLDING,HOLD,السهم في النطاق الآمن (لم يكسر وقف الخسارة والتركز طبيعي)
+2026-08-17 02:42,MASR.CA,مدينة مصر للإسكان,0,7.7,0.0,5.0,APPROVED,WAIT FOR PULLBACK,APPROVED_FOR_EXECUTION
+2026-08-17 02:42,TMGH.CA,طلعت مصطفى,8,97.88,783.04,7.2,HOLDING,HOLD,السهم في النطاق الآمن (لم يكسر وقف الخسارة والتركز طبيعي)
+2026-08-17 02:42,DOMT.CA,دومتي للصناعات الغذائية,0,29.57,0.0,5.7,APPROVED,WAIT FOR PULLBACK,APPROVED_FOR_EXECUTION
+2026-08-17 02:42,SWDY.CA,السويدي إلكتريك,0,120.9,0.0,4.9,APPROVED,WAIT FOR PULLBACK,APPROVED_FOR_EXECUTION
+2026-08-17 02:42,ABUK.CA,أبو قير للأسمدة,0,79.7,0.0,5.6,APPROVED,WAIT FOR PULLBACK,APPROVED_FOR_EXECUTION
+2026-08-17 02:42,ALCN.CA,الإسكندرية تداول الحاويات,0,31.88,0.0,8.5,APPROVED,WAIT FOR PULLBACK,APPROVED_FOR_EXECUTION
+2026-08-17 02:42,ADIB.CA,مصرف أبو ظبي الإسلامي,0,55.19,0.0,5.2,APPROVED,WAIT FOR PULLBACK,APPROVED_FOR_EXECUTION
+2026-08-17 02:42,COMI.CA,التجاري الدولي,26,139.96,3638.96,0.0,HOLDING,HOLD,السهم في النطاق الآمن (لم يكسر وقف الخسارة والتركز طبيعي)
+2026-08-17 02:42,PHDC.CA,بالم هيلز للتعمير,65,15.27,992.55,0.0,HOLDING,HOLD,السهم في النطاق الآمن (لم يكسر وقف الخسارة والتركز طبيعي)

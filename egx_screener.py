@@ -186,7 +186,7 @@ def main():
         'Price_Range_Imbalance', 'GK_Volatility', 'ATR_Percent', 'ADX_14',
         'MACD_Hist_Norm', 'BB_Percent_B', 'OBV_Mom_5D', 'Stoch_K', 'RSI_14',
         'Gold_Mom_5D', 'Oil_Mom_5D', 'EEM_Mom_5D', 'SPY_Mom_5D', 'US_10Y_Yield_Change',
-        'CBE_Interest_Rate', 'PE_Ratio'
+        'CBE_Interest_Rate'
     ]
 
     print(f"\n[2/4] 📚 تجميع بيانات التدريب المجمعة (Pooled Global Training) لـ {len(GLOBAL_TRAINING_POOL)} سهم ومؤشر عالمي وإقليمي...")

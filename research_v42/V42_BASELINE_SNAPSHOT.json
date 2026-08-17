@@ -1,0 +1,29 @@
+{
+  "snapshot_time": "2026-08-17T01:39:12.871262Z",
+  "purpose": "V4.1 frozen baseline before V42 development",
+  "v41_status": "FROZEN_STABLE_BASELINE",
+  "v42_status": "RESEARCH_SHADOW",
+  "git_sha": "b3c7e8b111c3865f4e6ffff6c8088a13eedd0881",
+  "git_branch": "main",
+  "file_hashes": {
+    "app.py": "c21beb5639249fb6",
+    "egx_screener.py": "891d20f0802bbe8d",
+    "decision_builder.py": "MISSING_FILE",
+    "session_manager.py": "85b8089cf2f88b30",
+    "market_data_provider.py": "7cf11bb4bbed92be",
+    "telemetry_tracker.py": "1c33cfa9ecbc3b51",
+    "walk_forward_backtest_engine.py": "0f259ad87244b4f8",
+    "config.py": "e92d9f784f01af27"
+  },
+  "data_source": "YFinance EOD/Delayed Proxy",
+  "paper_days_at_snapshot": 0,
+  "rules": {
+    "v42_cannot_override_risk": true,
+    "v42_cannot_override_cash_gate": true,
+    "v42_cannot_override_65pct_gate": true,
+    "v42_cannot_override_exit": true,
+    "ml_mode": "SHADOW",
+    "paper_only": true,
+    "no_real_trading": true
+  }
+}

@@ -7,6 +7,8 @@ import warnings
 import pandas as pd
 import numpy as np
 import requests
+import traceback
+import hashlib
 
 warnings.filterwarnings('ignore')
 
@@ -274,6 +276,9 @@ def run_daily_paper_trading():
     X_all = scaler.fit_transform(all_data[feature_cols].values)
     y_all = all_data['Target_5D_Dir'].values.astype(int)
 
+    data_hash = hashlib.sha256(pd.util.hash_pandas_object(all_data[feature_cols]).values).hexdigest()
+    config_hash = hashlib.sha256(b"HistGB_max_iter=40_lr=0.05_md=3").hexdigest()
+
     clf = HistGradientBoostingClassifier(max_iter=40, learning_rate=0.05, max_depth=3, random_state=42)
     clf.fit(X_all, y_all)
 
@@ -311,7 +316,12 @@ def run_daily_paper_trading():
                 "confidence_prob": round(float(prob), 4),
                 "eval_date": eval_date,
                 "status": "PENDING",
-                "log_timestamp": datetime.datetime.now().isoformat()
+                "log_timestamp": datetime.datetime.now().isoformat(),
+                "model_version": "v3.0",
+                "feature_version": "1.2",
+                "training_cutoff_date": all_data.index.max().strftime('%Y-%m-%d') if not all_data.empty else "N/A",
+                "training_data_hash": data_hash,
+                "config_hash": config_hash
             })
 
     candidate_recs.sort(key=lambda x: x["confidence_prob"], reverse=True)

@@ -98,9 +98,11 @@ check3_msg = ""
 if os.path.exists(portfolio_csv):
     try:
         df_p = pd.read_csv(portfolio_csv, encoding='utf-8-sig')
-        tot_alloc = df_p['risk_parity_weight_pct'].sum() if 'risk_parity_weight_pct' in df_p.columns else 0.0
-        check3_pass = tot_alloc <= 65.0
-        check3_msg = f"مجموع التخصيص الكلي للمحفظة: {tot_alloc:.1f}% (الحد الأقصى المسموح 65.0%)"
+        actual_alloc = df_p['current_invested_weight_pct'].sum() if 'current_invested_weight_pct' in df_p.columns else 0.0
+        check3_pass = actual_alloc <= 65.0
+        check3_msg = f"نسبة الاستثمار الحالية الفعلية: {actual_alloc:.1f}% (الحد الأقصى المسموح 65.0%)"
+        if not check3_pass:
+            check3_msg = f"⚠️ تحذير: محفظتك الحالية بالفعل فوق سقف المخاطرة المفروض ({actual_alloc:.1f}% > 65.0%) — ده وضع موروث من قبل النظام، مش قرار جديد، لكن يستاهل انتباه."
     except Exception as e:
         check3_msg = f"خطأ في فحص التخصيص: {e}"
 else:
@@ -568,6 +570,67 @@ else:
 
 check_result(19, "حداثة تأكيد المحفظة وتوثيق تاريخ الإدخال (Portfolio Confirmation Freshness)", check19_pass, check19_msg)
 
+
+# ─────────────────────────────────────────────────────────────────────────────
+# CHECK 20: NO NEW BUYS IF TOTAL ALLOCATION IS OVER CEILING
+# ─────────────────────────────────────────────────────────────────────────────
+check20_pass = False
+check20_msg = ""
+if os.path.exists(portfolio_json_path) and os.path.exists(trade_orders_csv):
+    try:
+        with open(portfolio_json_path, 'r', encoding='utf-8') as f:
+            port_data = json.load(f)
+        h_list = port_data.get('holdings', port_data) if isinstance(port_data, dict) else port_data
+        cash_egp = float(port_data.get('cash_egp', 2000.0))
+        
+        # Calculate current allocation
+        total_stock = sum(float(h.get('qty', 0)) * float(h.get('avg_price', 0)) for h in h_list)
+        total_equity = total_stock + cash_egp
+        current_alloc_pct = (total_stock / total_equity) if total_equity > 0 else 0.0
+        
+        df_orders = pd.read_csv(trade_orders_csv, encoding='utf-8-sig')
+        approved_buys = df_orders[df_orders['status'].str.contains('APPROVED', na=False)]
+        
+        if current_alloc_pct > 0.65:
+            if not approved_buys.empty:
+                check20_msg = f"مخالفة قاتلة: المحفظة الحالية تشغل {current_alloc_pct*100:.1f}% (أعلى من 65%) ورغم ذلك يوجد {len(approved_buys)} أمر شراء APPROVED_FOR_EXECUTION!"
+            else:
+                check20_pass = True
+                check20_msg = f"حماية سليمة: المحفظة متجاوزة السقف ({current_alloc_pct*100:.1f}%) وتم حظر كافة أوامر الشراء الجديدة بنجاح (BLOCKED_PORTFOLIO_OVER_CAP)."
+        else:
+            check20_pass = True
+            check20_msg = f"المحفظة ضمن الحدود الآمنة ({current_alloc_pct*100:.1f}%) ويسمح بوجود أوامر شراء معتمدة."
+    except Exception as e:
+        check20_msg = f"خطأ أثناء فحص أوامر الشراء فوق السقف: {e}"
+else:
+    check20_msg = "الملفات المطلوبة (portfolio أو trade orders) غير متوفرة."
+
+check_result(20, "حظر الشراء الجديد لتجاوز السقف (Over-Cap Buy Gate)", check20_pass, check20_msg)
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# CHECK 21: SHADOW MODE ISOLATION
+# ─────────────────────────────────────────────────────────────────────────────
+check21_pass = False
+check21_msg = ""
+if os.path.exists(trade_orders_csv):
+    try:
+        df_ord = pd.read_csv(trade_orders_csv, encoding='utf-8-sig')
+        df_ord = df_ord.dropna(subset=['confidence'])
+        if 'confidence' in df_ord.columns:
+            if all(df_ord['confidence'] == "SHADOW_MODE_IGNORED"):
+                check21_pass = True
+                check21_msg = "نجاح: لا يوجد أي استخدام لقيم الثقة (Confidence) من نموذج الـ ML في قرارات الأوامر الفعلية. قيمة العمود هي SHADOW_MODE_IGNORED بالكامل."
+            else:
+                check21_msg = "فشل: يبدو أن قيم ML لا تزال تتسرب وتؤثر على الأوامر."
+        else:
+            check21_msg = "عمود confidence غير موجود."
+    except Exception as e:
+        check21_msg = f"خطأ في قراءة ملفات التنفيذ لفحص SHADOW_MODE: {e}"
+else:
+    check21_msg = "الملفات المطلوبة غير متوفرة لفحص SHADOW_MODE."
+
+check_result(21, "عزلة وضع SHADOW_MODE عن القرارات الفعلية (Shadow Mode Isolation)", check21_pass, check21_msg)
 
 log_print("\n==================================================================")
 log_print(f"🎉 FINAL SYSTEM AUDIT RESULT: {passed_count} PASSED | {failed_count} FAILED")

@@ -101,6 +101,7 @@ def run_walk_forward_simulation(dfs, egx30_df, start_date=None, end_date=None,
         
     initial_capital = 100_000.0
     cash = initial_capital
+    pending_settlements = [] # list of {'release_idx': int, 'amount': float}
     positions = {} # {ticker: {'qty': int, 'entry_price': float, 'entry_date': date, 'total_cost_basis': float, 'entry_fee': float, 'stop_loss': float, 'target': float, 'days': int}}
     trade_history = []
     equity_curve = []
@@ -112,6 +113,17 @@ def run_walk_forward_simulation(dfs, egx30_df, start_date=None, end_date=None,
     eval_dates = all_dates[warmup:]
     
     for idx, current_date in enumerate(eval_dates):
+        # -------------------------------------------------------------
+        # STEP 0: Process T+2 Cash Settlements
+        # -------------------------------------------------------------
+        remaining_settlements = []
+        for st in pending_settlements:
+            if idx >= st['release_idx']:
+                cash += st['amount']
+            else:
+                remaining_settlements.append(st)
+        pending_settlements = remaining_settlements
+
         # -------------------------------------------------------------
         # STEP 1: Process Exits on Active Positions
         # -------------------------------------------------------------
@@ -129,7 +141,7 @@ def run_walk_forward_simulation(dfs, egx30_df, start_date=None, end_date=None,
             if hit_stop or hit_target or timeout:
                 exit_fee_egp = pos['qty'] * cur_p * half_drag
                 gross_proceeds = pos['qty'] * cur_p - exit_fee_egp
-                cash += gross_proceeds
+                pending_settlements.append({'release_idx': idx + 2, 'amount': gross_proceeds})
                 
                 net_profit_egp = gross_proceeds - pos['total_cost_basis']
                 net_pnl_pct = (net_profit_egp / pos['total_cost_basis']) * 100.0
@@ -257,7 +269,7 @@ def run_walk_forward_simulation(dfs, egx30_df, start_date=None, end_date=None,
             cur_p = float(df_t.loc[last_date]['Close']) if last_date in df_t.index else pos['entry_price']
             exit_fee_egp = pos['qty'] * cur_p * half_drag
             gross_proceeds = pos['qty'] * cur_p - exit_fee_egp
-            cash += gross_proceeds
+            pending_settlements.append({'release_idx': len(eval_dates) + 2, 'amount': gross_proceeds})
             net_profit_egp = gross_proceeds - pos['total_cost_basis']
             net_pnl_pct = (net_profit_egp / pos['total_cost_basis']) * 100.0
             
@@ -287,6 +299,10 @@ def run_walk_forward_simulation(dfs, egx30_df, start_date=None, end_date=None,
     if eq_df.empty: return None
     
     # Mathematical Triple Reconciliation Check
+    for st in pending_settlements:
+        cash += st['amount']
+    pending_settlements.clear()
+
     total_ledger_profit = sum(t['net_profit_egp'] for t in trade_history)
     reconciled_final_equity = round(initial_capital + total_ledger_profit, 2)
     terminal_cash = round(cash, 2)

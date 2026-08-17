@@ -1,2 +1,0 @@
-2205: portfolio_raw_input = st.text_area("📋 الصق بيانات أسهمك هنا:", value=default_text, height=180, key="wizard_pf_text")
-2254: with co1: sc_single = st.selectbox("اختر السهم:", list(EGX_STOCKS.keys()), key="single_s")

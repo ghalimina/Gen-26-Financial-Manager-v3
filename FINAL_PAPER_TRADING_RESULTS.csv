@@ -1,4 +1,0 @@
-trade_id,ticker,name,sector,entry_date,entry_price,confidence_prob,eval_date,status,log_timestamp,exit_price,exit_date,net_pnl_pct,gross_pnl_egp,friction_costs_egp,net_pnl_egp,exit_reason,signal_type,suggested_entry_price,simulated_fill_price,slippage_incurred_pct,stop_loss,peak_target,order_shares,allocated_cash_egp
-TMGH.CA_2026-08-06,TMGH.CA,طلعت مصطفى,عقارات وإنشاءات 🏗️,2026-08-06,98.5,0.5192,2026-08-13,COMPLETED,2026-08-10T03:07:03.800972,97.8,2026-08-14,-1.61,-70.0,88.34,-158.33,TIME_EXPIRY,,,,,,,,
-FWRY.CA_2026-08-06,FWRY.CA,فوري للمدفوعات,اتصالات وتكنولوجيا 📱,2026-08-06,19.24,0.5011,2026-08-13,COMPLETED,2026-08-10T03:07:03.816448,19.01,2026-08-14,-2.09,-23.0,17.21,-40.21,TIME_EXPIRY,,,,,,,,
-MASR.CA_2026-08-13,MASR.CA,مدينة مصر للإسكان,عقارات وإنشاءات 🏗️,2026-08-13,,0.5019,2026-08-20,PENDING,2026-08-14T17:41:38.553293,,,,,,,,BUY,7.62,7.64,0.2,7.16,8.53,1309.0,9994.53

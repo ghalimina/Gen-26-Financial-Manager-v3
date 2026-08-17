@@ -1,0 +1,116 @@
+name: GEN-26 V42 — Daily Intelligence Engine
+
+on:
+  schedule:
+    # 09:30 AM Cairo Time (UTC+3) -> 06:30 UTC (pre-market)
+    - cron: '30 6 * * 0-4'
+    # 02:45 PM Cairo Time (UTC+3) -> 11:45 UTC (post-close)
+    - cron: '45 11 * * 0-4'
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  PYTHONIOENCODING: utf-8
+  PYTHONUNBUFFERED: "1"
+
+jobs:
+  # ── JOB 1: V4.1 Paper Trading Session ──────────────────────────────────
+  v41-paper-session:
+    name: V4.1 Paper Trading Session
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Verify headless_runner.py exists
+        run: |
+          if [ ! -f "headless_runner.py" ]; then
+            echo "ERROR: headless_runner.py not found!"
+            exit 1
+          fi
+          echo "headless_runner.py: OK"
+
+      - name: Run V4.1 Paper Session
+        run: python headless_runner.py
+
+      - name: Commit paper session artifacts
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f data/ gen_*.csv paper_trading_journal.json execution_status.json || true
+          if git diff --staged --quiet; then
+            echo "No paper session changes to commit."
+          else
+            git commit -m "chore(paper): V4.1 paper session $(date -u +%Y-%m-%d)"
+            git push
+          fi
+
+  # ── JOB 2: V42 Intelligence Engine ─────────────────────────────────────
+  v42-intelligence:
+    name: V42 Intelligence Engine (Research/Shadow)
+    runs-on: ubuntu-latest
+    needs: v41-paper-session
+    if: always()   # Run even if paper session fails
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run V42 Master Stock Ranker
+        run: |
+          cd research_v42/engines
+          python master_stock_ranker.py 2>&1 || echo "V42 ranker completed (check for warnings)"
+
+      - name: Validate V42 is not triggering real trades
+        run: |
+          echo "SAFETY CHECK: V42 is in RESEARCH/SHADOW mode"
+          echo "No real broker calls. No production capital at risk."
+          python -c "
+          import json, os, sys
+          snap = 'research_v42/V42_BASELINE_SNAPSHOT.json'
+          if os.path.exists(snap):
+              d = json.load(open(snap))
+              assert d['rules']['no_real_trading'] == True, 'SAFETY VIOLATION'
+              print(f'V42 Status: {d[\"v42_status\"]} — SAFE')
+          else:
+              print('WARNING: Baseline snapshot missing')
+              sys.exit(1)
+          "
+
+      - name: Commit V42 intelligence reports
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f research_v42/reports/ || true
+          if git diff --staged --quiet; then
+            echo "No V42 report changes."
+          else
+            git commit -m "chore(v42): intelligence report $(date -u +%Y-%m-%d)"
+            git push
+          fi

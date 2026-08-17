@@ -1,67 +1,97 @@
-import os
+#!/usr/bin/env python3
+# =============================================================================
+# headless_runner.py — GEN-26 V4.1 Headless Execution Engine
+# Called by: GitHub Actions (.github/workflows/*.yml)
+# Purpose: Run paper trading session autonomously without UI
+# RULE: NO REAL TRADING. PAPER ONLY.
+# =============================================================================
 import sys
-import logging
+import os
+import datetime
+import json
 import traceback
-from datetime import datetime
 
-# Configure logging to catch all exceptions for GitHub Actions
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    handlers=[logging.StreamHandler(sys.stdout)]
-)
+sys.stdout.reconfigure(encoding='utf-8')
 
-logger = logging.getLogger(__name__)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__)) if '__file__' in globals() else os.getcwd()
+sys.path.insert(0, BASE_DIR)
+
+try:
+    import pytz
+    cairo_tz = pytz.timezone('Africa/Cairo')
+    now_cairo = datetime.datetime.now(cairo_tz)
+except ImportError:
+    now_cairo = datetime.datetime.utcnow() + datetime.timedelta(hours=3)
+    print("[WARN] pytz not available, using UTC+3 approximation")
+
+from session_manager import SessionManager
 
 def main():
-    logger.info("Starting Headless Automated Execution - Gen-26 Financial Manager v3.0")
-    
-    # Check if we are running in a CI environment
-    is_ci = os.getenv("GITHUB_ACTIONS") == "true"
-    if is_ci:
-        logger.info("Running in GitHub Actions environment.")
-    
+    print("=" * 70)
+    print("🏛️ GEN-26 V4.1 — HEADLESS PAPER TRADING ENGINE")
+    print(f"   Run Time (Cairo): {now_cairo.strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"   Mode: PAPER ONLY — NO REAL EXECUTION")
+    print("=" * 70)
+
+    market_date = now_cairo.strftime("%Y-%m-%d")
+    weekday = now_cairo.weekday()  # Mon=0..Sun=6
+
+    # EGX closed on Friday (4) and Saturday (5)
+    if weekday in [4, 5]:
+        print(f"[SKIP] EGX is closed today ({now_cairo.strftime('%A')}). No paper session.")
+        return 0
+
+    print(f"\n[1/4] Starting paper session for date: {market_date}")
+    session_id = SessionManager.start_session(market_date)
+
+    if session_id is None:
+        print(f"[SKIP] Session already completed for {market_date} or duplicate detected.")
+        valid_days = SessionManager.get_valid_days()
+        print(f"[INFO] Total valid paper days: {valid_days} / 30")
+        return 0
+
     try:
-        # Import core modules
-        logger.info("Importing engine modules...")
-        import app
-        import daily_paper_trade_logger
-        import telemetry_tracker
-        
-        # 1. Run Data Fetch & Prediction Engine Snapshot
-        logger.info("Executing run_engine_pipeline() for snapshots and predictions...")
-        decision_objects, processed_dict, metrics = app.run_engine_pipeline()
-        if decision_objects:
-            logger.info("Engine Pipeline completed successfully. Snapshot generated.")
-        else:
-            logger.warning("Engine Pipeline returned empty or encountered a data fetch issue (e.g., weekend/offline).")
+        print(f"[2/4] Session ID: {session_id}")
+        print(f"[3/4] Running screener pipeline...")
 
-        # 2. Run Daily Paper Trade Logging
-        logger.info("Executing run_daily_paper_trading() for execution journal updates...")
-        try:
-            # We assume run_daily_paper_trading updates the JSON/CSV directly.
-            daily_paper_trade_logger.run_daily_paper_trading()
-            logger.info("Paper trading journal updated successfully.")
-        except Exception as e:
-            logger.error(f"Error during paper trade logging: {e}")
-            logger.error(traceback.format_exc())
+        # Import the screener pipeline
+        from egx_screener import main as run_screener
+        run_screener()
 
-        # 3. Update Model Drift & Calibration Telemetry
-        logger.info("Executing telemetry_tracker for drift monitoring...")
-        try:
-            telemetry_tracker.compute_model_drift()
-            logger.info("Telemetry and drift tracking updated successfully.")
-        except Exception as e:
-            logger.error(f"Error during telemetry tracking: {e}")
-            logger.error(traceback.format_exc())
+        print(f"[4/4] Completing session...")
+        SessionManager.complete_session(session_id, data_status="VALID")
 
-        logger.info("✅ Headless Automated Execution Completed Successfully.")
+        valid_days = SessionManager.get_valid_days()
+        print(f"\n✅ Session completed successfully.")
+        print(f"   Paper days completed: {valid_days} / 30")
+        print(f"   Production gate: {'BLOCKED (need more days)' if valid_days < 30 else '⚠️ READY FOR REVIEW'}")
+
+        # Update execution_status.json
+        status_path = os.path.join(BASE_DIR, "execution_status.json")
+        status = {}
+        if os.path.exists(status_path):
+            try:
+                with open(status_path, 'r', encoding='utf-8') as f:
+                    status = json.load(f)
+            except:
+                pass
+
+        status['last_updated'] = now_cairo.strftime("%Y-%m-%d %H:%M")
+        status['last_headless_run'] = now_cairo.isoformat()
+        status['paper_session_count'] = valid_days
+        status['last_session_id'] = session_id
+        status['last_market_date'] = market_date
+
+        with open(status_path, 'w', encoding='utf-8') as f:
+            json.dump(status, f, indent=2, ensure_ascii=False)
+
+        return 0
 
     except Exception as e:
-        logger.critical("🚨 CRITICAL FAILURE IN HEADLESS RUNNER 🚨")
-        logger.critical(str(e))
-        logger.critical(traceback.format_exc())
-        sys.exit(1)
+        print(f"\n❌ Session FAILED: {e}")
+        traceback.print_exc()
+        SessionManager.fail_session(session_id, reason=str(e)[:200])
+        return 1
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
