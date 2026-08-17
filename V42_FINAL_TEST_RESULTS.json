@@ -1,0 +1,9 @@
+{
+  "git_sha_at_test": "a3a467e",
+  "v4.1_status": "FROZEN",
+  "v42_status": "SHADOW",
+  "tests_passed": 24,
+  "tests_failed": 0,
+  "production_eligible": false,
+  "reason_blocked": "Insufficient Paper Days (0/30)"
+}

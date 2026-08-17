@@ -1,0 +1,5 @@
+Component,Status,Reason
+Daily Workflow,PASS,v42_daily_engine.yml is active
+Failure Semantics,PASS,Job 2 failure does not fail Job 1. Overall marked PARTIAL
+Idempotency,PASS,SessionManager protects by market_date
+Cron,PASS,UTC schedules correctly map to Cairo open/close
