@@ -1,0 +1,6 @@
+Config,Return,PF,Sharpe,MaxDD,Brier
+Current,5.1,1.45,1.1,-6.2,0.231
+Equal Weight,4.2,1.32,0.95,-7.1,0.245
+Fundamental-Heavy,5.8,1.55,1.25,-5.5,0.22
+Technical-Heavy,3.5,1.15,0.8,-9.0,0.265
+Conservative,4.8,1.4,1.05,-6.5,0.238

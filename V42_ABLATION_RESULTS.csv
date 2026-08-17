@@ -1,0 +1,9 @@
+Dropped,Return,PF,Sharpe,DD,Impact
+None,5.1,1.45,1.1,-6.2,BASELINE
+No Fundamentals,2.1,1.05,0.6,-10.5,CRITICAL
+No Valuation,3.8,1.25,0.9,-7.5,HIGH
+No Technical,4.5,1.35,1.0,-8.0,MODERATE
+No Liquidity,5.0,1.42,1.08,-6.5,LOW
+No Sector,4.9,1.4,1.05,-6.8,LOW
+No Macro,4.2,1.28,0.92,-8.2,HIGH
+No ML,5.1,1.45,1.1,-6.2,ZERO
