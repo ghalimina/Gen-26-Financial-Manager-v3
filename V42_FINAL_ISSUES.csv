@@ -1,3 +1,0 @@
-ID,File,Severity,Issue,Remediation
-ISS-01,market_data_provider.py,LOW,Data is Delayed YFinance proxy,Explicitly labeled DELAYED in UI. Real-time API needed.
-ISS-02,session_manager.py,INFO,0 Completed Paper Days,Wait for 30 daily runs before production evaluation.

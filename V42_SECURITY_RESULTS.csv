@@ -1,4 +1,0 @@
-Scan_Target,Finding,Status
-All .py files,No hardcoded credentials,PASS
-JSON Configs,No API keys leaked,PASS
-GitHub Workflows,Uses GitHub secrets,PASS

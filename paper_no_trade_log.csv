@@ -1,0 +1,2 @@
+session_id,market_date,timestamp,decision_id,ticker,status,action,reason,primary_reason,secondary_reasons,allocation_pct,cash_available,current_price,entry_price,entry_type,data_mode,market_data_age_seconds,cash_gate,over_cap_gate,liquidity_gate,data_gate,model_status,snapshot_id
+2026-08-17_77e2aa90,2026-08-17,20260817_100000,COMI.CA_20260817_100000_77e2aa90,COMI.CA,BLOCKED,NO_TRADE,STALE_MARKET_DATA,STALE_MARKET_DATA,LOW_CASH,70.0,100000.0,105.0,90.0,PULLBACK LIMIT,STALE_BLOCKED,150.0,FAIL,PASS,PASS,FAIL,SHADOW_ONLY,77e2aa90

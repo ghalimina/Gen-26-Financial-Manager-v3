@@ -1,0 +1,118 @@
+[
+  {
+    "decision_id": "COMI.CA_2026-08-18 10:00:00_33bddf4d",
+    "timestamp": "2026-08-18 10:00:00",
+    "ticker": "COMI.CA",
+    "name": "التجاري الدولي",
+    "market_data": {
+      "current_price": 90.0,
+      "price_timestamp": "2026-08-18 10:00:00"
+    },
+    "portfolio": {
+      "equity": 59000.0,
+      "cash": 50000.0,
+      "allocation_pct": 15.0,
+      "position_qty": 100
+    },
+    "signal": {
+      "action": "HOLD",
+      "status": "HOLDING",
+      "reason": "السهم في النطاق الآمن"
+    },
+    "entry": {
+      "price": 87.5,
+      "type": "PULLBACK_LIMIT",
+      "distance_pct": -2.8
+    },
+    "risk": {
+      "stop": 84.0,
+      "target": 98.0,
+      "risk_pct": 0.0,
+      "reward_pct": 0.0,
+      "risk_reward": "1:0"
+    },
+    "prediction": {
+      "model_status": "FROZEN",
+      "confidence": "SHADOW_MODE_IGNORED",
+      "scenario": "N/A",
+      "scenario_probability": "N/A"
+    },
+    "quality": {
+      "data_quality": "OK",
+      "liquidity_status": "OK",
+      "drift_status": "OK"
+    },
+    "gates": {
+      "cash_gate": "N/A",
+      "liquidity_gate": "PASS",
+      "over_cap_gate": "N/A",
+      "risk_gate": "PASS",
+      "kill_switch": "PASS"
+    },
+    "metadata": {
+      "model_version": "v4.1",
+      "feature_version": "v3",
+      "config_version": "v1",
+      "training_cutoff": "N/A",
+      "data_snapshot_id": "33bddf4d"
+    }
+  },
+  {
+    "decision_id": "TMGH.CA_2026-08-18 10:00:00_33bddf4d",
+    "timestamp": "2026-08-18 10:00:00",
+    "ticker": "TMGH.CA",
+    "name": "طلعت مصطفى",
+    "market_data": {
+      "current_price": 60.0,
+      "price_timestamp": "2026-08-18 10:00:00"
+    },
+    "portfolio": {
+      "equity": 59000.0,
+      "cash": 50000.0,
+      "allocation_pct": 15.0,
+      "position_qty": 0
+    },
+    "signal": {
+      "action": "NO_TRADE",
+      "status": "BLOCKED",
+      "reason": "INVALID_PULLBACK_ENTRY (Entry >= Current)"
+    },
+    "entry": {
+      "price": 60.0,
+      "type": "PULLBACK_LIMIT",
+      "distance_pct": 0.0
+    },
+    "risk": {
+      "stop": 56.0,
+      "target": 68.0,
+      "risk_pct": 0.0,
+      "reward_pct": 0.0,
+      "risk_reward": "1:0"
+    },
+    "prediction": {
+      "model_status": "FROZEN",
+      "confidence": "SHADOW_MODE_IGNORED",
+      "scenario": "N/A",
+      "scenario_probability": "N/A"
+    },
+    "quality": {
+      "data_quality": "OK",
+      "liquidity_status": "OK",
+      "drift_status": "OK"
+    },
+    "gates": {
+      "cash_gate": "SKIPPED",
+      "liquidity_gate": "PASS",
+      "over_cap_gate": "SKIPPED",
+      "risk_gate": "PASS",
+      "kill_switch": "PASS"
+    },
+    "metadata": {
+      "model_version": "v4.1",
+      "feature_version": "v3",
+      "config_version": "v1",
+      "training_cutoff": "N/A",
+      "data_snapshot_id": "33bddf4d"
+    }
+  }
+]

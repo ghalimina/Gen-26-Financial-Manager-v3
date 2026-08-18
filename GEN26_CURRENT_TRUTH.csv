@@ -1,6 +1,0 @@
-Subsystem,Current State,Active File,Active Function,Source of Truth,Verified Now,Evidence,Issue
-Risk,MAX_TOTAL_ALLOCATION_PCT = 0.65,app.py,UI Gate,app.py,YES,Line 2054,NONE
-Entry,WAIT_FOR_PULLBACK (Entry < Current),decision_builder.py,build_final_decision_objects,decision_builder.py,YES,Pullback logic,NONE
-Exit,OBJECTIVE (Stop / Target Only),decision_builder.py,compute_exit_signals,decision_builder.py,YES,No ML in Exit logic,NONE
-Decision Object,decision_builder.py -> build_final_decision_objects,decision_builder.py,build_final_decision_objects,decision_builder.py,YES,All modules use this output,NONE
-Paper Trading,0 / 30,execution_status.json,N/A,execution_status.json,YES,JSON state,NONE

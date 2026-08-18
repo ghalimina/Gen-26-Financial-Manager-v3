@@ -1,4 +1,0 @@
-Test,Status,Component
-ast.parse,PASS,Syntax
-V4.1 Risk Gates untouched,PASS,Architecture
-Decision Object schema match,PASS,Integration
