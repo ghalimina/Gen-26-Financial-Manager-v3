@@ -1,0 +1,17 @@
+Factor,Implemented,Real_or_Proxy,Used_in_Decision,Used_in_UI,Research_Only,Status
+Price (OHLC),YES,PROXY (YFinance Delayed),YES,YES,NO,IMPLEMENTED
+Momentum (RSI/ROC),YES,REAL (Calculated),YES,YES,NO,IMPLEMENTED
+Technical (SMA/ATR/ADX),YES,REAL (Calculated),YES,YES,NO,IMPLEMENTED
+Volatility Cones,YES,REAL (Calculated),YES,YES,NO,IMPLEMENTED
+Volume / ADV,YES,PROXY (YFinance Volume),YES,YES,NO,IMPLEMENTED
+Liquidity Gate,YES,REAL (Rule Filter),YES,YES,NO,IMPLEMENTED
+Fundamentals (5 Sub-Scores),YES,PROXY (YFinance EGX Data),NO (V42 Shadow),YES,YES,PROXY
+"Valuation Multiples (P/E, P/B)",YES,PROXY (YFinance / Static Sector),NO (V42 Shadow),YES,YES,PROXY
+Sector Map,YES,STATIC (EGX Sector Map),NO (V42 Shadow),YES,YES,STATIC
+Market Breadth (A/D Line),NO,NONE,NO,NO,NO,MISSING
+"Macro Proxies (CBE, USD, Gold)",YES,PROXY (YFinance Futures/FX),NO (V42 Shadow),YES,YES,PROXY
+Institutional Flow,PARTIAL,PROXY (Volume proxy),NO,NO,YES,PROXY
+Corporate Events / Dividends,NO,NONE,NO,NO,NO,MISSING
+News Sentiment / NLP,NO,NONE,NO,NO,NO,MISSING
+Microstructure / Level 2,NO,NONE,NO,NO,NO,MISSING
+Market Regime (EGX30 Trend/Vol),YES,REAL (Calculated),NO (V42 Shadow),YES,YES,IMPLEMENTED
