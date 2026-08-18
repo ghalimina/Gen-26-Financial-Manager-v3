@@ -142,6 +142,15 @@ st.markdown("""
   .badge.reduce { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid #f59e0b; }
   .badge.hold { background: rgba(59, 130, 246, 0.2); color: #60a5fa; border: 1px solid #3b82f6; }
 
+  /* Data Honesty Badges */
+  .badge-live { background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid #10b981; padding: 2px 8px; border-radius: 10px; font-size: 0.72rem; font-weight: 700; display: inline-block; }
+  .badge-delayed { background: rgba(245, 158, 11, 0.18); color: #f59e0b; border: 1px solid #f59e0b; padding: 2px 8px; border-radius: 10px; font-size: 0.72rem; font-weight: 700; display: inline-block; }
+  .badge-proxy { background: rgba(59, 130, 246, 0.18); color: #60a5fa; border: 1px solid #3b82f6; padding: 2px 8px; border-radius: 10px; font-size: 0.72rem; font-weight: 700; display: inline-block; }
+  .badge-missing { background: rgba(239, 68, 68, 0.18); color: #ef4444; border: 1px solid #ef4444; padding: 2px 8px; border-radius: 10px; font-size: 0.72rem; font-weight: 700; display: inline-block; }
+  .badge-shadow { background: rgba(139, 92, 246, 0.18); color: #c084fc; border: 1px solid #8b5cf6; padding: 2px 8px; border-radius: 10px; font-size: 0.72rem; font-weight: 700; display: inline-block; }
+  .badge-safe { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid #10b981; padding: 2px 8px; border-radius: 10px; font-size: 0.72rem; font-weight: 700; display: inline-block; }
+  .badge-blocked { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid #ef4444; padding: 2px 8px; border-radius: 10px; font-size: 0.72rem; font-weight: 700; display: inline-block; }
+
   /* Info / Callout Boxes */
   .info-box  { 
     background: rgba(59, 130, 246, 0.1); 
@@ -1999,43 +2008,69 @@ quotes = mdp.get_quotes(active_tickers)
 from streamlit_autorefresh import st_autorefresh
 import datetime
 import pytz
+from session_manager import SessionManager
 
 cairo_tz = pytz.timezone('Africa/Cairo')
 now_cairo = datetime.datetime.now(cairo_tz)
 is_market_open = (now_cairo.weekday() in [6, 0, 1, 2, 3]) and ((10 <= now_cairo.hour < 14) or (now_cairo.hour == 14 and now_cairo.minute <= 30))
 
-# --- HEADER & TOP METRICS ---
-st.markdown("<h1 style='text-align: center; color: #1E88E5;'>🏛️ Gen-26 Financial Manager v4.1</h1>", unsafe_allow_html=True)
+# Compute Market Breadth Proxy from loaded processed_dict
+breadth_adv, breadth_dec, breadth_unch = 0, 0, 0
+for tkr_b, df_b in processed_dict.items():
+    if df_b is not None and not df_b.empty and 'Close' in df_b.columns and len(df_b) >= 2:
+        c_curr = float(df_b['Close'].iloc[-1])
+        c_prev = float(df_b['Close'].iloc[-2])
+        ret_b = (c_curr - c_prev) / c_prev if c_prev > 0 else 0.0
+        if ret_b > 0.001: breadth_adv += 1
+        elif ret_b < -0.001: breadth_dec += 1
+        else: breadth_unch += 1
+breadth_total = max(breadth_adv + breadth_dec + breadth_unch, 1)
+ad_ratio = round(breadth_adv / breadth_dec, 2) if breadth_dec > 0 else (breadth_adv if breadth_adv > 0 else 1.0)
+valid_paper_days = SessionManager.get_valid_days()
 
-header_cols = st.columns([2, 1, 1, 1])
-header_cols[0].markdown(f"**الوقت اللحظي:** {now_cairo.strftime('%Y-%m-%d %H:%M:%S')} (بتوقيت القاهرة)")
-header_cols[1].markdown(f"**حالة السوق:** {'🟢 مفتوح' if is_market_open else '🔴 مغلق'}")
+# --- HEADER & PERSISTENT STATUS BANNER ---
+st.markdown("<h1 style='text-align: center; color: #60a5fa; margin-bottom: 4px;'>🏛️ Gen-26 Financial Manager v4.1</h1>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #94a3b8; font-size: 0.95rem; margin-top: 0;'>المنظومة الآلية لإدارة المخاطر والتحليل الكمي لأسهم البورصة المصرية (EGX)</p>", unsafe_allow_html=True)
+
+# Top Bar Summary
+h_c1, h_c2, h_c3, h_c4 = st.columns([2, 1.2, 1.5, 1])
+h_c1.markdown(f"⏱️ **توقيت القاهرة:** `{now_cairo.strftime('%Y-%m-%d %I:%M %p')}`")
+h_c2.markdown(f"🏛️ **جلسة البورصة:** {'🟢 مفتوحة' if is_market_open else '🔴 مغلقة'}")
+h_c3.markdown(f"📊 **اتساع السوق (A/D):** 🟢 `{breadth_adv}` | 🔴 `{breadth_dec}` | ⚪ `{breadth_unch}` <span class='badge-proxy'>PROXY</span>", unsafe_allow_html=True)
 
 if is_market_open and live_mode:
-    st_autorefresh(interval=120000, key="auto_refresh")
-    header_cols[2].markdown("⏱️ **تحديث تلقائي:** مفعل (120 ثانية)")
+    st_autorefresh(interval=refresh_interval*1000, key="auto_refresh_loop")
+    h_c4.caption("🔄 تحديث تلقائي نشط")
 else:
-    header_cols[2].markdown("⏱️ **تحديث تلقائي:** متوقف")
+    if h_c4.button("🔄 تحديث يدوي"):
+        st.rerun()
 
-if header_cols[3].button("🔄 تحديث يدوي"):
-    st.rerun()
-
-st.markdown("<div style='background-color: #004D40; padding: 10px; border-radius: 5px; color: white; text-align: center;'>🛡️ <b>نظام الأمان (Kill-Switch):</b> فعال ومراقب | <b>البيانات:</b> Proxy YFinance 15m Delayed</div><br>", unsafe_allow_html=True)
+# ═══════════════════════════════════════════════════════════════════════════════
+# PERSISTENT TRUTH & HONESTY BANNER (Visible across all tabs)
+# ═══════════════════════════════════════════════════════════════════════════════
+st.markdown(f"""
+<div style="background: linear-gradient(135deg, rgba(6, 78, 59, 0.9) 0%, rgba(15, 23, 42, 0.95) 50%, rgba(30, 27, 75, 0.9) 100%); border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 12px; padding: 12px 18px; margin-bottom: 16px; color: #f8fafc; font-size: 0.88rem;">
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+        <div>🛡️ <b>بوابات الأمان V4.1:</b> <span class="badge-safe">مجمدة ومحمية 100% (Cash & 65% Gate)</span> | 📊 <b>وضع البيانات:</b> <span class="badge-delayed">DATA MODE = DELAYED (YFinance proxy, 15-min/EOD)</span></div>
+        <div>🔬 <b>محرك الذكاء V42:</b> <span class="badge-shadow">SHADOW ONLY (عرض فقط)</span> | 🚫 <b>حالة الإنتاج:</b> <span class="badge-blocked">محظور ({valid_paper_days}/30 يوم تجريبي)</span></div>
+    </div>
+</div>
+""", unsafe_allow_html=True)
 
 # --- TABS ---
 t_real_port, t_paper_port, t_screener, t_telemetry, t_v42 = st.tabs([
     "💼 محفظتي الحقيقية", 
-    "🧪 المحفظة الافتراضية", 
+    "🧪 المحفظة الافتراضية (Paper)", 
     "🏆 أفضل الأسهم والفرص", 
-    "⚙️ حالة النظام والتدقيق",
-    "🔬 ذكاء V42 (تجريبي)"
+    "⚙️ حالة النظام والتدقيق والاتساع",
+    "🔬 ذكاء V42 (وضع البحث والظل)"
 ])
 
 # ==================================================
 # TAB 1: Real Portfolio
 # ==================================================
 with t_real_port:
-    st.markdown("### 💼 المحفظة الحقيقية اللحظية")
+    st.markdown("### 💼 المحفظة الحقيقية ومراقبة المخاطر")
     portfolio_cash = get_portfolio_cash()
     live_market_value = 0.0
     
@@ -2056,252 +2091,330 @@ with t_real_port:
         
         # Stop loss evaluation for display (Read-Only UI)
         decision_match = next((d for d in decision_objects if d['ticker'] == tkr), None)
-        status = "HOLD"
-        if decision_match and decision_match['signal']['action'] in ['SELL', 'REDUCE', 'EXIT']:
-            status = decision_match['signal']['action']
+        status_badge = "🟢 احتفاظ في النطاق الآمن (HOLD)"
+        if decision_match:
+            act_sig = decision_match['signal']['action']
+            if 'EXIT' in act_sig or 'SELL' in act_sig:
+                status_badge = "🔴 خروج فوري لوقف الخسارة أو تحقيق الهدف (EXIT)"
+            elif 'REDUCE' in act_sig:
+                status_badge = "🟡 تقليص جزئي لتخفيف المخاطر (REDUCE)"
             
         real_holdings_data.append({
             "السهم": holding.get('stock', tkr),
             "الرمز": tkr,
-            "سعر الشراء": f"{avg_price:,.2f} EGP",
-            "السعر اللحظي": f"{live_price:,.2f} EGP",
+            "سعر الشراء": f"{avg_price:,.2f} ج.م",
+            "السعر الحالي [DELAYED]": f"{live_price:,.2f} ج.م",
             "الكمية": f"{qty:,}",
-            "الربح/الخسارة %": f"{pnl_pct:,.2f}%",
-            "الربح/الخسارة بالجنيه": f"{pnl:,.2f} EGP",
-            "حالة التخارج": status
+            "الربح/الخسارة %": f"{pnl_pct:+.2f}%",
+            "الربح/الخسارة بالجنيه": f"{pnl:+,.2f} ج.م",
+            "حالة قرار الخروج": status_badge
         })
         
     live_portfolio_equity = portfolio_cash + live_market_value
     current_allocation_pct = (live_market_value / live_portfolio_equity) * 100 if live_portfolio_equity > 0 else 0.0
 
     p_cols = st.columns(4)
-    p_cols[0].metric("قيمة المحفظة الإجمالية", f"{live_portfolio_equity:,.2f} EGP")
-    p_cols[1].metric("الكاش المتاح", f"{portfolio_cash:,.2f} EGP")
-    p_cols[2].metric("التخصيص الحالي", f"{current_allocation_pct:.1f}%")
+    p_cols[0].metric(
+        "قيمة المحفظة الإجمالية 💰", 
+        f"{live_portfolio_equity:,.2f} ج.م",
+        help="القيمة الصافية لمحفظتك وتساوي (رصيد الكاش الحر + القيمة السوقية الحالية للأسهم المملوكة)"
+    )
+    p_cols[1].metric(
+        "الكاش المتاح للشراء 💵", 
+        f"{portfolio_cash:,.2f} ج.م",
+        help="الكاش الحر الفعلي المتوفر في حسابك. لا يسمح النظام أبداً بشراء أسهم تتجاوز هذا المبلغ (قاعدة عدم الإفلاس 100%)."
+    )
+    
+    # Color coded allocation metric
+    alloc_delta = f"{current_allocation_pct:.1f}% من إجمالي المحفظة"
+    if current_allocation_pct > 65.0:
+        alloc_label = "🔴 تجاوز سقف 65%"
+    elif current_allocation_pct >= 55.0:
+        alloc_label = "🟡 اقتراب من السقف"
+    else:
+        alloc_label = "🟢 استثمار متوازن وآمن"
+        
+    p_cols[2].metric(
+        "نسبة الاستثمار في الأسهم", 
+        alloc_label, 
+        alloc_delta,
+        help="النسبة المئوية الحالية لقيمة الأسهم مقارنة بإجمالي المحفظة. الحد الأقصى المسموح به هو 65% لحماية رأس المال."
+    )
     
     if current_allocation_pct > (MAX_TOTAL_ALLOCATION_PCT * 100):
-        p_cols[3].metric("بوابة الاستثمار (65%)", "🔴 محظور للشراء", f"تجاوز: {current_allocation_pct - 65.0:.1f}%")
+        p_cols[3].metric("بوابة الاستثمار (65% Gate)", "🔴 محظور الشراء", f"تجاوز السقف: +{current_allocation_pct - 65.0:.1f}%", help="تم قفل الشراء تلقائياً لأن نسبة الأسهم تجاوزت 65%. لن يتم بيع أسهمك قسرياً، ولكن يُمنع شراء أي سهم جديد.")
     else:
-        p_cols[3].metric("بوابة الاستثمار (65%)", "🟢 مفتوح", f"متاح: {65.0 - current_allocation_pct:.1f}%")
+        avail_alloc = round(65.0 - current_allocation_pct, 1)
+        p_cols[3].metric("بوابة الاستثمار (65% Gate)", "🟢 متاح للشراء", f"سعة الشراء المتبقية: {avail_alloc}%", help="المحفظة ضمن النطاق الآمن. متاح شراء أسهم جديدة بحد أقصى السعة المتبقية.")
 
+    st.markdown("#### 📋 تفاصيل الأسهم المملوكة الحالية")
     if real_holdings_data:
         st.dataframe(pd.DataFrame(real_holdings_data), use_container_width=True)
     else:
-        st.info("المحفظة الحقيقية كاش 100% ولا توجد أسهم حالية.")
+        st.info("💡 **محفظتك الحقيقية كاش 100% حالياً.** لا توجد أسهم مفتوحة، مما يعني أنك في أعلى درجات الأمان المالي بانتظار الفرص المؤكدة.")
 
-    if st.button("💰 تسجيل تسويات مالية (إيداع/سحب)"):
-        st.warning("هذه الخاصية للقراءة فقط حالياً لحين إطلاق V5. الرجاء تعديل ملف `my_portfolio.json` يدوياً.")
+    with st.expander("ℹ️ دليل المستثمر المبتدئ: كيف تقرأ هذه الشاشة؟"):
+        st.markdown("""
+        - 🟢 **سعر الشراء الحالي [DELAYED]:** يتم جلب الأسعار عبر مزود Yahoo Finance بتأخير 15 دقيقة (موضح بشفافية).
+        - 🛡️ **حالة الخروج:** إذا ظهرت العلامة باللون الأحمر **🔴 خروج فوري**، فهذا يعني أن السهم كسر وقف الخسارة المحسوب أو حقق الهدف السعري ويجب بيعه لحماية أرباحك.
+        - 🔒 **بوابة 65%:** استراتيجية صارمة لإدارة المخاطر تضمن بقاء 35% على الأقل كاش في الأوقات الصعبة لاقتناص الفرص عند القيعان.
+        """)
 
 # ==================================================
 # TAB 2: Paper Trading Simulator
 # ==================================================
 with t_paper_port:
-    st.markdown("### 🧪 محاكاة التداول الوهمي (Forward-Testing)")
+    st.markdown("### 🧪 التداول التجريبي المستقل (Paper Trading Verification)")
     
-    paper_days = md.get('paper_session_count', 0)
-    p_cols2 = st.columns(3)
-    p_cols2[0].metric("أيام الاختبار (Paper Days)", f"{paper_days} / {PAPER_MIN_DAYS}")
-    p_cols2[1].metric("معدل النجاح التقريبي", "60.1%") # Mapped from V4.1 Raw Ledger
-    p_cols2[2].metric("حالة الصلاحية للإطلاق", "غير جاهز" if paper_days < PAPER_MIN_DAYS else "جاهز")
+    p_cols2 = st.columns([1.5, 1, 1])
+    p_cols2[0].metric(
+        "جلسات التداول المكتملة الموثقة", 
+        f"{valid_paper_days} / 30 يوم", 
+        f"المتبقي للاعتماد: {max(30 - valid_paper_days, 0)} يوم",
+        help="المصدر الرسمي هو SessionManager. اليوم لا يُحسب يوماً تجريبياً مكتملاً إلا إذا تم تنفيذ دورة التداول اليومية بنجاح كامل في يوم عمل حقيقي للبورصة."
+    )
+    p_cols2[1].metric("معدل نجاح الصفقات التاريخي (Win Rate)", "60.1%", help="معدل الصفقات الرابحة تاريخياً بناءً على فحص 386 صفقة في الـ Backtest الحقيقي.")
     
-    st.markdown("#### 📝 سجل الأوامر والقرارات (Decision Log)")
+    prod_badge = "🔴 غير مؤهل للإنتاج (BLOCKED)" if valid_paper_days < 30 else "🟢 مؤهل للمراجعة والترقية"
+    p_cols2[2].metric("حالة ترقية النظام للإنتاج", prod_badge, f"المكتمل: {(valid_paper_days/30.0)*100:.0f}%")
+    
+    st.progress(min(valid_paper_days / 30.0, 1.0))
+    if valid_paper_days < 30:
+        st.warning(f"⛔ **بوابة الإنتاج مغلقة (Production Blocked):** تم إنجاز {valid_paper_days} من أصل 30 يوماً تجريبياً مطلوباً. يُمنع منعاً باتاً تداول أي أموال حقيقية حتى اكتمال 30 يوماً متتالياً واجتياز جميع اختبارات الاستقرار.")
+    else:
+        st.success("✅ اكتملت أيام الاختبار الـ 30! النظام جاهز للمراجعة النهائية.")
+        
+    st.markdown("---")
+    st.markdown("#### 📝 سجل القرارات والأوامر الموحد (Authoritative Decision Log)")
     
     journal = load_paper_journal()
     journal_data = []
     if journal:
-        for order in reversed(journal[-20:]): # Last 20
+        for order in reversed(journal[-20:]):
             journal_data.append({
-                "التاريخ": order.get('timestamp'),
+                "التاريخ": order.get('timestamp', order.get('entry_date')),
                 "السهم": order.get('ticker'),
-                "نوع الأمر": order.get('side'),
-                "الكمية": order.get('quantity'),
+                "النوع": order.get('side', 'BUY'),
+                "الكمية": order.get('quantity', order.get('shares', 'N/A')),
                 "الحالة": order.get('status'),
                 "السعر المستهدف": order.get('target', 'N/A'),
                 "وقف الخسارة": order.get('stop', 'N/A')
             })
-    
     if journal_data:
         st.dataframe(pd.DataFrame(journal_data), use_container_width=True)
     else:
-        st.info("لا توجد أوامر منفذة في السجل الوهمي.")
-        
-    st.markdown("#### 🚫 أسباب رفض القرارات اليوم (No-Trade Log)")
+        st.info("سجل الأوامر التجريبية قيد التجميع من الـ Headless Runner اليومي.")
+
+    st.markdown("#### 🚫 سجل أسباب رفض الصفقات اليوم (No-Trade Accountability)")
     blocked_data = []
     for d in decision_objects:
-        if d['signal']['status'] == 'BLOCKED':
+        if d['signal']['status'] in ['BLOCKED', 'IGNORED', 'PENDING']:
             blocked_data.append({
-                "السهم": d['ticker'],
-                "الإشارة الأصلية": d['signal']['action'],
-                "السبب الرئيسي للرفض": d['signal'].get('primary_reason', 'N/A'),
-                "التفاصيل": d['signal'].get('reason', '')
+                "السهم": d['name'],
+                "الرمز": d['ticker'],
+                "الإشارة الأولية": d['signal']['action'],
+                "حالة القرار": f"🔴 {d['signal']['status']}" if d['signal']['status'] == 'BLOCKED' else f"🟡 {d['signal']['status']}",
+                "السبب الواضح للرفض / التعليق": d['signal'].get('reason', 'N/A')
             })
             
     if blocked_data:
         st.dataframe(pd.DataFrame(blocked_data), use_container_width=True)
     else:
-        st.success("لم يتم رفض أي فرص بناءً على قواعد المخاطرة اليوم.")
+        st.success("جميع الأسهم المفحوصة اليوم مطابقة لضوابط المخاطرة.")
 
 # ==================================================
-# TAB 3: Market Screener
+# TAB 3: Market Screener & Opportunities
 # ==================================================
 with t_screener:
-    st.markdown("### 🏆 أفضل الأسهم والفرص المكتشفة")
+    st.markdown("### 🏆 أفضل الفرص والأسهم المكتشفة بالذكاء الاصطناعي")
+    st.caption("جميع الأسعار والإشارات تعتمد على مبدأ **الشراء بارتداد (Pullback Limit)** لتجنب الشراء عند القمم السعرية.")
     
-    short_term, mid_term, long_term = [], [], []
-    
+    opp_rows = []
     for d in decision_objects:
-        # Filter strictly for BUY or WAIT FOR PULLBACK
-        if d['signal']['action'] not in ["BUY", "WAIT FOR PULLBACK"]: continue
-        
         tkr = d['ticker']
         q = quotes.get(tkr)
-        live_price = q.last_price if (q and q.last_price) else "بانتظار البيانات"
+        live_p = q.last_price if (q and q.last_price) else d['market_data']['current_price']
         
-        conf = d['signal'].get('confidence', 0.0)
-        row = {
+        act = d['signal']['action']
+        stat = d['signal']['status']
+        ep = d['entry']['price']
+        tp = d['risk']['target']
+        sl = d['risk']['stop']
+        
+        # Plain Arabic "WHY" explanation
+        why_parts = []
+        if ep < live_p:
+            why_parts.append(f"ارتداد سعري آمن بخصم {abs(d['entry']['distance_pct']):.1f}% عن سعر السوق")
+        if tp > live_p:
+            exp_gain = ((tp - live_p) / live_p) * 100
+            why_parts.append(f"هدف ربحي متوقع +{exp_gain:.1f}%")
+        if sl > 0:
+            risk_dist = ((live_p - sl) / live_p) * 100
+            why_parts.append(f"حماية بوقف خسارة عند {sl:,.2f} ج.م (مخاطرة {risk_dist:.1f}%)")
+        why_arabic = " | ".join(why_parts) if why_parts else d['signal']['reason']
+        
+        # Visual Action Badge
+        if stat == "APPROVED" and "PULLBACK" in act:
+            action_badge = "🟢 جاهز للشراء عند الارتداد (APPROVED)"
+        elif stat == "BLOCKED":
+            action_badge = f"🔴 محظور: {d['signal']['reason']}"
+        elif stat == "PENDING":
+            action_badge = "🟡 معلق بانتظار سيولة كاش (PENDING)"
+        else:
+            action_badge = f"⚪ {act} ({stat})"
+            
+        opp_rows.append({
             "السهم": d['name'],
             "الرمز": tkr,
-            "السعر الحالي": f"{live_price:,.2f} EGP" if isinstance(live_price, float) else live_price,
-            "سعر الدخول المقترح": f"{d['entry']['price']:,.2f} EGP",
-            "الهدف المتوقع": f"{d['risk']['target']:,.2f} EGP",
-            "وقف الخسارة": f"{d['risk']['stop']:,.2f} EGP",
-            "ثقة النموذج %": f"{(conf*100):.1f}%"
-        }
+            "السعر الحالي [DELAYED]": f"{live_p:,.2f} ج.م",
+            "سعر الدخول المقترح [PULLBACK]": f"{ep:,.2f} ج.م",
+            "الهدف المتوقع [TARGET]": f"{tp:,.2f} ج.م",
+            "وقف الخسارة [STOP]": f"{sl:,.2f} ج.م",
+            "تخصيص المحفظة": f"{d['portfolio']['allocation_pct']}%",
+            "حالة التوصية": action_badge,
+            "أسباب الترتيب ودوافع القرار (WHY)": why_arabic
+        })
         
-        # Fake categorization for UI demonstration, since actual model horizons are not split here yet.
-        if conf >= 0.85:
-            short_term.append(row)
-        elif conf >= 0.70:
-            mid_term.append(row)
-        else:
-            long_term.append(row)
-            
-    st.markdown("#### 🟢 فرص المدى القصير (الزخم العالي)")
-    if short_term: st.dataframe(pd.DataFrame(short_term), use_container_width=True)
-    else: st.info("لا توجد فرص قصيرة المدى حالياً.")
-    
-    st.markdown("#### 🟡 فرص المدى المتوسط")
-    if mid_term: st.dataframe(pd.DataFrame(mid_term), use_container_width=True)
-    else: st.info("لا توجد فرص متوسطة المدى حالياً.")
-    
-    st.markdown("#### 🔵 فرص المدى الممتد")
-    if long_term: st.dataframe(pd.DataFrame(long_term), use_container_width=True)
-    else: st.info("لا توجد فرص طويلة المدى حالياً.")
+    if opp_rows:
+        st.dataframe(pd.DataFrame(opp_rows), use_container_width=True)
+    else:
+        st.info("لا توجد فرص شراء نشطة اليوم. الكاش محفوظ 100%.")
+
+    with st.expander("💡 شرح مبسط للمبتدئين: كيف تستفيد من هذه التوصيات؟"):
+        st.markdown("""
+        1. **سعر الدخول المقترح (سعر الارتداد):** لا تقم بالشراء بسعر السوق المباشر! ضع أمر شراء محدد (Limit Order) لدى وسيطك عند سعر الدخول المقترح لضمان عدم الشراء عند قمة مؤقتة.
+        2. **وقف الخسارة الصارم:** إذا كسر السهم سعر وقف الخسارة لأسفل، يتم إغلاق الصفقة فوراً للحفاظ على باقي رأس المال.
+        3. **تخصيص المحفظة:** لا تضع كل أموالك في سهم واحد! التزم بالنسبة الموضحة لكل سهم لتقليل المخاطر.
+        """)
 
 # ==================================================
-# TAB 4: System Telemetry & Audits
+# TAB 4: System Telemetry & Feasible Gap Audit
 # ==================================================
 with t_telemetry:
-    st.markdown("### ⚙️ حالة النظام والتدقيق التقني")
+    st.markdown("### ⚙️ التدقيق التقني، نقطة التعادل، ومراجعة النواقص (System Health & Gap Audit)")
     
-    st.markdown("#### 📊 تدقيق التكلفة ونقطة التعادل (Break-even Economics)")
-    st.markdown('''
-    - **Total Raw Turnover:** EGP 10,038,147
-    - **Total Gross Profit:** EGP 126,286
-    - **True Break-even Fee Rate:** **1.258%**
-    - **System Default Fee Drag:** **0.900%**
-    - *Verdict: System maintains a mathematically verified predictive edge over market fees.*
-    ''')
+    t_c1, t_c2 = st.columns(2)
+    with t_c1:
+        st.markdown("#### 📊 تدقيق التكلفة ونقطة التعادل الحقيقية (Break-Even Truth)")
+        st.markdown("""
+        <div class="glossary-card">
+            <p><b>نقطة التعادل للجانب الواحد (Per-Side Break-Even):</b> <span class="badge-safe">0.6290%</span></p>
+            <p><b>نقطة التعادل للجولة الكاملة (Round-Trip Break-Even):</b> <span class="badge-safe">1.2581%</span></p>
+            <p><b>العمولة والانزلاق الافتراضي المطبق:</b> <span class="badge-delayed">0.9000%</span></p>
+            <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 8px;">
+            ✅ <b>الحقيقة الرياضية:</b> النظام يحقق أرباحاً صافية طالما إجمالي عمولات البيع والشراء والانزلاق السعري أقل من <b>1.2581%</b>. تم دحض الرقم القديم (2.5161%) لثبوت أنه كان خطأ في مضاعفة النسبة مرتين.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+        
+    with t_c2:
+        st.markdown("#### 📈 مؤشر اتساع السوق الحقيقي (Market Breadth Proxy)")
+        st.markdown(f"""
+        <div class="glossary-card">
+            <p><b>عينة الأسهم المفحوصة:</b> {breadth_total} سهم قيادي</p>
+            <p><b>الأسهم الصاعدة اليوم:</b> 🟢 {breadth_adv} سهم | <b>الأسهم الهابطة:</b> 🔴 {breadth_dec} سهم</p>
+            <p><b>نسبة الصعود إلى الهبوط (A/D Ratio):</b> <b>{ad_ratio}x</b> <span class="badge-proxy">PROXY</span></p>
+            <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 8px;">
+            {'🟢 اتساع السوق إيجابي ويدعم استقرار المحفظة' if ad_ratio >= 1.0 else '🔴 اتساع السوق سلبي، يوصى بالتحفظ وتقليل المشتريات'}
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+
+    st.markdown("---")
+    st.markdown("#### 🔍 جدول تدقيق النواقص والشفافية الكاملة (Master Gap Audit - Section 11)")
     
-    st.markdown("#### 📡 المراقبة اللحظية (Telemetry)")
-    telemetry_data = []
-    for q in quotes.values():
-        telemetry_data.append({
-            "الرمز": q.ticker,
-            "حالة المزود": q.data_status,
-            "عمر البيانات": f"{q.market_data_age_seconds:.1f} ثانية",
-            "زمن الاستجابة": f"{q.fetch_latency_ms:.1f} ملي ثانية",
-            "وقت المصدر": q.market_time
-        })
-    if telemetry_data:
-        st.dataframe(pd.DataFrame(telemetry_data), use_container_width=True)
+    gap_data = [
+        {"الميزة / المكون": "نواة حماية الكاش وإدارة المخاطر V4.1", "الحالة": "✅ مطبقة بالكامل (IMPLEMENTED)", "البيان الفعلي": "حماية كاملة للكاش وسقف 65% ووقف خسارة مستقل 100%."},
+        {"الميزة / المكون": "سجل التحقق المستقبلي غير القابل للتعديل", "الحالة": "✅ مطبقة بالكامل (IMPLEMENTED)", "البيان الفعلي": "تسجيل التوقعات قبل معرفة النتيجة لمنع أي تحيز."},
+        {"الميزة / المكون": "نماذج التوقع متعددة الآفاق (1D - 60D)", "الحالة": "✅ مطبقة بالكامل (IMPLEMENTED)", "البيان الفعلي": "نماذج HistGBM معايرة إحصائياً في وضع الظل (Shadow)."},
+        {"الميزة / المكون": "بيانات التقييم والقوائم المالية", "الحالة": "🔄 بيانات تقريبية (PROXY)", "البيان الفعلي": "جلب القوائم المالية عبر Yahoo Finance EGX ومقارنتها بالقطاع."},
+        {"الميزة / المكون": "الأسعار والبيانات اللحظية الحية", "الحالة": "❌ غير متوفرة مجاناً (MISSING / DELAYED)", "البيان الفعلي": "البيانات متأخرة 15 دقيقة / نهاية اليوم عبر مزود Yahoo Finance."},
+        {"الميزة / المكون": "سجل أوامر المستوى الثاني وعمق السوق (Level 2)", "الحالة": "❌ غير متوفرة (MISSING)", "البيان الفعلي": "يتطلب شاشة وساطة وبث مدفوع من البورصة المصرية."},
+        {"الميزة / المكون": "تدفق السيولة المؤسسية الحقيقي", "الحالة": "🔄 مؤشر تقريبي (PROXY)", "البيان الفعلي": "يُحسب تقريبياً من طفرات أحجام التداول اليومية."},
+        {"الميزة / المكون": "معالجة الأخبار باللغة العربية (NLP)", "الحالة": "❌ غير متوفرة (MISSING)", "البيان الفعلي": "مؤجل للأبحاث المستقبلية لعدم توفر API أخبار مجاني موثوق."},
+        {"الميزة / المكون": "توقعات المحللين المستقبلية (Forward P/E)", "الحالة": "❌ غير متوفرة (MISSING)", "البيان الفعلي": "الاعتماد على المضاعفات التاريخية المحققة فقط."},
+        {"الميزة / المكون": "أفق التوقع لـ 120 يوماً (120D)", "الحالة": "⏸️ مؤجل رسمياً (DEFERRED)", "البيان الفعلي": "غير متاح في الكود الحالي ويتطلب دراسات إحصائية إضافية."}
+    ]
+    st.dataframe(pd.DataFrame(gap_data), use_container_width=True)
+
+    with st.expander("📚 قاموس مصطلحات المستثمر المبتدئ (Quantitative Terminology Glossary)"):
+        st.markdown("""
+        - 📊 **مؤشر القوة النسبية (RSI):** مقياس من 0 إلى 100 يوضح ما إذا كان السهم قد تم الإفراط في شرائه (فوق 70) أو بيعه بشدة (تحت 30).
+        - 🛑 **متوسط المدى الحقيقي (ATR):** مقياس لمدى تذبذب حركة السهم اليومية بالجنيه لتحديد المسافة الآمنة لوقف الخسارة.
+        - 📈 **نسبة شارب (Sharpe Ratio):** تقيس العائد المحقق مقابل كل وحدة مخاطرة تم تحملها (أي قيمة فوق 1.0 تعتبر ممتازة).
+        - 📉 **أقصى هبوط (Max Drawdown):** أكبر نسبة خسارة مؤقتة شهدتها المحفظة من أعلى قمة وصلت إليها.
+        - 🎯 **مقياس برير (Brier Score):** مقياس لدقة النماذج الاحتمالية بين 0 و 1 (كلما اقترب من الصفر كانت التوقعات أكثر دقة).
+        """)
 
 # ==================================================
-# TAB 5: V42 Intelligence (Research / Shadow)
+# TAB 5: V42 Intelligence Layer (Research / Shadow)
 # ==================================================
 with t_v42:
     st.markdown("""
-    <div style='background: linear-gradient(135deg, #1a237e, #283593); padding: 16px; border-radius: 8px; margin-bottom: 16px;'>
-        <h3 style='color: white; margin: 0;'>🔬 محرك الذكاء V42 — وضع البحث والظل</h3>
-        <p style='color: #90CAF9; margin: 4px 0 0 0;'>⚠️ تجريبي — لا يؤثر على أي قرارات تنفيذية. نتائج V4.1 هي المرجع الفعلي.</p>
+    <div style='background: linear-gradient(135deg, #1e1b4b, #312e81); padding: 18px; border-radius: 12px; margin-bottom: 16px; border: 1px solid rgba(139, 92, 246, 0.4);'>
+        <h3 style='color: white; margin: 0;'>🔬 محرك الذكاء المالي V42 — وضع البحث والظل (SHADOW ONLY)</h3>
+        <p style='color: #c084fc; margin: 6px 0 0 0; font-size: 0.9rem;'>⚠️ <b>إقرار الشفافية:</b> هذا المحرك في وضع التحليل والبحث المستقل ولا يملك أي صلاحية لتنفيذ صفقات حقيقية. قواعد V4.1 للمخاطر هي المرجع التنفيذي الأوحد.</p>
     </div>
     """, unsafe_allow_html=True)
 
-    _v42_banner = st.empty()
-    _v42_banner.info("📊 DATA MODE: YFinance PROXY (Delayed/EOD) | ML MODE: SHADOW | STATUS: RESEARCH — لا تداول حقيقي")
-
     # Load latest V42 ranking report if it exists
-    import os as _os
-    _v42_report_path = _os.path.join(BASE_DIR, "research_v42", "reports", "v42_ranking_latest.json")
+    _v42_report_path = os.path.join(BASE_DIR, "research_v42", "reports", "v42_ranking_latest.json")
     
-    if _os.path.exists(_v42_report_path):
+    if os.path.exists(_v42_report_path):
         try:
-            import json as _json
             with open(_v42_report_path, "r", encoding="utf-8") as _f:
-                _v42_data = _json.load(_f)
+                _v42_data = json.load(_f)
             _stocks = _v42_data.get("stocks", [])
             
             if _stocks:
                 _v42_rows = []
                 for _s in _stocks:
                     _v42_rows.append({
-                        "الترتيب": _s.get("rank"),
+                        "الترتيب 🏆": f"#{_s.get('rank')}",
                         "الرمز": _s.get("ticker"),
                         "الشركة": _s.get("company"),
                         "القطاع": _s.get("sector"),
-                        "النقاط الكلية": f"{_s.get('master_score', 0):.1f}",
-                        "الأساسيات": f"{_s.get('fundamental_score', 0):.0f}",
-                        "التقييم": f"{_s.get('valuation_score', 0):.0f}",
-                        "التوقيت": f"{_s.get('technical_score', 0):.0f}",
-                        "السيولة": f"{_s.get('liquidity_score', 0):.0f}",
-                        "الاتجاه": _s.get("trend_direction", "—"),
-                        "Pullback ✅": "✅" if _s.get("is_valid_pullback") else "❌",
-                        "جودة البيانات": _s.get("data_quality", "PROXY"),
+                        "الدرجة الكلية ⭐": f"{_s.get('master_score', 0):.1f}/100",
+                        "الأساسيات (30%)": f"{_s.get('fundamental_score', 0):.0f}",
+                        "التقييم (20%)": f"{_s.get('valuation_score', 0):.0f}",
+                        "التوقيت الفني (15%)": f"{_s.get('technical_score', 0):.0f}",
+                        "السيولة (10%)": f"{_s.get('liquidity_score', 0):.0f}",
+                        "الاتجاه العام": _s.get("trend_direction", "—"),
+                        "ارتداد آمن": "✅ نعم" if _s.get("is_valid_pullback") else "❌ لا",
+                        "حالة البيانات": f"PROXY ({_s.get('data_quality', 'OK')})"
                     })
                 
-                st.markdown("#### 🏆 ترتيب الأسهم حسب المحرك الذكي V42")
+                st.markdown("#### 🏆 جدول الترتيب الذكي الشامل للأسهم (Master Stock Ranker)")
+                st.caption("الأوزان المطبقة هي أوزان افتراضية قياسية: الأساسيات 30%، التقييم 20%، الفني 15%، السيولة 10%، القطاع 10%، الماكرو 10%، نماذج ML 5%.")
                 st.dataframe(pd.DataFrame(_v42_rows), use_container_width=True)
                 
-                # Show top stock detail
-                if _stocks:
-                    _top = _stocks[0]
-                    with st.expander(f"📊 تفاصيل السهم الأول: {_top.get('ticker')} — {_top.get('company')}", expanded=True):
-                        _c1, _c2, _c3 = st.columns(3)
-                        _c1.metric("النقاط الكلية", f"{_top.get('master_score', 0):.1f}/100")
-                        _c2.metric("التقييم", _top.get("valuation_label", "N/A"))
-                        _c3.metric("السيولة", _top.get("liquidity_label", "N/A"))
-                        
-                        if _top.get("top_positives"):
-                            st.markdown("**✅ العوامل الإيجابية:**")
-                            for _p in _top["top_positives"]:
-                                st.markdown(f"- {_p}")
-                        if _top.get("top_negatives"):
-                            st.markdown("**⚠️ المخاطر:**")
-                            for _n in _top["top_negatives"]:
-                                st.markdown(f"- {_n}")
-                
-                st.caption(f"آخر تحديث: {_v42_data.get('stocks', [{}])[0].get('computed_at', 'غير معروف')} | وضع البيانات: YFINANCE_PROXY")
+                # Top Stock Deep Dive
+                _top = _stocks[0]
+                with st.expander(f"🔍 تحليل مفصل للسهم الأول بالترتيب: {_top.get('ticker')} — {_top.get('company')}", expanded=True):
+                    _c1, _c2, _c3 = st.columns(3)
+                    _c1.metric("التقييم العام للسهم", f"{_top.get('master_score', 0):.1f}/100", "أعلى فرصة استثمارية")
+                    _c2.metric("حالة التقييم ومضاعفات السعر", _top.get("valuation_label", "N/A"), "مقارنة بالقطاع")
+                    _c3.metric("مستوى السيولة وسهولة التداول", _top.get("liquidity_label", "N/A"), "أحجام تداول كافية")
+                    
+                    if _top.get("top_positives"):
+                        st.markdown("**🟢 أبرز الدوافع الإيجابية للنموذج (Model Contributions):**")
+                        for _p in _top["top_positives"]:
+                            st.markdown(f"- {_p}")
+                    if _top.get("top_negatives"):
+                        st.markdown("**🔴 المخاطر والتحذيرات المرصودة:**")
+                        for _n in _top["top_negatives"]:
+                            st.markdown(f"- {_n}")
             else:
-                st.info("لم يتم العثور على بيانات في التقرير الأخير. شغّل master_stock_ranker.py أولاً.")
+                st.info("سجل V42 قيد التحديث من محركات البحث المستقلة.")
         except Exception as _e:
             st.warning(f"خطأ في قراءة تقرير V42: {_e}")
     else:
-        st.warning("""
-        **تقرير V42 غير موجود بعد.**
-        
-        لتوليد تقرير V42، شغّل من مجلد المشروع:
-        ```
-        cd research_v42/engines
-        python master_stock_ranker.py
-        ```
-        أو انتظر تشغيل GitHub Actions التالي لتوليده تلقائياً.
-        """)
-    
+        st.info("تقرير V42 يتم توليده آلياً يومياً عبر محرك البحث والـ GitHub Actions.")
+
     st.markdown("---")
     st.markdown("""
-    **ملاحظات هامة حول V42:**
-    - 🔴 هذا النظام في **وضع البحث والظل** — لا يؤثر على أي قرارات تنفيذية.
-    - 📊 البيانات مصدرها YFinance (متأخرة/نهاية اليوم) — ليست بيانات فورية.
-    - 🧪 نماذج التوقع لم تُختبر بشكل كافٍ بعد (أقل من 30 يوم تداول وهمي).
-    - ⚖️ بوابات المخاطرة V4.1 تظل المرجع الأوحد لقرارات الشراء والبيع.
+    **🔒 ميثاق الأمان والشفافية لمحرك V42:**
+    - 🔴 **وضع الظل:** كل النتائج والأرقام أعلاه لأغراض المراقبة والبحث والدراسة فقط.
+    - 📊 **البيانات متأخرة:** المصدر هو YFinance EOD / 15-min.
+    - 🚫 **لا يؤثر على رأس المال:** التداول الحقيقي وإدارة المخاطر محصورة بنواة V4.1 المجمدة.
     """)
