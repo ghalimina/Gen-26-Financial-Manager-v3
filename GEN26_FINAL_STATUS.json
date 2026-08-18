@@ -1,0 +1,63 @@
+{
+  "version": "GEN-26 V42",
+  "timestamp": "2026-08-18T00:20:16.242743+00:00",
+  "git_sha": "15167bf5094c5bffa37049a70382ff0ca97de506",
+  "v41_status": "STABLE / FROZEN",
+  "v42_status": "RESEARCH / SHADOW",
+  "paper_days": 0,
+  "paper_required": 30,
+  "paper_remaining": 30,
+  "data_mode": "YFINANCE PROXY / DELAYED",
+  "ml_status": "SHADOW (HistGBM Multi-Horizon Calibrated)",
+  "break_even_per_side": 0.00629,
+  "break_even_round_trip": 0.012581,
+  "forward_validation_status": "ACTIVE (Immutable Log + Separate Outcome)",
+  "oos_status": "TENTATIVE (Weak edge >10D, Random on 1D/5D)",
+  "calibration_status": "MARGINAL (Acceptable on 60D, Poor on 1D/5D)",
+  "github_status": "PASS (Autonomous Scheduled Daily Pipeline)",
+  "security_status": "PASS (Zero Leaked Secrets / Keys)",
+  "production_gate": "BLOCKED",
+  "critical_issues": [],
+  "missing_features": [
+    {
+      "name": "Real-Time Market Data",
+      "status": "PROXY (YFinance 15m delay)"
+    },
+    {
+      "name": "Level-2 Order Book / Microstructure",
+      "status": "MISSING"
+    },
+    {
+      "name": "True Institutional Flow",
+      "status": "PROXY (Volume proxy only)"
+    },
+    {
+      "name": "Reliable Arabic EGX News NLP",
+      "status": "MISSING"
+    },
+    {
+      "name": "Corporate Events Feed API",
+      "status": "MISSING"
+    },
+    {
+      "name": "Market Breadth Advance/Decline",
+      "status": "MISSING"
+    },
+    {
+      "name": "Forward Analyst Estimates / Forward P/E",
+      "status": "MISSING"
+    },
+    {
+      "name": "120D Horizon Model",
+      "status": "NOT IMPLEMENTED / DEFERRED"
+    },
+    {
+      "name": "30-Day Completed Paper History",
+      "status": "IN PROGRESS (0/30)"
+    },
+    {
+      "name": "Production Broker Execution Gateway",
+      "status": "BLOCKED / NO BROKER"
+    }
+  ]
+}

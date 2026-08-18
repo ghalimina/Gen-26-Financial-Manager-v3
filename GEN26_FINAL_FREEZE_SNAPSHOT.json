@@ -1,0 +1,42 @@
+{
+  "system": "GEN-26 V42",
+  "timestamp": "2026-08-18T00:20:16.242743+00:00",
+  "git_sha": "15167bf5094c5bffa37049a70382ff0ca97de506",
+  "operating_policy": {
+    "v4.1_status": "STABLE / FROZEN",
+    "v42_status": "RESEARCH / SHADOW",
+    "no_real_trading": true,
+    "no_new_features": true,
+    "no_performance_chasing": true,
+    "data_mode": "YFINANCE PROXY / DELAYED",
+    "break_even_per_side_pct": 0.629,
+    "break_even_round_trip_pct": 1.2581
+  },
+  "file_hashes": {
+    "config.py": "9833fc0c649e109fb0a7ba9e8822d85503f2a7194f13b84d680eff7468085b96",
+    "app.py": "e8cd26b6e0cc04f58367754b6e449bc90f9521d53d976dbc674535222fdd5bf4",
+    "session_manager.py": "85b8089cf2f88b3029fa53740bfb4b190bc1fa569ade51638adfc9b97cb9e312",
+    "headless_runner.py": "db25fb1ae22d62cab8f39cf0a80196f50515e1ad162af20430ae0493ea3de6e4",
+    "market_data_provider.py": "7cf11bb4bbed92be65647ed3fd42fc8fca276167d43c115949d289a69d58a2c0",
+    "requirements.txt": "9b7f83a5b6c90b791d8df5f0264fc6d2c82c0229bd504419804cd64d8e9f3e76",
+    "walk_forward_backtest_report.json": "32bbf700e241e0c716358a891ef5b92a48e09da071b0653a69283bcd1c31646c",
+    "paper_trading_journal.json": "1d8f2c8926c421a619dcafc2595a6d09ebe4197e5ce38592271ceaccd9f288f7",
+    "V42_BREAK_EVEN_CANONICAL.json": "89b10803f5fdaa24bdfb25c644032d46832e63aac37d6322e5efd98b36eb3df3",
+    "V42_BREAK_EVEN_CANONICAL.csv": "d305785f2ad85323b803055b7dc5eeb7a31662fc1b498d0b1c3344e0352a3a97",
+    ".github/workflows/v42_daily_engine.yml": "04a6e8b8311536166b8ed0f6da821a92b653253f62beca46353ead0fac97811d",
+    "research_v42/engines/master_stock_ranker.py": "c68593bcf185bfd54343745d322d01c5665db447403e32cc009d7a492a027daf",
+    "research_v42/engines/multi_horizon_forecast_engine.py": "97860abad25e55f5bd0677ff41bc50444a35d00f5d160823b729eeb998c7fb99",
+    "research_v42/engines/company_intelligence_engine.py": "74dcf9239314d0428ca412bc5d55d939c99d8933846eed0767b651413c81a38f",
+    "research_v42/engines/fundamental_engine.py": "1b59e84f7f0ae1ef96f5c8165460c34ba128af2c178f406c4f0b2396c266f186",
+    "research_v42/engines/valuation_engine.py": "584aba8b64ccdbd15f471f12cd333dfa3706205211a78d36f540f621eda1eaca",
+    "research_v42/engines/technical_timing_engine.py": "62885b944cb49c92731a265fda524967c523835dcf53cbd167299d8979427e24",
+    "research_v42/engines/market_regime_engine.py": "4c5e968d042451ef28da702fb4cff5aff3f5e713b3ce3a912c03f9fb7938d221",
+    "research_v42/engines/data_quality_engine.py": "22f523c7c5507635c57c283147bfc43923e55ccf19cbf28873dae15a2c6ec38f",
+    "research_v42/engines/sector_macro_liquidity_engines.py": "5230fb75e64ad07594ef9f97a1fb2e227685c063cb2f90c57837d057c2e5931b"
+  },
+  "regression_invariants": {
+    "syntax_all_pass": true,
+    "entry_invariant_pass": true,
+    "alloc_gate_pass": true
+  }
+}
