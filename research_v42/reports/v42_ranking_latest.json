@@ -34,7 +34,7 @@
         "Revenue growth trend: needs multi-period data (TODO)",
         "No valid pullback condition currently (Entry must be < Current)"
       ],
-      "computed_at": "2026-08-17T12:00:16.608805Z"
+      "computed_at": "2026-08-18T00:26:22.138530Z"
     },
     {
       "rank": 2,
@@ -68,7 +68,7 @@
         "Revenue growth trend: needs multi-period data (TODO)",
         "No valid pullback condition currently (Entry must be < Current)"
       ],
-      "computed_at": "2026-08-17T11:59:57.777271Z"
+      "computed_at": "2026-08-18T00:26:11.151600Z"
     },
     {
       "rank": 3,
@@ -104,7 +104,7 @@
         "Extreme volatility regime — wider uncertainty",
         "No valid pullback condition currently (Entry must be < Current)"
       ],
-      "computed_at": "2026-08-17T12:00:33.052968Z"
+      "computed_at": "2026-08-18T00:26:31.500783Z"
     },
     {
       "rank": 4,
@@ -140,10 +140,44 @@
         "Cannot assess earnings quality — missing OCF or NI",
         "No valid pullback condition currently (Entry must be < Current)"
       ],
-      "computed_at": "2026-08-17T12:00:36.345916Z"
+      "computed_at": "2026-08-18T00:26:34.104689Z"
     },
     {
       "rank": 5,
+      "ticker": "TMGH.CA",
+      "company": "طلعت مصطفى",
+      "sector": "REAL_ESTATE",
+      "master_score": 62.7,
+      "fundamental_score": 74.5,
+      "valuation_score": 58.0,
+      "technical_score": 65.0,
+      "liquidity_score": 85.0,
+      "macro_score": 25.0,
+      "sector_score": 55.0,
+      "valuation_label": "FAIR",
+      "liquidity_label": "HIGH",
+      "trend_direction": "SIDEWAYS",
+      "is_valid_pullback": false,
+      "volatility_regime": "NORMAL",
+      "market_regime": "HIGH_VOL",
+      "confidence": 1.0,
+      "data_quality": "PROXY",
+      "top_positives": [
+        "💧 السيولة (85/100)",
+        "📊 الأساسيات (74/100)",
+        "📈 التوقيت (65/100)"
+      ],
+      "top_negatives": [
+        "🌍 الاقتصاد الكلي (25/100)"
+      ],
+      "warnings": [
+        "Revenue growth trend: needs multi-period data (TODO)",
+        "No valid pullback condition currently (Entry must be < Current)"
+      ],
+      "computed_at": "2026-08-18T00:26:14.159139Z"
+    },
+    {
+      "rank": 6,
       "ticker": "HELI.CA",
       "company": "مصر الجديدة",
       "sector": "REAL_ESTATE",
@@ -175,41 +209,7 @@
         "Negative operating cash flow",
         "Low OCF/NI ratio (-1.30) — possible earnings manipulation risk"
       ],
-      "computed_at": "2026-08-17T12:00:26.238254Z"
-    },
-    {
-      "rank": 6,
-      "ticker": "TMGH.CA",
-      "company": "طلعت مصطفى",
-      "sector": "REAL_ESTATE",
-      "master_score": 62.0,
-      "fundamental_score": 74.5,
-      "valuation_score": 58.0,
-      "technical_score": 60.0,
-      "liquidity_score": 85.0,
-      "macro_score": 25.0,
-      "sector_score": 55.0,
-      "valuation_label": "FAIR",
-      "liquidity_label": "HIGH",
-      "trend_direction": "SIDEWAYS",
-      "is_valid_pullback": false,
-      "volatility_regime": "NORMAL",
-      "market_regime": "HIGH_VOL",
-      "confidence": 1.0,
-      "data_quality": "PROXY",
-      "top_positives": [
-        "💧 السيولة (85/100)",
-        "📊 الأساسيات (74/100)",
-        "📈 التوقيت (60/100)"
-      ],
-      "top_negatives": [
-        "🌍 الاقتصاد الكلي (25/100)"
-      ],
-      "warnings": [
-        "Revenue growth trend: needs multi-period data (TODO)",
-        "No valid pullback condition currently (Entry must be < Current)"
-      ],
-      "computed_at": "2026-08-17T12:00:02.361817Z"
+      "computed_at": "2026-08-18T00:26:27.026688Z"
     },
     {
       "rank": 7,
@@ -244,7 +244,7 @@
         "RSI overbought: 80.1",
         "No valid pullback condition currently (Entry must be < Current)"
       ],
-      "computed_at": "2026-08-17T12:00:40.026267Z"
+      "computed_at": "2026-08-18T00:26:36.113217Z"
     },
     {
       "rank": 8,
@@ -278,7 +278,7 @@
         "Revenue growth trend: needs multi-period data (TODO)",
         "No valid pullback condition currently (Entry must be < Current)"
       ],
-      "computed_at": "2026-08-17T12:00:14.101800Z"
+      "computed_at": "2026-08-18T00:26:20.102576Z"
     },
     {
       "rank": 9,
@@ -314,7 +314,7 @@
         "RSI overbought: 82.9",
         "No valid pullback condition currently (Entry must be < Current)"
       ],
-      "computed_at": "2026-08-17T12:00:45.497860Z"
+      "computed_at": "2026-08-18T00:26:38.181871Z"
     },
     {
       "rank": 10,
@@ -350,7 +350,7 @@
         "Negative FCF",
         "No valid pullback condition currently (Entry must be < Current)"
       ],
-      "computed_at": "2026-08-17T12:00:08.126742Z"
+      "computed_at": "2026-08-18T00:26:16.607521Z"
     },
     {
       "rank": 11,
@@ -388,7 +388,7 @@
         "Downtrend detected",
         "No valid pullback condition currently (Entry must be < Current)"
       ],
-      "computed_at": "2026-08-17T12:00:11.873169Z"
+      "computed_at": "2026-08-18T00:26:18.318999Z"
     },
     {
       "rank": 12,
@@ -420,32 +420,34 @@
       "warnings": [
         "Revenue growth trend: needs multi-period data (TODO)",
         "Low OCF/NI ratio (0.41) — possible earnings manipulation risk",
-        "RSI overbought: 85.6",
+        "RSI overbought: 85.7",
         "No valid pullback condition currently (Entry must be < Current)"
       ],
-      "computed_at": "2026-08-17T12:00:27.925422Z"
+      "computed_at": "2026-08-18T00:26:29.775466Z"
     },
     {
       "rank": 13,
       "ticker": "ESRS.CA",
       "company": "حديد عز",
       "sector": "INDUSTRIALS",
-      "master_score": 38.8,
+      "master_score": 42.6,
       "fundamental_score": 32.8,
       "valuation_score": 35.0,
-      "technical_score": 50.0,
+      "technical_score": 75.0,
       "liquidity_score": 50.0,
       "macro_score": 25.0,
       "sector_score": 45.0,
       "valuation_label": "EXPENSIVE",
       "liquidity_label": "UNKNOWN",
-      "trend_direction": "UNKNOWN",
+      "trend_direction": "SIDEWAYS",
       "is_valid_pullback": false,
-      "volatility_regime": "UNKNOWN",
+      "volatility_regime": "NORMAL",
       "market_regime": "HIGH_VOL",
-      "confidence": 0.5,
+      "confidence": 0.75,
       "data_quality": "PROXY",
-      "top_positives": [],
+      "top_positives": [
+        "📈 التوقيت (75/100)"
+      ],
       "top_negatives": [
         "💰 التقييم (35/100)",
         "📊 الأساسيات (33/100)",
@@ -458,7 +460,7 @@
         "P/E (21.1) >> sector median (12.0)",
         "P/B not available"
       ],
-      "computed_at": "2026-08-17T12:00:19.315712Z"
+      "computed_at": "2026-08-18T00:26:24.417119Z"
     }
   ]
 }
