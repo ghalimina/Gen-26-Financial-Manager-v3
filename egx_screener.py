@@ -197,7 +197,7 @@ def main():
     for t in GLOBAL_TRAINING_POOL:
         df_t = build_features_for_stock(t)
         if df_t is not None and not df_t.empty:
-            df_t[feature_cols] = df_t[feature_cols].ffill().bfill()
+            df_t[feature_cols] = df_t[feature_cols].replace([np.inf, -np.inf], np.nan).ffill().bfill().fillna(0.0)
             processed_dict[t] = df_t
             
             # نحسب أهداف الـ 5 أيام للتخزين في الداتا العالمية
@@ -250,7 +250,7 @@ def main():
             if df_stock is None or df_stock.empty or len(df_stock) < 30:
                 continue
 
-            df_stock[feature_cols] = df_stock[feature_cols].ffill().bfill()
+            df_stock[feature_cols] = df_stock[feature_cols].replace([np.inf, -np.inf], np.nan).ffill().bfill().fillna(0.0)
             
             # عينة آخر جلسة تداول
             live_row = df_stock.iloc[-1]
