@@ -58,6 +58,7 @@ jobs:
             echo "No paper session changes to commit."
           else
             git commit -m "chore(paper): V4.1 paper session $(date -u +%Y-%m-%d)"
+            git pull --rebase origin main || true
             git push
           fi
 
@@ -107,10 +108,12 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main || true
           git add -f research_v42/reports/ || true
           if git diff --staged --quiet; then
             echo "No V42 report changes."
           else
             git commit -m "chore(v42): intelligence report $(date -u +%Y-%m-%d)"
+            git pull --rebase origin main || true
             git push
           fi
