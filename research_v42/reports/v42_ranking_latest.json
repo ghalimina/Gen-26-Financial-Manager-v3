@@ -34,7 +34,7 @@
         "Revenue growth trend: needs multi-period data (TODO)",
         "No valid pullback condition currently (Entry must be < Current)"
       ],
-      "computed_at": "2026-08-18T01:40:01.460475Z"
+      "computed_at": "2026-08-18T07:15:42.279924Z"
     },
     {
       "rank": 2,
@@ -68,7 +68,7 @@
         "Revenue growth trend: needs multi-period data (TODO)",
         "No valid pullback condition currently (Entry must be < Current)"
       ],
-      "computed_at": "2026-08-18T01:39:47.602284Z"
+      "computed_at": "2026-08-18T07:15:30.546427Z"
     },
     {
       "rank": 3,
@@ -104,7 +104,7 @@
         "Extreme volatility regime — wider uncertainty",
         "No valid pullback condition currently (Entry must be < Current)"
       ],
-      "computed_at": "2026-08-18T01:40:12.015948Z"
+      "computed_at": "2026-08-18T07:15:49.296130Z"
     },
     {
       "rank": 4,
@@ -140,7 +140,7 @@
         "Cannot assess earnings quality — missing OCF or NI",
         "No valid pullback condition currently (Entry must be < Current)"
       ],
-      "computed_at": "2026-08-18T01:40:13.829256Z"
+      "computed_at": "2026-08-18T07:15:50.495812Z"
     },
     {
       "rank": 5,
@@ -174,7 +174,7 @@
         "Revenue growth trend: needs multi-period data (TODO)",
         "No valid pullback condition currently (Entry must be < Current)"
       ],
-      "computed_at": "2026-08-18T01:39:50.357251Z"
+      "computed_at": "2026-08-18T07:15:32.924334Z"
     },
     {
       "rank": 6,
@@ -209,7 +209,7 @@
         "Negative operating cash flow",
         "Low OCF/NI ratio (-1.30) — possible earnings manipulation risk"
       ],
-      "computed_at": "2026-08-18T01:40:07.041157Z"
+      "computed_at": "2026-08-18T07:15:46.039146Z"
     },
     {
       "rank": 7,
@@ -244,7 +244,7 @@
         "RSI overbought: 80.1",
         "No valid pullback condition currently (Entry must be < Current)"
       ],
-      "computed_at": "2026-08-18T01:40:15.639624Z"
+      "computed_at": "2026-08-18T07:15:52.437360Z"
     },
     {
       "rank": 8,
@@ -278,7 +278,7 @@
         "Revenue growth trend: needs multi-period data (TODO)",
         "No valid pullback condition currently (Entry must be < Current)"
       ],
-      "computed_at": "2026-08-18T01:39:58.159025Z"
+      "computed_at": "2026-08-18T07:15:39.369438Z"
     },
     {
       "rank": 9,
@@ -314,10 +314,47 @@
         "RSI overbought: 82.9",
         "No valid pullback condition currently (Entry must be < Current)"
       ],
-      "computed_at": "2026-08-18T01:40:17.790083Z"
+      "computed_at": "2026-08-18T07:15:54.124552Z"
     },
     {
       "rank": 10,
+      "ticker": "HRHO.CA",
+      "company": "EFG هيرميس",
+      "sector": "FINANCIAL_SERVICES",
+      "master_score": 59.0,
+      "fundamental_score": 60.5,
+      "valuation_score": 73.0,
+      "technical_score": 50.0,
+      "liquidity_score": 85.0,
+      "macro_score": 25.0,
+      "sector_score": 53.0,
+      "valuation_label": "CHEAP",
+      "liquidity_label": "HIGH",
+      "trend_direction": "DOWN",
+      "is_valid_pullback": false,
+      "volatility_regime": "NORMAL",
+      "market_regime": "HIGH_VOL",
+      "confidence": 0.75,
+      "data_quality": "PROXY",
+      "top_positives": [
+        "💧 السيولة (85/100)",
+        "💰 التقييم (73/100)",
+        "📊 الأساسيات (60/100)"
+      ],
+      "top_negatives": [
+        "🌍 الاقتصاد الكلي (25/100)"
+      ],
+      "warnings": [
+        "Revenue growth trend: needs multi-period data (TODO)",
+        "Negative EBITDA margin: -98.4%",
+        "Low current ratio: 0.87",
+        "Downtrend detected",
+        "No valid pullback condition currently (Entry must be < Current)"
+      ],
+      "computed_at": "2026-08-18T07:15:36.227602Z"
+    },
+    {
+      "rank": 11,
       "ticker": "SWDY.CA",
       "company": "السويدي إلكتريك",
       "sector": "INDUSTRIALS",
@@ -350,45 +387,7 @@
         "Negative FCF",
         "No valid pullback condition currently (Entry must be < Current)"
       ],
-      "computed_at": "2026-08-18T01:39:53.093375Z"
-    },
-    {
-      "rank": 11,
-      "ticker": "HRHO.CA",
-      "company": "EFG هيرميس",
-      "sector": "FINANCIAL_SERVICES",
-      "master_score": 57.5,
-      "fundamental_score": 60.5,
-      "valuation_score": 73.0,
-      "technical_score": 40.0,
-      "liquidity_score": 85.0,
-      "macro_score": 25.0,
-      "sector_score": 53.0,
-      "valuation_label": "CHEAP",
-      "liquidity_label": "HIGH",
-      "trend_direction": "DOWN",
-      "is_valid_pullback": false,
-      "volatility_regime": "NORMAL",
-      "market_regime": "HIGH_VOL",
-      "confidence": 1.0,
-      "data_quality": "PROXY",
-      "top_positives": [
-        "💧 السيولة (85/100)",
-        "💰 التقييم (73/100)",
-        "📊 الأساسيات (60/100)"
-      ],
-      "top_negatives": [
-        "📈 التوقيت (40/100)",
-        "🌍 الاقتصاد الكلي (25/100)"
-      ],
-      "warnings": [
-        "Revenue growth trend: needs multi-period data (TODO)",
-        "Negative EBITDA margin: -98.4%",
-        "Low current ratio: 0.87",
-        "Downtrend detected",
-        "No valid pullback condition currently (Entry must be < Current)"
-      ],
-      "computed_at": "2026-08-18T01:39:55.075626Z"
+      "computed_at": "2026-08-18T07:15:34.335862Z"
     },
     {
       "rank": 12,
@@ -423,31 +422,29 @@
         "RSI overbought: 85.7",
         "No valid pullback condition currently (Entry must be < Current)"
       ],
-      "computed_at": "2026-08-18T01:40:09.524263Z"
+      "computed_at": "2026-08-18T07:15:47.486070Z"
     },
     {
       "rank": 13,
       "ticker": "ESRS.CA",
       "company": "حديد عز",
       "sector": "INDUSTRIALS",
-      "master_score": 42.6,
+      "master_score": 38.8,
       "fundamental_score": 32.8,
       "valuation_score": 35.0,
-      "technical_score": 75.0,
+      "technical_score": 50.0,
       "liquidity_score": 50.0,
       "macro_score": 25.0,
       "sector_score": 45.0,
       "valuation_label": "EXPENSIVE",
       "liquidity_label": "UNKNOWN",
-      "trend_direction": "SIDEWAYS",
+      "trend_direction": "UNKNOWN",
       "is_valid_pullback": false,
-      "volatility_regime": "NORMAL",
+      "volatility_regime": "UNKNOWN",
       "market_regime": "HIGH_VOL",
-      "confidence": 0.75,
+      "confidence": 0.5,
       "data_quality": "PROXY",
-      "top_positives": [
-        "📈 التوقيت (75/100)"
-      ],
+      "top_positives": [],
       "top_negatives": [
         "💰 التقييم (35/100)",
         "📊 الأساسيات (33/100)",
@@ -460,7 +457,7 @@
         "P/E (21.1) >> sector median (12.0)",
         "P/B not available"
       ],
-      "computed_at": "2026-08-18T01:40:04.746322Z"
+      "computed_at": "2026-08-18T07:15:43.918424Z"
     }
   ]
 }
