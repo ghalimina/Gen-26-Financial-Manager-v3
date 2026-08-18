@@ -1,0 +1,12 @@
+[
+    {
+        "session_id": "e7589acc-47a1-4723-8f58-cfa101ac396e",
+        "market_date": "2026-08-18",
+        "timezone": "Africa/Cairo",
+        "run_timestamp": "2026-08-18T00:48:12.081588",
+        "status": "COMPLETED",
+        "data_status": "VALID",
+        "paper_mode": true,
+        "completion_status": "SUCCESS"
+    }
+]
