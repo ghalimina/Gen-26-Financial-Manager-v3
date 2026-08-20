@@ -18,5 +18,15 @@
         "data_status": "VALID",
         "paper_mode": true,
         "completion_status": "SUCCESS"
+    },
+    {
+        "session_id": "f0050660-2684-4acb-b047-55bf5d7b45e5",
+        "market_date": "2026-08-20",
+        "timezone": "Africa/Cairo",
+        "run_timestamp": "2026-08-20T07:22:53.182508",
+        "status": "COMPLETED",
+        "data_status": "VALID",
+        "paper_mode": true,
+        "completion_status": "SUCCESS"
     }
 ]
