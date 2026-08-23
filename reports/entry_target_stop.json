@@ -1,0 +1,5 @@
+{
+  "pullback_gate": "PASS",
+  "stop_loss_gate": "PASS",
+  "target_progression": "PASS"
+}

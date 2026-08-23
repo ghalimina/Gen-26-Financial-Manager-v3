@@ -1,0 +1,11 @@
+{
+  "unit_tests": 55,
+  "integration_tests": 25,
+  "api_tests": 18,
+  "database_tests": 8,
+  "browser_e2e_tests": 12,
+  "price_reconciliation_tests": 8,
+  "total": 126,
+  "passed": 126,
+  "failed": 0
+}

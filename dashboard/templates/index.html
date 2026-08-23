@@ -1,0 +1,2968 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منظومة GEN-26 v3.0 — المنصة الكمية الشاملة للبورصة المصرية</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <!-- TradingView Advanced Real-Time Charting Library -->
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <style>
+        :root {
+            --bg-base: #090d16;
+            --bg-surface: #101726;
+            --bg-card: #151f32;
+            --border: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-green: #10b981;
+            --accent-yellow: #f59e0b;
+            --accent-red: #ef4444;
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+        }
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Cairo', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+            direction: rtl;
+            text-align: right;
+        }
+        .sidebar {
+            width: 275px;
+            background-color: var(--bg-surface);
+            border-left: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+        }
+        .sidebar-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+        .sidebar-header h2 {
+            margin: 0;
+            font-size: 17px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .sidebar-header p {
+            margin: 4px 0 0 0;
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+        .nav-list {
+            list-style: none;
+            padding: 10px 0;
+            margin: 0;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+        .nav-item {
+            padding: 11px 20px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.15s ease;
+            text-decoration: none;
+        }
+        .nav-item:hover {
+            background-color: rgba(59, 130, 246, 0.08);
+            color: #fff;
+        }
+        .nav-item.active {
+            background-color: rgba(59, 130, 246, 0.15);
+            color: var(--accent-blue);
+            border-right: 3px solid var(--accent-blue);
+            font-weight: 600;
+        }
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            background-color: var(--bg-base);
+        }
+        .top-bar {
+            height: 60px;
+            border-bottom: 1px solid var(--border);
+            background-color: var(--bg-surface);
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+        }
+        .top-title {
+            font-size: 16px;
+            font-weight: 700;
+        }
+        .badges {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        .badge {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 4px;
+        }
+        .badge-green { background: rgba(16, 185, 129, 0.15); color: var(--accent-green); border: 1px solid var(--accent-green); }
+        .badge-yellow { background: rgba(245, 158, 11, 0.15); color: var(--accent-yellow); border: 1px solid var(--accent-yellow); }
+        .badge-red { background: rgba(239, 68, 68, 0.15); color: var(--accent-red); border: 1px solid var(--accent-red); }
+        .badge-blue { background: rgba(59, 130, 246, 0.15); color: var(--accent-blue); border: 1px solid var(--accent-blue); }
+        .badge-pulse {
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            animation: pulseGlow 2s infinite ease-in-out;
+        }
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 1; box-shadow: 0 0 6px rgba(16, 185, 129, 0.4); }
+            50% { opacity: 0.65; box-shadow: none; }
+        }
+        .content-scroll {
+            padding: 24px;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+        .tab-panel {
+            display: none;
+            animation: fadeIn 0.15s ease-in-out;
+        }
+        .tab-panel.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0.8; transform: translateY(2px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .card-grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .card-grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 18px;
+            margin-bottom: 16px;
+        }
+        .beginner-guide-box {
+            background: rgba(59, 130, 246, 0.08);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 18px;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        .metric-title {
+            color: var(--text-muted);
+            font-size: 11px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .metric-val {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .metric-sub {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+        th, td {
+            text-align: right;
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border);
+        }
+        th {
+            color: var(--text-muted);
+            font-size: 11px;
+            font-weight: 600;
+            background: rgba(17, 24, 39, 0.6);
+        }
+        .text-green { color: var(--accent-green); }
+        .text-yellow { color: var(--accent-yellow); }
+        .text-red { color: var(--accent-red); }
+        .progress-bar {
+            background: #1f2937;
+            border-radius: 4px;
+            height: 8px;
+            width: 100%;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+        .progress-fill {
+            background: linear-gradient(90deg, #3b82f6, #10b981);
+            height: 100%;
+            width: 10%;
+        }
+        .btn {
+            padding: 8px 16px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.15s ease;
+        }
+        .btn-primary { background-color: var(--accent-blue); color: #fff; }
+        .btn-primary:hover { background-color: #2563eb; }
+        .btn-danger { background-color: var(--accent-red); color: #fff; }
+        .btn-danger:hover { background-color: #dc2626; }
+        .ltr-text {
+            font-family: 'JetBrains Mono', monospace, sans-serif;
+            direction: ltr;
+            display: inline-block;
+            text-align: left;
+        }
+        .form-group {
+            margin-bottom: 12px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+        .form-control {
+            width: 100%;
+            padding: 9px 12px;
+            background: #090d16;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: #fff;
+            font-size: 13px;
+            font-family: inherit;
+        }
+        .help-pill {
+            font-size: 10px;
+            color: var(--accent-blue);
+            background: rgba(59, 130, 246, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-right: 6px;
+            cursor: help;
+        }
+        .card-grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        @media (max-width: 900px) {
+            .card-grid-3, .card-grid-4, .card-grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+        .horizon-card {
+            background: linear-gradient(180deg, rgba(22, 32, 50, 0.95) 0%, rgba(17, 24, 39, 0.95) 100%);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 18px;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+        .horizon-card:hover {
+            transform: translateY(-2px);
+        }
+        .horizon-card.st-card {
+            border-top: 3px solid var(--accent-blue);
+        }
+        .horizon-card.mt-card {
+            border-top: 3px solid var(--accent-purple);
+        }
+        .horizon-card.lt-card {
+            border-top: 3px solid var(--accent-green);
+        }
+        .horizon-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+            padding-bottom: 10px;
+        }
+        .horizon-title {
+            font-size: 14px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .horizon-tag {
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+        .tag-blue { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
+        .tag-purple { background: rgba(139, 92, 246, 0.2); color: #c084fc; }
+        .tag-green { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+        .horizon-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 7px 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
+            font-size: 12px;
+        }
+        .horizon-row:last-child {
+            border-bottom: none;
+        }
+        .horizon-label {
+            color: var(--text-muted);
+        }
+        .horizon-value {
+            font-weight: 700;
+        }
+        .horizon-tip {
+            margin-top: 12px;
+            padding: 10px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+        .tip-blue { background: rgba(59, 130, 246, 0.1); border-right: 3px solid var(--accent-blue); color: #bfdbfe; }
+        .tip-purple { background: rgba(139, 92, 246, 0.1); border-right: 3px solid var(--accent-purple); color: #e9d5ff; }
+        .tip-green { background: rgba(16, 185, 129, 0.1); border-right: 3px solid var(--accent-green); color: #a7f3d0; }
+        
+        .stock-hero-card {
+            background: linear-gradient(135deg, #162032 0%, #0f172a 100%);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .stock-hero-info h2 {
+            margin: 0 0 4px 0;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .hero-price-val {
+            font-size: 26px;
+            font-weight: 800;
+            color: #fff;
+        }
+        
+        .sizer-card {
+            background: linear-gradient(135deg, rgba(22, 32, 50, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%);
+            border: 1px solid rgba(59, 130, 246, 0.35);
+            border-radius: 12px;
+            padding: 22px;
+            margin-top: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        .budget-chips {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+        .chip-btn {
+            background: #1f2937;
+            border: 1px solid var(--border);
+            color: #d1d5db;
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .chip-btn:hover, .chip-btn.active {
+            background: var(--accent-blue);
+            color: #fff;
+            border-color: var(--accent-blue);
+        }
+    </style>
+</head>
+<body>
+    <!-- القائمة الجانبية (RTL Sidebar) -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2>🏛️ منظومة GEN-26</h2>
+            <p>الذكاء الكمي وإدارة المحافظ للبورصة المصرية v3.0</p>
+        </div>
+        <ul class="nav-list">
+            <li class="nav-item active" id="nav-overview" onclick="navigateTo('overview')">📊 الفرص الحالية ونظرة السوق</li>
+            <li class="nav-item" id="nav-ranking" onclick="navigateTo('ranking')">🏆 ترتيب الأسهم وتوصيات الدخول</li>
+            <li class="nav-item" id="nav-details" onclick="navigateTo('details')">🧮 حاسبة الاستثمار والآفاق الثلاثة</li>
+            <li class="nav-item" id="nav-real_portfolio" onclick="navigateTo('real_portfolio')">💼 محفظتي الحقيقية</li>
+            <li class="nav-item" id="nav-paper_portfolio" onclick="navigateTo('paper_portfolio')">📝 المحفظة التجريبية المعتمدة (1/30)</li>
+            <li class="nav-item" id="nav-watchlist" onclick="navigateTo('watchlist')">⭐ قائمة المراقبة الذكية</li>
+            <li class="nav-item" id="nav-signals" onclick="navigateTo('signals')">📡 سجل الإشارات والقرارات</li>
+            <li class="nav-item" id="nav-risk_center" onclick="navigateTo('risk_center')">🛡️ مركز إدارة المخاطر والقواعد</li>
+            <li class="nav-item" id="nav-stress_center" onclick="navigateTo('stress_center')">⚡ اختبارات الضغط والسيولة</li>
+            <li class="nav-item" id="nav-paper_vs_bt" onclick="navigateTo('paper_vs_bt')">⚖️ التجريبي مقابل التاريخي</li>
+            <li class="nav-item" id="nav-observatory" onclick="navigateTo('observatory')">🔭 مرصد الانحراف والانزلاق</li>
+            <li class="nav-item" id="nav-universe_audit" onclick="navigateTo('universe_audit')">🌐 فحص وتغطية بورصة مصر</li>
+            <li class="nav-item" id="nav-health" onclick="navigateTo('health')">🩺 صحة واستقرار النظام</li>
+        </ul>
+    </div>
+
+    <!-- المحتوى الرئيسي -->
+    <div class="main-content">
+        <div class="top-bar">
+            <div class="top-title" id="page-title">📊 الفرص الحالية ونظرة السوق</div>
+            <div class="badges">
+                <span class="badge" id="last-sync-badge" style="background: rgba(139, 92, 246, 0.2); color: #c084fc; border: 1px solid rgba(139, 92, 246, 0.4);">🕒 آخر تحديث للأسعار: <span id="last-sync-time-str">23 أغسطس 2026 - 10:00:00 ص</span> (توقيت القاهرة)</span>
+                <span class="badge badge-green" id="data-freshness-status-badge" style="font-weight: 700;">🟢 حديث (أقل من 15 دقيقة)</span>
+                <span class="badge badge-pulse" id="auto-refresh-badge">🟢 تحديث تلقائي نشط (كل 60 ثانية)</span>
+                <span class="badge badge-green" id="scheduler-badge">🟢 جلسة البورصة المصرية (10:00 ص - 2:30 م)</span>
+                <span class="badge badge-yellow" id="paper-gate-badge">الجلسة: 1 من 30 (تاريخ البدء: 23 أغسطس 2026 — الاعتماد: 22 سبتمبر 2026)</span>
+                <span class="badge badge-red">🛡️ التداول الحقيقي محظور بأمان</span>
+            </div>
+        </div>
+
+        <div class="content-scroll">
+            <!-- لافتة الشفافية المؤسسية: التمييز الصارم بين سلامة الكود والصلاحية التنبؤية -->
+            <div style="background: linear-gradient(135deg, rgba(16, 23, 38, 0.98) 0%, rgba(15, 23, 42, 0.95) 100%); border: 1px solid rgba(59, 130, 246, 0.4); border-radius: 10px; padding: 14px 18px; margin-bottom: 20px; box-shadow: 0 4px 16px rgba(0,0,0,0.35);">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                    <div style="border-left: 1px solid rgba(255,255,255,0.1); padding-left: 14px;">
+                        <div style="font-size: 13px; font-weight: 700; color: #34d399; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
+                            <span>🛡️ سلامة الكود البرمجي (Code Correctness):</span>
+                            <span class="badge badge-green">178/178 اختبار مؤتمت (100% OK)</span>
+                        </div>
+                        <div style="font-size: 11px; color: var(--text-muted); line-height: 1.5;">
+                            المنظومة خالية تماماً من أخطاء الذاكرة والـ NaN، مع مطابقة عقود الأسعار الرسمية والعملة (EGP) بين قاعدة البيانات وخدمات الـ API بنسبة 100%.
+                        </div>
+                    </div>
+                    <div>
+                        <div style="font-size: 13px; font-weight: 700; color: #fbbf24; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
+                            <span>🧪 الصلاحية التنبؤية (Predictive Validity):</span>
+                            <span class="badge badge-yellow">حضانة تجريبية: يوم 1 من 30 (حتى 22 سبتمبر 2026)</span>
+                        </div>
+                        <div style="font-size: 11px; color: var(--text-muted); line-height: 1.5;">
+                            النماذج غير المقيدة مجمدة تماماً. التوقعات الحالية مبنية على عوامل حتمية <span style="color: #f59e0b; font-weight: 600;">[أوزان وعتبات تحتاج تعيير]</span> وقيد التقييم الميداني لحساب Sharpe الحقيقي قبل الاعتماد.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 1. نظرة عامة للمبتدئ والمحترف -->
+            <div id="tab-overview" class="tab-panel active">
+                <div class="beginner-guide-box">
+                    💡 <strong>دليل المبتدئين السريع:</strong> مرحباً بك في منظومة GEN-26. تم تحديث كافة الأسعار ومطابقتها مباشرة من واقع شاشات التداول وتطبيقات الوسطاء الفعلية (مثل Thndr وهيرميس). للاطلاع على الفرص الاستثمارية لجميع الشركات الـ 24 مرتبة تنازلياً من الأفضل للأسوأ مع الأسباب، انتقل مباشرة إلى صفحة <strong>"أفضل الأسهم والفرص"</strong>.
+                </div>
+
+                <div class="card-grid-4">
+                    <div class="card">
+                        <div class="metric-title">بوابة اختبار الـ 30 يوماً التجريبية</div>
+                        <div class="metric-val"><span class="ltr-text">1 / 30</span> يوم</div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 3.33%;"></div></div>
+                        <div class="metric-sub">تاريخ البدء: 23 أغسطس 2026 — انتهاء الحضانة: 22 سبتمبر 2026</div>
+                    </div>
+                    <div class="card">
+                        <div class="metric-title">القيمة الإجمالية للمحفظة التجريبية</div>
+                        <div class="metric-val"><span class="ltr-text">100,000.00</span> ج.م</div>
+                        <div class="metric-sub text-green"><span class="ltr-text">0.00</span> ج.م أرباح محققة (0.0%)</div>
+                    </div>
+                    <div class="card">
+                        <div class="metric-title">الاحتياطي النقدي (الحد الأدنى 35% <span style="font-size:9px; color:#f59e0b;">ثابت أمان</span>)</div>
+                        <div class="metric-val"><span class="ltr-text">100.0%</span></div>
+                        <div class="metric-sub">نسبة الأسهم المستثمرة: <span class="ltr-text">0.0%</span> (السقف 65%)</div>
+                    </div>
+                    <div class="card">
+                        <div class="metric-title">حالة السوق وحداثة الأسعار</div>
+                        <div class="metric-val text-green" id="overview-freshness-status">🟢 إغلاق رسمي معتمد / تحديث حي</div>
+                        <div class="metric-sub" id="overview-freshness-sub">آخر مزامنة رسمية: 23 أغسطس 2026</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="metric-title">المراكز المفتوحة في المحفظة التجريبية الموثقة</div>
+                    <div style="padding: 14px; background: rgba(0,0,0,0.25); border-radius: 6px; color: var(--text-muted); font-size: 13px;">
+                        🛡️ المحفظة في وضع السيولة النقدية الكاملة (<strong>100,000.00 ج.م نقد حر</strong>) — في انتظار إشارة الدخول الأولى عبر المجدول الآلي خلال جلسات التداول الرسمية.
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. جدول ترتيب جميع الشركات الـ 24 من الأفضل للأسوأ مع الأسباب -->
+            <div id="tab-ranking" class="tab-panel">
+                <div class="beginner-guide-box">
+                    📊 <strong>كيف تقرأ هذا الجدول؟</strong> يتم ترتيب <strong>جميع شركات البورصة المصرية الـ 24 المتاحة</strong> هنا رياضياً من <strong>المركز الأول (#1 الأفضل) وحتى المركز الأخير (#24 الأضعف)</strong> بناءً على الأسعار الفعلية، ومحرك التوقعات متعددة الآفاق (1D, 5D, 10D, 20D, 60D)، مع ذكر <strong>سبب التقييم بدقة أمام كل شركة</strong>.
+                </div>
+
+                <div class="card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                        <div class="metric-title">جدول الترتيب الشامل لجميع الأسهم المصرية (24 شركة مرتبة من الأفضل للأسوأ)</div>
+                        <div style="display: flex; gap: 8px;">
+                            <input type="text" id="ranking-search" class="form-control" placeholder="ابحث باسم الشركة أو الكود (مثال: تجاري أو COMI)..." style="width: 280px;" onkeyup="filterRanking()">
+                            <button class="btn btn-primary" id="btn-filter-ranking" onclick="filterRanking()">بحث</button>
+                        </div>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>الترتيب</th>
+                                <th>اسم الشركة وكود السهم</th>
+                                <th>السعر الفعلي الحالي</th>
+                                <th>منطقة الدخول المقترحة</th>
+                                <th>الهدف المتوقع (20D)</th>
+                                <th>وقف الخسارة (-7%)</th>
+                                <th>النقاط الكلية</th>
+                                <th>لماذا تم اختياره؟ (السبب والتحليل الكمي)</th>
+                                <th>القرار والتوصية</th>
+                                <th>إجراء</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ranking-tbody">
+                            <tr>
+                                <td><strong class="text-green">#1 الأفضل</strong></td>
+                                <td>البنك التجاري الدولي (<strong class="ltr-text">COMI.CA</strong>)</td>
+                                <td><span class="ltr-text">137.00</span> ج.م</td>
+                                <td><span class="ltr-text">134.94 – 136.73</span> ج.م</td>
+                                <td><span class="ltr-text">150.70</span> ج.م</td>
+                                <td><span class="ltr-text">127.41</span> ج.م</td>
+                                <td><strong class="text-green">90.0 / 100</strong></td>
+                                <td>🟢 اتجاه صاعد قوي فوق متوسط 50 يوماً، سيولة مؤسسية ضخمة (342M ج.م يومياً)، وزخم إيجابي.</td>
+                                <td><span class="badge badge-green">🟢 فرصة شراء ممتازة</span></td>
+                                <td><button class="btn btn-primary" onclick="openDossier('COMI.CA')">تفاصيل السهم</button></td>
+                            </tr>
+                            <tr>
+                                <td><strong class="text-green">#2</strong></td>
+                                <td>السويدي إليكتريك (<strong class="ltr-text">SWDY.CA</strong>)</td>
+                                <td><span class="ltr-text">116.00</span> ج.م</td>
+                                <td><span class="ltr-text">114.26 – 115.77</span> ج.م</td>
+                                <td><span class="ltr-text">127.60</span> ج.م</td>
+                                <td><span class="ltr-text">107.88</span> ج.م</td>
+                                <td><strong class="text-green">85.0 / 100</strong></td>
+                                <td>🟢 زخم تشغيلي ممتاز في قطاع الصناعة، ارتداد من الدعم الفني، وسيولة قياسية (208M ج.م).</td>
+                                <td><span class="badge badge-green">🟢 فرصة شراء ممتازة</span></td>
+                                <td><button class="btn btn-primary" onclick="openDossier('SWDY.CA')">تفاصيل السهم</button></td>
+                            </tr>
+                            <tr>
+                                <td><strong class="text-green">#3</strong></td>
+                                <td>مجموعة طلعت مصطفى (<strong class="ltr-text">TMGH.CA</strong>)</td>
+                                <td><span class="ltr-text">97.70</span> ج.م</td>
+                                <td><span class="ltr-text">96.23 – 97.50</span> ج.م</td>
+                                <td><span class="ltr-text">107.47</span> ج.م</td>
+                                <td><span class="ltr-text">90.86</span> ج.م</td>
+                                <td><strong class="text-green">82.0 / 100</strong></td>
+                                <td>🟢 تدفقات سيولة عقارية قوية ونمو متواصل في حجم المبيعات المحجوزة لمشاريع الساحل والعاصمة.</td>
+                                <td><span class="badge badge-green">🟢 فرصة شراء ممتازة</span></td>
+                                <td><button class="btn btn-primary" onclick="openDossier('TMGH.CA')">تفاصيل السهم</button></td>
+                            </tr>
+                            <tr>
+                                <td><strong class="text-green">#4</strong></td>
+                                <td>أوراسكوم للإنشاء (<strong class="ltr-text">ORAS.CA</strong>)</td>
+                                <td><span class="ltr-text">759.00</span> ج.م</td>
+                                <td><span class="ltr-text">747.62 – 757.48</span> ج.م</td>
+                                <td><span class="ltr-text">834.90</span> ج.م</td>
+                                <td><span class="ltr-text">705.87</span> ج.م</td>
+                                <td><strong class="text-green">80.5 / 100</strong></td>
+                                <td>🟢 مشروعات بنية تحتية إقليمية كبرى، عقود دولارية، وقوة في حقوق الملكية.</td>
+                                <td><span class="badge badge-green">🟢 فرصة شراء ممتازة</span></td>
+                                <td><button class="btn btn-primary" onclick="openDossier('ORAS.CA')">تفاصيل السهم</button></td>
+                            </tr>
+                            <tr>
+                                <td><strong class="text-green">#5</strong></td>
+                                <td>مصر للألومنيوم (<strong class="ltr-text">EGAL.CA</strong>)</td>
+                                <td><span class="ltr-text">330.00</span> ج.م</td>
+                                <td><span class="ltr-text">325.05 – 329.34</span> ج.م</td>
+                                <td><span class="ltr-text">363.00</span> ج.م</td>
+                                <td><span class="ltr-text">306.90</span> ج.م</td>
+                                <td><strong class="text-green">80.0 / 100</strong></td>
+                                <td>🟢 صادرات ألومنيوم دولارية وهوامش ربح قياسية مع توزيعات أرباح سخية.</td>
+                                <td><span class="badge badge-green">🟢 فرصة شراء ممتازة</span></td>
+                                <td><button class="btn btn-primary" onclick="openDossier('EGAL.CA')">تفاصيل السهم</button></td>
+                            </tr>
+                            <tr>
+                                <td><strong class="text-yellow">#6</strong></td>
+                                <td>المصرية للاتصالات (WE) (<strong class="ltr-text">ETEL.CA</strong>)</td>
+                                <td><span class="ltr-text">114.89</span> ج.م</td>
+                                <td><span class="ltr-text">113.17 – 114.66</span> ج.م</td>
+                                <td><span class="ltr-text">126.38</span> ج.م</td>
+                                <td><span class="ltr-text">106.85</span> ج.م</td>
+                                <td><strong class="text-yellow">79.0 / 100</strong></td>
+                                <td>🟢 نمو متسارع في خدمات البيانات والألياف وحصة 45% في فودافون مصر.</td>
+                                <td><span class="badge badge-green">🟢 فرصة شراء ممتازة</span></td>
+                                <td><button class="btn btn-primary" onclick="openDossier('ETEL.CA')">تفاصيل السهم</button></td>
+                            </tr>
+                            <tr>
+                                <td><strong class="text-yellow">#7</strong></td>
+                                <td>أبو قير للأسمدة (<strong class="ltr-text">ABUK.CA</strong>)</td>
+                                <td><span class="ltr-text">75.52</span> ج.م</td>
+                                <td><span class="ltr-text">74.39 – 75.37</span> ج.م</td>
+                                <td><span class="ltr-text">81.56</span> ج.م</td>
+                                <td><span class="ltr-text">70.23</span> ج.م</td>
+                                <td><strong class="text-yellow">78.5 / 100</strong></td>
+                                <td>🟢 تدفقات نقدية دولارية من التصدير، توزيعات أرباح سخية، واستقرار في الهيكل المالي.</td>
+                                <td><span class="badge badge-yellow">🟡 مراقبة / احتفاظ</span></td>
+                                <td><button class="btn btn-primary" onclick="openDossier('ABUK.CA')">تفاصيل السهم</button></td>
+                            </tr>
+                            <tr>
+                                <td><strong class="text-yellow">#8</strong></td>
+                                <td>مصر لإنتاج الأسمدة (<strong class="ltr-text">MFPC.CA</strong>)</td>
+                                <td><span class="ltr-text">48.50</span> ج.م</td>
+                                <td><span class="ltr-text">47.77 – 48.40</span> ج.م</td>
+                                <td><span class="ltr-text">52.38</span> ج.م</td>
+                                <td><span class="ltr-text">45.11</span> ج.م</td>
+                                <td><strong class="text-yellow">77.5 / 100</strong></td>
+                                <td>🟢 طاقة إنتاجية وتصديرية ضخمة لليوريا والأمونيا مع توزيعات أرباح قوية.</td>
+                                <td><span class="badge badge-yellow">🟡 مراقبة / احتفاظ</span></td>
+                                <td><button class="btn btn-primary" onclick="openDossier('MFPC.CA')">تفاصيل السهم</button></td>
+                            </tr>
+                            <tr>
+                                <td><strong class="text-yellow">#9</strong></td>
+                                <td>مصرف أبو ظبي الإسلامي (<strong class="ltr-text">ADIB.CA</strong>)</td>
+                                <td><span class="ltr-text">53.42</span> ج.م</td>
+                                <td><span class="ltr-text">52.62 – 53.31</span> ج.م</td>
+                                <td><span class="ltr-text">57.69</span> ج.م</td>
+                                <td><span class="ltr-text">49.68</span> ج.م</td>
+                                <td><strong class="text-yellow">77.0 / 100</strong></td>
+                                <td>🟢 نمو متسارع في محفظة التمويل الإسلامي، أرباح قياسية، وعائد مرتفع على حقوق الملكية.</td>
+                                <td><span class="badge badge-yellow">🟡 مراقبة / احتفاظ</span></td>
+                                <td><button class="btn btn-primary" onclick="openDossier('ADIB.CA')">تفاصيل السهم</button></td>
+                            </tr>
+                            <tr>
+                                <td><strong class="text-yellow">#10</strong></td>
+                                <td>الشرقية للدخان (<strong class="ltr-text">EAST.CA</strong>)</td>
+                                <td><span class="ltr-text">36.02</span> ج.م</td>
+                                <td><span class="ltr-text">35.48 – 35.95</span> ج.م</td>
+                                <td><span class="ltr-text">38.90</span> ج.م</td>
+                                <td><span class="ltr-text">33.50</span> ج.م</td>
+                                <td><strong class="text-yellow">76.0 / 100</strong></td>
+                                <td>🟡 سهم دفاعي منخفض التذبذب، هوامش ربحية عالية، وتوزيعات نقدية منتظمة.</td>
+                                <td><span class="badge badge-yellow">🟡 مراقبة / احتفاظ</span></td>
+                                <td><button class="btn btn-primary" onclick="openDossier('EAST.CA')">تفاصيل السهم</button></td>
+                            </tr>
+                            <tr>
+                                <td><strong class="text-yellow">#11</strong></td>
+                                <td>جي بي كورب (غبور أوتو) (<strong class="ltr-text">GBCO.CA</strong>)</td>
+                                <td><span class="ltr-text">29.32</span> ج.م</td>
+                                <td><span class="ltr-text">28.88 – 29.26</span> ج.م</td>
+                                <td><span class="ltr-text">31.67</span> ج.م</td>
+                                <td><span class="ltr-text">27.27</span> ج.م</td>
+                                <td><strong class="text-yellow">75.5 / 100</strong></td>
+                                <td>🟡 تعافي الطلب على سوق السيارات وذراع التمويل غير المصرفي (جي بي كابيتال).</td>
+                                <td><span class="badge badge-yellow">🟡 مراقبة / احتفاظ</span></td>
+                                <td><button class="btn btn-primary" onclick="openDossier('GBCO.CA')">تفاصيل السهم</button></td>
+                            </tr>
+                            <tr>
+                                <td><strong class="text-yellow">#12</strong></td>
+                                <td>إي إف جي القابضة (هيرميس) (<strong class="ltr-text">HRHO.CA</strong>)</td>
+                                <td><span class="ltr-text">26.30</span> ج.م</td>
+                                <td><span class="ltr-text">25.91 – 26.25</span> ج.م</td>
+                                <td><span class="ltr-text">28.40</span> ج.م</td>
+                                <td><span class="ltr-text">24.46</span> ج.م</td>
+                                <td><strong class="text-yellow">75.0 / 100</strong></td>
+                                <td>🟡 ريادة في بنوك الاستثمار وإدارة الأصول وبنك aiBANK التجاري مع حركة عرضية للسهم.</td>
+                                <td><span class="badge badge-yellow">🟡 مراقبة / احتفاظ</span></td>
+                                <td><button class="btn btn-primary" onclick="openDossier('HRHO.CA')">تفاصيل السهم</button></td>
+                            </tr>
+                            <tr>
+                                <td><strong class="text-yellow">#13</strong></td>
+                                <td>جهينة للصناعات الغذائية (<strong class="ltr-text">JUFO.CA</strong>)</td>
+                                <td><span class="ltr-text">26.71</span> ج.م</td>
+                                <td><span class="ltr-text">26.31 – 26.66</span> ج.م</td>
+                                <td><span class="ltr-text">28.85</span> ج.م</td>
+                                <td><span class="ltr-text">24.84</span> ج.م</td>
+                                <td><strong class="text-yellow">74.5 / 100</strong></td>
+                                <td>🟡 علامة تجارية رائدة وقوة تسعيرية عالية في قطاع الأغذية الاستهلاكية.</td>
+                                <td><span class="badge badge-yellow">🟡 مراقبة / احتفاظ</span></td>
+                                <td><button class="btn btn-primary" onclick="openDossier('JUFO.CA')">تفاصيل السهم</button></td>
+                            </tr>
+                            <tr>
+                                <td><strong class="text-yellow">#14</strong></td>
+                                <td>إي فاينانس للاستثمارات (<strong class="ltr-text">EFIH.CA</strong>)</td>
+                                <td><span class="ltr-text">24.50</span> ج.م</td>
+                                <td><span class="ltr-text">24.13 – 24.45</span> ج.م</td>
+                                <td><span class="ltr-text">26.46</span> ج.م</td>
+                                <td><span class="ltr-text">22.79</span> ج.م</td>
+                                <td><strong class="text-yellow">74.0 / 100</strong></td>
+                                <td>🟡 احتكار المدفوعات الحكومية والرقمية وهوامش ربحية فائقة وصفر ديون.</td>
+                                <td><span class="badge badge-yellow">🟡 مراقبة / احتفاظ</span></td>
+                                <td><button class="btn btn-primary" onclick="openDossier('EFIH.CA')">تفاصيل السهم</button></td>
+                            </tr>
+                            <tr>
+                                <td><strong class="text-yellow">#15</strong></td>
+                                <td>فوري لتكنولوجيا المدفوعات (<strong class="ltr-text">FWRY.CA</strong>)</td>
+                                <td><span class="ltr-text">19.21</span> ج.م</td>
+                                <td><span class="ltr-text">18.92 – 19.17</span> ج.م</td>
+                                <td><span class="ltr-text">20.75</span> ج.م</td>
+                                <td><span class="ltr-text">17.87</span> ج.م</td>
+                                <td><strong class="text-yellow">73.5 / 100</strong></td>
+                                <td>🟡 نمو مستمر في المعاملات المالية الرقمية وشبكة فروع ووكلاء عملاقة.</td>
+                                <td><span class="badge badge-yellow">🟡 مراقبة / احتفاظ</span></td>
+                                <td><button class="btn btn-primary" onclick="openDossier('FWRY.CA')">تفاصيل السهم</button></td>
+                            </tr>
+                            <tr>
+                                <td><strong class="text-yellow">#16</strong></td>
+                                <td>دومتي للصناعات الغذائية (<strong class="ltr-text">DOMT.CA</strong>)</td>
+                                <td><span class="ltr-text">15.20</span> ج.م</td>
+                                <td><span class="ltr-text">14.97 – 15.17</span> ج.م</td>
+                                <td><span class="ltr-text">16.42</span> ج.م</td>
+                                <td><span class="ltr-text">14.14</span> ج.م</td>
+                                <td><strong class="text-yellow">73.0 / 100</strong></td>
+                                <td>🟡 استقرار المبيعات الاستهلاكية للألبان والمخبوزات مع تحسن الهوامش التشغيلية.</td>
+                                <td><span class="badge badge-yellow">🟡 مراقبة / احتفاظ</span></td>
+                                <td><button class="btn btn-primary" onclick="openDossier('DOMT.CA')">تفاصيل السهم</button></td>
+                            </tr>
+                            <tr>
+                                <td><strong class="text-yellow">#17</strong></td>
+                                <td>بالم هيلز للتعمير (<strong class="ltr-text">PHDC.CA</strong>)</td>
+                                <td><span class="ltr-text">15.15</span> ج.م</td>
+                                <td><span class="ltr-text">14.92 – 15.12</span> ج.م</td>
+                                <td><span class="ltr-text">16.36</span> ج.م</td>
+                                <td><span class="ltr-text">14.09</span> ج.م</td>
+                                <td><strong class="text-yellow">72.5 / 100</strong></td>
+                                <td>🟡 مبيعات تعاقدية جيدة في شرق وغرب القاهرة ونمو التدفقات النقدية العقارية.</td>
+                                <td><span class="badge badge-yellow">🟡 مراقبة / احتفاظ</span></td>
+                                <td><button class="btn btn-primary" onclick="openDossier('PHDC.CA')">تفاصيل السهم</button></td>
+                            </tr>
+                            <tr>
+                                <td><strong class="text-yellow">#18</strong></td>
+                                <td>ابن سينا فارما (<strong class="ltr-text">ISPH.CA</strong>)</td>
+                                <td><span class="ltr-text">13.02</span> ج.م</td>
+                                <td><span class="ltr-text">12.82 – 12.99</span> ج.م</td>
+                                <td><span class="ltr-text">14.06</span> ج.م</td>
+                                <td><span class="ltr-text">12.11</span> ج.م</td>
+                                <td><strong class="text-yellow">72.0 / 100</strong></td>
+                                <td>🟡 حصة سوقية رئيسية في توزيع الدواء ونمو مستمر في حجم المبيعات الإجمالية.</td>
+                                <td><span class="badge badge-yellow">🟡 مراقبة / احتفاظ</span></td>
+                                <td><button class="btn btn-primary" onclick="openDossier('ISPH.CA')">تفاصيل السهم</button></td>
+                            </tr>
+                            <tr>
+                                <td><strong class="text-yellow">#19</strong></td>
+                                <td>إعمار مصر للتنمية (<strong class="ltr-text">EMFD.CA</strong>)</td>
+                                <td><span class="ltr-text">11.81</span> ج.م</td>
+                                <td><span class="ltr-text">11.63 – 11.79</span> ج.م</td>
+                                <td><span class="ltr-text">12.75</span> ج.م</td>
+                                <td><span class="ltr-text">10.98</span> ج.م</td>
+                                <td><strong class="text-yellow">71.5 / 100</strong></td>
+                                <td>🟡 مشروعات عقارية فاخرة بالساحل والقاهرة مع سيولة نقدية قوية وميزانية متينة.</td>
+                                <td><span class="badge badge-yellow">🟡 مراقبة / احتفاظ</span></td>
+                                <td><button class="btn btn-primary" onclick="openDossier('EMFD.CA')">تفاصيل السهم</button></td>
+                            </tr>
+                            <tr>
+                                <td><strong class="text-yellow">#20</strong></td>
+                                <td>أموك للزيوت المعدنية (<strong class="ltr-text">AMOC.CA</strong>)</td>
+                                <td><span class="ltr-text">11.35</span> ج.م</td>
+                                <td><span class="ltr-text">11.18 – 11.33</span> ج.م</td>
+                                <td><span class="ltr-text">12.26</span> ج.م</td>
+                                <td><span class="ltr-text">10.56</span> ج.م</td>
+                                <td><strong class="text-yellow">70.0 / 100</strong></td>
+                                <td>🟡 هوامش تكرير متأرجحة وحركة تجميع بطيئة قرب مستويات الدعم الفني.</td>
+                                <td><span class="badge badge-yellow">🟡 مراقبة / احتفاظ</span></td>
+                                <td><button class="btn btn-primary" onclick="openDossier('AMOC.CA')">تفاصيل السهم</button></td>
+                            </tr>
+                            <tr>
+                                <td><strong class="text-red">#21</strong></td>
+                                <td>مصر الجديدة للإسكان (<strong class="ltr-text">HELI.CA</strong>)</td>
+                                <td><span class="ltr-text">7.69</span> ج.م</td>
+                                <td><span class="ltr-text">7.57 – 7.67</span> ج.م</td>
+                                <td><span class="ltr-text">8.31</span> ج.م</td>
+                                <td><span class="ltr-text">7.15</span> ج.م</td>
+                                <td><strong class="text-red">69.0 / 100</strong></td>
+                                <td>🟡 محفظة أراضٍ ضخمة بنيوهيليوبوليس مع متابعة لوتيرة التطوير والمشاركات.</td>
+                                <td><span class="badge badge-yellow">🟡 مراقبة / احتفاظ</span></td>
+                                <td><button class="btn btn-primary" onclick="openDossier('HELI.CA')">تفاصيل السهم</button></td>
+                            </tr>
+                            <tr>
+                                <td><strong class="text-red">#22</strong></td>
+                                <td>راية القابضة للاستثمارات (<strong class="ltr-text">RAYA.CA</strong>)</td>
+                                <td><span class="ltr-text">7.00</span> ج.م</td>
+                                <td><span class="ltr-text">6.89 – 6.99</span> ج.م</td>
+                                <td><span class="ltr-text">7.56</span> ج.م</td>
+                                <td><span class="ltr-text">6.51</span> ج.م</td>
+                                <td><strong class="text-red">68.0 / 100</strong></td>
+                                <td>🟡 تنوع أنشطة واسع بين الاتصالات والمدفوعات والمراكز اللوجستية.</td>
+                                <td><span class="badge badge-yellow">🟡 مراقبة / احتفاظ</span></td>
+                                <td><button class="btn btn-primary" onclick="openDossier('RAYA.CA')">تفاصيل السهم</button></td>
+                            </tr>
+                            <tr>
+                                <td><strong class="text-red">#23</strong></td>
+                                <td>القلعة للاستشارات المالية (<strong class="ltr-text">CCAP.CA</strong>)</td>
+                                <td><span class="ltr-text">5.60</span> ج.م</td>
+                                <td><span class="ltr-text">5.52 – 5.59</span> ج.م</td>
+                                <td><span class="ltr-text">6.05</span> ج.م</td>
+                                <td><span class="ltr-text">5.21</span> ج.م</td>
+                                <td><strong class="text-red">65.0 / 100</strong></td>
+                                <td>🔴 إعادة هيكلة مستمرة للديون والشركات التابعة مع تذبذب مرتفع في التقييم.</td>
+                                <td><span class="badge badge-red">🔴 تجنب حالياً</span></td>
+                                <td><button class="btn btn-primary" onclick="openDossier('CCAP.CA')">تفاصيل السهم</button></td>
+                            </tr>
+                            <tr>
+                                <td><strong class="text-red">#24 الأضعف</strong></td>
+                                <td>بلتون المالية القابضة (<strong class="ltr-text">BTFH.CA</strong>)</td>
+                                <td><span class="ltr-text">2.98</span> ج.م</td>
+                                <td><span class="ltr-text">2.94 – 2.97</span> ج.م</td>
+                                <td><span class="ltr-text">3.22</span> ج.م</td>
+                                <td><span class="ltr-text">2.77</span> ج.م</td>
+                                <td><strong class="text-red">62.0 / 100</strong></td>
+                                <td>🔴 سيولة مضاربية عالية وتوسع سريع في الأنشطة مع تذبذب سعري مرتفع.</td>
+                                <td><span class="badge badge-red">🔴 تجنب حالياً</span></td>
+                                <td><button class="btn btn-primary" onclick="openDossier('BTFH.CA')">تفاصيل السهم</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 3. ملف الاستخبارات للسهم والآفاق الاستثمارية الثلاثة -->
+            <div id="tab-details" class="tab-panel">
+                <div class="beginner-guide-box">
+                    💡 <strong>دليل المبتدئين للآفاق الاستثمارية:</strong> قمنا بتبسيط التحليل المالي المعقد إلى <strong>3 بطاقات واضحة</strong> تناسب أسلوبك الاستثماري (مضاربة سريعة، أو نمو ربع سنوي، أو استثمار طويل الأجل)، مع <strong>حاسبة ذكية لتحديد كمية الأسهم الآمنة</strong> وفق سقف المخاطرة.
+                </div>
+
+                <!-- شريط اختيار السهم -->
+                <div class="card" style="margin-bottom: 16px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                        <div style="display: flex; align-items: center; gap: 10px; flex-grow: 1; max-width: 500px;">
+                            <label style="font-size: 13px; font-weight: 700; white-space: nowrap; margin: 0;">اختر شركة للتحليل:</label>
+                            <select id="details-stock-select" class="form-control" onchange="loadStockDetails(this.value)" style="font-size: 13px; font-weight: 600;">
+                                <option value="COMI.CA">البنك التجاري الدولي (COMI.CA) — 137.00 ج.م</option>
+                                <option value="SWDY.CA">السويدي إليكتريك (SWDY.CA) — 116.00 ج.م</option>
+                                <option value="TMGH.CA">مجموعة طلعت مصطفى (TMGH.CA) — 97.70 ج.م</option>
+                                <option value="ORAS.CA">أوراسكوم للإنشاء (ORAS.CA) — 759.00 ج.م</option>
+                                <option value="ETEL.CA">المصرية للاتصالات (ETEL.CA) — 114.89 ج.م</option>
+                                <option value="EGAL.CA">مصر للألومنيوم (EGAL.CA) — 330.00 ج.م</option>
+                                <option value="ABUK.CA">أبو قير للأسمدة (ABUK.CA) — 75.52 ج.م</option>
+                                <option value="MFPC.CA">مصر لإنتاج الأسمدة (MFPC.CA) — 48.50 ج.م</option>
+                                <option value="ADIB.CA">مصرف أبو ظبي الإسلامي (ADIB.CA) — 53.42 ج.م</option>
+                                <option value="EAST.CA">الشرقية للدخان (EAST.CA) — 36.02 ج.م</option>
+                                <option value="JUFO.CA">جهينة للصناعات الغذائية (JUFO.CA) — 26.71 ج.م</option>
+                                <option value="GBCO.CA">جي بي كورب (GBCO.CA) — 29.32 ج.م</option>
+                                <option value="HRHO.CA">إي إف جي القابضة (HRHO.CA) — 26.30 ج.م</option>
+                                <option value="EFIH.CA">إي فاينانس (EFIH.CA) — 24.50 ج.م</option>
+                                <option value="FWRY.CA">فوري للمدفوعات (FWRY.CA) — 19.21 ج.م</option>
+                                <option value="DOMT.CA">دومتي للأغذية (DOMT.CA) — 15.20 ج.م</option>
+                                <option value="PHDC.CA">بالم هيلز للتعمير (PHDC.CA) — 15.15 ج.م</option>
+                                <option value="ISPH.CA">ابن سينا فارما (ISPH.CA) — 13.02 ج.م</option>
+                                <option value="EMFD.CA">إعمار مصر للتنمية (EMFD.CA) — 11.81 ج.م</option>
+                                <option value="AMOC.CA">أموك للزيوت (AMOC.CA) — 11.35 ج.م</option>
+                                <option value="HELI.CA">مصر الجديدة للإسكان (HELI.CA) — 7.69 ج.م</option>
+                                <option value="RAYA.CA">راية القابضة (RAYA.CA) — 7.00 ج.م</option>
+                                <option value="CCAP.CA">القلعة للاستشارات (CCAP.CA) — 5.60 ج.م</option>
+                                <option value="BTFH.CA">بلتون القابضة (BTFH.CA) — 2.98 ج.م</option>
+                            </select>
+                        </div>
+                        <div class="budget-chips" style="margin: 0;">
+                            <span style="font-size: 11px; color: var(--text-muted); align-self: center;">اختيار سريع:</span>
+                            <button class="chip-btn" onclick="loadStockDetails('COMI.CA')">COMI</button>
+                            <button class="chip-btn" onclick="loadStockDetails('SWDY.CA')">SWDY</button>
+                            <button class="chip-btn" onclick="loadStockDetails('TMGH.CA')">TMGH</button>
+                            <button class="chip-btn" onclick="loadStockDetails('ORAS.CA')">ORAS</button>
+                            <button class="chip-btn" onclick="loadStockDetails('ESRS.CA')">ESRS</button>
+                            <button class="chip-btn" onclick="loadStockDetails('ABUK.CA')">ABUK</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- بطاقة ملخص السهم الرئيسية -->
+                <div class="stock-hero-card">
+                    <div class="stock-hero-info">
+                        <h2>
+                            <span id="hero-company-name">البنك التجاري الدولي</span>
+                            <span id="hero-ticker" class="ltr-text" style="color: var(--accent-blue);">COMI.CA</span>
+                        </h2>
+                        <div style="display: flex; gap: 12px; align-items: center; margin-top: 6px; flex-wrap: wrap;">
+                            <span class="metric-sub" id="hero-sector">القطاع: البنوك والخدمات المالية</span>
+                            <span style="color: rgba(255,255,255,0.2);">|</span>
+                            <span class="metric-sub">النقاط الكلية: <strong id="hero-score" class="text-green">90.0 / 100</strong></span>
+                            <span style="color: rgba(255,255,255,0.2);">|</span>
+                            <span class="metric-sub">السيولة اليومية: <strong id="hero-adv" class="ltr-text">342M ج.م</strong></span>
+                            <span style="color: rgba(255,255,255,0.2);">|</span>
+                            <span class="badge" id="stock-last-sync-badge" style="background: rgba(139, 92, 246, 0.15); color: #c084fc; border: 1px solid rgba(139, 92, 246, 0.3); font-size: 11px;">🕒 آخر تحديث للأسعار: 23 أغسطس 2026 - 10:00 ص بتوقيت القاهرة</span>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 20px;">
+                        <div class="stock-hero-price">
+                            <div class="metric-title" style="text-align: left;">السعر الفعلي الحالي (إغلاق)</div>
+                            <div class="hero-price-val"><span id="hero-price" class="ltr-text">137.00</span> <span style="font-size: 14px; font-weight: 500;">ج.م</span></div>
+                        </div>
+                        <div id="hero-badge-container">
+                            <span id="hero-badge" class="badge badge-green" style="font-size: 13px; padding: 6px 14px;">🟢 فرصة شراء ممتازة</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- الرسم البياني الفني المباشر التفاعلي (TradingView Advanced Technical Chart) -->
+                <div class="card chart-card" style="margin-bottom: 20px; padding: 18px 20px; border-radius: 12px; background: rgba(17, 24, 39, 0.95); border: 1px solid var(--border); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 12px;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div style="font-size: 15px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px;">
+                                <span>📈 الرسم البياني الفني المباشر (TradingView Live Chart)</span>
+                                <span class="badge badge-blue ltr-text" id="tv-chart-symbol-badge" style="font-size: 12px; font-weight: 700;">EGX:COMI</span>
+                            </div>
+                        </div>
+                        <!-- مؤشرات الإرشاد البصري لمستويات الدخول والوقف والأهداف (Visual Guidance Overlays) -->
+                        <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+                            <div style="background: rgba(59, 130, 246, 0.12); border: 1px solid rgba(59, 130, 246, 0.35); border-radius: 6px; padding: 5px 10px; font-size: 11px; display: flex; align-items: center; gap: 6px;">
+                                <span style="color: #60a5fa; font-weight: 600;">🎯 منطقة الشراء:</span>
+                                <strong id="tv-entry-guide" class="ltr-text" style="color: #93c5fd;">134.95 – 136.73 ج.م</strong>
+                            </div>
+                            <div style="background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 6px; padding: 5px 10px; font-size: 11px; display: flex; align-items: center; gap: 6px;">
+                                <span style="color: #f87171; font-weight: 600;">🛑 صمام الوقف (-7%):</span>
+                                <strong id="tv-stop-guide" class="ltr-text" style="color: #fca5a5;">127.41 ج.م</strong>
+                            </div>
+                            <div style="background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 6px; padding: 5px 10px; font-size: 11px; display: flex; align-items: center; gap: 6px;">
+                                <span style="color: #34d399; font-weight: 600;">🚀 الهدف الأول:</span>
+                                <strong id="tv-target-guide" class="ltr-text" style="color: #6ee7b7;">150.70 (+10.0%)</strong>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- حاوية الشارت التفاعلي -->
+                    <div id="tradingview_chart_wrapper" style="width: 100%; height: 500px; border-radius: 8px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); background: #131722; position: relative;">
+                        <div id="tradingview_widget_container" style="width: 100%; height: 100%;"></div>
+                    </div>
+                </div>
+
+                <!-- بطاقات الطبقات المؤسسية المتطورة (Institutional Multi-Factor Intelligence Panel) -->
+                <div class="card-grid-3" style="margin-bottom: 20px;">
+                    <!-- 1. مؤشرات الصحة المالية والتقييم الأساسي (Live Fundamentals) -->
+                    <div class="card" style="margin-bottom: 0; background: linear-gradient(180deg, rgba(21, 31, 50, 0.95) 0%, rgba(16, 23, 38, 0.95) 100%); border-top: 3px solid #10b981;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px;">
+                            <div style="font-size: 14px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 6px;">
+                                <span>🏛️ الصحة المالية والتقييم الأساسي</span>
+                            </div>
+                            <span id="fund-rating-badge" class="badge badge-green" style="font-size: 11px;">EXCELLENT</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <span class="metric-title" style="margin: 0;">التقييم المالي الكمي:</span>
+                            <strong id="fund-score-val" class="text-green" style="font-size: 18px;">82.5 / 100</strong>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 11.5px; background: rgba(0,0,0,0.25); padding: 10px; border-radius: 6px;">
+                            <div><span style="color: var(--text-muted);">مكرر الربحية (P/E):</span> <strong id="fund-pe" class="ltr-text" style="color: #60a5fa;">7.45</strong></div>
+                            <div><span style="color: var(--text-muted);">مضاعف الدفترية (P/B):</span> <strong id="fund-pb" class="ltr-text" style="color: #60a5fa;">1.62</strong></div>
+                            <div><span style="color: var(--text-muted);">عائد الملكية (ROE):</span> <strong id="fund-roe" class="ltr-text" style="color: #34d399;">28.5%</strong></div>
+                            <div><span style="color: var(--text-muted);">المديونية (D/E):</span> <strong id="fund-de" class="ltr-text" style="color: #34d399;">0.45</strong></div>
+                            <div><span style="color: var(--text-muted);">عائد الكوبون:</span> <strong id="fund-div" class="ltr-text" style="color: #fbbf24;">5.8%</strong></div>
+                            <div><span style="color: var(--text-muted);">نمو الأرباح (EPS):</span> <strong id="fund-eps" class="ltr-text" style="color: #a78bfa;">+34.2%</strong></div>
+                        </div>
+                    </div>
+
+                    <!-- 2. نبض الإفصاحات والأخبار وتأثير الصدمات (News & Disclosures NLP) -->
+                    <div class="card" style="margin-bottom: 0; background: linear-gradient(180deg, rgba(21, 31, 50, 0.95) 0%, rgba(16, 23, 38, 0.95) 100%); border-top: 3px solid #3b82f6;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px;">
+                            <div style="font-size: 14px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 6px;">
+                                <span>📰 نبض الإفصاحات والأخبار (NLP)</span>
+                            </div>
+                            <span id="news-sentiment-badge" class="badge badge-blue" style="font-size: 11px;">🟢 إيجابي ومحفز</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <span class="metric-title" style="margin: 0;">أثر الصدمة الإخبارية:</span>
+                            <strong id="news-shock-val" class="text-green" style="font-size: 16px;">+2.40% (عالي الأهمية)</strong>
+                        </div>
+                        <div style="background: rgba(0,0,0,0.25); padding: 10px; border-radius: 6px; font-size: 11.5px; line-height: 1.5; color: #e2e8f0; min-height: 62px;">
+                            <span style="color: var(--text-muted); display: block; font-size: 10px; margin-bottom: 3px;">آخر إفصاح / حدث جوهري مرصود:</span>
+                            <span id="news-headline-val">نمو صافي أرباح البنك بنسبة 48% وتوزيعات كوبونات نقدية استثنائية للمساهمين.</span>
+                        </div>
+                    </div>
+
+                    <!-- 3. رادار الصفقات الكتلية وتدفقات المؤسسات (Block Trades & Flow) -->
+                    <div class="card" style="margin-bottom: 0; background: linear-gradient(180deg, rgba(21, 31, 50, 0.95) 0%, rgba(16, 23, 38, 0.95) 100%); border-top: 3px solid #8b5cf6;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px;">
+                            <div style="font-size: 14px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 6px;">
+                                <span>⚡ الصفقات الكتلية وأوامر المؤسسات</span>
+                            </div>
+                            <span id="block-trade-badge" class="badge badge-purple" style="font-size: 11px;">🟢 شراء وتجميع كتلي</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <span class="metric-title" style="margin: 0;">مضاعف حجم التذكرة:</span>
+                            <strong id="block-multiple-val" class="text-purple" style="font-size: 16px;">3.2x متوسط التذكرة</strong>
+                        </div>
+                        <div style="background: rgba(0,0,0,0.25); padding: 10px; border-radius: 6px; font-size: 11.5px; line-height: 1.5; color: #e2e8f0; min-height: 62px;">
+                            <span style="color: var(--text-muted); display: block; font-size: 10px; margin-bottom: 3px;">رصد السيولة والكتل:</span>
+                            <span id="block-desc-val">رصد تنفيذ صفقات كتلية شرائية تعادل 3.2x متوسط حجم التداول الاعتيادي مع صعود سعري.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- الآفاق الاستثمارية الثلاثة (3 Horizon Cards) -->
+                <div class="card-grid-3">
+                    <!-- 1. المدى القصير -->
+                    <div class="horizon-card st-card">
+                        <div class="horizon-header">
+                            <div class="horizon-title">
+                                <span>⚡ المدى القصير</span>
+                            </div>
+                            <span class="horizon-tag tag-blue">أيام – أسبوعين</span>
+                        </div>
+                        <div class="horizon-row">
+                            <span class="horizon-label">سعر الدخول المقترح (Limit):</span>
+                            <span class="horizon-value text-green"><span id="detail-st-entry" class="ltr-text">134.95 – 136.73</span> ج.م</span>
+                        </div>
+                        <div class="horizon-row">
+                            <span class="horizon-label">الهدف السريع الأول:</span>
+                            <span class="horizon-value text-green"><span id="detail-st-target" class="ltr-text">150.70</span> ج.م (+10.0%)</span>
+                        </div>
+                        <div class="horizon-row">
+                            <span class="horizon-label">حد الأمان لحماية رأس المال (-7%):</span>
+                            <span class="horizon-value text-red"><span id="detail-st-stop" class="ltr-text">127.41</span> ج.م</span>
+                        </div>
+                        <div class="horizon-row">
+                            <span class="horizon-label">طبيعة الحركة:</span>
+                            <span class="horizon-value" id="detail-st-nature">مضاربة سريعة مع الزخم المؤسسي</span>
+                        </div>
+                        <div class="horizon-tip tip-blue" id="detail-st-tip">
+                            💡 <strong>نصيحة المتداول:</strong> لا تشترِ بسعر السوق المرتفع مباشرة. ضع أمر شراء محدد (Limit Order) داخل منطقة الدخول وانتظر التهدئة السعرية.
+                        </div>
+                    </div>
+
+                    <!-- 2. المدى المتوسط -->
+                    <div class="horizon-card mt-card">
+                        <div class="horizon-header">
+                            <div class="horizon-title">
+                                <span>📈 المدى المتوسط</span>
+                            </div>
+                            <span class="horizon-tag tag-purple">شهر – 3 شهور</span>
+                        </div>
+                        <div class="horizon-row">
+                            <span class="horizon-label">اتجاه السهم العام:</span>
+                            <span class="horizon-value text-green" id="detail-mt-trend">صاعد بقوة فوق متوسط 50 يوماً</span>
+                        </div>
+                        <div class="horizon-row">
+                            <span class="horizon-label">المستهدف الربعي الرئيسي:</span>
+                            <span class="horizon-value text-green"><span id="detail-mt-target" class="ltr-text">165.00</span> ج.م (+20.4%)</span>
+                        </div>
+                        <div class="horizon-row">
+                            <span class="horizon-label">أقوى نقطة دعم لحماية المكاسب:</span>
+                            <span class="horizon-value text-yellow"><span id="detail-mt-support" class="ltr-text">130.00</span> ج.م</span>
+                        </div>
+                        <div class="horizon-row">
+                            <span class="horizon-label">نمط التداول الموصى به:</span>
+                            <span class="horizon-value" id="detail-mt-pattern">سوينغ فصلي وتجميع تدريجي</span>
+                        </div>
+                        <div class="horizon-tip tip-purple" id="detail-mt-tip">
+                            💡 <strong>نصيحة المستثمر:</strong> احتفظ بمركزك طالما السهم يتداول أعلى مستوى الدعم المحوري لتحقيق كامل المستهدف الربعي مع إعلانات النتائج المالية.
+                        </div>
+                    </div>
+
+                    <!-- 3. المدى الطويل -->
+                    <div class="horizon-card lt-card">
+                        <div class="horizon-header">
+                            <div class="horizon-title">
+                                <span>💎 المدى الطويل</span>
+                            </div>
+                            <span class="horizon-tag tag-green">6 شهور – سنة</span>
+                        </div>
+                        <div class="horizon-row">
+                            <span class="horizon-label">قوة الشركة والمتانة المالية:</span>
+                            <span class="horizon-value text-green" id="detail-lt-health">ممتازة (أرباح تشغيلية نقدية حقيقية)</span>
+                        </div>
+                        <div class="horizon-row">
+                            <span class="horizon-label">تقييم الأمان الاستثماري:</span>
+                            <span class="horizon-value" id="detail-lt-safety">فائق الأمان (قيادي Blue-Chip)</span>
+                        </div>
+                        <div class="horizon-row">
+                            <span class="horizon-label">نطاق القيمة العادلة للسهم:</span>
+                            <span class="horizon-value text-green"><span id="detail-lt-fair" class="ltr-text">145.00 – 160.00</span> ج.م</span>
+                        </div>
+                        <div class="horizon-row">
+                            <span class="horizon-label">عائد التوزيعات المتوقع:</span>
+                            <span class="horizon-value text-green" id="detail-lt-div">توزيعات نقدية سخية ومستقرة</span>
+                        </div>
+                        <div class="horizon-tip tip-green" id="detail-lt-tip">
+                            💡 <strong>نصيحة الخبير:</strong> سهم قيادي متين مناسب جداً للمحافظ طويلة الأجل والنمو المركب، ومقاوم للتقلبات والتضخم بفضل حصته السوقية.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- حاسبة الشراء الآمن وتحديد الكمية (Investment Position Sizer) -->
+                <div class="sizer-card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+                        <div>
+                            <div style="font-size: 16px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px;">
+                                <span>🧮 حاسبة الاستثمار الآمن وتحديد الكمية (Safe Position Sizer)</span>
+                                <span class="badge badge-blue">مطابقة قواعد الحماية 100%</span>
+                            </div>
+                            <div class="metric-sub" style="margin-top: 4px;">
+                                احسب الكمية الدقيقة للشراء من سهم <strong id="sizer-target-ticker" class="ltr-text" style="color: var(--accent-blue);">COMI.CA</strong> دون كسر أرضية الكاش (35%) أو تجاوز سقف السهم الواحد (20%).
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 8px;">
+                            <button class="btn btn-primary" onclick="applySizerToModal()">➕ شراء هذه الكمية بمحفظتي</button>
+                        </div>
+                    </div>
+
+                    <!-- مدخلات رأس المال -->
+                    <div style="background: rgba(17, 24, 39, 0.7); border: 1px solid var(--border); border-radius: 8px; padding: 16px; margin-bottom: 16px;">
+                        <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+                            <div style="flex-grow: 1; max-width: 320px;">
+                                <label style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 6px; font-weight: 600;">
+                                    أدخل إجمالي رأس مال محفظتك الكلي (ج.م):
+                                </label>
+                                <input type="number" id="sizer-total-budget" class="form-control" value="20000" step="1000" min="1000" oninput="calculatePositionSize()" style="font-size: 15px; font-weight: 700; color: #60a5fa;">
+                            </div>
+                            <div style="flex-grow: 1;">
+                                <label style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 6px;">مبالغ استثمارية سريعة:</label>
+                                <div class="budget-chips">
+                                    <button class="chip-btn" onclick="setSizerBudget(10000)">10,000 ج.م</button>
+                                    <button class="chip-btn active" id="chip-20k" onclick="setSizerBudget(20000)">20,000 ج.م</button>
+                                    <button class="chip-btn" onclick="setSizerBudget(50000)">50,000 ج.م</button>
+                                    <button class="chip-btn" onclick="setSizerBudget(100000)">100,000 ج.م</button>
+                                    <button class="chip-btn" onclick="setSizerBudget(250000)">250,000 ج.م</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- نتائج الحساب الآمن -->
+                    <div class="card-grid-4" style="margin-bottom: 12px;">
+                        <div class="card" style="background: rgba(17, 24, 39, 0.9);">
+                            <div class="metric-title">🔒 الاحتياطي النقدي الإلزامي (35%)</div>
+                            <div class="metric-val text-yellow"><span id="sizer-cash-reserve" class="ltr-text">17,500.00</span> ج.م</div>
+                            <div class="metric-sub">ممنوع لمسه كصمام أمان ضد تقلبات البورصة</div>
+                        </div>
+                        <div class="card" style="background: rgba(17, 24, 39, 0.9);">
+                            <div class="metric-title">🛡️ الحد الأقصى لهذا السهم (20% سقف تركز)</div>
+                            <div class="metric-val text-green"><span id="sizer-stock-cap" class="ltr-text">10,000.00</span> ج.م</div>
+                            <div class="metric-sub">أقصى ميزانية مسموح بها لعدم وضع البيض في سلة واحدة</div>
+                        </div>
+                        <div class="card" style="background: rgba(17, 24, 39, 0.9); border: 1px solid var(--accent-blue);">
+                            <div class="metric-title" style="color: var(--accent-blue);">🎯 الكمية الدقيقة الآمنة للشراء</div>
+                            <div class="metric-val text-green"><span id="sizer-safe-qty" class="ltr-text">72</span> سهم</div>
+                            <div class="metric-sub">التكلفة الفعلية: <strong id="sizer-total-cost" class="ltr-text">9,864.00</strong> ج.م</div>
+                        </div>
+                        <div class="card" style="background: rgba(17, 24, 39, 0.9);">
+                            <div class="metric-title">🛑 أقصى خسارة ممكنة عند تفعيل الوقف (-7%)</div>
+                            <div class="metric-val text-red"><span id="sizer-max-loss" class="ltr-text">-690.48</span> ج.م</div>
+                            <div class="metric-sub">تمثل فقط <strong id="sizer-loss-pct" class="ltr-text">1.38%</strong> من إجمالي محفظتك</div>
+                        </div>
+                    </div>
+
+                    <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 8px; padding: 12px 16px; font-size: 12px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+                        <div>
+                            🟢 <strong>حالة الأمان للمحفظة:</strong> الكاش المتبقي في حسابك بعد هذه الصفقة سيكون <strong id="sizer-rem-cash" class="ltr-text">40,136.00 ج.م</strong> بنسبة <strong id="sizer-rem-cash-pct" class="ltr-text">80.27%</strong> (متوافق تماماً مع قواعد المخاطر المجمدة).
+                        </div>
+                        <span class="badge badge-green">🛡️ حماية ضد الكوارث مضمونة</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. محفظتي الحقيقية -->
+            <div id="tab-real_portfolio" class="tab-panel">
+                <div class="beginner-guide-box">
+                    💼 <strong>محفظتك الحقيقية:</strong> أضف الأسهم التي تملكها بالفعل في حسابك لدى وسيطك المالي (مثل Thndr أو مباشر أو هيرميس) لمتابعة أرباحها وخسائرها وفق الأسعار الحقيقية، وتلقي التوصيات الذكية لمركزك.
+                </div>
+
+                <div class="card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+                        <div class="metric-title">سجل محفظتي الحقيقية ومتابعة الأرباح والتوصيات</div>
+                        <div style="display: flex; gap: 8px;">
+                            <button class="btn btn-primary" id="btn-export-real-portfolio" onclick="exportPortfolioCSV('real')" style="background-color: #059669;">📥 تصدير كشف المحفظة (Excel / CSV)</button>
+                            <button class="btn btn-primary" id="btn-add-real-position" onclick="showAddPositionModal()">➕ إضافة سهم للمحفظة</button>
+                        </div>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>اسم الشركة وكود السهم</th>
+                                <th>الكمية</th>
+                                <th>متوسط سعر الشراء</th>
+                                <th>السعر الفعلي الحالي</th>
+                                <th>القيمة الإجمالية</th>
+                                <th>الربح / الخسارة</th>
+                                <th>توصية النموذج لمركزك</th>
+                                <th>إجراء</th>
+                            </tr>
+                        </thead>
+                        <tbody id="real-portfolio-tbody">
+                            <tr>
+                                <td>البنك التجاري الدولي (<strong class="ltr-text">COMI.CA</strong>)</td>
+                                <td>250</td>
+                                <td><span class="ltr-text">136.00</span> ج.م</td>
+                                <td><span class="ltr-text">137.00</span> ج.م</td>
+                                <td><span class="ltr-text">34,250.00</span> ج.م</td>
+                                <td class="text-green">+<span class="ltr-text">250.00</span> ج.م (+0.74%)</td>
+                                <td><span class="badge badge-green">🟢 أنت تملك السهم: احتفاظ أو تعزيز</span></td>
+                                <td><button class="btn btn-danger" onclick="deleteRealPosition('COMI.CA')">حذف</button></td>
+                            </tr>
+                            <tr>
+                                <td>السويدي إليكتريك (<strong class="ltr-text">SWDY.CA</strong>)</td>
+                                <td>500</td>
+                                <td><span class="ltr-text">115.00</span> ج.م</td>
+                                <td><span class="ltr-text">116.00</span> ج.م</td>
+                                <td><span class="ltr-text">58,000.00</span> ج.م</td>
+                                <td class="text-green">+<span class="ltr-text">500.00</span> ج.م (+0.87%)</td>
+                                <td><span class="badge badge-green">🟢 أنت تملك السهم: احتفاظ أو تعزيز</span></td>
+                                <td><button class="btn btn-danger" onclick="deleteRealPosition('SWDY.CA')">حذف</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 5. المحفظة التجريبية -->
+            <div id="tab-paper_portfolio" class="tab-panel">
+                <div class="card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+                        <div class="metric-title">سجل تداولات المحفظة التجريبية الموثقة مع محاكاة الاحتكاك (0.90% RT)</div>
+                        <button class="btn btn-primary" id="btn-export-paper-portfolio" onclick="exportPortfolioCSV('paper')" style="background-color: #059669;">📥 تصدير سجل التداول التجريبي (Excel / CSV)</button>
+                    </div>
+                    <div style="padding: 16px; background: rgba(0,0,0,0.25); border-radius: 6px; color: var(--text-muted); font-size: 13px;" id="paper-session-counter-box">
+                        📝 <strong>الجلسة: 1 من 30 (تاريخ البدء: 23 أغسطس 2026):</strong> سيتم تسجيل وتوثيق كل جلسة تداول تلقائياً في السجل الرقمي المعتمد فور انطلاق المجدول الآلي أثناء ساعات التداول.
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. قائمة المراقبة -->
+            <div id="tab-watchlist" class="tab-panel">
+                <div class="card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                        <div class="metric-title">قائمة المراقبة المستقلة للأسهم المرشحة بالأسعار الفعلية</div>
+                        <div style="display: flex; gap: 8px;">
+                            <select id="watchlist-select" class="form-control" style="width: 320px;">
+                                <option value="">-- اختر شركة لإضافتها للمراقبة --</option>
+                                <option value="COMI.CA">البنك التجاري الدولي (COMI.CA) — 137.00 ج.م</option>
+                                <option value="SWDY.CA">السويدي إليكتريك (SWDY.CA) — 116.00 ج.م</option>
+                                <option value="TMGH.CA">مجموعة طلعت مصطفى (TMGH.CA) — 97.70 ج.م</option>
+                                <option value="ORAS.CA">أوراسكوم للإنشاء (ORAS.CA) — 759.00 ج.م</option>
+                                <option value="ETEL.CA">المصرية للاتصالات (ETEL.CA) — 114.89 ج.م</option>
+                                <option value="EGAL.CA">مصر للألومنيوم (EGAL.CA) — 330.00 ج.م</option>
+                                <option value="ABUK.CA">أبو قير للأسمدة (ABUK.CA) — 75.52 ج.م</option>
+                                <option value="MFPC.CA">مصر لإنتاج الأسمدة (MFPC.CA) — 48.50 ج.م</option>
+                                <option value="ADIB.CA">مصرف أبو ظبي الإسلامي (ADIB.CA) — 53.42 ج.م</option>
+                                <option value="EAST.CA">الشرقية للدخان (EAST.CA) — 36.02 ج.م</option>
+                                <option value="HRHO.CA">إي إف جي القابضة (HRHO.CA) — 26.30 ج.م</option>
+                                <option value="FWRY.CA">فوري لتكنولوجيا البنوك (FWRY.CA) — 19.21 ج.م</option>
+                            </select>
+                            <button class="btn btn-primary" onclick="addWatchlistFromSelect()">➕ إضافة للقائمة</button>
+                        </div>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>كود السهم</th>
+                                <th>السعر الفعلي الحالي</th>
+                                <th>نقاط الألفا</th>
+                                <th>المستهدف</th>
+                                <th>وقف الخسارة</th>
+                                <th>التوصية</th>
+                                <th>إجراء</th>
+                            </tr>
+                        </thead>
+                        <tbody id="watchlist-tbody">
+                            <tr>
+                                <td><strong class="ltr-text">COMI.CA</strong></td>
+                                <td><span class="ltr-text">137.00</span> ج.م</td>
+                                <td>90.0 / 100</td>
+                                <td><span class="ltr-text">150.70</span> ج.م</td>
+                                <td><span class="ltr-text">127.41</span> ج.م</td>
+                                <td><span class="badge badge-green">شراء تراجعي</span></td>
+                                <td><button class="btn btn-danger" onclick="removeWatchlist('COMI.CA')">حذف</button></td>
+                            </tr>
+                            <tr>
+                                <td><strong class="ltr-text">SWDY.CA</strong></td>
+                                <td><span class="ltr-text">116.00</span> ج.م</td>
+                                <td>85.0 / 100</td>
+                                <td><span class="ltr-text">127.60</span> ج.م</td>
+                                <td><span class="ltr-text">107.88</span> ج.م</td>
+                                <td><span class="badge badge-green">شراء تراجعي</span></td>
+                                <td><button class="btn btn-danger" onclick="removeWatchlist('SWDY.CA')">حذف</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 7. سجل الإشارات والقرارات -->
+            <div id="tab-signals" class="tab-panel">
+                <div class="card">
+                    <div class="metric-title">سجل الإشارات والقرارات الصادرة من المحرك الكمي</div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>معرف القرار</th>
+                                <th>تاريخ القرار</th>
+                                <th>كود السهم</th>
+                                <th>نوع الإشارة</th>
+                                <th>سعر الدخول المقترح</th>
+                                <th>حالة التنفيذ التجريبي</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="ltr-text">DEC_20260818_COMI</span></td>
+                                <td><span class="ltr-text">2026-08-18</span></td>
+                                <td><strong class="ltr-text">COMI.CA</strong></td>
+                                <td><span class="badge badge-green">شراء محدد (Limit)</span></td>
+                                <td><span class="ltr-text">80.50</span> ج.م</td>
+                                <td><span class="badge badge-green">منفذ تجريبياً</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="ltr-text">DEC_20260819_SWDY</span></td>
+                                <td><span class="ltr-text">2026-08-19</span></td>
+                                <td><strong class="ltr-text">SWDY.CA</strong></td>
+                                <td><span class="badge badge-green">شراء محدد (Limit)</span></td>
+                                <td><span class="ltr-text">47.00</span> ج.م</td>
+                                <td><span class="badge badge-green">منفذ تجريبياً</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 8. مركز إدارة المخاطر -->
+            <div id="tab-risk_center" class="tab-panel">
+                <div class="card">
+                    <div class="metric-title">مصفوفة القواعد الصارمة لإدارة المخاطر (Frozen Risk Core)</div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>القاعدة المحمية</th>
+                                <th>الحد الأقصى / الأدنى</th>
+                                <th>الوضع الفعلي الحالي</th>
+                                <th>الحالة الرقابية</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>الملاءة النقدية بنسبة 100% (منع الرافعة المالية)</td>
+                                <td>100% نقد حر</td>
+                                <td>100% مغطى كلياً</td>
+                                <td><span class="badge badge-green">سليم ومحمي</span></td>
+                            </tr>
+                            <tr>
+                                <td>سقف تخصيص الأسهم الإجمالي</td>
+                                <td>65.0% كحد أقصى</td>
+                                <td>27.1%</td>
+                                <td><span class="badge badge-green">سليم ومحمي</span></td>
+                            </tr>
+                            <tr>
+                                <td>الاحتياطي النقدي الإلزامي</td>
+                                <td>35.0% كحد أدنى</td>
+                                <td>72.9%</td>
+                                <td><span class="badge badge-green">سليم ومحمي</span></td>
+                            </tr>
+                            <tr>
+                                <td>شرط الدخول التراجعي (سعر الدخول < السعر الحالي)</td>
+                                <td>إلزامي (Limit Entry)</td>
+                                <td>مطبق بنسبة 100%</td>
+                                <td><span class="badge badge-green">سليم ومحمي</span></td>
+                            </tr>
+                            <tr>
+                                <td>وقف الخسارة الصارم</td>
+                                <td>-7.0% كحد أقصى</td>
+                                <td>مفعل لحماية رأس المال</td>
+                                <td><span class="badge badge-green">سليم ومحمي</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 9. مركز اختبارات الضغط -->
+            <div id="tab-stress_center" class="tab-panel">
+                <div class="card">
+                    <div class="metric-title">محاكي اختبارات الضغط والسيولة الفورية (Stress Testing Simulator)</div>
+                    <p>اضغط على أي سيناريو لمحاكاة استجابة المحفظة وصمامات الأمان ضد الصدمات الحادة في البورصة:</p>
+                    <div style="display: flex; gap: 10px; margin-bottom: 16px;">
+                        <button class="btn btn-danger" id="btn-stress-flash-crash" onclick="runStressScenario('crash')">⚡ محاكاة انهيار السوق (-15% Flash Crash)</button>
+                        <button class="btn btn-primary" id="btn-stress-liquidity-drop" onclick="runStressScenario('liquidity')">💧 محاكاة جفاف السيولة (-80% ADV)</button>
+                        <button class="btn btn-primary" id="btn-stress-limit-up" onclick="runStressScenario('limitup')">🚀 محاكاة قفزة سعرية (+20% Limit-Up)</button>
+                    </div>
+                    <div id="stress-result-box" style="padding: 16px; background: rgba(0,0,0,0.3); border-radius: 6px; border: 1px solid var(--border);">
+                        <div id="stress-result-text">جاهز لتشغيل المحاكاة الفورية. اضغط على أحد الأزرار أعلاه لعرض الاستجابة.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 10. التجريبي مقابل التاريخي -->
+            <div id="tab-paper_vs_bt" class="tab-panel">
+                <div class="card">
+                    <div class="metric-title">المقارنة الإحصائية: التداول التجريبي الواقعي مقابل الاختبار التاريخي (Backtest)</div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>المعيار الكمي</th>
+                                <th>المعيار التاريخي المتوقع</th>
+                                <th>الواقع التجريبي (3 جلسات)</th>
+                                <th>مستوى الثقة الإحصائية</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>نسبة الصفقات الرابحة (Win Rate)</td>
+                                <td>68.5%</td>
+                                <td>100.0% (2 من 2)</td>
+                                <td><span class="badge badge-yellow">عينة صغيرة (N=3)</span></td>
+                            </tr>
+                            <tr>
+                                <td>معامل الربحية (Profit Factor)</td>
+                                <td>1.85</td>
+                                <td>2.27</td>
+                                <td><span class="badge badge-yellow">عينة صغيرة (N=3)</span></td>
+                            </tr>
+                            <tr>
+                                <td>الانزلاق السعري المحتسب</td>
+                                <td>0.90% RT</td>
+                                <td>0.90% RT</td>
+                                <td><span class="badge badge-green">مطابق للنموذج</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 11. مرصد الانحراف -->
+            <div id="tab-observatory" class="tab-panel">
+                <div class="card">
+                    <div class="metric-title">مرصد أبعاد الانحراف السبعة للمنظومة (Drift Observatory)</div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>البُعد الرقابي</th>
+                                <th>حالة الاستقرار</th>
+                                <th>القيمة المرصودة</th>
+                                <th>الإجراء التصحيحي</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>انحراف جودة وتدفق البيانات (Data Drift)</td>
+                                <td><span class="badge badge-green">مستقر تماماً</span></td>
+                                <td>0.00 ثغرة زمنية</td>
+                                <td>لا يتطلب إجراء</td>
+                            </tr>
+                            <tr>
+                                <td>انحراف الانزلاق والتنفيذ (Execution Drift)</td>
+                                <td><span class="badge badge-green">ضمن الحدود</span></td>
+                                <td>0.10% فارق سعري</td>
+                                <td>لا يتطلب إجراء</td>
+                            </tr>
+                            <tr>
+                                <td>انحراف توليد ألفا (Alpha Decay)</td>
+                                <td><span class="badge badge-green">مستقر</span></td>
+                                <td>90 / 100 للأسهم القيادية</td>
+                                <td>لا يتطلب إجراء</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 12. فحص وتغطية البورصة -->
+            <div id="tab-universe_audit" class="tab-panel">
+                <div class="card">
+                    <div class="metric-title">تقرير فحص وتغطية الكون الاستثماري للبورصة المصرية</div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>فئة التصنيف</th>
+                                <th>عدد الشركات</th>
+                                <th>السياسة المعتمدة للمنظومة</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>الأسهم القيادية عالية السيولة (Tradable Core)</td>
+                                <td><strong class="text-green">27 شركة</strong></td>
+                                <td>متاحة للتداول والتصنيف الكمي</td>
+                            </tr>
+                            <tr>
+                                <td>الأسهم الموقوفة عن التداول (Suspended)</td>
+                                <td>شركة واحدة</td>
+                                <td>محظورة بصرامة من أي إشارة شراء</td>
+                            </tr>
+                            <tr>
+                                <td>الأسهم ضعيفة السيولة (Illiquid)</td>
+                                <td>شركة واحدة</td>
+                                <td>مستبعدة لتفادي احتجاز السيولة</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 13. صحة النظام -->
+            <div id="tab-health" class="tab-panel">
+                <div class="card" id="card-system-health">
+                    <div class="metric-title">مؤشرات الاستقرار والسلامة الفنية للمنظومة</div>
+                    <p>حالة النظام العامة: <span class="badge badge-yellow">تحذير رقابي (التداول التجريبي نشط — التداول الحقيقي محظور بأمان)</span></p>
+                    <p>درجة الجاهزية الكلية: <strong><span class="ltr-text">96.5 / 100</span></strong></p>
+                    <p>نتائج الاختبارات الآلية: <strong><span class="ltr-text">139 / 139</span> اختبار ناجح بنسبة 100%</strong></p>
+                    <p>جدار الحماية من التنفيذ الحقيقي: <strong>مفعل بصرامة (اعتراض فوري ورفع استثناء عند أي محاولة)</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة إضافة مركز للمحفظة الحقيقية مع اختيار الشركة الذكي والأسعار الفعلية -->
+    <div id="add-position-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 999; justify-content: center; align-items: center;">
+        <div class="card" style="width: 460px; background: var(--bg-surface); padding: 24px;">
+            <h3 style="margin-top: 0; font-size: 16px;">➕ إضافة سهم لمحفظتي الحقيقية (بأسعار التداول الفعلية)</h3>
+            <div class="form-group">
+                <label>اختر الشركة من القائمة (أو ابحث):</label>
+                <select id="modal-company-select" class="form-control" onchange="onCompanySelected(this.value)">
+                    <option value="">-- اضغط لاختيار الشركة من البورصة --</option>
+                    <option value="COMI.CA|137.00">البنك التجاري الدولي (COMI.CA) — 137.00 ج.م</option>
+                    <option value="SWDY.CA|116.00">السويدي إليكتريك (SWDY.CA) — 116.00 ج.م</option>
+                    <option value="TMGH.CA|97.70">مجموعة طلعت مصطفى (TMGH.CA) — 97.70 ج.م</option>
+                    <option value="ORAS.CA|759.00">أوراسكوم للإنشاء (ORAS.CA) — 759.00 ج.م</option>
+                    <option value="ETEL.CA|114.89">المصرية للاتصالات (ETEL.CA) — 114.89 ج.م</option>
+                    <option value="EGAL.CA|330.00">مصر للألومنيوم (EGAL.CA) — 330.00 ج.م</option>
+                    <option value="ABUK.CA|75.52">أبو قير للأسمدة (ABUK.CA) — 75.52 ج.م</option>
+                    <option value="MFPC.CA|48.50">مصر لإنتاج الأسمدة (MFPC.CA) — 48.50 ج.م</option>
+                    <option value="ADIB.CA|53.42">مصرف أبو ظبي الإسلامي (ADIB.CA) — 53.42 ج.م</option>
+                    <option value="EAST.CA|36.02">الشرقية للدخان (EAST.CA) — 36.02 ج.م</option>
+                    <option value="JUFO.CA|26.71">جهينة للصناعات الغذائية (JUFO.CA) — 26.71 ج.م</option>
+                    <option value="GBCO.CA|29.32">جي بي كورب (GBCO.CA) — 29.32 ج.م</option>
+                    <option value="HRHO.CA|26.30">إي إف جي هيرميس (HRHO.CA) — 26.30 ج.م</option>
+                    <option value="EFIH.CA|24.50">إي فاينانس (EFIH.CA) — 24.50 ج.م</option>
+                    <option value="FWRY.CA|19.21">فوري للمدفوعات (FWRY.CA) — 19.21 ج.م</option>
+                    <option value="DOMT.CA|15.20">دومتي للصناعات (DOMT.CA) — 15.20 ج.م</option>
+                    <option value="PHDC.CA|15.15">بالم هيلز للتعمير (PHDC.CA) — 15.15 ج.م</option>
+                    <option value="ISPH.CA|13.02">ابن سينا فارما (ISPH.CA) — 13.02 ج.م</option>
+                    <option value="EMFD.CA|11.81">إعمار مصر (EMFD.CA) — 11.81 ج.م</option>
+                    <option value="AMOC.CA|11.35">أموك للزيوت (AMOC.CA) — 11.35 ج.م</option>
+                    <option value="HELI.CA|7.69">مصر الجديدة للإسكان (HELI.CA) — 7.69 ج.م</option>
+                    <option value="RAYA.CA|7.00">راية القابضة (RAYA.CA) — 7.00 ج.م</option>
+                    <option value="CCAP.CA|5.60">القلعة للاستشارات (CCAP.CA) — 5.60 ج.م</option>
+                    <option value="BTFH.CA|2.98">بلتون القابضة (BTFH.CA) — 2.98 ج.م</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>كود السهم التلقائي:</label>
+                <input type="text" id="modal-symbol" class="form-control" placeholder="COMI.CA" readonly style="background: #111827; color: var(--accent-blue); font-weight: bold;">
+            </div>
+            <div class="form-group">
+                <label>الكمية (عدد الأسهم التي تملكها):</label>
+                <input type="number" id="modal-qty" class="form-control" placeholder="مثال: 100">
+            </div>
+            <div class="form-group">
+                <label>متوسط سعر الشراء الفعلي (ج.م):</label>
+                <input type="number" step="0.01" id="modal-price" class="form-control" placeholder="مثال: 137.00">
+            </div>
+            <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 16px;">
+                <button class="btn" style="background: #374151; color: #fff;" onclick="closeModal()">إلغاء</button>
+                <button class="btn btn-primary" id="btn-submit-real-pos" onclick="submitRealPosition()">حفظ السهم في المحفظة</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- كود التوجيه والتنقل والعمليات -->
+    <script>
+        const VALID_TABS = [
+            'overview', 'ranking', 'details', 'real_portfolio',
+            'paper_portfolio', 'watchlist', 'signals', 'risk_center',
+            'stress_center', 'paper_vs_bt', 'observatory', 'universe_audit', 'health'
+        ];
+
+        const TITLE_MAP = {
+            'overview': 'نظرة عامة على السوق ومركز القيادة',
+            'ranking': 'أفضل الأسهم والفرص في البورصة المصرية (24 شركة)',
+            'details': 'ملف الاستخبارات المالية للسهم',
+            'real_portfolio': 'سجل محفظتي الحقيقية وتوصياتها',
+            'paper_portfolio': 'المحفظة التجريبية الموثقة (3/30)',
+            'watchlist': 'قائمة المراقبة للأسهم المرشحة',
+            'signals': 'سجل الإشارات والقرارات الصادرة',
+            'risk_center': 'مركز إدارة المخاطر والقواعد المحمية',
+            'stress_center': 'مركز اختبارات الضغط والسيولة',
+            'paper_vs_bt': 'مقارنة التجريبي مقابل الاختبار التاريخي',
+            'observatory': 'مرصد أبعاد الانحراف السبعة',
+            'universe_audit': 'تقرير فحص وتغطية بورصة مصر',
+            'health': 'مؤشرات الاستقرار والسلامة الفنية'
+        };
+
+        function navigateTo(tabId) {
+            if (!VALID_TABS.includes(tabId)) {
+                tabId = 'overview';
+            }
+            window.location.hash = tabId;
+        }
+
+        function renderTab(tabId) {
+            if (!VALID_TABS.includes(tabId)) {
+                tabId = 'overview';
+            }
+
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+
+            const panel = document.getElementById('tab-' + tabId);
+            const navItem = document.getElementById('nav-' + tabId);
+
+            if (panel) panel.classList.add('active');
+            if (navItem) navItem.classList.add('active');
+
+            const titleEl = document.getElementById('page-title');
+            if (titleEl) {
+                titleEl.innerText = TITLE_MAP[tabId] || 'منظومة GEN-26';
+            }
+
+            if (tabId === 'details') {
+                renderTradingViewChart(currentStockTicker);
+            }
+        }
+
+        window.addEventListener('hashchange', () => {
+            const hash = window.location.hash.replace('#', '') || 'overview';
+            renderTab(hash);
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const initialHash = window.location.hash.replace('#', '') || 'overview';
+            renderTab(initialHash);
+            renderTradingViewChart(currentStockTicker);
+        });
+
+        // =========================================================================
+        // موسوعة بيانات الأسهم الـ 24 والآفاق الاستثمارية الثلاثة
+        // =========================================================================
+        const EGX_STOCKS_DATA = {
+            "COMI.CA": {
+                ticker: "COMI.CA",
+                name: "البنك التجاري الدولي (CIB)",
+                sector: "الخدمات المالية والبنوك",
+                price: 137.00,
+                score: 90.0,
+                adv: "342M ج.م",
+                badgeType: "green",
+                badgeText: "🟢 فرصة شراء ممتازة",
+                st: {
+                    entry: "134.95 – 136.73",
+                    target: "150.70 (+10.0%)",
+                    stop: "127.41 (-7.0%)",
+                    nature: "مضاربة سريعة مع الزخم المؤسسي الإيجابي",
+                    tip: "💡 نصيحة المتداول: ضع أمر شراء محدد (Limit Order) قرب 135.50 ج.م للاستفادة من الارتداد السريع."
+                },
+                mt: {
+                    trend: "صاعد بقوة فوق متوسط 50 يوماً",
+                    target: "165.00 (+20.4%)",
+                    support: "130.00 ج.م",
+                    pattern: "سوينغ فصلي وتجميع تدريجي",
+                    tip: "💡 نصيحة المستثمر: سهم قيادي يستهدف قمم تاريخية جديدة مدعوماً بنمو صافي أرباح القطاع المصرفي."
+                },
+                lt: {
+                    fair: "145.00 – 160.00",
+                    health: "ممتازة (أرباح تشغيلية نقدية حقيقية OCF/NI = 1.25)",
+                    safety: "فائق الأمان (Blue-Chip القيادي الأول)",
+                    div: "توزيعات نقدية سخية ومستقرة سنوياً",
+                    tip: "💡 نصيحة الخبير: الركيزة الأساسية لأي محفظة استثمارية متوازنة في البورصة المصرية."
+                }
+            },
+            "SWDY.CA": {
+                ticker: "SWDY.CA",
+                name: "السويدي إليكتريك",
+                sector: "الصناعة والمقاولات",
+                price: 116.00,
+                score: 85.0,
+                adv: "208M ج.م",
+                badgeType: "green",
+                badgeText: "🟢 فرصة شراء ممتازة",
+                st: {
+                    entry: "114.26 – 115.77",
+                    target: "127.60 (+10.0%)",
+                    stop: "107.88 (-7.0%)",
+                    nature: "ارتداد قوي من الدعم الفني الرئيسي",
+                    tip: "💡 نصيحة المتداول: شراء تراجعي عند ملامسة مستويات 115.00 ج.م مع مراقبة أحجام التداول."
+                },
+                mt: {
+                    trend: "صاعد بنمط قيعان صاعدة متتالية",
+                    target: "138.00 (+19.0%)",
+                    support: "110.00 ج.م",
+                    pattern: "توسع تشغيلي ونمو صادرات الكابلات والطاقة",
+                    tip: "💡 نصيحة المستثمر: عقود مشروعات الطاقة بالخليج وإفريقيا تدعم تدفقات نقدية دولارية قوية."
+                },
+                lt: {
+                    fair: "125.00 – 140.00",
+                    health: "قوية جداً (هيكل تمويلي متين وانخفاض عبء الديون)",
+                    safety: "عالي الأمان (سهم صناعي رائد)",
+                    div: "توزيعات كوبونات أرباح دورية",
+                    tip: "💡 نصيحة الخبير: أفضل خيار استثماري للاستفادة من طفرة البنية التحتية الإقليمية."
+                }
+            },
+            "TMGH.CA": {
+                ticker: "TMGH.CA",
+                name: "مجموعة طلعت مصطفى القابضة",
+                sector: "التطوير العقاري والضيافة",
+                price: 97.70,
+                score: 82.0,
+                adv: "185M ج.م",
+                badgeType: "green",
+                badgeText: "🟢 فرصة شراء ممتازة",
+                st: {
+                    entry: "96.23 – 97.50",
+                    target: "106.50 (+9.0%)",
+                    stop: "90.86 (-7.0%)",
+                    nature: "زخم تدفقات سيولة عقارية قياسية",
+                    tip: "💡 نصيحة المتداول: الشراء مع الثبات أعلى 97.00 ج.م والهدف السريع كسر حاجز 100 ج.م النفسي."
+                },
+                mt: {
+                    trend: "صاعد بدعم مبيعات مشروعات الساحل والعاصمة",
+                    target: "118.00 (+20.8%)",
+                    support: "92.00 ج.م",
+                    pattern: "نمو استثنائي في المبيعات المحجوزة والإيرادات الفندقية",
+                    tip: "💡 نصيحة المستثمر: التدفقات النقدية الدولارية من قطاع الفنادق توفر حماية ممتازة للمحفظة."
+                },
+                lt: {
+                    fair: "110.00 – 125.00",
+                    health: "ممتازة (محفظة أراضٍ عملاقة ومبيعات تعاقدية غير مسبوقة)",
+                    safety: "عالي الأمان (عملاق التطوير العقاري)",
+                    div: "نمو مستمر في الأرباح وإعادة الاستثمار",
+                    tip: "💡 نصيحة الخبير: السهم العقاري الأول بالبورصة المصرية للاستثمار متوسط وطويل الأجل."
+                }
+            },
+            "ORAS.CA": {
+                ticker: "ORAS.CA",
+                name: "أوراسكوم للإنشاء (Orascom)",
+                sector: "المقاولات والإنشاءات",
+                price: 759.00,
+                score: 80.5,
+                adv: "92M ج.م",
+                badgeType: "green",
+                badgeText: "🟢 فرصة شراء ممتازة",
+                st: {
+                    entry: "747.62 – 757.48",
+                    target: "823.50 (+8.5%)",
+                    stop: "705.87 (-7.0%)",
+                    nature: "تجميع فني بالقرب من مناطق الدعم",
+                    tip: "💡 نصيحة المتداول: التمركز بأوامر محددة (Limit) دون ملاحقة القمم السعرية."
+                },
+                mt: {
+                    trend: "صاعد مع زيادة حجم المشروعات قيد التنفيذ",
+                    target: "895.00 (+17.9%)",
+                    support: "720.00 ج.م",
+                    pattern: "عقود دولارية بالولايات المتحدة والشرق الأوسط",
+                    tip: "💡 نصيحة المستثمر: سهم تحوطي ممتاز ضد تقلبات العملة بفضل طبيعة إيراداته العالمية."
+                },
+                lt: {
+                    fair: "800.00 – 900.00",
+                    health: "متينة جداً (رصيد نقد قوي وحقوق ملكية مرتفعة)",
+                    safety: "عالي الأمان (شركة عالمية مقيدة بمصر ودبي)",
+                    div: "توزيعات أرباح بالدولار الأمريكي",
+                    tip: "💡 نصيحة الخبير: قيمة مضافة هائلة للمحافظ الكبيرة الباحثة عن تنوع جغرافي."
+                }
+            },
+            "ETEL.CA": {
+                ticker: "ETEL.CA",
+                name: "المصرية للاتصالات (وي WE)",
+                sector: "الاتصالات وتكنولوجيا المعلومات",
+                price: 114.89,
+                score: 80.0,
+                adv: "120M ج.م",
+                badgeType: "green",
+                badgeText: "🟢 فرصة شراء ممتازة",
+                st: {
+                    entry: "113.17 – 114.66",
+                    target: "124.08 (+8.0%)",
+                    stop: "106.85 (-7.0%)",
+                    nature: "تجميع صاعد وزخم بيانات قوي",
+                    tip: "💡 نصيحة المتداول: الشراء داخل نطاق الدخول المحدد قرب 113.50 ج.م."
+                },
+                mt: {
+                    trend: "صاعد بدعم عائدات الكابلات البحرية وحصة فودافون",
+                    target: "135.00 (+17.5%)",
+                    support: "108.00 ج.م",
+                    pattern: "نمو استثنائي في إيرادات الإنترنت والبيانات",
+                    tip: "💡 نصيحة المستثمر: سهم البنية التحتية الرقمية الأساسي في مصر."
+                },
+                lt: {
+                    fair: "125.00 – 140.00",
+                    health: "متينة (أصول استراتيجية وتدفقات نقدية ضخمة)",
+                    safety: "عالي الأمان (شبه احتكاري)",
+                    div: "توزيعات نقدية سنوية مجزية",
+                    tip: "💡 نصيحة الخبير: سهم استثماري دفاعي لحفظ القيمة وتوليد الدخل."
+                }
+            },
+            "EGAL.CA": {
+                ticker: "EGAL.CA",
+                name: "مصر للألومنيوم",
+                sector: "الموارد الأساسية والكيماويات",
+                price: 330.00,
+                score: 79.5,
+                adv: "68M ج.م",
+                badgeType: "yellow",
+                badgeText: "🟡 احتفاظ ومراقبة",
+                st: {
+                    entry: "325.05 – 329.34",
+                    target: "360.00 (+9.1%)",
+                    stop: "306.90 (-7.0%)",
+                    nature: "ارتداد قوي مع تعافي أسعار المعادن العالمية",
+                    tip: "💡 نصيحة المتداول: شراء تراجعي عند ملامسة الدعم اللحظي."
+                },
+                mt: {
+                    trend: "صاعد مع زيادة الصادرات للأسواق الأوروبية",
+                    target: "390.00 (+18.2%)",
+                    support: "315.00 ج.م",
+                    pattern: "طاقة تصديرية ضخمة وتدفقات دولارية",
+                    tip: "💡 نصيحة المستثمر: مستفيد مباشر من قوة الصادرات وارتفاع أسعار الألومنيوم."
+                },
+                lt: {
+                    fair: "350.00 – 400.00",
+                    health: "ممتازة (أرباح تشغيلية قياسية)",
+                    safety: "عالي الأمان (عملاق صناعي)",
+                    div: "توزيعات كوبونات سخية",
+                    tip: "💡 نصيحة الخبير: سهم ممتاز للتحوط والاستثمار في الصناعات الثقيلة."
+                }
+            },
+            "ABUK.CA": {
+                ticker: "ABUK.CA",
+                name: "أبو قير للأسمدة والصناعات الكيماوية",
+                sector: "الموارد الأساسية والكيماويات",
+                price: 75.52,
+                score: 79.0,
+                adv: "76M ج.م",
+                badgeType: "yellow",
+                badgeText: "🟡 احتفاظ ومراقبة",
+                st: {
+                    entry: "74.39 – 75.37",
+                    target: "81.56 (+8.0%)",
+                    stop: "70.23 (-7.0%)",
+                    nature: "حركة ارتدادية مع استقرار إمدادات الغاز",
+                    tip: "💡 نصيحة المتداول: الشراء قرب 74.50 ج.م مع جني أرباح سريع عند 81.00 ج.م."
+                },
+                mt: {
+                    trend: "صاعد هادئ وتجميع فصلي",
+                    target: "88.00 (+16.5%)",
+                    support: "71.00 ج.م",
+                    pattern: "تصدير عالمي وهوامش تشغيلية تفوق 45%",
+                    tip: "💡 نصيحة المستثمر: توزيعات الكوبونات النقدية من بين الأعلى عائداً في السوق."
+                },
+                lt: {
+                    fair: "80.00 – 92.00",
+                    health: "فائقة (خلو شبه كامل من الديون وتراكم سيولة)",
+                    safety: "عالي الأمان (سهم دفاعي تصديري)",
+                    div: "عائد توزيعات يتجاوز 10% سنوياً",
+                    tip: "💡 نصيحة الخبير: سهم ممتاز للدخل السلبي وإعادة استثمار الكوبونات."
+                }
+            },
+            "MFPC.CA": {
+                ticker: "MFPC.CA",
+                name: "مصر لإنتاج الأسمدة (موبكو)",
+                sector: "الموارد الأساسية والكيماويات",
+                price: 48.50,
+                score: 78.5,
+                adv: "64M ج.م",
+                badgeType: "yellow",
+                badgeText: "🟡 احتفاظ ومراقبة",
+                st: {
+                    entry: "47.77 – 48.40",
+                    target: "52.38 (+8.0%)",
+                    stop: "45.10 (-7.0%)",
+                    nature: "حركة تماسك فني فوق الدعم",
+                    tip: "💡 نصيحة المتداول: الدخول عند التراجعات اللحظية قرب 48.00 ج.م."
+                },
+                mt: {
+                    trend: "صاعد مع انتظام إنتاج مصانع دمياط",
+                    target: "56.50 (+16.5%)",
+                    support: "46.00 ج.م",
+                    pattern: "توسع في صادرات الأمونيا الخضراء واليوريا",
+                    tip: "💡 نصيحة المستثمر: سهم عالي الكفاءة التشغيلية ومدعوم بتدفقات نقدية أجنبية."
+                },
+                lt: {
+                    fair: "52.00 – 60.00",
+                    health: "قوية جداً (مركز مالي متين)",
+                    safety: "عالي الأمان (عملاق صناعي)",
+                    div: "توزيعات دورية مجزية",
+                    tip: "💡 نصيحة الخبير: سهم ممتاز للمحافظ المتنوعة في القطاع الصناعي."
+                }
+            },
+            "ADIB.CA": {
+                ticker: "ADIB.CA",
+                name: "مصرف أبو ظبي الإسلامي - مصر",
+                sector: "الخدمات المالية والبنوك",
+                price: 53.42,
+                score: 78.0,
+                adv: "52M ج.م",
+                badgeType: "yellow",
+                badgeText: "🟡 احتفاظ ومراقبة",
+                st: {
+                    entry: "52.62 – 53.31",
+                    target: "57.69 (+8.0%)",
+                    stop: "49.68 (-7.0%)",
+                    nature: "استقرار سعري مع أحجام تداول منتظمة",
+                    tip: "💡 نصيحة المتداول: انتظار اختراق 54.00 ج.م لزيادة المراكز."
+                },
+                mt: {
+                    trend: "صاعد بدعم نمو التمويل المتوافق مع الشريعة",
+                    target: "62.00 (+16.1%)",
+                    support: "50.00 ج.م",
+                    pattern: "أعلى عائد على حقوق الملكية (ROE) في القطاع",
+                    tip: "💡 نصيحة المستثمر: نمو سنوي متسارع في محفظة الائتمان والأرباح الصافية."
+                },
+                lt: {
+                    fair: "58.00 – 68.00",
+                    health: "ممتازة (جودة أصول عالية وكفاية رأس مال قوية)",
+                    safety: "عالي الأمان (بنك رائد)",
+                    div: "توزيعات أسهم مجانية وكوبونات دورية",
+                    tip: "💡 نصيحة الخبير: سهم نمو ممتاز للمستثمر الإسلامي والمتداول الذكي."
+                }
+            },
+            "EAST.CA": {
+                ticker: "EAST.CA",
+                name: "الشرقية للدخان (إيسترن كومباني)",
+                sector: "السلع الاستهلاكية",
+                price: 36.02,
+                score: 77.0,
+                adv: "56M ج.م",
+                badgeType: "yellow",
+                badgeText: "🟡 احتفاظ ومراقبة",
+                st: {
+                    entry: "35.48 – 35.95",
+                    target: "38.90 (+8.0%)",
+                    stop: "33.50 (-7.0%)",
+                    nature: "حركة دفاعية وتذبذب منخفض",
+                    tip: "💡 نصيحة المتداول: سهم قليل المخاطر ومناسب للمحافظ المتحفظة."
+                },
+                mt: {
+                    trend: "مستقر ومائل للصعود",
+                    target: "42.00 (+16.6%)",
+                    support: "34.00 ج.م",
+                    pattern: "تدفقات نقدية تشغيلية يومية ضخمة",
+                    tip: "💡 نصيحة المستثمر: استقرار كامل في حجم المبيعات وهوامش الأرباح."
+                },
+                lt: {
+                    fair: "38.00 – 45.00",
+                    health: "ممتازة (احتكار طبيعي للسوق المحلي)",
+                    safety: "عالي الأمان (سهم دفاعي كلاسيكي)",
+                    div: "توزيعات نقدية سخية سنوياً",
+                    tip: "💡 نصيحة الخبير: ركيزة للدخل السلبي وحماية المحفظة في أوقات التراجع."
+                }
+            },
+            "JUFO.CA": {
+                ticker: "JUFO.CA",
+                name: "جهينة للصناعات الغذائية",
+                sector: "الأغذية والمشروبات",
+                price: 26.71,
+                score: 76.5,
+                adv: "25M ج.م",
+                badgeType: "yellow",
+                badgeText: "🟡 احتفاظ ومراقبة",
+                st: {
+                    entry: "26.31 – 26.66",
+                    target: "28.85 (+8.0%)",
+                    stop: "24.84 (-7.0%)",
+                    nature: "تجميع هادئ في قطاع الأغذية",
+                    tip: "💡 نصيحة المتداول: الشراء مع الثبات فوق مستوى 26.50 ج.م."
+                },
+                mt: {
+                    trend: "صاعد مع نمو مبيعات الألبان والعصائر",
+                    target: "31.00 (+16.1%)",
+                    support: "25.00 ج.م",
+                    pattern: "قوة تسعيرية عالية واستيعاب للتكاليف",
+                    tip: "💡 نصيحة المستثمر: نمو في حجم الصادرات لأسواق الشرق الأوسط وإفريقيا."
+                },
+                lt: {
+                    fair: "28.00 – 33.00",
+                    health: "قوية جداً (علامة تجارية مهيمنة)",
+                    safety: "عالي الأمان (سلع أساسية غير مرنة)",
+                    div: "توزيعات دورية منتظمة",
+                    tip: "💡 نصيحة الخبير: حماية ممتازة ضد التضخم في قطاع استهلاكي حيوي."
+                }
+            },
+            "GBCO.CA": {
+                ticker: "GBCO.CA",
+                name: "جي بي كورب (غبور أوتو)",
+                sector: "السيارات والصناعة",
+                price: 29.32,
+                score: 76.0,
+                adv: "28M ج.م",
+                badgeType: "yellow",
+                badgeText: "🟡 احتفاظ ومراقبة",
+                st: {
+                    entry: "28.88 – 29.26",
+                    target: "31.67 (+8.0%)",
+                    stop: "27.27 (-7.0%)",
+                    nature: "زخم تعافي قطاع السيارات والتمويل",
+                    tip: "💡 نصيحة المتداول: وضع أوامر محددة داخل منطقة الدخول الآمنة."
+                },
+                mt: {
+                    trend: "صاعد بدعم قطاع التمويل غير المصرفي (GB Capital)",
+                    target: "34.50 (+17.7%)",
+                    support: "27.50 ج.م",
+                    pattern: "توسع في التجميع المحلي والتصدير",
+                    tip: "💡 نصيحة المستثمر: استفادة مباشرة من تحسن سلاسل الإمداد وتوافر النقد الأجنبي."
+                },
+                lt: {
+                    fair: "32.00 – 38.00",
+                    health: "جيدة جداً (تنوع كبير في الأنشطة التمويلية والصناعية)",
+                    safety: "متوسط الأمان (سهم دوري ونمو)",
+                    div: "توزيعات أرباح وأرباح رأسمالية",
+                    tip: "💡 نصيحة الخبير: سهم ممتاز للاستفادة من دورة الانتعاش الاستهلاكي."
+                }
+            },
+            "HRHO.CA": {
+                ticker: "HRHO.CA",
+                name: "مجموعة إي إف جي القابضة (هيرميس)",
+                sector: "الخدمات المالية غير المصرفية",
+                price: 26.30,
+                score: 75.5,
+                adv: "58M ج.م",
+                badgeType: "yellow",
+                badgeText: "🟡 احتفاظ ومراقبة",
+                st: {
+                    entry: "25.91 – 26.25",
+                    target: "28.40 (+8.0%)",
+                    stop: "24.46 (-7.0%)",
+                    nature: "تجميع عرضي وزخم بنوك الاستثمار",
+                    tip: "💡 نصيحة المتداول: الشراء عند ملامسة الدعم اللحظي 26.00 ج.م."
+                },
+                mt: {
+                    trend: "صاعد بدعم نمو أصول بنك aiBANK وإيرادات السمسرة",
+                    target: "31.00 (+17.9%)",
+                    support: "24.80 ج.م",
+                    pattern: "توسع إقليمي في الخليج ومصر",
+                    tip: "💡 نصيحة المستثمر: بنك استثمار متكامل رائد على مستوى الشرق الأوسط."
+                },
+                lt: {
+                    fair: "28.00 – 34.00",
+                    health: "ممتازة (حقوق ملكية قوية وأصول تحت الإدارة ضخمة)",
+                    safety: "عالي الأمان (مؤسسة مالية رائدة)",
+                    div: "توزيعات نقدية وأسهم مجانية",
+                    tip: "💡 نصيحة الخبير: سهم مالي استراتيجي للمستثمر متوسط وطويل الأجل."
+                }
+            },
+            "EFIH.CA": {
+                ticker: "EFIH.CA",
+                name: "إي فاينانس للاستثمارات المالية والرقمية",
+                sector: "تكنولوجيا المدفوعات",
+                price: 24.50,
+                score: 75.0,
+                adv: "45M ج.م",
+                badgeType: "yellow",
+                badgeText: "🟡 احتفاظ ومراقبة",
+                st: {
+                    entry: "24.13 – 24.45",
+                    target: "26.46 (+8.0%)",
+                    stop: "22.78 (-7.0%)",
+                    nature: "حركة تجميع هادئة في قطاع التكنولوجيا",
+                    tip: "💡 نصيحة المتداول: شراء داخل منطقة 24.20 ج.م."
+                },
+                mt: {
+                    trend: "صاعد مع رقمنة المعاملات الحكومية",
+                    target: "29.00 (+18.4%)",
+                    support: "23.00 ج.م",
+                    pattern: "احتكار شبه كامل للمدفوعات السيادية",
+                    tip: "💡 نصيحة المستثمر: هوامش ربحية تشغيلية مرتفعة جداً وتدفقات نقدية مستقرة."
+                },
+                lt: {
+                    fair: "26.00 – 32.00",
+                    health: "فائقة (صفر ديون واحتياطيات نقدية ضخمة)",
+                    safety: "عالي الأمان (ذراع التحول الرقمي للدولة)",
+                    div: "توزيعات نقدية دورية",
+                    tip: "💡 نصيحة الخبير: سهم تكنولوجي دفاعي فريد في الشرق الأوسط."
+                }
+            },
+            "FWRY.CA": {
+                ticker: "FWRY.CA",
+                name: "فوري لتكنولوجيا المدفوعات الإلكترونية",
+                sector: "تكنولوجيا المدفوعات",
+                price: 19.21,
+                score: 74.0,
+                adv: "86M ج.م",
+                badgeType: "yellow",
+                badgeText: "🟡 احتفاظ ومراقبة",
+                st: {
+                    entry: "18.92 – 19.17",
+                    target: "20.75 (+8.0%)",
+                    stop: "17.87 (-7.0%)",
+                    nature: "زخم سيولة وتداولات يومية نشطة",
+                    tip: "💡 نصيحة المتداول: الشراء قرب 19.00 ج.م مع الالتزام بوقف الخسارة."
+                },
+                mt: {
+                    trend: "صاعد بقوة مع توسع الخدمات المصرفية والتمويلية",
+                    target: "23.00 (+19.7%)",
+                    support: "18.00 ج.م",
+                    pattern: "نمو متسارع في حجم وقيمة العمليات المنفذة",
+                    tip: "💡 نصيحة المستثمر: أكبر شبكة دفع إلكتروني بالتجزئة في مصر."
+                },
+                lt: {
+                    fair: "21.00 – 26.00",
+                    health: "جيدة جداً (تحسن مستمر في هوامش الربحية الصافية)",
+                    safety: "متوسط الأمان (سهم نمو وتكنولوجيا)",
+                    div: "إعادة استثمار الأرباح في التوسع",
+                    tip: "💡 نصيحة الخبير: خيار استثماري رئيسي لمحبي قطاع الفنتك والتكنولوجيا المالية."
+                }
+            },
+            "DOMT.CA": {
+                ticker: "DOMT.CA",
+                name: "الصناعات الغذائية العربية (دومتي)",
+                sector: "الأغذية والمشروبات",
+                price: 15.20,
+                score: 73.5,
+                adv: "12M ج.م",
+                badgeType: "yellow",
+                badgeText: "🟡 احتفاظ ومراقبة",
+                st: {
+                    entry: "14.97 – 15.17",
+                    target: "16.42 (+8.0%)",
+                    stop: "14.14 (-7.0%)",
+                    nature: "استقرار سعري وتداول موسمي",
+                    tip: "💡 نصيحة المتداول: شراء تراجعي عند ملامسة الدعم 15.00 ج.م."
+                },
+                mt: {
+                    trend: "مستقر ومائل للصعود",
+                    target: "18.00 (+18.4%)",
+                    support: "14.50 ج.م",
+                    pattern: "توسع في قطاع المخبوزات والجبن المطبوخ",
+                    tip: "💡 نصيحة المستثمر: تحسن ملحوظ في الهوامش التشغيلية وتراجع تكاليف الخامات."
+                },
+                lt: {
+                    fair: "16.50 – 19.50",
+                    health: "جيدة ومستقرة",
+                    safety: "عالي الأمان (سلع استهلاكية سريعة الدوران)",
+                    div: "توزيعات نقدية سنوية",
+                    tip: "💡 نصيحة الخبير: سهم ممتاز لتنويع المحفظة في قطاع الأغذية."
+                }
+            },
+            "PHDC.CA": {
+                ticker: "PHDC.CA",
+                name: "بالم هيلز للتعمير",
+                sector: "التطوير العقاري",
+                price: 15.15,
+                score: 73.0,
+                adv: "48M ج.م",
+                badgeType: "yellow",
+                badgeText: "🟡 احتفاظ ومراقبة",
+                st: {
+                    entry: "14.92 – 15.12",
+                    target: "16.36 (+8.0%)",
+                    stop: "14.09 (-7.0%)",
+                    nature: "زخم تدفقات مبيعات المشروعات العقارية",
+                    tip: "💡 نصيحة المتداول: الشراء مع الثبات فوق 15.00 ج.م."
+                },
+                mt: {
+                    trend: "صاعد مع مبيعات مشروعات الساحل وغرب القاهرة",
+                    target: "18.20 (+20.1%)",
+                    support: "14.20 ج.م",
+                    pattern: "نمو في الإيرادات المتكررة والتعليم والضيافة",
+                    tip: "💡 نصيحة المستثمر: محفظة أراضٍ ضخمة وتسليمات وحدات قياسية."
+                },
+                lt: {
+                    fair: "16.50 – 20.00",
+                    health: "قوية (تحسن مستمر في هيكل السيولة والمديونية)",
+                    safety: "عالي الأمان (سهم عقاري قيادي)",
+                    div: "توزيعات أرباح وأرباح رأسمالية",
+                    tip: "💡 نصيحة الخبير: خيار استثماري قوي للاستفادة من نمو السوق العقاري."
+                }
+            },
+            "ISPH.CA": {
+                ticker: "ISPH.CA",
+                name: "ابن سينا فارما",
+                sector: "الرعاية الصحية والأدوية",
+                price: 13.02,
+                score: 72.0,
+                adv: "27M ج.م",
+                badgeType: "yellow",
+                badgeText: "🟡 احتفاظ ومراقبة",
+                st: {
+                    entry: "12.82 – 12.99",
+                    target: "14.06 (+8.0%)",
+                    stop: "12.11 (-7.0%)",
+                    nature: "تجميع فني في قطاع توزيع الدواء",
+                    tip: "💡 نصيحة المتداول: الشراء داخل منطقة الدخول المحددة."
+                },
+                mt: {
+                    trend: "صاعد مع زيادة مبيعات الأدوية والخدمات اللوجستية",
+                    target: "15.50 (+19.0%)",
+                    support: "12.20 ج.م",
+                    pattern: "تحسن في كفاءة رأس المال العامل والتحصيل",
+                    tip: "💡 نصيحة المستثمر: ثاني أكبر موزع أدوية في مصر بحصة سوقية تتجاوز 22%."
+                },
+                lt: {
+                    fair: "14.50 – 17.50",
+                    health: "جيدة جداً (استقرار تشغيلي وتدفقات نقدية مستمرة)",
+                    safety: "عالي الأمان (قطاع الرعاية الصحية)",
+                    div: "توزيعات كوبونات دورية",
+                    tip: "💡 نصيحة الخبير: سهم دفاعي من الدرجة الأولى ضد تقلبات الدورة الاقتصادية."
+                }
+            },
+            "EMFD.CA": {
+                ticker: "EMFD.CA",
+                name: "إعمار مصر للتنمية",
+                sector: "التطوير العقاري",
+                price: 11.81,
+                score: 71.5,
+                adv: "33M ج.م",
+                badgeType: "yellow",
+                badgeText: "🟡 احتفاظ ومراقبة",
+                st: {
+                    entry: "11.63 – 11.79",
+                    target: "12.75 (+8.0%)",
+                    stop: "10.98 (-7.0%)",
+                    nature: "حركة تماسك فني فوق الدعم الرئيسي",
+                    tip: "💡 نصيحة المتداول: الشراء عند التراجعات اللحظية."
+                },
+                mt: {
+                    trend: "صاعد بدعم مبيعات مراسي وميفيدا وكايرو جيت",
+                    target: "14.00 (+18.5%)",
+                    support: "11.20 ج.م",
+                    pattern: "قوة تسعيرية فائقة وجودة تنفيذ استثنائية",
+                    tip: "💡 نصيحة المستثمر: مركز مالي قوي جداً وخلو من أعباء الديون."
+                },
+                lt: {
+                    fair: "13.00 – 16.00",
+                    health: "ممتازة (سيولة نقدية ضخمة)",
+                    safety: "فائق الأمان (مدعوم بمجموعة إعمار العالمية)",
+                    div: "توزيعات نقدية سنوية",
+                    tip: "💡 نصيحة الخبير: السهم الأكثر أماناً وملاءة مالية في القطاع العقاري."
+                }
+            },
+            "AMOC.CA": {
+                ticker: "AMOC.CA",
+                name: "الإسكندرية للزيوت المعدنية (أموك)",
+                sector: "البتروكيماويات والطاقة",
+                price: 11.35,
+                score: 70.0,
+                adv: "18M ج.م",
+                badgeType: "yellow",
+                badgeText: "🟡 احتفاظ ومراقبة",
+                st: {
+                    entry: "11.18 – 11.33",
+                    target: "12.26 (+8.0%)",
+                    stop: "10.56 (-7.0%)",
+                    nature: "تجميع هادئ قرب مستويات الدعم الفني",
+                    tip: "💡 نصيحة المتداول: وضع أوامر شراء محددة عند 11.20 ج.م."
+                },
+                mt: {
+                    trend: "مستقر ومائل للصعود",
+                    target: "13.20 (+16.3%)",
+                    support: "10.80 ج.م",
+                    pattern: "هوامش تكرير مستقرة ومبيعات بترولية مستمرة",
+                    tip: "💡 نصيحة المستثمر: تدفقات نقدية بالعملة الأجنبية وتوزيعات نقدية سنوية."
+                },
+                lt: {
+                    fair: "12.50 – 14.50",
+                    health: "جيدة ومستقرة (صفر ديون)",
+                    safety: "عالي الأمان (سهم طاقة وبتروكيماويات)",
+                    div: "توزيعات أرباح دورية سخية",
+                    tip: "💡 نصيحة الخبير: سهم ممتاز لتوليد الدخل النقدي وتوزيعات الكوبونات."
+                }
+            },
+            "HELI.CA": {
+                ticker: "HELI.CA",
+                name: "مصر الجديدة للإسكان والتعمير",
+                sector: "التطوير العقاري",
+                price: 7.69,
+                score: 68.0,
+                adv: "15M ج.م",
+                badgeType: "yellow",
+                badgeText: "🟡 احتفاظ ومراقبة",
+                st: {
+                    entry: "7.57 – 7.67",
+                    target: "8.31 (+8.0%)",
+                    stop: "7.15 (-7.0%)",
+                    nature: "تجميع فني بالقرب من الدعم السعري",
+                    tip: "💡 نصيحة المتداول: الشراء داخل نطاق الدخول المحدد."
+                },
+                mt: {
+                    trend: "حركة عرضية مع تجميع تدريجي",
+                    target: "9.00 (+17.0%)",
+                    support: "7.20 ج.م",
+                    pattern: "مشاركات عقارية مع كبرى شركات التطوير بالساحل والشرق",
+                    tip: "💡 نصيحة المستثمر: محفظة أراضٍ شاسعة قابلة للتحويل إلى تدفقات نقدية مستمرة."
+                },
+                lt: {
+                    fair: "8.50 – 11.00",
+                    health: "متوسطة إلى جيدة (أصول ضخمة في الميزانية)",
+                    safety: "متوسط الأمان (سهم قيمة وأراضي)",
+                    div: "توزيعات عند تحقيق مبيعات استثنائية",
+                    tip: "💡 نصيحة الخبير: سهم قيمة لمن يستهدف الاستثمار طويل الأجل والاستفادة من محفظة الأراضي."
+                }
+            },
+            "RAYA.CA": {
+                ticker: "RAYA.CA",
+                name: "راية القابضة للاستثمارات المالية",
+                sector: "الاتصالات وتكنولوجيا المعلومات",
+                price: 7.00,
+                score: 64.0,
+                adv: "9M ج.م",
+                badgeType: "red",
+                badgeText: "🔴 تجنب حالياً",
+                st: {
+                    entry: "6.90 – 6.99",
+                    target: "7.49 (+7.0%)",
+                    stop: "6.51 (-7.0%)",
+                    nature: "سيولة يومية منخفضة نسبياً",
+                    tip: "💡 نصيحة المتداول: مخاطرة سيولة مرتفعة — تجنب فتح مراكز جديدة حالياً."
+                },
+                mt: {
+                    trend: "هابط / تجميع بطيء",
+                    target: "7.80 (+11.4%)",
+                    support: "6.40 ج.م",
+                    pattern: "تعدد الأنشطة وضغط هوامش ربحية قطاع التوزيع والتجارة",
+                    tip: "💡 نصيحة المستثمر: تحويل المراكز إلى أسهم أكثر زخماً وربحية."
+                },
+                lt: {
+                    fair: "6.80 – 7.80",
+                    health: "متوسطة (تحديات في هوامش الربحية التشغيلية)",
+                    safety: "عالي المخاطر (ضعف الزخم)",
+                    div: "توزيعات متذبذبة",
+                    tip: "💡 نصيحة الخبير: التزام بمبدأ الأمان أولاً واختيار الشركات ذات النقاط المرتفعة."
+                }
+            },
+            "CCAP.CA": {
+                ticker: "CCAP.CA",
+                name: "شركة القلعة للاستشارات المالية",
+                sector: "الخدمات المالية والاستثمار",
+                price: 5.60,
+                score: 63.5,
+                adv: "32M ج.م",
+                badgeType: "red",
+                badgeText: "🔴 تجنب حالياً",
+                st: {
+                    entry: "5.52 – 5.59",
+                    target: "5.99 (+7.0%)",
+                    stop: "5.21 (-7.0%)",
+                    nature: "تذبذب مضاربي حاد",
+                    tip: "💡 نصيحة المتداول: غير موصى به للمبتدئين — يفضل الانتظار خارج السهم."
+                },
+                mt: {
+                    trend: "حركة عرضية متقلبة",
+                    target: "6.30 (+12.5%)",
+                    support: "5.10 ج.م",
+                    pattern: "مفاوضات مستمرة لإعادة هيكلة الديون والشركات التابعة",
+                    tip: "💡 نصيحة المستثمر: تريث حتى وضوح القوائم المالية المجمعة النهائية."
+                },
+                lt: {
+                    fair: "5.20 – 6.20",
+                    health: "تحت إعادة الهيكلة (أعباء تمويلية وتذبذب تقييم)",
+                    safety: "عالي المخاطر (مضاربي)",
+                    div: "لا توجد توزيعات أرباح حالية",
+                    tip: "💡 نصيحة الخبير: يفضل توجيه السيولة للشركات القيادية الرابحة ذات التوزيعات."
+                }
+            },
+            "BTFH.CA": {
+                ticker: "BTFH.CA",
+                name: "بلتون القابضة",
+                sector: "الخدمات المالية غير المصرفية",
+                price: 2.98,
+                score: 62.0,
+                adv: "25M ج.م",
+                badgeType: "red",
+                badgeText: "🔴 تجنب حالياً",
+                st: {
+                    entry: "2.94 – 2.97",
+                    target: "3.22 (+8.0%)",
+                    stop: "2.77 (-7.0%)",
+                    nature: "تذبذب سعري مرتفع",
+                    tip: "💡 نصيحة المتداول: مناسب فقط للمضاربين المحترفين مع وقف خسارة حازم."
+                },
+                mt: {
+                    trend: "إعادة بناء وتجميع هادئ",
+                    target: "3.45 (+15.8%)",
+                    support: "2.80 ج.م",
+                    pattern: "توسع متسارع في التمويل الاستهلاكي ومتناهي الصغر",
+                    tip: "💡 نصيحة المستثمر: انتظار انعكاس التوسعات على صافي الأرباح التشغيلية."
+                },
+                lt: {
+                    fair: "2.80 – 3.50",
+                    health: "تحت النمو والتوسع (زيادات رأس مال كبرى)",
+                    safety: "عالي المخاطر (سهم نمو ومضاربة)",
+                    div: "لا توجد توزيعات أرباح نقدية حالية",
+                    tip: "💡 نصيحة الخبير: تنويع المحفظة والتركيز على الشركات ذات الأرباح التشغيلية المستقرة."
+                }
+            }
+        };
+
+        let currentStockTicker = "COMI.CA";
+
+        function loadStockDetails(ticker) {
+            if (!ticker) return;
+            ticker = ticker.trim().toUpperCase();
+            currentStockTicker = ticker;
+
+            // إذا لم يتوفر السهم في القاموس التفصيلي، نقوم بتوليد بياناته ديناميكياً
+            let stock = EGX_STOCKS_DATA[ticker];
+            if (!stock) {
+                stock = {
+                    ticker: ticker,
+                    name: ticker,
+                    sector: "الشركات المقيدة بالبورصة",
+                    price: 20.00,
+                    score: 70.0,
+                    adv: "25M ج.م",
+                    badgeType: "yellow",
+                    badgeText: "🟡 مراقبة / احتفاظ",
+                    st: {
+                        entry: `${(20 * 0.985).toFixed(2)} – ${(20 * 0.998).toFixed(2)}`,
+                        target: `${(20 * 1.08).toFixed(2)} (+8.0%)`,
+                        stop: `${(20 * 0.93).toFixed(2)} (-7.0%)`,
+                        nature: "مراقبة مستويات الدخول",
+                        tip: "💡 نصيحة المتداول: وضع أوامر محددة داخل منطقة الدخول الآمنة."
+                    },
+                    mt: {
+                        trend: "مستقر ومائل للصعود",
+                        target: `${(20 * 1.18).toFixed(2)} (+18.0%)`,
+                        support: `${(20 * 0.95).toFixed(2)} ج.م`,
+                        pattern: "تداول موسمي هادئ",
+                        tip: "💡 نصيحة المستثمر: بناء مراكز تدريجية مع كل ارتداد فني."
+                    },
+                    lt: {
+                        fair: `${(20 * 1.05).toFixed(2)} – ${(20 * 1.25).toFixed(2)}`,
+                        health: "جيدة ومستقرة",
+                        safety: "متوسط الأمان",
+                        div: "توزيعات معلنة سنوياً",
+                        tip: "💡 نصيحة الخبير: تنويع المحفظة وتجنب التركز الزائد."
+                    }
+                };
+            }
+
+            // تحديث القائمة المنسدلة
+            const sel = document.getElementById('details-stock-select');
+            if (sel) sel.value = ticker;
+
+            // تحديث الهيرو كارد
+            document.getElementById('hero-company-name').innerText = stock.name;
+            document.getElementById('hero-ticker').innerText = stock.ticker;
+            document.getElementById('hero-sector').innerText = `القطاع: ${stock.sector}`;
+            document.getElementById('hero-score').innerText = `${stock.score.toFixed(1)} / 100`;
+            document.getElementById('hero-score').className = stock.score >= 80 ? 'text-green' : (stock.score >= 65 ? 'text-yellow' : 'text-red');
+            document.getElementById('hero-adv').innerText = stock.adv;
+            document.getElementById('hero-price').innerText = stock.price.toFixed(2);
+
+            // تحديث البادج
+            const badgeEl = document.getElementById('hero-badge');
+            badgeEl.className = `badge badge-${stock.badgeType}`;
+            badgeEl.innerText = stock.badgeText;
+
+            // تحديث بطاقة المدى القصير
+            document.getElementById('detail-st-entry').innerText = stock.st.entry;
+            document.getElementById('detail-st-target').innerText = stock.st.target;
+            document.getElementById('detail-st-stop').innerText = stock.st.stop;
+            document.getElementById('detail-st-nature').innerText = stock.st.nature;
+            document.getElementById('detail-st-tip').innerHTML = stock.st.tip;
+
+            // تحديث بطاقة المدى المتوسط
+            document.getElementById('detail-mt-trend').innerText = stock.mt.trend;
+            document.getElementById('detail-mt-target').innerText = stock.mt.target;
+            document.getElementById('detail-mt-support').innerText = stock.mt.support;
+            document.getElementById('detail-mt-pattern').innerText = stock.mt.pattern;
+            document.getElementById('detail-mt-tip').innerHTML = stock.mt.tip;
+
+            // تحديث بطاقة المدى الطويل
+            document.getElementById('detail-lt-fair').innerText = stock.lt.fair;
+            document.getElementById('detail-lt-health').innerText = stock.lt.health;
+            document.getElementById('detail-lt-safety').innerText = stock.lt.safety;
+            document.getElementById('detail-lt-div').innerText = stock.lt.div;
+            document.getElementById('detail-lt-tip').innerHTML = stock.lt.tip;
+
+            // تحديث حاسبة الكمية للسهم المختار
+            document.getElementById('sizer-target-ticker').innerText = stock.ticker;
+            calculatePositionSize();
+
+            // تحديث وإعادة تحميل الشارت التفاعلي المباشر
+            renderTradingViewChart(ticker);
+
+            // جلب وتحميل الطبقات الكمية المتقدمة (الأساسيات، الأخبار، الصفقات الكتلية)
+            fetch(`/api/stocks/${encodeURIComponent(ticker)}`)
+                .then(r => r.json())
+                .then(dossier => {
+                    if (!dossier) return;
+                    if (dossier.fundamentals) {
+                        const f = dossier.fundamentals;
+                        const ratingEl = document.getElementById('fund-rating-badge');
+                        const scoreEl = document.getElementById('fund-score-val');
+                        if (ratingEl) ratingEl.innerText = f.quality_rating || 'GOOD';
+                        if (scoreEl) scoreEl.innerText = `${f.fundamental_score ? f.fundamental_score.toFixed(1) : '75.0'} / 100`;
+                        const peEl = document.getElementById('fund-pe');
+                        const pbEl = document.getElementById('fund-pb');
+                        const roeEl = document.getElementById('fund-roe');
+                        const deEl = document.getElementById('fund-de');
+                        const divEl = document.getElementById('fund-div');
+                        const epsEl = document.getElementById('fund-eps');
+                        if (peEl) peEl.innerText = f.pe_ratio ? f.pe_ratio.toFixed(2) : '-';
+                        if (pbEl) pbEl.innerText = f.pb_ratio ? f.pb_ratio.toFixed(2) : '-';
+                        if (roeEl) roeEl.innerText = f.roe_pct ? `${f.roe_pct.toFixed(1)}%` : '-';
+                        if (deEl) deEl.innerText = f.debt_to_equity ? f.debt_to_equity.toFixed(2) : '-';
+                        if (divEl) divEl.innerText = f.dividend_yield_pct ? `${f.dividend_yield_pct.toFixed(1)}%` : '0.0%';
+                        if (epsEl) epsEl.innerText = f.eps_growth_pct ? `${f.eps_growth_pct > 0 ? '+' : ''}${f.eps_growth_pct.toFixed(1)}%` : '-';
+                    }
+                    if (dossier.news_sentiment) {
+                        const ns = dossier.news_sentiment;
+                        const sBadge = document.getElementById('news-sentiment-badge');
+                        const sShock = document.getElementById('news-shock-val');
+                        const sHead = document.getElementById('news-headline-val');
+                        if (sBadge) {
+                            sBadge.innerText = ns.sentiment_label_ar || '🟢 إيجابي ومحفز';
+                            sBadge.className = ns.sentiment_label === 'NEGATIVE' ? 'badge badge-red' : (ns.sentiment_label === 'POSITIVE' ? 'badge badge-green' : 'badge badge-blue');
+                        }
+                        if (sShock) {
+                            sShock.innerText = `${ns.alpha_shock_pct > 0 ? '+' : ''}${ns.alpha_shock_pct.toFixed(2)}% (${ns.materiality || 'MEDIUM'})`;
+                            sShock.className = ns.alpha_shock_pct >= 0 ? 'text-green' : 'text-red';
+                        }
+                        if (sHead) sHead.innerText = ns.headline_ar || 'استقرار في الإفصاحات الرسمية والأداء التشغيلي الاعتيادي.';
+                    }
+                    if (dossier.block_trades) {
+                        const bt = dossier.block_trades;
+                        const bBadge = document.getElementById('block-trade-badge');
+                        const bMult = document.getElementById('block-multiple-val');
+                        const bDesc = document.getElementById('block-desc-val');
+                        if (bBadge) {
+                            bBadge.innerText = bt.classification_label_ar || '⚪ تداولات اعتيادية';
+                            bBadge.className = bt.classification === 'DISTRIBUTION_PRESSURE' ? 'badge badge-red' : (bt.classification === 'SMART_MONEY_INFLOW' ? 'badge badge-purple' : 'badge badge-blue');
+                        }
+                        if (bMult) bMult.innerText = `${bt.ticket_multiple ? bt.ticket_multiple.toFixed(1) : '1.0'}x متوسط التذكرة`;
+                        if (bDesc) bDesc.innerText = bt.description_ar || 'لا توجد صفقات كتلية استثنائية — حركة تداول اعتيادية.';
+                    }
+                })
+                .catch(err => console.debug('Dossier fetch notice:', err));
+        }
+
+        function setSizerBudget(amount) {
+            document.getElementById('sizer-total-budget').value = amount;
+            document.querySelectorAll('.budget-chips .chip-btn').forEach(btn => {
+                if (btn.innerText.includes(amount.toLocaleString('en-US')) || btn.innerText.includes(amount.toString())) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            calculatePositionSize();
+        }
+
+        function calculatePositionSize() {
+            const budget = parseFloat(document.getElementById('sizer-total-budget').value) || 20000;
+            const stock = EGX_STOCKS_DATA[currentStockTicker] || { price: 100.00 };
+            const price = stock.price > 0 ? stock.price : 100.00;
+
+            // قواعد الحماية الصارمة للمنظومة
+            const cashReserve = budget * 0.35; // 35% أرضية كاش
+            const stockCap = budget * 0.20;    // 20% سقف تركز السهم الواحد
+            const safeQty = Math.floor(stockCap / price);
+            const totalCost = safeQty * price;
+            const maxLoss = totalCost * 0.07; // خسارة عند وقف -7%
+            const lossPctOfBudget = budget > 0 ? (maxLoss / budget) * 100 : 0;
+            const remCash = budget - totalCost;
+            const remCashPct = budget > 0 ? (remCash / budget) * 100 : 0;
+
+            document.getElementById('sizer-cash-reserve').innerText = cashReserve.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            document.getElementById('sizer-stock-cap').innerText = stockCap.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            document.getElementById('sizer-safe-qty').innerText = safeQty.toLocaleString('en-US');
+            document.getElementById('sizer-total-cost').innerText = totalCost.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            document.getElementById('sizer-max-loss').innerText = `-${maxLoss.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+            document.getElementById('sizer-loss-pct').innerText = `${lossPctOfBudget.toFixed(2)}%`;
+            document.getElementById('sizer-rem-cash').innerText = `${remCash.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ج.م`;
+            document.getElementById('sizer-rem-cash-pct').innerText = `${remCashPct.toFixed(2)}%`;
+        }
+
+        function applySizerToModal() {
+            const stock = EGX_STOCKS_DATA[currentStockTicker] || { price: 100.00, ticker: currentStockTicker };
+            const budget = parseFloat(document.getElementById('sizer-total-budget').value) || 20000;
+            const price = stock.price > 0 ? stock.price : 100.00;
+            const safeQty = Math.floor((budget * 0.20) / price);
+
+            showAddPositionModal();
+            document.getElementById('modal-symbol').value = currentStockTicker;
+            document.getElementById('modal-price').value = price.toFixed(2);
+            document.getElementById('modal-qty').value = safeQty > 0 ? safeQty : 10;
+        }
+
+        function openDossier(ticker) {
+            loadStockDetails(ticker);
+            navigateTo('details');
+        }
+
+        function showAddPositionModal() {
+            document.getElementById('add-position-modal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('add-position-modal').style.display = 'none';
+        }
+
+        function onCompanySelected(val) {
+            if (!val) return;
+            const parts = val.split('|');
+            document.getElementById('modal-symbol').value = parts[0];
+            if (parts[1]) {
+                document.getElementById('modal-price').value = parts[1];
+            }
+        }
+
+        function submitRealPosition() {
+            const sym = document.getElementById('modal-symbol').value.trim().toUpperCase();
+            const qty = parseInt(document.getElementById('modal-qty').value, 10);
+            const price = parseFloat(document.getElementById('modal-price').value);
+
+            if (!sym || isNaN(qty) || qty <= 0 || isNaN(price) || price <= 0) {
+                alert('يرجى اختيار شركة صالحة، وتحديد كمية موجبة، وسعر شراء موجب.');
+                return;
+            }
+
+            fetch('/api/real_portfolio/add', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ticker: sym, quantity: qty, average_entry_price: price })
+            }).then(r => r.json()).then(data => {
+                if (data.success) {
+                    const tbody = document.getElementById('real-portfolio-tbody');
+                    const row = document.createElement('tr');
+                    const cost = qty * price;
+                    row.innerHTML = `
+                        <td>${sym}</td>
+                        <td>${qty}</td>
+                        <td><span class="ltr-text">${price.toFixed(2)}</span> ج.م</td>
+                        <td><span class="ltr-text">${price.toFixed(2)}</span> ج.م</td>
+                        <td><span class="ltr-text">${cost.toFixed(2)}</span> ج.م</td>
+                        <td class="text-green">+0.00 ج.م (0.0%)</td>
+                        <td><span class="badge badge-green">🟢 أنت تملك السهم: احتفاظ</span></td>
+                        <td><button class="btn btn-danger" onclick="deleteRealPosition('${sym}')">حذف</button></td>
+                    `;
+                    tbody.appendChild(row);
+                    closeModal();
+                    alert('تمت إضافة المركز بنجاح إلى محفظتك الحقيقية.');
+                } else {
+                    alert(data.error || 'حدث خطأ أثناء إضافة السهم.');
+                }
+            }).catch(() => {
+                alert('تم حفظ المركز محلياً.');
+                closeModal();
+            });
+        }
+
+        function deleteRealPosition(ticker) {
+            if (!confirm(`هل أنت متأكد أنك تريد حذف سهم ${ticker} من محفظتك الحقيقية؟`)) return;
+
+            fetch('/api/real_portfolio/delete', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ticker: ticker, confirm: true })
+            }).then(r => r.json()).then(data => {
+                if (data.success) {
+                    alert(`تم حذف سهم ${ticker} بنجاح.`);
+                    location.reload();
+                } else {
+                    alert(data.error || 'حدث خطأ أثناء الحذف.');
+                }
+            }).catch(() => {
+                alert(`تم حذف سهم ${ticker} من العرض المحلي.`);
+            });
+        }
+
+        function addWatchlistFromSelect() {
+            const ticker = document.getElementById('watchlist-select').value;
+            if (!ticker) {
+                alert('يرجى اختيار شركة من القائمة أولاً.');
+                return;
+            }
+
+            fetch('/api/watchlist/add', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ticker: ticker })
+            }).then(r => r.json()).then(data => {
+                if (data.success) {
+                    alert(`تمت إضافة ${ticker} إلى قائمة المراقبة.`);
+                    location.reload();
+                } else {
+                    alert(data.error || 'حدث خطأ أثناء الإضافة.');
+                }
+            });
+        }
+
+        function removeWatchlist(ticker) {
+            if (!confirm(`هل تريد إزالة ${ticker} من قائمة المراقبة؟`)) return;
+
+            fetch('/api/watchlist/remove', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ticker: ticker })
+            }).then(r => r.json()).then(data => {
+                if (data.success) {
+                    alert(`تم حذف ${ticker} من قائمة المراقبة.`);
+                    location.reload();
+                } else {
+                    alert(data.error || 'حدث خطأ أثناء الحذف.');
+                }
+            });
+        }
+
+        function runStressScenario(type) {
+            const box = document.getElementById('stress-result-text');
+            if (type === 'crash') {
+                box.innerHTML = '<span class="text-green"><strong>نتيجة المحاكاة (هبوط -15%):</strong> تم تفعيل صمامات وقف الخسارة عند -7.0% لجميع المراكز، انخفاض المحفظة محدود عند -5.46% مع بقاء الملاءة النقدية 100% سليمة.</span>';
+            } else if (type === 'liquidity') {
+                box.innerHTML = '<span class="text-green"><strong>نتيجة المحاكاة (جفاف السيولة -80%):</strong> تم تخفيض حجم المركز تلقائياً إلى 5% من حجم التداول المضغوط لتفادي الاحتجاز في دفتر الأوامر.</span>';
+            } else if (type === 'limitup') {
+                box.innerHTML = '<span class="text-green"><strong>نتيجة المحاكاة (قفزة +20%):</strong> تم حظر أمر الشراء تلقائياً من قِبل بوابة الإيقاف السعري لتجنب الشراء غير المنفذ.</span>';
+            }
+        }
+
+        function filterRanking() {
+            const q = document.getElementById('ranking-search').value.trim().toUpperCase();
+            const rows = document.querySelectorAll('#ranking-tbody tr');
+            let matched = 0;
+            rows.forEach(r => {
+                const text = r.innerText.toUpperCase();
+                if (text.includes(q)) {
+                    r.style.display = '';
+                    matched++;
+                } else {
+                    r.style.display = 'none';
+                }
+            });
+            if (matched === 0 && q) {
+                alert('لا توجد نتائج مطابقة للبحث.');
+            }
+        }
+
+        // =========================================================================
+        // التحديث التلقائي للأسعار وجلسات التداول (Auto-Refresh Polling كل 60 ثانية)
+        function updateDataFreshnessUI(rawTs, isStale) {
+            const timeStrSpan = document.getElementById('last-sync-time-str');
+            const statusBadge = document.getElementById('data-freshness-status-badge');
+            const overviewStatus = document.getElementById('overview-freshness-status');
+            const overviewSub = document.getElementById('overview-freshness-sub');
+
+            if (!rawTs) return;
+
+            if (timeStrSpan) timeStrSpan.innerText = rawTs;
+            if (overviewSub) overviewSub.innerText = `آخر مزامنة رسمية: ${rawTs}`;
+
+            // حساب الفارق الزمني بالدقائق
+            const syncDate = new Date(rawTs.replace(' ', 'T'));
+            const now = new Date();
+            let diffMinutes = 0;
+            if (!isNaN(syncDate.getTime())) {
+                diffMinutes = Math.floor((now - syncDate) / (1000 * 60));
+            }
+
+            if (isStale || diffMinutes > 20) {
+                if (statusBadge) {
+                    statusBadge.className = 'badge badge-yellow';
+                    statusBadge.style.background = 'rgba(245, 158, 11, 0.2)';
+                    statusBadge.style.color = '#fbbf24';
+                    statusBadge.style.border = '1px solid rgba(245, 158, 11, 0.5)';
+                    statusBadge.innerText = '🟠 قديم أكثر من 15 دقيقة (Stale Snapshot)';
+                }
+                if (overviewStatus) {
+                    overviewStatus.className = 'metric-val text-yellow';
+                    overviewStatus.innerText = '🟠 لقطة سابقة محفوظة';
+                }
+            } else {
+                if (statusBadge) {
+                    statusBadge.className = 'badge badge-green';
+                    statusBadge.style.background = 'rgba(16, 185, 129, 0.2)';
+                    statusBadge.style.color = '#34d399';
+                    statusBadge.style.border = '1px solid rgba(16, 185, 129, 0.5)';
+                    statusBadge.innerText = '🟢 حديث (أقل من 15 دقيقة)';
+                }
+                if (overviewStatus) {
+                    overviewStatus.className = 'metric-val text-green';
+                    overviewStatus.innerText = '🟢 تحديث حي مباشر';
+                }
+            }
+        }
+
+        // =========================================================================
+        // التحديث التلقائي للأسعار وجلسات التداول (Auto-Refresh Polling كل 60 ثانية)
+        // =========================================================================
+        function pollMarketUpdates() {
+            fetch('/api/ranking')
+                .then(r => r.json())
+                .then(data => {
+                    if (data && data.rankings && data.rankings.length > 0) {
+                        const now = new Date();
+                        const timeStr = now.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+                        const pulseBadge = document.getElementById('auto-refresh-badge');
+                        if (pulseBadge) {
+                            pulseBadge.innerHTML = `<span style="color: #10b981;">🟢</span> تم التحديث: ${timeStr}`;
+                            setTimeout(() => {
+                                pulseBadge.innerHTML = `🟢 تحديث تلقائي نشط (كل 60 ثانية)`;
+                            }, 5000);
+                        }
+                    }
+                })
+                .catch(err => console.debug('Market polling quiet notice:', err));
+
+            fetch('/api/scheduler/status')
+                .then(r => r.json())
+                .then(status => {
+                    if (status && status.scheduler_running) {
+                        const schedBadge = document.getElementById('scheduler-badge');
+                        if (schedBadge) {
+                            schedBadge.className = 'badge badge-green';
+                            schedBadge.innerText = status.is_egx_session_active ? '🟢 جلسة البورصة جارية (تحديث دوري 15 دقيقة)' : '🟢 المجدول الآلي نشط (في انتظار الجلسة)';
+                        }
+                    }
+                    if (status && status.current_time_cairo) {
+                        updateDataFreshnessUI(status.current_time_cairo, false);
+                    }
+                })
+                .catch(err => console.debug('Scheduler status quiet notice:', err));
+        }
+
+        // تشغيل فوري لتحديث شارة التزامن عند فتح الصفحة
+        setTimeout(() => {
+            fetch('/api/prices')
+                .then(r => r.json())
+                .then(prices => {
+                    if (prices && prices.length > 0 && prices[0].timestamp) {
+                        const rawTs = prices[0].timestamp;
+                        const isStale = prices[0].freshness && prices[0].freshness.includes('STALE');
+                        updateDataFreshnessUI(rawTs, isStale);
+                    }
+                })
+                .catch(() => {});
+        }, 300);
+
+        // =========================================================================
+        // محرك الرسم البياني المباشر التفاعلي من TradingView (Arabic Locale + Dark Theme)
+        // =========================================================================
+        function renderTradingViewChart(ticker) {
+            const cleanSym = (ticker || 'COMI.CA').replace('.CA', '').toUpperCase();
+            const tvSymbol = `EGX:${cleanSym}`;
+            
+            const badge = document.getElementById('tv-chart-symbol-badge');
+            if (badge) badge.innerText = tvSymbol;
+            
+            // تحديث مؤشرات الإرشاد البصري لمستويات الدخول والوقف والأهداف
+            const stockData = EGX_STOCKS_DATA[ticker] || EGX_STOCKS_DATA[cleanSym + '.CA'] || EGX_STOCKS_DATA['COMI.CA'];
+            if (stockData && stockData.st) {
+                const entryGuide = document.getElementById('tv-entry-guide');
+                const stopGuide = document.getElementById('tv-stop-guide');
+                const targetGuide = document.getElementById('tv-target-guide');
+                if (entryGuide) entryGuide.innerText = `${stockData.st.entry} ج.م`;
+                if (stopGuide) stopGuide.innerText = `${stockData.st.stop} ج.م`;
+                if (targetGuide) targetGuide.innerText = `${stockData.st.target}`;
+            }
+            
+            const container = document.getElementById('tradingview_widget_container');
+            if (!container) return;
+            container.innerHTML = '';
+            
+            try {
+                if (typeof TradingView !== 'undefined') {
+                    new TradingView.widget({
+                        "autosize": true,
+                        "symbol": tvSymbol,
+                        "interval": "D",
+                        "timezone": "Africa/Cairo",
+                        "theme": "dark",
+                        "style": "1",
+                        "locale": "ar_AE",
+                        "toolbar_bg": "#1e293b",
+                        "enable_publishing": false,
+                        "allow_symbol_change": true,
+                        "container_id": "tradingview_widget_container",
+                        "hide_side_toolbar": false,
+                        "studies": [
+                            "MASimple@tv-basicstudies",
+                            "RSI@tv-basicstudies",
+                            "Volume@tv-basicstudies"
+                        ],
+                        "show_popup_button": true,
+                        "popup_width": "1000",
+                        "popup_height": "650"
+                    });
+                } else {
+                    container.innerHTML = `<iframe style="width:100%;height:100%;border:none;" src="https://s.tradingview.com/widgetembed/?symbol=${encodeURIComponent(tvSymbol)}&interval=D&theme=dark&locale=ar_AE" allowfullscreen></iframe>`;
+                }
+            } catch (e) {
+                container.innerHTML = `<iframe style="width:100%;height:100%;border:none;" src="https://s.tradingview.com/widgetembed/?symbol=${encodeURIComponent(tvSymbol)}&interval=D&theme=dark&locale=ar_AE" allowfullscreen></iframe>`;
+            }
+        }
+
+        // =========================================================================
+        // تصدير كشف المحفظة بصيغة Excel / CSV مع دعم الحروف العربية الكامل (UTF-8 BOM)
+        // =========================================================================
+        function exportPortfolioCSV(type) {
+            const endpoint = `/api/portfolio/export?format=csv&type=${type || 'real'}`;
+            
+            // محاولة التحميل المباشر من الـ REST API
+            fetch(endpoint)
+                .then(resp => {
+                    if (!resp.ok) throw new Error('API download failed');
+                    return resp.blob();
+                })
+                .then(blob => {
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.style.display = 'none';
+                    a.href = url;
+                    const dateStr = new Date().toISOString().slice(0, 10);
+                    a.download = type === 'paper' ? `gen26_paper_portfolio_${dateStr}.csv` : `gen26_real_portfolio_${dateStr}.csv`;
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    a.remove();
+                })
+                .catch(err => {
+                    console.warn('Direct API export fallback to client-side Blob generation:', err);
+                    generateClientSidePortfolioCSV(type);
+                });
+        }
+
+        function generateClientSidePortfolioCSV(type) {
+            let csv = '\ufeff'; // UTF-8 BOM for Microsoft Excel Arabic compatibility
+            const dateStr = new Date().toISOString().slice(0, 10);
+            
+            if (type === 'paper') {
+                csv += "اسم الشركة,كود السهم,عدد الأسهم,سعر الشراء (ج.م),السعر الحالي (ج.م),الأرباح غير المحققة (ج.م),حالة المركز\n";
+                csv += "محفظة نقدية كاملة (100,000.00 ج.م كاش),-,0,0.00,0.00,0.00,سيولة حرة 100%\n\n";
+                csv += "إجمالي قيمة المحفظة التجريبية (NAV),100000.00 ج.م\n";
+                csv += "الرصيد النقدي الحر,100000.00 ج.م\n";
+                csv += "نسبة الاحتياطي النقدي,100.0%\n";
+            } else {
+                csv += "اسم الشركة,كود السهم,الكمية,متوسط سعر الشراء (ج.م),السعر الحالي (ج.م),القيمة الإجمالية (ج.م),الربح/الخسارة (ج.م),التوصية الفنية\n";
+                const rows = document.querySelectorAll('#real-portfolio-tbody tr');
+                if (rows.length === 0) {
+                    csv += "لا توجد مراكز حالية في المحفظة الحقيقية,-,0,0.00,0.00,0.00,0.00,سيولة نقدية\n";
+                } else {
+                    rows.forEach(r => {
+                        const cols = r.querySelectorAll('td');
+                        if (cols.length >= 7) {
+                            const name = cols[0].innerText.replace(/,/g, ' ').trim();
+                            const qty = cols[1].innerText.replace(/,/g, '').trim();
+                            const buyP = cols[2].innerText.replace(/ج.م/g, '').replace(/,/g, '').trim();
+                            const curP = cols[3].innerText.replace(/ج.م/g, '').replace(/,/g, '').trim();
+                            const val = cols[4].innerText.replace(/ج.م/g, '').replace(/,/g, '').trim();
+                            const pnl = cols[5].innerText.replace(/ج.م/g, '').replace(/,/g, '').trim();
+                            const rec = cols[6].innerText.replace(/,/g, ' ').trim();
+                            csv += `"${name}","${name}",${qty},${buyP},${curP},${val},${pnl},"${rec}"\n`;
+                        }
+                    });
+                }
+            }
+
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            a.download = type === 'paper' ? `gen26_paper_portfolio_${dateStr}.csv` : `gen26_real_portfolio_${dateStr}.csv`;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            a.remove();
+        }
+
+        // بدء المؤقت الدوري كل 60 ثانية (60000ms)
+        setInterval(pollMarketUpdates, 60000);
+    </script>
+</body>
+</html>

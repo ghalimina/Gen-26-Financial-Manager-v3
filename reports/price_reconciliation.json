@@ -1,0 +1,14 @@
+[
+  {
+    "ticker": "COMI.CA",
+    "company_name": "البنك التجاري الدولي (CIB)",
+    "gen26_price": 138.5,
+    "external_reference_price": 105.0,
+    "external_source": "Thndr",
+    "absolute_difference": 33.5,
+    "percentage_difference": 31.9048,
+    "price_type": "OFFICIAL_LAST_CLOSE",
+    "data_timestamp": "2026-08-18 14:30:00",
+    "root_cause": "Live Intraday Tick vs Official EGX Settlement EOD Close"
+  }
+]

@@ -1,0 +1,33 @@
+{
+  "timestamp": "2026-08-20T06:06:00",
+  "system_status": "YELLOW (REAL PORTFOLIO ENABLED — LIVE BROKER BLOCKED)",
+  "real_portfolio_management": "ENABLED",
+  "paper_trading": "ENABLED",
+  "live_broker_execution": "BLOCKED",
+  "frozen_risk_core": "PROTECTED",
+  "tests": {
+    "total": 109,
+    "passed": 109,
+    "failed": 0,
+    "execution_time_sec": 0.589
+  },
+  "real_portfolio": {
+    "positions_count": 2,
+    "total_equity_egp": 72735.0,
+    "free_cash_egp": 45000.0,
+    "stock_market_val_egp": 27735.0,
+    "unrealized_pnl_egp": 1935.0,
+    "unrealized_pnl_pct": 7.5,
+    "crud_operations": "FULL_SUPPORT"
+  },
+  "paper_cohort": {
+    "historical_baseline_sessions": 3,
+    "active_cohort_id": "COHORT_20260820",
+    "active_cohort_progress": "1 / 30",
+    "remaining_sessions": 29
+  },
+  "watchlist": {
+    "tickers_count": 5,
+    "status": "ACTIVE_ISOLATED"
+  }
+}

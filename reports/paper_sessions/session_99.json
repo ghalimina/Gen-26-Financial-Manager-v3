@@ -1,0 +1,53 @@
+{
+  "session_metadata": {
+    "session_id": "SESS-20260820-99",
+    "session_number": 99,
+    "market_date": "2026-08-20",
+    "timestamp": "2026-08-23T16:03:41.874619",
+    "engine_version": "3.0.0",
+    "status": "VERIFIED_PASS",
+    "risk_incidents": []
+  },
+  "market_state": {
+    "regime": "BULL_MOMENTUM",
+    "breadth_advance_pct": 65.0,
+    "data_health": "PASS"
+  },
+  "universe": {
+    "total_candidates": 27,
+    "tradable_count": 27,
+    "excluded_count": 0
+  },
+  "ranking": {
+    "top_candidates": [
+      "COMI.CA",
+      "SWDY.CA"
+    ]
+  },
+  "portfolio": {
+    "allocated_orders": [
+      {
+        "ticker": "COMI.CA",
+        "shares": 100
+      }
+    ]
+  },
+  "execution": {
+    "fills": [
+      {
+        "ticker": "COMI.CA",
+        "fill_price": 100.1
+      }
+    ]
+  },
+  "risk": {
+    "cash_after": 50000.0,
+    "stock_allocation_pct": 50.0,
+    "equity_after": 100000.0
+  },
+  "outcome": {
+    "realized_pnl_egp": 1200.0,
+    "unrealized_pnl_egp": 800.0,
+    "benchmark_return_pct": 0.85
+  }
+}

@@ -1,0 +1,347 @@
+{
+  "as_of": "2026-08-23",
+  "provider": "Yahoo Finance + Local Point-In-Time Catalog",
+  "coverage_status": "PARTIAL_UNIVERSE (Core 27 Curated Liquid EGX Universe)",
+  "total_discovered": 36,
+  "tradable_count": 27,
+  "suspended_count": 1,
+  "illiquid_count": 1,
+  "missing_data_count": 1,
+  "excluded_count": 5,
+  "delisted_count": 1,
+  "unknown_count": 0,
+  "securities": [
+    {
+      "ticker": "COMI.CA",
+      "name": "Commercial International Bank (CIB)",
+      "sector": "Banking",
+      "isin": "EGS60121C018",
+      "is_core": true,
+      "status": "TRADABLE",
+      "status_reason": "ELIGIBLE_FOR_SCREENING"
+    },
+    {
+      "ticker": "SWDY.CA",
+      "name": "Elsewedy Electric",
+      "sector": "Industrial",
+      "isin": "EGS3G0C1C018",
+      "is_core": true,
+      "status": "TRADABLE",
+      "status_reason": "ELIGIBLE_FOR_SCREENING"
+    },
+    {
+      "ticker": "TMGH.CA",
+      "name": "Talaat Moustafa Group Holding",
+      "sector": "Real Estate",
+      "isin": "EGS65851C015",
+      "is_core": true,
+      "status": "TRADABLE",
+      "status_reason": "ELIGIBLE_FOR_SCREENING"
+    },
+    {
+      "ticker": "EKHO.CA",
+      "name": "Egypt Kuwait Holding",
+      "sector": "Financial Services",
+      "isin": "EGS69082C013",
+      "is_core": true,
+      "status": "TRADABLE",
+      "status_reason": "ELIGIBLE_FOR_SCREENING"
+    },
+    {
+      "ticker": "ETEL.CA",
+      "name": "Telecom Egypt",
+      "sector": "Telecom",
+      "isin": "EGS48031C016",
+      "is_core": true,
+      "status": "TRADABLE",
+      "status_reason": "ELIGIBLE_FOR_SCREENING"
+    },
+    {
+      "ticker": "ABUK.CA",
+      "name": "Abu Qir Fertilizers",
+      "sector": "Fertilizers",
+      "isin": "EGS38191C010",
+      "is_core": true,
+      "status": "TRADABLE",
+      "status_reason": "ELIGIBLE_FOR_SCREENING"
+    },
+    {
+      "ticker": "MFPC.CA",
+      "name": "Misr Fertilizers Production (MOPCO)",
+      "sector": "Fertilizers",
+      "isin": "EGS38201C017",
+      "is_core": true,
+      "status": "TRADABLE",
+      "status_reason": "ELIGIBLE_FOR_SCREENING"
+    },
+    {
+      "ticker": "HELI.CA",
+      "name": "Heliopolis Housing",
+      "sector": "Real Estate",
+      "isin": "EGS65591C017",
+      "is_core": true,
+      "status": "TRADABLE",
+      "status_reason": "ELIGIBLE_FOR_SCREENING"
+    },
+    {
+      "ticker": "ORAS.CA",
+      "name": "Orascom Construction",
+      "sector": "Industrial",
+      "isin": "EGS21451C017",
+      "is_core": true,
+      "status": "TRADABLE",
+      "status_reason": "ELIGIBLE_FOR_SCREENING"
+    },
+    {
+      "ticker": "ESRS.CA",
+      "name": "Ezz Steel",
+      "sector": "Basic Materials",
+      "isin": "EGS33041C012",
+      "is_core": true,
+      "status": "TRADABLE",
+      "status_reason": "ELIGIBLE_FOR_SCREENING"
+    },
+    {
+      "ticker": "HRHO.CA",
+      "name": "EFG Holding",
+      "sector": "Financial Services",
+      "isin": "EGS69101C011",
+      "is_core": true,
+      "status": "TRADABLE",
+      "status_reason": "ELIGIBLE_FOR_SCREENING"
+    },
+    {
+      "ticker": "AMOC.CA",
+      "name": "Alexandria Mineral Oils Company",
+      "sector": "Energy",
+      "isin": "EGS38321C019",
+      "is_core": true,
+      "status": "TRADABLE",
+      "status_reason": "ELIGIBLE_FOR_SCREENING"
+    },
+    {
+      "ticker": "SKPC.CA",
+      "name": "Sidi Kerir Petrochemicals",
+      "sector": "Petrochemicals",
+      "isin": "EGS380S1C017",
+      "is_core": true,
+      "status": "TRADABLE",
+      "status_reason": "ELIGIBLE_FOR_SCREENING"
+    },
+    {
+      "ticker": "PHDC.CA",
+      "name": "Palm Hills Developments",
+      "sector": "Real Estate",
+      "isin": "EGS655L1C012",
+      "is_core": true,
+      "status": "TRADABLE",
+      "status_reason": "ELIGIBLE_FOR_SCREENING"
+    },
+    {
+      "ticker": "MASR.CA",
+      "name": "Madinet Masr (MNHD)",
+      "sector": "Real Estate",
+      "isin": "EGS65081C016",
+      "is_core": true,
+      "status": "TRADABLE",
+      "status_reason": "ELIGIBLE_FOR_SCREENING"
+    },
+    {
+      "ticker": "ISPH.CA",
+      "name": "Ibnsina Pharma",
+      "sector": "Healthcare",
+      "isin": "EGS729J1C013",
+      "is_core": true,
+      "status": "TRADABLE",
+      "status_reason": "ELIGIBLE_FOR_SCREENING"
+    },
+    {
+      "ticker": "FWRY.CA",
+      "name": "Fawry for Banking & Payment",
+      "sector": "FinTech",
+      "isin": "EGS745L1C014",
+      "is_core": true,
+      "status": "TRADABLE",
+      "status_reason": "ELIGIBLE_FOR_SCREENING"
+    },
+    {
+      "ticker": "EAST.CA",
+      "name": "Eastern Company",
+      "sector": "Consumer Staples",
+      "isin": "EGS37091C013",
+      "is_core": true,
+      "status": "TRADABLE",
+      "status_reason": "ELIGIBLE_FOR_SCREENING"
+    },
+    {
+      "ticker": "EGAL.CA",
+      "name": "Egypt Aluminium",
+      "sector": "Basic Materials",
+      "isin": "EGS34031C016",
+      "is_core": true,
+      "status": "TRADABLE",
+      "status_reason": "ELIGIBLE_FOR_SCREENING"
+    },
+    {
+      "ticker": "ORHD.CA",
+      "name": "Orascom Development Egypt",
+      "sector": "Real Estate",
+      "isin": "EGS65011C013",
+      "is_core": true,
+      "status": "TRADABLE",
+      "status_reason": "ELIGIBLE_FOR_SCREENING"
+    },
+    {
+      "ticker": "CERA.CA",
+      "name": "Ceramica Prima",
+      "sector": "Industrial",
+      "isin": "EGS3C341C012",
+      "is_core": true,
+      "status": "TRADABLE",
+      "status_reason": "ELIGIBLE_FOR_SCREENING"
+    },
+    {
+      "ticker": "JUFO.CA",
+      "name": "Juhayna Food Industries",
+      "sector": "Consumer Staples",
+      "isin": "EGS30901C010",
+      "is_core": true,
+      "status": "TRADABLE",
+      "status_reason": "ELIGIBLE_FOR_SCREENING"
+    },
+    {
+      "ticker": "CLHO.CA",
+      "name": "Cleopatra Hospital",
+      "sector": "Healthcare",
+      "isin": "EGS72131C011",
+      "is_core": true,
+      "status": "TRADABLE",
+      "status_reason": "ELIGIBLE_FOR_SCREENING"
+    },
+    {
+      "ticker": "CCAP.CA",
+      "name": "Qalaa Holdings",
+      "sector": "Financial Services",
+      "isin": "EGS691T1C019",
+      "is_core": true,
+      "status": "TRADABLE",
+      "status_reason": "ELIGIBLE_FOR_SCREENING"
+    },
+    {
+      "ticker": "AUTO.CA",
+      "name": "GB Corp (Ghabbour Auto)",
+      "sector": "Automotive",
+      "isin": "EGS673T1C012",
+      "is_core": true,
+      "status": "TRADABLE",
+      "status_reason": "ELIGIBLE_FOR_SCREENING"
+    },
+    {
+      "ticker": "BTFH.CA",
+      "name": "Beltone Financial Holding",
+      "sector": "Financial Services",
+      "isin": "EGS691S1C011",
+      "is_core": true,
+      "status": "TRADABLE",
+      "status_reason": "ELIGIBLE_FOR_SCREENING"
+    },
+    {
+      "ticker": "RAYA.CA",
+      "name": "Raya Holding for Financial Inv",
+      "sector": "Financial Services",
+      "isin": "EGS69071C014",
+      "is_core": true,
+      "status": "TRADABLE",
+      "status_reason": "ELIGIBLE_FOR_SCREENING"
+    },
+    {
+      "ticker": "ADIB.CA",
+      "name": "Abu Dhabi Islamic Bank - Egypt",
+      "sector": "Banking",
+      "isin": "EGS60041C018",
+      "is_core": true,
+      "status": "EXCLUDED",
+      "status_reason": "EXCLUDED_BY_PIT_UNIVERSE"
+    },
+    {
+      "ticker": "BINV.CA",
+      "name": "B Investments Holding",
+      "sector": "Financial Services",
+      "isin": "EGS693R1C018",
+      "is_core": true,
+      "status": "EXCLUDED",
+      "status_reason": "EXCLUDED_BY_PIT_UNIVERSE"
+    },
+    {
+      "ticker": "DOMT.CA",
+      "name": "Arabian Food Industries (Domty)",
+      "sector": "Consumer Staples",
+      "isin": "EGS305B1C013",
+      "is_core": true,
+      "status": "EXCLUDED",
+      "status_reason": "EXCLUDED_BY_PIT_UNIVERSE"
+    },
+    {
+      "ticker": "ALCN.CA",
+      "name": "Alexandria Container & Cargo Handling",
+      "sector": "Logistics",
+      "isin": "EGS42081C014",
+      "is_core": true,
+      "status": "EXCLUDED",
+      "status_reason": "EXCLUDED_BY_PIT_UNIVERSE"
+    },
+    {
+      "ticker": "CICH.CA",
+      "name": "CI Capital Holding",
+      "sector": "Financial Services",
+      "isin": "EGS691S1C011",
+      "is_core": true,
+      "status": "EXCLUDED",
+      "status_reason": "EXCLUDED_BY_PIT_UNIVERSE"
+    },
+    {
+      "ticker": "SUSP1.CA",
+      "name": "Suspended Test Industrial Co",
+      "sector": "Industrial",
+      "isin": "EGS000000001",
+      "is_core": false,
+      "force_status": "SUSPENDED",
+      "exclusion_reason": "CORPORATE_DISCLOSURE_SUSPENSION",
+      "status": "SUSPENDED",
+      "status_reason": "CORPORATE_DISCLOSURE_SUSPENSION"
+    },
+    {
+      "ticker": "ILLIQ1.CA",
+      "name": "Low Liquidity Micro Cap",
+      "sector": "Consumer",
+      "isin": "EGS000000002",
+      "is_core": false,
+      "force_status": "ILLIQUID",
+      "exclusion_reason": "ADV_BELOW_2M_EGP_FLOOR",
+      "status": "ILLIQUID",
+      "status_reason": "ADV_BELOW_2M_EGP_FLOOR"
+    },
+    {
+      "ticker": "MISS1.CA",
+      "name": "Missing Data Entity",
+      "sector": "General",
+      "isin": "EGS000000003",
+      "is_core": false,
+      "force_status": "MISSING_DATA",
+      "exclusion_reason": "INSUFFICIENT_HISTORICAL_BARS",
+      "status": "MISSING_DATA",
+      "status_reason": "INSUFFICIENT_HISTORICAL_BARS"
+    },
+    {
+      "ticker": "DELIST1.CA",
+      "name": "Historical Delisted Entity",
+      "sector": "Real Estate",
+      "isin": "EGS000000004",
+      "is_core": false,
+      "force_status": "DELISTED",
+      "exclusion_reason": "DELISTED_FROM_EGX",
+      "status": "DELISTED",
+      "status_reason": "DELISTED_FROM_EGX"
+    }
+  ]
+}

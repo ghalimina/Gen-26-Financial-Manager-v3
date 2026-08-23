@@ -1,0 +1,13 @@
+{
+  "mode": "PAPER_ONLY",
+  "live_trading": false,
+  "live_trading_blocked": true,
+  "paper_sessions_required": 30,
+  "paper_sessions_completed": 3,
+  "paper_sessions_remaining": 27,
+  "tests_passed": 81,
+  "tests_failed": 0,
+  "deployment_status": "OPERATIONAL_AND_VALIDATED",
+  "dashboard": "http://127.0.0.1:5000",
+  "timestamp": "2026-08-20T05:22:00"
+}

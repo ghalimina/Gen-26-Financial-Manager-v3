@@ -1,0 +1,51 @@
+{
+  "version": "3.0.0",
+  "last_updated": "2026-08-23T16:03:41.908508",
+  "deployment_mode": "PAPER_ONLY",
+  "live_trading_blocked": true,
+  "start_date": "2026-08-23",
+  "start_date_ar": "23 أغسطس 2026",
+  "session_progress": {
+    "verified_sessions": 1,
+    "total_sessions_required": 30,
+    "remaining_sessions": 29,
+    "percentage_complete": 3.3,
+    "last_successful_session": "2026-08-23",
+    "gate_status": "INCUBATION_ACTIVE (1/30)",
+    "session_counter_label_ar": "الجلسة: 1 من 30 (تاريخ البدء: 23 أغسطس 2026)"
+  },
+  "portfolio": {
+    "portfolio_equity": 100000.0,
+    "cash": 100000.0,
+    "invested_stock_equity": 0.0,
+    "stock_allocation_pct": 0.0,
+    "cash_reserve_pct": 100.0,
+    "open_positions": [],
+    "closed_positions_count": 0
+  },
+  "performance": {
+    "realized_pnl_egp": 0.0,
+    "unrealized_pnl_egp": 0.0,
+    "cumulative_return_pct": 0.0,
+    "max_drawdown_pct": 0.0,
+    "win_rate_pct": 0.0,
+    "profit_factor": 1.0,
+    "average_slippage_pct": 0.0,
+    "turnover_egp": 0.0
+  },
+  "risk_and_quality": {
+    "rejected_orders_count": 0,
+    "risk_events_count": 0,
+    "invariant_failures_count": 0,
+    "data_quality_failures_count": 0
+  },
+  "verified_session_history": [
+    {
+      "session_number": 1,
+      "date": "2026-08-23",
+      "status": "COMPLETED_BENCHMARK_INITIALIZED",
+      "nav_egp": 100000.0,
+      "cash_egp": 100000.0
+    }
+  ]
+}

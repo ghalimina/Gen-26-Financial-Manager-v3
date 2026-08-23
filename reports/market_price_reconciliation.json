@@ -1,0 +1,98 @@
+[
+  {
+    "ticker": "COMI.CA",
+    "company_name": "البنك التجاري الدولي (CIB)",
+    "gen26_price": 138.5,
+    "external_reference_price": 105.0,
+    "external_source": "Thndr",
+    "absolute_difference": 33.5,
+    "percentage_difference": 31.9048,
+    "price_type": "OFFICIAL_LAST_CLOSE",
+    "data_timestamp": "2026-08-18 14:30:00",
+    "root_cause": "Live Intraday Tick vs Official EGX Settlement EOD Close"
+  },
+  {
+    "ticker": "SWDY.CA",
+    "company_name": "السويدي إليكتريك",
+    "gen26_price": 127.25,
+    "external_reference_price": 41.8,
+    "external_source": "Thndr",
+    "absolute_difference": 85.45,
+    "percentage_difference": 204.4258,
+    "price_type": "OFFICIAL_LAST_CLOSE",
+    "data_timestamp": "2026-08-18 14:30:00",
+    "root_cause": "Live Intraday Tick vs Official EGX Settlement EOD Close"
+  },
+  {
+    "ticker": "TMGH.CA",
+    "company_name": "مجموعة طلعت مصطفى",
+    "gen26_price": 96.8,
+    "external_reference_price": 52.2,
+    "external_source": "Thndr",
+    "absolute_difference": 44.6,
+    "percentage_difference": 85.4406,
+    "price_type": "OFFICIAL_LAST_CLOSE",
+    "data_timestamp": "2026-08-18 14:30:00",
+    "root_cause": "Live Intraday Tick vs Official EGX Settlement EOD Close"
+  },
+  {
+    "ticker": "EKHO.CA",
+    "company_name": "القابضة المصرية الكويتية",
+    "gen26_price": 33.5,
+    "external_reference_price": 20.7,
+    "external_source": "Thndr",
+    "absolute_difference": 12.8,
+    "percentage_difference": 61.8357,
+    "price_type": "OFFICIAL_LAST_CLOSE",
+    "data_timestamp": "2026-08-18 14:30:00",
+    "root_cause": "Live Intraday Tick vs Official EGX Settlement EOD Close"
+  },
+  {
+    "ticker": "FWRY.CA",
+    "company_name": "فوري لتكنولوجيا البنوك والمدفوعات الإلكترونية",
+    "gen26_price": 19.19,
+    "external_reference_price": 6.9,
+    "external_source": "Thndr",
+    "absolute_difference": 12.29,
+    "percentage_difference": 178.1159,
+    "price_type": "OFFICIAL_LAST_CLOSE",
+    "data_timestamp": "2026-08-18 14:30:00",
+    "root_cause": "Live Intraday Tick vs Official EGX Settlement EOD Close"
+  },
+  {
+    "ticker": "ABUK.CA",
+    "company_name": "أبو قير للأسمدة",
+    "gen26_price": 77.59,
+    "external_reference_price": 62.8,
+    "external_source": "Thndr",
+    "absolute_difference": 14.79,
+    "percentage_difference": 23.551,
+    "price_type": "OFFICIAL_LAST_CLOSE",
+    "data_timestamp": "2026-08-18 14:30:00",
+    "root_cause": "Live Intraday Tick vs Official EGX Settlement EOD Close"
+  },
+  {
+    "ticker": "EAST.CA",
+    "company_name": "الشرقية للدخان (إيسترن كومباني)",
+    "gen26_price": 36.4,
+    "external_reference_price": 28.9,
+    "external_source": "Thndr",
+    "absolute_difference": 7.5,
+    "percentage_difference": 25.9516,
+    "price_type": "OFFICIAL_LAST_CLOSE",
+    "data_timestamp": "2026-08-18 14:30:00",
+    "root_cause": "Live Intraday Tick vs Official EGX Settlement EOD Close"
+  },
+  {
+    "ticker": "ORAS.CA",
+    "company_name": "أوراسكوم للإنشاء",
+    "gen26_price": 71.05,
+    "external_reference_price": 243.0,
+    "external_source": "Thndr",
+    "absolute_difference": -171.95,
+    "percentage_difference": -70.7613,
+    "price_type": "OFFICIAL_LAST_CLOSE",
+    "data_timestamp": "2026-08-18 14:30:00",
+    "root_cause": "Live Intraday Tick vs Official EGX Settlement EOD Close"
+  }
+]

@@ -1,0 +1,20 @@
+{
+  "cohort_id": "COHORT_20260820",
+  "start_date": "2026-08-20",
+  "cohort_status": "ACTIVE_MATURATION_GATE",
+  "verified_sessions": 1,
+  "total_sessions_required": 30,
+  "remaining_sessions": 29,
+  "percentage_complete": 3.3,
+  "live_trading_blocked": true,
+  "sessions": [
+    {
+      "session_number": 1,
+      "date": "2026-08-20",
+      "status": "COMPLETED",
+      "realized_pnl_egp": 500.0,
+      "benchmark_win_rate_pct": 66.7,
+      "slippage_rt_pct": 0.9
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "snapshot_metadata": {
+    "decision_id": "DEC_TEST_REPLAY_001",
+    "session_id": "SESS-20260820-01",
+    "ticker": "COMI.CA",
+    "timestamp": "2026-08-23T16:03:41.876582",
+    "engine_version": "3.0.0",
+    "integrity_hash": "bc0a7a8bfff550fa83645c07fcc1c7acc5651b5817363a61214ef3f8193ddb43"
+  },
+  "decision": {
+    "action": "BUY LIMIT",
+    "entry": 100.0
+  },
+  "market_state": {
+    "regime": "BULL_MOMENTUM"
+  },
+  "features_as_of": {
+    "mom_20d": 0.15,
+    "roe": 22.5
+  },
+  "ranking": {
+    "rank": 1,
+    "alpha_score": 88.0
+  },
+  "risk_evaluation": {
+    "risk_score": 85.0,
+    "reasons": []
+  },
+  "portfolio_state": {
+    "weight": 0.1
+  }
+}

@@ -1,0 +1,176 @@
+{
+  "total_audited_modules": 19,
+  "modules": [
+    {
+      "file": "market_data_provider.py",
+      "class": "YFinanceDelayedProvider",
+      "capability": "Market Data Ingestion",
+      "status": "PRODUCTION_READY",
+      "test": "test_liquidity.py",
+      "integration": "CONNECTED",
+      "risk": "Low"
+    },
+    {
+      "file": "core/pit_store.py",
+      "class": "PointInTimeDataStore",
+      "capability": "Point-in-Time Publication Firewall",
+      "status": "PRODUCTION_READY",
+      "test": "test_leakage_forensics.py",
+      "integration": "CONNECTED",
+      "risk": "Low"
+    },
+    {
+      "file": "core/pit_store.py",
+      "class": "HistoricalTradableUniverse",
+      "capability": "Historical Tradable Universe",
+      "status": "PRODUCTION_READY",
+      "test": "test_core_engines.py",
+      "integration": "CONNECTED",
+      "risk": "Low"
+    },
+    {
+      "file": "core/data_quality.py",
+      "class": "DataQualityEngine",
+      "capability": "Data Quality Gate (Fail-Closed)",
+      "status": "PRODUCTION_READY",
+      "test": "test_core_engines.py",
+      "integration": "CONNECTED",
+      "risk": "Low"
+    },
+    {
+      "file": "core/feature_registry.py",
+      "class": "FeatureRegistry",
+      "capability": "Feature Registry & Data Lineage",
+      "status": "PRODUCTION_READY",
+      "test": "test_core_engines.py",
+      "integration": "CONNECTED",
+      "risk": "Low"
+    },
+    {
+      "file": "core/company_intelligence.py",
+      "class": "CompanyIntelligenceEngine",
+      "capability": "Company Quality & Accounting Risk",
+      "status": "PRODUCTION_READY",
+      "test": "test_core_engines.py",
+      "integration": "CONNECTED",
+      "risk": "Low"
+    },
+    {
+      "file": "core/valuation_engine.py",
+      "class": "ValuationEngine",
+      "capability": "Fair Value Envelopes & Margin of Safety",
+      "status": "PRODUCTION_READY",
+      "test": "test_core_engines.py",
+      "integration": "CONNECTED",
+      "risk": "Low"
+    },
+    {
+      "file": "core/market_intelligence.py",
+      "class": "MarketIntelligenceEngine",
+      "capability": "Zero-Lookahead Breadth & Market Regime",
+      "status": "PRODUCTION_READY",
+      "test": "test_core_engines.py",
+      "integration": "CONNECTED",
+      "risk": "Low"
+    },
+    {
+      "file": "core/liquidity_engine.py",
+      "class": "LiquidityEngine",
+      "capability": "ADV20 & 5% Capacity Gate",
+      "status": "PRODUCTION_READY",
+      "test": "test_core_engines.py",
+      "integration": "CONNECTED",
+      "risk": "Low"
+    },
+    {
+      "file": "core/event_intelligence.py",
+      "class": "EventIntelligenceEngine",
+      "capability": "Arabic Financial NLP & Event Parser",
+      "status": "EXPERIMENTAL",
+      "test": "test_core_engines.py",
+      "integration": "CONNECTED",
+      "risk": "Medium"
+    },
+    {
+      "file": "core/alpha_engine.py",
+      "class": "AlphaEngine",
+      "capability": "Composite Alpha & BH-FDR Controls",
+      "status": "PRODUCTION_READY",
+      "test": "test_core_engines.py",
+      "integration": "CONNECTED",
+      "risk": "Low"
+    },
+    {
+      "file": "core/decision_builder.py",
+      "class": "CanonicalDecisionBuilder",
+      "capability": "SSoT Decision Builder & Risk Invariants",
+      "status": "PRODUCTION_READY",
+      "test": "test_core_engines.py",
+      "integration": "CONNECTED",
+      "risk": "Low"
+    },
+    {
+      "file": "core/decision_builder.py",
+      "class": "DecisionReplayEngine",
+      "capability": "Deterministic Decision Replay",
+      "status": "PRODUCTION_READY",
+      "test": "test_core_engines.py",
+      "integration": "CONNECTED",
+      "risk": "Low"
+    },
+    {
+      "file": "session_manager.py",
+      "class": "SessionManager",
+      "capability": "Paper Session Tracking (3/30 Days)",
+      "status": "PRODUCTION_READY",
+      "test": "test_portfolio_journal.py",
+      "integration": "CONNECTED",
+      "risk": "Low"
+    },
+    {
+      "file": "portfolio_journal.py",
+      "class": "PortfolioJournal",
+      "capability": "FIFO Accounting & Real Transaction Store",
+      "status": "PRODUCTION_READY",
+      "test": "test_portfolio_journal.py",
+      "integration": "CONNECTED",
+      "risk": "Low"
+    },
+    {
+      "file": "egx_screener.py",
+      "class": "main",
+      "capability": "Pooled Screener & Feature Extraction",
+      "status": "PRODUCTION_READY",
+      "test": "test_targets.py",
+      "integration": "CONNECTED",
+      "risk": "Low"
+    },
+    {
+      "file": "walk_forward_backtest_engine.py",
+      "class": "run_walk_forward_simulation",
+      "capability": "Walk-Forward Out-of-Sample Engine",
+      "status": "PRODUCTION_READY",
+      "test": "test_backtest.py",
+      "integration": "CONNECTED",
+      "risk": "Low"
+    },
+    {
+      "file": "headless_runner.py",
+      "class": "main",
+      "capability": "Automated Daily Pipeline Runner",
+      "status": "PRODUCTION_READY",
+      "test": "CLI execution",
+      "integration": "CONNECTED",
+      "risk": "Low"
+    },
+    {
+      "file": "app.py",
+      "class": "Streamlit App",
+      "capability": "Quant Trading Terminal UI/UX",
+      "status": "PRODUCTION_READY",
+      "test": "Smoke Tested",
+      "integration": "CONNECTED",
+      "risk": "Low"
+    }
+  ]
+}

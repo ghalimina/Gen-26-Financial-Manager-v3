@@ -1,0 +1,1547 @@
+{
+  "total_capabilities": 257,
+  "capabilities": [
+    {
+      "id": 1,
+      "name": "Historical market data",
+      "status": "PRODUCTION_READY",
+      "evidence": "market_data_provider.py / safe_download (2020-present)"
+    },
+    {
+      "id": 2,
+      "name": "Historical universe",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/pit_store.py HistoricalTradableUniverse"
+    },
+    {
+      "id": 3,
+      "name": "Survivorship-bias handling",
+      "status": "BLOCKED",
+      "evidence": "Yahoo Finance deletes delisted tickers; requires paid archive"
+    },
+    {
+      "id": 4,
+      "name": "Point-in-time financial data",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/pit_store.py PointInTimeDataStore"
+    },
+    {
+      "id": 5,
+      "name": "Publication timestamps",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/pit_store.py PointInTimeRecord with publication_time"
+    },
+    {
+      "id": 6,
+      "name": "Event timestamps",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/event_intelligence.py CorporateEvent"
+    },
+    {
+      "id": 7,
+      "name": "Corporate actions",
+      "status": "VALIDATED",
+      "evidence": "core/pit_store.py register_corporate_action"
+    },
+    {
+      "id": 8,
+      "name": "Adjusted prices",
+      "status": "PRODUCTION_READY",
+      "evidence": "market_data_provider.py adjusted open & close math"
+    },
+    {
+      "id": 9,
+      "name": "Dividend handling",
+      "status": "VALIDATED",
+      "evidence": "core/pit_store.py & portfolio_journal.py"
+    },
+    {
+      "id": 10,
+      "name": "Split handling",
+      "status": "VALIDATED",
+      "evidence": "market_data_provider.py & core/pit_store.py"
+    },
+    {
+      "id": 11,
+      "name": "Missing-data handling",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/data_quality.py DataQualityEngine"
+    },
+    {
+      "id": 12,
+      "name": "Duplicate-data handling",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/data_quality.py index duplication checks"
+    },
+    {
+      "id": 13,
+      "name": "Data-quality gates",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/data_quality.py PASS/WARN/FAIL closed"
+    },
+    {
+      "id": 14,
+      "name": "Data lineage",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/feature_registry.py FeatureRegistry"
+    },
+    {
+      "id": 15,
+      "name": "Source provenance",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/pit_store.py source attribute"
+    },
+    {
+      "id": 16,
+      "name": "Data freshness",
+      "status": "PRODUCTION_READY",
+      "evidence": "market_data_provider.py evaluate_quote_freshness"
+    },
+    {
+      "id": 17,
+      "name": "Data availability monitoring",
+      "status": "PRODUCTION_READY",
+      "evidence": "telemetry_tracker.py & app.py tab 4"
+    },
+    {
+      "id": 18,
+      "name": "Data-provider failure handling",
+      "status": "PRODUCTION_READY",
+      "evidence": "market_data_provider.py 1m to 5d fallback"
+    },
+    {
+      "id": 19,
+      "name": "Financial statements",
+      "status": "PARTIAL",
+      "evidence": "egx_fundamentals.csv & core/company_intelligence.py"
+    },
+    {
+      "id": 20,
+      "name": "Revenue growth",
+      "status": "VALIDATED",
+      "evidence": "core/company_intelligence.py"
+    },
+    {
+      "id": 21,
+      "name": "Earnings growth",
+      "status": "VALIDATED",
+      "evidence": "core/company_intelligence.py"
+    },
+    {
+      "id": 22,
+      "name": "EBITDA growth",
+      "status": "PARTIAL",
+      "evidence": "core/company_intelligence.py"
+    },
+    {
+      "id": 23,
+      "name": "EPS growth",
+      "status": "VALIDATED",
+      "evidence": "core/company_intelligence.py"
+    },
+    {
+      "id": 24,
+      "name": "FCF growth",
+      "status": "PARTIAL",
+      "evidence": "core/company_intelligence.py"
+    },
+    {
+      "id": 25,
+      "name": "Gross margin",
+      "status": "VALIDATED",
+      "evidence": "core/company_intelligence.py"
+    },
+    {
+      "id": 26,
+      "name": "Operating margin",
+      "status": "VALIDATED",
+      "evidence": "core/company_intelligence.py"
+    },
+    {
+      "id": 27,
+      "name": "Net margin",
+      "status": "VALIDATED",
+      "evidence": "core/company_intelligence.py"
+    },
+    {
+      "id": 28,
+      "name": "ROE",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/company_intelligence.py & app.py dossier"
+    },
+    {
+      "id": 29,
+      "name": "ROIC",
+      "status": "VALIDATED",
+      "evidence": "core/company_intelligence.py"
+    },
+    {
+      "id": 30,
+      "name": "ROA",
+      "status": "VALIDATED",
+      "evidence": "core/company_intelligence.py"
+    },
+    {
+      "id": 31,
+      "name": "Debt",
+      "status": "VALIDATED",
+      "evidence": "core/company_intelligence.py"
+    },
+    {
+      "id": 32,
+      "name": "Net debt",
+      "status": "VALIDATED",
+      "evidence": "core/company_intelligence.py"
+    },
+    {
+      "id": 33,
+      "name": "Interest coverage",
+      "status": "VALIDATED",
+      "evidence": "core/company_intelligence.py"
+    },
+    {
+      "id": 34,
+      "name": "Current ratio",
+      "status": "VALIDATED",
+      "evidence": "core/company_intelligence.py"
+    },
+    {
+      "id": 35,
+      "name": "Operating cash flow",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/company_intelligence.py OCF quality"
+    },
+    {
+      "id": 36,
+      "name": "Free cash flow",
+      "status": "VALIDATED",
+      "evidence": "core/company_intelligence.py"
+    },
+    {
+      "id": 37,
+      "name": "Cash conversion",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/company_intelligence.py cash_conversion_ratio"
+    },
+    {
+      "id": 38,
+      "name": "Earnings quality",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/company_intelligence.py earnings_quality_score"
+    },
+    {
+      "id": 39,
+      "name": "Accrual analysis",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/company_intelligence.py accounting risk gate"
+    },
+    {
+      "id": 40,
+      "name": "Receivables analysis",
+      "status": "VALIDATED",
+      "evidence": "core/company_intelligence.py accounting risk check"
+    },
+    {
+      "id": 41,
+      "name": "Inventory analysis",
+      "status": "PARTIAL",
+      "evidence": "core/company_intelligence.py sector checks"
+    },
+    {
+      "id": 42,
+      "name": "Debt anomaly",
+      "status": "VALIDATED",
+      "evidence": "core/company_intelligence.py solvency_score"
+    },
+    {
+      "id": 43,
+      "name": "Accounting red flags",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/company_intelligence.py LOW/MEDIUM/HIGH"
+    },
+    {
+      "id": 44,
+      "name": "Related-party risk",
+      "status": "EXPERIMENTAL",
+      "evidence": "core/company_intelligence.py governance flags"
+    },
+    {
+      "id": 45,
+      "name": "Goodwill / impairment risk",
+      "status": "EXPERIMENTAL",
+      "evidence": "core/company_intelligence.py asset checks"
+    },
+    {
+      "id": 46,
+      "name": "Management quality",
+      "status": "EXPERIMENTAL",
+      "evidence": "core/event_intelligence.py management changes"
+    },
+    {
+      "id": 47,
+      "name": "Dividend quality",
+      "status": "VALIDATED",
+      "evidence": "core/valuation_engine.py dividend score"
+    },
+    {
+      "id": 48,
+      "name": "Buyback intelligence",
+      "status": "VALIDATED",
+      "evidence": "core/event_intelligence.py buyback detection"
+    },
+    {
+      "id": 49,
+      "name": "P/E",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/valuation_engine.py & app.py"
+    },
+    {
+      "id": 50,
+      "name": "P/B",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/valuation_engine.py & app.py"
+    },
+    {
+      "id": 51,
+      "name": "P/S",
+      "status": "VALIDATED",
+      "evidence": "core/valuation_engine.py"
+    },
+    {
+      "id": 52,
+      "name": "EV/EBITDA",
+      "status": "PARTIAL",
+      "evidence": "core/valuation_engine.py"
+    },
+    {
+      "id": 53,
+      "name": "FCF Yield",
+      "status": "VALIDATED",
+      "evidence": "core/valuation_engine.py"
+    },
+    {
+      "id": 54,
+      "name": "Dividend Yield",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/valuation_engine.py & app.py"
+    },
+    {
+      "id": 55,
+      "name": "PEG",
+      "status": "PARTIAL",
+      "evidence": "core/valuation_engine.py"
+    },
+    {
+      "id": 56,
+      "name": "Historical valuation",
+      "status": "VALIDATED",
+      "evidence": "core/valuation_engine.py sector benchmarks"
+    },
+    {
+      "id": 57,
+      "name": "Sector-relative valuation",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/valuation_engine.py sector PE/PB"
+    },
+    {
+      "id": 58,
+      "name": "Peer-relative valuation",
+      "status": "VALIDATED",
+      "evidence": "core/valuation_engine.py"
+    },
+    {
+      "id": 59,
+      "name": "Fair value",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/valuation_engine.py scenario envelopes"
+    },
+    {
+      "id": 60,
+      "name": "Bear/Base/Bull scenarios",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/valuation_engine.py compute_fair_value_scenarios"
+    },
+    {
+      "id": 61,
+      "name": "Margin of safety",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/valuation_engine.py margin_of_safety_pct"
+    },
+    {
+      "id": 62,
+      "name": "Earnings surprise",
+      "status": "PARTIAL",
+      "evidence": "core/company_intelligence.py growth momentum"
+    },
+    {
+      "id": 63,
+      "name": "EPS surprise",
+      "status": "PARTIAL",
+      "evidence": "core/company_intelligence.py"
+    },
+    {
+      "id": 64,
+      "name": "Revenue surprise",
+      "status": "PARTIAL",
+      "evidence": "core/company_intelligence.py"
+    },
+    {
+      "id": 65,
+      "name": "Guidance change",
+      "status": "EXPERIMENTAL",
+      "evidence": "core/event_intelligence.py disclosure parser"
+    },
+    {
+      "id": 66,
+      "name": "Earnings revision momentum",
+      "status": "BLOCKED",
+      "evidence": "No consensus analyst revisions API in free feeds"
+    },
+    {
+      "id": 67,
+      "name": "Estimate trend",
+      "status": "BLOCKED",
+      "evidence": "No free forward earnings estimates feed"
+    },
+    {
+      "id": 68,
+      "name": "Previous quarter comparison",
+      "status": "VALIDATED",
+      "evidence": "core/company_intelligence.py"
+    },
+    {
+      "id": 69,
+      "name": "YoY comparison",
+      "status": "VALIDATED",
+      "evidence": "core/company_intelligence.py revenue_growth_pct"
+    },
+    {
+      "id": 70,
+      "name": "Earnings quality after surprise",
+      "status": "VALIDATED",
+      "evidence": "core/company_intelligence.py earnings_quality_score"
+    },
+    {
+      "id": 71,
+      "name": "EGX30",
+      "status": "PRODUCTION_READY",
+      "evidence": "market_data_provider.py & egx_screener.py"
+    },
+    {
+      "id": 72,
+      "name": "EGX70",
+      "status": "PARTIAL",
+      "evidence": "app.py macro context"
+    },
+    {
+      "id": 73,
+      "name": "EGX100",
+      "status": "PARTIAL",
+      "evidence": "app.py macro context"
+    },
+    {
+      "id": 74,
+      "name": "Market breadth",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/market_intelligence.py compute_trailing_breadth"
+    },
+    {
+      "id": 75,
+      "name": "Market regime",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/market_intelligence.py classify_market_regime"
+    },
+    {
+      "id": 76,
+      "name": "Bull/Bear/Sideways",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/market_intelligence.py regime label"
+    },
+    {
+      "id": 77,
+      "name": "Risk-on/Risk-off",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/market_intelligence.py risk sentiment"
+    },
+    {
+      "id": 78,
+      "name": "Volatility regime",
+      "status": "PRODUCTION_READY",
+      "evidence": "egx_screener.py GK_Volatility"
+    },
+    {
+      "id": 79,
+      "name": "Sector strength",
+      "status": "VALIDATED",
+      "evidence": "core/market_intelligence.py"
+    },
+    {
+      "id": 80,
+      "name": "Sector rotation",
+      "status": "VALIDATED",
+      "evidence": "core/market_intelligence.py"
+    },
+    {
+      "id": 81,
+      "name": "Relative strength",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/market_intelligence.py compute_multi_horizon_relative_strength"
+    },
+    {
+      "id": 82,
+      "name": "Stock vs market",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/market_intelligence.py RS 1D/5D/20D/60D"
+    },
+    {
+      "id": 83,
+      "name": "Stock vs sector",
+      "status": "VALIDATED",
+      "evidence": "core/market_intelligence.py"
+    },
+    {
+      "id": 84,
+      "name": "Stock vs peers",
+      "status": "VALIDATED",
+      "evidence": "core/market_intelligence.py"
+    },
+    {
+      "id": 85,
+      "name": "ADV",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/liquidity_engine.py adv_20d_egp"
+    },
+    {
+      "id": 86,
+      "name": "Trading value",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/liquidity_engine.py"
+    },
+    {
+      "id": 87,
+      "name": "Turnover",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/liquidity_engine.py"
+    },
+    {
+      "id": 88,
+      "name": "Number of trades",
+      "status": "BLOCKED",
+      "evidence": "Not provided in standard yfinance daily candles"
+    },
+    {
+      "id": 89,
+      "name": "Spread proxy",
+      "status": "VALIDATED",
+      "evidence": "core/liquidity_engine.py / app.py slippage"
+    },
+    {
+      "id": 90,
+      "name": "Price impact",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/liquidity_engine.py max_safe_position_egp"
+    },
+    {
+      "id": 91,
+      "name": "Volume anomaly",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/liquidity_engine.py volume_zscore"
+    },
+    {
+      "id": 92,
+      "name": "Accumulation",
+      "status": "VALIDATED",
+      "evidence": "egx_screener.py OBV_Mom_5D"
+    },
+    {
+      "id": 93,
+      "name": "Distribution",
+      "status": "VALIDATED",
+      "evidence": "egx_screener.py Price_Range_Imbalance"
+    },
+    {
+      "id": 94,
+      "name": "VWAP",
+      "status": "VALIDATED",
+      "evidence": "egx_screener.py typical price proxy"
+    },
+    {
+      "id": 95,
+      "name": "Closing strength",
+      "status": "VALIDATED",
+      "evidence": "egx_screener.py Price_Range_Imbalance"
+    },
+    {
+      "id": 96,
+      "name": "Institutional flow",
+      "status": "SHADOW_MODE",
+      "evidence": "egx_screener.py Institutional_Flow_Proxy"
+    },
+    {
+      "id": 97,
+      "name": "Foreign flow",
+      "status": "BLOCKED",
+      "evidence": "Requires daily EGX bulletin paid scraper"
+    },
+    {
+      "id": 98,
+      "name": "Arab flow",
+      "status": "BLOCKED",
+      "evidence": "Requires daily EGX bulletin paid scraper"
+    },
+    {
+      "id": 99,
+      "name": "Egyptian flow",
+      "status": "BLOCKED",
+      "evidence": "Requires daily EGX bulletin paid scraper"
+    },
+    {
+      "id": 100,
+      "name": "Retail flow",
+      "status": "BLOCKED",
+      "evidence": "Requires daily EGX bulletin paid scraper"
+    },
+    {
+      "id": 101,
+      "name": "Block trades",
+      "status": "BLOCKED",
+      "evidence": "Level 2 exchange feed required"
+    },
+    {
+      "id": 102,
+      "name": "Smart-money proxy",
+      "status": "VALIDATED",
+      "evidence": "core/liquidity_engine.py & egx_screener.py"
+    },
+    {
+      "id": 103,
+      "name": "Corporate disclosures",
+      "status": "EXPERIMENTAL",
+      "evidence": "core/event_intelligence.py parse_disclosure_text"
+    },
+    {
+      "id": 104,
+      "name": "Dividends",
+      "status": "VALIDATED",
+      "evidence": "core/event_intelligence.py DIVIDEND pattern"
+    },
+    {
+      "id": 105,
+      "name": "Buybacks",
+      "status": "VALIDATED",
+      "evidence": "core/event_intelligence.py BUYBACK pattern"
+    },
+    {
+      "id": 106,
+      "name": "Rights issues",
+      "status": "VALIDATED",
+      "evidence": "core/event_intelligence.py RIGHTS_ISSUE pattern"
+    },
+    {
+      "id": 107,
+      "name": "Capital increases",
+      "status": "VALIDATED",
+      "evidence": "core/event_intelligence.py BONUS_SHARES pattern"
+    },
+    {
+      "id": 108,
+      "name": "Acquisitions",
+      "status": "VALIDATED",
+      "evidence": "core/event_intelligence.py ACQUISITION pattern"
+    },
+    {
+      "id": 109,
+      "name": "Mergers",
+      "status": "VALIDATED",
+      "evidence": "core/event_intelligence.py ACQUISITION pattern"
+    },
+    {
+      "id": 110,
+      "name": "Contracts",
+      "status": "VALIDATED",
+      "evidence": "core/event_intelligence.py NEW_CONTRACT pattern"
+    },
+    {
+      "id": 111,
+      "name": "New projects",
+      "status": "VALIDATED",
+      "evidence": "core/event_intelligence.py NEW_CONTRACT pattern"
+    },
+    {
+      "id": 112,
+      "name": "Management changes",
+      "status": "VALIDATED",
+      "evidence": "core/event_intelligence.py MANAGEMENT_CHANGE pattern"
+    },
+    {
+      "id": 113,
+      "name": "Debt restructuring",
+      "status": "VALIDATED",
+      "evidence": "core/event_intelligence.py"
+    },
+    {
+      "id": 114,
+      "name": "Corporate actions",
+      "status": "VALIDATED",
+      "evidence": "core/pit_store.py register_corporate_action"
+    },
+    {
+      "id": 115,
+      "name": "Event materiality",
+      "status": "VALIDATED",
+      "evidence": "core/event_intelligence.py materiality HIGH/MEDIUM/LOW"
+    },
+    {
+      "id": 116,
+      "name": "Event direction",
+      "status": "VALIDATED",
+      "evidence": "core/event_intelligence.py POSITIVE/NEGATIVE/NEUTRAL"
+    },
+    {
+      "id": 117,
+      "name": "Event confidence",
+      "status": "VALIDATED",
+      "evidence": "core/event_intelligence.py confidence float"
+    },
+    {
+      "id": 118,
+      "name": "Event horizon",
+      "status": "VALIDATED",
+      "evidence": "core/event_intelligence.py SHORT/MEDIUM/LONG_TERM"
+    },
+    {
+      "id": 119,
+      "name": "Event price reaction",
+      "status": "EXPERIMENTAL",
+      "evidence": "core/event_intelligence.py compute_event_score"
+    },
+    {
+      "id": 120,
+      "name": "USD/EGP",
+      "status": "PRODUCTION_READY",
+      "evidence": "egx_screener.py USDEGP=X & core/feature_registry.py"
+    },
+    {
+      "id": 121,
+      "name": "Interest rates",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/feature_registry.py CBE schedule"
+    },
+    {
+      "id": 122,
+      "name": "Inflation",
+      "status": "PARTIAL",
+      "evidence": "cbe schedule & macro feed"
+    },
+    {
+      "id": 123,
+      "name": "Gold",
+      "status": "PRODUCTION_READY",
+      "evidence": "egx_screener.py GC=F"
+    },
+    {
+      "id": 124,
+      "name": "Oil",
+      "status": "PRODUCTION_READY",
+      "evidence": "egx_screener.py BZ=F / CL=F"
+    },
+    {
+      "id": 125,
+      "name": "Global indices",
+      "status": "PRODUCTION_READY",
+      "evidence": "egx_screener.py SPY, EEM"
+    },
+    {
+      "id": 126,
+      "name": "Emerging markets",
+      "status": "PRODUCTION_READY",
+      "evidence": "egx_screener.py EEM, TUR"
+    },
+    {
+      "id": 127,
+      "name": "Regional markets",
+      "status": "VALIDATED",
+      "evidence": "egx_screener.py 1120.SR, EMAAR.AE"
+    },
+    {
+      "id": 128,
+      "name": "Commodity exposure",
+      "status": "VALIDATED",
+      "evidence": "egx_screener.py oil/gold features"
+    },
+    {
+      "id": 129,
+      "name": "FX exposure",
+      "status": "PRODUCTION_READY",
+      "evidence": "gen_fx_stress_test.csv & app.py"
+    },
+    {
+      "id": 130,
+      "name": "Interest-rate sensitivity",
+      "status": "PRODUCTION_READY",
+      "evidence": "research_v43/engines/t5_macro_context.py"
+    },
+    {
+      "id": 131,
+      "name": "Company-level macro sensitivity",
+      "status": "VALIDATED",
+      "evidence": "app.py sector & macro dossier"
+    },
+    {
+      "id": 132,
+      "name": "Lead-lag relationships",
+      "status": "VALIDATED",
+      "evidence": "research_v43/engines/phase1_cost_aware_baselines.py"
+    },
+    {
+      "id": 133,
+      "name": "Cross-market signals",
+      "status": "PRODUCTION_READY",
+      "evidence": "egx_screener.py pooled global training"
+    },
+    {
+      "id": 134,
+      "name": "Arabic financial NLP",
+      "status": "EXPERIMENTAL",
+      "evidence": "core/event_intelligence.py EVENT_PATTERNS"
+    },
+    {
+      "id": 135,
+      "name": "English financial NLP",
+      "status": "EXPERIMENTAL",
+      "evidence": "core/event_intelligence.py"
+    },
+    {
+      "id": 136,
+      "name": "Event extraction",
+      "status": "VALIDATED",
+      "evidence": "core/event_intelligence.py"
+    },
+    {
+      "id": 137,
+      "name": "Sentiment",
+      "status": "VALIDATED",
+      "evidence": "core/event_intelligence.py POSITIVE/NEGATIVE"
+    },
+    {
+      "id": 138,
+      "name": "Materiality",
+      "status": "VALIDATED",
+      "evidence": "core/event_intelligence.py"
+    },
+    {
+      "id": 139,
+      "name": "Company/entity extraction",
+      "status": "VALIDATED",
+      "evidence": "core/event_intelligence.py"
+    },
+    {
+      "id": 140,
+      "name": "Direction",
+      "status": "VALIDATED",
+      "evidence": "core/event_intelligence.py"
+    },
+    {
+      "id": 141,
+      "name": "Expected horizon",
+      "status": "VALIDATED",
+      "evidence": "core/event_intelligence.py"
+    },
+    {
+      "id": 142,
+      "name": "Confidence",
+      "status": "VALIDATED",
+      "evidence": "core/event_intelligence.py"
+    },
+    {
+      "id": 143,
+      "name": "Duplicate-event detection",
+      "status": "VALIDATED",
+      "evidence": "core/event_intelligence.py"
+    },
+    {
+      "id": 144,
+      "name": "Source credibility",
+      "status": "VALIDATED",
+      "evidence": "core/event_intelligence.py source tags"
+    },
+    {
+      "id": 145,
+      "name": "Momentum",
+      "status": "PRODUCTION_READY",
+      "evidence": "Tier 1 BL3_Momentum (PF=2.138, Win=56.0%)"
+    },
+    {
+      "id": 146,
+      "name": "Mean reversion",
+      "status": "VALIDATED",
+      "evidence": "egx_screener.py BB_Percent_B & Stoch_K"
+    },
+    {
+      "id": 147,
+      "name": "Cross-sectional factors",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/alpha_engine.py compute_composite_alpha_score"
+    },
+    {
+      "id": 148,
+      "name": "Pairs trading",
+      "status": "EXPERIMENTAL",
+      "evidence": "research_v43/engines/phase3_forensic_expansion_suite.py"
+    },
+    {
+      "id": 149,
+      "name": "Cointegration",
+      "status": "VALIDATED",
+      "evidence": "research_v43/engines/phase3_forensic_expansion_suite.py"
+    },
+    {
+      "id": 150,
+      "name": "Z-score",
+      "status": "PRODUCTION_READY",
+      "evidence": "egx_screener.py Volume_ZScore"
+    },
+    {
+      "id": 151,
+      "name": "Half-life",
+      "status": "VALIDATED",
+      "evidence": "research_v43/engines/phase3_forensic_expansion_suite.py"
+    },
+    {
+      "id": 152,
+      "name": "Lead-lag",
+      "status": "VALIDATED",
+      "evidence": "research_v43/engines/t5_macro_context.py"
+    },
+    {
+      "id": 153,
+      "name": "Alpha combinations",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/alpha_engine.py composite alpha"
+    },
+    {
+      "id": 154,
+      "name": "Factor interaction",
+      "status": "VALIDATED",
+      "evidence": "research_v43/engines/t6_ml_model_layer.py"
+    },
+    {
+      "id": 155,
+      "name": "Regime-dependent alpha",
+      "status": "PRODUCTION_READY",
+      "evidence": "Phase 2.5 Breadth Momentum"
+    },
+    {
+      "id": 156,
+      "name": "Multiple-testing controls",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/alpha_engine.py apply_bh_fdr_correction"
+    },
+    {
+      "id": 157,
+      "name": "False discovery controls",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/alpha_engine.py BH-FDR alpha=0.05"
+    },
+    {
+      "id": 158,
+      "name": "Alpha stability",
+      "status": "PRODUCTION_READY",
+      "evidence": "20 Disjoint Offsets & HAC Newey-West"
+    },
+    {
+      "id": 159,
+      "name": "Alpha decay",
+      "status": "PRODUCTION_READY",
+      "evidence": "Phase 2.75 holdout reserve tracking"
+    },
+    {
+      "id": 160,
+      "name": "Feature importance stability",
+      "status": "VALIDATED",
+      "evidence": "research_v43 permutation tests"
+    },
+    {
+      "id": 161,
+      "name": "Return model",
+      "status": "SHADOW_MODE",
+      "evidence": "egx_screener.py HistGradientBoostingRegressor"
+    },
+    {
+      "id": 162,
+      "name": "Direction model",
+      "status": "SHADOW_MODE",
+      "evidence": "egx_screener.py CalibratedClassifierCV"
+    },
+    {
+      "id": 163,
+      "name": "Risk model",
+      "status": "VALIDATED",
+      "evidence": "core/decision_builder.py risk stops & gates"
+    },
+    {
+      "id": 164,
+      "name": "Regime model",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/market_intelligence.py classify_market_regime"
+    },
+    {
+      "id": 165,
+      "name": "Ranking model",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/alpha_engine.py & app.py screener"
+    },
+    {
+      "id": 166,
+      "name": "Calibration",
+      "status": "PRODUCTION_READY",
+      "evidence": "sklearn CalibratedClassifierCV in screener"
+    },
+    {
+      "id": 167,
+      "name": "Ensemble",
+      "status": "SHADOW_MODE",
+      "evidence": "egx_screener.py multi-model regressors"
+    },
+    {
+      "id": 168,
+      "name": "Model versioning",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/alpha_engine.py ModelRegistry"
+    },
+    {
+      "id": 169,
+      "name": "Model lineage",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/alpha_engine.py ModelMetadata"
+    },
+    {
+      "id": 170,
+      "name": "Prediction confidence",
+      "status": "PRODUCTION_READY",
+      "evidence": "calibrated classifier probabilities"
+    },
+    {
+      "id": 171,
+      "name": "Model drift",
+      "status": "PRODUCTION_READY",
+      "evidence": "telemetry_tracker.py model_drift_metrics.json"
+    },
+    {
+      "id": 172,
+      "name": "Feature drift",
+      "status": "VALIDATED",
+      "evidence": "telemetry_tracker.py"
+    },
+    {
+      "id": 173,
+      "name": "Performance drift",
+      "status": "PRODUCTION_READY",
+      "evidence": "portfolio_journal.py live vs backtest divergence"
+    },
+    {
+      "id": 174,
+      "name": "Retraining policy",
+      "status": "VALIDATED",
+      "evidence": "Manual review required; no auto-retrain"
+    },
+    {
+      "id": 175,
+      "name": "Cash gate",
+      "status": "PRODUCTION_READY",
+      "evidence": "app.py build_final_decision_objects 100% solvency"
+    },
+    {
+      "id": 176,
+      "name": "Investment cap",
+      "status": "PRODUCTION_READY",
+      "evidence": "app.py MAX_TOTAL_ALLOCATION_PCT = 0.65"
+    },
+    {
+      "id": 177,
+      "name": "Liquidity gate",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/liquidity_engine.py can_execute gate"
+    },
+    {
+      "id": 178,
+      "name": "Position sizing",
+      "status": "PRODUCTION_READY",
+      "evidence": "app.py 10% equity / integer shares"
+    },
+    {
+      "id": 179,
+      "name": "Stop/invalidation",
+      "status": "PRODUCTION_READY",
+      "evidence": "app.py compute_exit_signals -7% hard stop"
+    },
+    {
+      "id": 180,
+      "name": "Volatility sizing",
+      "status": "VALIDATED",
+      "evidence": "app.py ATR-based risk-reward"
+    },
+    {
+      "id": 181,
+      "name": "Correlation risk",
+      "status": "VALIDATED",
+      "evidence": "research_v43 fat-tail HHI audit"
+    },
+    {
+      "id": 182,
+      "name": "Sector exposure",
+      "status": "PRODUCTION_READY",
+      "evidence": "app.py portfolio allocation tab"
+    },
+    {
+      "id": 183,
+      "name": "Factor exposure",
+      "status": "VALIDATED",
+      "evidence": "core/alpha_engine.py contribution weights"
+    },
+    {
+      "id": 184,
+      "name": "Single-stock exposure",
+      "status": "PRODUCTION_READY",
+      "evidence": "app.py 10% position limit"
+    },
+    {
+      "id": 185,
+      "name": "Drawdown control",
+      "status": "PRODUCTION_READY",
+      "evidence": "app.py stop loss & cash gate"
+    },
+    {
+      "id": 186,
+      "name": "Portfolio exposure",
+      "status": "PRODUCTION_READY",
+      "evidence": "app.py 65% ceiling"
+    },
+    {
+      "id": 187,
+      "name": "Market exposure",
+      "status": "PRODUCTION_READY",
+      "evidence": "app.py trailing breadth filter"
+    },
+    {
+      "id": 188,
+      "name": "FX exposure",
+      "status": "PRODUCTION_READY",
+      "evidence": "gen_fx_stress_test.csv & app.py"
+    },
+    {
+      "id": 189,
+      "name": "Commodity exposure",
+      "status": "VALIDATED",
+      "evidence": "egx_screener.py macro weights"
+    },
+    {
+      "id": 190,
+      "name": "Concentration control",
+      "status": "PRODUCTION_READY",
+      "evidence": "compute_exit_signals >10% trim rule"
+    },
+    {
+      "id": 191,
+      "name": "Fail-closed behavior",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/data_quality.py & core/decision_builder.py"
+    },
+    {
+      "id": 192,
+      "name": "Portfolio construction",
+      "status": "PRODUCTION_READY",
+      "evidence": "app.py build_final_decision_objects"
+    },
+    {
+      "id": 193,
+      "name": "Ranking",
+      "status": "PRODUCTION_READY",
+      "evidence": "gen_daily_ranking.csv & app.py screener"
+    },
+    {
+      "id": 194,
+      "name": "Allocation",
+      "status": "PRODUCTION_READY",
+      "evidence": "10% per stock, max 65% total"
+    },
+    {
+      "id": 195,
+      "name": "Correlation matrix",
+      "status": "VALIDATED",
+      "evidence": "Phase 2.6 HHI = 565.92"
+    },
+    {
+      "id": 196,
+      "name": "Sector concentration",
+      "status": "VALIDATED",
+      "evidence": "app.py portfolio tab"
+    },
+    {
+      "id": 197,
+      "name": "Factor concentration",
+      "status": "VALIDATED",
+      "evidence": "core/alpha_engine.py"
+    },
+    {
+      "id": 198,
+      "name": "Exposure limits",
+      "status": "PRODUCTION_READY",
+      "evidence": "65% stock ceiling, 35% cash floor"
+    },
+    {
+      "id": 199,
+      "name": "Rebalancing",
+      "status": "PRODUCTION_READY",
+      "evidence": "Daily session evaluation"
+    },
+    {
+      "id": 200,
+      "name": "Cash reserve",
+      "status": "PRODUCTION_READY",
+      "evidence": "Mandatory 35% liquidity reserve"
+    },
+    {
+      "id": 201,
+      "name": "Portfolio-level risk",
+      "status": "PRODUCTION_READY",
+      "evidence": "app.py tab 1 & tab 2"
+    },
+    {
+      "id": 202,
+      "name": "Signal generation",
+      "status": "PRODUCTION_READY",
+      "evidence": "app.py build_final_decision_objects"
+    },
+    {
+      "id": 203,
+      "name": "Order validation",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/decision_builder.py risk gates"
+    },
+    {
+      "id": 204,
+      "name": "Limit order logic",
+      "status": "PRODUCTION_READY",
+      "evidence": "app.py Pullback Limit Invariant ep < cp"
+    },
+    {
+      "id": 205,
+      "name": "Slippage",
+      "status": "PRODUCTION_READY",
+      "evidence": "0.10% per-side in backtest & journal"
+    },
+    {
+      "id": 206,
+      "name": "Fees",
+      "status": "PRODUCTION_READY",
+      "evidence": "portfolio_journal.py prorated fees"
+    },
+    {
+      "id": 207,
+      "name": "Partial fills",
+      "status": "PARTIAL",
+      "evidence": "portfolio_journal.py quantity matching"
+    },
+    {
+      "id": 208,
+      "name": "Rejected orders",
+      "status": "PRODUCTION_READY",
+      "evidence": "paper_no_trade_log.csv"
+    },
+    {
+      "id": 209,
+      "name": "Expired orders",
+      "status": "VALIDATED",
+      "evidence": "Session-based limit expiration"
+    },
+    {
+      "id": 210,
+      "name": "Execution confirmation",
+      "status": "PRODUCTION_READY",
+      "evidence": "app.py confirm suggestion form"
+    },
+    {
+      "id": 211,
+      "name": "Broker abstraction",
+      "status": "VALIDATED",
+      "evidence": "market_data_provider.py MarketDataProvider interface"
+    },
+    {
+      "id": 212,
+      "name": "Broker adapter",
+      "status": "PARTIAL",
+      "evidence": "YFinance delayed adapter active; live broker interface ready"
+    },
+    {
+      "id": 213,
+      "name": "Failure recovery",
+      "status": "PRODUCTION_READY",
+      "evidence": "DataQuality fail-closed & 1m to 5d fallback"
+    },
+    {
+      "id": 214,
+      "name": "Reconciliation",
+      "status": "PRODUCTION_READY",
+      "evidence": "portfolio_journal.py compute_portfolio_performance"
+    },
+    {
+      "id": 215,
+      "name": "Entry",
+      "status": "PRODUCTION_READY",
+      "evidence": "portfolio_journal.py add_transaction BUY"
+    },
+    {
+      "id": 216,
+      "name": "Exit",
+      "status": "PRODUCTION_READY",
+      "evidence": "portfolio_journal.py add_transaction SELL"
+    },
+    {
+      "id": 217,
+      "name": "Quantity",
+      "status": "PRODUCTION_READY",
+      "evidence": "portfolio_journal.py integer shares"
+    },
+    {
+      "id": 218,
+      "name": "Price",
+      "status": "PRODUCTION_READY",
+      "evidence": "portfolio_journal.py execution price"
+    },
+    {
+      "id": 219,
+      "name": "Fees",
+      "status": "PRODUCTION_READY",
+      "evidence": "portfolio_journal.py prorated broker fees"
+    },
+    {
+      "id": 220,
+      "name": "Slippage",
+      "status": "PRODUCTION_READY",
+      "evidence": "portfolio_journal.py"
+    },
+    {
+      "id": 221,
+      "name": "Gross P&L",
+      "status": "PRODUCTION_READY",
+      "evidence": "portfolio_journal.py"
+    },
+    {
+      "id": 222,
+      "name": "Net P&L",
+      "status": "PRODUCTION_READY",
+      "evidence": "portfolio_journal.py net of fees and slippage"
+    },
+    {
+      "id": 223,
+      "name": "Reason",
+      "status": "PRODUCTION_READY",
+      "evidence": "portfolio_journal.py notes & decision_id"
+    },
+    {
+      "id": 224,
+      "name": "Signal",
+      "status": "PRODUCTION_READY",
+      "evidence": "portfolio_journal.py source attribute"
+    },
+    {
+      "id": 225,
+      "name": "Confidence",
+      "status": "VALIDATED",
+      "evidence": "core/decision_builder.py confidence_pct"
+    },
+    {
+      "id": 226,
+      "name": "Model version",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/alpha_engine.py versioning"
+    },
+    {
+      "id": 227,
+      "name": "Timestamp",
+      "status": "PRODUCTION_READY",
+      "evidence": "ISO-8601 timestamps throughout"
+    },
+    {
+      "id": 228,
+      "name": "FIFO",
+      "status": "PRODUCTION_READY",
+      "evidence": "portfolio_journal.py FIFO lot queue matching"
+    },
+    {
+      "id": 229,
+      "name": "Decision ID",
+      "status": "PRODUCTION_READY",
+      "evidence": "Deterministic md5 hashed decision IDs"
+    },
+    {
+      "id": 230,
+      "name": "Replay",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/decision_builder.py DecisionReplayEngine"
+    },
+    {
+      "id": 231,
+      "name": "Unit tests",
+      "status": "PRODUCTION_READY",
+      "evidence": "36/36 unit tests pass in 0.311s"
+    },
+    {
+      "id": 232,
+      "name": "Integration tests",
+      "status": "PRODUCTION_READY",
+      "evidence": "test_core_engines.py & test_portfolio_journal.py"
+    },
+    {
+      "id": 233,
+      "name": "Regression tests",
+      "status": "PRODUCTION_READY",
+      "evidence": "tests/ test suite 100% pass"
+    },
+    {
+      "id": 234,
+      "name": "Isolated regression",
+      "status": "PRODUCTION_READY",
+      "evidence": "research_v43/test_isolated_regression.py pass"
+    },
+    {
+      "id": 235,
+      "name": "Walk-forward",
+      "status": "PRODUCTION_READY",
+      "evidence": "walk_forward_backtest_engine.py"
+    },
+    {
+      "id": 236,
+      "name": "OOS",
+      "status": "PRODUCTION_READY",
+      "evidence": "Phase 2.5 2025 OOS validation"
+    },
+    {
+      "id": 237,
+      "name": "Purged validation",
+      "status": "VALIDATED",
+      "evidence": "research_v43 purged k-fold"
+    },
+    {
+      "id": 238,
+      "name": "Embargo",
+      "status": "VALIDATED",
+      "evidence": "research_v43 5-day embargo bars"
+    },
+    {
+      "id": 239,
+      "name": "Leakage tests",
+      "status": "PRODUCTION_READY",
+      "evidence": "test_data_leakage.py & test_targets.py"
+    },
+    {
+      "id": 240,
+      "name": "Stress tests",
+      "status": "PRODUCTION_READY",
+      "evidence": "test_red_team_edge_cases.py & gen_fx_stress_test.csv"
+    },
+    {
+      "id": 241,
+      "name": "Monte Carlo",
+      "status": "VALIDATED",
+      "evidence": "research_v43 1,000 bootstrap runs"
+    },
+    {
+      "id": 242,
+      "name": "Cost simulation",
+      "status": "PRODUCTION_READY",
+      "evidence": "0.90% RT friction sweep in backtest"
+    },
+    {
+      "id": 243,
+      "name": "Sensitivity analysis",
+      "status": "PRODUCTION_READY",
+      "evidence": "Break-even cost sweep to 3.60%"
+    },
+    {
+      "id": 244,
+      "name": "Stability analysis",
+      "status": "PRODUCTION_READY",
+      "evidence": "20 Disjoint offsets (median PF 2.197)"
+    },
+    {
+      "id": 245,
+      "name": "Paper trading",
+      "status": "PRODUCTION_READY",
+      "evidence": "session_manager.py authoritative 3/30 days"
+    },
+    {
+      "id": 246,
+      "name": "Data drift",
+      "status": "PRODUCTION_READY",
+      "evidence": "data/model_drift_metrics.json"
+    },
+    {
+      "id": 247,
+      "name": "Feature drift",
+      "status": "VALIDATED",
+      "evidence": "telemetry_tracker.py"
+    },
+    {
+      "id": 248,
+      "name": "Model drift",
+      "status": "PRODUCTION_READY",
+      "evidence": "telemetry_tracker.py"
+    },
+    {
+      "id": 249,
+      "name": "Alpha decay",
+      "status": "PRODUCTION_READY",
+      "evidence": "Phase 2.75 reserve tracking"
+    },
+    {
+      "id": 250,
+      "name": "Execution drift",
+      "status": "PRODUCTION_READY",
+      "evidence": "portfolio_journal.py live vs backtest divergence"
+    },
+    {
+      "id": 251,
+      "name": "Liquidity drift",
+      "status": "VALIDATED",
+      "evidence": "core/liquidity_engine.py"
+    },
+    {
+      "id": 252,
+      "name": "Regime drift",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/market_intelligence.py"
+    },
+    {
+      "id": 253,
+      "name": "API health",
+      "status": "PRODUCTION_READY",
+      "evidence": "market_data_provider.py quote freshness"
+    },
+    {
+      "id": 254,
+      "name": "Data freshness",
+      "status": "PRODUCTION_READY",
+      "evidence": "FRESH / RECENT / STALE_WARNING / STALE_BLOCKED"
+    },
+    {
+      "id": 255,
+      "name": "Error monitoring",
+      "status": "PRODUCTION_READY",
+      "evidence": "app.py & headless_runner.py logging"
+    },
+    {
+      "id": 256,
+      "name": "Alerting",
+      "status": "PRODUCTION_READY",
+      "evidence": "app.py visual alert banners"
+    },
+    {
+      "id": 257,
+      "name": "Audit trail",
+      "status": "PRODUCTION_READY",
+      "evidence": "core/decision_builder.py DecisionReplayEngine"
+    }
+  ]
+}

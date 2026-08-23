@@ -1,0 +1,29 @@
+{
+  "session_metadata": {
+    "session_id": "SESS-20260820-98",
+    "session_number": 98,
+    "market_date": "2026-08-20",
+    "timestamp": "2026-08-23T16:03:41.875585",
+    "engine_version": "3.0.0",
+    "status": "RISK_FAILURE",
+    "risk_incidents": [
+      "ALLOCATION_CAP_BREACH",
+      "CASH_RESERVE_BREACH"
+    ]
+  },
+  "market_state": {
+    "regime": "BULL_MOMENTUM",
+    "breadth_advance_pct": 65.0,
+    "data_health": "PASS"
+  },
+  "universe": {},
+  "ranking": {},
+  "portfolio": {},
+  "execution": {},
+  "risk": {
+    "cash_after": 20000.0,
+    "stock_allocation_pct": 80.0,
+    "equity_after": 100000.0
+  },
+  "outcome": {}
+}

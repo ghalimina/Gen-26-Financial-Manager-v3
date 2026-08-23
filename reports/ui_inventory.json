@@ -1,0 +1,178 @@
+{
+  "timestamp": "2026-08-20T05:48:00",
+  "total_pages_views": 12,
+  "language": "Arabic (RTL)",
+  "elements_count": 34,
+  "views": [
+    {
+      "id": "VIEW-01",
+      "name": "نظرة عامة على السوق",
+      "nav_id": "nav-overview"
+    },
+    {
+      "id": "VIEW-02",
+      "name": "ترتيب الأسهم والفرص",
+      "nav_id": "nav-ranking"
+    },
+    {
+      "id": "VIEW-03",
+      "name": "ملف الاستخبارات للسهم",
+      "nav_id": "nav-details"
+    },
+    {
+      "id": "VIEW-04",
+      "name": "محفظتي الحقيقية",
+      "nav_id": "nav-real_portfolio"
+    },
+    {
+      "id": "VIEW-05",
+      "name": "المحفظة التجريبية (3/30)",
+      "nav_id": "nav-paper_portfolio"
+    },
+    {
+      "id": "VIEW-06",
+      "name": "سجل الإشارات والقرارات",
+      "nav_id": "nav-signals"
+    },
+    {
+      "id": "VIEW-07",
+      "name": "مركز إدارة المخاطر والقواعد",
+      "nav_id": "nav-risk_center"
+    },
+    {
+      "id": "VIEW-08",
+      "name": "مركز اختبارات الضغط والسيولة",
+      "nav_id": "nav-stress_center"
+    },
+    {
+      "id": "VIEW-09",
+      "name": "التجريبي مقابل التاريخي",
+      "nav_id": "nav-paper_vs_bt"
+    },
+    {
+      "id": "VIEW-10",
+      "name": "مرصد الانحراف والانزلاق",
+      "nav_id": "nav-observatory"
+    },
+    {
+      "id": "VIEW-11",
+      "name": "فحص وتغطية بورصة مصر",
+      "nav_id": "nav-universe_audit"
+    },
+    {
+      "id": "VIEW-12",
+      "name": "صحة واستقرار النظام",
+      "nav_id": "nav-health"
+    }
+  ],
+  "buttons": [
+    {
+      "id": "UI-BTN-001",
+      "label": "📊 نظرة عامة",
+      "element_id": "nav-overview",
+      "type": "navigation"
+    },
+    {
+      "id": "UI-BTN-002",
+      "label": "🏆 ترتيب الأسهم",
+      "element_id": "nav-ranking",
+      "type": "navigation"
+    },
+    {
+      "id": "UI-BTN-003",
+      "label": "🔍 ملف الاستخبارات",
+      "element_id": "nav-details",
+      "type": "navigation"
+    },
+    {
+      "id": "UI-BTN-004",
+      "label": "💼 محفظتي الحقيقية",
+      "element_id": "nav-real_portfolio",
+      "type": "navigation"
+    },
+    {
+      "id": "UI-BTN-005",
+      "label": "📝 المحفظة التجريبية",
+      "element_id": "nav-paper_portfolio",
+      "type": "navigation"
+    },
+    {
+      "id": "UI-BTN-006",
+      "label": "📡 سجل الإشارات",
+      "element_id": "nav-signals",
+      "type": "navigation"
+    },
+    {
+      "id": "UI-BTN-007",
+      "label": "🛡️ مركز المخاطر",
+      "element_id": "nav-risk_center",
+      "type": "navigation"
+    },
+    {
+      "id": "UI-BTN-008",
+      "label": "⚡ مركز الضغط",
+      "element_id": "nav-stress_center",
+      "type": "navigation"
+    },
+    {
+      "id": "UI-BTN-009",
+      "label": "⚖️ التجريبي vs التاريخي",
+      "element_id": "nav-paper_vs_bt",
+      "type": "navigation"
+    },
+    {
+      "id": "UI-BTN-010",
+      "label": "🔭 المرصد",
+      "element_id": "nav-observatory",
+      "type": "navigation"
+    },
+    {
+      "id": "UI-BTN-011",
+      "label": "🌐 فحص البورصة",
+      "element_id": "nav-universe_audit",
+      "type": "navigation"
+    },
+    {
+      "id": "UI-BTN-012",
+      "label": "🩺 صحة النظام",
+      "element_id": "nav-health",
+      "type": "navigation"
+    },
+    {
+      "id": "UI-BTN-013",
+      "label": "تصفية البحث",
+      "element_id": "btn-filter-ranking",
+      "type": "action"
+    },
+    {
+      "id": "UI-BTN-014",
+      "label": "+ إضافة مركز جديد",
+      "element_id": "btn-add-real-position",
+      "type": "modal_trigger"
+    },
+    {
+      "id": "UI-BTN-015",
+      "label": "حفظ المركز",
+      "element_id": "btn-submit-real-pos",
+      "type": "form_submit"
+    },
+    {
+      "id": "UI-BTN-016",
+      "label": "محاكاة هبوط -15%",
+      "element_id": "btn-stress-flash-crash",
+      "type": "stress_action"
+    },
+    {
+      "id": "UI-BTN-017",
+      "label": "محاكاة جفاف السيولة -80%",
+      "element_id": "btn-stress-liquidity-drop",
+      "type": "stress_action"
+    },
+    {
+      "id": "UI-BTN-018",
+      "label": "محاكاة قفزة +20%",
+      "element_id": "btn-stress-limit-up",
+      "type": "stress_action"
+    }
+  ]
+}

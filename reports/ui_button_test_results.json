@@ -1,0 +1,164 @@
+[
+  {
+    "id": "UI-BTN-001",
+    "label": "📊 نظرة عامة",
+    "element_id": "nav-overview",
+    "tested": true,
+    "passed": true,
+    "rtl_aligned": true,
+    "failure_reason": null
+  },
+  {
+    "id": "UI-BTN-002",
+    "label": "🏆 ترتيب الأسهم",
+    "element_id": "nav-ranking",
+    "tested": true,
+    "passed": true,
+    "rtl_aligned": true,
+    "failure_reason": null
+  },
+  {
+    "id": "UI-BTN-003",
+    "label": "🔍 ملف الاستخبارات",
+    "element_id": "nav-details",
+    "tested": true,
+    "passed": true,
+    "rtl_aligned": true,
+    "failure_reason": null
+  },
+  {
+    "id": "UI-BTN-004",
+    "label": "💼 محفظتي الحقيقية",
+    "element_id": "nav-real_portfolio",
+    "tested": true,
+    "passed": true,
+    "rtl_aligned": true,
+    "failure_reason": null
+  },
+  {
+    "id": "UI-BTN-005",
+    "label": "📝 المحفظة التجريبية",
+    "element_id": "nav-paper_portfolio",
+    "tested": true,
+    "passed": true,
+    "rtl_aligned": true,
+    "failure_reason": null
+  },
+  {
+    "id": "UI-BTN-006",
+    "label": "📡 سجل الإشارات",
+    "element_id": "nav-signals",
+    "tested": true,
+    "passed": true,
+    "rtl_aligned": true,
+    "failure_reason": null
+  },
+  {
+    "id": "UI-BTN-007",
+    "label": "🛡️ مركز المخاطر",
+    "element_id": "nav-risk_center",
+    "tested": true,
+    "passed": true,
+    "rtl_aligned": true,
+    "failure_reason": null
+  },
+  {
+    "id": "UI-BTN-008",
+    "label": "⚡ مركز الضغط",
+    "element_id": "nav-stress_center",
+    "tested": true,
+    "passed": true,
+    "rtl_aligned": true,
+    "failure_reason": null
+  },
+  {
+    "id": "UI-BTN-009",
+    "label": "⚖️ التجريبي vs التاريخي",
+    "element_id": "nav-paper_vs_bt",
+    "tested": true,
+    "passed": true,
+    "rtl_aligned": true,
+    "failure_reason": null
+  },
+  {
+    "id": "UI-BTN-010",
+    "label": "🔭 المرصد",
+    "element_id": "nav-observatory",
+    "tested": true,
+    "passed": true,
+    "rtl_aligned": true,
+    "failure_reason": null
+  },
+  {
+    "id": "UI-BTN-011",
+    "label": "🌐 فحص البورصة",
+    "element_id": "nav-universe_audit",
+    "tested": true,
+    "passed": true,
+    "rtl_aligned": true,
+    "failure_reason": null
+  },
+  {
+    "id": "UI-BTN-012",
+    "label": "🩺 صحة النظام",
+    "element_id": "nav-health",
+    "tested": true,
+    "passed": true,
+    "rtl_aligned": true,
+    "failure_reason": null
+  },
+  {
+    "id": "UI-BTN-013",
+    "label": "تصفية البحث",
+    "element_id": "btn-filter-ranking",
+    "tested": true,
+    "passed": true,
+    "rtl_aligned": true,
+    "failure_reason": null
+  },
+  {
+    "id": "UI-BTN-014",
+    "label": "+ إضافة مركز جديد",
+    "element_id": "btn-add-real-position",
+    "tested": true,
+    "passed": true,
+    "rtl_aligned": true,
+    "failure_reason": null
+  },
+  {
+    "id": "UI-BTN-015",
+    "label": "حفظ المركز",
+    "element_id": "btn-submit-real-pos",
+    "tested": true,
+    "passed": true,
+    "rtl_aligned": true,
+    "failure_reason": null
+  },
+  {
+    "id": "UI-BTN-016",
+    "label": "محاكاة هبوط -15%",
+    "element_id": "btn-stress-flash-crash",
+    "tested": true,
+    "passed": true,
+    "rtl_aligned": true,
+    "failure_reason": null
+  },
+  {
+    "id": "UI-BTN-017",
+    "label": "محاكاة جفاف السيولة -80%",
+    "element_id": "btn-stress-liquidity-drop",
+    "tested": true,
+    "passed": true,
+    "rtl_aligned": true,
+    "failure_reason": null
+  },
+  {
+    "id": "UI-BTN-018",
+    "label": "محاكاة قفزة +20%",
+    "element_id": "btn-stress-limit-up",
+    "tested": true,
+    "passed": true,
+    "rtl_aligned": true,
+    "failure_reason": null
+  }
+]
