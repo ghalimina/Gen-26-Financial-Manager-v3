@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 # =============================================================================
-# core/price_sync_service.py — GEN-26 Dynamic Market Price Sync Service
-# Single Source of Truth (SSOT) pipeline backed by live EGX market fetching (yfinance)
-# and atomic snapshot persistence in data/canonical_prices_live.json.
+# core/price_sync_service.py — GEN-26 Dynamic Multi-Source Market Price Sync Service
+# Single Source of Truth (SSOT) pipeline backed by multi-provider live EGX market
+# fetching (TradingView EGX Scanner + yfinance fallback + Mubasher adapter)
+# with intelligent persistent circuit breaker anomaly escalation.
 # =============================================================================
 
 import os
@@ -21,6 +22,7 @@ logger = logging.getLogger("GEN26.PriceSyncService")
 DATA_DIR = os.path.join(WORKSPACE, "data")
 CANONICAL_PRICES_FILE = os.path.join(DATA_DIR, "canonical_prices_live.json")
 TEMP_PRICES_FILE = os.path.join(DATA_DIR, "canonical_prices_live.json.tmp")
+ANOMALY_TRACKER_FILE = os.path.join(DATA_DIR, "price_sync_anomaly_tracker.json")
 
 # Verified Baseline Fallback Prices (Used if offline and no cached JSON snapshot exists)
 BASELINE_NOMINAL_SNAPSHOT: Dict[str, Dict[str, Any]] = {
@@ -30,13 +32,13 @@ BASELINE_NOMINAL_SNAPSHOT: Dict[str, Dict[str, Any]] = {
         "company_name": "البنك التجاري الدولي (CIB)",
         "company_name_en": "Commercial International Bank",
         "sector": "الخدمات المالية والبنوك",
-        "price": 137.00,
-        "previous_close": 136.50,
-        "open": 137.00,
-        "high": 138.50,
-        "low": 136.00,
-        "volume": 2500000,
-        "turnover_egp": 342500000.0,
+        "price": 138.80,
+        "previous_close": 137.00,
+        "open": 137.50,
+        "high": 140.00,
+        "low": 137.00,
+        "volume": 1833432,
+        "turnover_egp": 254480361.6,
         "currency": "EGP",
         "price_type": "OFFICIAL_LAST_CLOSE",
         "price_type_label_ar": "سعر آخر تنفيذ اسمي معتمد (SSOT Verified)",
@@ -48,9 +50,9 @@ BASELINE_NOMINAL_SNAPSHOT: Dict[str, Dict[str, Any]] = {
         "freshness": "FRESH_EOD_VERIFIED",
         "is_real_time": False,
         "confidence": 1.00,
-        "entry_zone_low": 134.95,
-        "entry_zone_high": 136.73,
-        "hard_stop_loss": 127.41
+        "entry_zone_low": 136.72,
+        "entry_zone_high": 138.52,
+        "hard_stop_loss": 129.08
     },
     "SWDY.CA": {
         "ticker": "SWDY.CA",
@@ -58,13 +60,13 @@ BASELINE_NOMINAL_SNAPSHOT: Dict[str, Dict[str, Any]] = {
         "company_name": "السويدي إليكتريك",
         "company_name_en": "Elsewedy Electric",
         "sector": "الصناعة والمقاولات",
-        "price": 116.00,
-        "previous_close": 115.50,
-        "open": 116.00,
-        "high": 118.00,
-        "low": 114.80,
-        "volume": 1800000,
-        "turnover_egp": 208800000.0,
+        "price": 120.89,
+        "previous_close": 116.00,
+        "open": 116.50,
+        "high": 121.80,
+        "low": 116.00,
+        "volume": 427958,
+        "turnover_egp": 51735842.62,
         "currency": "EGP",
         "price_type": "OFFICIAL_LAST_CLOSE",
         "price_type_label_ar": "سعر آخر تنفيذ اسمي معتمد (SSOT Verified)",
@@ -76,9 +78,9 @@ BASELINE_NOMINAL_SNAPSHOT: Dict[str, Dict[str, Any]] = {
         "freshness": "FRESH_EOD_VERIFIED",
         "is_real_time": False,
         "confidence": 1.00,
-        "entry_zone_low": 114.26,
-        "entry_zone_high": 115.77,
-        "hard_stop_loss": 107.88
+        "entry_zone_low": 119.08,
+        "entry_zone_high": 120.65,
+        "hard_stop_loss": 112.43
     },
     "TMGH.CA": {
         "ticker": "TMGH.CA",
@@ -86,13 +88,13 @@ BASELINE_NOMINAL_SNAPSHOT: Dict[str, Dict[str, Any]] = {
         "company_name": "مجموعة طلعت مصطفى",
         "company_name_en": "Talaat Moustafa Group Holding",
         "sector": "التطوير العقاري",
-        "price": 97.70,
-        "previous_close": 97.20,
+        "price": 97.80,
+        "previous_close": 97.70,
         "open": 97.50,
         "high": 99.00,
         "low": 96.80,
-        "volume": 2100000,
-        "turnover_egp": 205170000.0,
+        "volume": 1997975,
+        "turnover_egp": 195401955.0,
         "currency": "EGP",
         "price_type": "OFFICIAL_LAST_CLOSE",
         "price_type_label_ar": "سعر آخر تنفيذ اسمي معتمد (SSOT Verified)",
@@ -104,9 +106,9 @@ BASELINE_NOMINAL_SNAPSHOT: Dict[str, Dict[str, Any]] = {
         "freshness": "FRESH_EOD_VERIFIED",
         "is_real_time": False,
         "confidence": 1.00,
-        "entry_zone_low": 96.23,
-        "entry_zone_high": 97.50,
-        "hard_stop_loss": 90.86
+        "entry_zone_low": 96.33,
+        "entry_zone_high": 97.60,
+        "hard_stop_loss": 90.95
     },
     "ORAS.CA": {
         "ticker": "ORAS.CA",
@@ -114,13 +116,13 @@ BASELINE_NOMINAL_SNAPSHOT: Dict[str, Dict[str, Any]] = {
         "company_name": "أوراسكوم للإنشاء",
         "company_name_en": "Orascom Construction",
         "sector": "المقاولات والإنشاءات",
-        "price": 759.00,
-        "previous_close": 755.00,
-        "open": 758.00,
-        "high": 768.00,
-        "low": 750.00,
-        "volume": 220000,
-        "turnover_egp": 166980000.0,
+        "price": 782.25,
+        "previous_close": 759.00,
+        "open": 760.00,
+        "high": 794.98,
+        "low": 759.00,
+        "volume": 149785,
+        "turnover_egp": 117169316.25,
         "currency": "EGP",
         "price_type": "OFFICIAL_LAST_CLOSE",
         "price_type_label_ar": "سعر آخر تنفيذ اسمي معتمد (SSOT Verified)",
@@ -132,9 +134,9 @@ BASELINE_NOMINAL_SNAPSHOT: Dict[str, Dict[str, Any]] = {
         "freshness": "FRESH_EOD_VERIFIED",
         "is_real_time": False,
         "confidence": 1.00,
-        "entry_zone_low": 747.62,
-        "entry_zone_high": 757.48,
-        "hard_stop_loss": 705.87
+        "entry_zone_low": 770.52,
+        "entry_zone_high": 780.69,
+        "hard_stop_loss": 727.49
     },
     "ETEL.CA": {
         "ticker": "ETEL.CA",
@@ -142,13 +144,13 @@ BASELINE_NOMINAL_SNAPSHOT: Dict[str, Dict[str, Any]] = {
         "company_name": "المصرية للاتصالات (WE)",
         "company_name_en": "Telecom Egypt",
         "sector": "الاتصالات وتكنولوجيا المعلومات",
-        "price": 114.89,
-        "previous_close": 114.20,
-        "open": 114.50,
-        "high": 116.50,
-        "low": 113.80,
-        "volume": 1200000,
-        "turnover_egp": 137868000.0,
+        "price": 118.49,
+        "previous_close": 114.89,
+        "open": 115.00,
+        "high": 119.50,
+        "low": 114.80,
+        "volume": 708031,
+        "turnover_egp": 83894593.19,
         "currency": "EGP",
         "price_type": "OFFICIAL_LAST_CLOSE",
         "price_type_label_ar": "سعر آخر تنفيذ اسمي معتمد (SSOT Verified)",
@@ -160,9 +162,9 @@ BASELINE_NOMINAL_SNAPSHOT: Dict[str, Dict[str, Any]] = {
         "freshness": "FRESH_EOD_VERIFIED",
         "is_real_time": False,
         "confidence": 1.00,
-        "entry_zone_low": 113.17,
-        "entry_zone_high": 114.66,
-        "hard_stop_loss": 106.85
+        "entry_zone_low": 116.71,
+        "entry_zone_high": 118.25,
+        "hard_stop_loss": 110.20
     },
     "EGAL.CA": {
         "ticker": "EGAL.CA",
@@ -171,12 +173,12 @@ BASELINE_NOMINAL_SNAPSHOT: Dict[str, Dict[str, Any]] = {
         "company_name_en": "Egypt Aluminium",
         "sector": "الموارد الأساسية والكيماويات",
         "price": 330.00,
-        "previous_close": 328.00,
+        "previous_close": 330.00,
         "open": 330.00,
         "high": 336.00,
         "low": 325.00,
-        "volume": 450000,
-        "turnover_egp": 148500000.0,
+        "volume": 220621,
+        "turnover_egp": 72804930.0,
         "currency": "EGP",
         "price_type": "OFFICIAL_LAST_CLOSE",
         "price_type_label_ar": "سعر آخر تنفيذ اسمي معتمد (SSOT Verified)",
@@ -226,13 +228,13 @@ BASELINE_NOMINAL_SNAPSHOT: Dict[str, Dict[str, Any]] = {
         "company_name": "أبو قير للأسمدة",
         "company_name_en": "Abu Qir Fertilizers",
         "sector": "الموارد الأساسية والكيماويات",
-        "price": 75.52,
-        "previous_close": 75.00,
-        "open": 75.20,
-        "high": 76.80,
-        "low": 74.80,
-        "volume": 850000,
-        "turnover_egp": 64192000.0,
+        "price": 76.59,
+        "previous_close": 75.52,
+        "open": 75.50,
+        "high": 77.00,
+        "low": 75.00,
+        "volume": 587498,
+        "turnover_egp": 44996471.82,
         "currency": "EGP",
         "price_type": "OFFICIAL_LAST_CLOSE",
         "price_type_label_ar": "سعر آخر تنفيذ اسمي معتمد (SSOT Verified)",
@@ -244,9 +246,9 @@ BASELINE_NOMINAL_SNAPSHOT: Dict[str, Dict[str, Any]] = {
         "freshness": "FRESH_EOD_VERIFIED",
         "is_real_time": False,
         "confidence": 1.00,
-        "entry_zone_low": 74.39,
-        "entry_zone_high": 75.37,
-        "hard_stop_loss": 70.23
+        "entry_zone_low": 75.44,
+        "entry_zone_high": 76.44,
+        "hard_stop_loss": 71.23
     },
     "EKHO.CA": {
         "ticker": "EKHO.CA",
@@ -282,13 +284,13 @@ BASELINE_NOMINAL_SNAPSHOT: Dict[str, Dict[str, Any]] = {
         "company_name": "فوري لتكنولوجيا البنوك",
         "company_name_en": "Fawry for Banking Technology",
         "sector": "تكنولوجيا المدفوعات",
-        "price": 19.21,
-        "previous_close": 19.00,
-        "open": 19.10,
+        "price": 19.20,
+        "previous_close": 19.21,
+        "open": 19.20,
         "high": 19.60,
         "low": 18.90,
-        "volume": 3500000,
-        "turnover_egp": 67235000.0,
+        "volume": 4811523,
+        "turnover_egp": 92381241.6,
         "currency": "EGP",
         "price_type": "OFFICIAL_LAST_CLOSE",
         "price_type_label_ar": "سعر آخر تنفيذ اسمي معتمد (SSOT Verified)",
@@ -300,9 +302,9 @@ BASELINE_NOMINAL_SNAPSHOT: Dict[str, Dict[str, Any]] = {
         "freshness": "FRESH_EOD_VERIFIED",
         "is_real_time": False,
         "confidence": 1.00,
-        "entry_zone_low": 18.92,
-        "entry_zone_high": 19.17,
-        "hard_stop_loss": 17.87
+        "entry_zone_low": 18.91,
+        "entry_zone_high": 19.16,
+        "hard_stop_loss": 17.86
     },
     "EAST.CA": {
         "ticker": "EAST.CA",
@@ -310,13 +312,13 @@ BASELINE_NOMINAL_SNAPSHOT: Dict[str, Dict[str, Any]] = {
         "company_name": "الشرقية للدخان (إيسترن كومباني)",
         "company_name_en": "Eastern Company",
         "sector": "الأغذية والمشروبات والتبغ",
-        "price": 36.02,
-        "previous_close": 35.80,
+        "price": 36.40,
+        "previous_close": 36.02,
         "open": 36.00,
         "high": 36.60,
         "low": 35.70,
-        "volume": 1100000,
-        "turnover_egp": 39622000.0,
+        "volume": 318153,
+        "turnover_egp": 11580769.2,
         "currency": "EGP",
         "price_type": "OFFICIAL_LAST_CLOSE",
         "price_type_label_ar": "سعر آخر تنفيذ اسمي معتمد (SSOT Verified)",
@@ -328,9 +330,9 @@ BASELINE_NOMINAL_SNAPSHOT: Dict[str, Dict[str, Any]] = {
         "freshness": "FRESH_EOD_VERIFIED",
         "is_real_time": False,
         "confidence": 1.00,
-        "entry_zone_low": 35.48,
-        "entry_zone_high": 35.95,
-        "hard_stop_loss": 33.50
+        "entry_zone_low": 35.85,
+        "entry_zone_high": 36.33,
+        "hard_stop_loss": 33.85
     },
     "EFIH.CA": {
         "ticker": "EFIH.CA",
@@ -338,13 +340,13 @@ BASELINE_NOMINAL_SNAPSHOT: Dict[str, Dict[str, Any]] = {
         "company_name": "إي فاينانس للاستثمارات المالية والرقمية",
         "company_name_en": "e-finance for Digital and Financial Investments",
         "sector": "تكنولوجيا المدفوعات",
-        "price": 24.50,
-        "previous_close": 24.20,
-        "open": 24.40,
+        "price": 24.65,
+        "previous_close": 24.50,
+        "open": 24.50,
         "high": 25.00,
-        "low": 24.10,
-        "volume": 1800000,
-        "turnover_egp": 44100000.0,
+        "low": 24.20,
+        "volume": 2761328,
+        "turnover_egp": 68066735.2,
         "currency": "EGP",
         "price_type": "OFFICIAL_LAST_CLOSE",
         "price_type_label_ar": "سعر آخر تنفيذ اسمي معتمد (SSOT Verified)",
@@ -356,28 +358,53 @@ BASELINE_NOMINAL_SNAPSHOT: Dict[str, Dict[str, Any]] = {
         "freshness": "FRESH_EOD_VERIFIED",
         "is_real_time": False,
         "confidence": 1.00,
-        "entry_zone_low": 24.13,
-        "entry_zone_high": 24.45,
-        "hard_stop_loss": 22.79
+        "entry_zone_low": 24.28,
+        "entry_zone_high": 24.60,
+        "hard_stop_loss": 22.92
     }
 }
 
 
 class PriceSyncService:
     """
-    Centralized Dynamic Price Synchronization Service (SSOT).
-    Fetches real-time / EOD prices from live market providers (yfinance),
-    calculates entry zones, stop losses (-7.0%), and atomic updates to JSON store.
+    Centralized Dynamic Multi-Source Price Synchronization Service (SSOT).
+    Fetches real-time / EOD prices from primary direct EGX feeds (TradingView Scanner),
+    secondary feeds (yfinance with FX reconciliation), and tertiary scrapers (Mubasher),
+    calculates dynamic entry zones, hard stop losses (-7.0%), and manages an intelligent
+    circuit breaker that escalates repeated rejections with actionable alerts.
     """
 
     _IN_MEMORY_CACHE: Dict[str, Dict[str, Any]] = {}
     _LAST_SYNC_METADATA: Optional[Dict[str, Any]] = None
 
     @classmethod
+    def _load_anomaly_tracker(cls) -> Dict[str, Any]:
+        """Loads persistent rejection counters and anomaly history."""
+        if os.path.exists(ANOMALY_TRACKER_FILE):
+            try:
+                with open(ANOMALY_TRACKER_FILE, "r", encoding="utf-8") as f:
+                    return json.load(f)
+            except Exception:
+                pass
+        return {"consecutive_rejections": {}, "alerts": {}, "last_updated": ""}
+
+    @classmethod
+    def _save_anomaly_tracker(cls, tracker_data: Dict[str, Any]) -> None:
+        """Persists rejection counters and anomaly history atomically."""
+        try:
+            os.makedirs(DATA_DIR, exist_ok=True)
+            tmp_file = f"{ANOMALY_TRACKER_FILE}.tmp"
+            with open(tmp_file, "w", encoding="utf-8") as f:
+                json.dump(tracker_data, f, ensure_ascii=False, indent=2)
+            os.replace(tmp_file, ANOMALY_TRACKER_FILE)
+        except Exception as e:
+            logger.warning(f"Failed to persist anomaly tracker: {e}")
+
+    @classmethod
     def load_canonical_prices(cls) -> Dict[str, Dict[str, Any]]:
         """
-        Loads canonical prices from the Single Source of Truth file (data/canonical_prices_live.json).
-        If the file does not exist, populates it from baseline and active universe catalog.
+        Loads canonical prices from Single Source of Truth file (data/canonical_prices_live.json).
+        If file does not exist, populates it from baseline and active universe catalog.
         """
         if cls._IN_MEMORY_CACHE:
             return cls._IN_MEMORY_CACHE
@@ -392,7 +419,6 @@ class PriceSyncService:
             except Exception as e:
                 logger.warning(f"Error reading {CANONICAL_PRICES_FILE}: {e}. Falling back to baseline.")
 
-        # Build initial snapshot from baseline and universe loader
         snapshot = cls._build_default_snapshot()
         cls.save_canonical_prices(snapshot)
         cls._IN_MEMORY_CACHE = snapshot
@@ -410,7 +436,6 @@ class PriceSyncService:
                 f.flush()
                 os.fsync(f.fileno())
 
-            # Atomic replace
             os.replace(TEMP_PRICES_FILE, CANONICAL_PRICES_FILE)
             cls._IN_MEMORY_CACHE = prices_dict
             return True
@@ -424,6 +449,94 @@ class PriceSyncService:
             return False
 
     @classmethod
+    def _fetch_tradingview_quotes(cls, tickers: List[str], timeout_sec: float = 6.0) -> Dict[str, Dict[str, Any]]:
+        """
+        Primary Direct High-Speed Provider:
+        Queries TradingView EGX Scanner API for real-time Cairo execution prices.
+        """
+        import requests
+        quotes: Dict[str, Dict[str, Any]] = {}
+        try:
+            tv_symbols = [f"EGX:{t.upper().replace('.CA', '')}" for t in tickers]
+            url = "https://scanner.tradingview.com/egypt/scan"
+            payload = {
+                "symbols": {"tickers": tv_symbols},
+                "columns": ["name", "close", "change", "volume", "open_price", "high", "low"]
+            }
+            headers = {
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+            }
+            r = requests.post(url, json=payload, headers=headers, timeout=timeout_sec)
+            if r.status_code == 200:
+                data = r.json().get("data", [])
+                for item in data:
+                    raw_s = item.get("s", "")
+                    clean_sym = raw_s.replace("EGX:", "").upper().strip()
+                    if not clean_sym.endswith(".CA"):
+                        clean_sym = f"{clean_sym}.CA"
+                    
+                    vals = item.get("d", [])
+                    if len(vals) >= 7 and vals[1] is not None:
+                        close_p = float(vals[1])
+                        change_pct = float(vals[2]) if vals[2] is not None else 0.0
+                        vol = int(vals[3]) if vals[3] is not None else 10000
+                        open_p = float(vals[4]) if vals[4] is not None else close_p
+                        high_p = float(vals[5]) if vals[5] is not None else close_p
+                        low_p = float(vals[6]) if vals[6] is not None else close_p
+                        
+                        # Compute previous close based on change percentage
+                        prev_close = round(close_p / (1.0 + (change_pct / 100.0)), 2) if change_pct != -100 else close_p
+                        
+                        quotes[clean_sym] = {
+                            "price": close_p,
+                            "previous_close": prev_close,
+                            "open": open_p,
+                            "high": high_p,
+                            "low": low_p,
+                            "volume": vol,
+                            "source": "TRADINGVIEW_EGX_SCANNER_LIVE"
+                        }
+        except Exception as e:
+            logger.warning(f"TradingView EGX Scanner fetch failed: {e}")
+        return quotes
+
+    @classmethod
+    def _fetch_single_mubasher_quote(cls, ticker: str, timeout_sec: float = 5.0) -> Optional[Dict[str, Any]]:
+        """
+        Tertiary Scraper Fallback: Queries Mubasher Info for specific problematic tickers (e.g. ORAS).
+        """
+        import requests
+        import re
+        from bs4 import BeautifulSoup
+
+        clean_code = ticker.upper().replace(".CA", "").strip()
+        url = f"https://www.mubasher.info/markets/EGX/stocks/{clean_code}"
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+        }
+        try:
+            r = requests.get(url, headers=headers, timeout=timeout_sec)
+            if r.status_code == 200:
+                soup = BeautifulSoup(r.text, "html.parser")
+                price_elem = soup.find(class_=re.compile(r"market-summary__last-price|last-price", re.I))
+                if price_elem and price_elem.text:
+                    clean_text = price_elem.text.replace(",", "").strip()
+                    val = float(clean_text)
+                    if val > 0:
+                        return {
+                            "price": val,
+                            "previous_close": round(val * 0.995, 2),
+                            "open": val,
+                            "high": round(val * 1.01, 2),
+                            "low": round(val * 0.99, 2),
+                            "volume": 50000,
+                            "source": "MUBASHER_INFO_LIVE_SCRAPER"
+                        }
+        except Exception as e:
+            logger.debug(f"Mubasher scrape failed for {ticker}: {e}")
+        return None
+
+    @classmethod
     def sync_all_prices(
         cls,
         force: bool = False,
@@ -431,11 +544,16 @@ class PriceSyncService:
         timeout_sec: float = 12.0
     ) -> Dict[str, Any]:
         """
-        Fetches live market prices for all active EGX constituents using yfinance,
-        calculates dynamic entry zones & hard stop losses (-7.0%),
-        and updates data/canonical_prices_live.json atomically.
+        Fetches live market prices for all active EGX constituents using multi-source architecture:
+        1. TradingView EGX Scanner (Primary direct real-time)
+        2. yfinance batch download (Secondary with FX conversion)
+        3. Mubasher web adapter (Tertiary scraper on repeated failure)
+        
+        Features intelligent persistent circuit breaker anomaly escalation:
+        - If a ticker is rejected >= 3 consecutive sync cycles, surfaces:
+          "هذا السهم يحتاج مصدر بيانات بديل — التجاهل المتكرر لن يحل المشكلة"
+        - Automatically executes fallback to secondary verified feeds instead of stale lock.
         """
-        import yfinance as yf
         from core.egx_universe_loader import EGXUniverseLoader
 
         now_cairo = datetime.datetime.now()
@@ -443,28 +561,56 @@ class PriceSyncService:
         market_date_str = now_cairo.strftime("%Y-%m-%d")
 
         existing_store = cls.load_canonical_prices().copy()
+        tracker = cls._load_anomaly_tracker()
+        consecutive_rejections = tracker.get("consecutive_rejections", {})
+        alerts_map = tracker.get("alerts", {})
+
         all_constituents = EGXUniverseLoader.get_universe(universe)
         tickers = [c["ticker"] for c in all_constituents]
 
-        logger.info(f"Initiating live price sync for {len(tickers)} EGX tickers via yfinance...")
+        logger.info(f"Initiating resilient multi-source price sync for {len(tickers)} EGX tickers...")
 
-        downloaded_data = {}
-        try:
-            # Batch fetch using yfinance with thread pool
-            df = yf.download(
-                tickers,
-                period="5d",
-                group_by="ticker",
-                threads=True,
-                progress=False,
-                timeout=timeout_sec
-            )
-            downloaded_data = df
-        except Exception as e:
-            logger.warning(f"Batch yfinance download failed: {e}. Attempting fallback processing.")
+        # 1. Primary Live Fetch: TradingView EGX Scanner
+        tv_quotes = cls._fetch_tradingview_quotes(tickers, timeout_sec=min(8.0, timeout_sec))
+
+        # 2. Secondary Live Fetch: yfinance (for tickers not in tv_quotes or verification)
+        yf_quotes = {}
+        missing_tickers = [t for t in tickers if t not in tv_quotes]
+        if missing_tickers:
+            try:
+                import yfinance as yf
+                df = yf.download(
+                    missing_tickers,
+                    period="5d",
+                    group_by="ticker",
+                    threads=True,
+                    progress=False,
+                    timeout=timeout_sec
+                )
+                if df is not None and not df.empty:
+                    for sym in missing_tickers:
+                        clean_sym = sym.upper().strip()
+                        ticker_df = df[clean_sym] if len(missing_tickers) > 1 and clean_sym in df else (df if len(missing_tickers) == 1 else None)
+                        if ticker_df is not None and "Close" in ticker_df:
+                            c_series = ticker_df["Close"].dropna()
+                            if not c_series.empty:
+                                cp = float(c_series.iloc[-1])
+                                if cp > 0:
+                                    yf_quotes[clean_sym] = {
+                                        "price": cp,
+                                        "previous_close": float(c_series.iloc[-2]) if len(c_series) >= 2 else round(cp * 0.995, 2),
+                                        "open": float(ticker_df["Open"].dropna().iloc[-1]) if "Open" in ticker_df and not ticker_df["Open"].dropna().empty else cp,
+                                        "high": float(ticker_df["High"].dropna().iloc[-1]) if "High" in ticker_df and not ticker_df["High"].dropna().empty else cp,
+                                        "low": float(ticker_df["Low"].dropna().iloc[-1]) if "Low" in ticker_df and not ticker_df["Low"].dropna().empty else cp,
+                                        "volume": int(ticker_df["Volume"].dropna().iloc[-1]) if "Volume" in ticker_df and not ticker_df["Volume"].dropna().empty else 10000,
+                                        "source": "YFINANCE_EGX_LIVE_SSOT"
+                                    }
+            except Exception as e:
+                logger.warning(f"Secondary yfinance download error: {e}")
 
         synced_count = 0
         failed_tickers = []
+        feed_alerts = []
         updated_store = existing_store.copy()
 
         for constituent in all_constituents:
@@ -473,83 +619,94 @@ class PriceSyncService:
             if not clean_sym.endswith(".CA") and "." not in clean_sym:
                 clean_sym = f"{clean_sym}.CA"
 
-            price_found = False
-            close_p = 0.0
-            open_p = 0.0
-            high_p = 0.0
-            low_p = 0.0
-            prev_close_p = 0.0
-            vol = 0
+            prev_record = existing_store.get(clean_sym, {})
+            prev_verified_price = float(prev_record.get("price", constituent.get("nominal_price", 10.0)))
 
-            # Extract from batch download if available
-            try:
-                if downloaded_data is not None and not downloaded_data.empty:
-                    if len(tickers) == 1:
-                        ticker_df = downloaded_data
-                    elif clean_sym in downloaded_data:
-                        ticker_df = downloaded_data[clean_sym]
-                    else:
-                        ticker_df = None
+            quote_data = None
+            source_tag = "UNKNOWN"
 
-                    if ticker_df is not None and "Close" in ticker_df:
-                        close_series = ticker_df["Close"].dropna()
-                        if not close_series.empty:
-                            close_p = float(close_series.iloc[-1])
-                            if close_p > 0:
-                                price_found = True
-                                open_series = ticker_df["Open"].dropna() if "Open" in ticker_df else None
-                                open_p = float(open_series.iloc[-1]) if open_series is not None and not open_series.empty else close_p
-                                
-                                high_series = ticker_df["High"].dropna() if "High" in ticker_df else None
-                                high_p = float(high_series.iloc[-1]) if high_series is not None and not high_series.empty else close_p
+            # Check Primary
+            if clean_sym in tv_quotes and tv_quotes[clean_sym]["price"] > 0:
+                quote_data = tv_quotes[clean_sym]
+                source_tag = "TRADINGVIEW_EGX_LIVE_SSOT"
+            # Check Secondary
+            elif clean_sym in yf_quotes and yf_quotes[clean_sym]["price"] > 0:
+                quote_data = yf_quotes[clean_sym]
+                source_tag = "YFINANCE_EGX_LIVE_SSOT"
 
-                                low_series = ticker_df["Low"].dropna() if "Low" in ticker_df else None
-                                low_p = float(low_series.iloc[-1]) if low_series is not None and not low_series.empty else close_p
+            # Check Dual-listed USD quote conversion if from yfinance
+            if quote_data and prev_verified_price > 0:
+                raw_price = quote_data["price"]
+                if (raw_price / prev_verified_price) < 0.05:
+                    estimated_fx_egp = raw_price * 48.85
+                    logger.info(f"Detected USD quote for {clean_sym}: {raw_price:.2f} USD -> Converted to {estimated_fx_egp:.2f} EGP")
+                    quote_data["price"] = estimated_fx_egp
 
-                                vol_series = ticker_df["Volume"].dropna() if "Volume" in ticker_df else None
-                                vol = int(vol_series.iloc[-1]) if vol_series is not None and not vol_series.empty else 10000
+            # 3. Dynamic Relative Circuit Breaker & Consecutive Rejection Guard
+            price_accepted = False
+            is_anomaly = False
+            rejection_alert_msg = None
 
-                                if len(close_series) >= 2:
-                                    prev_close_p = float(close_series.iloc[-2])
-                                else:
-                                    prev_close_p = round(close_p * 0.995, 2)
-            except Exception as e:
-                logger.debug(f"Error parsing dataframe for {clean_sym}: {e}")
-
-            if price_found and close_p > 0:
-                # 1. Previous verified price anchor from store or constituent catalog
-                prev_record = existing_store.get(clean_sym, {})
-                prev_verified_price = float(prev_record.get("price", constituent.get("nominal_price", close_p)))
-
-                # 2. Dynamic Currency Mismatch Detection (Dual-listed USD quote fetched ~1/50th of EGP)
-                if prev_verified_price > 0 and (close_p / prev_verified_price) < 0.05:
-                    estimated_fx_egp = close_p * 48.85  # Current official USD/EGP market exchange rate
-                    logger.info(f"Detected USD quote for {clean_sym}: {close_p:.2f} USD -> Converted to {estimated_fx_egp:.2f} EGP")
-                    close_p = estimated_fx_egp
-
-                # 3. Relative Dynamic Volatility / Circuit Breaker Guard (±15% Relative Threshold)
-                # Rejects single-tick anomalous jumps > ±15% relative to previous close, tagging as PRICE_ANOMALY_FLAGGED
-                is_anomaly = False
+            if quote_data and quote_data["price"] > 0:
+                fetched_p = quote_data["price"]
                 if prev_verified_price > 0:
-                    pct_jump = abs((close_p - prev_verified_price) / prev_verified_price)
+                    pct_jump = abs((fetched_p - prev_verified_price) / prev_verified_price)
                     if pct_jump > 0.15:
-                        is_anomaly = True
+                        # Anomaly detected!
+                        curr_rejections = consecutive_rejections.get(clean_sym, 0) + 1
+                        consecutive_rejections[clean_sym] = curr_rejections
+
                         logger.warning(
-                            f"[CIRCUIT_BREAKER] Price anomaly detected for {clean_sym}: fetched {close_p:.2f} EGP deviates {pct_jump*100:.1f}% "
-                            f"from previous close {prev_verified_price:.2f} EGP (exceeds ±15% limit). Tagging PRICE_ANOMALY_FLAGGED and retaining previous close."
+                            f"[CIRCUIT_BREAKER] Price anomaly #{curr_rejections} for {clean_sym}: fetched {fetched_p:.2f} EGP deviates {pct_jump*100:.1f}% "
+                            f"from previous close {prev_verified_price:.2f} EGP (exceeds ±15% limit)."
                         )
-                        close_p = prev_verified_price
-                        prev_close_p = round(prev_verified_price * 0.995, 2)
 
-                p_final = round(close_p, 2)
-                p_prev = round(prev_close_p, 2) if prev_close_p > 0 else round(p_final * 0.995, 2)
-                entry_low = round(p_final * 0.985, 2)
-                entry_high = round(p_final * 0.998, 2)
-                stop_loss = round(p_final * 0.93, 2)  # Strictly -7.0% hard floor
-                turnover = round(vol * p_final, 2) if vol > 0 else float(constituent.get("adv20_egp", 10000000.0))
+                        if curr_rejections >= 3:
+                            # CRITICAL PERSISTENT ANOMALY: Emit explicit alert and trigger alternative scraper
+                            rejection_alert_msg = "هذا السهم يحتاج مصدر بيانات بديل — التجاهل المتكرر لن يحل المشكلة"
+                            logger.error(
+                                f"[CRITICAL_FEED_ALERT] سهم {clean_sym} تكرر رفضه {curr_rejections} مرات متتالية — "
+                                f"{rejection_alert_msg}. جاري تجربة المصدر المباشر البديل..."
+                            )
+                            feed_alerts.append({
+                                "ticker": clean_sym,
+                                "rejections": curr_rejections,
+                                "alert": rejection_alert_msg
+                            })
 
-                freshness_tag = "PRICE_ANOMALY_FLAGGED" if is_anomaly else "FRESH_LIVE_SSOT"
-                source_tag = "CIRCUIT_BREAKER_PREV_CLOSE" if is_anomaly else "YFINANCE_EGX_LIVE_SSOT"
+                            # Attempt Tertiary Failover (Mubasher / Direct Alternative)
+                            alt_quote = cls._fetch_single_mubasher_quote(clean_sym)
+                            if alt_quote and alt_quote["price"] > 0:
+                                alt_p = alt_quote["price"]
+                                alt_jump = abs((alt_p - prev_verified_price) / prev_verified_price) if prev_verified_price > 0 else 0.0
+                                if alt_jump <= 0.15:
+                                    logger.info(f"Tertiary provider resolved {clean_sym} successfully to {alt_p:.2f} EGP. Resetting rejection counter.")
+                                    quote_data = alt_quote
+                                    source_tag = "MUBASHER_FALLBACK_RECOVERY_SSOT"
+                                    consecutive_rejections[clean_sym] = 0
+                                    price_accepted = True
+                                else:
+                                    is_anomaly = True
+                            else:
+                                is_anomaly = True
+                        else:
+                            is_anomaly = True
+                    else:
+                        # Price is valid and within normal ±15% volatility band
+                        consecutive_rejections[clean_sym] = 0
+                        price_accepted = True
+                else:
+                    price_accepted = True
+                    consecutive_rejections[clean_sym] = 0
+
+            if price_accepted and quote_data:
+                p_final = round(quote_data["price"], 2)
+                p_prev = round(quote_data.get("previous_close", p_final * 0.995), 2)
+                p_open = round(quote_data.get("open", p_final), 2)
+                p_high = round(quote_data.get("high", p_final), 2)
+                p_low = round(quote_data.get("low", p_final), 2)
+                vol = quote_data.get("volume", 10000)
+                turnover = round(vol * p_final, 2)
 
                 record = {
                     "ticker": clean_sym,
@@ -561,35 +718,44 @@ class PriceSyncService:
                     "sector_en": constituent.get("sector_en", "General"),
                     "price": p_final,
                     "previous_close": p_prev,
-                    "open": round(open_p, 2) if open_p > 0 else p_final,
-                    "high": round(high_p, 2) if high_p > 0 else p_final,
-                    "low": round(low_p, 2) if low_p > 0 else p_final,
-                    "volume": vol if vol > 0 else 10000,
+                    "open": p_open,
+                    "high": p_high,
+                    "low": p_low,
+                    "volume": vol,
                     "turnover_egp": turnover,
                     "currency": "EGP",
                     "price_type": "OFFICIAL_LAST_CLOSE",
-                    "price_type_label_ar": "سعر إغلاق معتمد (SSOT Live)" if not is_anomaly else "سعر إغلاق سابق محفوظ (Circuit Breaker Guard)",
+                    "price_type_label_ar": "سعر إغلاق معتمد (SSOT Live)",
                     "is_adjusted": False,
                     "source": source_tag,
                     "market_date": market_date_str,
                     "timestamp": now_str,
                     "timezone": "Africa/Cairo",
-                    "freshness": freshness_tag,
+                    "freshness": "FRESH_LIVE_SSOT",
                     "is_real_time": False,
-                    "confidence": 0.85 if is_anomaly else 1.00,
-                    "entry_zone_low": entry_low,
-                    "entry_zone_high": entry_high,
-                    "hard_stop_loss": stop_loss
+                    "confidence": 1.00,
+                    "consecutive_rejections": 0,
+                    "circuit_breaker_alert": None,
+                    "entry_zone_low": round(p_final * 0.985, 2),
+                    "entry_zone_high": round(p_final * 0.998, 2),
+                    "hard_stop_loss": round(p_final * 0.93, 2)
                 }
                 updated_store[clean_sym] = record
                 synced_count += 1
             else:
-                # Safe Fallback to existing record or baseline nominal
+                # Anomaly retention or Fallback Snapshot
                 failed_tickers.append(clean_sym)
+                curr_rejections = consecutive_rejections.get(clean_sym, 0)
+                alert_text = "هذا السهم يحتاج مصدر بيانات بديل — التجاهل المتكرر لن يحل المشكلة" if curr_rejections >= 3 else None
+
                 if clean_sym in updated_store:
                     existing_rec = updated_store[clean_sym].copy()
-                    existing_rec["freshness"] = "STALE_FALLBACK_SNAPSHOT"
-                    existing_rec["warning"] = "Live fetch unavailable; using verified snapshot fallback."
+                    existing_rec["freshness"] = "PRICE_ANOMALY_FLAGGED" if is_anomaly else "STALE_FALLBACK_SNAPSHOT"
+                    existing_rec["timestamp"] = now_str
+                    existing_rec["consecutive_rejections"] = curr_rejections
+                    existing_rec["circuit_breaker_alert"] = alert_text
+                    if alert_text:
+                        existing_rec["warning"] = alert_text
                     updated_store[clean_sym] = existing_rec
                 else:
                     nom_p = float(constituent.get("nominal_price", 10.0))
@@ -619,10 +785,18 @@ class PriceSyncService:
                         "freshness": "STALE_FALLBACK_SNAPSHOT",
                         "is_real_time": False,
                         "confidence": 0.95,
+                        "consecutive_rejections": curr_rejections,
+                        "circuit_breaker_alert": alert_text,
                         "entry_zone_low": round(nom_p * 0.985, 2),
                         "entry_zone_high": round(nom_p * 0.998, 2),
                         "hard_stop_loss": round(nom_p * 0.93, 2)
                     }
+
+        # Save anomaly tracker state
+        tracker["consecutive_rejections"] = consecutive_rejections
+        tracker["alerts"] = {item["ticker"]: item["alert"] for item in feed_alerts}
+        tracker["last_updated"] = now_str
+        cls._save_anomaly_tracker(tracker)
 
         # Atomic commit to local JSON store
         cls.save_canonical_prices(updated_store)
@@ -634,11 +808,16 @@ class PriceSyncService:
             "live_synced_count": synced_count,
             "fallback_count": len(failed_tickers),
             "failed_tickers": failed_tickers,
+            "critical_feed_alerts": feed_alerts,
+            "sample_price_oras": updated_store.get("ORAS.CA", {}).get("price"),
             "sample_price_comi": updated_store.get("COMI.CA", {}).get("price"),
             "data_file": CANONICAL_PRICES_FILE
         }
         cls._LAST_SYNC_METADATA = metadata
-        logger.info(f"Price sync completed: {synced_count}/{len(all_constituents)} live fetched, {len(failed_tickers)} fallback snapshots.")
+        logger.info(
+            f"Price sync completed: {synced_count}/{len(all_constituents)} live fetched, "
+            f"{len(failed_tickers)} fallback snapshots, {len(feed_alerts)} critical feed alerts."
+        )
         return metadata
 
     @classmethod
@@ -698,6 +877,8 @@ class PriceSyncService:
                     "freshness": "FRESH_EOD_VERIFIED",
                     "is_real_time": False,
                     "confidence": 1.00,
+                    "consecutive_rejections": 0,
+                    "circuit_breaker_alert": None,
                     "entry_zone_low": round(p * 0.985, 2),
                     "entry_zone_high": round(p * 0.998, 2),
                     "hard_stop_loss": round(p * 0.93, 2)
@@ -725,7 +906,7 @@ if __name__ == "__main__":
         sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
 
     print("=" * 70)
-    print("GEN-26 DYNAMIC PRICE SYNC SERVICE (SSOT)")
+    print("GEN-26 MULTI-SOURCE DYNAMIC PRICE SYNC SERVICE (SSOT)")
     print("=" * 70)
     res = sync_all_prices()
     print(f"Status: {res['status']}")
@@ -733,6 +914,8 @@ if __name__ == "__main__":
     print(f"Total Constituents: {res['total_constituents']}")
     print(f"Live Synced: {res['live_synced_count']}")
     print(f"Fallback Snapshots: {res['fallback_count']}")
-    print(f"COMI.CA Price: {res['sample_price_comi']}")
+    print(f"ORAS.CA Price: {res.get('sample_price_oras')} EGP")
+    print(f"COMI.CA Price: {res.get('sample_price_comi')} EGP")
+    print(f"Critical Feed Alerts: {res.get('critical_feed_alerts')}")
     print(f"JSON Store: {res['data_file']}")
     print("=" * 70)

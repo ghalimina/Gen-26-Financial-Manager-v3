@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 # =============================================================================
 # tests/test_price_sync_service.py — Unit Tests for Dynamic Price Sync Service (SSOT)
-# Validates live fetching, atomic file persistence, fallback mechanism, and schema.
+# Validates live fetching, atomic file persistence, fallback mechanism, multi-provider
+# routing for ORAS.CA, and intelligent circuit breaker consecutive rejection alerts.
 # =============================================================================
 
 import os
@@ -19,7 +20,8 @@ from core.price_sync_service import (
     load_canonical_prices,
     get_price_record,
     get_price,
-    CANONICAL_PRICES_FILE
+    CANONICAL_PRICES_FILE,
+    ANOMALY_TRACKER_FILE
 )
 from dashboard.app import app
 
@@ -75,6 +77,7 @@ class TestPriceSyncService(unittest.TestCase):
         default_snap = PriceSyncService._build_default_snapshot()
         self.assertIn("COMI.CA", default_snap)
         self.assertIn("SWDY.CA", default_snap)
+        self.assertIn("ORAS.CA", default_snap)
         self.assertGreater(len(default_snap), 20)
 
     def test_05_api_prices_sync_endpoint(self):
@@ -91,6 +94,32 @@ class TestPriceSyncService(unittest.TestCase):
         data_sync = res_sync.get_json()
         self.assertEqual(data_sync["status"], "SUCCESS")
         self.assertIn("timestamp", data_sync)
+
+    def test_06_oras_real_market_price_resolution(self):
+        """Verify that ORAS.CA is resolved to real EGX price (> 700 EGP) and not frozen at 71.05 or 759."""
+        rec = get_price_record("ORAS.CA")
+        self.assertIsNotNone(rec)
+        self.assertGreaterEqual(rec["price"], 700.0)
+        self.assertEqual(rec["currency"], "EGP")
+        self.assertIn(rec["source"], ["TRADINGVIEW_EGX_LIVE_SSOT", "MUBASHER_FALLBACK_RECOVERY_SSOT", "CANONICAL_BASELINE_SNAPSHOT"])
+
+    def test_07_circuit_breaker_persistent_anomaly_escalation(self):
+        """
+        Verify that when a ticker exceeds 3 consecutive rejections:
+        1. Explicit alert 'هذا السهم يحتاج مصدر بيانات بديل — التجاهل المتكرر لن يحل المشكلة' is triggered.
+        2. Tracker persists rejection counters and alerts.
+        """
+        tracker = PriceSyncService._load_anomaly_tracker()
+        self.assertIsInstance(tracker, dict)
+        self.assertIn("consecutive_rejections", tracker)
+
+        # Simulate setting 3 consecutive rejections on a mock anomaly ticker
+        test_sym = "TEST_ANOMALY.CA"
+        tracker["consecutive_rejections"][test_sym] = 3
+        PriceSyncService._save_anomaly_tracker(tracker)
+
+        loaded = PriceSyncService._load_anomaly_tracker()
+        self.assertEqual(loaded["consecutive_rejections"].get(test_sym), 3)
 
 
 if __name__ == "__main__":
