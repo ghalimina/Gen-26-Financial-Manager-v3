@@ -27,7 +27,7 @@ class SessionManager:
             json.dump(sessions, f, indent=4)
 
     @classmethod
-    def start_session(cls, market_date: str):
+    def start_session(cls, market_date: str, bypass_weekend: bool = False):
         """Starts a session. If a successful session already exists for this date, returns None to prevent duplicates."""
         sessions = cls._load()
         
@@ -37,14 +37,13 @@ class SessionManager:
                 return None # Already has a valid run today
                 
         # 2. Weekend protection (EGX operates Sun-Thu)
-        try:
-            dt = datetime.datetime.strptime(market_date, "%Y-%m-%d")
-            if dt.weekday() >= 5: # 5=Sat, 6=Sun in standard python. EGX is Sun=6, Mon=0, Tue=1, Wed=2, Thu=3. Wait, Friday=4, Saturday=5.
-                # So EGX closed Friday(4) and Saturday(5).
+        if not bypass_weekend:
+            try:
+                dt = datetime.datetime.strptime(market_date, "%Y-%m-%d")
                 if dt.weekday() in [4, 5]:
                     return None # Closed days don't count
-        except:
-            pass
+            except:
+                pass
 
         session_id = str(uuid.uuid4())
         session = {

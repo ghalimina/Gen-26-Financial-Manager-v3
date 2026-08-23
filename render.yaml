@@ -1,0 +1,27 @@
+# =============================================================================
+# render.yaml — Render Blueprint Specification (Native Python 3.12 Runtime)
+# Zero-friction automated deployment for GEN-26 Institutional Quant Terminal
+# =============================================================================
+
+services:
+  - type: web
+    name: gen26-financial-manager
+    runtime: python
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
+    startCommand: gunicorn --bind 0.0.0.0:$PORT --workers 2 --threads 4 --timeout 120 dashboard.app:app
+    plan: free
+    region: frankfurt
+    branch: main
+    autoDeploy: true
+    healthCheckPath: /api/scheduler/status
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
+      - key: PORT
+        value: 5000
+      - key: TZ
+        value: Africa/Cairo
+      - key: FLASK_ENV
+        value: production
+      - key: PYTHONUNBUFFERED
+        value: "1"
