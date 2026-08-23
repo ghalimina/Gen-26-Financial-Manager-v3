@@ -1,35 +1,557 @@
 [
   {
-    "decision_id": "COMI.CA_2026-08-18 10:00:00_33bddf4d",
-    "timestamp": "2026-08-18 10:00:00",
-    "ticker": "COMI.CA",
-    "name": "التجاري الدولي",
+    "decision_id": "HELI.CA_2026-08-23 17:01_5d990d79",
+    "timestamp": "2026-08-23 17:01",
+    "ticker": "HELI.CA",
+    "name": "مصر الجديدة للإسكان",
     "market_data": {
-      "current_price": 90.0,
-      "price_timestamp": "2026-08-18 10:00:00"
+      "current_price": 7.75,
+      "price_timestamp": "2026-08-23 17:01"
     },
     "portfolio": {
-      "equity": 59000.0,
-      "cash": 50000.0,
-      "allocation_pct": 15.0,
-      "position_qty": 100
+      "equity": 106503.33,
+      "cash": 100000.0,
+      "allocation_pct": 5.3,
+      "position_qty": 0
+    },
+    "signal": {
+      "action": "WAIT FOR PULLBACK",
+      "status": "APPROVED",
+      "reason": "APPROVED_FOR_EXECUTION"
+    },
+    "entry": {
+      "price": 7.66,
+      "type": "PULLBACK_LIMIT",
+      "distance_pct": 1.16
+    },
+    "risk": {
+      "stop": 7.33,
+      "target": 8.12,
+      "risk_pct": 0.0,
+      "reward_pct": 0.0,
+      "risk_reward": "1:1.39"
+    },
+    "prediction": {
+      "model_status": "FROZEN",
+      "confidence": "SHADOW_MODE_IGNORED",
+      "scenario": "N/A",
+      "scenario_probability": "N/A"
+    },
+    "quality": {
+      "data_quality": "OK",
+      "liquidity_status": "OK",
+      "drift_status": "OK"
+    },
+    "gates": {
+      "cash_gate": "PASS",
+      "liquidity_gate": "PASS",
+      "over_cap_gate": "PASS",
+      "risk_gate": "PASS",
+      "kill_switch": "PASS"
+    },
+    "metadata": {
+      "model_version": "v4.1",
+      "feature_version": "v3",
+      "config_version": "v1",
+      "training_cutoff": "N/A",
+      "data_snapshot_id": "5d990d79"
+    }
+  },
+  {
+    "decision_id": "GBCO.CA_2026-08-23 17:01_5d990d79",
+    "timestamp": "2026-08-23 17:01",
+    "ticker": "GBCO.CA",
+    "name": "غبور أوتو",
+    "market_data": {
+      "current_price": 29.51,
+      "price_timestamp": "2026-08-23 17:01"
+    },
+    "portfolio": {
+      "equity": 106503.33,
+      "cash": 100000.0,
+      "allocation_pct": 0.0,
+      "position_qty": 0
+    },
+    "signal": {
+      "action": "HOLD/WATCH",
+      "status": "IGNORED",
+      "reason": "No Buy Signal"
+    },
+    "entry": {
+      "price": 29.31,
+      "type": "PULLBACK_LIMIT",
+      "distance_pct": 0.68
+    },
+    "risk": {
+      "stop": 27.85,
+      "target": 31.14,
+      "risk_pct": 0.0,
+      "reward_pct": 0.0,
+      "risk_reward": "1:1.25"
+    },
+    "prediction": {
+      "model_status": "FROZEN",
+      "confidence": "SHADOW_MODE_IGNORED",
+      "scenario": "N/A",
+      "scenario_probability": "N/A"
+    },
+    "quality": {
+      "data_quality": "OK",
+      "liquidity_status": "N/A",
+      "drift_status": "OK"
+    },
+    "gates": {
+      "cash_gate": "N/A",
+      "liquidity_gate": "FAIL",
+      "over_cap_gate": "N/A",
+      "risk_gate": "PASS",
+      "kill_switch": "PASS"
+    },
+    "metadata": {
+      "model_version": "v4.1",
+      "feature_version": "v3",
+      "config_version": "v1",
+      "training_cutoff": "N/A",
+      "data_snapshot_id": "5d990d79"
+    }
+  },
+  {
+    "decision_id": "JUFO.CA_2026-08-23 17:01_5d990d79",
+    "timestamp": "2026-08-23 17:01",
+    "ticker": "JUFO.CA",
+    "name": "جهينة للصناعات الغذائية",
+    "market_data": {
+      "current_price": 26.88,
+      "price_timestamp": "2026-08-23 17:01"
+    },
+    "portfolio": {
+      "equity": 106503.33,
+      "cash": 100000.0,
+      "allocation_pct": 0.0,
+      "position_qty": 0
+    },
+    "signal": {
+      "action": "HOLD/WATCH",
+      "status": "IGNORED",
+      "reason": "No Buy Signal"
+    },
+    "entry": {
+      "price": 26.5,
+      "type": "PULLBACK_LIMIT",
+      "distance_pct": 1.41
+    },
+    "risk": {
+      "stop": 25.03,
+      "target": 28.48,
+      "risk_pct": 0.0,
+      "reward_pct": 0.0,
+      "risk_reward": "1:1.35"
+    },
+    "prediction": {
+      "model_status": "FROZEN",
+      "confidence": "SHADOW_MODE_IGNORED",
+      "scenario": "N/A",
+      "scenario_probability": "N/A"
+    },
+    "quality": {
+      "data_quality": "OK",
+      "liquidity_status": "N/A",
+      "drift_status": "OK"
+    },
+    "gates": {
+      "cash_gate": "N/A",
+      "liquidity_gate": "FAIL",
+      "over_cap_gate": "N/A",
+      "risk_gate": "PASS",
+      "kill_switch": "PASS"
+    },
+    "metadata": {
+      "model_version": "v4.1",
+      "feature_version": "v3",
+      "config_version": "v1",
+      "training_cutoff": "N/A",
+      "data_snapshot_id": "5d990d79"
+    }
+  },
+  {
+    "decision_id": "SWDY.CA_2026-08-23 17:01_5d990d79",
+    "timestamp": "2026-08-23 17:01",
+    "ticker": "SWDY.CA",
+    "name": "السويدي إلكتريك",
+    "market_data": {
+      "current_price": 120.89,
+      "price_timestamp": "2026-08-23 17:01"
+    },
+    "portfolio": {
+      "equity": 106503.33,
+      "cash": 100000.0,
+      "allocation_pct": 3.9,
+      "position_qty": 0
+    },
+    "signal": {
+      "action": "WAIT FOR PULLBACK",
+      "status": "APPROVED",
+      "reason": "APPROVED_FOR_EXECUTION"
+    },
+    "entry": {
+      "price": 118.0,
+      "type": "PULLBACK_LIMIT",
+      "distance_pct": 2.39
+    },
+    "risk": {
+      "stop": 107.17,
+      "target": 131.7,
+      "risk_pct": 0.0,
+      "reward_pct": 0.0,
+      "risk_reward": "1:1.27"
+    },
+    "prediction": {
+      "model_status": "FROZEN",
+      "confidence": "SHADOW_MODE_IGNORED",
+      "scenario": "N/A",
+      "scenario_probability": "N/A"
+    },
+    "quality": {
+      "data_quality": "OK",
+      "liquidity_status": "OK",
+      "drift_status": "OK"
+    },
+    "gates": {
+      "cash_gate": "PASS",
+      "liquidity_gate": "PASS",
+      "over_cap_gate": "PASS",
+      "risk_gate": "PASS",
+      "kill_switch": "PASS"
+    },
+    "metadata": {
+      "model_version": "v4.1",
+      "feature_version": "v3",
+      "config_version": "v1",
+      "training_cutoff": "N/A",
+      "data_snapshot_id": "5d990d79"
+    }
+  },
+  {
+    "decision_id": "CLHO.CA_2026-08-23 17:01_5d990d79",
+    "timestamp": "2026-08-23 17:01",
+    "ticker": "CLHO.CA",
+    "name": "كليوباترا للمستشفيات",
+    "market_data": {
+      "current_price": 17.71,
+      "price_timestamp": "2026-08-23 17:01"
+    },
+    "portfolio": {
+      "equity": 106503.33,
+      "cash": 100000.0,
+      "allocation_pct": 5.6,
+      "position_qty": 0
+    },
+    "signal": {
+      "action": "WAIT FOR PULLBACK",
+      "status": "APPROVED",
+      "reason": "APPROVED_FOR_EXECUTION"
+    },
+    "entry": {
+      "price": 17.49,
+      "type": "PULLBACK_LIMIT",
+      "distance_pct": 1.24
+    },
+    "risk": {
+      "stop": 16.67,
+      "target": 18.7,
+      "risk_pct": 0.0,
+      "reward_pct": 0.0,
+      "risk_reward": "1:1.48"
+    },
+    "prediction": {
+      "model_status": "FROZEN",
+      "confidence": "SHADOW_MODE_IGNORED",
+      "scenario": "N/A",
+      "scenario_probability": "N/A"
+    },
+    "quality": {
+      "data_quality": "OK",
+      "liquidity_status": "OK",
+      "drift_status": "OK"
+    },
+    "gates": {
+      "cash_gate": "PASS",
+      "liquidity_gate": "PASS",
+      "over_cap_gate": "PASS",
+      "risk_gate": "PASS",
+      "kill_switch": "PASS"
+    },
+    "metadata": {
+      "model_version": "v4.1",
+      "feature_version": "v3",
+      "config_version": "v1",
+      "training_cutoff": "N/A",
+      "data_snapshot_id": "5d990d79"
+    }
+  },
+  {
+    "decision_id": "FWRY.CA_2026-08-23 17:01_5d990d79",
+    "timestamp": "2026-08-23 17:01",
+    "ticker": "FWRY.CA",
+    "name": "فوري للمدفوعات",
+    "market_data": {
+      "current_price": 19.2,
+      "price_timestamp": "2026-08-23 17:01"
+    },
+    "portfolio": {
+      "equity": 106503.33,
+      "cash": 100000.0,
+      "allocation_pct": 7.6,
+      "position_qty": 0
+    },
+    "signal": {
+      "action": "WAIT FOR PULLBACK",
+      "status": "APPROVED",
+      "reason": "APPROVED_FOR_EXECUTION"
+    },
+    "entry": {
+      "price": 19.07,
+      "type": "PULLBACK_LIMIT",
+      "distance_pct": 0.68
+    },
+    "risk": {
+      "stop": 18.59,
+      "target": 20.0,
+      "risk_pct": 0.0,
+      "reward_pct": 0.0,
+      "risk_reward": "1:1.94"
+    },
+    "prediction": {
+      "model_status": "FROZEN",
+      "confidence": "SHADOW_MODE_IGNORED",
+      "scenario": "N/A",
+      "scenario_probability": "N/A"
+    },
+    "quality": {
+      "data_quality": "OK",
+      "liquidity_status": "OK",
+      "drift_status": "OK"
+    },
+    "gates": {
+      "cash_gate": "PASS",
+      "liquidity_gate": "PASS",
+      "over_cap_gate": "PASS",
+      "risk_gate": "PASS",
+      "kill_switch": "PASS"
+    },
+    "metadata": {
+      "model_version": "v4.1",
+      "feature_version": "v3",
+      "config_version": "v1",
+      "training_cutoff": "N/A",
+      "data_snapshot_id": "5d990d79"
+    }
+  },
+  {
+    "decision_id": "SKPC.CA_2026-08-23 17:01_5d990d79",
+    "timestamp": "2026-08-23 17:01",
+    "ticker": "SKPC.CA",
+    "name": "سيدي كرير للبتروكيماويات",
+    "market_data": {
+      "current_price": 17.4,
+      "price_timestamp": "2026-08-23 17:01"
+    },
+    "portfolio": {
+      "equity": 106503.33,
+      "cash": 100000.0,
+      "allocation_pct": 5.3,
+      "position_qty": 0
+    },
+    "signal": {
+      "action": "WAIT FOR PULLBACK",
+      "status": "APPROVED",
+      "reason": "APPROVED_FOR_EXECUTION"
+    },
+    "entry": {
+      "price": 17.25,
+      "type": "PULLBACK_LIMIT",
+      "distance_pct": 0.86
+    },
+    "risk": {
+      "stop": 16.67,
+      "target": 18.18,
+      "risk_pct": 0.0,
+      "reward_pct": 0.0,
+      "risk_reward": "1:1.6"
+    },
+    "prediction": {
+      "model_status": "FROZEN",
+      "confidence": "SHADOW_MODE_IGNORED",
+      "scenario": "N/A",
+      "scenario_probability": "N/A"
+    },
+    "quality": {
+      "data_quality": "OK",
+      "liquidity_status": "OK",
+      "drift_status": "OK"
+    },
+    "gates": {
+      "cash_gate": "PASS",
+      "liquidity_gate": "PASS",
+      "over_cap_gate": "PASS",
+      "risk_gate": "PASS",
+      "kill_switch": "PASS"
+    },
+    "metadata": {
+      "model_version": "v4.1",
+      "feature_version": "v3",
+      "config_version": "v1",
+      "training_cutoff": "N/A",
+      "data_snapshot_id": "5d990d79"
+    }
+  },
+  {
+    "decision_id": "ETEL.CA_2026-08-23 17:01_5d990d79",
+    "timestamp": "2026-08-23 17:01",
+    "ticker": "ETEL.CA",
+    "name": "المصرية للاتصالات",
+    "market_data": {
+      "current_price": 118.49,
+      "price_timestamp": "2026-08-23 17:01"
+    },
+    "portfolio": {
+      "equity": 106503.33,
+      "cash": 100000.0,
+      "allocation_pct": 5.4,
+      "position_qty": 0
+    },
+    "signal": {
+      "action": "WAIT FOR PULLBACK",
+      "status": "APPROVED",
+      "reason": "APPROVED_FOR_EXECUTION"
+    },
+    "entry": {
+      "price": 116.79,
+      "type": "PULLBACK_LIMIT",
+      "distance_pct": 1.43
+    },
+    "risk": {
+      "stop": 110.41,
+      "target": 125.74,
+      "risk_pct": 0.0,
+      "reward_pct": 0.0,
+      "risk_reward": "1:1.4"
+    },
+    "prediction": {
+      "model_status": "FROZEN",
+      "confidence": "SHADOW_MODE_IGNORED",
+      "scenario": "N/A",
+      "scenario_probability": "N/A"
+    },
+    "quality": {
+      "data_quality": "OK",
+      "liquidity_status": "OK",
+      "drift_status": "OK"
+    },
+    "gates": {
+      "cash_gate": "PASS",
+      "liquidity_gate": "PASS",
+      "over_cap_gate": "PASS",
+      "risk_gate": "PASS",
+      "kill_switch": "PASS"
+    },
+    "metadata": {
+      "model_version": "v4.1",
+      "feature_version": "v3",
+      "config_version": "v1",
+      "training_cutoff": "N/A",
+      "data_snapshot_id": "5d990d79"
+    }
+  },
+  {
+    "decision_id": "MASR.CA_2026-08-23 17:01_5d990d79",
+    "timestamp": "2026-08-23 17:01",
+    "ticker": "MASR.CA",
+    "name": "مدينة مصر للإسكان",
+    "market_data": {
+      "current_price": 7.74,
+      "price_timestamp": "2026-08-23 17:01"
+    },
+    "portfolio": {
+      "equity": 106503.33,
+      "cash": 100000.0,
+      "allocation_pct": 0.0,
+      "position_qty": 0
+    },
+    "signal": {
+      "action": "HOLD/WATCH",
+      "status": "IGNORED",
+      "reason": "No Buy Signal"
+    },
+    "entry": {
+      "price": 7.67,
+      "type": "PULLBACK_LIMIT",
+      "distance_pct": 0.9
+    },
+    "risk": {
+      "stop": 7.42,
+      "target": 8.08,
+      "risk_pct": 0.0,
+      "reward_pct": 0.0,
+      "risk_reward": "1:1.64"
+    },
+    "prediction": {
+      "model_status": "FROZEN",
+      "confidence": "SHADOW_MODE_IGNORED",
+      "scenario": "N/A",
+      "scenario_probability": "N/A"
+    },
+    "quality": {
+      "data_quality": "OK",
+      "liquidity_status": "N/A",
+      "drift_status": "OK"
+    },
+    "gates": {
+      "cash_gate": "N/A",
+      "liquidity_gate": "FAIL",
+      "over_cap_gate": "N/A",
+      "risk_gate": "PASS",
+      "kill_switch": "PASS"
+    },
+    "metadata": {
+      "model_version": "v4.1",
+      "feature_version": "v3",
+      "config_version": "v1",
+      "training_cutoff": "N/A",
+      "data_snapshot_id": "5d990d79"
+    }
+  },
+  {
+    "decision_id": "TMGH.CA_2026-08-23 17:01_5d990d79",
+    "timestamp": "2026-08-23 17:01",
+    "ticker": "TMGH.CA",
+    "name": "طلعت مصطفى",
+    "market_data": {
+      "current_price": 97.8,
+      "price_timestamp": "2026-08-23 17:01"
+    },
+    "portfolio": {
+      "equity": 106503.33,
+      "cash": 100000.0,
+      "allocation_pct": 8.6,
+      "position_qty": 8
     },
     "signal": {
       "action": "HOLD",
       "status": "HOLDING",
-      "reason": "السهم في النطاق الآمن"
+      "reason": "السهم في النطاق الآمن (لم يكسر وقف الخسارة والتركز طبيعي)"
     },
     "entry": {
-      "price": 87.5,
+      "price": 97.14,
       "type": "PULLBACK_LIMIT",
-      "distance_pct": -2.8
+      "distance_pct": 0.67
     },
     "risk": {
-      "stop": 84.0,
-      "target": 98.0,
+      "stop": 94.67,
+      "target": 101.86,
       "risk_pct": 0.0,
       "reward_pct": 0.0,
-      "risk_reward": "1:0"
+      "risk_reward": "1:1.91"
     },
     "prediction": {
       "model_status": "FROZEN",
@@ -54,40 +576,98 @@
       "feature_version": "v3",
       "config_version": "v1",
       "training_cutoff": "N/A",
-      "data_snapshot_id": "33bddf4d"
+      "data_snapshot_id": "5d990d79"
     }
   },
   {
-    "decision_id": "TMGH.CA_2026-08-18 10:00:00_33bddf4d",
-    "timestamp": "2026-08-18 10:00:00",
-    "ticker": "TMGH.CA",
-    "name": "طلعت مصطفى",
+    "decision_id": "HRHO.CA_2026-08-23 17:01_5d990d79",
+    "timestamp": "2026-08-23 17:01",
+    "ticker": "HRHO.CA",
+    "name": "إي إف جي هيرميس",
     "market_data": {
-      "current_price": 60.0,
-      "price_timestamp": "2026-08-18 10:00:00"
+      "current_price": 26.32,
+      "price_timestamp": "2026-08-23 17:01"
     },
     "portfolio": {
-      "equity": 59000.0,
-      "cash": 50000.0,
-      "allocation_pct": 15.0,
+      "equity": 106503.33,
+      "cash": 100000.0,
+      "allocation_pct": 0.0,
       "position_qty": 0
     },
     "signal": {
-      "action": "NO_TRADE",
-      "status": "BLOCKED",
-      "reason": "INVALID_PULLBACK_ENTRY (Entry >= Current)"
+      "action": "HOLD/WATCH",
+      "status": "IGNORED",
+      "reason": "No Buy Signal"
     },
     "entry": {
-      "price": 60.0,
+      "price": 26.15,
       "type": "PULLBACK_LIMIT",
-      "distance_pct": 0.0
+      "distance_pct": 0.65
     },
     "risk": {
-      "stop": 56.0,
-      "target": 68.0,
+      "stop": 25.49,
+      "target": 27.38,
       "risk_pct": 0.0,
       "reward_pct": 0.0,
-      "risk_reward": "1:0"
+      "risk_reward": "1:1.86"
+    },
+    "prediction": {
+      "model_status": "FROZEN",
+      "confidence": "SHADOW_MODE_IGNORED",
+      "scenario": "N/A",
+      "scenario_probability": "N/A"
+    },
+    "quality": {
+      "data_quality": "OK",
+      "liquidity_status": "N/A",
+      "drift_status": "OK"
+    },
+    "gates": {
+      "cash_gate": "N/A",
+      "liquidity_gate": "FAIL",
+      "over_cap_gate": "N/A",
+      "risk_gate": "PASS",
+      "kill_switch": "PASS"
+    },
+    "metadata": {
+      "model_version": "v4.1",
+      "feature_version": "v3",
+      "config_version": "v1",
+      "training_cutoff": "N/A",
+      "data_snapshot_id": "5d990d79"
+    }
+  },
+  {
+    "decision_id": "EGAL.CA_2026-08-23 17:01_5d990d79",
+    "timestamp": "2026-08-23 17:01",
+    "ticker": "EGAL.CA",
+    "name": "مصر للالومنيوم",
+    "market_data": {
+      "current_price": 330.0,
+      "price_timestamp": "2026-08-23 17:01"
+    },
+    "portfolio": {
+      "equity": 106503.33,
+      "cash": 100000.0,
+      "allocation_pct": 5.8,
+      "position_qty": 0
+    },
+    "signal": {
+      "action": "WAIT FOR PULLBACK",
+      "status": "APPROVED",
+      "reason": "APPROVED_FOR_EXECUTION"
+    },
+    "entry": {
+      "price": 324.79,
+      "type": "PULLBACK_LIMIT",
+      "distance_pct": 1.58
+    },
+    "risk": {
+      "stop": 305.24,
+      "target": 351.12,
+      "risk_pct": 0.0,
+      "reward_pct": 0.0,
+      "risk_reward": "1:1.35"
     },
     "prediction": {
       "model_status": "FROZEN",
@@ -101,9 +681,9 @@
       "drift_status": "OK"
     },
     "gates": {
-      "cash_gate": "SKIPPED",
+      "cash_gate": "PASS",
       "liquidity_gate": "PASS",
-      "over_cap_gate": "SKIPPED",
+      "over_cap_gate": "PASS",
       "risk_gate": "PASS",
       "kill_switch": "PASS"
     },
@@ -112,7 +692,645 @@
       "feature_version": "v3",
       "config_version": "v1",
       "training_cutoff": "N/A",
-      "data_snapshot_id": "33bddf4d"
+      "data_snapshot_id": "5d990d79"
+    }
+  },
+  {
+    "decision_id": "PHDC.CA_2026-08-23 17:01_5d990d79",
+    "timestamp": "2026-08-23 17:01",
+    "ticker": "PHDC.CA",
+    "name": "بالم هيلز للتعمير",
+    "market_data": {
+      "current_price": 15.2,
+      "price_timestamp": "2026-08-23 17:01"
+    },
+    "portfolio": {
+      "equity": 106503.33,
+      "cash": 100000.0,
+      "allocation_pct": 6.2,
+      "position_qty": 65
+    },
+    "signal": {
+      "action": "HOLD",
+      "status": "HOLDING",
+      "reason": "السهم في النطاق الآمن (لم يكسر وقف الخسارة والتركز طبيعي)"
+    },
+    "entry": {
+      "price": 15.04,
+      "type": "PULLBACK_LIMIT",
+      "distance_pct": 1.05
+    },
+    "risk": {
+      "stop": 14.45,
+      "target": 15.87,
+      "risk_pct": 0.0,
+      "reward_pct": 0.0,
+      "risk_reward": "1:1.41"
+    },
+    "prediction": {
+      "model_status": "FROZEN",
+      "confidence": "SHADOW_MODE_IGNORED",
+      "scenario": "N/A",
+      "scenario_probability": "N/A"
+    },
+    "quality": {
+      "data_quality": "OK",
+      "liquidity_status": "OK",
+      "drift_status": "OK"
+    },
+    "gates": {
+      "cash_gate": "N/A",
+      "liquidity_gate": "PASS",
+      "over_cap_gate": "N/A",
+      "risk_gate": "PASS",
+      "kill_switch": "PASS"
+    },
+    "metadata": {
+      "model_version": "v4.1",
+      "feature_version": "v3",
+      "config_version": "v1",
+      "training_cutoff": "N/A",
+      "data_snapshot_id": "5d990d79"
+    }
+  },
+  {
+    "decision_id": "RAYA.CA_2026-08-23 17:01_5d990d79",
+    "timestamp": "2026-08-23 17:01",
+    "ticker": "RAYA.CA",
+    "name": "راية القابضة",
+    "market_data": {
+      "current_price": 7.07,
+      "price_timestamp": "2026-08-23 17:01"
+    },
+    "portfolio": {
+      "equity": 106503.33,
+      "cash": 100000.0,
+      "allocation_pct": 0.0,
+      "position_qty": 159
+    },
+    "signal": {
+      "action": "HOLD",
+      "status": "HOLDING",
+      "reason": "السهم في النطاق الآمن (لم يكسر وقف الخسارة والتركز طبيعي)"
+    },
+    "entry": {
+      "price": 7.0,
+      "type": "PULLBACK_LIMIT",
+      "distance_pct": 0.99
+    },
+    "risk": {
+      "stop": 6.75,
+      "target": 7.38,
+      "risk_pct": 0.0,
+      "reward_pct": 0.0,
+      "risk_reward": "1:1.52"
+    },
+    "prediction": {
+      "model_status": "FROZEN",
+      "confidence": "SHADOW_MODE_IGNORED",
+      "scenario": "N/A",
+      "scenario_probability": "N/A"
+    },
+    "quality": {
+      "data_quality": "OK",
+      "liquidity_status": "N/A",
+      "drift_status": "OK"
+    },
+    "gates": {
+      "cash_gate": "N/A",
+      "liquidity_gate": "FAIL",
+      "over_cap_gate": "N/A",
+      "risk_gate": "PASS",
+      "kill_switch": "PASS"
+    },
+    "metadata": {
+      "model_version": "v4.1",
+      "feature_version": "v3",
+      "config_version": "v1",
+      "training_cutoff": "N/A",
+      "data_snapshot_id": "5d990d79"
+    }
+  },
+  {
+    "decision_id": "ORWE.CA_2026-08-23 17:01_5d990d79",
+    "timestamp": "2026-08-23 17:01",
+    "ticker": "ORWE.CA",
+    "name": "النساجون الشرقيون",
+    "market_data": {
+      "current_price": 26.0,
+      "price_timestamp": "2026-08-23 17:01"
+    },
+    "portfolio": {
+      "equity": 106503.33,
+      "cash": 100000.0,
+      "allocation_pct": 0.0,
+      "position_qty": 0
+    },
+    "signal": {
+      "action": "HOLD/WATCH",
+      "status": "IGNORED",
+      "reason": "No Buy Signal"
+    },
+    "entry": {
+      "price": 25.67,
+      "type": "PULLBACK_LIMIT",
+      "distance_pct": 1.27
+    },
+    "risk": {
+      "stop": 24.43,
+      "target": 27.42,
+      "risk_pct": 0.0,
+      "reward_pct": 0.0,
+      "risk_reward": "1:1.41"
+    },
+    "prediction": {
+      "model_status": "FROZEN",
+      "confidence": "SHADOW_MODE_IGNORED",
+      "scenario": "N/A",
+      "scenario_probability": "N/A"
+    },
+    "quality": {
+      "data_quality": "OK",
+      "liquidity_status": "N/A",
+      "drift_status": "OK"
+    },
+    "gates": {
+      "cash_gate": "N/A",
+      "liquidity_gate": "FAIL",
+      "over_cap_gate": "N/A",
+      "risk_gate": "PASS",
+      "kill_switch": "PASS"
+    },
+    "metadata": {
+      "model_version": "v4.1",
+      "feature_version": "v3",
+      "config_version": "v1",
+      "training_cutoff": "N/A",
+      "data_snapshot_id": "5d990d79"
+    }
+  },
+  {
+    "decision_id": "MFPC.CA_2026-08-23 17:01_5d990d79",
+    "timestamp": "2026-08-23 17:01",
+    "ticker": "MFPC.CA",
+    "name": "موبكو للأسمدة",
+    "market_data": {
+      "current_price": 39.3,
+      "price_timestamp": "2026-08-23 17:01"
+    },
+    "portfolio": {
+      "equity": 106503.33,
+      "cash": 100000.0,
+      "allocation_pct": 0.0,
+      "position_qty": 0
+    },
+    "signal": {
+      "action": "HOLD/WATCH",
+      "status": "IGNORED",
+      "reason": "No Buy Signal"
+    },
+    "entry": {
+      "price": 39.01,
+      "type": "PULLBACK_LIMIT",
+      "distance_pct": 0.74
+    },
+    "risk": {
+      "stop": 37.91,
+      "target": 40.89,
+      "risk_pct": 0.0,
+      "reward_pct": 0.0,
+      "risk_reward": "1:1.71"
+    },
+    "prediction": {
+      "model_status": "FROZEN",
+      "confidence": "SHADOW_MODE_IGNORED",
+      "scenario": "N/A",
+      "scenario_probability": "N/A"
+    },
+    "quality": {
+      "data_quality": "OK",
+      "liquidity_status": "N/A",
+      "drift_status": "OK"
+    },
+    "gates": {
+      "cash_gate": "N/A",
+      "liquidity_gate": "FAIL",
+      "over_cap_gate": "N/A",
+      "risk_gate": "PASS",
+      "kill_switch": "PASS"
+    },
+    "metadata": {
+      "model_version": "v4.1",
+      "feature_version": "v3",
+      "config_version": "v1",
+      "training_cutoff": "N/A",
+      "data_snapshot_id": "5d990d79"
+    }
+  },
+  {
+    "decision_id": "ESRS.CA_2026-08-23 17:01_5d990d79",
+    "timestamp": "2026-08-23 17:01",
+    "ticker": "ESRS.CA",
+    "name": "حديد عز",
+    "market_data": {
+      "current_price": 133.9,
+      "price_timestamp": "2026-08-23 17:01"
+    },
+    "portfolio": {
+      "equity": 106503.33,
+      "cash": 100000.0,
+      "allocation_pct": 0.0,
+      "position_qty": 0
+    },
+    "signal": {
+      "action": "HOLD/WATCH",
+      "status": "IGNORED",
+      "reason": "No Buy Signal"
+    },
+    "entry": {
+      "price": 132.88,
+      "type": "PULLBACK_LIMIT",
+      "distance_pct": 0.76
+    },
+    "risk": {
+      "stop": 129.04,
+      "target": 139.3,
+      "risk_pct": 0.0,
+      "reward_pct": 0.0,
+      "risk_reward": "1:1.67"
+    },
+    "prediction": {
+      "model_status": "FROZEN",
+      "confidence": "SHADOW_MODE_IGNORED",
+      "scenario": "N/A",
+      "scenario_probability": "N/A"
+    },
+    "quality": {
+      "data_quality": "OK",
+      "liquidity_status": "N/A",
+      "drift_status": "OK"
+    },
+    "gates": {
+      "cash_gate": "N/A",
+      "liquidity_gate": "FAIL",
+      "over_cap_gate": "N/A",
+      "risk_gate": "PASS",
+      "kill_switch": "PASS"
+    },
+    "metadata": {
+      "model_version": "v4.1",
+      "feature_version": "v3",
+      "config_version": "v1",
+      "training_cutoff": "N/A",
+      "data_snapshot_id": "5d990d79"
+    }
+  },
+  {
+    "decision_id": "COMI.CA_2026-08-23 17:01_5d990d79",
+    "timestamp": "2026-08-23 17:01",
+    "ticker": "COMI.CA",
+    "name": "التجاري الدولي",
+    "market_data": {
+      "current_price": 138.8,
+      "price_timestamp": "2026-08-23 17:01"
+    },
+    "portfolio": {
+      "equity": 106503.33,
+      "cash": 100000.0,
+      "allocation_pct": 0.0,
+      "position_qty": 26
+    },
+    "signal": {
+      "action": "HOLD",
+      "status": "HOLDING",
+      "reason": "السهم في النطاق الآمن (لم يكسر وقف الخسارة والتركز طبيعي)"
+    },
+    "entry": {
+      "price": 138.16,
+      "type": "PULLBACK_LIMIT",
+      "distance_pct": 0.46
+    },
+    "risk": {
+      "stop": 135.74,
+      "target": 144.56,
+      "risk_pct": 0.0,
+      "reward_pct": 0.0,
+      "risk_reward": "1:2.64"
+    },
+    "prediction": {
+      "model_status": "FROZEN",
+      "confidence": "SHADOW_MODE_IGNORED",
+      "scenario": "N/A",
+      "scenario_probability": "N/A"
+    },
+    "quality": {
+      "data_quality": "OK",
+      "liquidity_status": "N/A",
+      "drift_status": "OK"
+    },
+    "gates": {
+      "cash_gate": "N/A",
+      "liquidity_gate": "FAIL",
+      "over_cap_gate": "N/A",
+      "risk_gate": "PASS",
+      "kill_switch": "PASS"
+    },
+    "metadata": {
+      "model_version": "v4.1",
+      "feature_version": "v3",
+      "config_version": "v1",
+      "training_cutoff": "N/A",
+      "data_snapshot_id": "5d990d79"
+    }
+  },
+  {
+    "decision_id": "CICH.CA_2026-08-23 17:01_5d990d79",
+    "timestamp": "2026-08-23 17:01",
+    "ticker": "CICH.CA",
+    "name": "سي آي كابيتال",
+    "market_data": {
+      "current_price": 12.23,
+      "price_timestamp": "2026-08-23 17:01"
+    },
+    "portfolio": {
+      "equity": 106503.33,
+      "cash": 100000.0,
+      "allocation_pct": 0.0,
+      "position_qty": 0
+    },
+    "signal": {
+      "action": "HOLD/WATCH",
+      "status": "IGNORED",
+      "reason": "No Buy Signal"
+    },
+    "entry": {
+      "price": 12.12,
+      "type": "PULLBACK_LIMIT",
+      "distance_pct": 0.9
+    },
+    "risk": {
+      "stop": 11.7,
+      "target": 12.78,
+      "risk_pct": 0.0,
+      "reward_pct": 0.0,
+      "risk_reward": "1:1.57"
+    },
+    "prediction": {
+      "model_status": "FROZEN",
+      "confidence": "SHADOW_MODE_IGNORED",
+      "scenario": "N/A",
+      "scenario_probability": "N/A"
+    },
+    "quality": {
+      "data_quality": "OK",
+      "liquidity_status": "N/A",
+      "drift_status": "OK"
+    },
+    "gates": {
+      "cash_gate": "N/A",
+      "liquidity_gate": "FAIL",
+      "over_cap_gate": "N/A",
+      "risk_gate": "PASS",
+      "kill_switch": "PASS"
+    },
+    "metadata": {
+      "model_version": "v4.1",
+      "feature_version": "v3",
+      "config_version": "v1",
+      "training_cutoff": "N/A",
+      "data_snapshot_id": "5d990d79"
+    }
+  },
+  {
+    "decision_id": "ADIB.CA_2026-08-23 17:01_5d990d79",
+    "timestamp": "2026-08-23 17:01",
+    "ticker": "ADIB.CA",
+    "name": "مصرف أبو ظبي الإسلامي",
+    "market_data": {
+      "current_price": 54.4,
+      "price_timestamp": "2026-08-23 17:01"
+    },
+    "portfolio": {
+      "equity": 106503.33,
+      "cash": 100000.0,
+      "allocation_pct": 0.0,
+      "position_qty": 0
+    },
+    "signal": {
+      "action": "HOLD/WATCH",
+      "status": "IGNORED",
+      "reason": "No Buy Signal"
+    },
+    "entry": {
+      "price": 53.99,
+      "type": "PULLBACK_LIMIT",
+      "distance_pct": 0.75
+    },
+    "risk": {
+      "stop": 52.47,
+      "target": 56.66,
+      "risk_pct": 0.0,
+      "reward_pct": 0.0,
+      "risk_reward": "1:1.76"
+    },
+    "prediction": {
+      "model_status": "FROZEN",
+      "confidence": "SHADOW_MODE_IGNORED",
+      "scenario": "N/A",
+      "scenario_probability": "N/A"
+    },
+    "quality": {
+      "data_quality": "OK",
+      "liquidity_status": "N/A",
+      "drift_status": "OK"
+    },
+    "gates": {
+      "cash_gate": "N/A",
+      "liquidity_gate": "FAIL",
+      "over_cap_gate": "N/A",
+      "risk_gate": "PASS",
+      "kill_switch": "PASS"
+    },
+    "metadata": {
+      "model_version": "v4.1",
+      "feature_version": "v3",
+      "config_version": "v1",
+      "training_cutoff": "N/A",
+      "data_snapshot_id": "5d990d79"
+    }
+  },
+  {
+    "decision_id": "RMDA.CA_2026-08-23 17:01_5d990d79",
+    "timestamp": "2026-08-23 17:01",
+    "ticker": "RMDA.CA",
+    "name": "العاشر من رمضان فارما (راميدا)",
+    "market_data": {
+      "current_price": 6.35,
+      "price_timestamp": "2026-08-23 17:01"
+    },
+    "portfolio": {
+      "equity": 106503.33,
+      "cash": 100000.0,
+      "allocation_pct": 0.0,
+      "position_qty": 0
+    },
+    "signal": {
+      "action": "HOLD/WATCH",
+      "status": "IGNORED",
+      "reason": "No Buy Signal"
+    },
+    "entry": {
+      "price": 6.19,
+      "type": "PULLBACK_LIMIT",
+      "distance_pct": 2.52
+    },
+    "risk": {
+      "stop": 5.57,
+      "target": 6.93,
+      "risk_pct": 0.0,
+      "reward_pct": 0.0,
+      "risk_reward": "1:1.19"
+    },
+    "prediction": {
+      "model_status": "FROZEN",
+      "confidence": "SHADOW_MODE_IGNORED",
+      "scenario": "N/A",
+      "scenario_probability": "N/A"
+    },
+    "quality": {
+      "data_quality": "OK",
+      "liquidity_status": "N/A",
+      "drift_status": "OK"
+    },
+    "gates": {
+      "cash_gate": "N/A",
+      "liquidity_gate": "FAIL",
+      "over_cap_gate": "N/A",
+      "risk_gate": "PASS",
+      "kill_switch": "PASS"
+    },
+    "metadata": {
+      "model_version": "v4.1",
+      "feature_version": "v3",
+      "config_version": "v1",
+      "training_cutoff": "N/A",
+      "data_snapshot_id": "5d990d79"
+    }
+  },
+  {
+    "decision_id": "ABUK.CA_2026-08-23 17:01_5d990d79",
+    "timestamp": "2026-08-23 17:01",
+    "ticker": "ABUK.CA",
+    "name": "أبو قير للأسمدة",
+    "market_data": {
+      "current_price": 76.59,
+      "price_timestamp": "2026-08-23 17:01"
+    },
+    "portfolio": {
+      "equity": 106503.33,
+      "cash": 100000.0,
+      "allocation_pct": 0.0,
+      "position_qty": 0
+    },
+    "signal": {
+      "action": "HOLD/WATCH",
+      "status": "IGNORED",
+      "reason": "No Buy Signal"
+    },
+    "entry": {
+      "price": 75.96,
+      "type": "PULLBACK_LIMIT",
+      "distance_pct": 0.82
+    },
+    "risk": {
+      "stop": 73.61,
+      "target": 79.95,
+      "risk_pct": 0.0,
+      "reward_pct": 0.0,
+      "risk_reward": "1:1.7"
+    },
+    "prediction": {
+      "model_status": "FROZEN",
+      "confidence": "SHADOW_MODE_IGNORED",
+      "scenario": "N/A",
+      "scenario_probability": "N/A"
+    },
+    "quality": {
+      "data_quality": "OK",
+      "liquidity_status": "N/A",
+      "drift_status": "OK"
+    },
+    "gates": {
+      "cash_gate": "N/A",
+      "liquidity_gate": "FAIL",
+      "over_cap_gate": "N/A",
+      "risk_gate": "PASS",
+      "kill_switch": "PASS"
+    },
+    "metadata": {
+      "model_version": "v4.1",
+      "feature_version": "v3",
+      "config_version": "v1",
+      "training_cutoff": "N/A",
+      "data_snapshot_id": "5d990d79"
+    }
+  },
+  {
+    "decision_id": "EXPA.CA_2026-08-23 17:01_5d990d79",
+    "timestamp": "2026-08-23 17:01",
+    "ticker": "EXPA.CA",
+    "name": "البنك المصري لتنمية الصادرات",
+    "market_data": {
+      "current_price": 20.27,
+      "price_timestamp": "2026-08-23 17:01"
+    },
+    "portfolio": {
+      "equity": 106503.33,
+      "cash": 100000.0,
+      "allocation_pct": 0.0,
+      "position_qty": 0
+    },
+    "signal": {
+      "action": "HOLD/WATCH",
+      "status": "IGNORED",
+      "reason": "No Buy Signal"
+    },
+    "entry": {
+      "price": 20.1,
+      "type": "PULLBACK_LIMIT",
+      "distance_pct": 0.84
+    },
+    "risk": {
+      "stop": 19.43,
+      "target": 21.17,
+      "risk_pct": 0.0,
+      "reward_pct": 0.0,
+      "risk_reward": "1:1.6"
+    },
+    "prediction": {
+      "model_status": "FROZEN",
+      "confidence": "SHADOW_MODE_IGNORED",
+      "scenario": "N/A",
+      "scenario_probability": "N/A"
+    },
+    "quality": {
+      "data_quality": "OK",
+      "liquidity_status": "N/A",
+      "drift_status": "OK"
+    },
+    "gates": {
+      "cash_gate": "N/A",
+      "liquidity_gate": "FAIL",
+      "over_cap_gate": "N/A",
+      "risk_gate": "PASS",
+      "kill_switch": "PASS"
+    },
+    "metadata": {
+      "model_version": "v4.1",
+      "feature_version": "v3",
+      "config_version": "v1",
+      "training_cutoff": "N/A",
+      "data_snapshot_id": "5d990d79"
     }
   }
 ]
