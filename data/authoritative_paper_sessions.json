@@ -1,1 +1,12 @@
-[]
+[
+    {
+        "session_id": "4086cc01-f1c1-41ad-8a26-1d35ba0bb929",
+        "market_date": "2026-08-24",
+        "timezone": "Africa/Cairo",
+        "run_timestamp": "2026-08-24T08:49:32.216677",
+        "status": "FAILED",
+        "data_status": "PENDING",
+        "paper_mode": true,
+        "completion_status": "type object 'DataQualityEngine' has no attribute 'audit_ohlcv_record'"
+    }
+]
