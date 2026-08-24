@@ -584,11 +584,11 @@
                             <tr>
                                 <td><strong class="text-green">#4</strong></td>
                                 <td>أوراسكوم للإنشاء (<strong class="ltr-text">ORAS.CA</strong>)</td>
-                                <td><span class="ltr-text">759.00</span> ج.م</td>
-                                <td><span class="ltr-text">747.62 – 757.48</span> ج.م</td>
-                                <td><span class="ltr-text">834.90</span> ج.م</td>
-                                <td><span class="ltr-text">705.87</span> ج.م</td>
-                                <td><strong class="text-green">80.5 / 100</strong></td>
+                                <td><span class="ltr-text">782.25</span> ج.م</td>
+                                <td><span class="ltr-text">770.52 – 780.69</span> ج.م</td>
+                                <td><span class="ltr-text">848.74</span> ج.م</td>
+                                <td><span class="ltr-text">727.49</span> ج.م</td>
+                                <td><strong class="text-green">79.9 / 100</strong></td>
                                 <td>🟢 مشروعات بنية تحتية إقليمية كبرى، عقود دولارية، وقوة في حقوق الملكية.</td>
                                 <td><span class="badge badge-green">🟢 فرصة شراء ممتازة</span></td>
                                 <td><button class="btn btn-primary" onclick="openDossier('ORAS.CA')">تفاصيل السهم</button></td>
@@ -853,7 +853,7 @@
                                 <option value="COMI.CA">البنك التجاري الدولي (COMI.CA) — 137.00 ج.م</option>
                                 <option value="SWDY.CA">السويدي إليكتريك (SWDY.CA) — 116.00 ج.م</option>
                                 <option value="TMGH.CA">مجموعة طلعت مصطفى (TMGH.CA) — 97.70 ج.م</option>
-                                <option value="ORAS.CA">أوراسكوم للإنشاء (ORAS.CA) — 759.00 ج.م</option>
+                                <option value="ORAS.CA">أوراسكوم للإنشاء (ORAS.CA) — 782.25 ج.م</option>
                                 <option value="ETEL.CA">المصرية للاتصالات (ETEL.CA) — 114.89 ج.م</option>
                                 <option value="EGAL.CA">مصر للألومنيوم (EGAL.CA) — 330.00 ج.م</option>
                                 <option value="ABUK.CA">أبو قير للأسمدة (ABUK.CA) — 75.52 ج.م</option>
@@ -1248,7 +1248,7 @@
                                 <option value="COMI.CA">البنك التجاري الدولي (COMI.CA) — 137.00 ج.م</option>
                                 <option value="SWDY.CA">السويدي إليكتريك (SWDY.CA) — 116.00 ج.م</option>
                                 <option value="TMGH.CA">مجموعة طلعت مصطفى (TMGH.CA) — 97.70 ج.م</option>
-                                <option value="ORAS.CA">أوراسكوم للإنشاء (ORAS.CA) — 759.00 ج.م</option>
+                                <option value="ORAS.CA">أوراسكوم للإنشاء (ORAS.CA) — 782.25 ج.م</option>
                                 <option value="ETEL.CA">المصرية للاتصالات (ETEL.CA) — 114.89 ج.م</option>
                                 <option value="EGAL.CA">مصر للألومنيوم (EGAL.CA) — 330.00 ج.م</option>
                                 <option value="ABUK.CA">أبو قير للأسمدة (ABUK.CA) — 75.52 ج.م</option>
@@ -1530,7 +1530,7 @@
                     <option value="COMI.CA|137.00">البنك التجاري الدولي (COMI.CA) — 137.00 ج.م</option>
                     <option value="SWDY.CA|116.00">السويدي إليكتريك (SWDY.CA) — 116.00 ج.م</option>
                     <option value="TMGH.CA|97.70">مجموعة طلعت مصطفى (TMGH.CA) — 97.70 ج.م</option>
-                    <option value="ORAS.CA|759.00">أوراسكوم للإنشاء (ORAS.CA) — 759.00 ج.م</option>
+                    <option value="ORAS.CA|782.25">أوراسكوم للإنشاء (ORAS.CA) — 782.25 ج.م</option>
                     <option value="ETEL.CA|114.89">المصرية للاتصالات (ETEL.CA) — 114.89 ج.م</option>
                     <option value="EGAL.CA|330.00">مصر للألومنيوم (EGAL.CA) — 330.00 ج.م</option>
                     <option value="ABUK.CA|75.52">أبو قير للأسمدة (ABUK.CA) — 75.52 ج.م</option>
@@ -2779,18 +2779,68 @@
         }
 
         // =========================================================================
-        // التحديث التلقائي للأسعار وجلسات التداول (Auto-Refresh Polling كل 60 ثانية)
+        // التحديث التلقائي للأسعار وجدول الترتيب (Dynamic Real-Time Live DOM Refresh)
         // =========================================================================
+        function renderDynamicRankingsTable(rankingsList) {
+            if (!rankingsList || !Array.isArray(rankingsList) || rankingsList.length === 0) return;
+            const tbody = document.getElementById('ranking-tbody');
+            if (!tbody) return;
+            
+            tbody.innerHTML = '';
+            rankingsList.forEach((r, idx) => {
+                const tr = document.createElement('tr');
+                const rk = r.rank || (idx + 1);
+                const rankColor = rk <= 5 ? 'text-green' : (rk <= 15 ? 'text-yellow' : '');
+                const rankLabel = rk === 1 ? '#1 الأفضل' : `#${rk}`;
+                const score = Number(r.alpha_score || r.overall_score || 75.0);
+                const badgeClass = score >= 80 ? 'badge-green' : (score >= 60 ? 'badge-yellow' : 'badge-red');
+                const badgeIcon = score >= 80 ? '🟢' : (score >= 60 ? '🟡' : '🔴');
+                const recText = r.recommendation || (score >= 80 ? 'فرصة شراء ممتازة' : (score >= 60 ? 'مراقبة الاتجاه' : 'تجنب الشراء'));
+                const whyText = r.why_selected || r.why_ar || (score >= 80 ? '🟢 زخم فني إيجابي وتدفقات سيولة داعمة.' : '🟡 أداء متوازن ومتوافق مع حركة السوق.');
+                
+                const curPrice = Number(r.current_price || 0.0);
+                const entryZoneStr = r.entry_zone || `${(curPrice * 0.985).toFixed(2)} – ${(curPrice * 0.998).toFixed(2)}`;
+                const targetPriceStr = r.target_price ? Number(r.target_price).toFixed(2) : (curPrice * 1.10).toFixed(2);
+                const stopLossStr = r.stop_loss ? Number(r.stop_loss).toFixed(2) : (curPrice * 0.93).toFixed(2);
+
+                tr.innerHTML = `
+                    <td><strong class="${rankColor}">${rankLabel}</strong></td>
+                    <td>${r.company_name} (<strong class="ltr-text">${r.ticker}</strong>)</td>
+                    <td><span class="ltr-text font-bold">${curPrice.toFixed(2)}</span> ج.م</td>
+                    <td><span class="ltr-text">${entryZoneStr}</span> ج.م</td>
+                    <td><span class="ltr-text">${targetPriceStr}</span> ج.م</td>
+                    <td><span class="ltr-text">${stopLossStr}</span> ج.م</td>
+                    <td><strong class="${rankColor}">${score.toFixed(1)} / 100</strong></td>
+                    <td>${whyText}</td>
+                    <td><span class="badge ${badgeClass}">${badgeIcon} ${recText}</span></td>
+                    <td><button class="btn btn-primary" onclick="openDossier('${r.ticker}')">تفاصيل السهم</button></td>
+                `;
+                tbody.appendChild(tr);
+
+                // Update in-memory EGX_STOCKS_DATA if present
+                if (typeof EGX_STOCKS_DATA !== 'undefined' && EGX_STOCKS_DATA[r.ticker]) {
+                    EGX_STOCKS_DATA[r.ticker].price = curPrice;
+                    if (EGX_STOCKS_DATA[r.ticker].st) {
+                        EGX_STOCKS_DATA[r.ticker].st.stop = `${stopLossStr} (-7.0%)`;
+                        EGX_STOCKS_DATA[r.ticker].st.target = `${targetPriceStr}`;
+                        EGX_STOCKS_DATA[r.ticker].st.entry = entryZoneStr;
+                    }
+                }
+            });
+        }
+
         function pollMarketUpdates() {
             fetch('/api/ranking')
                 .then(r => r.json())
                 .then(data => {
-                    if (data && data.rankings && data.rankings.length > 0) {
+                    const rankingsList = Array.isArray(data) ? data : (data.rankings || []);
+                    if (rankingsList.length > 0) {
+                        renderDynamicRankingsTable(rankingsList);
                         const now = new Date();
                         const timeStr = now.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
                         const pulseBadge = document.getElementById('auto-refresh-badge');
                         if (pulseBadge) {
-                            pulseBadge.innerHTML = `<span style="color: #10b981;">🟢</span> تم التحديث: ${timeStr}`;
+                            pulseBadge.innerHTML = `<span style="color: #10b981;">🟢</span> تم التحديث المباشر: ${timeStr}`;
                             setTimeout(() => {
                                 pulseBadge.innerHTML = `🟢 تحديث تلقائي نشط (كل 60 ثانية)`;
                             }, 5000);
@@ -2816,8 +2866,9 @@
                 .catch(err => console.debug('Scheduler status quiet notice:', err));
         }
 
-        // تشغيل فوري لتحديث شارة التزامن عند فتح الصفحة
-        setTimeout(() => {
+        // تشغيل فوري لجلب الأسعار وجدول الترتيب عند فتح الصفحة
+        document.addEventListener('DOMContentLoaded', () => {
+            pollMarketUpdates();
             fetch('/api/prices')
                 .then(r => r.json())
                 .then(prices => {
@@ -2828,7 +2879,7 @@
                     }
                 })
                 .catch(() => {});
-        }, 300);
+        });
 
         // =========================================================================
         // محرك الرسم البياني المباشر التفاعلي من TradingView (Arabic Locale + Dark Theme)

@@ -72,7 +72,7 @@ class EGXUniverseLoader:
             "isin": "EGS21451C017",
             "index_membership": ["EGX30", "EGX100"],
             "market_cap_tier": "LARGE_CAP",
-            "nominal_price": 759.00,
+            "nominal_price": 782.25,
             "adv20_egp": 84000000.0,
             "beta_egx30": 0.88,
             "is_active": True

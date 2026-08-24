@@ -1,0 +1,77 @@
+{
+  "decision": {
+    "decision_id": "COMI.CA_2026-08-24_1f7f60e8",
+    "timestamp": "2026-08-24T04:05:34.280249",
+    "ticker": "COMI.CA",
+    "name": "البنك التجاري الدولي",
+    "market_data": {
+      "current_price": 85.0,
+      "price_timestamp": "2026-08-24T04:05:34.280249"
+    },
+    "portfolio": {
+      "equity": 1000000.0,
+      "cash": 200000.0,
+      "allocation_pct": 10.0,
+      "position_qty": 0
+    },
+    "signal": {
+      "action": "BUY LIMIT (PULLBACK)",
+      "status": "APPROVED",
+      "reason": "ألفا استثمارية قوية (85.0/100) | جودة تشغيلية ومالية ممتازة (80.0/100) | تقييم مغري ومضاعفات عادلة (75.0/100) | دخول تراجعي آمن بخصم 2.4% عن سعر السوق",
+      "confidence_pct": 88.0
+    },
+    "entry": {
+      "price": 83.0,
+      "type": "PULLBACK_LIMIT",
+      "distance_pct": 2.35
+    },
+    "risk": {
+      "stop": 78.0,
+      "target": 95.0,
+      "risk_score": 75.0,
+      "risk_reason_codes": [],
+      "risk_reward": "1:1.4"
+    },
+    "explainability": {
+      "why": [
+        "ألفا استثمارية قوية (85.0/100)",
+        "جودة تشغيلية ومالية ممتازة (80.0/100)",
+        "تقييم مغري ومضاعفات عادلة (75.0/100)",
+        "دخول تراجعي آمن بخصم 2.4% عن سعر السوق"
+      ],
+      "why_not": [],
+      "alpha_score": 85.0,
+      "quality_score": 80.0,
+      "valuation_score": 75.0,
+      "liquidity_score": 90.0,
+      "risk_score": 75.0,
+      "accounting_risk": "LOW",
+      "risk_reason_codes": []
+    },
+    "gates": {
+      "cash_gate": "PASS",
+      "allocation_gate": "PASS",
+      "pullback_gate": "PASS",
+      "quality_gate": "PASS"
+    }
+  },
+  "state_snapshot": {
+    "alpha": {
+      "alpha_score": 85.0,
+      "confidence_pct": 88.0
+    },
+    "quality": {
+      "quality_score": 80.0,
+      "accounting_risk": "LOW"
+    },
+    "valuation": {
+      "valuation_score": 75.0
+    },
+    "liquidity": {
+      "liquidity_score": 90.0
+    },
+    "portfolio_equity": 1000000.0,
+    "cash": 200000.0
+  },
+  "saved_at": "2026-08-24T04:05:34.280815"
+}

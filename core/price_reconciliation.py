@@ -56,13 +56,13 @@ class PriceReconciliationEngine:
         },
         "ORAS.CA": {
             "company_name": "أوراسكوم للإنشاء",
-            "raw_broker_price": 759.00,
-            "adjusted_model_price": 759.00,
-            "previous_close": 755.00,
+            "raw_broker_price": 782.25,
+            "adjusted_model_price": 782.25,
+            "previous_close": 759.00,
             "currency": "EGP",
             "price_type": "OFFICIAL_LAST_CLOSE",
             "feed_status": "FRESH_EOD_VERIFIED",
-            "data_timestamp": "2026-08-20 14:30:00",
+            "data_timestamp": "2026-08-24 03:20:00",
             "split_adjusted": False,
             "discrepancy_reason": "No discrepancy: Identical to EGX broker closing settlement."
         },

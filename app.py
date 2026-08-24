@@ -1289,14 +1289,34 @@ def export_decision_log(decision_objects, ts):
     except Exception: pass
 
 def export_daily_ranking(predictions, ts):
-    rows = [{'date':ts,'rank':p.get('الترتيب 🏆',''),'ticker':p.get('الكود',''),
-              'name':p.get('الاسم',''),'sector':p.get('القطاع',''),
-              'score':p.get('درجة الترتيب الاستثماري ⭐',''),'signal':p.get('التوصية الحية',''),
-              'confidence':p.get('نسبة الثقة الحية',''),'market_regime':p.get('حالة السوق',''),
-              'model_agreement':p.get('اتفاق النماذج 🤝',''),'alpha_vs_egx30':p.get('Alpha vs EGX30 📊',''),
-              'data_quality':p.get('_dq_status','OK'), 'model_version': 'v3.0-frozen'} for p in predictions]
-    try: pd.DataFrame(rows).to_csv(RANKING_CSV, index=False, encoding='utf-8-sig')
-    except Exception: pass
+    rows = []
+    for p in predictions:
+        sym = p.get('الكود', '')
+        try:
+            from core.market_price_service import MarketPriceService
+            cp = float(p.get('السعر الحالي', MarketPriceService.get_latest_price(sym)))
+        except Exception:
+            cp = float(p.get('السعر الحالي', 0.0))
+        rows.append({
+            'date': ts,
+            'rank': p.get('الترتيب 🏆', ''),
+            'ticker': sym,
+            'name': p.get('الاسم', ''),
+            'sector': p.get('القطاع', ''),
+            'current_price': cp,
+            'score': p.get('درجة الترتيب الاستثماري ⭐', ''),
+            'signal': p.get('التوصية الحية', ''),
+            'confidence': p.get('نسبة الثقة الحية', ''),
+            'market_regime': p.get('حالة السوق', ''),
+            'model_agreement': p.get('اتفاق النماذج 🤝', ''),
+            'alpha_vs_egx30': p.get('Alpha vs EGX30 📊', ''),
+            'data_quality': p.get('_dq_status', 'OK'),
+            'model_version': 'v3.0-ssot'
+        })
+    try:
+        pd.DataFrame(rows).to_csv(RANKING_CSV, index=False, encoding='utf-8-sig')
+    except Exception:
+        pass
 
 def export_portfolio_state(decision_objects, ts):
     rows = []

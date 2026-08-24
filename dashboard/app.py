@@ -182,7 +182,9 @@ def api_ranking():
             "alpha_score": r["overall_score"],
             "risk_score": 85.0,
             "recommendation": "شراء تراجعي (Limit)" if r["overall_score"] >= 80 else ("مراقبة الاتجاه" if r["overall_score"] >= 60 else "تجنب الشراء حالياً"),
-            "action": "BUY" if r["overall_score"] >= 80 else ("WATCH" if r["overall_score"] >= 60 else "AVOID")
+            "action": "BUY" if r["overall_score"] >= 80 else ("WATCH" if r["overall_score"] >= 60 else "AVOID"),
+            "why_selected": r.get("why_selected", "🟢 أداء متوازن ومتوافق مع حركة السوق."),
+            "source": r.get("price_record", {}).get("source", "TRADINGVIEW_EGX_LIVE_SSOT")
         })
     return jsonify(results)
 
