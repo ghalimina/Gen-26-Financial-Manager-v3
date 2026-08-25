@@ -1,12 +1,12 @@
 {
   "decision": {
     "decision_id": "COMI.CA_2026-08-25_9cec8c1f",
-    "timestamp": "2026-08-25T08:43:38.179408",
+    "timestamp": "2026-08-25T10:34:46.601064",
     "ticker": "COMI.CA",
     "name": "البنك التجاري الدولي",
     "market_data": {
       "current_price": 85.0,
-      "price_timestamp": "2026-08-25T08:43:38.179408"
+      "price_timestamp": "2026-08-25T10:34:46.601064"
     },
     "portfolio": {
       "equity": 1000000.0,
@@ -73,5 +73,5 @@
     "portfolio_equity": 1000000.0,
     "cash": 200000.0
   },
-  "saved_at": "2026-08-25T08:43:38.179530"
+  "saved_at": "2026-08-25T10:34:46.601164"
 }
