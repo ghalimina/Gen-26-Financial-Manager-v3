@@ -1,13 +1,13 @@
 ﻿date,ticker,name,shares,current_price,market_value_egp,allocation_pct,status,action,notes
-2026-08-24 13:38,RAYA.CA,راية القابضة,159,7.03,1117.77,0.0,HOLDING,HOLD,السهم في النطاق الآمن (لم يكسر وقف الخسارة والتركز طبيعي)
-2026-08-24 13:38,SWDY.CA,السويدي إلكتريك,0,126.2,0.0,4.2,APPROVED,WAIT FOR PULLBACK,APPROVED_FOR_EXECUTION
-2026-08-24 13:38,AMOC.CA,أموك للبترول,0,11.1,0.0,4.5,APPROVED,WAIT FOR PULLBACK,APPROVED_FOR_EXECUTION
-2026-08-24 13:38,SKPC.CA,سيدي كرير للبتروكيماويات,0,17.4,0.0,5.9,APPROVED,WAIT FOR PULLBACK,APPROVED_FOR_EXECUTION
-2026-08-24 13:38,CLHO.CA,كليوباترا للمستشفيات,0,17.45,0.0,6.2,APPROVED,WAIT FOR PULLBACK,APPROVED_FOR_EXECUTION
-2026-08-24 13:38,ETEL.CA,المصرية للاتصالات,0,116.5,0.0,5.9,APPROVED,WAIT FOR PULLBACK,APPROVED_FOR_EXECUTION
-2026-08-24 13:38,TMGH.CA,طلعت مصطفى,8,98.0,784.0,8.7,HOLDING,HOLD,السهم في النطاق الآمن (لم يكسر وقف الخسارة والتركز طبيعي)
-2026-08-24 13:38,FWRY.CA,فوري للمدفوعات,0,19.05,0.0,8.4,APPROVED,WAIT FOR PULLBACK,APPROVED_FOR_EXECUTION
-2026-08-24 13:38,ADIB.CA,مصرف أبو ظبي الإسلامي,0,54.06,0.0,6.5,APPROVED,WAIT FOR PULLBACK,APPROVED_FOR_EXECUTION
-2026-08-24 13:38,PHDC.CA,بالم هيلز للتعمير,65,14.75,958.75,0.0,HOLDING,HOLD,السهم في النطاق الآمن (لم يكسر وقف الخسارة والتركز طبيعي)
-2026-08-24 13:38,ORWE.CA,النساجون الشرقيون,0,26.5,0.0,7.2,APPROVED,WAIT FOR PULLBACK,APPROVED_FOR_EXECUTION
-2026-08-24 13:38,COMI.CA,التجاري الدولي,26,139.48,3626.48,8.7,HOLDING,HOLD,السهم في النطاق الآمن (لم يكسر وقف الخسارة والتركز طبيعي)
+2026-08-25 08:43,RAYA.CA,راية القابضة,159,7.04,1119.36,0.0,HOLDING,HOLD,السهم في النطاق الآمن (لم يكسر وقف الخسارة والتركز طبيعي)
+2026-08-25 08:43,SWDY.CA,السويدي إلكتريك,0,126.99,0.0,4.2,APPROVED,WAIT FOR PULLBACK,APPROVED_FOR_EXECUTION
+2026-08-25 08:43,TMGH.CA,طلعت مصطفى,8,97.64,781.12,8.7,HOLDING,HOLD,السهم في النطاق الآمن (لم يكسر وقف الخسارة والتركز طبيعي)
+2026-08-25 08:43,FWRY.CA,فوري للمدفوعات,0,19.1,0.0,8.4,APPROVED,WAIT FOR PULLBACK,APPROVED_FOR_EXECUTION
+2026-08-25 08:43,CLHO.CA,كليوباترا للمستشفيات,0,17.41,0.0,6.2,APPROVED,WAIT FOR PULLBACK,APPROVED_FOR_EXECUTION
+2026-08-25 08:43,ETEL.CA,المصرية للاتصالات,0,116.8,0.0,5.9,APPROVED,WAIT FOR PULLBACK,APPROVED_FOR_EXECUTION
+2026-08-25 08:43,SKPC.CA,سيدي كرير للبتروكيماويات,0,17.4,0.0,5.9,APPROVED,WAIT FOR PULLBACK,APPROVED_FOR_EXECUTION
+2026-08-25 08:43,ADIB.CA,مصرف أبو ظبي الإسلامي,0,54.11,0.0,6.5,APPROVED,WAIT FOR PULLBACK,APPROVED_FOR_EXECUTION
+2026-08-25 08:43,ORWE.CA,النساجون الشرقيون,0,26.44,0.0,7.2,APPROVED,WAIT FOR PULLBACK,APPROVED_FOR_EXECUTION
+2026-08-25 08:43,EGAL.CA,مصر للالومنيوم,0,354.49,0.0,6.4,APPROVED,WAIT FOR PULLBACK,APPROVED_FOR_EXECUTION
+2026-08-25 08:43,PHDC.CA,بالم هيلز للتعمير,65,14.75,958.75,0.0,HOLDING,HOLD,السهم في النطاق الآمن (لم يكسر وقف الخسارة والتركز طبيعي)
+2026-08-25 08:43,COMI.CA,التجاري الدولي,26,140.55,3654.3,0.0,HOLDING,HOLD,السهم في النطاق الآمن (لم يكسر وقف الخسارة والتركز طبيعي)
