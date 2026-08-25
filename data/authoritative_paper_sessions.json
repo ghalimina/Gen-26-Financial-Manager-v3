@@ -58,5 +58,15 @@
         "data_status": "PENDING",
         "paper_mode": true,
         "completion_status": "type object 'DataQualityEngine' has no attribute 'audit_ohlcv_record'"
+    },
+    {
+        "session_id": "90b6e3f9-ed96-4157-be79-53bc91ec91ad",
+        "market_date": "2026-08-25",
+        "timezone": "Africa/Cairo",
+        "run_timestamp": "2026-08-25T12:49:00.119331",
+        "status": "FAILED",
+        "data_status": "PENDING",
+        "paper_mode": true,
+        "completion_status": "type object 'DataQualityEngine' has no attribute 'audit_ohlcv_record'"
     }
 ]
