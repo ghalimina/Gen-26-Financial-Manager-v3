@@ -1,12 +1,12 @@
 [
   {
-    "decision_id": "MASR.CA_2026-08-25 12:49_d1799f6b",
-    "timestamp": "2026-08-25 12:49",
+    "decision_id": "MASR.CA_2026-08-25 13:37_4ed44445",
+    "timestamp": "2026-08-25 13:37",
     "ticker": "MASR.CA",
     "name": "مدينة مصر للإسكان",
     "market_data": {
       "current_price": 7.58,
-      "price_timestamp": "2026-08-25 12:49"
+      "price_timestamp": "2026-08-25 13:37"
     },
     "portfolio": {
       "equity": 106570.96,
@@ -54,17 +54,17 @@
       "feature_version": "v3",
       "config_version": "v1",
       "training_cutoff": "N/A",
-      "data_snapshot_id": "d1799f6b"
+      "data_snapshot_id": "4ed44445"
     }
   },
   {
-    "decision_id": "RAYA.CA_2026-08-25 12:49_d1799f6b",
-    "timestamp": "2026-08-25 12:49",
+    "decision_id": "RAYA.CA_2026-08-25 13:37_4ed44445",
+    "timestamp": "2026-08-25 13:37",
     "ticker": "RAYA.CA",
     "name": "راية القابضة",
     "market_data": {
       "current_price": 7.25,
-      "price_timestamp": "2026-08-25 12:49"
+      "price_timestamp": "2026-08-25 13:37"
     },
     "portfolio": {
       "equity": 106570.96,
@@ -84,10 +84,10 @@
     },
     "risk": {
       "stop": 6.92,
-      "target": 7.59,
+      "target": 7.6,
       "risk_pct": 0.0,
       "reward_pct": 0.0,
-      "risk_reward": "1:1.58"
+      "risk_reward": "1:1.62"
     },
     "prediction": {
       "model_status": "FROZEN",
@@ -112,22 +112,22 @@
       "feature_version": "v3",
       "config_version": "v1",
       "training_cutoff": "N/A",
-      "data_snapshot_id": "d1799f6b"
+      "data_snapshot_id": "4ed44445"
     }
   },
   {
-    "decision_id": "SWDY.CA_2026-08-25 12:49_d1799f6b",
-    "timestamp": "2026-08-25 12:49",
+    "decision_id": "SWDY.CA_2026-08-25 13:37_4ed44445",
+    "timestamp": "2026-08-25 13:37",
     "ticker": "SWDY.CA",
     "name": "السويدي إلكتريك",
     "market_data": {
       "current_price": 126.6,
-      "price_timestamp": "2026-08-25 12:49"
+      "price_timestamp": "2026-08-25 13:37"
     },
     "portfolio": {
       "equity": 106570.96,
       "cash": 100000.0,
-      "allocation_pct": 4.8,
+      "allocation_pct": 5.2,
       "position_qty": 0
     },
     "signal": {
@@ -142,10 +142,10 @@
     },
     "risk": {
       "stop": 112.34,
-      "target": 140.62,
+      "target": 140.76,
       "risk_pct": 0.0,
       "reward_pct": 0.0,
-      "risk_reward": "1:1.51"
+      "risk_reward": "1:1.52"
     },
     "prediction": {
       "model_status": "FROZEN",
@@ -170,17 +170,17 @@
       "feature_version": "v3",
       "config_version": "v1",
       "training_cutoff": "N/A",
-      "data_snapshot_id": "d1799f6b"
+      "data_snapshot_id": "4ed44445"
     }
   },
   {
-    "decision_id": "AMOC.CA_2026-08-25 12:49_d1799f6b",
-    "timestamp": "2026-08-25 12:49",
+    "decision_id": "AMOC.CA_2026-08-25 13:37_4ed44445",
+    "timestamp": "2026-08-25 13:37",
     "ticker": "AMOC.CA",
     "name": "أموك للبترول",
     "market_data": {
       "current_price": 10.9,
-      "price_timestamp": "2026-08-25 12:49"
+      "price_timestamp": "2026-08-25 13:37"
     },
     "portfolio": {
       "equity": 106570.96,
@@ -200,10 +200,10 @@
     },
     "risk": {
       "stop": 10.29,
-      "target": 11.57,
+      "target": 11.59,
       "risk_pct": 0.0,
       "reward_pct": 0.0,
-      "risk_reward": "1:1.06"
+      "risk_reward": "1:1.1"
     },
     "prediction": {
       "model_status": "FROZEN",
@@ -228,17 +228,17 @@
       "feature_version": "v3",
       "config_version": "v1",
       "training_cutoff": "N/A",
-      "data_snapshot_id": "d1799f6b"
+      "data_snapshot_id": "4ed44445"
     }
   },
   {
-    "decision_id": "HELI.CA_2026-08-25 12:49_d1799f6b",
-    "timestamp": "2026-08-25 12:49",
+    "decision_id": "HELI.CA_2026-08-25 13:37_4ed44445",
+    "timestamp": "2026-08-25 13:37",
     "ticker": "HELI.CA",
     "name": "مصر الجديدة للإسكان",
     "market_data": {
       "current_price": 7.35,
-      "price_timestamp": "2026-08-25 12:49"
+      "price_timestamp": "2026-08-25 13:37"
     },
     "portfolio": {
       "equity": 106570.96,
@@ -286,22 +286,22 @@
       "feature_version": "v3",
       "config_version": "v1",
       "training_cutoff": "N/A",
-      "data_snapshot_id": "d1799f6b"
+      "data_snapshot_id": "4ed44445"
     }
   },
   {
-    "decision_id": "TMGH.CA_2026-08-25 12:49_d1799f6b",
-    "timestamp": "2026-08-25 12:49",
+    "decision_id": "TMGH.CA_2026-08-25 13:37_4ed44445",
+    "timestamp": "2026-08-25 13:37",
     "ticker": "TMGH.CA",
     "name": "طلعت مصطفى",
     "market_data": {
       "current_price": 98.5,
-      "price_timestamp": "2026-08-25 12:49"
+      "price_timestamp": "2026-08-25 13:37"
     },
     "portfolio": {
       "equity": 106570.96,
       "cash": 100000.0,
-      "allocation_pct": 9.0,
+      "allocation_pct": 9.1,
       "position_qty": 8
     },
     "signal": {
@@ -316,10 +316,10 @@
     },
     "risk": {
       "stop": 95.43,
-      "target": 103.08,
+      "target": 103.15,
       "risk_pct": 0.0,
       "reward_pct": 0.0,
-      "risk_reward": "1:2.16"
+      "risk_reward": "1:2.19"
     },
     "prediction": {
       "model_status": "FROZEN",
@@ -344,17 +344,17 @@
       "feature_version": "v3",
       "config_version": "v1",
       "training_cutoff": "N/A",
-      "data_snapshot_id": "d1799f6b"
+      "data_snapshot_id": "4ed44445"
     }
   },
   {
-    "decision_id": "FWRY.CA_2026-08-25 12:49_d1799f6b",
-    "timestamp": "2026-08-25 12:49",
+    "decision_id": "FWRY.CA_2026-08-25 13:37_4ed44445",
+    "timestamp": "2026-08-25 13:37",
     "ticker": "FWRY.CA",
     "name": "فوري للمدفوعات",
     "market_data": {
       "current_price": 18.9,
-      "price_timestamp": "2026-08-25 12:49"
+      "price_timestamp": "2026-08-25 13:37"
     },
     "portfolio": {
       "equity": 106570.96,
@@ -374,10 +374,10 @@
     },
     "risk": {
       "stop": 18.33,
-      "target": 19.78,
+      "target": 19.79,
       "risk_pct": 0.0,
       "reward_pct": 0.0,
-      "risk_reward": "1:2.09"
+      "risk_reward": "1:2.11"
     },
     "prediction": {
       "model_status": "FROZEN",
@@ -402,22 +402,22 @@
       "feature_version": "v3",
       "config_version": "v1",
       "training_cutoff": "N/A",
-      "data_snapshot_id": "d1799f6b"
+      "data_snapshot_id": "4ed44445"
     }
   },
   {
-    "decision_id": "CLHO.CA_2026-08-25 12:49_d1799f6b",
-    "timestamp": "2026-08-25 12:49",
+    "decision_id": "CLHO.CA_2026-08-25 13:37_4ed44445",
+    "timestamp": "2026-08-25 13:37",
     "ticker": "CLHO.CA",
     "name": "كليوباترا للمستشفيات",
     "market_data": {
       "current_price": 17.5,
-      "price_timestamp": "2026-08-25 12:49"
+      "price_timestamp": "2026-08-25 13:37"
     },
     "portfolio": {
       "equity": 106570.96,
       "cash": 100000.0,
-      "allocation_pct": 7.0,
+      "allocation_pct": 7.5,
       "position_qty": 0
     },
     "signal": {
@@ -432,10 +432,10 @@
     },
     "risk": {
       "stop": 16.65,
-      "target": 18.33,
+      "target": 18.34,
       "risk_pct": 0.0,
       "reward_pct": 0.0,
-      "risk_reward": "1:1.51"
+      "risk_reward": "1:1.52"
     },
     "prediction": {
       "model_status": "FROZEN",
@@ -460,22 +460,22 @@
       "feature_version": "v3",
       "config_version": "v1",
       "training_cutoff": "N/A",
-      "data_snapshot_id": "d1799f6b"
+      "data_snapshot_id": "4ed44445"
     }
   },
   {
-    "decision_id": "ETEL.CA_2026-08-25 12:49_d1799f6b",
-    "timestamp": "2026-08-25 12:49",
+    "decision_id": "ETEL.CA_2026-08-25 13:37_4ed44445",
+    "timestamp": "2026-08-25 13:37",
     "ticker": "ETEL.CA",
     "name": "المصرية للاتصالات",
     "market_data": {
       "current_price": 116.1,
-      "price_timestamp": "2026-08-25 12:49"
+      "price_timestamp": "2026-08-25 13:37"
     },
     "portfolio": {
       "equity": 106570.96,
       "cash": 100000.0,
-      "allocation_pct": 6.6,
+      "allocation_pct": 7.2,
       "position_qty": 0
     },
     "signal": {
@@ -490,10 +490,10 @@
     },
     "risk": {
       "stop": 108.93,
-      "target": 122.55,
+      "target": 122.63,
       "risk_pct": 0.0,
       "reward_pct": 0.0,
-      "risk_reward": "1:1.41"
+      "risk_reward": "1:1.42"
     },
     "prediction": {
       "model_status": "FROZEN",
@@ -518,22 +518,22 @@
       "feature_version": "v3",
       "config_version": "v1",
       "training_cutoff": "N/A",
-      "data_snapshot_id": "d1799f6b"
+      "data_snapshot_id": "4ed44445"
     }
   },
   {
-    "decision_id": "SKPC.CA_2026-08-25 12:49_d1799f6b",
-    "timestamp": "2026-08-25 12:49",
+    "decision_id": "SKPC.CA_2026-08-25 13:37_4ed44445",
+    "timestamp": "2026-08-25 13:37",
     "ticker": "SKPC.CA",
     "name": "سيدي كرير للبتروكيماويات",
     "market_data": {
       "current_price": 17.46,
-      "price_timestamp": "2026-08-25 12:49"
+      "price_timestamp": "2026-08-25 13:37"
     },
     "portfolio": {
       "equity": 106570.96,
       "cash": 100000.0,
-      "allocation_pct": 6.6,
+      "allocation_pct": 7.2,
       "position_qty": 0
     },
     "signal": {
@@ -548,10 +548,10 @@
     },
     "risk": {
       "stop": 16.65,
-      "target": 18.28,
+      "target": 18.3,
       "risk_pct": 0.0,
       "reward_pct": 0.0,
-      "risk_reward": "1:1.55"
+      "risk_reward": "1:1.58"
     },
     "prediction": {
       "model_status": "FROZEN",
@@ -576,17 +576,17 @@
       "feature_version": "v3",
       "config_version": "v1",
       "training_cutoff": "N/A",
-      "data_snapshot_id": "d1799f6b"
+      "data_snapshot_id": "4ed44445"
     }
   },
   {
-    "decision_id": "GBCO.CA_2026-08-25 12:49_d1799f6b",
-    "timestamp": "2026-08-25 12:49",
+    "decision_id": "GBCO.CA_2026-08-25 13:37_4ed44445",
+    "timestamp": "2026-08-25 13:37",
     "ticker": "GBCO.CA",
     "name": "غبور أوتو",
     "market_data": {
       "current_price": 28.4,
-      "price_timestamp": "2026-08-25 12:49"
+      "price_timestamp": "2026-08-25 13:37"
     },
     "portfolio": {
       "equity": 106570.96,
@@ -606,10 +606,10 @@
     },
     "risk": {
       "stop": 28.02,
-      "target": 29.94,
+      "target": 29.95,
       "risk_pct": 0.0,
       "reward_pct": 0.0,
-      "risk_reward": "1:0.49"
+      "risk_reward": "1:0.5"
     },
     "prediction": {
       "model_status": "FROZEN",
@@ -634,17 +634,17 @@
       "feature_version": "v3",
       "config_version": "v1",
       "training_cutoff": "N/A",
-      "data_snapshot_id": "d1799f6b"
+      "data_snapshot_id": "4ed44445"
     }
   },
   {
-    "decision_id": "JUFO.CA_2026-08-25 12:49_d1799f6b",
-    "timestamp": "2026-08-25 12:49",
+    "decision_id": "JUFO.CA_2026-08-25 13:37_4ed44445",
+    "timestamp": "2026-08-25 13:37",
     "ticker": "JUFO.CA",
     "name": "جهينة للصناعات الغذائية",
     "market_data": {
       "current_price": 26.89,
-      "price_timestamp": "2026-08-25 12:49"
+      "price_timestamp": "2026-08-25 13:37"
     },
     "portfolio": {
       "equity": 106570.96,
@@ -664,10 +664,10 @@
     },
     "risk": {
       "stop": 25.08,
-      "target": 28.45,
+      "target": 28.48,
       "risk_pct": 0.0,
       "reward_pct": 0.0,
-      "risk_reward": "1:1.36"
+      "risk_reward": "1:1.38"
     },
     "prediction": {
       "model_status": "FROZEN",
@@ -692,22 +692,22 @@
       "feature_version": "v3",
       "config_version": "v1",
       "training_cutoff": "N/A",
-      "data_snapshot_id": "d1799f6b"
+      "data_snapshot_id": "4ed44445"
     }
   },
   {
-    "decision_id": "ADIB.CA_2026-08-25 12:49_d1799f6b",
-    "timestamp": "2026-08-25 12:49",
+    "decision_id": "ADIB.CA_2026-08-25 13:37_4ed44445",
+    "timestamp": "2026-08-25 13:37",
     "ticker": "ADIB.CA",
     "name": "مصرف أبو ظبي الإسلامي",
     "market_data": {
       "current_price": 53.61,
-      "price_timestamp": "2026-08-25 12:49"
+      "price_timestamp": "2026-08-25 13:37"
     },
     "portfolio": {
       "equity": 106570.96,
       "cash": 100000.0,
-      "allocation_pct": 7.4,
+      "allocation_pct": 8.0,
       "position_qty": 0
     },
     "signal": {
@@ -722,10 +722,10 @@
     },
     "risk": {
       "stop": 51.77,
-      "target": 56.14,
+      "target": 56.18,
       "risk_pct": 0.0,
       "reward_pct": 0.0,
-      "risk_reward": "1:2.01"
+      "risk_reward": "1:2.04"
     },
     "prediction": {
       "model_status": "FROZEN",
@@ -750,22 +750,22 @@
       "feature_version": "v3",
       "config_version": "v1",
       "training_cutoff": "N/A",
-      "data_snapshot_id": "d1799f6b"
+      "data_snapshot_id": "4ed44445"
     }
   },
   {
-    "decision_id": "ORWE.CA_2026-08-25 12:49_d1799f6b",
-    "timestamp": "2026-08-25 12:49",
+    "decision_id": "ORWE.CA_2026-08-25 13:37_4ed44445",
+    "timestamp": "2026-08-25 13:37",
     "ticker": "ORWE.CA",
     "name": "النساجون الشرقيون",
     "market_data": {
       "current_price": 26.01,
-      "price_timestamp": "2026-08-25 12:49"
+      "price_timestamp": "2026-08-25 13:37"
     },
     "portfolio": {
       "equity": 106570.96,
       "cash": 100000.0,
-      "allocation_pct": 8.2,
+      "allocation_pct": 8.9,
       "position_qty": 0
     },
     "signal": {
@@ -780,10 +780,10 @@
     },
     "risk": {
       "stop": 24.41,
-      "target": 27.45,
+      "target": 27.47,
       "risk_pct": 0.0,
       "reward_pct": 0.0,
-      "risk_reward": "1:1.41"
+      "risk_reward": "1:1.43"
     },
     "prediction": {
       "model_status": "FROZEN",
@@ -808,22 +808,22 @@
       "feature_version": "v3",
       "config_version": "v1",
       "training_cutoff": "N/A",
-      "data_snapshot_id": "d1799f6b"
+      "data_snapshot_id": "4ed44445"
     }
   },
   {
-    "decision_id": "EGAL.CA_2026-08-25 12:49_d1799f6b",
-    "timestamp": "2026-08-25 12:49",
+    "decision_id": "EGAL.CA_2026-08-25 13:37_4ed44445",
+    "timestamp": "2026-08-25 13:37",
     "ticker": "EGAL.CA",
     "name": "مصر للالومنيوم",
     "market_data": {
       "current_price": 352.75,
-      "price_timestamp": "2026-08-25 12:49"
+      "price_timestamp": "2026-08-25 13:37"
     },
     "portfolio": {
       "equity": 106570.96,
       "cash": 100000.0,
-      "allocation_pct": 7.3,
+      "allocation_pct": 7.8,
       "position_qty": 0
     },
     "signal": {
@@ -838,10 +838,10 @@
     },
     "risk": {
       "stop": 325.64,
-      "target": 375.32,
+      "target": 375.55,
       "risk_pct": 0.0,
       "reward_pct": 0.0,
-      "risk_reward": "1:1.32"
+      "risk_reward": "1:1.33"
     },
     "prediction": {
       "model_status": "FROZEN",
@@ -866,17 +866,17 @@
       "feature_version": "v3",
       "config_version": "v1",
       "training_cutoff": "N/A",
-      "data_snapshot_id": "d1799f6b"
+      "data_snapshot_id": "4ed44445"
     }
   },
   {
-    "decision_id": "PHDC.CA_2026-08-25 12:49_d1799f6b",
-    "timestamp": "2026-08-25 12:49",
+    "decision_id": "PHDC.CA_2026-08-25 13:37_4ed44445",
+    "timestamp": "2026-08-25 13:37",
     "ticker": "PHDC.CA",
     "name": "بالم هيلز للتعمير",
     "market_data": {
       "current_price": 14.85,
-      "price_timestamp": "2026-08-25 12:49"
+      "price_timestamp": "2026-08-25 13:37"
     },
     "portfolio": {
       "equity": 106570.96,
@@ -896,10 +896,10 @@
     },
     "risk": {
       "stop": 14.47,
-      "target": 15.55,
+      "target": 15.56,
       "risk_pct": 0.0,
       "reward_pct": 0.0,
-      "risk_reward": "1:1.0"
+      "risk_reward": "1:1.02"
     },
     "prediction": {
       "model_status": "FROZEN",
@@ -924,17 +924,17 @@
       "feature_version": "v3",
       "config_version": "v1",
       "training_cutoff": "N/A",
-      "data_snapshot_id": "d1799f6b"
+      "data_snapshot_id": "4ed44445"
     }
   },
   {
-    "decision_id": "HRHO.CA_2026-08-25 12:49_d1799f6b",
-    "timestamp": "2026-08-25 12:49",
+    "decision_id": "HRHO.CA_2026-08-25 13:37_4ed44445",
+    "timestamp": "2026-08-25 13:37",
     "ticker": "HRHO.CA",
     "name": "إي إف جي هيرميس",
     "market_data": {
       "current_price": 25.76,
-      "price_timestamp": "2026-08-25 12:49"
+      "price_timestamp": "2026-08-25 13:37"
     },
     "portfolio": {
       "equity": 106570.96,
@@ -954,10 +954,10 @@
     },
     "risk": {
       "stop": 25.36,
-      "target": 26.96,
+      "target": 26.98,
       "risk_pct": 0.0,
       "reward_pct": 0.0,
-      "risk_reward": "1:1.54"
+      "risk_reward": "1:1.57"
     },
     "prediction": {
       "model_status": "FROZEN",
@@ -982,17 +982,17 @@
       "feature_version": "v3",
       "config_version": "v1",
       "training_cutoff": "N/A",
-      "data_snapshot_id": "d1799f6b"
+      "data_snapshot_id": "4ed44445"
     }
   },
   {
-    "decision_id": "RMDA.CA_2026-08-25 12:49_d1799f6b",
-    "timestamp": "2026-08-25 12:49",
+    "decision_id": "RMDA.CA_2026-08-25 13:37_4ed44445",
+    "timestamp": "2026-08-25 13:37",
     "ticker": "RMDA.CA",
     "name": "العاشر من رمضان فارما (راميدا)",
     "market_data": {
       "current_price": 6.15,
-      "price_timestamp": "2026-08-25 12:49"
+      "price_timestamp": "2026-08-25 13:37"
     },
     "portfolio": {
       "equity": 106570.96,
@@ -1040,17 +1040,17 @@
       "feature_version": "v3",
       "config_version": "v1",
       "training_cutoff": "N/A",
-      "data_snapshot_id": "d1799f6b"
+      "data_snapshot_id": "4ed44445"
     }
   },
   {
-    "decision_id": "ALCN.CA_2026-08-25 12:49_d1799f6b",
-    "timestamp": "2026-08-25 12:49",
+    "decision_id": "ALCN.CA_2026-08-25 13:37_4ed44445",
+    "timestamp": "2026-08-25 13:37",
     "ticker": "ALCN.CA",
     "name": "الإسكندرية تداول الحاويات",
     "market_data": {
       "current_price": 30.63,
-      "price_timestamp": "2026-08-25 12:49"
+      "price_timestamp": "2026-08-25 13:37"
     },
     "portfolio": {
       "equity": 106570.96,
@@ -1070,10 +1070,10 @@
     },
     "risk": {
       "stop": 29.01,
-      "target": 32.15,
+      "target": 32.16,
       "risk_pct": 0.0,
       "reward_pct": 0.0,
-      "risk_reward": "1:1.45"
+      "risk_reward": "1:1.46"
     },
     "prediction": {
       "model_status": "FROZEN",
@@ -1098,17 +1098,17 @@
       "feature_version": "v3",
       "config_version": "v1",
       "training_cutoff": "N/A",
-      "data_snapshot_id": "d1799f6b"
+      "data_snapshot_id": "4ed44445"
     }
   },
   {
-    "decision_id": "BINV.CA_2026-08-25 12:49_d1799f6b",
-    "timestamp": "2026-08-25 12:49",
+    "decision_id": "BINV.CA_2026-08-25 13:37_4ed44445",
+    "timestamp": "2026-08-25 13:37",
     "ticker": "BINV.CA",
     "name": "بي انفستمنتس القابضة",
     "market_data": {
       "current_price": 48.7,
-      "price_timestamp": "2026-08-25 12:49"
+      "price_timestamp": "2026-08-25 13:37"
     },
     "portfolio": {
       "equity": 106570.96,
@@ -1128,10 +1128,10 @@
     },
     "risk": {
       "stop": 46.71,
-      "target": 51.0,
+      "target": 51.03,
       "risk_pct": 0.0,
       "reward_pct": 0.0,
-      "risk_reward": "1:1.73"
+      "risk_reward": "1:1.75"
     },
     "prediction": {
       "model_status": "FROZEN",
@@ -1156,17 +1156,17 @@
       "feature_version": "v3",
       "config_version": "v1",
       "training_cutoff": "N/A",
-      "data_snapshot_id": "d1799f6b"
+      "data_snapshot_id": "4ed44445"
     }
   },
   {
-    "decision_id": "MFPC.CA_2026-08-25 12:49_d1799f6b",
-    "timestamp": "2026-08-25 12:49",
+    "decision_id": "MFPC.CA_2026-08-25 13:37_4ed44445",
+    "timestamp": "2026-08-25 13:37",
     "ticker": "MFPC.CA",
     "name": "موبكو للأسمدة",
     "market_data": {
       "current_price": 39.4,
-      "price_timestamp": "2026-08-25 12:49"
+      "price_timestamp": "2026-08-25 13:37"
     },
     "portfolio": {
       "equity": 106570.96,
@@ -1186,10 +1186,10 @@
     },
     "risk": {
       "stop": 38.05,
-      "target": 41.26,
+      "target": 41.29,
       "risk_pct": 0.0,
       "reward_pct": 0.0,
-      "risk_reward": "1:2.0"
+      "risk_reward": "1:2.03"
     },
     "prediction": {
       "model_status": "FROZEN",
@@ -1214,17 +1214,17 @@
       "feature_version": "v3",
       "config_version": "v1",
       "training_cutoff": "N/A",
-      "data_snapshot_id": "d1799f6b"
+      "data_snapshot_id": "4ed44445"
     }
   },
   {
-    "decision_id": "ABUK.CA_2026-08-25 12:49_d1799f6b",
-    "timestamp": "2026-08-25 12:49",
+    "decision_id": "ABUK.CA_2026-08-25 13:37_4ed44445",
+    "timestamp": "2026-08-25 13:37",
     "ticker": "ABUK.CA",
     "name": "أبو قير للأسمدة",
     "market_data": {
       "current_price": 76.37,
-      "price_timestamp": "2026-08-25 12:49"
+      "price_timestamp": "2026-08-25 13:37"
     },
     "portfolio": {
       "equity": 106570.96,
@@ -1244,10 +1244,10 @@
     },
     "risk": {
       "stop": 73.61,
-      "target": 79.98,
+      "target": 80.03,
       "risk_pct": 0.0,
       "reward_pct": 0.0,
-      "risk_reward": "1:1.92"
+      "risk_reward": "1:1.94"
     },
     "prediction": {
       "model_status": "FROZEN",
@@ -1272,17 +1272,17 @@
       "feature_version": "v3",
       "config_version": "v1",
       "training_cutoff": "N/A",
-      "data_snapshot_id": "d1799f6b"
+      "data_snapshot_id": "4ed44445"
     }
   },
   {
-    "decision_id": "CICH.CA_2026-08-25 12:49_d1799f6b",
-    "timestamp": "2026-08-25 12:49",
+    "decision_id": "CICH.CA_2026-08-25 13:37_4ed44445",
+    "timestamp": "2026-08-25 13:37",
     "ticker": "CICH.CA",
     "name": "سي آي كابيتال",
     "market_data": {
       "current_price": 12.19,
-      "price_timestamp": "2026-08-25 12:49"
+      "price_timestamp": "2026-08-25 13:37"
     },
     "portfolio": {
       "equity": 106570.96,
@@ -1330,17 +1330,17 @@
       "feature_version": "v3",
       "config_version": "v1",
       "training_cutoff": "N/A",
-      "data_snapshot_id": "d1799f6b"
+      "data_snapshot_id": "4ed44445"
     }
   },
   {
-    "decision_id": "ISPH.CA_2026-08-25 12:49_d1799f6b",
-    "timestamp": "2026-08-25 12:49",
+    "decision_id": "ISPH.CA_2026-08-25 13:37_4ed44445",
+    "timestamp": "2026-08-25 13:37",
     "ticker": "ISPH.CA",
     "name": "ابن سينا فارما",
     "market_data": {
       "current_price": 13.11,
-      "price_timestamp": "2026-08-25 12:49"
+      "price_timestamp": "2026-08-25 13:37"
     },
     "portfolio": {
       "equity": 106570.96,
@@ -1360,10 +1360,10 @@
     },
     "risk": {
       "stop": 11.51,
-      "target": 14.36,
+      "target": 14.37,
       "risk_pct": 0.0,
       "reward_pct": 0.0,
-      "risk_reward": "1:1.26"
+      "risk_reward": "1:1.27"
     },
     "prediction": {
       "model_status": "FROZEN",
@@ -1388,17 +1388,17 @@
       "feature_version": "v3",
       "config_version": "v1",
       "training_cutoff": "N/A",
-      "data_snapshot_id": "d1799f6b"
+      "data_snapshot_id": "4ed44445"
     }
   },
   {
-    "decision_id": "DOMT.CA_2026-08-25 12:49_d1799f6b",
-    "timestamp": "2026-08-25 12:49",
+    "decision_id": "DOMT.CA_2026-08-25 13:37_4ed44445",
+    "timestamp": "2026-08-25 13:37",
     "ticker": "DOMT.CA",
     "name": "دومتي للصناعات الغذائية",
     "market_data": {
       "current_price": 27.88,
-      "price_timestamp": "2026-08-25 12:49"
+      "price_timestamp": "2026-08-25 13:37"
     },
     "portfolio": {
       "equity": 106570.96,
@@ -1418,10 +1418,10 @@
     },
     "risk": {
       "stop": 26.44,
-      "target": 29.5,
+      "target": 29.52,
       "risk_pct": 0.0,
       "reward_pct": 0.0,
-      "risk_reward": "1:0.96"
+      "risk_reward": "1:0.97"
     },
     "prediction": {
       "model_status": "FROZEN",
@@ -1446,17 +1446,17 @@
       "feature_version": "v3",
       "config_version": "v1",
       "training_cutoff": "N/A",
-      "data_snapshot_id": "d1799f6b"
+      "data_snapshot_id": "4ed44445"
     }
   },
   {
-    "decision_id": "COMI.CA_2026-08-25 12:49_d1799f6b",
-    "timestamp": "2026-08-25 12:49",
+    "decision_id": "COMI.CA_2026-08-25 13:37_4ed44445",
+    "timestamp": "2026-08-25 13:37",
     "ticker": "COMI.CA",
     "name": "التجاري الدولي",
     "market_data": {
       "current_price": 140.96,
-      "price_timestamp": "2026-08-25 12:49"
+      "price_timestamp": "2026-08-25 13:37"
     },
     "portfolio": {
       "equity": 106570.96,
@@ -1476,10 +1476,10 @@
     },
     "risk": {
       "stop": 137.79,
-      "target": 147.52,
+      "target": 147.62,
       "risk_pct": 0.0,
       "reward_pct": 0.0,
-      "risk_reward": "1:2.89"
+      "risk_reward": "1:2.93"
     },
     "prediction": {
       "model_status": "FROZEN",
@@ -1504,17 +1504,17 @@
       "feature_version": "v3",
       "config_version": "v1",
       "training_cutoff": "N/A",
-      "data_snapshot_id": "d1799f6b"
+      "data_snapshot_id": "4ed44445"
     }
   },
   {
-    "decision_id": "EXPA.CA_2026-08-25 12:49_d1799f6b",
-    "timestamp": "2026-08-25 12:49",
+    "decision_id": "EXPA.CA_2026-08-25 13:37_4ed44445",
+    "timestamp": "2026-08-25 13:37",
     "ticker": "EXPA.CA",
     "name": "البنك المصري لتنمية الصادرات",
     "market_data": {
       "current_price": 19.99,
-      "price_timestamp": "2026-08-25 12:49"
+      "price_timestamp": "2026-08-25 13:37"
     },
     "portfolio": {
       "equity": 106570.96,
@@ -1534,10 +1534,10 @@
     },
     "risk": {
       "stop": 19.47,
-      "target": 20.93,
+      "target": 20.95,
       "risk_pct": 0.0,
       "reward_pct": 0.0,
-      "risk_reward": "1:1.32"
+      "risk_reward": "1:1.35"
     },
     "prediction": {
       "model_status": "FROZEN",
@@ -1562,7 +1562,7 @@
       "feature_version": "v3",
       "config_version": "v1",
       "training_cutoff": "N/A",
-      "data_snapshot_id": "d1799f6b"
+      "data_snapshot_id": "4ed44445"
     }
   }
 ]
