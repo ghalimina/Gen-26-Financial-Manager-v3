@@ -150,7 +150,14 @@ def run_comprehensive_qa() -> Dict[str, Any]:
          "bad_payload": {"ticker": "INVALID_TICKER_X"}},
         {"name": "POST /api/watchlist/remove", "type": "POST", "url": "/api/watchlist/remove",
          "good_payload": {"ticker": "ABUK.CA"},
-         "bad_payload": {"ticker": "NOT_IN_WATCHLIST"}}
+         "bad_payload": {"ticker": "NOT_IN_WATCHLIST"}},
+
+        # 6. Generative AI & Fundamentals
+        {"name": "POST /api/chat", "type": "POST", "url": "/api/chat",
+         "good_payload": {"query": "ما هو أفضل سهم للشراء اليوم؟"},
+         "bad_payload": {"query": ""}},
+        {"name": "GET /api/morning_briefing", "type": "GET", "url": "/api/morning_briefing", "bad_url": "/api/morning_briefing?universe=INVALID"},
+        {"name": "GET /api/fundamentals/COMI.CA", "type": "GET", "url": "/api/fundamentals/COMI.CA", "bad_url": "/api/fundamentals/INVALID_SYMBOL_99"}
     ]
 
     print("\n--- 1. REST API ENDPOINT AUDIT (Happy Path + Fault Injection + Rapid Repeat) ---")

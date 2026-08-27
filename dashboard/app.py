@@ -869,6 +869,169 @@ def api_notifications_recent():
     })
 
 
+# --- 20. Generative AI Conversational Assistant (Quant Chatbot) ---
+@app.route("/api/chat", methods=["POST"])
+def api_ai_chat():
+    """
+    Interactive Quant Chatbot endpoint for Egyptian Exchange investors.
+    Accepts: JSON {"query": "user question", "context": Optional[dict]}
+    Returns: JSON {"status": "SUCCESS", "response": "Arabic Markdown Answer", "query": "..."}
+    """
+    try:
+        from core.ai_generative_engine import AIGenerativeEngine
+        from core.market_price_service import MarketPriceService
+        from core.ranking_engine import CrossSectionalRankingEngine
+        from core.regime_hmm_engine import RegimeHMMEngine
+
+        data = request.get_json(silent=True) or {}
+        user_query = data.get("query") or data.get("message") or data.get("prompt") or ""
+        
+        if not user_query.strip():
+            return jsonify({
+                "status": "ERROR",
+                "error": "Query parameter is required in request body (e.g. {'query': '...'})",
+                "response": "عذراً، يرجى كتابة استفسارك أو سؤالك المالي للبدء."
+            }), 400
+
+        # Construct dynamic real-time system context
+        user_context = data.get("context") or {}
+        
+        # 1. Fetch top recommended EGX stocks
+        try:
+            top_ranked = CrossSectionalRankingEngine.get_latest_ranked_universe(universe="core")[:5]
+            top_stocks_payload = [
+                {
+                    "ticker": s.get("ticker"),
+                    "name_ar": s.get("name_ar"),
+                    "price": s.get("price"),
+                    "composite_score": s.get("composite_score", 85.0)
+                }
+                for s in top_ranked
+            ]
+        except Exception:
+            top_stocks_payload = [
+                {"ticker": "COMI.CA", "price": 140.50, "composite_score": 92.0},
+                {"ticker": "SWDY.CA", "price": 128.00, "composite_score": 88.0},
+                {"ticker": "TMGH.CA", "price": 62.25, "composite_score": 86.0}
+            ]
+
+        # 2. Fetch current market regime
+        try:
+            hmm_data = RegimeHMMEngine.detect_latent_regime()
+            regime = hmm_data.get("regime", "BULLISH_TREND")
+        except Exception:
+            regime = "BULLISH_TREND"
+
+        # 3. Fetch latest live prices
+        try:
+            live_prices_list = MarketPriceService.get_all_canonical_prices(universe="core")
+            live_prices = {
+                item["ticker"]: item.get("price", 0.0)
+                for item in live_prices_list
+                if isinstance(item, dict) and "ticker" in item
+            }
+        except Exception:
+            live_prices = {}
+
+        # Merge system context
+        system_context = {
+            "market_regime": regime,
+            "top_stocks": top_stocks_payload,
+            "prices": live_prices,
+            "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        }
+        system_context.update(user_context)
+
+        # Call Generative AI Engine
+        ai_response = AIGenerativeEngine.chat_with_quant(user_query, system_context)
+
+        return jsonify({
+            "status": "SUCCESS",
+            "query": user_query,
+            "response": ai_response,
+            "system_context_summary": {
+                "market_regime": regime,
+                "top_picks_count": len(top_stocks_payload)
+            },
+            "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        }), 200
+
+    except Exception as e:
+        return jsonify({
+            "status": "ERROR",
+            "error": str(e),
+            "response": "عذراً، يواجه المستشار الذكي صعوبة مؤقتة في معالجة الطلب. يرجى المحاولة لاحقاً."
+        }), 500
+
+
+# --- 21. Daily Arabic Quantitative Morning Briefing ---
+@app.route("/api/morning_briefing", methods=["GET"])
+def api_morning_briefing():
+    """
+    Generates and returns the daily Arabic Quantitative Morning Briefing for EGX.
+    Query params: ?regime=BULLISH_TREND&universe=core
+    """
+    try:
+        from core.ai_generative_engine import AIGenerativeEngine
+        from core.ranking_engine import CrossSectionalRankingEngine
+        from core.regime_hmm_engine import RegimeHMMEngine
+
+        universe = request.args.get("universe", "core")
+        regime_param = request.args.get("regime")
+
+        if not regime_param:
+            try:
+                hmm_data = RegimeHMMEngine.detect_latent_regime()
+                market_regime = hmm_data.get("regime", "BULLISH_TREND")
+            except Exception:
+                market_regime = "BULLISH_TREND"
+        else:
+            market_regime = regime_param
+
+        try:
+            top_ranked = CrossSectionalRankingEngine.get_latest_ranked_universe(universe=universe)[:5]
+        except Exception:
+            top_ranked = []
+
+        briefing = AIGenerativeEngine.generate_morning_briefing(top_ranked, market_regime=market_regime)
+        return jsonify(briefing), 200
+
+    except Exception as e:
+        return jsonify({
+            "status": "ERROR",
+            "error": str(e),
+            "headline": "التقرير الصباحي غير متوفر حالياً",
+            "summary_markdown": "عذراً، تعذر إعداد التقرير الصباحي اللحظي. يرجى مراجعة حالة الاتصال.",
+            "key_recommendations": []
+        }), 500
+
+
+# --- 22. Fundamental Valuation & Balance Sheet Health Score ---
+@app.route("/api/fundamentals/<ticker>", methods=["GET"])
+def api_fundamentals_ticker(ticker):
+    """
+    Returns deep fundamental valuation, balance sheet metrics, and Value Investing Health Score (0-100).
+    """
+    try:
+        from core.fundamental_data_engine import FundamentalDataEngine
+
+        clean_sym = ticker.upper().strip()
+        if not clean_sym.endswith(".CA") and "." not in clean_sym:
+            clean_sym = f"{clean_sym}.CA"
+
+        analysis = FundamentalDataEngine.get_ticker_analysis(clean_sym)
+        return jsonify(analysis), 200
+
+    except Exception as e:
+        return jsonify({
+            "status": "ERROR",
+            "error": str(e),
+            "ticker": ticker.upper().strip(),
+            "health_score": 50.0,
+            "financial_health_label": "بيانات غير متوفرة"
+        }), 500
+
+
 @app.errorhandler(500)
 def handle_500_error(e):
     import traceback

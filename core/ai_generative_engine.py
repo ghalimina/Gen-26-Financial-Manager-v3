@@ -472,12 +472,25 @@ class AIGenerativeEngine:
         Natural Language understanding and response generator for chatbot queries offline.
         """
         q_lower = query.lower()
+        context = context or {}
+
+        # Safely normalize prices input whether dict or list
+        prices_input = context.get("prices", {})
+        if isinstance(prices_input, list):
+            prices_dict = {
+                item.get("ticker", item.get("symbol", "")): item.get("price", 0.0)
+                for item in prices_input if isinstance(item, dict)
+            }
+        elif isinstance(prices_input, dict):
+            prices_dict = prices_input
+        else:
+            prices_dict = {}
         
         # 1. Check for specific ticker inquiries using aliases
         for ticker, aliases in cls.TICKER_SEARCH_ALIASES.items():
             if any(alias in q_lower for alias in aliases):
                 name_ar = cls.COMPANY_NAMES_AR.get(ticker, ticker)
-                p = context.get("prices", {}).get(ticker, context.get("prices", {}).get(ticker.replace(".CA", "")))
+                p = prices_dict.get(ticker, prices_dict.get(ticker.replace(".CA", "")))
                 p_text = f"{p:.2f} ج.م" if (p and p > 0) else "حوالي سعر الإغلاق السابق"
                 target_text = f"{p * 1.08:.2f} ج.م" if (p and p > 0) else "+8% من سعر الدخول"
                 stop_text = f"{p * 0.95:.2f} ج.م" if (p and p > 0) else "-5% من سعر الدخول"
