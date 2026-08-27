@@ -156,23 +156,32 @@ def api_stocks():
 def api_stock_dossier(ticker):
     """Returns deep intelligence dossier for a specific stock."""
     from core.multi_horizon_engine import MultiHorizonEngine
+    from core.egx_universe_loader import EGXUniverseLoader
     t = ticker.strip().upper()
     if not t.endswith(".CA") and "." not in t:
         t += ".CA"
     rec = MarketPriceService.get_canonical_price_record(t)
-    price = rec["price"] if rec else 102.50
+    price = float(rec["price"]) if (rec and rec.get("price")) else 102.50
     analysis = MultiHorizonEngine.get_stock_multi_horizon_analysis(t) or {}
+    
+    stock_info = EGXUniverseLoader.get_stock_info(t) or {}
+    name_ar = analysis.get("company_name") or stock_info.get("name_ar") or RealPortfolioTracker.COMPANY_NAMES.get(t, t)
+    sector_ar = analysis.get("sector") or stock_info.get("sector") or RealPortfolioTracker.SECTOR_MAPPINGS.get(t, "الخدمات العامة")
+    
+    entry_zone = analysis.get("entry_zone", f"{price*0.985:.2f} – {price*0.998:.2f}")
+    stop_loss = analysis.get("stop_loss", round(price * 0.93, 2))
     
     return jsonify({
         "ticker": t,
-        "company_name": analysis.get("company_name", RealPortfolioTracker.COMPANY_NAMES.get(t, t)),
-        "sector": analysis.get("sector", RealPortfolioTracker.SECTOR_MAPPINGS.get(t, "General")),
+        "company_name": name_ar,
+        "name_ar": name_ar,
+        "sector": sector_ar,
         "current_price": price,
         "price_record": rec,
         "alpha_score": analysis.get("overall_score", 85.0),
         "risk_score": 85.0,
-        "entry_zone": analysis.get("entry_zone", f"{price*0.985:.2f} – {price*0.998:.2f}"),
-        "stop_loss": analysis.get("stop_loss", round(price * 0.93, 2)),
+        "entry_zone": entry_zone,
+        "stop_loss": stop_loss,
         "decision": analysis.get("decision", "WATCH"),
         "action_ar": analysis.get("action_ar", "مراقبة"),
         "uncertainty_level": analysis.get("uncertainty_level", "LOW"),
@@ -190,7 +199,7 @@ def api_stock_dossier(ticker):
         "up_drivers": analysis.get("up_drivers", []),
         "down_risks": analysis.get("down_risks", []),
         "horizons": analysis.get("horizons", {}),
-        "liquidity_adv_egp": 85_000_000.0,
+        "liquidity_adv_egp": analysis.get("adv20_egp", 85_000_000.0),
         "fair_value_bounds": {"bear": round(price * 0.90, 2), "base": round(price * 1.08, 2), "bull": round(price * 1.22, 2)},
         "accounting_quality": f"HIGH (ROE: {analysis.get('fundamentals', {}).get('roe_pct', 22.0)}%)",
         "circuit_breaker_status": "NORMAL (No limits triggered)",
@@ -269,6 +278,7 @@ def api_ranking():
             "rank": r.get("rank", 0),
             "ticker": r["ticker"],
             "company_name": r["company_name"],
+            "name_ar": r.get("name_ar", r.get("company_name", r["ticker"])),
             "sector": r.get("sector", ""),
             "current_price": curr_p,
             "entry_price": round(entry_low, 2) if entry_low else None,
@@ -283,10 +293,14 @@ def api_ranking():
             "expected_holding_period": r.get("holding_period_ar", "5 – 20 جلسة تداول (متوسط شهر)"),
             "invalidation_trigger": r.get("invalidation_trigger_ar", ""),
             "alpha_score": r["overall_score"],
+            "composite_score": r["overall_score"],
+            "score": r["overall_score"],
             "risk_score": 85.0,
             "recommendation": "شراء تراجعي (Limit)" if r["overall_score"] >= 80 else ("مراقبة الاتجاه" if r["overall_score"] >= 60 else "تجنب الشراء حالياً"),
             "action": "BUY" if r["overall_score"] >= 80 else ("WATCH" if r["overall_score"] >= 60 else "AVOID"),
+            "action_ar": "🟢 شراء وتجميع" if r["overall_score"] >= 80 else ("🟡 مراقبة واحتفاظ" if r["overall_score"] >= 60 else "🔴 تجنب ومخاطر"),
             "why_selected": r.get("why_selected", "🟢 أداء متوازن ومتوافق مع حركة السوق."),
+            "explanation_ar": r.get("why_selected", "🟢 أداء متوازن ومتوافق مع حركة السوق."),
             "quality_of_earnings": r.get("fundamentals", {}).get("earnings_quality_flag_ar", ""),
             "has_non_recurring_gain": r.get("fundamentals", {}).get("has_non_recurring_gain", False),
             "macro_headline": r.get("macro_intelligence", {}).get("macro_headline", "استقرار نقدي متوازن"),
