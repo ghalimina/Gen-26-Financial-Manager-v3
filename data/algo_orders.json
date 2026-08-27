@@ -1,5 +1,21 @@
 [
   {
+    "order_id": "ORD-F9E72285",
+    "ticker": "COMI.CA",
+    "side": "BUY",
+    "order_type": "LIMIT",
+    "quantity": 100,
+    "submitted_price": 139.0,
+    "executed_price": null,
+    "slippage_pct": 0.0,
+    "total_value_egp": 13900.0,
+    "status": "PENDING",
+    "mode": "SANDBOX_SIMULATED",
+    "created_at": "2026-08-27 08:14:51",
+    "filled_at": null,
+    "notes": "Web UI Execution"
+  },
+  {
     "order_id": "ORD-B5304220",
     "ticker": "COMI.CA",
     "side": "BUY",

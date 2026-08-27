@@ -3,7 +3,7 @@
     {
       "endpoint": "GET /api/ranking",
       "happy_code": 200,
-      "happy_latency_ms": 38114.8,
+      "happy_latency_ms": 52053.7,
       "fault_code": 200,
       "passed": true,
       "error": null
@@ -11,7 +11,7 @@
     {
       "endpoint": "GET /api/universe",
       "happy_code": 200,
-      "happy_latency_ms": 420.0,
+      "happy_latency_ms": 414.4,
       "fault_code": "N/A",
       "passed": true,
       "error": null
@@ -19,7 +19,7 @@
     {
       "endpoint": "GET /api/prices",
       "happy_code": 200,
-      "happy_latency_ms": 3.0,
+      "happy_latency_ms": 4.0,
       "fault_code": "N/A",
       "passed": true,
       "error": null
@@ -27,7 +27,7 @@
     {
       "endpoint": "GET /api/opportunities/short-term",
       "happy_code": 200,
-      "happy_latency_ms": 12213.9,
+      "happy_latency_ms": 24377.4,
       "fault_code": 200,
       "passed": true,
       "error": null
@@ -35,7 +35,7 @@
     {
       "endpoint": "GET /api/execution/orders",
       "happy_code": 200,
-      "happy_latency_ms": 3.0,
+      "happy_latency_ms": 2.9,
       "fault_code": 200,
       "passed": true,
       "error": null
@@ -43,7 +43,7 @@
     {
       "endpoint": "POST /api/execution/order/submit",
       "happy_code": 200,
-      "happy_latency_ms": 8.2,
+      "happy_latency_ms": 7.9,
       "fault_code": 400,
       "passed": true,
       "error": null
@@ -51,7 +51,7 @@
     {
       "endpoint": "POST /api/execution/order/cancel",
       "happy_code": 200,
-      "happy_latency_ms": 12.5,
+      "happy_latency_ms": 9.0,
       "fault_code": 400,
       "passed": true,
       "error": null
@@ -59,7 +59,7 @@
     {
       "endpoint": "GET /api/portfolio/hrp_weights",
       "happy_code": 200,
-      "happy_latency_ms": 48.3,
+      "happy_latency_ms": 47.2,
       "fault_code": "N/A",
       "passed": true,
       "error": null
@@ -75,7 +75,7 @@
     {
       "endpoint": "GET /api/corporate-actions",
       "happy_code": 200,
-      "happy_latency_ms": 0.0,
+      "happy_latency_ms": 1.0,
       "fault_code": 200,
       "passed": true,
       "error": null
@@ -83,7 +83,7 @@
     {
       "endpoint": "GET /api/correlation",
       "happy_code": 200,
-      "happy_latency_ms": 740.1,
+      "happy_latency_ms": 714.0,
       "fault_code": "N/A",
       "passed": true,
       "error": null
@@ -91,7 +91,7 @@
     {
       "endpoint": "GET /api/mlops/status",
       "happy_code": 200,
-      "happy_latency_ms": 3.0,
+      "happy_latency_ms": 2.0,
       "fault_code": "N/A",
       "passed": true,
       "error": null
@@ -107,7 +107,7 @@
     {
       "endpoint": "GET /api/insider/market_deals",
       "happy_code": 200,
-      "happy_latency_ms": 1.0,
+      "happy_latency_ms": 0.0,
       "fault_code": "N/A",
       "passed": true,
       "error": null
@@ -115,7 +115,7 @@
     {
       "endpoint": "GET /api/tax/harvesting",
       "happy_code": 200,
-      "happy_latency_ms": 2.0,
+      "happy_latency_ms": 1.0,
       "fault_code": "N/A",
       "passed": true,
       "error": null
@@ -123,7 +123,7 @@
     {
       "endpoint": "GET /api/sentiment/COMI.CA",
       "happy_code": 200,
-      "happy_latency_ms": 838.1,
+      "happy_latency_ms": 3471.0,
       "fault_code": 200,
       "passed": true,
       "error": null
@@ -131,7 +131,7 @@
     {
       "endpoint": "GET /api/ai/forecast/COMI.CA",
       "happy_code": 200,
-      "happy_latency_ms": 804.3,
+      "happy_latency_ms": 1453.4,
       "fault_code": 200,
       "passed": true,
       "error": null
@@ -139,7 +139,7 @@
     {
       "endpoint": "GET /api/ai/validation_metrics",
       "happy_code": 200,
-      "happy_latency_ms": 0.0,
+      "happy_latency_ms": 1.0,
       "fault_code": "N/A",
       "passed": true,
       "error": null
@@ -163,7 +163,7 @@
     {
       "endpoint": "POST /api/real_portfolio/add",
       "happy_code": 200,
-      "happy_latency_ms": 195.6,
+      "happy_latency_ms": 97.6,
       "fault_code": 400,
       "passed": true,
       "error": null
@@ -171,7 +171,7 @@
     {
       "endpoint": "POST /api/real_portfolio/delete",
       "happy_code": 200,
-      "happy_latency_ms": 128.3,
+      "happy_latency_ms": 87.9,
       "fault_code": 400,
       "passed": true,
       "error": null
@@ -179,7 +179,7 @@
     {
       "endpoint": "GET /api/watchlist",
       "happy_code": 200,
-      "happy_latency_ms": 1.0,
+      "happy_latency_ms": 0.0,
       "fault_code": "N/A",
       "passed": true,
       "error": null
@@ -187,7 +187,7 @@
     {
       "endpoint": "POST /api/watchlist/add",
       "happy_code": 200,
-      "happy_latency_ms": 9.0,
+      "happy_latency_ms": 18.0,
       "fault_code": 400,
       "passed": true,
       "error": null
@@ -195,7 +195,7 @@
     {
       "endpoint": "POST /api/watchlist/remove",
       "happy_code": 200,
-      "happy_latency_ms": 10.2,
+      "happy_latency_ms": 18.3,
       "fault_code": 400,
       "passed": true,
       "error": null
@@ -203,7 +203,7 @@
     {
       "endpoint": "POST /api/chat",
       "happy_code": 200,
-      "happy_latency_ms": 5.0,
+      "happy_latency_ms": 36.9,
       "fault_code": 400,
       "passed": true,
       "error": null
@@ -211,7 +211,7 @@
     {
       "endpoint": "GET /api/morning_briefing",
       "happy_code": 200,
-      "happy_latency_ms": 0.0,
+      "happy_latency_ms": 1.0,
       "fault_code": 200,
       "passed": true,
       "error": null
@@ -219,7 +219,7 @@
     {
       "endpoint": "GET /api/fundamentals/COMI.CA",
       "happy_code": 200,
-      "happy_latency_ms": 10515.6,
+      "happy_latency_ms": 11816.5,
       "fault_code": "N/A",
       "passed": true,
       "error": null

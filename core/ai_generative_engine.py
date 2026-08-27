@@ -48,8 +48,10 @@ class AIGenerativeEngine:
     REGIME_TRANSLATIONS: Dict[str, str] = {
         "BULLISH_TREND": "🟢 اتجاه صاعد قوي (زخم شرائي مؤسسي)",
         "BULL_MARKET": "🟢 سوق صاعد (Bull Market)",
+        "BULL": "🟢 سوق صاعد وقوي (Bull Market)",
         "BEARISH_CORRECTION": "🔴 تصحيح هابط (ضغوط بيعية واحتراس)",
         "BEAR_MARKET": "🔴 سوق هابط (Bear Market)",
+        "BEAR": "🔴 سوق هابط واحتراس (Bear Market)",
         "HIGH_VOLATILITY": "⚡ تقلبات سعرية حادة (High Volatility)",
         "SIDEWAYS": "⚪ اتجاه عرضي وتذبذب ضيق (Range-Bound)",
         "ACCUMULATION": "🔵 مرحلة تجميع ذكي (Institutional Accumulation)",
