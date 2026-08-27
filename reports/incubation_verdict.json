@@ -1,0 +1,97 @@
+{
+  "evaluation_date": "2026-08-27",
+  "incubation_period": "30-Day Maturation Sandbox (23 Aug 2026 – 22 Sep 2026)",
+  "verdict_status": "FROZEN_FAIL_CLOSED",
+  "verdict_status_ar": "🔴 تفعيل صمام الأمان والإغلاق الإلزامي (FROZEN_FAIL_CLOSED)",
+  "all_gates_passed": false,
+  "real_money_authorized": false,
+  "authorized_capital_scale_pct": 0.0,
+  "active_model_policy": "TIER1_PRICE_MOMENTUM_OR_100_CASH",
+  "action_mandate_ar": "تم تعليق الترقية الفورية والرجوع الإلزامي لنموذج الزخم الأساسي Tier-1 أو الاحتفاظ بالسيولة 100% كاش لحماية رأس المال.",
+  "failed_gates_count": 5,
+  "failed_gates": [
+    "معامل شارب السنوي",
+    "العائد الإضافي التراكمي (ألفا) فوق المؤشر",
+    "نسبة الصفقات الرابحة",
+    "معامل الربحية (الأرباح / الخسائر)",
+    "الحد الأدنى لحجم العينة المغلقة"
+  ],
+  "gating_matrix": {
+    "gate_1_sharpe_ratio": {
+      "name": "Annualized Sharpe Ratio",
+      "name_ar": "معامل شارب السنوي",
+      "target": "≥ 1.05",
+      "actual": 0.0,
+      "passed": false,
+      "gap": -1.05
+    },
+    "gate_2_cumulative_alpha": {
+      "name": "Cumulative Alpha vs EGX30",
+      "name_ar": "العائد الإضافي التراكمي (ألفا) فوق المؤشر",
+      "target": "≥ +2.50%",
+      "actual": "-3.50%",
+      "passed": false,
+      "gap_pct": -6.0
+    },
+    "gate_3_max_drawdown": {
+      "name": "Maximum Peak-to-Trough Drawdown",
+      "name_ar": "أقصى تراجع تراكمي للمحفظة",
+      "target": "≤ 6.50%",
+      "actual": "0.00%",
+      "passed": true,
+      "gap_pct": -6.5
+    },
+    "gate_4_win_rate": {
+      "name": "Win Rate Percentage",
+      "name_ar": "نسبة الصفقات الرابحة",
+      "target": "≥ 52.0%",
+      "actual": "0.0%",
+      "passed": false,
+      "gap_pct": -52.0
+    },
+    "gate_5_profit_factor": {
+      "name": "Profit Factor",
+      "name_ar": "معامل الربحية (الأرباح / الخسائر)",
+      "target": "≥ 1.30",
+      "actual": 0.0,
+      "passed": false,
+      "gap": -1.3
+    },
+    "gate_6_sample_size": {
+      "name": "Minimum Closed Trades Sample Size",
+      "name_ar": "الحد الأدنى لحجم العينة المغلقة",
+      "target": "≥ 20 صفقات",
+      "actual": "0 صفقات",
+      "passed": false,
+      "gap_count": -20
+    }
+  },
+  "performance_summary": {
+    "total_closed_trades": 0,
+    "winning_trades_count": 0,
+    "losing_trades_count": 0,
+    "strategy_total_return_pct": 0.0,
+    "egx30_benchmark_return_pct": 3.5,
+    "cumulative_alpha_pct": -3.5,
+    "annualized_sharpe_ratio": 0.0,
+    "max_drawdown_pct": 0.0,
+    "win_rate_pct": 0.0,
+    "profit_factor": 0.0,
+    "gross_profit_egp": 0,
+    "gross_loss_egp": 0
+  },
+  "statistical_validation": {
+    "confidence_score_pct": 50.0,
+    "t_statistic": 0.0,
+    "p_value_one_tailed": 0.5,
+    "bootstrap_resamples_count": 1000,
+    "bootstrap_95_ci_pct": {
+      "lower": -2.0,
+      "mean": 0.0,
+      "upper": 2.0
+    },
+    "statistical_caveats": [
+      "[PRELIMINARY_SAMPLE_SIZE_WARNING: N=0 < 100] — القدرة الإحصائية أولية ومحدودة لحين الوصول لـ 100 صفقة مغلقة."
+    ]
+  }
+}

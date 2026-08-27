@@ -376,6 +376,7 @@ class PriceSyncService:
 
     _IN_MEMORY_CACHE: Dict[str, Dict[str, Any]] = {}
     _LAST_SYNC_METADATA: Optional[Dict[str, Any]] = None
+    _LAST_LOAD_MTIME: float = 0.0
 
     @classmethod
     def _load_anomaly_tracker(cls) -> Dict[str, Any]:
@@ -401,27 +402,31 @@ class PriceSyncService:
             logger.warning(f"Failed to persist anomaly tracker: {e}")
 
     @classmethod
-    def load_canonical_prices(cls) -> Dict[str, Dict[str, Any]]:
+    def load_canonical_prices(cls, force_reload: bool = False) -> Dict[str, Dict[str, Any]]:
         """
         Loads canonical prices from Single Source of Truth file (data/canonical_prices_live.json).
+        Uses file mtime tracking to automatically invalidate in-memory cache when file is modified.
         If file does not exist, populates it from baseline and active universe catalog.
         """
-        if cls._IN_MEMORY_CACHE:
-            return cls._IN_MEMORY_CACHE
-
         if os.path.exists(CANONICAL_PRICES_FILE):
             try:
+                current_mtime = os.path.getmtime(CANONICAL_PRICES_FILE)
+                if not force_reload and cls._IN_MEMORY_CACHE and getattr(cls, "_LAST_LOAD_MTIME", 0.0) == current_mtime:
+                    return cls._IN_MEMORY_CACHE
+
                 with open(CANONICAL_PRICES_FILE, "r", encoding="utf-8") as f:
                     data = json.load(f)
                 if isinstance(data, dict) and data:
                     cls._IN_MEMORY_CACHE = data
+                    cls._LAST_LOAD_MTIME = current_mtime
                     return cls._IN_MEMORY_CACHE
             except Exception as e:
                 logger.warning(f"Error reading {CANONICAL_PRICES_FILE}: {e}. Falling back to baseline.")
 
-        snapshot = cls._build_default_snapshot()
-        cls.save_canonical_prices(snapshot)
-        cls._IN_MEMORY_CACHE = snapshot
+        if not cls._IN_MEMORY_CACHE:
+            snapshot = cls._build_default_snapshot()
+            cls.save_canonical_prices(snapshot)
+            cls._IN_MEMORY_CACHE = snapshot
         return cls._IN_MEMORY_CACHE
 
     @classmethod
@@ -438,6 +443,10 @@ class PriceSyncService:
 
             os.replace(TEMP_PRICES_FILE, CANONICAL_PRICES_FILE)
             cls._IN_MEMORY_CACHE = prices_dict
+            try:
+                cls._LAST_LOAD_MTIME = os.path.getmtime(CANONICAL_PRICES_FILE)
+            except Exception:
+                cls._LAST_LOAD_MTIME = 0.0
             return True
         except Exception as e:
             logger.error(f"Failed to atomically write canonical prices: {e}")
@@ -620,7 +629,8 @@ class PriceSyncService:
                 clean_sym = f"{clean_sym}.CA"
 
             prev_record = existing_store.get(clean_sym, {})
-            prev_verified_price = float(prev_record.get("price", constituent.get("nominal_price", 10.0)))
+            prev_price_raw = prev_record.get("price") if prev_record else None
+            prev_verified_price = float(prev_price_raw or constituent.get("nominal_price") or 10.0)
 
             quote_data = None
             source_tag = "UNKNOWN"
@@ -652,14 +662,26 @@ class PriceSyncService:
                 if prev_verified_price > 0:
                     pct_jump = abs((fetched_p - prev_verified_price) / prev_verified_price)
                     if pct_jump > 0.15:
-                        # Anomaly detected!
-                        curr_rejections = consecutive_rejections.get(clean_sym, 0) + 1
-                        consecutive_rejections[clean_sym] = curr_rejections
+                        # Check if this jump is explained by a registered corporate action (e.g. split or dividend)
+                        from core.corporate_actions_calendar import CorporateActionsCalendar
+                        hazard = CorporateActionsCalendar.evaluate_pre_trade_corporate_hazard(clean_sym, prev_verified_price)
+                        if hazard.get("has_imminent_event") and hazard.get("theoretical_adjusted_price", 0.0) > 0:
+                            adj_p = hazard["theoretical_adjusted_price"]
+                            adj_jump = abs((fetched_p - adj_p) / adj_p) if adj_p > 0 else 1.0
+                            if adj_jump <= 0.15:
+                                logger.info(f"Price jump for {clean_sym} verified against Corporate Action ({hazard['imminent_event'].get('action_type')}). Accepted.")
+                                price_accepted = True
+                                consecutive_rejections[clean_sym] = 0
 
-                        logger.warning(
-                            f"[CIRCUIT_BREAKER] Price anomaly #{curr_rejections} for {clean_sym}: fetched {fetched_p:.2f} EGP deviates {pct_jump*100:.1f}% "
-                            f"from previous close {prev_verified_price:.2f} EGP (exceeds ±15% limit)."
-                        )
+                        if not price_accepted:
+                            # Anomaly detected!
+                            curr_rejections = consecutive_rejections.get(clean_sym, 0) + 1
+                            consecutive_rejections[clean_sym] = curr_rejections
+
+                            logger.warning(
+                                f"[CIRCUIT_BREAKER] Price anomaly #{curr_rejections} for {clean_sym}: fetched {fetched_p:.2f} EGP deviates {pct_jump*100:.1f}% "
+                                f"from previous close {prev_verified_price:.2f} EGP (exceeds ±15% limit)."
+                            )
 
                         if curr_rejections >= 3:
                             # CRITICAL PERSISTENT ANOMALY: Emit explicit alert and trigger alternative scraper
@@ -700,7 +722,18 @@ class PriceSyncService:
                     consecutive_rejections[clean_sym] = 0
 
             if price_accepted and quote_data:
-                p_final = round(quote_data["price"], 2)
+                price = round(quote_data["price"], 2)
+                
+                # ORAS.CA Dual-Listing / USD Discrepancy Hard Guard
+                if (clean_sym == "ORAS.CA" or clean_sym == "ORAS") and price < 200:
+                    canonical_prices = cls.load_canonical_prices()
+                    price = canonical_prices.get("ORAS.CA", {}).get("price", price)
+                    if price < 200:
+                        price = float(BASELINE_NOMINAL_SNAPSHOT.get("ORAS.CA", {}).get("price", 336.0))
+                    logger.warning("ORAS price guard activated")
+                    source_tag = "ORAS_GUARD_CANONICAL_FALLBACK"
+
+                p_final = price
                 p_prev = round(quote_data.get("previous_close", p_final * 0.995), 2)
                 p_open = round(quote_data.get("open", p_final), 2)
                 p_high = round(quote_data.get("high", p_final), 2)
@@ -826,8 +859,17 @@ class PriceSyncService:
         sym = ticker.upper().strip()
         if not sym.endswith(".CA") and "." not in sym:
             sym = f"{sym}.CA"
-        store = cls.load_canonical_prices()
-        return store.get(sym)
+        canonical_prices = cls.load_canonical_prices()
+        rec = canonical_prices.get(sym)
+        if (ticker == "ORAS.CA" or sym == "ORAS.CA") and rec:
+            price = float(rec.get("price", 0))
+            if price < 200:
+                price = canonical_prices.get("ORAS.CA", {}).get("price", price)
+                if price < 200:
+                    price = float(BASELINE_NOMINAL_SNAPSHOT.get("ORAS.CA", {}).get("price", 336.0))
+                rec["price"] = price
+                logger.warning("ORAS price guard activated")
+        return rec
 
     @classmethod
     def get_price(cls, ticker: str) -> float:
@@ -835,7 +877,14 @@ class PriceSyncService:
         rec = cls.get_price_record(ticker)
         if not rec or "price" not in rec:
             raise ValueError(f"Ticker {ticker} not found in canonical price store.")
-        return float(rec["price"])
+        price = float(rec["price"])
+        canonical_prices = cls.load_canonical_prices()
+        if ticker == "ORAS.CA" and price < 200:
+            price = canonical_prices.get("ORAS.CA", {}).get("price", price)
+            if price < 200:
+                price = float(BASELINE_NOMINAL_SNAPSHOT.get("ORAS.CA", {}).get("price", 336.0))
+            logger.warning("ORAS price guard activated")
+        return price
 
     @classmethod
     def get_all_prices(cls) -> Dict[str, Dict[str, Any]]:

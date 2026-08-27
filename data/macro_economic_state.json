@@ -1,0 +1,99 @@
+{
+  "indicators": {
+    "cbe_deposit_rate_pct": {
+      "value": 19.25,
+      "unit": "%",
+      "label_ar": "سعر الفائدة على الإيداع لليلة واحدة (البنك المركزي المصري)",
+      "source": "CENTRAL_BANK_OF_EGYPT_OFFICIAL",
+      "last_updated": "2026-08-20",
+      "is_stale": false,
+      "staleness_threshold_days": 60,
+      "days_since_update": 4
+    },
+    "cbe_lending_rate_pct": {
+      "value": 20.25,
+      "unit": "%",
+      "label_ar": "سعر الفائدة على الإقراض لليلة واحدة (البنك المركزي المصري)",
+      "source": "CENTRAL_BANK_OF_EGYPT_OFFICIAL",
+      "last_updated": "2026-08-20",
+      "is_stale": false,
+      "staleness_threshold_days": 60,
+      "days_since_update": 4
+    },
+    "cbe_corridor_rate_pct": {
+      "value": 19.75,
+      "unit": "%",
+      "label_ar": "سعر الكوريدور المركزي المعتمد",
+      "source": "CENTRAL_BANK_OF_EGYPT_OFFICIAL",
+      "last_updated": "2026-08-20",
+      "is_stale": false,
+      "staleness_threshold_days": 60,
+      "days_since_update": 4
+    },
+    "cpi_inflation_yoy_pct": {
+      "value": 14.9,
+      "unit": "%",
+      "label_ar": "معدل التضخم السنوي العام للحضر (الجهاز المركزي للتعبئة والإحصاء)",
+      "source": "CAPMAS_MONTHLY_BULLETIN",
+      "last_updated": "2026-08-10",
+      "is_stale": false,
+      "staleness_threshold_days": 35,
+      "days_since_update": 14
+    },
+    "usd_egp_rate": {
+      "value": 50.76,
+      "unit": "EGP",
+      "label_ar": "سعر صرف الجنيه أمام الدولار الأمريكي",
+      "source": "LIVE_YAHOO_FINANCE_EGP_X",
+      "last_updated": "2026-08-24 05:15:00",
+      "is_stale": false,
+      "staleness_threshold_days": 2,
+      "days_since_update": 0
+    },
+    "brent_oil_usd": {
+      "value": 82.5,
+      "unit": "USD/bbl",
+      "label_ar": "سعر خام برنت العالمي للنفط",
+      "source": "LIVE_YAHOO_FINANCE_BZ_F",
+      "last_updated": "2026-08-24 05:15:00",
+      "is_stale": false,
+      "staleness_threshold_days": 2,
+      "days_since_update": 0
+    },
+    "gold_spot_usd": {
+      "value": 2510.0,
+      "unit": "USD/oz",
+      "label_ar": "سعر أونصة الذهب عالمياً",
+      "source": "LIVE_YAHOO_FINANCE_GC_F",
+      "last_updated": "2026-08-24 05:15:00",
+      "is_stale": false,
+      "staleness_threshold_days": 2,
+      "days_since_update": 0
+    },
+    "gold_24k_egp_gram": {
+      "value": 4120.0,
+      "unit": "EGP/gram",
+      "label_ar": "سعر جرام الذهب عيار 24 محلياً",
+      "source": "LOCAL_EGYPT_BULLION_MARKET",
+      "last_updated": "2026-08-24 05:15:00",
+      "is_stale": false,
+      "staleness_threshold_days": 2,
+      "days_since_update": 0
+    },
+    "egx_foreign_net_flow_egp": {
+      "value": 185000000.0,
+      "unit": "EGP",
+      "label_ar": "صافي تدفقات المؤسسات الأجنبية بالبورصة المصرية",
+      "source": "EGX_DAILY_BULLETIN",
+      "last_updated": "2026-08-24 04:30:00",
+      "is_stale": false,
+      "staleness_threshold_days": 3,
+      "days_since_update": 0
+    }
+  },
+  "macro_regime": "EASING_DISINFLATION_EXPANSION",
+  "macro_regime_ar": "🟢 تراجع التضخم واستقرار سعر الصرف مع مسار تيسير نقدي تدريجي",
+  "last_sync_timestamp": "2026-08-24 05:13:50",
+  "staleness_warnings_count": 0,
+  "stale_indicators": []
+}

@@ -1,4 +1,14 @@
 ﻿date,ticker,name,shares,current_price,market_value_egp,allocation_pct,status,action,notes
-2026-08-24 04:05,SWDY.CA,السويدي إلكتريك,0,116.0,0.0,5.1,APPROVED,WAIT FOR PULLBACK,APPROVED_FOR_EXECUTION
-2026-08-24 04:05,TMGH.CA,طلعت مصطفى,8,97.7,781.6,0.0,HOLDING,HOLD,السهم في النطاق الآمن (لم يكسر وقف الخسارة والتركز طبيعي)
-2026-08-24 04:05,COMI.CA,التجاري الدولي,26,137.0,3562.0,0.0,HOLDING,HOLD,السهم في النطاق الآمن (لم يكسر وقف الخسارة والتركز طبيعي)
+2026-08-27 04:19,RAYA.CA,راية القابضة,159,7.39,1175.01,0.0,HOLDING,HOLD,السهم في النطاق الآمن (لم يكسر وقف الخسارة والتركز طبيعي)
+2026-08-27 04:19,SKPC.CA,سيدي كرير للبتروكيماويات,0,17.21,0.0,6.3,APPROVED,WAIT FOR PULLBACK,APPROVED_FOR_EXECUTION
+2026-08-27 04:19,PHDC.CA,بالم هيلز للتعمير,65,14.67,953.55,0.0,HOLDING,HOLD,السهم في النطاق الآمن (لم يكسر وقف الخسارة والتركز طبيعي)
+2026-08-27 04:19,EGAL.CA,مصر للالومنيوم,0,365.0,0.0,6.6,APPROVED,WAIT FOR PULLBACK,APPROVED_FOR_EXECUTION
+2026-08-27 04:19,BINV.CA,بي انفستمنتس القابضة,0,48.9,0.0,6.4,APPROVED,WAIT FOR PULLBACK,APPROVED_FOR_EXECUTION
+2026-08-27 04:19,ORWE.CA,النساجون الشرقيون,0,25.6,0.0,7.6,APPROVED,WAIT FOR PULLBACK,APPROVED_FOR_EXECUTION
+2026-08-27 04:19,CLHO.CA,كليوباترا للمستشفيات,0,17.5,0.0,6.6,APPROVED,WAIT FOR PULLBACK,APPROVED_FOR_EXECUTION
+2026-08-27 04:19,MFPC.CA,موبكو للأسمدة,0,39.34,0.0,7.6,APPROVED,WAIT FOR PULLBACK,APPROVED_FOR_EXECUTION
+2026-08-27 04:19,SWDY.CA,السويدي إلكتريك,0,127.99,0.0,4.5,APPROVED,WAIT FOR PULLBACK,APPROVED_FOR_EXECUTION
+2026-08-27 04:19,ISPH.CA,ابن سينا فارما,0,12.92,0.0,4.2,APPROVED,WAIT FOR PULLBACK,APPROVED_FOR_EXECUTION
+2026-08-27 04:19,RMDA.CA,العاشر من رمضان فارما (راميدا),0,6.14,0.0,4.6,APPROVED,WAIT FOR PULLBACK,APPROVED_FOR_EXECUTION
+2026-08-27 04:19,TMGH.CA,طلعت مصطفى,8,97.51,780.08,0.0,HOLDING,HOLD,السهم في النطاق الآمن (لم يكسر وقف الخسارة والتركز طبيعي)
+2026-08-27 04:19,COMI.CA,التجاري الدولي,26,139.28,3621.28,0.0,HOLDING,HOLD,السهم في النطاق الآمن (لم يكسر وقف الخسارة والتركز طبيعي)

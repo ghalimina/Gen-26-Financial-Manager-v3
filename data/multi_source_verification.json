@@ -1,0 +1,85 @@
+{
+  "timestamp": "2026-08-27T04:09:27.303507",
+  "comparison": [
+    {
+      "ticker": "COMI.CA",
+      "system": 139.28,
+      "yfinance": 139.48,
+      "investpy": null,
+      "egx": null,
+      "max_diff_pct": 0.1
+    },
+    {
+      "ticker": "SWDY.CA",
+      "system": 127.99,
+      "yfinance": 126.2,
+      "investpy": null,
+      "egx": null,
+      "max_diff_pct": 1.4
+    },
+    {
+      "ticker": "TMGH.CA",
+      "system": 97.51,
+      "yfinance": 98.0,
+      "investpy": null,
+      "egx": null,
+      "max_diff_pct": 0.5
+    },
+    {
+      "ticker": "ADIB.CA",
+      "system": 53.89,
+      "yfinance": 54.06,
+      "investpy": null,
+      "egx": null,
+      "max_diff_pct": 0.3
+    },
+    {
+      "ticker": "AMOC.CA",
+      "system": 10.91,
+      "yfinance": 11.1,
+      "investpy": null,
+      "egx": null,
+      "max_diff_pct": 1.7
+    },
+    {
+      "ticker": "HRHO.CA",
+      "system": 25.9,
+      "yfinance": 26.09,
+      "investpy": null,
+      "egx": null,
+      "max_diff_pct": 0.7
+    },
+    {
+      "ticker": "ORAS.CA",
+      "system": 832.0,
+      "yfinance": 71.05,
+      "investpy": null,
+      "egx": null,
+      "max_diff_pct": 1071.0
+    },
+    {
+      "ticker": "ETEL.CA",
+      "system": 116.0,
+      "yfinance": 116.5,
+      "investpy": null,
+      "egx": null,
+      "max_diff_pct": 0.4
+    },
+    {
+      "ticker": "ABUK.CA",
+      "system": 75.76,
+      "yfinance": 76.7,
+      "investpy": null,
+      "egx": null,
+      "max_diff_pct": 1.2
+    },
+    {
+      "ticker": "FWRY.CA",
+      "system": 18.85,
+      "yfinance": 19.05,
+      "investpy": null,
+      "egx": null,
+      "max_diff_pct": 1.1
+    }
+  ]
+}

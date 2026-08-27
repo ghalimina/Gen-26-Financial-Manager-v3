@@ -13,7 +13,7 @@ class Config:
     PAPER_MIN_DAYS = 30
     
     # ML Settings
-    ML_MODE = "SHADOW"  # Options: OFF, SHADOW, CONFIDENCE_ONLY, ACTIVE
+    ML_MODE = "CONFIDENCE_ONLY"  # Options: OFF, SHADOW, CONFIDENCE_ONLY, ACTIVE
     
     # Exit Rules
     STOP_RULE_TYPE = "ATR"

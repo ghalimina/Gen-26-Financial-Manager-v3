@@ -70,16 +70,26 @@ class BlockTradesEngine:
         if not sym.endswith(".CA") and "." not in sym:
             sym = f"{sym}.CA"
 
+        from core.egx_universe_loader import EGXUniverseLoader
+        from data.universe_manager import UniverseManager
+        info = EGXUniverseLoader.get_stock_info(sym) or UniverseManager.get_ticker_metadata(sym)
+        adv_egp = float(info.get("adv20_egp", 5000000.0)) if info else 5000000.0
+        cp_nominal = float(info.get("nominal_price", 10.0)) if info else 10.0
+        block_val = max(adv_egp * 0.05, 500000.0)
+        block_shares = max(int(block_val / max(cp_nominal, 0.01)), 5000)
+
         prof = cls._BLOCK_PROFILES.get(sym, {
-            "avg_ticket_shares": 2000,
-            "block_threshold_shares": 50000,
-            "block_value_egp": 1000000.0
+            "avg_ticket_shares": max(int(block_shares / 25), 500),
+            "block_threshold_shares": block_shares,
+            "block_value_egp": block_val
         })
 
         canon = MarketPriceService.CANONICAL_PRICES.get(sym, {})
-        cp = current_price or canon.get("price", 10.0)
-        prev = canon.get("previous_close", cp * 0.995)
-        price_change_pct = ((cp - prev) / prev) * 100.0 if prev > 0 else 0.0
+        cp = current_price or canon.get("price")
+        if cp is None or cp <= 0:
+            cp = 10.0
+        prev = canon.get("previous_close") or (cp * 0.995)
+        price_change_pct = ((cp - prev) / prev) * 100.0 if (prev and prev > 0) else 0.0
 
         # Determine block trade presence
         threshold = prof["block_threshold_shares"]

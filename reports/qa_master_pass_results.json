@@ -1,0 +1,239 @@
+{
+  "api_endpoints": [
+    {
+      "endpoint": "GET /api/ranking",
+      "happy_code": 200,
+      "happy_latency_ms": 14272.2,
+      "fault_code": 200,
+      "passed": true,
+      "error": null
+    },
+    {
+      "endpoint": "GET /api/universe",
+      "happy_code": 200,
+      "happy_latency_ms": 2016.5,
+      "fault_code": "N/A",
+      "passed": true,
+      "error": null
+    },
+    {
+      "endpoint": "GET /api/prices",
+      "happy_code": 200,
+      "happy_latency_ms": 2005.9,
+      "fault_code": "N/A",
+      "passed": true,
+      "error": null
+    },
+    {
+      "endpoint": "GET /api/opportunities/short-term",
+      "happy_code": 200,
+      "happy_latency_ms": 6905.0,
+      "fault_code": 200,
+      "passed": true,
+      "error": null
+    },
+    {
+      "endpoint": "GET /api/execution/orders",
+      "happy_code": 200,
+      "happy_latency_ms": 2035.9,
+      "fault_code": 200,
+      "passed": true,
+      "error": null
+    },
+    {
+      "endpoint": "POST /api/execution/order/submit",
+      "happy_code": 200,
+      "happy_latency_ms": 2027.9,
+      "fault_code": 400,
+      "passed": true,
+      "error": "HTTP Error 400: BAD REQUEST"
+    },
+    {
+      "endpoint": "POST /api/execution/order/cancel",
+      "happy_code": 200,
+      "happy_latency_ms": 2026.7,
+      "fault_code": 400,
+      "passed": true,
+      "error": "HTTP Error 400: BAD REQUEST"
+    },
+    {
+      "endpoint": "GET /api/portfolio/hrp_weights",
+      "happy_code": 200,
+      "happy_latency_ms": 2041.0,
+      "fault_code": "N/A",
+      "passed": true,
+      "error": null
+    },
+    {
+      "endpoint": "GET /api/macro",
+      "happy_code": 200,
+      "happy_latency_ms": 2024.7,
+      "fault_code": "N/A",
+      "passed": true,
+      "error": null
+    },
+    {
+      "endpoint": "GET /api/corporate-actions",
+      "happy_code": 200,
+      "happy_latency_ms": 2025.1,
+      "fault_code": 200,
+      "passed": true,
+      "error": null
+    },
+    {
+      "endpoint": "GET /api/correlation",
+      "happy_code": 200,
+      "happy_latency_ms": 6345.2,
+      "fault_code": "N/A",
+      "passed": true,
+      "error": null
+    },
+    {
+      "endpoint": "GET /api/mlops/status",
+      "happy_code": 200,
+      "happy_latency_ms": 2039.6,
+      "fault_code": "N/A",
+      "passed": true,
+      "error": null
+    },
+    {
+      "endpoint": "GET /api/insider/COMI.CA",
+      "happy_code": 200,
+      "happy_latency_ms": 2022.5,
+      "fault_code": 200,
+      "passed": true,
+      "error": null
+    },
+    {
+      "endpoint": "GET /api/insider/market_deals",
+      "happy_code": 200,
+      "happy_latency_ms": 2016.1,
+      "fault_code": "N/A",
+      "passed": true,
+      "error": null
+    },
+    {
+      "endpoint": "GET /api/tax/harvesting",
+      "happy_code": 200,
+      "happy_latency_ms": 2023.9,
+      "fault_code": "N/A",
+      "passed": true,
+      "error": null
+    },
+    {
+      "endpoint": "GET /api/sentiment/COMI.CA",
+      "happy_code": 200,
+      "happy_latency_ms": 2539.0,
+      "fault_code": 200,
+      "passed": true,
+      "error": null
+    },
+    {
+      "endpoint": "GET /api/ai/forecast/COMI.CA",
+      "happy_code": 200,
+      "happy_latency_ms": 2680.0,
+      "fault_code": 200,
+      "passed": true,
+      "error": null
+    },
+    {
+      "endpoint": "GET /api/ai/validation_metrics",
+      "happy_code": 200,
+      "happy_latency_ms": 2026.0,
+      "fault_code": "N/A",
+      "passed": true,
+      "error": null
+    },
+    {
+      "endpoint": "GET /api/notifications/recent",
+      "happy_code": 200,
+      "happy_latency_ms": 2024.4,
+      "fault_code": 200,
+      "passed": true,
+      "error": null
+    },
+    {
+      "endpoint": "GET /api/real_portfolio",
+      "happy_code": 200,
+      "happy_latency_ms": 2014.7,
+      "fault_code": "N/A",
+      "passed": true,
+      "error": null
+    },
+    {
+      "endpoint": "POST /api/real_portfolio/add",
+      "happy_code": 200,
+      "happy_latency_ms": 2170.5,
+      "fault_code": 400,
+      "passed": true,
+      "error": "HTTP Error 400: BAD REQUEST"
+    },
+    {
+      "endpoint": "POST /api/real_portfolio/delete",
+      "happy_code": 200,
+      "happy_latency_ms": 2181.7,
+      "fault_code": 400,
+      "passed": true,
+      "error": "HTTP Error 400: BAD REQUEST"
+    },
+    {
+      "endpoint": "GET /api/watchlist",
+      "happy_code": 200,
+      "happy_latency_ms": 2025.5,
+      "fault_code": "N/A",
+      "passed": true,
+      "error": null
+    },
+    {
+      "endpoint": "POST /api/watchlist/add",
+      "happy_code": 200,
+      "happy_latency_ms": 2117.2,
+      "fault_code": 400,
+      "passed": true,
+      "error": "HTTP Error 400: BAD REQUEST"
+    },
+    {
+      "endpoint": "POST /api/watchlist/remove",
+      "happy_code": 200,
+      "happy_latency_ms": 2122.5,
+      "fault_code": 400,
+      "passed": true,
+      "error": "HTTP Error 400: BAD REQUEST"
+    }
+  ],
+  "numerical_edge_cases": [
+    {
+      "case": "Zero-Price Division Guard",
+      "passed": true
+    },
+    {
+      "case": "Short Price History Guard",
+      "passed": true
+    },
+    {
+      "case": "Macro Staleness Tracking",
+      "passed": true
+    },
+    {
+      "case": "NaN/Inf Sanitizer",
+      "passed": true
+    }
+  ],
+  "persistence_stress": [
+    {
+      "case": "Sequential Lifecycle",
+      "passed": true
+    },
+    {
+      "case": "Concurrent Multi-threading",
+      "passed": true
+    }
+  ],
+  "decision_isolation": [
+    {
+      "case": "Decision Engine Isolation",
+      "passed": true
+    }
+  ],
+  "overall_summary": {}
+}

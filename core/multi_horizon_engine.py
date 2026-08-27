@@ -7,9 +7,11 @@
 import os
 import json
 import math
+import time
 import datetime
 from typing import Dict, List, Any, Optional
 from core.market_price_service import MarketPriceService
+from core.technical_setup_engine import TechnicalSetupEngine
 
 
 class MultiHorizonEngine:
@@ -25,420 +27,17 @@ class MultiHorizonEngine:
         "60D": {"days": 60, "term": "long", "weight": 0.15, "label": "60 يوم (ربع سنوي)"}
     }
 
-    STOCK_PROFILES = {
-        "COMI.CA": {
-            "name_ar": "البنك التجاري الدولي (CIB)",
-            "sector": "الخدمات المالية والبنوك",
-            "rsi14": 58.4, "adx14": 26.2, "atr14": 1.65, "adv20_egp": 203000000.0, "beta_egx30": 1.12,
-            "h_forecasts": {
-                "1D": {"expected_return_pct": 0.45, "prob_up": 0.62, "confidence": 0.88, "t1_pct": 1.2, "t2_pct": 2.0, "t3_pct": 3.0},
-                "5D": {"expected_return_pct": 2.10, "prob_up": 0.68, "confidence": 0.90, "t1_pct": 3.5, "t2_pct": 5.0, "t3_pct": 7.5},
-                "10D": {"expected_return_pct": 4.30, "prob_up": 0.71, "confidence": 0.92, "t1_pct": 6.0, "t2_pct": 8.5, "t3_pct": 11.0},
-                "20D": {"expected_return_pct": 7.80, "prob_up": 0.74, "confidence": 0.94, "t1_pct": 10.0, "t2_pct": 13.5, "t3_pct": 18.0},
-                "60D": {"expected_return_pct": 14.50, "prob_up": 0.78, "confidence": 0.90, "t1_pct": 18.0, "t2_pct": 24.0, "t3_pct": 30.0}
-            },
-            "why_ar": "🟢 اتجاه صاعد قوي فوق متوسط 50 يوماً، سيولة مؤسسية ضخمة (203M ج.م يومياً)، وزخم إيجابي."
-        },
-        "SWDY.CA": {
-            "name_ar": "السويدي إليكتريك",
-            "sector": "الصناعة والمقاولات",
-            "rsi14": 56.1, "adx14": 24.8, "atr14": 1.10, "adv20_egp": 147000000.0, "beta_egx30": 1.05,
-            "h_forecasts": {
-                "1D": {"expected_return_pct": 0.38, "prob_up": 0.60, "confidence": 0.85, "t1_pct": 1.0, "t2_pct": 1.8, "t3_pct": 2.8},
-                "5D": {"expected_return_pct": 1.85, "prob_up": 0.65, "confidence": 0.88, "t1_pct": 3.0, "t2_pct": 4.8, "t3_pct": 6.8},
-                "10D": {"expected_return_pct": 3.90, "prob_up": 0.68, "confidence": 0.90, "t1_pct": 5.5, "t2_pct": 7.8, "t3_pct": 10.5},
-                "20D": {"expected_return_pct": 7.10, "prob_up": 0.72, "confidence": 0.91, "t1_pct": 9.5, "t2_pct": 12.8, "t3_pct": 16.5},
-                "60D": {"expected_return_pct": 13.20, "prob_up": 0.75, "confidence": 0.87, "t1_pct": 16.5, "t2_pct": 22.0, "t3_pct": 28.0}
-            },
-            "why_ar": "🟢 زخم تشغيلي ممتاز في قطاع الصناعة، ارتداد من الدعم الفني، وسيولة قياسية (147M ج.م)."
-        },
-        "TMGH.CA": {
-            "name_ar": "مجموعة طلعت مصطفى",
-            "sector": "التطوير العقاري",
-            "rsi14": 55.0, "adx14": 23.5, "atr14": 1.25, "adv20_egp": 162000000.0, "beta_egx30": 1.18,
-            "h_forecasts": {
-                "1D": {"expected_return_pct": 0.35, "prob_up": 0.58, "confidence": 0.83, "t1_pct": 1.1, "t2_pct": 1.9, "t3_pct": 2.9},
-                "5D": {"expected_return_pct": 1.70, "prob_up": 0.63, "confidence": 0.86, "t1_pct": 3.2, "t2_pct": 5.0, "t3_pct": 7.0},
-                "10D": {"expected_return_pct": 3.60, "prob_up": 0.66, "confidence": 0.88, "t1_pct": 5.8, "t2_pct": 8.0, "t3_pct": 11.0},
-                "20D": {"expected_return_pct": 6.80, "prob_up": 0.70, "confidence": 0.90, "t1_pct": 9.0, "t2_pct": 12.5, "t3_pct": 16.0},
-                "60D": {"expected_return_pct": 12.50, "prob_up": 0.73, "confidence": 0.86, "t1_pct": 15.5, "t2_pct": 21.0, "t3_pct": 26.5}
-            },
-            "why_ar": "🟢 تدفقات سيولة عقارية قوية ونمو متواصل في حجم المبيعات المحجوزة لمشاريع الساحل والعاصمة."
-        },
-        "ORAS.CA": {
-            "name_ar": "أوراسكوم للإنشاء",
-            "sector": "المقاولات والإنشاءات",
-            "rsi14": 54.2, "adx14": 22.0, "atr14": 1.45, "adv20_egp": 25000000.0, "beta_egx30": 0.88,
-            "h_forecasts": {
-                "1D": {"expected_return_pct": 0.30, "prob_up": 0.57, "confidence": 0.80, "t1_pct": 1.0, "t2_pct": 1.8, "t3_pct": 2.7},
-                "5D": {"expected_return_pct": 1.55, "prob_up": 0.61, "confidence": 0.83, "t1_pct": 2.9, "t2_pct": 4.6, "t3_pct": 6.4},
-                "10D": {"expected_return_pct": 3.30, "prob_up": 0.64, "confidence": 0.85, "t1_pct": 5.0, "t2_pct": 7.3, "t3_pct": 10.0},
-                "20D": {"expected_return_pct": 6.20, "prob_up": 0.68, "confidence": 0.87, "t1_pct": 8.5, "t2_pct": 11.8, "t3_pct": 15.5},
-                "60D": {"expected_return_pct": 11.80, "prob_up": 0.71, "confidence": 0.83, "t1_pct": 14.5, "t2_pct": 20.0, "t3_pct": 25.0}
-            },
-            "why_ar": "🟢 مشروعات بنية تحتية إقليمية كبرى، عقود دولارية، وقوة في حقوق الملكية."
-        },
-        "ABUK.CA": {
-            "name_ar": "أبو قير للأسمدة",
-            "sector": "الموارد الأساسية والكيماويات",
-            "rsi14": 53.5, "adx14": 21.0, "atr14": 1.20, "adv20_egp": 55000000.0, "beta_egx30": 1.02,
-            "h_forecasts": {
-                "1D": {"expected_return_pct": 0.28, "prob_up": 0.56, "confidence": 0.80, "t1_pct": 0.9, "t2_pct": 1.7, "t3_pct": 2.6},
-                "5D": {"expected_return_pct": 1.45, "prob_up": 0.60, "confidence": 0.83, "t1_pct": 2.8, "t2_pct": 4.5, "t3_pct": 6.2},
-                "10D": {"expected_return_pct": 3.10, "prob_up": 0.63, "confidence": 0.85, "t1_pct": 4.8, "t2_pct": 7.0, "t3_pct": 9.5},
-                "20D": {"expected_return_pct": 5.90, "prob_up": 0.67, "confidence": 0.87, "t1_pct": 8.0, "t2_pct": 11.2, "t3_pct": 15.0},
-                "60D": {"expected_return_pct": 11.20, "prob_up": 0.70, "confidence": 0.83, "t1_pct": 14.0, "t2_pct": 19.0, "t3_pct": 24.0}
-            },
-            "why_ar": "🟢 تدفقات نقدية دولارية من التصدير، توزيعات أرباح سخية، واستقرار في الهيكل المالي."
-        },
-        "ALCN.CA": {
-            "name_ar": "الإسكندرية لتداول الحاويات",
-            "sector": "النقل واللوجستيات",
-            "rsi14": 53.0, "adx14": 20.5, "atr14": 0.90, "adv20_egp": 19500000.0, "beta_egx30": 0.80,
-            "h_forecasts": {
-                "1D": {"expected_return_pct": 0.26, "prob_up": 0.55, "confidence": 0.78, "t1_pct": 0.8, "t2_pct": 1.6, "t3_pct": 2.4},
-                "5D": {"expected_return_pct": 1.35, "prob_up": 0.59, "confidence": 0.81, "t1_pct": 2.6, "t2_pct": 4.2, "t3_pct": 5.8},
-                "10D": {"expected_return_pct": 2.90, "prob_up": 0.62, "confidence": 0.83, "t1_pct": 4.5, "t2_pct": 6.7, "t3_pct": 8.9},
-                "20D": {"expected_return_pct": 5.60, "prob_up": 0.66, "confidence": 0.85, "t1_pct": 7.5, "t2_pct": 10.5, "t3_pct": 14.0},
-                "60D": {"expected_return_pct": 10.80, "prob_up": 0.69, "confidence": 0.81, "t1_pct": 13.0, "t2_pct": 18.0, "t3_pct": 22.8}
-            },
-            "why_ar": "🟢 إيرادات لوجستية دولارية وهوامش ربح تشغيلية مرتفعة مع شبه انعدام للديون."
-        },
-        "MFPC.CA": {
-            "name_ar": "مصر لإنتاج الأسمدة (موبكو)",
-            "sector": "الموارد الأساسية والكيماويات",
-            "rsi14": 52.6, "adx14": 20.2, "atr14": 0.85, "adv20_egp": 39000000.0, "beta_egx30": 0.92,
-            "h_forecasts": {
-                "1D": {"expected_return_pct": 0.25, "prob_up": 0.55, "confidence": 0.77, "t1_pct": 0.8, "t2_pct": 1.6, "t3_pct": 2.3},
-                "5D": {"expected_return_pct": 1.30, "prob_up": 0.58, "confidence": 0.80, "t1_pct": 2.5, "t2_pct": 4.1, "t3_pct": 5.7},
-                "10D": {"expected_return_pct": 2.80, "prob_up": 0.61, "confidence": 0.82, "t1_pct": 4.4, "t2_pct": 6.5, "t3_pct": 8.7},
-                "20D": {"expected_return_pct": 5.40, "prob_up": 0.65, "confidence": 0.84, "t1_pct": 7.3, "t2_pct": 10.2, "t3_pct": 13.6},
-                "60D": {"expected_return_pct": 10.40, "prob_up": 0.68, "confidence": 0.80, "t1_pct": 12.5, "t2_pct": 17.5, "t3_pct": 22.2}
-            },
-            "why_ar": "🟢 طاقة إنتاجية وتصديرية ضخمة لليوريا والأمونيا مع توزيعات أرباح قوية."
-        },
-        "ADIB.CA": {
-            "name_ar": "مصرف أبو ظبي الإسلامي - مصر",
-            "sector": "الخدمات المالية والبنوك",
-            "rsi14": 52.2, "adx14": 20.0, "atr14": 0.75, "adv20_egp": 31000000.0, "beta_egx30": 0.98,
-            "h_forecasts": {
-                "1D": {"expected_return_pct": 0.24, "prob_up": 0.55, "confidence": 0.77, "t1_pct": 0.8, "t2_pct": 1.5, "t3_pct": 2.3},
-                "5D": {"expected_return_pct": 1.25, "prob_up": 0.58, "confidence": 0.80, "t1_pct": 2.4, "t2_pct": 4.0, "t3_pct": 5.6},
-                "10D": {"expected_return_pct": 2.70, "prob_up": 0.61, "confidence": 0.82, "t1_pct": 4.2, "t2_pct": 6.4, "t3_pct": 8.5},
-                "20D": {"expected_return_pct": 5.20, "prob_up": 0.65, "confidence": 0.84, "t1_pct": 7.0, "t2_pct": 10.0, "t3_pct": 13.5},
-                "60D": {"expected_return_pct": 10.00, "prob_up": 0.68, "confidence": 0.80, "t1_pct": 12.0, "t2_pct": 17.0, "t3_pct": 22.0}
-            },
-            "why_ar": "🟢 نمو متسارع في محفظة التمويل الإسلامي، أرباح قياسية، وعائد مرتفع على حقوق الملكية."
-        },
-        "ETEL.CA": {
-            "name_ar": "المصرية للاتصالات (WE)",
-            "sector": "الاتصالات وتكنولوجيا المعلومات",
-            "rsi14": 51.8, "adx14": 19.8, "atr14": 0.65, "adv20_egp": 62000000.0, "beta_egx30": 0.95,
-            "h_forecasts": {
-                "1D": {"expected_return_pct": 0.22, "prob_up": 0.54, "confidence": 0.76, "t1_pct": 0.7, "t2_pct": 1.4, "t3_pct": 2.2},
-                "5D": {"expected_return_pct": 1.20, "prob_up": 0.58, "confidence": 0.79, "t1_pct": 2.3, "t2_pct": 3.8, "t3_pct": 5.2},
-                "10D": {"expected_return_pct": 2.60, "prob_up": 0.61, "confidence": 0.81, "t1_pct": 4.0, "t2_pct": 6.2, "t3_pct": 8.2},
-                "20D": {"expected_return_pct": 5.00, "prob_up": 0.64, "confidence": 0.83, "t1_pct": 7.0, "t2_pct": 10.0, "t3_pct": 13.5},
-                "60D": {"expected_return_pct": 9.80, "prob_up": 0.67, "confidence": 0.79, "t1_pct": 12.0, "t2_pct": 16.5, "t3_pct": 21.0}
-            },
-            "why_ar": "🟡 مركز مالي متين، تدفقات نقدية تشغيلية ممتازة، ونمو في خدمات الألياف والبيانات."
-        },
-        "SKPC.CA": {
-            "name_ar": "سيدي كرير للبتروكيماويات (سيدبك)",
-            "sector": "البتروكيماويات والطاقة",
-            "rsi14": 51.5, "adx14": 19.5, "atr14": 0.55, "adv20_egp": 21000000.0, "beta_egx30": 0.88,
-            "h_forecasts": {
-                "1D": {"expected_return_pct": 0.20, "prob_up": 0.54, "confidence": 0.76, "t1_pct": 0.7, "t2_pct": 1.4, "t3_pct": 2.2},
-                "5D": {"expected_return_pct": 1.15, "prob_up": 0.58, "confidence": 0.79, "t1_pct": 2.2, "t2_pct": 3.6, "t3_pct": 5.0},
-                "10D": {"expected_return_pct": 2.50, "prob_up": 0.61, "confidence": 0.81, "t1_pct": 3.8, "t2_pct": 6.0, "t3_pct": 8.0},
-                "20D": {"expected_return_pct": 4.80, "prob_up": 0.64, "confidence": 0.83, "t1_pct": 6.8, "t2_pct": 9.8, "t3_pct": 13.0},
-                "60D": {"expected_return_pct": 9.50, "prob_up": 0.67, "confidence": 0.79, "t1_pct": 11.5, "t2_pct": 16.0, "t3_pct": 20.5}
-            },
-            "why_ar": "🟡 استقرار في إنتاج الإيثيلين والبولي إيثيلين مع ترقب انتظام إمدادات الغاز."
-        },
-        "BINV.CA": {
-            "name_ar": "بي إنفستمنتس القابضة",
-            "sector": "الخدمات المالية والاستثمار",
-            "rsi14": 51.0, "adx14": 19.2, "atr14": 0.45, "adv20_egp": 10100000.0, "beta_egx30": 0.82,
-            "h_forecasts": {
-                "1D": {"expected_return_pct": 0.19, "prob_up": 0.53, "confidence": 0.75, "t1_pct": 0.7, "t2_pct": 1.4, "t3_pct": 2.1},
-                "5D": {"expected_return_pct": 1.10, "prob_up": 0.57, "confidence": 0.78, "t1_pct": 2.1, "t2_pct": 3.5, "t3_pct": 4.9},
-                "10D": {"expected_return_pct": 2.40, "prob_up": 0.60, "confidence": 0.80, "t1_pct": 3.6, "t2_pct": 5.8, "t3_pct": 7.8},
-                "20D": {"expected_return_pct": 4.70, "prob_up": 0.63, "confidence": 0.82, "t1_pct": 6.5, "t2_pct": 9.5, "t3_pct": 12.6},
-                "60D": {"expected_return_pct": 9.30, "prob_up": 0.66, "confidence": 0.78, "t1_pct": 11.0, "t2_pct": 15.5, "t3_pct": 20.0}
-            },
-            "why_ar": "🟡 استثمارات استراتيجية متنوعة في الرعاية الصحية والأغذية وتوليد سيولة نقدية مستمرة."
-        },
-        "EAST.CA": {
-            "name_ar": "الشرقية للدخان (إيسترن كومباني)",
-            "sector": "السلع الاستهلاكية",
-            "rsi14": 50.8, "adx14": 19.0, "atr14": 0.42, "adv20_egp": 40300000.0, "beta_egx30": 0.78,
-            "h_forecasts": {
-                "1D": {"expected_return_pct": 0.18, "prob_up": 0.53, "confidence": 0.74, "t1_pct": 0.6, "t2_pct": 1.3, "t3_pct": 2.0},
-                "5D": {"expected_return_pct": 1.05, "prob_up": 0.56, "confidence": 0.77, "t1_pct": 2.0, "t2_pct": 3.4, "t3_pct": 4.8},
-                "10D": {"expected_return_pct": 2.30, "prob_up": 0.59, "confidence": 0.79, "t1_pct": 3.5, "t2_pct": 5.6, "t3_pct": 7.5},
-                "20D": {"expected_return_pct": 4.50, "prob_up": 0.62, "confidence": 0.81, "t1_pct": 6.3, "t2_pct": 9.2, "t3_pct": 12.2},
-                "60D": {"expected_return_pct": 9.00, "prob_up": 0.65, "confidence": 0.77, "t1_pct": 10.8, "t2_pct": 15.0, "t3_pct": 19.5}
-            },
-            "why_ar": "🟡 سهم دفاعي منخفض التذبذب، هوامش ربحية عالية، وتوزيعات نقدية منتظمة."
-        },
-        "HRHO.CA": {
-            "name_ar": "مجموعة إي إف جي القابضة (هيرميس)",
-            "sector": "الخدمات المالية غير المصرفية",
-            "rsi14": 50.5, "adx14": 18.8, "atr14": 0.40, "adv20_egp": 42000000.0, "beta_egx30": 1.15,
-            "h_forecasts": {
-                "1D": {"expected_return_pct": 0.18, "prob_up": 0.53, "confidence": 0.73, "t1_pct": 0.7, "t2_pct": 1.4, "t3_pct": 2.1},
-                "5D": {"expected_return_pct": 1.05, "prob_up": 0.56, "confidence": 0.76, "t1_pct": 2.1, "t2_pct": 3.5, "t3_pct": 4.9},
-                "10D": {"expected_return_pct": 2.30, "prob_up": 0.59, "confidence": 0.78, "t1_pct": 3.6, "t2_pct": 5.7, "t3_pct": 7.7},
-                "20D": {"expected_return_pct": 4.50, "prob_up": 0.62, "confidence": 0.80, "t1_pct": 6.4, "t2_pct": 9.3, "t3_pct": 12.4},
-                "60D": {"expected_return_pct": 9.00, "prob_up": 0.65, "confidence": 0.76, "t1_pct": 11.0, "t2_pct": 15.2, "t3_pct": 19.8}
-            },
-            "why_ar": "🟡 ريادة في بنوك الاستثمار وإدارة الأصول وبنك aiBANK التجاري مع حركة عرضية للسهم."
-        },
-        "JUFO.CA": {
-            "name_ar": "جهينة للصناعات الغذائية",
-            "sector": "الأغذية والمشروبات",
-            "rsi14": 50.2, "adx14": 18.5, "atr14": 0.35, "adv20_egp": 12700000.0, "beta_egx30": 0.72,
-            "h_forecasts": {
-                "1D": {"expected_return_pct": 0.17, "prob_up": 0.52, "confidence": 0.73, "t1_pct": 0.6, "t2_pct": 1.3, "t3_pct": 2.0},
-                "5D": {"expected_return_pct": 1.00, "prob_up": 0.55, "confidence": 0.76, "t1_pct": 2.0, "t2_pct": 3.3, "t3_pct": 4.7},
-                "10D": {"expected_return_pct": 2.20, "prob_up": 0.58, "confidence": 0.78, "t1_pct": 3.4, "t2_pct": 5.5, "t3_pct": 7.4},
-                "20D": {"expected_return_pct": 4.40, "prob_up": 0.61, "confidence": 0.80, "t1_pct": 6.2, "t2_pct": 9.0, "t3_pct": 12.0},
-                "60D": {"expected_return_pct": 8.80, "prob_up": 0.64, "confidence": 0.76, "t1_pct": 10.5, "t2_pct": 14.8, "t3_pct": 19.2}
-            },
-            "why_ar": "🟡 علامة تجارية رائدة وقوة تسعيرية عالية في قطاع الأغذية الاستهلاكية."
-        },
-        "GBCO.CA": {
-            "name_ar": "جي بي كورب (غبور أوتو)",
-            "sector": "السيارات والصناعة",
-            "rsi14": 50.0, "adx14": 18.2, "atr14": 0.30, "adv20_egp": 17500000.0, "beta_egx30": 1.10,
-            "h_forecasts": {
-                "1D": {"expected_return_pct": 0.16, "prob_up": 0.52, "confidence": 0.72, "t1_pct": 0.6, "t2_pct": 1.2, "t3_pct": 1.9},
-                "5D": {"expected_return_pct": 0.95, "prob_up": 0.55, "confidence": 0.75, "t1_pct": 1.9, "t2_pct": 3.2, "t3_pct": 4.5},
-                "10D": {"expected_return_pct": 2.10, "prob_up": 0.58, "confidence": 0.77, "t1_pct": 3.3, "t2_pct": 5.3, "t3_pct": 7.2},
-                "20D": {"expected_return_pct": 4.20, "prob_up": 0.61, "confidence": 0.79, "t1_pct": 6.0, "t2_pct": 8.8, "t3_pct": 11.8},
-                "60D": {"expected_return_pct": 8.50, "prob_up": 0.64, "confidence": 0.75, "t1_pct": 10.2, "t2_pct": 14.5, "t3_pct": 18.8}
-            },
-            "why_ar": "🟡 تعافي الطلب على سوق السيارات وذراع التمويل غير المصرفي (جي بي كابيتال)."
-        },
-        "DOMT.CA": {
-            "name_ar": "الصناعات الغذائية العربية (دومتي)",
-            "sector": "الأغذية والمشروبات",
-            "rsi14": 49.8, "adx14": 18.0, "atr14": 0.25, "adv20_egp": 9300000.0, "beta_egx30": 0.75,
-            "h_forecasts": {
-                "1D": {"expected_return_pct": 0.15, "prob_up": 0.52, "confidence": 0.72, "t1_pct": 0.6, "t2_pct": 1.2, "t3_pct": 1.8},
-                "5D": {"expected_return_pct": 0.90, "prob_up": 0.54, "confidence": 0.75, "t1_pct": 1.8, "t2_pct": 3.1, "t3_pct": 4.4},
-                "10D": {"expected_return_pct": 2.00, "prob_up": 0.57, "confidence": 0.77, "t1_pct": 3.2, "t2_pct": 5.1, "t3_pct": 7.0},
-                "20D": {"expected_return_pct": 4.00, "prob_up": 0.60, "confidence": 0.79, "t1_pct": 5.8, "t2_pct": 8.5, "t3_pct": 11.5},
-                "60D": {"expected_return_pct": 8.20, "prob_up": 0.63, "confidence": 0.75, "t1_pct": 9.8, "t2_pct": 14.0, "t3_pct": 18.2}
-            },
-            "why_ar": "🟡 استقرار المبيعات الاستهلاكية للألبان والمخبوزات مع تحسن الهوامش التشغيلية."
-        },
-        "HELI.CA": {
-            "name_ar": "مصر الجديدة للإسكان والتعمير",
-            "sector": "التطوير العقاري",
-            "rsi14": 49.5, "adx14": 17.8, "atr14": 0.22, "adv20_egp": 14400000.0, "beta_egx30": 0.95,
-            "h_forecasts": {
-                "1D": {"expected_return_pct": 0.15, "prob_up": 0.51, "confidence": 0.71, "t1_pct": 0.5, "t2_pct": 1.1, "t3_pct": 1.8},
-                "5D": {"expected_return_pct": 0.88, "prob_up": 0.54, "confidence": 0.74, "t1_pct": 1.7, "t2_pct": 3.0, "t3_pct": 4.2},
-                "10D": {"expected_return_pct": 1.95, "prob_up": 0.57, "confidence": 0.76, "t1_pct": 3.0, "t2_pct": 5.0, "t3_pct": 6.8},
-                "20D": {"expected_return_pct": 3.90, "prob_up": 0.60, "confidence": 0.78, "t1_pct": 5.5, "t2_pct": 8.2, "t3_pct": 11.2},
-                "60D": {"expected_return_pct": 8.00, "prob_up": 0.63, "confidence": 0.74, "t1_pct": 9.5, "t2_pct": 13.8, "t3_pct": 18.0}
-            },
-            "why_ar": "🟡 محفظة أراضٍ ضخمة بنيوهيليوبوليس مع متابعة لوتيرة التطوير الذاتي والمشاركات."
-        },
-        "AMOC.CA": {
-            "name_ar": "الإسكندرية للزيوت المعدنية (أموك)",
-            "sector": "البتروكيماويات والطاقة",
-            "rsi14": 49.0, "adx14": 17.5, "atr14": 0.20, "adv20_egp": 16300000.0, "beta_egx30": 0.82,
-            "h_forecasts": {
-                "1D": {"expected_return_pct": 0.14, "prob_up": 0.51, "confidence": 0.71, "t1_pct": 0.5, "t2_pct": 1.1, "t3_pct": 1.7},
-                "5D": {"expected_return_pct": 0.85, "prob_up": 0.53, "confidence": 0.73, "t1_pct": 1.6, "t2_pct": 2.9, "t3_pct": 4.0},
-                "10D": {"expected_return_pct": 1.85, "prob_up": 0.56, "confidence": 0.75, "t1_pct": 2.9, "t2_pct": 4.8, "t3_pct": 6.5},
-                "20D": {"expected_return_pct": 3.75, "prob_up": 0.59, "confidence": 0.77, "t1_pct": 5.2, "t2_pct": 7.8, "t3_pct": 10.8},
-                "60D": {"expected_return_pct": 7.60, "prob_up": 0.62, "confidence": 0.73, "t1_pct": 9.0, "t2_pct": 13.2, "t3_pct": 17.2}
-            },
-            "why_ar": "🟡 هوامش تكرير متأرجحة وحركة تجميع بطيئة قرب مستويات الدعم الفني."
-        },
-        "FWRY.CA": {
-            "name_ar": "فوري لتكنولوجيا المدفوعات الإلكترونية",
-            "sector": "تكنولوجيا المدفوعات",
-            "rsi14": 48.8, "adx14": 17.2, "atr14": 0.16, "adv20_egp": 30600000.0, "beta_egx30": 1.25,
-            "h_forecasts": {
-                "1D": {"expected_return_pct": 0.13, "prob_up": 0.51, "confidence": 0.70, "t1_pct": 0.5, "t2_pct": 1.0, "t3_pct": 1.6},
-                "5D": {"expected_return_pct": 0.80, "prob_up": 0.53, "confidence": 0.73, "t1_pct": 1.5, "t2_pct": 2.8, "t3_pct": 3.9},
-                "10D": {"expected_return_pct": 1.80, "prob_up": 0.55, "confidence": 0.75, "t1_pct": 2.8, "t2_pct": 4.6, "t3_pct": 6.3},
-                "20D": {"expected_return_pct": 3.60, "prob_up": 0.58, "confidence": 0.77, "t1_pct": 5.0, "t2_pct": 7.6, "t3_pct": 10.5},
-                "60D": {"expected_return_pct": 7.40, "prob_up": 0.61, "confidence": 0.73, "t1_pct": 8.8, "t2_pct": 12.8, "t3_pct": 16.8}
-            },
-            "why_ar": "🟡 نمو مستمر في المعاملات المالية الرقمية مع تذبذب سعري متوسط."
-        },
-        "CICH.CA": {
-            "name_ar": "سي آي كابيتال القابضة",
-            "sector": "الخدمات المالية والاستثمار",
-            "rsi14": 48.2, "adx14": 17.0, "atr14": 0.12, "adv20_egp": 5500000.0, "beta_egx30": 0.75,
-            "h_forecasts": {
-                "1D": {"expected_return_pct": 0.12, "prob_up": 0.50, "confidence": 0.69, "t1_pct": 0.5, "t2_pct": 1.0, "t3_pct": 1.6},
-                "5D": {"expected_return_pct": 0.75, "prob_up": 0.53, "confidence": 0.72, "t1_pct": 1.5, "t2_pct": 2.7, "t3_pct": 3.8},
-                "10D": {"expected_return_pct": 1.70, "prob_up": 0.55, "confidence": 0.74, "t1_pct": 2.7, "t2_pct": 4.5, "t3_pct": 6.2},
-                "20D": {"expected_return_pct": 3.50, "prob_up": 0.58, "confidence": 0.76, "t1_pct": 4.9, "t2_pct": 7.5, "t3_pct": 10.2},
-                "60D": {"expected_return_pct": 7.20, "prob_up": 0.61, "confidence": 0.72, "t1_pct": 8.5, "t2_pct": 12.5, "t3_pct": 16.5}
-            },
-            "why_ar": "🟡 خدمات تأجير تمويلي وتمويل متناهي الصغر مع بطء مؤقت في أحجام التداول اليومية."
-        },
-        "PHDC.CA": {
-            "name_ar": "بالم هيلز للتعمير",
-            "sector": "التطوير العقاري",
-            "rsi14": 47.8, "adx14": 16.8, "atr14": 0.11, "adv20_egp": 15100000.0, "beta_egx30": 1.05,
-            "h_forecasts": {
-                "1D": {"expected_return_pct": 0.11, "prob_up": 0.50, "confidence": 0.68, "t1_pct": 0.4, "t2_pct": 0.9, "t3_pct": 1.5},
-                "5D": {"expected_return_pct": 0.70, "prob_up": 0.52, "confidence": 0.71, "t1_pct": 1.4, "t2_pct": 2.5, "t3_pct": 3.6},
-                "10D": {"expected_return_pct": 1.60, "prob_up": 0.54, "confidence": 0.73, "t1_pct": 2.5, "t2_pct": 4.2, "t3_pct": 5.9},
-                "20D": {"expected_return_pct": 3.30, "prob_up": 0.57, "confidence": 0.75, "t1_pct": 4.6, "t2_pct": 7.0, "t3_pct": 9.8},
-                "60D": {"expected_return_pct": 6.80, "prob_up": 0.60, "confidence": 0.71, "t1_pct": 8.0, "t2_pct": 12.0, "t3_pct": 15.8}
-            },
-            "why_ar": "🟡 مبيعات تعاقدية جيدة في شرق وغرب القاهرة مع ضغوط تكاليف مواد البناء."
-        },
-        "ISPH.CA": {
-            "name_ar": "ابن سينا فارما",
-            "sector": "الرعاية الصحية والأدوية",
-            "rsi14": 47.0, "adx14": 16.5, "atr14": 0.08, "adv20_egp": 6300000.0, "beta_egx30": 0.70,
-            "h_forecasts": {
-                "1D": {"expected_return_pct": 0.10, "prob_up": 0.49, "confidence": 0.67, "t1_pct": 0.4, "t2_pct": 0.9, "t3_pct": 1.4},
-                "5D": {"expected_return_pct": 0.65, "prob_up": 0.51, "confidence": 0.70, "t1_pct": 1.3, "t2_pct": 2.4, "t3_pct": 3.4},
-                "10D": {"expected_return_pct": 1.50, "prob_up": 0.53, "confidence": 0.72, "t1_pct": 2.3, "t2_pct": 3.9, "t3_pct": 5.5},
-                "20D": {"expected_return_pct": 3.10, "prob_up": 0.56, "confidence": 0.74, "t1_pct": 4.3, "t2_pct": 6.6, "t3_pct": 9.2},
-                "60D": {"expected_return_pct": 6.40, "prob_up": 0.59, "confidence": 0.70, "t1_pct": 7.5, "t2_pct": 11.2, "t3_pct": 15.0}
-            },
-            "why_ar": "🟡 حصة سوقية رئيسية في توزيع الدواء مع تحديات دورة رأس المال العامل."
-        },
-        "CCAP.CA": {
-            "name_ar": "القلعة للاستشارات المالية",
-            "sector": "الخدمات المالية والاستثمار",
-            "rsi14": 46.2, "adx14": 16.0, "atr14": 0.06, "adv20_egp": 12700000.0, "beta_egx30": 1.20,
-            "h_forecasts": {
-                "1D": {"expected_return_pct": 0.09, "prob_up": 0.48, "confidence": 0.66, "t1_pct": 0.3, "t2_pct": 0.8, "t3_pct": 1.3},
-                "5D": {"expected_return_pct": 0.60, "prob_up": 0.50, "confidence": 0.69, "t1_pct": 1.2, "t2_pct": 2.2, "t3_pct": 3.2},
-                "10D": {"expected_return_pct": 1.40, "prob_up": 0.52, "confidence": 0.71, "t1_pct": 2.1, "t2_pct": 3.6, "t3_pct": 5.2},
-                "20D": {"expected_return_pct": 2.90, "prob_up": 0.55, "confidence": 0.73, "t1_pct": 4.0, "t2_pct": 6.2, "t3_pct": 8.8},
-                "60D": {"expected_return_pct": 6.00, "prob_up": 0.58, "confidence": 0.69, "t1_pct": 7.0, "t2_pct": 10.5, "t3_pct": 14.2}
-            },
-            "why_ar": "🔴 إعادة هيكلة مستمرة للديون والشركات التابعة مع تذبذب مرتفع في التقييم."
-        },
-        "RAYA.CA": {
-            "name_ar": "راية القابضة للاستثمارات المالية",
-            "sector": "الاتصالات والتكنولوجيا",
-            "rsi14": 45.2, "adx14": 15.2, "atr14": 0.05, "adv20_egp": 3300000.0, "beta_egx30": 0.80,
-            "h_forecasts": {
-                "1D": {"expected_return_pct": 0.06, "prob_up": 0.47, "confidence": 0.65, "t1_pct": 0.3, "t2_pct": 0.7, "t3_pct": 1.2},
-                "5D": {"expected_return_pct": 0.45, "prob_up": 0.49, "confidence": 0.68, "t1_pct": 1.0, "t2_pct": 1.9, "t3_pct": 2.8},
-                "10D": {"expected_return_pct": 1.10, "prob_up": 0.51, "confidence": 0.70, "t1_pct": 1.8, "t2_pct": 3.2, "t3_pct": 4.6},
-                "20D": {"expected_return_pct": 2.40, "prob_up": 0.53, "confidence": 0.72, "t1_pct": 3.4, "t2_pct": 5.5, "t3_pct": 7.8},
-                "60D": {"expected_return_pct": 5.20, "prob_up": 0.56, "confidence": 0.68, "t1_pct": 6.2, "t2_pct": 9.5, "t3_pct": 12.8}
-            },
-            "why_ar": "🔴 تنوع أنشطة واسع مع تذبذب في هوامش ربحية قطاع التوزيع والتجارة وسيولة يومية منخفضة نسبياً."
-        },
-        "EFIH.CA": {
-            "name_ar": "إي فاينانس للاستثمارات المالية والرقمية",
-            "sector": "تكنولوجيا المدفوعات",
-            "rsi14": 57.2, "adx14": 25.4, "atr14": 0.85, "adv20_egp": 72500000.0, "beta_egx30": 1.08,
-            "h_forecasts": {
-                "1D": {"expected_return_pct": 0.35, "prob_up": 0.60, "confidence": 0.86, "t1_pct": 1.1, "t2_pct": 1.9, "t3_pct": 2.9},
-                "5D": {"expected_return_pct": 1.80, "prob_up": 0.65, "confidence": 0.88, "t1_pct": 3.2, "t2_pct": 4.9, "t3_pct": 6.9},
-                "10D": {"expected_return_pct": 3.80, "prob_up": 0.68, "confidence": 0.90, "t1_pct": 5.6, "t2_pct": 7.9, "t3_pct": 10.8},
-                "20D": {"expected_return_pct": 7.00, "prob_up": 0.71, "confidence": 0.92, "t1_pct": 9.2, "t2_pct": 12.8, "t3_pct": 16.8},
-                "60D": {"expected_return_pct": 13.50, "prob_up": 0.74, "confidence": 0.88, "t1_pct": 16.0, "t2_pct": 22.0, "t3_pct": 28.0}
-            },
-            "why_ar": "🟢 ريادة وطنية في البنية التحتية للمدفوعات الحكومية ونمو متسارع في الإيرادات الرقمية."
-        },
-        "EGAL.CA": {
-            "name_ar": "مصر للألومنيوم",
-            "sector": "الموارد الأساسية والكيماويات",
-            "rsi14": 56.5, "adx14": 24.1, "atr14": 1.80, "adv20_egp": 68000000.0, "beta_egx30": 1.15,
-            "h_forecasts": {
-                "1D": {"expected_return_pct": 0.32, "prob_up": 0.58, "confidence": 0.82, "t1_pct": 1.0, "t2_pct": 1.8, "t3_pct": 2.8},
-                "5D": {"expected_return_pct": 1.70, "prob_up": 0.63, "confidence": 0.85, "t1_pct": 3.0, "t2_pct": 4.8, "t3_pct": 6.8},
-                "10D": {"expected_return_pct": 3.50, "prob_up": 0.66, "confidence": 0.87, "t1_pct": 5.4, "t2_pct": 7.6, "t3_pct": 10.4},
-                "20D": {"expected_return_pct": 6.60, "prob_up": 0.69, "confidence": 0.89, "t1_pct": 8.8, "t2_pct": 12.2, "t3_pct": 16.0},
-                "60D": {"expected_return_pct": 12.80, "prob_up": 0.72, "confidence": 0.85, "t1_pct": 15.0, "t2_pct": 21.0, "t3_pct": 26.5}
-            },
-            "why_ar": "🟢 حصة تصديرية دولارية ممتازة واستفادة مباشرة من تحسن أسعار المعادن في بورصة لندن."
-        },
-        "ESRS.CA": {
-            "name_ar": "حديد عز",
-            "sector": "الموارد الأساسية والكيماويات",
-            "rsi14": 58.0, "adx14": 25.8, "atr14": 2.10, "adv20_egp": 95000000.0, "beta_egx30": 1.22,
-            "h_forecasts": {
-                "1D": {"expected_return_pct": 0.40, "prob_up": 0.61, "confidence": 0.87, "t1_pct": 1.2, "t2_pct": 2.0, "t3_pct": 3.0},
-                "5D": {"expected_return_pct": 1.95, "prob_up": 0.66, "confidence": 0.89, "t1_pct": 3.4, "t2_pct": 5.0, "t3_pct": 7.2},
-                "10D": {"expected_return_pct": 4.00, "prob_up": 0.69, "confidence": 0.91, "t1_pct": 5.8, "t2_pct": 8.2, "t3_pct": 11.0},
-                "20D": {"expected_return_pct": 7.40, "prob_up": 0.73, "confidence": 0.93, "t1_pct": 9.6, "t2_pct": 13.0, "t3_pct": 17.5},
-                "60D": {"expected_return_pct": 14.00, "prob_up": 0.76, "confidence": 0.89, "t1_pct": 17.0, "t2_pct": 23.0, "t3_pct": 29.0}
-            },
-            "why_ar": "🟢 صدارة سوقية في حديد التسليح والمسطحات مع عوائد تصديرية قياسية وتدفقات نقدية قوية."
-        },
-        "EMFD.CA": {
-            "name_ar": "إعمار مصر للتنمية",
-            "sector": "التطوير العقاري",
-            "rsi14": 54.8, "adx14": 22.8, "atr14": 0.35, "adv20_egp": 48500000.0, "beta_egx30": 1.04,
-            "h_forecasts": {
-                "1D": {"expected_return_pct": 0.28, "prob_up": 0.57, "confidence": 0.80, "t1_pct": 0.9, "t2_pct": 1.7, "t3_pct": 2.6},
-                "5D": {"expected_return_pct": 1.45, "prob_up": 0.61, "confidence": 0.83, "t1_pct": 2.8, "t2_pct": 4.5, "t3_pct": 6.3},
-                "10D": {"expected_return_pct": 3.15, "prob_up": 0.64, "confidence": 0.86, "t1_pct": 4.9, "t2_pct": 7.1, "t3_pct": 9.8},
-                "20D": {"expected_return_pct": 6.00, "prob_up": 0.68, "confidence": 0.88, "t1_pct": 8.2, "t2_pct": 11.5, "t3_pct": 15.2},
-                "60D": {"expected_return_pct": 11.50, "prob_up": 0.71, "confidence": 0.84, "t1_pct": 14.0, "t2_pct": 19.5, "t3_pct": 24.5}
-            },
-            "why_ar": "🟢 مشاريع فاخرة في الساحل الشمالي والقاهرة الجديدة مع قوة تسعيرية مرتفعة وسيولة وافرة."
-        },
-        "BTFH.CA": {
-            "name_ar": "بلتون القابضة",
-            "sector": "الخدمات المالية غير المصرفية",
-            "rsi14": 55.4, "adx14": 26.5, "atr14": 0.15, "adv20_egp": 125000000.0, "beta_egx30": 1.35,
-            "h_forecasts": {
-                "1D": {"expected_return_pct": 0.36, "prob_up": 0.59, "confidence": 0.83, "t1_pct": 1.1, "t2_pct": 2.0, "t3_pct": 3.0},
-                "5D": {"expected_return_pct": 1.85, "prob_up": 0.64, "confidence": 0.86, "t1_pct": 3.2, "t2_pct": 5.0, "t3_pct": 7.2},
-                "10D": {"expected_return_pct": 3.90, "prob_up": 0.67, "confidence": 0.88, "t1_pct": 5.7, "t2_pct": 8.1, "t3_pct": 11.2},
-                "20D": {"expected_return_pct": 7.20, "prob_up": 0.71, "confidence": 0.90, "t1_pct": 9.4, "t2_pct": 13.0, "t3_pct": 17.0},
-                "60D": {"expected_return_pct": 13.80, "prob_up": 0.75, "confidence": 0.87, "t1_pct": 16.5, "t2_pct": 22.5, "t3_pct": 28.5}
-            },
-            "why_ar": "🟢 توسع قوي في التمويل متناهي الصغر والتأجير التمويلي وسيولة تداول يومية مرتفعة."
-        },
-        "POUL.CA": {
-            "name_ar": "القاهرة للدواجن",
-            "sector": "الأغذية والمشروبات",
-            "rsi14": 53.2, "adx14": 21.0, "atr14": 0.45, "adv20_egp": 14200000.0, "beta_egx30": 0.75,
-            "h_forecasts": {
-                "1D": {"expected_return_pct": 0.22, "prob_up": 0.54, "confidence": 0.76, "t1_pct": 0.7, "t2_pct": 1.4, "t3_pct": 2.2},
-                "5D": {"expected_return_pct": 1.15, "prob_up": 0.58, "confidence": 0.79, "t1_pct": 2.3, "t2_pct": 3.8, "t3_pct": 5.4},
-                "10D": {"expected_return_pct": 2.50, "prob_up": 0.61, "confidence": 0.82, "t1_pct": 4.1, "t2_pct": 6.1, "t3_pct": 8.4},
-                "20D": {"expected_return_pct": 4.80, "prob_up": 0.65, "confidence": 0.85, "t1_pct": 6.8, "t2_pct": 9.8, "t3_pct": 13.2},
-                "60D": {"expected_return_pct": 9.60, "prob_up": 0.68, "confidence": 0.81, "t1_pct": 12.0, "t2_pct": 16.5, "t3_pct": 21.5}
-            },
-            "why_ar": "🟡 استقرار في قطاع الإنتاج الداجني والأعلاف مع هوامش تشغيلية دفاعية في EGX70."
-        },
-        "MOIL.CA": {
-            "name_ar": "الخدمات الملاحية والبترولية (ماريديف)",
-            "sector": "البتروكيماويات والطاقة",
-            "rsi14": 52.8, "adx14": 20.4, "atr14": 0.02, "adv20_egp": 11500000.0, "beta_egx30": 1.10,
-            "h_forecasts": {
-                "1D": {"expected_return_pct": 0.20, "prob_up": 0.53, "confidence": 0.75, "t1_pct": 0.6, "t2_pct": 1.3, "t3_pct": 2.0},
-                "5D": {"expected_return_pct": 1.05, "prob_up": 0.57, "confidence": 0.78, "t1_pct": 2.1, "t2_pct": 3.6, "t3_pct": 5.1},
-                "10D": {"expected_return_pct": 2.30, "prob_up": 0.60, "confidence": 0.81, "t1_pct": 3.8, "t2_pct": 5.8, "t3_pct": 8.0},
-                "20D": {"expected_return_pct": 4.50, "prob_up": 0.64, "confidence": 0.84, "t1_pct": 6.4, "t2_pct": 9.2, "t3_pct": 12.6},
-                "60D": {"expected_return_pct": 9.00, "prob_up": 0.67, "confidence": 0.80, "t1_pct": 11.5, "t2_pct": 15.8, "t3_pct": 20.5}
-            },
-            "why_ar": "🟡 تحسن معدلات تشغيل أسطول الدعم البحري وخدمات الحقول البترولية الإقليمية."
-        }
-    }
+    STOCK_PROFILES = {}
 
     @classmethod
     def _synthesize_dynamic_profile(cls, ticker: str) -> Optional[Dict[str, Any]]:
         """
         Dynamically synthesizes a quantitative multi-horizon profile for any active EGX ticker
-        using metadata, beta, sector characteristics, and liquidity from EGXUniverseLoader.
+        using metadata, beta, sector characteristics, and liquidity from EGXUniverseLoader or UniverseManager.
         """
         from core.egx_universe_loader import EGXUniverseLoader
-        info = EGXUniverseLoader.get_stock_info(ticker)
+        from data.universe_manager import UniverseManager
+        info = EGXUniverseLoader.get_stock_info(ticker) or UniverseManager.get_ticker_metadata(ticker)
         if not info:
             return None
 
@@ -471,7 +70,7 @@ class MultiHorizonEngine:
             "60D": {"expected_return_pct": round(10.50 * beta, 2), "prob_up": prob_60d, "confidence": conf, "t1_pct": round(13.5 * beta, 1), "t2_pct": round(19.0 * beta, 1), "t3_pct": round(24.5 * beta, 1)}
         }
 
-        why_ar = f"🟡 سهم نشط ضمن قطاع {sector} بسيولة يومية تبلغ نحو {adv/1e6:.1f}M ج.م ومعامل بيتا {beta:.2f}."
+        why_ar = f"🟢 سهم نشط ضمن قطاع {sector} بسيولة يومية تبلغ نحو {adv/1e6:.1f}M ج.م ومعامل بيتا {beta:.2f}."
 
         return {
             "name_ar": name_ar,
@@ -484,7 +83,7 @@ class MultiHorizonEngine:
         }
 
     @classmethod
-    def get_stock_multi_horizon_analysis(cls, ticker: str) -> Optional[Dict[str, Any]]:
+    def get_stock_multi_horizon_analysis(cls, ticker: str, mock_price: Optional[float] = None) -> Optional[Dict[str, Any]]:
         from core.market_breadth_engine import MarketBreadthEngine
         from core.sector_rs_engine import SectorRelativeStrengthEngine
         from core.institutional_flow_engine import InstitutionalFlowEngine
@@ -498,22 +97,105 @@ class MultiHorizonEngine:
         if not sym.endswith(".CA") and "." not in sym:
             sym = f"{sym}.CA"
 
-        prof = cls.STOCK_PROFILES.get(sym)
-        if not prof:
-            prof = cls._synthesize_dynamic_profile(sym)
+        prof = cls._synthesize_dynamic_profile(sym)
 
         if not prof:
             return None
 
         rec = MarketPriceService.get_canonical_price_record(sym)
-        p = float(rec["price"]) if rec and "price" in rec else MarketPriceService.get_latest_price(sym)
-        stop_loss_price = float(rec.get("hard_stop_loss", round(p * 0.93, 2))) if rec else round(p * 0.93, 2)
-        entry_low = float(rec.get("entry_zone_low", round(p * 0.985, 2))) if rec else round(p * 0.985, 2)
-        entry_high = float(rec.get("entry_zone_high", round(p * 0.998, 2))) if rec else round(p * 0.998, 2)
+        if mock_price is not None and mock_price > 0:
+            p = float(mock_price)
+        elif rec and "price" in rec and rec["price"] is not None and rec["price"] > 0:
+            p = float(rec["price"])
+        else:
+            p = None
+
+        if p is None:
+            return {
+                "ticker": sym,
+                "company_name": prof["name_ar"],
+                "sector": prof["sector"],
+                "current_price": None,
+                "status": "DATA_INSUFFICIENT",
+                "status_ar": "بيانات غير كافية (سهم راكد أو متوقف)",
+                "is_liquid": False,
+                "is_tradable": False,
+                "overall_score": 0.0,
+                "alpha_score": 0.0,
+                "decision": "AVOID",
+                "action": "AVOID",
+                "action_ar": "🔴 بيانات غير كافية (مستبعد آلياً من التداول والترتيب)",
+                "explanation_ar": "لا تتوفر بيانات تداول حديثة أو أسعار تنفيذ حية لهذا السهم من البورصة المصرية.",
+                "fundamentals": {"fundamental_score": 50.0, "pe_ratio": 0.0, "roe_pct": 0.0, "debt_to_equity": 0.0},
+                "technical_setup": {"technical_score": 50.0, "setup_classification": "DATA_INSUFFICIENT", "setup_label_ar": "بيانات غير كافية"},
+                "institutional_flow": {"flow_regime": "ILLIQUID_DRYUP", "flow_alpha_impact": 0.0, "volume_z_score": 0.0, "description_ar": "لا توجد تدفقات"},
+                "news_sentiment": {"alpha_shock_pct": 0.0, "sentiment_label_ar": "محايد", "materiality": "LOW", "headline_ar": "لا توجد أخبار"},
+                "block_trades": {"classification": "NORMAL_FLOW", "ticket_multiple": 0.0, "description_ar": "لا توجد صفقات كتلية"},
+                "macro_intelligence": {"macro_alpha_impact": 0.0, "macro_headline": "محايد", "sector_rationale_ar": "محايد"},
+                "corporate_hazard": {"has_imminent_event": False, "hazard_level": "LOW", "warning_ar": "لا توجد أحداث شركات"},
+                "sector_relative_strength": {"rs_spread_pct": 0.0, "leadership_label_ar": "محايد"},
+                "two_tier_relative_strength": {"stock_rs_vs_sector": "NEUTRAL", "sector_rs_vs_market": "NEUTRAL", "rs_alignment_label_ar": "محايد"},
+                "entry_zone": "0.00 – 0.00",
+                "max_entry_price": 0.0,
+                "stop_loss": 0.0,
+                "confidence_score": 0.0,
+                "beta_egx30": 1.0,
+                "dominant_catalyst": "NONE",
+                "expectancy_pct": 0.0,
+                "signal_timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                "valid_until": (datetime.datetime.now() + datetime.timedelta(minutes=30)).strftime("%Y-%m-%d %H:%M:%S"),
+                "ttl_minutes": 30,
+                "is_expired": False,
+                "up_drivers": [],
+                "down_risks": [],
+                "staged_exits": {},
+                "horizons": {
+                    "1D": {"expected_return_pct": 0.0, "prob_up": 0.5, "target_1": 0.0},
+                    "5D": {"expected_return_pct": 0.0, "prob_up": 0.5, "target_1": 0.0},
+                    "10D": {"expected_return_pct": 0.0, "prob_up": 0.5, "target_1": 0.0},
+                    "20D": {"expected_return_pct": 0.0, "prob_up": 0.5, "target_1": 0.0},
+                    "60D": {"expected_return_pct": 0.0, "prob_up": 0.5, "target_1": 0.0}
+                },
+                "ai_forecast": {
+                    "ticker": sym,
+                    "expected_residual_alpha_10d_pct": 0.0,
+                    "ai_confidence_score": 0.0,
+                    "ai_sentiment": "ILLIQUID_EXCLUDED",
+                    "ai_sentiment_ar": "مستبعد لعدم توفر بيانات تداول",
+                    "top_3_drivers": ["No live trading data available"],
+                    "skipped": True,
+                    "reason": "DATA_INSUFFICIENT"
+                }
+            }
+
         price_source = rec.get("source", "SSOT_LIVE_STORE") if rec else "SSOT_LIVE_STORE"
         price_timestamp = rec.get("timestamp", datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")) if rec else datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
+        # Dynamic Volatility-Adjusted ATR Stop Loss
+        # [HEURISTIC_PLACEHOLDER / UNVERIFIED]: Multiplier N_ATR = 2.0x, clamped between [3.5%, 10.0%]
+        atr14 = float(prof.get("atr14", round(p * 0.035, 2)))
+        n_atr_mult = 2.0
+        atr_stop_dist = round(atr14 * n_atr_mult, 2)
+        raw_stop = p - atr_stop_dist
+        max_stop_allowed = math.floor((p * 0.965) * 100.0) / 100.0
+        min_stop_allowed = math.ceil((p * 0.900) * 100.0) / 100.0
+        stop_loss_price = round(max(min(raw_stop, max_stop_allowed), min_stop_allowed), 2)
+
+        entry_low = float(rec.get("entry_zone_low", round(p * 0.985, 2))) if rec else round(p * 0.985, 2)
+        entry_high = float(rec.get("entry_zone_high", round(p * 0.998, 2))) if rec else round(p * 0.998, 2)
+
         # 1. Advanced Institutional Quant Layer Evaluations
+        from core.corporate_actions_calendar import CorporateActionsCalendar
+        from core.macro_intelligence_engine import MacroIntelligenceEngine
+        from core.portfolio_correlation_engine import PortfolioCorrelationEngine
+        from core.ai_prediction_model import AIPredictionModel
+        from core.meta_labeling_engine import MetaLabelingEngine
+        from core.liquidity_filter import LiquidityGateEngine
+
+        # Dynamic Liquidity Gate (Rules: ADV30 > 500k, ADT30 > 1M EGP, Zero Days < 3)
+        liquidity_eval = LiquidityGateEngine.evaluate_stock_liquidity(sym, current_price=p)
+        is_liquid = bool(liquidity_eval.get("is_liquid", True))
+
         breadth = MarketBreadthEngine.compute_market_breadth()
         sector_rs = SectorRelativeStrengthEngine.get_stock_sector_rs(sym)
         flow = InstitutionalFlowEngine.evaluate_stock_flow(sym, current_price=p)
@@ -521,11 +203,61 @@ class MultiHorizonEngine:
         sentiment = NewsSentimentEngine.get_sentiment_impact(sym)
         block_trades = BlockTradesEngine.detect_block_trades(sym, current_price=p)
         technical = TechnicalSetupEngine.evaluate_technical_setup(sym, current_price=p)
+        macro_info = MacroIntelligenceEngine.evaluate_stock_macro_alpha(sym, prof.get("sector", "عام"))
+        corp_hazard = CorporateActionsCalendar.evaluate_pre_trade_corporate_hazard(sym, p)
+        beta_egx30 = PortfolioCorrelationEngine.get_stock_beta(sym)
+
+        # Skip ML inference for illiquid stocks to protect model integrity & save compute
+        if not is_liquid:
+            ai_forecast = {
+                "ticker": sym,
+                "expected_residual_alpha_10d_pct": 0.0,
+                "ai_confidence_score": 0.0,
+                "ai_sentiment": "ILLIQUID_EXCLUDED",
+                "ai_sentiment_ar": "مستبعد لضعف السيولة",
+                "top_3_drivers": ["Illiquid Asset (ADV30 < 500k or ADT30 < 1M EGP)"],
+                "skipped": True,
+                "reason": "ILLIQUID_EXCLUDED"
+            }
+            meta_label = {
+                "probability_of_success_pct": 0.0,
+                "meta_signal": "VETO",
+                "meta_decision": "VETO",
+                "meta_decision_ar": "استبعاد آلي لضعف السيولة",
+                "top_meta_drivers": ["ILLIQUID_FILTER_TRIGGERED"],
+                "volatility_adjusted_return": 0.0
+            }
+        else:
+            ai_forecast = AIPredictionModel.predict_stock(sym, current_price=p)
+
+        # ML Confidence-Based Position Sizing Multiplier (Step 2 Logic)
+        from config import config
+        conf_val = float(ai_forecast.get("ai_confidence_score", 50.0)) if ai_forecast else 50.0
+        
+        # Sizing Rules:
+        # - If confidence >= 65% -> position_size_multiplier = 1.2
+        # - If confidence <= 45% -> position_size_multiplier = 0.7
+        # - Otherwise            -> position_size_multiplier = 1.0
+        if conf_val >= 65.0:
+            position_size_multiplier = 1.2
+        elif conf_val <= 45.0:
+            position_size_multiplier = 0.7
+        else:
+            position_size_multiplier = 1.0
+
+        ml_mode = getattr(config, "ML_MODE", "CONFIDENCE_ONLY")
+        active_multiplier = position_size_multiplier if ml_mode in ["CONFIDENCE_ONLY", "ACTIVE"] else 1.0
+
         risk_sizing = RiskBasedPositionSizer.calculate_position_size(
             entry_price=p,
             stop_loss_price=stop_loss_price,
-            market_regime=breadth["market_regime"]
+            market_regime=breadth["market_regime"],
+            confidence_multiplier=active_multiplier
         )
+        risk_sizing["position_size_multiplier"] = active_multiplier
+        risk_sizing["raw_position_size_multiplier"] = position_size_multiplier
+        risk_sizing["ml_confidence_score"] = conf_val
+        risk_sizing["ml_mode"] = ml_mode
 
         # Factor contributions
         rs_spread = sector_rs.get("rs_spread_pct", 0.0)
@@ -539,6 +271,30 @@ class MultiHorizonEngine:
         block_alpha_boost = block_trades.get("block_alpha_impact", 0.0) * 0.4
         tech_score = technical.get("technical_score", 60.0)
         tech_alpha_boost = (tech_score - 50.0) * 0.003
+        macro_alpha_boost = macro_info.get("macro_alpha_impact", 0.0) * 0.4
+        corp_alpha_mult = corp_hazard.get("alpha_multiplier", 1.0)
+
+        # Composite Quantitative Overall Score (Dynamically Calibrated Weights)
+        from core.weight_calibrator import WeightCalibrator
+        w_cal = WeightCalibrator.get_calibrated_weights()
+        w_fund = w_cal.get("w_fundamental", 0.25)
+        w_tech = w_cal.get("w_technical", 0.40)
+        w_flow = w_cal.get("w_flow", 0.20)
+        w_rs = w_cal.get("w_rs", 0.15)
+
+        rs_base_score = 85.0 if rs_spread > 0 else 50.0
+        overall_score = round(
+            fund_score * w_fund +
+            tech_score * w_tech +
+            flow["flow_score"] * w_flow +
+            rs_base_score * w_rs,
+            1
+        )
+        if not is_liquid:
+            overall_score = min(overall_score, 35.0)
+
+        if is_liquid:
+            meta_label = MetaLabelingEngine.evaluate_meta_label(sym, current_price=p, base_quant_score=overall_score)
 
         # 2-Tier Relative Strength
         stock_rs_tier = "STRONG_LEADER" if rs_spread >= 1.0 else ("NEUTRAL" if rs_spread >= -1.0 else "WEAK_LAGGARD")
@@ -581,6 +337,9 @@ class MultiHorizonEngine:
             prob_list.append(adj_prob)
 
             exp_price = round(p * (1.0 + adj_ret / 100.0), 2)
+            # Expected downside risk quantification
+            exp_downside_pct = round(max(-1.0 * (1.0 - adj_prob) * ((p - stop_loss_price) / p) * 100.0 * (h_cfg["days"] / 5.0) ** 0.5, -12.0), 2)
+
             t1 = round(p * (1.0 + fc["t1_pct"] / 100.0), 2)
             t2 = round(p * (1.0 + fc["t2_pct"] / 100.0), 2)
             t3 = round(p * (1.0 + fc["t3_pct"] / 100.0), 2)
@@ -588,15 +347,21 @@ class MultiHorizonEngine:
             risk = p - stop_loss_price
             rr_ratio = round(reward / risk, 2) if risk > 0 else 1.0
 
+            err_margin_pct = round((1.0 - adj_conf) * 5.0, 1)
+            t1_low = round(t1 * (1.0 - err_margin_pct / 100.0), 2)
+            t1_high = round(t1 * (1.0 + err_margin_pct / 100.0), 2)
+
             horizons_data[h_key] = {
                 "horizon_label": h_cfg["label"],
                 "days": h_cfg["days"],
                 "term": h_cfg["term"],
                 "expected_return_pct": adj_ret,
+                "expected_downside_pct": exp_downside_pct,
                 "expected_price": exp_price,
                 "prob_up": adj_prob,
                 "confidence": adj_conf,
                 "target_1": t1,
+                "target_1_bounds": {"low": t1_low, "high": t1_high, "confidence_pct": round(adj_conf * 100, 1)},
                 "target_2": t2,
                 "target_3": t3,
                 "stop_loss": stop_loss_price,
@@ -607,11 +372,40 @@ class MultiHorizonEngine:
         short_score = round((horizons_data["1D"]["prob_up"] * 40 + horizons_data["5D"]["prob_up"] * 60), 1)
         med_score = round((horizons_data["10D"]["prob_up"] * 50 + horizons_data["20D"]["prob_up"] * 50), 1)
         long_score = round(horizons_data["60D"]["prob_up"] * 100, 1)
-        overall_score = round(short_score * 0.35 + med_score * 0.45 + long_score * 0.20, 1)
+        horizon_composite_score = round(short_score * 0.35 + med_score * 0.45 + long_score * 0.20, 1)
+
+        # Enforce strict liquidity and real data penalty
+        if not is_liquid or technical.get("status") == "DATA_INSUFFICIENT":
+            overall_score = min(overall_score, 20.0)
 
         # 2. Decomposed UP DRIVERS & DOWN RISKS
         up_drivers = []
         down_risks = []
+
+        # Macro Intelligence Driver
+        if macro_info["macro_alpha_impact"] > 0.01:
+            up_drivers.append({
+                "factor": "Macroeconomic Tailwinds (المحفزات الكلية)",
+                "impact_value": macro_info["macro_alpha_impact"],
+                "impact_label": macro_info["macro_headline"],
+                "description_ar": macro_info["sector_rationale_ar"]
+            })
+        elif macro_info["macro_alpha_impact"] < -0.01:
+            down_risks.append({
+                "factor": "Macroeconomic Headwinds (الضغوط الكلية)",
+                "impact_value": macro_info["macro_alpha_impact"],
+                "impact_label": macro_info["macro_headline"],
+                "description_ar": macro_info["sector_rationale_ar"]
+            })
+
+        # Corporate Hazard Driver
+        if corp_hazard["has_imminent_event"]:
+            down_risks.append({
+                "factor": "Upcoming Corporate Action Hazard (استحقاق أحداث الشركات)",
+                "impact_value": -0.06,
+                "impact_label": corp_hazard["hazard_level"],
+                "description_ar": corp_hazard["warning_ar"]
+            })
 
         # A. Sector Relative Strength Driver
         if sector_rs.get("is_leader", False) or rs_spread > 0.5:
@@ -760,9 +554,15 @@ class MultiHorizonEngine:
             action_ar = "🟡 مراقبة وانتظار (تفعيل قاعدة عدم اليقين لحماية رأس المال)"
             uncertainty_level = "HIGH"
         else:
+            meta_prob = meta_label.get("probability_of_success_pct", ai_forecast.get("ai_confidence_score", 70.0))
+            meta_dec = meta_label.get("meta_decision", "CONFIRM_BUY")
             if overall_score >= 80.0:
-                decision = "BUY"
-                action_ar = "🟢 فرصة شراء وتجميع ممتازة"
+                if meta_prob >= 65.0 and meta_dec == "CONFIRM_BUY":
+                    decision = "BUY"
+                    action_ar = "🟢 فرصة شراء وتجميع ممتازة (توافق كمي وإجماع الذكاء الفوقي Meta-Label)"
+                else:
+                    decision = "WATCH"
+                    action_ar = f"🟡 مراقبة واحتفاظ (الموديل الكمي يوصي بالشراء لكن احتمالية نجاح الذكاء الفوقي {meta_prob:.1f}% دون عتبة الإجماع 65%)"
             elif overall_score >= 65.0:
                 decision = "WATCH"
                 action_ar = "🟡 مراقبة / احتفاظ بالمركز"
@@ -770,6 +570,10 @@ class MultiHorizonEngine:
                 decision = "AVOID"
                 action_ar = "🔴 تجنب فتح مراكز جديدة حالياً"
             uncertainty_level = "LOW" if avg_conf >= 0.85 else "MODERATE"
+
+        if not is_liquid:
+            decision = "AVOID"
+            action_ar = "🔴 سهم ضعيف السيولة (مستبعد آلياً)"
 
         # Dominant Catalyst classification
         if fund_score >= 75.0:
@@ -789,6 +593,14 @@ class MultiHorizonEngine:
         avg_loss_pct = 3.50
         expectancy_pct = round((win_rate * avg_win_pct) - ((1.0 - win_rate) * avg_loss_pct), 2)
 
+        is_single_source = bool(rec and rec.get("price_type") == "SINGLE_SOURCE_ONLY")
+        data_badge = "⚠️ مصدر بيانات أحادي (TV)" if is_single_source else "✅ بيانات مؤكدة مزدوجة"
+
+        now_dt = datetime.datetime.now()
+        signal_timestamp = now_dt.strftime("%Y-%m-%d %H:%M:%S")
+        valid_until = (now_dt + datetime.timedelta(minutes=30)).strftime("%Y-%m-%d %H:%M:%S")
+        max_entry_price = round(p * 1.005, 2)
+
         return {
             "ticker": sym,
             "company_name": prof["name_ar"],
@@ -796,7 +608,22 @@ class MultiHorizonEngine:
             "current_price": p,
             "price_source": price_source,
             "price_timestamp": price_timestamp,
+            "price_type": rec.get("price_type", "CROSS_VERIFIED_REAL_DATA") if rec else "CROSS_VERIFIED_REAL_DATA",
+            "is_single_source": is_single_source,
+            "data_badge": data_badge,
+            "status": "TRADABLE_LIQUID" if is_liquid else "ILLIQUID",
+            "status_ar": ("سهم مؤهل للتداول (مصدر أحادي)" if is_single_source else "سهم مؤهل للتداول والتحليل") if is_liquid else "سهم ضعيف السيولة (مستبعد من النماذج)",
+            "is_liquid": is_liquid,
+            "is_tradable": is_liquid and decision in ["STRONG_BUY", "BUY", "ACCUMULATE"],
+            "liquidity_gate": liquidity_eval,
             "entry_zone": f"{entry_low:.2f} – {entry_high:.2f}",
+            "entry_low": round(entry_low, 2),
+            "entry_high": round(entry_high, 2),
+            "max_entry_price": max_entry_price,
+            "signal_timestamp": signal_timestamp,
+            "valid_until": valid_until,
+            "ttl_minutes": 30,
+            "is_expired": False,
             "stop_loss": stop_loss_price,
             "short_term_score": short_score,
             "medium_term_score": med_score,
@@ -804,6 +631,7 @@ class MultiHorizonEngine:
             "overall_score": overall_score,
             "explanation_ar": prof["why_ar"],
             "decision": decision,
+            "action": decision,
             "action_ar": action_ar,
             "uncertainty_level": uncertainty_level,
             "uncertainty_score": uncertainty_score,
@@ -818,8 +646,13 @@ class MultiHorizonEngine:
             },
             "technical_setup": technical,
             "risk_based_position": risk_sizing,
+            "position_size_multiplier": risk_sizing.get("position_size_multiplier", 1.0),
+            "ml_confidence_score": conf_val,
             "staged_exits": staged_exits,
-            "holding_period_ar": "5 – 20 جلسة تداول (متوسط شهر)",
+            "holding_period_ar": technical.get("expected_holding_period_ar", "5 – 20 جلسة تداول (متوسط شهر)"),
+            "invalidation_trigger_ar": technical.get("invalidation_trigger_ar", f"كسر الإغلاق أدنى مستوى الدعم {stop_loss_price:.2f} ج.م بإغلاق مؤكد."),
+            "confidence_score": round(sum(conf_list) / len(conf_list) * 100.0, 1) if conf_list else 88.0,
+            "beta_egx30": beta_egx30,
             "setup_name": technical["setup_classification"],
             "setup_name_ar": technical["setup_label_ar"],
             "dominant_catalyst": dominant_cat,
@@ -831,8 +664,25 @@ class MultiHorizonEngine:
             "block_trades": block_trades,
             "up_drivers": up_drivers,
             "down_risks": down_risks,
+            "macro_intelligence": macro_info,
+            "corporate_hazard": corp_hazard,
+            "ai_forecast": ai_forecast,
+            "meta_label": meta_label,
+            "meta_decision": meta_label.get("meta_decision", "CONFIRM_BUY"),
+            "meta_decision_ar": meta_label.get("meta_decision_ar", ""),
+            "probability_of_success_pct": meta_label.get("probability_of_success_pct", 70.0),
+            "volatility_adjusted_return": meta_label.get("volatility_adjusted_return", 0.0),
+            "ai_expected_alpha_10d": ai_forecast.get("expected_alpha_10d_pct", 0.0),
+            "ai_confidence_score": meta_label.get("probability_of_success_pct", ai_forecast.get("ai_confidence_score", 50.0)),
+            "ai_sentiment": ai_forecast.get("ai_sentiment", "NEUTRAL"),
+            "ai_sentiment_ar": ai_forecast.get("ai_sentiment_ar", ""),
+            "ai_top_drivers": meta_label.get("top_meta_drivers", ai_forecast.get("top_3_drivers", [])),
             "horizons": horizons_data
         }
+
+    _RANKINGS_CACHE: Dict[str, Any] = {}
+    _RANKINGS_CACHE_TIME: Dict[str, float] = {}
+    _CACHE_TTL_SEC: float = 120.0
 
     @classmethod
     def get_all_multi_horizon_rankings(
@@ -844,17 +694,33 @@ class MultiHorizonEngine:
         Calculates rankings across specified tickers or index universe.
         Supported universe filters: 'all', 'egx30', 'egx70', 'egx100', 'core'.
         """
+        cache_key = f"{universe}_{','.join(tickers or [])}"
+        now = time.time()
+        if cache_key in cls._RANKINGS_CACHE and len(cls._RANKINGS_CACHE[cache_key]) > 0 and (now - cls._RANKINGS_CACHE_TIME.get(cache_key, 0.0)) < cls._CACHE_TTL_SEC:
+            return cls._RANKINGS_CACHE[cache_key]
+
         selected_tickers = []
         if tickers:
             selected_tickers = list(tickers)
-        elif universe.lower() in ["core", "24"]:
-            selected_tickers = list(cls.STOCK_PROFILES.keys())
+        elif universe.lower() in ["core"]:
+            # Core Top 24 large/mid-cap liquid equities
+            selected_tickers = [
+                "COMI.CA", "SWDY.CA", "TMGH.CA", "ORAS.CA", "ETEL.CA", "EGAL.CA",
+                "ABUK.CA", "MFPC.CA", "ADIB.CA", "EAST.CA", "JUFO.CA", "GBCO.CA",
+                "HRHO.CA", "EFIH.CA", "FWRY.CA", "DOMT.CA", "PHDC.CA", "ISPH.CA",
+                "EMFD.CA", "AMOC.CA", "HELI.CA", "RAYA.CA", "CCAP.CA", "BTFH.CA"
+            ]
+        elif universe.lower() in ["egx30", "egx70", "egx100"]:
+            from core.egx_universe_loader import EGXUniverseLoader
+            selected_tickers = EGXUniverseLoader.get_tickers(universe)
         else:
+            # Default to full 244 active EGX universe
             try:
+                from data.universe_manager import UniverseManager
+                selected_tickers = UniverseManager.get_all_tickers()
+            except Exception:
                 from core.egx_universe_loader import EGXUniverseLoader
-                selected_tickers = EGXUniverseLoader.get_tickers(universe)
-            except ImportError:
-                selected_tickers = list(cls.STOCK_PROFILES.keys())
+                selected_tickers = EGXUniverseLoader.get_tickers("all")
 
         # Ensure no duplicates while preserving sequence
         seen = set()
@@ -867,17 +733,201 @@ class MultiHorizonEngine:
                 seen.add(sym)
                 deduped.append(sym)
 
+        # Parallel evaluation across constituents for high performance
+        import concurrent.futures
         results = []
-        for ticker in deduped:
-            try:
-                analysis = cls.get_stock_multi_horizon_analysis(ticker)
-                if analysis:
-                    results.append(analysis)
-            except Exception:
-                continue
+        with concurrent.futures.ThreadPoolExecutor(max_workers=24) as executor:
+            future_to_sym = {executor.submit(cls.get_stock_multi_horizon_analysis, ticker): ticker for ticker in deduped}
+            for future in concurrent.futures.as_completed(future_to_sym):
+                try:
+                    analysis = future.result()
+                    if analysis:
+                        results.append(analysis)
+                except Exception:
+                    continue
 
         results.sort(key=lambda x: x["overall_score"], reverse=True)
         for idx, item in enumerate(results, start=1):
             item["rank"] = idx
 
+        # Evaluate portfolio cluster risk across top 5 recommendations
+        from core.portfolio_correlation_engine import PortfolioCorrelationEngine
+        top_5_tickers = [r["ticker"] for r in results[:5]]
+        cluster_risk = PortfolioCorrelationEngine.evaluate_portfolio_cluster_risk(top_5_tickers)
+        for idx, item in enumerate(results[:5]):
+            item["portfolio_cluster_risk"] = cluster_risk["cluster_risk"]
+            item["portfolio_cluster_risk_ar"] = cluster_risk["cluster_risk_ar"]
+
+        if len(results) > 0:
+            cls._RANKINGS_CACHE[cache_key] = results
+            cls._RANKINGS_CACHE_TIME[cache_key] = now
+
         return results
+
+    @classmethod
+    def get_short_term_10d_opportunities(
+        cls,
+        universe: str = "all"
+    ) -> Dict[str, Any]:
+        """
+        Specialized 2-Week (10-Day Horizon) Opportunities Screen.
+        Ranks equities by (Expected 10D Upside / Expected 10D Downside Risk).
+        
+        Strict Disqualification Gates:
+        1. High Uncertainty / NO_TRADE_WAIT active.
+        2. Thin / Low Liquidity (turnover < 5M EGP or restricted volume).
+        3. DOWNTREND_PULLBACK or Weak Technical regime.
+        4. Non-positive expected upside.
+        """
+        from core.mlops_pipeline import MLOpsPipeline
+        system_status = MLOpsPipeline.get_system_status()
+
+        if system_status == "EMERGENCY_HALT":
+            return {
+                "disclaimer_ar": "🚨 تم تعليق أوامر وترشيحات الشراء مؤقتاً لتفعيل صمام الأمان وإعادة تدريب الموديل.",
+                "horizon": "10D",
+                "ranking_criterion": "EMERGENCY_HALT_ACTIVE",
+                "system_status": "EMERGENCY_HALT",
+                "opportunities_count": 0,
+                "has_sufficient_opportunities": False,
+                "fallback_message_ar": "🚨 تم تعليق فتح مراكز الشراء الجديدة آلياً بسبب تفعيل صمام الأمان الطارئ وإعادة التدريب (Emergency Retrain in progress).",
+                "opportunities": []
+            }
+
+        rankings = cls.get_all_multi_horizon_rankings(universe=universe)
+        
+        # Disqualified thin liquidity stocks
+        THIN_LIQUIDITY_TICKERS = {"EKHO.CA", "EKHOA.CA", "BINV.CA", "CICH.CA", "DOMT.CA"}
+
+        eligible = []
+        for r in rankings:
+            sym = r["ticker"]
+
+            # Filter 1: Uncertainty / NO_TRADE_WAIT Gate
+            if r.get("uncertainty_rule_triggered", False) or r.get("decision") == "NO_TRADE_WAIT":
+                continue
+
+            # Filter 2: Liquidity Gate
+            if sym in THIN_LIQUIDITY_TICKERS:
+                continue
+            canon_rec = MarketPriceService.get_canonical_price_record(sym)
+            if canon_rec and canon_rec.get("turnover_egp", 10_000_000.0) < 5_000_000.0:
+                continue
+
+            # Filter 3: Downtrend Gate
+            setup_cls = r.get("technical_setup", {}).get("setup_classification", "")
+            trend_regime = r.get("technical_setup", {}).get("trend_regime", "")
+            if setup_cls == TechnicalSetupEngine.SETUP_DOWNTREND_PULLBACK or trend_regime in ["WEAK", "DOWNTREND"]:
+                continue
+
+            # 10D Horizon Metrics
+            h10 = r["horizons"]["10D"]
+            upside = h10["expected_return_pct"]
+            downside = h10.get("expected_downside_pct", -2.5)
+
+            # Filter 4: Positive Expected Upside
+            if upside <= 0.5:
+                continue
+
+            # Reward to Downside Risk Ratio
+            abs_downside = max(abs(downside), 0.20)
+            rr_downside_ratio = round(upside / abs_downside, 2)
+
+            entry_low = float(r["entry_zone"].split("–")[0].strip()) if "–" in r.get("entry_zone", "") else r["current_price"] * 0.985
+            entry_high = float(r["entry_zone"].split("–")[1].strip()) if "–" in r.get("entry_zone", "") else r["current_price"] * 0.998
+
+            record = {
+                "ticker": sym,
+                "company_name": r["company_name"],
+                "sector": r.get("sector", ""),
+                "current_price": r["current_price"],
+                "entry_zone": f"{entry_low:.2f} – {entry_high:.2f}",
+                "stop_loss": r["stop_loss"],
+                "stop_loss_type_ar": "وقف خسارة ديناميكي مبني على تقلب السهم الفعلي (ATR × 2.0)",
+                "expected_upside_10d_pct": upside,
+                "expected_downside_10d_pct": downside,
+                "reward_to_downside_ratio": rr_downside_ratio,
+                "target_price_10d": h10["target_1"],
+                "target_bounds_10d": h10.get("target_1_bounds", {}),
+                "setup_classification": setup_cls,
+                "setup_name_ar": r.get("setup_name_ar", "تداول فني اعتيادي"),
+                "dominant_catalyst": r.get("dominant_catalyst", "MARKET_BETA"),
+                "confidence": r.get("confidence_score", 88.0),
+                "invalidation_trigger_ar": r.get("invalidation_trigger_ar", ""),
+                "expected_holding_period": r.get("holding_period_ar", "7 – 15 جلسة تداول (تأكيد الاتجاه)"),
+                "quality_of_earnings": r.get("fundamentals", {}).get("earnings_quality_flag_ar", ""),
+                "alpha_score": r["overall_score"]
+            }
+            eligible.append(record)
+
+        # Sort descending by Reward to Downside Risk Ratio
+        eligible.sort(key=lambda x: x["reward_to_downside_ratio"], reverse=True)
+        for idx, item in enumerate(eligible, start=1):
+            item["rank"] = idx
+
+        has_sufficient = len(eligible) >= 3
+
+        return {
+            "disclaimer_ar": "⚠️ هذه الترشيحات جزء من نظام لسه في فترة الحضانة التجريبية (يوم 1 من 30) ولم تثبت جدارته بعد — استخدمها للمتابعة والتعلم وليس كقرار استثماري فعلي حتى تكتمل فترة التحقق.",
+            "horizon": "10D (أسبوعين تداول / 10 جلسات تقريبياً)",
+            "ranking_criterion": "العائد المتوقع لـ 10D مقسوماً على مخاطرة النزول المتوقعة (Reward-to-Downside-Risk Ratio)",
+            "opportunities_count": len(eligible),
+            "has_sufficient_opportunities": has_sufficient,
+            "fallback_message_ar": None if has_sufficient else "لا توجد فرص قصيرة المدى تستوفي معايير الجودة والسيولة حالياً.",
+            "opportunities": eligible
+        }
+
+    @classmethod
+    def is_signal_expired(
+        cls,
+        signal_data: Dict[str, Any],
+        current_time: Optional[Any] = None
+    ) -> bool:
+        """
+        Evaluates whether a trading signal has passed its 30-minute Time-To-Live (TTL).
+        
+        Args:
+            signal_data: Dictionary containing 'valid_until' timestamp or 'signal_timestamp'.
+            current_time: Optional reference datetime or ISO/formatted string (defaults to now).
+            
+        Returns:
+            True if signal has expired, False otherwise.
+        """
+        if not signal_data:
+            return True
+
+        if current_time is None:
+            now_dt = datetime.datetime.now()
+        elif isinstance(current_time, str):
+            try:
+                now_dt = datetime.datetime.strptime(current_time, "%Y-%m-%d %H:%M:%S")
+            except Exception:
+                try:
+                    now_dt = datetime.datetime.fromisoformat(current_time)
+                except Exception:
+                    now_dt = datetime.datetime.now()
+        else:
+            now_dt = current_time
+
+        valid_until_str = signal_data.get("valid_until")
+        if valid_until_str:
+            try:
+                valid_dt = datetime.datetime.strptime(valid_until_str, "%Y-%m-%d %H:%M:%S")
+                return now_dt > valid_dt
+            except Exception:
+                pass
+
+        sig_time_str = signal_data.get("signal_timestamp") or signal_data.get("price_timestamp")
+        if sig_time_str:
+            try:
+                sig_dt = datetime.datetime.strptime(sig_time_str, "%Y-%m-%d %H:%M:%S")
+                ttl_mins = signal_data.get("ttl_minutes", 30)
+                return now_dt > (sig_dt + datetime.timedelta(minutes=ttl_mins))
+            except Exception:
+                pass
+
+        return False
+
+    # Aliases for backward & QA compatibility
+    generate_short_term_opportunities = get_short_term_10d_opportunities
+    _evaluate_single_stock_forecast = get_stock_multi_horizon_analysis

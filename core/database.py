@@ -21,11 +21,13 @@ class DatabaseManager:
 
     @classmethod
     def get_connection(cls) -> sqlite3.Connection:
-        """Returns an active SQLite database connection with row_factory enabled."""
+        """Returns an active SQLite database connection with row_factory, WAL mode, and busy_timeout enabled."""
         os.makedirs(cls.DATA_DIR, exist_ok=True)
-        conn = sqlite3.connect(cls.DB_PATH)
+        conn = sqlite3.connect(cls.DB_PATH, timeout=30.0, check_same_thread=False)
         conn.row_factory = sqlite3.Row
         conn.execute("PRAGMA foreign_keys = ON;")
+        conn.execute("PRAGMA journal_mode = WAL;")
+        conn.execute("PRAGMA busy_timeout = 5000;")
         return conn
 
     @classmethod
@@ -208,18 +210,22 @@ class DatabaseManager:
             # 2. Seed canonical market prices
             cursor.execute("DELETE FROM market_prices;")
             for rec in MarketPriceService.get_all_canonical_prices(universe="all"):
+                p_val = rec.get("price")
+                turnover_val = float(rec.get("turnover_egp", 0.0) or 0.0)
+                adv_calc = (turnover_val / p_val) if (p_val is not None and p_val > 0) else 0.0
+
                 cursor.execute("""
                 INSERT OR REPLACE INTO market_prices (ticker, market_date, open_price, high_price, low_price, close_price, volume, adv_20d, created_at)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
                 """, (
                     rec["ticker"],
-                    rec.get("market_date", "2026-08-20"),
-                    rec.get("open", rec["price"]),
-                    rec.get("high", rec["price"]),
-                    rec.get("low", rec["price"]),
-                    rec["price"],
-                    rec.get("volume", 10000),
-                    rec.get("turnover_egp", 0.0) / rec["price"] if rec["price"] > 0 else 0.0,
+                    rec.get("market_date") or "2026-08-20",
+                    float(rec.get("open") or p_val or 0.0),
+                    float(rec.get("high") or p_val or 0.0),
+                    float(rec.get("low") or p_val or 0.0),
+                    float(p_val or 0.0),
+                    int(rec.get("volume") or 0),
+                    adv_calc,
                     now_str
                 ))
 

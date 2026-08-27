@@ -58,6 +58,10 @@ class MarketBreadthEngine:
         "BTFH.CA": {"ma20": 2.90, "ma50": 2.80}
     }
 
+    _BREADTH_CACHE: Dict[str, Any] = {}
+    _BREADTH_CACHE_TIME: float = 0.0
+    _BREADTH_TTL_SEC: float = 30.0
+
     @classmethod
     def compute_market_breadth(
         cls,
@@ -68,6 +72,12 @@ class MarketBreadthEngine:
         Computes dynamic market breadth statistics, Advance/Decline ratio,
         MA participation (% above MA20 and MA50), and classifies the market regime.
         """
+        import time
+        now = time.time()
+        if not current_prices and not universe_tickers:
+            if cls._BREADTH_CACHE and (now - cls._BREADTH_CACHE_TIME) < cls._BREADTH_TTL_SEC:
+                return cls._BREADTH_CACHE
+
         active_stocks = EGXUniverseLoader.get_active_universe()
         tickers = universe_tickers or list(active_stocks.keys())
         
@@ -90,21 +100,24 @@ class MarketBreadthEngine:
                 cp = current_prices.get(sym_clean) if current_prices else MarketPriceService.get_latest_price(sym_clean)
             except Exception:
                 canon = MarketPriceService.CANONICAL_PRICES.get(sym_clean, {})
-                cp = canon.get("price", 10.0)
+                cp = canon.get("price")
+
+            if cp is None or cp <= 0:
+                continue
 
             # Previous close reference
             canon_rec = MarketPriceService.CANONICAL_PRICES.get(sym_clean, {})
-            prev_close = canon_rec.get("previous_close", cp * 0.995)
+            prev_close = canon_rec.get("previous_close") or (cp * 0.995)
             
             # Moving averages
             ma_ref = cls._MA_BENCHMARKS.get(sym_clean, {
                 "ma20": round(cp * 0.97, 2),
                 "ma50": round(cp * 0.94, 2)
             })
-            ma20 = ma_ref["ma20"]
-            ma50 = ma_ref["ma50"]
+            ma20 = ma_ref.get("ma20", round(cp * 0.97, 2))
+            ma50 = ma_ref.get("ma50", round(cp * 0.94, 2))
 
-            daily_ret = ((cp - prev_close) / prev_close) * 100.0 if prev_close > 0 else 0.0
+            daily_ret = ((cp - prev_close) / prev_close) * 100.0 if (prev_close and prev_close > 0) else 0.0
             
             if daily_ret > 0.10:
                 advances += 1
@@ -171,7 +184,7 @@ class MarketBreadthEngine:
             risk_multiplier = 0.85
             sentiment_ar = "سوق متوازن في حركة عرضية منضبطة مع فرص انتقائية للأسهم القيادية ذات الزخم."
 
-        return {
+        result = {
             "total_constituents": total_eval,
             "advances": advances,
             "declines": declines,
@@ -187,3 +200,7 @@ class MarketBreadthEngine:
             "sentiment_summary_ar": sentiment_ar,
             "constituents_detail": constituent_breadth
         }
+        if not current_prices and not universe_tickers:
+            cls._BREADTH_CACHE = result
+            cls._BREADTH_CACHE_TIME = now
+        return result

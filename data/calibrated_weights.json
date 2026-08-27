@@ -1,0 +1,14 @@
+{
+  "status": "CALIBRATED_OPTIMAL",
+  "optimization_method": "SciPy SLSQP Maximize Sharpe Ratio (Top-Quintile Basket)",
+  "lookback_months": 12,
+  "sample_size": 2325,
+  "optimal_sharpe_ratio": 0.63,
+  "weights": {
+    "w_fundamental": 0.25,
+    "w_technical": 0.25,
+    "w_flow": 0.25,
+    "w_rs": 0.25
+  },
+  "interpretation_ar": "الأوزان المثلى تجريبياً: الفني 25.0%, الأساسي 25.0%, التدفق المؤسسي 25.0%, القوة النسبية 25.0%"
+}

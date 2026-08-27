@@ -128,15 +128,14 @@ class HistoricalTradableUniverse:
     Manages the universe of eligible stocks across historical dates.
     Tracks listing status, suspension status, and trading eligibility to eliminate survivorship bias.
     """
-    # 27 Active Liquid EGX Core Universe
-    CORE_EGX_UNIVERSE = [
-        "COMI.CA", "TMGH.CA", "SWDY.CA", "HRHO.CA", "FWRY.CA",
-        "PHDC.CA", "ESRS.CA", "HELI.CA", "AMOC.CA", "ISPH.CA",
-        "ETEL.CA", "ABUK.CA", "MFPC.CA", "ORAS.CA", "SKPC.CA",
-        "EKHO.CA", "ORHD.CA", "BTFH.CA", "EAST.CA", "EGAL.CA",
-        "CERA.CA", "AUTO.CA", "CLHO.CA", "JUFO.CA", "MASR.CA",
-        "RAYA.CA", "CCAP.CA"
-    ]
+    @classmethod
+    def get_core_universe(cls) -> List[str]:
+        from core.egx_universe_loader import EGXUniverseLoader
+        return EGXUniverseLoader.get_tickers()
+
+    @property
+    def CORE_EGX_UNIVERSE(self) -> List[str]:
+        return self.get_core_universe()
 
     def __init__(self):
         # Maps date -> set of tradable tickers

@@ -101,7 +101,7 @@ class TestPriceSyncService(unittest.TestCase):
         self.assertIsNotNone(rec)
         self.assertGreaterEqual(rec["price"], 700.0)
         self.assertEqual(rec["currency"], "EGP")
-        self.assertIn(rec["source"], ["TRADINGVIEW_EGX_LIVE_SSOT", "MUBASHER_FALLBACK_RECOVERY_SSOT", "CANONICAL_BASELINE_SNAPSHOT"])
+        self.assertIn(rec["source"], ["TRADINGVIEW_EGX_LIVE_SSOT", "TRADINGVIEW_EGX_LIVE_SCANNER", "MUBASHER_FALLBACK_RECOVERY_SSOT", "CANONICAL_BASELINE_SNAPSHOT"])
 
     def test_07_circuit_breaker_persistent_anomaly_escalation(self):
         """

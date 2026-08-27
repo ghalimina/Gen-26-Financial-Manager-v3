@@ -77,18 +77,20 @@ def audit_flask_endpoints(client) -> Dict[str, Any]:
     }
     
     # 3. Stock Dossier API (COMI & ORAS)
+    comi_expected_p = MarketPriceService.get_latest_price("COMI.CA")
     r_comi = client.get("/api/stocks/COMI.CA")
     comi_data = r_comi.get_json() if r_comi.status_code == 200 else {}
     results["/api/stocks/COMI.CA"] = {
         "status_code": r_comi.status_code,
-        "success": r_comi.status_code == 200 and comi_data.get("current_price") == 137.00
+        "success": r_comi.status_code == 200 and comi_data.get("current_price") == comi_expected_p
     }
     
+    oras_expected_p = MarketPriceService.get_latest_price("ORAS.CA")
     r_oras = client.get("/api/stocks/ORAS.CA")
     oras_data = r_oras.get_json() if r_oras.status_code == 200 else {}
     results["/api/stocks/ORAS.CA"] = {
         "status_code": r_oras.status_code,
-        "success": r_oras.status_code == 200 and oras_data.get("current_price") == 759.00,
+        "success": r_oras.status_code == 200 and oras_data.get("current_price") == oras_expected_p,
         "oras_price": oras_data.get("current_price"),
         "oras_stop_loss": oras_data.get("stop_loss"),
         "oras_technical_setup": oras_data.get("technical_setup", {}).get("setup_classification")
@@ -106,7 +108,7 @@ def audit_flask_endpoints(client) -> Dict[str, Any]:
 
     results["/api/prices"] = {
         "status_code": r_prices.status_code,
-        "success": r_prices.status_code == 200 and oras_rec is not None and oras_rec.get("price") == 759.00
+        "success": r_prices.status_code == 200 and oras_rec is not None and oras_rec.get("price") == oras_expected_p
     }
     
     # 5. Price Sync API

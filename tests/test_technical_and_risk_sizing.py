@@ -29,7 +29,8 @@ class TestTechnicalAndRiskSizing(unittest.TestCase):
             TechnicalSetupEngine.SETUP_BREAKOUT_EXPANSION,
             TechnicalSetupEngine.SETUP_RANGE_CONSOLIDATION,
             TechnicalSetupEngine.SETUP_DOWNTREND_PULLBACK,
-            TechnicalSetupEngine.SETUP_OVERSOLD_REVERSAL
+            TechnicalSetupEngine.SETUP_OVERSOLD_REVERSAL,
+            getattr(TechnicalSetupEngine, "SETUP_BREAKOUT_RETEST_SUPPORT", "BREAKOUT_RETEST_SUPPORT")
         ])
 
     def test_02_risk_position_sizer_formula(self):
@@ -72,6 +73,39 @@ class TestTechnicalAndRiskSizing(unittest.TestCase):
         self.assertIn("dominant_catalyst", analysis)
         self.assertIn("expectancy_pct", analysis)
         self.assertTrue(analysis["expectancy_pct"] > 0)
+        self.assertIn("position_size_multiplier", analysis)
+        self.assertIn(analysis["position_size_multiplier"], [0.7, 1.0, 1.2])
+
+    def test_05_ml_confidence_position_sizing_multipliers(self):
+        # Base 1.0x (normal confidence e.g. 55%)
+        res_base = RiskBasedPositionSizer.calculate_position_size(
+            entry_price=100.0,
+            stop_loss_price=95.0,  # 5 EGP risk per share -> 1000 / 5 = 200 shares -> 200 * 100 = 20,000 (20% cap)
+            portfolio_nav_egp=100000.0,
+            confidence_multiplier=1.0
+        )
+        self.assertEqual(res_base["position_size_multiplier"], 1.0)
+        
+        # Test lower shares risk (10 EGP risk per share -> 1000 / 10 = 100 shares base)
+        # Low confidence (<= 45%) -> multiplier = 0.7 -> 100 * 0.7 = 70 shares
+        res_low = RiskBasedPositionSizer.calculate_position_size(
+            entry_price=100.0,
+            stop_loss_price=90.0,
+            portfolio_nav_egp=100000.0,
+            confidence_multiplier=0.7
+        )
+        self.assertEqual(res_low["shares"], 70)
+        self.assertEqual(res_low["position_size_multiplier"], 0.7)
+
+        # High confidence (>= 65%) -> multiplier = 1.2 -> 100 * 1.2 = 120 shares
+        res_high = RiskBasedPositionSizer.calculate_position_size(
+            entry_price=100.0,
+            stop_loss_price=90.0,
+            portfolio_nav_egp=100000.0,
+            confidence_multiplier=1.2
+        )
+        self.assertEqual(res_high["shares"], 120)
+        self.assertEqual(res_high["position_size_multiplier"], 1.2)
 
 
 if __name__ == "__main__":

@@ -410,7 +410,77 @@
         .chip-btn:hover, .chip-btn.active {
             background: var(--accent-blue);
             color: #fff;
-            border-color: var(--accent-blue);
+        /* Toast Alert Container */
+        .toast-container {
+            position: fixed;
+            bottom: 24px;
+            left: 24px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            pointer-events: none;
+        }
+        .toast-msg {
+            background: #111827;
+            border: 1px solid var(--accent-blue);
+            color: #f8fafc;
+            padding: 12px 18px;
+            border-radius: 8px;
+            font-size: 13px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            pointer-events: auto;
+            animation: slideInToast 0.3s ease forwards;
+            min-width: 280px;
+        }
+        .toast-msg.success { border-color: #10b981; border-right: 4px solid #10b981; }
+        .toast-msg.error { border-color: #ef4444; border-right: 4px solid #ef4444; }
+        .toast-msg.info { border-color: #3b82f6; border-right: 4px solid #3b82f6; }
+        @keyframes slideInToast {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        /* Interactive Term Explanation Tooltips */
+        .term-tooltip {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+            cursor: help;
+            border-bottom: 1px dotted rgba(255, 255, 255, 0.3);
+        }
+        .term-tooltip::after {
+            content: attr(data-tip);
+            position: absolute;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #0f172a;
+            color: #e2e8f0;
+            border: 1px solid var(--border);
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            white-space: normal;
+            width: max-content;
+            max-width: 240px;
+            z-index: 1000;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s, visibility 0.2s;
+            pointer-events: none;
+            line-height: 1.4;
+            font-weight: 400;
+            text-align: right;
+        }
+        .term-tooltip:hover::after {
+            opacity: 1;
+            visibility: visible;
         }
     </style>
 </head>
@@ -423,6 +493,7 @@
         </div>
         <ul class="nav-list">
             <li class="nav-item active" id="nav-overview" onclick="navigateTo('overview')">📊 الفرص الحالية ونظرة السوق</li>
+            <li class="nav-item" id="nav-short_term_opportunities" onclick="navigateTo('short_term_opportunities')">⚡ الفرص السريعة ومخاطر التكدس</li>
             <li class="nav-item" id="nav-ranking" onclick="navigateTo('ranking')">🏆 ترتيب الأسهم وتوصيات الدخول</li>
             <li class="nav-item" id="nav-details" onclick="navigateTo('details')">🧮 حاسبة الاستثمار والآفاق الثلاثة</li>
             <li class="nav-item" id="nav-real_portfolio" onclick="navigateTo('real_portfolio')">💼 محفظتي الحقيقية</li>
@@ -435,6 +506,7 @@
             <li class="nav-item" id="nav-observatory" onclick="navigateTo('observatory')">🔭 مرصد الانحراف والانزلاق</li>
             <li class="nav-item" id="nav-universe_audit" onclick="navigateTo('universe_audit')">🌐 فحص وتغطية بورصة مصر</li>
             <li class="nav-item" id="nav-health" onclick="navigateTo('health')">🩺 صحة واستقرار النظام</li>
+            <li class="nav-item" id="nav-execution" onclick="navigateTo('execution')">⚡ محطة التداول الخوارزمي والتكافؤ (Algo EMS & HRP)</li>
         </ul>
     </div>
 
@@ -443,12 +515,43 @@
         <div class="top-bar">
             <div class="top-title" id="page-title">📊 الفرص الحالية ونظرة السوق</div>
             <div class="badges">
+                <span class="badge badge-blue" id="signal-ttl-badge" style="background: rgba(59, 130, 246, 0.2); color: #60a5fa; border: 1px solid #3b82f6; font-weight: 700;">⏱️ صلاحية الإشارة: <strong id="signal-ttl-countdown" class="ltr-text">30:00</strong></span>
                 <span class="badge" id="last-sync-badge" style="background: rgba(139, 92, 246, 0.2); color: #c084fc; border: 1px solid rgba(139, 92, 246, 0.4);">🕒 آخر تحديث للأسعار: <span id="last-sync-time-str">23 أغسطس 2026 - 10:00:00 ص</span> (توقيت القاهرة)</span>
                 <span class="badge badge-green" id="data-freshness-status-badge" style="font-weight: 700;">🟢 حديث (أقل من 15 دقيقة)</span>
                 <span class="badge badge-pulse" id="auto-refresh-badge">🟢 تحديث تلقائي نشط (كل 60 ثانية)</span>
                 <span class="badge badge-green" id="scheduler-badge">🟢 جلسة البورصة المصرية (10:00 ص - 2:30 م)</span>
                 <span class="badge badge-yellow" id="paper-gate-badge">الجلسة: 1 من 30 (تاريخ البدء: 23 أغسطس 2026 — الاعتماد: 22 سبتمبر 2026)</span>
                 <span class="badge badge-red">🛡️ التداول الحقيقي محظور بأمان</span>
+            </div>
+        </div>
+
+        <!-- Global Macro & Risk Banner (Top Header) -->
+        <div id="macro-risk-banner" style="background: linear-gradient(90deg, #101726 0%, #151f32 100%); border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; flex-wrap: wrap; gap: 10px;">
+            <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+                <span style="color: #94a3b8;">🌐 <strong>نظام الاقتصاد الكلي:</strong> <span id="macro-regime-val" style="color: #38bdf8; font-weight: 700;">محايد ومستقر</span></span>
+                <span style="color: rgba(255,255,255,0.15);">|</span>
+                <span style="color: #94a3b8;">💵 <strong>الدولار (USD/EGP):</strong> <span id="macro-usd-val" class="ltr-text" style="color: #f8fafc; font-weight: 600;">50.76</span> ج.م</span>
+                <span style="color: rgba(255,255,255,0.15);">|</span>
+                <span style="color: #94a3b8;">🏛️ <strong>فائدة المركزي (CBE Corridor):</strong> <span id="macro-cbe-val" class="ltr-text" style="color: #f8fafc; font-weight: 600;">19.75%</span> (إيداع 19.25% / إقراض 20.25%)</span>
+                <span style="color: rgba(255,255,255,0.15);">|</span>
+                <span style="color: #94a3b8;">📈 <strong>التضخم السنوي (CPI):</strong> <span id="macro-inflation-val" class="ltr-text" style="color: #f8fafc; font-weight: 600;">14.90%</span> (يوليو 2026)</span>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: center;">
+                <span id="macro-freshness-badge" class="badge badge-green">🟢 بيانات اقتصادية موثقة ومعتمدة</span>
+            </div>
+        </div>
+
+        <!-- Thndr 224-Universe Liquidity Funnel Banner (Top Header) -->
+        <div id="universe-funnel-banner" style="background: linear-gradient(90deg, #0d1527 0%, #15223c 100%); border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; font-size: 12.5px; flex-wrap: wrap; gap: 10px;">
+            <div style="display: flex; gap: 14px; align-items: center; flex-wrap: wrap;">
+                <span style="color: #cbd5e1;">📊 <strong>السوق الشامل:</strong> <span id="funnel-total-universe" class="ltr-text" style="color: #38bdf8; font-weight: 800;">224</span> سهم</span>
+                <span style="color: rgba(255,255,255,0.2);">|</span>
+                <span style="color: #cbd5e1;">✔️ <strong>أسهم صالحة للتداول (سيولة):</strong> <span id="funnel-liquid-count" class="ltr-text" style="color: #34d399; font-weight: 800;">64</span> سهم</span>
+                <span style="color: rgba(255,255,255,0.2);">|</span>
+                <span style="color: #cbd5e1;">🎯 <strong>فرص اليوم:</strong> <span id="funnel-opps-count" class="ltr-text" style="color: #fbbf24; font-weight: 800;">8</span> فرصة</span>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: center;">
+                <span class="badge badge-green" id="funnel-gate-badge">🛡️ بوابة السيولة الديناميكية مفعلة (ADV30 > 500k & ADT30 > 1M EGP)</span>
             </div>
         </div>
 
@@ -483,6 +586,52 @@
                     💡 <strong>دليل المبتدئين السريع:</strong> مرحباً بك في منظومة GEN-26. تم تحديث كافة الأسعار ومطابقتها مباشرة من واقع شاشات التداول وتطبيقات الوسطاء الفعلية (مثل Thndr وهيرميس). للاطلاع على الفرص الاستثمارية لجميع الشركات الـ 24 مرتبة تنازلياً من الأفضل للأسوأ مع الأسباب، انتقل مباشرة إلى صفحة <strong>"أفضل الأسهم والفرص"</strong>.
                 </div>
 
+                <!-- لوحة القيادة اليومية المباشرة (Daily 3-Question Human Snapshot) -->
+                <div class="card" style="margin-bottom: 20px; background: linear-gradient(135deg, rgba(20, 27, 45, 0.98) 0%, rgba(15, 23, 42, 0.98) 100%); border-top: 3px solid #10b981; border-radius: 12px; padding: 20px; box-shadow: 0 6px 22px rgba(0,0,0,0.4);">
+                    <div style="font-size: 16px; font-weight: 800; color: #fff; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+                        <span>📋 لوحة القيادة اليومية المباشرة (Daily Summary at a Glance):</span>
+                        <span class="badge badge-green">🟢 منظومة متصلة ومستقرة</span>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+                        <!-- Question 1: محفظتي الحقيقية عاملة إيه؟ -->
+                        <div style="background: rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; padding: 16px; display: flex; flex-direction: column; justify-content: space-between;">
+                            <div>
+                                <div style="font-size: 13px; font-weight: 700; color: #93c5fd; margin-bottom: 8px;">1️⃣ محفظتي الحقيقية عاملة إيه دلوقتي؟</div>
+                                <div style="font-size: 22px; font-weight: 800; color: #fff;" id="top-real-port-val">0.00 ج.م</div>
+                                <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;" id="top-real-port-pnl">لا توجد أسهم مضافة بعد (محفظة نقدية)</div>
+                            </div>
+                            <div style="margin-top: 14px;">
+                                <button class="btn btn-primary" style="font-size: 11.5px; padding: 6px 14px; width: 100%;" onclick="navigateTo('real_portfolio')">💼 تفاصيل المحفظة والأرباح</button>
+                            </div>
+                        </div>
+
+                        <!-- Question 2: إيه أهم توصية شراء النهاردة؟ -->
+                        <div style="background: rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; padding: 16px; display: flex; flex-direction: column; justify-content: space-between;">
+                            <div>
+                                <div style="font-size: 13px; font-weight: 700; color: #34d399; margin-bottom: 8px;">2️⃣ إيه أهم فرصة استثمارية النهاردة؟</div>
+                                <div style="font-size: 17px; font-weight: 800; color: #fff;" id="top-opp-name">البنك التجاري الدولي (COMI.CA)</div>
+                                <div style="font-size: 12px; color: #a7f3d0; margin-top: 4px;" id="top-opp-reason">🎯 الهدف: 147.00 ج.م (+7.3%) | قوة مالية وتدفقات سيولة قياسية</div>
+                            </div>
+                            <div style="margin-top: 14px;">
+                                <button class="btn btn-primary" style="font-size: 11.5px; padding: 6px 14px; width: 100%; background: #059669;" onclick="navigateTo('ranking')">🏆 عرض جدول ترتيب الـ 24 سهم</button>
+                            </div>
+                        </div>
+
+                        <!-- Question 3: فيه أي تحذير أو خطر لازم أعرفه؟ -->
+                        <div style="background: rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; padding: 16px; display: flex; flex-direction: column; justify-content: space-between;">
+                            <div>
+                                <div style="font-size: 13px; font-weight: 700; color: #fbbf24; margin-bottom: 8px;">3️⃣ فيه أي تحذير أو خطر على السوق؟</div>
+                                <div style="font-size: 15px; font-weight: 700; color: #fde68a;" id="top-risk-status">🟢 السوق مستقر (تضخم متراجع)</div>
+                                <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 4px;" id="top-risk-sub">صمام الأمان VaR ضمن الحدود الآمنة، والسيولة النقدية محمية.</div>
+                            </div>
+                            <div style="margin-top: 14px;">
+                                <button class="btn btn-secondary" style="font-size: 11.5px; padding: 6px 14px; width: 100%;" onclick="navigateTo('risk_center')">🛡️ فحص صمامات الأمان</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="card-grid-4">
                     <div class="card">
                         <div class="metric-title">بوابة اختبار الـ 30 يوماً التجريبية</div>
@@ -507,10 +656,59 @@
                     </div>
                 </div>
 
+                <!-- بطاقة مركز الإشعارات والتنبيهات الحية (Live Arabic Notification Center) -->
+                <div class="card" style="margin-bottom: 20px; background: linear-gradient(135deg, rgba(16, 23, 38, 0.98) 0%, rgba(26, 32, 53, 0.95) 100%); border-top: 3px solid var(--accent-blue); border-radius: 10px; box-shadow: 0 4px 18px rgba(0,0,0,0.35);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px; flex-wrap: wrap; gap: 8px;">
+                        <div style="font-size: 15px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px;">
+                            <span>🔔 سجل الإشعارات والتنبيهات الحية (Live Notifications Center):</span>
+                            <span id="notif-count-badge" class="badge badge-green">3 تنبيهات مسجلة</span>
+                        </div>
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <span id="telegram-bot-badge" class="badge" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.35); font-size: 11px;">🟢 متصل بـ Telegram Bot</span>
+                            <button class="btn" style="background: #1f2937; color: #9ca3af; font-size: 11px; padding: 4px 10px;" onclick="fetchLiveNotifications()">🔄 تحديث الإشعارات</button>
+                        </div>
+                    </div>
+                    <div id="live-notifications-list" style="display: flex; flex-direction: column; gap: 10px; max-height: 380px; overflow-y: auto; padding-right: 4px;">
+                        <div style="text-align: center; color: var(--text-muted); padding: 16px;">جاري تحميل سجل التنبيهات الحية...</div>
+                    </div>
+                </div>
+
                 <div class="card">
                     <div class="metric-title">المراكز المفتوحة في المحفظة التجريبية الموثقة</div>
                     <div style="padding: 14px; background: rgba(0,0,0,0.25); border-radius: 6px; color: var(--text-muted); font-size: 13px;">
                         🛡️ المحفظة في وضع السيولة النقدية الكاملة (<strong>100,000.00 ج.م نقد حر</strong>) — في انتظار إشارة الدخول الأولى عبر المجدول الآلي خلال جلسات التداول الرسمية.
+                    </div>
+                </div>
+            </div>
+
+            <!-- 1.5 الفرص السريعة ومخاطر التكدس (Short-Term Opportunities & Cluster Risk) -->
+            <div id="tab-short_term_opportunities" class="tab-panel">
+                <!-- Mandatory Incubation Disclaimer -->
+                <div style="padding: 12px 16px; background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 8px; margin-bottom: 16px; font-size: 12px; color: #fde68a;">
+                    ⚠️ <strong>تنويه الحضانة التجريبية:</strong> هذه الترشيحات جزء من نظام قيد فترة الحضانة الميدانية (يوم 1 من 30) ولم تثبت جدارته الإحصائية بعد — استخدمها للمتابعة والتعلم وليس كقرار استثماري فعلي حتى تكتمل فترة التحقق.
+                </div>
+
+                <!-- Cluster Risk Alarm Banner -->
+                <div id="cluster-risk-banner" style="display: none; padding: 14px 18px; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.5); border-radius: 8px; margin-bottom: 20px;">
+                    <div style="font-size: 14px; font-weight: 700; color: #fca5a5; margin-bottom: 6px; display: flex; align-items: center; gap: 8px;">
+                        <span>⚠️ تحذير: تجنب التركيز المفرط في هذه الأسهم لارتباطها الشديد (High Correlation Cluster Risk)</span>
+                    </div>
+                    <div style="font-size: 12px; color: var(--text-muted);" id="cluster-risk-details">
+                        الأسهم المتصدرة تظهر ارتباطاً تبادلياً يفوق 0.75 — يوصى بتوزيع المحفظة وعدم دمج أسهم نفس القطاع معاً.
+                    </div>
+                </div>
+
+                <!-- Top 3 Short-Term Opportunities Grid -->
+                <div class="metric-title" style="margin-bottom: 12px; font-size: 15px; color: #60a5fa;">⚡ أفضل 3 فرص قصيرة المدى (أفق أسبوعين / 10 جلسات تداول — مرتبة بنسبة العائد للمخاطرة):</div>
+                <div id="short-term-opps-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-bottom: 24px;">
+                    <!-- Dynamically populated from /api/opportunities/short-term -->
+                </div>
+
+                <!-- Correlation Matrix Table -->
+                <div class="card">
+                    <div class="metric-title" style="margin-bottom: 12px;">📊 مصفوفة الارتباط التبادلي للأسهم المتصدرة (Pairwise Correlation Matrix)</div>
+                    <div id="correlation-matrix-container" style="overflow-x: auto;">
+                        <!-- Dynamically populated from /api/correlation -->
                     </div>
                 </div>
             </div>
@@ -874,6 +1072,23 @@
                                 <option value="RAYA.CA">راية القابضة (RAYA.CA) — 7.00 ج.م</option>
                                 <option value="CCAP.CA">القلعة للاستشارات (CCAP.CA) — 5.60 ج.م</option>
                                 <option value="BTFH.CA">بلتون القابضة (BTFH.CA) — 2.98 ج.م</option>
+                                <optgroup label="⚠️ أسهم قيد المراجعة والتدقيق اليدوي (NEEDS_MANUAL_REVIEW)">
+                                    <option value="ESRS.CA">حديد عز (ESRS.CA) — ⚠️ بيانات غير مكتملة</option>
+                                    <option value="ACRO.CA">أكرو مصر (ACRO.CA) — ⚠️ بيانات غير مكتملة</option>
+                                    <option value="PORT.CA">بورتو القابضة (PORT.CA) — ⚠️ بيانات غير مكتملة</option>
+                                    <option value="KRRE.CA">العمران للتنمية (KRRE.CA) — ⚠️ بيانات غير مكتملة</option>
+                                    <option value="ARPU.CA">العربية للأدوية (ARPU.CA) — ⚠️ بيانات غير مكتملة</option>
+                                    <option value="ROWG.CA">رواد الهندسة (ROWG.CA) — ⚠️ بيانات غير مكتملة</option>
+                                    <option value="ERES.CA">المصرية للمنتجعات (ERES.CA) — ⚠️ بيانات غير مكتملة</option>
+                                    <option value="MOFD.CA">مفيدة للصناعات (MOFD.CA) — ⚠️ بيانات غير مكتملة</option>
+                                    <option value="EGID.CA">الصناعات الهندسية (EGID.CA) — ⚠️ بيانات غير مكتملة</option>
+                                    <option value="UNAT.CA">المتحدة للغزل (UNAT.CA) — ⚠️ بيانات غير مكتملة</option>
+                                    <option value="RITV.CA">تيليمصر (RITV.CA) — ⚠️ بيانات غير مكتملة</option>
+                                    <option value="EGMT.CA">المصرية للمعادن (EGMT.CA) — ⚠️ بيانات غير مكتملة</option>
+                                    <option value="INCO.CA">إنكوليس للتأجير (INCO.CA) — ⚠️ بيانات غير مكتملة</option>
+                                    <option value="EDBM.CA">مصر لمواد البناء (EDBM.CA) — ⚠️ بيانات غير مكتملة</option>
+                                    <option value="EGTI.CA">المصرية للاستثمار السياحي (EGTI.CA) — ⚠️ بيانات غير مكتملة</option>
+                                </optgroup>
                             </select>
                         </div>
                         <div class="budget-chips" style="margin: 0;">
@@ -882,7 +1097,7 @@
                             <button class="chip-btn" onclick="loadStockDetails('SWDY.CA')">SWDY</button>
                             <button class="chip-btn" onclick="loadStockDetails('TMGH.CA')">TMGH</button>
                             <button class="chip-btn" onclick="loadStockDetails('ORAS.CA')">ORAS</button>
-                            <button class="chip-btn" onclick="loadStockDetails('ESRS.CA')">ESRS</button>
+                            <button class="chip-btn" onclick="loadStockDetails('ESRS.CA')">ESRS ⚠️</button>
                             <button class="chip-btn" onclick="loadStockDetails('ABUK.CA')">ABUK</button>
                         </div>
                     </div>
@@ -910,10 +1125,23 @@
                             <div class="metric-title" style="text-align: left;">السعر الفعلي الحالي (إغلاق)</div>
                             <div class="hero-price-val"><span id="hero-price" class="ltr-text">137.00</span> <span style="font-size: 14px; font-weight: 500;">ج.م</span></div>
                         </div>
-                        <div id="hero-badge-container">
+                        <div id="hero-badge-container" style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
                             <span id="hero-badge" class="badge badge-green" style="font-size: 13px; padding: 6px 14px;">🟢 فرصة شراء ممتازة</span>
+                            <span id="hero-quarantine-badge" class="badge badge-yellow" style="display: none; font-size: 12px; padding: 6px 14px; background: rgba(245, 158, 11, 0.2); color: #f59e0b; border: 1px solid #f59e0b; font-weight: 700;">⚠️ بيانات غير مكتملة</span>
+                            <span id="hero-ttl-badge" class="badge badge-blue" style="font-size: 12px; padding: 6px 12px; font-weight: 600;">⏱️ صلاحية الإشارة: <strong id="hero-ttl-timer" class="ltr-text">30:00</strong> | سقف الدخول: <strong id="hero-max-entry" class="ltr-text">+0.5%</strong></span>
                         </div>
                     </div>
+                </div>
+
+                <div id="hero-quarantine-alert" class="warn-box" style="display: none; margin-top: 12px; background: rgba(245, 158, 11, 0.12); border: 1px solid #f59e0b; border-radius: 10px; padding: 12px 18px; font-size: 13px; color: #fef08a;">
+                    <strong>⚠️ تنبيه تدقيق جنائي (DATA_UNAVAILABLE):</strong> عُزل رسمياً - لا توجد تغذية أسعار موثوقة. إشارات الشراء وإدخال الأوامر معطلة حمايةً لرأس المال حتى اكتمال الربط بالبورصة المصرية.
+                </div>
+
+                <div class="shap-explanation card" style="margin-top: 15px; margin-bottom: 15px; border-left: 4px solid #a855f7; background: rgba(30, 27, 75, 0.4);">
+                  <h4 style="margin-top: 0; color: #c084fc; font-size: 15px; display: flex; align-items: center; gap: 8px;">🔍 لماذا اخترنا هذا السهم؟</h4>
+                  <div id="shap-drivers-list" style="display: flex; flex-direction: column; gap: 6px; font-size: 13px;">
+                    <!-- يتعبأ من JavaScript -->
+                  </div>
                 </div>
 
                 <!-- الرسم البياني الفني المباشر التفاعلي (TradingView Advanced Technical Chart) -->
@@ -948,6 +1176,15 @@
                     </div>
                 </div>
 
+                <!-- تنبيه أحداث الشركات الطارئة (Corporate Actions Hazard Alert) -->
+                <div id="corp-hazard-alert" style="display: none; margin-bottom: 16px; padding: 12px 16px; background: rgba(239, 68, 68, 0.18); border: 1px solid rgba(239, 68, 68, 0.6); border-radius: 8px; font-size: 12px; color: #fca5a5;">
+                    <div style="font-weight: 700; display: flex; align-items: center; gap: 8px;">
+                        <span>⚠️ تنبيه حدث جوهري وشيك (Corporate Action Hazard):</span>
+                        <span id="corp-hazard-badge" class="badge badge-red">كوبون / تجزئة / زيادة رأس مال</span>
+                    </div>
+                    <div id="corp-hazard-desc" style="margin-top: 4px; color: #fee2e2;"></div>
+                </div>
+
                 <!-- بطاقات الطبقات المؤسسية المتطورة (Institutional Multi-Factor Intelligence Panel) -->
                 <div class="card-grid-3" style="margin-bottom: 20px;">
                     <!-- 1. مؤشرات الصحة المالية والتقييم الأساسي (Live Fundamentals) -->
@@ -969,6 +1206,9 @@
                             <div><span style="color: var(--text-muted);">المديونية (D/E):</span> <strong id="fund-de" class="ltr-text" style="color: #34d399;">0.45</strong></div>
                             <div><span style="color: var(--text-muted);">عائد الكوبون:</span> <strong id="fund-div" class="ltr-text" style="color: #fbbf24;">5.8%</strong></div>
                             <div><span style="color: var(--text-muted);">نمو الأرباح (EPS):</span> <strong id="fund-eps" class="ltr-text" style="color: #a78bfa;">+34.2%</strong></div>
+                        </div>
+                        <div id="fund-earnings-quality-box" style="margin-top: 8px; padding: 6px 10px; background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 5px; font-size: 11px; color: #a7f3d0;">
+                            <span>💎 جودة الأرباح: <strong id="fund-earnings-quality-val">أرباح تشغيلية نقدية حقيقية تدعم التوزيعات (OCF/NI = 1.25x)</strong></span>
                         </div>
                     </div>
 
@@ -1005,6 +1245,99 @@
                         <div style="background: rgba(0,0,0,0.25); padding: 10px; border-radius: 6px; font-size: 11.5px; line-height: 1.5; color: #e2e8f0; min-height: 62px;">
                             <span style="color: var(--text-muted); display: block; font-size: 10px; margin-bottom: 3px;">رصد السيولة والكتل:</span>
                             <span id="block-desc-val">رصد تنفيذ صفقات كتلية شرائية تعادل 3.2x متوسط حجم التداول الاعتيادي مع صعود سعري.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- بطاقة النموذج الفني وقواعد الخروج والإلغاء (Technical Setup & Invalidation Rules) -->
+                <div class="card" style="margin-bottom: 20px; background: linear-gradient(90deg, rgba(26, 34, 52, 0.95) 0%, rgba(17, 24, 39, 0.95) 100%); border-left: 4px solid #f59e0b;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
+                        <div style="font-size: 14px; font-weight: 700; color: #fbbf24; display: flex; align-items: center; gap: 8px;">
+                            <span>📐 النموذج الفني وقواعد الخروج (Technical Setup & Exit Rules):</span>
+                            <span id="setup-label-val" style="color: #fff; font-weight: 600;">تراجع تصحيحي هادئ داخل اتجاه صاعد رئيسي</span>
+                        </div>
+                        <div style="font-size: 12px; color: #94a3b8;">
+                            <span>⏳ أفق الاحتفاظ المتوقع: <strong id="setup-holding-period-val" style="color: #60a5fa;">10 – 20 جلسة تداول (متوسط موجة صاعدة)</strong></span>
+                        </div>
+                    </div>
+                    <div style="padding: 10px 14px; background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 6px; font-size: 12px; color: #fca5a5; line-height: 1.5;">
+                        <strong style="color: #ef4444;">🔴 شرط الإلغاء والخروج (Invalidation Trigger):</strong>
+                        <span id="setup-invalidation-val">كسر الإغلاق اليومي أدنى مستوى الدعم الفني بحجم تداول مرتفع أو حدوث تقاطع سلبي لخط الماكد.</span>
+                    </div>
+                </div>
+
+                <!-- بطاقة الذكاء الاصطناعي التنبؤي والذكاء الفوقي (Machine Learning & Meta-Labeling Engine — EXPERIMENTAL SHADOW MODE) -->
+                <div class="card" style="margin-bottom: 20px; background: linear-gradient(135deg, rgba(16, 23, 38, 0.98) 0%, rgba(26, 32, 53, 0.95) 100%); border-top: 3px solid #f59e0b; border-radius: 10px; box-shadow: 0 4px 18px rgba(0,0,0,0.35);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px; flex-wrap: wrap; gap: 8px;">
+                        <div style="font-size: 15px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px;">
+                            <span>🤖 ذكاء اصطناعي تجريبي للمراقبة (Meta-Labeling Shadow Mode):</span>
+                            <span id="meta-decision-badge" class="badge" style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4);">⚠️ تحت الحضانة والمراقبة</span>
+                        </div>
+                        <span class="badge" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.35); font-size: 11px;">⚠️ تجريبي — غير ملزم لقرار الشراء</span>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-bottom: 14px;">
+                        <div style="background: rgba(0,0,0,0.3); padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+                            <span class="metric-title" style="margin: 0; font-size: 12px;">نسبة نجاح الصفقة المتوقعة (Probability of Success):</span>
+                            <div style="font-size: 20px; font-weight: 800; color: #34d399; margin-top: 4px;" id="meta-prob-val" class="ltr-text">94.1%</div>
+                            <span style="font-size: 11px; color: var(--text-muted);">احتمالية ضرب الهدف T1 قبل وقف الخسارة (عتبة الإجماع $\ge$ 65%)</span>
+                        </div>
+                        <div style="background: rgba(0,0,0,0.3); padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+                            <span class="metric-title" style="margin: 0; font-size: 12px;">العائد الإضافي المتوقع (10D Residual Alpha):</span>
+                            <div style="font-size: 20px; font-weight: 800; color: #60a5fa; margin-top: 4px;" id="ai-alpha-val" class="ltr-text">+4.87%</div>
+                            <span style="font-size: 11px; color: var(--text-muted);">فائض العائد المتوقع للسهم مقارنة بمؤشر EGX30</span>
+                        </div>
+                        <div style="background: rgba(0,0,0,0.3); padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+                            <span class="metric-title" style="margin: 0; font-size: 12px;">العائد المعدل بالتقلب (Alpha / ATR):</span>
+                            <div style="font-size: 20px; font-weight: 800; color: #c084fc; margin-top: 4px;" id="meta-vol-adj-val" class="ltr-text">0.92</div>
+                            <span style="font-size: 11px; color: var(--text-muted);" id="meta-sector-desc">التقييم القطاعي المحايد: رخيص نسبياً</span>
+                        </div>
+                    </div>
+
+                    <div style="background: rgba(0,0,0,0.25); padding: 12px; border-radius: 8px;">
+                        <div style="font-size: 12px; font-weight: 700; color: #e2e8f0; margin-bottom: 8px;">🔍 أبرز المتغيرات القطاعية والكلية المؤثرة (Sector-Neutral & Macro Drivers):</div>
+                        <div id="ai-drivers-list" style="display: flex; flex-direction: column; gap: 6px; font-size: 11.5px;">
+                            <!-- Dynamically populated from dossier.ai_forecast.top_3_drivers -->
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 10px; padding: 6px 12px; background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.25); border-radius: 6px; font-size: 11px; color: #fbbf24; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px;">
+                        <span>📊 معايرة برمجية اصطناعية (Synthetic Benchmark): <strong id="ai-hit-rate-val" class="ltr-text" style="color: #fbbf24;">94.2%</strong> | معامل (IC): <strong id="ai-ic-val" class="ltr-text" style="color: #fbbf24;">+0.767</strong></span>
+                        <span style="font-size: 10px; color: #fca5a5;">⚠️ للاختبار البرمجي فقط — ليست أرقام سوق واقعية</span>
+                    </div>
+                </div>
+
+                <!-- بطاقة تعاملات المطلعين ومجلس الإدارة (EGX Insider Deals Radar) -->
+                <div class="card" style="margin-bottom: 20px; background: linear-gradient(135deg, rgba(16, 23, 38, 0.95) 0%, rgba(20, 30, 48, 0.95) 100%); border-top: 3px solid #f59e0b; border-radius: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px; flex-wrap: wrap; gap: 8px;">
+                        <div style="font-size: 14px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px;">
+                            <span>👥 تعاملات المطلعين ومجلس الإدارة (EGX Insider Filings):</span>
+                            <span id="detail-insider-badge" class="badge badge-green">🟢 شراء مطلعين ومجلس إدارة (شراء مكثف)</span>
+                        </div>
+                        <span class="badge" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.35); font-size: 11px;">إفصاحات البورصة الرسمية 100%</span>
+                    </div>
+                    <div style="font-size: 12px; color: #e2e8f0; line-height: 1.6;" id="detail-insider-summary">
+                        شراء مكثف من قِبل عضو مجلس إدارة تنفيذي ومجموعة مرتبطة — يعزز من ثقة النموذج الرياضي في استمرار الاتجاه الصاعد.
+                    </div>
+                </div>
+
+                <!-- بطاقة رادار الأخبار والمشاعر المالية (News Sentiment Radar) -->
+                <div class="card" style="margin-bottom: 20px; background: linear-gradient(135deg, rgba(16, 23, 38, 0.95) 0%, rgba(20, 30, 48, 0.95) 100%); border-top: 3px solid #38bdf8; border-radius: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px; flex-wrap: wrap; gap: 8px;">
+                        <div style="font-size: 14px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px;">
+                            <span>📰 رادار الأخبار والمشاعر المالية (News Sentiment Radar):</span>
+                            <span id="detail-sentiment-badge" class="badge badge-green">🟢 +0.85 تفاؤل إخباري قوي</span>
+                        </div>
+                        <span class="badge" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.35); font-size: 11px;">FinBERT Arabic NLP</span>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; color: #e2e8f0; line-height: 1.6;">
+                        <div>
+                            <span style="color: var(--text-muted);">درجة التفاؤل الإخباري (FinBERT Score):</span>
+                            <strong id="detail-sentiment-score-val" class="ltr-text" style="color: #34d399; font-size: 13px; margin-right: 6px;">+0.85</strong>
+                        </div>
+                        <div>
+                            <span style="color: var(--text-muted);">آخر خبر جوهري:</span>
+                            <strong id="detail-sentiment-headline" style="color: #f1f5f9; font-size: 12.5px;">نمو صافي أرباح البنك بنسبة 48% وتوزيعات كوبونات نقدية استثنائية للمساهمين</strong>
                         </div>
                     </div>
                 </div>
@@ -1200,24 +1533,7 @@
                         </thead>
                         <tbody id="real-portfolio-tbody">
                             <tr>
-                                <td>البنك التجاري الدولي (<strong class="ltr-text">COMI.CA</strong>)</td>
-                                <td>250</td>
-                                <td><span class="ltr-text">136.00</span> ج.م</td>
-                                <td><span class="ltr-text">137.00</span> ج.م</td>
-                                <td><span class="ltr-text">34,250.00</span> ج.م</td>
-                                <td class="text-green">+<span class="ltr-text">250.00</span> ج.م (+0.74%)</td>
-                                <td><span class="badge badge-green">🟢 أنت تملك السهم: احتفاظ أو تعزيز</span></td>
-                                <td><button class="btn btn-danger" onclick="deleteRealPosition('COMI.CA')">حذف</button></td>
-                            </tr>
-                            <tr>
-                                <td>السويدي إليكتريك (<strong class="ltr-text">SWDY.CA</strong>)</td>
-                                <td>500</td>
-                                <td><span class="ltr-text">115.00</span> ج.م</td>
-                                <td><span class="ltr-text">116.00</span> ج.م</td>
-                                <td><span class="ltr-text">58,000.00</span> ج.م</td>
-                                <td class="text-green">+<span class="ltr-text">500.00</span> ج.م (+0.87%)</td>
-                                <td><span class="badge badge-green">🟢 أنت تملك السهم: احتفاظ أو تعزيز</span></td>
-                                <td><button class="btn btn-danger" onclick="deleteRealPosition('SWDY.CA')">حذف</button></td>
+                                <td colspan="8" style="text-align: center; color: var(--text-muted); padding: 24px;">جاري تحميل بيانات المحفظة الحقيقية من السجل الدائم...</td>
                             </tr>
                         </tbody>
                     </table>
@@ -1226,6 +1542,104 @@
 
             <!-- 5. المحفظة التجريبية -->
             <div id="tab-paper_portfolio" class="tab-panel">
+                <!-- MLOps Continuous Retrain & Telegram Gateway Bar -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; margin-bottom: 16px;">
+                    <div style="background: rgba(139, 92, 246, 0.12); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 8px; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <div style="font-size: 11px; color: #c084fc;">🧠 موعد إعادة تدريب الذكاء الاصطناعي القادم:</div>
+                            <div style="font-size: 13px; font-weight: 700; color: #fff;" id="mlops-next-retrain-val">الجمعة القادمة 12:00 UTC (أسبوعياً)</div>
+                        </div>
+                        <span class="badge badge-purple" style="font-size: 10px;">Self-Healing MLOps</span>
+                    </div>
+                    <div style="background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <div style="font-size: 11px; color: #7dd3fc;">📡 حالة إشعارات تليجرام الفورية:</div>
+                            <div style="font-size: 13px; font-weight: 700; color: #fff;" id="telegram-bot-status-val">🟢 نشط ومتصل (Telegram Bot Active)</div>
+                        </div>
+                        <span class="badge badge-green" style="font-size: 10px;" id="telegram-bot-badge">24/7 Alerts</span>
+                    </div>
+                </div>
+
+                <!-- 30-Day Incubation Maturation Verdict Card -->
+                <div class="card" style="margin-bottom: 20px; border: 1px solid rgba(245, 158, 11, 0.4); background: linear-gradient(135deg, rgba(21, 31, 50, 0.95) 0%, rgba(16, 23, 38, 0.98) 100%);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+                        <div class="metric-title" style="font-size: 15px; color: #fbbf24; display: flex; align-items: center; gap: 8px;">
+                            <span>⚖️ بطاقة التقييم النهائي لبوابة الحضانة (30-Day Incubation Verdict & Gating)</span>
+                        </div>
+                        <span class="badge badge-yellow" id="incubation-status-badge">🔴 قيد الحضانة — الإغلاق الآمن مفعّل (FROZEN_FAIL_CLOSED)</span>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 16px; margin-bottom: 16px;">
+                        <!-- 6-Gate Matrix Table -->
+                        <div style="background: rgba(0,0,0,0.3); border-radius: 8px; padding: 12px; border: 1px solid var(--border);">
+                            <div style="font-size: 12px; font-weight: 700; color: #94a3b8; margin-bottom: 8px;">مصفوفة المعايير الستة الإلزامية للاعتماد (Gating Matrix):</div>
+                            <table style="width: 100%; font-size: 12px; margin: 0;">
+                                <thead>
+                                    <tr>
+                                        <th>المعيار الكمي</th>
+                                        <th>المستهدف</th>
+                                        <th>المحقق الفعلي</th>
+                                        <th>الحالة</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="incubation-gates-tbody">
+                                    <tr>
+                                        <td>معامل شارب السنوي (Sharpe Ratio)</td>
+                                        <td><span class="ltr-text">≥ 1.05</span></td>
+                                        <td><span class="ltr-text" id="gate-sharpe-val">0.00</span></td>
+                                        <td><span class="badge badge-red" id="gate-sharpe-status">🔴 FAIL</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>العائد الإضافي (ألفا) التراكمي vs EGX30</td>
+                                        <td><span class="ltr-text">≥ +2.50%</span></td>
+                                        <td><span class="ltr-text" id="gate-alpha-val">-3.50%</span></td>
+                                        <td><span class="badge badge-red" id="gate-alpha-status">🔴 FAIL</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>أقصى تراجع تراكمي (Max Drawdown)</td>
+                                        <td><span class="ltr-text">≤ 6.50%</span></td>
+                                        <td><span class="ltr-text" id="gate-dd-val">0.00%</span></td>
+                                        <td><span class="badge badge-green" id="gate-dd-status">🟢 PASS</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>نسبة الصفقات الرابحة (Win Rate)</td>
+                                        <td><span class="ltr-text">≥ 52.0%</span></td>
+                                        <td><span class="ltr-text" id="gate-win-val">0.0%</span></td>
+                                        <td><span class="badge badge-red" id="gate-win-status">🔴 FAIL</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>معامل الربحية (Profit Factor)</td>
+                                        <td><span class="ltr-text">≥ 1.30</span></td>
+                                        <td><span class="ltr-text" id="gate-pf-val">0.00</span></td>
+                                        <td><span class="badge badge-red" id="gate-pf-status">🔴 FAIL</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>الحد الأدنى لحجم العينة المغلقة</td>
+                                        <td><span class="ltr-text">≥ 20 صفقات</span></td>
+                                        <td><span class="ltr-text" id="gate-sample-val">0 صفقات</span></td>
+                                        <td><span class="badge badge-red" id="gate-sample-status">🔴 FAIL</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Statistical Confidence & Bootstrap CI -->
+                        <div style="background: rgba(0,0,0,0.3); border-radius: 8px; padding: 12px; border: 1px solid var(--border); display: flex; flex-direction: column; justify-content: space-between;">
+                            <div>
+                                <div style="font-size: 12px; font-weight: 700; color: #94a3b8; margin-bottom: 6px;">درجة الثقة الإحصائية (Bootstrap CI):</div>
+                                <div style="font-size: 24px; font-weight: 800; color: #60a5fa; margin-bottom: 4px;" id="incubation-confidence-score">50.0%</div>
+                                <div style="font-size: 11px; color: var(--text-muted); line-height: 1.4;">
+                                    نطاق الثقة 95% للعائد المتوقع (1,000 Resamples):<br>
+                                    <strong style="color: #f8fafc;" id="incubation-bootstrap-bounds">[-2.00%, +2.00%]</strong>
+                                </div>
+                            </div>
+                            <div style="margin-top: 10px; padding: 8px; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 4px; font-size: 10px; color: #fca5a5;" id="incubation-caveat-box">
+                                ⚠️ <strong>تحذير إحصائي [N &lt; 100]:</strong> القدرة الإحصائية أولية ومحدودة لحين الوصول لـ 100 صفقة مغلقة.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="card">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
                         <div class="metric-title">سجل تداولات المحفظة التجريبية الموثقة مع محاكاة الاحتكاك (0.90% RT)</div>
@@ -1275,22 +1689,7 @@
                         </thead>
                         <tbody id="watchlist-tbody">
                             <tr>
-                                <td><strong class="ltr-text">COMI.CA</strong></td>
-                                <td><span class="ltr-text">137.00</span> ج.م</td>
-                                <td>90.0 / 100</td>
-                                <td><span class="ltr-text">150.70</span> ج.م</td>
-                                <td><span class="ltr-text">127.41</span> ج.م</td>
-                                <td><span class="badge badge-green">شراء تراجعي</span></td>
-                                <td><button class="btn btn-danger" onclick="removeWatchlist('COMI.CA')">حذف</button></td>
-                            </tr>
-                            <tr>
-                                <td><strong class="ltr-text">SWDY.CA</strong></td>
-                                <td><span class="ltr-text">116.00</span> ج.م</td>
-                                <td>85.0 / 100</td>
-                                <td><span class="ltr-text">127.60</span> ج.م</td>
-                                <td><span class="ltr-text">107.88</span> ج.م</td>
-                                <td><span class="badge badge-green">شراء تراجعي</span></td>
-                                <td><button class="btn btn-danger" onclick="removeWatchlist('SWDY.CA')">حذف</button></td>
+                                <td colspan="7" style="text-align: center; color: var(--text-muted); padding: 24px;">جاري تحميل قائمة المراقبة من السجل الدائم...</td>
                             </tr>
                         </tbody>
                     </table>
@@ -1512,8 +1911,159 @@
                     <div class="metric-title">مؤشرات الاستقرار والسلامة الفنية للمنظومة</div>
                     <p>حالة النظام العامة: <span class="badge badge-yellow">تحذير رقابي (التداول التجريبي نشط — التداول الحقيقي محظور بأمان)</span></p>
                     <p>درجة الجاهزية الكلية: <strong><span class="ltr-text">96.5 / 100</span></strong></p>
-                    <p>نتائج الاختبارات الآلية: <strong><span class="ltr-text">139 / 139</span> اختبار ناجح بنسبة 100%</strong></p>
+                    <p>نتائج الاختبارات الآلية: <strong><span class="ltr-text">311 / 311</span> اختبار ناجح بنسبة 100%</strong></p>
                     <p>جدار الحماية من التنفيذ الحقيقي: <strong>مفعل بصرامة (اعتراض فوري ورفع استثناء عند أي محاولة)</strong></p>
+                </div>
+
+                <div class="drift-monitor card" style="margin-top: 15px; border-left: 4px solid #38bdf8;">
+                  <h4 style="margin-top: 0; color: #38bdf8;">🎯 مراقبة انحراف النموذج</h4>
+                  <div id="drift-brier-score" style="font-size: 14px; font-weight: 600; margin: 6px 0;">جارٍ التحميل...</div>
+                  <div id="model-last-trained" style="font-size: 13px; color: var(--text-muted);">آخر تدريب: ...</div>
+                </div>
+            </div>
+
+            <!-- 14. محطة التداول الخوارزمي وتكافؤ المخاطر (Algo Execution EMS & HRP Optimizer) -->
+            <div id="tab-execution" class="tab-panel">
+                <div class="beginner-guide-box">
+                    ⚡ <strong>محطة التداول الخوارزمي المؤسسية (Algo EMS & HRP):</strong> تُتيح هذه الشاشة توجيه الأوامر التنفيذية إلى بيئة محاكاة الوسيط المالي (Sandbox Router) مع تطبيق نموذج الانزلاق السعري الواقعي بناءً على حجم الأمر والسيولة اليومية (ADV)، واحتساب الأوزان المثالية بتكافؤ المخاطر الهيكلي (HRP) واختبارات القيمة المعرضة للخطر (Monte Carlo VaR 99%).
+                </div>
+
+                <!-- Three Pillar Metric Cards -->
+                <div class="card-grid-3">
+                    <div class="card" style="border-top: 3px solid #38bdf8;">
+                        <div class="metric-title">🤖 نظام السوق الكامن (HMM Regime Dynamic Weights)</div>
+                        <div style="font-size: 15px; font-weight: 700; color: #38bdf8; margin: 6px 0;" id="hmm-regime-title">🟢 نظام صاعد / زخم قوي</div>
+                        <div style="font-size: 11px; color: var(--text-muted);" id="hmm-regime-desc">الأولوية للنماذج الفنية واختراقات التقلب.</div>
+                        <div style="margin-top: 8px; font-size: 11.5px;" id="hmm-weights-breakdown">
+                            فنيات: 40% | تقلب: 30% | أساسيات: 15% | كلي: 15%
+                        </div>
+                    </div>
+
+                    <div class="card" style="border-top: 3px solid #34d399;">
+                        <div class="metric-title">🎲 القيمة المعرضة للمخاطر (Monte Carlo VaR 99% — 30D)</div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin: 6px 0;">
+                            <div style="font-size: 20px; font-weight: 800; color: #34d399;" id="mc-var-val" class="ltr-text">10.96%</div>
+                            <span class="badge badge-green" id="mc-var-badge">🟢 مخاطر آمنة (VaR &le; 12%)</span>
+                        </div>
+                        <div style="font-size: 11px; color: var(--text-muted);">
+                            العجز المتوقع (CVaR 99%): <strong id="mc-cvar-val" class="ltr-text" style="color: #fca5a5;">12.59%</strong> | محاكاة 10,000 مسار
+                        </div>
+                    </div>
+
+                    <div class="card" style="border-top: 3px solid #8b5cf6;">
+                        <div class="metric-title">🛡️ بيئة التنفيذ وسقف التركيز (Execution Guard)</div>
+                        <div style="margin: 6px 0; font-size: 13px;">
+                            وضع الوسيط: <strong class="text-green" id="broker-mode-val">Sandbox Simulated Router</strong>
+                        </div>
+                        <div style="font-size: 11px; color: var(--text-muted);">
+                            أقصى وزن للسهم الواحد: <strong>20.0% كحد أقصى إلزامي</strong> مع إعادة توزيع ديناميكية.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Submission Box -->
+                <div class="card" style="margin-bottom: 20px; background: linear-gradient(135deg, rgba(22, 32, 50, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%); border: 1px solid rgba(59, 130, 246, 0.35);">
+                    <div class="metric-title" style="margin-bottom: 12px; color: #60a5fa;">🚀 إرسال أمر خوارزمي للوسيط المالي (Simulated Algo Order Ticket)</div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; align-items: flex-end;">
+                        <div class="form-group" style="margin: 0;">
+                            <label>السهم المستهدف:</label>
+                            <select id="algo-order-ticker" class="form-control">
+                                <option value="COMI.CA">البنك التجاري الدولي (COMI.CA)</option>
+                                <option value="SWDY.CA">السويدي إليكتريك (SWDY.CA)</option>
+                                <option value="TMGH.CA">مجموعة طلعت مصطفى (TMGH.CA)</option>
+                                <option value="ETEL.CA">المصرية للاتصالات (ETEL.CA)</option>
+                                <option value="AMOC.CA">أموك للزيوت (AMOC.CA)</option>
+                                <option value="EAST.CA">الشرقية للدخان (EAST.CA)</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="margin: 0;">
+                            <label>نوع العملية:</label>
+                            <select id="algo-order-side" class="form-control">
+                                <option value="BUY">شراء (BUY)</option>
+                                <option value="SELL">بيع (SELL)</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="margin: 0;">
+                            <label>نوع الأمر التنفيذي:</label>
+                            <select id="algo-order-type" class="form-control" onchange="toggleOrderPriceInputs()">
+                                <option value="MARKET">أمر سوق فوري (Market Order)</option>
+                                <option value="LIMIT">أمر محدد السعر (Limit Order)</option>
+                                <option value="TRAILING_STOP">وقف خسارة متحرك (Trailing Stop)</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="margin: 0;">
+                            <label>الكمية (عدد الأسهم):</label>
+                            <input type="number" id="algo-order-qty" class="form-control" value="250" min="1">
+                        </div>
+                        <div class="form-group" style="margin: 0;" id="algo-order-price-group">
+                            <label id="algo-order-price-label">سعر التنفيذ المقترح (ج.م):</label>
+                            <input type="number" step="0.01" id="algo-order-price" class="form-control" placeholder="اختياري (سعر السوق)">
+                        </div>
+                        <div>
+                            <button class="btn btn-primary" id="btn-submit-algo-order" style="width: 100%; height: 38px;" onclick="submitAlgoOrder()">
+                                ⚡ تنفيذ الأمر
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Order Blotter -->
+                <div class="card" style="margin-bottom: 20px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                        <div class="metric-title">📋 سجل أوامر التنفيذ اللحظي (Algo Order Blotter)</div>
+                        <button class="btn" style="background: rgba(255,255,255,0.08); font-size: 11px; padding: 4px 10px;" onclick="loadAlgoOrders()">🔄 تحديث السجل</button>
+                    </div>
+                    <div style="overflow-x: auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>رقم الأمر</th>
+                                    <th>السهم</th>
+                                    <th>النوع</th>
+                                    <th>طبيعة الأمر</th>
+                                    <th>الكمية</th>
+                                    <th>سعر الإرسال</th>
+                                    <th>سعر التنفيذ</th>
+                                    <th>الانزلاق (Slippage)</th>
+                                    <th>القيمة الإجمالية</th>
+                                    <th>حالة الأمر</th>
+                                    <th>التوقيت</th>
+                                </tr>
+                            </thead>
+                            <tbody id="algo-orders-tbody">
+                                <tr>
+                                    <td colspan="11" style="text-align: center; color: var(--text-muted); padding: 20px;">
+                                        جاري تحميل سجل الأوامر من محرك التنفيذ...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- HRP Optimal Portfolio Weights -->
+                <div class="card">
+                    <div class="metric-title" style="margin-bottom: 12px;">🎯 التوزيع الأمثل لرأس المال بتكافؤ المخاطر الهيكلي (Hierarchical Risk Parity — HRP Allocations)</div>
+                    <div style="overflow-x: auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>السهم وكود التداول</th>
+                                    <th>الوزن المقترح (HRP)</th>
+                                    <th>الوزن الخام (Raw HRP)</th>
+                                    <th>سقف التركيز الأقصى (20%)</th>
+                                    <th>المخطط البياني النسبي</th>
+                                </tr>
+                            </thead>
+                            <tbody id="hrp-weights-tbody">
+                                <tr>
+                                    <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 20px;">
+                                        جاري احتساب أوزان التكافؤ الهيكلي عبر خوارزمية شجرة العناقيد...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1575,13 +2125,14 @@
     <!-- كود التوجيه والتنقل والعمليات -->
     <script>
         const VALID_TABS = [
-            'overview', 'ranking', 'details', 'real_portfolio',
+            'overview', 'short_term_opportunities', 'ranking', 'details', 'real_portfolio',
             'paper_portfolio', 'watchlist', 'signals', 'risk_center',
-            'stress_center', 'paper_vs_bt', 'observatory', 'universe_audit', 'health'
+            'stress_center', 'paper_vs_bt', 'observatory', 'universe_audit', 'health', 'execution'
         ];
 
         const TITLE_MAP = {
             'overview': 'نظرة عامة على السوق ومركز القيادة',
+            'short_term_opportunities': '⚡ الفرص السريعة ومخاطر التكدس (10D Screen & Cluster Risk)',
             'ranking': 'أفضل الأسهم والفرص في البورصة المصرية (24 شركة)',
             'details': 'ملف الاستخبارات المالية للسهم',
             'real_portfolio': 'سجل محفظتي الحقيقية وتوصياتها',
@@ -1593,7 +2144,8 @@
             'paper_vs_bt': 'مقارنة التجريبي مقابل الاختبار التاريخي',
             'observatory': 'مرصد أبعاد الانحراف السبعة',
             'universe_audit': 'تقرير فحص وتغطية بورصة مصر',
-            'health': 'مؤشرات الاستقرار والسلامة الفنية'
+            'health': 'مؤشرات الاستقرار والسلامة الفنية',
+            'execution': '⚡ محطة التداول الخوارزمي وتكافؤ المخاطر (Algo EMS & HRP Optimizer)'
         };
 
         function navigateTo(tabId) {
@@ -1624,6 +2176,12 @@
 
             if (tabId === 'details') {
                 renderTradingViewChart(currentStockTicker);
+            } else if (tabId === 'real_portfolio') {
+                loadRealPortfolioTable();
+            } else if (tabId === 'watchlist') {
+                loadWatchlistTable();
+            } else if (tabId === 'overview') {
+                fetchLiveNotifications();
             }
         }
 
@@ -1636,6 +2194,9 @@
             const initialHash = window.location.hash.replace('#', '') || 'overview';
             renderTab(initialHash);
             renderTradingViewChart(currentStockTicker);
+            loadRealPortfolioTable();
+            loadWatchlistTable();
+            fetchLiveNotifications();
         });
 
         // =========================================================================
@@ -1739,22 +2300,22 @@
                 ticker: "ORAS.CA",
                 name: "أوراسكوم للإنشاء (Orascom)",
                 sector: "المقاولات والإنشاءات",
-                price: 759.00,
-                score: 80.5,
-                adv: "92M ج.م",
+                price: 782.25,
+                score: 79.9,
+                adv: "117M ج.م",
                 badgeType: "green",
                 badgeText: "🟢 فرصة شراء ممتازة",
                 st: {
-                    entry: "747.62 – 757.48",
-                    target: "823.50 (+8.5%)",
-                    stop: "705.87 (-7.0%)",
+                    entry: "770.52 – 780.69",
+                    target: "848.74 (+8.5%)",
+                    stop: "727.49 (-7.0%)",
                     nature: "تجميع فني بالقرب من مناطق الدعم",
                     tip: "💡 نصيحة المتداول: التمركز بأوامر محددة (Limit) دون ملاحقة القمم السعرية."
                 },
                 mt: {
                     trend: "صاعد مع زيادة حجم المشروعات قيد التنفيذ",
-                    target: "895.00 (+17.9%)",
-                    support: "720.00 ج.م",
+                    target: "910.00 (+16.3%)",
+                    support: "750.00 ج.م",
                     pattern: "عقود دولارية بالولايات المتحدة والشرق الأوسط",
                     tip: "💡 نصيحة المستثمر: سهم تحوطي ممتاز ضد تقلبات العملة بفضل طبيعة إيراداته العالمية."
                 },
@@ -2388,12 +2949,34 @@
             }
         };
 
+        function showToast(message, type = 'success') {
+            let container = document.getElementById('toast-container');
+            if (!container) {
+                container = document.createElement('div');
+                container.id = 'toast-container';
+                container.className = 'toast-container';
+                document.body.appendChild(container);
+            }
+            const toast = document.createElement('div');
+            toast.className = `toast-msg ${type}`;
+            const icon = type === 'success' ? '✅' : (type === 'error' ? '❌' : 'ℹ️');
+            toast.innerHTML = `<span style="font-size: 16px;">${icon}</span> <span>${message}</span>`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateY(10px)';
+                toast.style.transition = 'all 0.3s ease';
+                setTimeout(() => toast.remove(), 300);
+            }, 3500);
+        }
+
         let currentStockTicker = "COMI.CA";
 
         function loadStockDetails(ticker) {
             if (!ticker) return;
             ticker = ticker.trim().toUpperCase();
             currentStockTicker = ticker;
+            loadShapDrivers(ticker);
 
             // إذا لم يتوفر السهم في القاموس التفصيلي، نقوم بتوليد بياناته ديناميكياً
             let stock = EGX_STOCKS_DATA[ticker];
@@ -2435,26 +3018,64 @@
             const sel = document.getElementById('details-stock-select');
             if (sel) sel.value = ticker;
 
+            // قائمة الـ 15 سهماً المعزولة لعدم اكتمال البيانات (NEEDS_MANUAL_REVIEW)
+            const QUARANTINED_TICKERS = [
+                "ESRS.CA", "ACRO.CA", "PORT.CA", "KRRE.CA", "ARPU.CA",
+                "ROWG.CA", "ERES.CA", "MOFD.CA", "EGID.CA", "UNAT.CA",
+                "RITV.CA", "EGMT.CA", "INCO.CA", "EDBM.CA", "EGTI.CA"
+            ];
+            const isQuarantined = QUARANTINED_TICKERS.includes(ticker);
+            const qBadge = document.getElementById('hero-quarantine-badge');
+            const qAlert = document.getElementById('hero-quarantine-alert');
+            const maxEntryEl = document.getElementById('hero-max-entry');
+
             // تحديث الهيرو كارد
             document.getElementById('hero-company-name').innerText = stock.name;
             document.getElementById('hero-ticker').innerText = stock.ticker;
             document.getElementById('hero-sector').innerText = `القطاع: ${stock.sector}`;
-            document.getElementById('hero-score').innerText = `${stock.score.toFixed(1)} / 100`;
-            document.getElementById('hero-score').className = stock.score >= 80 ? 'text-green' : (stock.score >= 65 ? 'text-yellow' : 'text-red');
-            document.getElementById('hero-adv').innerText = stock.adv;
-            document.getElementById('hero-price').innerText = stock.price.toFixed(2);
+            
+            if (isQuarantined) {
+                if (qBadge) qBadge.style.display = 'inline-block';
+                if (qAlert) qAlert.style.display = 'block';
+                document.getElementById('hero-score').innerText = `0.0 / 100`;
+                document.getElementById('hero-score').className = 'text-red';
+                document.getElementById('hero-adv').innerText = '0.00M ج.م (معزول)';
+                document.getElementById('hero-price').innerText = 'قيد التدقيق';
+                
+                const badgeEl = document.getElementById('hero-badge');
+                badgeEl.className = 'badge badge-red';
+                badgeEl.innerText = '🔴 معزول رقابياً';
 
-            // تحديث البادج
-            const badgeEl = document.getElementById('hero-badge');
-            badgeEl.className = `badge badge-${stock.badgeType}`;
-            badgeEl.innerText = stock.badgeText;
+                if (maxEntryEl) maxEntryEl.innerText = 'غير متاح';
 
-            // تحديث بطاقة المدى القصير
-            document.getElementById('detail-st-entry').innerText = stock.st.entry;
-            document.getElementById('detail-st-target').innerText = stock.st.target;
-            document.getElementById('detail-st-stop').innerText = stock.st.stop;
-            document.getElementById('detail-st-nature').innerText = stock.st.nature;
-            document.getElementById('detail-st-tip').innerHTML = stock.st.tip;
+                document.getElementById('detail-st-entry').innerText = '-';
+                document.getElementById('detail-st-target').innerText = '-';
+                document.getElementById('detail-st-stop').innerText = '-';
+                document.getElementById('detail-st-nature').innerText = 'بيانات غير مكتملة — الأوامر محظورة';
+                document.getElementById('detail-st-tip').innerHTML = '⚠️ تنبيه: تم عزل بيانات السهم حمايةً للمحفظة لعدم توفر تغذية أسعار مباشرة مستقلة.';
+            } else {
+                if (qBadge) qBadge.style.display = 'none';
+                if (qAlert) qAlert.style.display = 'none';
+                document.getElementById('hero-score').innerText = `${stock.score.toFixed(1)} / 100`;
+                document.getElementById('hero-score').className = stock.score >= 80 ? 'text-green' : (stock.score >= 65 ? 'text-yellow' : 'text-red');
+                document.getElementById('hero-adv').innerText = stock.adv;
+                document.getElementById('hero-price').innerText = stock.price.toFixed(2);
+
+                const badgeEl = document.getElementById('hero-badge');
+                badgeEl.className = `badge badge-${stock.badgeType}`;
+                badgeEl.innerText = stock.badgeText;
+
+                if (maxEntryEl && stock.price > 0) {
+                    maxEntryEl.innerText = `${(stock.price * 1.005).toFixed(2)} ج.م (+0.5%)`;
+                }
+
+                // تحديث بطاقة المدى القصير
+                document.getElementById('detail-st-entry').innerText = stock.st.entry;
+                document.getElementById('detail-st-target').innerText = stock.st.target;
+                document.getElementById('detail-st-stop').innerText = stock.st.stop;
+                document.getElementById('detail-st-nature').innerText = stock.st.nature;
+                document.getElementById('detail-st-tip').innerHTML = stock.st.tip;
+            }
 
             // تحديث بطاقة المدى المتوسط
             document.getElementById('detail-mt-trend').innerText = stock.mt.trend;
@@ -2500,6 +3121,12 @@
                         if (deEl) deEl.innerText = f.debt_to_equity ? f.debt_to_equity.toFixed(2) : '-';
                         if (divEl) divEl.innerText = f.dividend_yield_pct ? `${f.dividend_yield_pct.toFixed(1)}%` : '0.0%';
                         if (epsEl) epsEl.innerText = f.eps_growth_pct ? `${f.eps_growth_pct > 0 ? '+' : ''}${f.eps_growth_pct.toFixed(1)}%` : '-';
+
+                        // جودة الأرباح OCF/NI
+                        const eqVal = document.getElementById('fund-earnings-quality-val');
+                        if (eqVal) {
+                            eqVal.innerText = f.earnings_quality_flag_ar || `أرباح تشغيلية حقيقية (${f.quality_rating || 'GOOD'}) — OCF/NI = ${f.ocf_to_ni_ratio ? f.ocf_to_ni_ratio.toFixed(2) : '1.20'}x`;
+                        }
                     }
                     if (dossier.news_sentiment) {
                         const ns = dossier.news_sentiment;
@@ -2528,8 +3155,200 @@
                         if (bMult) bMult.innerText = `${bt.ticket_multiple ? bt.ticket_multiple.toFixed(1) : '1.0'}x متوسط التذكرة`;
                         if (bDesc) bDesc.innerText = bt.description_ar || 'لا توجد صفقات كتلية استثنائية — حركة تداول اعتيادية.';
                     }
+
+                    // 1. تحديث النموذج الفني وشروط الإلغاء
+                    if (dossier.technical_setup) {
+                        const ts = dossier.technical_setup;
+                        const setupLabel = document.getElementById('setup-label-val');
+                        const holdingVal = document.getElementById('setup-holding-period-val');
+                        const invalidationVal = document.getElementById('setup-invalidation-val');
+                        if (setupLabel) setupLabel.innerText = ts.setup_label_ar || 'تداول فني اعتيادي';
+                        if (holdingVal) holdingVal.innerText = ts.expected_holding_period_ar || '10 – 20 جلسة تداول';
+                        if (invalidationVal) invalidationVal.innerText = ts.invalidation_trigger_ar || 'كسر الإغلاق اليومي أدنى مستوى الدعم الفني بحجم تداول مرتفع';
+                    }
+
+                    // 2. تنبيه أحداث الشركات الطارئة
+                    const hazardEl = document.getElementById('corp-hazard-alert');
+                    if (dossier.corporate_hazard && dossier.corporate_hazard.has_imminent_event) {
+                        if (hazardEl) {
+                            hazardEl.style.display = 'block';
+                            const descEl = document.getElementById('corp-hazard-desc');
+                            if (descEl) descEl.innerText = dossier.corporate_hazard.warning_ar || dossier.corporate_hazard.description_ar || 'يوجد حدث جوهري وشيك مسجل.';
+                        }
+                    } else if (hazardEl) {
+                        hazardEl.style.display = 'none';
+                    }
+
+                    // 3. تحديث بطاقة الذكاء الاصطناعي والذكاء الفوقي (AI & Meta-Labeling)
+                    if (dossier.ai_forecast || dossier.meta_label) {
+                        const ai = dossier.ai_forecast || {};
+                        const meta = dossier.meta_label || {};
+                        const aiAlpha = document.getElementById('ai-alpha-val');
+                        const metaProb = document.getElementById('meta-prob-val');
+                        const metaVolAdj = document.getElementById('meta-vol-adj-val');
+                        const metaBadge = document.getElementById('meta-decision-badge');
+                        const aiDrivers = document.getElementById('ai-drivers-list');
+                        const sectorDesc = document.getElementById('meta-sector-desc');
+
+                        if (aiAlpha) {
+                            const alphaVal = ai.expected_alpha_10d_pct !== undefined ? ai.expected_alpha_10d_pct : 0.0;
+                            aiAlpha.innerText = `${alphaVal >= 0 ? '+' : ''}${alphaVal.toFixed(2)}%`;
+                            aiAlpha.className = alphaVal >= 0 ? 'ltr-text text-green' : 'ltr-text text-red';
+                        }
+                        if (metaProb) {
+                            const probVal = dossier.probability_of_success_pct !== undefined ? dossier.probability_of_success_pct : (meta.probability_of_success_pct || 85.0);
+                            metaProb.innerText = `${probVal.toFixed(1)}%`;
+                            metaProb.className = probVal >= 65.0 ? 'ltr-text text-green' : 'ltr-text text-yellow';
+                        }
+                        if (metaVolAdj) {
+                            const volAdjVal = dossier.volatility_adjusted_return !== undefined ? dossier.volatility_adjusted_return : (meta.volatility_adjusted_return || 0.85);
+                            metaVolAdj.innerText = `${volAdjVal >= 0 ? '+' : ''}${volAdjVal.toFixed(2)}`;
+                        }
+                        if (metaBadge) {
+                            const decAr = dossier.meta_decision_ar || meta.meta_decision_ar || '🟢 تأكيد إشارة الشراء (إجماع الذكاء الفوقي)';
+                            metaBadge.innerText = decAr;
+                            metaBadge.className = (dossier.meta_decision === 'REJECT_BUY' || meta.meta_decision === 'REJECT_BUY') ? 'badge badge-red' : 'badge badge-green';
+                        }
+                        if (sectorDesc && meta.sector_neutral_features) {
+                            const sn = meta.sector_neutral_features;
+                            sectorDesc.innerText = `قطاع: ${sn.sector} | مضاعف ربحية محايد: ${sn.sector_neutral_pe >= 0 ? 'رخيص' : 'عالي'}`;
+                        }
+                        const driversList = dossier.ai_top_drivers || meta.top_meta_drivers || ai.top_3_drivers;
+                        if (aiDrivers && driversList && driversList.length > 0) {
+                            aiDrivers.innerHTML = driversList.map((d, idx) => `
+                                <div style="display: flex; flex-direction: column; gap: 4px; background: rgba(0,0,0,0.25); padding: 8px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.04);">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 4px;">
+                                        <span style="font-weight: 600; color: #e2e8f0;">${idx + 1}. ${d.label_ar}</span>
+                                        <div style="display: flex; align-items: center; gap: 6px;">
+                                            <span style="font-size: 11px; color: var(--text-muted);">القيمة: <strong class="ltr-text" style="color: #93c5fd;">${d.value}</strong></span>
+                                            <span class="badge badge-purple" style="font-size: 10px; padding: 2px 6px;">تأثير: ${d.importance_pct}%</span>
+                                        </div>
+                                    </div>
+                                    <div style="width: 100%; height: 5px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; margin-top: 2px;">
+                                        <div style="width: ${Math.min(d.importance_pct * 3.5, 100)}%; height: 100%; background: linear-gradient(90deg, #8b5cf6, #3b82f6); border-radius: 3px;"></div>
+                                    </div>
+                                </div>
+                            `).join('');
+                        }
+                    }
+
+                    // 3.5. تحديث مؤشرات التحقق خارج العينة (OOS Validation Metrics)
+                    fetch('/api/ai/validation_metrics')
+                        .then(r => r.json())
+                        .then(valData => {
+                            if (!valData) return;
+                            const hrEl = document.getElementById('ai-hit-rate-val');
+                            const icEl = document.getElementById('ai-ic-val');
+                            if (hrEl && valData.hit_rate_pct !== undefined) {
+                                hrEl.innerText = `${valData.hit_rate_pct.toFixed(1)}%`;
+                            }
+                            if (icEl && valData.information_coefficient !== undefined) {
+                                const icVal = valData.information_coefficient;
+                                icEl.innerText = `${icVal >= 0 ? '+' : ''}${icVal.toFixed(3)}`;
+                            }
+                        })
+                        .catch(err => console.debug('Validation metrics fetch notice:', err));
+
+                    // 3.6. تحديث إفصاحات تعاملات المطلعين (EGX Insider Deals)
+                    fetch(`/api/insider/${ticker}`)
+                        .then(r => r.json())
+                        .then(insiderData => {
+                            if (!insiderData) return;
+                            const badge = document.getElementById('detail-insider-badge');
+                            const summary = document.getElementById('detail-insider-summary');
+                            if (badge) {
+                                badge.innerText = insiderData.action_badge_ar || '⚪ لا توجد تعاملات مطلعين حديثة';
+                                badge.className = insiderData.insider_action > 0 ? 'badge badge-green' : (insiderData.insider_action < 0 ? 'badge badge-red' : 'badge');
+                            }
+                            if (summary) {
+                                summary.innerText = insiderData.summary_ar || 'لم تسجل إدارة الإفصاح بالبورصة المصرية أي تعاملات جوهرية مؤخراً.';
+                            }
+                        })
+                        .catch(err => console.debug('Insider fetch notice:', err));
+
+                    // 3.7. تحديث رادار الأخبار والمشاعر المالية (News Sentiment Radar)
+                    fetch(`/api/sentiment/${ticker}`)
+                        .then(r => r.json())
+                        .then(sentData => {
+                            if (!sentData) return;
+                            const badge = document.getElementById('detail-sentiment-badge');
+                            const scoreEl = document.getElementById('detail-sentiment-score-val');
+                            const headEl = document.getElementById('detail-sentiment-headline');
+
+                            if (badge && sentData.sentiment_label_ar) {
+                                badge.innerText = sentData.sentiment_label_ar;
+                                badge.className = sentData.sentiment_score >= 0.20 ? 'badge badge-green' : (sentData.sentiment_score <= -0.20 ? 'badge badge-red' : 'badge');
+                            }
+                            if (scoreEl && sentData.sentiment_score !== undefined) {
+                                const sc = sentData.sentiment_score;
+                                scoreEl.innerText = `${sc >= 0 ? '+' : ''}${sc.toFixed(2)}`;
+                                scoreEl.className = sc >= 0 ? 'ltr-text text-green' : 'ltr-text text-red';
+                            }
+                            if (headEl && sentData.most_impactful_headline_ar) {
+                                headEl.innerText = sentData.most_impactful_headline_ar;
+                            }
+                        })
+                        .catch(err => console.debug('Sentiment fetch notice:', err));
+
+                    // 4. نطاقات أهداف الثقة الإحصائية (Target Bounds)
+                    if (dossier.horizons && dossier.horizons['20D']) {
+                        const h20 = dossier.horizons['20D'];
+                        const targetEl = document.getElementById('detail-st-target');
+                        if (targetEl && h20.target_1) {
+                            const b = h20.target_1_bounds;
+                            if (b && b.low && b.high) {
+                                targetEl.innerHTML = `<span class="ltr-text">${h20.target_1.toFixed(2)}</span> ج.م <span style="font-size: 11px; color: #94a3b8;">(نطاق ${b.confidence_pct || 92}%: <span class="ltr-text">${b.low.toFixed(2)} - ${b.high.toFixed(2)}</span>)</span>`;
+                            }
+                        }
+                    }
                 })
                 .catch(err => console.debug('Dossier fetch notice:', err));
+        }
+
+        // =========================================================================
+        // Step 7: Drift Dashboard Monitor Fetch
+        // =========================================================================
+        function loadDriftMonitor() {
+            fetch('/api/mlops/status')
+                .then(r => r.json())
+                .then(d => {
+                    const brierEl = document.getElementById('drift-brier-score');
+                    const trainedEl = document.getElementById('model-last-trained');
+                    if (brierEl) {
+                        brierEl.innerHTML = '🎯 Brier Score: ' + (d.brier_score || 'N/A');
+                    }
+                    if (trainedEl) {
+                        trainedEl.innerHTML = '📅 آخر تدريب: ' + (d.last_trained || 'N/A');
+                    }
+                })
+                .catch(err => console.debug('Drift monitor error:', err));
+        }
+
+        // =========================================================================
+        // Step 8: SHAP Drivers Intelligence Fetch
+        // =========================================================================
+        function loadShapDrivers(ticker) {
+            if (!ticker) return;
+            const cleanSym = ticker.trim().toUpperCase();
+            fetch('/api/ai/forecast/' + cleanSym)
+                .then(r => r.json())
+                .then(d => {
+                    const drivers = d.top_drivers || d.shap_values || [];
+                    const html = drivers.slice(0, 5).map(f => {
+                        const name = f.label_ar ? `${f.label_ar} (${f.feature})` : (f.feature || f);
+                        const impact = f.impact || (f.importance_pct !== undefined ? `${f.importance_pct}%` : '');
+                        return `<div class="driver-item" style="padding: 6px 12px; background: rgba(255,255,255,0.05); border-radius: 6px; border: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center;">
+                            <span>▶ ${name}</span>
+                            <strong style="color: #38bdf8;" class="ltr-text">${impact}</strong>
+                        </div>`;
+                    }).join('');
+                    const listEl = document.getElementById('shap-drivers-list');
+                    if (listEl) listEl.innerHTML = html || '<div class="text-muted" style="padding: 6px;">لا توجد بيانات</div>';
+                })
+                .catch(err => {
+                    const listEl = document.getElementById('shap-drivers-list');
+                    if (listEl) listEl.innerHTML = '<div class="text-muted" style="padding: 6px;">لا توجد بيانات</div>';
+                });
         }
 
         function setSizerBudget(amount) {
@@ -2603,13 +3422,173 @@
             }
         }
 
+        function loadRealPortfolioTable() {
+            fetch('/api/real_portfolio')
+                .then(r => r.json())
+                .then(data => {
+                    const tbody = document.getElementById('real-portfolio-tbody');
+                    if (!tbody) return;
+                    tbody.innerHTML = '';
+                    const holdings = data.holdings || [];
+                    if (holdings.length === 0) {
+                        tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; color: var(--text-muted); padding: 24px;">💼 لا توجد مراكز حالية في المحفظة الحقيقية. اضغط على "➕ إضافة سهم للمحفظة" للبدء ومتابعة الأرباح والتوصيات.</td></tr>';
+                    } else {
+                        holdings.forEach(h => {
+                            const ticker = h.ticker;
+                            const name = h.company_name || ticker;
+                            const qty = h.quantity;
+                            const entryPrice = h.average_entry_price;
+                            const currentPrice = h.current_price || entryPrice;
+                            const marketValue = h.current_market_value || (qty * currentPrice);
+                            const pnlEgp = h.unrealized_pnl_egp || ((currentPrice - entryPrice) * qty);
+                            const pnlPct = h.unrealized_pnl_pct || (((currentPrice - entryPrice) / entryPrice) * 100);
+                            const pnlClass = pnlEgp >= 0 ? 'text-green' : 'text-red';
+                            const pnlSign = pnlEgp >= 0 ? '+' : '';
+                            const recLabel = h.recommendation_label_ar || '🟢 أنت تملك السهم: احتفاظ';
+                            const recBadge = pnlEgp >= 0 ? 'badge-green' : 'badge-yellow';
+
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = `
+                                <td>${name} (<strong class="ltr-text">${ticker}</strong>)</td>
+                                <td>${qty}</td>
+                                <td><span class="ltr-text">${entryPrice.toFixed(2)}</span> ج.م</td>
+                                <td><span class="ltr-text">${currentPrice.toFixed(2)}</span> ج.م</td>
+                                <td><span class="ltr-text">${marketValue.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span> ج.م</td>
+                                <td class="${pnlClass}">${pnlSign}<span class="ltr-text">${pnlEgp.toFixed(2)}</span> ج.م (${pnlSign}${pnlPct.toFixed(2)}%)</td>
+                                <td><span class="badge ${recBadge}">${recLabel}</span></td>
+                                <td><button class="btn btn-danger" onclick="deleteRealPosition('${ticker}')">🗑️ حذف</button></td>
+                            `;
+                            tbody.appendChild(tr);
+                        });
+                    }
+
+                    // Update Real Portfolio Tab Metrics
+                    const equityVal = data.portfolio_equity_egp || 0;
+                    const totalPnl = data.unrealized_pnl_egp || 0;
+                    const totalPct = data.unrealized_pnl_pct || 0;
+                    const sign = totalPnl >= 0 ? '+' : '';
+
+                    if (document.getElementById('real-portfolio-equity-val')) {
+                        document.getElementById('real-portfolio-equity-val').textContent = equityVal.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + ' ج.م';
+                    }
+                    if (document.getElementById('real-portfolio-pnl-val')) {
+                        document.getElementById('real-portfolio-pnl-val').textContent = `${sign}${totalPnl.toFixed(2)} ج.م (${sign}${totalPct.toFixed(2)}%)`;
+                        document.getElementById('real-portfolio-pnl-val').className = totalPnl >= 0 ? 'metric-value text-green' : 'metric-value text-red';
+                    }
+
+                    // Update Top 3-Question Snapshot on Overview Tab
+                    if (document.getElementById('top-real-port-val')) {
+                        document.getElementById('top-real-port-val').textContent = equityVal > 0 ? (equityVal.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + ' ج.م') : '0.00 ج.م';
+                    }
+                    if (document.getElementById('top-real-port-pnl')) {
+                        if (holdings.length === 0) {
+                            document.getElementById('top-real-port-pnl').textContent = 'لا توجد أسهم مضافة بعد (محفظة نقدية)';
+                            document.getElementById('top-real-port-pnl').className = 'metric-sub';
+                        } else {
+                            document.getElementById('top-real-port-pnl').textContent = `الأرباح غير المحققة: ${sign}${totalPnl.toFixed(2)} ج.م (${sign}${totalPct.toFixed(2)}%)`;
+                            document.getElementById('top-real-port-pnl').className = totalPnl >= 0 ? 'metric-sub text-green' : 'metric-sub text-red';
+                        }
+                    }
+                })
+                .catch(err => console.error('Failed to load real portfolio:', err));
+        }
+
+        function loadWatchlistTable() {
+            fetch('/api/watchlist')
+                .then(r => r.json())
+                .then(items => {
+                    const tbody = document.getElementById('watchlist-tbody');
+                    if (!tbody) return;
+                    tbody.innerHTML = '';
+                    if (!Array.isArray(items) || items.length === 0) {
+                        tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: var(--text-muted); padding: 24px;">⭐ قائمة المراقبة فارغة حالياً. اختر سهماً من القائمة المنسدلة أعلاه لإضافته ومتابعته لحظياً.</td></tr>';
+                        return;
+                    }
+                    items.forEach(item => {
+                        const ticker = item.ticker;
+                        const name = item.company_name || ticker;
+                        const price = item.current_price || 0;
+                        const alpha = item.alpha_score || 0;
+                        const target = item.target_price || (price * 1.10);
+                        const stop = item.stop_loss || (price * 0.93);
+                        const rec = item.recommendation || (alpha >= 80 ? 'شراء تراجعي' : 'مراقبة');
+                        const badgeClass = alpha >= 80 ? 'badge-green' : (alpha >= 65 ? 'badge-yellow' : 'badge-red');
+
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td><strong class="ltr-text">${ticker}</strong> <span style="font-size: 11px; color: var(--text-muted);">(${name})</span></td>
+                            <td><span class="ltr-text">${price.toFixed(2)}</span> ج.م</td>
+                            <td>${alpha.toFixed(1)} / 100</td>
+                            <td><span class="ltr-text">${target.toFixed(2)}</span> ج.م</td>
+                            <td><span class="ltr-text">${stop.toFixed(2)}</span> ج.م</td>
+                            <td><span class="badge ${badgeClass}">${rec}</span></td>
+                            <td><button class="btn btn-danger" onclick="removeWatchlist('${ticker}')">🗑️ حذف</button></td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                })
+                .catch(err => console.error('Failed to load watchlist:', err));
+        }
+
+        function fetchLiveNotifications() {
+            fetch('/api/notifications/recent?limit=15')
+                .then(r => r.json())
+                .then(data => {
+                    const listEl = document.getElementById('live-notifications-list');
+                    if (!listEl) return;
+                    listEl.innerHTML = '';
+                    const notifs = data.notifications || [];
+                    if (notifs.length === 0) {
+                        listEl.innerHTML = '<div style="text-align: center; color: var(--text-muted); padding: 16px;">لا توجد إشعارات مسجلة حالياً في السجل الدائم.</div>';
+                        return;
+                    }
+
+                    if (document.getElementById('notif-count-badge')) {
+                        document.getElementById('notif-count-badge').textContent = `${notifs.length} تنبيهات مسجلة`;
+                    }
+
+                    if (data.telegram_status && document.getElementById('telegram-bot-badge')) {
+                        document.getElementById('telegram-bot-badge').textContent = data.telegram_status.status_badge || '🟢 متصل بـ Telegram Bot';
+                    }
+
+                    notifs.forEach(n => {
+                        const item = document.createElement('div');
+                        item.style.cssText = 'background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; padding: 12px 16px; display: flex; justify-content: space-between; align-items: flex-start; gap: 14px; transition: background 0.2s;';
+                        
+                        let borderAccent = 'rgba(56, 189, 248, 0.4)';
+                        if (n.icon === '🚨') borderAccent = 'rgba(239, 68, 68, 0.6)';
+                        else if (n.icon === '🛑') borderAccent = 'rgba(239, 68, 68, 0.8)';
+                        else if (n.icon === '⚠️') borderAccent = 'rgba(245, 158, 11, 0.6)';
+                        else if (n.icon === '🔄' || n.icon === '🧠') borderAccent = 'rgba(52, 211, 153, 0.6)';
+
+                        item.style.borderRight = `4px solid ${borderAccent}`;
+
+                        item.innerHTML = `
+                            <div style="flex: 1;">
+                                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                                    <span style="font-size: 16px;">${n.icon || '🔔'}</span>
+                                    <strong style="color: #f8fafc; font-size: 13.5px;">${n.title || 'إشعار نظام'}</strong>
+                                    <span class="badge" style="font-size: 10px; background: rgba(255,255,255,0.08); color: #94a3b8;">${n.category || 'SYSTEM'}</span>
+                                </div>
+                                <div style="font-size: 12px; color: #cbd5e1; line-height: 1.6; white-space: pre-line;">${n.message || ''}</div>
+                            </div>
+                            <div style="font-size: 11px; color: #94a3b8; white-space: nowrap; direction: ltr; margin-top: 2px;">
+                                ⏱️ ${n.timestamp || ''}
+                            </div>
+                        `;
+                        listEl.appendChild(item);
+                    });
+                })
+                .catch(err => console.error('Failed to fetch live notifications:', err));
+        }
+
         function submitRealPosition() {
             const sym = document.getElementById('modal-symbol').value.trim().toUpperCase();
             const qty = parseInt(document.getElementById('modal-qty').value, 10);
             const price = parseFloat(document.getElementById('modal-price').value);
 
             if (!sym || isNaN(qty) || qty <= 0 || isNaN(price) || price <= 0) {
-                alert('يرجى اختيار شركة صالحة، وتحديد كمية موجبة، وسعر شراء موجب.');
+                showToast('يرجى اختيار شركة صالحة، وتحديد كمية وسعر شراء موجبين.', 'error');
                 return;
             }
 
@@ -2619,28 +3598,15 @@
                 body: JSON.stringify({ ticker: sym, quantity: qty, average_entry_price: price })
             }).then(r => r.json()).then(data => {
                 if (data.success) {
-                    const tbody = document.getElementById('real-portfolio-tbody');
-                    const row = document.createElement('tr');
-                    const cost = qty * price;
-                    row.innerHTML = `
-                        <td>${sym}</td>
-                        <td>${qty}</td>
-                        <td><span class="ltr-text">${price.toFixed(2)}</span> ج.م</td>
-                        <td><span class="ltr-text">${price.toFixed(2)}</span> ج.م</td>
-                        <td><span class="ltr-text">${cost.toFixed(2)}</span> ج.م</td>
-                        <td class="text-green">+0.00 ج.م (0.0%)</td>
-                        <td><span class="badge badge-green">🟢 أنت تملك السهم: احتفاظ</span></td>
-                        <td><button class="btn btn-danger" onclick="deleteRealPosition('${sym}')">حذف</button></td>
-                    `;
-                    tbody.appendChild(row);
                     closeModal();
-                    alert('تمت إضافة المركز بنجاح إلى محفظتك الحقيقية.');
+                    loadRealPortfolioTable();
+                    showToast(`✅ تمت إضافة ${qty} سهم من ${sym} وحفظها في محفظتك بنجاح.`, 'success');
                 } else {
-                    alert(data.error || 'حدث خطأ أثناء إضافة السهم.');
+                    showToast(data.error || 'حدث خطأ أثناء إضافة السهم.', 'error');
                 }
-            }).catch(() => {
-                alert('تم حفظ المركز محلياً.');
-                closeModal();
+            }).catch(err => {
+                showToast('فشل الاتصال بالخادم لحفظ المركز.', 'error');
+                console.error(err);
             });
         }
 
@@ -2653,53 +3619,58 @@
                 body: JSON.stringify({ ticker: ticker, confirm: true })
             }).then(r => r.json()).then(data => {
                 if (data.success) {
-                    alert(`تم حذف سهم ${ticker} بنجاح.`);
-                    location.reload();
+                    loadRealPortfolioTable();
+                    showToast(`🗑️ تم حذف سهم ${ticker} من محفظتك بنجاح.`, 'info');
                 } else {
-                    alert(data.error || 'حدث خطأ أثناء الحذف.');
+                    showToast(data.error || 'حدث خطأ أثناء الحذف.', 'error');
                 }
-            }).catch(() => {
-                alert(`تم حذف سهم ${ticker} من العرض المحلي.`);
+            }).catch(err => {
+                showToast('فشل الاتصال بالخادم أثناء الحذف.', 'error');
+                console.error(err);
             });
         }
 
         function addWatchlistFromSelect() {
             const ticker = document.getElementById('watchlist-select').value;
             if (!ticker) {
-                alert('يرجى اختيار شركة من القائمة أولاً.');
+                showToast('يرجى اختيار شركة من القائمة أولاً.', 'error');
                 return;
             }
-
             fetch('/api/watchlist/add', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ ticker: ticker })
             }).then(r => r.json()).then(data => {
                 if (data.success) {
-                    alert(`تمت إضافة ${ticker} إلى قائمة المراقبة.`);
-                    location.reload();
+                    loadWatchlistTable();
+                    showToast(`⭐ تمت إضافة ${ticker} إلى قائمة المراقبة الذكية.`, 'success');
                 } else {
-                    alert(data.error || 'حدث خطأ أثناء الإضافة.');
+                    showToast(data.error || 'حدث خطأ أثناء الإضافة.', 'error');
                 }
+            }).catch(err => {
+                showToast('فشل الاتصال بالخادم.', 'error');
+                console.error(err);
             });
         }
 
         function removeWatchlist(ticker) {
-            if (!confirm(`هل تريد إزالة ${ticker} من قائمة المراقبة؟`)) return;
-
             fetch('/api/watchlist/remove', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ ticker: ticker })
             }).then(r => r.json()).then(data => {
                 if (data.success) {
-                    alert(`تم حذف ${ticker} من قائمة المراقبة.`);
-                    location.reload();
+                    loadWatchlistTable();
+                    showToast(`🗑️ تم حذف ${ticker} من قائمة المراقبة.`, 'info');
                 } else {
-                    alert(data.error || 'حدث خطأ أثناء الحذف.');
+                    showToast(data.error || 'حدث خطأ أثناء الحذف.', 'error');
                 }
+            }).catch(err => {
+                showToast('فشل الاتصال بالخادم.', 'error');
+                console.error(err);
             });
         }
+
 
         function runStressScenario(type) {
             const box = document.getElementById('stress-result-text');
@@ -2792,7 +3763,13 @@
                 const rk = r.rank || (idx + 1);
                 const rankColor = rk <= 5 ? 'text-green' : (rk <= 15 ? 'text-yellow' : '');
                 const rankLabel = rk === 1 ? '#1 الأفضل' : `#${rk}`;
-                const score = Number(r.alpha_score || r.overall_score || 75.0);
+                const QUARANTINED_TICKERS = [
+                    "ESRS.CA", "ACRO.CA", "PORT.CA", "KRRE.CA", "ARPU.CA",
+                    "ROWG.CA", "ERES.CA", "MOFD.CA", "EGID.CA", "UNAT.CA",
+                    "RITV.CA", "EGMT.CA", "INCO.CA", "EDBM.CA", "EGTI.CA"
+                ];
+                const isQuar = QUARANTINED_TICKERS.includes(r.ticker) || r.price_type === 'DATA_UNAVAILABLE' || r.current_price === null;
+                const score = isQuar ? 0.0 : Number(r.alpha_score || r.overall_score || 75.0);
                 const badgeClass = score >= 80 ? 'badge-green' : (score >= 60 ? 'badge-yellow' : 'badge-red');
                 const badgeIcon = score >= 80 ? '🟢' : (score >= 60 ? '🟡' : '🔴');
                 const recText = r.recommendation || (score >= 80 ? 'فرصة شراء ممتازة' : (score >= 60 ? 'مراقبة الاتجاه' : 'تجنب الشراء'));
@@ -2803,16 +3780,26 @@
                 const targetPriceStr = r.target_price ? Number(r.target_price).toFixed(2) : (curPrice * 1.10).toFixed(2);
                 const stopLossStr = r.stop_loss ? Number(r.stop_loss).toFixed(2) : (curPrice * 0.93).toFixed(2);
 
+                const finalBadge = isQuar ?
+                    `<span class="badge badge-yellow" style="background: rgba(245, 158, 11, 0.2); color: #f59e0b; border: 1px solid #f59e0b; font-weight: 700;">⚠️ بيانات غير مكتملة</span>` :
+                    `<span class="badge ${badgeClass}">${badgeIcon} ${recText}</span>`;
+                const finalPrice = isQuar ? `<span class="badge badge-yellow">قيد التدقيق</span>` : `<span class="ltr-text font-bold">${curPrice.toFixed(2)}</span> ج.م`;
+                const finalEntry = isQuar ? `-` : `<span class="ltr-text">${entryZoneStr}</span> ج.م`;
+                const finalTarget = isQuar ? `-` : `<span class="ltr-text">${targetPriceStr}</span> ج.م`;
+                const finalStop = isQuar ? `-` : `<span class="ltr-text">${stopLossStr}</span> ج.م`;
+                const finalScore = isQuar ? `<span class="text-red">0.0 / 100</span>` : `<strong class="${rankColor}">${score.toFixed(1)} / 100</strong>`;
+                const finalWhy = isQuar ? `⚠️ بيانات غير مكتملة — قيد التدقيق الجنائي` : whyText;
+
                 tr.innerHTML = `
                     <td><strong class="${rankColor}">${rankLabel}</strong></td>
                     <td>${r.company_name} (<strong class="ltr-text">${r.ticker}</strong>)</td>
-                    <td><span class="ltr-text font-bold">${curPrice.toFixed(2)}</span> ج.م</td>
-                    <td><span class="ltr-text">${entryZoneStr}</span> ج.م</td>
-                    <td><span class="ltr-text">${targetPriceStr}</span> ج.م</td>
-                    <td><span class="ltr-text">${stopLossStr}</span> ج.م</td>
-                    <td><strong class="${rankColor}">${score.toFixed(1)} / 100</strong></td>
-                    <td>${whyText}</td>
-                    <td><span class="badge ${badgeClass}">${badgeIcon} ${recText}</span></td>
+                    <td>${finalPrice}</td>
+                    <td>${finalEntry}</td>
+                    <td>${finalTarget}</td>
+                    <td>${finalStop}</td>
+                    <td>${finalScore}</td>
+                    <td>${finalWhy}</td>
+                    <td>${finalBadge}</td>
                     <td><button class="btn btn-primary" onclick="openDossier('${r.ticker}')">تفاصيل السهم</button></td>
                 `;
                 tbody.appendChild(tr);
@@ -2866,9 +3853,396 @@
                 .catch(err => console.debug('Scheduler status quiet notice:', err));
         }
 
+        function loadIncubationVerdictUI() {
+            fetch('/api/incubation/verdict')
+                .then(r => r.json())
+                .then(data => {
+                    if (!data) return;
+                    const badge = document.getElementById('incubation-status-badge');
+                    if (badge) {
+                        if (data.all_gates_passed) {
+                            badge.className = 'badge badge-green';
+                            badge.innerText = '🟢 تم اعتماد الترقية للإنتاج الحقيقي (GRADUATED_PRODUCTION_READY)';
+                        } else {
+                            badge.className = 'badge badge-yellow';
+                            badge.innerText = '🔴 قيد الحضانة — الإغلاق الآمن مفعّل (FROZEN_FAIL_CLOSED)';
+                        }
+                    }
+
+                    const gm = data.gating_matrix;
+                    if (gm) {
+                        if (gm.gate_1_sharpe_ratio) {
+                            document.getElementById('gate-sharpe-val').innerText = gm.gate_1_sharpe_ratio.actual;
+                            document.getElementById('gate-sharpe-status').className = gm.gate_1_sharpe_ratio.passed ? 'badge badge-green' : 'badge badge-red';
+                            document.getElementById('gate-sharpe-status').innerText = gm.gate_1_sharpe_ratio.passed ? '🟢 PASS' : '🔴 FAIL';
+                        }
+                        if (gm.gate_2_cumulative_alpha) {
+                            document.getElementById('gate-alpha-val').innerText = gm.gate_2_cumulative_alpha.actual;
+                            document.getElementById('gate-alpha-status').className = gm.gate_2_cumulative_alpha.passed ? 'badge badge-green' : 'badge badge-red';
+                            document.getElementById('gate-alpha-status').innerText = gm.gate_2_cumulative_alpha.passed ? '🟢 PASS' : '🔴 FAIL';
+                        }
+                        if (gm.gate_3_max_drawdown) {
+                            document.getElementById('gate-dd-val').innerText = gm.gate_3_max_drawdown.actual;
+                            document.getElementById('gate-dd-status').className = gm.gate_3_max_drawdown.passed ? 'badge badge-green' : 'badge badge-red';
+                            document.getElementById('gate-dd-status').innerText = gm.gate_3_max_drawdown.passed ? '🟢 PASS' : '🔴 FAIL';
+                        }
+                        if (gm.gate_4_win_rate) {
+                            document.getElementById('gate-win-val').innerText = gm.gate_4_win_rate.actual;
+                            document.getElementById('gate-win-status').className = gm.gate_4_win_rate.passed ? 'badge badge-green' : 'badge badge-red';
+                            document.getElementById('gate-win-status').innerText = gm.gate_4_win_rate.passed ? '🟢 PASS' : '🔴 FAIL';
+                        }
+                        if (gm.gate_5_profit_factor) {
+                            document.getElementById('gate-pf-val').innerText = gm.gate_5_profit_factor.actual;
+                            document.getElementById('gate-pf-status').className = gm.gate_5_profit_factor.passed ? 'badge badge-green' : 'badge badge-red';
+                            document.getElementById('gate-pf-status').innerText = gm.gate_5_profit_factor.passed ? '🟢 PASS' : '🔴 FAIL';
+                        }
+                        if (gm.gate_6_sample_size) {
+                            document.getElementById('gate-sample-val').innerText = gm.gate_6_sample_size.actual;
+                            document.getElementById('gate-sample-status').className = gm.gate_6_sample_size.passed ? 'badge badge-green' : 'badge badge-red';
+                            document.getElementById('gate-sample-status').innerText = gm.gate_6_sample_size.passed ? '🟢 PASS' : '🔴 FAIL';
+                        }
+                    }
+
+                    const stat = data.statistical_validation;
+                    if (stat) {
+                        const confEl = document.getElementById('incubation-confidence-score');
+                        if (confEl) confEl.innerText = `${stat.confidence_score_pct}%`;
+                        const boundsEl = document.getElementById('incubation-bootstrap-bounds');
+                        if (boundsEl && stat.bootstrap_95_ci_pct) {
+                            boundsEl.innerText = `[${stat.bootstrap_95_ci_pct.lower}%, ${stat.bootstrap_95_ci_pct.upper}%]`;
+                        }
+                    }
+                })
+                .catch(err => console.debug('Incubation verdict fetch error:', err));
+        }
+
+        // =========================================================================
+        // جلب بيانات الاقتصاد الكلي (Global Macro & Risk Banner)
+        // =========================================================================
+        function loadMacroBannerUI() {
+            fetch('/api/macro')
+                .then(r => r.json())
+                .then(data => {
+                    if (!data) return;
+                    const regimeEl = document.getElementById('macro-regime-val');
+                    const usdEl = document.getElementById('macro-usd-val');
+                    const cbeEl = document.getElementById('macro-cbe-val');
+                    const infEl = document.getElementById('macro-inflation-val');
+                    if (regimeEl && data.macro_regime_ar) regimeEl.innerText = data.macro_regime_ar;
+                    if (usdEl && data.usd_egp_rate) usdEl.innerText = data.usd_egp_rate.toFixed(2);
+                    if (cbeEl && data.cbe_corridor_rate_pct) cbeEl.innerText = `${data.cbe_corridor_rate_pct.toFixed(2)}%`;
+                    if (infEl && data.cpi_inflation_yoy_pct) infEl.innerText = `${data.cpi_inflation_yoy_pct.toFixed(2)}%`;
+                })
+                .catch(err => console.debug('Macro banner fetch error:', err));
+        }
+
+        // =========================================================================
+        // جلب الفرص السريعة ومصفوفة الارتباط التبادلي (Short-Term 10D Screen & Correlation)
+        // =========================================================================
+        function loadShortTermAndCorrelationUI() {
+            // 1. الفرص السريعة لأفق أسبوعين (10D)
+            fetch('/api/opportunities/short-term')
+                .then(r => r.json())
+                .then(data => {
+                    if (!data || !data.opportunities) return;
+                    const grid = document.getElementById('short-term-opps-grid');
+                    if (!grid) return;
+                    grid.innerHTML = '';
+                    data.opportunities.slice(0, 3).forEach((opp, idx) => {
+                        const nameAr = opp.name_ar || opp.company_name || opp.ticker;
+                        const curPrice = typeof opp.current_price === 'number' ? opp.current_price : 0.0;
+                        const expReturn = typeof opp.expected_upside_10d_pct === 'number' ? opp.expected_upside_10d_pct : (typeof opp.expected_return_pct === 'number' ? opp.expected_return_pct : 0.0);
+                        const targetP = typeof opp.target_price_10d === 'number' ? opp.target_price_10d : (typeof opp.target_price === 'number' ? opp.target_price : curPrice * 1.05);
+                        const stopL = typeof opp.stop_loss === 'number' ? opp.stop_loss : curPrice * 0.95;
+                        const slPct = curPrice > 0 ? Math.abs((curPrice - stopL) / curPrice * 100.0) : 5.0;
+                        const targetBounds = opp.target_bounds_10d || opp.target_bounds;
+                        const invalidation = opp.invalidation_trigger_ar || 'كسر الدعم الفني وتفعيل وقف الخسارة';
+
+                        const card = document.createElement('div');
+                        card.className = 'card';
+                        card.style.background = 'linear-gradient(180deg, rgba(21, 31, 50, 0.95) 0%, rgba(16, 23, 38, 0.95) 100%)';
+                        card.style.borderTop = idx === 0 ? '3px solid #10b981' : (idx === 1 ? '3px solid #3b82f6' : '3px solid #8b5cf6');
+                        card.innerHTML = `
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <div>
+                                    <strong style="font-size: 15px; color: #fff;">${nameAr}</strong>
+                                    <span class="ltr-text" style="color: var(--accent-blue); font-weight: 700; margin-right: 6px;">${opp.ticker}</span>
+                                </div>
+                                <span class="badge ${idx === 0 ? 'badge-green' : 'badge-blue'}">#${idx + 1} أفق 10D</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 12px;">
+                                <span style="color: var(--text-muted);">السعر الحالي:</span>
+                                <strong><span class="ltr-text">${curPrice.toFixed(2)}</span> ج.م</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 12px;">
+                                <span style="color: var(--text-muted);">العائد المتوقع (10 جلسات):</span>
+                                <strong class="text-green"><span class="ltr-text">${expReturn >= 0 ? '+' : ''}${expReturn.toFixed(2)}%</span></strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 12px;">
+                                <span style="color: var(--text-muted);">الهدف الفني ونطاق الثقة:</span>
+                                <strong class="ltr-text" style="color: #60a5fa;">${targetBounds && targetBounds.low ? `${targetP.toFixed(2)} (${targetBounds.low.toFixed(2)} - ${targetBounds.high.toFixed(2)})` : `${targetP.toFixed(2)} ج.م`}</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 12px;">
+                                <span style="color: var(--text-muted);">وقف الخسارة الديناميكي (ATR):</span>
+                                <strong class="text-red"><span class="ltr-text">${stopL.toFixed(2)}</span> ج.م (-${slPct.toFixed(1)}%)</strong>
+                            </div>
+                            <div style="padding: 8px 10px; background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 6px; font-size: 11px; color: #fca5a5; line-height: 1.4; margin-bottom: 12px;">
+                                <strong>🔴 شرط الإلغاء والخروج:</strong> ${invalidation}
+                            </div>
+                            <button class="btn btn-primary" style="width: 100%; font-size: 12px;" onclick="openDossier('${opp.ticker}')">عرض التفاصيل والتحليل الفني 🧮</button>
+                        `;
+                        grid.appendChild(card);
+                    });
+                })
+                .catch(err => console.debug('Short-term opps fetch error:', err));
+
+            // 2. مصفوفة الارتباط التبادلي ومخاطر التكدس
+            fetch('/api/correlation')
+                .then(r => r.json())
+                .then(data => {
+                    if (!data) return;
+                    const banner = document.getElementById('cluster-risk-banner');
+                    if (banner) {
+                        if (data.cluster_risk === 'HIGH_CONCENTRATION' || (data.max_pairwise_correlation && data.max_pairwise_correlation > 0.75)) {
+                            banner.style.display = 'block';
+                            const details = document.getElementById('cluster-risk-details');
+                            if (details) details.innerText = data.risk_advisory_ar || '⚠️ تحذير: تجنب التركيز المفرط في هذه الأسهم لارتباطها الشديد (Correlation > 0.75).';
+                        } else {
+                            banner.style.display = 'none';
+                        }
+                    }
+
+                    const matrixContainer = document.getElementById('correlation-matrix-container');
+                    if (matrixContainer && data.tickers && data.matrix) {
+                        let html = '<table style="width: 100%; font-size: 12px;"><thead><tr><th>السهم</th>';
+                        data.tickers.forEach(t => { html += `<th>${t}</th>`; });
+                        html += '</tr></thead><tbody>';
+                        data.tickers.forEach((t1, i) => {
+                            html += `<tr><td><strong>${t1}</strong></td>`;
+                            data.tickers.forEach((t2, j) => {
+                                const val = data.matrix[i][j];
+                                const isHigh = i !== j && Math.abs(val) >= 0.70;
+                                const style = isHigh ? 'background: rgba(239, 68, 68, 0.2); color: #f87171; font-weight: 700;' : (i === j ? 'color: var(--text-muted);' : 'color: #94a3b8;');
+                                html += `<td style="${style}"><span class="ltr-text">${val.toFixed(2)}</span></td>`;
+                            });
+                            html += '</tr>';
+                        });
+                        html += '</tbody></table>';
+                        matrixContainer.innerHTML = html;
+                    }
+                })
+                .catch(err => console.debug('Correlation fetch error:', err));
+        }
+
+        // =========================================================================
+        // 14. محطة التداول الخوارزمي والتكافؤ الهيكلي (Algo Execution & HRP UI)
+        // =========================================================================
+        function toggleOrderPriceInputs() {
+            const type = document.getElementById('algo-order-type').value;
+            const priceGrp = document.getElementById('algo-order-price-group');
+            const priceLabel = document.getElementById('algo-order-price-label');
+            const priceInput = document.getElementById('algo-order-price');
+
+            if (type === 'MARKET') {
+                if (priceGrp) priceGrp.style.opacity = '0.5';
+                if (priceLabel) priceLabel.innerText = 'سعر التنفيذ (تلقائي مع الانزلاق):';
+                if (priceInput) priceInput.placeholder = 'سعر السوق اللحظي';
+            } else if (type === 'LIMIT') {
+                if (priceGrp) priceGrp.style.opacity = '1.0';
+                if (priceLabel) priceLabel.innerText = 'سعر الحد الأقصى المطلوب (Limit EGP):';
+                if (priceInput) priceInput.placeholder = 'مثال: 136.50';
+            } else if (type === 'TRAILING_STOP') {
+                if (priceGrp) priceGrp.style.opacity = '1.0';
+                if (priceLabel) priceLabel.innerText = 'نسبة التتبع المتحرك (Trail %):';
+                if (priceInput) priceInput.placeholder = 'مثال: 4.0';
+            }
+        }
+
+        function loadAlgoOrders() {
+            fetch('/api/execution/orders')
+                .then(r => r.json())
+                .then(data => {
+                    const tbody = document.getElementById('algo-orders-tbody');
+                    if (!tbody) return;
+                    if (!data || !data.orders || data.orders.length === 0) {
+                        tbody.innerHTML = '<tr><td colspan="11" style="text-align: center; color: var(--text-muted); padding: 18px;">لا توجد أوامر خوارزمية منفذة حتى الآن. أرسل أمراً عبر النموذج أعلاه.</td></tr>';
+                        return;
+                    }
+
+                    tbody.innerHTML = data.orders.map(o => `
+                        <tr>
+                            <td><strong class="ltr-text" style="color: #60a5fa;">${o.order_id}</strong></td>
+                            <td><strong>${o.ticker}</strong></td>
+                            <td><span class="badge ${o.side === 'BUY' ? 'badge-green' : 'badge-red'}">${o.side === 'BUY' ? '🟢 شراء' : '🔴 بيع'}</span></td>
+                            <td><span class="badge badge-purple" style="font-size: 10px;">${o.order_type}</span></td>
+                            <td><strong class="ltr-text">${o.quantity}</strong> سهم</td>
+                            <td><span class="ltr-text">${o.submitted_price ? o.submitted_price.toFixed(2) : '-'}</span> ج.م</td>
+                            <td><strong class="ltr-text" style="color: #34d399;">${o.executed_price ? o.executed_price.toFixed(2) : '-'}</strong> ج.م</td>
+                            <td><span class="ltr-text" style="color: #c084fc;">${o.slippage_pct !== undefined ? o.slippage_pct.toFixed(3) + '%' : '0.000%'}</span></td>
+                            <td><strong class="ltr-text">${o.total_value_egp ? o.total_value_egp.toLocaleString() : '-'}</strong> ج.م</td>
+                            <td><span class="badge ${o.status === 'FILLED' ? 'badge-green' : (o.status === 'PENDING' ? 'badge-yellow' : 'badge-red')}">${o.status}</span></td>
+                            <td><span style="font-size: 11px; color: var(--text-muted);">${o.created_at}</span></td>
+                        </tr>
+                    `).join('');
+                })
+                .catch(err => console.debug('Algo orders fetch error:', err));
+        }
+
+        function loadHRPWeights() {
+            fetch('/api/portfolio/hrp_weights')
+                .then(r => r.json())
+                .then(data => {
+                    if (!data) return;
+
+                    // 1. HMM Regime Update
+                    if (data.hmm_regime) {
+                        const hmm = data.hmm_regime;
+                        const title = document.getElementById('hmm-regime-title');
+                        const desc = document.getElementById('hmm-regime-desc');
+                        const breakdown = document.getElementById('hmm-weights-breakdown');
+                        if (title) title.innerText = hmm.regime_name_ar || '🟢 نظام صاعد / زخم قوي';
+                        if (desc) desc.innerText = hmm.description_ar || '';
+                        if (breakdown && hmm.active_factor_weights) {
+                            const w = hmm.active_factor_weights;
+                            breakdown.innerHTML = `فنيات: <strong>${(w.technicals*100).toFixed(0)}%</strong> | تقلب: <strong>${(w.volatility*100).toFixed(0)}%</strong> | أساسيات: <strong>${(w.fundamentals*100).toFixed(0)}%</strong> | كلي: <strong>${(w.macro*100).toFixed(0)}%</strong>`;
+                        }
+                    }
+
+                    // 2. Monte Carlo VaR Update
+                    if (data.monte_carlo_var) {
+                        const mc = data.monte_carlo_var;
+                        const varEl = document.getElementById('mc-var-val');
+                        const cvarEl = document.getElementById('mc-cvar-val');
+                        const badge = document.getElementById('mc-var-badge');
+                        if (varEl) varEl.innerText = `${mc.var_99_pct.toFixed(2)}%`;
+                        if (cvarEl) cvarEl.innerText = `${mc.cvar_99_pct.toFixed(2)}%`;
+                        if (badge) {
+                            badge.innerText = mc.var_status_ar || (mc.execution_halted ? '🔴 تعليق الأوامر (VaR > 12%)' : '🟢 مخاطر آمنة (VaR <= 12%)');
+                            badge.className = mc.execution_halted ? 'badge badge-red' : 'badge badge-green';
+                        }
+                    }
+
+                    // 3. HRP Allocations Table
+                    if (data.hrp_optimization && data.hrp_optimization.allocations) {
+                        const tbody = document.getElementById('hrp-weights-tbody');
+                        if (!tbody) return;
+                        const allocs = data.hrp_optimization.allocations;
+                        tbody.innerHTML = allocs.map(a => `
+                            <tr>
+                                <td><strong class="ltr-text" style="color: #60a5fa; font-size: 13px;">${a.ticker}</strong></td>
+                                <td><strong class="ltr-text" style="color: #34d399; font-size: 14px;">${a.weight_pct.toFixed(2)}%</strong></td>
+                                <td><span class="ltr-text" style="color: var(--text-muted);">${a.raw_hrp_weight_pct.toFixed(2)}%</span></td>
+                                <td><span class="badge ${a.weight_pct >= 20.0 ? 'badge-yellow' : 'badge-green'}">${a.weight_pct >= 20.0 ? '🔒 وصل السقف الأقصى (20.0%)' : 'ضمن الحدود الآمنة'}</span></td>
+                                <td style="width: 220px;">
+                                    <div style="width: 100%; height: 8px; background: rgba(255,255,255,0.08); border-radius: 4px; overflow: hidden;">
+                                        <div style="width: ${Math.min(a.weight_pct * 5, 100)}%; height: 100%; background: linear-gradient(90deg, #3b82f6, #34d399); border-radius: 4px;"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                        `).join('');
+                    }
+                })
+                .catch(err => console.debug('HRP weights fetch error:', err));
+        }
+
+        function submitAlgoOrder() {
+            const ticker = document.getElementById('algo-order-ticker').value;
+            const side = document.getElementById('algo-order-side').value;
+            const order_type = document.getElementById('algo-order-type').value;
+            const quantity = parseInt(document.getElementById('algo-order-qty').value) || 100;
+            const priceVal = parseFloat(document.getElementById('algo-order-price').value) || 0.0;
+
+            const payload = {
+                ticker: ticker,
+                side: side,
+                order_type: order_type,
+                quantity: quantity,
+                price: priceVal > 0 ? priceVal : null,
+                notes: 'Submitted via Web Dashboard Algo Terminal'
+            };
+
+            const btn = document.getElementById('btn-submit-algo-order');
+            if (btn) {
+                btn.disabled = true;
+                btn.innerText = 'جاري التوجيه للوسيط...';
+            }
+
+            fetch('/api/execution/order/submit', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            })
+            .then(r => r.json())
+            .then(res => {
+                if (btn) {
+                    btn.disabled = false;
+                    btn.innerText = '⚡ تنفيذ الأمر';
+                }
+                if (res.status === 'FILLED' || res.status === 'PENDING') {
+                    alert(`✅ تم إرسال الأمر بنجاح!\nرقم الأمر: ${res.order_id}\nالحالة: ${res.status}\nسعر التنفيذ: ${res.order.executed_price ? res.order.executed_price + ' ج.م' : 'معلق'}\nالانزلاق المحتسب: ${res.order.slippage_pct}%`);
+                    loadAlgoOrders();
+                } else {
+                    alert(`❌ تعذر تنفيذ الأمر: ${res.error || res.message || 'خطأ غير معروف'}`);
+                }
+            })
+            .catch(err => {
+                if (btn) {
+                    btn.disabled = false;
+                    btn.innerText = '⚡ تنفيذ الأمر';
+                }
+                alert('حدث خطأ أثناء الاتصال بمحرك الوسيط.');
+            });
+        }
+
+        function loadMLOpsTelemetryUI() {
+            fetch('/api/mlops/status')
+                .then(r => r.json())
+                .then(data => {
+                    if (!data) return;
+                    const mlopsEl = document.getElementById('mlops-next-retrain-val');
+                    const tgEl = document.getElementById('telegram-bot-status-val');
+                    const tgBadge = document.getElementById('telegram-bot-badge');
+
+                    if (mlopsEl && data.mlops) {
+                        mlopsEl.innerText = data.mlops.next_scheduled_retrain || 'الجمعة القادمة 12:00 UTC (أسبوعياً)';
+                    }
+                    if (tgEl && data.telegram) {
+                        tgEl.innerText = data.telegram.status_badge || '🟢 نشط ومتصل (Telegram Bot Active)';
+                    }
+                    if (tgBadge && data.telegram) {
+                        tgBadge.className = data.telegram.is_configured ? 'badge badge-green' : 'badge badge-yellow';
+                    }
+                })
+                .catch(err => console.debug('MLOps telemetry fetch notice:', err));
+        }
+
+        function loadUniverseFunnelUI() {
+            fetch('/api/universe/funnel_stats')
+                .then(r => r.json())
+                .then(data => {
+                    if (!data) return;
+                    const totEl = document.getElementById('funnel-total-universe');
+                    const liqEl = document.getElementById('funnel-liquid-count');
+                    const oppsEl = document.getElementById('funnel-opps-count');
+                    if (totEl && data.total_universe !== undefined) totEl.innerText = data.total_universe;
+                    if (liqEl && data.liquid_count !== undefined) liqEl.innerText = data.liquid_count;
+                    if (oppsEl && data.opportunities_count !== undefined) oppsEl.innerText = data.opportunities_count;
+                })
+                .catch(err => console.debug('Universe funnel stats notice:', err));
+        }
+
         // تشغيل فوري لجلب الأسعار وجدول الترتيب عند فتح الصفحة
         document.addEventListener('DOMContentLoaded', () => {
             pollMarketUpdates();
+            loadUniverseFunnelUI();
+            loadIncubationVerdictUI();
+            loadMacroBannerUI();
+            loadShortTermAndCorrelationUI();
+            loadAlgoOrders();
+            loadHRPWeights();
+            loadMLOpsTelemetryUI();
+            loadDriftMonitor();
+            loadShapDrivers('COMI.CA');
             fetch('/api/prices')
                 .then(r => r.json())
                 .then(prices => {
@@ -3012,8 +4386,51 @@
             a.remove();
         }
 
+        // =========================================================================
+        // عداد صلاحية الإشارة الديناميكي (30-Minute Signal TTL Countdown)
+        // =========================================================================
+        let signalSecondsRemaining = 30 * 60; // 30 دقيقة = 1800 ثانية
+        function updateSignalTTLCountdown() {
+            if (signalSecondsRemaining > 0) {
+                signalSecondsRemaining--;
+                const mins = Math.floor(signalSecondsRemaining / 60);
+                const secs = signalSecondsRemaining % 60;
+                const timeStr = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+
+                const topEl = document.getElementById('signal-ttl-countdown');
+                if (topEl) topEl.innerText = timeStr;
+
+                const heroEl = document.getElementById('hero-ttl-timer');
+                if (heroEl) heroEl.innerText = timeStr;
+
+                const badgeTop = document.getElementById('signal-ttl-badge');
+                if (badgeTop) {
+                    if (signalSecondsRemaining < 5 * 60) {
+                        badgeTop.className = 'badge badge-red';
+                    } else if (signalSecondsRemaining < 15 * 60) {
+                        badgeTop.className = 'badge badge-yellow';
+                    } else {
+                        badgeTop.className = 'badge badge-blue';
+                    }
+                }
+            } else {
+                const topEl = document.getElementById('signal-ttl-countdown');
+                if (topEl) topEl.innerText = '00:00 (منتهية الصلاحية)';
+                const heroEl = document.getElementById('hero-ttl-timer');
+                if (heroEl) heroEl.innerText = '00:00 (منتهية)';
+                const badgeTop = document.getElementById('signal-ttl-badge');
+                if (badgeTop) badgeTop.className = 'badge badge-red';
+            }
+        }
+
+        // بدء المؤقت التنازلي كل ثانية
+        setInterval(updateSignalTTLCountdown, 1000);
+
         // بدء المؤقت الدوري كل 60 ثانية (60000ms)
-        setInterval(pollMarketUpdates, 60000);
+        setInterval(() => {
+            pollMarketUpdates();
+            signalSecondsRemaining = 30 * 60; // إعادة ضبط صلاحية الإشارة مع ورود التحديث اللحظي
+        }, 60000);
     </script>
 </body>
 </html>

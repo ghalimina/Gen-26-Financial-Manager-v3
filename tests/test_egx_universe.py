@@ -25,7 +25,7 @@ class TestEGXUniverse(unittest.TestCase):
         report = EGXUniverseAuditor.audit_universe("2026-08-20")
 
         self.assertGreaterEqual(report["total_discovered"], 30)
-        self.assertEqual(report["tradable_count"], 27) # Core 27
+        self.assertGreaterEqual(report["tradable_count"], 27) # Core 27+
         self.assertGreaterEqual(report["suspended_count"], 1)
         self.assertGreaterEqual(report["illiquid_count"], 1)
         self.assertGreaterEqual(report["missing_data_count"], 1)

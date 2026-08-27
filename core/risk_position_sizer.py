@@ -47,10 +47,12 @@ class RiskBasedPositionSizer:
         stop_loss_price: float,
         portfolio_nav_egp: float = 100000.0,
         risk_per_trade_pct: float = 1.0,
-        market_regime: str = MarketBreadthEngine.REGIME_STRONG_BULL
+        market_regime: str = MarketBreadthEngine.REGIME_STRONG_BULL,
+        confidence_multiplier: float = 1.0
     ) -> Dict[str, Any]:
         """
         Computes exact risk-adjusted position size, target allocation, and shares.
+        Supports confidence_multiplier (e.g. 1.2x for high ML confidence >= 65%, 0.7x for <= 45%).
         """
         if entry_price <= 0 or stop_loss_price <= 0 or entry_price <= stop_loss_price:
             return {
@@ -59,7 +61,9 @@ class RiskBasedPositionSizer:
                 "allocation_pct": 0.0,
                 "risk_amount_egp": 0.0,
                 "binding_constraint": "INVALID_PRICES",
-                "regime_multiplier": 0.0
+                "regime_multiplier": 0.0,
+                "confidence_multiplier": float(confidence_multiplier),
+                "position_size_multiplier": float(confidence_multiplier)
             }
 
         dollar_risk_per_share = entry_price - stop_loss_price
@@ -77,7 +81,9 @@ class RiskBasedPositionSizer:
 
         # Base optimal shares
         constrained_shares = min(raw_risk_shares, cap_shares)
-        final_shares = int(math.floor(constrained_shares * regime_mult))
+        final_shares = int(math.floor(constrained_shares * regime_mult * confidence_multiplier))
+        # Ensure hard 20% cap invariant is never exceeded
+        final_shares = min(final_shares, cap_shares)
 
         position_value_egp = round(final_shares * entry_price, 2)
         allocation_pct = round((position_value_egp / portfolio_nav_egp) * 100.0, 2) if portfolio_nav_egp > 0 else 0.0
@@ -87,10 +93,12 @@ class RiskBasedPositionSizer:
         binding = "RISK_FORMULA"
         if regime_mult == 0.0:
             binding = "PANIC_BEAR_CASH_LOCKOUT"
-        elif constrained_shares == cap_shares:
+        elif final_shares == cap_shares:
             binding = "20PCT_SINGLE_STOCK_HARD_CAP"
         elif regime_mult < 1.0:
             binding = "REGIME_SCALED_CONTRACTION"
+        elif confidence_multiplier != 1.0:
+            binding = "ML_CONFIDENCE_SIZED"
 
         return {
             "shares": final_shares,
@@ -100,6 +108,8 @@ class RiskBasedPositionSizer:
             "actual_risk_pct": actual_risk_pct,
             "dollar_risk_per_share": round(dollar_risk_per_share, 2),
             "regime_multiplier": regime_mult,
+            "confidence_multiplier": float(confidence_multiplier),
+            "position_size_multiplier": float(confidence_multiplier),
             "binding_constraint": binding,
             "max_single_stock_cap_egp": max_stock_value_egp
         }

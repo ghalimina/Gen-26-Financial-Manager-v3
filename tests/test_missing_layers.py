@@ -86,8 +86,8 @@ class TestMissingInstitutionalLayers(unittest.TestCase):
 
     def test_06_block_trade_smart_money_vs_distribution(self):
         """Verify classification of smart money accumulation vs distribution."""
-        # Smart money inflow: block size 300k shares with +2.0% price jump
-        inflow = BlockTradesEngine.detect_block_trades("COMI.CA", current_price=140.0, simulated_block_size=300000)
+        # Smart money inflow: block size 300k shares with +2.8% price jump
+        inflow = BlockTradesEngine.detect_block_trades("COMI.CA", current_price=145.0, simulated_block_size=300000)
         self.assertEqual(inflow["classification"], BlockTradesEngine.SIGNAL_SMART_MONEY_INFLOW)
         self.assertGreater(inflow["block_alpha_impact"], 0.0)
 

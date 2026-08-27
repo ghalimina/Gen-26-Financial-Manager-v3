@@ -10,6 +10,7 @@ import os
 import json
 import datetime
 import uuid
+import threading
 from typing import Dict, List, Any, Optional
 
 from core.frozen_invariants import FrozenRiskInvariants
@@ -24,6 +25,7 @@ class RealPortfolioTracker:
     DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data")
     REAL_PORTFOLIO_FILE = os.path.join(DATA_DIR, "user_real_portfolio.json")
     AUDIT_LOG_FILE = os.path.join(DATA_DIR, "real_portfolio_audit_log.json")
+    _PORTFOLIO_LOCK = threading.RLock()
 
     COMPANY_NAMES = {
         "COMI.CA": "البنك التجاري الدولي (CIB)",
@@ -139,11 +141,15 @@ class RealPortfolioTracker:
 
     @classmethod
     def save_real_portfolio(cls, portfolio_data: Dict[str, Any]):
-        """Persists real portfolio state."""
+        """Persists real portfolio state atomically with disk sync."""
         os.makedirs(cls.DATA_DIR, exist_ok=True)
         portfolio_data["last_updated"] = datetime.datetime.now().isoformat()
-        with open(cls.REAL_PORTFOLIO_FILE, "w", encoding="utf-8") as f:
+        tmp_f = f"{cls.REAL_PORTFOLIO_FILE}.tmp"
+        with open(tmp_f, "w", encoding="utf-8") as f:
             json.dump(portfolio_data, f, ensure_ascii=False, indent=2)
+            f.flush()
+            os.fsync(f.fileno())
+        os.replace(tmp_f, cls.REAL_PORTFOLIO_FILE)
 
     @classmethod
     def _log_audit_event(cls, action: str, ticker: str, old_val: Optional[Dict[str, Any]], new_val: Optional[Dict[str, Any]], user_note: str = ""):
@@ -168,90 +174,100 @@ class RealPortfolioTracker:
             "notes": user_note
         }
         logs.append(event)
-        with open(cls.AUDIT_LOG_FILE, "w", encoding="utf-8") as f:
+        tmp_f = f"{cls.AUDIT_LOG_FILE}.tmp"
+        with open(tmp_f, "w", encoding="utf-8") as f:
             json.dump(logs, f, ensure_ascii=False, indent=2)
+            f.flush()
+            os.fsync(f.fileno())
+        os.replace(tmp_f, cls.AUDIT_LOG_FILE)
 
     @classmethod
     def add_holding(cls, ticker: str, quantity: int, average_entry_price: float, notes: str = "") -> Dict[str, Any]:
         """
         Adds a new real stock holding with validation and audit logging.
         """
-        t = ticker.strip().upper()
-        if not t.endswith(".CA"):
-            t += ".CA"
+        with cls._PORTFOLIO_LOCK:
+            t = ticker.strip().upper()
+            if not t.endswith(".CA") and "." not in t:
+                t += ".CA"
 
-        # 1. Validation: Ticker in Universe
-        univ = HistoricalTradableUniverse()
-        if t not in univ.CORE_EGX_UNIVERSE:
-            return {"success": False, "error": f"كود السهم {t} غير موجود في الكون الاستثماري المعتمد لبورصة مصر."}
+            # 1. Validation: Ticker in Universe (Supports all 50 active EGX stocks)
+            from core.egx_universe_loader import EGXUniverseLoader
+            from core.market_price_service import MarketPriceService
+            canonical_data = MarketPriceService.get_all_canonical_prices()
+            canonical_tickers = {r["ticker"] for r in canonical_data if isinstance(r, dict) and "ticker" in r} if isinstance(canonical_data, list) else set(canonical_data.keys())
+            all_valid_tickers = set(EGXUniverseLoader.ACTIVE_UNIVERSE.keys()) | canonical_tickers | set(cls.COMPANY_NAMES.keys())
+            if t not in all_valid_tickers:
+                return {"success": False, "error": f"كود السهم {t} غير موجود في الكون الاستثماري المعتمد لبورصة مصر."}
 
-        # 2. Validation: Positive Quantity and Price
-        if quantity <= 0:
-            return {"success": False, "error": "يجب أن تكون الكمية عدداً موجباً أكبر من صفر."}
+            # 2. Validation: Positive Quantity and Price
+            if quantity <= 0:
+                return {"success": False, "error": "يجب أن تكون الكمية عدداً موجباً أكبر من صفر."}
 
-        if average_entry_price <= 0:
-            return {"success": False, "error": "يجب أن يكون متوسط سعر الشراء أكبر من صفر."}
+            if average_entry_price <= 0:
+                return {"success": False, "error": "يجب أن يكون متوسط سعر الشراء أكبر من صفر."}
 
-        portfolio = cls.load_real_portfolio()
-        holdings = portfolio.setdefault("holdings", [])
+            portfolio = cls.load_real_portfolio()
+            holdings = portfolio.setdefault("holdings", [])
 
-        # 3. Check Duplicate Position (unless modifying existing lot)
-        existing = next((h for h in holdings if h["ticker"] == t and h.get("active", True)), None)
-        if existing:
-            return {"success": False, "error": f"السهم {t} موجود بالفعل في المحفظة. يرجى استخدام خيار التعديل لتحديث الكمية أو السعر."}
+            # 3. Check Duplicate Position (unless modifying existing lot)
+            existing = next((h for h in holdings if h["ticker"] == t and h.get("active", True)), None)
+            if existing:
+                return {"success": False, "error": f"السهم {t} موجود بالفعل في المحفظة. يرجى استخدام خيار التعديل لتحديث الكمية أو السعر."}
 
-        new_holding = {
-            "holding_id": f"POS_{t.replace('.CA', '')}_{str(uuid.uuid4())[:6]}",
-            "ticker": t,
-            "company_name": cls.COMPANY_NAMES.get(t, t),
-            "exchange": "EGX",
-            "sector": cls.SECTOR_MAPPINGS.get(t, "General"),
-            "quantity": int(quantity),
-            "average_entry_price": float(average_entry_price),
-            "manual_notes": notes.strip(),
-            "created_at": datetime.datetime.now().isoformat(),
-            "updated_at": datetime.datetime.now().isoformat(),
-            "active": True
-        }
+            new_holding = {
+                "holding_id": f"POS_{t.replace('.CA', '')}_{str(uuid.uuid4())[:6]}",
+                "ticker": t,
+                "company_name": cls.COMPANY_NAMES.get(t, t),
+                "exchange": "EGX",
+                "sector": cls.SECTOR_MAPPINGS.get(t, "General"),
+                "quantity": int(quantity),
+                "average_entry_price": float(average_entry_price),
+                "manual_notes": notes.strip(),
+                "created_at": datetime.datetime.now().isoformat(),
+                "updated_at": datetime.datetime.now().isoformat(),
+                "active": True
+            }
 
-        holdings.append(new_holding)
-        cls.save_real_portfolio(portfolio)
-        cls._log_audit_event("ADD", t, None, new_holding, notes)
+            holdings.append(new_holding)
+            cls.save_real_portfolio(portfolio)
+            cls._log_audit_event("ADD", t, None, new_holding, notes)
 
-        return {"success": True, "message": f"تمت إضافة سهم {t} للمحفظة بنجاح.", "holding": new_holding}
+            return {"success": True, "message": f"تمت إضافة سهم {t} للمحفظة بنجاح.", "holding": new_holding}
 
     @classmethod
     def edit_holding(cls, ticker: str, quantity: int, average_entry_price: float, notes: str = "") -> Dict[str, Any]:
         """
         Edits an existing holding's quantity, entry price, and notes.
         """
-        t = ticker.strip().upper()
-        if not t.endswith(".CA"):
-            t += ".CA"
+        with cls._PORTFOLIO_LOCK:
+            t = ticker.strip().upper()
+            if not t.endswith(".CA"):
+                t += ".CA"
 
-        if quantity <= 0:
-            return {"success": False, "error": "الكمية يجب أن تكون أكبر من صفر."}
+            if quantity <= 0:
+                return {"success": False, "error": "الكمية يجب أن تكون أكبر من صفر."}
 
-        if average_entry_price <= 0:
-            return {"success": False, "error": "متوسط سعر الشراء يجب أن يكون أكبر من صفر."}
+            if average_entry_price <= 0:
+                return {"success": False, "error": "متوسط سعر الشراء يجب أن يكون أكبر من صفر."}
 
-        portfolio = cls.load_real_portfolio()
-        holdings = portfolio.get("holdings", [])
-        existing = next((h for h in holdings if h["ticker"] == t and h.get("active", True)), None)
+            portfolio = cls.load_real_portfolio()
+            holdings = portfolio.get("holdings", [])
+            existing = next((h for h in holdings if h["ticker"] == t and h.get("active", True)), None)
 
-        if not existing:
-            return {"success": False, "error": f"السهم {t} غير موجود في المحفظة لتعديله."}
+            if not existing:
+                return {"success": False, "error": f"السهم {t} غير موجود في المحفظة لتعديله."}
 
-        old_snapshot = dict(existing)
-        existing["quantity"] = int(quantity)
-        existing["average_entry_price"] = float(average_entry_price)
-        existing["manual_notes"] = notes.strip()
-        existing["updated_at"] = datetime.datetime.now().isoformat()
+            old_snapshot = dict(existing)
+            existing["quantity"] = int(quantity)
+            existing["average_entry_price"] = float(average_entry_price)
+            existing["manual_notes"] = notes.strip()
+            existing["updated_at"] = datetime.datetime.now().isoformat()
 
-        cls.save_real_portfolio(portfolio)
-        cls._log_audit_event("EDIT", t, old_snapshot, existing, notes)
+            cls.save_real_portfolio(portfolio)
+            cls._log_audit_event("EDIT", t, old_snapshot, existing, notes)
 
-        return {"success": True, "message": f"تم تعديل مركز {t} بنجاح.", "holding": existing}
+            return {"success": True, "message": f"تم تعديل مركز {t} بنجاح.", "holding": existing}
 
     @classmethod
     def delete_holding(cls, ticker: str, confirm: bool = True) -> Dict[str, Any]:
@@ -261,26 +277,27 @@ class RealPortfolioTracker:
         if not confirm:
             return {"success": False, "error": "الحذف يتطلب تأكيداً صريحاً من المستخدم."}
 
-        t = ticker.strip().upper()
-        if not t.endswith(".CA"):
-            t += ".CA"
+        with cls._PORTFOLIO_LOCK:
+            t = ticker.strip().upper()
+            if not t.endswith(".CA"):
+                t += ".CA"
 
-        portfolio = cls.load_real_portfolio()
-        holdings = portfolio.get("holdings", [])
-        existing = next((h for h in holdings if h["ticker"] == t and h.get("active", True)), None)
+            portfolio = cls.load_real_portfolio()
+            holdings = portfolio.get("holdings", [])
+            existing = next((h for h in holdings if h["ticker"] == t and h.get("active", True)), None)
 
-        if not existing:
-            return {"success": False, "error": f"السهم {t} غير موجود في المحفظة لحذفه."}
+            if not existing:
+                return {"success": False, "error": f"السهم {t} غير موجود في المحفظة لحذفه."}
 
-        old_snapshot = dict(existing)
-        existing["active"] = False
-        existing["deleted_at"] = datetime.datetime.now().isoformat()
-        portfolio["holdings"] = [h for h in holdings if h.get("active", True)]
+            old_snapshot = dict(existing)
+            existing["active"] = False
+            existing["deleted_at"] = datetime.datetime.now().isoformat()
+            portfolio["holdings"] = [h for h in holdings if h.get("active", True) and h["ticker"] != t]
 
-        cls.save_real_portfolio(portfolio)
-        cls._log_audit_event("DELETE", t, old_snapshot, None, "User confirmed deletion")
+            cls.save_real_portfolio(portfolio)
+            cls._log_audit_event("DELETE", t, old_snapshot, None, "User confirmed deletion")
 
-        return {"success": True, "message": f"تم حذف سهم {t} من المحفظة بنجاح."}
+            return {"success": True, "message": f"تم حذف سهم {t} من المحفظة بنجاح."}
 
     @classmethod
     def analyze_real_portfolio(
@@ -425,10 +442,12 @@ class RealPortfolioTracker:
             "free_cash_egp": round(cash, 2),
             "stock_market_value_egp": round(total_stock_market_value, 2),
             "total_unrealized_pnl_egp": round(total_stock_market_value - total_invested_cost, 2),
-            "total_unrealized_pnl_pct": round(((total_stock_market_value - total_invested_cost) / total_invested_cost) * 100.0, 2) if total_invested_cost > 0 else 0.0,
-            "stock_weight_pct": round(stock_weight_pct, 1),
-            "cash_weight_pct": round(cash_weight_pct, 1),
             "positions_count": len(analyzed_positions),
             "positions": analyzed_positions,
+            "holdings": analyzed_positions,
+            "portfolio_equity_egp": round(total_portfolio_equity, 2),
+            "cash_egp": round(cash, 2),
+            "unrealized_pnl_egp": round(total_stock_market_value - total_invested_cost, 2),
+            "unrealized_pnl_pct": round(((total_stock_market_value - total_invested_cost) / total_invested_cost) * 100.0, 2) if total_invested_cost > 0 else 0.0,
             "risk_analysis": risk_report
         }

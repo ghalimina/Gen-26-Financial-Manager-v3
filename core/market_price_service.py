@@ -90,14 +90,14 @@ class MarketPriceService:
         if not sym.endswith(".CA") and "." not in sym:
             sym = f"{sym}.CA"
 
-        # 1. Check live in-memory cache if active
-        if sym in cls._LIVE_CACHE:
-            return cls._LIVE_CACHE[sym]
-
-        # 2. Query SSOT store
+        # 1. Query SSOT store (canonical_prices_live.json with dynamic mtime invalidation)
         rec = PriceSyncService.get_price_record(sym)
         if rec:
             return rec
+
+        # 2. Check live in-memory cache if active
+        if sym in cls._LIVE_CACHE:
+            return cls._LIVE_CACHE[sym]
 
         # 3. Dynamic fallback to EGXUniverseLoader
         try:
@@ -167,8 +167,8 @@ class MarketPriceService:
             from core.egx_universe_loader import EGXUniverseLoader
             if universe.lower() in ["core"]:
                 # Core top large-caps
-                core_tickers = ["COMI.CA", "SWDY.CA", "TMGH.CA", "ORAS.CA", "ETEL.CA", "EGAL.CA", "ESRS.CA", "ABUK.CA", "EKHO.CA", "FWRY.CA", "EAST.CA", "EFIH.CA"]
-                return [store[t] for t in core_tickers if t in store]
+                core_tickers = ["COMI.CA", "SWDY.CA", "TMGH.CA", "ORAS.CA", "ETEL.CA", "EGAL.CA", "ABUK.CA", "EKHO.CA", "FWRY.CA", "EAST.CA", "EFIH.CA", "HRHO.CA", "MASR.CA"]
+                return [store[t] for t in core_tickers if t in store and store[t].get("price") is not None]
             
             tickers = EGXUniverseLoader.get_tickers(universe)
             results = []
@@ -189,8 +189,17 @@ class MarketPriceService:
         import urllib.request
         import urllib.error
 
+        MAPPING_TO_TV = {
+            "DICE.CA": "DSCW", "MNHD.CA": "MASR", "OBUR.CA": "OLFI",
+            "GBCO.CA": "AUTO", "PIOH.CA": "PRDC", "QNBA.CA": "QNBE",
+            "MTRC.CA": "MILS", "MCEG.CA": "SCFM", "MEFM.CA": "CEFM",
+            "UEDA.CA": "UEFM", "WDEH.CA": "WCDF", "EXTK.CA": "ZEOT",
+            "VERT.CA": "FERT", "ICMI.CA": "INEG", "SMPC.CA": "NEDA",
+            "ARCO.CA": "ACAMD"
+        }
+
         target_tickers = tickers or list(PriceSyncService.load_canonical_prices().keys())
-        tv_symbols = [f"EGX:{t.replace('.CA', '')}" for t in target_tickers]
+        tv_symbols = [f"EGX:{MAPPING_TO_TV.get(t.upper().strip(), t.replace('.CA', ''))}" for t in target_tickers]
 
         url = "https://scanner.tradingview.com/egypt/scan"
         payload = {
@@ -264,6 +273,22 @@ class MarketPriceService:
                             "hard_stop_loss": round(close_p * 0.93, 2)
                         }
                         fetched[clean_sym] = record
+
+                        # Reverse mapping for Thndr / EGX primary symbols (100% Identical Legal Entity & ISIN)
+                        REVERSE_TV_MAP = {
+                            "DSCW.CA": "DICE.CA", "MASR.CA": "MNHD.CA", "OLFI.CA": "OBUR.CA",
+                            "AUTO.CA": "GBCO.CA", "PRDC.CA": "PIOH.CA", "QNBE.CA": "QNBA.CA",
+                            "MILS.CA": "MTRC.CA", "SCFM.CA": "MCEG.CA", "CEFM.CA": "MEFM.CA",
+                            "UEFM.CA": "UEDA.CA", "WCDF.CA": "WDEH.CA", "ZEOT.CA": "EXTK.CA",
+                            "FERT.CA": "VERT.CA", "INEG.CA": "ICMI.CA", "NEDA.CA": "SMPC.CA",
+                            "ACAMD.CA": "ARCO.CA"
+                        }
+                        if clean_sym in REVERSE_TV_MAP:
+                            thndr_sym = REVERSE_TV_MAP[clean_sym]
+                            rec_thndr = dict(record)
+                            rec_thndr["ticker"] = thndr_sym
+                            rec_thndr["provider_symbol"] = clean_sym
+                            fetched[thndr_sym] = rec_thndr
                         cls._LIVE_CACHE[clean_sym] = record
                     cls._LIVE_CACHE_TIMESTAMP = now
         except Exception:
@@ -311,18 +336,22 @@ class MarketPriceService:
                     now_str
                 ))
 
+                p_val = rec.get("price")
+                turnover_val = float(rec.get("turnover_egp", 0.0) or 0.0)
+                adv_calc = (turnover_val / p_val) if (p_val is not None and p_val > 0) else 0.0
+
                 cursor.execute("""
                 INSERT OR REPLACE INTO market_prices (ticker, market_date, open_price, high_price, low_price, close_price, volume, adv_20d, created_at)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
                 """, (
                     rec["ticker"],
-                    rec.get("market_date", datetime.datetime.now().strftime("%Y-%m-%d")),
-                    rec.get("open", rec["price"]),
-                    rec.get("high", rec["price"]),
-                    rec.get("low", rec["price"]),
-                    rec["price"],
-                    rec.get("volume", 10000),
-                    rec.get("turnover_egp", 0.0) / rec["price"] if rec["price"] > 0 else 0.0,
+                    rec.get("market_date") or datetime.datetime.now().strftime("%Y-%m-%d"),
+                    float(rec.get("open") or p_val or 0.0),
+                    float(rec.get("high") or p_val or 0.0),
+                    float(rec.get("low") or p_val or 0.0),
+                    float(p_val or 0.0),
+                    int(rec.get("volume") or 0),
+                    adv_calc,
                     now_str
                 ))
                 updated_count += 1

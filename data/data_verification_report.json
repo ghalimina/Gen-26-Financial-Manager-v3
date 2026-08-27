@@ -1,0 +1,1272 @@
+{
+  "timestamp": "2026-08-27T04:06:01.707972",
+  "total_active": 155,
+  "matched_count": 126,
+  "warning_count": 14,
+  "critical_count": 3,
+  "no_data_count": 12,
+  "accuracy_pct": 88.1,
+  "critical_tickers": [
+    "ORAS.CA",
+    "SAIB.CA",
+    "AIH.CA"
+  ],
+  "warning_tickers": [
+    "EGAL.CA",
+    "ZMID.CA",
+    "HDBK.CA",
+    "OFH.CA",
+    "ASPI.CA",
+    "AIFI.CA",
+    "PRMH.CA",
+    "AMIA.CA",
+    "ECAP.CA",
+    "AXPH.CA",
+    "SUGR.CA",
+    "AMER.CA",
+    "ISMA.CA",
+    "TALM.CA"
+  ],
+  "all_results": [
+    {
+      "ticker": "COMI.CA",
+      "system_price": 139.28,
+      "yfinance_price": 139.48,
+      "diff_pct": 0.14,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "SWDY.CA",
+      "system_price": 127.99,
+      "yfinance_price": 126.2,
+      "diff_pct": 1.4,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "TMGH.CA",
+      "system_price": 97.51,
+      "yfinance_price": 98.0,
+      "diff_pct": 0.5,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "ORAS.CA",
+      "system_price": 832.0,
+      "yfinance_price": 71.05,
+      "diff_pct": 91.46,
+      "status": "🔴 فرق كبير",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "EFIH.CA",
+      "system_price": 24.0,
+      "yfinance_price": 24.0,
+      "diff_pct": 0.0,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "EGAL.CA",
+      "system_price": 365.0,
+      "yfinance_price": 343.0,
+      "diff_pct": 6.03,
+      "status": "⚠️ فرق متوسط",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "EMFD.CA",
+      "system_price": 12.17,
+      "yfinance_price": 12.17,
+      "diff_pct": 0.0,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "BTFH.CA",
+      "system_price": 2.99,
+      "yfinance_price": 2.97,
+      "diff_pct": 0.67,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "EKHO.CA",
+      "system_price": 0.67,
+      "yfinance_price": 0.67,
+      "diff_pct": 0.0,
+      "status": "✅ متطابق",
+      "source": "YFINANCE_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "EKHOA.CA",
+      "system_price": 24.13,
+      "yfinance_price": 24.13,
+      "diff_pct": 0.0,
+      "status": "✅ متطابق",
+      "source": "YFINANCE_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "ETEL.CA",
+      "system_price": 116.0,
+      "yfinance_price": 116.5,
+      "diff_pct": 0.43,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "ABUK.CA",
+      "system_price": 75.76,
+      "yfinance_price": 76.7,
+      "diff_pct": 1.24,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "MFPC.CA",
+      "system_price": 39.34,
+      "yfinance_price": 40.1,
+      "diff_pct": 1.93,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "EAST.CA",
+      "system_price": 35.15,
+      "yfinance_price": 35.8,
+      "diff_pct": 1.85,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "SKPC.CA",
+      "system_price": 17.21,
+      "yfinance_price": 17.4,
+      "diff_pct": 1.1,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "ADIB.CA",
+      "system_price": 53.89,
+      "yfinance_price": 54.06,
+      "diff_pct": 0.32,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "HRHO.CA",
+      "system_price": 25.9,
+      "yfinance_price": 26.09,
+      "diff_pct": 0.73,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "BINV.CA",
+      "system_price": 48.9,
+      "yfinance_price": 48.77,
+      "diff_pct": 0.27,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "JUFO.CA",
+      "system_price": 27.25,
+      "yfinance_price": 27.0,
+      "diff_pct": 0.92,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "DOMT.CA",
+      "system_price": 28.78,
+      "yfinance_price": 28.09,
+      "diff_pct": 2.4,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "CICH.CA",
+      "system_price": 12.3,
+      "yfinance_price": 12.47,
+      "diff_pct": 1.38,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "PHDC.CA",
+      "system_price": 14.67,
+      "yfinance_price": 14.75,
+      "diff_pct": 0.55,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "MASR.CA",
+      "system_price": 7.55,
+      "yfinance_price": 7.62,
+      "diff_pct": 0.93,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "ISPH.CA",
+      "system_price": 12.92,
+      "yfinance_price": 13.07,
+      "diff_pct": 1.16,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "POUL.CA",
+      "system_price": 38.44,
+      "yfinance_price": 37.56,
+      "diff_pct": 2.29,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "ALCN.CA",
+      "system_price": 30.26,
+      "yfinance_price": 31.0,
+      "diff_pct": 2.45,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "RAYA.CA",
+      "system_price": 7.39,
+      "yfinance_price": 7.03,
+      "diff_pct": 4.87,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "GBCO.CA",
+      "system_price": 28.59,
+      "yfinance_price": 28.4,
+      "diff_pct": 0.66,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "FWRY.CA",
+      "system_price": 18.85,
+      "yfinance_price": 19.05,
+      "diff_pct": 1.06,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "CLHO.CA",
+      "system_price": 17.5,
+      "yfinance_price": 17.45,
+      "diff_pct": 0.29,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "ORHD.CA",
+      "system_price": 42.48,
+      "yfinance_price": 42.15,
+      "diff_pct": 0.78,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "AMOC.CA",
+      "system_price": 10.91,
+      "yfinance_price": 11.1,
+      "diff_pct": 1.74,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "MOIL.CA",
+      "system_price": 0.67,
+      "yfinance_price": 0.68,
+      "diff_pct": 1.04,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "DSCW.CA",
+      "system_price": 1.89,
+      "yfinance_price": 1.91,
+      "diff_pct": 1.06,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "OIH.CA",
+      "system_price": 2.0,
+      "yfinance_price": 1.91,
+      "diff_pct": 4.5,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "HELI.CA",
+      "system_price": 7.66,
+      "yfinance_price": 7.48,
+      "diff_pct": 2.35,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "ELSH.CA",
+      "system_price": 13.26,
+      "yfinance_price": 13.16,
+      "diff_pct": 0.75,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "CERA.CA",
+      "system_price": 1.29,
+      "yfinance_price": 1.29,
+      "diff_pct": 0.0,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "CCAP.CA",
+      "system_price": 5.75,
+      "yfinance_price": 5.71,
+      "diff_pct": 0.7,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "SPMD.CA",
+      "system_price": 0.46,
+      "yfinance_price": 0.46,
+      "diff_pct": 0.22,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "KZPC.CA",
+      "system_price": 12.8,
+      "yfinance_price": 13.21,
+      "diff_pct": 3.2,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "PRDC.CA",
+      "system_price": 9.4,
+      "yfinance_price": 9.5,
+      "diff_pct": 1.06,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "EGCH.CA",
+      "system_price": 13.51,
+      "yfinance_price": 13.85,
+      "diff_pct": 2.52,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "ARAB.CA",
+      "system_price": 0.26,
+      "yfinance_price": 0.25,
+      "diff_pct": 3.85,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "UNIP.CA",
+      "system_price": 0.37,
+      "yfinance_price": 0.37,
+      "diff_pct": 0.54,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "ELEC.CA",
+      "system_price": 2.08,
+      "yfinance_price": 2.08,
+      "diff_pct": 0.0,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "ZMID.CA",
+      "system_price": 8.6,
+      "yfinance_price": 8.0,
+      "diff_pct": 6.98,
+      "status": "⚠️ فرق متوسط",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "RTVC.CA",
+      "system_price": 4.13,
+      "yfinance_price": 4.16,
+      "diff_pct": 0.73,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "EXPA.CA",
+      "system_price": 19.98,
+      "yfinance_price": 19.99,
+      "diff_pct": 0.05,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "FAIT.CA",
+      "system_price": 43.52,
+      "yfinance_price": 42.4,
+      "diff_pct": 2.57,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "FAITA.CA",
+      "system_price": 1.02,
+      "yfinance_price": 1.0,
+      "diff_pct": 2.06,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "CIEB.CA",
+      "system_price": 24.99,
+      "yfinance_price": 24.8,
+      "diff_pct": 0.76,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "CANA.CA",
+      "system_price": 41.98,
+      "yfinance_price": 41.35,
+      "diff_pct": 1.5,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "SAIB.CA",
+      "system_price": 3.03,
+      "yfinance_price": 2.53,
+      "diff_pct": 16.5,
+      "status": "🔴 فرق كبير",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "EGBE.CA",
+      "system_price": 0.54,
+      "yfinance_price": 0.54,
+      "diff_pct": 0.0,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "HDBK.CA",
+      "system_price": 96.4,
+      "yfinance_price": 90.76,
+      "diff_pct": 5.85,
+      "status": "⚠️ فرق متوسط",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "QNBA.CA",
+      "system_price": 58.2,
+      "yfinance_price": null,
+      "diff_pct": null,
+      "status": "❓ yfinance لا يجيب",
+      "source": "TRADINGVIEW_SCANNER_SINGLE_FEED"
+    },
+    {
+      "ticker": "VALU.CA",
+      "system_price": 10.82,
+      "yfinance_price": null,
+      "diff_pct": null,
+      "status": "❓ yfinance لا يجيب",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "MNHD.CA",
+      "system_price": 7.55,
+      "yfinance_price": 7.62,
+      "diff_pct": 0.93,
+      "status": "✅ متطابق",
+      "source": "DUAL_SOURCE_CROSS_VERIFIED"
+    },
+    {
+      "ticker": "ODIN.CA",
+      "system_price": 3.28,
+      "yfinance_price": 3.12,
+      "diff_pct": 4.88,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "OFH.CA",
+      "system_price": 1.1,
+      "yfinance_price": 0.95,
+      "diff_pct": 13.82,
+      "status": "⚠️ فرق متوسط",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "PIOH.CA",
+      "system_price": 9.4,
+      "yfinance_price": 9.5,
+      "diff_pct": 1.06,
+      "status": "✅ متطابق",
+      "source": "DUAL_SOURCE_CROSS_VERIFIED"
+    },
+    {
+      "ticker": "ASPI.CA",
+      "system_price": 0.48,
+      "yfinance_price": 0.51,
+      "diff_pct": 5.83,
+      "status": "⚠️ فرق متوسط",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "CNFN.CA",
+      "system_price": 4.78,
+      "yfinance_price": 4.85,
+      "diff_pct": 1.46,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "ICMI.CA",
+      "system_price": 0.55,
+      "yfinance_price": 0.54,
+      "diff_pct": 2.18,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_SCANNER_PRIMARY_FEED"
+    },
+    {
+      "ticker": "EIUD.CA",
+      "system_price": 0.73,
+      "yfinance_price": 0.73,
+      "diff_pct": 0.27,
+      "status": "✅ متطابق",
+      "source": "YFINANCE_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "ALEX.CA",
+      "system_price": 21.0,
+      "yfinance_price": null,
+      "diff_pct": null,
+      "status": "❓ yfinance لا يجيب",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "ETRS.CA",
+      "system_price": 10.91,
+      "yfinance_price": 11.0,
+      "diff_pct": 0.82,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "DAPH.CA",
+      "system_price": 118.0,
+      "yfinance_price": 113.4,
+      "diff_pct": 3.9,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "WATP.CA",
+      "system_price": 20.0,
+      "yfinance_price": null,
+      "diff_pct": null,
+      "status": "❓ yfinance لا يجيب",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "AIFI.CA",
+      "system_price": 2.4,
+      "yfinance_price": 2.25,
+      "diff_pct": 6.25,
+      "status": "⚠️ فرق متوسط",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "ACAP.CA",
+      "system_price": 8.9,
+      "yfinance_price": null,
+      "diff_pct": null,
+      "status": "❓ yfinance لا يجيب",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "PRMH.CA",
+      "system_price": 2.46,
+      "yfinance_price": 2.28,
+      "diff_pct": 7.32,
+      "status": "⚠️ فرق متوسط",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "OCDI.CA",
+      "system_price": 31.5,
+      "yfinance_price": 32.98,
+      "diff_pct": 4.7,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "AREH.CA",
+      "system_price": 1.46,
+      "yfinance_price": 1.48,
+      "diff_pct": 1.37,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "NCCW.CA",
+      "system_price": 5.87,
+      "yfinance_price": 6.0,
+      "diff_pct": 2.21,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "UEGC.CA",
+      "system_price": 2.04,
+      "yfinance_price": 2.09,
+      "diff_pct": 2.45,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "AIH.CA",
+      "system_price": 0.5,
+      "yfinance_price": 0.58,
+      "diff_pct": 16.0,
+      "status": "🔴 فرق كبير",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "GDWA.CA",
+      "system_price": 0.79,
+      "yfinance_price": 0.78,
+      "diff_pct": 1.01,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "MENA.CA",
+      "system_price": 6.9,
+      "yfinance_price": 7.0,
+      "diff_pct": 1.45,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "ELKA.CA",
+      "system_price": 1.77,
+      "yfinance_price": 1.73,
+      "diff_pct": 2.26,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "GGCC.CA",
+      "system_price": 0.96,
+      "yfinance_price": 0.92,
+      "diff_pct": 4.27,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "RREI.CA",
+      "system_price": 4.28,
+      "yfinance_price": 4.49,
+      "diff_pct": 4.91,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "UNIT.CA",
+      "system_price": 18.6,
+      "yfinance_price": 19.2,
+      "diff_pct": 3.23,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "TAQA.CA",
+      "system_price": 15.98,
+      "yfinance_price": null,
+      "diff_pct": null,
+      "status": "❓ yfinance لا يجيب",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "AMIA.CA",
+      "system_price": 19.0,
+      "yfinance_price": 20.34,
+      "diff_pct": 7.05,
+      "status": "⚠️ فرق متوسط",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "GTHE.CA",
+      "system_price": 4.3,
+      "yfinance_price": null,
+      "diff_pct": null,
+      "status": "❓ yfinance لا يجيب",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "MEPA.CA",
+      "system_price": 1.8,
+      "yfinance_price": 1.83,
+      "diff_pct": 1.67,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "EGSA.CA",
+      "system_price": 8.69,
+      "yfinance_price": 8.69,
+      "diff_pct": 0.0,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "ALUM.CA",
+      "system_price": 29.6,
+      "yfinance_price": 28.93,
+      "diff_pct": 2.26,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "ICID.CA",
+      "system_price": 17.05,
+      "yfinance_price": 17.0,
+      "diff_pct": 0.29,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "BIOC.CA",
+      "system_price": 445.0,
+      "yfinance_price": 462.0,
+      "diff_pct": 3.82,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "MICH.CA",
+      "system_price": 49.01,
+      "yfinance_price": 50.0,
+      "diff_pct": 2.02,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "SMPP.CA",
+      "system_price": 103.6,
+      "yfinance_price": null,
+      "diff_pct": null,
+      "status": "❓ yfinance لا يجيب",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "OBUR.CA",
+      "system_price": 23.3,
+      "yfinance_price": 23.49,
+      "diff_pct": 0.82,
+      "status": "✅ متطابق",
+      "source": "DUAL_SOURCE_CROSS_VERIFIED"
+    },
+    {
+      "ticker": "EFID.CA",
+      "system_price": 32.47,
+      "yfinance_price": 32.36,
+      "diff_pct": 0.34,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "OLFI.CA",
+      "system_price": 23.3,
+      "yfinance_price": 23.49,
+      "diff_pct": 0.82,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "PACH.CA",
+      "system_price": 81.0,
+      "yfinance_price": null,
+      "diff_pct": null,
+      "status": "❓ yfinance لا يجيب",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "SCEM.CA",
+      "system_price": 98.0,
+      "yfinance_price": 96.5,
+      "diff_pct": 1.53,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "MCQE.CA",
+      "system_price": 233.0,
+      "yfinance_price": 233.0,
+      "diff_pct": 0.0,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "ARCC.CA",
+      "system_price": 75.63,
+      "yfinance_price": 75.59,
+      "diff_pct": 0.05,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "SVCE.CA",
+      "system_price": 11.0,
+      "yfinance_price": 10.77,
+      "diff_pct": 2.09,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "TORA.CA",
+      "system_price": 67.98,
+      "yfinance_price": null,
+      "diff_pct": null,
+      "status": "❓ yfinance لا يجيب",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "IFAP.CA",
+      "system_price": 20.87,
+      "yfinance_price": 20.52,
+      "diff_pct": 1.68,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "MIPH.CA",
+      "system_price": 784.0,
+      "yfinance_price": 775.21,
+      "diff_pct": 1.12,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "EFIC.CA",
+      "system_price": 200.0,
+      "yfinance_price": 208.97,
+      "diff_pct": 4.49,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "KABO.CA",
+      "system_price": 9.11,
+      "yfinance_price": 9.0,
+      "diff_pct": 1.21,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "DICE.CA",
+      "system_price": 1.89,
+      "yfinance_price": 1.91,
+      "diff_pct": 1.06,
+      "status": "✅ متطابق",
+      "source": "DUAL_SOURCE_CROSS_VERIFIED"
+    },
+    {
+      "ticker": "ORWE.CA",
+      "system_price": 25.6,
+      "yfinance_price": 26.5,
+      "diff_pct": 3.52,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "SPIN.CA",
+      "system_price": 19.16,
+      "yfinance_price": 19.25,
+      "diff_pct": 0.47,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "CSAG.CA",
+      "system_price": 39.8,
+      "yfinance_price": 41.53,
+      "diff_pct": 4.35,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "MPCO.CA",
+      "system_price": 2.23,
+      "yfinance_price": 2.26,
+      "diff_pct": 1.35,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "SMPC.CA",
+      "system_price": 2.75,
+      "yfinance_price": 2.77,
+      "diff_pct": 0.73,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_SCANNER_SINGLE_FEED"
+    },
+    {
+      "ticker": "ECAP.CA",
+      "system_price": 33.02,
+      "yfinance_price": 36.1,
+      "diff_pct": 9.33,
+      "status": "⚠️ فرق متوسط",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "ARCO.CA",
+      "system_price": 2.06,
+      "yfinance_price": 2.0,
+      "diff_pct": 2.91,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_SCANNER_SINGLE_FEED"
+    },
+    {
+      "ticker": "EPCO.CA",
+      "system_price": 11.19,
+      "yfinance_price": 11.0,
+      "diff_pct": 1.7,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "NIPH.CA",
+      "system_price": 372.3,
+      "yfinance_price": 385.0,
+      "diff_pct": 3.41,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "AXPH.CA",
+      "system_price": 1687.5,
+      "yfinance_price": 1504.15,
+      "diff_pct": 10.87,
+      "status": "⚠️ فرق متوسط",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "CPCI.CA",
+      "system_price": 548.0,
+      "yfinance_price": 543.78,
+      "diff_pct": 0.77,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "MPCI.CA",
+      "system_price": 402.54,
+      "yfinance_price": 404.0,
+      "diff_pct": 0.36,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "ADPC.CA",
+      "system_price": 3.87,
+      "yfinance_price": 3.96,
+      "diff_pct": 2.33,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "NAHO.CA",
+      "system_price": 0.14,
+      "yfinance_price": 0.14,
+      "diff_pct": 1.43,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "ATQA.CA",
+      "system_price": 11.6,
+      "yfinance_price": 11.07,
+      "diff_pct": 4.57,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "IRON.CA",
+      "system_price": 30.77,
+      "yfinance_price": 30.61,
+      "diff_pct": 0.52,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "AJWA.CA",
+      "system_price": 181.83,
+      "yfinance_price": 181.94,
+      "diff_pct": 0.06,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "SUGR.CA",
+      "system_price": 57.24,
+      "yfinance_price": 60.39,
+      "diff_pct": 5.5,
+      "status": "⚠️ فرق متوسط",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "KRDI.CA",
+      "system_price": 0.45,
+      "yfinance_price": null,
+      "diff_pct": null,
+      "status": "❓ yfinance لا يجيب",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "AMER.CA",
+      "system_price": 6.33,
+      "yfinance_price": 5.82,
+      "diff_pct": 8.06,
+      "status": "⚠️ فرق متوسط",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "CCRS.CA",
+      "system_price": 2.87,
+      "yfinance_price": 2.92,
+      "diff_pct": 1.74,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "ELWA.CA",
+      "system_price": 1.86,
+      "yfinance_price": 1.91,
+      "diff_pct": 2.69,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "GSSC.CA",
+      "system_price": 286.05,
+      "yfinance_price": 289.94,
+      "diff_pct": 1.36,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "ZEOT.CA",
+      "system_price": 13.96,
+      "yfinance_price": 13.67,
+      "diff_pct": 2.08,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "EXTK.CA",
+      "system_price": 13.96,
+      "yfinance_price": 13.67,
+      "diff_pct": 2.08,
+      "status": "✅ متطابق",
+      "source": "DUAL_SOURCE_CROSS_VERIFIED"
+    },
+    {
+      "ticker": "TANM.CA",
+      "system_price": 5.51,
+      "yfinance_price": null,
+      "diff_pct": null,
+      "status": "❓ yfinance لا يجيب",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "MBSC.CA",
+      "system_price": 392.52,
+      "yfinance_price": 387.22,
+      "diff_pct": 1.35,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "PRCL.CA",
+      "system_price": 33.2,
+      "yfinance_price": 34.1,
+      "diff_pct": 2.71,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "MOSC.CA",
+      "system_price": 328.57,
+      "yfinance_price": 333.72,
+      "diff_pct": 1.57,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "MTRC.CA",
+      "system_price": 216.04,
+      "yfinance_price": 225.11,
+      "diff_pct": 4.2,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_SCANNER_SINGLE_FEED"
+    },
+    {
+      "ticker": "MCEG.CA",
+      "system_price": 288.1,
+      "yfinance_price": 282.99,
+      "diff_pct": 1.77,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_SCANNER_SINGLE_FEED"
+    },
+    {
+      "ticker": "MEFM.CA",
+      "system_price": 144.24,
+      "yfinance_price": 147.1,
+      "diff_pct": 1.98,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_SCANNER_SINGLE_FEED"
+    },
+    {
+      "ticker": "WCDF.CA",
+      "system_price": 643.0,
+      "yfinance_price": 641.15,
+      "diff_pct": 0.29,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "UEDA.CA",
+      "system_price": 538.6,
+      "yfinance_price": 544.99,
+      "diff_pct": 1.19,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_SCANNER_SINGLE_FEED"
+    },
+    {
+      "ticker": "EDFM.CA",
+      "system_price": 404.0,
+      "yfinance_price": 404.31,
+      "diff_pct": 0.08,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "WDEH.CA",
+      "system_price": 643.0,
+      "yfinance_price": 641.15,
+      "diff_pct": 0.29,
+      "status": "✅ متطابق",
+      "source": "DUAL_SOURCE_CROSS_VERIFIED"
+    },
+    {
+      "ticker": "SNFC.CA",
+      "system_price": 10.5,
+      "yfinance_price": 10.74,
+      "diff_pct": 2.29,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "ISMA.CA",
+      "system_price": 39.42,
+      "yfinance_price": 35.12,
+      "diff_pct": 10.91,
+      "status": "⚠️ فرق متوسط",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "IDRE.CA",
+      "system_price": 52.6,
+      "yfinance_price": 53.49,
+      "diff_pct": 1.69,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "EPPK.CA",
+      "system_price": 13.3,
+      "yfinance_price": 13.18,
+      "diff_pct": 0.9,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "SAUD.CA",
+      "system_price": 23.01,
+      "yfinance_price": 23.64,
+      "diff_pct": 2.74,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "ARVA.CA",
+      "system_price": 12.35,
+      "yfinance_price": 12.35,
+      "diff_pct": 0.0,
+      "status": "✅ متطابق",
+      "source": "YFINANCE_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "ELNA.CA",
+      "system_price": 37.6,
+      "yfinance_price": 37.01,
+      "diff_pct": 1.57,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "ASCM.CA",
+      "system_price": 62.41,
+      "yfinance_price": 63.11,
+      "diff_pct": 1.12,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "CIRA.CA",
+      "system_price": 34.3,
+      "yfinance_price": 35.83,
+      "diff_pct": 4.46,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "RUBX.CA",
+      "system_price": 12.9,
+      "yfinance_price": 13.33,
+      "diff_pct": 3.33,
+      "status": "✅ متطابق",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    },
+    {
+      "ticker": "TALM.CA",
+      "system_price": 17.65,
+      "yfinance_price": 19.4,
+      "diff_pct": 9.92,
+      "status": "⚠️ فرق متوسط",
+      "source": "TRADINGVIEW_EGX_LIVE_SSOT"
+    }
+  ]
+}

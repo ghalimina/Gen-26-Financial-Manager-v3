@@ -78,10 +78,17 @@ class InstitutionalFlowEngine:
         if not sym_clean.endswith(".CA") and "." not in sym_clean:
             sym_clean = f"{sym_clean}.CA"
 
+        from core.egx_universe_loader import EGXUniverseLoader
+        from data.universe_manager import UniverseManager
+        info = EGXUniverseLoader.get_stock_info(sym_clean) or UniverseManager.get_ticker_metadata(sym_clean)
+        adv_egp = float(info.get("adv20_egp", 10000000.0)) if info else 10000000.0
+        cp_nominal = float(info.get("nominal_price", 10.0)) if info else 10.0
+        adv_shares = max(int(adv_egp / max(cp_nominal, 0.01)), 10000)
+
         bm = cls._ADV_BENCHMARKS.get(sym_clean, {
-            "adv20_shares": 1000000,
+            "adv20_shares": adv_shares,
             "sigma_ratio": 0.35,
-            "adv20_turnover_egp": 20000000.0
+            "adv20_turnover_egp": adv_egp
         })
 
         adv20 = bm["adv20_shares"]
@@ -89,9 +96,11 @@ class InstitutionalFlowEngine:
 
         # Fetch live quote or fallback
         canon = MarketPriceService.CANONICAL_PRICES.get(sym_clean, {})
-        cp = current_price or canon.get("price", 10.0)
-        op = open_price or cp * 0.998
-        prev = previous_close or canon.get("previous_close", cp * 0.995)
+        cp = current_price or canon.get("price")
+        if cp is None or cp <= 0:
+            cp = 10.0
+        op = open_price or (cp * 0.998)
+        prev = previous_close or canon.get("previous_close") or (cp * 0.995)
 
         vol = current_volume if current_volume is not None else int(adv20 * 1.15) # Default typical active session
         turnover = vol * cp

@@ -1,0 +1,652 @@
+{
+  "COMI.CA": {
+    "close": 139.48,
+    "volume": 3118227,
+    "date": "2026-08-24"
+  },
+  "SWDY.CA": {
+    "close": 126.2,
+    "volume": 1292735,
+    "date": "2026-08-24"
+  },
+  "TMGH.CA": {
+    "close": 98.0,
+    "volume": 2168567,
+    "date": "2026-08-24"
+  },
+  "ORAS.CA": {
+    "close": 71.05,
+    "volume": 0,
+    "date": "2026-08-24"
+  },
+  "EFIH.CA": {
+    "close": 24.0,
+    "volume": 2049146,
+    "date": "2026-08-24"
+  },
+  "EGAL.CA": {
+    "close": 343.0,
+    "volume": 341139,
+    "date": "2026-08-24"
+  },
+  "EMFD.CA": {
+    "close": 12.17,
+    "volume": 11793770,
+    "date": "2026-08-24"
+  },
+  "BTFH.CA": {
+    "close": 2.97,
+    "volume": 27013213,
+    "date": "2026-08-24"
+  },
+  "EKHO.CA": {
+    "close": 0.67,
+    "volume": 0,
+    "date": "2026-08-24"
+  },
+  "EKHOA.CA": {
+    "close": 24.13,
+    "volume": 0,
+    "date": "2026-08-24"
+  },
+  "ETEL.CA": {
+    "close": 116.5,
+    "volume": 561816,
+    "date": "2026-08-24"
+  },
+  "ABUK.CA": {
+    "close": 76.7,
+    "volume": 619359,
+    "date": "2026-08-24"
+  },
+  "MFPC.CA": {
+    "close": 40.1,
+    "volume": 3066429,
+    "date": "2026-08-24"
+  },
+  "EAST.CA": {
+    "close": 35.8,
+    "volume": 1144995,
+    "date": "2026-08-24"
+  },
+  "SKPC.CA": {
+    "close": 17.4,
+    "volume": 2142130,
+    "date": "2026-08-24"
+  },
+  "ADIB.CA": {
+    "close": 54.06,
+    "volume": 662894,
+    "date": "2026-08-24"
+  },
+  "HRHO.CA": {
+    "close": 26.09,
+    "volume": 1523498,
+    "date": "2026-08-24"
+  },
+  "BINV.CA": {
+    "close": 48.77,
+    "volume": 51949,
+    "date": "2026-08-24"
+  },
+  "JUFO.CA": {
+    "close": 27.0,
+    "volume": 628427,
+    "date": "2026-08-24"
+  },
+  "DOMT.CA": {
+    "close": 28.09,
+    "volume": 146867,
+    "date": "2026-08-24"
+  },
+  "CICH.CA": {
+    "close": 12.47,
+    "volume": 684881,
+    "date": "2026-08-24"
+  },
+  "PHDC.CA": {
+    "close": 14.75,
+    "volume": 22029048,
+    "date": "2026-08-24"
+  },
+  "MASR.CA": {
+    "close": 7.62,
+    "volume": 7521430,
+    "date": "2026-08-24"
+  },
+  "ISPH.CA": {
+    "close": 13.07,
+    "volume": 5625006,
+    "date": "2026-08-24"
+  },
+  "POUL.CA": {
+    "close": 37.56,
+    "volume": 290219,
+    "date": "2026-08-24"
+  },
+  "ALCN.CA": {
+    "close": 31.0,
+    "volume": 724668,
+    "date": "2026-08-24"
+  },
+  "RAYA.CA": {
+    "close": 7.03,
+    "volume": 2656032,
+    "date": "2026-08-24"
+  },
+  "GBCO.CA": {
+    "close": 29.8,
+    "volume": 1464843,
+    "date": "2026-08-24"
+  },
+  "FWRY.CA": {
+    "close": 19.05,
+    "volume": 3378028,
+    "date": "2026-08-24"
+  },
+  "CLHO.CA": {
+    "close": 17.45,
+    "volume": 1271747,
+    "date": "2026-08-24"
+  },
+  "ORHD.CA": {
+    "close": 42.15,
+    "volume": 2553846,
+    "date": "2026-08-24"
+  },
+  "AMOC.CA": {
+    "close": 11.1,
+    "volume": 10247068,
+    "date": "2026-08-24"
+  },
+  "MOIL.CA": {
+    "close": 0.68,
+    "volume": 150976,
+    "date": "2026-08-24"
+  },
+  "DSCW.CA": {
+    "close": 1.91,
+    "volume": 69459872,
+    "date": "2026-08-24"
+  },
+  "OIH.CA": {
+    "close": 1.91,
+    "volume": 32893671,
+    "date": "2026-08-24"
+  },
+  "HELI.CA": {
+    "close": 7.48,
+    "volume": 23096325,
+    "date": "2026-08-24"
+  },
+  "ELSH.CA": {
+    "close": 13.16,
+    "volume": 1577117,
+    "date": "2026-08-24"
+  },
+  "CERA.CA": {
+    "close": 1.29,
+    "volume": 7622887,
+    "date": "2026-08-24"
+  },
+  "CCAP.CA": {
+    "close": 5.71,
+    "volume": 154968541,
+    "date": "2026-08-24"
+  },
+  "SPMD.CA": {
+    "close": 0.46,
+    "volume": 16681324,
+    "date": "2026-08-24"
+  },
+  "KZPC.CA": {
+    "close": 13.21,
+    "volume": 3019874,
+    "date": "2026-08-24"
+  },
+  "PRDC.CA": {
+    "close": 9.5,
+    "volume": 5888895,
+    "date": "2026-08-24"
+  },
+  "EGCH.CA": {
+    "close": 13.85,
+    "volume": 2602605,
+    "date": "2026-08-24"
+  },
+  "ARAB.CA": {
+    "close": 0.25,
+    "volume": 581678718,
+    "date": "2026-08-24"
+  },
+  "UNIP.CA": {
+    "close": 0.37,
+    "volume": 68900954,
+    "date": "2026-08-24"
+  },
+  "ELEC.CA": {
+    "close": 2.08,
+    "volume": 15901368,
+    "date": "2026-08-24"
+  },
+  "ZMID.CA": {
+    "close": 8.0,
+    "volume": 14767628,
+    "date": "2026-08-24"
+  },
+  "RTVC.CA": {
+    "close": 4.16,
+    "volume": 1265744,
+    "date": "2026-08-24"
+  },
+  "EXPA.CA": {
+    "close": 19.99,
+    "volume": 3263507,
+    "date": "2026-08-24"
+  },
+  "FAIT.CA": {
+    "close": 42.4,
+    "volume": 49689,
+    "date": "2026-08-24"
+  },
+  "FAITA.CA": {
+    "close": 1.0,
+    "volume": 85738,
+    "date": "2026-08-24"
+  },
+  "CIEB.CA": {
+    "close": 24.8,
+    "volume": 277908,
+    "date": "2026-08-24"
+  },
+  "CANA.CA": {
+    "close": 41.35,
+    "volume": 381606,
+    "date": "2026-08-24"
+  },
+  "SAIB.CA": {
+    "close": 2.53,
+    "volume": 48,
+    "date": "2026-08-24"
+  },
+  "EGBE.CA": {
+    "close": 0.54,
+    "volume": 360115,
+    "date": "2026-08-24"
+  },
+  "HDBK.CA": {
+    "close": 90.76,
+    "volume": 337157,
+    "date": "2026-08-24"
+  },
+  "ODIN.CA": {
+    "close": 3.12,
+    "volume": 9354371,
+    "date": "2026-08-24"
+  },
+  "OFH.CA": {
+    "close": 0.95,
+    "volume": 57389701,
+    "date": "2026-08-24"
+  },
+  "ASPI.CA": {
+    "close": 0.51,
+    "volume": 30563880,
+    "date": "2026-08-24"
+  },
+  "CNFN.CA": {
+    "close": 4.85,
+    "volume": 2090871,
+    "date": "2026-08-24"
+  },
+  "ICMI.CA": {
+    "close": 5.81,
+    "volume": 0,
+    "date": "2026-08-24"
+  },
+  "EIUD.CA": {
+    "close": 0.73,
+    "volume": 0,
+    "date": "2026-08-24"
+  },
+  "ETRS.CA": {
+    "close": 11.0,
+    "volume": 2657757,
+    "date": "2026-08-24"
+  },
+  "DAPH.CA": {
+    "close": 113.4,
+    "volume": 266148,
+    "date": "2026-08-24"
+  },
+  "AIFI.CA": {
+    "close": 2.25,
+    "volume": 2154076,
+    "date": "2026-08-24"
+  },
+  "PRMH.CA": {
+    "close": 2.28,
+    "volume": 3059817,
+    "date": "2026-08-24"
+  },
+  "OCDI.CA": {
+    "close": 32.98,
+    "volume": 3087243,
+    "date": "2026-08-24"
+  },
+  "AREH.CA": {
+    "close": 1.48,
+    "volume": 11715474,
+    "date": "2026-08-24"
+  },
+  "NCCW.CA": {
+    "close": 6.0,
+    "volume": 1587270,
+    "date": "2026-08-24"
+  },
+  "UEGC.CA": {
+    "close": 2.09,
+    "volume": 10748863,
+    "date": "2026-08-24"
+  },
+  "GDWA.CA": {
+    "close": 0.78,
+    "volume": 34186632,
+    "date": "2026-08-24"
+  },
+  "MENA.CA": {
+    "close": 7.0,
+    "volume": 727373,
+    "date": "2026-08-24"
+  },
+  "ELKA.CA": {
+    "close": 1.73,
+    "volume": 14560352,
+    "date": "2026-08-24"
+  },
+  "GGCC.CA": {
+    "close": 0.92,
+    "volume": 12782587,
+    "date": "2026-08-24"
+  },
+  "RREI.CA": {
+    "close": 4.49,
+    "volume": 4494120,
+    "date": "2026-08-24"
+  },
+  "UNIT.CA": {
+    "close": 19.2,
+    "volume": 305985,
+    "date": "2026-08-24"
+  },
+  "AMIA.CA": {
+    "close": 20.34,
+    "volume": 11562333,
+    "date": "2026-08-24"
+  },
+  "MEPA.CA": {
+    "close": 1.83,
+    "volume": 4889567,
+    "date": "2026-08-24"
+  },
+  "EGSA.CA": {
+    "close": 8.69,
+    "volume": 310,
+    "date": "2026-08-24"
+  },
+  "ALUM.CA": {
+    "close": 28.93,
+    "volume": 1652662,
+    "date": "2026-08-24"
+  },
+  "ICID.CA": {
+    "close": 17.0,
+    "volume": 1788041,
+    "date": "2026-08-24"
+  },
+  "BIOC.CA": {
+    "close": 462.0,
+    "volume": 231045,
+    "date": "2026-08-24"
+  },
+  "MICH.CA": {
+    "close": 50.0,
+    "volume": 316175,
+    "date": "2026-08-24"
+  },
+  "EFID.CA": {
+    "close": 32.36,
+    "volume": 812497,
+    "date": "2026-08-24"
+  },
+  "OLFI.CA": {
+    "close": 23.49,
+    "volume": 622081,
+    "date": "2026-08-24"
+  },
+  "SCEM.CA": {
+    "close": 96.5,
+    "volume": 3148556,
+    "date": "2026-08-24"
+  },
+  "MCQE.CA": {
+    "close": 233.0,
+    "volume": 494722,
+    "date": "2026-08-24"
+  },
+  "ARCC.CA": {
+    "close": 75.59,
+    "volume": 1744053,
+    "date": "2026-08-24"
+  },
+  "SVCE.CA": {
+    "close": 10.77,
+    "volume": 11380584,
+    "date": "2026-08-24"
+  },
+  "IFAP.CA": {
+    "close": 20.52,
+    "volume": 1245721,
+    "date": "2026-08-24"
+  },
+  "MIPH.CA": {
+    "close": 775.21,
+    "volume": 1492,
+    "date": "2026-08-24"
+  },
+  "EFIC.CA": {
+    "close": 208.97,
+    "volume": 167670,
+    "date": "2026-08-24"
+  },
+  "KABO.CA": {
+    "close": 9.0,
+    "volume": 3294331,
+    "date": "2026-08-24"
+  },
+  "ORWE.CA": {
+    "close": 26.5,
+    "volume": 2928891,
+    "date": "2026-08-24"
+  },
+  "SPIN.CA": {
+    "close": 19.25,
+    "volume": 558297,
+    "date": "2026-08-24"
+  },
+  "CSAG.CA": {
+    "close": 41.53,
+    "volume": 153989,
+    "date": "2026-08-24"
+  },
+  "MPCO.CA": {
+    "close": 2.26,
+    "volume": 35525303,
+    "date": "2026-08-24"
+  },
+  "ECAP.CA": {
+    "close": 36.1,
+    "volume": 167313,
+    "date": "2026-08-24"
+  },
+  "EPCO.CA": {
+    "close": 11.0,
+    "volume": 1137875,
+    "date": "2026-08-24"
+  },
+  "NIPH.CA": {
+    "close": 385.0,
+    "volume": 945116,
+    "date": "2026-08-24"
+  },
+  "AXPH.CA": {
+    "close": 1504.15,
+    "volume": 5240,
+    "date": "2026-08-24"
+  },
+  "CPCI.CA": {
+    "close": 543.78,
+    "volume": 8140,
+    "date": "2026-08-24"
+  },
+  "MPCI.CA": {
+    "close": 404.0,
+    "volume": 411013,
+    "date": "2026-08-24"
+  },
+  "ADPC.CA": {
+    "close": 3.96,
+    "volume": 5281658,
+    "date": "2026-08-24"
+  },
+  "NAHO.CA": {
+    "close": 0.14,
+    "volume": 490612,
+    "date": "2026-08-24"
+  },
+  "ATQA.CA": {
+    "close": 11.07,
+    "volume": 4943813,
+    "date": "2026-08-24"
+  },
+  "IRON.CA": {
+    "close": 30.61,
+    "volume": 272756,
+    "date": "2026-08-24"
+  },
+  "AJWA.CA": {
+    "close": 181.94,
+    "volume": 93998,
+    "date": "2026-08-24"
+  },
+  "SUGR.CA": {
+    "close": 60.39,
+    "volume": 7700127,
+    "date": "2026-08-24"
+  },
+  "AMER.CA": {
+    "close": 5.82,
+    "volume": 4773020,
+    "date": "2026-08-24"
+  },
+  "CCRS.CA": {
+    "close": 2.92,
+    "volume": 95042161,
+    "date": "2026-08-24"
+  },
+  "ELWA.CA": {
+    "close": 1.91,
+    "volume": 1453213,
+    "date": "2026-08-24"
+  },
+  "GSSC.CA": {
+    "close": 289.94,
+    "volume": 58417,
+    "date": "2026-08-24"
+  },
+  "ZEOT.CA": {
+    "close": 13.67,
+    "volume": 639915,
+    "date": "2026-08-24"
+  },
+  "MBSC.CA": {
+    "close": 387.22,
+    "volume": 276006,
+    "date": "2026-08-24"
+  },
+  "PRCL.CA": {
+    "close": 34.1,
+    "volume": 1157041,
+    "date": "2026-08-24"
+  },
+  "MOSC.CA": {
+    "close": 333.72,
+    "volume": 22293,
+    "date": "2026-08-24"
+  },
+  "WCDF.CA": {
+    "close": 641.15,
+    "volume": 2312,
+    "date": "2026-08-24"
+  },
+  "EDFM.CA": {
+    "close": 404.31,
+    "volume": 1895,
+    "date": "2026-08-24"
+  },
+  "SNFC.CA": {
+    "close": 10.74,
+    "volume": 2449469,
+    "date": "2026-08-24"
+  },
+  "ISMA.CA": {
+    "close": 35.12,
+    "volume": 244952,
+    "date": "2026-08-24"
+  },
+  "IDRE.CA": {
+    "close": 53.49,
+    "volume": 136207,
+    "date": "2026-08-24"
+  },
+  "EPPK.CA": {
+    "close": 13.18,
+    "volume": 41393,
+    "date": "2026-08-24"
+  },
+  "SAUD.CA": {
+    "close": 23.64,
+    "volume": 620331,
+    "date": "2026-08-24"
+  },
+  "ARVA.CA": {
+    "close": 12.35,
+    "volume": 0,
+    "date": "2026-08-24"
+  },
+  "ELNA.CA": {
+    "close": 37.01,
+    "volume": 1590,
+    "date": "2026-08-24"
+  },
+  "ASCM.CA": {
+    "close": 63.11,
+    "volume": 255147,
+    "date": "2026-08-24"
+  },
+  "CIRA.CA": {
+    "close": 35.83,
+    "volume": 676106,
+    "date": "2026-08-24"
+  },
+  "RUBX.CA": {
+    "close": 13.33,
+    "volume": 2479157,
+    "date": "2026-08-24"
+  },
+  "TALM.CA": {
+    "close": 19.4,
+    "volume": 1003106,
+    "date": "2026-08-24"
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "decision": {
+    "decision_id": "COMI.CA_2026-08-27_41ae1892",
+    "timestamp": "2026-08-27T04:20:42.553529",
+    "ticker": "COMI.CA",
+    "name": "البنك التجاري الدولي",
+    "market_data": {
+      "current_price": 85.0,
+      "price_timestamp": "2026-08-27T04:20:42.553529"
+    },
+    "portfolio": {
+      "equity": 1000000.0,
+      "cash": 200000.0,
+      "allocation_pct": 10.0,
+      "position_qty": 0
+    },
+    "signal": {
+      "action": "NO_TRADE",
+      "status": "BLOCKED",
+      "reason": "INVALID_PULLBACK_ENTRY (Entry >= Current Price)",
+      "confidence_pct": 88.0
+    },
+    "entry": {
+      "price": 86.0,
+      "type": "PULLBACK_LIMIT",
+      "distance_pct": -1.18
+    },
+    "risk": {
+      "stop": 78.0,
+      "target": 95.0,
+      "risk_score": 75.0,
+      "risk_reason_codes": [
+        "PULLBACK_INVARIANT_VIOLATION"
+      ],
+      "risk_reward": "1:1.4"
+    },
+    "explainability": {
+      "why": [
+        "ألفا استثمارية قوية (85.0/100)",
+        "جودة تشغيلية ومالية ممتازة (80.0/100)",
+        "تقييم مغري ومضاعفات عادلة (75.0/100)"
+      ],
+      "why_not": [],
+      "alpha_score": 85.0,
+      "quality_score": 80.0,
+      "valuation_score": 75.0,
+      "liquidity_score": 90.0,
+      "risk_score": 75.0,
+      "accounting_risk": "LOW",
+      "risk_reason_codes": [
+        "PULLBACK_INVARIANT_VIOLATION"
+      ]
+    },
+    "gates": {
+      "cash_gate": "PASS",
+      "allocation_gate": "PASS",
+      "pullback_gate": "FAIL",
+      "quality_gate": "PASS"
+    }
+  },
+  "state_snapshot": {
+    "alpha": {
+      "alpha_score": 85.0,
+      "confidence_pct": 88.0
+    },
+    "quality": {
+      "quality_score": 80.0,
+      "accounting_risk": "LOW"
+    },
+    "valuation": {
+      "valuation_score": 75.0
+    },
+    "liquidity": {
+      "liquidity_score": 90.0
+    },
+    "portfolio_equity": 1000000.0,
+    "cash": 200000.0
+  },
+  "saved_at": "2026-08-27T04:20:42.553529"
+}

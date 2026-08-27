@@ -389,11 +389,27 @@ class LiveFundamentalsEngine:
         eps_g = f["eps_growth_pct"]
         growth_score = min(max(div * 4.0 + eps_g * 1.5, 15.0), 98.0)
 
+        # 5. Quality of Earnings & Non-Recurring Analysis (Cash Flow Conversion OCF / NI)
+        ocf_ni = f.get("ocf_to_ni", 1.10)
+        has_non_recurring = ocf_ni < 0.75 or f.get("has_non_recurring_gain", False)
+        
+        if ocf_ni >= 1.20:
+            earnings_quality_rating = "HIGH_CASH_CONVERTED"
+            earnings_quality_flag_ar = f"🟢 أرباح تشغيلية ممتازة ومغطاة بتدفقات نقدية حرة قوية (OCF/NI = {ocf_ni:.2f}x)"
+            earnings_quality_score = 95.0
+        elif ocf_ni >= 0.85:
+            earnings_quality_rating = "OPERATING_CORE"
+            earnings_quality_flag_ar = f"🟢 أرباح تشغيلية منتظمة ومتطابقة مع النشاط الأساسي (OCF/NI = {ocf_ni:.2f}x)"
+            earnings_quality_score = 80.0
+        else:
+            earnings_quality_rating = "NON_RECURRING_INFLATED"
+            earnings_quality_flag_ar = f"⚠️ تحذير جودة الأرباح: صافي الربح يحتوي على بنود استثنائية أو ضعف تحصيل نقدي (OCF/NI = {ocf_ni:.2f}x)"
+            earnings_quality_score = 45.0
+
+        # Adjust composite fundamental score for earnings quality
+        quality_penalty = -5.0 if has_non_recurring else +2.0
         composite_score = round(
-            (val_score * 0.30) +
-            (prof_score * 0.30) +
-            (solv_score * 0.20) +
-            (growth_score * 0.20),
+            min(max((val_score * 0.28) + (prof_score * 0.28) + (solv_score * 0.18) + (growth_score * 0.18) + (earnings_quality_score * 0.08) + quality_penalty, 10.0), 98.0),
             1
         )
 
@@ -407,8 +423,12 @@ class LiveFundamentalsEngine:
             "roe_pct": f["roe_pct"],
             "debt_to_equity": f["debt_to_equity"],
             "eps_growth_pct": f["eps_growth_pct"],
-            "ocf_to_ni": f.get("ocf_to_ni", 1.10),
+            "ocf_to_ni": ocf_ni,
             "quality_rating": f.get("quality_rating", "GOOD"),
+            "earnings_quality_rating": earnings_quality_rating,
+            "earnings_quality_score": earnings_quality_score,
+            "earnings_quality_flag_ar": earnings_quality_flag_ar,
+            "has_non_recurring_gain": has_non_recurring,
             "fundamental_score": composite_score,
             "valuation_subscore": round(val_score, 1),
             "profitability_subscore": round(prof_score, 1),

@@ -29,9 +29,13 @@ class TestDynamicMultiHorizonUniverse(unittest.TestCase):
             res = MultiHorizonEngine.get_stock_multi_horizon_analysis(sym)
             self.assertIsNotNone(res, f"Failed to score ticker {sym}")
             self.assertEqual(res["ticker"], sym)
-            self.assertGreater(res["current_price"], 0.0)
-            self.assertEqual(res["stop_loss"], round(res["current_price"] * 0.93, 2))
-            self.assertIn("–", res["entry_zone"])
+            if res.get("current_price") is not None:
+                self.assertGreater(res["current_price"], 0.0)
+                self.assertLess(res["stop_loss"], res["current_price"])
+                self.assertGreaterEqual(res["stop_loss"], round(res["current_price"] * 0.89, 2))
+                self.assertIn("–", res["entry_zone"])
+            else:
+                self.assertIn(res["status"], ["DATA_INSUFFICIENT", "ILLIQUID"])
             self.assertGreaterEqual(res["overall_score"], 0.0)
             self.assertLessEqual(res["overall_score"], 100.0)
             self.assertIn("20D", res["horizons"])

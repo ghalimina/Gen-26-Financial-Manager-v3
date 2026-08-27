@@ -1,13 +1,13 @@
 {
-  "as_of": "2026-08-24",
+  "as_of": "2026-08-27",
   "provider": "Yahoo Finance + Local Point-In-Time Catalog",
   "coverage_status": "PARTIAL_UNIVERSE (Core 27 Curated Liquid EGX Universe)",
   "total_discovered": 36,
-  "tradable_count": 27,
+  "tradable_count": 31,
   "suspended_count": 1,
   "illiquid_count": 1,
   "missing_data_count": 1,
-  "excluded_count": 5,
+  "excluded_count": 1,
   "delisted_count": 1,
   "unknown_count": 0,
   "securities": [
@@ -233,8 +233,8 @@
       "sector": "Automotive",
       "isin": "EGS673T1C012",
       "is_core": true,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
+      "status": "EXCLUDED",
+      "status_reason": "EXCLUDED_BY_PIT_UNIVERSE"
     },
     {
       "ticker": "BTFH.CA",
@@ -260,8 +260,8 @@
       "sector": "Banking",
       "isin": "EGS60041C018",
       "is_core": true,
-      "status": "EXCLUDED",
-      "status_reason": "EXCLUDED_BY_PIT_UNIVERSE"
+      "status": "TRADABLE",
+      "status_reason": "ELIGIBLE_FOR_SCREENING"
     },
     {
       "ticker": "BINV.CA",
@@ -269,8 +269,8 @@
       "sector": "Financial Services",
       "isin": "EGS693R1C018",
       "is_core": true,
-      "status": "EXCLUDED",
-      "status_reason": "EXCLUDED_BY_PIT_UNIVERSE"
+      "status": "TRADABLE",
+      "status_reason": "ELIGIBLE_FOR_SCREENING"
     },
     {
       "ticker": "DOMT.CA",
@@ -278,8 +278,8 @@
       "sector": "Consumer Staples",
       "isin": "EGS305B1C013",
       "is_core": true,
-      "status": "EXCLUDED",
-      "status_reason": "EXCLUDED_BY_PIT_UNIVERSE"
+      "status": "TRADABLE",
+      "status_reason": "ELIGIBLE_FOR_SCREENING"
     },
     {
       "ticker": "ALCN.CA",
@@ -287,8 +287,8 @@
       "sector": "Logistics",
       "isin": "EGS42081C014",
       "is_core": true,
-      "status": "EXCLUDED",
-      "status_reason": "EXCLUDED_BY_PIT_UNIVERSE"
+      "status": "TRADABLE",
+      "status_reason": "ELIGIBLE_FOR_SCREENING"
     },
     {
       "ticker": "CICH.CA",
@@ -296,8 +296,8 @@
       "sector": "Financial Services",
       "isin": "EGS691S1C011",
       "is_core": true,
-      "status": "EXCLUDED",
-      "status_reason": "EXCLUDED_BY_PIT_UNIVERSE"
+      "status": "TRADABLE",
+      "status_reason": "ELIGIBLE_FOR_SCREENING"
     },
     {
       "ticker": "SUSP1.CA",

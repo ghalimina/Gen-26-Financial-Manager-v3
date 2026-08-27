@@ -830,3 +830,40 @@ class EGXUniverseLoader:
             "sectors_breakdown": sector_counts
         }
 
+    @classmethod
+    def _init_244_universe(cls):
+        """Loads complete 244-stock EGX/Thndr universe dynamically into ACTIVE_UNIVERSE."""
+        try:
+            workspace = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+            u_path_244 = os.path.join(workspace, "data", "thndr_egx_244_universe.json")
+            u_path_224 = os.path.join(workspace, "data", "thndr_egx_224_universe.json")
+            u_file = u_path_244 if os.path.exists(u_path_244) else (u_path_224 if os.path.exists(u_path_224) else None)
+            if u_file:
+                with open(u_file, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                for s in data.get("stocks", []):
+                    t = s["ticker"]
+                    if t not in cls.ACTIVE_UNIVERSE:
+                        cls.ACTIVE_UNIVERSE[t] = {
+                            "ticker": t,
+                            "symbol": s.get("symbol", t.split(".")[0]),
+                            "name_ar": s.get("name_ar", t),
+                            "name_en": s.get("name_en", t),
+                            "sector": s.get("sector", "عام"),
+                            "sector_en": s.get("sector_en", "General"),
+                            "isin": s.get("isin", ""),
+                            "index_membership": s.get("index_membership", ["EGX100"]),
+                            "market_cap_tier": s.get("market_cap_tier", "SMALL_CAP"),
+                            "nominal_price": s.get("nominal_price", 10.0),
+                            "adv20_egp": s.get("adv20_egp", 5000000.0),
+                            "beta_egx30": s.get("beta_egx30", 1.0),
+                            "is_active": s.get("is_active", True)
+                        }
+        except Exception:
+            pass
+
+
+# Automatically load full 244-universe
+EGXUniverseLoader._init_244_universe()
+
+

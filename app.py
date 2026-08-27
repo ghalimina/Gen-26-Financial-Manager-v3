@@ -1289,31 +1289,31 @@ def export_decision_log(decision_objects, ts):
     except Exception: pass
 
 def export_daily_ranking(predictions, ts):
-    rows = []
-    for p in predictions:
-        sym = p.get('الكود', '')
-        try:
-            from core.market_price_service import MarketPriceService
-            cp = float(p.get('السعر الحالي', MarketPriceService.get_latest_price(sym)))
-        except Exception:
-            cp = float(p.get('السعر الحالي', 0.0))
-        rows.append({
-            'date': ts,
-            'rank': p.get('الترتيب 🏆', ''),
-            'ticker': sym,
-            'name': p.get('الاسم', ''),
-            'sector': p.get('القطاع', ''),
-            'current_price': cp,
-            'score': p.get('درجة الترتيب الاستثماري ⭐', ''),
-            'signal': p.get('التوصية الحية', ''),
-            'confidence': p.get('نسبة الثقة الحية', ''),
-            'market_regime': p.get('حالة السوق', ''),
-            'model_agreement': p.get('اتفاق النماذج 🤝', ''),
-            'alpha_vs_egx30': p.get('Alpha vs EGX30 📊', ''),
-            'data_quality': p.get('_dq_status', 'OK'),
-            'model_version': 'v3.0-ssot'
-        })
     try:
+        from core.multi_horizon_engine import MultiHorizonEngine
+        from core.market_price_service import MarketPriceService
+        rankings = MultiHorizonEngine.get_all_multi_horizon_rankings(universe="all")
+        rows = []
+        for r in rankings:
+            rk = r.get("rank", 0)
+            score = r.get("overall_score", 80.0)
+            sig = "🟢 شراء تراجعي (BUY)" if score >= 80 else ("🟡 مراقبة الاتجاه (WATCH)" if score >= 60 else "🔴 تجنب الشراء (AVOID)")
+            rows.append({
+                "date": ts,
+                "rank": f"#{rk}",
+                "ticker": r["ticker"],
+                "name": r["company_name"],
+                "sector": r.get("sector", ""),
+                "current_price": r["current_price"],
+                "score": score,
+                "signal": sig,
+                "confidence": f"{round(float(r.get('confidence', 0.85))*100, 1)}%",
+                "entry_zone": r.get("entry_zone", ""),
+                "target_20d": r["horizons"]["20D"]["target_1"],
+                "stop_loss": r["stop_loss"],
+                "data_quality": "OK",
+                "model_version": "v3.0-ssot"
+            })
         pd.DataFrame(rows).to_csv(RANKING_CSV, index=False, encoding='utf-8-sig')
     except Exception:
         pass

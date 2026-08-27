@@ -80,11 +80,14 @@ class SectorRelativeStrengthEngine:
                 cp = prices.get(sym_clean) if prices else MarketPriceService.get_latest_price(sym_clean)
             except Exception:
                 canon = MarketPriceService.CANONICAL_PRICES.get(sym_clean, {})
-                cp = canon.get("price", 10.0)
+                cp = canon.get("price")
+
+            if cp is None or cp <= 0:
+                continue
 
             canon = MarketPriceService.CANONICAL_PRICES.get(sym_clean, {})
-            prev_close = canon.get("previous_close", cp * 0.995)
-            ret_pct = ((cp - prev_close) / prev_close) * 100.0 if prev_close > 0 else 0.0
+            prev_close = canon.get("previous_close") or (cp * 0.995)
+            ret_pct = ((cp - prev_close) / prev_close) * 100.0 if (prev_close and prev_close > 0) else 0.0
             
             stock_returns[sym_clean] = {
                 "price": cp,

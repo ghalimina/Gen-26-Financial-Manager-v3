@@ -66,6 +66,9 @@ class TestAPIEndpoints(unittest.TestCase):
         res_get = self.client.get("/api/real_portfolio")
         self.assertEqual(res_get.status_code, 200)
 
+        # Ensure test ticker is clean before adding
+        self.client.post("/api/real_portfolio/delete", json={"ticker": "TMGH.CA", "confirm": True})
+
         # 2. ADD
         res_add = self.client.post("/api/real_portfolio/add", json={
             "ticker": "TMGH.CA",
@@ -103,8 +106,17 @@ class TestAPIEndpoints(unittest.TestCase):
 
     def test_07_watchlist_api(self):
         """Verify /api/watchlist GET and POST add/remove."""
+        # Clean before adding
+        self.client.post("/api/watchlist/remove", json={"ticker": "EGAL.CA"})
+
+        res_add = self.client.post("/api/watchlist/add", json={"ticker": "EGAL.CA"})
+        self.assertEqual(res_add.status_code, 200)
+
         res_get = self.client.get("/api/watchlist")
         self.assertEqual(res_get.status_code, 200)
+
+        res_del = self.client.post("/api/watchlist/remove", json={"ticker": "EGAL.CA"})
+        self.assertEqual(res_del.status_code, 200)
 
     def test_08_portfolio_export_api(self):
         """Verify /api/portfolio/export returns downloadable CSV with UTF-8 BOM and JSON."""

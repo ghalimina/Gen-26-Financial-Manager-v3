@@ -196,18 +196,22 @@ class EGXMarketScheduler:
                         now_iso
                     ))
 
+                    p_val = rec.get("price")
+                    turnover_val = float(rec.get("turnover_egp", 0.0) or 0.0)
+                    adv_calc = (turnover_val / p_val) if (p_val is not None and p_val > 0) else 0.0
+
                     cur.execute("""
                     INSERT OR REPLACE INTO market_prices (ticker, market_date, open_price, high_price, low_price, close_price, volume, adv_20d, created_at)
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
                     """, (
                         rec["ticker"],
-                        rec.get("market_date", now_cairo.strftime("%Y-%m-%d")),
-                        rec.get("open", rec["price"]),
-                        rec.get("high", rec["price"]),
-                        rec.get("low", rec["price"]),
-                        rec["price"],
-                        rec.get("volume", 10000),
-                        rec.get("turnover_egp", 0.0) / rec["price"] if rec["price"] > 0 else 0.0,
+                        rec.get("market_date") or now_cairo.strftime("%Y-%m-%d"),
+                        float(rec.get("open") or p_val or 0.0),
+                        float(rec.get("high") or p_val or 0.0),
+                        float(rec.get("low") or p_val or 0.0),
+                        float(p_val or 0.0),
+                        int(rec.get("volume") or 0),
+                        adv_calc,
                         now_iso
                     ))
                 conn.commit()
