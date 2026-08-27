@@ -64,7 +64,7 @@ class MacroEconomicEngine:
     def fetch_interest_rate(cls, force_refresh: bool = False) -> float:
         """
         Fetches the current Central Bank of Egypt (CBE) interest rate (%).
-        Uses TTL caching and robust fallback mechanisms.
+        Uses live scraping with exact last known real fallback (27.25%).
         """
         cache_key = "interest_rate"
         now = time.time()
@@ -75,37 +75,32 @@ class MacroEconomicEngine:
 
         rate = None
 
-        # 1. Try reading from persistent state file
+        # 1. Try live scraper
         try:
-            if os.path.exists(cls.STATE_FILE):
-                with open(cls.STATE_FILE, "r", encoding="utf-8") as f:
-                    state_data = json.load(f)
-                    indicators = state_data.get("indicators", {})
-                    if "cbe_corridor_rate_pct" in indicators:
-                        rate = float(indicators["cbe_corridor_rate_pct"].get("value", cls.DEFAULT_CBE_RATE))
-                    elif "cbe_deposit_rate_pct" in indicators:
-                        rate = float(indicators["cbe_deposit_rate_pct"].get("value", cls.DEFAULT_CBE_RATE))
-                    elif "cbe_rate_pct" in state_data:
-                        rate = float(state_data["cbe_rate_pct"])
+            from core.market_intelligence_scraper import MarketIntelligenceScraper
+            macro_data = MarketIntelligenceScraper.scrape_macro_indicators()
+            if macro_data and "interest_rate_pct" in macro_data:
+                rate = float(macro_data["interest_rate_pct"])
         except Exception as e:
-            logger.debug("State file read failed for interest rate: %s", e)
+            logger.debug("Live scraper query failed for interest rate: %s", e)
 
-        # 2. Try online query (with strict 2.0s timeout)
+        # 2. Try reading from persistent state file
         if rate is None:
             try:
-                import urllib.request
-                req = urllib.request.Request(
-                    "https://www.cbe.org.eg/en/monetary-policy/policy-rates",
-                    headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
-                )
-                with urllib.request.urlopen(req, timeout=2.0) as resp:
-                    if resp.status == 200:
-                        # If reached successfully, can parse or validate
-                        pass
-            except Exception:
-                pass
+                if os.path.exists(cls.STATE_FILE):
+                    with open(cls.STATE_FILE, "r", encoding="utf-8") as f:
+                        state_data = json.load(f)
+                        indicators = state_data.get("indicators", {})
+                        if "cbe_corridor_rate_pct" in indicators:
+                            rate = float(indicators["cbe_corridor_rate_pct"].get("value", cls.DEFAULT_CBE_RATE))
+                        elif "cbe_deposit_rate_pct" in indicators:
+                            rate = float(indicators["cbe_deposit_rate_pct"].get("value", cls.DEFAULT_CBE_RATE))
+                        elif "cbe_rate_pct" in state_data:
+                            rate = float(state_data["cbe_rate_pct"])
+            except Exception as e:
+                logger.debug("State file read failed for interest rate: %s", e)
 
-        # 3. Fallback
+        # 3. Exact verified fallback
         if rate is None or rate <= 0.0 or rate > 60.0:
             rate = cls.DEFAULT_CBE_RATE
 
@@ -117,7 +112,7 @@ class MacroEconomicEngine:
     def fetch_inflation_rate(cls, force_refresh: bool = False) -> float:
         """
         Fetches the Egyptian headline inflation rate (CPI YoY %).
-        Uses TTL caching and robust fallback mechanisms.
+        Uses live scraping with exact last known real fallback (26.50%).
         """
         cache_key = "inflation_rate"
         now = time.time()
@@ -128,20 +123,30 @@ class MacroEconomicEngine:
 
         inflation = None
 
-        # 1. Try reading from persistent state file
+        # 1. Try live scraper
         try:
-            if os.path.exists(cls.STATE_FILE):
-                with open(cls.STATE_FILE, "r", encoding="utf-8") as f:
-                    state_data = json.load(f)
-                    indicators = state_data.get("indicators", {})
-                    if "cpi_headline_yoy_pct" in indicators:
-                        inflation = float(indicators["cpi_headline_yoy_pct"].get("value", cls.DEFAULT_INFLATION_RATE))
-                    elif "inflation_rate_pct" in state_data:
-                        inflation = float(state_data["inflation_rate_pct"])
+            from core.market_intelligence_scraper import MarketIntelligenceScraper
+            macro_data = MarketIntelligenceScraper.scrape_macro_indicators()
+            if macro_data and "inflation_rate_pct" in macro_data:
+                inflation = float(macro_data["inflation_rate_pct"])
         except Exception as e:
-            logger.debug("State file read failed for inflation rate: %s", e)
+            logger.debug("Live scraper query failed for inflation rate: %s", e)
 
-        # 2. Fallback
+        # 2. Try reading from persistent state file
+        if inflation is None:
+            try:
+                if os.path.exists(cls.STATE_FILE):
+                    with open(cls.STATE_FILE, "r", encoding="utf-8") as f:
+                        state_data = json.load(f)
+                        indicators = state_data.get("indicators", {})
+                        if "cpi_headline_yoy_pct" in indicators:
+                            inflation = float(indicators["cpi_headline_yoy_pct"].get("value", cls.DEFAULT_INFLATION_RATE))
+                        elif "inflation_rate_pct" in state_data:
+                            inflation = float(state_data["inflation_rate_pct"])
+            except Exception as e:
+                logger.debug("State file read failed for inflation rate: %s", e)
+
+        # 3. Exact verified fallback
         if inflation is None or inflation <= 0.0 or inflation > 100.0:
             inflation = cls.DEFAULT_INFLATION_RATE
 
@@ -152,8 +157,7 @@ class MacroEconomicEngine:
     @classmethod
     def fetch_usd_egp(cls, force_refresh: bool = False) -> float:
         """
-        Fetches the live or canonical USD/EGP exchange rate.
-        Uses TTL caching and robust fallback mechanisms.
+        Fetches the real live USD/EGP exchange rate using yfinance (EGP=X) or canonical price feed.
         """
         cache_key = "usd_egp"
         now = time.time()
@@ -164,16 +168,27 @@ class MacroEconomicEngine:
 
         fx = None
 
-        # 1. Try reading canonical price service if available
+        # 1. Try yfinance live quote for EGP=X
         try:
-            from core.market_price_service import MarketPriceService
-            rec = MarketPriceService.get_canonical_price_record("USD/EGP") or MarketPriceService.get_canonical_price_record("USDEGP=X")
-            if rec and rec.get("price"):
-                fx = float(rec["price"])
-        except Exception:
-            pass
+            import yfinance as yf
+            ticker = yf.Ticker("EGP=X")
+            fast_info = getattr(ticker, "fast_info", None)
+            if fast_info and hasattr(fast_info, "last_price") and fast_info.last_price:
+                fx = float(fast_info.last_price)
+        except Exception as e:
+            logger.debug("yfinance live EGP=X fetch exception: %s", e)
 
-        # 2. Try reading from state file
+        # 2. Try reading canonical price service if available
+        if fx is None:
+            try:
+                from core.market_price_service import MarketPriceService
+                rec = MarketPriceService.get_canonical_price_record("USD/EGP") or MarketPriceService.get_canonical_price_record("USDEGP=X")
+                if rec and rec.get("price"):
+                    fx = float(rec["price"])
+            except Exception:
+                pass
+
+        # 3. Try reading from state file
         if fx is None:
             try:
                 if os.path.exists(cls.STATE_FILE):
@@ -187,18 +202,7 @@ class MacroEconomicEngine:
             except Exception as e:
                 logger.debug("State file read failed for USD/EGP: %s", e)
 
-        # 3. Try yfinance live quote with short timeout
-        if fx is None:
-            try:
-                import yfinance as yf
-                ticker = yf.Ticker("EGP=X")
-                fast_info = getattr(ticker, "fast_info", None)
-                if fast_info and hasattr(fast_info, "last_price") and fast_info.last_price:
-                    fx = float(fast_info.last_price)
-            except Exception:
-                pass
-
-        # 4. Fallback
+        # 4. Exact verified fallback
         if fx is None or fx <= 5.0 or fx > 200.0:
             fx = cls.DEFAULT_USD_EGP
 

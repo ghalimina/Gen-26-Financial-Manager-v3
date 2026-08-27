@@ -727,6 +727,27 @@ def api_ml_walk_forward():
     return jsonify(WalkForwardMLEngine.get_active_model_weights(force_refresh=force_refresh))
 
 
+@app.route("/api/market_pulse", methods=["GET"])
+@app.route("/api/intelligence/live", methods=["GET"])
+def api_market_pulse():
+    """Returns live real-time market intelligence pulse (CBE macro, global commodities, Mubasher news & catalysts)."""
+    from core.market_intelligence_scraper import MarketIntelligenceScraper
+    return jsonify(MarketIntelligenceScraper.get_live_market_pulse())
+
+
+@app.route("/api/news/mubasher", methods=["GET"])
+def api_news_mubasher():
+    """Scrapes and returns real EGX headlines and corporate disclosures from Mubasher."""
+    from core.market_intelligence_scraper import MarketIntelligenceScraper
+    ticker = request.args.get("ticker")
+    limit = int(request.args.get("limit", 10))
+    return jsonify({
+        "articles": MarketIntelligenceScraper.scrape_mubasher_news(ticker=ticker, limit=limit),
+        "ticker": ticker,
+        "source": "Mubasher EGX Live Feed"
+    })
+
+
 # --- 9.7 MLOps Continuous Learning & Telegram Bot Status ---
 @app.route("/api/mlops/status", methods=["GET"])
 def api_mlops_status():

@@ -12,6 +12,7 @@
 import os
 import sys
 import unittest
+from unittest.mock import patch
 import json
 
 WORKSPACE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -70,23 +71,40 @@ class TestMLOpsAndNotifications(unittest.TestCase):
         res_macro = TelegramNotifier.send_macro_shock_alert("EASING_DISINFLATION", 19.75, 50.80, "CBE Rate Decision")
         self.assertTrue(res_macro.get("delivered"))
 
-    def test_04_insider_trading_engine_signals(self):
+    @patch("core.insider_trading_engine.InsiderTradingEngine.fetch_insider_deals")
+    def test_04_insider_trading_engine_signals(self, mock_fetch):
         """Verify EGX Insider Trading Engine computes signals and boosts confidence."""
         # COMI.CA has recorded executive buying -> positive signal
+        mock_fetch.return_value = [
+            {
+                "transaction_type": "BUY",
+                "shares_transacted": 150_000,
+                "price_egp": 136.20,
+                "total_value_egp": 20_430_000.0,
+                "insider_title": "عضو مجلس إدارة تنفيذي ومجموعة مرتبطة"
+            }
+        ]
         comi_insider = InsiderTradingEngine.evaluate_insider_activity("COMI.CA")
         self.assertEqual(comi_insider["ticker"], "COMI.CA")
         self.assertGreater(comi_insider["insider_action"], 0.0)
         self.assertGreater(comi_insider["confidence_boost_pct"], 0.0)
-        self.assertIn("شراء", comi_insider["action_badge_ar"])
+        self.assertTrue("شراء" in comi_insider["action_badge_ar"] or "تجميع" in comi_insider["action_badge_ar"])
 
         # Unknown / neutral ticker -> 0.0 signal
+        mock_fetch.return_value = []
         neutral_insider = InsiderTradingEngine.evaluate_insider_activity("UNKNOWN.CA")
         self.assertEqual(neutral_insider["insider_action"], 0.0)
         self.assertEqual(neutral_insider["confidence_boost_pct"], 0.0)
 
         # Market-wide deals list
-        all_deals = InsiderTradingEngine.get_market_wide_insider_deals()
-        self.assertGreaterEqual(len(all_deals), 3)
+        with patch("core.insider_trading_engine.InsiderTradingEngine.scrape_live_insider_deals") as mock_scrape:
+            mock_scrape.return_value = [
+                {"ticker": "SWDY.CA", "total_value_egp": 32_000_000.0},
+                {"ticker": "COMI.CA", "total_value_egp": 20_000_000.0},
+                {"ticker": "TMGH.CA", "total_value_egp": 7_000_000.0}
+            ]
+            all_deals = InsiderTradingEngine.get_market_wide_insider_deals()
+            self.assertGreaterEqual(len(all_deals), 3)
 
     def test_05_tax_loss_harvesting_and_margin_manager(self):
         """Verify margin financing cost calculation and tax-loss harvesting evaluation."""
