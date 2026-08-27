@@ -718,6 +718,15 @@ def api_alternative_data(ticker):
     return jsonify(AlternativeDataEngine.fetch_alternative_signals(ticker))
 
 
+@app.route("/api/ml/walk_forward", methods=["GET", "POST"])
+@app.route("/api/ml/weights", methods=["GET"])
+def api_ml_walk_forward():
+    """Returns active model factor weights calibrated via walk-forward empirical feedback loop."""
+    from core.walk_forward_ml_engine import WalkForwardMLEngine
+    force_refresh = (request.method == "POST" or request.args.get("refresh") == "1")
+    return jsonify(WalkForwardMLEngine.get_active_model_weights(force_refresh=force_refresh))
+
+
 # --- 9.7 MLOps Continuous Learning & Telegram Bot Status ---
 @app.route("/api/mlops/status", methods=["GET"])
 def api_mlops_status():

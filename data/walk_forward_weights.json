@@ -1,0 +1,33 @@
+{
+  "status": "CALIBRATED",
+  "timestamp": "2026-08-27T09:04:42.925130",
+  "active_weights": {
+    "fundamental": 0.181,
+    "insider": 0.3334,
+    "alternative": 0.2973,
+    "sentiment": 0.1883
+  },
+  "base_weights": {
+    "fundamental": 0.3,
+    "insider": 0.25,
+    "alternative": 0.25,
+    "sentiment": 0.2
+  },
+  "accuracy_metrics": {
+    "fundamental": 0.48,
+    "insider": 0.82,
+    "alternative": 0.76,
+    "sentiment": 0.65
+  },
+  "calibration_delta": {
+    "fundamental": -0.119,
+    "insider": 0.0834,
+    "alternative": 0.0473,
+    "sentiment": -0.0117
+  },
+  "top_performing_engine": "insider",
+  "weakest_engine": "fundamental",
+  "diagnostic_rationale_ar": "تمت ترقية وزن رادار المطلعين والحيتان (Insider Trading) بمقدار (+8.3%) وتخفيض وزن التحليل المالي والأساسي (Fundamental) بمقدار (-11.9%) استجابةً لدقة التوقعات في الاختبار الأمامي المتدحرج (Walk-Forward) خلال آخر 4 أسابيع.",
+  "model": "Walk-Forward Empirical Feedback Loop Optimizer",
+  "weights_sum": 1.0
+}
