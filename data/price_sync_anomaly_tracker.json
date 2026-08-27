@@ -62,7 +62,7 @@
     "OFH.CA": 0,
     "ASPI.CA": 0,
     "CNFN.CA": 0,
-    "ICMI.CA": 76,
+    "ICMI.CA": 0,
     "EIUD.CA": 0,
     "ALEX.CA": 0,
     "ETRS.CA": 0,
@@ -88,7 +88,7 @@
     "MEPA.CA": 0,
     "EGSA.CA": 0,
     "ALUM.CA": 0,
-    "VERT.CA": 76,
+    "VERT.CA": 0,
     "ICID.CA": 0,
     "BIOC.CA": 0,
     "MICH.CA": 0,
@@ -124,7 +124,7 @@
     "KRDI.CA": 0,
     "AMER.CA": 0,
     "CCRS.CA": 0,
-    "EDBM.CA": 44,
+    "EDBM.CA": 0,
     "ELWA.CA": 0,
     "GSSC.CA": 0,
     "ZEOT.CA": 0,
@@ -144,12 +144,21 @@
     "ASCM.CA": 0,
     "CIRA.CA": 0,
     "RUBX.CA": 0,
-    "TALM.CA": 0
+    "TALM.CA": 0,
+    "QNBA.CA": 0,
+    "MNHD.CA": 0,
+    "PIOH.CA": 0,
+    "OBUR.CA": 0,
+    "DICE.CA": 0,
+    "SMPC.CA": 0,
+    "ARCO.CA": 0,
+    "EXTK.CA": 0,
+    "MTRC.CA": 0,
+    "MCEG.CA": 0,
+    "MEFM.CA": 0,
+    "UEDA.CA": 0,
+    "WDEH.CA": 0
   },
-  "alerts": {
-    "ICMI.CA": "هذا السهم يحتاج مصدر بيانات بديل — التجاهل المتكرر لن يحل المشكلة",
-    "VERT.CA": "هذا السهم يحتاج مصدر بيانات بديل — التجاهل المتكرر لن يحل المشكلة",
-    "EDBM.CA": "هذا السهم يحتاج مصدر بيانات بديل — التجاهل المتكرر لن يحل المشكلة"
-  },
-  "last_updated": "2026-08-27 06:42:43"
+  "alerts": {},
+  "last_updated": "2026-08-27 07:35:45"
 }

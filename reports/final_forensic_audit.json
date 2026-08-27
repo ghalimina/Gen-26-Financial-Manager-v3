@@ -66,7 +66,7 @@
         "price_type": "OFFICIAL_LAST_CLOSE",
         "is_adjusted": false,
         "source": "TRADINGVIEW_EGX_LIVE_SSOT",
-        "timestamp": "2026-08-27 04:18:31",
+        "timestamp": "2026-08-27 07:30:29",
         "timezone": "Africa/Cairo",
         "freshness": "FRESH_LIVE_SSOT",
         "is_real_time": false,
@@ -79,7 +79,7 @@
         "price_type": "OFFICIAL_LAST_CLOSE",
         "is_adjusted": false,
         "source": "TRADINGVIEW_EGX_LIVE_SSOT",
-        "timestamp": "2026-08-27 04:18:31",
+        "timestamp": "2026-08-27 07:30:29",
         "timezone": "Africa/Cairo",
         "freshness": "FRESH_LIVE_SSOT",
         "is_real_time": false,
@@ -92,7 +92,7 @@
         "price_type": "OFFICIAL_LAST_CLOSE",
         "is_adjusted": false,
         "source": "TRADINGVIEW_EGX_LIVE_SSOT",
-        "timestamp": "2026-08-27 04:18:31",
+        "timestamp": "2026-08-27 07:30:29",
         "timezone": "Africa/Cairo",
         "freshness": "FRESH_LIVE_SSOT",
         "is_real_time": false,
@@ -105,7 +105,7 @@
         "price_type": "OFFICIAL_LAST_CLOSE",
         "is_adjusted": false,
         "source": "TRADINGVIEW_EGX_LIVE_SSOT",
-        "timestamp": "2026-08-27 04:18:31",
+        "timestamp": "2026-08-27 07:30:29",
         "timezone": "Africa/Cairo",
         "freshness": "FRESH_LIVE_SSOT",
         "is_real_time": false,
@@ -118,7 +118,7 @@
         "price_type": "OFFICIAL_LAST_CLOSE",
         "is_adjusted": false,
         "source": "TRADINGVIEW_EGX_LIVE_SSOT",
-        "timestamp": "2026-08-27 04:18:31",
+        "timestamp": "2026-08-27 07:30:29",
         "timezone": "Africa/Cairo",
         "freshness": "FRESH_LIVE_SSOT",
         "is_real_time": false,
@@ -391,7 +391,7 @@
   "phase_23_performance": {
     "status": "PASS_HIGH_PERFORMANCE",
     "ranking_generation_latency_ms": 0.0,
-    "reconciliation_latency_ms": 0.96,
+    "reconciliation_latency_ms": 1.0,
     "database_query_latency_ms": 1.2
   },
   "phase_24_honest_status": {
@@ -405,8 +405,8 @@
     ]
   },
   "audit_metadata": {
-    "audit_timestamp": "2026-08-27T04:23:04.613385",
-    "execution_duration_seconds": 5.182,
+    "audit_timestamp": "2026-08-27T07:33:50.555801",
+    "execution_duration_seconds": 1.172,
     "total_phases_executed": 25,
     "master_verdict": "FORENSIC_VALIDATION_COMPLETE_TRUTH_VERIFIED"
   }

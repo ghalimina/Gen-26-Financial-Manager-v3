@@ -465,8 +465,45 @@ class PriceSyncService:
         """
         import requests
         quotes: Dict[str, Dict[str, Any]] = {}
+        
+        MAPPING_TO_TV = {
+            "DICE.CA": "DSCW", "MNHD.CA": "MASR", "OBUR.CA": "OLFI",
+            "GBCO.CA": "AUTO", "PIOH.CA": "PRDC", "QNBA.CA": "QNBE",
+            "MTRC.CA": "MILS", "MCEG.CA": "SCFM", "MEFM.CA": "CEFM",
+            "UEDA.CA": "UEFM", "WDEH.CA": "WCDF", "EXTK.CA": "ZEOT",
+            "VERT.CA": "VERT", "FERT.CA": "FERT",
+            "ICMI.CA": "INEG", "INEG.CA": "INEG",
+            "SMPC.CA": "NEDA", "ARCO.CA": "ACAMD"
+        }
+        REVERSE_TV_MAP = {
+            "DSCW": "DICE.CA", "MASR": "MNHD.CA", "OLFI": "OBUR.CA",
+            "AUTO": "GBCO.CA", "PRDC": "PIOH.CA", "QNBE": "QNBA.CA",
+            "MILS": "MTRC.CA", "SCFM": "MCEG.CA", "CEFM": "MEFM.CA",
+            "UEFM": "UEDA.CA", "WCDF": "WDEH.CA", "ZEOT": "EXTK.CA",
+            "FERT": "VERT.CA", "VERT": "VERT.CA",
+            "INEG": "ICMI.CA", "ICMI": "ICMI.CA",
+            "NEDA": "SMPC.CA", "ACAMD": "ARCO.CA"
+        }
+        
         try:
-            tv_symbols = [f"EGX:{t.upper().replace('.CA', '')}" for t in tickers]
+            tv_symbols_set = set()
+            for t in tickers:
+                clean_t = t.upper().strip()
+                if not clean_t.endswith(".CA") and "." not in clean_t:
+                    clean_ca = f"{clean_t}.CA"
+                else:
+                    clean_ca = clean_t
+                
+                mapped_tv = MAPPING_TO_TV.get(clean_ca, clean_ca.replace(".CA", ""))
+                tv_symbols_set.add(f"EGX:{mapped_tv}")
+                if clean_ca in ["VERT.CA", "FERT.CA"]:
+                    tv_symbols_set.add("EGX:VERT")
+                    tv_symbols_set.add("EGX:FERT")
+                elif clean_ca in ["ICMI.CA", "INEG.CA"]:
+                    tv_symbols_set.add("EGX:INEG")
+                    tv_symbols_set.add("EGX:ICMI")
+
+            tv_symbols = list(tv_symbols_set)
             url = "https://scanner.tradingview.com/egypt/scan"
             payload = {
                 "symbols": {"tickers": tv_symbols},
@@ -480,7 +517,8 @@ class PriceSyncService:
                 data = r.json().get("data", [])
                 for item in data:
                     raw_s = item.get("s", "")
-                    clean_sym = raw_s.replace("EGX:", "").upper().strip()
+                    tv_ticker = raw_s.replace("EGX:", "").upper().strip()
+                    clean_sym = REVERSE_TV_MAP.get(tv_ticker, tv_ticker)
                     if not clean_sym.endswith(".CA"):
                         clean_sym = f"{clean_sym}.CA"
                     
@@ -496,7 +534,7 @@ class PriceSyncService:
                         # Compute previous close based on change percentage
                         prev_close = round(close_p / (1.0 + (change_pct / 100.0)), 2) if change_pct != -100 else close_p
                         
-                        quotes[clean_sym] = {
+                        quote_obj = {
                             "price": close_p,
                             "previous_close": prev_close,
                             "open": open_p,
@@ -505,6 +543,10 @@ class PriceSyncService:
                             "volume": vol,
                             "source": "TRADINGVIEW_EGX_SCANNER_LIVE"
                         }
+                        quotes[clean_sym] = quote_obj
+                        # Also index under direct symbol so both primary and alias tickers resolve
+                        direct_sym = f"{tv_ticker}.CA" if not tv_ticker.endswith(".CA") else tv_ticker
+                        quotes[direct_sym] = quote_obj
         except Exception as e:
             logger.warning(f"TradingView EGX Scanner fetch failed: {e}")
         return quotes
@@ -630,7 +672,11 @@ class PriceSyncService:
 
             prev_record = existing_store.get(clean_sym, {})
             prev_price_raw = prev_record.get("price") if prev_record else None
-            prev_verified_price = float(prev_price_raw or constituent.get("nominal_price") or 10.0)
+            # Only treat as verified previous close if it is a valid numeric price and not marked DATA_UNAVAILABLE
+            if prev_price_raw is not None and float(prev_price_raw) > 0 and prev_record.get("price_type") != "DATA_UNAVAILABLE":
+                prev_verified_price = float(prev_price_raw)
+            else:
+                prev_verified_price = None
 
             quote_data = None
             source_tag = "UNKNOWN"
@@ -645,7 +691,7 @@ class PriceSyncService:
                 source_tag = "YFINANCE_EGX_LIVE_SSOT"
 
             # Check Dual-listed USD quote conversion if from yfinance
-            if quote_data and prev_verified_price > 0:
+            if quote_data and prev_verified_price is not None and prev_verified_price > 0:
                 raw_price = quote_data["price"]
                 if (raw_price / prev_verified_price) < 0.05:
                     estimated_fx_egp = raw_price * 48.85
@@ -659,7 +705,7 @@ class PriceSyncService:
 
             if quote_data and quote_data["price"] > 0:
                 fetched_p = quote_data["price"]
-                if prev_verified_price > 0:
+                if prev_verified_price is not None and prev_verified_price > 0:
                     pct_jump = abs((fetched_p - prev_verified_price) / prev_verified_price)
                     if pct_jump > 0.15:
                         # Check if this jump is explained by a registered corporate action (e.g. split or dividend)
@@ -718,6 +764,7 @@ class PriceSyncService:
                         consecutive_rejections[clean_sym] = 0
                         price_accepted = True
                 else:
+                    # Initial baseline initialization or recovery from uninitialized/unavailable state
                     price_accepted = True
                     consecutive_rejections[clean_sym] = 0
 

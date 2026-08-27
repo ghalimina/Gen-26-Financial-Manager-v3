@@ -339,10 +339,33 @@ def run_comprehensive_qa() -> Dict[str, Any]:
 
 
 if __name__ == "__main__":
-    res = run_comprehensive_qa()
-    # Write QA artifact to reports
-    os.makedirs(os.path.join(WORKSPACE, "reports"), exist_ok=True)
-    report_file = os.path.join(WORKSPACE, "reports", "qa_master_pass_results.json")
-    with open(report_file, "w", encoding="utf-8") as f:
-        json.dump(res, f, ensure_ascii=False, indent=2)
-    print(f"Saved full QA pass artifact to {report_file}")
+    import subprocess
+    import socket
+    
+    # Check if port 5000 is open
+    server_process = None
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    try:
+        s.connect(("localhost", 5000))
+        s.close()
+        print("Flask server is already running on port 5000.")
+    except ConnectionRefusedError:
+        print("Flask server not running. Starting it temporarily on port 5000...")
+        import sys
+        run_script = os.path.join(WORKSPACE, "run.py")
+        server_process = subprocess.Popen([sys.executable, run_script, "--no-browser"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        time.sleep(3)  # Wait for server to boot up
+    
+    try:
+        res = run_comprehensive_qa()
+        # Write QA artifact to reports
+        os.makedirs(os.path.join(WORKSPACE, "reports"), exist_ok=True)
+        report_file = os.path.join(WORKSPACE, "reports", "qa_master_pass_results.json")
+        with open(report_file, "w", encoding="utf-8") as f:
+            json.dump(res, f, ensure_ascii=False, indent=2)
+        print(f"Saved full QA pass artifact to {report_file}")
+    finally:
+        if server_process:
+            print("Stopping temporary Flask server...")
+            server_process.terminate()
+            server_process.wait()

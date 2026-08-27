@@ -86,9 +86,9 @@
       "isin": "EGS33041C012",
       "market_cap_tier": "LARGE_CAP",
       "thndr_available": true,
-      "is_active": true,
-      "status": "DATA_UNAVAILABLE",
-      "isolation_note": "عُزل رسمياً - لا توجد تغذية أسعار موثوقة"
+      "is_active": false,
+      "status": "QUARANTINED_ALIAS_CONFLICT",
+      "isolation_note": "Quarantined to prevent data poisoning"
     },
     {
       "ticker": "EMFD.CA",
@@ -436,9 +436,9 @@
       "isin": "EGS3C381C018",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true,
-      "status": "DATA_UNAVAILABLE",
-      "isolation_note": "عُزل رسمياً - لا توجد تغذية أسعار موثوقة"
+      "is_active": false,
+      "status": "QUARANTINED_ALIAS_CONFLICT",
+      "isolation_note": "Quarantined to prevent data poisoning"
     },
     {
       "ticker": "OIH.CA",
@@ -1026,9 +1026,9 @@
       "isin": "EGS65121C010",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true,
-      "status": "DATA_UNAVAILABLE",
-      "isolation_note": "عُزل رسمياً - لا توجد تغذية أسعار موثوقة"
+      "is_active": false,
+      "status": "QUARANTINED_ALIAS_CONFLICT",
+      "isolation_note": "Quarantined to prevent data poisoning"
     },
     {
       "ticker": "PORT.CA",
@@ -1040,9 +1040,9 @@
       "isin": "EGS65621C012",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true,
-      "status": "DATA_UNAVAILABLE",
-      "isolation_note": "عُزل رسمياً - لا توجد تغذية أسعار موثوقة"
+      "is_active": false,
+      "status": "QUARANTINED_ALIAS_CONFLICT",
+      "isolation_note": "Quarantined to prevent data poisoning"
     },
     {
       "ticker": "ERES.CA",
@@ -1054,9 +1054,9 @@
       "isin": "EGS70041C013",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true,
-      "status": "DATA_UNAVAILABLE",
-      "isolation_note": "عُزل رسمياً - لا توجد تغذية أسعار موثوقة"
+      "is_active": false,
+      "status": "QUARANTINED_ALIAS_CONFLICT",
+      "isolation_note": "Quarantined to prevent data poisoning"
     },
     {
       "ticker": "RREI.CA",
@@ -1116,9 +1116,9 @@
       "isin": "EGS65241C018",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true,
-      "status": "DATA_UNAVAILABLE",
-      "isolation_note": "عُزل رسمياً - لا توجد تغذية أسعار موثوقة"
+      "is_active": false,
+      "status": "QUARANTINED_ALIAS_CONFLICT",
+      "isolation_note": "Quarantined to prevent data poisoning"
     },
     {
       "ticker": "GTHE.CA",
@@ -1274,9 +1274,9 @@
       "isin": "EGS30211C019",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true,
-      "status": "DATA_UNAVAILABLE",
-      "isolation_note": "عُزل رسمياً - لا توجد تغذية أسعار موثوقة"
+      "is_active": false,
+      "status": "QUARANTINED_ALIAS_CONFLICT",
+      "isolation_note": "Quarantined to prevent data poisoning"
     },
     {
       "ticker": "PACH.CA",
@@ -1444,9 +1444,9 @@
       "isin": "EGS32081C018",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true,
-      "status": "DATA_UNAVAILABLE",
-      "isolation_note": "عُزل رسمياً - لا توجد تغذية أسعار موثوقة"
+      "is_active": false,
+      "status": "QUARANTINED_ALIAS_CONFLICT",
+      "isolation_note": "Quarantined to prevent data poisoning"
     },
     {
       "ticker": "CSAG.CA",
@@ -1494,9 +1494,9 @@
       "isin": "EGS36011C014",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true,
-      "status": "DATA_UNAVAILABLE",
-      "isolation_note": "عُزل رسمياً - لا توجد تغذية أسعار موثوقة"
+      "is_active": false,
+      "status": "QUARANTINED_ALIAS_CONFLICT",
+      "isolation_note": "Quarantined to prevent data poisoning"
     },
     {
       "ticker": "ECAP.CA",
@@ -1544,9 +1544,9 @@
       "isin": "EGS36051C010",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true,
-      "status": "DATA_UNAVAILABLE",
-      "isolation_note": "عُزل رسمياً - لا توجد تغذية أسعار موثوقة"
+      "is_active": false,
+      "status": "QUARANTINED_ALIAS_CONFLICT",
+      "isolation_note": "Quarantined to prevent data poisoning"
     },
     {
       "ticker": "NIPH.CA",
@@ -1606,9 +1606,9 @@
       "isin": "EGS72071C017",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true,
-      "status": "DATA_UNAVAILABLE",
-      "isolation_note": "عُزل رسمياً - لا توجد تغذية أسعار موثوقة"
+      "is_active": false,
+      "status": "QUARANTINED_ALIAS_CONFLICT",
+      "isolation_note": "Quarantined to prevent data poisoning"
     },
     {
       "ticker": "ADPC.CA",
@@ -1632,9 +1632,9 @@
       "isin": "EGS34051C014",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true,
-      "status": "DATA_UNAVAILABLE",
-      "isolation_note": "عُزل رسمياً - لا توجد تغذية أسعار موثوقة"
+      "is_active": false,
+      "status": "QUARANTINED_ALIAS_CONFLICT",
+      "isolation_note": "Quarantined to prevent data poisoning"
     },
     {
       "ticker": "NAHO.CA",
@@ -1718,9 +1718,9 @@
       "isin": "EGS3G011C013",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true,
-      "status": "DATA_UNAVAILABLE",
-      "isolation_note": "عُزل رسمياً - لا توجد تغذية أسعار موثوقة"
+      "is_active": false,
+      "status": "QUARANTINED_ALIAS_CONFLICT",
+      "isolation_note": "Quarantined to prevent data poisoning"
     },
     {
       "ticker": "KRDI.CA",
@@ -1768,9 +1768,9 @@
       "isin": "EGS3C141C012",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true,
-      "status": "DATA_UNAVAILABLE",
-      "isolation_note": "عُزل رسمياً - لا توجد تغذية أسعار موثوقة"
+      "is_active": false,
+      "status": "QUARANTINED_ALIAS_CONFLICT",
+      "isolation_note": "Quarantined to prevent data poisoning"
     },
     {
       "ticker": "ELWA.CA",
@@ -1854,9 +1854,9 @@
       "isin": "EGS70101C017",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true,
-      "status": "DATA_UNAVAILABLE",
-      "isolation_note": "عُزل رسمياً - لا توجد تغذية أسعار موثوقة"
+      "is_active": false,
+      "status": "QUARANTINED_ALIAS_CONFLICT",
+      "isolation_note": "Quarantined to prevent data poisoning"
     },
     {
       "ticker": "VERT_B.CA",
