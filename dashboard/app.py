@@ -703,6 +703,21 @@ def api_arbitrage_pairs():
     })
 
 
+@app.route("/api/alternative_data/supply_chain", methods=["GET"])
+@app.route("/api/supply_chain", methods=["GET"])
+def api_supply_chain():
+    """Returns the full EGX corporate supply chain and raw material dependency knowledge graph."""
+    from core.alternative_data_engine import AlternativeDataEngine
+    return jsonify(AlternativeDataEngine.get_all_supply_chain_relationships())
+
+
+@app.route("/api/alternative_data/<ticker>", methods=["GET"])
+def api_alternative_data(ticker):
+    """Returns multi-dimensional alternative data, commodity inflation impact, and port traffic for a ticker."""
+    from core.alternative_data_engine import AlternativeDataEngine
+    return jsonify(AlternativeDataEngine.fetch_alternative_signals(ticker))
+
+
 # --- 9.7 MLOps Continuous Learning & Telegram Bot Status ---
 @app.route("/api/mlops/status", methods=["GET"])
 def api_mlops_status():
