@@ -1,4 +1,25 @@
-<!DOCTYPE html>
+#!/usr/bin/env python3
+# =============================================================================
+# scripts/build_ui.py — Generates Redesigned Clean, Beginner-Friendly Apple-Grade UI
+# Integrates:
+# 1. Morning Briefing Hero Card (/api/morning_briefing)
+# 2. Traffic Light System for Stocks (Green 🟢, Yellow 🟡, Red 🔴)
+# 3. Interactive Floating AI Quant Chatbot (/api/chat)
+# 4. One-Click Portfolio Sizer Modal (HRP / Risk Parity Lot Sizing)
+# 5. Live Fundamental Health Card (/api/fundamentals/<ticker>)
+# 6. Preserves 100% of forensic test IDs and navigation elements.
+# =============================================================================
+
+import os
+import sys
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding='utf-8')
+
+WORKSPACE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+def generate_html():
+    return '''<!DOCTYPE html>
 <html dir="rtl" lang="ar">
 <head>
     <meta charset="UTF-8">
@@ -2383,7 +2404,7 @@
             if (sender === 'ai' && window.marked) {
                 formattedText = marked.parse(text);
             } else {
-                formattedText = text.replace(/\n/g, '<br>');
+                formattedText = text.replace(/\\n/g, '<br>');
             }
 
             div.innerHTML = `<div class="chat-bubble">${formattedText}</div>`;
@@ -2814,3 +2835,22 @@
     </script>
 </body>
 </html>
+'''
+
+def main():
+    html_content = generate_html()
+    
+    # Target files:
+    targets = [
+        os.path.join(WORKSPACE, "dashboard", "index.html"),
+        os.path.join(WORKSPACE, "dashboard", "templates", "index.html")
+    ]
+    
+    for t in targets:
+        os.makedirs(os.path.dirname(t), exist_ok=True)
+        with open(t, "w", encoding="utf-8") as f:
+            f.write(html_content)
+        print(f"✅ Generated {t} ({len(html_content)} bytes)")
+
+if __name__ == "__main__":
+    main()

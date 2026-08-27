@@ -3,7 +3,7 @@
     {
       "endpoint": "GET /api/ranking",
       "happy_code": 200,
-      "happy_latency_ms": 14272.2,
+      "happy_latency_ms": 38114.8,
       "fault_code": 200,
       "passed": true,
       "error": null
@@ -11,7 +11,7 @@
     {
       "endpoint": "GET /api/universe",
       "happy_code": 200,
-      "happy_latency_ms": 2016.5,
+      "happy_latency_ms": 420.0,
       "fault_code": "N/A",
       "passed": true,
       "error": null
@@ -19,7 +19,7 @@
     {
       "endpoint": "GET /api/prices",
       "happy_code": 200,
-      "happy_latency_ms": 2005.9,
+      "happy_latency_ms": 3.0,
       "fault_code": "N/A",
       "passed": true,
       "error": null
@@ -27,7 +27,7 @@
     {
       "endpoint": "GET /api/opportunities/short-term",
       "happy_code": 200,
-      "happy_latency_ms": 6905.0,
+      "happy_latency_ms": 12213.9,
       "fault_code": 200,
       "passed": true,
       "error": null
@@ -35,7 +35,7 @@
     {
       "endpoint": "GET /api/execution/orders",
       "happy_code": 200,
-      "happy_latency_ms": 2035.9,
+      "happy_latency_ms": 3.0,
       "fault_code": 200,
       "passed": true,
       "error": null
@@ -43,23 +43,23 @@
     {
       "endpoint": "POST /api/execution/order/submit",
       "happy_code": 200,
-      "happy_latency_ms": 2027.9,
+      "happy_latency_ms": 8.2,
       "fault_code": 400,
       "passed": true,
-      "error": "HTTP Error 400: BAD REQUEST"
+      "error": null
     },
     {
       "endpoint": "POST /api/execution/order/cancel",
       "happy_code": 200,
-      "happy_latency_ms": 2026.7,
+      "happy_latency_ms": 12.5,
       "fault_code": 400,
       "passed": true,
-      "error": "HTTP Error 400: BAD REQUEST"
+      "error": null
     },
     {
       "endpoint": "GET /api/portfolio/hrp_weights",
       "happy_code": 200,
-      "happy_latency_ms": 2041.0,
+      "happy_latency_ms": 48.3,
       "fault_code": "N/A",
       "passed": true,
       "error": null
@@ -67,7 +67,7 @@
     {
       "endpoint": "GET /api/macro",
       "happy_code": 200,
-      "happy_latency_ms": 2024.7,
+      "happy_latency_ms": 0.0,
       "fault_code": "N/A",
       "passed": true,
       "error": null
@@ -75,7 +75,7 @@
     {
       "endpoint": "GET /api/corporate-actions",
       "happy_code": 200,
-      "happy_latency_ms": 2025.1,
+      "happy_latency_ms": 0.0,
       "fault_code": 200,
       "passed": true,
       "error": null
@@ -83,7 +83,7 @@
     {
       "endpoint": "GET /api/correlation",
       "happy_code": 200,
-      "happy_latency_ms": 6345.2,
+      "happy_latency_ms": 740.1,
       "fault_code": "N/A",
       "passed": true,
       "error": null
@@ -91,7 +91,7 @@
     {
       "endpoint": "GET /api/mlops/status",
       "happy_code": 200,
-      "happy_latency_ms": 2039.6,
+      "happy_latency_ms": 3.0,
       "fault_code": "N/A",
       "passed": true,
       "error": null
@@ -99,7 +99,7 @@
     {
       "endpoint": "GET /api/insider/COMI.CA",
       "happy_code": 200,
-      "happy_latency_ms": 2022.5,
+      "happy_latency_ms": 2.0,
       "fault_code": 200,
       "passed": true,
       "error": null
@@ -107,7 +107,7 @@
     {
       "endpoint": "GET /api/insider/market_deals",
       "happy_code": 200,
-      "happy_latency_ms": 2016.1,
+      "happy_latency_ms": 1.0,
       "fault_code": "N/A",
       "passed": true,
       "error": null
@@ -115,7 +115,7 @@
     {
       "endpoint": "GET /api/tax/harvesting",
       "happy_code": 200,
-      "happy_latency_ms": 2023.9,
+      "happy_latency_ms": 2.0,
       "fault_code": "N/A",
       "passed": true,
       "error": null
@@ -123,7 +123,7 @@
     {
       "endpoint": "GET /api/sentiment/COMI.CA",
       "happy_code": 200,
-      "happy_latency_ms": 2539.0,
+      "happy_latency_ms": 838.1,
       "fault_code": 200,
       "passed": true,
       "error": null
@@ -131,7 +131,7 @@
     {
       "endpoint": "GET /api/ai/forecast/COMI.CA",
       "happy_code": 200,
-      "happy_latency_ms": 2680.0,
+      "happy_latency_ms": 804.3,
       "fault_code": 200,
       "passed": true,
       "error": null
@@ -139,7 +139,7 @@
     {
       "endpoint": "GET /api/ai/validation_metrics",
       "happy_code": 200,
-      "happy_latency_ms": 2026.0,
+      "happy_latency_ms": 0.0,
       "fault_code": "N/A",
       "passed": true,
       "error": null
@@ -147,7 +147,7 @@
     {
       "endpoint": "GET /api/notifications/recent",
       "happy_code": 200,
-      "happy_latency_ms": 2024.4,
+      "happy_latency_ms": 3.0,
       "fault_code": 200,
       "passed": true,
       "error": null
@@ -155,7 +155,7 @@
     {
       "endpoint": "GET /api/real_portfolio",
       "happy_code": 200,
-      "happy_latency_ms": 2014.7,
+      "happy_latency_ms": 1.0,
       "fault_code": "N/A",
       "passed": true,
       "error": null
@@ -163,23 +163,23 @@
     {
       "endpoint": "POST /api/real_portfolio/add",
       "happy_code": 200,
-      "happy_latency_ms": 2170.5,
+      "happy_latency_ms": 195.6,
       "fault_code": 400,
       "passed": true,
-      "error": "HTTP Error 400: BAD REQUEST"
+      "error": null
     },
     {
       "endpoint": "POST /api/real_portfolio/delete",
       "happy_code": 200,
-      "happy_latency_ms": 2181.7,
+      "happy_latency_ms": 128.3,
       "fault_code": 400,
       "passed": true,
-      "error": "HTTP Error 400: BAD REQUEST"
+      "error": null
     },
     {
       "endpoint": "GET /api/watchlist",
       "happy_code": 200,
-      "happy_latency_ms": 2025.5,
+      "happy_latency_ms": 1.0,
       "fault_code": "N/A",
       "passed": true,
       "error": null
@@ -187,18 +187,42 @@
     {
       "endpoint": "POST /api/watchlist/add",
       "happy_code": 200,
-      "happy_latency_ms": 2117.2,
+      "happy_latency_ms": 9.0,
       "fault_code": 400,
       "passed": true,
-      "error": "HTTP Error 400: BAD REQUEST"
+      "error": null
     },
     {
       "endpoint": "POST /api/watchlist/remove",
       "happy_code": 200,
-      "happy_latency_ms": 2122.5,
+      "happy_latency_ms": 10.2,
       "fault_code": 400,
       "passed": true,
-      "error": "HTTP Error 400: BAD REQUEST"
+      "error": null
+    },
+    {
+      "endpoint": "POST /api/chat",
+      "happy_code": 200,
+      "happy_latency_ms": 5.0,
+      "fault_code": 400,
+      "passed": true,
+      "error": null
+    },
+    {
+      "endpoint": "GET /api/morning_briefing",
+      "happy_code": 200,
+      "happy_latency_ms": 0.0,
+      "fault_code": 200,
+      "passed": true,
+      "error": null
+    },
+    {
+      "endpoint": "GET /api/fundamentals/COMI.CA",
+      "happy_code": 200,
+      "happy_latency_ms": 10515.6,
+      "fault_code": "N/A",
+      "passed": true,
+      "error": null
     }
   ],
   "numerical_edge_cases": [
