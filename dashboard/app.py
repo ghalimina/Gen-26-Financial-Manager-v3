@@ -689,6 +689,20 @@ def api_regime():
     return jsonify(RegimeHMMEngine.detect_latent_regime())
 
 
+@app.route("/api/arbitrage/pairs", methods=["GET"])
+@app.route("/api/arbitrage", methods=["GET"])
+def api_arbitrage_pairs():
+    """Returns EGX statistical arbitrage opportunities, spread Z-Scores, and mean-reversion signals."""
+    from core.statistical_arbitrage_engine import StatisticalArbitrageEngine
+    opportunities = StatisticalArbitrageEngine.evaluate_arbitrage_opportunities()
+    return jsonify({
+        "opportunities": opportunities,
+        "actionable_count": sum(1 for o in opportunities if o.get("is_actionable")),
+        "total_pairs_monitored": len(opportunities),
+        "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    })
+
+
 # --- 9.7 MLOps Continuous Learning & Telegram Bot Status ---
 @app.route("/api/mlops/status", methods=["GET"])
 def api_mlops_status():
