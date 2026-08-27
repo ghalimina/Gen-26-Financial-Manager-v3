@@ -331,7 +331,24 @@ def api_corporate_actions():
 def api_macro():
     """Returns quantified Egyptian macroeconomic indicators and sector sensitivities."""
     from core.macro_intelligence_engine import MacroIntelligenceEngine
-    return jsonify(MacroIntelligenceEngine.load_macro_state())
+    from core.macro_economic_engine import MacroEconomicEngine
+    state = MacroIntelligenceEngine.load_macro_state()
+    try:
+        telemetry = MacroEconomicEngine.get_macro_telemetry()
+        state["macro_telemetry"] = telemetry
+        state["engine_regime"] = telemetry.get("macro_regime")
+        state["engine_regime_ar"] = telemetry.get("macro_regime_ar")
+        state["sector_biases"] = telemetry.get("sector_biases")
+    except Exception:
+        pass
+    return jsonify(state)
+
+
+@app.route("/api/macro/telemetry", methods=["GET"])
+def api_macro_telemetry():
+    """Returns compiled macro telemetry and tactical sector rotation directives from MacroEconomicEngine."""
+    from core.macro_economic_engine import MacroEconomicEngine
+    return jsonify(MacroEconomicEngine.get_macro_telemetry()), 200
 
 
 @app.route("/api/correlation", methods=["GET"])
