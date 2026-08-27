@@ -682,6 +682,13 @@ def api_portfolio_hrp_weights():
     })
 
 
+@app.route("/api/regime", methods=["GET"])
+def api_regime():
+    """Returns EGX30 market regime classification, cash allocation rules, and crash detector metrics."""
+    from core.regime_hmm_engine import RegimeHMMEngine
+    return jsonify(RegimeHMMEngine.detect_latent_regime())
+
+
 # --- 9.7 MLOps Continuous Learning & Telegram Bot Status ---
 @app.route("/api/mlops/status", methods=["GET"])
 def api_mlops_status():
