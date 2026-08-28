@@ -32,7 +32,7 @@ class TestUniverseExpansionAndLiquidityGate(unittest.TestCase):
         self.app.testing = True
 
     def test_01_thndr_universe_json_structure_and_count(self):
-        """Verify data/thndr_egx_224_universe.json exists and contains 224 valid stocks."""
+        """Verify data/thndr_egx_244_universe.json exists and contains 244 valid stocks."""
         self.assertTrue(os.path.exists(THNDR_UNIVERSE_FILE), f"Missing {THNDR_UNIVERSE_FILE}")
         with open(THNDR_UNIVERSE_FILE, "r", encoding="utf-8") as f:
             data = json.load(f)

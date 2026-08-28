@@ -835,10 +835,8 @@ class EGXUniverseLoader:
         """Loads complete 244-stock EGX/Thndr universe dynamically into ACTIVE_UNIVERSE."""
         try:
             workspace = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-            u_path_244 = os.path.join(workspace, "data", "thndr_egx_244_universe.json")
-            u_path_224 = os.path.join(workspace, "data", "thndr_egx_224_universe.json")
-            u_file = u_path_244 if os.path.exists(u_path_244) else (u_path_224 if os.path.exists(u_path_224) else None)
-            if u_file:
+            u_file = os.path.join(workspace, "data", "thndr_egx_244_universe.json")
+            if os.path.exists(u_file):
                 with open(u_file, "r", encoding="utf-8") as f:
                     data = json.load(f)
                 for s in data.get("stocks", []):
