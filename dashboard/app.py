@@ -1245,6 +1245,132 @@ def api_fundamentals_ticker(ticker):
         }), 500
 
 
+# --- 23. EGX Trading Rules & Execution Guard ---
+@app.route("/api/trading_rules/<ticker>", methods=["GET"])
+@app.route("/api/trading-rules/<ticker>", methods=["GET"])
+def api_trading_rules(ticker):
+    """
+    Returns EGX circuit breaker status, settlement tiers (T+0/T+1/T+2),
+    margin eligibility (List A/B), and market impact safeguards.
+    """
+    try:
+        from core.egx_trading_rules_engine import EGXTradingRulesEngine
+        from core.market_price_service import MarketPriceService
+        from flask import request
+
+        clean_sym = ticker.upper().strip()
+        if not clean_sym.endswith(".CA") and "." not in clean_sym:
+            clean_sym = f"{clean_sym}.CA"
+
+        canon = MarketPriceService.CANONICAL_PRICES.get(clean_sym, {})
+        cp = float(canon.get("price", 10.0))
+        prev = float(canon.get("previous_close", cp))
+
+        limits = EGXTradingRulesEngine.evaluate_price_limits(clean_sym, cp, prev)
+        tiers = EGXTradingRulesEngine.get_settlement_and_margin_tier(clean_sym)
+        
+        order_val = float(request.args.get("order_value", 250000.0))
+        impact = EGXTradingRulesEngine.check_market_impact(clean_sym, order_val)
+
+        return jsonify({
+            "ticker": clean_sym,
+            "current_price": cp,
+            "previous_close": prev,
+            "price_limits": limits,
+            "settlement_and_margin": tiers,
+            "market_impact_analysis": impact,
+            "status": "SUCCESS"
+        }), 200
+    except Exception as e:
+        return jsonify({"status": "ERROR", "error": str(e)}), 500
+
+
+# --- 24. DCF Intrinsic Fair Value & Margin of Safety ---
+@app.route("/api/fair_value/<ticker>", methods=["GET"])
+@app.route("/api/fair-value/<ticker>", methods=["GET"])
+def api_fair_value(ticker):
+    """
+    Returns two-stage DCF intrinsic valuation, margin of safety %, and institutional verdict.
+    """
+    try:
+        from core.corporate_actions_engine import CorporateActionsEngine
+        clean_sym = ticker.upper().strip()
+        if not clean_sym.endswith(".CA") and "." not in clean_sym:
+            clean_sym = f"{clean_sym}.CA"
+
+        res = CorporateActionsEngine.calculate_fair_value(clean_sym)
+        return jsonify(res), 200
+    except Exception as e:
+        return jsonify({"status": "ERROR", "error": str(e)}), 500
+
+
+# --- 25. Institutional & Foreign Flow Radar ---
+@app.route("/api/institutional_flow", methods=["GET"])
+@app.route("/api/institutional-flow", methods=["GET"])
+def api_institutional_flow():
+    """
+    Returns daily institutional & foreign net flows, MSCI/FTSE rebalancing radar, and Equity Risk Premium (ERP).
+    """
+    try:
+        from core.institutional_flow_engine import InstitutionalFlowEngine
+        telemetry = InstitutionalFlowEngine.get_institutional_flow_telemetry()
+        rebal = InstitutionalFlowEngine.get_index_rebalancing_calendar()
+        erp = InstitutionalFlowEngine.calculate_equity_risk_premium()
+
+        return jsonify({
+            "flow_telemetry": telemetry,
+            "index_rebalancing_radar": rebal,
+            "equity_risk_premium": erp,
+            "status": "SUCCESS"
+        }), 200
+    except Exception as e:
+        return jsonify({"status": "ERROR", "error": str(e)}), 500
+
+
+# --- 26. Dynamic Trailing Stop Levels ---
+@app.route("/api/trailing_stop", methods=["GET"])
+@app.route("/api/trailing-stop", methods=["GET"])
+def api_trailing_stop():
+    """
+    Returns active trailing stop ratchet calculations and profit lock levels.
+    """
+    try:
+        from core.dynamic_risk_manager import DynamicRiskManager
+        from core.market_price_service import MarketPriceService
+        from flask import request
+
+        ticker = request.args.get("ticker", "COMI.CA")
+        clean_sym = ticker.upper().strip()
+        if not clean_sym.endswith(".CA") and "." not in clean_sym:
+            clean_sym = f"{clean_sym}.CA"
+
+        canon = MarketPriceService.CANONICAL_PRICES.get(clean_sym, {})
+        cp = float(canon.get("price", 140.0))
+        entry_price = float(request.args.get("entry_price", cp * 0.85))
+        peak_price = float(request.args.get("peak_price", max(cp, entry_price * 1.15)))
+
+        res = DynamicRiskManager.compute_trailing_stop(entry_price, peak_price, cp)
+        return jsonify(res), 200
+    except Exception as e:
+        return jsonify({"status": "ERROR", "error": str(e)}), 500
+
+
+# --- 27. EGX Seasonality & Market Psychology ---
+@app.route("/api/seasonality", methods=["GET"])
+def api_seasonality():
+    """
+    Returns current calendar seasonality regime (Ramadan, Thursday Dip, December Dressing) and strategy adjustments.
+    """
+    try:
+        from core.market_seasonality_engine import MarketSeasonalityEngine
+        from flask import request
+        d_str = request.args.get("date")
+        res = MarketSeasonalityEngine.evaluate_current_seasonality(d_str)
+        return jsonify(res), 200
+    except Exception as e:
+        return jsonify({"status": "ERROR", "error": str(e)}), 500
+
+
 @app.errorhandler(404)
 def handle_404_error(e):
     return jsonify({"error": "Not Found", "status": 404}), 404
