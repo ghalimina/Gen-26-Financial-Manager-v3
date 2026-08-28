@@ -640,10 +640,18 @@ class PriceSyncService:
 
         # 2. Secondary Live Fetch: yfinance (for tickers not in tv_quotes or verification)
         yf_quotes = {}
-        missing_tickers = [t for t in tickers if t not in tv_quotes]
+        # Filter out preferred/bonus share symbols that do not exist on Yahoo Finance
+        missing_tickers = [t for t in tickers if t not in tv_quotes and not ('_P.CA' in t or '_B.CA' in t)]
         if missing_tickers:
             try:
                 import yfinance as yf
+                import logging as py_logging
+                import os
+                import sys
+
+                # Mute yfinance internal logger noise
+                py_logging.getLogger('yfinance').setLevel(py_logging.CRITICAL)
+
                 df = yf.download(
                     missing_tickers,
                     period="5d",

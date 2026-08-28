@@ -11,7 +11,12 @@ import json
 import io
 import csv
 import datetime
-from flask import Flask, render_template, jsonify, request, Response
+import logging
+from flask import Flask, render_template, jsonify, request, Response, send_file
+
+# Mute noisy third-party library loggers
+logging.getLogger('yfinance').setLevel(logging.CRITICAL)
+logging.getLogger('urllib3').setLevel(logging.WARNING)
 
 WORKSPACE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if WORKSPACE not in sys.path:

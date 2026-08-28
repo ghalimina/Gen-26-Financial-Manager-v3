@@ -2658,7 +2658,14 @@
         // --- Navigation ---
         function navigateTo(tabId) {
             if (!VALID_TABS.includes(tabId)) tabId = 'overview';
-            window.location.hash = tabId;
+            if (window.location.hash !== '#' + tabId) {
+                window.location.hash = tabId;
+            }
+            renderTab(tabId);
+            const sb = document.getElementById('main-sidebar');
+            if (sb && sb.classList.contains('mobile-open')) {
+                sb.classList.remove('mobile-open');
+            }
         }
 
         function renderTab(tabId) {
@@ -2677,25 +2684,29 @@
             if (titleEl) titleEl.innerText = TITLE_MAP[tabId] || 'منظومة GEN-26';
 
             // Tab-specific fetchers
-            if (tabId === 'details') {
-                renderTradingViewChart(currentStockTicker);
-                fetchStockFundamentals(currentStockTicker);
-            } else if (tabId === 'real_portfolio') {
-                loadRealPortfolioTable();
-            } else if (tabId === 'watchlist') {
-                loadWatchlistTable();
-            } else if (tabId === 'overview') {
-                fetchMorningBriefing();
-                fetchMacroTelemetry();
-                fetchInsiderRadarData();
-                fetchArbitrageData();
-                fetchLiveNotifications();
-            } else if (tabId === 'ranking') {
-                loadRankingData();
-            } else if (tabId === 'insider_radar') {
-                fetchInsiderRadarData();
-            } else if (tabId === 'arbitrage_monitor') {
-                fetchArbitrageData();
+            try {
+                if (tabId === 'details') {
+                    renderTradingViewChart(currentStockTicker);
+                    fetchStockFundamentals(currentStockTicker);
+                } else if (tabId === 'real_portfolio') {
+                    loadRealPortfolioTable();
+                } else if (tabId === 'watchlist') {
+                    loadWatchlistTable();
+                } else if (tabId === 'overview') {
+                    fetchMorningBriefing();
+                    fetchMacroTelemetry();
+                    fetchInsiderRadarData();
+                    fetchArbitrageData();
+                    fetchLiveNotifications();
+                } else if (tabId === 'ranking') {
+                    loadRankingData();
+                } else if (tabId === 'insider_radar') {
+                    fetchInsiderRadarData();
+                } else if (tabId === 'arbitrage_monitor') {
+                    fetchArbitrageData();
+                }
+            } catch (tabErr) {
+                console.warn("Tab render handler warning:", tabErr);
             }
         }
 
@@ -3027,7 +3038,6 @@
         // =====================================================================
         // 🏆 4. RANKING DATA LOADER & RENDERER (TOP 100 CAPACITY & TABLE VIEW)
         // =====================================================================
-        let cachedRankings = [];
 
         function setRankingView(mode) {
             const btnCards = document.getElementById('btn-view-cards');
