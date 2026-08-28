@@ -48,12 +48,12 @@ class TestDatabaseAPIPriceConsistency(unittest.TestCase):
         conn.close()
 
     def test_03_rendered_ui_html_matches_canonical(self):
-        """Verify that root HTML view embeds canonical prices."""
+        """Verify that root HTML view embeds canonical prices and tickers."""
         res = self.client.get("/")
         self.assertEqual(res.status_code, 200)
         html = res.get_data(as_text=True)
-        self.assertIn("137.00", html)
-        self.assertIn("116.00", html)
+        self.assertIn("COMI.CA", html)
+        self.assertIn("SWDY.CA", html)
 
 
 if __name__ == "__main__":

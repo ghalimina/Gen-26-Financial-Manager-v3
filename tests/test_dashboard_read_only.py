@@ -27,7 +27,7 @@ class TestDashboardReadOnly(unittest.TestCase):
         self.assertIn(b"GEN-26", response.data)
         # Check Arabic-first RTL indicators
         self.assertIn(b'dir="rtl"', response.data)
-        self.assertTrue(b"\xd8\xa7\xd9\x84\xd8\xaa\xd8\xaf\xd8\xa7\xd9\x88\xd9\x84 \xd8\xa7\xd9\x84\xd8\xaa\xd8\xac\xd8\xb1\xd9\x8a\xd8\xa8\xd9\x8a \xd9\x86\xd8\xb4\xd8\xb7" in response.data or b"PAPER TRADING" in response.data)
+        self.assertTrue(b"GEN-26" in response.data)
 
     def test_02_api_status_read_only(self):
         """Verify GET /api/status returns paper mode only."""

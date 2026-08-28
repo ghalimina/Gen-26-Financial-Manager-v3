@@ -99,10 +99,10 @@ def audit_50_stocks():
 
         tv_q = tv_quotes.get(sym)
         canon_rec = canonical_store.get(sym)
-
-        live_price = tv_q["close"] if tv_q else (float(canon_rec["price"]) if canon_rec else nom_p)
-        volume = tv_q["volume"] if tv_q else (int(canon_rec.get("volume", 0)) if canon_rec else 0)
-        turnover = tv_q["turnover_egp"] if tv_q else (float(canon_rec.get("turnover_egp", 0.0)) if canon_rec else 0.0)
+        p_val = canon_rec.get("price") if canon_rec else None
+        live_price = float(tv_q["close"]) if (tv_q and tv_q.get("close") is not None) else (float(p_val) if p_val is not None else nom_p)
+        volume = tv_q["volume"] if (tv_q and tv_q.get("volume") is not None) else (int(canon_rec.get("volume", 0)) if (canon_rec and canon_rec.get("volume") is not None) else 0)
+        turnover = tv_q["turnover_egp"] if (tv_q and tv_q.get("turnover_egp") is not None) else (float(canon_rec.get("turnover_egp", 0.0)) if (canon_rec and canon_rec.get("turnover_egp") is not None) else 0.0)
 
         # A. Liquidity & Zero-Volume Audit
         is_liquid = volume > 0 and turnover >= 500_000.0
@@ -117,7 +117,7 @@ def audit_50_stocks():
             corp_hazard_stocks.append(sym)
 
         # C. Price Discrepancy & Drift Check
-        canon_p = float(canon_rec["price"]) if canon_rec else live_price
+        canon_p = float(p_val) if p_val is not None else live_price
         drift_pct = round(((live_price - canon_p) / canon_p) * 100.0, 2) if canon_p > 0 else 0.0
         if abs(drift_pct) > 3.0:
             discrepancy_stocks.append({"ticker": sym, "live": live_price, "canonical": canon_p, "drift_pct": drift_pct})

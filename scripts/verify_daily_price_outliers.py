@@ -53,7 +53,7 @@ def verify_outliers(sample_size: int = 10, max_drift_pct: float = 3.0) -> Dict[s
         canon_rec = ssot_store.get(sym) or MarketPriceService.get_canonical_price_record(sym)
         live_rec = live_quotes.get(sym)
 
-        if not canon_rec or not live_rec:
+        if not canon_rec or not live_rec or canon_rec.get("price") is None or live_rec.get("price") is None:
             continue
 
         p_canon = float(canon_rec["price"])
