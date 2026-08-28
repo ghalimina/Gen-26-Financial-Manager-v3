@@ -175,6 +175,11 @@ class NotificationEngine:
         return {
             "status": "DELIVERED" if (token and chat_id and delivered) else "MOCK_DISPATCHED",
             "delivered": delivered,
+            "notification_id": log_record.get("notification_id"),
+            "category": log_record.get("category"),
+            "timestamp": log_record.get("timestamp"),
+            "title": title,
+            "message": text,
             "telegram_response": res_info,
             "log_record": log_record,
             "message_preview": text[:120] + "..." if len(text) > 120 else text
@@ -462,14 +467,41 @@ class NotificationEngine:
                 "notification_id": "NOTIF_INIT_03",
                 "timestamp": (now - datetime.timedelta(hours=6)).strftime("%Y-%m-%d %H:%M:%S"),
                 "iso_timestamp": (now - datetime.timedelta(hours=6)).isoformat(),
-                "category": "MACRO_SHOCK",
-                "icon": "⚠️",
-                "title": "⚠️ صدمة اقتصادية (ماكرو)",
-                "message": "⚠️ صدمة اقتصادية (ماكرو): استقرار سعر الفائدة عند 19.25% وسعر الدولار عند 48.50 ج.م مع ترجيح العوامل الدفاعية.",
-                "delivered_telegram": True,
                 "metadata": {"cbe_rate": 19.25}
             }
         ]
+
+    @classmethod
+    def send_telegram_alert(
+        cls,
+        message: str,
+        alert_type: str = "GENERAL",
+        **kwargs
+    ) -> Dict[str, Any]:
+        """
+        Main dispatch gateway for custom Telegram alerts.
+        Gracefully logs locally and dispatches to Telegram if configured.
+        """
+        icon_map = {
+            "STRONG_BUY": "🟢",
+            "BUY": "🟢",
+            "SELL": "🔴",
+            "STRONG_SELL": "🔴",
+            "STOP_LOSS": "🛑",
+            "CRASH_WARNING": "🚨",
+            "MORNING_BRIEFING": "🌅",
+            "MACRO_SHOCK": "⚠️",
+            "GENERAL": "🔔"
+        }
+        icon = icon_map.get(alert_type.upper(), "🔔")
+        title = kwargs.get("title", f"{icon} إشعار: {alert_type}")
+
+        return cls.send_message(
+            text=message,
+            category=alert_type.upper(),
+            icon=icon,
+            title=title
+        )
 
 
 # Backward Compatibility Alias

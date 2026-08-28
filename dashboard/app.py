@@ -1371,6 +1371,98 @@ def api_seasonality():
         return jsonify({"status": "ERROR", "error": str(e)}), 500
 
 
+# --- 28. London GDR Lead-Lag Arbitrage ---
+@app.route("/api/gdr/arbitrage", methods=["GET"])
+@app.route("/api/gdr-arbitrage", methods=["GET"])
+def api_gdr_arbitrage():
+    """
+    Returns London GDR live spreads, implied Cairo EGP parity, and overnight opening gap forecasts.
+    """
+    try:
+        from core.gdr_arbitrage_engine import GDRArbitrageEngine
+        pairs = GDRArbitrageEngine.scan_all_gdr_pairs()
+        return jsonify({
+            "status": "SUCCESS",
+            "gdr_pairs": pairs,
+            "count": len(pairs)
+        }), 200
+    except Exception as e:
+        return jsonify({"status": "ERROR", "error": str(e)}), 500
+
+
+# --- 29. Ensemble Consensus Decisions ---
+@app.route("/api/signals/ensemble", methods=["GET"])
+@app.route("/api/signals-ensemble", methods=["GET"])
+def api_signals_ensemble():
+    """
+    Returns 6-pillar multi-engine consensus decisions with conviction breakdown and entry/target/stop levels.
+    """
+    try:
+        from core.ensemble_decision_engine import EnsembleDecisionEngine
+        from flask import request
+
+        ticker = request.args.get("ticker")
+        if ticker:
+            clean_sym = ticker.upper().strip()
+            if not clean_sym.endswith(".CA") and "." not in clean_sym:
+                clean_sym = f"{clean_sym}.CA"
+            res = EnsembleDecisionEngine.evaluate_ensemble_consensus(clean_sym)
+            return jsonify(res), 200
+        else:
+            limit = int(request.args.get("limit", 10))
+            top_ops = EnsembleDecisionEngine.scan_top_ensemble_opportunities(limit=limit)
+            return jsonify({
+                "status": "SUCCESS",
+                "top_opportunities": top_ops,
+                "count": len(top_ops)
+            }), 200
+    except Exception as e:
+        return jsonify({"status": "ERROR", "error": str(e)}), 500
+
+
+# --- 30. Stealth Volume Accumulation Features ---
+@app.route("/api/features/stealth_volume", methods=["GET"])
+@app.route("/api/features/stealth-volume", methods=["GET"])
+def api_features_stealth_volume():
+    """
+    Returns top equities exhibiting stealth volume accumulation patterns (Volume Z > +2.0 and Range <= 1.5%).
+    """
+    try:
+        from core.advanced_feature_engineering import AdvancedFeatureEngineering
+        matches = AdvancedFeatureEngineering.scan_universe_stealth_volume()
+        return jsonify({
+            "status": "SUCCESS",
+            "stealth_matches": matches,
+            "count": len(matches)
+        }), 200
+    except Exception as e:
+        return jsonify({"status": "ERROR", "error": str(e)}), 500
+
+
+# --- 31. Telegram Alert Test Dispatch ---
+@app.route("/api/telegram/test", methods=["POST", "GET"])
+def api_telegram_test():
+    """
+    Dispatches a live test alert to Telegram and records in notification log.
+    """
+    try:
+        from core.notification_gateway import NotificationEngine
+        from flask import request
+        
+        msg = request.args.get("message") or (request.get_json(silent=True) or {}).get("message")
+        if not msg:
+            msg = "🔔 *GEN-26 Quant Terminal Live Telemetry Active*\n• 6-Pillar Ensemble Engine: `ONLINE`\n• London GDR Parity: `TRACKING`"
+
+        alert_type = request.args.get("alert_type") or (request.get_json(silent=True) or {}).get("alert_type") or "GENERAL"
+        res = NotificationEngine.send_telegram_alert(message=msg, alert_type=alert_type)
+        return jsonify({
+            "status": "SUCCESS",
+            "result": res
+        }), 200
+    except Exception as e:
+        return jsonify({"status": "ERROR", "error": str(e)}), 500
+
+
 @app.errorhandler(404)
 def handle_404_error(e):
     return jsonify({"error": "Not Found", "status": 404}), 404
