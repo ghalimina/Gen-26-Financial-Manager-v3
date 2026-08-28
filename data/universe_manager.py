@@ -20,7 +20,9 @@ if WORKSPACE not in sys.path:
 logger = logging.getLogger("GEN26.UniverseManager")
 
 DATA_DIR = os.path.join(WORKSPACE, "data")
-THNDR_UNIVERSE_FILE = os.path.join(DATA_DIR, "thndr_egx_224_universe.json")
+_u_244 = os.path.join(DATA_DIR, "thndr_egx_244_universe.json")
+_u_224 = os.path.join(DATA_DIR, "thndr_egx_224_universe.json")
+THNDR_UNIVERSE_FILE = _u_244 if os.path.exists(_u_244) else _u_224
 
 
 # Verified Legal Rebrand / Archaic EGX Ticker Translation Map (100% Identical Legal Entity & ISIN)

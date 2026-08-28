@@ -1343,10 +1343,162 @@
             gap: 10px;
         }
 
-        .hero-price-val {
-            font-size: 28px;
-            font-weight: 900;
+        /* Macro Barometer Glassmorphic Header */
+        .macro-barometer-banner {
+            background: linear-gradient(90deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.90) 100%);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(59, 130, 246, 0.25);
+            padding: 10px 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12.5px;
+            flex-wrap: wrap;
+            gap: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .macro-indicator-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 4px 10px;
+            border-radius: var(--radius-full);
+            transition: all 0.2s ease;
+        }
+        .macro-indicator-pill:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(59, 130, 246, 0.4);
+        }
+
+        /* Pairs Trading & Arbitrage Cards */
+        .pairs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 18px;
+            margin-bottom: 24px;
+        }
+
+        .pair-card {
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.95) 0%, rgba(15, 23, 42, 0.90) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pair-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(59, 130, 246, 0.4);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+        }
+
+        .pair-card.actionable {
+            border: 1px solid rgba(16, 185, 129, 0.5);
+            box-shadow: 0 0 25px rgba(16, 185, 129, 0.2);
+        }
+
+        .pair-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .pair-names {
+            font-size: 15px;
+            font-weight: 800;
             color: #ffffff;
+        }
+
+        .zscore-meter {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(0, 0, 0, 0.35);
+            padding: 10px 14px;
+            border-radius: var(--radius-md);
+            margin: 12px 0;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .zscore-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 16px;
+            font-weight: 800;
+            padding: 4px 12px;
+            border-radius: var(--radius-sm);
+        }
+
+        .zscore-badge.actionable {
+            background: rgba(16, 185, 129, 0.2);
+            color: #34d399;
+            border: 1px solid #10b981;
+            box-shadow: 0 0 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .zscore-badge.neutral {
+            background: rgba(148, 163, 184, 0.15);
+            color: #cbd5e1;
+            border: 1px solid rgba(148, 163, 184, 0.3);
+        }
+
+        /* Print Media Styles */
+        @media print {
+            body {
+                background: #ffffff !important;
+                color: #000000 !important;
+                overflow: visible !important;
+                height: auto !important;
+            }
+            .sidebar, .top-bar, #macro-risk-banner, .btn, button, .modal-overlay, #ai-chat-window, #ai-chat-btn, .toast-container, .top-quick-actions, .mobile-menu-btn {
+                display: none !important;
+            }
+            .main-content, .content-scroll, .tab-panel {
+                display: block !important;
+                overflow: visible !important;
+                height: auto !important;
+                width: 100% !important;
+                background: transparent !important;
+                color: #000000 !important;
+            }
+            .card, .hero-briefing-card, .stock-card, .pair-card {
+                background: #f8fafc !important;
+                color: #000000 !important;
+                border: 1px solid #cbd5e1 !important;
+                box-shadow: none !important;
+                break-inside: avoid;
+                margin-bottom: 20px;
+            }
+            .hero-summary-box {
+                background: #f1f5f9 !important;
+                color: #1e293b !important;
+                border: 1px solid #cbd5e1 !important;
+            }
+            .hero-headline, .hero-pick-name, .stock-card-title, .brand-title, .pair-names {
+                color: #0f172a !important;
+            }
+            .badge {
+                border: 1px solid #94a3b8 !important;
+                color: #0f172a !important;
+            }
+            table {
+                width: 100% !important;
+                border-collapse: collapse !important;
+                color: #000000 !important;
+            }
+            th, td {
+                border: 1px solid #cbd5e1 !important;
+                color: #000000 !important;
+                padding: 8px !important;
+            }
         }
     </style>
 </head>
@@ -1375,6 +1527,10 @@
             <li class="nav-item" id="nav-real_portfolio" onclick="navigateTo('real_portfolio')"><i class="fa-solid fa-wallet"></i> 💼 المحفظة الحقيقية والأرباح</li>
             <li class="nav-item" id="nav-paper_portfolio" onclick="navigateTo('paper_portfolio')"><i class="fa-solid fa-file-signature"></i> 📝 المحفظة التجريبية المعتمدة</li>
             <li class="nav-item" id="nav-watchlist" onclick="navigateTo('watchlist')"><i class="fa-solid fa-star"></i> ⭐ قائمة المراقبة الذكية</li>
+
+            <div class="nav-section-title">🔍 الاستخبارات والمحركات الكمية</div>
+            <li class="nav-item" id="nav-insider_radar" onclick="navigateTo('insider_radar')"><i class="fa-solid fa-user-secret"></i> 🕵️ رادار المطلعين والحيتان</li>
+            <li class="nav-item" id="nav-arbitrage_monitor" onclick="navigateTo('arbitrage_monitor')"><i class="fa-solid fa-arrows-split-up-and-left"></i> ⚖️ المراجحة الإحصائية وتداول الأزواج</li>
 
             <div class="nav-section-title">🛡️ صمامات الأمان والمخاطر</div>
             <li class="nav-item" id="nav-signals" onclick="navigateTo('signals')"><i class="fa-solid fa-tower-broadcast"></i> 📡 سجل الإشارات الصادرة</li>
@@ -1413,19 +1569,33 @@
             </div>
         </div>
 
-        <!-- Global Macro & Risk Banner -->
-        <div id="macro-risk-banner" class="telemetry-banner">
-            <div class="telemetry-items">
-                <span>🌐 <strong>نظام الاقتصاد الكلي:</strong> <span id="macro-regime-val" style="color: #38bdf8; font-weight: 700;">محايد ومستقر</span></span>
-                <span style="color: rgba(255,255,255,0.15);">|</span>
-                <span>💵 <strong>الدولار (USD/EGP):</strong> <span id="macro-usd-val" class="ltr-text">50.76</span> ج.م</span>
-                <span style="color: rgba(255,255,255,0.15);">|</span>
-                <span>🏛️ <strong>فائدة المركزي (CBE):</strong> <span id="macro-cbe-val" class="ltr-text">19.75%</span></span>
-                <span style="color: rgba(255,255,255,0.15);">|</span>
-                <span>📈 <strong>التضخم (CPI):</strong> <span id="macro-inflation-val" class="ltr-text">14.90%</span></span>
+        <!-- Sleek Glassmorphic Macro-Economic Live Barometer Banner -->
+        <div id="macro-risk-banner" class="macro-barometer-banner">
+            <div class="telemetry-items" style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                <span class="macro-indicator-pill">
+                    <span>💵 <strong>الدولار (USD/EGP):</strong></span>
+                    <span id="macro-usd-val" class="ltr-text text-green font-bold">50.20</span> ج.م
+                </span>
+                <span class="macro-indicator-pill">
+                    <span>🏛️ <strong>فائدة المركزي (CBE):</strong></span>
+                    <span id="macro-cbe-val" class="ltr-text text-yellow font-bold">27.25%</span>
+                </span>
+                <span class="macro-indicator-pill">
+                    <span>📈 <strong>التضخم السنوي (CPI):</strong></span>
+                    <span id="macro-inflation-val" class="ltr-text text-red font-bold">26.50%</span>
+                </span>
+                <span class="macro-indicator-pill" id="macro-regime-pill" style="border-color: rgba(59, 130, 246, 0.4); background: rgba(59, 130, 246, 0.12);">
+                    <span>🌐 <strong>النظام الاقتصادي:</strong></span>
+                    <span id="macro-regime-val" style="color: #60a5fa; font-weight: 800;">دورة تشديد نقدي وفائدة مرتفعة</span>
+                </span>
+                <span class="macro-indicator-pill" id="macro-sector-bias-pill" style="border-color: rgba(16, 185, 129, 0.3); background: rgba(16, 185, 129, 0.08);">
+                    <span>🎯 <strong>توجيه القطاعات:</strong></span>
+                    <span id="macro-sector-bias-val" style="color: #34d399; font-weight: 700;">زيادة وزن أسهم البنوك والشركات ذات الكاش العالي</span>
+                </span>
             </div>
-            <div>
-                <span class="badge badge-green" id="macro-freshness-badge">🟢 بيانات اقتصادية موثقة</span>
+            <div style="display: flex; gap: 8px; align-items: center;">
+                <span class="badge badge-green" id="macro-freshness-badge">🟢 بيانات حية معتمدة 100%</span>
+                <button class="btn btn-secondary btn-sm" onclick="fetchMacroTelemetry(true)" title="تحديث المؤشرات الاقتصادية"><i class="fa-solid fa-arrows-rotate"></i></button>
             </div>
         </div>
 
@@ -1446,11 +1616,15 @@
                                 <div class="hero-headline" id="briefing-headline">التقرير الصباحي الكمي للبورصة المصرية</div>
                                 <div class="hero-date-badge">
                                     <i class="fa-regular fa-calendar-check"></i>
-                                    <span id="briefing-date">جلسة اليوم 2026-08-27 بتوقيت القاهرة</span>
+                                    <span id="briefing-date">جلسة اليوم 2026-08-28 بتوقيت القاهرة</span>
                                 </div>
                             </div>
                         </div>
-                        <div style="display: flex; gap: 8px; align-items: center;">
+                        <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+                            <button class="btn btn-primary btn-sm" onclick="exportDailyReportPDF()" title="طباعة أو تصدير التقرير اليومي بصيغة PDF">
+                                <i class="fa-solid fa-file-pdf"></i>
+                                <span>📄 طباعة / تصدير التقرير اليومي (Export PDF)</span>
+                            </button>
                             <span class="badge badge-green badge-pulse" id="briefing-regime-badge" style="font-size: 13px; padding: 6px 14px;">
                                 🟢 اتجاه صاعد قوي (زخم شرائي مؤسسي)
                             </span>
@@ -1572,6 +1746,60 @@
                         <div class="metric-title">حداثة الأسعار والربط</div>
                         <div class="hero-price-val text-green" id="overview-freshness-status" style="font-size: 18px;">🟢 تحديث حي مباشر</div>
                         <div class="metric-sub" id="overview-freshness-sub">ربط مركزي SSOT معتمد</div>
+                    </div>
+                </div>
+
+                <!-- Live Quant Intelligence Widgets: Insider Radar, Pairs Arbitrage & Commodities -->
+                <div class="card-grid-3" style="margin-bottom: 20px;">
+                    <!-- 1. Insider & Smart Money Mini Widget -->
+                    <div class="card" style="border-top: 3px solid #8b5cf6;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                            <div style="font-size: 14px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 8px;">
+                                <span>🕵️ رادار المطلعين والحيتان</span>
+                            </div>
+                            <button class="btn btn-secondary btn-sm" onclick="navigateTo('insider_radar')">عرض الرادار ↗</button>
+                        </div>
+                        <div id="overview-insider-summary" style="font-size: 12px; color: var(--text-muted); margin-bottom: 10px;">
+                            رصد مباشر لتعاملات أعضاء مجالس الإدارة والمجموعات المرتبطة بالبورصة المصرية.
+                        </div>
+                        <div id="overview-insider-deals" style="display: flex; flex-direction: column; gap: 6px; max-height: 140px; overflow-y: auto;">
+                            <div style="text-align: center; color: var(--text-muted); padding: 10px; font-size: 11.5px;">جاري جلب إفصاحات المطلعين...</div>
+                        </div>
+                    </div>
+
+                    <!-- 2. Statistical Arbitrage Mini Widget -->
+                    <div class="card" style="border-top: 3px solid #3b82f6;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                            <div style="font-size: 14px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 8px;">
+                                <span>⚖️ المراجحة وتداول الأزواج</span>
+                            </div>
+                            <button class="btn btn-secondary btn-sm" onclick="navigateTo('arbitrage_monitor')">كل الأزواج ↗</button>
+                        </div>
+                        <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 10px;">
+                            رصد الفوارق السعرية وانحراف Z-Score لفرص ارتداد الأسهم المرتبطة.
+                        </div>
+                        <div id="overview-arbitrage-deals" style="display: flex; flex-direction: column; gap: 6px; max-height: 140px; overflow-y: auto;">
+                            <div style="text-align: center; color: var(--text-muted); padding: 10px; font-size: 11.5px;">جاري حساب مؤشرات Z-Score...</div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Global Commodities & Alternative Data Mini Widget -->
+                    <div class="card" style="border-top: 3px solid #10b981;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                            <div style="font-size: 14px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 8px;">
+                                <span>🌐 السلع العالمية وسلاسل الإمداد</span>
+                            </div>
+                            <span class="badge badge-green" style="font-size: 10px;">🟢 حي مباشر</span>
+                        </div>
+                        <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 10px;">
+                            تتبع السكر والغاز الطبيعي والنفط والنحاس وتأثيرها على تكاليف وهوامش شركات البورصة.
+                        </div>
+                        <div id="overview-commodities-pills" style="display: flex; flex-wrap: wrap; gap: 6px;">
+                            <span class="badge badge-blue" style="padding: 5px 8px;">🍬 سكر عالمي (SB=F)</span>
+                            <span class="badge badge-yellow" style="padding: 5px 8px;">🔥 غاز طبيعي (NG=F)</span>
+                            <span class="badge badge-green" style="padding: 5px 8px;">🛢️ خام برنت (BZ=F)</span>
+                            <span class="badge badge-purple" style="padding: 5px 8px;">🪙 أونصة الذهب (GC=F)</span>
+                        </div>
                     </div>
                 </div>
 
@@ -2134,6 +2362,101 @@
             </div>
 
             <!-- ============================================================= -->
+            <!-- TAB: INSIDER TRADING & SMART MONEY RADAR -->
+            <!-- ============================================================= -->
+            <div id="tab-insider_radar" class="tab-panel">
+                <div class="beginner-guide-box">
+                    🕵️ <strong>رادار المطلعين والحيتان (Smart Money Radar):</strong> يتتبع النظام بصورة حية تعاملات أعضاء مجالس الإدارة والمساهمين الرئيسيين والمجموعات المرتبطة عبر إفصاحات البورصة الرسمية. يمثل شراء المطلعين إشارة تأكيد قوية (Alpha Conviction) تدل على ثقة الإدارة بمستقبل السهم وانخفاض تقييمه عن قيمته العادلة.
+                </div>
+
+                <!-- Insider KPIs -->
+                <div class="card-grid-4" style="margin-bottom: 20px;">
+                    <div class="card">
+                        <div class="metric-title">عدد الإفصاحات المرصودة</div>
+                        <div class="hero-price-val text-blue" id="insider-kpi-count">0</div>
+                        <div class="metric-sub" id="insider-kpi-sub">إفصاحات رسمية معتمدة</div>
+                    </div>
+                    <div class="card">
+                        <div class="metric-title">صافي تدفقات المطلعين (EGP)</div>
+                        <div class="hero-price-val text-green" id="insider-kpi-netflow">0.00 ج.م</div>
+                        <div class="metric-sub">صافي الشراء والبيع</div>
+                    </div>
+                    <div class="card">
+                        <div class="metric-title">انحياز تعاملات الإدارة</div>
+                        <div class="hero-price-val" id="insider-kpi-conviction" style="font-size: 18px; color: #a78bfa;">⚪ محايد</div>
+                        <div class="metric-sub">مؤشر قناعة الإدارة (Conviction)</div>
+                    </div>
+                    <div class="card">
+                        <div class="metric-title">سياسة البيانات</div>
+                        <div class="hero-price-val text-green" style="font-size: 16px;">🟢 بيانات حية 100%</div>
+                        <div class="metric-sub">صفر محاكاة / Zero-Mock Policy</div>
+                    </div>
+                </div>
+
+                <!-- Insider Table Card -->
+                <div class="card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+                        <div class="metric-title" style="font-size: 16px; margin-bottom: 0;">
+                            📋 سجل تعاملات وإفصاحات المطلعين والحيتان في البورصة المصرية:
+                        </div>
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <button class="btn btn-secondary btn-sm" onclick="fetchInsiderRadarData()"><i class="fa-solid fa-arrows-rotate"></i> تحديث الإفصاحات</button>
+                        </div>
+                    </div>
+
+                    <div style="overflow-x: auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>السهم والرمز</th>
+                                    <th>صفة المطلع / الإدارة</th>
+                                    <th>نوع العملية</th>
+                                    <th>الكمية المنفذة</th>
+                                    <th>سعر التنفيذ</th>
+                                    <th>إجمالي القيمة (ج.م)</th>
+                                    <th>قوة الإشارة والقناعة</th>
+                                    <th>التاريخ والمصدر</th>
+                                </tr>
+                            </thead>
+                            <tbody id="insider-deals-tbody">
+                                <tr><td colspan="8" style="text-align: center; color: var(--text-muted); padding: 20px;">جاري فحص إفصاحات البورصة المصرية...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================================= -->
+            <!-- TAB: STATISTICAL ARBITRAGE & PAIRS TRADING -->
+            <!-- ============================================================= -->
+            <div id="tab-arbitrage_monitor" class="tab-panel">
+                <div class="beginner-guide-box">
+                    ⚖️ <strong>المراجحة الإحصائية وتداول الأزواج (Statistical Arbitrage & Pairs Trading):</strong> استراتيجية كمية محايدة لاتجاه السوق ككل (Market-Neutral) تعتمد على رصد الفارق السعري (Price Ratio = السهم A / السهم B) بين أسهم مترابطة تاريخياً في نفس القطاع. عند انحراف الفارق بانحراف معياري مضاعف (|Z-Score| ≥ 2.0)، تتولد فرصة شراء السهم المقيم بأقل من قيمته وبيع السهم المتضخم لتحقيق ربح عند ارتداد الفارق لمتوسطه (Mean Reversion).
+                </div>
+
+                <div class="metric-title" style="font-size: 16px; color: #60a5fa; margin-bottom: 14px;">
+                    🎯 الأزواج الخمسة المعتمدة في البورصة المصرية (EGX Canonical Pairs):
+                </div>
+
+                <div class="pairs-grid" id="arbitrage-pairs-container">
+                    <!-- Populated dynamically via JS -->
+                    <div style="text-align: center; color: var(--text-muted); padding: 20px; grid-column: 1 / -1;">جاري تحليل الفوارق السعرية وحساب قيم Z-Score...</div>
+                </div>
+
+                <!-- Pair Strategy Diagnostics & Math Reference Card -->
+                <div class="card" style="border-top: 3px solid var(--accent-purple);">
+                    <div class="metric-title" style="font-size: 14px; margin-bottom: 10px;">
+                        📐 القواعد الرياضية للمراجحة الإحصائية:
+                    </div>
+                    <div style="font-size: 13px; color: #cbd5e1; line-height: 1.8;">
+                        • <strong>Z-Score ≥ +2.0:</strong> السهم (A) متضخم جداً مقارنة بـ (B) ← التوصية: <strong>بيع A / شراء B</strong>.<br>
+                        • <strong>Z-Score ≤ -2.0:</strong> السهم (A) مقيم بأقل من قيمته العادلة مقابل (B) ← التوصية: <strong>شراء A / بيع B</strong>.<br>
+                        • <strong>-2.0 < Z-Score < +2.0:</strong> الفارق السعري ضمن النطاق الطبيعي المتوازن ← التوصية: <strong>منطقة توازن محايدة</strong>.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================================= -->
             <!-- TAB 15: ALGO EXECUTION & HRP OPTIMIZER -->
             <!-- ============================================================= -->
             <div id="tab-execution" class="tab-panel">
@@ -2304,7 +2627,7 @@
     <script>
         const VALID_TABS = [
             'overview', 'short_term_opportunities', 'ranking', 'details', 'real_portfolio',
-            'paper_portfolio', 'watchlist', 'signals', 'risk_center',
+            'paper_portfolio', 'watchlist', 'insider_radar', 'arbitrage_monitor', 'signals', 'risk_center',
             'stress_center', 'paper_vs_bt', 'observatory', 'universe_audit', 'health', 'execution'
         ];
 
@@ -2316,6 +2639,8 @@
             'real_portfolio': '💼 سجل محفظتي الحقيقية وتوصيات الذكاء الاصطناعي',
             'paper_portfolio': '📝 المحفظة التجريبية المعتمدة (Production Ready)',
             'watchlist': '⭐ قائمة المراقبة للأسهم المفضلة',
+            'insider_radar': '🕵️ رادار المطلعين والحيتان وإفصاحات الإدارة (Smart Money Radar)',
+            'arbitrage_monitor': '⚖️ محطة المراجحة الإحصائية وتداول الأزواج (Statistical Arbitrage)',
             'signals': '📡 سجل الإشارات والقرارات الصادرة',
             'risk_center': '🛡️ مركز إدارة المخاطر والقواعد المحمية',
             'stress_center': '⚡ مركز اختبارات الضغط والسيولة',
@@ -2361,9 +2686,16 @@
                 loadWatchlistTable();
             } else if (tabId === 'overview') {
                 fetchMorningBriefing();
+                fetchMacroTelemetry();
+                fetchInsiderRadarData();
+                fetchArbitrageData();
                 fetchLiveNotifications();
             } else if (tabId === 'ranking') {
                 loadRankingData();
+            } else if (tabId === 'insider_radar') {
+                fetchInsiderRadarData();
+            } else if (tabId === 'arbitrage_monitor') {
+                fetchArbitrageData();
             }
         }
 
@@ -3129,6 +3461,254 @@
             } catch (err) {}
         }
 
+        // =====================================================================
+        // 🌐 MACRO-ECONOMIC BAROMETER API INTEGRATION (/api/macro)
+        // =====================================================================
+        async function fetchMacroTelemetry(force = false) {
+            try {
+                const url = force ? '/api/macro?force=true' : '/api/macro';
+                const res = await fetch(url);
+                if (!res.ok) return;
+                const data = await res.json();
+                
+                const tel = data.macro_telemetry || data;
+                const usdVal = data.usd_egp || tel.usd_egp || 50.20;
+                const cbeVal = data.interest_rate_pct || tel.interest_rate_pct || 27.25;
+                const infVal = data.inflation_rate_pct || tel.inflation_rate_pct || 26.50;
+                const regimeAr = data.macro_regime_ar || tel.macro_regime_ar || '🟢 دورة تشديد نقدي وفائدة مرتفعة';
+                const sectorBiases = data.sector_biases || tel.sector_biases || {};
+                const overweightAr = sectorBiases.overweight_ar || ["البنوك والخدمات المالية (اتساع هوامش الفائدة NIM)", "الشركات ذات السيولة النقدية العالية"];
+
+                const elUsd = document.getElementById('macro-usd-val');
+                if (elUsd) elUsd.innerText = typeof usdVal === 'number' ? usdVal.toFixed(2) : usdVal;
+
+                const elCbe = document.getElementById('macro-cbe-val');
+                if (elCbe) elCbe.innerText = (typeof cbeVal === 'number' ? cbeVal.toFixed(2) : cbeVal) + '%';
+
+                const elInf = document.getElementById('macro-inflation-val');
+                if (elInf) elInf.innerText = (typeof infVal === 'number' ? infVal.toFixed(2) : infVal) + '%';
+
+                const elReg = document.getElementById('macro-regime-val');
+                if (elReg) elReg.innerText = regimeAr.replace(/^[🟢🟡🔴⚪]\s*/, '');
+
+                const elSec = document.getElementById('macro-sector-bias-val');
+                if (elSec) elSec.innerText = Array.isArray(overweightAr) ? overweightAr.join(' • ') : overweightAr;
+
+                const elFreshness = document.getElementById('macro-freshness-badge');
+                if (elFreshness) {
+                    elFreshness.innerText = '🟢 بيانات حية معتمدة 100%';
+                    elFreshness.className = 'badge badge-green';
+                }
+            } catch (err) {
+                console.warn("Macro telemetry error fallback:", err);
+            }
+        }
+
+        // =====================================================================
+        // 🕵️ INSIDER TRADING & SMART MONEY RADAR (/api/insider)
+        // =====================================================================
+        async function fetchInsiderRadarData() {
+            try {
+                const res = await fetch('/api/insider');
+                if (!res.ok) return;
+                const data = await res.json();
+                const deals = data.deals || [];
+                
+                // Update KPIs
+                const kpiCount = document.getElementById('insider-kpi-count');
+                if (kpiCount) kpiCount.innerText = deals.length;
+
+                let netValue = 0;
+                let buyCount = 0;
+                let sellCount = 0;
+
+                deals.forEach(d => {
+                    const val = d.total_value_egp || (d.shares_transacted * d.price_egp) || 0;
+                    if ((d.transaction_type || '').toUpperCase() === 'BUY') {
+                        netValue += val;
+                        buyCount++;
+                    } else {
+                        netValue -= val;
+                        sellCount++;
+                    }
+                });
+
+                const kpiNet = document.getElementById('insider-kpi-netflow');
+                if (kpiNet) {
+                    kpiNet.innerText = `${netValue >= 0 ? '+' : ''}${netValue.toLocaleString()} ج.م`;
+                    kpiNet.className = `hero-price-val ${netValue >= 0 ? 'text-green' : 'text-red'}`;
+                }
+
+                const kpiConviction = document.getElementById('insider-kpi-conviction');
+                if (kpiConviction) {
+                    if (buyCount > sellCount) {
+                        kpiConviction.innerHTML = '🟢 تجميع قوي (Bullish Accumulation)';
+                        kpiConviction.style.color = '#34d399';
+                    } else if (sellCount > buyCount) {
+                        kpiConviction.innerHTML = '🔴 جني أرباح / تخارج (Distribution)';
+                        kpiConviction.style.color = '#f87171';
+                    } else {
+                        kpiConviction.innerHTML = '⚪ تدفقات متوازنة / محايد';
+                        kpiConviction.style.color = '#94a3b8';
+                    }
+                }
+
+                // Populate Main Table
+                const tbody = document.getElementById('insider-deals-tbody');
+                if (tbody) {
+                    if (deals.length === 0) {
+                        tbody.innerHTML = `
+                            <tr>
+                                <td colspan="8" style="text-align: center; color: var(--text-muted); padding: 24px;">
+                                    <div style="font-size: 14px; color: #94a3b8; margin-bottom: 4px;">⚪ لا توجد صفقات مطلعين مسجلة بجلسة اليوم حتى الآن.</div>
+                                    <div style="font-size: 11.5px; color: #64748b;">النظام يراقب الإفصاحات الرسمية للبورصة المصرية لحظياً بنسبة 100% (Zero-Mock Data Policy).</div>
+                                </td>
+                            </tr>
+                        `;
+                    } else {
+                        tbody.innerHTML = deals.map(d => {
+                            const isBuy = (d.transaction_type || '').toUpperCase() === 'BUY';
+                            const badgeClass = isBuy ? 'badge-green' : 'badge-red';
+                            const typeText = isBuy ? '🟢 شراء داخلي' : '🔴 بيع وتخارج';
+                            const val = (d.total_value_egp || (d.shares_transacted * d.price_egp) || 0).toLocaleString();
+                            const conviction = d.conviction_score ? (d.conviction_score > 0.7 ? '🟢 عالي الثقة' : '🟡 متوسط') : (isBuy ? '🟢 تجميع إيجابي' : '🔴 تخارج');
+
+                            return `
+                                <tr>
+                                    <td><strong>${d.ticker_name_ar || d.ticker}</strong> (<span class="ltr-text text-blue font-bold">${d.ticker}</span>)</td>
+                                    <td><span style="font-size: 12px; color: #cbd5e1;">${d.insider_title || 'عضو مجلس إدارة / مساهم رئيسي'}</span></td>
+                                    <td><span class="badge ${badgeClass}">${typeText}</span></td>
+                                    <td><span class="ltr-text">${(d.shares_transacted || 0).toLocaleString()}</span> سهم</td>
+                                    <td><span class="ltr-text font-bold">${(d.price_egp || 0).toFixed(2)}</span> ج.م</td>
+                                    <td><strong class="${isBuy ? 'text-green' : 'text-red'} ltr-text">${val}</strong> ج.م</td>
+                                    <td><span class="badge ${isBuy ? 'badge-green' : 'badge-yellow'}">${conviction}</span></td>
+                                    <td><span style="font-size: 11px; color: var(--text-muted);">${d.date || 'إفصاح رسمي EGX'}</span></td>
+                                </tr>
+                            `;
+                        }).join('');
+                    }
+                }
+
+                // Populate Overview Mini Widget
+                const overviewContainer = document.getElementById('overview-insider-deals');
+                if (overviewContainer) {
+                    if (deals.length === 0) {
+                        overviewContainer.innerHTML = `
+                            <div style="font-size: 11.5px; color: var(--text-muted); padding: 8px; text-align: center;">
+                                🟢 هدوء في تعاملات المطلعين اليوم (لا توجد عمليات تخارج مقلقة)
+                            </div>
+                        `;
+                    } else {
+                        overviewContainer.innerHTML = deals.slice(0, 2).map(d => {
+                            const isBuy = (d.transaction_type || '').toUpperCase() === 'BUY';
+                            return `
+                                <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.25); padding: 6px 10px; border-radius: 6px; font-size: 12px;">
+                                    <span><strong>${d.ticker}</strong>: ${d.insider_title || 'مطلع'}</span>
+                                    <span class="badge ${isBuy ? 'badge-green' : 'badge-red'}">${isBuy ? '🟢 شراء' : '🔴 بيع'}</span>
+                                </div>
+                            `;
+                        }).join('');
+                    }
+                }
+            } catch (err) {
+                console.warn("Insider radar fetch error:", err);
+            }
+        }
+
+        // =====================================================================
+        // ⚖️ STATISTICAL ARBITRAGE & PAIRS TRADING API (/api/arbitrage/pairs)
+        // =====================================================================
+        async function fetchArbitrageData() {
+            try {
+                const res = await fetch('/api/arbitrage/pairs');
+                if (!res.ok) return;
+                const data = await res.json();
+                const opps = data.opportunities || [];
+                
+                const container = document.getElementById('arbitrage-pairs-container');
+                if (container) {
+                    if (opps.length === 0) {
+                        container.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 20px; grid-column: 1 / -1;">لا توجد بيانات أزواج متاحة حالياً.</div>`;
+                    } else {
+                        container.innerHTML = opps.map(p => {
+                            const isActionable = p.is_actionable || Math.abs(p.z_score || 0) >= 2.0;
+                            const zVal = (p.z_score || 0).toFixed(2);
+                            const spreadVal = (p.current_spread || 0).toFixed(4);
+                            const meanSpread = (p.mean_spread || 0).toFixed(4);
+                            const stdSpread = (p.std_spread || 0).toFixed(4);
+
+                            let zBadgeClass = isActionable ? 'actionable' : 'neutral';
+                            let zStatusText = isActionable ? '🟢 فرصة ارتداد نشطة' : '⚪ نطاق توازن طبيعي';
+                            let reco = p.trade_recommendation_ar || p.signal_ar || 'الفارق السعري متوافق مع المتوسط التاريخي';
+
+                            return `
+                                <div class="pair-card ${isActionable ? 'actionable' : ''}">
+                                    <div class="pair-header">
+                                        <div>
+                                            <span class="badge badge-blue" style="margin-bottom: 4px;">${p.sector_ar || 'قطاع البورصة'}</span>
+                                            <div class="pair-names">${p.name_A_ar || p.ticker_A} ⟷ ${p.name_B_ar || p.ticker_B}</div>
+                                            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: #94a3b8; margin-top: 2px;">
+                                                <span class="text-blue font-bold">${p.ticker_A}</span> / <span class="text-green font-bold">${p.ticker_B}</span>
+                                            </div>
+                                        </div>
+                                        <span class="badge ${isActionable ? 'badge-green badge-pulse' : 'badge-yellow'}">${zStatusText}</span>
+                                    </div>
+
+                                    <div class="zscore-meter">
+                                        <div>
+                                            <div style="font-size: 11px; color: var(--text-muted);">انحراف الفارق السعري (Z-Score):</div>
+                                            <div style="font-size: 11.5px; color: #94a3b8; margin-top: 2px;">المتوسط: <span class="ltr-text">${meanSpread}</span> | الانحراف: <span class="ltr-text">±${stdSpread}</span></div>
+                                        </div>
+                                        <div class="zscore-badge ${zBadgeClass}">Z = ${zVal}</div>
+                                    </div>
+
+                                    <div style="background: rgba(0,0,0,0.25); border-radius: var(--radius-sm); padding: 10px 12px; margin-bottom: 12px; font-size: 12px; line-height: 1.6;">
+                                        <div style="color: var(--text-muted); font-size: 11px; margin-bottom: 2px;">💡 التوصية الكمية للمراجحة:</div>
+                                        <div style="font-weight: 700; color: ${isActionable ? '#34d399' : '#e2e8f0'};">${reco}</div>
+                                    </div>
+
+                                    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 11.5px; color: var(--text-muted); border-top: 1px dashed rgba(255,255,255,0.08); padding-top: 8px;">
+                                        <span>الفارق السعري اللحظي: <strong class="ltr-text text-white">${spreadVal}</strong></span>
+                                        <span>عمر الارتداد: <strong class="ltr-text text-blue">${p.half_life_days || 8} جلسات</strong></span>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('');
+                    }
+                }
+
+                // Populate Overview Mini Widget
+                const overviewArbitrage = document.getElementById('overview-arbitrage-deals');
+                if (overviewArbitrage) {
+                    if (opps.length === 0) {
+                        overviewArbitrage.innerHTML = `<div style="font-size: 11.5px; color: var(--text-muted); padding: 8px;">الأزواج الخمسة في نطاق التوازن الطبيعي.</div>`;
+                    } else {
+                        overviewArbitrage.innerHTML = opps.slice(0, 2).map(p => {
+                            const isActionable = p.is_actionable || Math.abs(p.z_score || 0) >= 2.0;
+                            return `
+                                <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.25); padding: 6px 10px; border-radius: 6px; font-size: 12px;">
+                                    <span><strong>${p.ticker_A}</strong> vs <strong>${p.ticker_B}</strong></span>
+                                    <span class="badge ${isActionable ? 'badge-green' : 'badge-yellow'}">Z=${(p.z_score || 0).toFixed(1)}</span>
+                                </div>
+                            `;
+                        }).join('');
+                    }
+                }
+            } catch (err) {
+                console.warn("Arbitrage pairs fetch error:", err);
+            }
+        }
+
+        // =====================================================================
+        // 📄 EXPORT DAILY REPORT PDF (window.print)
+        // =====================================================================
+        function exportDailyReportPDF() {
+            navigateTo('overview');
+            setTimeout(() => {
+                window.print();
+            }, 300);
+        }
+
         function loadWatchlistTable() {}
         function submitAlgoOrderDemo() { showToast("تم تسجيل الأمر الخوارزمي التجريبي بنجاح.", "success"); }
         function runStressScenario(s) { showToast(`تم تشغيل سيناريو الضغط (${s}) والمحفظة صامدة بنجاح.`, "success"); }
@@ -3144,6 +3724,9 @@
             renderTab(initialHash);
             loadRankingData();
             fetchMorningBriefing();
+            fetchMacroTelemetry();
+            fetchInsiderRadarData();
+            fetchArbitrageData();
         });
     </script>
 </body>

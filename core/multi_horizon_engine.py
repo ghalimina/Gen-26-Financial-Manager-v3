@@ -928,6 +928,36 @@ class MultiHorizonEngine:
 
         return False
 
+    @classmethod
+    def export_multi_horizon_predictions(cls, output_path: Optional[str] = None) -> Dict[str, Any]:
+        """
+        Computes and exports complete multi-horizon forecasts for all active EGX equities
+        using live SSOT prices from MarketPriceService. Saves to data/multi_horizon_predictions.json.
+        """
+        workspace = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        out_file = output_path or os.path.join(workspace, "data", "multi_horizon_predictions.json")
+
+        all_rankings = cls.get_all_multi_horizon_rankings(universe="all")
+        predictions_map: Dict[str, Any] = {}
+
+        for item in all_rankings:
+            ticker = item.get("ticker")
+            if ticker:
+                predictions_map[ticker] = item
+
+        payload = {
+            "as_of": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "total_equities": len(predictions_map),
+            "source": "GEN-26 Multi-Horizon Forecasting Engine (Live SSOT Prices)",
+            "predictions": predictions_map
+        }
+
+        os.makedirs(os.path.dirname(out_file), exist_ok=True)
+        with open(out_file, "w", encoding="utf-8") as f:
+            json.dump(payload, f, ensure_ascii=False, indent=2)
+
+        return payload
+
     # Aliases for backward & QA compatibility
     generate_short_term_opportunities = get_short_term_10d_opportunities
     _evaluate_single_stock_forecast = get_stock_multi_horizon_analysis

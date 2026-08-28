@@ -593,6 +593,63 @@ def api_risk():
     })
 
 
+@app.route("/api/risk/stress_test", methods=["GET"])
+@app.route("/api/risk/stress-test", methods=["GET"])
+def api_risk_stress_test():
+    """
+    Simulates mathematical portfolio stress scenarios (flash_crash_15, egp_devaluation_25, cbe_rate_hike_300bps, liquidity_crunch).
+    """
+    from core.risk_stress_testing_engine import RiskStressTestingEngine
+    scenario = request.args.get("scenario", "flash_crash_15")
+    try:
+        equity = float(request.args.get("initial_equity", 1_000_000.0))
+    except (ValueError, TypeError):
+        equity = 1_000_000.0
+    res = RiskStressTestingEngine.simulate_stress_scenario(scenario=scenario, initial_equity=equity)
+    return jsonify(res)
+
+
+@app.route("/api/risk/gold_hedge", methods=["GET"])
+@app.route("/api/risk/gold-hedge", methods=["GET"])
+def api_risk_gold_hedge():
+    """
+    Calculates dynamic Egyptian Gold ETF (AZG.CA) hedging allocation.
+    """
+    from core.risk_stress_testing_engine import RiskStressTestingEngine
+    regime = request.args.get("regime", "RATE_HIKING_CYCLE")
+    try:
+        risk_score = float(request.args.get("risk_score", 0.50))
+        portfolio_value = float(request.args.get("portfolio_value", 1_000_000.0))
+    except (ValueError, TypeError):
+        risk_score = 0.50
+        portfolio_value = 1_000_000.0
+    res = RiskStressTestingEngine.calculate_gold_hedge_allocation(
+        regime=regime,
+        risk_score=risk_score,
+        portfolio_value=portfolio_value
+    )
+    return jsonify(res)
+
+
+@app.route("/api/system/reality_audit", methods=["GET"])
+@app.route("/api/system/reality-audit", methods=["GET"])
+def api_system_reality_audit():
+    """
+    Runs or retrieves the Ground-Truth Reality Audit report.
+    """
+    from scripts.verify_ground_truth_reality import run_ground_truth_audit
+    force = request.args.get("force", "false").lower() in ["true", "1", "yes"]
+    report_path = os.path.join(WORKSPACE, "reports", "ground_truth_audit_report.json")
+    if not force and os.path.exists(report_path):
+        try:
+            with open(report_path, "r", encoding="utf-8") as f:
+                return jsonify(json.load(f))
+        except Exception:
+            pass
+    report = run_ground_truth_audit(export_report=True)
+    return jsonify(report)
+
+
 # --- 9.5 Algorithmic Broker Execution & Order Blotter ---
 @app.route("/api/execution/orders", methods=["GET"])
 def api_execution_orders():
@@ -778,8 +835,19 @@ def api_mlops_status():
     })
 
 
+# --- 9.75 Macro-Economic Telemetry & CBE Regime ---
+@app.route("/api/macro", endpoint="api_macro_direct", methods=["GET"])
+@app.route("/api/macro/telemetry", endpoint="api_macro_telemetry_ep", methods=["GET"])
+def api_macro_telemetry():
+    """Returns CBE interest rate, headline CPI inflation, USD/EGP, and active macro regime."""
+    from core.macro_economic_engine import MacroEconomicEngine
+    force = request.args.get("force", "false").lower() == "true"
+    return jsonify(MacroEconomicEngine.get_macro_telemetry(force_refresh=force))
+
+
 # --- 9.8 Insider Trading & Board Member Deals ---
-@app.route("/api/insider/market_deals", methods=["GET"])
+@app.route("/api/insider/market_deals", endpoint="api_insider_market_deals_ep", methods=["GET"])
+@app.route("/api/insider", endpoint="api_insider_direct", methods=["GET"])
 def api_insider_market_deals():
     """Returns market-wide aggregated insider deals."""
     from core.insider_trading_engine import InsiderTradingEngine

@@ -33534,5 +33534,83 @@
     "new_values": null,
     "source": "USER_MANUAL_UI",
     "notes": "User confirmed deletion"
+  },
+  {
+    "audit_id": "5fac6132",
+    "timestamp": "2026-08-28T03:31:35.198279",
+    "action": "ADD",
+    "ticker": "TMGH.CA",
+    "old_values": null,
+    "new_values": {
+      "holding_id": "POS_TMGH_9d5a7f",
+      "ticker": "TMGH.CA",
+      "company_name": "مجموعة طلعت مصطفى",
+      "exchange": "EGX",
+      "sector": "Real Estate",
+      "quantity": 100,
+      "average_entry_price": 50.0,
+      "manual_notes": "API test buy",
+      "created_at": "2026-08-28T03:31:35.104890",
+      "updated_at": "2026-08-28T03:31:35.104890",
+      "active": true
+    },
+    "source": "USER_MANUAL_UI",
+    "notes": "API test buy"
+  },
+  {
+    "audit_id": "f82452ec",
+    "timestamp": "2026-08-28T03:31:35.290783",
+    "action": "EDIT",
+    "ticker": "TMGH.CA",
+    "old_values": {
+      "holding_id": "POS_TMGH_9d5a7f",
+      "ticker": "TMGH.CA",
+      "company_name": "مجموعة طلعت مصطفى",
+      "exchange": "EGX",
+      "sector": "Real Estate",
+      "quantity": 100,
+      "average_entry_price": 50.0,
+      "manual_notes": "API test buy",
+      "created_at": "2026-08-28T03:31:35.104890",
+      "updated_at": "2026-08-28T03:31:35.104890",
+      "active": true
+    },
+    "new_values": {
+      "holding_id": "POS_TMGH_9d5a7f",
+      "ticker": "TMGH.CA",
+      "company_name": "مجموعة طلعت مصطفى",
+      "exchange": "EGX",
+      "sector": "Real Estate",
+      "quantity": 150,
+      "average_entry_price": 51.0,
+      "manual_notes": "API test edit",
+      "created_at": "2026-08-28T03:31:35.104890",
+      "updated_at": "2026-08-28T03:31:35.253881",
+      "active": true
+    },
+    "source": "USER_MANUAL_UI",
+    "notes": "API test edit"
+  },
+  {
+    "audit_id": "aa048cb3",
+    "timestamp": "2026-08-28T03:31:35.373455",
+    "action": "DELETE",
+    "ticker": "TMGH.CA",
+    "old_values": {
+      "holding_id": "POS_TMGH_9d5a7f",
+      "ticker": "TMGH.CA",
+      "company_name": "مجموعة طلعت مصطفى",
+      "exchange": "EGX",
+      "sector": "Real Estate",
+      "quantity": 150,
+      "average_entry_price": 51.0,
+      "manual_notes": "API test edit",
+      "created_at": "2026-08-28T03:31:35.104890",
+      "updated_at": "2026-08-28T03:31:35.253881",
+      "active": true
+    },
+    "new_values": null,
+    "source": "USER_MANUAL_UI",
+    "notes": "User confirmed deletion"
   }
 ]
