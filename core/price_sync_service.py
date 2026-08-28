@@ -432,7 +432,7 @@ class PriceSyncService:
     @classmethod
     def save_canonical_prices(cls, prices_dict: Dict[str, Dict[str, Any]]) -> bool:
         """
-        Atomically writes prices dictionary to data/canonical_prices_live.json.
+        Atomically writes prices dictionary to data/canonical_prices_live.json with retry on Windows.
         """
         try:
             os.makedirs(DATA_DIR, exist_ok=True)
@@ -441,7 +441,21 @@ class PriceSyncService:
                 f.flush()
                 os.fsync(f.fileno())
 
-            os.replace(TEMP_PRICES_FILE, CANONICAL_PRICES_FILE)
+            # Attempt atomic replace with retries for Windows file lock contention
+            replaced = False
+            for attempt in range(5):
+                try:
+                    os.replace(TEMP_PRICES_FILE, CANONICAL_PRICES_FILE)
+                    replaced = True
+                    break
+                except OSError:
+                    time.sleep(0.05)
+
+            if not replaced:
+                # Direct fallback write
+                with open(CANONICAL_PRICES_FILE, "w", encoding="utf-8") as f:
+                    json.dump(prices_dict, f, ensure_ascii=False, indent=2)
+
             cls._IN_MEMORY_CACHE = prices_dict
             try:
                 cls._LAST_LOAD_MTIME = os.path.getmtime(CANONICAL_PRICES_FILE)

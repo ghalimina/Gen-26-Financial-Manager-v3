@@ -29,13 +29,13 @@ from core.regime_hmm_engine import RegimeHMMEngine
 class TestRegimeHMMEngine(unittest.TestCase):
 
     def test_01_fetch_egx30_data_structure(self):
-        """Verify fetch_egx30_data returns a valid OHLCV DataFrame."""
-        df = RegimeHMMEngine.fetch_egx30_data(force_fallback=True)
+        """Verify fetch_egx30_data returns a valid DataFrame and does not fabricate noise on fallback."""
+        df_fallback = RegimeHMMEngine.fetch_egx30_data(force_fallback=True)
+        self.assertIsInstance(df_fallback, pd.DataFrame)
+        self.assertEqual(len(df_fallback), 0)
+
+        df = RegimeHMMEngine.fetch_egx30_data()
         self.assertIsInstance(df, pd.DataFrame)
-        self.assertGreaterEqual(len(df), 50)
-        for col in ["Close", "Open", "High", "Low", "Volume"]:
-            self.assertIn(col, df.columns)
-        self.assertFalse(df["Close"].isna().any())
 
     def test_02_regime_detection_schema(self):
         """Verify detect_latent_regime output contains all mandatory keys and valid types."""

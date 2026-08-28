@@ -1,7 +1,10 @@
 {
   "version": "3.0.0",
-  "last_updated": "2026-08-28T03:31:35.436350",
+  "last_updated": "2026-08-28T03:55:06.550377",
   "tickers": [
+    "COMI.CA",
+    "SWDY.CA",
+    "TMGH.CA",
     "EKHO.CA",
     "FWRY.CA"
   ]

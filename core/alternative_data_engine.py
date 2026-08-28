@@ -357,13 +357,35 @@ class AlternativeDataEngine:
 
         # 2. Evaluate Fertilizer Exporters & Natural Gas (ABUK, MFPC)
         if primary_comm == "NATURAL_GAS":
-            alt_score = 85.0
-            signal = cls.SIGNAL_BULLISH_EXPORTS
-            catalyst = "GLOBAL_FERTILIZER_EXPORT_STRENGTH"
-            desc_ar = (
-                f"قوة أسعار الغاز والأسمدة العالمية ({comm_ticker}: {pct_change:+.1f}%) "
-                f"تدعم تسعير شحنات التصدير بالدولار وتعزز ربحية شركة {info.get('company_name_ar', sym)}."
-            )
+            is_live = comm_trend.get("is_live", False)
+            if pct_change > 4.0:
+                alt_score = round(min(95.0, 50.0 + (pct_change * 3.5)), 1)
+                signal = cls.SIGNAL_BULLISH_EXPORTS
+                catalyst = "GLOBAL_FERTILIZER_EXPORT_STRENGTH"
+                desc_ar = (
+                    f"ارتفاع أسعار الغاز والأسمدة العالمية ({comm_ticker}: {pct_change:+.1f}%) "
+                    f"يعزز هوامش تسعير شحنات التصدير بالدولار لشركة {info.get('company_name_ar', sym)}."
+                )
+                badge_ar = "🟢 هوامش تصدير دولارية قوية"
+                is_actionable = True
+            elif pct_change < -5.0:
+                alt_score = round(max(-80.0, -30.0 + (pct_change * 2.0)), 1)
+                signal = cls.SIGNAL_INPUT_COST_HEADWIND
+                catalyst = "GLOBAL_GAS_DEMAND_SOFTENING"
+                desc_ar = (
+                    f"تراجع أسعار الغاز العالمية ({comm_ticker}: {pct_change:+.1f}%) "
+                    f"يضغط على تسعير صادرات الأسمدة لشركة {info.get('company_name_ar', sym)}."
+                )
+                badge_ar = "🔴 تباطؤ أسعار التصدير العالمية"
+                is_actionable = True
+            else:
+                alt_score = 0.0
+                signal = cls.SIGNAL_NEUTRAL
+                catalyst = "STABLE_ENERGY_COMMODITIES"
+                desc_ar = "استقرار أسعار الغاز والطاقة العالمية ضمن النطاق المعتاد."
+                badge_ar = "⚪ استقرار أسعار الطاقة العالمية"
+                is_actionable = False
+
             return {
                 "ticker": sym,
                 "company_name_ar": info.get("company_name_ar", sym),
@@ -371,24 +393,44 @@ class AlternativeDataEngine:
                 "alt_data_score": alt_score,
                 "signal": signal,
                 "primary_catalyst": catalyst,
-                "is_actionable": True,
-                "conviction_badge_ar": "🟢 هوامش تصدير دولارية قوية",
+                "is_actionable": is_actionable,
+                "conviction_badge_ar": badge_ar,
                 "description_ar": desc_ar,
                 "commodity_telemetry": comm_trend,
                 "supply_chain_dependencies": upstream,
                 "supply_chain_risk": "LOW",
+                "is_live": is_live,
                 "model": "EGX Export & Global Energy Commodities Pipeline"
             }
 
         # 3. Evaluate Real Estate Materials & Steel (TMGH, PHDC)
         if primary_comm == "STEEL":
-            alt_score = 65.0
-            signal = cls.SIGNAL_MARGIN_EXPANSION
-            catalyst = "STABILIZING_CONSTRUCTION_COSTS"
-            desc_ar = (
-                f"استقرار وتراجع أسعار حديد التسليح ومواد البناء ({pct_change:+.1f}%) "
-                f"يدعم هوامش تنفيذ المشروعات العقارية والتسليمات لشركة {info.get('company_name_ar', sym)}."
-            )
+            is_live = comm_trend.get("is_live", False)
+            if pct_change < -2.0:
+                alt_score = 65.0
+                signal = cls.SIGNAL_MARGIN_EXPANSION
+                catalyst = "STABILIZING_CONSTRUCTION_COSTS"
+                desc_ar = (
+                    f"تراجع واستقرار أسعار حديد التسليح ومواد البناء ({pct_change:+.1f}%) "
+                    f"يدعم هوامش تنفيذ المشروعات العقارية والتسليمات لشركة {info.get('company_name_ar', sym)}."
+                )
+                badge_ar = "🟢 تحسن هوامش التشييد والبناء"
+                is_actionable = True
+            elif pct_change > 5.0:
+                alt_score = -55.0
+                signal = cls.SIGNAL_INPUT_COST_HEADWIND
+                catalyst = "RISING_BUILDING_MATERIALS_COST"
+                desc_ar = f"ارتفاع أسعار الحديد ومواد البناء ({pct_change:+.1f}%) يضغط على هوامش التطوير العقاري."
+                badge_ar = "🔴 ارتفاع تكاليف مواد البناء"
+                is_actionable = True
+            else:
+                alt_score = 0.0
+                signal = cls.SIGNAL_NEUTRAL
+                catalyst = "STABLE_CONSTRUCTION_COSTS"
+                desc_ar = "استقرار أسعار مواد البناء وحديد التسليح ضمن النطاق الطبيعي."
+                badge_ar = "⚪ استقرار تكاليف التشييد والبناء"
+                is_actionable = False
+
             return {
                 "ticker": sym,
                 "company_name_ar": info.get("company_name_ar", sym),
@@ -396,12 +438,13 @@ class AlternativeDataEngine:
                 "alt_data_score": alt_score,
                 "signal": signal,
                 "primary_catalyst": catalyst,
-                "is_actionable": True,
-                "conviction_badge_ar": "🟢 استقرار تكاليف التشييد والبناء",
+                "is_actionable": is_actionable,
+                "conviction_badge_ar": badge_ar,
                 "description_ar": desc_ar,
                 "commodity_telemetry": comm_trend,
                 "supply_chain_dependencies": upstream,
                 "supply_chain_risk": "LOW",
+                "is_live": is_live,
                 "model": "EGX Real Estate Materials & Supply Chain Graph"
             }
 

@@ -133,13 +133,12 @@ class RegimeHMMEngine:
                 except Exception as e:
                     logger.debug("Failed fetching EGX30 via %s: %s", sym, e)
 
-            # 2. Try top EGX30 heavyweight constituent basket proxy (COMI 45%, SWDY 25%, TMGH 30%)
+            # 2. Try top EGX30 heavyweight constituent basket proxy (COMI 35%, SWDY 20%, TMGH 20%, EKHO 10%, ETEL 7.5%, ABUK 7.5%)
             if result_df is None or result_df.empty:
                 result_df = cls._fetch_egx30_basket_proxy(period=period)
 
-        # 3. Robust Realistic Fallback
-        if result_df is None or result_df.empty:
-            result_df = cls._generate_synthetic_egx30_data()
+        if result_df is None:
+            result_df = pd.DataFrame()
 
         cls._cached_df = result_df
         cls._last_cache_time = now
@@ -149,11 +148,18 @@ class RegimeHMMEngine:
     def _fetch_egx30_basket_proxy(cls, period: str = "1y", base_index_level: float = 30_850.0) -> Optional[pd.DataFrame]:
         """
         Synthesizes the EGX30 index series from top heavyweights:
-        COMI.CA (~45% proxy weight), SWDY.CA (~25%), TMGH.CA (~30%).
+        COMI.CA (~35%), SWDY.CA (~20%), TMGH.CA (~20%), EKHO.CA (~10%), ETEL.CA (~7.5%), ABUK.CA (~7.5%).
         """
         try:
             import yfinance as yf
-            weights = {"COMI.CA": 0.45, "SWDY.CA": 0.25, "TMGH.CA": 0.30}
+            weights = {
+                "COMI.CA": 0.35,
+                "SWDY.CA": 0.20,
+                "TMGH.CA": 0.20,
+                "EKHO.CA": 0.10,
+                "ETEL.CA": 0.075,
+                "ABUK.CA": 0.075
+            }
             dfs = {}
             for ticker in weights:
                 try:
@@ -161,7 +167,7 @@ class RegimeHMMEngine:
                     if df_t is not None and not df_t.empty:
                         if isinstance(df_t.columns, pd.MultiIndex):
                             df_t.columns = df_t.columns.get_level_values(0)
-                        if "Close" in df_t.columns and len(df_t) >= 20:
+                        if "Close" in df_t.columns and len(df_t) >= 15:
                             dfs[ticker] = df_t["Close"].dropna()
                 except Exception as e:
                     logger.debug("Proxy basket download failed for %s: %s", ticker, e)
@@ -171,7 +177,7 @@ class RegimeHMMEngine:
 
             # Align series
             combined_df = pd.DataFrame(dfs).dropna()
-            if combined_df.empty or len(combined_df) < 15:
+            if combined_df.empty or len(combined_df) < 10:
                 return None
 
             # Calculate daily weighted percentage returns
@@ -204,35 +210,6 @@ class RegimeHMMEngine:
         except Exception as e:
             logger.debug("Error building EGX30 basket proxy: %s", e)
             return None
-
-    @classmethod
-    def _generate_synthetic_egx30_data(cls, n_days: int = 250, base_price: float = 30_850.0, trend: float = 0.0004) -> pd.DataFrame:
-        """Generates realistic daily OHLCV series for EGX30 for testing and disconnected environments."""
-        np.random.seed(42)
-        end_date = datetime.date.today()
-        dates = pd.date_range(end=end_date, periods=n_days, freq="B")
-
-        daily_returns = np.random.normal(loc=trend, scale=0.012, size=n_days)
-        # Add momentum and smooth drift
-        prices = [base_price]
-        for r in daily_returns[1:]:
-            prices.append(prices[-1] * (1.0 + r))
-
-        close_series = np.array(prices)
-        high_series = close_series * (1.0 + np.abs(np.random.normal(0, 0.006, n_days)))
-        low_series = close_series * (1.0 - np.abs(np.random.normal(0, 0.006, n_days)))
-        open_series = (high_series + low_series) / 2.0
-        volume_series = np.random.randint(150_000_000, 450_000_000, size=n_days)
-
-        df = pd.DataFrame({
-            "Open": open_series,
-            "High": high_series,
-            "Low": low_series,
-            "Close": close_series,
-            "Volume": volume_series
-        }, index=dates)
-
-        return df
 
     # =========================================================================
     # 2. QUANTITATIVE CLASSIFIER HELPER
@@ -284,8 +261,38 @@ class RegimeHMMEngine:
         # Fetch or use provided index data
         df = egx30_df if egx30_df is not None else cls.fetch_egx30_data()
 
-        if df is None or df.empty or len(df) < 20:
-            df = cls._generate_synthetic_egx30_data()
+        if df is None or df.empty or len(df) < 5:
+            default_reg = cls.REGIME_SIDEWAYS_CHOP
+            weights_info = cls.DYNAMIC_WEIGHTS[default_reg]
+            return {
+                "regime": default_reg,
+                "current_regime_state": default_reg,
+                "recommended_cash_reserve_pct": float(weights_info["cash_reserve_pct"]),
+                "safe_cash_pct": float(weights_info["cash_reserve_pct"]),
+                "recommended_equity_pct": float(weights_info["equity_allocation_pct"]),
+                "name_ar": weights_info["name_ar"],
+                "regime_name_ar": weights_info["name_ar"],
+                "description_ar": weights_info["description_ar"],
+                "raw_volatility_score": 0.15,
+                "current_price": 30850.0,
+                "ma_50": 30850.0,
+                "ma_200": 30850.0,
+                "volatility_20d": 0.15,
+                "drawdown_5d_pct": 0.0,
+                "drawdown_20d_pct": 0.0,
+                "cash_reserve_pct": float(weights_info["cash_reserve_pct"]),
+                "equity_allocation_pct": float(weights_info["equity_allocation_pct"]),
+                "confidence": 0.50,
+                "dynamic_weights": weights_info,
+                "active_factor_weights": {
+                    "technicals": weights_info["technicals"],
+                    "volatility": weights_info["volatility"],
+                    "fundamentals": weights_info["fundamentals"],
+                    "macro": weights_info["macro"]
+                },
+                "is_live_data": False,
+                "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            }
 
         close = df["Close"].values
         current_price = float(close[-1])

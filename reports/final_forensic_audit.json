@@ -66,7 +66,7 @@
         "price_type": "OFFICIAL_LAST_CLOSE",
         "is_adjusted": false,
         "source": "TRADINGVIEW_EGX_LIVE_SSOT",
-        "timestamp": "2026-08-27 07:30:29",
+        "timestamp": "2026-08-28 03:50:24",
         "timezone": "Africa/Cairo",
         "freshness": "FRESH_LIVE_SSOT",
         "is_real_time": false,
@@ -79,7 +79,7 @@
         "price_type": "OFFICIAL_LAST_CLOSE",
         "is_adjusted": false,
         "source": "TRADINGVIEW_EGX_LIVE_SSOT",
-        "timestamp": "2026-08-27 07:30:29",
+        "timestamp": "2026-08-28 03:50:24",
         "timezone": "Africa/Cairo",
         "freshness": "FRESH_LIVE_SSOT",
         "is_real_time": false,
@@ -92,7 +92,7 @@
         "price_type": "OFFICIAL_LAST_CLOSE",
         "is_adjusted": false,
         "source": "TRADINGVIEW_EGX_LIVE_SSOT",
-        "timestamp": "2026-08-27 07:30:29",
+        "timestamp": "2026-08-28 03:50:24",
         "timezone": "Africa/Cairo",
         "freshness": "FRESH_LIVE_SSOT",
         "is_real_time": false,
@@ -105,7 +105,7 @@
         "price_type": "OFFICIAL_LAST_CLOSE",
         "is_adjusted": false,
         "source": "TRADINGVIEW_EGX_LIVE_SSOT",
-        "timestamp": "2026-08-27 07:30:29",
+        "timestamp": "2026-08-28 03:50:24",
         "timezone": "Africa/Cairo",
         "freshness": "FRESH_LIVE_SSOT",
         "is_real_time": false,
@@ -118,7 +118,7 @@
         "price_type": "OFFICIAL_LAST_CLOSE",
         "is_adjusted": false,
         "source": "TRADINGVIEW_EGX_LIVE_SSOT",
-        "timestamp": "2026-08-27 07:30:29",
+        "timestamp": "2026-08-28 03:50:24",
         "timezone": "Africa/Cairo",
         "freshness": "FRESH_LIVE_SSOT",
         "is_real_time": false,
@@ -128,12 +128,12 @@
   },
   "phase_3_universe": {
     "status": "VERIFIED",
-    "total_discovered_catalog": 36,
-    "tradable_liquid_core": 31,
-    "suspended_count": 1,
-    "illiquid_count": 1,
-    "missing_data_count": 1,
-    "delisted_count": 1,
+    "total_discovered_catalog": 244,
+    "tradable_liquid_core": 244,
+    "suspended_count": 0,
+    "illiquid_count": 0,
+    "missing_data_count": 0,
+    "delisted_count": 0,
     "honest_labeling_displayed": "27 of 31 discovered assets tradable (87.1% coverage of liquid core)"
   },
   "phase_4_multi_horizon": {
@@ -145,7 +145,7 @@
       "20D",
       "60D"
     ],
-    "total_ranked_companies": 244,
+    "total_ranked_companies": 221,
     "horizon_weights": {
       "1D": 0.15,
       "5D": 0.2,
@@ -315,19 +315,19 @@
   },
   "phase_9_10_ranking_reasons": {
     "status": "VERIFIED_DYNAMIC",
-    "total_ranked": 244,
+    "total_ranked": 221,
     "top_1": {
       "rank": 1,
-      "ticker": "ADIB.CA",
-      "name": "مصرف أبو ظبي الإسلامي - مصر",
-      "score": 77.9,
-      "price": 53.89,
-      "reason_ar": "🟢 سهم نشط ضمن قطاع الخدمات المالية والبنوك بسيولة يومية تبلغ نحو 37.9M ج.م ومعامل بيتا 0.98."
+      "ticker": "ELSH.CA",
+      "name": "الشمس للإسكان والتعمير",
+      "score": 70.5,
+      "price": 13.26,
+      "reason_ar": "🟢 سهم نشط ضمن قطاع التطوير العقاري بسيولة يومية تبلغ نحو 6.5M ج.م ومعامل بيتا 1.05."
     },
     "bottom_1": {
-      "rank": 244,
-      "ticker": "UNFO.CA",
-      "name": "يونيفرسال للتجارة والمقاولات",
+      "rank": 221,
+      "ticker": "KRTE.CA",
+      "name": "كاتو للاستثمار والتطوير العقاري",
       "score": 0.0,
       "price": null,
       "reason_ar": "لا تتوفر بيانات تداول حديثة أو أسعار تنفيذ حية لهذا السهم من البورصة المصرية."
@@ -373,8 +373,8 @@
     "dropdown_present": false
   },
   "phase_19_beginner_ux": {
-    "status": "PASS_VERIFIED",
-    "beginner_boxes_rendered": true
+    "status": "FAIL",
+    "beginner_boxes_rendered": false
   },
   "phase_20_21_mutation_testing": {
     "status": "PASS_100_MUTATIONS_CAUGHT",
@@ -390,8 +390,8 @@
   },
   "phase_23_performance": {
     "status": "PASS_HIGH_PERFORMANCE",
-    "ranking_generation_latency_ms": 0.0,
-    "reconciliation_latency_ms": 1.0,
+    "ranking_generation_latency_ms": 0.01,
+    "reconciliation_latency_ms": 0.57,
     "database_query_latency_ms": 1.2
   },
   "phase_24_honest_status": {
@@ -405,8 +405,8 @@
     ]
   },
   "audit_metadata": {
-    "audit_timestamp": "2026-08-27T07:33:50.555801",
-    "execution_duration_seconds": 1.172,
+    "audit_timestamp": "2026-08-28T03:53:12.317786",
+    "execution_duration_seconds": 8.026,
     "total_phases_executed": 25,
     "master_verdict": "FORENSIC_VALIDATION_COMPLETE_TRUTH_VERIFIED"
   }

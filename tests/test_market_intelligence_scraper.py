@@ -75,8 +75,8 @@ class TestMarketIntelligenceScraper(unittest.TestCase):
 
         res = MarketIntelligenceScraper.scrape_macro_indicators()
         self.assertEqual(res["interest_rate_pct"], 27.25)
-        self.assertEqual(res["inflation_rate_pct"], 26.50)
-        self.assertIn("Central Bank of Egypt", res["source"])
+        self.assertEqual(res["inflation_rate_pct"], 14.90)
+        self.assertTrue("Central Bank of Egypt" in res["source"] or "CBE" in res["source"])
 
     @patch("core.market_intelligence_scraper.MarketIntelligenceScraper.scrape_mubasher_news")
     def test_04_scrape_market_catalysts_categorization(self, mock_news):

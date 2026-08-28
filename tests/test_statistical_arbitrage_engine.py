@@ -139,7 +139,8 @@ class TestStatisticalArbitrageEngine(unittest.TestCase):
             self.assertIn(op["signal"], [
                 StatisticalArbitrageEngine.SIGNAL_SHORT_A_LONG_B,
                 StatisticalArbitrageEngine.SIGNAL_LONG_A_SHORT_B,
-                StatisticalArbitrageEngine.SIGNAL_NEUTRAL
+                StatisticalArbitrageEngine.SIGNAL_NEUTRAL,
+                "INSUFFICIENT_DATA"
             ])
             self.assertIn("is_actionable", op)
             self.assertIsInstance(op["is_actionable"], bool)
@@ -148,15 +149,13 @@ class TestStatisticalArbitrageEngine(unittest.TestCase):
             self.assertIn("description_ar", op)
             self.assertGreater(len(op["description_ar"]), 10)
 
-    def test_07_price_history_fallback_generation(self):
-        """Verify fetch_pair_price_history generates valid 60-day series even with force_fallback."""
+    def test_07_price_history_zero_mock_fallback(self):
+        """Verify fetch_pair_price_history returns empty arrays on failure instead of fake noise."""
         pA, pB = StatisticalArbitrageEngine.fetch_pair_price_history(
-            "TEST_A.CA", "TEST_B.CA", window_days=60, force_fallback=True
+            "NON_EXISTENT_1.CA", "NON_EXISTENT_2.CA", window_days=60, force_fallback=True
         )
-        self.assertEqual(len(pA), 60)
-        self.assertEqual(len(pB), 60)
-        self.assertTrue(np.all(pA > 0))
-        self.assertTrue(np.all(pB > 0))
+        self.assertEqual(len(pA), 0)
+        self.assertEqual(len(pB), 0)
 
 
 if __name__ == "__main__":

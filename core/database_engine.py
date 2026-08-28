@@ -175,6 +175,11 @@ class SQLiteDatabaseEngine:
             cursor.execute("CREATE INDEX IF NOT EXISTS idx_macro_name ON macro_indicators(indicator_name);")
             cursor.execute("CREATE INDEX IF NOT EXISTS idx_decisions_ticker ON decision_history(ticker);")
 
+            # SQL Views for compatibility with alternative naming conventions
+            cursor.execute("CREATE VIEW IF NOT EXISTS universe_equities AS SELECT * FROM stocks_universe;")
+            cursor.execute("CREATE VIEW IF NOT EXISTS canonical_prices AS SELECT * FROM live_prices;")
+            cursor.execute("CREATE VIEW IF NOT EXISTS macro_state AS SELECT * FROM macro_indicators;")
+
             conn.commit()
 
     # =========================================================================

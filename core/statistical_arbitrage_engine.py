@@ -111,8 +111,8 @@ class StatisticalArbitrageEngine:
         force_fallback: bool = False
     ) -> Tuple[np.ndarray, np.ndarray]:
         """
-        Fetches 60-day historical closing prices for two tickers.
-        Uses yfinance with robust fallback to realistic synthetic price series.
+        Fetches historical closing prices for two tickers.
+        Uses yfinance with strict real-world data validation (never fabricates noise).
         """
         cache_key = f"{ticker_A}_{ticker_B}_{window_days}"
         now = datetime.datetime.now().timestamp()
@@ -126,65 +126,24 @@ class StatisticalArbitrageEngine:
         if not force_fallback:
             try:
                 import yfinance as yf
-                data = yf.download([ticker_A, ticker_B], period="3mo", progress=False, timeout=0.8)
+                data = yf.download([ticker_A, ticker_B], period="3mo", progress=False, timeout=1.5)
                 if data is not None and not data.empty and "Close" in data:
                     closes = data["Close"]
                     if ticker_A in closes and ticker_B in closes:
                         df_pair = closes[[ticker_A, ticker_B]].dropna()
-                        if len(df_pair) >= 20:
+                        if len(df_pair) >= 15:
                             prices_A = df_pair[ticker_A].values[-window_days:]
                             prices_B = df_pair[ticker_B].values[-window_days:]
             except Exception as e:
                 logger.debug("Live fetch failed for pair (%s, %s): %s", ticker_A, ticker_B, e)
 
         if prices_A is None or prices_B is None or len(prices_A) < 15:
-            prices_A, prices_B = cls._generate_synthetic_pair_prices(ticker_A, ticker_B, n_days=window_days)
+            prices_A = np.array([], dtype=float)
+            prices_B = np.array([], dtype=float)
 
         cls._cache[cache_key] = (prices_A, prices_B)
         cls._cache_timestamps[cache_key] = now
         return prices_A, prices_B
-
-    @classmethod
-    def _generate_synthetic_pair_prices(
-        cls,
-        ticker_A: str,
-        ticker_B: str,
-        n_days: int = 60
-    ) -> Tuple[np.ndarray, np.ndarray]:
-        """
-        Generates realistic co-integrated, mean-reverting price series for testing and offline modes.
-        """
-        # Baseline reference prices for known EGX tickers
-        base_prices = {
-            "COMI.CA": 140.50, "QNBE.CA": 38.20,
-            "TMGH.CA": 97.50,  "PHDC.CA": 7.40,
-            "SWDY.CA": 128.00, "ORAS.CA": 780.00,
-            "ABUK.CA": 75.50,  "MFPC.CA": 48.50,
-            "FWRY.CA": 9.80,   "EFIH.CA": 24.50
-        }
-
-        pA_base = base_prices.get(ticker_A, 100.0)
-        pB_base = base_prices.get(ticker_B, 50.0)
-
-        # Seed based on ticker strings for deterministic testing
-        seed = sum(ord(c) for c in (ticker_A + ticker_B)) % 10000
-        rng = np.random.RandomState(seed)
-
-        # Generate correlated random walk with mean-reverting spread
-        common_trend = np.cumsum(rng.normal(0.0005, 0.012, n_days))
-        noise_A = rng.normal(0, 0.008, n_days)
-        noise_B = rng.normal(0, 0.008, n_days)
-
-        # Mean-reverting Ornstein-Uhlenbeck spread component
-        ou_spread = np.zeros(n_days)
-        theta = 0.15  # Speed of mean reversion
-        for t in range(1, n_days):
-            ou_spread[t] = ou_spread[t - 1] * (1.0 - theta) + rng.normal(0, 0.015)
-
-        prices_A = pA_base * (1.0 + common_trend + noise_A + ou_spread / 2.0)
-        prices_B = pB_base * (1.0 + common_trend + noise_B - ou_spread / 2.0)
-
-        return np.maximum(prices_A, 1.0), np.maximum(prices_B, 1.0)
 
     # =========================================================================
     # 2. SPREAD & Z-SCORE COMPUTATION
@@ -200,8 +159,8 @@ class StatisticalArbitrageEngine:
         custom_prices_B: Optional[np.ndarray] = None
     ) -> Dict[str, Any]:
         """
-        Calculates the historical spread (Price A / Price B), historical Mean,
-        Standard Deviation, and current Z-Score over the specified lookback window.
+        Calculates historical spread, Mean, Std Dev, and Z-Score.
+        Returns signal: 'INSUFFICIENT_DATA' if bars < 15.
         """
         if custom_prices_A is not None and custom_prices_B is not None:
             pA = np.array(custom_prices_A, dtype=float)
@@ -210,19 +169,20 @@ class StatisticalArbitrageEngine:
             pA, pB = cls.fetch_pair_price_history(ticker_A, ticker_B, window_days=window_days)
 
         min_len = min(len(pA), len(pB))
-        if min_len < 2:
+        if min_len < 15:
             return {
                 "ticker_A": ticker_A,
                 "ticker_B": ticker_B,
-                "price_A": 0.0,
-                "price_B": 0.0,
+                "price_A": round(float(pA[-1]), 2) if len(pA) > 0 else 0.0,
+                "price_B": round(float(pB[-1]), 2) if len(pB) > 0 else 0.0,
                 "current_spread": 0.0,
                 "mean_spread": 0.0,
                 "std_spread": 0.0,
                 "z_score": 0.0,
-                "window_days": 0,
+                "window_days": int(min_len),
                 "half_life_days": 0.0,
-                "correlation": 0.0
+                "correlation": 0.0,
+                "status": "INSUFFICIENT_DATA"
             }
 
         pA = pA[-min_len:]
@@ -271,7 +231,8 @@ class StatisticalArbitrageEngine:
             "z_score": round(z_score, 2),
             "window_days": int(min_len),
             "half_life_days": round(max(1.0, min(60.0, half_life)), 1),
-            "correlation": round(correlation, 2)
+            "correlation": round(correlation, 2),
+            "status": "VALID_DATA"
         }
 
     # =========================================================================
@@ -285,16 +246,27 @@ class StatisticalArbitrageEngine:
         ticker_A: str,
         ticker_B: str,
         name_A_ar: str = "",
-        name_B_ar: str = ""
+        name_B_ar: str = "",
+        status: str = "VALID_DATA"
     ) -> Tuple[str, str, str]:
         """
         Classifies the quantitative signal based on Z-Score:
-        - Z >= +2.0 -> SHORT A / LONG B (A is overvalued vs B)
-        - Z <= -2.0 -> LONG A / SHORT B (A is undervalued vs B)
+        - status == 'INSUFFICIENT_DATA' -> INSUFFICIENT_DATA
+        - Z >= +2.0 -> SHORT A / LONG B
+        - Z <= -2.0 -> LONG A / SHORT B
         - Otherwise -> NEUTRAL
         """
         name_A = name_A_ar or ticker_A
         name_B = name_B_ar or ticker_B
+
+        if status == "INSUFFICIENT_DATA":
+            signal = "INSUFFICIENT_DATA"
+            direction_label_ar = "بيانات غير كافية"
+            description_ar = (
+                f"البيانات السعرية التاريخية المتوفرة لسهمي {name_A} و {name_B} غير كافية "
+                f"لتوليد إشارة مراجحة إحصائية موثوقة (أقل من 15 جلسة)."
+            )
+            return signal, direction_label_ar, description_ar
 
         if z_score >= 2.0:
             signal = cls.SIGNAL_SHORT_A_LONG_B
@@ -348,7 +320,8 @@ class StatisticalArbitrageEngine:
                 ticker_A=tA,
                 ticker_B=tB,
                 name_A_ar=nA_ar,
-                name_B_ar=nB_ar
+                name_B_ar=nB_ar,
+                status=math_telemetry.get("status", "VALID_DATA")
             )
 
             is_actionable = bool(abs(z) >= 2.0)

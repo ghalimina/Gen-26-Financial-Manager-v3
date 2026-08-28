@@ -29,10 +29,10 @@ class MacroEconomicEngine:
     tactical and structural sector rotation.
     """
 
-    # Default Verified Macro Fallbacks for Egypt (Plausible Baseline)
-    DEFAULT_CBE_RATE: float = 27.25       # CBE Corridor Mid/Lending Rate (%)
-    DEFAULT_INFLATION_RATE: float = 26.50  # Urban Headline CPI YoY (%)
-    DEFAULT_USD_EGP: float = 48.50         # Interbank Spot Rate (EGP/USD)
+    # Default Verified Macro Fallbacks for Egypt (19.75% CBE Corridor, 14.90% Inflation, 50.20 USD/EGP)
+    DEFAULT_CBE_RATE: float = 19.75       # CBE Corridor Rate (%)
+    DEFAULT_INFLATION_RATE: float = 14.90  # Urban Headline CPI YoY (%)
+    DEFAULT_USD_EGP: float = 50.20         # Interbank Spot Rate (EGP/USD)
 
     # In-memory TTL Cache (Default: 3600 seconds / 1 hour)
     CACHE_TTL_SECONDS: int = 3600
@@ -47,6 +47,24 @@ class MacroEconomicEngine:
 
     # State file path
     STATE_FILE: str = os.path.join(WORKSPACE, "data", "macro_economic_state.json")
+
+    @classmethod
+    def _init_from_state_file(cls) -> None:
+        """Dynamically loads verified macro baseline from state file if present."""
+        if os.path.exists(cls.STATE_FILE):
+            try:
+                with open(cls.STATE_FILE, "r", encoding="utf-8") as f:
+                    state_data = json.load(f)
+                    indicators = state_data.get("indicators", {})
+                    if "cbe_corridor_rate_pct" in indicators:
+                        cls.DEFAULT_CBE_RATE = float(indicators["cbe_corridor_rate_pct"].get("value", 19.75))
+                        cls._last_verified_date = indicators["cbe_corridor_rate_pct"].get("last_updated", cls._last_verified_date)
+                    if "cpi_inflation_yoy_pct" in indicators:
+                        cls.DEFAULT_INFLATION_RATE = float(indicators["cpi_inflation_yoy_pct"].get("value", 14.90))
+                    if "usd_egp_rate" in indicators:
+                        cls.DEFAULT_USD_EGP = float(indicators["usd_egp_rate"].get("value", 50.20))
+            except Exception as e:
+                logger.debug("Failed loading macro initial state file: %s", e)
 
     # Macro Regime Constants
     REGIME_RATE_HIKING_CYCLE: str = "RATE_HIKING_CYCLE"
@@ -527,3 +545,8 @@ class MacroEconomicEngine:
     def get_biases(self) -> Dict[str, Any]:
         telemetry = self.get_macro_telemetry()
         return telemetry["sector_biases"]
+
+
+# Initialize verified baseline from state file at module load
+MacroEconomicEngine._init_from_state_file()
+

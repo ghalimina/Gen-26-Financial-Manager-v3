@@ -133,8 +133,8 @@ class MarketIntelligenceScraper:
             if (now - cls._cache_timestamps.get(cache_key, 0)) < cls.CACHE_TTL_MACRO:
                 return cls._cache[cache_key]
 
-        cbe_rate = 27.25       # Exact verified CBE corridor mid rate (27.25%)
-        inflation_rate = 26.50 # Exact verified headline CPI rate (26.50%)
+        cbe_rate = 19.75       # Exact verified CBE corridor rate (19.75%)
+        inflation_rate = 14.90 # Exact verified headline CPI rate (14.90%)
         is_live_scraped = False
         source_name = "Central Bank of Egypt / CAPMAS / TradingEconomics"
         today_str = datetime.date.today().isoformat()

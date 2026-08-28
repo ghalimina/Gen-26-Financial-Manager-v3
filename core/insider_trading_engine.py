@@ -83,15 +83,32 @@ class InsiderTradingEngine:
                     is_sell = any(k in txt for k in ["بيع داخلي", "تخفيض حصة", "بيع مجلس إدارة", "تخارج"])
 
                     if is_buy or is_sell:
+                        # Attempt to parse real numeric volume/price with regex if present in disclosure
+                        import re
+                        numbers = re.findall(r"[\d,]+(?:\.\d+)?", txt)
+                        parsed_shares = None
+                        parsed_price = None
+                        parsed_value = None
+                        if len(numbers) >= 2:
+                            try:
+                                n0 = float(numbers[0].replace(",", ""))
+                                n1 = float(numbers[1].replace(",", ""))
+                                if n0 > 100 and n1 < 1000:
+                                    parsed_shares = int(n0)
+                                    parsed_price = n1
+                                    parsed_value = round(n0 * n1, 2)
+                            except (ValueError, TypeError):
+                                pass
+
                         deals.append({
                             "date": datetime.date.today().isoformat(),
                             "ticker": ticker or "EGX_LISTED.CA",
                             "insider_title": "عضو مجلس إدارة / مساهم رئيسي ومجموعة مرتبطة",
                             "transaction_type": "BUY" if is_buy else "SELL",
-                            "shares_transacted": 50_000,
-                            "price_egp": 50.0,
-                            "total_value_egp": 2_500_000.0,
-                            "summary_ar": txt[:120].strip()
+                            "shares_transacted": parsed_shares,
+                            "price_egp": parsed_price,
+                            "total_value_egp": parsed_value,
+                            "summary_ar": txt[:140].strip()
                         })
         except Exception as e:
             logger.debug("Live insider scraper network exception: %s", e)
@@ -140,7 +157,7 @@ class InsiderTradingEngine:
         """
         Computes the aggregate quantitative Insider Conviction Score ranging from:
         -100.0 (Massive Insider Dumping) to +100.0 (Aggressive Insider Accumulation).
-        Returns 0.0 if deals list is empty.
+        Evaluates transaction values if present, or disclosure type/sentiment.
         """
         if not deals or not isinstance(deals, list):
             return 0.0
@@ -152,12 +169,8 @@ class InsiderTradingEngine:
 
         for deal in deals:
             tx_type = str(deal.get("transaction_type", "BUY")).upper()
-            shares = float(deal.get("shares_transacted", 0))
-            price = float(deal.get("price_egp", 0.0))
-            val = float(deal.get("total_value_egp", shares * price))
-
-            if val <= 0.0:
-                continue
+            val_raw = deal.get("total_value_egp")
+            val = float(val_raw) if val_raw is not None else 1.0  # Unit weighting if no explicit value
 
             # Weight multiplier based on insider seniority
             title = str(deal.get("insider_title", ""))
@@ -174,18 +187,16 @@ class InsiderTradingEngine:
             elif tx_type == "SELL":
                 total_sell_value += val
                 weighted_signal_sum += (-1.0 * val * seniority_mult)
-            
+
             weight_sum += (val * seniority_mult)
 
-        total_volume = total_buy_value + total_sell_value
-        if total_volume <= 0.0 or weight_sum <= 0.0:
+        if weight_sum <= 0.0:
             return 0.0
 
         # Net directional conviction ratio (-1.0 to +1.0)
         net_ratio = weighted_signal_sum / weight_sum
-
-        # Size conviction factor: deals over 10M EGP get full scale
-        size_factor = min(1.0, max(0.5, total_volume / 10_000_000.0))
+        total_volume = total_buy_value + total_sell_value
+        size_factor = min(1.0, max(0.5, total_volume / 10_000_000.0)) if total_volume > 10.0 else 0.75
 
         conviction = net_ratio * 100.0 * (0.6 + 0.4 * size_factor)
         conviction = max(-100.0, min(100.0, conviction))
