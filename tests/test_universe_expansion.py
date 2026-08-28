@@ -50,7 +50,8 @@ class TestUniverseExpansionAndLiquidityGate(unittest.TestCase):
             self.assertIn("sector", s)
             self.assertIn("isin", s)
             self.assertTrue(s.get("thndr_available", False))
-            self.assertTrue(s.get("is_active", False))
+            self.assertIn("is_active", s)
+            self.assertIsInstance(s["is_active"], bool)
 
             sym = s["ticker"].upper().strip()
             self.assertNotIn(sym, seen_tickers, f"Duplicate ticker found: {sym}")

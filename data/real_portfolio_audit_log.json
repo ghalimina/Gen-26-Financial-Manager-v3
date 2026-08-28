@@ -33756,5 +33756,127 @@
     "new_values": null,
     "source": "USER_MANUAL_UI",
     "notes": "User confirmed deletion"
+  },
+  {
+    "audit_id": "ce6d7ea6",
+    "timestamp": "2026-08-28T04:13:38.584345",
+    "action": "ADD",
+    "ticker": "TMGH.CA",
+    "old_values": null,
+    "new_values": {
+      "holding_id": "POS_TMGH_f1c126",
+      "ticker": "TMGH.CA",
+      "company_name": "مجموعة طلعت مصطفى",
+      "exchange": "EGX",
+      "sector": "Real Estate",
+      "quantity": 100,
+      "average_entry_price": 50.0,
+      "manual_notes": "API test buy",
+      "created_at": "2026-08-28T04:13:38.465701",
+      "updated_at": "2026-08-28T04:13:38.465701",
+      "active": true
+    },
+    "source": "USER_MANUAL_UI",
+    "notes": "API test buy"
+  },
+  {
+    "audit_id": "c40b5dae",
+    "timestamp": "2026-08-28T04:13:38.677240",
+    "action": "EDIT",
+    "ticker": "TMGH.CA",
+    "old_values": {
+      "holding_id": "POS_TMGH_f1c126",
+      "ticker": "TMGH.CA",
+      "company_name": "مجموعة طلعت مصطفى",
+      "exchange": "EGX",
+      "sector": "Real Estate",
+      "quantity": 100,
+      "average_entry_price": 50.0,
+      "manual_notes": "API test buy",
+      "created_at": "2026-08-28T04:13:38.465701",
+      "updated_at": "2026-08-28T04:13:38.465701",
+      "active": true
+    },
+    "new_values": {
+      "holding_id": "POS_TMGH_f1c126",
+      "ticker": "TMGH.CA",
+      "company_name": "مجموعة طلعت مصطفى",
+      "exchange": "EGX",
+      "sector": "Real Estate",
+      "quantity": 150,
+      "average_entry_price": 51.0,
+      "manual_notes": "API test edit",
+      "created_at": "2026-08-28T04:13:38.465701",
+      "updated_at": "2026-08-28T04:13:38.650674",
+      "active": true
+    },
+    "source": "USER_MANUAL_UI",
+    "notes": "API test edit"
+  },
+  {
+    "audit_id": "2513bc73",
+    "timestamp": "2026-08-28T04:13:38.759787",
+    "action": "DELETE",
+    "ticker": "TMGH.CA",
+    "old_values": {
+      "holding_id": "POS_TMGH_f1c126",
+      "ticker": "TMGH.CA",
+      "company_name": "مجموعة طلعت مصطفى",
+      "exchange": "EGX",
+      "sector": "Real Estate",
+      "quantity": 150,
+      "average_entry_price": 51.0,
+      "manual_notes": "API test edit",
+      "created_at": "2026-08-28T04:13:38.465701",
+      "updated_at": "2026-08-28T04:13:38.650674",
+      "active": true
+    },
+    "new_values": null,
+    "source": "USER_MANUAL_UI",
+    "notes": "User confirmed deletion"
+  },
+  {
+    "audit_id": "a9789e21",
+    "timestamp": "2026-08-28T04:16:55.976500",
+    "action": "ADD",
+    "ticker": "ABUK.CA",
+    "old_values": null,
+    "new_values": {
+      "holding_id": "POS_ABUK_29e50e",
+      "ticker": "ABUK.CA",
+      "company_name": "أبو قير للأسمدة",
+      "exchange": "EGX",
+      "sector": "Fertilizers",
+      "quantity": 100,
+      "average_entry_price": 75.4,
+      "manual_notes": "ACID Test Position",
+      "created_at": "2026-08-28T04:16:55.941530",
+      "updated_at": "2026-08-28T04:16:55.941530",
+      "active": true
+    },
+    "source": "USER_MANUAL_UI",
+    "notes": "ACID Test Position"
+  },
+  {
+    "audit_id": "69e36595",
+    "timestamp": "2026-08-28T04:16:56.074882",
+    "action": "DELETE",
+    "ticker": "ABUK.CA",
+    "old_values": {
+      "holding_id": "POS_ABUK_29e50e",
+      "ticker": "ABUK.CA",
+      "company_name": "أبو قير للأسمدة",
+      "exchange": "EGX",
+      "sector": "Fertilizers",
+      "quantity": 100,
+      "average_entry_price": 75.4,
+      "manual_notes": "ACID Test Position",
+      "created_at": "2026-08-28T04:16:55.941530",
+      "updated_at": "2026-08-28T04:16:55.941530",
+      "active": true
+    },
+    "new_values": null,
+    "source": "USER_MANUAL_UI",
+    "notes": "User confirmed deletion"
   }
 ]
