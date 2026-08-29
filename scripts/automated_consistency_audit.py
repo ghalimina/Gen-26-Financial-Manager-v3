@@ -14,6 +14,8 @@ import datetime
 from typing import Dict, List, Any
 
 WORKSPACE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if WORKSPACE not in sys.path:
+    sys.path.insert(0, WORKSPACE)
 REPORTS_DIR = os.path.join(WORKSPACE, "reports", "authoritative_20_reports")
 MASTER_DOSSIER = os.path.join(WORKSPACE, "reports", "00_MASTER_CONSOLIDATED_SYSTEM_DOSSIER.md")
 AUDIT_OUTPUT = os.path.join(WORKSPACE, "reports", "consistency_audit_report.json")
@@ -139,7 +141,40 @@ class ConsistencyAuditor:
                 if k != "file" and not passed:
                     audit_results["violations"].append(f"Master Dossier: Check {k} failed")
 
-        # 3. Final Summary Calculation
+        # 3. Audit V2 Architectural & Codebase Invariants (7 New Checks)
+        v2_audit = {}
+        sources_yaml_p = os.path.join(WORKSPACE, "data_sources", "sources_registry.yaml")
+        if os.path.exists(sources_yaml_p):
+            with open(sources_yaml_p, "r", encoding="utf-8") as f:
+                s_yaml = f.read()
+            v2_audit["sources_registry_5_tiers"] = all(t in s_yaml for t in ["tier_1", "tier_2", "tier_3", "tier_4", "tier_5"])
+        else:
+            v2_audit["sources_registry_5_tiers"] = False
+
+        from core.data_sources_registry import DataSourceRegistry
+        v2_audit["data_sources_3_timestamps_enforced"] = hasattr(DataSourceRegistry, "enforce_3_timestamps")
+
+        from core.uncertainty_engine import UncertaintyEngine
+        v2_audit["uncertainty_engine_thresholds"] = "LOW" in UncertaintyEngine.UNCERTAINTY_THRESHOLDS and "HIGH" in UncertaintyEngine.UNCERTAINTY_THRESHOLDS
+
+        from core.trade_selection_model import TradeSelectionModel
+        v2_audit["trade_selection_net_edge_gate"] = TradeSelectionModel.MINIMUM_NET_EDGE_REQUIRED_PCT == 1.00 and TradeSelectionModel.ROUNDTRIP_FRICTION_PCT == 0.35
+
+        from core.multi_objective_evaluator import MultiObjectiveEvaluator
+        v2_audit["multi_objective_evaluator_present"] = hasattr(MultiObjectiveEvaluator, "evaluate_strategy_objective")
+
+        from core.news_deduplication_engine import NewsDeduplicationEngine
+        v2_audit["news_deduplication_story_clustering"] = hasattr(NewsDeduplicationEngine, "cluster_and_deduplicate")
+
+        from core.production_readiness_matrix import ProductionReadinessMatrix
+        v2_audit["production_readiness_10_layers"] = hasattr(ProductionReadinessMatrix, "compute_overall_readiness") and len(ProductionReadinessMatrix.LAYERS_SPEC) == 10
+
+        audit_results["v2_architectural_audit"] = v2_audit
+        for k, passed in v2_audit.items():
+            if not passed:
+                audit_results["violations"].append(f"V2 Architecture Invariant Failed: {k}")
+
+        # 4. Final Summary Calculation
         total_checks = 0
         passed_checks = 0
         for r_data in audit_results["reports_audit"].values():
@@ -157,6 +192,13 @@ class ConsistencyAuditor:
                     passed_checks += 1
                 else:
                     audit_results["failed_invariants"] += 1
+
+        for k, passed in audit_results["v2_architectural_audit"].items():
+            total_checks += 1
+            if passed:
+                passed_checks += 1
+            else:
+                audit_results["failed_invariants"] += 1
 
         audit_results["passed_invariants"] = passed_checks
         audit_results["summary_status"] = "PASS" if len(audit_results["violations"]) == 0 else "FAIL"

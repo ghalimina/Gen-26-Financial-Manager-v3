@@ -1,5 +1,5 @@
 {
-  "audit_timestamp": "2026-08-30T02:02:31.757455",
+  "audit_timestamp": "2026-08-30T02:16:56.222210",
   "target_version": "v3.2.0-Authoritative",
   "total_reports_scanned": 21,
   "reports_audit": {
@@ -128,7 +128,16 @@
     "tests_456": true
   },
   "summary_status": "PASS",
-  "passed_invariants": 14,
+  "passed_invariants": 21,
   "failed_invariants": 0,
-  "violations": []
+  "violations": [],
+  "v2_architectural_audit": {
+    "sources_registry_5_tiers": true,
+    "data_sources_3_timestamps_enforced": true,
+    "uncertainty_engine_thresholds": true,
+    "trade_selection_net_edge_gate": true,
+    "multi_objective_evaluator_present": true,
+    "news_deduplication_story_clustering": true,
+    "production_readiness_10_layers": true
+  }
 }
