@@ -167,6 +167,55 @@ class SQLiteDatabaseEngine:
                 );
             """)
 
+            # 6. Research Experiments Journal (Self-Improving Quant Experiments)
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS research_experiments_journal (
+                    experiment_id TEXT PRIMARY KEY,
+                    timestamp TEXT NOT NULL,
+                    hypothesis_title TEXT NOT NULL,
+                    hypothesis_description TEXT,
+                    agent_author TEXT NOT NULL,
+                    features_used TEXT,
+                    parameters TEXT,
+                    in_sample_sharpe REAL,
+                    oos_sharpe REAL,
+                    max_drawdown_pct REAL,
+                    win_rate_pct REAL,
+                    critic_score REAL,
+                    critic_notes_ar TEXT,
+                    promotion_status TEXT DEFAULT 'PENDING'
+                );
+            """)
+
+            # 7. Episodic Failure Memory & Lessons Learned
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS failure_cases_memory (
+                    failure_id TEXT PRIMARY KEY,
+                    timestamp TEXT NOT NULL,
+                    regime TEXT,
+                    failed_hypothesis TEXT NOT NULL,
+                    root_cause_analysis TEXT,
+                    lesson_learned_ar TEXT NOT NULL,
+                    quarantined_patterns TEXT
+                );
+            """)
+
+            # 8. Agent Council Deliberation & Voting Blotter
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS agent_council_votes (
+                    vote_id TEXT PRIMARY KEY,
+                    timestamp TEXT NOT NULL,
+                    ticker TEXT NOT NULL,
+                    market_analyst_vote TEXT,
+                    fundamentalist_vote TEXT,
+                    technician_vote TEXT,
+                    quant_modeler_vote TEXT,
+                    risk_sizer_vote TEXT,
+                    consensus_verdict TEXT NOT NULL,
+                    conviction_score REAL NOT NULL
+                );
+            """)
+
             # Indexes for ultra-fast query latency (< 2ms)
             cursor.execute("CREATE INDEX IF NOT EXISTS idx_universe_sector ON stocks_universe(sector);")
             cursor.execute("CREATE INDEX IF NOT EXISTS idx_universe_symbol ON stocks_universe(symbol);")
@@ -174,6 +223,11 @@ class SQLiteDatabaseEngine:
             cursor.execute("CREATE INDEX IF NOT EXISTS idx_prices_timestamp ON live_prices(timestamp);")
             cursor.execute("CREATE INDEX IF NOT EXISTS idx_macro_name ON macro_indicators(indicator_name);")
             cursor.execute("CREATE INDEX IF NOT EXISTS idx_decisions_ticker ON decision_history(ticker);")
+            cursor.execute("CREATE INDEX IF NOT EXISTS idx_experiments_status ON research_experiments_journal(promotion_status);")
+            cursor.execute("CREATE INDEX IF NOT EXISTS idx_experiments_author ON research_experiments_journal(agent_author);")
+            cursor.execute("CREATE INDEX IF NOT EXISTS idx_failures_regime ON failure_cases_memory(regime);")
+            cursor.execute("CREATE INDEX IF NOT EXISTS idx_council_votes_ticker ON agent_council_votes(ticker);")
+            cursor.execute("CREATE INDEX IF NOT EXISTS idx_council_votes_verdict ON agent_council_votes(consensus_verdict);")
 
             # SQL Views for compatibility with alternative naming conventions
             cursor.execute("CREATE VIEW IF NOT EXISTS universe_equities AS SELECT * FROM stocks_universe;")
@@ -530,12 +584,185 @@ class SQLiteDatabaseEngine:
             conn.commit()
             return cursor.lastrowid or 1
 
+    # =========================================================================
+    # 7. RESEARCH EXPERIMENTS, FAILURE MEMORY & COUNCIL VOTES
+    # =========================================================================
+
+    def record_experiment(self, exp_dict: Dict[str, Any]) -> str:
+        """Records a new quantitative hypothesis and backtest experiment."""
+        exp_id = exp_dict.get("experiment_id") or f"EXP_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}_{os.urandom(2).hex()}"
+        now_str = exp_dict.get("timestamp") or datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        
+        features_str = json.dumps(exp_dict.get("features_used", []), ensure_ascii=False) if isinstance(exp_dict.get("features_used"), (list, dict)) else str(exp_dict.get("features_used", ""))
+        params_str = json.dumps(exp_dict.get("parameters", {}), ensure_ascii=False) if isinstance(exp_dict.get("parameters"), dict) else str(exp_dict.get("parameters", ""))
+
+        with self.get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+                INSERT INTO research_experiments_journal (
+                    experiment_id, timestamp, hypothesis_title, hypothesis_description,
+                    agent_author, features_used, parameters, in_sample_sharpe,
+                    oos_sharpe, max_drawdown_pct, win_rate_pct, critic_score,
+                    critic_notes_ar, promotion_status
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ON CONFLICT(experiment_id) DO UPDATE SET
+                    hypothesis_title=excluded.hypothesis_title,
+                    hypothesis_description=excluded.hypothesis_description,
+                    agent_author=excluded.agent_author,
+                    features_used=excluded.features_used,
+                    parameters=excluded.parameters,
+                    in_sample_sharpe=excluded.in_sample_sharpe,
+                    oos_sharpe=excluded.oos_sharpe,
+                    max_drawdown_pct=excluded.max_drawdown_pct,
+                    win_rate_pct=excluded.win_rate_pct,
+                    critic_score=excluded.critic_score,
+                    critic_notes_ar=excluded.critic_notes_ar,
+                    promotion_status=excluded.promotion_status;
+            """, (
+                exp_id, now_str,
+                exp_dict.get("hypothesis_title", "Untitled Hypothesis"),
+                exp_dict.get("hypothesis_description", ""),
+                exp_dict.get("agent_author", "ResearchScientistAgent"),
+                features_str, params_str,
+                float(exp_dict.get("in_sample_sharpe", 0.0)),
+                float(exp_dict.get("oos_sharpe", 0.0)),
+                float(exp_dict.get("max_drawdown_pct", 0.0)),
+                float(exp_dict.get("win_rate_pct", 0.0)),
+                float(exp_dict.get("critic_score", 0.0)),
+                exp_dict.get("critic_notes_ar", ""),
+                exp_dict.get("promotion_status", "PENDING")
+            ))
+            conn.commit()
+        return exp_id
+
+    def get_recent_experiments(self, limit: int = 20, status: Optional[str] = None) -> List[Dict[str, Any]]:
+        """Retrieves recent quantitative research experiments."""
+        with self.get_connection() as conn:
+            cursor = conn.cursor()
+            if status:
+                cursor.execute(
+                    "SELECT * FROM research_experiments_journal WHERE promotion_status = ? ORDER BY timestamp DESC LIMIT ?;",
+                    (status, limit)
+                )
+            else:
+                cursor.execute(
+                    "SELECT * FROM research_experiments_journal ORDER BY timestamp DESC LIMIT ?;",
+                    (limit,)
+                )
+            return [dict(r) for r in cursor.fetchall()]
+
+    def record_failure_lesson(self, failure_dict: Dict[str, Any]) -> str:
+        """Records an episodic failure case and post-mortem lesson learned."""
+        fail_id = failure_dict.get("failure_id") or f"FAIL_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}_{os.urandom(2).hex()}"
+        now_str = failure_dict.get("timestamp") or datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        quarantine_str = json.dumps(failure_dict.get("quarantined_patterns", []), ensure_ascii=False) if isinstance(failure_dict.get("quarantined_patterns"), (list, dict)) else str(failure_dict.get("quarantined_patterns", ""))
+
+        with self.get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+                INSERT INTO failure_cases_memory (
+                    failure_id, timestamp, regime, failed_hypothesis,
+                    root_cause_analysis, lesson_learned_ar, quarantined_patterns
+                ) VALUES (?, ?, ?, ?, ?, ?, ?)
+                ON CONFLICT(failure_id) DO UPDATE SET
+                    regime=excluded.regime,
+                    failed_hypothesis=excluded.failed_hypothesis,
+                    root_cause_analysis=excluded.root_cause_analysis,
+                    lesson_learned_ar=excluded.lesson_learned_ar,
+                    quarantined_patterns=excluded.quarantined_patterns;
+            """, (
+                fail_id, now_str,
+                failure_dict.get("regime", "UNKNOWN"),
+                failure_dict.get("failed_hypothesis", ""),
+                failure_dict.get("root_cause_analysis", ""),
+                failure_dict.get("lesson_learned_ar", "درس مستفاد لتجنب الأخطاء السابقة"),
+                quarantine_str
+            ))
+            conn.commit()
+        return fail_id
+
+    def get_failure_memory(self, limit: int = 20, regime: Optional[str] = None) -> List[Dict[str, Any]]:
+        """Retrieves episodic failure memory and lessons learned."""
+        with self.get_connection() as conn:
+            cursor = conn.cursor()
+            if regime:
+                cursor.execute(
+                    "SELECT * FROM failure_cases_memory WHERE regime = ? ORDER BY timestamp DESC LIMIT ?;",
+                    (regime, limit)
+                )
+            else:
+                cursor.execute(
+                    "SELECT * FROM failure_cases_memory ORDER BY timestamp DESC LIMIT ?;",
+                    (limit,)
+                )
+            return [dict(r) for r in cursor.fetchall()]
+
+    def record_council_vote(self, vote_dict: Dict[str, Any]) -> str:
+        """Records deliberation votes and final synthesis from the 7-Agent Council."""
+        vote_id = vote_dict.get("vote_id") or f"VOTE_{vote_dict.get('ticker', 'EGX')}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}_{os.urandom(2).hex()}"
+        now_str = vote_dict.get("timestamp") or datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+        def _fmt(val):
+            return json.dumps(val, ensure_ascii=False) if isinstance(val, (dict, list)) else str(val or "")
+
+        with self.get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+                INSERT INTO agent_council_votes (
+                    vote_id, timestamp, ticker, market_analyst_vote,
+                    fundamentalist_vote, technician_vote, quant_modeler_vote,
+                    risk_sizer_vote, consensus_verdict, conviction_score
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ON CONFLICT(vote_id) DO UPDATE SET
+                    timestamp=excluded.timestamp,
+                    ticker=excluded.ticker,
+                    market_analyst_vote=excluded.market_analyst_vote,
+                    fundamentalist_vote=excluded.fundamentalist_vote,
+                    technician_vote=excluded.technician_vote,
+                    quant_modeler_vote=excluded.quant_modeler_vote,
+                    risk_sizer_vote=excluded.risk_sizer_vote,
+                    consensus_verdict=excluded.consensus_verdict,
+                    conviction_score=excluded.conviction_score;
+            """, (
+                vote_id, now_str,
+                vote_dict.get("ticker", "EGX"),
+                _fmt(vote_dict.get("market_analyst_vote")),
+                _fmt(vote_dict.get("fundamentalist_vote")),
+                _fmt(vote_dict.get("technician_vote")),
+                _fmt(vote_dict.get("quant_modeler_vote")),
+                _fmt(vote_dict.get("risk_sizer_vote")),
+                vote_dict.get("consensus_verdict", "HOLD"),
+                float(vote_dict.get("conviction_score", 50.0))
+            ))
+            conn.commit()
+        return vote_id
+
+    def get_recent_council_votes(self, limit: int = 20, ticker: Optional[str] = None) -> List[Dict[str, Any]]:
+        """Retrieves recent Agent Council deliberation votes."""
+        with self.get_connection() as conn:
+            cursor = conn.cursor()
+            if ticker:
+                cursor.execute(
+                    "SELECT * FROM agent_council_votes WHERE ticker = ? ORDER BY timestamp DESC LIMIT ?;",
+                    (ticker, limit)
+                )
+            else:
+                cursor.execute(
+                    "SELECT * FROM agent_council_votes ORDER BY timestamp DESC LIMIT ?;",
+                    (limit,)
+                )
+            return [dict(r) for r in cursor.fetchall()]
+
     def get_database_stats(self) -> Dict[str, Any]:
         """Returns row counts and database health metrics."""
         with self.get_connection() as conn:
             cursor = conn.cursor()
             stats = {}
-            for tbl in ["stocks_universe", "live_prices", "macro_indicators", "arbitrage_pairs", "decision_history"]:
+            for tbl in [
+                "stocks_universe", "live_prices", "macro_indicators", "arbitrage_pairs",
+                "decision_history", "research_experiments_journal", "failure_cases_memory",
+                "agent_council_votes"
+            ]:
                 cursor.execute(f"SELECT COUNT(*) as cnt FROM {tbl};")
                 stats[f"{tbl}_count"] = cursor.fetchone()["cnt"]
 

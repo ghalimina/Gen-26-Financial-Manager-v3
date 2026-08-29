@@ -546,6 +546,9 @@ class MacroEconomicEngine:
         telemetry = self.get_macro_telemetry()
         return telemetry["sector_biases"]
 
+    # Class method alias for ecosystem consistency
+    get_latest_macro_state = get_macro_telemetry
+
 
 # Initialize verified baseline from state file at module load
 MacroEconomicEngine._init_from_state_file()

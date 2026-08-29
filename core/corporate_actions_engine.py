@@ -216,3 +216,6 @@ class CorporateActionsEngine:
                 "terminal_growth_pct": round(g_terminal * 100.0, 1)
             }
         }
+
+    # Class method alias for ecosystem consistency
+    compute_fair_value_dcf = calculate_fair_value
