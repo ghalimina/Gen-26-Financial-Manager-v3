@@ -1756,6 +1756,39 @@ def api_portfolio_correlation():
         return jsonify({"status": "ERROR", "error": str(e)}), 500
 
 
+@app.route("/api/observability/readiness_matrix", methods=["GET"])
+def api_observability_readiness_matrix():
+    """Returns the 10-layer production readiness matrix and 5 independent audit results."""
+    try:
+        from core.production_readiness_matrix import ProductionReadinessMatrix
+        res = ProductionReadinessMatrix.compute_overall_readiness()
+        return jsonify(res), 200
+    except Exception as e:
+        return jsonify({"status": "ERROR", "error": str(e)}), 500
+
+
+@app.route("/api/observability/data_sources", methods=["GET"])
+def api_observability_data_sources():
+    """Returns the 5-tier data source registry and 3-timestamp governance protocol."""
+    try:
+        from core.data_sources_registry import DataSourceRegistry
+        res = DataSourceRegistry.get_summary_report()
+        return jsonify(res), 200
+    except Exception as e:
+        return jsonify({"status": "ERROR", "error": str(e)}), 500
+
+
+@app.route("/api/observability/market_breadth", methods=["GET"])
+def api_observability_market_breadth():
+    """Returns cross-sectional market breadth, A/D ratio, and sector dispersion."""
+    try:
+        from core.market_breadth_engine import MarketBreadthEngine
+        res = MarketBreadthEngine.calculate_market_breadth()
+        return jsonify(res), 200
+    except Exception as e:
+        return jsonify({"status": "ERROR", "error": str(e)}), 500
+
+
 @app.errorhandler(404)
 def handle_404_error(e):
     return jsonify({"error": "Not Found", "status": 404}), 404
