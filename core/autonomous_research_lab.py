@@ -139,9 +139,12 @@ class AutonomousResearchLab:
 
             # Send telemetry alert
             try:
-                NotificationEngine.send_telegram_alert(
-                    message=f"🚀 *GEN-26 Research Lab: New Strategy Promoted*\n• ID: `{exp_id}`\n• Title: {title}\n• OOS Sharpe: `{oos_sharpe:.2f}`\n• Max DD: `{max_dd:.1f}%`",
-                    alert_type="RESEARCH_PROMOTION"
+                NotificationEngine.send_strategy_promoted_alert(
+                    experiment_id=exp_id,
+                    hypothesis_title=title,
+                    oos_sharpe=oos_sharpe,
+                    max_drawdown_pct=max_dd,
+                    in_sample_sharpe=is_sharpe
                 )
             except Exception:
                 pass

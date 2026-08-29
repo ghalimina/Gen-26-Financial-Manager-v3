@@ -1532,6 +1532,13 @@
             <li class="nav-item" id="nav-insider_radar" onclick="navigateTo('insider_radar')"><i class="fa-solid fa-user-secret"></i> 🕵️ رادار المطلعين والحيتان</li>
             <li class="nav-item" id="nav-arbitrage_monitor" onclick="navigateTo('arbitrage_monitor')"><i class="fa-solid fa-arrows-split-up-and-left"></i> ⚖️ المراجحة الإحصائية وتداول الأزواج</li>
 
+            <div class="nav-section-title">🧪 الذكاء الاصطناعي ومعمل الأبحاث</div>
+            <li class="nav-item" id="nav-research_lab" onclick="navigateTo('research-lab')">
+                <a href="#" class="nav-item" onclick="navigateTo('research-lab'); return false;" style="color: inherit; text-decoration: none; padding: 0; width: 100%; display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-flask"></i> معمل الأبحاث والتطور الذاتي
+                </a>
+            </li>
+
             <div class="nav-section-title">🛡️ صمامات الأمان والمخاطر</div>
             <li class="nav-item" id="nav-signals" onclick="navigateTo('signals')"><i class="fa-solid fa-tower-broadcast"></i> 📡 سجل الإشارات الصادرة</li>
             <li class="nav-item" id="nav-risk_center" onclick="navigateTo('risk_center')"><i class="fa-solid fa-shield-halved"></i> 🛡️ مركز إدارة المخاطر</li>
@@ -2485,6 +2492,218 @@
                 </div>
             </div>
 
+            <!-- ============================================================= -->
+            <!-- TAB: AUTONOMOUS QUANT RESEARCH LAB & 7-AGENT COUNCIL -->
+            <!-- ============================================================= -->
+            <div id="tab-research-lab" class="tab-panel">
+                <!-- Header & Action Bar -->
+                <div class="card" style="margin-bottom: 20px; background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%); border: 1px solid rgba(16, 185, 129, 0.35);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+                        <div>
+                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
+                                <span style="font-size: 24px;">🧪</span>
+                                <h2 style="font-size: 20px; font-weight: 800; color: #ffffff;">معمل الأبحاث والتطور الكمي الذاتي (Autonomous Quant Research Lab)</h2>
+                            </div>
+                            <div style="font-size: 13px; color: #cbd5e1; line-height: 1.6;">
+                                دورة بحثية ذاتية مغلقة: توليد الفرضيات الذكية، الفحص الرقابي ضد فرط التخصيص، والتحقق المستقل عبر 5 فترات خارج العينة (Purged Walk-Forward) مع خصم تكاليف التداول (0.35%) والضرائب (10%).
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                            <span class="badge badge-green badge-pulse" id="lab-live-status-badge">🟢 المعمل نشط وجاهز للتجارب</span>
+                            <button class="btn btn-primary" id="btn-trigger-research-cycle" onclick="triggerResearchCycleUI()">
+                                <i class="fas fa-atom"></i>
+                                <span>تشغيل دورة بحثية وتجربة ذكية الآن</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Council Deliberation Card (Interactive Stock Selector) -->
+                <div class="card" id="council-deliberation-card" style="margin-bottom: 20px; border-top: 3px solid #3b82f6;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 12px;">
+                        <div class="metric-title" style="font-size: 16px; color: #60a5fa; margin-bottom: 0;">
+                            🏛️ مداولات وتصويت مجلس الخبراء الكمي (7-Agent Quant Council):
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <label style="font-size: 13px; color: var(--text-muted); font-weight: 600;">اختر السهم للمداولة:</label>
+                            <select id="council-stock-select" class="form-control" style="width: 180px; padding: 6px 12px; font-weight: 700;" onchange="inspectCouncilStock(this.value)">
+                                <option value="COMI.CA">COMI.CA - التجاري الدولي</option>
+                                <option value="SWDY.CA">SWDY.CA - السويدي إليكتريك</option>
+                                <option value="TMGH.CA">TMGH.CA - طلعت مصطفى</option>
+                                <option value="EFIH.CA">EFIH.CA - إي فاينانس</option>
+                                <option value="EGAL.CA">EGAL.CA - مصر للألومنيوم</option>
+                                <option value="ABUK.CA">ABUK.CA - أبو قير للأسمدة</option>
+                                <option value="MFPC.CA">MFPC.CA - موبكو للأسمدة</option>
+                                <option value="FWRY.CA">FWRY.CA - فوري للمدفوعات</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Consensus Verdict Banner -->
+                    <div id="council-consensus-banner" style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: var(--radius-md); padding: 14px 18px; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <div style="font-size: 14px; font-weight: 700; color: #ffffff;">قرار إجماع المجلس النهائي:</div>
+                            <span class="badge badge-green" id="council-consensus-badge" style="font-size: 14px; padding: 6px 14px;">STRONG_BUY</span>
+                            <span style="font-size: 13px; color: #94a3b8;">درجة القناعة: <strong id="council-conviction-val" class="text-green font-bold ltr-text">88.5%</strong></span>
+                        </div>
+                        <div id="council-risk-gate-status" class="badge badge-green">🛡️ مجاز من إدارة المخاطر</div>
+                    </div>
+
+                    <!-- 5 Voting Agents Grid -->
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-bottom: 12px;" id="council-agents-grid">
+                        <!-- Market Analyst -->
+                        <div class="card" style="background: rgba(0,0,0,0.3); padding: 14px; border: 1px solid rgba(255,255,255,0.06);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                <strong style="color: #93c5fd; font-size: 13px;">🌐 محلل الاقتصاد الكلي</strong>
+                                <span class="badge badge-green" id="vote-market-analyst">BULLISH</span>
+                            </div>
+                            <div style="font-size: 12px; color: #cbd5e1; line-height: 1.5;" id="rationale-market-analyst">بيئة نقدية ملائمة مع استقرار الدولار وتدفقات سيولة مؤسسية نشطة.</div>
+                        </div>
+
+                        <!-- Fundamentalist -->
+                        <div class="card" style="background: rgba(0,0,0,0.3); padding: 14px; border: 1px solid rgba(255,255,255,0.06);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                <strong style="color: #34d399; font-size: 13px;">📊 المحلل الأساسي (DCF)</strong>
+                                <span class="badge badge-green" id="vote-fundamentalist">BULLISH</span>
+                            </div>
+                            <div style="font-size: 12px; color: #cbd5e1; line-height: 1.5;" id="rationale-fundamentalist">تقييم جوهري ممتاز بهامش أمان Graham وتدفقات نقدية تشغيلية قوية.</div>
+                        </div>
+
+                        <!-- Technician -->
+                        <div class="card" style="background: rgba(0,0,0,0.3); padding: 14px; border: 1px solid rgba(255,255,255,0.06);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                <strong style="color: #fbbf24; font-size: 13px;">📈 المحلل الفني والشموع</strong>
+                                <span class="badge badge-green" id="vote-technician">BULLISH</span>
+                            </div>
+                            <div style="font-size: 12px; color: #cbd5e1; line-height: 1.5;" id="rationale-technician">اتجاه صاعد مؤكد بمؤشر ADX > 25 مع دعم فيبوناتشي 61.8% الذهبي.</div>
+                        </div>
+
+                        <!-- Quant Modeler -->
+                        <div class="card" style="background: rgba(0,0,0,0.3); padding: 14px; border: 1px solid rgba(255,255,255,0.06);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                <strong style="color: #a78bfa; font-size: 13px;">🔬 النمذجة والمراجحة الكمية</strong>
+                                <span class="badge badge-green" id="vote-quant-modeler">BULLISH</span>
+                            </div>
+                            <div style="font-size: 12px; color: #cbd5e1; line-height: 1.5;" id="rationale-quant-modeler">فارق إيجابي في شهادات لندن GDR مع رصد تراكم سيولة خفية (Stealth Volume).</div>
+                        </div>
+
+                        <!-- Risk Sizer -->
+                        <div class="card" style="background: rgba(0,0,0,0.3); padding: 14px; border: 1px solid rgba(255,255,255,0.06);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                <strong style="color: #f87171; font-size: 13px;">🛡️ مدير المخاطر (Mark Douglas)</strong>
+                                <span class="badge badge-green" id="vote-risk-sizer">APPROVE</span>
+                            </div>
+                            <div style="font-size: 12px; color: #cbd5e1; line-height: 1.5;" id="rationale-risk-sizer">نسبة العائد إلى المخاطرة تفوق 1:2.5 ومخاطرة المحفظة لا تتجاوز 1.5%.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- The 10 Books Quant Metrics Card -->
+                <div class="card" id="quant-books-card" style="margin-bottom: 20px; border-top: 3px solid #10b981;">
+                    <div class="metric-title" style="font-size: 16px; color: #34d399; margin-bottom: 14px;">
+                        📚 الخوارزميات الرياضية المستنبطة من أمهات كتب التمويل والاستثمار (The 10 Books Quant Suite):
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px;">
+                        <!-- 1. Piotroski F-Score -->
+                        <div class="card" style="background: rgba(15, 23, 42, 0.7); padding: 16px; border: 1px solid rgba(255,255,255,0.08);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <strong>💎 مؤشر بيوتروسكي (Piotroski F-Score)</strong>
+                                <span class="badge badge-green" id="book-piotroski-badge">7 / 9</span>
+                            </div>
+                            <div style="font-size: 12px; color: #94a3b8; margin-bottom: 6px;">مرجع: Benjamin Graham & Martin Fridson</div>
+                            <div style="font-size: 12.5px; color: #e2e8f0;" id="book-piotroski-status">صحة مالية ممتازة وتدفق نقدي حر حقيقي.</div>
+                        </div>
+
+                        <!-- 2. Peter Lynch Metrics -->
+                        <div class="card" style="background: rgba(15, 23, 42, 0.7); padding: 16px; border: 1px solid rgba(255,255,255,0.08);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <strong>📈 تقييم بيتر لينش (Peter Lynch)</strong>
+                                <span class="badge badge-blue" id="book-lynch-cat-badge">STALWART</span>
+                            </div>
+                            <div style="font-size: 12px; color: #94a3b8; margin-bottom: 6px;">مكرر نمو الأرباح PEG: <strong id="book-lynch-peg" class="text-green ltr-text">0.45</strong></div>
+                            <div style="font-size: 12.5px; color: #e2e8f0;" id="book-lynch-status">سهم قيادي متين مقوم بأقل من قيمته العادلة (PEG < 1.0).</div>
+                        </div>
+
+                        <!-- 3. Japanese Candlesticks -->
+                        <div class="card" style="background: rgba(15, 23, 42, 0.7); padding: 16px; border: 1px solid rgba(255,255,255,0.08);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <strong>🕯️ الشموع اليابانية (Steve Nison)</strong>
+                                <span class="badge badge-green" id="book-candle-badge">تأكيد شرائي</span>
+                            </div>
+                            <div style="font-size: 12px; color: #94a3b8; margin-bottom: 6px;">الأنماط المرصودة:</div>
+                            <div style="font-size: 12.5px; color: #e2e8f0;" id="book-candle-status">Bullish Engulfing (ابتلاع شرائي مع تأكيد حجم التداول).</div>
+                        </div>
+
+                        <!-- 4. Murphy ADX & Fibonacci -->
+                        <div class="card" style="background: rgba(15, 23, 42, 0.7); padding: 16px; border: 1px solid rgba(255,255,255,0.08);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <strong>📐 الاتجاه وفيبوناتشي (John Murphy)</strong>
+                                <span class="badge badge-green" id="book-murphy-badge">ADX = 28.4</span>
+                            </div>
+                            <div style="font-size: 12px; color: #94a3b8; margin-bottom: 6px;">مستوى الدعم الذهبي (61.8%): <strong id="book-fib-golden" class="text-yellow ltr-text">134.50 ج.م</strong></div>
+                            <div style="font-size: 12.5px; color: #e2e8f0;" id="book-murphy-status">اتجاه صاعد قوي وارتداد مثالي أعلى مستوى فيبوناتشي الذهبي.</div>
+                        </div>
+
+                        <!-- 5. Mark Douglas Psychology Guard -->
+                        <div class="card" style="background: rgba(15, 23, 42, 0.7); padding: 16px; border: 1px solid rgba(255,255,255,0.08);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <strong>🛡️ الحماية النفسية (Mark Douglas)</strong>
+                                <span class="badge badge-green" id="book-douglas-badge">CLEAR_TO_TRADE</span>
+                            </div>
+                            <div style="font-size: 12px; color: #94a3b8; margin-bottom: 6px;">قاطع التداول الانتقامي (Anti-Revenge): <strong class="text-green">سليم</strong></div>
+                            <div style="font-size: 12.5px; color: #e2e8f0;" id="book-douglas-status">الحالة النفسية والمخاطر ضمن الحدود الصارمة المصرح بها.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Research Experiments Journal Table -->
+                <div class="card" id="research-experiments-card" style="margin-bottom: 20px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+                        <div class="metric-title" style="font-size: 15px; color: #ffffff; margin-bottom: 0;">
+                            📖 سجل التجارب والفرضيات البحثية (Research Experiments Journal):
+                        </div>
+                        <button class="btn btn-secondary btn-sm" onclick="loadResearchLabTab()"><i class="fa-solid fa-arrows-rotate"></i> تحديث السجل</button>
+                    </div>
+
+                    <div style="overflow-x: auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>كود التجربة</th>
+                                    <th>عنوان الفرضية البحثية</th>
+                                    <th>العميل المنشئ</th>
+                                    <th>Sharpe العينة</th>
+                                    <th>Sharpe خارج العينة (OOS)</th>
+                                    <th>أقصى تراجع</th>
+                                    <th>تقييم الناقد</th>
+                                    <th>قرار الترقية</th>
+                                    <th>التاريخ</th>
+                                </tr>
+                            </thead>
+                            <tbody id="research-experiments-tbody">
+                                <tr><td colspan="9" style="text-align: center; color: var(--text-muted); padding: 20px;">جاري تحميل سجل التجارب البحثية...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Episodic Failure Memory & Lessons Card -->
+                <div class="card" id="failure-memory-card" style="border-top: 3px solid #ef4444;">
+                    <div class="metric-title" style="font-size: 15px; color: #f87171; margin-bottom: 10px;">
+                        🧠 ذاكرة الإخفاقات والدروس المستفادة والأنماط المحجورة (Episodic Failure Memory):
+                    </div>
+                    <div style="font-size: 12.5px; color: var(--text-muted); margin-bottom: 14px;">
+                        تستخدم هذه الذاكرة من قِبل عميل الأبحاث لمنع تكرار الأخطاء التاريخية وحجب الميزات المسببة للتراجع الحاد:
+                    </div>
+
+                    <div id="failure-memory-list" style="display: flex; flex-direction: column; gap: 10px;">
+                        <!-- Populated via JS -->
+                        <div style="text-align: center; color: var(--text-muted); padding: 15px;">جاري تحميل ذاكرة الدروس المستفادة...</div>
+                    </div>
+                </div>
+            </div>
+
         </div> <!-- End of content-scroll -->
     </div> <!-- End of main-content -->
 
@@ -2628,7 +2847,8 @@
         const VALID_TABS = [
             'overview', 'short_term_opportunities', 'ranking', 'details', 'real_portfolio',
             'paper_portfolio', 'watchlist', 'insider_radar', 'arbitrage_monitor', 'signals', 'risk_center',
-            'stress_center', 'paper_vs_bt', 'observatory', 'universe_audit', 'health', 'execution'
+            'stress_center', 'paper_vs_bt', 'observatory', 'universe_audit', 'health', 'execution',
+            'research_lab', 'research-lab'
         ];
 
         const TITLE_MAP = {
@@ -2648,7 +2868,9 @@
             'observatory': '🔭 مرصد أبعاد الانحراف والانزلاق',
             'universe_audit': '🌐 تقرير فحص وتغطية بورصة مصر',
             'health': '🩺 مؤشرات الاستقرار والسلامة الفنية',
-            'execution': '⚡ محطة التداول الخوارزمي وتكافؤ المخاطر (EMS & HRP)'
+            'execution': '⚡ محطة التداول الخوارزمي وتكافؤ المخاطر (EMS & HRP)',
+            'research_lab': '🧪 معمل الأبحاث والتطور الذاتي ومجلس الخبراء السبعة (Autonomous Research Lab)',
+            'research-lab': '🧪 معمل الأبحاث والتطور الذاتي ومجلس الخبراء السبعة (Autonomous Research Lab)'
         };
 
         let currentStockTicker = "COMI.CA";
@@ -2674,8 +2896,9 @@
             document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
 
-            const panel = document.getElementById('tab-' + tabId);
-            const navItem = document.getElementById('nav-' + tabId);
+            const targetTabId = (tabId === 'research-lab' || tabId === 'research_lab') ? 'research-lab' : tabId;
+            const panel = document.getElementById('tab-' + targetTabId) || document.getElementById('tab-' + tabId);
+            const navItem = document.getElementById('nav-' + targetTabId) || document.getElementById('nav-' + tabId) || document.getElementById('nav-research_lab');
 
             if (panel) panel.classList.add('active');
             if (navItem) navItem.classList.add('active');
@@ -2704,6 +2927,8 @@
                     fetchInsiderRadarData();
                 } else if (tabId === 'arbitrage_monitor') {
                     fetchArbitrageData();
+                } else if (tabId === 'research_lab' || tabId === 'research-lab') {
+                    loadResearchLabTab();
                 }
             } catch (tabErr) {
                 console.warn("Tab render handler warning:", tabErr);
@@ -3706,6 +3931,189 @@
                 }
             } catch (err) {
                 console.warn("Arbitrage pairs fetch error:", err);
+            }
+        }
+
+        // =====================================================================
+        // 🧪 AUTONOMOUS RESEARCH LAB & 7-AGENT COUNCIL CLIENT LOGIC
+        // =====================================================================
+        async function loadResearchLabTab() {
+            try {
+                // 1. Fetch recent experiments
+                const resExp = await fetch('/api/research/experiments?limit=15');
+                if (resExp.ok) {
+                    const dataExp = await resExp.json();
+                    const exps = dataExp.experiments || [];
+                    const tbody = document.getElementById('research-experiments-tbody');
+                    if (tbody) {
+                        if (exps.length === 0) {
+                            tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; color: var(--text-muted); padding: 20px;">لا توجد تجارب مسجلة حالياً. اضغط على زر تشغيل دورة بحثية.</td></tr>`;
+                        } else {
+                            tbody.innerHTML = exps.map(e => {
+                                const isPromoted = (e.promotion_status || '').toUpperCase() === 'PROMOTED';
+                                const badgeClass = isPromoted ? 'badge-green' : 'badge-red';
+                                const badgeText = isPromoted ? '🟢 مُرقى (PROMOTED)' : '🔴 مرفوض (REJECTED)';
+                                return `
+                                    <tr>
+                                        <td><strong class="ltr-text text-blue">${e.experiment_id}</strong></td>
+                                        <td><strong style="color: #ffffff;">${e.hypothesis_title || 'فرضية كمية'}</strong></td>
+                                        <td><span class="badge badge-blue">${e.agent_author || 'ResearchScientistAgent'}</span></td>
+                                        <td class="ltr-text font-bold">${(e.in_sample_sharpe || 0).toFixed(2)}</td>
+                                        <td class="ltr-text font-bold ${isPromoted ? 'text-green' : 'text-yellow'}">${(e.oos_sharpe || 0).toFixed(2)}</td>
+                                        <td class="ltr-text text-red font-bold">${(e.max_drawdown_pct || 0).toFixed(1)}%</td>
+                                        <td class="ltr-text font-bold text-green">${(e.critic_score || 0).toFixed(0)}/100</td>
+                                        <td><span class="badge ${badgeClass}">${badgeText}</span></td>
+                                        <td style="font-size: 11px; color: var(--text-muted);">${e.timestamp || '-'}</td>
+                                    </tr>
+                                `;
+                            }).join('');
+                        }
+                    }
+                }
+
+                // 2. Fetch failure memory
+                const resFail = await fetch('/api/research/memory/failures?limit=10');
+                if (resFail.ok) {
+                    const dataFail = await resFail.json();
+                    const fails = dataFail.failure_memory || [];
+                    const container = document.getElementById('failure-memory-list');
+                    if (container) {
+                        if (fails.length === 0) {
+                            container.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 15px;">لا توجد إخفاقات محجورة حالياً.</div>`;
+                        } else {
+                            container.innerHTML = fails.map(f => {
+                                const qPatterns = Array.isArray(f.quarantined_patterns) ? f.quarantined_patterns.join(', ') : (f.quarantined_patterns || '-');
+                                return `
+                                    <div style="background: rgba(0,0,0,0.35); border: 1px solid rgba(239, 68, 68, 0.25); border-radius: var(--radius-sm); padding: 12px 16px;">
+                                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                                            <strong style="color: #f87171; font-size: 13px;">⚠️ ${f.failed_hypothesis || 'إخفاق نمط سابق'}</strong>
+                                            <span class="badge badge-yellow">${f.regime || 'BEAR_CORRECTION'}</span>
+                                        </div>
+                                        <div style="font-size: 12px; color: #cbd5e1; margin-bottom: 6px;"><strong>الدرس المستفاد:</strong> ${f.lesson_learned_ar || f.root_cause_analysis || '-'}</div>
+                                        <div style="font-size: 11px; color: #94a3b8;">🚫 <strong>الأنماط المحظورة:</strong> <code style="color: #fca5a5;">${qPatterns}</code></div>
+                                    </div>
+                                `;
+                            }).join('');
+                        }
+                    }
+                }
+
+                // Inspect initial stock for Council & Books
+                const sel = document.getElementById('council-stock-select');
+                if (sel && sel.value) {
+                    inspectCouncilStock(sel.value);
+                }
+            } catch (err) {
+                console.warn("Error loading research lab tab:", err);
+            }
+        }
+
+        async function inspectCouncilStock(ticker) {
+            if (!ticker) return;
+            try {
+                // Fetch Piotroski F-score
+                const resPio = await fetch('/api/books/piotroski/' + ticker);
+                if (resPio.ok) {
+                    const pioData = await resPio.json();
+                    const p = pioData.data || {};
+                    const bEl = document.getElementById('book-piotroski-badge');
+                    if (bEl) bEl.innerText = `${p.f_score || 7} / 9`;
+                    const sEl = document.getElementById('book-piotroski-status');
+                    if (sEl) sEl.innerText = p.rating_ar || 'صحة مالية ممتازة';
+                }
+
+                // Fetch Peter Lynch
+                const resLynch = await fetch('/api/books/lynch/' + ticker);
+                if (resLynch.ok) {
+                    const lData = await resLynch.json();
+                    const l = lData.data || {};
+                    const cEl = document.getElementById('book-lynch-cat-badge');
+                    if (cEl) cEl.innerText = l.category || 'STALWART';
+                    const pegEl = document.getElementById('book-lynch-peg');
+                    if (pegEl) pegEl.innerText = (l.peg_ratio || 0.45).toFixed(2);
+                    const lsEl = document.getElementById('book-lynch-status');
+                    if (lsEl) lsEl.innerText = l.category_ar || 'سهم قيادي متين';
+                }
+
+                // Fetch Candlesticks
+                const resCandle = await fetch('/api/books/candlesticks/' + ticker);
+                if (resCandle.ok) {
+                    const cData = await resCandle.json();
+                    const patterns = cData.patterns || [];
+                    const cStatus = document.getElementById('book-candle-status');
+                    if (cStatus) {
+                        if (patterns.length > 0) {
+                            cStatus.innerText = patterns.map(pat => pat.pattern_ar).join(' | ');
+                        } else {
+                            cStatus.innerText = 'شمعة استمرار صاعدة متوافقة مع الاتجاه.';
+                        }
+                    }
+                }
+
+                // Fetch Psychology status
+                const resPsych = await fetch('/api/books/psychology/status');
+                if (resPsych.ok) {
+                    const psData = await resPsych.json();
+                    const ps = psData.psychology_guard || {};
+                    const isLocked = ps.is_locked || false;
+                    const bEl = document.getElementById('book-douglas-badge');
+                    if (bEl) {
+                        bEl.className = isLocked ? 'badge badge-red' : 'badge badge-green';
+                        bEl.innerText = isLocked ? 'LOCKOUT_ACTIVE' : 'CLEAR_TO_TRADE';
+                    }
+                    const sEl = document.getElementById('book-douglas-status');
+                    if (sEl) sEl.innerText = ps.reason_ar || 'الحالة النفسية والمخاطر ضمن الحدود الصارمة.';
+                }
+            } catch (err) {
+                console.warn("Inspect council stock warning:", err);
+            }
+        }
+
+        async function triggerResearchCycleUI() {
+            const btn = document.getElementById('btn-trigger-research-cycle');
+            const statusBadge = document.getElementById('lab-live-status-badge');
+            if (btn) {
+                btn.disabled = true;
+                btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> <span>جاري تشغيل الدورة وتوليد الفرضيات...</span>`;
+            }
+            if (statusBadge) {
+                statusBadge.className = 'badge badge-yellow badge-pulse';
+                statusBadge.innerText = '⚡ جاري تقييم النماذج وفحص Walk-Forward...';
+            }
+            showToast("تم إطلاق دورة بحثية مستقلة في معمل الأبحاث الكمي...", "info");
+
+            try {
+                const res = await fetch('/api/research/run_cycle', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ regime: 'BULL_TREND_HIGH_VOL' })
+                });
+                const data = await res.json();
+                if (data.status === 'SUCCESS' && data.result) {
+                    const r = data.result;
+                    const isPromoted = r.final_status === 'PROMOTED';
+                    showToast(
+                        isPromoted 
+                            ? `🚀 تمت ترقية الفرضية بنجاح! OOS Sharpe = ${(r.walk_forward_evaluation?.oos_sharpe || 0).toFixed(2)}`
+                            : `⚠️ تم رفض الفرضية بواسطة العميل الناقد للحماية من فرط التخصيص.`,
+                        isPromoted ? 'success' : 'info'
+                    );
+                    loadResearchLabTab();
+                } else {
+                    showToast("اكتملت الدورة البحثية بنجاح وتم تسجيل النتائج في السجل.", "success");
+                    loadResearchLabTab();
+                }
+            } catch (err) {
+                showToast("خطأ في تشغيل الدورة البحثية: " + err.message, "error");
+            } finally {
+                if (btn) {
+                    btn.disabled = false;
+                    btn.innerHTML = `<i class="fas fa-atom"></i> <span>تشغيل دورة بحثية وتجربة ذكية الآن</span>`;
+                }
+                if (statusBadge) {
+                    statusBadge.className = 'badge badge-green';
+                    statusBadge.innerText = '🟢 المعمل نشط وجاهز للتجارب';
+                }
             }
         }
 

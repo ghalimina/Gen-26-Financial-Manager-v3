@@ -3,7 +3,7 @@
     "COMI.CA": 0,
     "SWDY.CA": 0,
     "TMGH.CA": 0,
-    "ORAS.CA": 0,
+    "ORAS.CA": 1,
     "EFIH.CA": 0,
     "EGAL.CA": 0,
     "EMFD.CA": 0,
@@ -54,7 +54,7 @@
     "FAITA.CA": 0,
     "CIEB.CA": 0,
     "CANA.CA": 0,
-    "SAIB.CA": 0,
+    "SAIB.CA": 1,
     "EGBE.CA": 0,
     "HDBK.CA": 0,
     "VALU.CA": 0,
@@ -62,7 +62,7 @@
     "OFH.CA": 0,
     "ASPI.CA": 0,
     "CNFN.CA": 0,
-    "ICMI.CA": 0,
+    "ICMI.CA": 1,
     "EIUD.CA": 0,
     "ALEX.CA": 0,
     "ETRS.CA": 0,
@@ -160,5 +160,5 @@
     "WDEH.CA": 0
   },
   "alerts": {},
-  "last_updated": "2026-08-29 04:18:19"
+  "last_updated": "2026-08-29 04:27:19"
 }

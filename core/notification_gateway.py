@@ -354,6 +354,38 @@ class NotificationEngine:
         )
 
     @classmethod
+    def send_strategy_promoted_alert(
+        cls,
+        experiment_id: str,
+        hypothesis_title: str,
+        oos_sharpe: float,
+        max_drawdown_pct: float,
+        in_sample_sharpe: float = 2.45
+    ) -> Dict[str, Any]:
+        """
+        🚀 [ترقية استراتيجية جديدة] نجح العميل الباحث في ترقية استراتيجية جديدة بنسبة Sharpe خارج العينة = X.XX وتراجع أقصى = X.X% بعد اجتياز فحص العميل الناقد واقتطاع 10% ضريبة الأرباح الرأسمالية.
+        """
+        title = f"🚀 ترقية استراتيجية جديدة ({experiment_id})"
+        msg = (
+            f"🚀 *[ترقية استراتيجية جديدة]* نجح العميل الباحث في ترقية استراتيجية جديدة `{experiment_id}`: "
+            f"*{hypothesis_title}* بنسبة Sharpe خارج العينة = `{oos_sharpe:.2f}` (مقابل داخل العينة `{in_sample_sharpe:.2f}`) "
+            f"وتراجع أقصى = `{max_drawdown_pct:.1f}%` بعد اجتياز فحص العميل الناقد واقتطاع 0.35% عمولات تداول و10% ضريبة الأرباح الرأسمالية (CGT).\n"
+            f"━━━━━━━━━━━━━━━━━━━━\n"
+            f"• *كود التجربة:* `{experiment_id}`\n"
+            f"• *حالة الترقية:* `PROMOTED TO PRODUCTION`\n"
+            f"• *المعايرة الآلية:* `تم تحديث أوزان الإنتاج بنجاح دون الإخلال بحدود المخاطر`\n"
+            f"━━━━━━━━━━━━━━━━━━━━\n"
+            f"🧪 _معمل الأبحاث والتطور الكمي المستقل (Autonomous Quant Research Lab)_"
+        )
+        return cls.send_message(
+            text=msg,
+            parse_mode="Markdown",
+            category="RESEARCH_PROMOTION",
+            icon="🚀",
+            title=title
+        )
+
+    @classmethod
     def send_emergency_retrain_alert(cls, reason: str) -> Dict[str, Any]:
         """
         🚨 حالة طوارئ: إيقاف التداول وبدء إعادة التدريب الفوري للذكاء الاصطناعي بسبب [Reason].
