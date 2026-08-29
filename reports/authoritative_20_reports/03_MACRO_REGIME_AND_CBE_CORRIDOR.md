@@ -9,26 +9,31 @@ The GEN-26 Macroeconomic Barometer (`core/macro_risk_manager.py`) tracks the mon
 
 | Macro Metric | Official Rate / Value | Regulatory Authority | Quantitative Impact on EGX Equities |
 | :--- | :--- | :--- | :--- |
-| **CBE Overnight Lending Rate** | **$19.00\%$** | Central Bank of Egypt (MPC) | High hurdle rate; elevates Cost of Capital ($WACC$) |
-| **CBE Overnight Deposit Rate** | **$18.00\%$** | Central Bank of Egypt (MPC) | Risk-free rate floor ($R_f$) for cash holdings |
-| **Headline Annual Inflation** | **$14.90\%$** | CAPMAS / CBE Disclosures | Positive real interest rate environment ($+3.10\%$) |
-| **USD/EGP Official Spot Rate** | **$50.20$ EGP** | Interbank Market / CBE | Benchmark for London GDR arbitrage parity |
-| **91-Day T-Bill Yield (Net)** | **$26.40\%$** | Ministry of Finance Auctions | Alternative yield benchmark for asset allocators |
+| **CBE Overnight Deposit Rate** | **$19.00\%$** | Central Bank of Egypt (MPC) | Risk-free rate floor ($R_f$) for Egyptian cash holdings |
+| **CBE Overnight Lending Rate** | **$20.00\%$** | Central Bank of Egypt (MPC) | Upper corridor rate; benchmark for corporate debt costs |
+| **Headline Annual Inflation** | **$14.90\%$** | CAPMAS / CBE Disclosures | Positive real interest rate environment ($+4.10\%$) |
+| **USD/EGP Official Spot Rate** | **$50.20$ EGP** | Interbank Market / CBE | Official anchor for London GDR arbitrage parity |
+| **91-Day T-Bill Yield (Net)** | **$26.40\%$** | Ministry of Finance Auctions | Alternative riskless yield benchmark for institutional allocators |
 | **Macro Regime State** | **`HIGH_RATES_STABLE_FX`** | GEN-26 Classification Engine | Favors high cash-flow, net-cash, export-oriented stocks |
 
 ---
 
-## 3. Equity Risk Premium (ERP) Formulation
+## 3. Equity Risk Premium (ERP) & Hurdle Rate Formulation
 
-The platform computes the **EGX Hurdle Rate** dynamically using the Capital Asset Pricing Model (CAPM) with Egyptian sovereign risk adjustments:
+The platform computes the **EGX Required Cost of Equity (Hurdle Rate)** dynamically using the Capital Asset Pricing Model (CAPM) augmented with sovereign Country Risk Premium (CRP):
 
-$$E(R_i) = R_f + \beta_i \cdot \text{ERP}_{\text{EGX}} + \text{CRP}_{\text{Egypt}}$$
+$$E(R_i) = R_f + (\beta_i \cdot \text{ERP}_{\text{EGX}}) + \text{CRP}_{\text{Egypt}}$$
 
 Where:
-- $R_f = 18.00\%$ (CBE Risk-Free Floor)
+- $R_f = 19.00\%$ (CBE Overnight Deposit Floor)
+- $\beta_i = 1.00$ (Market Benchmark Beta)
 - $\text{ERP}_{\text{EGX}} = 7.50\%$ (Egyptian Equity Risk Premium)
-- $\text{CRP}_{\text{Egypt}} = 4.20\%$ (Country Risk Premium)
-- **Minimum Required Hurdle Rate for Equities**: $18.00\% + 7.50\% = 25.50\%$ annualized.
+- $\text{CRP}_{\text{Egypt}} = 4.20\%$ (Egyptian Country Risk Premium)
+
+### Institutional Hurdle Rate Benchmark:
+$$E(R_i) = 19.00\% + (1.00 \times 7.50\%) + 4.20\% = \mathbf{30.70\%} \text{ Annualized}$$
+
+Equities evaluated by the platform must demonstrate an expected total return (Alpha + Beta) exceeding the $30.70\%$ hurdle rate to qualify for active capital deployment.
 
 ---
 

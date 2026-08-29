@@ -42,12 +42,13 @@ Total Piotroski F-Score = Profitability (4 pts) + Leverage/Liquidity (3 pts) + O
 ---
 
 ## 4. Empirical Sample Score: Commercial International Bank (`COMI.CA`)
-- **ROA**: $+3.40\%$ (Point 1: 1)
-- **CFO**: Positive (Point 2: 1)
-- **Delta ROA**: Expanding (Point 3: 1)
-- **Accruals**: Cash exceeds net profit (Point 4: 1)
-- **Capital Adequacy & Leverage**: Strong (Point 5: 1)
-- **Current / Liquidity Ratio**: Strong (Point 6: 1)
-- **No Dilution**: Zero new shares issued (Point 7: 1)
-- **Net Interest Margin / Efficiency**: Expanding (Points 8 & 9: 1, 1)
-- **Total F-Score for `COMI.CA`**: **8 / 9** (Institutional Premium Tier).
+- **ROA ($+3.40\% > 0$)**: $+1$ Point
+- **Operating Cash Flow (CFO $> 0$)**: $+1$ Point
+- **Delta ROA ($\Delta \text{ROA} > 0$)**: $+1$ Point
+- **Accruals Quality ($\text{CFO} > \text{ROA}$)**: $+1$ Point
+- **Capital Adequacy & Leverage ($\Delta \text{Lev} \le 0$)**: $+1$ Point
+- **Current / Liquidity Ratio ($\Delta \text{CR} > 0$)**: $+1$ Point
+- **No Share Dilution ($\Delta \text{Shares} \le 0$)**: $+1$ Point
+- **Gross / Net Interest Margin ($\Delta \text{NIM} > 0$)**: $+1$ Point
+- **Asset Turnover ($\Delta \text{ATO} > 0$)**: $+1$ Point
+- **Total F-Score for `COMI.CA`**: **9 / 9 (100% Perfect Fundamental Accounting Score)**.

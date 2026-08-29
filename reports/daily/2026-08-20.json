@@ -1,11 +1,11 @@
 {
   "snapshot_metadata": {
     "market_date": "2026-08-20",
-    "timestamp": "2026-08-29T05:43:47.756711",
+    "timestamp": "2026-08-29T05:56:27.144133",
     "data_provider": "Yahoo Finance + Local PIT Store",
     "engine_version": "3.0.0",
     "mode": "PAPER_ONLY",
-    "sha256_hash": "7a065181bc8b7ad3dcf761bb7101f8641d6c41170976f38f312e219938f19e18"
+    "sha256_hash": "51b7c4366ac251a6a3b433e045be168700ff76a612218e113b3cd91d4669cb63"
   },
   "universe_coverage": {
     "tradable": 27,

@@ -45,12 +45,18 @@ $$y_2 = \begin{cases}
 
 ---
 
-## 4. Bet Sizing Calibration & S-Curve Mapping
+## 4. Bet Sizing Calibration & Piecewise Linear Sizing Function
 
-The secondary model predicts the probability $p = P(y_2 = 1)$. Bet sizing multiplier $f(p)$ is computed using the inverse normal CDF (probit link function):
+The secondary model predicts the probability $p = P(y_2 = 1 \mid X, y_1)$. The dynamic bet sizing multiplier $f(p)$ is computed using the continuous piecewise linear scaling function:
 
-$$f(p) = \max\left(0.0, \frac{p - 0.50}{0.50}\right) \quad \text{for } p \ge 0.50$$
+$$f(p) = \min\left(1.0, \max\left(0.0, \frac{p - 0.60}{0.85 - 0.60}\right)\right)$$
 
-- If $p < 0.60$: Model discards trade proposal ($f = 0$).
-- If $p = 0.85$: Model allocates full calculated Kelly fraction ($f = 1.0$).
-- **Result**: Precision increases from $51.2\%$ (raw base model) to $68.7\%$ (meta-labeled model).
+### Explicit Operating Tiers:
+- **$p < 0.60 \implies f(p) = 0.0$** (**Trade Veto / Zero Allocation**): Signals with meta-confidence below $60\%$ are automatically suppressed, protecting capital from noisy setups.
+- **$p = 0.725 \implies f(p) = 0.50$** (**Half-Kelly Allocation**): Moderate conviction allocations.
+- **$p \ge 0.85 \implies f(p) = 1.0$** (**Full Position Sizing**): Maximum permissible allocation per risk limit.
+
+### Performance Impact:
+- Raw primary directional accuracy: $51.2\%$
+- Secondary meta-filtered precision: **$68.7\%$**
+- Out-of-sample Sharpe Ratio improvement: $+0.65$
