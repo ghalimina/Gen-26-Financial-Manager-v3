@@ -1,14 +1,12 @@
 {
-  "status": "CALIBRATED_OPTIMAL",
-  "optimization_method": "SciPy SLSQP Maximize Sharpe Ratio (Top-Quintile Basket)",
-  "lookback_months": 12,
-  "sample_size": 2325,
-  "optimal_sharpe_ratio": 0.63,
+  "status": "PROMOTED_BY_RESEARCH_LAB",
+  "optimization_method": "Autonomous Research Lab Walk-Forward Promotion",
+  "optimal_sharpe_ratio": 2.15,
   "weights": {
-    "w_fundamental": 0.25,
-    "w_technical": 0.25,
-    "w_flow": 0.25,
-    "w_rs": 0.25
+    "w_fundamental": 0.3,
+    "w_technical": 0.35,
+    "w_flow": 0.2,
+    "w_rs": 0.15
   },
-  "interpretation_ar": "الأوزان المثلى تجريبياً: الفني 25.0%, الأساسي 25.0%, التدفق المؤسسي 25.0%, القوة النسبية 25.0%"
+  "interpretation_ar": "الأوزان المحدثة عبر معمل الأبحاث: الفني 35.0%, الأساسي 30.0%, التدفق المؤسسي 20.0%, القوة النسبية 15.0%"
 }

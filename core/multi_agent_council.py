@@ -446,19 +446,28 @@ class ResearchScientistAgent:
     def formulate_hypothesis(
         cls,
         market_regime: str = "STRONG_BULL",
-        failure_memory: Optional[List[Dict[str, Any]]] = None
+        failure_memory: Optional[List[Dict[str, Any]]] = None,
+        current_regime: Optional[str] = None
     ) -> Dict[str, Any]:
+        regime = current_regime or market_regime
         exp_id = f"EXP_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}_{os.urandom(2).hex()}"
         
         # Avoid quarantined features from failure memory
         quarantined = set()
         if failure_memory:
             for f in failure_memory:
-                try:
-                    q_list = json.loads(f.get("quarantined_patterns", "[]"))
-                    quarantined.update(q_list)
-                except Exception:
-                    pass
+                qp = f.get("quarantined_patterns", [])
+                if isinstance(qp, list):
+                    quarantined.update(qp)
+                elif isinstance(qp, str):
+                    try:
+                        q_list = json.loads(qp)
+                        if isinstance(q_list, list):
+                            quarantined.update(q_list)
+                        else:
+                            quarantined.add(qp)
+                    except Exception:
+                        quarantined.add(qp)
 
         # Feature selection avoiding quarantined features
         candidate_features = [
@@ -467,10 +476,10 @@ class ResearchScientistAgent:
         ]
         active_features = [feat for feat in candidate_features if feat not in quarantined]
 
-        title = f"Multi-Factor EGX Alpha Multiplier [{market_regime}]"
+        title = f"Multi-Factor EGX Alpha Multiplier [{regime}]"
         desc = (
             f"فرضية بحثية تدمج التفاضل الكسري مع فوارق شهادات إيداع لندن وهامش أمان Graham "
-            f"لتحقيق تفوق عائد ألفا في ظل نظام السوق ({market_regime})."
+            f"لتحقيق تفوق عائد ألفا في ظل نظام السوق ({regime})."
         )
 
         return {
@@ -513,12 +522,16 @@ class CriticAuditorAgent:
     @classmethod
     def audit_experiment(
         cls,
-        experiment: Dict[str, Any],
-        failure_memory: Optional[List[Dict[str, Any]]] = None
+        experiment: Optional[Dict[str, Any]] = None,
+        failure_memory: Optional[List[Dict[str, Any]]] = None,
+        experiment_data: Optional[Dict[str, Any]] = None,
+        past_failures: Optional[List[Dict[str, Any]]] = None
     ) -> Dict[str, Any]:
+        exp = experiment_data or experiment or {}
+        failures = past_failures or failure_memory or []
         rejections = []
-        is_sharpe = float(experiment.get("in_sample_sharpe", 0.0))
-        oos_sharpe = float(experiment.get("oos_sharpe", 0.0))
+        is_sharpe = float(exp.get("in_sample_sharpe", 0.0))
+        oos_sharpe = float(exp.get("oos_sharpe", 0.0))
 
         # 1. Overfitting Degradation Test
         if is_sharpe > 0:
@@ -533,16 +546,20 @@ class CriticAuditorAgent:
             rejections.append(f"معامل شارب خارج العينة منخفض ({oos_sharpe:.2f} < 1.40).")
 
         # 3. Maximum Drawdown Test
-        mdd = float(experiment.get("max_drawdown_pct", 0.0))
+        mdd = float(exp.get("max_drawdown_pct", 0.0))
         if mdd > 15.0:
             rejections.append(f"أقصى تراجع تاريخي مرتفع ({mdd:.1f}% > 15.0%).")
 
         # 4. Quarantined pattern check
-        feats = experiment.get("features_used", [])
-        if failure_memory:
-            for fail in failure_memory:
+        feats = exp.get("features_used", [])
+        if failures:
+            for fail in failures:
                 try:
-                    q_list = json.loads(fail.get("quarantined_patterns", "[]"))
+                    qp = fail.get("quarantined_patterns", [])
+                    if isinstance(qp, str):
+                        q_list = json.loads(qp) if qp.startswith("[") else [qp]
+                    else:
+                        q_list = qp
                     overlap = set(feats).intersection(set(q_list))
                     if overlap:
                         rejections.append(f"استخدام ميزات محظورة ومحجورة في ذاكرة الإخفاقات السابقة: {list(overlap)}.")
@@ -550,7 +567,7 @@ class CriticAuditorAgent:
                     pass
 
         # 5. Look-Ahead Bias & Circular Data Leakage Test
-        if experiment.get("has_lookahead_bias") or experiment.get("has_data_leakage"):
+        if exp.get("has_lookahead_bias") or exp.get("has_data_leakage"):
             rejections.append("رصد تسريب بيانات مستقبلية (Look-ahead bias / Circular data leakage).")
         for f in feats:
             if any(leak_kw in str(f).lower() for leak_kw in ["future", "target", "leak", "next_close", "t+1"]):
@@ -558,7 +575,7 @@ class CriticAuditorAgent:
                 break
 
         # 6. Transaction Friction Penalty Test (Minimum 0.35% roundtrip EGX fees + 10% CGT)
-        params = experiment.get("parameters", {})
+        params = exp.get("parameters", {})
         friction = float(params.get("friction_allowance_pct", 0.35))
         if friction < 0.25:
             rejections.append(f"إغفال تكاليف التداول وعمولات البورصة الواقعية ({friction:.2f}% < 0.35%).")

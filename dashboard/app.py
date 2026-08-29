@@ -1544,6 +1544,61 @@ def api_books_psychology_status():
         return jsonify({"status": "ERROR", "error": str(e)}), 500
 
 
+# --- 33. Autonomous Research Lab & Promotion Gate Endpoints ---
+
+@app.route("/api/research/experiments", methods=["GET"])
+def api_research_experiments():
+    """
+    Returns recent research experiments, hypothesis evaluations, and promotion verdicts.
+    """
+    try:
+        from core.autonomous_research_lab import AutonomousResearchLab
+        from flask import request
+        limit = int(request.args.get("limit", 10))
+        exps = AutonomousResearchLab.get_recent_experiments(limit=limit)
+        return jsonify({"status": "SUCCESS", "experiments": exps, "count": len(exps)}), 200
+    except Exception as e:
+        return jsonify({"status": "ERROR", "error": str(e)}), 500
+
+
+@app.route("/api/research/run_cycle", methods=["POST", "GET"])
+@app.route("/api/research/run-cycle", methods=["POST", "GET"])
+def api_research_run_cycle():
+    """
+    Triggers an autonomous research cycle and returns hypothesis formulation,
+    adversarial screening, walk-forward validation, and promotion verdict.
+    """
+    try:
+        from core.autonomous_research_lab import AutonomousResearchLab
+        from flask import request
+        payload = request.get_json(silent=True) or {}
+        regime = request.args.get("regime") or payload.get("regime", "BULL_TREND_HIGH_VOL")
+        force_hypo = payload.get("hypothesis")
+        result = AutonomousResearchLab.run_autonomous_research_cycle(
+            force_hypothesis=force_hypo,
+            regime_context=regime
+        )
+        return jsonify({"status": "SUCCESS", "result": result}), 200
+    except Exception as e:
+        return jsonify({"status": "ERROR", "error": str(e)}), 500
+
+
+@app.route("/api/research/memory/failures", methods=["GET"])
+@app.route("/api/research/memory-failures", methods=["GET"])
+def api_research_memory_failures():
+    """
+    Returns quarantined patterns and post-mortem lessons from failure memory.
+    """
+    try:
+        from core.autonomous_research_lab import AutonomousResearchLab
+        from flask import request
+        limit = int(request.args.get("limit", 20))
+        fails = AutonomousResearchLab.get_failure_memory(limit=limit)
+        return jsonify({"status": "SUCCESS", "failure_memory": fails, "count": len(fails)}), 200
+    except Exception as e:
+        return jsonify({"status": "ERROR", "error": str(e)}), 500
+
+
 @app.errorhandler(404)
 def handle_404_error(e):
     return jsonify({"error": "Not Found", "status": 404}), 404
