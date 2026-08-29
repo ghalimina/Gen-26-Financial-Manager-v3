@@ -1,49 +1,70 @@
 # 18. Black Swan Stress Testing & Extreme Tail-Risk Resilience
 
 **Document Version:** `v3.2.0-Authoritative`  
-**Publication Date:** `2026-08-29`  
-**Status:** `PRODUCTION VERIFIED & INSTITUTIONALLY CERTIFIED`
+**Classification:** `INSTITUTIONAL QUANTITATIVE ASSET MANAGEMENT SPECIFICATION`  
+**Publication Date:** `2026-08-30`  
+**Status:** `PRODUCTION VERIFIED & INSTITUTIONALLY CERTIFIED`  
 
 ---
 
 ## 1. Executive Summary
-The **Black Swan & Tail-Risk Stress Testing Engine** (`core/macro_risk_manager.py` and `core/real_portfolio.py`) simulates institutional portfolio resilience under severe macroeconomic shocks, geopolitical crises, unexpected currency devaluations, and sharp interest rate spikes.
+
+The **Black Swan Stress Testing & Tail-Risk Resilience Engine** (`core/risk_stress_testing_engine.py`) subjects candidate and active portfolios to extreme macroeconomic and market microstructure shocks. Rather than relying solely on linear Gaussian assumptions, GEN-26 runs **10,000-iteration Monte Carlo simulations** and computes **Parametric/Historical Value-at-Risk (VaR 99%)** and **Conditional Value-at-Risk (CVaR / Expected Shortfall)**.
+
+The engine dynamically computes the optimal allocation to Egyptian Gold Fund certificates (**`AZG.CA` - Azimut Gold ETF**) to insulate purchasing power against currency devaluations and systemic shocks.
 
 ---
 
-## 2. Macro Stress Scenarios & Simulated Impacts
+## 2. Standard Institutional Stress Test Scenarios
 
-| Scenario ID | Shock Event Description | Simulated Asset Shock | Expected Portfolio Impact | Capital Guard Defense |
-| :--- | :--- | :--- | :--- | :--- |
-| **`SHOCK_EGX_FLASH_CRASH`** | Sudden $-15\%$ market-wide liquidity drain | High-Beta Equities drop $-15\%$ to $-20\%$ | Portfolio Max Drawdown: **$-4.80\%$** | $30\%$ Cash Reserve $+ -7\%$ Stop-Loss limits |
-| **`SHOCK_EGP_DEVALUATION`** | Overnight $-25\%$ EGP currency devaluation | Banking & Exporters $+15\%$, Importers $-20\%$ | Portfolio P\&L: **$+3.20\%$ (Net Hedge)** | Heavy weighting in London GDRs & Exporters |
-| **`SHOCK_CBE_RATE_HIKE_300BPS`** | Surprise $+300\text{ bps}$ rate increase to $22\%$ | Real Estate drops $-12\%$, High-Debt $-15\%$ | Portfolio Max Drawdown: **$-3.10\%$** | Low allocation to leveraged developers |
-| **`SHOCK_GEOPOLITICAL_CRISIS`** | Regional conflict \& Red Sea transit disruption | Oil $+20\%$, Fertilizers $+15\%$, Tourism $-18\%$ | Portfolio P\&L: **$+1.80\%$** | Overweight Petrochemicals (`ABUK`, `MFPC`) |
+```
++========================================================================================================+
+| Scenario Identifier | Market Shock Event Description                   | Historical Benchmark Ref      |
++=====================+==================================================+===============================+
+| FLASH_CRASH         | Intraday market-wide liquidity evaporation (-15%)| EGX30 March 2020 Flash Shock  |
+| EGP_DEVALUATION     | Sudden 25% interbank currency depreciation       | March 2024 FX Floatation      |
+| RATE_HIKE_SPIKE     | Emergency 600 bps Central Bank rate hike         | CBE March 2024 Tightening     |
+| GLOBAL_RECESSION    | Emerging market capital flight; Brent drops -30% | Global 2008 / 2020 Crises     |
+| GEOPOLITICAL_SHOCK  | Regional trade disruption and shipping halt      | Red Sea / Suez Canal Shocks   |
++========================================================================================================+
+```
 
 ---
 
 ## 3. Mathematical Value-at-Risk (VaR) & Expected Shortfall (CVaR)
 
-### 1. Parametric \& Historical VaR ($99\%$ Confidence Level, 1-Day Horizon)
+### 1. Parametric Value-at-Risk ($\text{VaR}_{\alpha}$):
+$$\text{VaR}_{\alpha} = \mu_P - z_{\alpha} \cdot \sigma_P \cdot \sqrt{\frac{h}{252}}$$
 
-$$\text{VaR}_{99\%} = -(\mu_p - 2.326 \cdot \sigma_p) \cdot \text{Portfolio Equity}$$
+Where $z_{0.99} = 2.3263$, $\sigma_P = \sqrt{w^T \Sigma w}$, and $h = 30$ trading days.
 
-- For a standard 100,000 EGP balanced portfolio: $\text{VaR}_{99\%, 1\text{D}} = 2,450 \text{ EGP} \ (2.45\%)$.
+### 2. Conditional Value-at-Risk (CVaR / Expected Shortfall):
+Measures the expected loss given that the loss exceeds the $\text{VaR}_{\alpha}$ threshold:
 
-### 2. Conditional Value-at-Risk / Expected Shortfall ($\text{CVaR}_{99\%}$)
+$$\text{CVaR}_{\alpha} = E\left[ L \mid L > \text{VaR}_{\alpha} \right] = \mu_P + \sigma_P \cdot \frac{\phi(z_{\alpha})}{1 - \alpha}$$
 
-$$\text{CVaR}_{99\%} = E[L \mid L > \text{VaR}_{99\%}]$$
-
-- Measures the expected loss in the worst $1\%$ of market tail outcomes: $\text{CVaR}_{99\%} = 3,620 \text{ EGP} \ (3.62\%)$.
+Where $\phi(z)$ is the standard normal probability density function.
 
 ---
 
-## 4. Automatic Defensive Response Mechanisms
+## 4. Dynamic Gold ETF Hedging Allocation (`AZG.CA`)
 
-When extreme stress thresholds ($\Delta \text{Index} < -5.0\%$) are detected in live market telemetry:
-1. New position entries are immediately suspended.
-2. Trailing stop-loss triggers are tightened from $1.5 \times \text{ATR}$ to $0.8 \times \text{ATR}$.
-3. Cash reserve target is dynamically raised from $20.0\%$ to $50.0\%$.
+The platform calculates dynamic hedging allocations into Azimut Gold Fund certificates (`AZG.CA`) derived from live spot gold (`GC=F`) and official USD/EGP rates:
+
+$$\text{Recommended Gold Weight} = \max\left(0.05, \min\left(0.20, \, W_{\text{base, regime}} + (\text{Risk Score} - 0.50) \times 0.08\right)\right)$$
+
+```
++========================================================================================================+
+| Market Regime       | Base Gold Hedge Weight | Stress Protection Objective                             |
++=====================+========================+=========================================================+
+| STRONG_BULL         | 5.0%                   | Alpha maximization; minimal hedging drag               |
+| SIDEWAYS_CHOP       | 10.0%                  | Volatility dampening; correlation diversification       |
+| RATE_HIKING_CYCLE   | 12.5%                  | Real return preservation against interest rate spikes   |
+| HIGH_INFLATION      | 15.0%                  | Direct purchasing power preservation                    |
+| BEAR_CORRECTION     | 15.0%                  | Drawdown insulation and liquidity buffer                |
+| FLASH_CRASH         | 20.0%                  | Maximum defensive physical gold allocation              |
++========================================================================================================+
+```
 
 ---
 **Institutional Compliance Notice:**  

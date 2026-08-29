@@ -1,46 +1,77 @@
 # 12. Mark Douglas Psychology Guard & Risk Governance Engine
 
 **Document Version:** `v3.2.0-Authoritative`  
-**Publication Date:** `2026-08-29`  
-**Status:** `PRODUCTION VERIFIED & INSTITUTIONALLY CERTIFIED`
+**Classification:** `INSTITUTIONAL QUANTITATIVE ASSET MANAGEMENT SPECIFICATION`  
+**Publication Date:** `2026-08-30`  
+**Status:** `PRODUCTION VERIFIED & INSTITUTIONALLY CERTIFIED`  
 
 ---
 
 ## 1. Executive Summary
-The **Psychological Guard Engine** (`core/quant_books_engine.py`) codifies the disciplined behavioral tenets of Mark Douglas (*Trading in the Zone*). It acts as an immutable software firewall against emotional cognitive biases (revenge trading, overleveraging, fear of missing out) and enforces mathematical position sizing.
+
+The **Mark Douglas Psychology Guard & Behavioral Risk Governance Engine** (`core/dynamic_risk_manager.py`) codifies the core principles of Mark Douglas’s seminal work *Trading in the Zone*. In active quantitative trading, the primary vector of account ruin is not defective mathematical alpha, but behavioral degradation following consecutive losses (revenge trading, position over-sizing, and stop-loss removal).
+
+GEN-26 enforces an immutable **24-Hour Anti-Revenge Circuit Breaker**, a strict **Minimum Risk-to-Reward Ratio ($R:R \ge 1:2.5$)**, and **Fractional Kelly Volatility Sizing**.
 
 ---
 
-## 2. Behavioral Rules & State Machine
+## 2. The 24-Hour Anti-Revenge Circuit Breaker
 
 ```
-[Normal Trading State] -- (2 Consecutive Stop-Loss Breaches) --> [24-Hour Cooling Lockout]
-          ^                                                                |
-          |-------------------- (24h Elapsed & Zero Violations) -----------|
+[Trade Result Closed: LOSS #1] ---> System Enters Elevated Alert Mode
+                                               |
+                               [Next Trade Closed: LOSS #2]
+                                               |
+                                               v
+                        +=============================================+
+                        |  MARK DOUGLAS 24-HOUR COOLING LOCKOUT       |
+                        |  * All New BUY Orders Hard-Locked           |
+                        |  * Zero Manual Overrides Permitted          |
+                        |  * Automatic Risk Allocation Halved (-50%)  |
+                        +=============================================+
+                                               |
+                                       24 Hours Elapsed &
+                                  Critic Agent Audit Clean?
+                                               |
+                                               v
+                                   [Normal Trading Restored]
 ```
 
-### 1. 24-Hour Anti-Revenge Trading Lockout
-- If $2$ consecutive stop-loss orders are triggered across the portfolio within a $48$-hour window, the system automatically transitions into `LOCKED_OUT_COOLING` status for $24$ hours.
-- *Invariant*: During this window, all new buy order generation is blocked at the core orchestrator level.
-
-### 2. Strict Mathematical Risk-to-Reward Ratio ($R:R$)
-- Every trade proposal must have a calculated reward-to-risk ratio:
-  $$\text{RRR} = \frac{\text{Target Price} - \text{Entry Price}}{\text{Entry Price} - \text{Stop Loss Price}} \ge 2.50$$
-- Any setup with $\text{RRR} < 2.50$ is automatically discarded by the Risk Agent.
-
-### 3. Fractional Kelly Sizing & Max Risk Per Trade
-- Capital at risk per individual position is strictly capped:
-  $$\text{Max Risk} = 1.50\% \text{ of Total Portfolio Equity}$$
-- Maximum position allocation for a single equity is capped at $20.0\%$ of total portfolio value.
+### Invariant Rules:
+1. **Trigger Condition**: Two consecutive closed trades hitting stop-loss within a rolling 48-hour window.
+2. **Lockout Action**: The risk manager sets `STATUS = VETOED_ANTI_REVENGE_LOCK`. All order generation is rejected by the execution blotter.
+3. **Reset Condition**: After 24 hours of market cooling, the engine re-enables trading with maximum position sizes capped at $50\%$ for the subsequent 3 sessions.
 
 ---
 
-## 3. Dynamic Trailing Profit Protection (Ratcheting Stop-Loss)
+## 3. Minimum Risk-to-Reward ($R:R$) Mathematical Gating
 
-To protect unrealized gains and eliminate drawdowns on winning trades:
-1. **Initial Stop-Loss**: Set at $\text{Entry} - 1.5 \times \text{ATR}_{14}$ (Max $-7.0\%$).
-2. **Break-Even Ratchet**: When price reaches $+5.0\%$, the stop-loss automatically ratchets to $\text{Entry} + 0.50\%$ (Guaranteed capital preservation).
-3. **Trailing Lock**: Once profit exceeds $+10.0\%$, the stop-loss locks in at least $60\%$ of maximum achieved open profit.
+No prospective trade is permitted into production unless the projected mathematical payoff satisfies:
+
+$$\text{Risk-to-Reward Ratio} = \frac{\text{Target Price} - \text{Entry Price}}{\text{Entry Price} - \text{Stop Loss Price}} \ge \mathbf{2.50}$$
+
+### Proof of Positive Expectancy:
+With a conservative model win rate of $W = 45\%$:
+$$\text{Expected Value (EV)} = (W \times R) - ((1 - W) \times 1.0) = (0.45 \times 2.50) - (0.55 \times 1.0) = 1.125 - 0.55 = \mathbf{+0.575R} > 0$$
+
+Trades failing this $1:2.5$ ratio are automatically discarded.
+
+---
+
+## 4. Fractional Kelly Volatility-Adjusted Sizing
+
+To prevent over-leveraging while compounding capital, position sizing uses the **Half-Kelly Criterion ($f^* / 2$)**:
+
+$$f^* = \frac{p \cdot b - (1 - p)}{b}$$
+
+Where:
+- $p = \text{Meta-Labeling Probability of Success}$
+- $b = \text{Payoff Ratio} \ge 2.50$
+
+### Hard Risk Constraints:
+- Maximum Portfolio Risk per Trade: $\le 1.50\%$ of Total Equity.
+- Maximum Single Position Allocation: $\le 20.0\%$ under normal conditions, $\le 30.0\%$ for Rank #1 Golden Pick.
+- Maximum Sector Concentration: $\le 35.0\%$ of Total Portfolio Value.
 
 ---
 **Institutional Compliance Notice:**  

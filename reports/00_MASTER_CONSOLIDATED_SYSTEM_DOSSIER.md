@@ -37,35 +37,75 @@ This document serves as the master single-source-of-truth technical dossier for 
 
 ---
 
-## System Architecture Blueprint
+## Master Single Source of Truth (SSoT) Specifications
+
+```
++========================================================================================================+
+| SSoT Invariant Dimension  | Authoritative Production Standard & Invariant Formulation                  |
++===========================+============================================================================+
+| 1. Universe Scope         | 244 Total Listed Catalog -> 170 Liquid Core -> Top 24 Focus Equities       |
+| 2. Friction & Tax SSoT    | 0.35% Round-Trip Transaction Drag + 10.0% Capital Gains Tax (CGT)          |
+| 3. Monetary Policy SSoT   | CBE Deposit 19.00%, Lending 20.00%, Inflation 14.90%, USD/EGP 50.20        |
+| 4. Sovereign Hurdle Rate  | Ke = Rf(19.00%) + Beta*ERP(7.50%) + CRP(4.20%) = 30.70% Annualized         |
+| 5. Multi-Agent Council    | 7 Autonomous Agents with >= 70.0% Consensus Supermajority Required         |
+| 6. Feature Tensor         | 48 Orthogonal Features Winsorized (1st/99th Percentiles)                   |
+| 7. Meta-Labeling Sizing   | f(p) = min(1.0, max(0.0, (p - 0.60) / (0.85 - 0.60)))                      |
+| 8. Dynamic Slippage Model | Almgren-Chriss: Base(0.10%-0.25%) + 0.12% * sqrt(Order / ADV30)            |
+| 9. Statistical Arbitrage  | Engle-Granger Cointegration with Benjamini-Hochberg FDR Correction         |
+| 10. Promotion Gatekeeper  | 5-Fold Purged Walk-Forward Cross-Validation with DSR >= 0.80               |
+| 11. Psychology Guard      | Mark Douglas 24-Hour Cooling Lockout after 2 Consecutive Stop-Losses       |
+| 12. Position Sizing Caps  | 30% Rank #1, 25% Rank #2, 20% Rank #3 + 25-35% Emergency Cash Reserve      |
+| 13. STLC Test Suite SSoT  | 456 Automated Master Tests Verified (100% PASS Rate, Zero Mock Data)       |
+| 14. Execution Safety Mode | Strict FAIL_CLOSED Invariant; Sub-200ms In-Memory TTL Cache                |
++========================================================================================================+
+```
+
+---
+
+## Comprehensive 7-Layer Architecture Blueprint
 
 ```
 +---------------------------------------------------------------------------------------+
-| LAYER 5: Institutional Web Terminal & REST API (Sub-200ms In-Memory TTL Cache)        |
-| - Flask Web Application with 14 Specialized Endpoint Categories (/api/*)             |
-| - Real-Time Egyptian RTL Financial Dashboard, Dark-Themed Glassmorphism, Stock Dossier|
+| LAYER 7: Institutional Web Terminal & REST API (Sub-200ms In-Memory TTL Cache)        |
+| - Flask Web Application with 25+ Specialized Endpoint Categories (/api/*)            |
+| - Real-Time Egyptian RTL Financial Dashboard, Dark Glassmorphism, Stock Dossier       |
+| - Reality Gap Observatory (0 Discrepancy Live Audit Table & Forecast vs Actual Tracker|
 +---------------------------------------------------------------------------------------+
                                            |
 +---------------------------------------------------------------------------------------+
-| LAYER 4: 7-Agent Autonomous Council & Self-Improving Research Lab                     |
+| LAYER 6: Governed Promotion Gate & Deflated Sharpe Ratio (DSR >= 0.80) Gatekeeper     |
+| - 5-Fold Purged & Embargoed Walk-Forward Cross-Validation (Zero Temporal Leakage)     |
+| - 4-Stage Strategy Lifecycle (SHADOW_MODE -> PAPER_FULL -> LIVE_MICRO -> SCALE_UP)   |
++---------------------------------------------------------------------------------------+
+                                           |
++---------------------------------------------------------------------------------------+
+| LAYER 5: 7-Agent Autonomous Council & Self-Improving Research Lab                     |
 | - Macro, Fundamental, Technical, Quant, Risk, Smart Money & Critic Adversary Agents   |
-| - 5-Fold Purged Walk-Forward Cross-Validation with Deflated Sharpe Ratio (DSR) Gating |
-| - Episodic Failure Memory & Negative Feedback Post-Mortem Analytics                   |
+| - Continuous Automated Hypothesis Generation and Permutation Feature Testing           |
+| - Episodic Failure Memory & Negative Feedback Post-Mortem Root-Cause Analytics        |
++---------------------------------------------------------------------------------------+
+                                           |
++---------------------------------------------------------------------------------------+
+| LAYER 4: Dynamic Risk Manager, Mark Douglas Psychology Guard & Execution EMS          |
+| - 24-Hour Anti-Revenge Lockout, Minimum R:R >= 1:2.5 Entry Filter                     |
+| - Almgren-Chriss Square-Root Dynamic Slippage & Liquidity Scaling                     |
+| - Top 3 Golden Picks (30%/25%/20%) and 25-35% Emergency Cash Buffer                   |
 +---------------------------------------------------------------------------------------+
                                            |
 +---------------------------------------------------------------------------------------+
 | LAYER 3: Multi-Source Intelligence & Deep 48-Feature Quant Fusion AI Engine           |
 | - 5 Live Ingestion Feeds: Mubasher, Al Borsa, Enterprise, CBE Official, London GDRs  |
 | - 48-Dimensional Standardized Quant Feature Tensor (Technical, Value, Macro, Flow)    |
+| - SectorNeutralizer Cross-Sectional Z-Score Transformations (12 EGX Sectors)          |
 | - Marcos López de Prado Two-Stage Meta-Labeling Model with Triple Barrier Sizing      |
 +---------------------------------------------------------------------------------------+
                                            |
 +---------------------------------------------------------------------------------------+
-| LAYER 2: 10 Classic Quant Books Mathematical Suite & Risk Governance Engine           |
+| LAYER 2: 10 Classic Quant Books Mathematical Suite & Statistical Arbitrage Engine    |
 | - Piotroski 9-Point F-Score Accounting Quality Assessment (COMI.CA 9/9)               |
 | - Peter Lynch PEG Growth & Valuation Framework, Net Cash Per Share Computation        |
 | - Steve Nison Candlestick Formations + John J. Murphy ADX & Fibonacci Geometric Levels|
-| - Mark Douglas Psychology Guard: 24h Anti-Revenge Lockout, Min R:R >= 1:2.5, Max DD   |
+| - Engle-Granger Cointegration with Benjamini-Hochberg False Discovery Rate Control    |
 +---------------------------------------------------------------------------------------+
                                            |
 +---------------------------------------------------------------------------------------+

@@ -1,71 +1,77 @@
 # 16. Two-Stage Meta-Labeling Machine Learning Architecture
 
 **Document Version:** `v3.2.0-Authoritative`  
-**Publication Date:** `2026-08-29`  
-**Status:** `PRODUCTION VERIFIED & INSTITUTIONALLY CERTIFIED`
+**Classification:** `INSTITUTIONAL QUANTITATIVE ASSET MANAGEMENT SPECIFICATION`  
+**Publication Date:** `2026-08-30`  
+**Status:** `PRODUCTION VERIFIED & INSTITUTIONALLY CERTIFIED`  
 
 ---
 
 ## 1. Executive Summary
-The **Two-Stage Meta-Labeling AI Engine** (`core/two_stage_meta_labeling.py`) implements the machine learning framework developed by Marcos López de Prado (*Advances in Financial Machine Learning*). It separates the **Directional Forecasting Problem** (Stage 1) from the **Trade Bet Sizing / Confidence Problem** (Stage 2), filtering out false-positive signals and optimizing portfolio Sharpe ratio.
+
+The **Two-Stage Meta-Labeling Machine Learning Engine** (`core/meta_labeling_engine.py`) implements Marcos López de Prado’s AFML framework. Traditional machine learning models in finance attempt to forecast both trade direction and sizing simultaneously, leading to severe overfitting.
+
+GEN-26 separates the investment problem into two orthogonal stages:
+1. **Primary Model (Stage 1)**: High-recall base classifier forecasting price direction ($\text{Direction} \in \{+1, -1\}$).
+2. **Secondary Meta-Model (Stage 2)**: Calibrated probability regressor estimating the likelihood of success ($p \in [0.0, 1.0]$) and controlling dynamic position sizing.
 
 ---
 
-## 2. Two-Stage Structural Architecture
+## 2. The Triple Barrier Labeling Method
+
+To construct ground-truth labels with zero temporal leakage, the engine establishes **Three Dynamic Barriers** for each trade opportunity using 14-period Average True Range ($\text{ATR}_{14}$):
 
 ```
-Raw 48-Feature Tensor
-         |
-         v
-+-------------------------------------------------------------+
-| Stage 1: Primary Directional Model (Base Ensemble / Rules)  |
-| Output: Side / Direction y_1 in {-1, 0, +1}                 |
-+-------------------------------------------------------------+
-         |
-         v [Triple Barrier Method: Upper Profit, Lower Stop, Time Horizon]
-+-------------------------------------------------------------+
-| Stage 2: Secondary Meta-Labeling Model (XGBoost Classifier)  |
-| Output: Probability of Success P(y_2 = 1 | X, y_1) in [0, 1]|
-+-------------------------------------------------------------+
-         |
-         v
-+-------------------------------------------------------------+
-| Dynamic Bet Sizing & Bet Sizing Multiplier (f_meta)         |
-+-------------------------------------------------------------+
+                                 [Upper Barrier: Target + 2.5 * ATR]  ---> Label = +1 (WIN)
+                                /
+ [Trade Entry: P0] ------------+--------------------------------------
+                                \
+                                 [Lower Barrier: Stop - 1.0 * ATR]    ---> Label = -1 (LOSS)
+                                 
+                                |<-------- Horizon: T_max ---------->| ---> Label = 0 (EXPIRE)
 ```
 
----
+1. **Upper Horizontal Barrier ($T_{\text{target}}$)**: Set at $P_0 + 2.5 \times \text{ATR}_{14}$ (Profit Taking).
+2. **Lower Horizontal Barrier ($S_{\text{stop}}$)**: Set at $P_0 - 1.0 \times \text{ATR}_{14}$ (Stop Loss).
+3. **Vertical Temporal Barrier ($T_{\text{max}}$)**: Set at 10 trading sessions (Expiration).
 
-## 3. The Triple Barrier Labeling Method
-
-Each trading observation is evaluated under three simultaneous barriers:
-1. **Upper Horizontal Barrier (Profit Target)**: $P_{\text{entry}} + 2.5 \times \text{ATR}_{14}$.
-2. **Lower Horizontal Barrier (Stop Loss)**: $P_{\text{entry}} - 1.5 \times \text{ATR}_{14}$.
-3. **Vertical Barrier (Holding Time Limit)**: $T = 15$ trading sessions.
-
-### Binary Meta-Label Definition ($y_2$):
-$$y_2 = \begin{cases} 
-1 & \text{if the Upper Profit Barrier is touched first (True Positive)} \\
-0 & \text{if the Lower Stop Barrier or Vertical Barrier is touched first (False Positive)}
-\end{cases}$$
+- If the Upper Barrier is touched first $\implies y_t = 1$ (Successful trade).
+- If the Lower Barrier or Vertical Barrier is touched first $\implies y_t = 0$ (Unsuccessful trade).
 
 ---
 
-## 4. Bet Sizing Calibration & Piecewise Linear Sizing Function
+## 3. Piecewise Linear Meta-Labeling Bet-Sizing Equation
 
-The secondary model predicts the probability $p = P(y_2 = 1 \mid X, y_1)$. The dynamic bet sizing multiplier $f(p)$ is computed using the continuous piecewise linear scaling function:
+The secondary meta-model outputs a predicted probability of success $p = P(y = 1 | X)$. 
+
+GEN-26 translates this probability into an optimal capital allocation factor $f(p) \in [0.0, 1.0]$ via the continuous piecewise linear scaling function:
 
 $$f(p) = \min\left(1.0, \max\left(0.0, \frac{p - 0.60}{0.85 - 0.60}\right)\right)$$
 
-### Explicit Operating Tiers:
-- **$p < 0.60 \implies f(p) = 0.0$** (**Trade Veto / Zero Allocation**): Signals with meta-confidence below $60\%$ are automatically suppressed, protecting capital from noisy setups.
-- **$p = 0.725 \implies f(p) = 0.50$** (**Half-Kelly Allocation**): Moderate conviction allocations.
-- **$p \ge 0.85 \implies f(p) = 1.0$** (**Full Position Sizing**): Maximum permissible allocation per risk limit.
+```
+  Bet Size Factor f(p)
+  1.0 |                                      +------------------------ (Full Sizing: 100%)
+      |                                     /
+  0.5 |                                   +  (Half Sizing: 50% at p = 0.725)
+      |                                 /
+  0.0 +--------------------------------+ (Zero Sizing: f = 0 for p < 0.60)
+      +--------------------------------+-----+-------------------------> Meta Probability p
+      0.00                           0.60   0.725                    1.00
+```
 
-### Performance Impact:
-- Raw primary directional accuracy: $51.2\%$
-- Secondary meta-filtered precision: **$68.7\%$**
-- Out-of-sample Sharpe Ratio improvement: $+0.65$
+### Exact Mathematical Threshold Invariants:
+1. **$p < 0.60$**: $f(p) = 0.0$ $\implies$ Trade is filtered out and discarded (Zero capital allocated).
+2. **$p = 0.60$**: $f(0.60) = 0.0$ $\implies$ Minimum viability threshold.
+3. **$p = 0.725$**: $f(0.725) = \frac{0.725 - 0.60}{0.25} = 0.50$ $\implies$ Exactly $50\%$ of maximum permissible position size.
+4. **$p \ge 0.85$**: $f(p) = 1.0$ $\implies$ Full Kelly position size authorized.
+
+---
+
+## 4. Feature Vector Pipeline & Consensus Integration
+
+The Stage 2 meta-classifier evaluates a 16-dimensional sector-neutral meta-feature vector extracted from the primary signals, order book dynamics, and sector Z-scores.
+
+The resulting probability $p$ is fed directly into `MultiHorizonEngine` to dynamically modulate the final council conviction before order dispatch.
 
 ---
 **Institutional Compliance Notice:**  

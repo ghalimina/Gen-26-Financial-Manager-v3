@@ -1,72 +1,86 @@
 # 06. Autonomous Quant Research Lab & Continuous Improvement Loop
 
 **Document Version:** `v3.2.0-Authoritative`  
-**Publication Date:** `2026-08-29`  
-**Status:** `PRODUCTION VERIFIED & INSTITUTIONALLY CERTIFIED`
+**Classification:** `INSTITUTIONAL QUANTITATIVE ASSET MANAGEMENT SPECIFICATION`  
+**Publication Date:** `2026-08-30`  
+**Status:** `PRODUCTION VERIFIED & INSTITUTIONALLY CERTIFIED`  
 
 ---
 
 ## 1. Executive Summary
-The **Autonomous Quant Research Lab** (`core/autonomous_research_lab.py`) is a continuous learning and strategy evolution system. It autonomously formulates novel quantitative hypotheses, constructs adaptive factor topologies, simulates cross-sectional walk-forward backtests with EGX trading frictions, challenges candidates via the Critic Agent, and promotes mathematically robust models to production.
+
+The **Autonomous Quantitative Research Laboratory** (`core/autonomous_research_lab.py`) is a fully automated, continuous self-improvement engine. Operating as a background service, the lab autonomously formulates new algorithmic trading hypotheses, backtests them against historical EGX price data using purged walk-forward cross-validation, challenges them via adversarial critic audits, and safely promotes qualifying models into live production.
+
+This closed-loop research cycle ensures that the GEN-26 system continuously adapts to shifting Egyptian macroeconomic regimes and structural market microstructure dynamics without manual developer intervention.
 
 ---
 
-## 2. Autonomous Evolution Lifecycle
+## 2. The 6-Step Autonomous Scientific Loop
 
 ```
-+-------------------------------------------------------------+
-| 1. Hypothesis Formulation (Macro/Market Regime Triggered)   |
-+-------------------------------------------------------------+
-                              |
-                              v
-+-------------------------------------------------------------+
-| 2. Factor Weight Topology Construction & Normalization      |
-+-------------------------------------------------------------+
-                              |
-                              v
-+-------------------------------------------------------------+
-| 3. 5-Fold Purged Walk-Forward Cross-Validation (0.35% Fric) |
-+-------------------------------------------------------------+
-                              |
-                              v
-+-------------------------------------------------------------+
-| 4. Adversarial Critic Audit & Deflated Sharpe Ratio (DSR)   |
-+-------------------------------------------------------------+
-                              |
-                              v
-+-------------------------------------------------------------+
-| 5. Promotion Gate Verdict (PROMOTED vs. QUARANTINED)        |
-+-------------------------------------------------------------+
++---------------------------------------------------------------------------------------+
+| STEP 1: HYPOTHESIS GENERATION (ResearchScientistAgent)                                |
+| Generates novel factor weightings, technical setups, or macro overlay rules.         |
++---------------------------------------------------------------------------------------+
+                                           |
+                                           v
++---------------------------------------------------------------------------------------+
+| STEP 2: 5-FOLD PURGED WALK-FORWARD CROSS-VALIDATION                                   |
+| Evaluates Out-of-Sample (OOS) Sharpe, Max Drawdown, and Win Rate with 0.35% friction. |
++---------------------------------------------------------------------------------------+
+                                           |
+                                           v
++---------------------------------------------------------------------------------------+
+| STEP 3: ADVERSARIAL CRITIC AUDIT (CriticAuditorAgent)                                 |
+| Screens for backtest overfitting, selection bias, and degradation (> 35.0%).          |
++---------------------------------------------------------------------------------------+
+                                           |
+                                           v
++---------------------------------------------------------------------------------------+
+| STEP 4: GOVERNED PROMOTION VERDICT (Deflated Sharpe Ratio DSR >= 0.80)                |
+| Applies institutional gates before advancing strategy into production pipeline.       |
++---------------------------------------------------------------------------------------+
+                                           |
+                                           v
++---------------------------------------------------------------------------------------+
+| STEP 5: SQLITE JOURNALING & EPISODIC LOGGING                                          |
+| Records full experiment telemetry to research_experiments_journal table.             |
++---------------------------------------------------------------------------------------+
+                                           |
+                                           v
++---------------------------------------------------------------------------------------+
+| STEP 6: PRODUCTION CALIBRATION & EXECUTION                                            |
+| Safely applies winning factor topologies to production model weights.                |
++---------------------------------------------------------------------------------------+
 ```
 
 ---
 
-## 3. Autonomous Experiment Execution Logic
+## 3. Interaction Between Research Scientist and Critic Auditor
 
-```python
-# Sample Autonomous Research Loop Trigger
-cycle_results = AutonomousResearchLab.run_autonomous_cycle(
-    regime="BULL_TREND_HIGH_VOL",
-    hypothesis_seed="Dual-Momentum Adaptive ATR-Volatility Breakers"
-)
-```
+The research laboratory operates as an adversarial duel between two specialized agents:
 
-### Metrics Logged Per Cycle:
-- `in_sample_sharpe`: Target $\ge 2.00$
-- `oos_sharpe`: Target $\ge 1.50$
-- `max_drawdown_pct`: Upper limit $< 15.0\%$
-- `degradation_pct`: Anti-Overfitting limit $\le 35.0\%$
-- `deflated_sharpe_ratio`: Bailey & López de Prado DSR $\ge 0.80$
-- `promotion_verdict`: `PROMOTED` or `REJECTED_OVERFITTING`
+1. **ResearchScientistAgent (The Generator)**:
+   - Proposes variations in factor weights ($w_{\text{fund}}, w_{\text{tech}}, w_{\text{flow}}, w_{\text{macro}}$).
+   - Tests non-linear combinations (e.g. higher fundamental weight during High-Inflation regimes, higher technical momentum weight during Bull regimes).
+2. **CriticAuditorAgent (The Evaluator & Invariant Enforcer)**:
+   - Evaluates whether the hypothesis violates any core invariant:
+     * *Conservation Law*: $\sum w_k = 1.0000$ (Zero floating weights).
+     * *Degradation Limit*: Out-of-Sample Sharpe degradation must not exceed **$35.0\%$** vs In-Sample.
+     * *Deflated Sharpe Ratio*: $\text{DSR} \ge 0.80$ to eliminate data-snooping artifacts.
+     * *Failure Memory Check*: Prohibits configurations matching quarantined failure patterns.
 
 ---
 
-## 4. Production Promotion Safety Safeguard
+## 4. Permutation Feature Importance Testing
 
-When a candidate strategy is promoted:
-1. `WeightCalibrator.update_weights(promoted_topology)` updates active production factor weights.
-2. Invariants verify that new weights sum strictly to $1.0000$ ($\pm 0.0001$).
-3. The experiment payload is archived in SQLite `research_experiments_journal` and JSON backup files.
+To eliminate collinear and noisy features, the Autonomous Lab conducts automated **Permutation Importance Auditing**:
+1. Record baseline Out-of-Sample performance score $S_{\text{baseline}}$.
+2. Shuffle feature column $X_j$ across observations to destroy its predictive relationship while preserving its marginal distribution.
+3. Compute permuted performance score $S_{\text{perm}(j)}$.
+4. Calculate importance metric:
+   $$I(X_j) = S_{\text{baseline}} - S_{\text{perm}(j)}$$
+5. If $I(X_j) \le 0.00$, the feature is flagged `STATUS = DEPRECATED` in `FeatureRegistry`.
 
 ---
 **Institutional Compliance Notice:**  

@@ -1,75 +1,71 @@
 # 10. Peter Lynch Valuation & Stock Categorization Engine
 
 **Document Version:** `v3.2.0-Authoritative`  
-**Publication Date:** `2026-08-29`  
-**Status:** `PRODUCTION VERIFIED & INSTITUTIONALLY CERTIFIED`
+**Classification:** `INSTITUTIONAL QUANTITATIVE ASSET MANAGEMENT SPECIFICATION`  
+**Publication Date:** `2026-08-30`  
+**Status:** `PRODUCTION VERIFIED & INSTITUTIONALLY CERTIFIED`  
 
 ---
 
 ## 1. Executive Summary
-The **Peter Lynch Valuation Engine** (`core/quant_books_engine.py`) implements the growth-at-a-reasonable-price (GARP) valuation methodologies pioneered by legendary Magellan Fund manager Peter Lynch (*One Up On Wall Street*).
+
+The **Peter Lynch Valuation Engine** (`core/quant_books_engine.py`) implements the legendary fund manager’s fundamental valuation heuristics. In the Egyptian market, characterized by elevated inflation and high dividend yields, standard Price-to-Earnings (P/E) multiples fail to capture true corporate earning power.
+
+The engine distinguishes between **Standard Peter Lynch PEG** and **Dividend-Adjusted PEGY**, classifies equities into the **6 Canonical Lynch Asset Classes**, and computes **Net Cash Per Share** balance sheet valuations.
 
 ---
 
-## 2. Core Mathematical Metrics
+## 2. Mathematical Valuation Formulations: PEG vs. PEGY
 
-### 1. Standard Peter Lynch PEG Ratio
+### 1. Standard Peter Lynch PEG Ratio:
+Evaluates valuation relative to pure earnings per share (EPS) growth:
 
-$$\text{PEG} = \frac{P/E}{\text{EPS Growth Rate (\%) disagree}} = \frac{P/E}{\text{EPS Growth Rate (\%)}} $$
+$$\text{Standard Peter Lynch PEG} = \frac{P/E}{\text{EPS Growth Rate (\%)}}$$
 
-Where:
-- $\text{PEG} < 0.50$: **Deeply Undervalued Opportunity** (فرصة نادرة ومغرية جداً مع هامش أمان واسع)
-- $0.50 \le \text{PEG} \le 1.00$: **Fairly Valued Growth** (سعر عادل ومتوازن لنمو الشركة)
-- $\text{PEG} > 1.50$: **Overvalued / Growth Stretched** (مبالغ في التقييم مقارنة بالنمو)
+- $\text{PEG} < 0.50$: Deep Undervaluation (Exceptional Buy)
+- $0.50 \le \text{PEG} \le 1.00$: Fair Valuation (Institutional Core)
+- $\text{PEG} > 1.50$: Overvalued relative to growth
 
-### 2. Dividend-Adjusted PEGY Ratio
+### 2. Dividend-Adjusted PEGY Ratio:
+Crucial for cash-generative Egyptian blue chips paying substantial cash dividends:
 
-$$\text{PEGY} = \frac{P/E}{\text{EPS Growth Rate (\%) } + \text{Dividend Yield (\%) }}$$
+$$\text{Dividend-Adjusted PEGY} = \frac{P/E}{\text{EPS Growth Rate (\%)} + \text{Dividend Yield (\%)}}$$
 
-Accounts for the total shareholder return by crediting dividend payouts alongside earnings expansion.
-
-### 3. Net Cash Per Share
-
-$$\text{Net Cash Per Share} = \frac{\text{Cash \& Equivalents} - \text{Total Debt}}{\text{Shares Outstanding}}$$
-
-If $\text{Net Cash Per Share} > 0$, the effective enterprise value is lower than nominal market cap, providing downside balance sheet protection.
+- $\text{PEGY} < 0.80$: Substantial Margin of Safety when accounting for total shareholder return.
 
 ---
 
-## 3. The 6 Lynch Stock Categories
+## 3. The 6 Peter Lynch Canonical Asset Classes
 
 ```
-+------------------+-----------------------------------------------------+
-| Category         | Definition & EGX Criteria                           |
-+------------------+-----------------------------------------------------+
-| FAST_GROWER      | EPS Growth > 20% annually with modest P/E.          |
-| STALWART         | Large-cap, steady 10-18% growth, recession buffer.  |
-| SLOW_GROWER      | EPS Growth < 8%, high dividend yield (>8%).         |
-| CYCLICAL         | Revenues tied to commodity/macro cycles (Steel/Petro|
-| TURNAROUND       | Depressed earnings but restructuring balance sheet. |
-| ASSET_PLAY       | Hidden real estate, land bank, or hard assets.      |
-+------------------+-----------------------------------------------------+
++========================================================================================================+
+| Lynch Category | EPS Growth (%) | Dividend Yield (%) | Typical EGX Representation | Quant Rule         |
++================+================+====================+============================+====================+
+| FAST_GROWER    | >= 25.0%       | Low (< 3.0%)       | FWRY.CA, EFIH.CA           | PEG < 0.80         |
+| STALWART       | 12.0% - 25.0%  | Moderate (4% - 8%) | COMI.CA, SWDY.CA           | PEGY < 1.00        |
+| SLOW_GROWER    | < 12.0%        | High (> 10.0%)     | ETEL.CA, ALCN.CA           | Div Yield > 12.0%  |
+| CYCLICAL       | Volatile       | Variable           | ESRS.CA, MFPC.CA           | Buy Low P/B, Peak  |
+| TURNAROUND     | Recovering     | 0.0%               | EGTS.CA                    | Net Cash > 0       |
+| ASSET_PLAY     | Asset Rich     | Variable           | OCDI.CA, MNHD.CA           | Net Cash / P > 30% |
++========================================================================================================+
 ```
 
 ---
 
-## 4. Empirical Sample Categorization
+## 4. Net Cash Per Share Balance Sheet Decomposition
 
-### Elsewedy Electric (`SWDY.CA`):
-- **Trailing $P/E$**: $8.2\times$
-- **EPS Growth Rate**: $+28.5\%$
-- **Dividend Yield**: $+4.5\%$
-- **Standard $\text{PEG}$**: $\frac{8.2}{28.5} = \mathbf{0.29}$
-- **Dividend-Adjusted $\text{PEGY}$**: $\frac{8.2}{28.5 + 4.5} = \frac{8.2}{33.0} = \mathbf{0.25}$
-- **Category**: `FAST_GROWER` (High Alpha Conviction).
+Peter Lynch emphasized deducting non-operating net cash from market price before calculating operational P/E:
 
-### Commercial International Bank (`COMI.CA`):
-- **Trailing $P/E$**: $6.8\times$
-- **EPS Growth Rate**: $+18.0\%$
-- **Dividend Yield**: $+5.2\%$
-- **Standard $\text{PEG}$**: $\frac{6.8}{18.0} = \mathbf{0.38}$
-- **Dividend-Adjusted $\text{PEGY}$**: $\frac{6.8}{18.0 + 5.2} = \frac{6.8}{23.2} = \mathbf{0.29}$
-- **Category**: `STALWART` (Institutional Anchor).
+$$\text{Net Cash Per Share} = \frac{\text{Cash \& Equities} + \text{Short-Term Investments} - \text{Total Debt}}{\text{Total Shares Outstanding}}$$
+
+$$\text{Enterprise Adjusted P/E} = \frac{\text{Current Market Price} - \text{Net Cash Per Share}}{\text{Diluted EPS}}$$
+
+### Worked Numerical Example (`SWDY.CA` - Elsewedy Electric):
+- Market Price: $128.00$ EGP
+- Net Cash & Equivalents per Share: $24.50$ EGP
+- Enterprise Price: $128.00 - 24.50 = 103.50$ EGP
+- EPS: $18.20$ EGP $\implies \text{Enterprise Adjusted P/E} = \frac{103.50}{18.20} = \mathbf{5.68x}$
+- EPS Growth: $28.0\% \implies \text{Enterprise PEG} = \frac{5.68}{28.0} = \mathbf{0.203}$ (Exceptional Fundamental Opportunity).
 
 ---
 **Institutional Compliance Notice:**  

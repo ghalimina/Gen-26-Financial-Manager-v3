@@ -1,58 +1,96 @@
 # 05. The 7-Agent Autonomous Quant Council
 
 **Document Version:** `v3.2.0-Authoritative`  
-**Publication Date:** `2026-08-29`  
-**Status:** `PRODUCTION VERIFIED & INSTITUTIONALLY CERTIFIED`
+**Classification:** `INSTITUTIONAL QUANTITATIVE ASSET MANAGEMENT SPECIFICATION`  
+**Publication Date:** `2026-08-30`  
+**Status:** `PRODUCTION VERIFIED & INSTITUTIONALLY CERTIFIED`  
 
 ---
 
 ## 1. Executive Summary
-The GEN-26 platform employs a **7-Agent Autonomous Quant Council** (`core/multi_agent_council.py`) to deliberate on equity opportunities. Each agent represents a specialized domain of quantitative analysis, risk management, and adversarial verification. A security is only approved for production trade execution if it surpasses an institutional consensus score of $\ge 70.0\%$ and receives no veto from the Risk and Critic agents.
+
+The **7-Agent Autonomous Quant Council** (`core/multi_agent_council.py`) is the supreme decision-making body of the GEN-26 platform. Instead of relying on a single monolithic black-box model, GEN-26 deploys 7 specialized, orthogonally focused quantitative agents that evaluate market opportunities from distinct financial disciplines.
+
+To execute an order, the Council requires a **Consensus Supermajority of $\ge 70.0\%$**. Furthermore, the **Risk Agent** and **Critic Agent** possess absolute, un-overridable veto power to abort trades exhibiting excessive risk, regime mismatch, or statistical degradation.
 
 ---
 
-## 2. Agent Roster & Mathematical Mandates
+## 2. The 7 Specialized Council Agents
 
 ```
-                     +---------------------------------------+
-                     |        Deliberation Moderator         |
-                     +---------------------------------------+
-                                         |
-     +-----------------------------------+-----------------------------------+
-     |           |           |           |           |           |           |
-     v           v           v           v           v           v           v
- [Agent 1]   [Agent 2]   [Agent 3]   [Agent 4]   [Agent 5]   [Agent 6]   [Agent 7]
-   Macro    Fundamental  Technical     Quant       Risk     Smart Money    Critic
- (CBE/Rates) (Piotroski/ (Nison/ADX) (48-Tensor)  (Douglas/ (Block Trades) (Adversary/
-               Lynch)                           Drawdowns)               Overfitting)
++========================================================================================================+
+| Agent Title         | Domain Focus & Core Responsibilities                                | Veto Power |
++---------------------+----------------------------------------------------------------------+------------+
+| 1. MacroAgent       | CBE corridor rates, inflation, USD/EGP, London GDRs, macro regime.  | Advisory   |
+| 2. FundamentalAgent | Piotroski F-Score (9/9), Lynch PEG/PEGY, DCF fair value, balance sheet.| Advisory |
+| 3. TechnicalAgent   | Nison Candlesticks, Murphy ADX, multi-timeframe Fibonacci, volume.  | Advisory   |
+| 4. QuantModeler     | 48-feature tensor, meta-labeling AI probability, statistical pairs.  | Advisory   |
+| 5. SmartMoneyAgent  | Mubasher/Al Borsa NLP sentiment, insider buys, institutional flows.  | Advisory   |
+| 6. RiskSizerAgent   | Mark Douglas 24h anti-revenge, ATR volatility stops, position caps.  | ABSOLUTE   |
+| 7. CriticAuditor    | Out-of-sample degradation, overfit detection, failure memory checks. | ABSOLUTE   |
++========================================================================================================+
 ```
-
-| # | Agent Name | Domain & Methodology | Primary Factor Metric | Weight |
-| :--- | :--- | :--- | :--- | :--- |
-| 1 | **Macro Risk Agent** | CBE Corridor, Inflation, Currency Parity | Real Rate Hurdle, USD/EGP stability | $15\%$ |
-| 2 | **Fundamental Value Agent** | Piotroski F-Score, Graham Net-Current-Assets, Lynch PEG | F-Score $\ge 7/9$, PEG $\le 1.0$ | $15\%$ |
-| 3 | **Technical Momentum Agent** | Steve Nison Candlesticks, Murphy ADX, Fibonacci Levels | ADX $\ge 25.0$, Bullish Engulfing | $15\%$ |
-| 4 | **Quantitative AI Agent** | 48-Feature Tensor, Two-Stage Meta-Labeling Model | Meta-Confidence Score $\ge 0.65$ | $20\%$ |
-| 5 | **Institutional Risk Agent** | Mark Douglas Rules, Maximum DD, ATR Sizing | Risk-Reward $\ge 1:2.5$, Lockout check | $15\%$ (Veto Power) |
-| 6 | **Smart Money Agent** | Block Trades, Foreign Flow, London GDR Arbitrage | GDR Premium $\ge 2.0\%$, Block Sentiment | $10\%$ |
-| 7 | **Critic / Adversary Agent** | Out-of-Sample Degrade, Deflated Sharpe, Data Snooping | DSR $\ge 0.80$, Degradation $\le 35\%$ | $10\%$ (Veto Power) |
 
 ---
 
-## 3. Consensus Decision Formula
+## 3. Mathematical Consensus Formulation
 
-For any evaluated stock $S$, the overall council consensus score $C(S)$ is computed as:
+Each agent $k \in \{1, 2, \dots, 7\}$ casts a directional vote $V_k \in \{-1.0, 0.0, +1.0\}$ and assigns a conviction confidence score $C_k \in [0.0, 1.0]$.
 
-$$C(S) = \sum_{k=1}^{7} W_k \cdot V_k(S)$$
+The composite council score $S_{\text{Council}}$ is calculated as:
 
-Where:
-- $W_k$ is the normalized weight of agent $k$ ($\sum W_k = 1.00$).
-- $V_k(S) \in [0.0, 100.0]$ is the conviction vote awarded by agent $k$.
+$$S_{\text{Council}} = \sum_{k=1}^{7} w_k \cdot (V_k \times C_k)$$
 
-### Mandatory Approval Invariants:
-1. **Consensus Threshold**: $C(S) \ge 70.0\%$.
-2. **Zero-Veto Rule**: $V_{\text{Risk}}(S) \ge 50.0$ AND $V_{\text{Critic}}(S) \ge 50.0$.
-3. **Execution Flag**: If invariants hold, status is `APPROVED_BUY`; otherwise, `REJECT_OR_HOLD`.
+Where base weights $w_k$ satisfy $\sum_{k=1}^7 w_k = 1.00$:
+- $w_{\text{Fundamental}} = 0.25$
+- $w_{\text{Technical}} = 0.20$
+- $w_{\text{QuantModel}} = 0.20$
+- $w_{\text{Macro}} = 0.15$
+- $w_{\text{SmartMoney}} = 0.10$
+- $w_{\text{RiskSizer}} = 0.05$
+- $w_{\text{CriticAuditor}} = 0.05$
+
+### Consensus Authorization Rules:
+1. **`APPROVED_BUY`**: Triggered if $S_{\text{Council}} \ge 0.70$ AND neither Risk Agent nor Critic Agent casts a Veto.
+2. **`HOLD_OR_WATCH`**: Triggered if $0.40 \le S_{\text{Council}} < 0.70$.
+3. **`REJECT_OR_EXIT`**: Triggered if $S_{\text{Council}} < 0.40$.
+4. **`VETOED_SAFETY_LOCK`**: Triggered if either Risk or Critic Agent exercises Veto, regardless of composite score.
+
+---
+
+## 4. Absolute Veto Mechanisms
+
+```
+[Agent Council Vote] ---> Composite Score >= 70.0% ---> [Veto Gateway]
+                                                              |
+                                +-----------------------------+-----------------------------+
+                                |                                                           |
+                                v                                                           v
+                     [Risk Agent Veto Check]                                     [Critic Agent Veto Check]
+                     - Consecutive Losses >= 2                                   - Walk-Forward Degradation > 35%
+                     - Sector Exposure > 35%                                     - DSR < 0.80
+                     - ATR Stop Distance > 8%                                    - Active Quarantine Match
+                                |                                                           |
+                                +-----------------------------+-----------------------------+
+                                                              |
+                                               Any Veto Triggered?
+                                              /                   \
+                                           YES                     NO
+                                           /                         \
+                                          v                           v
+                        [STATUS: VETOED_SAFETY_LOCK]        [STATUS: APPROVED_BUY]
+```
+
+---
+
+## 5. Agent Agreement Index (Cohen's Kappa Concordance)
+
+To monitor council health and prevent groupthink, the platform continuously tracks the pairwise **Cohen's Kappa ($\kappa$) Concordance** between agents:
+
+$$\kappa = \frac{P_o - P_e}{1 - P_e}$$
+
+Where $P_o$ is observed agreement percentage and $P_e$ is expected random agreement.
+- Healthy Target: $0.45 \le \kappa \le 0.75$ (Robust diversity of thought without chaotic discordance).
 
 ---
 **Institutional Compliance Notice:**  

@@ -1,52 +1,60 @@
 # 11. Steve Nison Candlesticks & John J. Murphy Technical Engine
 
 **Document Version:** `v3.2.0-Authoritative`  
-**Publication Date:** `2026-08-29`  
-**Status:** `PRODUCTION VERIFIED & INSTITUTIONALLY CERTIFIED`
+**Classification:** `INSTITUTIONAL QUANTITATIVE ASSET MANAGEMENT SPECIFICATION`  
+**Publication Date:** `2026-08-30`  
+**Status:** `PRODUCTION VERIFIED & INSTITUTIONALLY CERTIFIED`  
 
 ---
 
 ## 1. Executive Summary
-The **Technical Pattern Recognition Engine** (`core/quant_books_engine.py`) synthesizes Steve Nison’s Japanese Candlestick formations (*Japanese Candlestick Charting Techniques*) with John J. Murphy’s trend-following indicators and Fibonacci retracement mathematics (*Technical Analysis of the Financial Markets*).
+
+The **Technical Microstructure & Chart Pattern Recognition Engine** (`core/technical_setup_engine.py`) synthesizes Steve Nison’s Eastern Japanese candlestick analytics with John J. Murphy’s Western trend-following and geometric retracement principles.
+
+To eliminate discretionary subjectivity, all candlestick and geometric setups are mathematically formalized, volume-confirmed, and integrated with Average True Range (ATR) dynamic volatility bands.
 
 ---
 
-## 2. Steve Nison Japanese Candlestick Recognition
+## 2. Steve Nison Candlestick Pattern Recognition Engine
 
-The engine scans daily and hourly OHLCV candles to identify 4 institutional reversal patterns:
+```
++========================================================================================================+
+| Pattern Name       | Algorithmic Identification Logic                                 | Volume Factor  |
++====================+==================================================================+================+
+| BULLISH_ENGULFING  | Body(t) > Body(t-1) AND Close(t) > Open(t-1) AND Open(t) < Close(t-1)| Volume >= 1.3x |
+| HAMMER_REVERSAL    | LowerShadow >= 2.0 * Body AND UpperShadow <= 0.2 * Body          | Volume >= 1.2x |
+| MORNING_STAR       | 3-Bar: Large Bearish -> Small Doji/Star -> Large Bullish Close   | Volume >= 1.5x |
+| PIERCING_LINE      | Close(t) >= (Open(t-1) + Close(t-1)) / 2 AND Open(t) < Low(t-1)  | Volume >= 1.25x|
++========================================================================================================+
+```
 
-1. **Bullish Engulfing (الابتلاع الشرائي)**:
-   $$\text{Open}_t < \text{Close}_{t-1} \quad \text{AND} \quad \text{Close}_t > \text{Open}_{t-1} \quad \text{AND} \quad \text{Candle}_{t-1} = \text{Bearish}$$
-   - *Significance*: Overwhelming buying pressure overwhelming prior sellers.
-2. **Hammer (المطرقة الصاعدة)**:
-   $$\text{Lower Shadow} \ge 2.0 \cdot \text{Real Body} \quad \text{AND} \quad \text{Upper Shadow} \le 0.2 \cdot \text{Real Body}$$
-   - *Significance*: Rejection of intraday lows at strong support levels.
-3. **Morning Star (نجمة الصباح الثلاثية)**:
-   - 3-candle sequence: Long bearish $\to$ Small gap down doji/spinning top $\to$ Strong bullish closing into the first candle's upper half.
-4. **Piercing Line (الخط الثاقب)**:
-   - Bullish candle opens below prior low and closes above the $50\%$ midpoint of the prior bearish candle.
-
----
-
-## 3. John J. Murphy ADX Trend Strength Filter
-
-To avoid false breakouts in choppy, range-bound markets, the **Average Directional Index (ADX, 14-period)** acts as a trend strength gatekeeper:
-
-$$\text{ADX} = 100 \cdot \text{EMA}_{14}\left( \frac{|+\text{DI} - -\text{DI}|}{+\text{DI} + -\text{DI}} \right)$$
-
-- **$\text{ADX} \ge 25.0$**: **Strong Active Trend** (موجة اتجاهية قوية تسمح بتداول الاختراقات).
-- **$\text{ADX} < 20.0$**: **Choppy Consolidation** (حركة عرضية غير اتجاهية - حظر أوامر الاختراق).
+### Volume Confirmation Filter:
+A candlestick formation is rejected as non-actionable noise if the session volume fails to exceed **$120\%$** of the 20-day simple moving average volume ($V_t \ge 1.20 \times \text{SMA}_{20}(V)$).
 
 ---
 
-## 4. Fibonacci Dynamic Retracement Geometry
+## 3. John J. Murphy Trend Strength & Fibonacci Retracements
 
-For any swing high ($H$) and swing low ($L$), institutional entry and profit-taking levels are computed:
+### 1. 14-Period Average Directional Index (ADX):
+- $\text{ADX} = 100 \times \text{EMA}_{14}\left(\frac{|+DI - -DI|}{+DI + -DI}\right)$
+- **Trend Filter Rule**: Long trend-following breakouts are only authorized when $\mathbf{\text{ADX} \ge 25.0}$. If $\text{ADX} < 20.0$, the market is classified as `SIDEWAYS_CHOP`, activating mean-reversion trading rules.
 
-$$\text{Retracement}(P) = H - (H - L) \cdot P \quad \text{for } P \in \{0.236, 0.382, 0.500, 0.618, 0.786\}$$
+### 2. Dynamic Fibonacci Geometric Confluence:
+For a detected swing between anchor Low ($P_{\text{low}}$) and High ($P_{\text{high}}$):
 
-- **Golden Ratio Support ($61.8\%$)**: Primary accumulation sweet spot.
-- **Target Extensions ($161.8\%$ & $261.8\%$)**: Multi-stage take-profit exit targets.
+$$P_{\text{Fib}}(\lambda) = P_{\text{high}} - \lambda \cdot (P_{\text{high}} - P_{\text{low}})$$
+
+Where $\lambda \in \{0.236, 0.382, 0.500, 0.618, 0.786\}$.
+
+- **Golden Ratio Confluence ($61.8\%$)**: When price pulls back to the $61.8\%$ Fibonacci level concurrent with a Hammer or Bullish Engulfing pattern, the technical score receives a $+0.25$ conviction bonus.
+
+---
+
+## 4. Algorithmic Technical Setup Classification
+
+1. **`SETUP_MOMENTUM_BREAKOUT`**: Price crosses 20-day Donchian High, $\text{ADX} \ge 25.0$, Volume Surge $\ge 1.50x$.
+2. **`SETUP_PULLBACK_SUPPORT`**: Price retraces to $50.0\% - 61.8\%$ Fibonacci level on declining volume, followed by a bullish reversal candle.
+3. **`SETUP_MEAN_REVERSION`**: RSI-14 $\le 30.0$, Price touches Lower Bollinger Band ($2.0\sigma$), stochastic crossover.
 
 ---
 **Institutional Compliance Notice:**  

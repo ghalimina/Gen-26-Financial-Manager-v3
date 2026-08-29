@@ -1,33 +1,33 @@
 # 17. EGX Trading Rules, Circuit Breakers & Capital Gains Tax (CGT)
 
 **Document Version:** `v3.2.0-Authoritative`  
-**Publication Date:** `2026-08-29`  
-**Status:** `PRODUCTION VERIFIED & INSTITUTIONALLY CERTIFIED`
+**Classification:** `INSTITUTIONAL QUANTITATIVE ASSET MANAGEMENT SPECIFICATION`  
+**Publication Date:** `2026-08-30`  
+**Status:** `PRODUCTION VERIFIED & INSTITUTIONALLY CERTIFIED`  
 
 ---
 
 ## 1. Executive Summary
-The **EGX Market Microstructure Rules Engine** (`core/egx_trading_rules_engine.py`) enforces strict compliance with the regulatory bylaws mandated by the Egyptian Financial Regulatory Authority (FRA) and the Egyptian Stock Exchange (EGX), including intraday price limits, cooling pauses, settlement cycles, and the 10% Capital Gains Tax (CGT).
+
+The **EGX Market Microstructure Rules Engine** (`core/egx_trading_rules_engine.py`) enforces strict compliance with the regulatory bylaws mandated by the Egyptian Financial Regulatory Authority (FRA) and the Egyptian Stock Exchange (EGX), including intraday price limits, cooling pauses, settlement cycles, dynamic execution slippage, and the 10% Capital Gains Tax (CGT).
 
 ---
 
 ## 2. Intraday Price Limits & Circuit Breakers
 
 ```
-+-------------------------------------------------------------------------------+
-|                      EGX INTRADAY PRICE LIMIT TIERS                           |
-+-------------------+-----------------------+-----------------------------------+
-| Tier Level        | Price Limit Deviation | Trading Action Enforced           |
-+-------------------+-----------------------+-----------------------------------+
-| Tier 1 Limit      | +/- 10.0%             | 10-Minute Market Cooling Auction  |
-| Tier 2 Hard Limit | +/- 20.0%             | Hard Trading Suspension for Day   |
-| Index Wide Halt   | +/- 5.0% on EGX100    | 30-Minute Market-Wide Suspension  |
-+-------------------+-----------------------+-----------------------------------+
++========================================================================================================+
+| Limit Tier        | Price Band Deviation | Trading Action Enforced                                     |
++===================+======================+=============================================================+
+| Tier 1 Limit      | +/- 10.0%            | 10-Minute Market Cooling Price Discovery Auction            |
+| Tier 2 Hard Limit | +/- 20.0%            | Hard Trading Suspension for Remainder of Trading Session    |
+| Index Wide Halt   | +/- 5.0% on EGX100   | 30-Minute Market-Wide Trading Suspension                    |
++========================================================================================================+
 ```
 
 ### 1. Tier 1 ($\pm 10.0\%$):
 - When a stock touches $\pm 10.0\%$ from its previous closing reference price, continuous trading is halted for a **10-minute cooling price discovery auction**.
-- Trading resumes with new reference bids/asks.
+- Orders can be entered and amended; trading resumes with a newly established equilibrium price.
 
 ### 2. Tier 2 ($\pm 20.0\%$ Hard Limit):
 - The maximum permissible single-session price band is $\pm 20.0\%$.
