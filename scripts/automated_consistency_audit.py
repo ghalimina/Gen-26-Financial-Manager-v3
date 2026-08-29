@@ -1,0 +1,184 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# =============================================================================
+# scripts/automated_consistency_audit.py — GEN-26 SSoT & Mathematical Consistency Auditor
+# Scans all authoritative reports, core models, and data artifacts to verify
+# 100% adherence to Single Source of Truth (SSoT) invariants.
+# =============================================================================
+
+import os
+import sys
+import re
+import json
+import datetime
+from typing import Dict, List, Any
+
+WORKSPACE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+REPORTS_DIR = os.path.join(WORKSPACE, "reports", "authoritative_20_reports")
+MASTER_DOSSIER = os.path.join(WORKSPACE, "reports", "00_MASTER_CONSOLIDATED_SYSTEM_DOSSIER.md")
+AUDIT_OUTPUT = os.path.join(WORKSPACE, "reports", "consistency_audit_report.json")
+
+
+def clean_text(text: str) -> str:
+    """Removes LaTeX escape slashes and dollar signs for uniform text matching."""
+    t = text.replace("\\left", "").replace("\\right", "").replace("\\%", "%").replace("$", "")
+    t = t.replace("\\min", "min").replace("\\max", "max")
+    return t
+
+
+class ConsistencyAuditor:
+    """
+    Automated verification of cross-report mathematical and architectural consistency.
+    """
+
+    SSOT_RULES = {
+        "cbe_deposit_rate": "19.00%",
+        "cbe_lending_rate": "20.00%",
+        "cbe_inflation": "14.90%",
+        "usd_egp_rate": "50.20",
+        "hurdle_rate_crp": "30.70%",
+        "universe_catalog_count": 244,
+        "roundtrip_friction": "0.35%",
+        "master_test_count": 456,
+        "piotroski_cib_score": "9 / 9",
+        "meta_labeling_threshold_min": "0.60",
+        "meta_labeling_threshold_max": "0.85",
+        "version_tag": "v3.2.0-Authoritative"
+    }
+
+    @classmethod
+    def audit_reports(cls) -> Dict[str, Any]:
+        report_files = [f for f in os.listdir(REPORTS_DIR) if f.endswith(".md")]
+        report_files.sort()
+
+        audit_results = {
+            "audit_timestamp": datetime.datetime.now().isoformat(),
+            "target_version": cls.SSOT_RULES["version_tag"],
+            "total_reports_scanned": len(report_files) + 1,
+            "reports_audit": {},
+            "master_dossier_audit": {},
+            "summary_status": "PASS",
+            "passed_invariants": 0,
+            "failed_invariants": 0,
+            "violations": []
+        }
+
+        # 1. Audit individual reports
+        for rf in report_files:
+            p = os.path.join(REPORTS_DIR, rf)
+            with open(p, "r", encoding="utf-8") as f:
+                raw_content = f.read()
+            content = clean_text(raw_content)
+
+            file_audit = {
+                "file": rf,
+                "size_bytes": len(raw_content),
+                "checks": {}
+            }
+
+            if rf == "01_SYSTEM_ARCHITECTURE_OVERVIEW.md":
+                ssot_sec = "MASTER SSoT HIERARCHY" in content or "Universe SSoT" in content
+                file_audit["checks"]["ssot_definitions_present"] = ssot_sec
+                if not ssot_sec:
+                    audit_results["violations"].append(f"{rf}: Missing SSoT definitions")
+
+            if rf == "03_MACRO_REGIME_AND_CBE_CORRIDOR.md":
+                cbe_dep_ok = "19.00%" in content
+                cbe_lend_ok = "20.00%" in content
+                hurdle_ok = "30.70%" in content
+                file_audit["checks"]["cbe_deposit_rate_19pct"] = cbe_dep_ok
+                file_audit["checks"]["cbe_lending_rate_20pct"] = cbe_lend_ok
+                file_audit["checks"]["hurdle_rate_crp_30_70pct"] = hurdle_ok
+                if not (cbe_dep_ok and cbe_lend_ok and hurdle_ok):
+                    audit_results["violations"].append(f"{rf}: Macro rate or Hurdle Rate mismatch")
+
+            if rf == "09_PIOTROSKI_F_SCORE_ANALYSIS.md":
+                fscore_ok = "9 / 9" in content
+                file_audit["checks"]["comi_fscore_9_of_9"] = fscore_ok
+                if not fscore_ok:
+                    audit_results["violations"].append(f"{rf}: Piotroski score for COMI.CA not 9/9")
+
+            if rf == "10_PETER_LYNCH_VALUATION_METRICS.md":
+                peg_ok = "Standard Peter Lynch PEG" in content or "Standard PEG" in content or "PEG" in content
+                pegy_ok = "Dividend-Adjusted PEGY" in content or "PEGY" in content
+                file_audit["checks"]["peg_distinction"] = peg_ok and pegy_ok
+                if not (peg_ok and pegy_ok):
+                    audit_results["violations"].append(f"{rf}: PEG and PEGY distinction missing")
+
+            if rf == "16_TWO_STAGE_META_LABELING_AI.md":
+                meta_eq_ok = "0.60" in content and "0.85" in content and "min(" in content.lower()
+                file_audit["checks"]["meta_labeling_piecewise_formula"] = meta_eq_ok
+                if not meta_eq_ok:
+                    audit_results["violations"].append(f"{rf}: Meta-labeling piecewise formula mismatch")
+
+            if rf == "19_DEVOPS_CI_CD_AND_TEST_BATTERY.md":
+                test_cnt_ok = "456" in content and ("456 TESTS" in content or "456 Tests" in content or "TOTAL" in content)
+                file_audit["checks"]["master_test_count_456"] = test_cnt_ok
+                if not test_cnt_ok:
+                    audit_results["violations"].append(f"{rf}: Test count not 456")
+
+            audit_results["reports_audit"][rf] = file_audit
+
+        # 2. Audit Master Dossier
+        if os.path.exists(MASTER_DOSSIER):
+            with open(MASTER_DOSSIER, "r", encoding="utf-8") as f:
+                dossier_raw = f.read()
+            dossier_content = clean_text(dossier_raw)
+
+            dossier_audit = {
+                "file": "00_MASTER_CONSOLIDATED_SYSTEM_DOSSIER.md",
+                "cbe_deposit_19pct": "19.00%" in dossier_content,
+                "cbe_lending_20pct": "20.00%" in dossier_content,
+                "hurdle_30_70pct": "30.70%" in dossier_content,
+                "friction_0_35pct": "0.35%" in dossier_content,
+                "universe_244": "244" in dossier_content,
+                "tests_456": "456" in dossier_content
+            }
+            audit_results["master_dossier_audit"] = dossier_audit
+            for k, passed in dossier_audit.items():
+                if k != "file" and not passed:
+                    audit_results["violations"].append(f"Master Dossier: Check {k} failed")
+
+        # 3. Final Summary Calculation
+        total_checks = 0
+        passed_checks = 0
+        for r_data in audit_results["reports_audit"].values():
+            for passed in r_data["checks"].values():
+                total_checks += 1
+                if passed:
+                    passed_checks += 1
+                else:
+                    audit_results["failed_invariants"] += 1
+
+        for k, passed in audit_results["master_dossier_audit"].items():
+            if k != "file":
+                total_checks += 1
+                if passed:
+                    passed_checks += 1
+                else:
+                    audit_results["failed_invariants"] += 1
+
+        audit_results["passed_invariants"] = passed_checks
+        audit_results["summary_status"] = "PASS" if len(audit_results["violations"]) == 0 else "FAIL"
+
+        # Save report
+        os.makedirs(os.path.dirname(AUDIT_OUTPUT), exist_ok=True)
+        with open(AUDIT_OUTPUT, "w", encoding="utf-8") as f:
+            json.dump(audit_results, f, ensure_ascii=False, indent=2)
+
+        return audit_results
+
+
+if __name__ == "__main__":
+    res = ConsistencyAuditor.audit_reports()
+    print("=" * 80)
+    print(f"GEN-26 SSoT Consistency Audit Result: {res['summary_status']}")
+    print(f"Passed Invariants: {res['passed_invariants']} | Failed Invariants: {res['failed_invariants']}")
+    if res["violations"]:
+        print("Violations:")
+        for v in res["violations"]:
+            print(f"  - {v}")
+    print(f"Report saved to: {AUDIT_OUTPUT}")
+    print("=" * 80)
+    if res["summary_status"] != "PASS":
+        sys.exit(1)

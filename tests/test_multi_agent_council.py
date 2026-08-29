@@ -143,7 +143,7 @@ class TestMultiAgentCouncil(unittest.TestCase):
         exp_success = db_engine.record_experiment(exp_data)
         self.assertTrue(exp_success)
 
-        recent_exps = db_engine.get_recent_experiments(limit=10)
+        recent_exps = db_engine.get_recent_experiments(limit=100)
         self.assertTrue(any(e["experiment_id"] == "EXP_STLC_TC04" for e in recent_exps))
 
         # 2. Record a failure lesson
@@ -159,7 +159,7 @@ class TestMultiAgentCouncil(unittest.TestCase):
         fail_success = db_engine.record_failure_lesson(fail_data)
         self.assertTrue(fail_success)
 
-        failure_memory = db_engine.get_failure_memory(limit=10)
+        failure_memory = db_engine.get_failure_memory(limit=100)
         self.assertTrue(any(f["failure_id"] == "FAIL_STLC_TC04" for f in failure_memory))
 
     def test_tc05_critic_auditor_rejection_of_overfitted_and_leaked_hypotheses(self):

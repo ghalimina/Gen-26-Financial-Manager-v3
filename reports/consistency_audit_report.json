@@ -1,0 +1,134 @@
+{
+  "audit_timestamp": "2026-08-29T06:05:33.953948",
+  "target_version": "v3.2.0-Authoritative",
+  "total_reports_scanned": 21,
+  "reports_audit": {
+    "01_SYSTEM_ARCHITECTURE_OVERVIEW.md": {
+      "file": "01_SYSTEM_ARCHITECTURE_OVERVIEW.md",
+      "size_bytes": 7648,
+      "checks": {
+        "ssot_definitions_present": true
+      }
+    },
+    "02_EGX_244_UNIVERSE_CATALOG.md": {
+      "file": "02_EGX_244_UNIVERSE_CATALOG.md",
+      "size_bytes": 3873,
+      "checks": {}
+    },
+    "03_MACRO_REGIME_AND_CBE_CORRIDOR.md": {
+      "file": "03_MACRO_REGIME_AND_CBE_CORRIDOR.md",
+      "size_bytes": 3077,
+      "checks": {
+        "cbe_deposit_rate_19pct": true,
+        "cbe_lending_rate_20pct": true,
+        "hurdle_rate_crp_30_70pct": true
+      }
+    },
+    "04_DATABASE_SCHEMA_AND_PERSISTENCE.md": {
+      "file": "04_DATABASE_SCHEMA_AND_PERSISTENCE.md",
+      "size_bytes": 3700,
+      "checks": {}
+    },
+    "05_SEVEN_AGENT_QUANT_COUNCIL.md": {
+      "file": "05_SEVEN_AGENT_QUANT_COUNCIL.md",
+      "size_bytes": 3351,
+      "checks": {}
+    },
+    "06_AUTONOMOUS_RESEARCH_LAB.md": {
+      "file": "06_AUTONOMOUS_RESEARCH_LAB.md",
+      "size_bytes": 3061,
+      "checks": {}
+    },
+    "07_PURGED_WALK_FORWARD_PROMOTION_GATE.md": {
+      "file": "07_PURGED_WALK_FORWARD_PROMOTION_GATE.md",
+      "size_bytes": 2662,
+      "checks": {}
+    },
+    "08_EPISODIC_FAILURE_MEMORY.md": {
+      "file": "08_EPISODIC_FAILURE_MEMORY.md",
+      "size_bytes": 2213,
+      "checks": {}
+    },
+    "09_PIOTROSKI_F_SCORE_ANALYSIS.md": {
+      "file": "09_PIOTROSKI_F_SCORE_ANALYSIS.md",
+      "size_bytes": 3230,
+      "checks": {
+        "comi_fscore_9_of_9": true
+      }
+    },
+    "10_PETER_LYNCH_VALUATION_METRICS.md": {
+      "file": "10_PETER_LYNCH_VALUATION_METRICS.md",
+      "size_bytes": 3183,
+      "checks": {
+        "peg_distinction": true
+      }
+    },
+    "11_NISON_CANDLESTICKS_AND_MURPHY_TECH.md": {
+      "file": "11_NISON_CANDLESTICKS_AND_MURPHY_TECH.md",
+      "size_bytes": 2673,
+      "checks": {}
+    },
+    "12_MARK_DOUGLAS_PSYCHOLOGY_GUARD.md": {
+      "file": "12_MARK_DOUGLAS_PSYCHOLOGY_GUARD.md",
+      "size_bytes": 2493,
+      "checks": {}
+    },
+    "13_LONDON_GDR_ARBITRAGE_REPORT.md": {
+      "file": "13_LONDON_GDR_ARBITRAGE_REPORT.md",
+      "size_bytes": 2475,
+      "checks": {}
+    },
+    "14_STATISTICAL_PAIRS_ARBITRAGE.md": {
+      "file": "14_STATISTICAL_PAIRS_ARBITRAGE.md",
+      "size_bytes": 2525,
+      "checks": {}
+    },
+    "15_DEEP_QUANT_48_FEATURE_TENSOR.md": {
+      "file": "15_DEEP_QUANT_48_FEATURE_TENSOR.md",
+      "size_bytes": 2953,
+      "checks": {}
+    },
+    "16_TWO_STAGE_META_LABELING_AI.md": {
+      "file": "16_TWO_STAGE_META_LABELING_AI.md",
+      "size_bytes": 3291,
+      "checks": {
+        "meta_labeling_piecewise_formula": true
+      }
+    },
+    "17_EGX_TRADING_RULES_AND_CGT_TAX.md": {
+      "file": "17_EGX_TRADING_RULES_AND_CGT_TAX.md",
+      "size_bytes": 3059,
+      "checks": {}
+    },
+    "18_BLACK_SWAN_STRESS_TESTING.md": {
+      "file": "18_BLACK_SWAN_STRESS_TESTING.md",
+      "size_bytes": 2755,
+      "checks": {}
+    },
+    "19_DEVOPS_CI_CD_AND_TEST_BATTERY.md": {
+      "file": "19_DEVOPS_CI_CD_AND_TEST_BATTERY.md",
+      "size_bytes": 4454,
+      "checks": {
+        "master_test_count_456": true
+      }
+    },
+    "20_MASTER_INDEX_AND_SYSTEM_GLOSSARY.md": {
+      "file": "20_MASTER_INDEX_AND_SYSTEM_GLOSSARY.md",
+      "size_bytes": 4466,
+      "checks": {}
+    }
+  },
+  "master_dossier_audit": {
+    "file": "00_MASTER_CONSOLIDATED_SYSTEM_DOSSIER.md",
+    "cbe_deposit_19pct": true,
+    "cbe_lending_20pct": true,
+    "hurdle_30_70pct": true,
+    "friction_0_35pct": true,
+    "universe_244": true,
+    "tests_456": true
+  },
+  "summary_status": "PASS",
+  "passed_invariants": 14,
+  "failed_invariants": 0,
+  "violations": []
+}
