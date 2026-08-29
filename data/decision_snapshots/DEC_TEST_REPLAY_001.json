@@ -3,9 +3,9 @@
     "decision_id": "DEC_TEST_REPLAY_001",
     "session_id": "SESS-20260820-01",
     "ticker": "COMI.CA",
-    "timestamp": "2026-08-29T05:26:48.296377",
+    "timestamp": "2026-08-29T05:37:36.046158",
     "engine_version": "3.0.0",
-    "integrity_hash": "79b7334c7f3c369d7e55bf59b57869a66672ac560eb68f442c62d53e60920122"
+    "integrity_hash": "2409f253c80f31e65f54cd875bfe94cc9ad238b16b2f97ece50a05f7be07f22e"
   },
   "decision": {
     "action": "BUY LIMIT",
