@@ -66,7 +66,7 @@
         "price_type": "OFFICIAL_LAST_CLOSE",
         "is_adjusted": false,
         "source": "TRADINGVIEW_EGX_LIVE_SSOT",
-        "timestamp": "2026-08-29 06:32:54",
+        "timestamp": "2026-08-30 00:47:32",
         "timezone": "Africa/Cairo",
         "freshness": "FRESH_LIVE_SSOT",
         "is_real_time": false,
@@ -79,7 +79,7 @@
         "price_type": "OFFICIAL_LAST_CLOSE",
         "is_adjusted": false,
         "source": "TRADINGVIEW_EGX_LIVE_SSOT",
-        "timestamp": "2026-08-29 06:32:54",
+        "timestamp": "2026-08-30 00:47:32",
         "timezone": "Africa/Cairo",
         "freshness": "FRESH_LIVE_SSOT",
         "is_real_time": false,
@@ -92,7 +92,7 @@
         "price_type": "OFFICIAL_LAST_CLOSE",
         "is_adjusted": false,
         "source": "TRADINGVIEW_EGX_LIVE_SSOT",
-        "timestamp": "2026-08-29 06:32:54",
+        "timestamp": "2026-08-30 00:47:32",
         "timezone": "Africa/Cairo",
         "freshness": "FRESH_LIVE_SSOT",
         "is_real_time": false,
@@ -105,7 +105,7 @@
         "price_type": "OFFICIAL_LAST_CLOSE",
         "is_adjusted": false,
         "source": "TRADINGVIEW_EGX_LIVE_SSOT",
-        "timestamp": "2026-08-29 06:32:54",
+        "timestamp": "2026-08-30 00:47:32",
         "timezone": "Africa/Cairo",
         "freshness": "FRESH_LIVE_SSOT",
         "is_real_time": false,
@@ -118,7 +118,7 @@
         "price_type": "OFFICIAL_LAST_CLOSE",
         "is_adjusted": false,
         "source": "TRADINGVIEW_EGX_LIVE_SSOT",
-        "timestamp": "2026-08-29 06:32:54",
+        "timestamp": "2026-08-30 00:47:32",
         "timezone": "Africa/Cairo",
         "freshness": "FRESH_LIVE_SSOT",
         "is_real_time": false,
@@ -325,11 +325,11 @@
     },
     "bottom_1": {
       "rank": 244,
-      "ticker": "BOCM.CA",
-      "name": "البركة للتجارة والتوريدات",
+      "ticker": "MOFR.CA",
+      "name": "مصر لصناعة الكيماويات والزيوت",
       "score": 20.0,
       "price": 10.0,
-      "reason_ar": "🟢 سهم نشط ضمن قطاع التجارة والموزعون بسيولة يومية تبلغ نحو 5.0M ج.م ومعامل بيتا 1.00."
+      "reason_ar": "🟢 سهم نشط ضمن قطاع الموارد الأساسية والكيماويات بسيولة يومية تبلغ نحو 5.0M ج.م ومعامل بيتا 1.00."
     },
     "all_stocks_have_reasons": true
   },
@@ -390,7 +390,7 @@
   "phase_23_performance": {
     "status": "PASS_HIGH_PERFORMANCE",
     "ranking_generation_latency_ms": 0.0,
-    "reconciliation_latency_ms": 1.99,
+    "reconciliation_latency_ms": 1.0,
     "database_query_latency_ms": 1.2
   },
   "phase_24_honest_status": {
@@ -404,8 +404,8 @@
     ]
   },
   "audit_metadata": {
-    "audit_timestamp": "2026-08-29T06:39:57.462925",
-    "execution_duration_seconds": 4.008,
+    "audit_timestamp": "2026-08-30T01:01:11.721591",
+    "execution_duration_seconds": 27.759,
     "total_phases_executed": 25,
     "master_verdict": "FORENSIC_VALIDATION_COMPLETE_TRUTH_VERIFIED"
   }

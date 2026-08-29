@@ -183,7 +183,9 @@ class RiskStressTestingEngine:
         based on current market regime and portfolio risk profile.
         """
         gold_metrics = cls.get_live_gold_metrics()
-        cert_price = gold_metrics["azg_cert_price_egp"]
+        cert_price = float(gold_metrics.get("azg_cert_price_egp", 42.50) or 42.50)
+        if cert_price <= 0:
+            cert_price = 42.50
 
         # Base gold allocation by regime
         regime_weights = {
@@ -202,7 +204,7 @@ class RiskStressTestingEngine:
         recommended_gold_weight = max(0.05, min(0.20, base_weight + risk_adj))
 
         target_gold_value_egp = round(portfolio_value * recommended_gold_weight, 2)
-        recommended_shares = int(target_gold_value_egp / cert_price) if cert_price > 0 else 0
+        recommended_shares = max(1, int(target_gold_value_egp / cert_price)) if cert_price > 0 else 0
 
         # Arabic rationale
         if recommended_gold_weight >= 0.15:

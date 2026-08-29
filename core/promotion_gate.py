@@ -68,23 +68,22 @@ class PromotionGate:
         # Euler-Mascheroni constant
         euler_gamma = 0.57721566490153286
 
-        # Expected maximum Sharpe ratio under null hypothesis (independent trials)
+        # Annualization factor and sample years
+        sample_years = max(0.1, sample_length_days / 252.0)
         log_n = math.log(max(2, num_trials))
-        expected_max_sr = (1.0 - euler_gamma) * math.sqrt(2.0 * log_n) + euler_gamma * math.sqrt(2.0 * math.log(max(2, num_trials * math.e)))
-        expected_max_sr = expected_max_sr / math.sqrt(sample_length_days)
+
+        # Expected maximum Sharpe ratio under null hypothesis (independent trials)
+        expected_max_sr = ((1.0 - euler_gamma) * math.sqrt(2.0 * log_n) + euler_gamma * math.sqrt(2.0 * math.log(max(2, num_trials * math.e)))) / math.sqrt(max(1.0, sample_years * 10.0))
 
         # Standard error of Sharpe ratio adjusted for higher moments (Lo 2002 / Mertens 2002)
         sr = max(0.01, observed_sharpe)
-        sr_annual = sr / math.sqrt(sample_length_days)
-        
-        # Variance term: 1 - gamma_3 * SR + (gamma_4 - 1)/4 * SR^2
-        variance_term = 1.0 - skewness * sr_annual + ((kurtosis - 1.0) / 4.0) * (sr_annual ** 2)
+        variance_term = 1.0 - skewness * (sr / math.sqrt(252.0)) + ((kurtosis - 1.0) / 4.0) * ((sr / math.sqrt(252.0)) ** 2)
         variance_term = max(0.001, variance_term)
         
-        std_error = math.sqrt(variance_term / max(10, sample_length_days - 1))
+        std_error = math.sqrt(variance_term / sample_years)
 
         # DSR Z-Score
-        z_stat = (sr_annual - expected_max_sr) / std_error
+        z_stat = (sr - expected_max_sr) / std_error
         dsr_prob = norm_cdf(z_stat)
 
         return round(float(dsr_prob), 3)

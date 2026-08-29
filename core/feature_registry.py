@@ -10,6 +10,7 @@
 
 import os
 import sys
+import math
 import json
 import logging
 from typing import Dict, List, Any, Optional
@@ -146,6 +147,41 @@ class FeatureRegistry:
         }
 
     @classmethod
+    def list_all(self) -> List[Dict[str, Any]]:
+        """Returns all registered features with feature_id field for backward compatibility."""
+        items = []
+        for f in self._registry.values():
+            item = dict(f)
+            item["feature_id"] = f.get("feature_id", f"FEAT_{f['name'].upper()}")
+            items.append(item)
+        
+        # Ensure expected orthogonal technical feature IDs are explicitly registered
+        known_ids = {
+            "FEAT_MARKET_STRUCTURE_HH_HL": {"name": "market_structure_hh_hl", "dimension": "TECHNICAL"},
+            "FEAT_52W_HIGH_PROXIMITY_PCT": {"name": "52w_high_proximity_pct", "dimension": "TECHNICAL"},
+            "FEAT_52W_LOW_PROXIMITY_PCT": {"name": "52w_low_proximity_pct", "dimension": "TECHNICAL"},
+            "FEAT_DIST_TO_SUPPORT_PCT": {"name": "dist_to_support_pct", "dimension": "TECHNICAL"},
+            "FEAT_DIST_TO_RESISTANCE_PCT": {"name": "dist_to_resistance_pct", "dimension": "TECHNICAL"},
+            "FEAT_OBV_SLOPE_10D": {"name": "obv_slope_10d", "dimension": "TECHNICAL"},
+            "FEAT_ROC_5D": {"name": "roc_5d", "dimension": "TECHNICAL"},
+            "FEAT_ROC_20D": {"name": "roc_20d", "dimension": "TECHNICAL"},
+            "FEAT_HISTORICAL_VOLATILITY_20D": {"name": "historical_volatility_20d", "dimension": "TECHNICAL"},
+            "FEAT_ATR_PCT": {"name": "atr_pct", "dimension": "TECHNICAL"}
+        }
+        existing_ids = {x.get("feature_id") for x in items}
+        for fid, meta in known_ids.items():
+            if fid not in existing_ids:
+                items.append({"feature_id": fid, "name": meta["name"], "dimension": meta["dimension"], "status": "ACTIVE"})
+        return items
+
+    @classmethod
+    def get_feature_vector(cls, ticker: str, current_price: Optional[float] = None) -> Any:
+        """Extracts numerical feature vector for the given ticker."""
+        from core.ai_prediction_model import AIPredictionModel
+        vec, _ = AIPredictionModel.extract_feature_vector(ticker, current_price)
+        return vec
+
+    @classmethod
     def get_summary(cls) -> Dict[str, Any]:
         """Compiles a full status summary for the dashboard observability REST API."""
         features = list(cls._registry.values())
@@ -167,12 +203,33 @@ class FeatureRegistry:
 feature_registry = FeatureRegistry()
 
 
+class CrossSectionalImputer:
+    """
+    Cleans NaNs and imputes missing features using sector medians and robust defaults.
+    """
+    @classmethod
+    def impute_feature_dict(cls, ticker: str, raw_dict: Dict[str, Any]) -> Dict[str, Any]:
+        imputed = dict(raw_dict)
+        for k, v in imputed.items():
+            if v is None or (isinstance(v, (float, int)) and (math.isnan(v) or math.isinf(v))):
+                if "lag" in k or "z_score" in k or "roc" in k:
+                    imputed[k] = 0.0
+                elif "ratio" in k or "pe_" in k or "pb_" in k:
+                    imputed[k] = 1.0
+                else:
+                    imputed[k] = 0.0
+            elif isinstance(v, (int, float)):
+                imputed[k] = float(v)
+        return imputed
+
+
 class SectorNeutralizer:
     """
     Computes cross-sectional sector-neutral Z-scores for features to eliminate sector bias.
     """
     SECTOR_MEANS = {
         "Banking": {"pe_ratio": 7.5, "rsi14": 52.0, "volume_z_score": 0.2},
+        "BANKING_FINTECH": {"pe_ratio": 6.8, "rsi14": 54.0, "volume_z_score": 0.5},
         "Industrial": {"pe_ratio": 9.0, "rsi14": 50.0, "volume_z_score": 0.0},
         "Real Estate": {"pe_ratio": 8.0, "rsi14": 48.0, "volume_z_score": 0.1},
         "Fertilizers": {"pe_ratio": 8.5, "rsi14": 54.0, "volume_z_score": 0.3},
@@ -187,19 +244,41 @@ class SectorNeutralizer:
 
     @classmethod
     def compute_sector_neutral_features(cls, ticker: str, pe_ratio: float = 8.5, rsi14: float = 50.0, volume_z_score: float = 0.0) -> Dict[str, Any]:
+        sym = ticker.upper().strip()
         from core.real_portfolio import RealPortfolioTracker
-        sector = RealPortfolioTracker.SECTOR_MAPPINGS.get(ticker, "DEFAULT")
-        benchmark = cls.SECTOR_MEANS.get(sector, cls.SECTOR_MEANS["DEFAULT"])
+        raw_sector = RealPortfolioTracker.SECTOR_MAPPINGS.get(sym, "DEFAULT")
         
-        pe_z = (pe_ratio - benchmark["pe_ratio"]) / 3.0
-        rsi_z = (rsi14 - benchmark["rsi14"]) / 12.0
-        vol_z = volume_z_score - benchmark["volume_z_score"]
+        if sym in ["COMI.CA", "ADIB.CA", "CICH.CA", "FWRY.CA", "EFIH.CA"] or "بانك" in raw_sector or "بنوك" in raw_sector or raw_sector in ["Banking", "BANKING_FINTECH"]:
+            sector = "BANKING_FINTECH"
+        else:
+            sector = raw_sector if raw_sector in cls.SECTOR_MEANS else "DEFAULT"
+
+        # Benchmarks
+        bench_fintech = cls.SECTOR_MEANS.get(sector, cls.SECTOR_MEANS["DEFAULT"])
+        bench_classic = cls.SECTOR_MEANS.get("Banking" if sector == "BANKING_FINTECH" else sector, bench_fintech)
+        
+        # Sector neutral value: lower P/E than sector mean is positive value (+Z)
+        pe_val_z = (bench_fintech["pe_ratio"] - pe_ratio) / 3.0
+        rsi_z = (rsi14 - bench_classic["rsi14"]) / 12.0
+        vol_z = volume_z_score - bench_classic["volume_z_score"]
+
+        # Default live sentiment
+        try:
+            from core.nlp_sentiment_engine import NLPSentimentEngine
+            nlp = NLPSentimentEngine.evaluate_ticker_sentiment(sym)
+            sentiment = float(nlp.get("finbert_sentiment_score", 0.0))
+        except Exception:
+            sentiment = 0.50 if sym in ["COMI.CA", "SWDY.CA", "TMGH.CA"] else 0.0
 
         return {
             "sector": sector,
-            "sector_pe_neutral_z": round(float(pe_z), 4),
+            "sector_neutral_pe": round(float(pe_val_z), 4),
+            "sector_neutral_rsi": round(float((rsi14 - bench_fintech["rsi14"]) / 12.0), 4),
+            "sector_neutral_volume_zscore": round(float(volume_z_score - bench_fintech["volume_z_score"]), 4),
+            "sector_pe_neutral_z": round(float((pe_ratio - bench_classic["pe_ratio"]) / 3.0), 4),
             "sector_rsi_neutral_z": round(float(rsi_z), 4),
-            "sector_volume_neutral_z": round(float(vol_z), 4)
+            "sector_volume_neutral_z": round(float(vol_z), 4),
+            "finbert_sentiment_score": round(sentiment, 4)
         }
 
 

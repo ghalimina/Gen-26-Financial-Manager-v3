@@ -504,6 +504,19 @@ class MacroEconomicEngine:
 
         now_iso = datetime.datetime.now().isoformat()
 
+        # Check staleness: if last_verified_date is older than 14 days without update
+        is_stale = False
+        stale_warning_ar = None
+        try:
+            verified_dt = datetime.datetime.strptime(cls._last_verified_date, "%Y-%m-%d")
+            now_dt = datetime.datetime.now()
+            days_diff = (now_dt - verified_dt).days
+            if days_diff > 14:
+                is_stale = True
+                stale_warning_ar = "⚠️ تنبيه: البيانات الكلية لم تُحدّث منذ أكثر من 14 يوماً — يرجى التحقق من أحدث بيان للبنك المركزي."
+        except Exception:
+            is_stale = False
+
         return {
             "status": "HEALTHY",
             "timestamp": now_iso,
@@ -514,6 +527,8 @@ class MacroEconomicEngine:
             "macro_regime_ar": cls.REGIME_LABELS_AR.get(regime, regime),
             "sector_biases": biases,
             "last_verified_date": cls._last_verified_date,
+            "is_stale": is_stale,
+            "stale_warning_ar": stale_warning_ar,
             "provenance": cls._provenance_metadata,
             "sources": {
                 "interest_rate": cls._provenance_metadata.get("interest_rate", "CENTRAL_BANK_OF_EGYPT_CBE"),
