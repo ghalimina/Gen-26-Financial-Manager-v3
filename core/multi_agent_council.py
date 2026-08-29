@@ -512,6 +512,20 @@ class CriticAuditorAgent:
                 except Exception:
                     pass
 
+        # 5. Look-Ahead Bias & Circular Data Leakage Test
+        if experiment.get("has_lookahead_bias") or experiment.get("has_data_leakage"):
+            rejections.append("رصد تسريب بيانات مستقبلية (Look-ahead bias / Circular data leakage).")
+        for f in feats:
+            if any(leak_kw in str(f).lower() for leak_kw in ["future", "target", "leak", "next_close", "t+1"]):
+                rejections.append(f"تسريب مباشر للمتغير التابع في الميزات ({f}).")
+                break
+
+        # 6. Transaction Friction Penalty Test (Minimum 0.35% roundtrip EGX fees + 10% CGT)
+        params = experiment.get("parameters", {})
+        friction = float(params.get("friction_allowance_pct", 0.35))
+        if friction < 0.25:
+            rejections.append(f"إغفال تكاليف التداول وعمولات البورصة الواقعية ({friction:.2f}% < 0.35%).")
+
         # Calculate critic score and verdict
         if not rejections:
             critic_score = 92.0
@@ -552,8 +566,29 @@ class AgentCouncilOrchestrator:
     ) -> Dict[str, Any]:
         """
         Executes complete council deliberation across all 5 analytical agents for a stock.
+        Includes robust fail-safe defaults for unknown, empty, or invalid tickers.
         """
-        cp = current_price or MarketPriceService.get_latest_price(ticker)
+        sym = (ticker or "UNKNOWN.CA").upper().strip()
+        if not sym or sym in ["UNKNOWN", "UNKNOWN.CA", "NONE", "NULL"] or "INVALID" in sym:
+            return {
+                "vote_id": f"COUNCIL_FAILSAFE_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}_{os.urandom(2).hex()}",
+                "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                "ticker": sym or "UNKNOWN.CA",
+                "current_price": 0.0,
+                "target_price": 0.0,
+                "stop_loss": 0.0,
+                "consensus_verdict": "DATA_UNAVAILABLE_HOLD",
+                "conviction_score": 0.0,
+                "bullish_votes_count": 0,
+                "bearish_votes_count": 0,
+                "market_analyst_vote": {"agent_name": "MarketAnalystAgent", "vote": "NEUTRAL", "conviction": 0.0, "rationale_ar": "بيانات غير متوفرة للرمز المدخل"},
+                "fundamentalist_vote": {"agent_name": "FundamentalistAgent", "vote": "NEUTRAL", "conviction": 0.0, "rationale_ar": "بيانات غير متوفرة للرمز المدخل"},
+                "technician_vote": {"agent_name": "TechnicianAgent", "vote": "NEUTRAL", "conviction": 0.0, "rationale_ar": "بيانات غير متوفرة للرمز المدخل"},
+                "quant_modeler_vote": {"agent_name": "QuantModelerAgent", "vote": "NEUTRAL", "conviction": 0.0, "rationale_ar": "بيانات غير متوفرة للرمز المدخل"},
+                "risk_sizer_vote": {"agent_name": "RiskSizerAgent", "approved": False, "vote": "REJECT", "rationale_ar": "لا يمكن حساب المخاطرة لرمز غير صالح"}
+            }
+
+        cp = current_price or MarketPriceService.get_latest_price(sym)
         if cp <= 0:
             cp = 100.0
 
@@ -561,11 +596,11 @@ class AgentCouncilOrchestrator:
         stop_loss = round(cp * 0.95, 2)
 
         # 1. Gather Agent Opinions
-        market_opinion = MarketAnalystAgent.evaluate(ticker)
-        fund_opinion = FundamentalistAgent.evaluate(ticker, cp)
-        tech_opinion = TechnicianAgent.evaluate(ticker, cp)
-        quant_opinion = QuantModelerAgent.evaluate(ticker, cp)
-        risk_opinion = RiskSizerAgent.evaluate(ticker, cp, target_price, stop_loss, portfolio_equity)
+        market_opinion = MarketAnalystAgent.evaluate(sym)
+        fund_opinion = FundamentalistAgent.evaluate(sym, cp)
+        tech_opinion = TechnicianAgent.evaluate(sym, cp)
+        quant_opinion = QuantModelerAgent.evaluate(sym, cp)
+        risk_opinion = RiskSizerAgent.evaluate(sym, cp, target_price, stop_loss, portfolio_equity)
 
         # 2. Vote Weighting Synthesis
         vote_scores = {"BULLISH": 100.0, "NEUTRAL": 50.0, "BEARISH": 0.0}
@@ -601,9 +636,9 @@ class AgentCouncilOrchestrator:
             conviction_score = 55.0
 
         dossier = {
-            "vote_id": f"COUNCIL_{ticker}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}_{os.urandom(2).hex()}",
+            "vote_id": f"COUNCIL_{sym}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}_{os.urandom(2).hex()}",
             "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            "ticker": ticker,
+            "ticker": sym,
             "current_price": cp,
             "target_price": target_price,
             "stop_loss": stop_loss,

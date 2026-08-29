@@ -588,54 +588,59 @@ class SQLiteDatabaseEngine:
     # 7. RESEARCH EXPERIMENTS, FAILURE MEMORY & COUNCIL VOTES
     # =========================================================================
 
-    def record_experiment(self, exp_dict: Dict[str, Any]) -> str:
+    def record_experiment(self, exp_dict: Dict[str, Any]) -> bool:
         """Records a new quantitative hypothesis and backtest experiment."""
-        exp_id = exp_dict.get("experiment_id") or f"EXP_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}_{os.urandom(2).hex()}"
-        now_str = exp_dict.get("timestamp") or datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        
-        features_str = json.dumps(exp_dict.get("features_used", []), ensure_ascii=False) if isinstance(exp_dict.get("features_used"), (list, dict)) else str(exp_dict.get("features_used", ""))
-        params_str = json.dumps(exp_dict.get("parameters", {}), ensure_ascii=False) if isinstance(exp_dict.get("parameters"), dict) else str(exp_dict.get("parameters", ""))
+        try:
+            exp_id = exp_dict.get("experiment_id") or f"EXP_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}_{os.urandom(2).hex()}"
+            exp_dict["experiment_id"] = exp_id
+            now_str = exp_dict.get("timestamp") or datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            
+            features_str = json.dumps(exp_dict.get("features_used", []), ensure_ascii=False) if isinstance(exp_dict.get("features_used"), (list, dict)) else str(exp_dict.get("features_used", ""))
+            params_str = json.dumps(exp_dict.get("parameters", {}), ensure_ascii=False) if isinstance(exp_dict.get("parameters"), dict) else str(exp_dict.get("parameters", ""))
 
-        with self.get_connection() as conn:
-            cursor = conn.cursor()
-            cursor.execute("""
-                INSERT INTO research_experiments_journal (
-                    experiment_id, timestamp, hypothesis_title, hypothesis_description,
-                    agent_author, features_used, parameters, in_sample_sharpe,
-                    oos_sharpe, max_drawdown_pct, win_rate_pct, critic_score,
-                    critic_notes_ar, promotion_status
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-                ON CONFLICT(experiment_id) DO UPDATE SET
-                    hypothesis_title=excluded.hypothesis_title,
-                    hypothesis_description=excluded.hypothesis_description,
-                    agent_author=excluded.agent_author,
-                    features_used=excluded.features_used,
-                    parameters=excluded.parameters,
-                    in_sample_sharpe=excluded.in_sample_sharpe,
-                    oos_sharpe=excluded.oos_sharpe,
-                    max_drawdown_pct=excluded.max_drawdown_pct,
-                    win_rate_pct=excluded.win_rate_pct,
-                    critic_score=excluded.critic_score,
-                    critic_notes_ar=excluded.critic_notes_ar,
-                    promotion_status=excluded.promotion_status;
-            """, (
-                exp_id, now_str,
-                exp_dict.get("hypothesis_title", "Untitled Hypothesis"),
-                exp_dict.get("hypothesis_description", ""),
-                exp_dict.get("agent_author", "ResearchScientistAgent"),
-                features_str, params_str,
-                float(exp_dict.get("in_sample_sharpe", 0.0)),
-                float(exp_dict.get("oos_sharpe", 0.0)),
-                float(exp_dict.get("max_drawdown_pct", 0.0)),
-                float(exp_dict.get("win_rate_pct", 0.0)),
-                float(exp_dict.get("critic_score", 0.0)),
-                exp_dict.get("critic_notes_ar", ""),
-                exp_dict.get("promotion_status", "PENDING")
-            ))
-            conn.commit()
-        return exp_id
+            with self.get_connection() as conn:
+                cursor = conn.cursor()
+                cursor.execute("""
+                    INSERT INTO research_experiments_journal (
+                        experiment_id, timestamp, hypothesis_title, hypothesis_description,
+                        agent_author, features_used, parameters, in_sample_sharpe,
+                        oos_sharpe, max_drawdown_pct, win_rate_pct, critic_score,
+                        critic_notes_ar, promotion_status
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    ON CONFLICT(experiment_id) DO UPDATE SET
+                        hypothesis_title=excluded.hypothesis_title,
+                        hypothesis_description=excluded.hypothesis_description,
+                        agent_author=excluded.agent_author,
+                        features_used=excluded.features_used,
+                        parameters=excluded.parameters,
+                        in_sample_sharpe=excluded.in_sample_sharpe,
+                        oos_sharpe=excluded.oos_sharpe,
+                        max_drawdown_pct=excluded.max_drawdown_pct,
+                        win_rate_pct=excluded.win_rate_pct,
+                        critic_score=excluded.critic_score,
+                        critic_notes_ar=excluded.critic_notes_ar,
+                        promotion_status=excluded.promotion_status;
+                """, (
+                    exp_id, now_str,
+                    exp_dict.get("hypothesis_title", "Untitled Hypothesis"),
+                    exp_dict.get("hypothesis_description", ""),
+                    exp_dict.get("agent_author", "ResearchScientistAgent"),
+                    features_str, params_str,
+                    float(exp_dict.get("in_sample_sharpe", 0.0)),
+                    float(exp_dict.get("oos_sharpe", 0.0)),
+                    float(exp_dict.get("max_drawdown_pct", 0.0)),
+                    float(exp_dict.get("win_rate_pct", 0.0)),
+                    float(exp_dict.get("critic_score", 0.0)),
+                    exp_dict.get("critic_notes_ar", ""),
+                    exp_dict.get("promotion_status", "PENDING")
+                ))
+                conn.commit()
+            return True
+        except Exception as e:
+            logger.error("Failed to record experiment: %s", e)
+            return False
 
-    def get_recent_experiments(self, limit: int = 20, status: Optional[str] = None) -> List[Dict[str, Any]]:
+    def get_recent_experiments(self, limit: int = 10, status: Optional[str] = None) -> List[Dict[str, Any]]:
         """Retrieves recent quantitative research experiments."""
         with self.get_connection() as conn:
             cursor = conn.cursor()
@@ -651,35 +656,40 @@ class SQLiteDatabaseEngine:
                 )
             return [dict(r) for r in cursor.fetchall()]
 
-    def record_failure_lesson(self, failure_dict: Dict[str, Any]) -> str:
+    def record_failure_lesson(self, failure_dict: Dict[str, Any]) -> bool:
         """Records an episodic failure case and post-mortem lesson learned."""
-        fail_id = failure_dict.get("failure_id") or f"FAIL_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}_{os.urandom(2).hex()}"
-        now_str = failure_dict.get("timestamp") or datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        quarantine_str = json.dumps(failure_dict.get("quarantined_patterns", []), ensure_ascii=False) if isinstance(failure_dict.get("quarantined_patterns"), (list, dict)) else str(failure_dict.get("quarantined_patterns", ""))
+        try:
+            fail_id = failure_dict.get("failure_id") or f"FAIL_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}_{os.urandom(2).hex()}"
+            failure_dict["failure_id"] = fail_id
+            now_str = failure_dict.get("timestamp") or datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            quarantine_str = json.dumps(failure_dict.get("quarantined_patterns", []), ensure_ascii=False) if isinstance(failure_dict.get("quarantined_patterns"), (list, dict)) else str(failure_dict.get("quarantined_patterns", ""))
 
-        with self.get_connection() as conn:
-            cursor = conn.cursor()
-            cursor.execute("""
-                INSERT INTO failure_cases_memory (
-                    failure_id, timestamp, regime, failed_hypothesis,
-                    root_cause_analysis, lesson_learned_ar, quarantined_patterns
-                ) VALUES (?, ?, ?, ?, ?, ?, ?)
-                ON CONFLICT(failure_id) DO UPDATE SET
-                    regime=excluded.regime,
-                    failed_hypothesis=excluded.failed_hypothesis,
-                    root_cause_analysis=excluded.root_cause_analysis,
-                    lesson_learned_ar=excluded.lesson_learned_ar,
-                    quarantined_patterns=excluded.quarantined_patterns;
-            """, (
-                fail_id, now_str,
-                failure_dict.get("regime", "UNKNOWN"),
-                failure_dict.get("failed_hypothesis", ""),
-                failure_dict.get("root_cause_analysis", ""),
-                failure_dict.get("lesson_learned_ar", "درس مستفاد لتجنب الأخطاء السابقة"),
-                quarantine_str
-            ))
-            conn.commit()
-        return fail_id
+            with self.get_connection() as conn:
+                cursor = conn.cursor()
+                cursor.execute("""
+                    INSERT INTO failure_cases_memory (
+                        failure_id, timestamp, regime, failed_hypothesis,
+                        root_cause_analysis, lesson_learned_ar, quarantined_patterns
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?)
+                    ON CONFLICT(failure_id) DO UPDATE SET
+                        regime=excluded.regime,
+                        failed_hypothesis=excluded.failed_hypothesis,
+                        root_cause_analysis=excluded.root_cause_analysis,
+                        lesson_learned_ar=excluded.lesson_learned_ar,
+                        quarantined_patterns=excluded.quarantined_patterns;
+                """, (
+                    fail_id, now_str,
+                    failure_dict.get("regime", "UNKNOWN"),
+                    failure_dict.get("failed_hypothesis", ""),
+                    failure_dict.get("root_cause_analysis", ""),
+                    failure_dict.get("lesson_learned_ar", "درس مستفاد لتجنب الأخطاء السابقة"),
+                    quarantine_str
+                ))
+                conn.commit()
+            return True
+        except Exception as e:
+            logger.error("Failed to record failure lesson: %s", e)
+            return False
 
     def get_failure_memory(self, limit: int = 20, regime: Optional[str] = None) -> List[Dict[str, Any]]:
         """Retrieves episodic failure memory and lessons learned."""
@@ -697,45 +707,50 @@ class SQLiteDatabaseEngine:
                 )
             return [dict(r) for r in cursor.fetchall()]
 
-    def record_council_vote(self, vote_dict: Dict[str, Any]) -> str:
+    def record_council_vote(self, vote_dict: Dict[str, Any]) -> bool:
         """Records deliberation votes and final synthesis from the 7-Agent Council."""
-        vote_id = vote_dict.get("vote_id") or f"VOTE_{vote_dict.get('ticker', 'EGX')}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}_{os.urandom(2).hex()}"
-        now_str = vote_dict.get("timestamp") or datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        try:
+            vote_id = vote_dict.get("vote_id") or f"VOTE_{vote_dict.get('ticker', 'EGX')}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}_{os.urandom(2).hex()}"
+            vote_dict["vote_id"] = vote_id
+            now_str = vote_dict.get("timestamp") or datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-        def _fmt(val):
-            return json.dumps(val, ensure_ascii=False) if isinstance(val, (dict, list)) else str(val or "")
+            def _fmt(val):
+                return json.dumps(val, ensure_ascii=False) if isinstance(val, (dict, list)) else str(val or "")
 
-        with self.get_connection() as conn:
-            cursor = conn.cursor()
-            cursor.execute("""
-                INSERT INTO agent_council_votes (
-                    vote_id, timestamp, ticker, market_analyst_vote,
-                    fundamentalist_vote, technician_vote, quant_modeler_vote,
-                    risk_sizer_vote, consensus_verdict, conviction_score
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-                ON CONFLICT(vote_id) DO UPDATE SET
-                    timestamp=excluded.timestamp,
-                    ticker=excluded.ticker,
-                    market_analyst_vote=excluded.market_analyst_vote,
-                    fundamentalist_vote=excluded.fundamentalist_vote,
-                    technician_vote=excluded.technician_vote,
-                    quant_modeler_vote=excluded.quant_modeler_vote,
-                    risk_sizer_vote=excluded.risk_sizer_vote,
-                    consensus_verdict=excluded.consensus_verdict,
-                    conviction_score=excluded.conviction_score;
-            """, (
-                vote_id, now_str,
-                vote_dict.get("ticker", "EGX"),
-                _fmt(vote_dict.get("market_analyst_vote")),
-                _fmt(vote_dict.get("fundamentalist_vote")),
-                _fmt(vote_dict.get("technician_vote")),
-                _fmt(vote_dict.get("quant_modeler_vote")),
-                _fmt(vote_dict.get("risk_sizer_vote")),
-                vote_dict.get("consensus_verdict", "HOLD"),
-                float(vote_dict.get("conviction_score", 50.0))
-            ))
-            conn.commit()
-        return vote_id
+            with self.get_connection() as conn:
+                cursor = conn.cursor()
+                cursor.execute("""
+                    INSERT INTO agent_council_votes (
+                        vote_id, timestamp, ticker, market_analyst_vote,
+                        fundamentalist_vote, technician_vote, quant_modeler_vote,
+                        risk_sizer_vote, consensus_verdict, conviction_score
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    ON CONFLICT(vote_id) DO UPDATE SET
+                        timestamp=excluded.timestamp,
+                        ticker=excluded.ticker,
+                        market_analyst_vote=excluded.market_analyst_vote,
+                        fundamentalist_vote=excluded.fundamentalist_vote,
+                        technician_vote=excluded.technician_vote,
+                        quant_modeler_vote=excluded.quant_modeler_vote,
+                        risk_sizer_vote=excluded.risk_sizer_vote,
+                        consensus_verdict=excluded.consensus_verdict,
+                        conviction_score=excluded.conviction_score;
+                """, (
+                    vote_id, now_str,
+                    vote_dict.get("ticker", "EGX"),
+                    _fmt(vote_dict.get("market_analyst_vote")),
+                    _fmt(vote_dict.get("fundamentalist_vote")),
+                    _fmt(vote_dict.get("technician_vote")),
+                    _fmt(vote_dict.get("quant_modeler_vote")),
+                    _fmt(vote_dict.get("risk_sizer_vote")),
+                    vote_dict.get("consensus_verdict", "HOLD"),
+                    float(vote_dict.get("conviction_score", 50.0))
+                ))
+                conn.commit()
+            return True
+        except Exception as e:
+            logger.error("Failed to record council vote: %s", e)
+            return False
 
     def get_recent_council_votes(self, limit: int = 20, ticker: Optional[str] = None) -> List[Dict[str, Any]]:
         """Retrieves recent Agent Council deliberation votes."""
