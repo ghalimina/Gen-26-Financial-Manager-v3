@@ -1,12 +1,12 @@
 {
   "decision": {
     "decision_id": "TEST.CA_2026-08-29_8c9c3ae9",
-    "timestamp": "2026-08-29T05:35:47.788802",
+    "timestamp": "2026-08-29T05:48:23.439182",
     "ticker": "TEST.CA",
     "name": "Test Company",
     "market_data": {
       "current_price": 50.0,
-      "price_timestamp": "2026-08-29T05:35:47.788802"
+      "price_timestamp": "2026-08-29T05:48:23.439182"
     },
     "portfolio": {
       "equity": 100000.0,
@@ -82,5 +82,5 @@
     "portfolio_equity": 100000.0,
     "cash": 100000.0
   },
-  "saved_at": "2026-08-29T05:35:47.789318"
+  "saved_at": "2026-08-29T05:48:23.439182"
 }
