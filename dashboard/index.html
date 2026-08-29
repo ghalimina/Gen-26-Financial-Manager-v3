@@ -2969,6 +2969,8 @@
                     fetchArbitrageData();
                 } else if (tabId === 'research_lab' || tabId === 'research-lab') {
                     loadResearchLabTab();
+                } else if (tabId === 'short_term_opportunities') {
+                    fetchShortTermOpportunities();
                 }
             } catch (tabErr) {
                 console.warn("Tab render handler warning:", tabErr);

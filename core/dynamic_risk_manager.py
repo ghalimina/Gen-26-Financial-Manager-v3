@@ -163,3 +163,38 @@ class DynamicRiskManager:
             "is_allowed": is_allowed,
             "reason_ar": reason_ar
         }
+
+    # =========================================================================
+    # 3. ALMGREN-CHRISS DYNAMIC SLIPPAGE MODEL
+    # =========================================================================
+
+    @classmethod
+    def calculate_dynamic_slippage(
+        cls,
+        order_value_egp: float,
+        adv30_egp: float,
+        tier: str = "MID_CAP"
+    ) -> float:
+        """
+        Computes dynamic market execution slippage based on Almgren-Chriss square-root impact model.
+        - Base bid-ask spread: 0.10% (LARGE_CAP), 0.15% (MID_CAP), 0.25% (SMALL_CAP).
+        - Non-linear square-root market impact: 0.12% * sqrt(Order_Value / ADV30).
+        - Total slippage bounded in [0.10%, 1.50%].
+        """
+        import math
+        tier_upper = (tier or "MID_CAP").upper()
+        if "LARGE" in tier_upper or "COMI" in tier_upper:
+            base_spread_pct = 0.10
+        elif "SMALL" in tier_upper or "MICRO" in tier_upper:
+            base_spread_pct = 0.25
+        else:
+            base_spread_pct = 0.15
+
+        safe_adv = max(float(adv30_egp or 1_000_000.0), 1_000_000.0)
+        safe_order = max(float(order_value_egp or 0.0), 0.0)
+
+        participation_ratio = safe_order / safe_adv
+        impact_pct = 0.12 * math.sqrt(participation_ratio)
+
+        total_slippage_pct = base_spread_pct + impact_pct
+        return round(float(max(0.10, min(1.50, total_slippage_pct))), 4)

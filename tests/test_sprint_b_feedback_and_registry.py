@@ -37,8 +37,9 @@ class TestSprintBFeedbackAndRegistry(unittest.TestCase):
 
     def test_01_database_prediction_table_and_crud(self):
         """TC-B01: Verify prediction_vs_actual table CRUD operations."""
+        test_pred_id = f"PRED_TEST_COMI_1D_{os.urandom(4).hex()}"
         pred_record = {
-            "prediction_id": "PRED_TEST_COMI_1D_001",
+            "prediction_id": test_pred_id,
             "ticker": "COMI.CA",
             "horizon": "1D",
             "timestamp_created": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
@@ -53,11 +54,11 @@ class TestSprintBFeedbackAndRegistry(unittest.TestCase):
         ok = db_engine.record_prediction_forecast(pred_record)
         self.assertTrue(ok)
 
-        pending = db_engine.get_pending_predictions(limit=50)
-        self.assertTrue(any(p["prediction_id"] == "PRED_TEST_COMI_1D_001" for p in pending))
+        pending = db_engine.get_pending_predictions(limit=100)
+        self.assertTrue(any(p["prediction_id"] == test_pred_id for p in pending))
 
         reconcile_ok = db_engine.update_reconciled_prediction(
-            prediction_id="PRED_TEST_COMI_1D_001",
+            prediction_id=test_pred_id,
             actual_price=146.50,
             is_hit=1,
             forecast_error_pct=1.03,

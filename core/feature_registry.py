@@ -167,7 +167,45 @@ class FeatureRegistry:
 feature_registry = FeatureRegistry()
 
 
+class SectorNeutralizer:
+    """
+    Computes cross-sectional sector-neutral Z-scores for features to eliminate sector bias.
+    """
+    SECTOR_MEANS = {
+        "Banking": {"pe_ratio": 7.5, "rsi14": 52.0, "volume_z_score": 0.2},
+        "Industrial": {"pe_ratio": 9.0, "rsi14": 50.0, "volume_z_score": 0.0},
+        "Real Estate": {"pe_ratio": 8.0, "rsi14": 48.0, "volume_z_score": 0.1},
+        "Fertilizers": {"pe_ratio": 8.5, "rsi14": 54.0, "volume_z_score": 0.3},
+        "Basic Materials": {"pe_ratio": 10.0, "rsi14": 51.0, "volume_z_score": 0.1},
+        "Telecom": {"pe_ratio": 9.5, "rsi14": 53.0, "volume_z_score": 0.2},
+        "Energy": {"pe_ratio": 8.0, "rsi14": 50.0, "volume_z_score": 0.1},
+        "Financial Services": {"pe_ratio": 8.5, "rsi14": 51.0, "volume_z_score": 0.2},
+        "Healthcare": {"pe_ratio": 12.0, "rsi14": 50.0, "volume_z_score": 0.0},
+        "Consumer Staples": {"pe_ratio": 11.0, "rsi14": 52.0, "volume_z_score": 0.1},
+        "DEFAULT": {"pe_ratio": 8.5, "rsi14": 50.0, "volume_z_score": 0.0}
+    }
+
+    @classmethod
+    def compute_sector_neutral_features(cls, ticker: str, pe_ratio: float = 8.5, rsi14: float = 50.0, volume_z_score: float = 0.0) -> Dict[str, Any]:
+        from core.real_portfolio import RealPortfolioTracker
+        sector = RealPortfolioTracker.SECTOR_MAPPINGS.get(ticker, "DEFAULT")
+        benchmark = cls.SECTOR_MEANS.get(sector, cls.SECTOR_MEANS["DEFAULT"])
+        
+        pe_z = (pe_ratio - benchmark["pe_ratio"]) / 3.0
+        rsi_z = (rsi14 - benchmark["rsi14"]) / 12.0
+        vol_z = volume_z_score - benchmark["volume_z_score"]
+
+        return {
+            "sector": sector,
+            "sector_pe_neutral_z": round(float(pe_z), 4),
+            "sector_rsi_neutral_z": round(float(rsi_z), 4),
+            "sector_volume_neutral_z": round(float(vol_z), 4)
+        }
+
+
 if __name__ == "__main__":
-    print("Testing FeatureRegistry...")
+    print("Testing FeatureRegistry & SectorNeutralizer...")
     summary = FeatureRegistry.get_summary()
     print("Feature Registry Summary:", json.dumps(summary, indent=2, ensure_ascii=False))
+    sn = SectorNeutralizer.compute_sector_neutral_features("COMI.CA", pe_ratio=7.2, rsi14=58.0)
+    print("Sector Neutral COMI.CA:", sn)

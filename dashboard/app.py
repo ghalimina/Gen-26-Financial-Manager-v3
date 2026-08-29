@@ -1724,6 +1724,38 @@ def api_observability_promotion_lifecycle():
         return jsonify({"status": "ERROR", "error": str(e)}), 500
 
 
+@app.route("/api/opportunities/10d", methods=["GET"], endpoint="api_opportunities_10d")
+@app.route("/api/opportunities/short_term", methods=["GET"], endpoint="api_opportunities_short_term")
+def api_short_term_opportunities():
+    """Returns Top 10-day short-term momentum opportunities and cross-sectional cluster risk."""
+    try:
+        from core.multi_horizon_engine import MultiHorizonEngine
+        universe = request.args.get("universe", "all")
+        result = MultiHorizonEngine.get_short_term_10d_opportunities(universe=universe)
+        return jsonify(result), 200
+    except Exception as e:
+        return jsonify({"status": "ERROR", "error": str(e)}), 500
+
+
+@app.route("/api/correlation", methods=["GET", "POST"])
+def api_portfolio_correlation():
+    """Returns pairwise correlation matrix and cluster risk for requested tickers or Top 5 core equities."""
+    try:
+        from core.portfolio_correlation_engine import PortfolioCorrelationEngine
+        tickers = None
+        if request.method == "POST":
+            data = request.get_json(silent=True) or {}
+            tickers = data.get("tickers")
+        if not tickers:
+            raw_tickers = request.args.get("tickers", "COMI.CA,SWDY.CA,TMGH.CA,ORAS.CA,ABUK.CA")
+            tickers = [t.strip() for t in raw_tickers.split(",") if t.strip()]
+        
+        result = PortfolioCorrelationEngine.evaluate_portfolio_cluster_risk(tickers)
+        return jsonify(result), 200
+    except Exception as e:
+        return jsonify({"status": "ERROR", "error": str(e)}), 500
+
+
 @app.errorhandler(404)
 def handle_404_error(e):
     return jsonify({"error": "Not Found", "status": 404}), 404
