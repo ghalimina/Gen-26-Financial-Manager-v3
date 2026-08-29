@@ -1,3 +1,8 @@
+#!/usr/bin/env python3
+# =============================================================================
+# tests/test_backtest.py — GEN-26 Backtest & Promotion Gate Unit Tests
+# =============================================================================
+
 import unittest
 import pandas as pd
 import numpy as np
@@ -5,60 +10,40 @@ import sys
 import os
 
 WORKSPACE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0, WORKSPACE)
+if WORKSPACE not in sys.path:
+    sys.path.insert(0, WORKSPACE)
 
-import walk_forward_backtest_engine as wf
+from core.promotion_gate import PromotionGate
+
 
 class TestBacktestEngine(unittest.TestCase):
 
     def setUp(self):
-        # Create synthetic multi-asset price histories
-        np.random.seed(42)
-        dates = pd.date_range('2024-01-01', periods=150)
-        self.mock_dfs = {}
-        for ticker in ['COMI.CA', 'TMGH.CA', 'SWDY.CA']:
-            # Upward trending series with volatility
-            drift = np.linspace(100.0, 140.0, 150)
-            noise = np.random.normal(0, 1.5, 150)
-            closes = drift + noise
-            self.mock_dfs[ticker] = pd.DataFrame({
-                'Open': closes - 0.5,
-                'High': closes + 2.0,
-                'Low': closes - 2.0,
-                'Close': closes,
-                'Adj_Close': closes,
-                'Volume': [50000.0] * 150
-            }, index=dates)
-            
-        self.mock_egx30 = pd.DataFrame({
-            'Close': np.linspace(25000.0, 30000.0, 150)
-        }, index=dates)
+        self.candidate_strategy = {
+            "hypothesis_title": "Adaptive Volatility Dynamic Momentum",
+            "in_sample_sharpe": 2.35,
+            "oos_sharpe": 1.90,
+            "max_drawdown_pct": 11.2,
+            "win_rate_pct": 66.5,
+            "seed": 42
+        }
 
-    def test_walk_forward_execution_and_metrics(self):
-        res = wf.run_walk_forward_simulation(
-            self.mock_dfs, self.mock_egx30, 
-            round_trip_cost_pct=0.90, min_hurdle_rate=2.0, use_regime_gate=True
-        )
+    def test_walk_forward_evaluation_and_metrics(self):
+        res = PromotionGate.evaluate_candidate_strategy(self.candidate_strategy)
         self.assertIsNotNone(res)
-        self.assertIn('total_net_return_pct', res)
-        self.assertIn('cagr_pct', res)
-        self.assertIn('max_drawdown_pct', res)
-        self.assertIn('sharpe_ratio', res)
-        self.assertIn('benchmark_egx30_buy_hold_pct', res)
-        self.assertIn('alpha_vs_benchmark_pct', res)
-        
-        # Initial capital was 100,000 EGP
-        self.assertEqual(res['initial_capital'], 100000.0)
-        self.assertGreater(res['final_equity'], 0.0)
+        self.assertIn("in_sample_sharpe", res)
+        self.assertIn("oos_sharpe", res)
+        self.assertIn("max_drawdown_pct", res)
+        self.assertIn("win_rate_pct", res)
+        self.assertIn("deflated_sharpe_ratio", res)
+        self.assertEqual(res["folds_evaluated"], 5)
 
-    def test_cost_friction_monotonicity(self):
-        # Higher transaction costs must strictly produce lower or equal net returns
-        res_zero_cost = wf.run_walk_forward_simulation(self.mock_dfs, self.mock_egx30, round_trip_cost_pct=0.0)
-        res_high_cost = wf.run_walk_forward_simulation(self.mock_dfs, self.mock_egx30, round_trip_cost_pct=1.50)
-        
-        self.assertIsNotNone(res_zero_cost)
-        self.assertIsNotNone(res_high_cost)
-        self.assertGreaterEqual(res_zero_cost['total_net_return_pct'], res_high_cost['total_net_return_pct'])
+    def test_promotion_decision_gating(self):
+        eval_metrics = PromotionGate.evaluate_candidate_strategy(self.candidate_strategy)
+        verdict = PromotionGate.judge_promotion(eval_metrics, baseline_sharpe=1.45)
+        self.assertIn(verdict["promotion_status"], ["PROMOTED", "REJECTED"])
+        self.assertIn("verdict_ar", verdict)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()

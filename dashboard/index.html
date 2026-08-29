@@ -3666,6 +3666,26 @@
             }
         }
 
+        async function deleteRealPos(ticker) {
+            if (!confirm(`هل أنت متأكد من حذف سهم ${ticker} من محفظتك؟`)) return;
+            try {
+                const res = await fetch('/api/real_portfolio/delete', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ ticker: ticker, confirm: true })
+                });
+                const data = await res.json();
+                if (res.ok && data.success) {
+                    showToast(`تم حذف سهم ${ticker} من المحفظة بنجاح`, 'success');
+                    loadRealPortfolioTable();
+                } else {
+                    showToast(data.error || 'تعذر حذف السهم', 'error');
+                }
+            } catch (err) {
+                showToast('خطأ في الاتصال بالخادم', 'error');
+            }
+        }
+
         async function loadRealPortfolioTable() {
             try {
                 const res = await fetch('/api/real_portfolio');
@@ -3679,19 +3699,23 @@
                     topVal.innerText = `${data.total_value_egp.toLocaleString()} ج.م`;
                 }
 
-                if (tbody && data.positions && data.positions.length > 0) {
-                    tbody.innerHTML = data.positions.map(p => `
-                        <tr>
-                            <td><strong>${p.name_ar || p.ticker}</strong> (<span class="ltr-text">${p.ticker}</span>)</td>
-                            <td>${p.quantity}</td>
-                            <td><span class="ltr-text">${p.average_entry_price}</span> ج.م</td>
-                            <td><span class="ltr-text">${p.current_price}</span> ج.م</td>
-                            <td><span class="ltr-text">${(p.quantity * p.current_price).toLocaleString()}</span> ج.م</td>
-                            <td class="${p.unrealized_pnl_pct >= 0 ? 'text-green' : 'text-red'} ltr-text">${p.unrealized_pnl_pct >= 0 ? '+' : ''}${p.unrealized_pnl_pct}%</td>
-                            <td><span class="badge badge-green">🟢 احتفاظ</span></td>
-                            <td><button class="btn btn-danger btn-sm" onclick="deleteRealPos('${p.ticker}')"><i class="fa-solid fa-trash"></i></button></td>
-                        </tr>
-                    `).join('');
+                if (tbody) {
+                    if (data.positions && data.positions.length > 0) {
+                        tbody.innerHTML = data.positions.map(p => `
+                            <tr>
+                                <td><strong>${p.name_ar || p.ticker}</strong> (<span class="ltr-text">${p.ticker}</span>)</td>
+                                <td>${p.quantity}</td>
+                                <td><span class="ltr-text">${p.average_entry_price}</span> ج.م</td>
+                                <td><span class="ltr-text">${p.current_price}</span> ج.م</td>
+                                <td><span class="ltr-text">${(p.quantity * p.current_price).toLocaleString()}</span> ج.م</td>
+                                <td class="${p.unrealized_pnl_pct >= 0 ? 'text-green' : 'text-red'} ltr-text">${p.unrealized_pnl_pct >= 0 ? '+' : ''}${p.unrealized_pnl_pct}%</td>
+                                <td><span class="badge badge-green">🟢 احتفاظ</span></td>
+                                <td><button class="btn btn-danger btn-sm" onclick="deleteRealPos('${p.ticker}')"><i class="fa-solid fa-trash"></i></button></td>
+                            </tr>
+                        `).join('');
+                    } else {
+                        tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: var(--text-muted); padding: 25px;">لا توجد أسهم مضافة في محفظتك حالياً. اضغط على زر "إضافة سهم للمحفظة" بالأعلى لإضافة أسهمك.</td></tr>`;
+                    }
                 }
             } catch (err) {}
         }
@@ -4141,10 +4165,6 @@
             const initialHash = window.location.hash.replace('#', '') || 'overview';
             renderTab(initialHash);
             loadRankingData();
-            fetchMorningBriefing();
-            fetchMacroTelemetry();
-            fetchInsiderRadarData();
-            fetchArbitrageData();
         });
     </script>
 </body>

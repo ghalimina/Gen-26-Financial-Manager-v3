@@ -66,7 +66,7 @@
         "price_type": "OFFICIAL_LAST_CLOSE",
         "is_adjusted": false,
         "source": "TRADINGVIEW_EGX_LIVE_SSOT",
-        "timestamp": "2026-08-29 03:29:10",
+        "timestamp": "2026-08-29 05:19:43",
         "timezone": "Africa/Cairo",
         "freshness": "FRESH_LIVE_SSOT",
         "is_real_time": false,
@@ -79,7 +79,7 @@
         "price_type": "OFFICIAL_LAST_CLOSE",
         "is_adjusted": false,
         "source": "TRADINGVIEW_EGX_LIVE_SSOT",
-        "timestamp": "2026-08-29 03:29:10",
+        "timestamp": "2026-08-29 05:19:43",
         "timezone": "Africa/Cairo",
         "freshness": "FRESH_LIVE_SSOT",
         "is_real_time": false,
@@ -92,7 +92,7 @@
         "price_type": "OFFICIAL_LAST_CLOSE",
         "is_adjusted": false,
         "source": "TRADINGVIEW_EGX_LIVE_SSOT",
-        "timestamp": "2026-08-29 03:29:10",
+        "timestamp": "2026-08-29 05:19:43",
         "timezone": "Africa/Cairo",
         "freshness": "FRESH_LIVE_SSOT",
         "is_real_time": false,
@@ -105,7 +105,7 @@
         "price_type": "OFFICIAL_LAST_CLOSE",
         "is_adjusted": false,
         "source": "TRADINGVIEW_EGX_LIVE_SSOT",
-        "timestamp": "2026-08-29 03:29:10",
+        "timestamp": "2026-08-29 05:19:43",
         "timezone": "Africa/Cairo",
         "freshness": "FRESH_LIVE_SSOT",
         "is_real_time": false,
@@ -118,7 +118,7 @@
         "price_type": "OFFICIAL_LAST_CLOSE",
         "is_adjusted": false,
         "source": "TRADINGVIEW_EGX_LIVE_SSOT",
-        "timestamp": "2026-08-29 03:29:10",
+        "timestamp": "2026-08-29 05:19:43",
         "timezone": "Africa/Cairo",
         "freshness": "FRESH_LIVE_SSOT",
         "is_real_time": false,
@@ -319,17 +319,17 @@
       "rank": 1,
       "ticker": "ADIB.CA",
       "name": "مصرف أبو ظبي الإسلامي - مصر",
-      "score": 77.9,
+      "score": 78.9,
       "price": 53.89,
       "reason_ar": "🟢 سهم نشط ضمن قطاع الخدمات المالية والبنوك بسيولة يومية تبلغ نحو 37.9M ج.م ومعامل بيتا 0.98."
     },
     "bottom_1": {
       "rank": 244,
-      "ticker": "KRTE.CA",
-      "name": "كاتو للاستثمار والتطوير العقاري",
+      "ticker": "UNFO.CA",
+      "name": "يونيفرسال للتجارة والمقاولات",
       "score": 20.0,
       "price": 10.0,
-      "reason_ar": "🟢 سهم نشط ضمن قطاع التطوير العقاري بسيولة يومية تبلغ نحو 5.0M ج.م ومعامل بيتا 1.00."
+      "reason_ar": "🟢 سهم نشط ضمن قطاع الصناعة والمقاولات بسيولة يومية تبلغ نحو 5.0M ج.م ومعامل بيتا 1.00."
     },
     "all_stocks_have_reasons": true
   },
@@ -390,7 +390,7 @@
   "phase_23_performance": {
     "status": "PASS_HIGH_PERFORMANCE",
     "ranking_generation_latency_ms": 0.0,
-    "reconciliation_latency_ms": 1.0,
+    "reconciliation_latency_ms": 0.97,
     "database_query_latency_ms": 1.2
   },
   "phase_24_honest_status": {
@@ -404,8 +404,8 @@
     ]
   },
   "audit_metadata": {
-    "audit_timestamp": "2026-08-29T03:41:21.057616",
-    "execution_duration_seconds": 71.453,
+    "audit_timestamp": "2026-08-29T05:25:35.969171",
+    "execution_duration_seconds": 5.541,
     "total_phases_executed": 25,
     "master_verdict": "FORENSIC_VALIDATION_COMPLETE_TRUTH_VERIFIED"
   }

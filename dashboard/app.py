@@ -10,9 +10,26 @@ import sys
 import json
 import io
 import csv
+import time
 import datetime
 import logging
 from flask import Flask, render_template, jsonify, request, Response, send_file
+
+# In-memory Dashboard Cache (60-second TTL for sub-200ms loads)
+_DASHBOARD_CACHE = {}
+_DASHBOARD_CACHE_TS = {}
+_CACHE_TTL_SECS = 60.0
+
+def _get_dashboard_cached(key: str):
+    now = time.time()
+    if key in _DASHBOARD_CACHE:
+        if (now - _DASHBOARD_CACHE_TS.get(key, 0.0)) < _CACHE_TTL_SECS:
+            return _DASHBOARD_CACHE[key]
+    return None
+
+def _set_dashboard_cached(key: str, val):
+    _DASHBOARD_CACHE[key] = val
+    _DASHBOARD_CACHE_TS[key] = time.time()
 
 # Mute noisy third-party library loggers
 logging.getLogger('yfinance').setLevel(logging.CRITICAL)
@@ -90,6 +107,10 @@ def index():
 @app.route("/api/market", methods=["GET"])
 def api_market():
     """Returns EGX market regime, breadth, and session status dynamically."""
+    cached = _get_dashboard_cached("market_telemetry")
+    if cached is not None:
+        return jsonify(cached)
+
     from core.regime_hmm_engine import RegimeHMMEngine
     from core.market_price_service import MarketPriceService
 
@@ -120,7 +141,7 @@ def api_market():
         advance_ratio = 55.0
         total_turnover = 3_850_000_000.0
 
-    return jsonify({
+    res = {
         "market_date": date_str,
         "cairo_time": now_cairo.isoformat(),
         "is_session_open": is_open,
@@ -130,7 +151,9 @@ def api_market():
         "egx30_index_level": round(index_level, 2),
         "egx30_daily_change_pct": round(daily_chg, 2),
         "total_turnover_egp": round(total_turnover, 2)
-    })
+    }
+    _set_dashboard_cached("market_telemetry", res)
+    return jsonify(res)
 
 
 # --- 2. Universe Audit ---
@@ -286,8 +309,13 @@ def api_ai_forecast(ticker):
 @app.route("/api/rankings", methods=["GET"])
 def api_ranking():
     """Returns cross-sectional ranking sorted best-to-worst using canonical real prices with optional ?universe=all|egx30|egx70|core filter."""
-    from core.multi_horizon_engine import MultiHorizonEngine
     universe = request.args.get("universe", "core").strip().lower()
+    cache_key = f"ranking_{universe}"
+    cached = _get_dashboard_cached(cache_key)
+    if cached is not None:
+        return jsonify(cached)
+
+    from core.multi_horizon_engine import MultiHorizonEngine
     rankings = MultiHorizonEngine.get_all_multi_horizon_rankings(universe=universe)
     results = []
     for r in rankings:
@@ -340,6 +368,7 @@ def api_ranking():
             "risk_based_position": r.get("risk_based_position", {}),
             "source": r.get("price_record", {}).get("source", "TRADINGVIEW_EGX_LIVE_SSOT")
         })
+    _set_dashboard_cached(cache_key, results)
     return jsonify(results)
 
 

@@ -6,8 +6,6 @@ import os
 WORKSPACE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, WORKSPACE)
 
-import app
-
 class TestPortfolioEquity(unittest.TestCase):
 
     def test_dynamic_equity_calculation(self):

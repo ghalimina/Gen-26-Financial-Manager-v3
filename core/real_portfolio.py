@@ -94,35 +94,8 @@ class RealPortfolioTracker:
             "portfolio_id": "REAL_PORTFOLIO_PRIMARY",
             "version": "3.0.0",
             "last_updated": datetime.datetime.now().isoformat(),
-            "cash_egp": 45000.0,
-            "holdings": [
-                {
-                    "holding_id": "POS_COMI_001",
-                    "ticker": "COMI.CA",
-                    "company_name": "البنك التجاري الدولي (CIB)",
-                    "exchange": "EGX",
-                    "sector": "Banking",
-                    "quantity": 150,
-                    "average_entry_price": 95.0,
-                    "manual_notes": "مركز أساسي تم الشراء عند التراجع",
-                    "created_at": "2026-08-10T10:00:00",
-                    "updated_at": "2026-08-10T10:00:00",
-                    "active": True
-                },
-                {
-                    "holding_id": "POS_SWDY_002",
-                    "ticker": "SWDY.CA",
-                    "company_name": "السويدي إليكتريك",
-                    "exchange": "EGX",
-                    "sector": "Industrial",
-                    "quantity": 300,
-                    "average_entry_price": 38.5,
-                    "manual_notes": "تخصيص قطاع الصناعة",
-                    "created_at": "2026-08-12T11:30:00",
-                    "updated_at": "2026-08-12T11:30:00",
-                    "active": True
-                }
-            ]
+            "cash_egp": 100000.0,
+            "holdings": []
         }
 
     @classmethod
@@ -314,7 +287,7 @@ class RealPortfolioTracker:
         prices = current_market_prices or {}
         alphas = alpha_scores or {"COMI.CA": 90.0, "SWDY.CA": 85.0, "TMGH.CA": 82.0, "EKHO.CA": 78.0, "ETEL.CA": 80.0, "ABUK.CA": 76.0, "FWRY.CA": 74.0}
 
-        cash = float(portfolio.get("cash_egp", 45000.0))
+        cash = float(portfolio.get("cash_egp", 100000.0))
         raw_holdings = [h for h in portfolio.get("holdings", []) if h.get("active", True)]
 
         analyzed_positions = []

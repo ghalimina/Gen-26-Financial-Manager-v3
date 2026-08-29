@@ -18,7 +18,44 @@ from core.real_portfolio import RealPortfolioTracker
 class TestRealPortfolioCRUD(unittest.TestCase):
 
     def setUp(self):
-        # Reset to known clean baseline before each test
+        # Reset to known fixture with 2 initial holdings
+        fixture = {
+            "portfolio_id": "REAL_PORTFOLIO_PRIMARY",
+            "version": "3.0.0",
+            "cash_egp": 100000.0,
+            "holdings": [
+                {
+                    "holding_id": "POS_COMI_001",
+                    "ticker": "COMI.CA",
+                    "company_name": "البنك التجاري الدولي (CIB)",
+                    "exchange": "EGX",
+                    "sector": "Banking",
+                    "quantity": 150,
+                    "average_entry_price": 95.0,
+                    "manual_notes": "مركز أساسي",
+                    "created_at": "2026-08-10T10:00:00",
+                    "updated_at": "2026-08-10T10:00:00",
+                    "active": True
+                },
+                {
+                    "holding_id": "POS_SWDY_002",
+                    "ticker": "SWDY.CA",
+                    "company_name": "السويدي إليكتريك",
+                    "exchange": "EGX",
+                    "sector": "Industrial",
+                    "quantity": 300,
+                    "average_entry_price": 38.5,
+                    "manual_notes": "تخصيص صناعي",
+                    "created_at": "2026-08-12T11:30:00",
+                    "updated_at": "2026-08-12T11:30:00",
+                    "active": True
+                }
+            ]
+        }
+        RealPortfolioTracker.save_real_portfolio(fixture)
+
+    def tearDown(self):
+        # Reset to production clean empty state
         baseline = RealPortfolioTracker.get_initial_real_portfolio()
         RealPortfolioTracker.save_real_portfolio(baseline)
 
@@ -45,7 +82,7 @@ class TestRealPortfolioCRUD(unittest.TestCase):
     def test_02_duplicate_holding_rejected(self):
         """Verify adding an already existing ticker is rejected with explanation."""
         res = RealPortfolioTracker.add_holding(
-            ticker="COMI.CA", # Already exists in baseline
+            ticker="COMI.CA", # Already exists in fixture
             quantity=100,
             average_entry_price=90.0
         )

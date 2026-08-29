@@ -21,7 +21,7 @@ from core.ranking_engine import CrossSectionalRankingEngine
 from core.portfolio_constructor import InstitutionalPortfolioConstructor
 from core.paper_observatory import PaperTradingObservatory
 from core.broker_adapter import PaperBrokerAdapter, OrderStatus
-from session_manager import SessionManager
+from core.session_manager import SessionManager
 
 
 class PaperTradingOrchestrator:

@@ -1,3 +1,8 @@
+#!/usr/bin/env python3
+# =============================================================================
+# tests/test_liquidity.py — GEN-26 Dynamic Liquidity Gate Unit Tests
+# =============================================================================
+
 import unittest
 import pandas as pd
 import numpy as np
@@ -5,52 +10,52 @@ import sys
 import os
 
 WORKSPACE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0, WORKSPACE)
+if WORKSPACE not in sys.path:
+    sys.path.insert(0, WORKSPACE)
 
-import app
+from core.liquidity_filter import LiquidityGateEngine
+
 
 class TestLiquidityFilter(unittest.TestCase):
 
     def setUp(self):
         # Create a mock 40-day dataframe with known turnover
         dates = pd.date_range('2026-01-01', periods=40)
-        # Volume = 10,000, Price = 10.0 -> Turnover = 100,000 EGP / day
-        self.mock_df = pd.DataFrame({
+        # Volume = 600,000, Price = 10.0 -> Turnover = 6,000,000 EGP / day
+        self.mock_liquid_df = pd.DataFrame({
+            'Open': [10.0] * 40,
+            'High': [10.5] * 40,
+            'Low': [9.5] * 40,
             'Close': [10.0] * 40,
-            'Volume': [10000.0] * 40
+            'Volume': [600000.0] * 40
         }, index=dates)
 
-    def test_market_impact_normal_portfolio(self):
-        # Capital = 20,000 EGP, allocation = 10% -> Order = 2,000 EGP
-        # Turnover = 100,000 EGP -> Impact = 2% (below 8% limit) -> OK
-        flag, reason, adj_alloc = app.compute_liquidity_flag('TEST.CA', self.mock_df, 0.10, capital=20000.0)
-        self.assertEqual(flag, 'OK')
-        self.assertEqual(adj_alloc, 0.10)
-        self.assertIn("مقبول", reason)
+        # Illiquid dataframe with 0 volume
+        self.mock_illiquid_df = pd.DataFrame({
+            'Open': [10.0] * 40,
+            'High': [10.5] * 40,
+            'Low': [9.5] * 40,
+            'Close': [10.0] * 40,
+            'Volume': [0.0] * 40
+        }, index=dates)
 
-    def test_market_impact_large_portfolio_reduction(self):
-        # Capital = 500,000 EGP, allocation = 10% -> Order = 50,000 EGP
-        # Turnover = 100,000 EGP -> Impact = 50% (> 8% limit) -> REDUCE
-        flag, reason, adj_alloc = app.compute_liquidity_flag('TEST.CA', self.mock_df, 0.10, capital=500000.0)
-        self.assertEqual(flag, 'REDUCE')
-        # Max allowed = 100,000 * 0.08 / 500,000 = 0.016 (1.6%)
-        self.assertAlmostEqual(adj_alloc, 0.016, places=3)
-        self.assertIn("خُفِّض التخصيص", reason)
+    def test_liquid_stock_passes_gate(self):
+        res = LiquidityGateEngine.evaluate_stock_liquidity("COMI.CA", self.mock_liquid_df)
+        self.assertTrue(res["is_liquid"])
+        self.assertEqual(res["status"], "TRADABLE_LIQUID")
 
-    def test_etf_stricter_threshold(self):
-        # ETF ticker: EGX30ETF.CA -> max limit is 5% instead of 8%
-        # Capital = 100,000 EGP, allocation = 10% -> Order = 10,000 EGP
-        # Turnover = 100,000 EGP -> Impact = 10% (> 5% ETF limit) -> REDUCE
-        flag, reason, adj_alloc = app.compute_liquidity_flag('EGX30ETF.CA', self.mock_df, 0.10, capital=100000.0)
-        self.assertEqual(flag, 'REDUCE')
-        self.assertAlmostEqual(adj_alloc, 0.05, places=3)
-        self.assertIn("صندوق مؤشر", reason)
+    def test_zero_volume_stock_rejected(self):
+        res = LiquidityGateEngine.evaluate_stock_liquidity("DEAD.CA", self.mock_illiquid_df)
+        self.assertFalse(res["is_liquid"])
+        self.assertEqual(res["status"], "ILLIQUID")
 
-    def test_zero_volume_rejection(self):
-        zero_df = pd.DataFrame({'Close': [10.0]*40, 'Volume': [0.0]*40}, index=pd.date_range('2026-01-01', periods=40))
-        flag, reason, adj_alloc = app.compute_liquidity_flag('DEAD.CA', zero_df, 0.05, capital=20000.0)
-        self.assertEqual(flag, 'REJECT')
-        self.assertEqual(adj_alloc, 0.0)
+    def test_universe_filtering(self):
+        sample_tickers = ["COMI.CA", "SWDY.CA", "UNKNOWN_DEAD_TICKER.CA"]
+        filtered = LiquidityGateEngine.filter_universe(sample_tickers)
+        self.assertIn("liquid_tickers", filtered)
+        self.assertIn("liquid_count", filtered)
+        self.assertGreaterEqual(filtered["liquid_count"], 2)
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -5,8 +5,6 @@ import os
 WORKSPACE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, WORKSPACE)
 
-import app
-
 class TestStopLossSanity(unittest.TestCase):
 
     def test_stop_loss_below_entry_and_current(self):

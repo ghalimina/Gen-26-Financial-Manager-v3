@@ -13,7 +13,7 @@ if WORKSPACE not in sys.path:
     sys.path.insert(0, WORKSPACE)
 
 from core.paper_observatory import PaperTradingObservatory
-from session_manager import SessionManager
+from core.session_manager import SessionManager
 
 
 class TestSessionImmutability(unittest.TestCase):
