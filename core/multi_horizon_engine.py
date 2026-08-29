@@ -5,6 +5,7 @@
 # =============================================================================
 
 import os
+import sys
 import json
 import math
 import time
@@ -956,8 +957,26 @@ class MultiHorizonEngine:
         with open(out_file, "w", encoding="utf-8") as f:
             json.dump(payload, f, ensure_ascii=False, indent=2)
 
+        # Sync authoritative copy to reports directory
+        reports_file = os.path.join(workspace, "reports", "multi_horizon_predictions.json")
+        os.makedirs(os.path.dirname(reports_file), exist_ok=True)
+        with open(reports_file, "w", encoding="utf-8") as f:
+            json.dump(payload, f, ensure_ascii=False, indent=2)
+
         return payload
 
     # Aliases for backward & QA compatibility
     generate_short_term_opportunities = get_short_term_10d_opportunities
     _evaluate_single_stock_forecast = get_stock_multi_horizon_analysis
+
+
+if __name__ == "__main__":
+    if sys.platform == "win32":
+        try:
+            sys.stdout.reconfigure(encoding="utf-8")
+        except Exception:
+            pass
+    print("=== GEN-26 Multi-Horizon Forecasting Engine Execution ===")
+    res = MultiHorizonEngine.export_multi_horizon_predictions()
+    print(f"Successfully generated multi-horizon forecasts for {res['total_equities']} EGX equities.")
+    print(f"Authoritative reports saved to data/ and reports/ directories.")

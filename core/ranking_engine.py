@@ -6,8 +6,16 @@
 # =============================================================================
 
 from typing import Dict, List, Any, Optional
+import os
+import sys
 import numpy as np
 import pandas as pd
+
+WORKSPACE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if WORKSPACE not in sys.path:
+    sys.path.insert(0, WORKSPACE)
+
+from core.market_price_service import MarketPriceService
 
 
 class CrossSectionalRankingEngine:
@@ -68,7 +76,11 @@ class CrossSectionalRankingEngine:
         eligible_records = []
         for cand in candidates:
             cand_copy = dict(cand)
-            cp = cand.get("current_price", cand.get("price", 10.0))
+            ticker = cand.get("ticker", cand.get("symbol", ""))
+            cp = cand.get("current_price") or cand.get("price")
+            if cp is None or cp <= 0:
+                cp = MarketPriceService.get_latest_price(ticker) if ticker else 0.0
+            cand_copy["current_price"] = cp
             prev_c = cand.get("previous_close", cp)
             cb = cls.check_egx_circuit_breaker_band(cp, prev_c)
             cand_copy["circuit_breaker"] = cb
