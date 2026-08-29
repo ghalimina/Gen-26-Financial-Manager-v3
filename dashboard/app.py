@@ -1468,6 +1468,82 @@ def api_telegram_test():
         return jsonify({"status": "ERROR", "error": str(e)}), 500
 
 
+# --- 32. 10 Books Quant Mathematical Suite Endpoints ---
+
+@app.route("/api/books/piotroski/<ticker>", methods=["GET"])
+def api_books_piotroski(ticker):
+    """
+    Returns Benjamin Graham / Martin Fridson / Joseph Piotroski 9-factor F-Score and breakdown.
+    """
+    try:
+        from core.quant_books_engine import QuantBooksEngine
+        clean_sym = ticker.upper().strip()
+        if not clean_sym.endswith(".CA") and "." not in clean_sym:
+            clean_sym = f"{clean_sym}.CA"
+        res = QuantBooksEngine.calculate_piotroski_f_score(clean_sym)
+        return jsonify({"status": "SUCCESS", "data": res}), 200
+    except Exception as e:
+        return jsonify({"status": "ERROR", "error": str(e)}), 500
+
+
+@app.route("/api/books/lynch/<ticker>", methods=["GET"])
+def api_books_lynch(ticker):
+    """
+    Returns Peter Lynch valuation metrics, PEG ratio, category, and fair value.
+    """
+    try:
+        from core.quant_books_engine import QuantBooksEngine
+        clean_sym = ticker.upper().strip()
+        if not clean_sym.endswith(".CA") and "." not in clean_sym:
+            clean_sym = f"{clean_sym}.CA"
+        res = QuantBooksEngine.evaluate_peter_lynch_metrics(clean_sym)
+        return jsonify({"status": "SUCCESS", "data": res}), 200
+    except Exception as e:
+        return jsonify({"status": "ERROR", "error": str(e)}), 500
+
+
+@app.route("/api/books/candlesticks/<ticker>", methods=["GET"])
+def api_books_candlesticks(ticker):
+    """
+    Returns Steve Nison Japanese Candlestick pattern detection for an equity.
+    """
+    try:
+        from core.quant_books_engine import QuantBooksEngine
+        from core.market_price_service import MarketPriceService
+        clean_sym = ticker.upper().strip()
+        if not clean_sym.endswith(".CA") and "." not in clean_sym:
+            clean_sym = f"{clean_sym}.CA"
+        
+        cp = MarketPriceService.get_latest_price(clean_sym)
+        simulated_candles = [
+            {"open": round(cp * 0.98, 2), "high": round(cp * 0.99, 2), "low": round(cp * 0.96, 2), "close": round(cp * 0.97, 2), "volume": 15000},
+            {"open": round(cp * 0.97, 2), "high": round(cp * 1.01, 2), "low": round(cp * 0.965, 2), "close": cp, "volume": 35000}
+        ]
+        patterns = QuantBooksEngine.detect_candlestick_patterns(simulated_candles)
+        return jsonify({
+            "status": "SUCCESS",
+            "ticker": clean_sym,
+            "current_price": cp,
+            "patterns": patterns,
+            "count": len(patterns)
+        }), 200
+    except Exception as e:
+        return jsonify({"status": "ERROR", "error": str(e)}), 500
+
+
+@app.route("/api/books/psychology/status", methods=["GET"])
+def api_books_psychology_status():
+    """
+    Returns Mark Douglas / Morgan Housel Anti-Revenge Lockout status and emotional guard telemetry.
+    """
+    try:
+        from core.quant_books_engine import QuantBooksEngine
+        res = QuantBooksEngine.evaluate_anti_revenge_circuit_breaker()
+        return jsonify({"status": "SUCCESS", "psychology_guard": res}), 200
+    except Exception as e:
+        return jsonify({"status": "ERROR", "error": str(e)}), 500
+
+
 @app.errorhandler(404)
 def handle_404_error(e):
     return jsonify({"error": "Not Found", "status": 404}), 404

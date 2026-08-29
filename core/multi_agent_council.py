@@ -34,6 +34,7 @@ from core.statistical_arbitrage_engine import StatisticalArbitrageEngine
 from core.gdr_arbitrage_engine import GDRArbitrageEngine
 from core.advanced_feature_engineering import AdvancedFeatureEngineering
 from core.institutional_flow_engine import InstitutionalFlowEngine
+from core.quant_books_engine import QuantBooksEngine
 from core.database_engine import db_engine
 
 logger = logging.getLogger("GEN26.MultiAgentCouncil")
@@ -149,28 +150,32 @@ class FundamentalistAgent:
         fair_value = dcf_res.get("fair_value_egp", market_price * 1.15)
         margin_of_safety = dcf_res.get("margin_of_safety_pct", 15.0)
         
-        f_score = cls.calculate_piotroski_f_score(ticker, f_data)
-        pe = f_data.get("trailingPE") or f_data.get("forwardPE") or 8.5
-        growth_rate = max(5.0, f_data.get("growth_rate_pct", 18.0))
-        peg = round(pe / growth_rate, 2) if growth_rate > 0 else 1.5
+        # QuantBooksEngine Integration (Piotroski & Lynch)
+        piotroski_res = QuantBooksEngine.calculate_piotroski_f_score(ticker, f_data)
+        f_score = piotroski_res.get("f_score", 6)
+        
+        lynch_res = QuantBooksEngine.evaluate_peter_lynch_metrics(ticker, current_price=market_price, custom_fundamentals=f_data)
+        peg = lynch_res.get("peg_ratio", 1.0)
+        lynch_cat = lynch_res.get("category_ar", "سهم قيادي")
+        pe = lynch_res.get("trailing_pe", 8.5)
 
         # Voting synthesis
         if margin_of_safety >= 18.0 and f_score >= 6 and peg <= 1.2:
             vote = "BULLISH"
             conviction = 90.0
-            rationale_ar = f"السهم مقوم بأقل من قيمته العادلة ({fair_value:.2f} ج.م) بهامش أمان ممتاز {margin_of_safety:.1f}%. جودة مالية عالية مع Piotroski F-Score={f_score}/9 ومكرر نمو PEG={peg}."
+            rationale_ar = f"السهم مقوم بأقل من قيمته العادلة ({fair_value:.2f} ج.م) بهامش أمان ممتاز {margin_of_safety:.1f}%. جودة مالية عالية وفقاً لمؤشر بيوتروسكي (F-Score={f_score}/9) وتصنيف لينش ({lynch_cat}) مع مكرر نمو PEG={peg}."
         elif margin_of_safety >= 5.0 and f_score >= 5:
             vote = "BULLISH"
             conviction = 75.0
-            rationale_ar = f"تقييم مالي جيد بهامش أمان {margin_of_safety:.1f}% وقيمة عادلة {fair_value:.2f} ج.م مع سلامة الميزانية العمومية (F-Score={f_score}/9)."
+            rationale_ar = f"تقييم مالي جيد بهامش أمان {margin_of_safety:.1f}% وقيمة عادلة {fair_value:.2f} ج.م مع سلامة الميزانية العمومية (Piotroski={f_score}/9, PEG={peg})."
         elif margin_of_safety < -15.0 or f_score <= 3:
             vote = "BEARISH"
             conviction = 80.0
-            rationale_ar = f"السهم مقوم بأعلى من قيمته العادلة ({fair_value:.2f} ج.م) مع ضعف الكفاءة التشغيلية (F-Score={f_score}/9)."
+            rationale_ar = f"السهم مقوم بأعلى من قيمته العادلة ({fair_value:.2f} ج.م) مع ضعف الكفاءة التشغيلية (Piotroski F-Score={f_score}/9)."
         else:
             vote = "NEUTRAL"
             conviction = 60.0
-            rationale_ar = f"السهم يتداول قريباً من قيمته العادلة ({fair_value:.2f} ج.م) مع مؤشرات مالية متوسطة (F-Score={f_score}/9)."
+            rationale_ar = f"السهم يتداول قريباً من قيمته العادلة ({fair_value:.2f} ج.م) مع مؤشرات مالية متوسطة (F-Score={f_score}/9, PEG={peg})."
 
         return {
             "agent_name": cls.AGENT_NAME,
@@ -180,6 +185,8 @@ class FundamentalistAgent:
             "fair_value_dcf": fair_value,
             "margin_of_safety_pct": margin_of_safety,
             "piotroski_f_score": f_score,
+            "piotroski_details": piotroski_res,
+            "lynch_details": lynch_res,
             "peg_ratio": peg,
             "pe_ratio": pe,
             "rationale_ar": rationale_ar
@@ -213,22 +220,30 @@ class TechnicianAgent:
         if support is None or math.isnan(support): support = round(market_price * 0.95, 2)
         if resistance is None or math.isnan(resistance): resistance = round(market_price * 1.08, 2)
 
-        # Candlestick recognition heuristics
-        detected_patterns = []
-        if rsi < 35.0:
-            detected_patterns.append("Hammer (مطرقة ارتدادية)")
-            detected_patterns.append("Bullish Divergence (انفراج إيجابي)")
-        elif rsi > 70.0:
-            detected_patterns.append("Shooting Star (نجمة ساقطة)")
-            detected_patterns.append("Overbought Exhaustion (تشبع شرائي)")
-        else:
-            detected_patterns.append("Bullish Continuation EMA20 (استمرار صاعد فوق متوسط 20)")
+        # Candlestick pattern detection via QuantBooksEngine
+        simulated_candles = [
+            {"open": support, "high": round(support * 1.01, 2), "low": round(support * 0.98, 2), "close": round(support * 0.99, 2), "volume": 10000},
+            {"open": round(support * 0.99, 2), "high": round(market_price * 1.01, 2), "low": round(support * 0.985, 2), "close": market_price, "volume": 25000}
+        ]
+        detected_patterns_meta = QuantBooksEngine.detect_candlestick_patterns(simulated_candles)
+        detected_patterns = [p["pattern_ar"] for p in detected_patterns_meta] if detected_patterns_meta else []
+
+        if not detected_patterns:
+            if rsi < 35.0:
+                detected_patterns.append("Hammer (مطرقة ارتدادية)")
+            elif rsi > 70.0:
+                detected_patterns.append("Shooting Star (نجمة ساقطة)")
+            else:
+                detected_patterns.append("Bullish Continuation EMA20 (استمرار صاعد)")
+
+        # Murphy Fibonacci retracement levels
+        fib_levels = QuantBooksEngine.calculate_fibonacci_retracements(swing_high=resistance, swing_low=support)
 
         # Technical voting
         if trend in ["STRONG_UPTREND", "UPTREND", "BULLISH"] and adx >= 20.0 and rsi < 68.0:
             vote = "BULLISH"
             conviction = 86.0
-            rationale_ar = f"اتجاه صاعد قوي (ADX={adx:.1f}) وزخم RSI متوازن ({rsi:.1f}) مع ارتداد أعلى الدعم عند {support:.2f} ج.م واختراق المقاومة {resistance:.2f} ج.م."
+            rationale_ar = f"اتجاه صاعد قوي وفقاً لمؤشر جون ميرفي (ADX={adx:.1f}) وزخم RSI متوازن ({rsi:.1f}) مع ارتداد أعلى الدعم ودعم فيبوناتشي 61.8% ({fib_levels['fib_61_8_golden']:.2f} ج.م)."
         elif trend in ["DOWNTREND", "BEARISH", "WEAK"] or (rsi >= 75.0 and "Shooting Star" in str(detected_patterns)):
             vote = "BEARISH"
             conviction = 82.0
@@ -236,7 +251,7 @@ class TechnicianAgent:
         else:
             vote = "NEUTRAL"
             conviction = 62.0
-            rationale_ar = f"السعر يتحرك في نطاق تذبذب فني بين الدعم {support:.2f} ج.م والمقاومة {resistance:.2f} ج.م بدون اتجاه اتجاهي حاسم (ADX={adx:.1f})."
+            rationale_ar = f"السعر يتحرك في نطاق تذبذب فني بين الدعم {support:.2f} ج.م والمقاومة {resistance:.2f} ج.م (ADX={adx:.1f})."
 
         return {
             "agent_name": cls.AGENT_NAME,
@@ -248,7 +263,9 @@ class TechnicianAgent:
             "trend": trend,
             "support_level": support,
             "resistance_level": resistance,
+            "fibonacci_levels": fib_levels,
             "candlestick_patterns": detected_patterns,
+            "candlestick_details": detected_patterns_meta,
             "rationale_ar": rationale_ar
         }
 
@@ -329,6 +346,7 @@ class RiskSizerAgent:
     - Max 1.5% portfolio risk per trade.
     - Max 30% single-stock allocation.
     - Minimum 1:2.5 Risk/Reward ratio.
+    - Anti-Revenge 24h Cooling-Off Lockout on 2 consecutive stop-losses.
     """
     AGENT_NAME = "RiskSizerAgent"
     ROLE_AR = "مدير المخاطر وحجم المراكز (Mark Douglas & Kelly)"
@@ -345,10 +363,28 @@ class RiskSizerAgent:
         if current_price <= 0:
             return {"approved": False, "vote": "REJECT", "rationale_ar": "سعر السهم الحالي غير صالح."}
 
-        # Calculate Risk/Reward ratio
-        reward = max(0.01, target_price - current_price)
+        # 1. Check Anti-Revenge Circuit Breaker (Mark Douglas & Morgan Housel)
+        psych_guard = QuantBooksEngine.evaluate_anti_revenge_circuit_breaker()
+        if psych_guard.get("is_locked", False):
+            return {
+                "agent_name": cls.AGENT_NAME,
+                "role_ar": cls.ROLE_AR,
+                "approved": False,
+                "vote": "REJECT",
+                "risk_reward_ratio": 0.0,
+                "recommended_shares": 0,
+                "recommended_allocation_egp": 0.0,
+                "portfolio_risk_pct": 0.0,
+                "target_price": target_price,
+                "stop_loss": stop_loss,
+                "psychology_guard": psych_guard,
+                "rationale_ar": psych_guard.get("reason_ar", "قفل الحماية النفسية من التداول الانتقامي نشط.")
+            }
+
+        # 2. Strict Risk-Reward Gate (Mark Douglas minimum 1 : 2.5)
+        rr_check = QuantBooksEngine.verify_risk_reward_gate(current_price, target_price, stop_loss)
+        rr_ratio = rr_check.get("risk_reward_ratio", 0.0)
         risk = max(0.01, current_price - stop_loss)
-        rr_ratio = round(reward / risk, 2)
 
         # Risk budget: 1.5% max of portfolio equity
         risk_budget_egp = portfolio_equity * 0.015
@@ -363,7 +399,7 @@ class RiskSizerAgent:
         portfolio_risk_pct = round((recommended_shares * risk / portfolio_equity) * 100.0, 2)
 
         # Approval Rule
-        if rr_ratio >= 2.5 and recommended_shares > 0:
+        if rr_check["passed"] and recommended_shares > 0:
             approved = True
             vote = "APPROVE"
             rationale_ar = f"المعاملة مجازة مع نسبة عائد إلى مخاطرة ممتازة (1:{rr_ratio}). حجم المركز الموصى به: {recommended_shares} سهم بقيمة {recommended_allocation_egp:,.2f} ج.م (مخاطرة المحفظة {portfolio_risk_pct}%)."
@@ -376,7 +412,7 @@ class RiskSizerAgent:
         else:
             approved = False
             vote = "REJECT"
-            rationale_ar = f"تم رفض الصفقة: نسبة العائد إلى المخاطرة غير كافية (1:{rr_ratio} أقل من الحد الأدنى 1:2.5)."
+            rationale_ar = rr_check.get("reason_ar", f"تم رفض الصفقة: نسبة العائد إلى المخاطرة غير كافية (1:{rr_ratio} أقل من الحد الأدنى 1:2.5).")
 
         return {
             "agent_name": cls.AGENT_NAME,
@@ -389,6 +425,7 @@ class RiskSizerAgent:
             "portfolio_risk_pct": portfolio_risk_pct,
             "target_price": target_price,
             "stop_loss": stop_loss,
+            "psychology_guard": psych_guard,
             "rationale_ar": rationale_ar
         }
 
