@@ -31,13 +31,13 @@ class PaperTradingStateManager:
             "start_date": "2026-08-23",
             "start_date_ar": "23 أغسطس 2026",
             "session_progress": {
-                "verified_sessions": 1,
+                "verified_sessions": 0,
                 "total_sessions_required": 30,
-                "remaining_sessions": 29,
-                "percentage_complete": 3.3,
-                "last_successful_session": "2026-08-23",
-                "gate_status": "INCUBATION_ACTIVE (1/30)",
-                "session_counter_label_ar": "الجلسة: 1 من 30 (تاريخ البدء: 23 أغسطس 2026)"
+                "remaining_sessions": 30,
+                "percentage_complete": 0.0,
+                "last_successful_session": None,
+                "gate_status": "STANDBY_READY_FOR_LAUNCH",
+                "session_counter_label_ar": "فترة الحضانة: في وضع الاستعداد (0 من 30 جلسة)"
             },
             "portfolio": {
                 "portfolio_equity": 100000.0,

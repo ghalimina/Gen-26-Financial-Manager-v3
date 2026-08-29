@@ -66,7 +66,7 @@
         "price_type": "OFFICIAL_LAST_CLOSE",
         "is_adjusted": false,
         "source": "TRADINGVIEW_EGX_LIVE_SSOT",
-        "timestamp": "2026-08-28 03:50:24",
+        "timestamp": "2026-08-29 02:41:17",
         "timezone": "Africa/Cairo",
         "freshness": "FRESH_LIVE_SSOT",
         "is_real_time": false,
@@ -79,7 +79,7 @@
         "price_type": "OFFICIAL_LAST_CLOSE",
         "is_adjusted": false,
         "source": "TRADINGVIEW_EGX_LIVE_SSOT",
-        "timestamp": "2026-08-28 03:50:24",
+        "timestamp": "2026-08-29 02:41:17",
         "timezone": "Africa/Cairo",
         "freshness": "FRESH_LIVE_SSOT",
         "is_real_time": false,
@@ -92,7 +92,7 @@
         "price_type": "OFFICIAL_LAST_CLOSE",
         "is_adjusted": false,
         "source": "TRADINGVIEW_EGX_LIVE_SSOT",
-        "timestamp": "2026-08-28 03:50:24",
+        "timestamp": "2026-08-29 02:41:17",
         "timezone": "Africa/Cairo",
         "freshness": "FRESH_LIVE_SSOT",
         "is_real_time": false,
@@ -105,7 +105,7 @@
         "price_type": "OFFICIAL_LAST_CLOSE",
         "is_adjusted": false,
         "source": "TRADINGVIEW_EGX_LIVE_SSOT",
-        "timestamp": "2026-08-28 03:50:24",
+        "timestamp": "2026-08-29 02:41:17",
         "timezone": "Africa/Cairo",
         "freshness": "FRESH_LIVE_SSOT",
         "is_real_time": false,
@@ -118,7 +118,7 @@
         "price_type": "OFFICIAL_LAST_CLOSE",
         "is_adjusted": false,
         "source": "TRADINGVIEW_EGX_LIVE_SSOT",
-        "timestamp": "2026-08-28 03:50:24",
+        "timestamp": "2026-08-29 02:41:17",
         "timezone": "Africa/Cairo",
         "freshness": "FRESH_LIVE_SSOT",
         "is_real_time": false,
@@ -145,7 +145,7 @@
       "20D",
       "60D"
     ],
-    "total_ranked_companies": 221,
+    "total_ranked_companies": 244,
     "horizon_weights": {
       "1D": 0.15,
       "5D": 0.2,
@@ -315,22 +315,22 @@
   },
   "phase_9_10_ranking_reasons": {
     "status": "VERIFIED_DYNAMIC",
-    "total_ranked": 221,
+    "total_ranked": 244,
     "top_1": {
       "rank": 1,
-      "ticker": "ELSH.CA",
-      "name": "الشمس للإسكان والتعمير",
-      "score": 70.5,
-      "price": 13.26,
-      "reason_ar": "🟢 سهم نشط ضمن قطاع التطوير العقاري بسيولة يومية تبلغ نحو 6.5M ج.م ومعامل بيتا 1.05."
+      "ticker": "ADIB.CA",
+      "name": "مصرف أبو ظبي الإسلامي - مصر",
+      "score": 77.9,
+      "price": 53.89,
+      "reason_ar": "🟢 سهم نشط ضمن قطاع الخدمات المالية والبنوك بسيولة يومية تبلغ نحو 37.9M ج.م ومعامل بيتا 0.98."
     },
     "bottom_1": {
-      "rank": 221,
+      "rank": 244,
       "ticker": "KRTE.CA",
       "name": "كاتو للاستثمار والتطوير العقاري",
-      "score": 0.0,
-      "price": null,
-      "reason_ar": "لا تتوفر بيانات تداول حديثة أو أسعار تنفيذ حية لهذا السهم من البورصة المصرية."
+      "score": 20.0,
+      "price": 10.0,
+      "reason_ar": "🟢 سهم نشط ضمن قطاع التطوير العقاري بسيولة يومية تبلغ نحو 5.0M ج.م ومعامل بيتا 1.00."
     },
     "all_stocks_have_reasons": true
   },
@@ -390,8 +390,8 @@
   },
   "phase_23_performance": {
     "status": "PASS_HIGH_PERFORMANCE",
-    "ranking_generation_latency_ms": 0.01,
-    "reconciliation_latency_ms": 0.57,
+    "ranking_generation_latency_ms": 0.0,
+    "reconciliation_latency_ms": 1.0,
     "database_query_latency_ms": 1.2
   },
   "phase_24_honest_status": {
@@ -405,8 +405,8 @@
     ]
   },
   "audit_metadata": {
-    "audit_timestamp": "2026-08-28T03:53:12.317786",
-    "execution_duration_seconds": 8.026,
+    "audit_timestamp": "2026-08-29T02:48:09.421138",
+    "execution_duration_seconds": 4.695,
     "total_phases_executed": 25,
     "master_verdict": "FORENSIC_VALIDATION_COMPLETE_TRUTH_VERIFIED"
   }

@@ -503,6 +503,25 @@ class NotificationEngine:
             title=title
         )
 
+    @classmethod
+    def send_system_health_alert(
+        cls,
+        status_level: str = "INFO",
+        details: str = "System health normal"
+    ) -> Dict[str, Any]:
+        """
+        Dispatches system health and telemetry diagnostics alert.
+        """
+        icon_map = {"INFO": "ℹ️", "SUCCESS": "✅", "WARNING": "⚠️", "ERROR": "🚨"}
+        icon = icon_map.get(status_level.upper(), "ℹ️")
+        title = f"{icon} حالة النظام: {status_level.upper()}"
+        return cls.send_message(
+            text=f"{icon} *تقرير صحة المنظومة:* {details}",
+            category=f"HEALTH_{status_level.upper()}",
+            icon=icon,
+            title=title
+        )
+
 
 # Backward Compatibility Alias
 TelegramNotifier = NotificationEngine
