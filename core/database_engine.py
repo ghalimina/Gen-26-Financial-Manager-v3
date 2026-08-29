@@ -216,6 +216,28 @@ class SQLiteDatabaseEngine:
                 );
             """)
 
+            # 9. Prediction vs Actual Tracking Table (Continuous Feedback Loop)
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS prediction_vs_actual (
+                    prediction_id TEXT PRIMARY KEY,
+                    ticker TEXT NOT NULL,
+                    horizon TEXT NOT NULL,
+                    timestamp_created TEXT NOT NULL,
+                    timestamp_target TEXT NOT NULL,
+                    entry_price REAL NOT NULL,
+                    predicted_target_price REAL NOT NULL,
+                    predicted_direction TEXT NOT NULL,
+                    predicted_confidence_pct REAL NOT NULL,
+                    features_snapshot_json TEXT NOT NULL,
+                    actual_price_at_horizon REAL,
+                    actual_direction TEXT,
+                    is_hit INTEGER,
+                    forecast_error_pct REAL,
+                    status TEXT NOT NULL DEFAULT 'PENDING',
+                    reconciled_at TEXT
+                );
+            """)
+
             # Indexes for ultra-fast query latency (< 2ms)
             cursor.execute("CREATE INDEX IF NOT EXISTS idx_universe_sector ON stocks_universe(sector);")
             cursor.execute("CREATE INDEX IF NOT EXISTS idx_universe_symbol ON stocks_universe(symbol);")
@@ -228,6 +250,9 @@ class SQLiteDatabaseEngine:
             cursor.execute("CREATE INDEX IF NOT EXISTS idx_failures_regime ON failure_cases_memory(regime);")
             cursor.execute("CREATE INDEX IF NOT EXISTS idx_council_votes_ticker ON agent_council_votes(ticker);")
             cursor.execute("CREATE INDEX IF NOT EXISTS idx_council_votes_verdict ON agent_council_votes(consensus_verdict);")
+            cursor.execute("CREATE INDEX IF NOT EXISTS idx_pred_status ON prediction_vs_actual(status, timestamp_target);")
+            cursor.execute("CREATE INDEX IF NOT EXISTS idx_pred_ticker ON prediction_vs_actual(ticker);")
+            cursor.execute("CREATE INDEX IF NOT EXISTS idx_pred_horizon ON prediction_vs_actual(horizon);")
 
             # SQL Views for compatibility with alternative naming conventions
             cursor.execute("CREATE VIEW IF NOT EXISTS universe_equities AS SELECT * FROM stocks_universe;")
@@ -768,6 +793,136 @@ class SQLiteDatabaseEngine:
                 )
             return [dict(r) for r in cursor.fetchall()]
 
+    # =========================================================================
+    # 8. PREDICTION VS ACTUAL TRACKING & RECONCILIATION
+    # =========================================================================
+
+    def record_prediction_forecast(self, pred_dict: Dict[str, Any]) -> bool:
+        """Records a forward-looking price/directional prediction for feedback tracking."""
+        try:
+            pred_id = pred_dict.get("prediction_id") or f"PRED_{pred_dict.get('ticker', 'EGY')}_{pred_dict.get('horizon', '1D')}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}_{os.urandom(2).hex()}"
+            pred_dict["prediction_id"] = pred_id
+            created_at = pred_dict.get("timestamp_created") or datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            target_at = pred_dict.get("timestamp_target") or created_at
+            features_json = json.dumps(pred_dict.get("features_snapshot_json", {}), ensure_ascii=False) if isinstance(pred_dict.get("features_snapshot_json"), (dict, list)) else str(pred_dict.get("features_snapshot_json", "{}"))
+
+            with self.get_connection() as conn:
+                cursor = conn.cursor()
+                cursor.execute("""
+                    INSERT INTO prediction_vs_actual (
+                        prediction_id, ticker, horizon, timestamp_created,
+                        timestamp_target, entry_price, predicted_target_price,
+                        predicted_direction, predicted_confidence_pct,
+                        features_snapshot_json, status
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    ON CONFLICT(prediction_id) DO UPDATE SET
+                        predicted_target_price=excluded.predicted_target_price,
+                        predicted_confidence_pct=excluded.predicted_confidence_pct;
+                """, (
+                    pred_id,
+                    pred_dict.get("ticker", "COMI.CA"),
+                    pred_dict.get("horizon", "1D"),
+                    created_at,
+                    target_at,
+                    float(pred_dict.get("entry_price", 0.0)),
+                    float(pred_dict.get("predicted_target_price", 0.0)),
+                    pred_dict.get("predicted_direction", "BULLISH"),
+                    float(pred_dict.get("predicted_confidence_pct", 0.0)),
+                    features_json,
+                    pred_dict.get("status", "PENDING")
+                ))
+                conn.commit()
+            return True
+        except Exception as e:
+            logger.error("Failed to record prediction forecast: %s", e)
+            return False
+
+    def get_pending_predictions(self, limit: int = 200) -> List[Dict[str, Any]]:
+        """Retrieves pending predictions ready for evaluation and reconciliation."""
+        with self.get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute(
+                "SELECT * FROM prediction_vs_actual WHERE status = 'PENDING' ORDER BY timestamp_target ASC LIMIT ?;",
+                (limit,)
+            )
+            return [dict(r) for r in cursor.fetchall()]
+
+    def update_reconciled_prediction(
+        self,
+        prediction_id: str,
+        actual_price: float,
+        is_hit: int,
+        forecast_error_pct: float,
+        actual_direction: Optional[str] = None,
+        status: str = "RECONCILED"
+    ) -> bool:
+        """Updates a prediction with observed actual outcome metrics."""
+        try:
+            reconciled_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            with self.get_connection() as conn:
+                cursor = conn.cursor()
+                cursor.execute("""
+                    UPDATE prediction_vs_actual
+                    SET actual_price_at_horizon = ?,
+                        actual_direction = ?,
+                        is_hit = ?,
+                        forecast_error_pct = ?,
+                        status = ?,
+                        reconciled_at = ?
+                    WHERE prediction_id = ?;
+                """, (
+                    float(actual_price),
+                    actual_direction or ("BULLISH" if actual_price > 0 else "BEARISH"),
+                    int(is_hit),
+                    float(forecast_error_pct),
+                    status,
+                    reconciled_time,
+                    prediction_id
+                ))
+                conn.commit()
+            return True
+        except Exception as e:
+            logger.error("Failed to update reconciled prediction: %s", e)
+            return False
+
+    def get_prediction_accuracy_stats(self, lookback_days: int = 30, ticker: Optional[str] = None) -> Dict[str, Any]:
+        """Computes empirical accuracy and hit-rate stats over reconciled predictions."""
+        with self.get_connection() as conn:
+            cursor = conn.cursor()
+            query = """
+                SELECT 
+                    COUNT(*) as total_predictions,
+                    SUM(CASE WHEN is_hit = 1 THEN 1 ELSE 0 END) as hits,
+                    AVG(forecast_error_pct) as avg_error_pct,
+                    AVG(predicted_confidence_pct) as avg_confidence_pct
+                FROM prediction_vs_actual
+                WHERE status = 'RECONCILED'
+            """
+            params = []
+            if ticker:
+                query += " AND ticker = ?"
+                params.append(ticker)
+
+            cursor.execute(query, tuple(params))
+            row = cursor.fetchone()
+            total = row["total_predictions"] if row and row["total_predictions"] else 0
+            hits = row["hits"] if row and row["hits"] else 0
+            avg_err = row["avg_error_pct"] if row and row["avg_error_pct"] is not None else 0.0
+            avg_conf = row["avg_confidence_pct"] if row and row["avg_confidence_pct"] is not None else 0.0
+
+            hit_rate_pct = (hits / total * 100.0) if total > 0 else 0.0
+            return {
+                "lookback_days": lookback_days,
+                "ticker": ticker or "ALL_UNIVERSE",
+                "total_reconciled": total,
+                "hits_count": hits,
+                "misses_count": max(0, total - hits),
+                "hit_rate_pct": round(hit_rate_pct, 2),
+                "avg_forecast_error_pct": round(avg_err, 2),
+                "avg_confidence_pct": round(avg_conf, 2),
+                "is_statistically_significant": total >= 30
+            }
+
     def get_database_stats(self) -> Dict[str, Any]:
         """Returns row counts and database health metrics."""
         with self.get_connection() as conn:
@@ -776,7 +931,7 @@ class SQLiteDatabaseEngine:
             for tbl in [
                 "stocks_universe", "live_prices", "macro_indicators", "arbitrage_pairs",
                 "decision_history", "research_experiments_journal", "failure_cases_memory",
-                "agent_council_votes"
+                "agent_council_votes", "prediction_vs_actual"
             ]:
                 cursor.execute(f"SELECT COUNT(*) as cnt FROM {tbl};")
                 stats[f"{tbl}_count"] = cursor.fetchone()["cnt"]
@@ -790,7 +945,8 @@ class SQLiteDatabaseEngine:
             return stats
 
 
-# Global Database Singleton
+# Global Database Singleton & Type Aliases
+DatabaseEngine = SQLiteDatabaseEngine
 db_engine = SQLiteDatabaseEngine()
 
 

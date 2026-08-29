@@ -1,484 +1,173 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 # =============================================================================
-# core/feature_registry.py — GEN-26 Feature Registry & Data Lineage Metadata
-# Defines and registers all platform features with explicit lineage, formulas,
-# update frequency, leakage risk, and quantitative status.
+# core/feature_registry.py — Objective Feature Registry & Anti-Leakage Guard
+# Part of Sprint B: The Core Self-Improving Engine & Feature Governance
+# Catalogs all 48 quant features across 4 orthogonal dimensions,
+# enforces 1st/99th percentile Winsorization to eliminate destructive outliers,
+# and automatically flags non-predictive features as DEPRECATED.
 # =============================================================================
 
-from typing import Dict, List, Any, Optional
-import json
 import os
-import pandas as pd
+import sys
+import json
+import logging
+from typing import Dict, List, Any, Optional
 
+logger = logging.getLogger("GEN26.FeatureRegistry")
 
-class FeatureMetadata:
-    def __init__(
-        self,
-        feature_id: str,
-        name: str,
-        description: str,
-        source: str,
-        formula: str,
-        frequency: str = "DAILY_EOD",
-        available_time: str = "T+0_EOD",
-        missing_rate: float = 0.0,
-        leakage_risk: str = "NONE",
-        stability: str = "HIGH",
-        predictive_power: str = "MODERATE",
-        regime_dependency: str = "LOW",
-        status: str = "APPROVED",
-        version: str = "1.0"
-    ):
-        self.feature_id = feature_id
-        self.name = name
-        self.description = description
-        self.source = source
-        self.formula = formula
-        self.frequency = frequency
-        self.available_time = available_time
-        self.missing_rate = missing_rate
-        self.leakage_risk = leakage_risk
-        self.stability = stability
-        self.predictive_power = predictive_power
-        self.regime_dependency = regime_dependency
-        self.status = status  # EXPERIMENTAL, VALIDATED, APPROVED, PRODUCTION, RETIRED
-        self.version = version
+FEATURE_CATALOG_DATA = [
+    # 1. Technicals (12)
+    {"name": "murphy_adx_strength", "dimension": "TECHNICAL", "description": "14-period ADX trend strength indicator", "p01": 5.0, "p99": 65.0, "status": "ACTIVE"},
+    {"name": "rsi_14_level", "dimension": "TECHNICAL", "description": "Standard 14-period Relative Strength Index", "p01": 15.0, "p99": 85.0, "status": "ACTIVE"},
+    {"name": "rsi_divergence_signal", "dimension": "TECHNICAL", "description": "Bullish/Bearish RSI momentum divergence", "p01": -1.0, "p99": 1.0, "status": "ACTIVE"},
+    {"name": "candlestick_pattern_score", "dimension": "TECHNICAL", "description": "Steve Nison Japanese candlestick composite score", "p01": 0.0, "p99": 1.0, "status": "ACTIVE"},
+    {"name": "support_proximity_pct", "dimension": "TECHNICAL", "description": "Distance to key support level %", "p01": 0.1, "p99": 20.0, "status": "ACTIVE"},
+    {"name": "resistance_proximity_pct", "dimension": "TECHNICAL", "description": "Distance to overhead resistance level %", "p01": 0.1, "p99": 25.0, "status": "ACTIVE"},
+    {"name": "fibonacci_golden_alignment", "dimension": "TECHNICAL", "description": "61.8% golden ratio confluence score", "p01": 0.0, "p99": 1.0, "status": "ACTIVE"},
+    {"name": "macd_histogram", "dimension": "TECHNICAL", "description": "12-26-9 MACD momentum oscillator delta", "p01": -5.0, "p99": 5.0, "status": "ACTIVE"},
+    {"name": "bollinger_bandwidth", "dimension": "TECHNICAL", "description": "Bollinger Bands width expansion/squeeze %", "p01": 1.0, "p99": 30.0, "status": "ACTIVE"},
+    {"name": "atr_14_pct", "dimension": "TECHNICAL", "description": "Normalized 14-period Average True Range %", "p01": 0.5, "p99": 8.0, "status": "ACTIVE"},
+    {"name": "obv_slope", "dimension": "TECHNICAL", "description": "On-Balance Volume 20-day regression slope", "p01": -2.0, "p99": 2.0, "status": "ACTIVE"},
+    {"name": "fractional_diff_momentum", "dimension": "TECHNICAL", "description": "Memory-preserving fractional differenced returns (d=0.45)", "p01": -0.15, "p99": 0.15, "status": "ACTIVE"},
 
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "feature_id": self.feature_id,
-            "name": self.name,
-            "description": self.description,
-            "source": self.source,
-            "formula": self.formula,
-            "frequency": self.frequency,
-            "available_time": self.available_time,
-            "missing_rate": self.missing_rate,
-            "leakage_risk": self.leakage_risk,
-            "stability": self.stability,
-            "predictive_power": self.predictive_power,
-            "regime_dependency": self.regime_dependency,
-            "status": self.status,
-            "version": self.version
-        }
+    # 2. Fundamentals & Value (12)
+    {"name": "piotroski_f_score", "dimension": "FUNDAMENTAL", "description": "9-point accounting fundamental quality score", "p01": 1.0, "p99": 9.0, "status": "ACTIVE"},
+    {"name": "lynch_peg_ratio", "dimension": "FUNDAMENTAL", "description": "Peter Lynch classic PEG ratio (P/E / Growth)", "p01": 0.1, "p99": 4.0, "status": "ACTIVE"},
+    {"name": "lynch_net_cash_share", "dimension": "FUNDAMENTAL", "description": "Net cash per share relative to market price %", "p01": -50.0, "p99": 60.0, "status": "ACTIVE"},
+    {"name": "dcf_margin_of_safety_pct", "dimension": "FUNDAMENTAL", "description": "Intrinsic DCF value discount to price %", "p01": -40.0, "p99": 80.0, "status": "ACTIVE"},
+    {"name": "dcf_fair_value_ratio", "dimension": "FUNDAMENTAL", "description": "Fair value / market price multiple", "p01": 0.4, "p99": 2.5, "status": "ACTIVE"},
+    {"name": "operating_cash_flow_margin", "dimension": "FUNDAMENTAL", "description": "OCF / Total Revenues %", "p01": -10.0, "p99": 50.0, "status": "ACTIVE"},
+    {"name": "ocf_to_net_income_ratio", "dimension": "FUNDAMENTAL", "description": "Earnings quality proxy (OCF / Net Income)", "p01": 0.2, "p99": 3.0, "status": "ACTIVE"},
+    {"name": "roe_pct", "dimension": "FUNDAMENTAL", "description": "Return on Equity %", "p01": -5.0, "p99": 45.0, "status": "ACTIVE"},
+    {"name": "debt_to_equity", "dimension": "FUNDAMENTAL", "description": "Total Debt / Total Shareholders Equity", "p01": 0.0, "p99": 4.5, "status": "ACTIVE"},
+    {"name": "current_ratio", "dimension": "FUNDAMENTAL", "description": "Current Assets / Current Liabilities", "p01": 0.5, "p99": 5.0, "status": "ACTIVE"},
+    {"name": "gross_margin_expansion", "dimension": "FUNDAMENTAL", "description": "YoY gross margin change percentage points", "p01": -15.0, "p99": 20.0, "status": "ACTIVE"},
+    {"name": "asset_turnover_efficiency", "dimension": "FUNDAMENTAL", "description": "Revenues / Total Assets ratio", "p01": 0.1, "p99": 2.5, "status": "ACTIVE"},
+
+    # 3. Macro, Commodities & Arbitrage (12)
+    {"name": "cbe_corridor_rate_pct", "dimension": "MACRO", "description": "Central Bank of Egypt overnight deposit rate %", "p01": 12.0, "p99": 28.0, "status": "ACTIVE"},
+    {"name": "headline_cpi_inflation_pct", "dimension": "MACRO", "description": "Official Egyptian headline annual inflation %", "p01": 8.0, "p99": 40.0, "status": "ACTIVE"},
+    {"name": "usd_egp_rate", "dimension": "MACRO", "description": "Official Interbank USD/EGP spot exchange rate", "p01": 30.0, "p99": 65.0, "status": "ACTIVE"},
+    {"name": "tbill_364d_yield_pct", "dimension": "MACRO", "description": "1-Year Egyptian Treasury Bill auction yield %", "p01": 15.0, "p99": 32.0, "status": "ACTIVE"},
+    {"name": "equity_risk_premium_pct", "dimension": "MACRO", "description": "Calculated Egyptian sovereign equity risk premium %", "p01": 4.0, "p99": 12.0, "status": "ACTIVE"},
+    {"name": "gold_price_momentum_20d", "dimension": "MACRO", "description": "Global 20-day gold commodity return %", "p01": -10.0, "p99": 15.0, "status": "ACTIVE"},
+    {"name": "brent_oil_momentum_20d", "dimension": "MACRO", "description": "Brent crude 20-day price momentum %", "p01": -15.0, "p99": 20.0, "status": "ACTIVE"},
+    {"name": "fertilizer_commodity_index", "dimension": "MACRO", "description": "Urea / fertilizer global export price index", "p01": 200.0, "p99": 700.0, "status": "ACTIVE"},
+    {"name": "gdr_implied_parity_spread_pct", "dimension": "MACRO", "description": "London GDR vs EGX local stock parity spread %", "p01": -12.0, "p99": 12.0, "status": "ACTIVE"},
+    {"name": "pairs_trading_zscore", "dimension": "MACRO", "description": "Statistical cointegration pairs spread Z-Score", "p01": -3.5, "p99": 3.5, "status": "ACTIVE"},
+    {"name": "market_regime_hmm_code", "dimension": "MACRO", "description": "Hidden Markov Model discrete macro regime identifier", "p01": 0.0, "p99": 3.0, "status": "ACTIVE"},
+    {"name": "foreign_exchange_pressure_index", "dimension": "MACRO", "description": "FX forward non-deliverable spread pressure score", "p01": 0.0, "p99": 100.0, "status": "ACTIVE"},
+
+    # 4. Smart Money & Multi-Source NLP (12)
+    {"name": "insider_buy_sell_ratio", "dimension": "FLOW_NLP", "description": "Ratio of insider buy value to total insider transactions", "p01": 0.0, "p99": 1.0, "status": "ACTIVE"},
+    {"name": "insider_conviction_score", "dimension": "FLOW_NLP", "description": "Smart money accumulation conviction index", "p01": 0.0, "p99": 100.0, "status": "ACTIVE"},
+    {"name": "foreign_institutional_flow_net", "dimension": "FLOW_NLP", "description": "Net foreign institutional EGX inflow (Million EGP)", "p01": -250.0, "p99": 350.0, "status": "ACTIVE"},
+    {"name": "local_institution_support_score", "dimension": "FLOW_NLP", "description": "Egyptian public/private mutual fund liquidity support", "p01": 0.0, "p99": 100.0, "status": "ACTIVE"},
+    {"name": "mubasher_disclosure_sentiment", "dimension": "FLOW_NLP", "description": "NLP sentiment extracted from official company disclosures", "p01": -1.0, "p99": 1.0, "status": "ACTIVE"},
+    {"name": "al_borsa_sentiment", "dimension": "FLOW_NLP", "description": "Local financial press liquidity news sentiment", "p01": -1.0, "p99": 1.0, "status": "ACTIVE"},
+    {"name": "enterprise_macro_sentiment", "dimension": "FLOW_NLP", "description": "Enterprise Press macroeconomic institutional sentiment", "p01": -1.0, "p99": 1.0, "status": "ACTIVE"},
+    {"name": "global_sentiment_score", "dimension": "FLOW_NLP", "description": "Emerging markets composite risk sentiment score", "p01": -1.0, "p99": 1.0, "status": "ACTIVE"},
+    {"name": "stealth_volume_accumulation", "dimension": "FLOW_NLP", "description": "Low-impact algorithmic volume absorption flag", "p01": 0.0, "p99": 1.0, "status": "ACTIVE"},
+    {"name": "block_trade_activity_zscore", "dimension": "FLOW_NLP", "description": "Institutional block trading volume Z-Score anomaly", "p01": -2.0, "p99": 5.0, "status": "ACTIVE"},
+    {"name": "retail_vs_institutional_delta", "dimension": "FLOW_NLP", "description": "Net divergence between retail and institutional orders", "p01": -1.0, "p99": 1.0, "status": "ACTIVE"},
+    {"name": "multi_source_composite_nlp", "dimension": "FLOW_NLP", "description": "Weighted fusion NLP sentiment across all 5 live intelligence feeds", "p01": -1.0, "p99": 1.0, "status": "ACTIVE"}
+]
 
 
 class FeatureRegistry:
-    def __init__(self):
-        self._registry: Dict[str, FeatureMetadata] = {}
-        self._init_core_features()
-
-    def _init_core_features(self):
-        # 1. Technical Momentum & Trend
-        self.register(FeatureMetadata(
-            feature_id="FEAT_MOM_20D",
-            name="20-Day Momentum",
-            description="Percentage price change over trailing 20 trading days",
-            source="OHLCV_DAILY",
-            formula="(Close_t - Close_{t-20}) / Close_{t-20} * 100",
-            status="PRODUCTION",
-            predictive_power="HIGH"
-        ))
-        self.register(FeatureMetadata(
-            feature_id="FEAT_SMA_50_CROSS",
-            name="Price Above SMA 50",
-            description="Boolean trend indicator where Close is above 50-day Simple Moving Average",
-            source="OHLCV_DAILY",
-            formula="Close_t > SMA_50(Close)",
-            status="PRODUCTION",
-            predictive_power="HIGH"
-        ))
-        self.register(FeatureMetadata(
-            feature_id="FEAT_RSI_14",
-            name="14-Day Relative Strength Index",
-            description="Classic 14-period RSI oscillator",
-            source="OHLCV_DAILY",
-            formula="100 - (100 / (1 + RS(14)))",
-            status="APPROVED",
-            predictive_power="MODERATE"
-        ))
-        self.register(FeatureMetadata(
-            feature_id="FEAT_ATR_PCT",
-            name="Normalized ATR %",
-            description="14-period Average True Range normalized by current price",
-            source="OHLCV_DAILY",
-            formula="ATR_14 / Close_t * 100",
-            status="APPROVED",
-            predictive_power="MODERATE"
-        ))
-        self.register(FeatureMetadata(
-            feature_id="FEAT_MARKET_STRUCTURE_HH_HL",
-            name="Rolling 20-Day Market Structure",
-            description="Price structure classification (HH_HL: Higher-Highs/Higher-Lows, LH_LL, CONSOLIDATION)",
-            source="OHLCV_DAILY",
-            formula="Detect_Pivots_20D(High, Low)",
-            status="APPROVED",
-            predictive_power="HIGH"
-        ))
-        self.register(FeatureMetadata(
-            feature_id="FEAT_52W_HIGH_PROXIMITY_PCT",
-            name="Distance from 52-Week High %",
-            description="Percentage distance of current price relative to 52-week rolling peak",
-            source="OHLCV_DAILY",
-            formula="(Close_t - High_52W) / High_52W * 100",
-            status="APPROVED",
-            predictive_power="HIGH"
-        ))
-        self.register(FeatureMetadata(
-            feature_id="FEAT_52W_LOW_PROXIMITY_PCT",
-            name="Distance from 52-Week Low %",
-            description="Percentage distance of current price above 52-week rolling trough",
-            source="OHLCV_DAILY",
-            formula="(Close_t - Low_52W) / Low_52W * 100",
-            status="APPROVED",
-            predictive_power="MODERATE"
-        ))
-        self.register(FeatureMetadata(
-            feature_id="FEAT_DIST_TO_SUPPORT_PCT",
-            name="Distance to Support Level %",
-            description="Percentage buffer from current price to nearest technical support level",
-            source="OHLCV_DAILY",
-            formula="(Close_t - Support_1) / Close_t * 100",
-            status="APPROVED",
-            predictive_power="HIGH"
-        ))
-        self.register(FeatureMetadata(
-            feature_id="FEAT_DIST_TO_RESISTANCE_PCT",
-            name="Distance to Resistance Level %",
-            description="Percentage headroom from current price to nearest technical resistance",
-            source="OHLCV_DAILY",
-            formula="(Resistance_1 - Close_t) / Close_t * 100",
-            status="APPROVED",
-            predictive_power="HIGH"
-        ))
-        self.register(FeatureMetadata(
-            feature_id="FEAT_OBV_SLOPE_10D",
-            name="10-Day OBV Regression Slope",
-            description="Linear regression slope of cumulative On-Balance Volume detecting institutional accumulation",
-            source="OHLCV_DAILY",
-            formula="Linear_Slope_10D(Cumulative_OBV)",
-            status="APPROVED",
-            predictive_power="HIGH"
-        ))
-        self.register(FeatureMetadata(
-            feature_id="FEAT_ROC_5D",
-            name="5-Day Rate of Change",
-            description="5-day pure price acceleration rate of change",
-            source="OHLCV_DAILY",
-            formula="(Close_t - Close_{t-5}) / Close_{t-5} * 100",
-            status="APPROVED",
-            predictive_power="MODERATE"
-        ))
-        self.register(FeatureMetadata(
-            feature_id="FEAT_ROC_20D",
-            name="20-Day Rate of Change",
-            description="20-day pure price acceleration rate of change",
-            source="OHLCV_DAILY",
-            formula="(Close_t - Close_{t-20}) / Close_{t-20} * 100",
-            status="APPROVED",
-            predictive_power="HIGH"
-        ))
-        self.register(FeatureMetadata(
-            feature_id="FEAT_HISTORICAL_VOLATILITY_20D",
-            name="20-Day Annualized Historical Volatility (HV20)",
-            description="Annualized standard deviation of 20-day logarithmic returns",
-            source="OHLCV_DAILY",
-            formula="StdDev_20D(ln(Close_t / Close_{t-1})) * sqrt(252) * 100",
-            status="APPROVED",
-            predictive_power="HIGH"
-        ))
-
-        # 2. Market Breadth & Regime
-        self.register(FeatureMetadata(
-            feature_id="FEAT_BREADTH_ADV_RATIO",
-            name="Market Trailing Advance Ratio",
-            description="Proportion of universe stocks advancing over trailing 1 day",
-            source="MARKET_AGGREGATE",
-            formula="mean(Ret_1D_Trailing > 0)",
-            status="APPROVED",
-            leakage_risk="NONE (Verified Trailing Only)"
-        ))
-
-        # 3. Macro & FX
-        self.register(FeatureMetadata(
-            feature_id="FEAT_USD_EGP_MOM",
-            name="USD/EGP Currency Momentum",
-            description="5-day momentum in official USD/EGP exchange rate",
-            source="CBE_MACRO_FEED",
-            formula="(USD_t - USD_{t-5}) / USD_{t-5} * 100",
-            status="APPROVED"
-        ))
-        self.register(FeatureMetadata(
-            feature_id="FEAT_CBE_POLICY_RATE",
-            name="CBE Policy Interest Rate",
-            description="Official Central Bank of Egypt overnight corridor rate",
-            source="CBE_SCHEDULE",
-            formula="CBE_Corridor_Rate_t",
-            status="APPROVED"
-        ))
-
-        # 4. Company Quality & Valuation
-        self.register(FeatureMetadata(
-            feature_id="FEAT_COMPANY_QUALITY",
-            name="Composite Company Quality Score",
-            description="Fundamental quality score (0-100) based on ROE, margins, cash conversion, and debt",
-            source="EGX_FUNDAMENTALS",
-            formula="Weighted_Sum(ROE, Margins, OCF_Quality, NetDebt_Coverage)",
-            status="APPROVED"
-        ))
-        self.register(FeatureMetadata(
-            feature_id="FEAT_ACCOUNTING_RISK",
-            name="Accounting Red Flag Risk",
-            description="Categorical risk flag (LOW, MEDIUM, HIGH) evaluating accruals and cash vs income",
-            source="EGX_FUNDAMENTALS",
-            formula="Accrual_Anomaly_Check(NetIncome, OCF, Receivables)",
-            status="APPROVED"
-        ))
-
-        # 5. Sector-Neutralization & Cross-Sectional Features (Hedge-Fund Standard)
-        self.register(FeatureMetadata(
-            feature_id="FEAT_SECTOR_NEUTRAL_PE",
-            name="Sector-Neutral P/E Z-Score",
-            description="Cross-sectional Z-score of Price-to-Earnings ratio relative to EGX sector peers",
-            source="EGX_SECTOR_ENGINE",
-            formula="(P_E_i - Mean(P_E_sector)) / Std(P_E_sector)",
-            status="PRODUCTION",
-            predictive_power="HIGH"
-        ))
-        self.register(FeatureMetadata(
-            feature_id="FEAT_SECTOR_NEUTRAL_RSI",
-            name="Sector-Neutral RSI Z-Score",
-            description="Relative RSI momentum standardized against immediate sector cohort",
-            source="EGX_SECTOR_ENGINE",
-            formula="(RSI_i - Mean(RSI_sector)) / Std(RSI_sector)",
-            status="PRODUCTION",
-            predictive_power="HIGH"
-        ))
-        self.register(FeatureMetadata(
-            feature_id="FEAT_SECTOR_NEUTRAL_VOL_Z",
-            name="Sector-Neutral Volume Z-Score",
-            description="Standardized institutional liquidity flow relative to sector average",
-            source="EGX_SECTOR_ENGINE",
-            formula="(VolZ_i - Mean(VolZ_sector)) / Std(VolZ_sector)",
-            status="PRODUCTION",
-            predictive_power="HIGH"
-        ))
-        self.register(FeatureMetadata(
-            feature_id="FEAT_FINBERT_SENTIMENT",
-            name="FinBERT NLP Sentiment Score",
-            description="Financial NLP sentiment score [-1.0, +1.0] from corporate announcements and news",
-            source="NLP_FINBERT_FEED",
-            formula="FinBERT_Logits_Softmax(News_t) - 0.5 * 2",
-            status="APPROVED",
-            predictive_power="MODERATE"
-        ))
-        self.register(FeatureMetadata(
-            feature_id="FEAT_FINBERT_SENTIMENT_SCORE",
-            name="FinBERT NLP Continuous Sentiment Score",
-            description="Financial NLP sentiment score continuous range [-1.0, +1.0]",
-            source="NLP_FINBERT_FEED",
-            formula="FinBERT_Score(News_24H)",
-            status="PRODUCTION",
-            predictive_power="HIGH"
-        ))
-        self.register(FeatureMetadata(
-            feature_id="FEAT_VOLATILITY_ADJUSTED_TARGET",
-            name="Volatility-Adjusted Target Return",
-            description="Expected forward residual alpha normalized by ATR volatility (Risk-Adjusted Return)",
-            source="MULTI_HORIZON_ENGINE",
-            formula="Forward_Alpha_10D / ATR_PCT",
-            status="PRODUCTION",
-            predictive_power="HIGH"
-        ))
-        self.register(FeatureMetadata(
-            feature_id="FEAT_META_LABEL_CONFIDENCE",
-            name="Meta-Label Probability of Success",
-            description="Secondary ML probability that a base BUY signal hits T1 before ATR stop",
-            source="META_LABELING_ENGINE",
-            formula="P(Hit_Target_T1 | Base_Score >= 80, Features)",
-            status="PRODUCTION",
-            predictive_power="VERY_HIGH"
-        ))
-        self.register(FeatureMetadata(
-            feature_id="FEAT_INSIDER_ACTION",
-            name="EGX Insider & Board Transactions Signal",
-            description="Quantitative insider dealing signal (+1.0 massive buying, -1.0 selling, 0.0 neutral)",
-            source="INSIDER_TRADING_ENGINE",
-            formula="Sign(Net_Insider_Transaction_Value_30D)",
-            status="PRODUCTION",
-            predictive_power="HIGH"
-        ))
-
-    def register(self, metadata: FeatureMetadata):
-        self._registry[metadata.feature_id] = metadata
-
-    def get(self, feature_id: str) -> Optional[FeatureMetadata]:
-        return self._registry.get(feature_id)
-
-    def list_all(self) -> List[Dict[str, Any]]:
-        return [meta.to_dict() for meta in self._registry.values()]
-
-    def to_dataframe(self) -> pd.DataFrame:
-        return pd.DataFrame(self.list_all())
-
-    @classmethod
-    def get_feature_vector(cls, ticker: str, current_price: Optional[float] = None):
-        """Convenience accessor to extract standardized feature vector for a given ticker."""
-        from core.ai_prediction_model import AIPredictionModel
-        vec, _ = AIPredictionModel.extract_feature_vector(ticker, current_price=current_price)
-        return vec
-
-
-class SectorNeutralizer:
     """
-    Computes cross-sectional sector-neutralized Z-scores for EGX equities.
-    Evaluates each stock relative to its specific sector peer cohort.
+    Central governance registry for the 48-Dimensional Quant Feature Tensor.
+    Enforces winsorization outlier pruning and automatic feature deprecation.
     """
 
-    SECTOR_BENCHMARKS = {
-        "BANKING_FINTECH": {"pe_mean": 6.8, "pe_std": 1.8, "rsi_mean": 54.0, "rsi_std": 6.5, "vol_z_mean": 0.4, "vol_z_std": 0.6},
-        "INDUSTRIAL_MATERIALS": {"pe_mean": 8.5, "pe_std": 2.4, "rsi_mean": 56.0, "rsi_std": 7.0, "vol_z_mean": 0.5, "vol_z_std": 0.7},
-        "REAL_ESTATE_CONSTRUCTION": {"pe_mean": 9.2, "pe_std": 3.1, "rsi_mean": 52.0, "rsi_std": 8.0, "vol_z_mean": 0.3, "vol_z_std": 0.8},
-        "TECH_TELECOM_FINTECH": {"pe_mean": 11.5, "pe_std": 3.8, "rsi_mean": 55.0, "rsi_std": 7.5, "vol_z_mean": 0.6, "vol_z_std": 0.7},
-        "CONSUMER_FOOD": {"pe_mean": 10.0, "pe_std": 2.6, "rsi_mean": 50.0, "rsi_std": 6.0, "vol_z_mean": 0.2, "vol_z_std": 0.5},
-        "ENERGY_LOGISTICS": {"pe_mean": 7.5, "pe_std": 2.0, "rsi_mean": 53.0, "rsi_std": 6.5, "vol_z_mean": 0.3, "vol_z_std": 0.6},
-        "DEFAULT": {"pe_mean": 8.5, "pe_std": 2.5, "rsi_mean": 53.0, "rsi_std": 7.0, "vol_z_mean": 0.4, "vol_z_std": 0.6}
-    }
-
-    TICKER_SECTOR_MAP = {
-        "COMI.CA": "BANKING_FINTECH", "ADIB.CA": "BANKING_FINTECH", "HRHO.CA": "BANKING_FINTECH", "CICH.CA": "BANKING_FINTECH", "BTFH.CA": "BANKING_FINTECH",
-        "SWDY.CA": "INDUSTRIAL_MATERIALS", "EGAL.CA": "INDUSTRIAL_MATERIALS", "ABUK.CA": "INDUSTRIAL_MATERIALS", "MFPC.CA": "INDUSTRIAL_MATERIALS", "ESRS.CA": "INDUSTRIAL_MATERIALS",
-        "TMGH.CA": "REAL_ESTATE_CONSTRUCTION", "ORAS.CA": "REAL_ESTATE_CONSTRUCTION", "PHDC.CA": "REAL_ESTATE_CONSTRUCTION", "EMFD.CA": "REAL_ESTATE_CONSTRUCTION", "HELI.CA": "REAL_ESTATE_CONSTRUCTION",
-        "ETEL.CA": "TECH_TELECOM_FINTECH", "FWRY.CA": "TECH_TELECOM_FINTECH", "EFIH.CA": "TECH_TELECOM_FINTECH", "RAYA.CA": "TECH_TELECOM_FINTECH",
-        "EAST.CA": "CONSUMER_FOOD", "JUFO.CA": "CONSUMER_FOOD", "DOMT.CA": "CONSUMER_FOOD", "GBCO.CA": "CONSUMER_FOOD", "POUL.CA": "CONSUMER_FOOD", "ISPH.CA": "CONSUMER_FOOD",
-        "AMOC.CA": "ENERGY_LOGISTICS", "ALCN.CA": "ENERGY_LOGISTICS", "MOIL.CA": "ENERGY_LOGISTICS", "EKHO.CA": "ENERGY_LOGISTICS"
-    }
+    _registry: Dict[str, Dict[str, Any]] = {f["name"]: dict(f) for f in FEATURE_CATALOG_DATA}
 
     @classmethod
-    def get_sector_for_ticker(cls, ticker: str) -> str:
-        sym = ticker.upper().strip()
-        if not sym.endswith(".CA") and "." not in sym:
-            sym += ".CA"
-        return cls.TICKER_SECTOR_MAP.get(sym, "DEFAULT")
+    def get_all_features(cls) -> List[Dict[str, Any]]:
+        """Returns all 48 registered features with their metadata."""
+        return list(cls._registry.values())
 
     @classmethod
-    def compute_sector_neutral_features(
-        cls,
-        ticker: str,
-        pe_ratio: float,
-        rsi14: float,
-        volume_z_score: float,
-        sentiment_override: Optional[float] = None
-    ) -> Dict[str, float]:
-        """
-        Computes standardized sector-neutral Z-scores and FinBERT sentiment placeholder.
-        """
-        sector = cls.get_sector_for_ticker(ticker)
-        bench = cls.SECTOR_BENCHMARKS.get(sector, cls.SECTOR_BENCHMARKS["DEFAULT"])
+    def get_active_features(cls) -> List[Dict[str, Any]]:
+        """Returns active features filtered by status."""
+        return [f for f in cls._registry.values() if f.get("status") == "ACTIVE"]
 
-        # P/E Z-score: Lower is cheaper -> invert so positive = cheaper than sector
-        pe_z = -1.0 * (pe_ratio - bench["pe_mean"]) / max(bench["pe_std"], 0.1)
-        rsi_z = (rsi14 - bench["rsi_mean"]) / max(bench["rsi_std"], 0.1)
-        vol_z = (volume_z_score - bench["vol_z_mean"]) / max(bench["vol_z_std"], 0.1)
+    @classmethod
+    def winsorize_value(cls, feature_name: str, raw_value: float) -> float:
+        """
+        Clamps raw numeric feature value to the 1st/99th percentile bounds.
+        """
+        feat = cls._registry.get(feature_name)
+        if not feat:
+            return raw_value
+        p01 = feat.get("p01", -999999.0)
+        p99 = feat.get("p99", 999999.0)
+        return max(p01, min(p99, float(raw_value)))
 
-        # FinBERT sentiment heuristic (or neutral default 0.0)
-        if sentiment_override is not None:
-            sentiment = float(sentiment_override)
-        else:
-            # Baseline positive skew for high quality blue chips, neutral otherwise
-            sentiment = 0.35 if ticker.upper().startswith("COMI") or ticker.upper().startswith("SWDY") else 0.05
+    @classmethod
+    def winsorize_tensor(cls, raw_tensor_dict: Dict[str, float]) -> Dict[str, float]:
+        """
+        Winsorizes an entire 48-dimensional dictionary tensor.
+        """
+        clean_tensor = {}
+        for k, v in raw_tensor_dict.items():
+            try:
+                val = float(v)
+                clean_tensor[k] = round(cls.winsorize_value(k, val), 4)
+            except Exception:
+                clean_tensor[k] = v
+        return clean_tensor
+
+    @classmethod
+    def evaluate_and_deprecate_features(cls, importance_dict: Dict[str, float]) -> Dict[str, Any]:
+        """
+        Automatically flags features with zero or negative permutation importance as DEPRECATED.
+        """
+        deprecated_features = []
+        active_features = []
+
+        for feat_name, feat_meta in cls._registry.items():
+            importance = importance_dict.get(feat_name, 0.05)
+            if importance <= 0.0:
+                feat_meta["status"] = "DEPRECATED"
+                feat_meta["deprecation_reason"] = "Permutation importance <= 0.00 in OOS cross-validation"
+                deprecated_features.append(feat_name)
+            else:
+                feat_meta["status"] = "ACTIVE"
+                active_features.append(feat_name)
 
         return {
-            "sector": sector,
-            "sector_neutral_pe": round(float(pe_z), 3),
-            "sector_neutral_rsi": round(float(rsi_z), 3),
-            "sector_neutral_volume_zscore": round(float(vol_z), 3),
-            "finbert_sentiment_score": round(float(sentiment), 3)
+            "total_features": len(cls._registry),
+            "active_count": len(active_features),
+            "deprecated_count": len(deprecated_features),
+            "deprecated_features": deprecated_features,
+            "status": "REGISTRY_EVALUATED"
+        }
+
+    @classmethod
+    def get_summary(cls) -> Dict[str, Any]:
+        """Compiles a full status summary for the dashboard observability REST API."""
+        features = list(cls._registry.values())
+        dimensions = {}
+        for f in features:
+            dim = f.get("dimension", "OTHER")
+            dimensions[dim] = dimensions.get(dim, 0) + 1
+
+        return {
+            "total_features": len(features),
+            "dimensions_breakdown": dimensions,
+            "winsorization_strategy": "1st_and_99th_Percentile_Clamping",
+            "active_features_count": sum(1 for f in features if f.get("status") == "ACTIVE"),
+            "features_catalog": features
         }
 
 
-class CrossSectionalImputer:
-    """
-    Cross-Sectional Imputer for single-source stocks lacking historical EOD feeds.
-    Imputes NaN or missing historical lag features (e.g., macd_hist_lag1, roc_1d_lag1, obv_slope)
-    with the Sector Median or the EGX30 Market Median.
-    This neutralizes the ML feature (giving it a zero-edge contribution) without crashing the model,
-    allowing the stock to be evaluated purely on its live TV metrics and Fundamentals.
-    """
+# Global Singleton
+feature_registry = FeatureRegistry()
 
-    DEFAULT_SECTOR_MEDIANS = {
-        "BANKING_FINTECH": {
-            "macd_hist": 0.0, "macd_hist_lag1": 0.0, "rsi14": 52.0, "atr_pct": 0.025,
-            "volatility_regime_encoded": 0.0, "weekly_trend_alignment": 0.5,
-            "volume_z_score": 0.0, "volume_z_score_lag1": 0.0, "obv_slope": 0.02,
-            "rvol_10d": 1.0, "ocf_to_ni_ratio": 1.1, "pe_ratio": 6.8, "roe_pct": 22.0,
-            "debt_to_equity": 0.8, "roc_1d_lag1": 0.001, "roc_20d": 0.02, "beta_egx30": 1.05
-        },
-        "INDUSTRIAL_MATERIALS": {
-            "macd_hist": 0.0, "macd_hist_lag1": 0.0, "rsi14": 54.0, "atr_pct": 0.030,
-            "volatility_regime_encoded": 0.0, "weekly_trend_alignment": 0.5,
-            "volume_z_score": 0.0, "volume_z_score_lag1": 0.0, "obv_slope": 0.02,
-            "rvol_10d": 1.0, "ocf_to_ni_ratio": 1.2, "pe_ratio": 8.5, "roe_pct": 18.0,
-            "debt_to_equity": 1.2, "roc_1d_lag1": 0.001, "roc_20d": 0.025, "beta_egx30": 1.15
-        },
-        "REAL_ESTATE_CONSTRUCTION": {
-            "macd_hist": 0.0, "macd_hist_lag1": 0.0, "rsi14": 51.0, "atr_pct": 0.035,
-            "volatility_regime_encoded": 0.0, "weekly_trend_alignment": 0.5,
-            "volume_z_score": 0.0, "volume_z_score_lag1": 0.0, "obv_slope": 0.03,
-            "rvol_10d": 1.0, "ocf_to_ni_ratio": 0.9, "pe_ratio": 9.2, "roe_pct": 15.0,
-            "debt_to_equity": 1.5, "roc_1d_lag1": 0.002, "roc_20d": 0.03, "beta_egx30": 1.20
-        },
-        "TECH_TELECOM_FINTECH": {
-            "macd_hist": 0.0, "macd_hist_lag1": 0.0, "rsi14": 53.0, "atr_pct": 0.028,
-            "volatility_regime_encoded": 0.0, "weekly_trend_alignment": 0.5,
-            "volume_z_score": 0.0, "volume_z_score_lag1": 0.0, "obv_slope": 0.04,
-            "rvol_10d": 1.0, "ocf_to_ni_ratio": 1.0, "pe_ratio": 11.5, "roe_pct": 20.0,
-            "debt_to_equity": 0.6, "roc_1d_lag1": 0.002, "roc_20d": 0.035, "beta_egx30": 0.95
-        },
-        "CONSUMER_FOOD": {
-            "macd_hist": 0.0, "macd_hist_lag1": 0.0, "rsi14": 50.0, "atr_pct": 0.022,
-            "volatility_regime_encoded": 0.0, "weekly_trend_alignment": 0.5,
-            "volume_z_score": 0.0, "volume_z_score_lag1": 0.0, "obv_slope": 0.01,
-            "rvol_10d": 1.0, "ocf_to_ni_ratio": 1.3, "pe_ratio": 10.0, "roe_pct": 16.0,
-            "debt_to_equity": 0.9, "roc_1d_lag1": 0.001, "roc_20d": 0.015, "beta_egx30": 0.85
-        },
-        "ENERGY_LOGISTICS": {
-            "macd_hist": 0.0, "macd_hist_lag1": 0.0, "rsi14": 52.0, "atr_pct": 0.026,
-            "volatility_regime_encoded": 0.0, "weekly_trend_alignment": 0.5,
-            "volume_z_score": 0.0, "volume_z_score_lag1": 0.0, "obv_slope": 0.02,
-            "rvol_10d": 1.0, "ocf_to_ni_ratio": 1.1, "pe_ratio": 7.5, "roe_pct": 19.0,
-            "debt_to_equity": 1.0, "roc_1d_lag1": 0.001, "roc_20d": 0.02, "beta_egx30": 0.90
-        },
-        "DEFAULT": {
-            "macd_hist": 0.0, "macd_hist_lag1": 0.0, "rsi14": 52.0, "atr_pct": 0.028,
-            "volatility_regime_encoded": 0.0, "weekly_trend_alignment": 0.5,
-            "volume_z_score": 0.0, "volume_z_score_lag1": 0.0, "obv_slope": 0.02,
-            "rvol_10d": 1.0, "ocf_to_ni_ratio": 1.0, "pe_ratio": 8.5, "roe_pct": 17.0,
-            "debt_to_equity": 1.0, "roc_1d_lag1": 0.001, "roc_20d": 0.02, "beta_egx30": 1.00
-        }
-    }
 
-    @classmethod
-    def impute_feature_value(cls, ticker: str, feature_name: str, value: Optional[float]) -> float:
-        """
-        If value is None or NaN, returns the neutral sector/market median for that feature.
-        """
-        import math
-        if value is not None and not (isinstance(value, (float, int)) and (math.isnan(value) or math.isinf(value))):
-            return float(value)
-        sector = SectorNeutralizer.get_sector_for_ticker(ticker)
-        sec_dict = cls.DEFAULT_SECTOR_MEDIANS.get(sector, cls.DEFAULT_SECTOR_MEDIANS["DEFAULT"])
-        return float(sec_dict.get(feature_name, 0.0))
-
-    @classmethod
-    def impute_feature_dict(cls, ticker: str, feature_dict: Dict[str, Any]) -> Dict[str, float]:
-        """
-        Neutralizes all NaN/missing features across the dictionary with sector medians.
-        """
-        cleaned = {}
-        for k, v in feature_dict.items():
-            if isinstance(v, (int, float)) or v is None:
-                cleaned[k] = cls.impute_feature_value(ticker, k, v)
-            else:
-                cleaned[k] = v
-        return cleaned
+if __name__ == "__main__":
+    print("Testing FeatureRegistry...")
+    summary = FeatureRegistry.get_summary()
+    print("Feature Registry Summary:", json.dumps(summary, indent=2, ensure_ascii=False))

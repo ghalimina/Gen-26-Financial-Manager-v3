@@ -55,6 +55,9 @@ from core.price_reconciliation import PriceReconciliationEngine
 from core.market_price_service import MarketPriceService
 from core.price_sync_service import PriceSyncService
 from core.market_scheduler import EGXMarketScheduler
+from core.prediction_actual_tracker import PredictionActualTracker
+from core.feature_registry import FeatureRegistry
+from core.promotion_gate import PromotionGate
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
 
@@ -1683,6 +1686,40 @@ def api_pipeline_run_unified():
             portfolio_equity=equity
         )
         return jsonify(result), 200
+    except Exception as e:
+        return jsonify({"status": "ERROR", "error": str(e)}), 500
+
+
+@app.route("/api/observability/forecast_vs_actual", methods=["GET"])
+def api_observability_forecast_vs_actual():
+    """Returns rolling hit rate %, prediction counts, and recent reconciled records."""
+    try:
+        lookback = int(request.args.get("lookback_days", 30))
+        ticker = request.args.get("ticker", None)
+        PredictionActualTracker.reconcile_closed_horizons()
+        metrics = PredictionActualTracker.get_rolling_accuracy_metrics(lookback_days=lookback, ticker=ticker)
+        return jsonify(metrics), 200
+    except Exception as e:
+        return jsonify({"status": "ERROR", "error": str(e)}), 500
+
+
+@app.route("/api/observability/feature_registry", methods=["GET"])
+def api_observability_feature_registry():
+    """Returns the active 48-feature catalog with status (ACTIVE/DEPRECATED) and winsorization thresholds."""
+    try:
+        summary = FeatureRegistry.get_summary()
+        return jsonify(summary), 200
+    except Exception as e:
+        return jsonify({"status": "ERROR", "error": str(e)}), 500
+
+
+@app.route("/api/observability/promotion_lifecycle", methods=["GET"])
+def api_observability_promotion_lifecycle():
+    """Returns the 4-stage promotion gate status and DSR scores."""
+    try:
+        strategy_id = request.args.get("strategy_id", "STRAT_EGX_FUSION_48_TENSOR")
+        lifecycle = PromotionGate.get_promotion_lifecycle_status(candidate_strategy_id=strategy_id)
+        return jsonify(lifecycle), 200
     except Exception as e:
         return jsonify({"status": "ERROR", "error": str(e)}), 500
 
