@@ -1,11 +1,11 @@
 {
-  "audit_timestamp": "2026-08-30T01:06:35.058974",
+  "audit_timestamp": "2026-08-30T01:17:58.124317",
   "target_version": "v3.2.0-Authoritative",
   "total_reports_scanned": 21,
   "reports_audit": {
     "01_SYSTEM_ARCHITECTURE_OVERVIEW.md": {
       "file": "01_SYSTEM_ARCHITECTURE_OVERVIEW.md",
-      "size_bytes": 7648,
+      "size_bytes": 9269,
       "checks": {
         "ssot_definitions_present": true
       }
@@ -26,7 +26,7 @@
     },
     "04_DATABASE_SCHEMA_AND_PERSISTENCE.md": {
       "file": "04_DATABASE_SCHEMA_AND_PERSISTENCE.md",
-      "size_bytes": 3700,
+      "size_bytes": 5886,
       "checks": {}
     },
     "05_SEVEN_AGENT_QUANT_COUNCIL.md": {
@@ -80,12 +80,12 @@
     },
     "14_STATISTICAL_PAIRS_ARBITRAGE.md": {
       "file": "14_STATISTICAL_PAIRS_ARBITRAGE.md",
-      "size_bytes": 2525,
+      "size_bytes": 3921,
       "checks": {}
     },
     "15_DEEP_QUANT_48_FEATURE_TENSOR.md": {
       "file": "15_DEEP_QUANT_48_FEATURE_TENSOR.md",
-      "size_bytes": 2953,
+      "size_bytes": 3951,
       "checks": {}
     },
     "16_TWO_STAGE_META_LABELING_AI.md": {
@@ -97,7 +97,7 @@
     },
     "17_EGX_TRADING_RULES_AND_CGT_TAX.md": {
       "file": "17_EGX_TRADING_RULES_AND_CGT_TAX.md",
-      "size_bytes": 3059,
+      "size_bytes": 3946,
       "checks": {}
     },
     "18_BLACK_SWAN_STRESS_TESTING.md": {

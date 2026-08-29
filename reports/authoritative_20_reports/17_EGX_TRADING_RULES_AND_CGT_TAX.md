@@ -54,5 +54,23 @@ $$\text{CGT Withholding} = \max(0.0, 0.10 \times \text{Net Realized P\&L})$$
 - Invariant: Backtest and real portfolio engines deduct $10.0\%$ CGT from all winning closed positions to reflect true post-tax institutional net returns.
 
 ---
+
+## 5. Almgren-Chriss Dynamic Slippage Model
+
+To replace naive static friction assumptions, GEN-26 implements the **Almgren-Chriss Square-Root Market Impact Model** (`core/dynamic_risk_manager.py` $\to$ `calculate_dynamic_slippage`):
+
+$$\text{Execution Slippage (\%)} = \text{Base Spread}_{\text{Tier}} + 0.12\% \times \sqrt{\frac{\text{Order Value (EGP)}}{\max(ADV_{30} \text{ (EGP)}, \, 1,000,000)}}$$
+
+### Market Cap Tier Spreads:
+- **LARGE_CAP** ($ADV_{30} \ge 20\text{M EGP}$): $\text{Base Spread} = 0.10\%$
+- **MID_CAP** ($5\text{M} \le ADV_{30} < 20\text{M EGP}$): $\text{Base Spread} = 0.15\%$
+- **SMALL_CAP** ($ADV_{30} < 5\text{M EGP}$): $\text{Base Spread} = 0.25\%$
+
+### Bounded Invariants:
+- Minimum Execution Friction Floor: $0.10\%$
+- Maximum Liquidity Stress Ceiling: $1.50\%$
+- Applied dynamically to order execution simulation across all portfolio sizing engines.
+
+---
 **Institutional Compliance Notice:**  
 *Document certified under GEN-26 Institutional Risk Governance Protocol v3.2.0. Verified with 456 automated STLC test suites.*

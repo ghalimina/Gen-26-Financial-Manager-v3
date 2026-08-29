@@ -102,6 +102,45 @@ CREATE TABLE IF NOT EXISTS market_intelligence_records (
 );
 ```
 
+### Table 5: `prediction_vs_actual`
+Tracks the empirical lifecycle of every multi-horizon quantitative forecast, recording predictions at inception and automatically reconciling them with live market prices after horizon maturity (1D, 5D, 10D, 20D, 60D).
+
+```sql
+CREATE TABLE IF NOT EXISTS prediction_vs_actual (
+    prediction_id TEXT PRIMARY KEY,
+    ticker TEXT NOT NULL,
+    horizon TEXT NOT NULL, -- '1D', '5D', '10D', '20D', '60D'
+    timestamp_created TEXT NOT NULL,
+    timestamp_target TEXT NOT NULL,
+    entry_price REAL NOT NULL,
+    predicted_target_price REAL NOT NULL,
+    predicted_direction TEXT NOT NULL, -- 'BULLISH', 'BEARISH', 'RANGE'
+    predicted_confidence_pct REAL NOT NULL,
+    features_snapshot_json TEXT NOT NULL,
+    actual_price_at_horizon REAL,
+    actual_direction TEXT,
+    is_hit INTEGER, -- 1 if target/direction hit, 0 otherwise
+    forecast_error_pct REAL, -- abs(predicted_target - actual_price) / entry_price * 100
+    reconciliation_timestamp TEXT,
+    status TEXT DEFAULT 'PENDING' -- 'PENDING', 'RECONCILED', 'EXPIRED'
+);
+
+CREATE INDEX IF NOT EXISTS idx_pred_ticker_status ON prediction_vs_actual(ticker, status);
+CREATE INDEX IF NOT EXISTS idx_pred_target_time ON prediction_vs_actual(timestamp_target, status);
+```
+
+#### Field Glossary for `prediction_vs_actual`:
+- `prediction_id`: Cryptographic unique identifier for the forecast event (`PRED_{TICKER}_{HORIZON}_{TIMESTAMP}`).
+- `ticker`: Unified EGX ticker symbol (e.g., `COMI.CA`, `SWDY.CA`).
+- `horizon`: Investment holding period (`1D`, `5D`, `10D`, `20D`, `60D`).
+- `entry_price`: Exact spot market price at time of prediction generation.
+- `predicted_target_price`: Quant target price projected for the specified horizon.
+- `predicted_confidence_pct`: Confidence probability score ($0.0\% - 100.0\%$).
+- `actual_price_at_horizon`: Verified spot market price at `timestamp_target`.
+- `is_hit`: Binary classification ($1 = \text{Target Hit / Directional Win}$, $0 = \text{Miss}$).
+- `forecast_error_pct`: Mean Absolute Percentage Error ($\text{MAPE} = \frac{|\hat{y} - y|}{y_0} \times 100\%$).
+- `status`: Lifecycle stage (`PENDING` during active holding, `RECONCILED` once evaluated).
+
 ---
 
 ## 4. Concurrent Access & Fault-Tolerance Principles

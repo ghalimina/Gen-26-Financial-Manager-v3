@@ -93,10 +93,34 @@ The **GEN-26 Institutional Quant Platform** is an enterprise-grade quantitative 
 ## 4. High-Level Data Flow Sequence
 
 1. **Ingestion**: Raw prices, news, filings, macro rates, and London GDR prices are ingested and validated.
-2. **Feature Extraction**: 48 normalized factors are computed for each tradable stock.
+2. **Feature Extraction**: 48 normalized factors are computed for each tradable stock with sector neutralization.
 3. **Council Deliberation**: The 7 agents evaluate the stock independently and cast weighted votes.
 4. **Risk Gating**: Mark Douglas anti-revenge, sector concentration (max 35%), and dynamic ratcheting trailing stops are enforced.
 5. **Execution Advisory**: Final high-conviction recommendations (`APPROVED_BUY`, `HOLD_OR_REJECT`) are presented in the UI and recorded in the SQLite audit log.
+
+---
+
+## 5. Grand Finale Institutional Innovations (Sprints B, C & D)
+
+### 1. Reality Gap & Observability Suite
+A dedicated live verification matrix (`dashboard/templates/index.html` $\to$ `#tab-observatory`) that cross-checks reported documentation specs against the live SQLite database and in-memory engines:
+- **0 Discrepancy Invariant**: Ensures universe catalog (244), CBE policy rates (19.00%), round-trip friction (0.35%), active features (48), and DSR threshold (0.80) are 100% matched in real time.
+- **Rolling Forecast vs. Actual Tracker**: Empirical hit rate and Information Coefficient (IC) tracking across closed prediction horizons.
+
+### 2. Top 3 Golden Buy Opportunities Spotlight & Dynamic Portfolio Sizer
+- **Top 3 Golden Buy Cards**: Dynamically extracts top liquid buy-rated equities directly from the cross-sectional ranking engine.
+- **Dynamic Portfolio Sizer**: Allocates capital adhering to frozen risk rules:
+  * Rank #1: Maximum 30.0% capital allocation
+  * Rank #2: Maximum 25.0% capital allocation
+  * Rank #3: Maximum 20.0% capital allocation
+  * Emergency Cash Buffer: Minimum 25.0% - 35.0% unallocated liquidity reserved to capitalize on market drawdowns.
+
+### 3. 4-Stage Governed Promotion Gate
+Enforces Marcos López de Prado's Deflated Sharpe Ratio (DSR $\ge 0.80$) and multi-tier production gating:
+- `STAGE 1: SHADOW_MODE` (30 Sessions empirical logging)
+- `STAGE 2: PAPER_FULL` (0.35% friction & 10% CGT deduction)
+- `STAGE 3: LIVE_MICRO` (Max 5% portfolio risk allocation, DSR $\ge 0.80$)
+- `STAGE 4: SCALE_UP` (Full allocation, degradation gap $\le 20\%$)
 
 ---
 **Institutional Compliance Notice:**  

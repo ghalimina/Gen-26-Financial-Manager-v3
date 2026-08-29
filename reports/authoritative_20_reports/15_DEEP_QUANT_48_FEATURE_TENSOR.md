@@ -38,15 +38,34 @@ The **Deep Quant Feature Fusion Engine** (`core/deep_quant_fusion_engine.py`) ex
 ## 3. Normalization & Preprocessing Protocol
 
 To ensure mathematical stability and prevent gradient vanishing or outlier explosion:
-1. **Winsorization**: Extreme outliers are capped at the $1^{\text{st}}$ and $99^{\text{th}}$ percentiles:
-   $$x_{\text{clipped}} = \max(Q_{0.01}, \min(Q_{0.99}, x))$$
+1. **1st/99th Percentile Winsorization**: Applied via `FeatureRegistry` across all 48 dimensions:
+   $$x_{\text{clipped}} = \max(p_{01}, \min(p_{99}, x))$$
 2. **Robust Z-Score Normalization**:
    $$z = \frac{x_{\text{clipped}} - \text{Median}(X)}{\text{IQR}(X) / 1.349}$$
-3. **Min-Max Uniform Scaling**: Rescaled into the standardized interval $[0.0, 1.0]$.
+3. **Automated Feature Deprecation Governance**:
+   - `FeatureRegistry.evaluate_and_deprecate_features()` computes Out-of-Sample permutation importance.
+   - Any feature with importance $\le 0.00$ is flagged `DEPRECATED` and zero-weighted in production inference.
 
 ---
 
-## 4. Tensor Consumption Pipeline
+## 4. Cross-Sectional Sector Neutralization (`SectorNeutralizer`)
+
+To eliminate structural valuation and momentum biases across heterogeneous EGX sectors (e.g. Banking vs Heavy Industry vs Real Estate), `SectorNeutralizer` computes sector-relative Z-scores:
+
+$$\text{Sector-Neutral P/E } Z = \frac{\mu_{\text{Sector, P/E}} - \text{P/E}_i}{\sigma_{\text{P/E}}}$$
+
+$$\text{Sector-Neutral RSI } Z = \frac{\text{RSI}_i - \mu_{\text{Sector, RSI}}}{\sigma_{\text{RSI}}}$$
+
+$$\text{Sector-Neutral Volume } Z = \text{Volume } Z_i - \mu_{\text{Sector, Volume } Z}$$
+
+Where:
+- Lower relative P/E vs sector peers yields positive value attribution ($+Z$).
+- Higher relative RSI momentum vs sector benchmark yields positive momentum attribution.
+- Cross-sectional imputation guarantees zero `NaN` contamination via `CrossSectionalImputer`.
+
+---
+
+## 5. Tensor Consumption Pipeline
 
 The resulting $N \times 48$ tensor ($N = 244$ stocks) is streamed synchronously into:
 1. The **Two-Stage Meta-Labeling Machine Learning Model**.
