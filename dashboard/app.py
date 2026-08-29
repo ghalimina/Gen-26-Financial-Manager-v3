@@ -1599,6 +1599,65 @@ def api_research_memory_failures():
         return jsonify({"status": "ERROR", "error": str(e)}), 500
 
 
+# =============================================================================
+# 11. MULTI-SOURCE INTELLIGENCE & DEEP QUANT FUSION AI ENDPOINTS
+# =============================================================================
+
+@app.route("/api/intelligence/multi_source", methods=["GET"])
+@app.route("/api/intelligence/multi-source", methods=["GET"])
+def api_multi_source_intelligence():
+    """
+    Returns live aggregated news, disclosures, liquidity sentiment, CBE macro telemetry,
+    and global commodities / London GDRs.
+    """
+    try:
+        from core.multi_source_intelligence import MultiSourceIntelligence
+        from flask import request
+        ticker = request.args.get("ticker")
+        data = MultiSourceIntelligence.get_all_intelligence(ticker=ticker)
+        return jsonify(data), 200
+    except Exception as e:
+        return jsonify({"status": "ERROR", "error": str(e)}), 500
+
+
+@app.route("/api/signals/deep_fusion/<ticker>", methods=["GET"])
+@app.route("/api/signals/deep-fusion/<ticker>", methods=["GET"])
+def api_deep_quant_fusion(ticker):
+    """
+    Returns the 48-dimensional quant feature breakdown and Two-Stage Meta-Labeling AI confidence.
+    """
+    try:
+        from core.deep_quant_fusion_engine import DeepQuantFusionEngine
+        fusion = DeepQuantFusionEngine.compute_fusion(ticker)
+        return jsonify(fusion), 200
+    except Exception as e:
+        return jsonify({"status": "ERROR", "error": str(e)}), 500
+
+
+@app.route("/api/pipeline/run_unified", methods=["POST", "GET"])
+@app.route("/api/pipeline/run-unified", methods=["POST", "GET"])
+def api_pipeline_run_unified():
+    """
+    Executes the end-to-end unified pipeline for a stock and returns full diagnostic findings.
+    """
+    try:
+        from core.unified_pipeline_orchestrator import UnifiedPipelineOrchestrator
+        from flask import request
+        payload = request.get_json(silent=True) or {}
+        ticker = request.args.get("ticker") or payload.get("ticker", "COMI.CA")
+        trigger_res = str(request.args.get("trigger_research", payload.get("trigger_research", "false"))).lower() in ["true", "1"]
+        equity = float(request.args.get("portfolio_equity", payload.get("portfolio_equity", 100000.0)))
+        
+        result = UnifiedPipelineOrchestrator.execute_unified_pipeline(
+            ticker=ticker,
+            trigger_research=trigger_res,
+            portfolio_equity=equity
+        )
+        return jsonify(result), 200
+    except Exception as e:
+        return jsonify({"status": "ERROR", "error": str(e)}), 500
+
+
 @app.errorhandler(404)
 def handle_404_error(e):
     return jsonify({"error": "Not Found", "status": 404}), 404

@@ -548,6 +548,7 @@ class MacroEconomicEngine:
 
     # Class method alias for ecosystem consistency
     get_latest_macro_state = get_macro_telemetry
+    get_latest_macro_truth = get_macro_telemetry
 
 
 # Initialize verified baseline from state file at module load

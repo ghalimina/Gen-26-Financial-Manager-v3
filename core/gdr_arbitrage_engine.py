@@ -205,3 +205,6 @@ class GDRArbitrageEngine:
             results.append(analysis)
 
         return results
+
+    # Class method alias
+    evaluate_all_gdrs = scan_all_gdr_pairs
