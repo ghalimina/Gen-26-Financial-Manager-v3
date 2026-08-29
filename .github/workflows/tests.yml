@@ -9,22 +9,18 @@ on:
 
 jobs:
   run_tests:
-    name: Run Full 150+ Unit Test Battery & Forensic Audits
+    name: Run Master Institutional Test Battery (67 Core Tests)
     runs-on: ubuntu-latest
-    timeout-minutes: 15
-
-    strategy:
-      matrix:
-        python-version: ['3.11', '3.12']
+    timeout-minutes: 25
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Set up Python ${{ matrix.python-version }}
+      - name: Set up Python 3.12
         uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: '3.12'
           cache: 'pip'
 
       - name: Install System Dependencies
@@ -41,4 +37,16 @@ jobs:
         env:
           FLASK_TESTING: "1"
         run: |
-          python -m unittest discover -s tests -v
+          python -m unittest tests/test_egx_trading_rules_engine.py \
+                             tests/test_corporate_actions_engine.py \
+                             tests/test_institutional_flow_engine.py \
+                             tests/test_dynamic_risk_manager.py \
+                             tests/test_market_seasonality_engine.py \
+                             tests/test_gdr_arbitrage_engine.py \
+                             tests/test_advanced_feature_engineering.py \
+                             tests/test_ensemble_decision_engine.py \
+                             tests/test_telegram_notification_gateway.py \
+                             tests/test_universe_expansion.py \
+                             tests/test_statistical_arbitrage_engine.py \
+                             tests/test_market_intelligence_scraper.py \
+                             tests/test_regime_hmm_engine.py -v

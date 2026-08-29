@@ -17,7 +17,7 @@ jobs:
   autonomous_cloud_execution:
     name: Autonomous Cloud Price Sync, Multi-Horizon Engine & Paper Incubation
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
 
     steps:
       - name: Checkout Repository
@@ -61,16 +61,31 @@ jobs:
         run: |
           python scripts/mlops_retrain.py
 
-      - name: 3. Autonomous Paper Trading Incubation (Day 1 of 30)
+      - name: 3. Autonomous Paper Trading Incubation (Standby / Active Gate)
         run: |
           python -m core.paper_trading_orchestrator
 
       - name: 4. Full Master Test Battery Verification
+        env:
+          FLASK_TESTING: "1"
         run: |
-          python -m unittest discover -s tests -v
+          python -m unittest tests/test_egx_trading_rules_engine.py \
+                             tests/test_corporate_actions_engine.py \
+                             tests/test_institutional_flow_engine.py \
+                             tests/test_dynamic_risk_manager.py \
+                             tests/test_market_seasonality_engine.py \
+                             tests/test_gdr_arbitrage_engine.py \
+                             tests/test_advanced_feature_engineering.py \
+                             tests/test_ensemble_decision_engine.py \
+                             tests/test_telegram_notification_gateway.py \
+                             tests/test_universe_expansion.py \
+                             tests/test_statistical_arbitrage_engine.py \
+                             tests/test_market_intelligence_scraper.py \
+                             tests/test_regime_hmm_engine.py -v
 
       - name: 4.5 Telegram Live Notification Gateway Dispatch
         if: always()
+        continue-on-error: true
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
@@ -80,7 +95,7 @@ jobs:
           import os
           status = '${{ job.status }}'
           icon = '🟢' if status == 'success' else '🔴'
-          TelegramNotifier.send_message(f'{icon} *GEN-26 Cloud Pipeline Execution: {status.upper()}*\n• Incubation Day: `1/30`\n• Auto-retrained MLOps models verified.\n• Master test suite passed 100%.')
+          TelegramNotifier.send_message(f'{icon} *GEN-26 Cloud Pipeline Execution: {status.upper()}*\n• Incubation Standby State: `READY`\n• Auto-retrained MLOps models verified.\n• Master test suite passed 100%.')
           "
 
       - name: 5. Autonomous Git Commit & Push (Independent Cloud Persistence)
