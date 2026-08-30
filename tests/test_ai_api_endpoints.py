@@ -100,6 +100,26 @@ class TestAIApiEndpoints(unittest.TestCase):
         self.assertIn("health_score", data)
         self.assertAlmostEqual(data["health_score"], 50.0, delta=5.0)
 
+    def test_07_api_trading_agents_debate_success(self):
+        """Verify GET /api/v1/trading-agents/debate/COMI.CA returns complete multi-agent deliberation."""
+        response = self.app.get("/api/v1/trading-agents/debate/COMI.CA")
+        self.assertEqual(response.status_code, 200)
+        data = response.get_json()
+        self.assertEqual(data["ticker"], "COMI.CA")
+        self.assertIn("analyst_team", data)
+        self.assertIn("debate", data)
+        self.assertIn("proposal", data)
+        self.assertIn("executive_decision", data)
+
+    def test_08_api_trading_agents_scan_success(self):
+        """Verify GET /api/v1/trading-agents/scan returns scan across focus equities."""
+        response = self.app.get("/api/v1/trading-agents/scan")
+        self.assertEqual(response.status_code, 200)
+        data = response.get_json()
+        self.assertIn("count", data)
+        self.assertIn("scan_results", data)
+        self.assertGreater(data["count"], 0)
+
 
 if __name__ == "__main__":
     unittest.main()

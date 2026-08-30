@@ -124,8 +124,8 @@ class MultiLayerScanner:
     def evaluate_layer_sentiment(cls, ticker: str) -> Dict[str, Any]:
         from core.news_deduplication_engine import NewsDeduplicationEngine
         articles = [
-            {"id": "art1", "title": f\"profit growth for {ticker}\", "source": "Mubasher", "sentiment_score": 0.85},
-            {"id": "art2", "title": f\"expansion plans for {ticker}\", "source": "Reuters", "sentiment_score": 0.80}
+            {"id": "art1", "title": f"profit growth for {ticker}", "source": "Mubasher", "sentiment_score": 0.85},
+            {"id": "art2", "title": f"expansion plans for {ticker}", "source": "Reuters", "sentiment_score": 0.80}
         ]
         deduped = NewsDeduplicationEngine.cluster_and_deduplicate(articles)
         return {

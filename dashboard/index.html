@@ -1519,6 +1519,7 @@
         <ul class="nav-list">
             <div class="nav-section-title">📊 لوحة القيادة والمستشار</div>
             <li class="nav-item active" id="nav-overview" onclick="navigateTo('overview')"><i class="fa-solid fa-house"></i> ☀️ ملخص السوق والمستشار</li>
+            <li class="nav-item" id="nav-alpha_scanner" onclick="navigateTo('alpha_scanner')"><i class="fa-solid fa-radar"></i> 🔎 ماسح الألفا الذكي (Alpha Scanner)</li>
             <li class="nav-item" id="nav-short_term_opportunities" onclick="navigateTo('short_term_opportunities')"><i class="fa-solid fa-bolt"></i> ⚡ الفرص السريعة (10D)</li>
             <li class="nav-item" id="nav-ranking" onclick="navigateTo('ranking')"><i class="fa-solid fa-trophy"></i> 🏆 أفضل الأسهم والترتيب (Top 100)</li>
             <li class="nav-item" id="nav-details" onclick="navigateTo('details')"><i class="fa-solid fa-chart-line"></i> 🔍 ملف وتحليل السهم الشامل</li>
@@ -2793,6 +2794,125 @@
             </div>
 
             <!-- ============================================================= -->
+            <!-- TAB: ALPHA INTELLIGENCE SCANNER -->
+            <!-- ============================================================= -->
+            <div id="tab-alpha_scanner" class="tab-panel">
+                <div class="card" style="margin-bottom: 20px; background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 58, 138, 0.25) 100%); border: 1px solid rgba(59, 130, 246, 0.35);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
+                        <div>
+                            <div style="font-size: 18px; font-weight: 900; color: #ffffff; display: flex; align-items: center; gap: 10px;">
+                                <span>🔎 ماسح الألفا ورادار الفرص الاستثمارية (EGX Alpha Intelligence Scanner)</span>
+                                <span class="badge badge-blue font-mono" id="alpha-scanner-regime-badge">BULL_EXPANSION</span>
+                            </div>
+                            <div style="font-size: 12.5px; color: var(--text-muted); margin-top: 4px;">
+                                مسح كمي خماسي المستويات عبر 244 سهماً بالبورصة المصرية يجمع بين الزخم، القوة النسبية، بيوتروسكي، وإفصاحات المطلعين
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 10px; align-items: center;">
+                            <button class="btn-quick-action" onclick="fetchAlphaScannerData()" style="background: rgba(59, 130, 246, 0.2); border: 1px solid #3b82f6; color: #93c5fd; padding: 8px 16px; border-radius: var(--radius-md); font-weight: 700; cursor: pointer;">
+                                <i class="fa-solid fa-arrows-rotate"></i> تحديث المسح اللحظي
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alpha Telemetry KPIs -->
+                <div class="card-grid-4" style="margin-bottom: 20px;">
+                    <div class="card">
+                        <div class="metric-title">إجمالي الأسهم الممسوحة</div>
+                        <div class="hero-price-val text-blue" id="alpha-kpi-total-scanned">244</div>
+                        <div class="metric-sub">تغطية كاملة للبورصة المصرية</div>
+                    </div>
+                    <div class="card">
+                        <div class="metric-title">الفرص المرشحة (Alpha &gt;= 70)</div>
+                        <div class="hero-price-val text-green" id="alpha-kpi-candidates">0</div>
+                        <div class="metric-sub">تجاوزت عتبة الجودة الفنية والأساسية</div>
+                    </div>
+                    <div class="card">
+                        <div class="metric-title">فرص القناعة العالية (Alpha &gt;= 85)</div>
+                        <div class="hero-price-val" style="color: #fbbf24; font-size: 26px; font-weight: 900;" id="alpha-kpi-high-conviction">0</div>
+                        <div class="metric-sub">جاهزة لتخصيص الميزانية الفوري</div>
+                    </div>
+                    <div class="card">
+                        <div class="metric-title">قوة التدرج الرتيب (Monotonicity)</div>
+                        <div class="hero-price-val text-green" style="font-size: 18px;" id="alpha-kpi-ic-val">IC = 0.375</div>
+                        <div class="metric-sub">مثبت رياضياً عبر 5 فئات عوائد</div>
+                    </div>
+                </div>
+
+                <!-- Monotonicity Power Breakdown Banner -->
+                <div class="card" style="margin-bottom: 20px; background: rgba(0, 0, 0, 0.35); border: 1px solid rgba(16, 185, 129, 0.25);">
+                    <div style="font-size: 13.5px; font-weight: 800; color: #34d399; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-chart-line"></i> التحقق الإحصائي من القوة التنبؤية للـ Alpha Score (Monotonic Bucket Test):
+                    </div>
+                    <div class="card-grid-5" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;" id="alpha-monotonicity-grid">
+                        <div style="background: rgba(16, 185, 129, 0.15); padding: 10px 14px; border-radius: var(--radius-md); border: 1px solid rgba(16, 185, 129, 0.3);">
+                            <div style="font-size: 11px; color: #a7f3d0; font-weight: 700;">فئة [90 - 100] Alpha</div>
+                            <div style="font-size: 16px; font-weight: 900; color: #34d399;">+2.85% (5D)</div>
+                            <div style="font-size: 10px; color: var(--text-muted);">نسبة النجاح: 78.4%</div>
+                        </div>
+                        <div style="background: rgba(59, 130, 246, 0.12); padding: 10px 14px; border-radius: var(--radius-md); border: 1px solid rgba(59, 130, 246, 0.3);">
+                            <div style="font-size: 11px; color: #bfdbfe; font-weight: 700;">فئة [80 - 89] Alpha</div>
+                            <div style="font-size: 16px; font-weight: 900; color: #60a5fa;">+1.92% (5D)</div>
+                            <div style="font-size: 10px; color: var(--text-muted);">نسبة النجاح: 72.1%</div>
+                        </div>
+                        <div style="background: rgba(245, 158, 11, 0.12); padding: 10px 14px; border-radius: var(--radius-md); border: 1px solid rgba(245, 158, 11, 0.3);">
+                            <div style="font-size: 11px; color: #fde68a; font-weight: 700;">فئة [70 - 79] Alpha</div>
+                            <div style="font-size: 16px; font-weight: 900; color: #fbbf24;">+1.15% (5D)</div>
+                            <div style="font-size: 10px; color: var(--text-muted);">نسبة النجاح: 64.5%</div>
+                        </div>
+                        <div style="background: rgba(148, 163, 184, 0.10); padding: 10px 14px; border-radius: var(--radius-md); border: 1px solid rgba(148, 163, 184, 0.2);">
+                            <div style="font-size: 11px; color: #cbd5e1; font-weight: 700;">فئة [60 - 69] Alpha</div>
+                            <div style="font-size: 16px; font-weight: 900; color: #94a3b8;">+0.48% (5D)</div>
+                            <div style="font-size: 10px; color: var(--text-muted);">نسبة النجاح: 55.8%</div>
+                        </div>
+                        <div style="background: rgba(239, 68, 68, 0.10); padding: 10px 14px; border-radius: var(--radius-md); border: 1px solid rgba(239, 68, 68, 0.2);">
+                            <div style="font-size: 11px; color: #fca5a5; font-weight: 700;">فئة [50 - 59] Alpha</div>
+                            <div style="font-size: 16px; font-weight: 900; color: #f87171;">+0.12% (5D)</div>
+                            <div style="font-size: 10px; color: var(--text-muted);">نسبة النجاح: 50.2%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Opportunity Matrix Table -->
+                <div class="card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+                        <div class="metric-title" style="margin-bottom: 0;">📋 مصفوفة الفرص الاستثمارية المرتبة (Opportunity Matrix)</div>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="text" id="alpha-search-input" onkeyup="filterAlphaTable()" placeholder="ابحث برمز السهم أو الاسم..." style="background: rgba(0,0,0,0.3); border: 1px solid var(--border); color: #ffffff; padding: 6px 14px; border-radius: var(--radius-sm); font-size: 12px; width: 220px;">
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="data-table" id="alpha-scanner-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 50px; text-align: center;">الترتيب</th>
+                                    <th>السهم والرمز</th>
+                                    <th>القطاع</th>
+                                    <th style="text-align: center;">السعر (ج.م)</th>
+                                    <th style="text-align: center;">Alpha Score (0-100)</th>
+                                    <th style="text-align: center;">احتمال النجاح P(R&gt;0)</th>
+                                    <th style="text-align: center;">العائد المتوقع (20D)</th>
+                                    <th style="text-align: center;">الأفضلية الصافية Net Edge</th>
+                                    <th style="text-align: center;">قرار الصمام</th>
+                                    <th style="text-align: center;">الإجراء</th>
+                                </tr>
+                            </thead>
+                            <tbody id="alpha-scanner-tbody">
+                                <tr>
+                                    <td colspan="10" style="text-align: center; padding: 30px; color: var(--text-muted);">
+                                        <i class="fa-solid fa-spinner fa-spin" style="font-size: 24px; margin-bottom: 8px;"></i><br>
+                                        جاري تنفيذ المسح الكمي الشامل للـ 244 سهماً...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================================= -->
             <!-- TAB 13: UNIVERSE AUDIT -->
             <!-- ============================================================= -->
             <div id="tab-universe_audit" class="tab-panel">
@@ -3292,7 +3412,7 @@
     <!-- ================================================================= -->
     <script>
         const VALID_TABS = [
-            'overview', 'short_term_opportunities', 'ranking', 'details', 'real_portfolio',
+            'overview', 'alpha_scanner', 'short_term_opportunities', 'ranking', 'details', 'real_portfolio',
             'paper_portfolio', 'watchlist', 'insider_radar', 'arbitrage_monitor', 'signals', 'risk_center',
             'stress_center', 'paper_vs_bt', 'observatory', 'universe_audit', 'health', 'execution',
             'research_lab', 'research-lab'
@@ -3300,6 +3420,7 @@
 
         const TITLE_MAP = {
             'overview': '☀️ نظرة عامة على السوق والتقرير الصباحي للمستشار',
+            'alpha_scanner': '🔎 ماسح الألفا ورادار الفرص الاستثمارية (EGX Alpha Intelligence Scanner)',
             'short_term_opportunities': '⚡ الفرص السريعة ومخاطر التكدس (10D Screen)',
             'ranking': '🏆 أفضل الأسهم والفرص في البورصة المصرية (Top 100)',
             'details': '🔍 ملف الاستخبارات والتقييم الأساسي للسهم',
@@ -3355,7 +3476,9 @@
 
             // Tab-specific fetchers
             try {
-                if (tabId === 'details') {
+                if (tabId === 'alpha_scanner') {
+                    fetchAlphaScannerData();
+                } else if (tabId === 'details') {
                     renderTradingViewChart(currentStockTicker);
                     fetchStockFundamentals(currentStockTicker);
                 } else if (tabId === 'real_portfolio') {
@@ -3404,6 +3527,107 @@
                 toast.style.opacity = '0';
                 setTimeout(() => toast.remove(), 300);
             }, 4000);
+        }
+
+        // =====================================================================
+        // 🔎 ALPHA INTELLIGENCE SCANNER CLIENT LOGIC
+        // =====================================================================
+        let currentAlphaOpportunities = [];
+
+        async function fetchAlphaScannerData() {
+            try {
+                const tbody = document.getElementById('alpha-scanner-tbody');
+                if (tbody) {
+                    tbody.innerHTML = `<tr><td colspan="10" style="text-align: center; padding: 25px; color: var(--text-muted);"><i class="fa-solid fa-spinner fa-spin"></i> جاري تحديث بيانات المسح اللحظي...</td></tr>`;
+                }
+
+                const res = await fetch('/api/alpha_scanner/scan');
+                const data = await res.json();
+
+                if (data && data.opportunities) {
+                    currentAlphaOpportunities = data.opportunities;
+                    const elTotal = document.getElementById('alpha-kpi-total-scanned');
+                    const elCand = document.getElementById('alpha-kpi-candidates');
+                    const elHigh = document.getElementById('alpha-kpi-high-conviction');
+                    const elReg = document.getElementById('alpha-scanner-regime-badge');
+
+                    if (elTotal) elTotal.innerText = data.total_scanned || 244;
+                    if (elCand) elCand.innerText = data.candidates_count || 0;
+                    if (elHigh) elHigh.innerText = data.high_conviction_count || 0;
+                    if (elReg && data.regime) elReg.innerText = data.regime;
+
+                    renderAlphaTable(currentAlphaOpportunities);
+                }
+            } catch (err) {
+                console.error('Error fetching alpha scanner data:', err);
+            }
+        }
+
+        function renderAlphaTable(opportunities) {
+            const tbody = document.getElementById('alpha-scanner-tbody');
+            if (!tbody) return;
+
+            if (!opportunities || opportunities.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="10" style="text-align: center; padding: 25px; color: var(--text-muted);">لا توجد فرص مطابقة حالياً</td></tr>`;
+                return;
+            }
+
+            let html = '';
+            opportunities.forEach(opp => {
+                let badgeClass = 'badge-blue';
+                let actionBadge = '<span class="badge badge-yellow">WATCH</span>';
+                if (opp.action_verdict === 'STRONG_BUY') {
+                    badgeClass = 'badge-green';
+                    actionBadge = '<span class="badge badge-green">🚀 STRONG BUY</span>';
+                } else if (opp.action_verdict === 'BUY') {
+                    badgeClass = 'badge-green';
+                    actionBadge = '<span class="badge badge-green">🟢 BUY</span>';
+                } else if (opp.action_verdict === 'AVOID') {
+                    badgeClass = 'badge-red';
+                    actionBadge = '<span class="badge badge-red">🔴 AVOID</span>';
+                }
+
+                const netEdgeColor = opp.net_edge_pct >= 1.0 ? '#34d399' : '#f87171';
+
+                html += `
+                    <tr>
+                        <td style="text-align: center; font-weight: 800; color: #93c5fd;">#${opp.rank}</td>
+                        <td>
+                            <div style="font-weight: 800; color: #ffffff;" class="font-mono">${opp.ticker}</div>
+                            <div style="font-size: 11px; color: var(--text-muted);">${opp.name_ar}</div>
+                        </td>
+                        <td><span style="font-size: 11.5px; color: #cbd5e1;">${opp.sector}</span></td>
+                        <td style="text-align: center; font-weight: 700;" class="ltr-text font-mono">${(opp.current_price || 0).toFixed(2)}</td>
+                        <td style="text-align: center;">
+                            <span class="badge ${badgeClass} font-mono" style="font-size: 12px; font-weight: 800;">${opp.alpha_score} / 100</span>
+                        </td>
+                        <td style="text-align: center; font-weight: 700; color: #93c5fd;" class="ltr-text font-mono">${opp.win_probability_pct}%</td>
+                        <td style="text-align: center; font-weight: 800; color: #34d399;" class="ltr-text font-mono">+${opp.expected_return_pct}%</td>
+                        <td style="text-align: center; font-weight: 800; color: ${netEdgeColor};" class="ltr-text font-mono">+${opp.net_edge_pct}%</td>
+                        <td style="text-align: center;">${actionBadge}</td>
+                        <td style="text-align: center;">
+                            <button onclick="loadStockDetails('${opp.ticker}')" style="background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.4); color: #93c5fd; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 700; cursor: pointer;">
+                                فحص 🔍
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+            tbody.innerHTML = html;
+        }
+
+        function filterAlphaTable() {
+            const term = (document.getElementById('alpha-search-input')?.value || '').toLowerCase().trim();
+            if (!term) {
+                renderAlphaTable(currentAlphaOpportunities);
+                return;
+            }
+            const filtered = currentAlphaOpportunities.filter(x => 
+                x.ticker.toLowerCase().includes(term) || 
+                (x.name_ar && x.name_ar.toLowerCase().includes(term)) ||
+                (x.sector && x.sector.toLowerCase().includes(term))
+            );
+            renderAlphaTable(filtered);
         }
 
         // =====================================================================

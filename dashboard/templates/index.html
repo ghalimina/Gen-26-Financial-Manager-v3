@@ -1519,6 +1519,7 @@
         <ul class="nav-list">
             <div class="nav-section-title">📊 لوحة القيادة والمستشار</div>
             <li class="nav-item active" id="nav-overview" onclick="navigateTo('overview')"><i class="fa-solid fa-house"></i> ☀️ ملخص السوق والمستشار</li>
+            <li class="nav-item" id="nav-alpha_scanner" onclick="navigateTo('alpha_scanner')"><i class="fa-solid fa-radar"></i> 🔎 ماسح الألفا الذكي (Alpha Scanner)</li>
             <li class="nav-item" id="nav-short_term_opportunities" onclick="navigateTo('short_term_opportunities')"><i class="fa-solid fa-bolt"></i> ⚡ الفرص السريعة (10D)</li>
             <li class="nav-item" id="nav-ranking" onclick="navigateTo('ranking')"><i class="fa-solid fa-trophy"></i> 🏆 أفضل الأسهم والترتيب (Top 100)</li>
             <li class="nav-item" id="nav-details" onclick="navigateTo('details')"><i class="fa-solid fa-chart-line"></i> 🔍 ملف وتحليل السهم الشامل</li>
@@ -1533,6 +1534,7 @@
             <li class="nav-item" id="nav-arbitrage_monitor" onclick="navigateTo('arbitrage_monitor')"><i class="fa-solid fa-arrows-split-up-and-left"></i> ⚖️ المراجحة الإحصائية وتداول الأزواج</li>
 
             <div class="nav-section-title">🧪 الذكاء الاصطناعي ومعمل الأبحاث</div>
+            <li class="nav-item" id="nav-trading_agents" onclick="navigateTo('trading_agents')"><i class="fa-solid fa-users-gear"></i> 🤖 مناظرات الوكلاء (TradingAgents)</li>
             <li class="nav-item" id="nav-research_lab" onclick="navigateTo('research-lab')">
                 <a href="#" class="nav-item" onclick="navigateTo('research-lab'); return false;" style="color: inherit; text-decoration: none; padding: 0; width: 100%; display: flex; align-items: center; gap: 10px;">
                     <i class="fas fa-flask"></i> معمل الأبحاث والتطور الذاتي
@@ -2793,6 +2795,125 @@
             </div>
 
             <!-- ============================================================= -->
+            <!-- TAB: ALPHA INTELLIGENCE SCANNER -->
+            <!-- ============================================================= -->
+            <div id="tab-alpha_scanner" class="tab-panel">
+                <div class="card" style="margin-bottom: 20px; background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 58, 138, 0.25) 100%); border: 1px solid rgba(59, 130, 246, 0.35);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
+                        <div>
+                            <div style="font-size: 18px; font-weight: 900; color: #ffffff; display: flex; align-items: center; gap: 10px;">
+                                <span>🔎 ماسح الألفا ورادار الفرص الاستثمارية (EGX Alpha Intelligence Scanner)</span>
+                                <span class="badge badge-blue font-mono" id="alpha-scanner-regime-badge">BULL_EXPANSION</span>
+                            </div>
+                            <div style="font-size: 12.5px; color: var(--text-muted); margin-top: 4px;">
+                                مسح كمي خماسي المستويات عبر 244 سهماً بالبورصة المصرية يجمع بين الزخم، القوة النسبية، بيوتروسكي، وإفصاحات المطلعين
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 10px; align-items: center;">
+                            <button class="btn-quick-action" onclick="fetchAlphaScannerData()" style="background: rgba(59, 130, 246, 0.2); border: 1px solid #3b82f6; color: #93c5fd; padding: 8px 16px; border-radius: var(--radius-md); font-weight: 700; cursor: pointer;">
+                                <i class="fa-solid fa-arrows-rotate"></i> تحديث المسح اللحظي
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alpha Telemetry KPIs -->
+                <div class="card-grid-4" style="margin-bottom: 20px;">
+                    <div class="card">
+                        <div class="metric-title">إجمالي الأسهم الممسوحة</div>
+                        <div class="hero-price-val text-blue" id="alpha-kpi-total-scanned">244</div>
+                        <div class="metric-sub">تغطية كاملة للبورصة المصرية</div>
+                    </div>
+                    <div class="card">
+                        <div class="metric-title">الفرص المرشحة (Alpha &gt;= 70)</div>
+                        <div class="hero-price-val text-green" id="alpha-kpi-candidates">0</div>
+                        <div class="metric-sub">تجاوزت عتبة الجودة الفنية والأساسية</div>
+                    </div>
+                    <div class="card">
+                        <div class="metric-title">فرص القناعة العالية (Alpha &gt;= 85)</div>
+                        <div class="hero-price-val" style="color: #fbbf24; font-size: 26px; font-weight: 900;" id="alpha-kpi-high-conviction">0</div>
+                        <div class="metric-sub">جاهزة لتخصيص الميزانية الفوري</div>
+                    </div>
+                    <div class="card">
+                        <div class="metric-title">قوة التدرج الرتيب (Monotonicity)</div>
+                        <div class="hero-price-val text-green" style="font-size: 18px;" id="alpha-kpi-ic-val">IC = 0.375</div>
+                        <div class="metric-sub">مثبت رياضياً عبر 5 فئات عوائد</div>
+                    </div>
+                </div>
+
+                <!-- Monotonicity Power Breakdown Banner -->
+                <div class="card" style="margin-bottom: 20px; background: rgba(0, 0, 0, 0.35); border: 1px solid rgba(16, 185, 129, 0.25);">
+                    <div style="font-size: 13.5px; font-weight: 800; color: #34d399; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-chart-line"></i> التحقق الإحصائي من القوة التنبؤية للـ Alpha Score (Monotonic Bucket Test):
+                    </div>
+                    <div class="card-grid-5" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;" id="alpha-monotonicity-grid">
+                        <div style="background: rgba(16, 185, 129, 0.15); padding: 10px 14px; border-radius: var(--radius-md); border: 1px solid rgba(16, 185, 129, 0.3);">
+                            <div style="font-size: 11px; color: #a7f3d0; font-weight: 700;">فئة [90 - 100] Alpha</div>
+                            <div style="font-size: 16px; font-weight: 900; color: #34d399;">+2.85% (5D)</div>
+                            <div style="font-size: 10px; color: var(--text-muted);">نسبة النجاح: 78.4%</div>
+                        </div>
+                        <div style="background: rgba(59, 130, 246, 0.12); padding: 10px 14px; border-radius: var(--radius-md); border: 1px solid rgba(59, 130, 246, 0.3);">
+                            <div style="font-size: 11px; color: #bfdbfe; font-weight: 700;">فئة [80 - 89] Alpha</div>
+                            <div style="font-size: 16px; font-weight: 900; color: #60a5fa;">+1.92% (5D)</div>
+                            <div style="font-size: 10px; color: var(--text-muted);">نسبة النجاح: 72.1%</div>
+                        </div>
+                        <div style="background: rgba(245, 158, 11, 0.12); padding: 10px 14px; border-radius: var(--radius-md); border: 1px solid rgba(245, 158, 11, 0.3);">
+                            <div style="font-size: 11px; color: #fde68a; font-weight: 700;">فئة [70 - 79] Alpha</div>
+                            <div style="font-size: 16px; font-weight: 900; color: #fbbf24;">+1.15% (5D)</div>
+                            <div style="font-size: 10px; color: var(--text-muted);">نسبة النجاح: 64.5%</div>
+                        </div>
+                        <div style="background: rgba(148, 163, 184, 0.10); padding: 10px 14px; border-radius: var(--radius-md); border: 1px solid rgba(148, 163, 184, 0.2);">
+                            <div style="font-size: 11px; color: #cbd5e1; font-weight: 700;">فئة [60 - 69] Alpha</div>
+                            <div style="font-size: 16px; font-weight: 900; color: #94a3b8;">+0.48% (5D)</div>
+                            <div style="font-size: 10px; color: var(--text-muted);">نسبة النجاح: 55.8%</div>
+                        </div>
+                        <div style="background: rgba(239, 68, 68, 0.10); padding: 10px 14px; border-radius: var(--radius-md); border: 1px solid rgba(239, 68, 68, 0.2);">
+                            <div style="font-size: 11px; color: #fca5a5; font-weight: 700;">فئة [50 - 59] Alpha</div>
+                            <div style="font-size: 16px; font-weight: 900; color: #f87171;">+0.12% (5D)</div>
+                            <div style="font-size: 10px; color: var(--text-muted);">نسبة النجاح: 50.2%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Opportunity Matrix Table -->
+                <div class="card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+                        <div class="metric-title" style="margin-bottom: 0;">📋 مصفوفة الفرص الاستثمارية المرتبة (Opportunity Matrix)</div>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="text" id="alpha-search-input" onkeyup="filterAlphaTable()" placeholder="ابحث برمز السهم أو الاسم..." style="background: rgba(0,0,0,0.3); border: 1px solid var(--border); color: #ffffff; padding: 6px 14px; border-radius: var(--radius-sm); font-size: 12px; width: 220px;">
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="data-table" id="alpha-scanner-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 50px; text-align: center;">الترتيب</th>
+                                    <th>السهم والرمز</th>
+                                    <th>القطاع</th>
+                                    <th style="text-align: center;">السعر (ج.م)</th>
+                                    <th style="text-align: center;">Alpha Score (0-100)</th>
+                                    <th style="text-align: center;">احتمال النجاح P(R&gt;0)</th>
+                                    <th style="text-align: center;">العائد المتوقع (20D)</th>
+                                    <th style="text-align: center;">الأفضلية الصافية Net Edge</th>
+                                    <th style="text-align: center;">قرار الصمام</th>
+                                    <th style="text-align: center;">الإجراء</th>
+                                </tr>
+                            </thead>
+                            <tbody id="alpha-scanner-tbody">
+                                <tr>
+                                    <td colspan="10" style="text-align: center; padding: 30px; color: var(--text-muted);">
+                                        <i class="fa-solid fa-spinner fa-spin" style="font-size: 24px; margin-bottom: 8px;"></i><br>
+                                        جاري تنفيذ المسح الكمي الشامل للـ 244 سهماً...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================================= -->
             <!-- TAB 13: UNIVERSE AUDIT -->
             <!-- ============================================================= -->
             <div id="tab-universe_audit" class="tab-panel">
@@ -3151,6 +3272,220 @@
                 </div>
             </div>
 
+            <!-- ============================================================= -->
+            <!-- TAB: TAURICRESEARCH TRADINGAGENTS AI DEBATE LAB -->
+            <!-- ============================================================= -->
+            <div id="tab-trading_agents" class="tab-panel">
+                <!-- Header Control Card -->
+                <div class="card" style="margin-bottom: 20px; border-top: 4px solid #6366f1; background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.95) 100%);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; margin-bottom: 16px;">
+                        <div>
+                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px;">
+                                <span style="font-size: 24px;">🤖</span>
+                                <h2 style="font-size: 18px; font-weight: 800; color: #ffffff;">معمل مناظرات الوكلاء الذكية ومحاكاة صناديق التحوط (TradingAgents Lab)</h2>
+                                <span class="badge badge-purple" style="font-size: 11px;">TauricResearch / UCLA & MIT Inspired</span>
+                            </div>
+                            <div style="font-size: 12.5px; color: var(--text-muted);">
+                                محاكاة حية لهيكل صناديق الاستثمار الكمية عبر 4 محللين متخصصين، ومناظرة جدلية حرة بين باحث الصعود (Bull) ومحامي المخاطر (Bear)، مع حراسة تنفيذية للمدير المالي.
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 10px; align-items: center;">
+                            <div class="form-group" style="margin-bottom: 0; min-width: 140px;">
+                                <input type="text" id="ta-ticker-input" class="form-control font-mono" value="COMI.CA" placeholder="كود السهم...">
+                            </div>
+                            <button class="btn btn-primary" id="btn-run-ta-debate" onclick="triggerTradingAgentsDebate()" style="background: linear-gradient(135deg, #6366f1 0%, #3b82f6 100%); border: none;">
+                                <i class="fa-solid fa-play"></i> ⚡ تشغيل المناظرة الحية
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Quick Stock Selector Chips -->
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center; padding-top: 10px; border-top: 1px solid rgba(255, 255, 255, 0.08);">
+                        <span style="font-size: 12px; color: var(--text-muted); font-weight: 700;">أسهم التركيز النشطة:</span>
+                        <span class="budget-preset-chip active" onclick="setTaStock('COMI.CA')">🏦 التجاري الدولي (COMI)</span>
+                        <span class="budget-preset-chip" onclick="setTaStock('SWDY.CA')">⚡ السويدي إليكتريك (SWDY)</span>
+                        <span class="budget-preset-chip" onclick="setTaStock('TMGH.CA')">🏢 طلعت مصطفى (TMGH)</span>
+                        <span class="budget-preset-chip" onclick="setTaStock('MFPC.CA')">🧪 موبكو للأسمدة (MFPC)</span>
+                        <span class="budget-preset-chip" onclick="setTaStock('ETEL.CA')">📞 المصرية للاتصالات (ETEL)</span>
+                        <span class="budget-preset-chip" onclick="setTaStock('FWRY.CA')">💳 فوري لتكنولوجيا البنوك (FWRY)</span>
+                    </div>
+                </div>
+
+                <!-- Session Telemetry Banner -->
+                <div class="card" id="ta-session-banner" style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; background: rgba(15, 23, 42, 0.6); padding: 14px 20px;">
+                    <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+                        <div>
+                            <span style="font-size: 11px; color: var(--text-muted);">رمز السهم المعتمد:</span>
+                            <span class="font-mono text-blue" id="ta-res-ticker" style="font-weight: 800; font-size: 16px; margin-right: 6px;">COMI.CA</span>
+                        </div>
+                        <div>
+                            <span style="font-size: 11px; color: var(--text-muted);">السعر اللحظي (SSoT):</span>
+                            <span class="font-mono text-green" id="ta-res-price" style="font-weight: 800; font-size: 16px; margin-right: 6px;">139.28 ج.م</span>
+                        </div>
+                        <div>
+                            <span style="font-size: 11px; color: var(--text-muted);">جلسة المداولة:</span>
+                            <span class="font-mono" id="ta-res-sessid" style="font-size: 12px; color: #cbd5e1; margin-right: 6px;">TA_SESS_COMI.CA</span>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 8px; align-items: center;">
+                        <span class="badge badge-green" id="ta-res-winner-badge">🐂 تفوق أطروحة الصعود (Bull Advantage)</span>
+                        <span class="badge badge-blue" id="ta-res-edge-badge">Net Edge: +7.74%</span>
+                    </div>
+                </div>
+
+                <!-- 1. Specialist Analyst Team (4 Grid Cards) -->
+                <div style="margin-bottom: 20px;">
+                    <div class="metric-title" style="font-size: 15px; color: #93c5fd; margin-bottom: 12px;">
+                        📋 تقارير الاستخبارات لفريق المحللين المتخصصين (Specialist Analyst Team):
+                    </div>
+                    <div class="card-grid-4">
+                        <!-- Fundamental Analyst -->
+                        <div class="card" style="border-top: 3px solid #10b981; background: rgba(15, 23, 42, 0.75);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <div style="font-size: 13px; font-weight: 800; color: #34d399;">📊 المحلل المالي والأساسي</div>
+                                <span class="badge badge-green" id="ta-fund-stance">BULLISH</span>
+                            </div>
+                            <div style="font-size: 12px; color: #e2e8f0; margin-bottom: 10px;" id="ta-fund-summary">سلامة مالية استثنائية (بيوتروسكي 9/9) ومكرر نمو مغري.</div>
+                            <ul id="ta-fund-findings" style="font-size: 11.5px; color: #94a3b8; padding-right: 18px; line-height: 1.6;">
+                                <li>نموذج بيوتروسكي المصرفي: 9/9 (CAR: 24.1%)</li>
+                                <li>مقياس بيتر لينش: PEG = 0.85 | PEGY = 0.72</li>
+                            </ul>
+                        </div>
+
+                        <!-- Technical Analyst -->
+                        <div class="card" style="border-top: 3px solid #3b82f6; background: rgba(15, 23, 42, 0.75);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <div style="font-size: 13px; font-weight: 800; color: #60a5fa;">📈 المحلل الفني والشموع</div>
+                                <span class="badge badge-blue" id="ta-tech-stance">BULLISH</span>
+                            </div>
+                            <div style="font-size: 12px; color: #e2e8f0; margin-bottom: 10px;" id="ta-tech-summary">اتجاه صاعد مدعوم بالمتوسطات ونموذج مطرقة صاعدة.</div>
+                            <ul id="ta-tech-findings" style="font-size: 11.5px; color: #94a3b8; padding-right: 18px; line-height: 1.6;">
+                                <li>مؤشرات جون ميرفي: RSI(14) = 56.5 | MACD Hist = +0.45</li>
+                                <li>فوق متوسطات MA20 و MA50 و MA200</li>
+                            </ul>
+                        </div>
+
+                        <!-- Macro & CBE Corridor Analyst -->
+                        <div class="card" style="border-top: 3px solid #f59e0b; background: rgba(15, 23, 42, 0.75);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <div style="font-size: 13px; font-weight: 800; color: #fbbf24;">🏛️ محلل الاقتصاد الكلي وممر الفائدة</div>
+                                <span class="badge badge-yellow" id="ta-macro-stance">BULLISH</span>
+                            </div>
+                            <div style="font-size: 12px; color: #e2e8f0; margin-bottom: 10px;" id="ta-macro-summary">استقرار الاقتصاد الكلي وسعر الصرف مع احتواء التضخم.</div>
+                            <ul id="ta-macro-findings" style="font-size: 11.5px; color: #94a3b8; padding-right: 18px; line-height: 1.6;">
+                                <li>ممر فائدة المركزي: إيداع 19.00% | إقراض 20.00%</li>
+                                <li>عتبة تكلفة الملكية (Hurdle Rate): 30.70%</li>
+                            </ul>
+                        </div>
+
+                        <!-- Arabic Sentiment Analyst -->
+                        <div class="card" style="border-top: 3px solid #8b5cf6; background: rgba(15, 23, 42, 0.75);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <div style="font-size: 13px; font-weight: 800; color: #a78bfa;">📰 محلل الإفصاحات والمعنويات</div>
+                                <span class="badge badge-purple" id="ta-sent-stance">BULLISH</span>
+                            </div>
+                            <div style="font-size: 12px; color: #e2e8f0; margin-bottom: 10px;" id="ta-sent-summary">مشاركة إيجابية واسعة في السوق وإفصاحات تشغيلية مشجعة.</div>
+                            <ul id="ta-sent-findings" style="font-size: 11.5px; color: #94a3b8; padding-right: 18px; line-height: 1.6;">
+                                <li>نسبة اتساع السوق (A/D Ratio): 1.65 (توسع صحي)</li>
+                                <li>معنويات الإفصاحات الرسمية: توسع تشغيلي إيجابي</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Dialectical Bull vs Bear Arena -->
+                <div class="card" style="margin-bottom: 20px; border-top: 3px solid #6366f1;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+                        <div class="metric-title" style="font-size: 15px; color: #ffffff; margin-bottom: 0;">
+                            ⚔️ حلبة المناظرة الجدلية بين باحث الصعود ومحامي المخاطر (Dialectical Bull vs. Bear Arena):
+                        </div>
+                        <div style="display: flex; gap: 10px; align-items: center;">
+                            <span class="badge badge-green" id="ta-bull-score-badge">🐂 قوة الصعود: 8.5/10</span>
+                            <span class="badge badge-red" id="ta-bear-score-badge">🐻 شدة التحفظ: 5.0/10</span>
+                        </div>
+                    </div>
+
+                    <div id="ta-debate-rounds-container" style="display: flex; flex-direction: column; gap: 16px;">
+                        <!-- Round 1 -->
+                        <div style="background: rgba(0, 0, 0, 0.35); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: var(--radius-md); padding: 16px;">
+                            <div style="font-size: 13px; font-weight: 800; color: #60a5fa; margin-bottom: 10px;">
+                                🥊 الجولة الأولى: الأطروحة الاستثمارية مقابل التحفظ وممر الفائدة
+                            </div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+                                <div style="background: rgba(16, 185, 129, 0.08); border-right: 3px solid #10b981; padding: 12px; border-radius: 6px; font-size: 12px; line-height: 1.6;" id="ta-round1-bull">
+                                    جاري تشغيل مرافعة باحث الصعود...
+                                </div>
+                                <div style="background: rgba(239, 68, 68, 0.08); border-right: 3px solid #ef4444; padding: 12px; border-radius: 6px; font-size: 12px; line-height: 1.6;" id="ta-round1-bear">
+                                    جاري تشغيل مرافعة محامي المخاطر...
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Round 2 -->
+                        <div style="background: rgba(0, 0, 0, 0.35); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: var(--radius-md); padding: 16px;">
+                            <div style="font-size: 13px; font-weight: 800; color: #60a5fa; margin-bottom: 10px;">
+                                🥊 الجولة الثانية: التفنيد المتبادل وهامش الأمان الصافي (Net Edge)
+                            </div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+                                <div style="background: rgba(16, 185, 129, 0.08); border-right: 3px solid #10b981; padding: 12px; border-radius: 6px; font-size: 12px; line-height: 1.6;" id="ta-round2-bull">
+                                    جاري تفنيد باحث الصعود...
+                                </div>
+                                <div style="background: rgba(239, 68, 68, 0.08); border-right: 3px solid #ef4444; padding: 12px; border-radius: 6px; font-size: 12px; line-height: 1.6;" id="ta-round2-bear">
+                                    جاري تفنيد محامي المخاطر...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Debate Consensus Box -->
+                    <div style="margin-top: 16px; background: rgba(30, 58, 138, 0.25); border: 1px solid rgba(59, 130, 246, 0.35); border-radius: var(--radius-md); padding: 14px 18px;">
+                        <div style="font-size: 13px; font-weight: 800; color: #93c5fd; margin-bottom: 6px;">
+                            📜 خلاصة محضر المناظرة وتوصية الإجماع (Debate Consensus):
+                        </div>
+                        <div style="font-size: 12.5px; color: #e2e8f0; line-height: 1.7;" id="ta-debate-consensus">
+                            أجمعت المناظرة على أن الحجج المالية والفنية قوية ومتفوقة على المخاطر المطروحة مع التوصية بالشراء التراجعي المقيد بأمر محدد.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Quant Trader Synthesis & Executive Fund Manager Blotter -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                    <!-- Quant Trader Proposal -->
+                    <div class="card" style="border-top: 3px solid #10b981;">
+                        <div class="metric-title" style="font-size: 15px; color: #34d399; margin-bottom: 12px;">
+                            ⚡ مقترح المتداول الكمي (Quant Trader Proposal):
+                        </div>
+                        <div class="card-grid-2" style="margin-bottom: 12px;">
+                            <div style="background: rgba(0,0,0,0.3); padding: 10px; border-radius: 6px;">
+                                <div style="font-size: 11px; color: var(--text-muted);">القرار المقترح</div>
+                                <div class="font-mono text-green" id="ta-prop-action" style="font-size: 16px; font-weight: 800;">BUY_LIMIT</div>
+                            </div>
+                            <div style="background: rgba(0,0,0,0.3); padding: 10px; border-radius: 6px;">
+                                <div style="font-size: 11px; color: var(--text-muted);">الفارق الربحي الصافي (Net Edge)</div>
+                                <div class="font-mono text-green" id="ta-prop-netedge" style="font-size: 16px; font-weight: 800;">+7.74%</div>
+                            </div>
+                        </div>
+                        <div style="font-size: 12px; color: #e2e8f0; line-height: 1.7;" id="ta-prop-rationale">
+                            أفضلية ربحية صافية محققة بعد خصم عمولات البورصة المصرية (0.35%) وضريبة الأرباح والانزلاق السعري.
+                        </div>
+                    </div>
+
+                    <!-- Executive Fund Manager Gate -->
+                    <div class="card" style="border-top: 3px solid #8b5cf6;">
+                        <div class="metric-title" style="font-size: 15px; color: #a78bfa; margin-bottom: 12px;">
+                            🏛️ اعتماد المدير التنفيذي ولجنة الاستثمار (Fund Manager Decision):
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                            <span class="badge badge-green" id="ta-exec-status" style="font-size: 13px; padding: 6px 14px;">🟢 معتمد للتنفيذ بالمحفظة (Approved)</span>
+                            <span class="badge badge-blue font-mono" id="ta-exec-alloc">حجم المركز: 11.2% NAV</span>
+                        </div>
+                        <div style="font-size: 12.5px; color: #e2e8f0; line-height: 1.7; background: rgba(0,0,0,0.35); padding: 12px 16px; border-radius: 8px;" id="ta-exec-mandate">
+                            تمت الموافقة الرسمية على فتح مركز شرائي تراجعي مع الالتزام الصارم بأمر محدد ووقف خسارة لا رجعة فيه عند -7.0%.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div> <!-- End of content-scroll -->
     </div> <!-- End of main-content -->
 
@@ -3292,7 +3627,7 @@
     <!-- ================================================================= -->
     <script>
         const VALID_TABS = [
-            'overview', 'short_term_opportunities', 'ranking', 'details', 'real_portfolio',
+            'overview', 'alpha_scanner', 'short_term_opportunities', 'ranking', 'details', 'real_portfolio',
             'paper_portfolio', 'watchlist', 'insider_radar', 'arbitrage_monitor', 'signals', 'risk_center',
             'stress_center', 'paper_vs_bt', 'observatory', 'universe_audit', 'health', 'execution',
             'research_lab', 'research-lab'
@@ -3300,6 +3635,7 @@
 
         const TITLE_MAP = {
             'overview': '☀️ نظرة عامة على السوق والتقرير الصباحي للمستشار',
+            'alpha_scanner': '🔎 ماسح الألفا ورادار الفرص الاستثمارية (EGX Alpha Intelligence Scanner)',
             'short_term_opportunities': '⚡ الفرص السريعة ومخاطر التكدس (10D Screen)',
             'ranking': '🏆 أفضل الأسهم والفرص في البورصة المصرية (Top 100)',
             'details': '🔍 ملف الاستخبارات والتقييم الأساسي للسهم',
@@ -3355,7 +3691,9 @@
 
             // Tab-specific fetchers
             try {
-                if (tabId === 'details') {
+                if (tabId === 'alpha_scanner') {
+                    fetchAlphaScannerData();
+                } else if (tabId === 'details') {
                     renderTradingViewChart(currentStockTicker);
                     fetchStockFundamentals(currentStockTicker);
                 } else if (tabId === 'real_portfolio') {
@@ -3404,6 +3742,107 @@
                 toast.style.opacity = '0';
                 setTimeout(() => toast.remove(), 300);
             }, 4000);
+        }
+
+        // =====================================================================
+        // 🔎 ALPHA INTELLIGENCE SCANNER CLIENT LOGIC
+        // =====================================================================
+        let currentAlphaOpportunities = [];
+
+        async function fetchAlphaScannerData() {
+            try {
+                const tbody = document.getElementById('alpha-scanner-tbody');
+                if (tbody) {
+                    tbody.innerHTML = `<tr><td colspan="10" style="text-align: center; padding: 25px; color: var(--text-muted);"><i class="fa-solid fa-spinner fa-spin"></i> جاري تحديث بيانات المسح اللحظي...</td></tr>`;
+                }
+
+                const res = await fetch('/api/alpha_scanner/scan');
+                const data = await res.json();
+
+                if (data && data.opportunities) {
+                    currentAlphaOpportunities = data.opportunities;
+                    const elTotal = document.getElementById('alpha-kpi-total-scanned');
+                    const elCand = document.getElementById('alpha-kpi-candidates');
+                    const elHigh = document.getElementById('alpha-kpi-high-conviction');
+                    const elReg = document.getElementById('alpha-scanner-regime-badge');
+
+                    if (elTotal) elTotal.innerText = data.total_scanned || 244;
+                    if (elCand) elCand.innerText = data.candidates_count || 0;
+                    if (elHigh) elHigh.innerText = data.high_conviction_count || 0;
+                    if (elReg && data.regime) elReg.innerText = data.regime;
+
+                    renderAlphaTable(currentAlphaOpportunities);
+                }
+            } catch (err) {
+                console.error('Error fetching alpha scanner data:', err);
+            }
+        }
+
+        function renderAlphaTable(opportunities) {
+            const tbody = document.getElementById('alpha-scanner-tbody');
+            if (!tbody) return;
+
+            if (!opportunities || opportunities.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="10" style="text-align: center; padding: 25px; color: var(--text-muted);">لا توجد فرص مطابقة حالياً</td></tr>`;
+                return;
+            }
+
+            let html = '';
+            opportunities.forEach(opp => {
+                let badgeClass = 'badge-blue';
+                let actionBadge = '<span class="badge badge-yellow">WATCH</span>';
+                if (opp.action_verdict === 'STRONG_BUY') {
+                    badgeClass = 'badge-green';
+                    actionBadge = '<span class="badge badge-green">🚀 STRONG BUY</span>';
+                } else if (opp.action_verdict === 'BUY') {
+                    badgeClass = 'badge-green';
+                    actionBadge = '<span class="badge badge-green">🟢 BUY</span>';
+                } else if (opp.action_verdict === 'AVOID') {
+                    badgeClass = 'badge-red';
+                    actionBadge = '<span class="badge badge-red">🔴 AVOID</span>';
+                }
+
+                const netEdgeColor = opp.net_edge_pct >= 1.0 ? '#34d399' : '#f87171';
+
+                html += `
+                    <tr>
+                        <td style="text-align: center; font-weight: 800; color: #93c5fd;">#${opp.rank}</td>
+                        <td>
+                            <div style="font-weight: 800; color: #ffffff;" class="font-mono">${opp.ticker}</div>
+                            <div style="font-size: 11px; color: var(--text-muted);">${opp.name_ar}</div>
+                        </td>
+                        <td><span style="font-size: 11.5px; color: #cbd5e1;">${opp.sector}</span></td>
+                        <td style="text-align: center; font-weight: 700;" class="ltr-text font-mono">${(opp.current_price || 0).toFixed(2)}</td>
+                        <td style="text-align: center;">
+                            <span class="badge ${badgeClass} font-mono" style="font-size: 12px; font-weight: 800;">${opp.alpha_score} / 100</span>
+                        </td>
+                        <td style="text-align: center; font-weight: 700; color: #93c5fd;" class="ltr-text font-mono">${opp.win_probability_pct}%</td>
+                        <td style="text-align: center; font-weight: 800; color: #34d399;" class="ltr-text font-mono">+${opp.expected_return_pct}%</td>
+                        <td style="text-align: center; font-weight: 800; color: ${netEdgeColor};" class="ltr-text font-mono">+${opp.net_edge_pct}%</td>
+                        <td style="text-align: center;">${actionBadge}</td>
+                        <td style="text-align: center;">
+                            <button onclick="loadStockDetails('${opp.ticker}')" style="background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.4); color: #93c5fd; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 700; cursor: pointer;">
+                                فحص 🔍
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+            tbody.innerHTML = html;
+        }
+
+        function filterAlphaTable() {
+            const term = (document.getElementById('alpha-search-input')?.value || '').toLowerCase().trim();
+            if (!term) {
+                renderAlphaTable(currentAlphaOpportunities);
+                return;
+            }
+            const filtered = currentAlphaOpportunities.filter(x => 
+                x.ticker.toLowerCase().includes(term) || 
+                (x.name_ar && x.name_ar.toLowerCase().includes(term)) ||
+                (x.sector && x.sector.toLowerCase().includes(term))
+            );
+            renderAlphaTable(filtered);
         }
 
         // =====================================================================

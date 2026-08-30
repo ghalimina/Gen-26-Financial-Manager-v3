@@ -307,6 +307,26 @@ def api_ai_forecast(ticker):
     return jsonify(combined)
 
 
+# --- 3.7 TauricResearch TradingAgents Multi-Agent Deliberation & Debate ---
+@app.route("/api/v1/trading-agents/debate/<ticker>", methods=["GET"])
+def api_trading_agents_debate(ticker):
+    """Executes a full 4-tier TradingAgents deliberation session for a given EGX stock."""
+    from core.trading_agents.orchestrator import TradingAgentsOrchestrator
+    t = ticker.strip().upper()
+    if not t.endswith(".CA") and "." not in t:
+        t += ".CA"
+    result = TradingAgentsOrchestrator.run_stock_deliberation(t, persist=True)
+    return jsonify(result)
+
+
+@app.route("/api/v1/trading-agents/scan", methods=["GET"])
+def api_trading_agents_scan():
+    """Returns TradingAgents scans across key liquid EGX stocks."""
+    from core.trading_agents.orchestrator import TradingAgentsOrchestrator
+    results = TradingAgentsOrchestrator.run_universe_scan()
+    return jsonify({"count": len(results), "scan_results": results})
+
+
 # --- 4. Cross-Sectional Ranking ---
 @app.route("/api/ranking", methods=["GET"])
 @app.route("/api/rankings", methods=["GET"])
@@ -1784,6 +1804,48 @@ def api_observability_market_breadth():
     try:
         from core.market_breadth_engine import MarketBreadthEngine
         res = MarketBreadthEngine.calculate_market_breadth()
+        return jsonify(res), 200
+    except Exception as e:
+        return jsonify({"status": "ERROR", "error": str(e)}), 500
+
+
+# =============================================================================
+# ALPHA INTELLIGENCE SCANNER ENDPOINTS
+# =============================================================================
+
+@app.route("/api/alpha_scanner/scan", methods=["GET"])
+def api_alpha_scanner_scan():
+    """Returns the full universe scan results and ranked opportunity matrix."""
+    try:
+        from core.alpha_scanner import OpportunityRanker
+        regime = request.args.get("regime", "BULL_EXPANSION")
+        filter_type = request.args.get("filter", "all")
+        res = OpportunityRanker.scan_universe(universe_filter=filter_type, regime=regime)
+        return jsonify(res), 200
+    except Exception as e:
+        return jsonify({"status": "ERROR", "error": str(e)}), 500
+
+
+@app.route("/api/alpha_scanner/stock/<ticker>", methods=["GET"])
+def api_alpha_scanner_stock_detail(ticker):
+    """Returns deep multi-layer radar breakdown for a single equity."""
+    try:
+        from core.alpha_scanner import OpportunityRanker
+        regime = request.args.get("regime", "BULL_EXPANSION")
+        res = OpportunityRanker.evaluate_stock_scan(ticker.upper(), regime=regime)
+        if not res:
+            return jsonify({"status": "NOT_FOUND", "ticker": ticker}), 404
+        return jsonify(res), 200
+    except Exception as e:
+        return jsonify({"status": "ERROR", "error": str(e)}), 500
+
+
+@app.route("/api/alpha_scanner/monotonicity", methods=["GET"])
+def api_alpha_scanner_monotonicity():
+    """Returns 5-bucket empirical monotonicity validation scorecard."""
+    try:
+        from core.alpha_scanner import MonotonicityValidator
+        res = MonotonicityValidator.validate_monotonic_buckets()
         return jsonify(res), 200
     except Exception as e:
         return jsonify({"status": "ERROR", "error": str(e)}), 500
