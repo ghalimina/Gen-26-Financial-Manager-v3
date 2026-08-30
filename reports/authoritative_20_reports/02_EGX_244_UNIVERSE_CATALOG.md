@@ -31,14 +31,14 @@ All components read live canonical market prices from the unified SSoT store (`d
 
 | Ticker | Company Name (Arabic) | Sector | Canonical Price | Status |
 | :--- | :--- | :--- | :---: | :---: |
-| **`COMI.CA`** | البنك التجاري الدولي | Banking & Financial Services | **139.28 EGP** | Verified SSoT |
-| **`SWDY.CA`** | السويدي إليكتريك | Industrial & Construction | **127.99 EGP** | Verified SSoT |
-| **`TMGH.CA`** | مجموعة طلعت مصطفى | Real Estate & Development | **97.51 EGP** | Verified SSoT |
-| **`MFPC.CA`** | مصر لإنتاج الأسمدة (موبكو) | Basic Resources & Petrochemicals | **39.34 EGP** | Verified SSoT |
-| **`ETEL.CA`** | المصرية للاتصالات | Telecom, Media & Technology | **116.00 EGP** | Verified SSoT |
-| **`FWRY.CA`** | فوري لتكنولوجيا البنوك | Technology / FinTech | **18.85 EGP** | Verified SSoT |
-| **`ABUK.CA`** | أبو قير للأسمدة | Basic Resources & Petrochemicals | **75.76 EGP** | Verified SSoT |
-| **`HRHO.CA`** | إي إف جي القابضة (هيرميس) | Non-Bank Financial Services | **25.90 EGP** | Verified SSoT |
+| **`COMI.CA`** | البنك التجاري الدولي (CIB) | الخدمات المالية والبنوك | **139.28 EGP** | Verified SSoT |
+| **`SWDY.CA`** | السويدي إليكتريك | الصناعة والمقاولات | **127.99 EGP** | Verified SSoT |
+| **`TMGH.CA`** | مجموعة طلعت مصطفى | التطوير العقاري | **97.51 EGP** | Verified SSoT |
+| **`MFPC.CA`** | مصر لإنتاج الأسمدة (موبكو) | الموارد الأساسية والكيماويات | **39.34 EGP** | Verified SSoT |
+| **`ETEL.CA`** | المصرية للاتصالات (WE) | الاتصالات وتكنولوجيا المعلومات | **116.00 EGP** | Verified SSoT |
+| **`FWRY.CA`** | فوري لتكنولوجيا المدفوعات الإلكترونية | تكنولوجيا المدفوعات | **18.85 EGP** | Verified SSoT |
+| **`ABUK.CA`** | أبو قير للأسمدة | الموارد الأساسية والكيماويات | **75.76 EGP** | Verified SSoT |
+| **`HRHO.CA`** | مجموعة إي إف جي القابضة (هيرميس) | الخدمات المالية غير المصرفية | **25.90 EGP** | Verified SSoT |
 
 ---
 
