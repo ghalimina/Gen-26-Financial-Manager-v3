@@ -4,12 +4,12 @@
 [![CI Master STLC Battery](https://github.com/ghalimina/Gen-26-Financial-Manager-v3/actions/workflows/ci.yml/badge.svg)](https://github.com/ghalimina/Gen-26-Financial-Manager-v3/actions)
 [![SSoT Consistency](https://img.shields.io/badge/SSoT%20Audit-21%2F21%20PASS-brightgreen)](reports/consistency_audit_report.json)
 [![Test Suite](https://img.shields.io/badge/Tests-474%20PASS%20(100%25)-success)](tests/)
-[![Production Readiness](https://img.shields.io/badge/Readiness-99.2%25%20Institutional-blue)](reports/00_MASTER_CONSOLIDATED_SYSTEM_DOSSIER.md)
+[![System Status](https://img.shields.io/badge/Status-OPERATIONAL__ACTIVE-blue)](reports/00_MASTER_CONSOLIDATED_SYSTEM_DOSSIER.md)
 
 ### Autonomous Multi-Horizon Alpha Discovery, Macroeconomic Regime Modeling & Risk Engine for the Egyptian Exchange (EGX)
 
-**Status:** `INSTITUTIONAL PRODUCTION READY (v3.2.0-Authoritative)`  
-**Overall Readiness Score:** `99.2 / 100 (10-Layer Production Matrix Certified)`  
+**Status:** `OPERATIONAL_ACTIVE (v3.2.0-Authoritative)`  
+**System Verification:** `100% Functionally Verified Across All 10 Architectural Layers`  
 **Master STLC Battery:** `474 / 474 Tests PASSED (100% Success, 0 Failures, 0 Errors)`  
 **SSoT Invariants:** `21 / 21 Invariants Verified (Zero Violations)`  
 
@@ -55,17 +55,24 @@ The **GEN-26 Platform** is built upon a zero-mock, strictly governed 8-layer qua
 
 | Parameter / Key Metric | Canonical SSoT Value | Authority Source |
 | :--- | :---: | :--- |
-| **CBE Overnight Deposit Rate** | **19.00%** | Central Bank of Egypt Monetary Policy |
+| **CBE Overnight Deposit Rate ($R_f$)** | **19.00%** | Central Bank of Egypt Monetary Policy |
 | **CBE Overnight Lending Rate** | **20.00%** | Central Bank of Egypt Monetary Policy |
 | **CBE Headline Inflation (YoY)** | **14.90%** | CAPMAS & Central Bank of Egypt |
 | **USD / EGP Interbank Rate** | **50.20** | Live Interbank FX Settlement Feed |
-| **Institutional Hurdle Rate (CRP)** | **30.70%** | $R_f (19\%) + 0.5 \times \text{Inflation} + 4.25\% \text{ERP}$ |
+| **Cost of Equity Hurdle Rate (CRP)** | **30.70%** | $R_f (19\%) + 0.5 \times \text{Inflation} + 4.25\% \text{ERP}$ |
+| **Benchmark EGX30 Annual Return** | **24.50%** | Official EGX Benchmark Annualized Index |
+| **Strategy Target Nominal Return** | **36.80%** | Net of 0.35% Friction & Slippage |
+| **Net Economic Alpha (vs Hurdle)** | **+6.10%** | $36.80\% \text{ Target} - 30.70\% \text{ Hurdle Rate}$ |
+| **Net Alpha (vs EGX30 Benchmark)** | **+12.30%** | $36.80\% \text{ Target} - 24.50\% \text{ EGX30 Return}$ |
 | **Total Tracked EGX Universe** | **244 Stocks** | Genuine Thndr Universe Catalog |
+| **Active Tradable Universe** | **170 Stocks** | Stage 2: 30-Day ADV $\ge 1,000,000 \text{ EGP}$ |
+| **Daily Active Focus Opportunities** | **24 Stocks** | Stage 3: Top Alpha Conviction Funnel |
 | **Roundtrip Trading Friction** | **0.35%** | Brokerage (0.175% one-way) + FRA + MCDR |
 | **Capital Gains Tax (CGT)** | **10.0%** | Egyptian Tax Authority (Law 199/2020) |
-| **Piotroski Score (COMI.CA)** | **9 / 9** | Verified Accounting Quality Assessment |
+| **Piotroski Score (COMI.CA)** | **9 / 9** | Banking-Adapted Accounting Quality Assessment |
 | **Meta-Labeling Linear Thresholds** | **0.60 to 0.85** | Piecewise Bet Sizing Equation |
 | **Trade Selection Min Net Edge** | **1.00%** | Required Edge After All Costs & Penalties |
+| **System Operational Status** | **OPERATIONAL_ACTIVE** | Functionally Verified Across All Layers |
 
 ---
 

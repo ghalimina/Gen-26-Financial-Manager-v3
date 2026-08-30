@@ -1,5 +1,5 @@
 {
-  "audit_timestamp": "2026-08-30T03:44:57.920073",
+  "audit_timestamp": "2026-08-30T04:08:20.425347",
   "target_version": "v3.2.0-Authoritative",
   "total_reports_scanned": 21,
   "reports_audit": {
@@ -12,16 +12,20 @@
     },
     "02_EGX_244_UNIVERSE_CATALOG.md": {
       "file": "02_EGX_244_UNIVERSE_CATALOG.md",
-      "size_bytes": 2626,
-      "checks": {}
+      "size_bytes": 2924,
+      "checks": {
+        "liquidity_funnel_244_170_24": true
+      }
     },
     "03_MACRO_REGIME_AND_CBE_CORRIDOR.md": {
       "file": "03_MACRO_REGIME_AND_CBE_CORRIDOR.md",
-      "size_bytes": 1723,
+      "size_bytes": 2209,
       "checks": {
         "cbe_deposit_rate_19pct": true,
         "cbe_lending_rate_20pct": true,
-        "hurdle_rate_crp_30_70pct": true
+        "hurdle_rate_crp_30_70pct": true,
+        "target_strategy_return_36_80pct": true,
+        "no_28_4pct_contradiction": true
       }
     },
     "04_DATABASE_SCHEMA_AND_PERSISTENCE.md": {
@@ -51,9 +55,9 @@
     },
     "09_PIOTROSKI_F_SCORE_ANALYSIS.md": {
       "file": "09_PIOTROSKI_F_SCORE_ANALYSIS.md",
-      "size_bytes": 1453,
+      "size_bytes": 2699,
       "checks": {
-        "comi_fscore_9_of_9": true
+        "comi_fscore_adapted_9_of_9": true
       }
     },
     "10_PETER_LYNCH_VALUATION_METRICS.md": {
@@ -107,9 +111,9 @@
     },
     "19_DEVOPS_CI_CD_AND_TEST_BATTERY.md": {
       "file": "19_DEVOPS_CI_CD_AND_TEST_BATTERY.md",
-      "size_bytes": 2366,
+      "size_bytes": 2520,
       "checks": {
-        "master_test_count_456": true
+        "master_test_count_474": true
       }
     },
     "20_MASTER_INDEX_AND_SYSTEM_GLOSSARY.md": {
@@ -123,12 +127,15 @@
     "cbe_deposit_19pct": true,
     "cbe_lending_20pct": true,
     "hurdle_30_70pct": true,
+    "target_return_36_80pct": true,
     "friction_0_35pct": true,
     "universe_244": true,
-    "tests_456": true
+    "universe_170": true,
+    "universe_24": true,
+    "tests_474": true
   },
   "summary_status": "PASS",
-  "passed_invariants": 21,
+  "passed_invariants": 27,
   "failed_invariants": 0,
   "violations": [],
   "v2_architectural_audit": {

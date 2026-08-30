@@ -8,19 +8,16 @@ The GEN-26 Platform tracks the complete **244-stock universe** of genuine Egypti
 
 ---
 
-## 1. 3-Tier Liquidity Funnel Filtering
+## 1. 3-Stage Institutional Liquidity Funnel
 
 ```
-[ Full EGX Universe: 244 Listed Equities ]
-                  │
-                  ▼  (Rule 1: 30-Day ADV >= 500,000 EGP)
-[ Liquid Active Universe: ~165-170 Equities ]
-                  │
-                  ▼  (Rule 2: Trading Days >= 80% over 60 Sessions)
-[ Core Research Universe: ~70-90 Equities ]
-                  │
-                  ▼  (Rule 3: Max Bid-Ask Spread <= 2.50%)
-[ Elite Tradable Alpha Universe: ~25-35 Equities ]
++====================================================================================================+
+| STAGE 1: Total Listed Catalog               | 244 Equities (Complete Genuine EGX Universe)         |
++---------------------------------------------+------------------------------------------------------+
+| STAGE 2: Active Tradable Universe           | 170 Equities (Filtered for 30-Day ADV >= 1,000,000)  |
++---------------------------------------------+------------------------------------------------------+
+| STAGE 3: Daily Active Focus Opportunities   | 24 Equities (High-Conviction Alpha & Prime Liquidity)|
++====================================================================================================+
 ```
 
 ---

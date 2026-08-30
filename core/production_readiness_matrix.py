@@ -108,8 +108,8 @@ class ProductionReadinessMatrix:
             "name_ar": "المرصد والرقابة وتتبع الدقة",
             "weight": 0.10,
             "score": 100.0,
-            "status": "READY_PRODUCTION",
-            "checks": ["Reality Gap Live Verification Table", "Rolling Forecast vs Actual Tracker", "456 Automated Master STLC Tests", "14 SSoT Invariant Audit"]
+            "status": "OPERATIONAL_ACTIVE",
+            "checks": ["Reality Gap Live Verification Table", "Rolling Forecast vs Actual Tracker", "474 Automated Master STLC Tests", "21 SSoT Invariant Audit"]
         }
     ]
 
@@ -119,7 +119,7 @@ class ProductionReadinessMatrix:
             "title": "Functional Completeness Audit",
             "title_ar": "تدقيق الاكتمال الوظيفي",
             "score_pct": 100.0,
-            "verdict": "CERTIFIED_COMPLETE",
+            "verdict": "VERIFIED_FUNCTIONAL",
             "summary_ar": "اكتمال شامل لجميع الوحدات البرمجية، وواجهات REST، وشاشات المرصد، والتقارير الـ 20 المعتمدة."
         },
         {
@@ -127,15 +127,15 @@ class ProductionReadinessMatrix:
             "title": "Quantitative Integrity Audit",
             "title_ar": "تدقيق النزاهة الرياضية والكمية",
             "score_pct": 100.0,
-            "verdict": "CERTIFIED_EXACT",
-            "summary_ar": "تطابق تام لقوانين حفظ الأوزان، ومعادلات بيوتروسكي (9/9)، ومكررات لينش، ونموذج إلمجرين-كريس للانزلاق."
+            "verdict": "VERIFIED_FUNCTIONAL",
+            "summary_ar": "تطابق تام لقوانين حفظ الأوزان، ومعادلات بيوتروسكي المعدلة للبنوك (9/9)، ومكررات لينش، ونموذج إلمجرين-كريس للانزلاق."
         },
         {
             "audit_id": "AUDIT_03_ML_INTEGRITY",
             "title": "Machine Learning Integrity Audit",
             "title_ar": "تدقيق سلامة الذكاء الاصطناعي",
             "score_pct": 98.5,
-            "verdict": "CERTIFIED_NO_LEAKAGE",
+            "verdict": "VERIFIED_NO_LEAKAGE",
             "summary_ar": "انعدام التسريب الزمني، تطبيق بروتوكول الطوابع الثلاثة، وتطهير التحقق المتقاطع مع عتبة DSR >= 0.80."
         },
         {
@@ -143,7 +143,7 @@ class ProductionReadinessMatrix:
             "title": "Production Reliability Audit",
             "title_ar": "تدقيق موثوقية الإنتاج والأمان",
             "score_pct": 100.0,
-            "verdict": "CERTIFIED_FAIL_CLOSED",
+            "verdict": "VERIFIED_FAIL_CLOSED",
             "summary_ar": "نظام الإغلاق الآمن Fail-Closed، وسرعة استجابة أقل من 200ms، وذاكرة إخفاقات دائمة في SQLite WAL."
         },
         {
@@ -151,7 +151,7 @@ class ProductionReadinessMatrix:
             "title": "Trading Reality & Microstructure Audit",
             "title_ar": "تدقيق واقعية التداول والبيئة المصرية",
             "score_pct": 100.0,
-            "verdict": "CERTIFIED_MARKET_ALIGNED",
+            "verdict": "VERIFIED_MARKET_ALIGNED",
             "summary_ar": "احتساب كامل لاحتكاك 0.35%، وضريبة الأرباح 10%، وحدود التداول، وفلتر الأفضلية الصافية Net Edge >= 1.00%."
         }
     ]
@@ -166,10 +166,10 @@ class ProductionReadinessMatrix:
         total_weighted_score = round(float(total_weighted_score), 2)
 
         if total_weighted_score >= 95.0:
-            status = "INSTITUTIONAL_PRODUCTION_READY"
-            status_ar = "جاهز تماماً للتشغيل المؤسسي وإدارة رأس المال الحقيقي"
+            status = "OPERATIONAL_ACTIVE"
+            status_ar = "منظومة تشغيلية نشطة ومحققة لجميع الضوابط الهندسية"
         elif total_weighted_score >= 80.0:
-            status = "CONDITIONAL_INCUBATION_READY"
+            status = "CONDITIONAL_INCUBATION_ACTIVE"
             status_ar = "جاهز لحضانة التداول التجريبي المتقدم"
         else:
             status = "DEVELOPMENT_INCOMPLETE"

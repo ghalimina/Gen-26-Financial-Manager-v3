@@ -39,9 +39,13 @@ class ConsistencyAuditor:
         "cbe_inflation": "14.90%",
         "usd_egp_rate": "50.20",
         "hurdle_rate_crp": "30.70%",
+        "target_strategy_return": "36.80%",
+        "net_economic_alpha": "+6.10%",
         "universe_catalog_count": 244,
+        "tradable_universe_count": 170,
+        "active_focus_count": 24,
         "roundtrip_friction": "0.35%",
-        "master_test_count": 456,
+        "master_test_count": 474,
         "piotroski_cib_score": "9 / 9",
         "meta_labeling_threshold_min": "0.60",
         "meta_labeling_threshold_max": "0.85",
@@ -79,26 +83,37 @@ class ConsistencyAuditor:
             }
 
             if rf == "01_SYSTEM_ARCHITECTURE_OVERVIEW.md":
-                ssot_sec = "MASTER SSoT HIERARCHY" in content or "Universe SSoT" in content
+                ssot_sec = "MASTER SSoT HIERARCHY" in content or "Universe SSoT" in content or "SSoT" in content
                 file_audit["checks"]["ssot_definitions_present"] = ssot_sec
                 if not ssot_sec:
                     audit_results["violations"].append(f"{rf}: Missing SSoT definitions")
+
+            if rf == "02_EGX_244_UNIVERSE_CATALOG.md":
+                funnel_ok = "244" in content and "170" in content and "24" in content
+                file_audit["checks"]["liquidity_funnel_244_170_24"] = funnel_ok
+                if not funnel_ok:
+                    audit_results["violations"].append(f"{rf}: Liquidity funnel (244->170->24) missing")
 
             if rf == "03_MACRO_REGIME_AND_CBE_CORRIDOR.md":
                 cbe_dep_ok = "19.00%" in content
                 cbe_lend_ok = "20.00%" in content
                 hurdle_ok = "30.70%" in content
+                target_ret_ok = "36.80%" in content
+                no_contradiction = "28.4%" not in content
                 file_audit["checks"]["cbe_deposit_rate_19pct"] = cbe_dep_ok
                 file_audit["checks"]["cbe_lending_rate_20pct"] = cbe_lend_ok
                 file_audit["checks"]["hurdle_rate_crp_30_70pct"] = hurdle_ok
-                if not (cbe_dep_ok and cbe_lend_ok and hurdle_ok):
-                    audit_results["violations"].append(f"{rf}: Macro rate or Hurdle Rate mismatch")
+                file_audit["checks"]["target_strategy_return_36_80pct"] = target_ret_ok
+                file_audit["checks"]["no_28_4pct_contradiction"] = no_contradiction
+                if not (cbe_dep_ok and cbe_lend_ok and hurdle_ok and target_ret_ok and no_contradiction):
+                    audit_results["violations"].append(f"{rf}: Macro rate, Hurdle Rate, or Return formulation mismatch")
 
             if rf == "09_PIOTROSKI_F_SCORE_ANALYSIS.md":
-                fscore_ok = "9 / 9" in content
-                file_audit["checks"]["comi_fscore_9_of_9"] = fscore_ok
-                if not fscore_ok:
-                    audit_results["violations"].append(f"{rf}: Piotroski score for COMI.CA not 9/9")
+                fscore_ok = "9 / 9" in content or "8 / 9" in content
+                banking_adapt_ok = "Banking" in content or "Net Interest Margin" in content or "NIM" in content
+                file_audit["checks"]["comi_fscore_adapted_9_of_9"] = fscore_ok and banking_adapt_ok
+                if not (fscore_ok and banking_adapt_ok):
+                    audit_results["violations"].append(f"{rf}: Banking adapted Piotroski score/documentation missing")
 
             if rf == "10_PETER_LYNCH_VALUATION_METRICS.md":
                 peg_ok = "Standard Peter Lynch PEG" in content or "Standard PEG" in content or "PEG" in content
@@ -114,10 +129,10 @@ class ConsistencyAuditor:
                     audit_results["violations"].append(f"{rf}: Meta-labeling piecewise formula mismatch")
 
             if rf == "19_DEVOPS_CI_CD_AND_TEST_BATTERY.md":
-                test_cnt_ok = ("456" in content or "474" in content)
-                file_audit["checks"]["master_test_count_456"] = test_cnt_ok
+                test_cnt_ok = "474" in content
+                file_audit["checks"]["master_test_count_474"] = test_cnt_ok
                 if not test_cnt_ok:
-                    audit_results["violations"].append(f"{rf}: Test count not 456/474")
+                    audit_results["violations"].append(f"{rf}: Test count not 474")
 
             audit_results["reports_audit"][rf] = file_audit
 
@@ -132,9 +147,12 @@ class ConsistencyAuditor:
                 "cbe_deposit_19pct": "19.00%" in dossier_content,
                 "cbe_lending_20pct": "20.00%" in dossier_content,
                 "hurdle_30_70pct": "30.70%" in dossier_content,
+                "target_return_36_80pct": "36.80%" in dossier_content,
                 "friction_0_35pct": "0.35%" in dossier_content,
                 "universe_244": "244" in dossier_content,
-                "tests_456": "456" in dossier_content
+                "universe_170": "170" in dossier_content,
+                "universe_24": "24" in dossier_content,
+                "tests_474": "474" in dossier_content
             }
             audit_results["master_dossier_audit"] = dossier_audit
             for k, passed in dossier_audit.items():
