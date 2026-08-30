@@ -1,111 +1,56 @@
-# 02. EGX 244-Stock Universe Catalog & Liquidity Architecture
-
-**Document Version:** `v3.2.0-Authoritative`  
-**Classification:** `INSTITUTIONAL QUANTITATIVE ASSET MANAGEMENT SPECIFICATION`  
-**Publication Date:** `2026-08-30`  
-**Status:** `PRODUCTION VERIFIED & INSTITUTIONALLY CERTIFIED`  
+# 02 — EGX 244-Stock Universe Catalog & Liquidity Funnel
+**GEN-26 Quantitative Autonomous Platform | Version 3.2.0-Authoritative | Institutional Whitepaper**
 
 ---
 
-## 1. Executive Summary
-
-The **Universe Catalog & Liquidity Architecture** (`core/universe_manager.py`) governs the definition, tracking, categorization, and liquidity filtering of all listed equities on the **Egyptian Stock Exchange (EGX)**. The catalog maintains complete mappings to official Egyptian ISIN codes, Thndr application symbols, and standardized Reuters `.CA` tickers for exactly **244 listed securities**.
-
-To protect trading capital from severe liquidity black holes and illiquidity traps, GEN-26 enforces a mathematical **3-Stage Liquidity Funnel** that filters down the 244 listed stocks to a tradable core of **170 liquid securities**, and selects a daily high-conviction focus list of the **Top 24 Opportunities**.
+## Executive Summary
+The GEN-26 Platform tracks the complete **244-stock universe** of genuine Egyptian Exchange (EGX) equities listed on the Thndr broker platform. To prevent execution failures and illiquidity slippage, the universe passes through a rigorous **3-Tier Institutional Liquidity Funnel**.
 
 ---
 
-## 2. The 3-Stage Market Liquidity Funnel
+## 1. 3-Tier Liquidity Funnel Filtering
 
 ```
-+-------------------------------------------------------------------------------+
-| STAGE 1: TOTAL LISTED EGX UNIVERSE (244 STOCKS)                               |
-| All common equities, preferred shares, and closed-end funds listed on EGX.    |
-+-------------------------------------------------------------------------------+
-                                       |
-                                       | Liquidity Filter (ADV30 >= 1M EGP,
-                                       | Trading Frequency >= 60%, Free Float >= 10%)
-                                       v
-+-------------------------------------------------------------------------------+
-| STAGE 2: LIQUID TRADABLE CORE (170 STOCKS)                                    |
-| Continuous quoting, institutional spread depth, zero delisting risk.          |
-+-------------------------------------------------------------------------------+
-                                       |
-                                       | Multi-Factor Alpha Ranking,
-                                       | 7-Agent Council Supermajority & Risk Sizing
-                                       v
-+-------------------------------------------------------------------------------+
-| STAGE 3: DAILY ACTIVE FOCUS BLOTTER (TOP 24 STOCKS)                           |
-| Institutional order routing, high-conviction execution, live monitoring.      |
-+-------------------------------------------------------------------------------+
-```
-
-### Liquidity Filtering Rules:
-1. **Rule 1: Minimum 30-Day Average Daily Volume ($ADV_{30}$)**:
-   $$ADV_{30} = \frac{1}{30} \sum_{t=1}^{30} (\text{Close}_t \times \text{Volume}_t) \ge 1,000,000 \text{ EGP}$$
-2. **Rule 2: Minimum Trading Session Frequency**:
-   $$\text{Active Trading Days Ratio} = \frac{\text{Days with Traded Volume > 0}}{30} \ge 60.0\%$$
-3. **Rule 3: Minimum Effective Free Float**:
-   $$\text{Free Float Ratio} = \frac{\text{Free Floating Shares}}{\text{Total Listed Shares}} \ge 10.0\%$$
-
-Stocks failing any of these criteria are quarantined as `STATUS = ILLIQUID` and bypassed by the AI ML inference engine to prevent unexecutable signals.
-
----
-
-## 3. Market Capitalization & Liquidity Tiers
-
-The 244 cataloged equities are classified into 4 standardized market capitalization and liquidity tiers:
-
-```
-+========================================================================================================+
-| Tier Category | ADV30 Liquidity Threshold | Typical Market Cap (EGP) | Execution Friction (Base Spread)|
-+---------------+---------------------------+--------------------------+---------------------------------+
-| LARGE_CAP     | ADV30 >= 20,000,000 EGP   | >= 25 Billion EGP        | 0.10% Base Spread               |
-| MID_CAP       | 5M <= ADV30 < 20M EGP     | 5B - 25 Billion EGP      | 0.15% Base Spread               |
-| SMALL_CAP     | 1M <= ADV30 < 5M EGP      | 1B - 5 Billion EGP       | 0.25% Base Spread               |
-| MICRO_CAP     | ADV30 < 1,000,000 EGP     | < 1 Billion EGP          | Quarantined (Illiquid Trap)     |
-+========================================================================================================+
+[ Full EGX Universe: 244 Listed Equities ]
+                  │
+                  ▼  (Rule 1: 30-Day ADV >= 500,000 EGP)
+[ Liquid Active Universe: ~165-170 Equities ]
+                  │
+                  ▼  (Rule 2: Trading Days >= 80% over 60 Sessions)
+[ Core Research Universe: ~70-90 Equities ]
+                  │
+                  ▼  (Rule 3: Max Bid-Ask Spread <= 2.50%)
+[ Elite Tradable Alpha Universe: ~25-35 Equities ]
 ```
 
 ---
 
-## 4. Sector Breakdown & Representative Benchmarks
+## 2. Canonical Pricing Single Source of Truth (SSoT)
 
-The 244 equities are classified into 12 homogeneous Egyptian economic sectors:
+All components read live canonical market prices from the unified SSoT store (`data/canonical_prices_live.json` and `core/market_price_service.py`):
 
-1. **Banking & Financial Services (32 Stocks)**:
-   - Benchmark: `COMI.CA` (Commercial International Bank), `ADIB.CA` (Abu Dhabi Islamic Bank), `CICH.CA` (CI Capital), `FWRY.CA` (Fawry).
-2. **Real Estate & Urban Development (38 Stocks)**:
-   - Benchmark: `TMGH.CA` (Talaat Moustafa Group), `PHDC.CA` (Palm Hills), `MNHD.CA` (Madinet Masr), `OCDI.CA` (SODIC).
-3. **Basic Materials & Fertilizers (22 Stocks)**:
-   - Benchmark: `MFPC.CA` (MOPCO), `ABUK.CA` (Abu Qir Fertilizers), `EKHO.CA` (Egypt Kuwait Holding).
-4. **Industrial Goods & Construction (28 Stocks)**:
-   - Benchmark: `SWDY.CA` (Elsewedy Electric), `ORAS.CA` (Orascom Construction), `ESRS.CA` (Ezz Steel).
-5. **Telecommunications & Technology (14 Stocks)**:
-   - Benchmark: `ETEL.CA` (Telecom Egypt), `EFIH.CA` (e-finance).
-6. **Consumer Staples, Food & Beverages (26 Stocks)**:
-   - Benchmark: `JUFO.CA` (Juhayna), `DOMN.CA` (Domty), `EFID.CA` (Edita).
-7. **Healthcare & Pharmaceuticals (18 Stocks)**:
-   - Benchmark: `ISPH.CA` (Ibnsina Pharma), `CLHO.CA` (Cleopatra Hospital).
-8. **Energy, Oil & Gas Services (12 Stocks)**:
-   - Benchmark: `TAQA.CA` (Taqa Arabia), `AMOC.CA` (Alexandria Mineral Oils).
-9. **Transportation, Shipping & Logistics (10 Stocks)**:
-   - Benchmark: `ALCN.CA` (Alexandria Containers).
-10. **Non-Banking Financial Institutions (16 Stocks)**:
-    - Benchmark: `HRHO.CA` (EFG Holding), `GBCO.CA` (GB Corp).
-11. **Textiles, Paper & Consumer Discretionary (16 Stocks)**:
-    - Benchmark: `ORWE.CA` (Oriental Weavers).
-12. **Tourism, Hotels & Entertainment (12 Stocks)**:
-    - Benchmark: `EGTS.CA` (Egyptian Resorts).
+| Ticker | Company Name (Arabic) | Sector | Canonical Price | Status |
+| :--- | :--- | :--- | :---: | :---: |
+| **`COMI.CA`** | البنك التجاري الدولي | Banking | **139.28 EGP** | Verified SSoT |
+| **`SWDY.CA`** | السويدي إليكتريك | Industrial | **127.99 EGP** | Verified SSoT |
+| **`TMGH.CA`** | مجموعة طلعت مصطفى | Real Estate | **97.51 EGP** | Verified SSoT |
+| **`MFPC.CA`** | مصر لإنتاج الأسمدة (موبكو) | Basic Resources | **68.00 EGP** | Verified SSoT |
+| **`ETEL.CA`** | المصرية للاتصالات | Telecom | **44.50 EGP** | Verified SSoT |
+| **`FWRY.CA`** | فوري لتكنولوجيا البنوك | Technology / FinTech | **8.90 EGP** | Verified SSoT |
 
 ---
 
-## 5. Delisting & Preferred Share Isolation Policy
-
-- **Preferred Shares (`*_P.CA`)**: Automatically isolated from quantitative pairs and momentum baskets due to voting and dividend asymmetries.
-- **Trading Suspensions**: If a stock is halted by the Egyptian FRA for $> 3$ consecutive sessions, it is tagged `FLAG_HALTED_REGULATORY` and excluded from model inputs.
-- **Zero-Mock Verification**: All calculations use confirmed ticker records from `data/canonical_prices_live.json` and `data/thndr_egx_244_universe.json`.
-
----
-**Institutional Compliance Notice:**  
-*Document certified under GEN-26 Institutional Risk Governance Protocol v3.2.0. Verified with 456 automated STLC test suites.*
+## 3. Sector Classifications
+The 244 equities are categorized across 12 standard EGX industrial sectors:
+1. Banking & Financial Services
+2. Real Estate & Development
+3. Basic Resources & Petrochemicals
+4. Industrial Goods, Services & Automobiles
+5. Food, Beverages & Tobacco
+6. Healthcare & Pharmaceuticals
+7. Telecommunications, Media & Technology
+8. Building Materials & Construction
+9. Non-Bank Financial Services (NBFS)
+10. Energy & Support Services
+11. Travel, Tourism & Leisure
+12. Education & Consumer Services

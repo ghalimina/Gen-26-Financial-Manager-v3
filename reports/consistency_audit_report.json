@@ -1,23 +1,23 @@
 {
-  "audit_timestamp": "2026-08-30T02:31:08.211513",
+  "audit_timestamp": "2026-08-30T03:19:16.155185",
   "target_version": "v3.2.0-Authoritative",
   "total_reports_scanned": 21,
   "reports_audit": {
     "01_SYSTEM_ARCHITECTURE_OVERVIEW.md": {
       "file": "01_SYSTEM_ARCHITECTURE_OVERVIEW.md",
-      "size_bytes": 15637,
+      "size_bytes": 4793,
       "checks": {
         "ssot_definitions_present": true
       }
     },
     "02_EGX_244_UNIVERSE_CATALOG.md": {
       "file": "02_EGX_244_UNIVERSE_CATALOG.md",
-      "size_bytes": 6678,
+      "size_bytes": 2320,
       "checks": {}
     },
     "03_MACRO_REGIME_AND_CBE_CORRIDOR.md": {
       "file": "03_MACRO_REGIME_AND_CBE_CORRIDOR.md",
-      "size_bytes": 6316,
+      "size_bytes": 1723,
       "checks": {
         "cbe_deposit_rate_19pct": true,
         "cbe_lending_rate_20pct": true,
@@ -26,95 +26,95 @@
     },
     "04_DATABASE_SCHEMA_AND_PERSISTENCE.md": {
       "file": "04_DATABASE_SCHEMA_AND_PERSISTENCE.md",
-      "size_bytes": 6243,
+      "size_bytes": 5060,
       "checks": {}
     },
     "05_SEVEN_AGENT_QUANT_COUNCIL.md": {
       "file": "05_SEVEN_AGENT_QUANT_COUNCIL.md",
-      "size_bytes": 5382,
+      "size_bytes": 1925,
       "checks": {}
     },
     "06_AUTONOMOUS_RESEARCH_LAB.md": {
       "file": "06_AUTONOMOUS_RESEARCH_LAB.md",
-      "size_bytes": 5416,
+      "size_bytes": 1375,
       "checks": {}
     },
     "07_PURGED_WALK_FORWARD_PROMOTION_GATE.md": {
       "file": "07_PURGED_WALK_FORWARD_PROMOTION_GATE.md",
-      "size_bytes": 4933,
+      "size_bytes": 1184,
       "checks": {}
     },
     "08_EPISODIC_FAILURE_MEMORY.md": {
       "file": "08_EPISODIC_FAILURE_MEMORY.md",
-      "size_bytes": 4284,
+      "size_bytes": 795,
       "checks": {}
     },
     "09_PIOTROSKI_F_SCORE_ANALYSIS.md": {
       "file": "09_PIOTROSKI_F_SCORE_ANALYSIS.md",
-      "size_bytes": 5220,
+      "size_bytes": 1453,
       "checks": {
         "comi_fscore_9_of_9": true
       }
     },
     "10_PETER_LYNCH_VALUATION_METRICS.md": {
       "file": "10_PETER_LYNCH_VALUATION_METRICS.md",
-      "size_bytes": 3788,
+      "size_bytes": 698,
       "checks": {
         "peg_distinction": true
       }
     },
     "11_NISON_CANDLESTICKS_AND_MURPHY_TECH.md": {
       "file": "11_NISON_CANDLESTICKS_AND_MURPHY_TECH.md",
-      "size_bytes": 3484,
+      "size_bytes": 439,
       "checks": {}
     },
     "12_MARK_DOUGLAS_PSYCHOLOGY_GUARD.md": {
       "file": "12_MARK_DOUGLAS_PSYCHOLOGY_GUARD.md",
-      "size_bytes": 3816,
+      "size_bytes": 573,
       "checks": {}
     },
     "13_LONDON_GDR_ARBITRAGE_REPORT.md": {
       "file": "13_LONDON_GDR_ARBITRAGE_REPORT.md",
-      "size_bytes": 3224,
+      "size_bytes": 413,
       "checks": {}
     },
     "14_STATISTICAL_PAIRS_ARBITRAGE.md": {
       "file": "14_STATISTICAL_PAIRS_ARBITRAGE.md",
-      "size_bytes": 4566,
+      "size_bytes": 558,
       "checks": {}
     },
     "15_DEEP_QUANT_48_FEATURE_TENSOR.md": {
       "file": "15_DEEP_QUANT_48_FEATURE_TENSOR.md",
-      "size_bytes": 8674,
+      "size_bytes": 809,
       "checks": {}
     },
     "16_TWO_STAGE_META_LABELING_AI.md": {
       "file": "16_TWO_STAGE_META_LABELING_AI.md",
-      "size_bytes": 4083,
+      "size_bytes": 1122,
       "checks": {
         "meta_labeling_piecewise_formula": true
       }
     },
     "17_EGX_TRADING_RULES_AND_CGT_TAX.md": {
       "file": "17_EGX_TRADING_RULES_AND_CGT_TAX.md",
-      "size_bytes": 4119,
+      "size_bytes": 583,
       "checks": {}
     },
     "18_BLACK_SWAN_STRESS_TESTING.md": {
       "file": "18_BLACK_SWAN_STRESS_TESTING.md",
-      "size_bytes": 4295,
+      "size_bytes": 482,
       "checks": {}
     },
     "19_DEVOPS_CI_CD_AND_TEST_BATTERY.md": {
       "file": "19_DEVOPS_CI_CD_AND_TEST_BATTERY.md",
-      "size_bytes": 4889,
+      "size_bytes": 2366,
       "checks": {
         "master_test_count_456": true
       }
     },
     "20_MASTER_INDEX_AND_SYSTEM_GLOSSARY.md": {
       "file": "20_MASTER_INDEX_AND_SYSTEM_GLOSSARY.md",
-      "size_bytes": 8623,
+      "size_bytes": 3609,
       "checks": {}
     }
   },
