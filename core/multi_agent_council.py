@@ -773,3 +773,7 @@ if __name__ == "__main__":
     print("\n--- Autonomous Research Cycle ---")
     research_res = AgentCouncilOrchestrator.run_autonomous_research_cycle()
     print(f"Experiment ID: {research_res['experiment_id']} | Status: {research_res['status']} | Critic Score: {research_res['critic_score']}")
+
+
+# Canonical Alias
+MultiAgentCouncil = AgentCouncilOrchestrator

@@ -837,6 +837,69 @@ class SQLiteDatabaseEngine:
             logger.error("Failed to record prediction forecast: %s", e)
             return False
 
+    @classmethod
+    def record_prediction(
+        cls,
+        prediction_id: str,
+        ticker: str,
+        horizon: str,
+        timestamp_target: str,
+        entry_price: float,
+        predicted_target_price: float,
+        predicted_direction: str = "BULLISH",
+        predicted_confidence_pct: float = 75.0,
+        features_snapshot_json: str = "{}",
+        status: str = "PENDING"
+    ) -> bool:
+        """Classmethod helper to record forward-looking predictions."""
+        return db_engine.record_prediction_forecast({
+            "prediction_id": prediction_id,
+            "ticker": ticker,
+            "horizon": horizon,
+            "timestamp_created": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "timestamp_target": timestamp_target,
+            "entry_price": entry_price,
+            "predicted_target_price": predicted_target_price,
+            "predicted_direction": predicted_direction,
+            "predicted_confidence_pct": predicted_confidence_pct,
+            "features_snapshot_json": features_snapshot_json,
+            "status": status
+        })
+
+    @classmethod
+    def record_agent_vote(
+        cls,
+        vote_id: str,
+        session_id: str,
+        ticker: str,
+        agent_name: str,
+        vote: str,
+        conviction_score: float,
+        rationale_ar: str = "",
+        features_evaluated_json: str = "{}"
+    ) -> bool:
+        """Records an agent vote into SQLite agent_council_votes table."""
+        try:
+            now_ts = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            with db_engine.get_connection() as conn:
+                cursor = conn.cursor()
+                cursor.execute("""
+                    INSERT OR REPLACE INTO agent_council_votes (
+                        vote_id, timestamp, ticker, consensus_verdict, conviction_score
+                    ) VALUES (?, ?, ?, ?, ?);
+                """, (
+                    vote_id,
+                    now_ts,
+                    ticker,
+                    vote,
+                    float(conviction_score)
+                ))
+                conn.commit()
+            return True
+        except Exception as e:
+            logger.error("Failed to record agent vote: %s", e)
+            return False
+
     def get_pending_predictions(self, limit: int = 200) -> List[Dict[str, Any]]:
         """Retrieves pending predictions ready for evaluation and reconciliation."""
         with self.get_connection() as conn:

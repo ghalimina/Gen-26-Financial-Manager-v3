@@ -397,3 +397,7 @@ if __name__ == "__main__":
     print(f"COMI.CA Price: {MarketPriceService.get_latest_price('COMI.CA')} EGP")
     print(f"SWDY.CA Price: {MarketPriceService.get_latest_price('SWDY.CA')} EGP")
     print("=" * 70)
+
+
+# Canonical alias for universal compatibility
+CanonicalPriceService = MarketPriceService

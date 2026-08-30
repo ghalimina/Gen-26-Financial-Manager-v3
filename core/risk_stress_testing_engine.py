@@ -131,8 +131,12 @@ class RiskStressTestingEngine:
         Dynamically calculates Egyptian Gold ETF (AZG.CA) metrics from live Gold Spot (GC=F)
         and live USD/EGP (EGP=X). Zero hardcoded static numbers.
         """
-        usd_egp = MacroEconomicEngine.fetch_usd_egp()
-        if usd_egp <= 0:
+        import math
+        try:
+            usd_egp = float(MacroEconomicEngine.fetch_usd_egp())
+            if math.isnan(usd_egp) or usd_egp <= 0:
+                usd_egp = 50.20
+        except Exception:
             usd_egp = 50.20
 
         # Try live yfinance Gold Spot query
@@ -141,19 +145,25 @@ class RiskStressTestingEngine:
             import yfinance as yf
             t = yf.Ticker("GC=F")
             h = t.history(period="5d")
-            if not h.empty:
-                gold_spot_usd = float(h["Close"].iloc[-1])
+            if not h.empty and "Close" in h:
+                valid_closes = h["Close"].dropna()
+                if not valid_closes.empty:
+                    val = float(valid_closes.iloc[-1])
+                    if not math.isnan(val) and val > 0:
+                        gold_spot_usd = val
         except Exception as e:
             logger.debug("Live yfinance GC=F query failed: %s", e)
 
         # 1 Troy Ounce = 31.1034768 grams of 24k Gold
         grams_per_oz = 31.1034768
         gold_24k_egp_gram = (gold_spot_usd / grams_per_oz) * usd_egp
+        if math.isnan(gold_24k_egp_gram) or gold_24k_egp_gram <= 0:
+            gold_24k_egp_gram = 4250.0
 
         # AZG.CA (Azimut Gold Fund) represents ~10mg of 24k gold (~0.01g per cert)
         # Dynamic NAV per certificate in EGP
         azg_nav_egp = round(gold_24k_egp_gram * 0.01, 2)
-        if azg_nav_egp <= 0:
+        if math.isnan(azg_nav_egp) or azg_nav_egp <= 0:
             azg_nav_egp = 42.50
 
         # Estimate Gold Volatility (annualized ~16%)
@@ -182,9 +192,10 @@ class RiskStressTestingEngine:
         Dynamically calculates the recommended Gold ETF (AZG.CA) allocation
         based on current market regime and portfolio risk profile.
         """
+        import math
         gold_metrics = cls.get_live_gold_metrics()
         cert_price = float(gold_metrics.get("azg_cert_price_egp", 42.50) or 42.50)
-        if cert_price <= 0:
+        if math.isnan(cert_price) or cert_price <= 0:
             cert_price = 42.50
 
         # Base gold allocation by regime
