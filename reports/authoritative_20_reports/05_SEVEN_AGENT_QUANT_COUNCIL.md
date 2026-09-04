@@ -1,31 +1,35 @@
-# 05 — 7-Agent Autonomous Quantitative Council
-**GEN-26 Quantitative Autonomous Platform | Version 3.2.0-Authoritative | Institutional Whitepaper**
+# 05 — Seven-Agent Quant Council & TradingAgents Dialectical Architecture
+**GEN-26 Multi-Agent Deliberation Suite**
+*Last Synchronized: 2026-08-30 14:19:12*
 
 ---
 
-## Executive Summary
-The GEN-26 decision engine is powered by an autonomous **7-Agent Quantitative Council** (`core/multi_agent_council.py`). Each agent represents a specialized institutional discipline and votes independently with an assigned conviction score.
+## 1. Two-Tier 7-Agent Architecture Specification
+
+```
++====================================================================================================+
+|                              7-AGENT QUANTITATIVE COUNCIL HIERARCHY                                |
++====================================================================================================+
+| TIER 1: REAL-TIME TRADE SCREENING COUNCIL (5 VOTING AGENTS)                                         |
++----------------------------------------------------------------------------------------------------+
+| 1. FundamentalistAgent ($w_1 = 0.25$) | Piotroski 9/9 adapted model, Lynch PEG, Graham margin       |
+| 2. TechnicianAgent     ($w_2 = 0.25$) | Steve Nison candlesticks, Murphy support/resistance, ADX    |
+| 3. MarketAnalystAgent  ($w_3 = 0.20$) | EGX30 breadth, foreign/institutional net flows, macro state |
+| 4. QuantModelerAgent   ($w_4 = 0.20$) | Pairs arbitrage Z-score, London GDR parity, FracDiff        |
+| 5. RiskSizerAgent      ($w_5 = 0.10$) | Mark Douglas sizing (max 1.0% NAV risk) + ABSOLUTE VETO     |
+| --> Synthesis: Consensus Score = sum(w_i * Score_i) with sum(w_i) = 1.00                            |
++====================================================================================================+
+| TIER 2: AUTONOMOUS RESEARCH LAB & EVOLUTION (2 META-AGENTS)                                        |
++----------------------------------------------------------------------------------------------------+
+| 6. ResearchScientistAgent             | Formulates new hypotheses & parameter tuning from failures  |
+| 7. CriticAuditorAgent                 | Adversarial anti-overfit audit & look-ahead bias gatekeeper |
++====================================================================================================+
+```
 
 ---
 
-## 1. Council Member Specifications
+## 2. Consensus Synthesis Formulation
+$$\text{Consensus Score} = (0.25 \times S_{\text{fund}}) + (0.25 \times S_{\text{tech}}) + (0.20 \times S_{\text{mkt}}) + (0.20 \times S_{\text{quant}}) + (0.10 \times S_{\text{risk}})$$
 
-| # | Agent Name | Domain & Methodology | Primary Features Evaluated |
-| :-: | :--- | :--- | :--- |
-| **1** | **Macro Strategy Agent** | CBE Corridor, Inflation, FX, HMM Regime | CBE Rates (19%/20%), USD/EGP (50.20), Net Foreign Inflows |
-| **2** | **Fundamental Value Agent** | Piotroski F-Score, Graham Value, Lynch PEG | F-Score (9/9), P/E, PEG, ROE, Debt/Equity |
-| **3** | **Technical Timing Agent** | Nison Candlesticks, Murphy Trends, ADX | RSI(14), ADX, MACD, Support/Resistance Zones |
-| **4** | **Smart Money Radar Agent** | Institutional block trades, Insider filings | Volume Z-Score, Institutional Accumulation Index |
-| **5** | **Quantitative Model Agent** | Two-Stage Meta-Labeling, Pairs Arbitrage | Random Forest Probabilities, Z-Spread, Fractional Diff |
-| **6** | **Dynamic Risk Agent** | Modified Kelly, Douglas Psychology Guard | ATR Volatility, Max Drawdown, Stop Loss Distance |
-| **7** | **Adversarial Critic Agent** | Overfitting detection, Deflated Sharpe Ratio | PBO, Purged Walk-Forward Degradation Hurdle |
-
----
-
-## 2. Consensus Synthesis & Supermajority Rule
-
-The final council verdict requires a **Supermajority Consensus Hurdle**:
-
-$$	ext{Consensus Score} = rac{\sum_{i=1}^{7} w_i \cdot 	ext{Vote}_i \cdot 	ext{Conviction}_i}{\sum_{i=1}^{7} w_i} \ge \mathbf{70.0\%}$$
-
-If the consensus score is $< 70.0\%$ or the Adversarial Critic Agent identifies data leakage / overfitting, the system executes a fail-closed `HOLD` or `NO_TRADE`.
+- $\sum_{i=1}^{5} w_i = 0.25 + 0.25 + 0.20 + 0.20 + 0.10 = \mathbf{1.00}$
+- **Absolute Risk Veto**: If `RiskSizerAgent` votes `REJECT` due to poor risk-reward ($R:R < 1:2.5$) or risk limit violation ($>1.0\%$ NAV), the entire candidate is rejected immediately regardless of other votes.

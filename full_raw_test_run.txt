@@ -1,0 +1,1638 @@
+﻿python : test_01_triple_barrier_labeling 
+(test_advanced_feature_engineering.TestAdvancedFeatureEngineering.test_01_triple_barrier_labeling)
+At line:1 char:1
++ python -m unittest discover -s tests -v 2>&1 | Out-File -FilePath ful ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (test_01_triple_...rrier_labeling):String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Verify Triple Barrier assigns +1 on profit target, -1 on stop loss, 0 on time expiration. ... ok
+test_02_fractional_differentiation 
+(test_advanced_feature_engineering.TestAdvancedFeatureEngineering.test_02_fractional_differentiation)
+Verify fractional differentiation preserves shape and produces stationary memory-preserving series. ... ok
+test_03_multi_timeframe_momentum 
+(test_advanced_feature_engineering.TestAdvancedFeatureEngineering.test_03_multi_timeframe_momentum)
+Verify momentum score is bounded between 0 and 100 with valid velocity regime. ... ok
+test_04_stealth_accumulation_detection 
+(test_advanced_feature_engineering.TestAdvancedFeatureEngineering.test_04_stealth_accumulation_detection)
+Verify high Volume Z-Score with tight price range flags STEALTH_ACCUMULATION. ... ok
+test_01_macd_and_bollinger_bands_structure 
+(test_advanced_methodology_features.TestAdvancedMethodologyFeatures.test_01_macd_and_bollinger_bands_structure)
+Verify TechnicalSetupEngine computes MACD and Bollinger Bands squeeze/expansion. ... 2026-08-30 14:59:51,337 [INFO] 
+Initiating resilient multi-source price sync for 244 EGX tickers...
+ok
+test_02_retest_setup_classification 
+(test_advanced_methodology_features.TestAdvancedMethodologyFeatures.test_02_retest_setup_classification)
+Verify TechnicalSetupEngine recognizes BREAKOUT_RETEST_SUPPORT setup. ... ok
+test_03_multi_timeframe_weekly_trend 
+(test_advanced_methodology_features.TestAdvancedMethodologyFeatures.test_03_multi_timeframe_weekly_trend)
+Verify Multi-Timeframe weekly trend confirmation filter. ... ok
+test_04_dynamic_atr_stop_loss 
+(test_advanced_methodology_features.TestAdvancedMethodologyFeatures.test_04_dynamic_atr_stop_loss)
+Verify stop loss is dynamic based on ATR and clamped within [3.5%, 10.0%]. ... 2026-08-30 15:00:19,779 [WARNING] 
+[CIRCUIT_BREAKER] Price anomaly #2 for SAIB.CA: fetched 2.53 EGP deviates 16.5% from previous close 3.03 EGP (exceeds 
+▒15% limit).
+2026-08-30 15:00:19,779 [WARNING] [CIRCUIT_BREAKER] Price anomaly #3 for DAPH.CA: fetched 141.60 EGP deviates 20.0% 
+from previous close 118.00 EGP (exceeds ▒15% limit).
+2026-08-30 15:00:19,779 [ERROR] [CRITICAL_FEED_ALERT] \u0633\u0647\u0645 DAPH.CA \u062a\u0643\u0631\u0631 
+\u0631\u0641\u0636\u0647 3 \u0645\u0631\u0627\u062a \u0645\u062a\u062a\u0627\u0644\u064a\u0629 ù \u0647\u0630\u0627 
+\u0627\u0644\u0633\u0647\u0645 \u064a\u062d\u062a\u0627\u062c \u0645\u0635\u062f\u0631 
+\u0628\u064a\u0627\u0646\u0627\u062a \u0628\u062f\u064a\u0644 ù \u0627\u0644\u062a\u062c\u0627\u0647\u0644 
+\u0627\u0644\u0645\u062a\u0643\u0631\u0631 \u0644\u0646 \u064a\u062d\u0644 \u0627\u0644\u0645\u0634\u0643\u0644\u0629. 
+\u062c\u0627\u0631\u064a \u062a\u062c\u0631\u0628\u0629 \u0627\u0644\u0645\u0635\u062f\u0631 
+\u0627\u0644\u0645\u0628\u0627\u0634\u0631 \u0627\u0644\u0628\u062f\u064a\u0644...
+2026-08-30 15:00:21,446 [WARNING] [CIRCUIT_BREAKER] Price anomaly #6 for AIH.CA: fetched 0.60 EGP deviates 20.6% from 
+previous close 0.50 EGP (exceeds ▒15% limit).
+2026-08-30 15:00:21,447 [ERROR] [CRITICAL_FEED_ALERT] \u0633\u0647\u0645 AIH.CA \u062a\u0643\u0631\u0631 
+\u0631\u0641\u0636\u0647 6 \u0645\u0631\u0627\u062a \u0645\u062a\u062a\u0627\u0644\u064a\u0629 ù \u0647\u0630\u0627 
+\u0627\u0644\u0633\u0647\u0645 \u064a\u062d\u062a\u0627\u062c \u0645\u0635\u062f\u0631 
+\u0628\u064a\u0627\u0646\u0627\u062a \u0628\u062f\u064a\u0644 ù \u0627\u0644\u062a\u062c\u0627\u0647\u0644 
+\u0627\u0644\u0645\u062a\u0643\u0631\u0631 \u0644\u0646 \u064a\u062d\u0644 \u0627\u0644\u0645\u0634\u0643\u0644\u0629. 
+\u062c\u0627\u0631\u064a \u062a\u062c\u0631\u0628\u0629 \u0627\u0644\u0645\u0635\u062f\u0631 
+\u0627\u0644\u0645\u0628\u0627\u0634\u0631 \u0627\u0644\u0628\u062f\u064a\u0644...
+ok
+test_05_expected_upside_and_downside_per_horizon 
+(test_advanced_methodology_features.TestAdvancedMethodologyFeatures.test_05_expected_upside_and_downside_per_horizon)
+Verify each horizon contains both expected_return_pct and expected_downside_pct. ... 2026-08-30 15:00:22,490 [INFO] 
+Price sync completed: 154/244 live fetched, 90 fallback snapshots, 2 critical feed alerts.
+ok
+test_06_quality_of_earnings_analysis 
+(test_advanced_methodology_features.TestAdvancedMethodologyFeatures.test_06_quality_of_earnings_analysis)
+Verify LiveFundamentalsEngine evaluates Cash Flow Conversion (OCF/NI) and flags. ... ok
+test_07_portfolio_correlation_and_beta_engine 
+(test_advanced_methodology_features.TestAdvancedMethodologyFeatures.test_07_portfolio_correlation_and_beta_engine)
+Verify PortfolioCorrelationEngine computes Beta vs EGX30 and correlation matrix. ... ok
+test_08_multi_horizon_engine_new_report_fields 
+(test_advanced_methodology_features.TestAdvancedMethodologyFeatures.test_08_multi_horizon_engine_new_report_fields)
+Verify MultiHorizonEngine includes confidence, beta, invalidation triggers, and tailored holding. ... ok
+test_09_api_ranking_and_correlation_endpoints 
+(test_advanced_methodology_features.TestAdvancedMethodologyFeatures.test_09_api_ranking_and_correlation_endpoints)
+Verify /api/ranking contains new report fields and /api/correlation works. ... ok
+test_01_market_breadth_baseline_computation 
+(test_advanced_quant_layers.TestAdvancedQuantLayers.test_01_market_breadth_baseline_computation)
+Verify dynamic breadth metrics across the EGX universe. ... ok
+test_02_market_breadth_regime_switch_synthetic 
+(test_advanced_quant_layers.TestAdvancedQuantLayers.test_02_market_breadth_regime_switch_synthetic)
+Verify regime classification logic under synthetic bull vs bear prices. ... ok
+test_03_sector_rs_aggregation (test_advanced_quant_layers.TestAdvancedQuantLayers.test_03_sector_rs_aggregation)
+Verify real-time sector indices and relative strength rankings. ... ok
+test_04_sector_rs_single_stock_query 
+(test_advanced_quant_layers.TestAdvancedQuantLayers.test_04_sector_rs_single_stock_query)
+Verify get_stock_sector_rs helper. ... ok
+test_05_institutional_flow_routine 
+(test_advanced_quant_layers.TestAdvancedQuantLayers.test_05_institutional_flow_routine)
+Verify Volume Z-score and routine liquidity evaluation. ... ok
+test_06_institutional_accumulation_detection 
+(test_advanced_quant_layers.TestAdvancedQuantLayers.test_06_institutional_accumulation_detection)
+Verify detection of institutional accumulation on high volume breakout. ... ok
+test_07_retail_distribution_detection 
+(test_advanced_quant_layers.TestAdvancedQuantLayers.test_07_retail_distribution_detection)
+Verify detection of retail distribution / panic dumping on heavy volume. ... ok
+test_08_scan_universe_flows (test_advanced_quant_layers.TestAdvancedQuantLayers.test_08_scan_universe_flows)
+Verify scanning entire active universe for volume anomalies. ... ok
+test_09_multi_horizon_decomposed_drivers 
+(test_advanced_quant_layers.TestAdvancedQuantLayers.test_09_multi_horizon_decomposed_drivers)
+Verify UP DRIVERS and DOWN RISKS decomposition in multi-horizon analysis. ... ok
+test_10_uncertainty_rule_enforcement 
+(test_advanced_quant_layers.TestAdvancedQuantLayers.test_10_uncertainty_rule_enforcement)
+Verify uncertainty rule flags and decision outputs. ... ok
+test_11_cross_sectional_rankings_with_factors 
+(test_advanced_quant_layers.TestAdvancedQuantLayers.test_11_cross_sectional_rankings_with_factors)
+Verify full universe rankings are produced with complete factor attribution. ... ok
+test_01_api_chat_success (test_ai_api_endpoints.TestAIApiEndpoints.test_01_api_chat_success)
+Verify POST /api/chat returns structured Arabic AI response. ... ok
+test_02_api_chat_empty_query_400 (test_ai_api_endpoints.TestAIApiEndpoints.test_02_api_chat_empty_query_400)
+Verify POST /api/chat returns 400 when query is empty. ... ok
+test_03_api_morning_briefing_success (test_ai_api_endpoints.TestAIApiEndpoints.test_03_api_morning_briefing_success)
+Verify GET /api/morning_briefing returns complete Arabic morning report. ... ok
+test_04_api_morning_briefing_custom_regime 
+(test_ai_api_endpoints.TestAIApiEndpoints.test_04_api_morning_briefing_custom_regime)
+Verify GET /api/morning_briefing respects custom regime parameter. ... ok
+test_05_api_fundamentals_ticker_success 
+(test_ai_api_endpoints.TestAIApiEndpoints.test_05_api_fundamentals_ticker_success)
+[2026-08-30 15:05:30,483] [INFO] [FundamentalDataEngine] Querying fundamental data for COMI.CA (yfinance: COMI.CA)...
+Verify GET /api/fundamentals/COMI.CA returns health score and valuation metrics. ... 2026-08-30 15:05:30,483 [INFO] 
+Querying fundamental data for COMI.CA (yfinance: COMI.CA)...
+ok
+test_06_api_fundamentals_fallback_on_invalid_ticker 
+(test_ai_api_endpoints.TestAIApiEndpoints.test_06_api_fundamentals_fallback_on_invalid_ticker)
+[2026-08-30 15:05:45,385] [INFO] [FundamentalDataEngine] Querying fundamental data for INVALID_SYMBOL_XYZ.CA (yfinance: INVALID_SYMBOL_XYZ.CA)...
+Verify GET /api/fundamentals/<invalid> returns graceful 200 fallback without crashing. ... 2026-08-30 15:05:45,385 
+[INFO] Querying fundamental data for INVALID_SYMBOL_XYZ.CA (yfinance: INVALID_SYMBOL_XYZ.CA)...
+ok
+test_07_api_trading_agents_debate_success 
+(test_ai_api_endpoints.TestAIApiEndpoints.test_07_api_trading_agents_debate_success)
+Verify GET /api/v1/trading-agents/debate/COMI.CA returns complete multi-agent deliberation. ... ok
+test_08_api_trading_agents_scan_success 
+(test_ai_api_endpoints.TestAIApiEndpoints.test_08_api_trading_agents_scan_success)
+[2026-08-30 15:05:46,564] [INFO] [FundamentalDataEngine] Querying fundamental data for SWDY.CA (yfinance: SWDY.CA)...
+Verify GET /api/v1/trading-agents/scan returns scan across focus equities. ... 2026-08-30 15:05:46,564 [INFO] Querying 
+fundamental data for SWDY.CA (yfinance: SWDY.CA)...
+[2026-08-30 15:05:47,308] [INFO] [FundamentalDataEngine] Querying fundamental data for TMGH.CA (yfinance: TMGH.CA)...
+2026-08-30 15:05:47,308 [INFO] Querying fundamental data for TMGH.CA (yfinance: TMGH.CA)...
+[2026-08-30 15:05:48,026] [INFO] [FundamentalDataEngine] Querying fundamental data for MFPC.CA (yfinance: MFPC.CA)...
+2026-08-30 15:05:48,026 [INFO] Querying fundamental data for MFPC.CA (yfinance: MFPC.CA)...
+[2026-08-30 15:05:48,750] [INFO] [FundamentalDataEngine] Querying fundamental data for ETEL.CA (yfinance: ETEL.CA)...
+2026-08-30 15:05:48,750 [INFO] Querying fundamental data for ETEL.CA (yfinance: ETEL.CA)...
+[2026-08-30 15:05:55,936] [INFO] [FundamentalDataEngine] Querying fundamental data for FWRY.CA (yfinance: FWRY.CA)...
+2026-08-30 15:05:55,936 [INFO] Querying fundamental data for FWRY.CA (yfinance: FWRY.CA)...
+ok
+test_01_morning_briefing_structure 
+(test_ai_generative_engine.TestAIGenerativeEngine.test_01_morning_briefing_structure)
+Verify generate_morning_briefing returns complete and valid payload. ... ok
+test_02_morning_briefing_regime_customization 
+(test_ai_generative_engine.TestAIGenerativeEngine.test_02_morning_briefing_regime_customization)
+Verify briefing reflects the provided market regime. ... ok
+test_03_chat_ticker_lookup (test_ai_generative_engine.TestAIGenerativeEngine.test_03_chat_ticker_lookup)
+Verify chatbot identifies specific ticker in Arabic query. ... ok
+test_04_chat_recommendations_query 
+(test_ai_generative_engine.TestAIGenerativeEngine.test_04_chat_recommendations_query)
+Verify chatbot answers general recommendation queries. ... ok
+test_05_chat_capital_allocation_query 
+(test_ai_generative_engine.TestAIGenerativeEngine.test_05_chat_capital_allocation_query)
+Verify chatbot answers portfolio allocation questions. ... ok
+test_06_edge_cases_and_empty_inputs 
+(test_ai_generative_engine.TestAIGenerativeEngine.test_06_edge_cases_and_empty_inputs)
+Verify engine gracefully handles empty strings, None contexts, and missing data. ... ok
+test_01_feature_vector_extraction (test_ai_prediction_model.TestAIPredictionModel.test_01_feature_vector_extraction)
+Verify feature extraction returns exact 21-dimensional orthogonal vector with lag & regime metrics. ... ok
+test_02_model_training_timeseries_split 
+(test_ai_prediction_model.TestAIPredictionModel.test_02_model_training_timeseries_split)
+Verify model trains with TimeSeriesSplit without look-ahead bias. ... ok
+test_03_prediction_output_schema (test_ai_prediction_model.TestAIPredictionModel.test_03_prediction_output_schema)
+Verify inference outputs residual alpha, confidence score, and top 3 drivers. ... ok
+test_04_ai_consensus_in_multi_horizon 
+(test_ai_prediction_model.TestAIPredictionModel.test_04_ai_consensus_in_multi_horizon)
+Verify MultiHorizonEngine embeds AI prediction and requires consensus. ... ok
+test_05_risk_engine_override_invariance 
+(test_ai_prediction_model.TestAIPredictionModel.test_05_risk_engine_override_invariance)
+Verify AI forecast CANNOT override ATR Stop Loss or Risk Position Sizing. ... ok
+test_06_api_ai_forecast_endpoint (test_ai_prediction_model.TestAIPredictionModel.test_06_api_ai_forecast_endpoint)
+Verify GET /api/ai/forecast/<ticker> returns HTTP 200 with forecast payload. ... ok
+test_07_purged_timeseries_split_embargo_isolation 
+(test_ai_prediction_model.TestAIPredictionModel.test_07_purged_timeseries_split_embargo_isolation)
+Verify PurgedTimeSeriesSplit purges overlapping horizon days and applies embargo. ... ok
+test_08_native_feature_importance_properties 
+(test_ai_prediction_model.TestAIPredictionModel.test_08_native_feature_importance_properties)
+Verify feature importances are normalized and sum close to 1.0. ... ok
+test_09_lightgbm_ensemble_model (test_ai_prediction_model.TestAIPredictionModel.test_09_lightgbm_ensemble_model)
+Verify LightGBM + XGBoost Ensemble returns weighted prediction (0.6*xgb + 0.4*lgbm). ... ok
+test_01_multi_layer_scanner_layers 
+(test_alpha_intelligence_scanner.TestAlphaIntelligenceScanner.test_01_multi_layer_scanner_layers) ... ok
+test_02_regime_adaptive_weights 
+(test_alpha_intelligence_scanner.TestAlphaIntelligenceScanner.test_02_regime_adaptive_weights) ... ok
+test_03_alpha_scorer_bounds (test_alpha_intelligence_scanner.TestAlphaIntelligenceScanner.test_03_alpha_scorer_bounds) 
+... ok
+test_04_opportunity_ranking_universe 
+(test_alpha_intelligence_scanner.TestAlphaIntelligenceScanner.test_04_opportunity_ranking_universe) ... ok
+test_05_monotonicity_validator 
+(test_alpha_intelligence_scanner.TestAlphaIntelligenceScanner.test_05_monotonicity_validator) ... ok
+test_06_flask_alpha_scanner_endpoints 
+(test_alpha_intelligence_scanner.TestAlphaIntelligenceScanner.test_06_flask_alpha_scanner_endpoints) ... ok
+test_01_supply_chain_graph_mapping_integrity 
+(test_alternative_data_engine.TestAlternativeDataEngine.test_01_supply_chain_graph_mapping_integrity)
+Verify EGX_SUPPLY_CHAIN_GRAPH maps raw material dependencies accurately. ... ok
+test_02_exporter_gas_futures_signal 
+(test_alternative_data_engine.TestAlternativeDataEngine.test_02_exporter_gas_futures_signal)
+Verify gas futures surge triggers BULLISH_EXPORTS signal for ABUK.CA and MFPC.CA. ... ok
+test_03_fmcg_sugar_cost_headwind_signal 
+(test_alternative_data_engine.TestAlternativeDataEngine.test_03_fmcg_sugar_cost_headwind_signal)
+Verify raw material sugar price spike creates INPUT_COST_HEADWIND signal for JUFO.CA. ... ok
+test_04_real_estate_material_margin_expansion 
+(test_alternative_data_engine.TestAlternativeDataEngine.test_04_real_estate_material_margin_expansion)
+Verify steel/cement cost moderation creates positive margin signal for TMGH.CA. ... ok
+test_05_unknown_and_empty_ticker_fallback 
+(test_alternative_data_engine.TestAlternativeDataEngine.test_05_unknown_and_empty_ticker_fallback)
+Verify unmapped or invalid tickers safely return NEUTRAL baseline. ... ok
+test_06_score_bounds_and_graph_export 
+(test_alternative_data_engine.TestAlternativeDataEngine.test_06_score_bounds_and_graph_export)
+Verify that all mapped tickers return scores bounded within [-100, +100]. ... ok
+test_01_market_endpoint (test_api_endpoints.TestAPIEndpoints.test_01_market_endpoint)
+Verify /api/market returns regime and EGX30 level. ... ok
+test_02_universe_endpoint (test_api_endpoints.TestAPIEndpoints.test_02_universe_endpoint)
+Verify /api/universe returns coverage breakdown. ... ok
+test_03_stock_dossier_endpoint (test_api_endpoints.TestAPIEndpoints.test_03_stock_dossier_endpoint)
+Verify /api/stocks/<ticker> deep dossier with institutional factor layers. ... ok
+test_04_ranking_and_signals_endpoints (test_api_endpoints.TestAPIEndpoints.test_04_ranking_and_signals_endpoints)
+Verify /api/ranking and /api/signals. ... ok
+test_05_real_portfolio_crud_api (test_api_endpoints.TestAPIEndpoints.test_05_real_portfolio_crud_api)
+Verify real portfolio GET and POST endpoints via API. ... ok
+test_06_risk_and_stress_endpoints (test_api_endpoints.TestAPIEndpoints.test_06_risk_and_stress_endpoints)
+Verify /api/risk and /api/stress endpoints. ... ok
+test_07_watchlist_api (test_api_endpoints.TestAPIEndpoints.test_07_watchlist_api)
+Verify /api/watchlist GET and POST add/remove. ... ok
+test_08_portfolio_export_api (test_api_endpoints.TestAPIEndpoints.test_08_portfolio_export_api)
+Verify /api/portfolio/export returns downloadable CSV with UTF-8 BOM and JSON. ... ok
+test_promotion_decision_gating (test_backtest.TestBacktestEngine.test_promotion_decision_gating) ... ok
+test_walk_forward_evaluation_and_metrics (test_backtest.TestBacktestEngine.test_walk_forward_evaluation_and_metrics) 
+... ok
+test_01_broker_api_client_alias_and_sandbox 
+(test_broker_execution.TestBrokerExecutionEngine.test_01_broker_api_client_alias_and_sandbox)
+Verify BrokerAPIClient class exists and default is sandbox mode. ... ok
+test_02_dynamic_slippage_market_impact 
+(test_broker_execution.TestBrokerExecutionEngine.test_02_dynamic_slippage_market_impact)
+Verify dynamic slippage scales with order size vs Average Daily Volume. ... ok
+test_03_submit_market_order_sandbox_fill 
+(test_broker_execution.TestBrokerExecutionEngine.test_03_submit_market_order_sandbox_fill)
+Verify market order in sandbox executes immediately with filled status. ... ok
+test_04_submit_limit_order (test_broker_execution.TestBrokerExecutionEngine.test_04_submit_limit_order)
+Verify limit order submission and status. ... ok
+test_05_submit_trailing_stop (test_broker_execution.TestBrokerExecutionEngine.test_05_submit_trailing_stop)
+Verify trailing stop order calculation. ... ok
+test_06_cancel_order (test_broker_execution.TestBrokerExecutionEngine.test_06_cancel_order)
+Verify order cancellation state machine. ... ok
+test_07_api_execution_endpoints (test_broker_execution.TestBrokerExecutionEngine.test_07_api_execution_endpoints)
+Verify REST API GET /api/execution/orders and POST /api/execution/order/submit. ... ok
+test_01_all_13_tab_panels_rendered_by_flask 
+(test_browser_navigation_e2e.TestBrowserNavigationE2E.test_01_all_13_tab_panels_rendered_by_flask)
+Verify that Flask root route '/' renders all 13 distinct tab panels in the DOM, ... ok
+test_02_all_13_sidebar_nav_links_present 
+(test_browser_navigation_e2e.TestBrowserNavigationE2E.test_02_all_13_sidebar_nav_links_present)
+Verify that every corresponding sidebar navigation item exists with navigateTo handler. ... ok
+test_03_client_side_hash_router_present 
+(test_browser_navigation_e2e.TestBrowserNavigationE2E.test_03_client_side_hash_router_present)
+Verify that client-side SPA hash router script is embedded and configured. ... ok
+test_04_stress_simulator_buttons_and_handlers 
+(test_browser_navigation_e2e.TestBrowserNavigationE2E.test_04_stress_simulator_buttons_and_handlers)
+Verify stress test action buttons and handlers are rendered. ... ok
+test_01_point_in_time_firewall (test_core_engines.TestCoreEngines.test_01_point_in_time_firewall)
+Verify that PointInTimeDataStore strictly prevents lookahead leakage. ... ok
+test_02_historical_tradable_universe (test_core_engines.TestCoreEngines.test_02_historical_tradable_universe)
+Verify tradable status and suspension handling. ... ok
+test_03_data_quality_engine (test_core_engines.TestCoreEngines.test_03_data_quality_engine)
+Verify Data Quality Engine audits OHLCV and produces fail-closed verdicts. ... ok
+test_04_company_intelligence_and_accounting_risk 
+(test_core_engines.TestCoreEngines.test_04_company_intelligence_and_accounting_risk)
+Verify Company Quality and Accounting Risk indicator. ... ok
+test_05_valuation_and_fair_value_scenarios 
+(test_core_engines.TestCoreEngines.test_05_valuation_and_fair_value_scenarios)
+Verify multi-ratio valuation and conservative fair value envelopes. ... ok
+test_06_market_regime_and_breadth (test_core_engines.TestCoreEngines.test_06_market_regime_and_breadth)
+Verify market regime classification and trailing breadth. ... ok
+test_07_liquidity_engine_capacity (test_core_engines.TestCoreEngines.test_07_liquidity_engine_capacity)
+Verify ADV and tradability capacity limits. ... ok
+test_08_event_intelligence_parser (test_core_engines.TestCoreEngines.test_08_event_intelligence_parser)
+Verify Arabic disclosure parsing. ... ok
+test_09_decision_builder_and_replay_engine 
+(test_core_engines.TestCoreEngines.test_09_decision_builder_and_replay_engine)
+Verify SSoT Decision Builder, Frozen Core Risk Gates, and Decision Replay. ... ok
+test_01_stock_split_backward_adjustment_and_atr_stability 
+(test_corporate_actions.TestCorporateActionsAndTTLProtocol.test_01_stock_split_backward_adjustment_and_atr_stability)
+Verify that a 2-for-1 stock split is backward adjusted, preventing ATR spikes. ... ok
+test_02_cash_dividend_backward_adjustment 
+(test_corporate_actions.TestCorporateActionsAndTTLProtocol.test_02_cash_dividend_backward_adjustment)
+Verify that a cash dividend adjusts prior historical bars backward by (1 - D / P_prior). ... ok
+test_03_signal_ttl_and_expiration_logic 
+(test_corporate_actions.TestCorporateActionsAndTTLProtocol.test_03_signal_ttl_and_expiration_logic)
+Verify Signal Time-To-Live (30 min) and is_signal_expired helper method. ... ok
+test_04_max_entry_price_bound_enforcement 
+(test_corporate_actions.TestCorporateActionsAndTTLProtocol.test_04_max_entry_price_bound_enforcement)
+Verify that max_entry_price is strictly bounded at +0.5% above trigger price. ... ok
+test_05_notification_engine_buy_signal_alert_template 
+(test_corporate_actions.TestCorporateActionsAndTTLProtocol.test_05_notification_engine_buy_signal_alert_template)
+Verify Arabic Telegram buy signal alert template includes TTL and Max Entry guardrails. ... ok
+test_01_corporate_actions_calendar_loading 
+(test_corporate_actions_and_macro.TestCorporateActionsAndMacro.test_01_corporate_actions_calendar_loading)
+Verify that CorporateActionsCalendar loads valid events and schemas. ... ok
+test_02_get_events_for_ticker 
+(test_corporate_actions_and_macro.TestCorporateActionsAndMacro.test_02_get_events_for_ticker)
+Verify retrieving specific ticker events (e.g. ORAS.CA & COMI.CA). ... ok
+test_03_pre_trade_hazard_evaluation 
+(test_corporate_actions_and_macro.TestCorporateActionsAndMacro.test_03_pre_trade_hazard_evaluation)
+Verify hazard evaluation on theoretical dividend adjustment. ... ok
+test_04_macro_intelligence_state 
+(test_corporate_actions_and_macro.TestCorporateActionsAndMacro.test_04_macro_intelligence_state)
+Verify that MacroIntelligenceEngine loads rates, USD/EGP, and commodities with timestamps. ... ok
+test_05_macro_sector_sensitivities 
+(test_corporate_actions_and_macro.TestCorporateActionsAndMacro.test_05_macro_sector_sensitivities)
+Verify sector sensitivity calculations for Banking and Materials. ... ok
+test_06_multi_horizon_engine_integration 
+(test_corporate_actions_and_macro.TestCorporateActionsAndMacro.test_06_multi_horizon_engine_integration)
+Verify that MultiHorizonEngine analysis contains macro and corporate hazard fields. ... ok
+test_07_api_corporate_actions_endpoint 
+(test_corporate_actions_and_macro.TestCorporateActionsAndMacro.test_07_api_corporate_actions_endpoint)
+Verify GET /api/corporate_actions and /api/corporate_actions?ticker=ORAS.CA. ... ok
+test_08_api_macro_endpoint (test_corporate_actions_and_macro.TestCorporateActionsAndMacro.test_08_api_macro_endpoint)
+Verify GET /api/macro endpoint returns valid state. ... ok
+test_09_api_ranking_contains_macro_and_hazard 
+(test_corporate_actions_and_macro.TestCorporateActionsAndMacro.test_09_api_ranking_contains_macro_and_hazard)
+Verify GET /api/ranking includes macro_headline and corporate_hazard. ... ok
+test_01_ex_dividend_shield_suppresses_stop_loss 
+(test_corporate_actions_engine.TestCorporateActionsEngine.test_01_ex_dividend_shield_suppresses_stop_loss)
+Verify price drop on ex-dividend date suppresses stop-loss. ... ok
+test_02_ex_dividend_shield_normal_trading_no_suppress 
+(test_corporate_actions_engine.TestCorporateActionsEngine.test_02_ex_dividend_shield_normal_trading_no_suppress)
+Verify stock with no corporate action does not suppress stop-loss. ... ok
+test_03_dcf_fair_value_calculation_structure 
+(test_corporate_actions_engine.TestCorporateActionsEngine.test_03_dcf_fair_value_calculation_structure)
+Verify calculate_fair_value returns fair value, margin of safety, and Arabic verdict. ... ok
+test_04_dcf_fair_value_custom_parameters 
+(test_corporate_actions_engine.TestCorporateActionsEngine.test_04_dcf_fair_value_custom_parameters)
+Verify custom discount and growth rates alter the computed fair value logically. ... ok
+test_01_save_daily_snapshot_with_sha256 (test_daily_snapshot.TestDailySnapshot.test_01_save_daily_snapshot_with_sha256)
+Verify that save_daily_snapshot writes a valid JSON snapshot with sha256_hash. ... ok
+test_arbitrage_pairs_endpoint (test_dashboard_quant_widgets.TestDashboardQuantWidgets.test_arbitrage_pairs_endpoint)
+Test /api/arbitrage/pairs returns all 5 canonical EGX pairs. ... ok
+test_dashboard_html_elements (test_dashboard_quant_widgets.TestDashboardQuantWidgets.test_dashboard_html_elements)
+Test index.html contains all required UI telemetry widgets, tabs, and print hooks. ... ok
+test_insider_trading_endpoints (test_dashboard_quant_widgets.TestDashboardQuantWidgets.test_insider_trading_endpoints)
+Test /api/insider and /api/insider/market_deals return valid list structure. ... ok
+test_macro_telemetry_endpoints (test_dashboard_quant_widgets.TestDashboardQuantWidgets.test_macro_telemetry_endpoints)
+Test /api/macro and /api/macro/telemetry return expected data structure. ... ok
+test_01_index_html_renders (test_dashboard_read_only.TestDashboardReadOnly.test_01_index_html_renders)
+Verify that GET / returns HTML control center with HTTP 200. ... ok
+test_02_api_status_read_only (test_dashboard_read_only.TestDashboardReadOnly.test_02_api_status_read_only)
+Verify GET /api/status returns paper mode only. ... ok
+test_03_api_progress_read_only (test_dashboard_read_only.TestDashboardReadOnly.test_03_api_progress_read_only)
+Verify GET /api/progress returns 30-day gate information. ... ok
+test_04_no_order_post_routes_exist (test_dashboard_read_only.TestDashboardReadOnly.test_04_no_order_post_routes_exist)
+Verify that attempting to POST an order fails with HTTP 404/405. ... ok
+test_05_research_lab_ui_and_council_cards_rendered 
+(test_dashboard_read_only.TestDashboardReadOnly.test_05_research_lab_ui_and_council_cards_rendered)
+Verify that #tab-research-lab exists and contains: ... ok
+test_06_research_api_endpoints (test_dashboard_read_only.TestDashboardReadOnly.test_06_research_api_endpoints)
+Verify /api/research/experiments and /api/research/memory/failures return HTTP 200 with valid JSON. ... ok
+test_07_books_api_endpoints (test_dashboard_read_only.TestDashboardReadOnly.test_07_books_api_endpoints)
+Verify /api/books/piotroski/COMI.CA and /api/books/psychology/status return HTTP 200. ... ok
+test_01_fresh_data_accepted (test_data_freshness.TestDataFreshness.test_01_fresh_data_accepted)
+Verify that recent data (e.g. 2 hours old) passes cleanly. ... ok
+test_02_stale_data_rejected (test_data_freshness.TestDataFreshness.test_02_stale_data_rejected)
+Verify that 100-hour-old data is rejected as DATA_STALE. ... ok
+test_03_future_data_rejected (test_data_freshness.TestDataFreshness.test_03_future_data_rejected)
+Verify that future timestamps are rejected for lookahead leakage risk. ... ok
+test_04_zero_records_rejected (test_data_freshness.TestDataFreshness.test_04_zero_records_rejected)
+Verify that zero records in feed returns NO_VALID_UNIVERSE. ... ok
+test_minmax_scaler_temporal_isolation (test_data_leakage.TestDataLeakage.test_minmax_scaler_temporal_isolation) ... ok
+test_scaler_train_only_fit (test_data_leakage.TestDataLeakage.test_scaler_train_only_fit) ... ok
+test_calculate_gold_hedge_allocation 
+(test_database_and_stress_engine.TestDatabaseAndStressEngine.test_calculate_gold_hedge_allocation)
+Test dynamic gold hedge allocation using AZG.CA. ... ok
+test_database_initialization_and_tables 
+(test_database_and_stress_engine.TestDatabaseAndStressEngine.test_database_initialization_and_tables)
+Test SQLite tables and indexes exist. ... ok
+test_flask_risk_and_audit_endpoints 
+(test_database_and_stress_engine.TestDatabaseAndStressEngine.test_flask_risk_and_audit_endpoints)
+Test Flask routes /api/risk/stress_test, /api/risk/gold_hedge, /api/system/reality_audit. ... ok
+test_ground_truth_reality_audit 
+(test_database_and_stress_engine.TestDatabaseAndStressEngine.test_ground_truth_reality_audit)
+Test running ground-truth reality audit report. ... ok
+test_macro_and_arbitrage_persistence 
+(test_database_and_stress_engine.TestDatabaseAndStressEngine.test_macro_and_arbitrage_persistence)
+Test saving and retrieving macro state and arbitrage pairs. ... ok
+test_save_price_batch_and_queries 
+(test_database_and_stress_engine.TestDatabaseAndStressEngine.test_save_price_batch_and_queries)
+Test inserting and querying live prices. ... 2026-08-30 15:08:56,000 [INFO] Successfully synced 244 stocks into 
+stocks_universe database table.
+ok
+test_simulate_stress_scenarios 
+(test_database_and_stress_engine.TestDatabaseAndStressEngine.test_simulate_stress_scenarios)
+Test all standard stress scenarios and mathematical VaR outputs. ... ok
+test_sync_universe_from_catalog 
+(test_database_and_stress_engine.TestDatabaseAndStressEngine.test_sync_universe_from_catalog)
+Test populating 244 stocks from real catalog. ... 2026-08-30 15:08:56,622 [INFO] Successfully synced 244 stocks into 
+stocks_universe database table.
+ok
+test_01_service_matches_api_stocks_dossier 
+(test_database_api_price_consistency.TestDatabaseAPIPriceConsistency.test_01_service_matches_api_stocks_dossier)
+Verify that /api/stocks/<ticker> returns the exact price from MarketPriceService. ... ok
+test_02_database_seeded_prices_match_canonical 
+(test_database_api_price_consistency.TestDatabaseAPIPriceConsistency.test_02_database_seeded_prices_match_canonical)
+Verify that SQLite market_prices table contains matching canonical prices. ... ok
+test_03_rendered_ui_html_matches_canonical 
+(test_database_api_price_consistency.TestDatabaseAPIPriceConsistency.test_03_rendered_ui_html_matches_canonical)
+Verify that root HTML view embeds canonical prices and tickers. ... ok
+test_01_schema_initialization_and_seeding 
+(test_database_persistence.TestDatabasePersistence.test_01_schema_initialization_and_seeding)
+Verify database tables and indexes initialize cleanly and seed stocks. ... ok
+test_02_paper_session_storage (test_database_persistence.TestDatabasePersistence.test_02_paper_session_storage)
+Verify saving paper session record into database. ... ok
+test_01_dynamic_stock_scoring_for_all_universe 
+(test_dynamic_multi_horizon_universe.TestDynamicMultiHorizonUniverse.test_01_dynamic_stock_scoring_for_all_universe)
+Verify dynamic scoring works for representative sample in EGXUniverseLoader. ... ok
+test_02_rankings_universe_filters 
+(test_dynamic_multi_horizon_universe.TestDynamicMultiHorizonUniverse.test_02_rankings_universe_filters)
+Verify get_all_multi_horizon_rankings filters correctly. ... ok
+test_03_api_rankings_query_param 
+(test_dynamic_multi_horizon_universe.TestDynamicMultiHorizonUniverse.test_03_api_rankings_query_param)
+Verify /api/rankings responds to ?universe=egx30 and ?universe=egx70. ... ok
+test_04_explicit_ticker_list_scoring 
+(test_dynamic_multi_horizon_universe.TestDynamicMultiHorizonUniverse.test_04_explicit_ticker_list_scoring)
+Verify custom ticker list ranking. ... ok
+test_01_trailing_stop_initial_buffer 
+(test_dynamic_risk_manager.TestDynamicRiskManager.test_01_trailing_stop_initial_buffer)
+Verify gain < 10% defaults to initial stop buffer. ... ok
+test_02_trailing_stop_stage1_breakeven 
+(test_dynamic_risk_manager.TestDynamicRiskManager.test_02_trailing_stop_stage1_breakeven)
+Verify gain >= 10% raises stop to entry price (breakeven). ... ok
+test_03_trailing_stop_stage2_profit_lock 
+(test_dynamic_risk_manager.TestDynamicRiskManager.test_03_trailing_stop_stage2_profit_lock)
+Verify gain >= 20% locks in profit at 92% of peak price. ... ok
+test_04_trailing_stop_stage3_aggressive_profit_lock 
+(test_dynamic_risk_manager.TestDynamicRiskManager.test_04_trailing_stop_stage3_aggressive_profit_lock)
+Verify gain >= 30% locks in profit at 94% of peak price. ... ok
+test_05_trailing_stop_irreversible_ratchet 
+(test_dynamic_risk_manager.TestDynamicRiskManager.test_05_trailing_stop_irreversible_ratchet)
+Verify stop price never drops even if current_price falls from peak. ... ok
+test_06_sector_concentration_guard_enforcement 
+(test_dynamic_risk_manager.TestDynamicRiskManager.test_06_sector_concentration_guard_enforcement)
+Verify sector exposure exceeding 35% is rejected with Arabic explanation. ... ok
+test_01_circuit_breaker_limit_up_egx30 
+(test_egx_trading_rules_engine.TestEGXTradingRulesEngine.test_01_circuit_breaker_limit_up_egx30)
+Verify EGX30 stock hitting +19.8% wide limit returns can_buy=False with Arabic reason. ... ok
+test_02_circuit_breaker_limit_down_standard 
+(test_egx_trading_rules_engine.TestEGXTradingRulesEngine.test_02_circuit_breaker_limit_down_standard)
+Verify standard stock hitting -9.9% limit returns can_sell=False. ... ok
+test_03_circuit_breaker_normal_trading 
+(test_egx_trading_rules_engine.TestEGXTradingRulesEngine.test_03_circuit_breaker_normal_trading)
+Verify normal +3.5% move allows both buying and selling. ... ok
+test_04_settlement_and_margin_tiers 
+(test_egx_trading_rules_engine.TestEGXTradingRulesEngine.test_04_settlement_and_margin_tiers)
+Verify settlement tagging for T+0 (List A), T+1 (List B), and T+2. ... ok
+test_05_net_profit_and_cgt_tax_calculation 
+(test_egx_trading_rules_engine.TestEGXTradingRulesEngine.test_05_net_profit_and_cgt_tax_calculation)
+Verify deduction of 0.35% roundtrip friction and 10% CGT on positive profit. ... ok
+test_06_market_impact_order_sizer 
+(test_egx_trading_rules_engine.TestEGXTradingRulesEngine.test_06_market_impact_order_sizer)
+Verify order > 10% ADV triggers market impact warning and multi-session chunks. ... ok
+test_01_universe_audit_real_universe (test_egx_universe.TestEGXUniverse.test_01_universe_audit_real_universe)
+Verify that audit_universe audits the real 200+ active EGX equities catalog. ... ok
+test_02_isolated_mock_partitioning_for_edge_cases 
+(test_egx_universe.TestEGXUniverse.test_02_isolated_mock_partitioning_for_edge_cases)
+Verify status partitioning using isolated test mock fixtures without polluting production catalogs. ... ok
+test_03_every_excluded_security_has_reason 
+(test_egx_universe.TestEGXUniverse.test_03_every_excluded_security_has_reason)
+Verify that no security is categorized as non-tradable without an explicit reason code. ... ok
+test_01_universe_coverage_counts (test_egx_universe_loader.TestEGXUniverseLoader.test_01_universe_coverage_counts)
+Verify universe coverage satisfies EGX30 and EGX70 requirements. ... ok
+test_02_index_filtering (test_egx_universe_loader.TestEGXUniverseLoader.test_02_index_filtering)
+Verify index filtering returns proper subsets. ... ok
+test_03_explicit_requested_equities_exist 
+(test_egx_universe_loader.TestEGXUniverseLoader.test_03_explicit_requested_equities_exist)
+Verify all specific tickers requested by the user are properly mapped. ... ok
+test_04_sector_enumeration (test_egx_universe_loader.TestEGXUniverseLoader.test_04_sector_enumeration)
+Verify sector listing retrieves unique non-empty sectors. ... ok
+test_05_ticker_normalization (test_egx_universe_loader.TestEGXUniverseLoader.test_05_ticker_normalization)
+Verify get_stock_info normalizes ticker casing and suffix. ... ok
+test_01_llm_router_provider_status_and_fallback 
+(test_elite_extensions.TestEliteExtensions.test_01_llm_router_provider_status_and_fallback)
+Verify LLMRouter provider detection and offline deterministic fallback. ... ok
+test_02_telegram_notifier_config_and_mock 
+(test_elite_extensions.TestEliteExtensions.test_02_telegram_notifier_config_and_mock)
+Verify TelegramNotifier config persistence and validation. ... ok
+test_03_portfolio_alert_engine_rules (test_elite_extensions.TestEliteExtensions.test_03_portfolio_alert_engine_rules)
+Verify PortfolioAlertEngine detects target hits and stop loss warnings. ... ok
+test_04_market_heatmap_engine_egx244 (test_elite_extensions.TestEliteExtensions.test_04_market_heatmap_engine_egx244)
+Verify MarketHeatmapEngine groups 244 stocks into sectors with color codes. ... ok
+test_05_monte_carlo_simulator_1000_paths 
+(test_elite_extensions.TestEliteExtensions.test_05_monte_carlo_simulator_1000_paths)
+Verify MonteCarloEngine computes 1,000 paths with VaR/CVaR and cones. ... ok
+test_06_flask_endpoints_for_elite_features 
+(test_elite_extensions.TestEliteExtensions.test_06_flask_endpoints_for_elite_features)
+Verify REST API routes for all 4 new features return HTTP 200. ... ok
+test_01_ensemble_decision_structure 
+(test_ensemble_decision_engine.TestEnsembleDecisionEngine.test_01_ensemble_decision_structure)
+Verify consensus evaluation returns all 6 analytical pillars and action parameters. ... ok
+test_02_targets_and_stop_loss_ratios 
+(test_ensemble_decision_engine.TestEnsembleDecisionEngine.test_02_targets_and_stop_loss_ratios)
+Verify target price 1 is ~+8%, target 2 is ~+18%, and stop loss is ~-5%. ... ok
+test_03_top_ensemble_opportunities_ranking 
+(test_ensemble_decision_engine.TestEnsembleDecisionEngine.test_03_top_ensemble_opportunities_ranking)
+[2026-08-30 15:15:41,840] [INFO] [FundamentalDataEngine] Querying fundamental data for ORAS.CA (yfinance: ORAS.CA)...
+Verify scan_top_ensemble_opportunities returns sorted opportunities. ... 2026-08-30 15:15:41,840 [INFO] Querying 
+fundamental data for ORAS.CA (yfinance: ORAS.CA)...
+[2026-08-30 15:15:43,723] [INFO] [FundamentalDataEngine] Querying fundamental data for EFIH.CA (yfinance: EFIH.CA)...
+2026-08-30 15:15:43,723 [INFO] Querying fundamental data for EFIH.CA (yfinance: EFIH.CA)...
+[2026-08-30 15:15:56,573] [INFO] [FundamentalDataEngine] Querying fundamental data for EGAL.CA (yfinance: EGAL.CA)...
+2026-08-30 15:15:56,573 [INFO] Querying fundamental data for EGAL.CA (yfinance: EGAL.CA)...
+[2026-08-30 15:15:58,588] [INFO] [FundamentalDataEngine] Querying fundamental data for ESRS.CA (yfinance: ESRS.CA)...
+2026-08-30 15:15:58,588 [INFO] Querying fundamental data for ESRS.CA (yfinance: ESRS.CA)...
+[2026-08-30 15:16:10,263] [INFO] [FundamentalDataEngine] Querying fundamental data for EMFD.CA (yfinance: EMFD.CA)...
+2026-08-30 15:16:10,263 [INFO] Querying fundamental data for EMFD.CA (yfinance: EMFD.CA)...
+[2026-08-30 15:16:12,899] [INFO] [FundamentalDataEngine] Querying fundamental data for BTFH.CA (yfinance: BTFH.CA)...
+2026-08-30 15:16:12,899 [INFO] Querying fundamental data for BTFH.CA (yfinance: BTFH.CA)...
+[2026-08-30 15:16:17,073] [INFO] [FundamentalDataEngine] Querying fundamental data for EKHO.CA (yfinance: EKHO.CA)...
+2026-08-30 15:16:17,073 [INFO] Querying fundamental data for EKHO.CA (yfinance: EKHO.CA)...
+[2026-08-30 15:16:23,347] [INFO] [FundamentalDataEngine] Querying fundamental data for EKHOA.CA (yfinance: EKHOA.CA)...
+2026-08-30 15:16:23,347 [INFO] Querying fundamental data for EKHOA.CA (yfinance: EKHOA.CA)...
+[2026-08-30 15:16:56,604] [INFO] [FundamentalDataEngine] Querying fundamental data for ABUK.CA (yfinance: ABUK.CA)...
+2026-08-30 15:16:56,604 [INFO] Querying fundamental data for ABUK.CA (yfinance: ABUK.CA)...
+[2026-08-30 15:17:07,694] [INFO] [FundamentalDataEngine] Querying fundamental data for EAST.CA (yfinance: EAST.CA)...
+2026-08-30 15:17:07,694 [INFO] Querying fundamental data for EAST.CA (yfinance: EAST.CA)...
+[2026-08-30 15:17:10,226] [INFO] [FundamentalDataEngine] Querying fundamental data for SKPC.CA (yfinance: SKPC.CA)...
+2026-08-30 15:17:10,226 [INFO] Querying fundamental data for SKPC.CA (yfinance: SKPC.CA)...
+[2026-08-30 15:17:12,716] [INFO] [FundamentalDataEngine] Querying fundamental data for ADIB.CA (yfinance: ADIB.CA)...
+2026-08-30 15:17:12,716 [INFO] Querying fundamental data for ADIB.CA (yfinance: ADIB.CA)...
+2026-08-30 15:17:15,472 [INFO] Querying fundamental data for HRHO.CA (yfinance: HRHO.CA)...
+[2026-08-30 15:17:15,472] [INFO] [FundamentalDataEngine] Querying fundamental data for HRHO.CA (yfinance: HRHO.CA)...
+[2026-08-30 15:17:17,853] [INFO] [FundamentalDataEngine] Querying fundamental data for BINV.CA (yfinance: BINV.CA)...
+2026-08-30 15:17:17,853 [INFO] Querying fundamental data for BINV.CA (yfinance: BINV.CA)...
+[2026-08-30 15:17:21,012] [INFO] [FundamentalDataEngine] Querying fundamental data for JUFO.CA (yfinance: JUFO.CA)...
+2026-08-30 15:17:21,012 [INFO] Querying fundamental data for JUFO.CA (yfinance: JUFO.CA)...
+[2026-08-30 15:17:36,784] [INFO] [FundamentalDataEngine] Querying fundamental data for DOMT.CA (yfinance: DOMT.CA)...
+2026-08-30 15:17:36,784 [INFO] Querying fundamental data for DOMT.CA (yfinance: DOMT.CA)...
+[2026-08-30 15:17:57,791] [INFO] [FundamentalDataEngine] Querying fundamental data for CICH.CA (yfinance: CICH.CA)...
+2026-08-30 15:17:57,791 [INFO] Querying fundamental data for CICH.CA (yfinance: CICH.CA)...
+[2026-08-30 15:17:59,761] [INFO] [FundamentalDataEngine] Querying fundamental data for PHDC.CA (yfinance: PHDC.CA)...
+2026-08-30 15:17:59,761 [INFO] Querying fundamental data for PHDC.CA (yfinance: PHDC.CA)...
+[2026-08-30 15:18:10,944] [INFO] [FundamentalDataEngine] Querying fundamental data for MASR.CA (yfinance: MASR.CA)...
+2026-08-30 15:18:10,944 [INFO] Querying fundamental data for MASR.CA (yfinance: MASR.CA)...
+[2026-08-30 15:18:12,789] [INFO] [FundamentalDataEngine] Querying fundamental data for ISPH.CA (yfinance: ISPH.CA)...
+2026-08-30 15:18:12,789 [INFO] Querying fundamental data for ISPH.CA (yfinance: ISPH.CA)...
+[2026-08-30 15:18:26,776] [INFO] [FundamentalDataEngine] Querying fundamental data for POUL.CA (yfinance: POUL.CA)...
+2026-08-30 15:18:26,776 [INFO] Querying fundamental data for POUL.CA (yfinance: POUL.CA)...
+[2026-08-30 15:18:44,279] [INFO] [FundamentalDataEngine] Querying fundamental data for ALCN.CA (yfinance: ALCN.CA)...
+2026-08-30 15:18:44,279 [INFO] Querying fundamental data for ALCN.CA (yfinance: ALCN.CA)...
+[2026-08-30 15:19:04,467] [INFO] [FundamentalDataEngine] Querying fundamental data for RAYA.CA (yfinance: RAYA.CA)...
+2026-08-30 15:19:04,467 [INFO] Querying fundamental data for RAYA.CA (yfinance: RAYA.CA)...
+[2026-08-30 15:19:19,738] [INFO] [FundamentalDataEngine] Querying fundamental data for GBCO.CA (yfinance: AUTO.CA)...
+2026-08-30 15:19:19,738 [INFO] Querying fundamental data for GBCO.CA (yfinance: AUTO.CA)...
+ok
+test_01_all_25_phases_execute_and_pass 
+(test_final_forensic_validation.TestMasterForensicValidation.test_01_all_25_phases_execute_and_pass)
+Verify that MasterForensicValidator runs cleanly across all 25 phases. ... ok
+test_01_future_injection_decision_invariance 
+(test_full_temporal_forensics.TestFullTemporalForensics.test_01_future_injection_decision_invariance)
+Adversarial Test: ... ok
+test_02_publication_vs_event_boundary 
+(test_full_temporal_forensics.TestFullTemporalForensics.test_02_publication_vs_event_boundary)
+Period End: 2024-12-31 ... ok
+test_03_tradable_universe_delisting_and_suspension_firewall 
+(test_full_temporal_forensics.TestFullTemporalForensics.test_03_tradable_universe_delisting_and_suspension_firewall)
+Verify that suspended/delisted stocks are strictly excluded from tradable universe as of that date. ... ok
+test_04_accounting_anomaly_detection_integrity 
+(test_full_temporal_forensics.TestFullTemporalForensics.test_04_accounting_anomaly_detection_integrity)
+Verify that Accounting Risk correctly detects Net Income rise with collapsing cash flow. ... ok
+test_01_fetch_fundamentals_schema 
+(test_fundamental_data_engine.TestFundamentalDataEngine.test_01_fetch_fundamentals_schema)
+Verify fetch_fundamentals returns all required financial keys. ... ok
+test_02_calculate_health_score_excellent_value 
+(test_fundamental_data_engine.TestFundamentalDataEngine.test_02_calculate_health_score_excellent_value)
+Verify attractive value stock with low P/E, reasonable P/B, and dividend gets high health score. ... ok
+test_03_calculate_health_score_poor_or_distressed 
+(test_fundamental_data_engine.TestFundamentalDataEngine.test_03_calculate_health_score_poor_or_distressed)
+Verify unprofitable, overleveraged company gets penalized with low health score. ... ok
+test_04_calculate_health_score_empty_missing_data 
+(test_fundamental_data_engine.TestFundamentalDataEngine.test_04_calculate_health_score_empty_missing_data)
+Verify empty fundamental data returns neutral 50.0 score and '\u0628\u064a\u0627\u0646\u0627\u062a \u063a\u064a\u0631 
+\u0645\u062a\u0648\u0641\u0631\u0629'. ... ok
+test_05_get_ticker_analysis_success 
+(test_fundamental_data_engine.TestFundamentalDataEngine.test_05_get_ticker_analysis_success)
+Verify get_ticker_analysis returns structured and robust payload. ... ok
+test_06_get_ticker_analysis_invalid_fallback 
+(test_fundamental_data_engine.TestFundamentalDataEngine.test_06_get_ticker_analysis_invalid_fallback)
+================================================================================
+GEN-26 v3.0 MASTER FORENSIC AUDIT ΓÇö 25-PHASE INDEPENDENT VALIDATION
+================================================================================
+[1/25] Mapping Data Flow & Value Provenance...
+[2/25] Auditing Market Price Truth & Classification...
+[3/25] Auditing EGX Universe Coverage & Exclusions...
+[4/25] Verifying Multi-Horizon Projections (1D, 5D, 10D, 20D, 60D)...
+[5/25] Testing Point-In-Time Anti-Lookahead Protections...
+[6/25] Validating Purged/Embargoed Overlap Prevention...
+[7/25] Auditing Baseline Outperformance...
+[8/25] Auditing Cost Realism & Execution Friction...
+[9-10/25] Auditing Dynamic Ranking Engine (#1 to #24) & Arabic Rationales...
+[11/25] Auditing Entry, Target, and Stop Loss Sanity...
+[12/25] Auditing Market Regime Classification...
+[13/25] Auditing Fundamentals & Data Availability...
+[14/25] Auditing Multi-Term Strategy Horizon Bucketing...
+[15-16/25] Auditing Calibration & Dynamic Confidence Scores...
+[17/25] Auditing Canonical Price Consistency (DB == Svc == API == UI)...
+[18/25] Auditing Real Portfolio Searchable Dropdown...
+[19/25] Auditing Beginner UX Cards & Plain-Language Arabic...
+[20-21/25] Executing Fault Injection & Mutation Testing...
+[22/25] Auditing UI Navigation & 13 SPA Tabs...
+[23/25] Benchmarking Pipeline Latencies...
+[24/25] Documenting Honest System Status & Constraints...
+[25/25] Emitting Final Forensic Report Artifacts...
+================================================================================
+MASTER FORENSIC AUDIT COMPLETE in 80.169s
+JSON Artifact: C:\Users\Administrator\Desktop\New folder\reports\final_forensic_audit.json
+Markdown Audit: C:\Users\Administrator\Desktop\New folder\GEN26_FINAL_FORENSIC_AUDIT.md
+Verify non-existent ticker falls back gracefully without raising uncaught exceptions. ... 2026-08-30 15:20:43,205 
+[INFO] Querying fundamental data for NON_EXISTENT_TICKER_999.CA (yfinance: NON_EXISTENT_TICKER_999.CA)...
+================================================================================
+[2026-08-30 15:20:43,205] [INFO] [FundamentalDataEngine] Querying fundamental data for NON_EXISTENT_TICKER_999.CA (yfinance: NON_EXISTENT_TICKER_999.CA)...
+ok
+test_01_paper_broker_lifecycle (test_gap_closure.TestGapClosure.test_01_paper_broker_lifecycle)
+Test PaperBrokerAdapter order validation, execution, cash tracking, and reconciliation. ... ok
+test_02_advisory_and_official_broker_safety 
+(test_gap_closure.TestGapClosure.test_02_advisory_and_official_broker_safety)
+Verify advisory mode creates recommendations and official adapter blocks live orders. ... ok
+test_03_external_provider_graceful_fallbacks 
+(test_gap_closure.TestGapClosure.test_03_external_provider_graceful_fallbacks)
+Verify external providers report proper statuses without faking data. ... ok
+test_04_contextual_arabic_event_stages (test_gap_closure.TestGapClosure.test_04_contextual_arabic_event_stages)
+Verify that rumors and intentions are discounted compared to completed acquisitions. ... ok
+test_05_decision_builder_risk_reason_codes (test_gap_closure.TestGapClosure.test_05_decision_builder_risk_reason_codes)
+Verify that risk reason codes and unified risk score are included in decision output. ... ok
+test_06_alpha_sub_score_attribution (test_gap_closure.TestGapClosure.test_06_alpha_sub_score_attribution)
+Verify that AlphaEngine computes complete explainable sub-scores across all 7 dimensions. ... ok
+test_01_gdr_bullish_gap_forecast (test_gdr_arbitrage_engine.TestGDRArbitrageEngine.test_01_gdr_bullish_gap_forecast)
+Verify London GDR price trading at premium (> +2%) forecasts OVERNIGHT_GDR_BULLISH_GAP. ... ok
+test_02_gdr_bearish_gap_forecast (test_gdr_arbitrage_engine.TestGDRArbitrageEngine.test_02_gdr_bearish_gap_forecast)
+Verify London GDR trading at discount (<= -2%) forecasts OVERNIGHT_GDR_BEARISH_GAP. ... ok
+test_03_gdr_parity_neutral (test_gdr_arbitrage_engine.TestGDRArbitrageEngine.test_03_gdr_parity_neutral)
+Verify spread within ▒2% returns GDR_PARITY_NEUTRAL. ... ok
+test_04_scan_all_gdr_pairs_schema (test_gdr_arbitrage_engine.TestGDRArbitrageEngine.test_04_scan_all_gdr_pairs_schema)
+Verify multi-pair GDR scanner returns structured array with COMI, ETEL, HRHO. ... ok
+test_01_dynamic_weight_calibration_optimization 
+(test_hardening_phase_2.TestGenesisHardeningPhase2.test_01_dynamic_weight_calibration_optimization)
+Verify WeightCalibrator optimizes weights to sum=1.0 and factor floor >= 5%. ... ok
+test_02_scoring_engine_loads_calibrated_weights 
+(test_hardening_phase_2.TestGenesisHardeningPhase2.test_02_scoring_engine_loads_calibrated_weights)
+Verify MultiHorizonEngine applies dynamic calibrated weights for overall score. ... ok
+test_03_statistical_edge_verifier_vectorized_backtest 
+(test_hardening_phase_2.TestGenesisHardeningPhase2.test_03_statistical_edge_verifier_vectorized_backtest)
+Verify StatisticalEdgeVerifier computes Profit Factor, Hit Rate, and Max DD. ... 2026-08-30 15:21:29,033 [INFO] 
+STATISTICAL EDGE VERIFIED: Realized Profit Factor 2.50 with 58.9% Hit Rate.
+ok
+test_04_ml_permutation_importance_validation 
+(test_hardening_phase_2.TestGenesisHardeningPhase2.test_04_ml_permutation_importance_validation)
+Verify PermutationImportanceValidator evaluates feature contribution and detects noise. ... ok
+test_01_as_of_universe_cross_sectional_ranking (test_historical_cross_sectional_selection.TestHistoricalCrossSectionalS
+election.test_01_as_of_universe_cross_sectional_ranking)
+Simulate a historical date (2025-01-15) across 5 candidate EGX stocks: ... ok
+test_02_quantile_spread_monotonicity 
+(test_historical_cross_sectional_selection.TestHistoricalCrossSectionalSelection.test_02_quantile_spread_monotonicity)
+Verify that compute_quantile_spread properly computes monotonic spread across bins. ... ok
+test_01_simulated_winning_graduation_scenario 
+(test_incubation_gate_engine.TestIncubationGateEngine.test_01_simulated_winning_graduation_scenario)
+Simulate a successful 30-day incubation outcome (22 trades, 72.7% win rate, Sharpe 1.85, DD 2.8%): ... ok
+test_02_simulated_failing_drawdown_scenario 
+(test_incubation_gate_engine.TestIncubationGateEngine.test_02_simulated_failing_drawdown_scenario)
+Simulate a failing incubation outcome (25 trades, Drawdown = 9.5% > 6.5% limit, Win Rate = 36%): ... ok
+test_03_statistical_bootstrap_confidence_and_caveat 
+(test_incubation_gate_engine.TestIncubationGateEngine.test_03_statistical_bootstrap_confidence_and_caveat)
+Verify Bootstrap 95% CI calculation and N < 100 caveat warning. ... ok
+test_04_api_incubation_verdict_endpoint 
+(test_incubation_gate_engine.TestIncubationGateEngine.test_04_api_incubation_verdict_endpoint)
+Verify GET /api/incubation/verdict returns HTTP 200 and valid JSON. ... ok
+test_01_fetch_insider_deals_formatting 
+(test_insider_trading_engine.TestInsiderTradingEngine.test_01_fetch_insider_deals_formatting)
+Verify fetch_insider_deals retrieves and formats real scraped deals. ... ok
+test_02_fetch_insider_deals_empty_or_unknown 
+(test_insider_trading_engine.TestInsiderTradingEngine.test_02_fetch_insider_deals_empty_or_unknown)
+Verify fetch_insider_deals handles unknown or invalid tickers safely. ... ok
+test_03_calculate_insider_conviction_scoring 
+(test_insider_trading_engine.TestInsiderTradingEngine.test_03_calculate_insider_conviction_scoring)
+Verify conviction scoring logic from -100 to +100. ... ok
+test_04_evaluate_insider_activity_signals 
+(test_insider_trading_engine.TestInsiderTradingEngine.test_04_evaluate_insider_activity_signals)
+Verify evaluate_insider_activity produces expected signals and Arabic labels. ... ok
+test_05_get_market_wide_insider_deals 
+(test_insider_trading_engine.TestInsiderTradingEngine.test_05_get_market_wide_insider_deals)
+Verify market-wide radar returns deals sorted descending by trade value. ... ok
+test_06_edge_case_and_malformed_deal_handling 
+(test_insider_trading_engine.TestInsiderTradingEngine.test_06_edge_case_and_malformed_deal_handling)
+Verify calculation handles zero amounts and missing keys without raising exceptions. ... ok
+test_01_stock_level_volume_zscore_accumulation 
+(test_institutional_flow_engine.TestInstitutionalFlowEngine.test_01_stock_level_volume_zscore_accumulation)
+Verify volume spike (+Z-Score) with price increase triggers INSTITUTIONAL_ACCUMULATION. ... ok
+test_02_stock_level_retail_distribution 
+(test_institutional_flow_engine.TestInstitutionalFlowEngine.test_02_stock_level_retail_distribution)
+Verify volume spike with severe price drop triggers RETAIL_DISTRIBUTION. ... ok
+test_03_institutional_flow_telemetry_and_blue_chip_boost 
+(test_institutional_flow_engine.TestInstitutionalFlowEngine.test_03_institutional_flow_telemetry_and_blue_chip_boost)
+Verify aggressive net buying (>50M EGP) activates blue chip composite boost factor. ... ok
+test_04_msci_ftse_rebalancing_calendar_schema 
+(test_institutional_flow_engine.TestInstitutionalFlowEngine.test_04_msci_ftse_rebalancing_calendar_schema)
+Verify rebalancing radar outputs valid review dates, countdown, and affected equities. ... ok
+test_05_equity_risk_premium_calculation 
+(test_institutional_flow_engine.TestInstitutionalFlowEngine.test_05_equity_risk_premium_calculation)
+Verify ERP compares Earnings Yield vs CBE Risk Free Rate. ... ok
+test_01_future_publication_adversarial_injection 
+(test_leakage_forensics.TestLeakageForensics.test_01_future_publication_adversarial_injection)
+Adversarial Test: ... ok
+test_02_trailing_breadth_zero_lookahead 
+(test_leakage_forensics.TestLeakageForensics.test_02_trailing_breadth_zero_lookahead)
+Verify that compute_trailing_breadth relies ONLY on past trailing returns ... ok
+test_liquid_stock_passes_gate (test_liquidity.TestLiquidityFilter.test_liquid_stock_passes_gate) ... ok
+test_universe_filtering (test_liquidity.TestLiquidityFilter.test_universe_filtering) ... ok
+test_zero_volume_stock_rejected (test_liquidity.TestLiquidityFilter.test_zero_volume_stock_rejected) ... ok
+test_01_assert_paper_mode_only_passes_on_paper 
+(test_live_execution_firewall.TestLiveExecutionFirewall.test_01_assert_paper_mode_only_passes_on_paper)
+Verify that passing 'PAPER' mode succeeds cleanly. ... ok
+test_02_assert_paper_mode_blocks_live_and_prod 
+(test_live_execution_firewall.TestLiveExecutionFirewall.test_02_assert_paper_mode_blocks_live_and_prod)
+Verify that 'LIVE', 'REAL', or 'PROD' raises LiveExecutionBlockedError. ... ok
+test_03_validate_execution_safety_blocks_live_payload 
+(test_live_execution_firewall.TestLiveExecutionFirewall.test_03_validate_execution_safety_blocks_live_payload)
+Verify that order payload with is_live=True is blocked. ... ok
+test_01_fetch_interest_rate (test_macro_economic_engine.TestMacroEconomicEngine.test_01_fetch_interest_rate)
+Verify fetch_interest_rate returns a plausible rate and uses TTL cache. ... ok
+test_02_fetch_inflation_rate (test_macro_economic_engine.TestMacroEconomicEngine.test_02_fetch_inflation_rate)
+Verify fetch_inflation_rate returns plausible CPI and respects caching. ... ok
+test_03_fetch_usd_egp (test_macro_economic_engine.TestMacroEconomicEngine.test_03_fetch_usd_egp)
+Verify fetch_usd_egp returns plausible exchange rate. ... ok
+test_04_determine_macro_regime_classification 
+(test_macro_economic_engine.TestMacroEconomicEngine.test_04_determine_macro_regime_classification)
+Verify regime classification across various economic states. ... ok
+test_05_determine_macro_regime_edge_cases 
+(test_macro_economic_engine.TestMacroEconomicEngine.test_05_determine_macro_regime_edge_cases)
+Verify regime classifier handles edge cases and invalid inputs gracefully. ... ok
+test_06_get_sector_biases (test_macro_economic_engine.TestMacroEconomicEngine.test_06_get_sector_biases)
+Verify sector biases return proper overweight/underweight sectors for each regime. ... ok
+test_07_get_macro_telemetry (test_macro_economic_engine.TestMacroEconomicEngine.test_07_get_macro_telemetry)
+Verify get_macro_telemetry compiles full structured dictionary. ... ok
+test_08_instance_methods (test_macro_economic_engine.TestMacroEconomicEngine.test_08_instance_methods)
+Verify instance methods mirror class methods correctly. ... ok
+test_01_valid_trading_days (test_market_calendar.TestMarketCalendar.test_01_valid_trading_days)
+Verify that Sunday to Thursday dates are valid trading days (if not holidays). ... ok
+test_02_weekend_rejection (test_market_calendar.TestMarketCalendar.test_02_weekend_rejection)
+Verify that Friday and Saturday are rejected as EGX weekends. ... ok
+test_03_holiday_rejection (test_market_calendar.TestMarketCalendar.test_03_holiday_rejection)
+Verify that Egyptian national/market holidays are rejected. ... ok
+test_04_continuous_trading_hours (test_market_calendar.TestMarketCalendar.test_04_continuous_trading_hours)
+Verify 10:00 to 14:30 Cairo market hours. ... ok
+test_01_truth_records_separation_of_price_types 
+(test_market_data_truth.TestMarketDataTruth.test_01_truth_records_separation_of_price_types)
+Verify that official EOD, unadjusted, adjusted, and vwap prices are explicitly distinguished. ... ok
+test_02_freshness_audit_gate (test_market_data_truth.TestMarketDataTruth.test_02_freshness_audit_gate)
+Verify that price freshness gate evaluates validity and eligibility. ... ok
+test_01_session_and_headers_configuration 
+(test_market_intelligence_scraper.TestMarketIntelligenceScraper.test_01_session_and_headers_configuration)
+Verify HTTP session configures rotating User-Agents and headers. ... ok
+test_02_scrape_mubasher_news_parsing 
+(test_market_intelligence_scraper.TestMarketIntelligenceScraper.test_02_scrape_mubasher_news_parsing)
+Verify BeautifulSoup correctly parses Mubasher HTML news feed. ... ok
+test_03_scrape_macro_indicators_parsing 
+(test_market_intelligence_scraper.TestMarketIntelligenceScraper.test_03_scrape_macro_indicators_parsing)
+Verify macro indicators parser extracts interest rate or uses exact verified real numbers. ... ok
+test_04_scrape_market_catalysts_categorization 
+(test_market_intelligence_scraper.TestMarketIntelligenceScraper.test_04_scrape_market_catalysts_categorization)
+Verify catalyst scraper flags M&A, earnings, and dividends correctly. ... ok
+test_05_fetch_global_commodities_schema 
+(test_market_intelligence_scraper.TestMarketIntelligenceScraper.test_05_fetch_global_commodities_schema)
+Verify commodities fetcher returns structured dictionary for sugar, gas, brent, gold, copper. ... ok
+test_06_get_live_market_pulse_aggregation 
+(test_market_intelligence_scraper.TestMarketIntelligenceScraper.test_06_get_live_market_pulse_aggregation)
+Verify live market pulse compiles full multi-dimensional payload. ... ok
+test_01_canonical_price_record_schema 
+(test_market_price_service.TestMarketPriceService.test_01_canonical_price_record_schema)
+Verify that every canonical price record satisfies the full data contract. ... ok
+test_02_get_latest_price_helper (test_market_price_service.TestMarketPriceService.test_02_get_latest_price_helper)
+Verify get_latest_price retrieves exact positive price. ... ok
+test_03_reconcile_with_external_reference 
+(test_market_price_service.TestMarketPriceService.test_03_reconcile_with_external_reference)
+Verify reconciliation against external broker feed (e.g. Thndr). ... ok
+test_01_active_trading_hours_logic (test_market_scheduler.TestEGXMarketScheduler.test_01_active_trading_hours_logic)
+Verify EGX trading hours logic: Sun-Thu 10:00 to 14:30 Cairo Time. ... 2026-08-30 15:22:05,748 [INFO] Scheduler has 
+been shut down
+2026-08-30 15:22:05,748 [INFO] EGX Market Scheduler shutdown complete.
+ok
+test_02_scheduler_lifecycle_and_job_registration 
+(test_market_scheduler.TestEGXMarketScheduler.test_02_scheduler_lifecycle_and_job_registration)
+Verify scheduler start, job registration, and graceful stop. ... 2026-08-30 15:22:05,749 [INFO] Adding job tentatively 
+-- it will be properly scheduled when the scheduler starts
+2026-08-30 15:22:05,749 [INFO] Added job "EGX 15-Minute MultiHorizon & Risk Audit Cycle" to job store "default"
+2026-08-30 15:22:05,749 [INFO] Scheduler started
+2026-08-30 15:22:05,750 [INFO] EGX Market Scheduler successfully started in background.
+2026-08-30 15:22:05,750 [INFO] EGX Market Scheduler is already running.
+2026-08-30 15:22:05,750 [INFO] Scheduler has been shut down
+2026-08-30 15:22:05,750 [INFO] EGX Market Scheduler shutdown complete.
+ok
+test_03_run_market_cycle_execution (test_market_scheduler.TestEGXMarketScheduler.test_03_run_market_cycle_execution)
+Verify run_market_cycle updates rankings, database prices, and audits stop losses. ... 2026-08-30 15:22:05,750 [INFO] 
+Executing EGX Quantitative Cycle at 2026-08-30T15:22:05.750855+03:00...
+2026-08-30 15:22:05,847 [INFO] Initiating resilient multi-source price sync for 244 EGX tickers...
+2026-08-30 15:22:13,572 [WARNING] [CIRCUIT_BREAKER] Price anomaly #3 for SAIB.CA: fetched 2.53 EGP deviates 16.5% from 
+previous close 3.03 EGP (exceeds ▒15% limit).
+2026-08-30 15:22:13,572 [ERROR] [CRITICAL_FEED_ALERT] \u0633\u0647\u0645 SAIB.CA \u062a\u0643\u0631\u0631 
+\u0631\u0641\u0636\u0647 3 \u0645\u0631\u0627\u062a \u0645\u062a\u062a\u0627\u0644\u064a\u0629 ù \u0647\u0630\u0627 
+\u0627\u0644\u0633\u0647\u0645 \u064a\u062d\u062a\u0627\u062c \u0645\u0635\u062f\u0631 
+\u0628\u064a\u0627\u0646\u0627\u062a \u0628\u062f\u064a\u0644 ù \u0627\u0644\u062a\u062c\u0627\u0647\u0644 
+\u0627\u0644\u0645\u062a\u0643\u0631\u0631 \u0644\u0646 \u064a\u062d\u0644 \u0627\u0644\u0645\u0634\u0643\u0644\u0629. 
+\u062c\u0627\u0631\u064a \u062a\u062c\u0631\u0628\u0629 \u0627\u0644\u0645\u0635\u062f\u0631 
+\u0627\u0644\u0645\u0628\u0627\u0634\u0631 \u0627\u0644\u0628\u062f\u064a\u0644...
+2026-08-30 15:22:18,867 [WARNING] [CIRCUIT_BREAKER] Price anomaly #4 for DAPH.CA: fetched 141.60 EGP deviates 20.0% 
+from previous close 118.00 EGP (exceeds ▒15% limit).
+2026-08-30 15:22:18,867 [ERROR] [CRITICAL_FEED_ALERT] \u0633\u0647\u0645 DAPH.CA \u062a\u0643\u0631\u0631 
+\u0631\u0641\u0636\u0647 4 \u0645\u0631\u0627\u062a \u0645\u062a\u062a\u0627\u0644\u064a\u0629 ù \u0647\u0630\u0627 
+\u0627\u0644\u0633\u0647\u0645 \u064a\u062d\u062a\u0627\u062c \u0645\u0635\u062f\u0631 
+\u0628\u064a\u0627\u0646\u0627\u062a \u0628\u062f\u064a\u0644 ù \u0627\u0644\u062a\u062c\u0627\u0647\u0644 
+\u0627\u0644\u0645\u062a\u0643\u0631\u0631 \u0644\u0646 \u064a\u062d\u0644 \u0627\u0644\u0645\u0634\u0643\u0644\u0629. 
+\u062c\u0627\u0631\u064a \u062a\u062c\u0631\u0628\u0629 \u0627\u0644\u0645\u0635\u062f\u0631 
+\u0627\u0644\u0645\u0628\u0627\u0634\u0631 \u0627\u0644\u0628\u062f\u064a\u0644...
+2026-08-30 15:22:21,722 [WARNING] [CIRCUIT_BREAKER] Price anomaly #7 for AIH.CA: fetched 0.60 EGP deviates 20.6% from 
+previous close 0.50 EGP (exceeds ▒15% limit).
+2026-08-30 15:22:21,722 [ERROR] [CRITICAL_FEED_ALERT] \u0633\u0647\u0645 AIH.CA \u062a\u0643\u0631\u0631 
+\u0631\u0641\u0636\u0647 7 \u0645\u0631\u0627\u062a \u0645\u062a\u062a\u0627\u0644\u064a\u0629 ù \u0647\u0630\u0627 
+\u0627\u0644\u0633\u0647\u0645 \u064a\u062d\u062a\u0627\u062c \u0645\u0635\u062f\u0631 
+\u0628\u064a\u0627\u0646\u0627\u062a \u0628\u062f\u064a\u0644 ù \u0627\u0644\u062a\u062c\u0627\u0647\u0644 
+\u0627\u0644\u0645\u062a\u0643\u0631\u0631 \u0644\u0646 \u064a\u062d\u0644 \u0627\u0644\u0645\u0634\u0643\u0644\u0629. 
+\u062c\u0627\u0631\u064a \u062a\u062c\u0631\u0628\u0629 \u0627\u0644\u0645\u0635\u062f\u0631 
+\u0627\u0644\u0645\u0628\u0627\u0634\u0631 \u0627\u0644\u0628\u062f\u064a\u0644...
+2026-08-30 15:22:23,777 [INFO] Price sync completed: 154/244 live fetched, 90 fallback snapshots, 3 critical feed 
+alerts.
+2026-08-30 15:24:16,244 [INFO] EGX Quantitative Cycle completed: 244 stocks ranked, 244 prices updated, 0 stop-loss 
+breaches.
+ok
+test_04_api_scheduler_endpoints (test_market_scheduler.TestEGXMarketScheduler.test_04_api_scheduler_endpoints)
+Verify Flask API endpoints /api/scheduler/status and /api/scheduler/run_cycle. ... 2026-08-30 15:24:16,244 [INFO] 
+Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-08-30 15:24:16,245 [INFO] Added job "EGX 15-Minute MultiHorizon & Risk Audit Cycle" to job store "default"
+2026-08-30 15:24:16,245 [INFO] Scheduler started
+2026-08-30 15:24:16,246 [INFO] EGX Market Scheduler successfully started in background.
+2026-08-30 15:24:16,246 [INFO] Executing EGX Quantitative Cycle at 2026-08-30T15:24:16.246362+03:00...
+2026-08-30 15:24:16,267 [INFO] Initiating resilient multi-source price sync for 244 EGX tickers...
+2026-08-30 15:24:44,988 [WARNING] [CIRCUIT_BREAKER] Price anomaly #4 for SAIB.CA: fetched 2.53 EGP deviates 16.5% from 
+previous close 3.03 EGP (exceeds ▒15% limit).
+2026-08-30 15:24:44,988 [ERROR] [CRITICAL_FEED_ALERT] \u0633\u0647\u0645 SAIB.CA \u062a\u0643\u0631\u0631 
+\u0631\u0641\u0636\u0647 4 \u0645\u0631\u0627\u062a \u0645\u062a\u062a\u0627\u0644\u064a\u0629 ù \u0647\u0630\u0627 
+\u0627\u0644\u0633\u0647\u0645 \u064a\u062d\u062a\u0627\u062c \u0645\u0635\u062f\u0631 
+\u0628\u064a\u0627\u0646\u0627\u062a \u0628\u062f\u064a\u0644 ù \u0627\u0644\u062a\u062c\u0627\u0647\u0644 
+\u0627\u0644\u0645\u062a\u0643\u0631\u0631 \u0644\u0646 \u064a\u062d\u0644 \u0627\u0644\u0645\u0634\u0643\u0644\u0629. 
+\u062c\u0627\u0631\u064a \u062a\u062c\u0631\u0628\u0629 \u0627\u0644\u0645\u0635\u062f\u0631 
+\u0627\u0644\u0645\u0628\u0627\u0634\u0631 \u0627\u0644\u0628\u062f\u064a\u0644...
+2026-08-30 15:24:47,067 [WARNING] [CIRCUIT_BREAKER] Price anomaly #5 for DAPH.CA: fetched 141.60 EGP deviates 20.0% 
+from previous close 118.00 EGP (exceeds ▒15% limit).
+2026-08-30 15:24:47,067 [ERROR] [CRITICAL_FEED_ALERT] \u0633\u0647\u0645 DAPH.CA \u062a\u0643\u0631\u0631 
+\u0631\u0641\u0636\u0647 5 \u0645\u0631\u0627\u062a \u0645\u062a\u062a\u0627\u0644\u064a\u0629 ù \u0647\u0630\u0627 
+\u0627\u0644\u0633\u0647\u0645 \u064a\u062d\u062a\u0627\u062c \u0645\u0635\u062f\u0631 
+\u0628\u064a\u0627\u0646\u0627\u062a \u0628\u062f\u064a\u0644 ù \u0627\u0644\u062a\u062c\u0627\u0647\u0644 
+\u0627\u0644\u0645\u062a\u0643\u0631\u0631 \u0644\u0646 \u064a\u062d\u0644 \u0627\u0644\u0645\u0634\u0643\u0644\u0629. 
+\u062c\u0627\u0631\u064a \u062a\u062c\u0631\u0628\u0629 \u0627\u0644\u0645\u0635\u062f\u0631 
+\u0627\u0644\u0645\u0628\u0627\u0634\u0631 \u0627\u0644\u0628\u062f\u064a\u0644...
+2026-08-30 15:24:48,111 [WARNING] [CIRCUIT_BREAKER] Price anomaly #8 for AIH.CA: fetched 0.60 EGP deviates 20.6% from 
+previous close 0.50 EGP (exceeds ▒15% limit).
+2026-08-30 15:24:48,111 [ERROR] [CRITICAL_FEED_ALERT] \u0633\u0647\u0645 AIH.CA \u062a\u0643\u0631\u0631 
+\u0631\u0641\u0636\u0647 8 \u0645\u0631\u0627\u062a \u0645\u062a\u062a\u0627\u0644\u064a\u0629 ù \u0647\u0630\u0627 
+\u0627\u0644\u0633\u0647\u0645 \u064a\u062d\u062a\u0627\u062c \u0645\u0635\u062f\u0631 
+\u0628\u064a\u0627\u0646\u0627\u062a \u0628\u062f\u064a\u0644 ù \u0627\u0644\u062a\u062c\u0627\u0647\u0644 
+\u0627\u0644\u0645\u062a\u0643\u0631\u0631 \u0644\u0646 \u064a\u062d\u0644 \u0627\u0644\u0645\u0634\u0643\u0644\u0629. 
+\u062c\u0627\u0631\u064a \u062a\u062c\u0631\u0628\u0629 \u0627\u0644\u0645\u0635\u062f\u0631 
+\u0627\u0644\u0645\u0628\u0627\u0634\u0631 \u0627\u0644\u0628\u062f\u064a\u0644...
+2026-08-30 15:24:52,806 [INFO] Price sync completed: 154/244 live fetched, 90 fallback snapshots, 3 critical feed 
+alerts.
+2026-08-30 15:26:07,736 [INFO] EGX Quantitative Cycle completed: 244 stocks ranked, 244 prices updated, 0 stop-loss 
+breaches.
+2026-08-30 15:26:07,737 [INFO] Scheduler has been shut down
+2026-08-30 15:26:07,737 [INFO] EGX Market Scheduler shutdown complete.
+ok
+test_01_ramadan_seasonality_detection 
+(test_market_seasonality_engine.TestMarketSeasonalityEngine.test_01_ramadan_seasonality_detection)
+Verify date within Ramadan window triggers RAMADAN_CONTRACTION. ... ok
+test_02_thursday_dip_detection 
+(test_market_seasonality_engine.TestMarketSeasonalityEngine.test_02_thursday_dip_detection)
+Verify Thursday session triggers THURSDAY_PROFIT_TAKING. ... ok
+test_03_december_window_dressing 
+(test_market_seasonality_engine.TestMarketSeasonalityEngine.test_03_december_window_dressing)
+Verify late December date triggers DECEMBER_WINDOW_DRESSING. ... ok
+test_04_standard_session_detection 
+(test_market_seasonality_engine.TestMarketSeasonalityEngine.test_04_standard_session_detection)
+Verify typical Sunday/Tuesday outside special seasons returns standard cycle. ... ok
+test_01_sector_neutralizer_computation 
+(test_meta_labeling_engine.TestMetaLabelingEngine.test_01_sector_neutralizer_computation)
+Verify cross-sectional sector-neutral Z-score calculation for EGX stocks. ... ok
+test_02_meta_feature_vector_extraction 
+(test_meta_labeling_engine.TestMetaLabelingEngine.test_02_meta_feature_vector_extraction)
+Verify extraction of 16-dimensional sector-neutral meta-feature vector. ... ok
+test_03_meta_model_training_and_schema 
+(test_meta_labeling_engine.TestMetaLabelingEngine.test_03_meta_model_training_and_schema)
+Verify training of secondary meta-classifier and volatility regressor. ... ok
+test_04_meta_label_evaluation_output 
+(test_meta_labeling_engine.TestMetaLabelingEngine.test_04_meta_label_evaluation_output)
+Verify meta-label evaluation produces probability of success and decision. ... ok
+test_05_consensus_chain_integration 
+(test_meta_labeling_engine.TestMetaLabelingEngine.test_05_consensus_chain_integration)
+Verify that MultiHorizonEngine incorporates Meta-Label decision into consensus. ... ok
+test_06_risk_engine_override_invariance 
+(test_meta_labeling_engine.TestMetaLabelingEngine.test_06_risk_engine_override_invariance)
+Verify Meta-Model CANNOT override the dynamic ATR stop floor or position sizing. ... ok
+test_07_api_ai_forecast_endpoint_meta_fields 
+(test_meta_labeling_engine.TestMetaLabelingEngine.test_07_api_ai_forecast_endpoint_meta_fields)
+Verify GET /api/ai/forecast/<ticker> returns enriched Meta-Labeling payload. ... ok
+test_01_fundamentals_retrieval (test_missing_layers.TestMissingInstitutionalLayers.test_01_fundamentals_retrieval)
+Verify fundamental metrics retrieval and normalization. ... ok
+test_02_fundamentals_score_helper 
+(test_missing_layers.TestMissingInstitutionalLayers.test_02_fundamentals_score_helper)
+Verify get_fundamental_score helper returns expected range. ... ok
+test_03_news_sentiment_retrieval (test_missing_layers.TestMissingInstitutionalLayers.test_03_news_sentiment_retrieval)
+Verify news sentiment impact scoring. ... ok
+test_04_arbitrary_headline_nlp_scoring 
+(test_missing_layers.TestMissingInstitutionalLayers.test_04_arbitrary_headline_nlp_scoring)
+Verify text NLP sentiment classifier on synthetic Arabic/English headlines. ... ok
+test_05_block_trade_detection_routine 
+(test_missing_layers.TestMissingInstitutionalLayers.test_05_block_trade_detection_routine)
+Verify block trade evaluation on standard tickers. ... ok
+test_06_block_trade_smart_money_vs_distribution 
+(test_missing_layers.TestMissingInstitutionalLayers.test_06_block_trade_smart_money_vs_distribution)
+Verify classification of smart money accumulation vs distribution. ... ok
+test_07_scan_all_block_trades (test_missing_layers.TestMissingInstitutionalLayers.test_07_scan_all_block_trades)
+Verify universe scan of block executions. ... ok
+test_08_multi_horizon_full_factor_payload 
+(test_missing_layers.TestMissingInstitutionalLayers.test_08_multi_horizon_full_factor_payload)
+Verify that multi-horizon analysis payload contains all newly added layers. ... ok
+test_09_multi_horizon_rankings_with_missing_layers 
+(test_missing_layers.TestMissingInstitutionalLayers.test_09_multi_horizon_rankings_with_missing_layers)
+Verify cross-sectional ranking produces complete factor attribution across all stocks. ... ok
+test_01_mlops_drift_triggers_assessment 
+(test_mlops_and_notifications.TestMLOpsAndNotifications.test_01_mlops_drift_triggers_assessment)
+Verify MLOps drift trigger evaluates rolling accuracy and macro regime. ... ok
+test_02_mlops_retrain_execution 
+(test_mlops_and_notifications.TestMLOpsAndNotifications.test_02_mlops_retrain_execution)
+Verify MLOps retraining pipeline executes safely and writes metadata. ... ok
+test_03_telegram_notifier_formatting_and_mock 
+(test_mlops_and_notifications.TestMLOpsAndNotifications.test_03_telegram_notifier_formatting_and_mock)
+Verify TelegramNotifier dispatches correctly formatted Markdown alerts in Mock mode. ... ok
+test_04_insider_trading_engine_signals 
+(test_mlops_and_notifications.TestMLOpsAndNotifications.test_04_insider_trading_engine_signals)
+Verify EGX Insider Trading Engine computes signals and boosts confidence. ... ok
+test_05_tax_loss_harvesting_and_margin_manager 
+(test_mlops_and_notifications.TestMLOpsAndNotifications.test_05_tax_loss_harvesting_and_margin_manager)
+Verify margin financing cost calculation and tax-loss harvesting evaluation. ... ok
+test_06_api_endpoints_mlops_insider_tax 
+(test_mlops_and_notifications.TestMLOpsAndNotifications.test_06_api_endpoints_mlops_insider_tax)
+Verify REST API endpoints for MLOps, Insider Deals, and Tax Harvesting. ... ok
+test_07_ui_insider_and_mlops_elements_exist 
+(test_mlops_and_notifications.TestMLOpsAndNotifications.test_07_ui_insider_and_mlops_elements_exist)
+Verify UI index.html contains Insider and MLOps elements. ... ok
+test_01_emergency_trigger_macro_shock_tuesday 
+(test_mlops_triggers.TestMLOpsTriggers.test_01_emergency_trigger_macro_shock_tuesday)
+Test A: A simulated CBE Rate hike on a Tuesday (weekday=1) ... ok
+test_02_routine_weekly_retrain_friday (test_mlops_triggers.TestMLOpsTriggers.test_02_routine_weekly_retrain_friday)
+Test B: A quiet week with no alarms triggers the routine retrain ... ok
+test_03_quiet_midweek_no_retrain (test_mlops_triggers.TestMLOpsTriggers.test_03_quiet_midweek_no_retrain)
+Verify that a quiet Wednesday (weekday=2) with normal conditions ... ok
+test_04_emergency_market_crash_trigger (test_mlops_triggers.TestMLOpsTriggers.test_04_emergency_market_crash_trigger)
+Verify that a single-session EGX30 drop > 5% triggers emergency retrain. ... ok
+test_05_emergency_performance_bleed_consecutive_stops 
+(test_mlops_triggers.TestMLOpsTriggers.test_05_emergency_performance_bleed_consecutive_stops)
+Verify that 3 consecutive stop losses hit triggers emergency retrain. ... ok
+test_06_emergency_volatility_explosion (test_mlops_triggers.TestMLOpsTriggers.test_06_emergency_volatility_explosion)
+Verify that ATR% expanding > 50% vs 20-day MA triggers emergency retrain. ... ok
+test_07_emergency_halt_blocks_short_term_opportunities 
+(test_mlops_triggers.TestMLOpsTriggers.test_07_emergency_halt_blocks_short_term_opportunities)
+Verify that when SYSTEM_STATUS is EMERGENCY_HALT, MultiHorizonEngine blocks BUY opportunities. ... ok
+test_01_information_coefficient_perfect_positive 
+(test_model_evaluator.TestModelEvaluator.test_01_information_coefficient_perfect_positive)
+Verify Spearman Rank IC equals 1.0 for monotonic rank alignment. ... ok
+test_02_information_coefficient_inverse_negative 
+(test_model_evaluator.TestModelEvaluator.test_02_information_coefficient_inverse_negative)
+Verify Spearman Rank IC equals -1.0 for perfectly inverted ranking. ... ok
+test_03_hit_rate_directional_accuracy (test_model_evaluator.TestModelEvaluator.test_03_hit_rate_directional_accuracy)
+Verify hit rate computes exact directional sign percentage. ... ok
+test_04_rmse_calculation (test_model_evaluator.TestModelEvaluator.test_04_rmse_calculation)
+Verify RMSE calculation against ground truth values. ... ok
+test_05_walk_forward_simulation_oos_integrity 
+(test_model_evaluator.TestModelEvaluator.test_05_walk_forward_simulation_oos_integrity)
+Verify Out-of-Sample Walk-Forward Simulation produces robust metrics meeting targets. ... ok
+test_06_api_ai_validation_metrics_endpoint 
+(test_model_evaluator.TestModelEvaluator.test_06_api_ai_validation_metrics_endpoint)
+Verify GET /api/ai/validation_metrics returns HTTP 200 with complete metrics payload. ... ok
+test_07_triple_barrier_label (test_model_evaluator.TestModelEvaluator.test_07_triple_barrier_label)
+Verify Triple Barrier label correctly detects upper barrier, lower barrier, and timeout. ... ok
+test_tc01_valid_council_synthesis_comi 
+(test_multi_agent_council.TestMultiAgentCouncil.test_tc01_valid_council_synthesis_comi)
+TC-01: Valid council synthesis on COMI.CA. ... ok
+test_tc02_risk_and_friction_bounds_calculation 
+(test_multi_agent_council.TestMultiAgentCouncil.test_tc02_risk_and_friction_bounds_calculation)
+TC-02: Risk & Friction bounds calculation. ... ok
+test_tc03_failsafe_handling_on_unknown_or_invalid_tickers 
+(test_multi_agent_council.TestMultiAgentCouncil.test_tc03_failsafe_handling_on_unknown_or_invalid_tickers)
+TC-03: Fail-safe handling on unknown/invalid tickers. ... ok
+test_tc04_database_persistence_and_failure_memory 
+(test_multi_agent_council.TestMultiAgentCouncil.test_tc04_database_persistence_and_failure_memory)
+TC-04: Database persistence and retrieval of failure memory. ... ok
+test_tc05_critic_auditor_rejection_of_overfitted_and_leaked_hypotheses 
+(test_multi_agent_council.TestMultiAgentCouncil.test_tc05_critic_auditor_rejection_of_overfitted_and_leaked_hypotheses)
+TC-05: Critic Auditor rejection of overfitted/leaked hypotheses. ... ok
+test_01_all_five_horizons_present (test_multi_horizon_engine.TestMultiHorizonEngine.test_01_all_five_horizons_present)
+Verify that analysis produces forecasts across all 5 horizons. ... ok
+test_02_term_scores_and_overall_score 
+(test_multi_horizon_engine.TestMultiHorizonEngine.test_02_term_scores_and_overall_score)
+Verify that short, medium, and long term scores combine into overall score. ... ok
+test_03_rankings_descending_order (test_multi_horizon_engine.TestMultiHorizonEngine.test_03_rankings_descending_order)
+Verify that ranking returns stocks sorted by overall score descending. ... ok
+test_04_api_forecasts_endpoints (test_multi_horizon_engine.TestMultiHorizonEngine.test_04_api_forecasts_endpoints)
+Verify /api/forecasts and /api/forecasts/<ticker> endpoints. ... ok
+test_01_arabic_financial_polarity_positive_scoring 
+(test_nlp_sentiment_engine.TestNLPSentimentEngine.test_01_arabic_financial_polarity_positive_scoring)
+Verify positive Arabic financial headlines score > 0.50. ... ok
+test_02_arabic_financial_polarity_negative_scoring 
+(test_nlp_sentiment_engine.TestNLPSentimentEngine.test_02_arabic_financial_polarity_negative_scoring)
+Verify negative Arabic financial headlines score < -0.50. ... ok
+test_03_arabic_financial_polarity_neutral_scoring 
+(test_nlp_sentiment_engine.TestNLPSentimentEngine.test_03_arabic_financial_polarity_neutral_scoring)
+Verify neutral Arabic financial headlines score in bounded range [-0.25, +0.35]. ... ok
+test_04_evaluate_ticker_sentiment_structure 
+(test_nlp_sentiment_engine.TestNLPSentimentEngine.test_04_evaluate_ticker_sentiment_structure)
+Verify evaluate_ticker_sentiment returns complete bounded telemetry. ... ok
+test_05_news_ingestion_and_mock_fallback 
+(test_nlp_sentiment_engine.TestNLPSentimentEngine.test_05_news_ingestion_and_mock_fallback)
+Verify NewsIngestionEngine behavior in mock test vs production lockdown mode. ... ok
+test_06_meta_labeling_finbert_feature_integration 
+(test_nlp_sentiment_engine.TestNLPSentimentEngine.test_06_meta_labeling_finbert_feature_integration)
+Verify MetaLabelingEngine dynamically ingests finbert_sentiment_score. ... ok
+test_07_api_endpoint_sentiment (test_nlp_sentiment_engine.TestNLPSentimentEngine.test_07_api_endpoint_sentiment)
+Verify GET /api/sentiment/<ticker> returns HTTP 200 OK. ... ok
+test_08_ui_sentiment_elements_exist 
+(test_nlp_sentiment_engine.TestNLPSentimentEngine.test_08_ui_sentiment_elements_exist)
+Verify UI index.html contains News Sentiment Radar card elements. ... ok
+test_01_arabic_order_executed_template 
+(test_notifications.TestArabicNotifications.test_01_arabic_order_executed_template)
+Verify ORDER EXECUTED alert formats with professional Arabic and parameters. ... ok
+test_02_arabic_stop_loss_hit_template 
+(test_notifications.TestArabicNotifications.test_02_arabic_stop_loss_hit_template)
+Verify STOP LOSS HIT alert formats with capital protection message. ... ok
+test_03_arabic_macro_shock_template (test_notifications.TestArabicNotifications.test_03_arabic_macro_shock_template)
+Verify MACRO SHOCK alert formats with quantified rates and reason. ... ok
+test_04_arabic_emergency_retrain_template 
+(test_notifications.TestArabicNotifications.test_04_arabic_emergency_retrain_template)
+Verify EMERGENCY RETRAIN alert formats with halt status and trigger reason. ... ok
+test_05_arabic_routine_retrain_template 
+(test_notifications.TestArabicNotifications.test_05_arabic_routine_retrain_template)
+Verify ROUTINE WEEKLY RETRAIN alert formats with weekend maintenance message. ... ok
+test_06_persistent_json_logging (test_notifications.TestArabicNotifications.test_06_persistent_json_logging)
+Verify all notifications are saved atomically to data/system_notifications_log.json. ... ok
+test_07_api_notifications_recent_endpoint 
+(test_notifications.TestArabicNotifications.test_07_api_notifications_recent_endpoint)
+Verify GET /api/notifications/recent returns structured JSON with 15 alerts. ... ok
+test_01_feature_registry_orthogonal_registrations 
+(test_orthogonal_technical_features.TestOrthogonalTechnicalFeatures.test_01_feature_registry_orthogonal_registrations)
+Verify all new orthogonal features are registered in feature_registry.py. ... ok
+test_02_market_structure_hh_hl_and_52w_proximity 
+(test_orthogonal_technical_features.TestOrthogonalTechnicalFeatures.test_02_market_structure_hh_hl_and_52w_proximity)
+Verify Higher-Highs/Higher-Lows detection and 52W proximity calculations. ... ok
+test_03_obv_regression_slope_and_accumulation 
+(test_orthogonal_technical_features.TestOrthogonalTechnicalFeatures.test_03_obv_regression_slope_and_accumulation)
+Verify OBV Regression Slope and accumulation status. ... ok
+test_04_roc_pure_price_acceleration 
+(test_orthogonal_technical_features.TestOrthogonalTechnicalFeatures.test_04_roc_pure_price_acceleration)
+Verify ROC_5D and ROC_20D calculations distinct from RSI. ... ok
+test_05_volatility_normalization_atr_pct_and_hv20 
+(test_orthogonal_technical_features.TestOrthogonalTechnicalFeatures.test_05_volatility_normalization_atr_pct_and_hv20)
+Verify ATR_PCT and HV20 historical volatility normalization. ... ok
+test_06_5_dimension_orthogonal_scoring_breakdown 
+(test_orthogonal_technical_features.TestOrthogonalTechnicalFeatures.test_06_5_dimension_orthogonal_scoring_breakdown)
+Verify 5 independent dimensions (20% each) aggregate to composite technical score. ... ok
+test_01_cohort_initialization_and_archive (test_paper_cohort.TestPaperCohort.test_01_cohort_initialization_and_archive)
+Verify that initializing new cohort preserves historical baseline archive ... ok
+test_01_session_recording_and_artifact_export 
+(test_paper_observatory.TestPaperObservatory.test_01_session_recording_and_artifact_export)
+Verify that recording a paper trading session produces valid JSON & Markdown reports. ... ok
+test_02_risk_incident_detection (test_paper_observatory.TestPaperObservatory.test_02_risk_incident_detection)
+Verify that breaching stock allocation cap (>65%) flags RISK_FAILURE. ... ok
+test_03_immutable_decision_snapshot_and_replay 
+(test_paper_observatory.TestPaperObservatory.test_03_immutable_decision_snapshot_and_replay)
+Verify that decision snapshots are saved with SHA256 integrity hash and deterministically replayed. ... ok
+test_04_paper_reality_auditor (test_paper_observatory.TestPaperObservatory.test_04_paper_reality_auditor)
+Verify that PaperRealityAuditor evaluates paper statistics and flags sample confidence. ... ok
+test_05_platform_drift_monitor (test_paper_observatory.TestPaperObservatory.test_05_platform_drift_monitor)
+Verify drift monitor detects warning state when slippage widens or data health degrades. ... ok
+test_01_load_state_preserves_verified_sessions 
+(test_paper_state_persistence.TestPaperStatePersistence.test_01_load_state_preserves_verified_sessions)
+Verify that load_state loads valid paper trading maturation gate state. ... ok
+test_02_atomic_save_and_backup_creation 
+(test_paper_state_persistence.TestPaperStatePersistence.test_02_atomic_save_and_backup_creation)
+Verify that saving state creates timestamped backups in reports/state_backups/. ... ok
+test_01_orchestrator_blocks_non_paper_mode 
+(test_paper_trading_orchestrator.TestPaperTradingOrchestrator.test_01_orchestrator_blocks_non_paper_mode)
+Verify that orchestrator raises LiveExecutionBlockedError if force_paper_mode is False. ... ok
+test_02_orchestrator_duplicate_date_skip 
+(test_paper_trading_orchestrator.TestPaperTradingOrchestrator.test_02_orchestrator_duplicate_date_skip)
+Verify that attempting to run an already completed date returns SKIPPED with reason code. ... ok
+test_01_portfolio_allocation_plan_and_solvency 
+(test_portfolio_construction.TestPortfolioConstruction.test_01_portfolio_allocation_plan_and_solvency)
+Verify that portfolio constructor generates valid allocation plan: ... ok
+test_02_correlation_and_sector_penalty 
+(test_portfolio_construction.TestPortfolioConstruction.test_02_correlation_and_sector_penalty)
+Verify that adding a second asset in the same sector receives a concentration penalty. ... ok
+test_03_paper_vs_backtest_divergence 
+(test_portfolio_construction.TestPortfolioConstruction.test_03_paper_vs_backtest_divergence)
+Verify PaperVsBacktestComparator flags severe divergence when win rate collapses. ... ok
+test_cash_gate_enforcement (test_portfolio_equity.TestPortfolioEquity.test_cash_gate_enforcement) ... ok
+test_dynamic_equity_calculation (test_portfolio_equity.TestPortfolioEquity.test_dynamic_equity_calculation) ... ok
+test_position_sizing_integer_and_caps 
+(test_portfolio_equity.TestPortfolioEquity.test_position_sizing_integer_and_caps) ... ok
+test_01_add_manual_transaction (test_portfolio_journal.TestPortfolioJournal.test_01_add_manual_transaction)
+Test adding manual transactions persists properly. ... ok
+test_02_edit_and_delete_transaction (test_portfolio_journal.TestPortfolioJournal.test_02_edit_and_delete_transaction)
+Test editing and deleting transactions. ... ok
+test_03_confirm_from_suggestion_links_decision_id 
+(test_portfolio_journal.TestPortfolioJournal.test_03_confirm_from_suggestion_links_decision_id)
+Test confirming from system suggestion correctly links decision_id. ... ok
+test_04_weighted_average_cost_basis (test_portfolio_journal.TestPortfolioJournal.test_04_weighted_average_cost_basis)
+Test multi-buy weighted average cost basis. ... ok
+test_05_fifo_realized_pnl (test_portfolio_journal.TestPortfolioJournal.test_05_fifo_realized_pnl)
+Test FIFO realized P&L matching: ... ok
+test_06_zero_interference_with_production_core 
+(test_portfolio_journal.TestPortfolioJournal.test_06_zero_interference_with_production_core)
+Assert that calling portfolio journal functions NEVER modifies ... ok
+test_01_distance_matrix_properties (test_portfolio_optimizer.TestPortfolioOptimizer.test_01_distance_matrix_properties)
+Verify correlation distance matrix properties: 0 on diagonal, bounded in [0, 1]. ... ok
+test_02_hrp_optimization_end_to_end 
+(test_portfolio_optimizer.TestPortfolioOptimizer.test_02_hrp_optimization_end_to_end)
+Verify complete HRP optimization pipeline on top EGX stocks. ... ok
+test_03_monte_carlo_var_and_cvar_computation 
+(test_portfolio_optimizer.TestPortfolioOptimizer.test_03_monte_carlo_var_and_cvar_computation)
+Verify Monte Carlo 10,000-path simulation computes valid VaR and CVaR. ... ok
+test_04_monte_carlo_halt_circuit_breaker 
+(test_portfolio_optimizer.TestPortfolioOptimizer.test_04_monte_carlo_halt_circuit_breaker)
+Verify that extreme volatility (>50%) causing VaR 99% > 12% triggers execution halt. ... ok
+test_05_api_hrp_weights_endpoint (test_portfolio_optimizer.TestPortfolioOptimizer.test_05_api_hrp_weights_endpoint)
+Verify REST API GET /api/portfolio/hrp_weights returns combined HRP and Risk payload. ... ok
+test_06_portfolio_optimizer_inverse_volatility_weighting 
+(test_portfolio_optimizer.TestPortfolioOptimizer.test_06_portfolio_optimizer_inverse_volatility_weighting)
+[2026-08-30 15:28:58,629] [INFO] [PortfolioOptimizer] Successfully computed optimal weights for 5 assets (Max Cap = 30%).
+Verify Inverse Volatility assigns higher weights to lower volatility stocks. ... 2026-08-30 15:28:58,629 [INFO] 
+Successfully computed optimal weights for 5 assets (Max Cap = 30%).
+ok
+test_07_strict_30pct_max_position_cap 
+(test_portfolio_optimizer.TestPortfolioOptimizer.test_07_strict_30pct_max_position_cap)
+[2026-08-30 15:28:58,629] [INFO] [PortfolioOptimizer] Successfully computed optimal weights for 5 assets (Max Cap = 30%).
+Verify no single stock ever exceeds the 30% (0.30) regulatory position limit. ... 2026-08-30 15:28:58,629 [INFO] 
+Successfully computed optimal weights for 5 assets (Max Cap = 30%).
+ok
+test_08_capital_allocation_and_lot_sizing 
+(test_portfolio_optimizer.TestPortfolioOptimizer.test_08_capital_allocation_and_lot_sizing)
+Verify capital allocation properly computes integer share lots and cash reserves in EGP. ... ok
+test_09_edge_cases_zero_volatility_and_missing_prices 
+(test_portfolio_optimizer.TestPortfolioOptimizer.test_09_edge_cases_zero_volatility_and_missing_prices)
+[2026-08-30 15:28:58,630] [WARNING] [PortfolioOptimizer] Asset 'ZERO_VOL.CA' has invalid or missing volatility (0.0). Applying robust fallback volatility of 0.25.
+Verify robust handling of zero/missing volatilities and missing prices without crashes. ... 2026-08-30 15:28:58,630 
+[WARNING] Asset 'ZERO_VOL.CA' has invalid or missing volatility (0.0). Applying robust fallback volatility of 0.25.
+[2026-08-30 15:28:58,630] [WARNING] [PortfolioOptimizer] Asset 'MISSING_VOL.CA' has invalid or missing volatility (None). Applying robust fallback volatility of 0.25.
+2026-08-30 15:28:58,630 [WARNING] Asset 'MISSING_VOL.CA' has invalid or missing volatility (None). Applying robust 
+fallback volatility of 0.25.
+[2026-08-30 15:28:58,630] [WARNING] [PortfolioOptimizer] Asset 'FOURTH.CA' has invalid or missing volatility (None). Applying robust fallback volatility of 0.25.
+2026-08-30 15:28:58,630 [WARNING] Asset 'FOURTH.CA' has invalid or missing volatility (None). Applying robust fallback 
+volatility of 0.25.
+[2026-08-30 15:28:58,630] [INFO] [PortfolioOptimizer] Successfully computed optimal weights for 4 assets (Max Cap = 30%).
+2026-08-30 15:28:58,630 [INFO] Successfully computed optimal weights for 4 assets (Max Cap = 30%).
+[2026-08-30 15:28:58,630] [WARNING] [PortfolioOptimizer] Cannot allocate shares for 'MISSING_VOL.CA': Invalid or missing price (None EGP). Skipping.
+2026-08-30 15:28:58,630 [WARNING] Cannot allocate shares for 'MISSING_VOL.CA': Invalid or missing price (None EGP). 
+Skipping.
+[2026-08-30 15:28:58,630] [WARNING] [PortfolioOptimizer] Cannot allocate shares for 'NORMAL_VOL.CA': Invalid or missing price (None EGP). Skipping.
+[2026-08-30 15:28:58,630] [WARNING] [PortfolioOptimizer] Cannot allocate shares for 'FOURTH.CA': Invalid or missing price (None EGP). Skipping.
+2026-08-30 15:28:58,630 [WARNING] Cannot allocate shares for 'NORMAL_VOL.CA': Invalid or missing price (None EGP). 
+Skipping.
+2026-08-30 15:28:58,630 [WARNING] Cannot allocate shares for 'FOURTH.CA': Invalid or missing price (None EGP). 
+Skipping.
+ok
+test_01_price_reconciliation_engine_runs_cleanly 
+(test_price_reconciliation_and_ux.TestPriceReconciliationAndUX.test_01_price_reconciliation_engine_runs_cleanly)
+Verify that price reconciliation analyzes key liquid assets without errors. ... ok
+test_02_company_selector_dropdown_exists_in_dom 
+(test_price_reconciliation_and_ux.TestPriceReconciliationAndUX.test_02_company_selector_dropdown_exists_in_dom)
+Verify that dashboard renders company symbols. ... ok
+test_03_beginner_guidance_boxes_rendered 
+(test_price_reconciliation_and_ux.TestPriceReconciliationAndUX.test_03_beginner_guidance_boxes_rendered)
+Verify that dashboard renders correctly with Arabic RTL structure. ... ok
+test_04_official_eod_data_labeling_present 
+(test_price_reconciliation_and_ux.TestPriceReconciliationAndUX.test_04_official_eod_data_labeling_present)
+Verify prices and dashboard elements are clearly labeled. ... ok
+test_01_canonical_prices_file_exists_and_valid 
+(test_price_sync_service.TestPriceSyncService.test_01_canonical_prices_file_exists_and_valid)
+Verify that data/canonical_prices_live.json exists and is valid JSON. ... ok
+test_02_record_schema_and_required_risk_fields 
+(test_price_sync_service.TestPriceSyncService.test_02_record_schema_and_required_risk_fields)
+Verify each record contains ticker, price, timestamp, entry_zone, and hard_stop_loss (-7.0%). ... ok
+test_03_convenience_functions (test_price_sync_service.TestPriceSyncService.test_03_convenience_functions)
+Verify get_price and get_price_record helper functions. ... ok
+test_04_fallback_mechanism (test_price_sync_service.TestPriceSyncService.test_04_fallback_mechanism)
+Verify safe fallback on network errors or invalid tickers. ... ok
+test_05_api_prices_sync_endpoint (test_price_sync_service.TestPriceSyncService.test_05_api_prices_sync_endpoint)
+Verify Flask API endpoint /api/prices/sync and /api/prices. ... 2026-08-30 15:28:58,688 [INFO] Initiating resilient 
+multi-source price sync for 244 EGX tickers...
+2026-08-30 15:29:03,400 [WARNING] [CIRCUIT_BREAKER] Price anomaly #5 for SAIB.CA: fetched 2.53 EGP deviates 16.5% from 
+previous close 3.03 EGP (exceeds ▒15% limit).
+2026-08-30 15:29:03,401 [ERROR] [CRITICAL_FEED_ALERT] \u0633\u0647\u0645 SAIB.CA \u062a\u0643\u0631\u0631 
+\u0631\u0641\u0636\u0647 5 \u0645\u0631\u0627\u062a \u0645\u062a\u062a\u0627\u0644\u064a\u0629 ù \u0647\u0630\u0627 
+\u0627\u0644\u0633\u0647\u0645 \u064a\u062d\u062a\u0627\u062c \u0645\u0635\u062f\u0631 
+\u0628\u064a\u0627\u0646\u0627\u062a \u0628\u062f\u064a\u0644 ù \u0627\u0644\u062a\u062c\u0627\u0647\u0644 
+\u0627\u0644\u0645\u062a\u0643\u0631\u0631 \u0644\u0646 \u064a\u062d\u0644 \u0627\u0644\u0645\u0634\u0643\u0644\u0629. 
+\u062c\u0627\u0631\u064a \u062a\u062c\u0631\u0628\u0629 \u0627\u0644\u0645\u0635\u062f\u0631 
+\u0627\u0644\u0645\u0628\u0627\u0634\u0631 \u0627\u0644\u0628\u062f\u064a\u0644...
+2026-08-30 15:29:04,107 [WARNING] [CIRCUIT_BREAKER] Price anomaly #6 for DAPH.CA: fetched 141.60 EGP deviates 20.0% 
+from previous close 118.00 EGP (exceeds ▒15% limit).
+2026-08-30 15:29:04,107 [ERROR] [CRITICAL_FEED_ALERT] \u0633\u0647\u0645 DAPH.CA \u062a\u0643\u0631\u0631 
+\u0631\u0641\u0636\u0647 6 \u0645\u0631\u0627\u062a \u0645\u062a\u062a\u0627\u0644\u064a\u0629 ù \u0647\u0630\u0627 
+\u0627\u0644\u0633\u0647\u0645 \u064a\u062d\u062a\u0627\u062c \u0645\u0635\u062f\u0631 
+\u0628\u064a\u0627\u0646\u0627\u062a \u0628\u062f\u064a\u0644 ù \u0627\u0644\u062a\u062c\u0627\u0647\u0644 
+\u0627\u0644\u0645\u062a\u0643\u0631\u0631 \u0644\u0646 \u064a\u062d\u0644 \u0627\u0644\u0645\u0634\u0643\u0644\u0629. 
+\u062c\u0627\u0631\u064a \u062a\u062c\u0631\u0628\u0629 \u0627\u0644\u0645\u0635\u062f\u0631 
+\u0627\u0644\u0645\u0628\u0627\u0634\u0631 \u0627\u0644\u0628\u062f\u064a\u0644...
+2026-08-30 15:29:04,802 [WARNING] [CIRCUIT_BREAKER] Price anomaly #9 for AIH.CA: fetched 0.60 EGP deviates 20.6% from 
+previous close 0.50 EGP (exceeds ▒15% limit).
+2026-08-30 15:29:04,802 [ERROR] [CRITICAL_FEED_ALERT] \u0633\u0647\u0645 AIH.CA \u062a\u0643\u0631\u0631 
+\u0631\u0641\u0636\u0647 9 \u0645\u0631\u0627\u062a \u0645\u062a\u062a\u0627\u0644\u064a\u0629 ù \u0647\u0630\u0627 
+\u0627\u0644\u0633\u0647\u0645 \u064a\u062d\u062a\u0627\u062c \u0645\u0635\u062f\u0631 
+\u0628\u064a\u0627\u0646\u0627\u062a \u0628\u062f\u064a\u0644 ù \u0627\u0644\u062a\u062c\u0627\u0647\u0644 
+\u0627\u0644\u0645\u062a\u0643\u0631\u0631 \u0644\u0646 \u064a\u062d\u0644 \u0627\u0644\u0645\u0634\u0643\u0644\u0629. 
+\u062c\u0627\u0631\u064a \u062a\u062c\u0631\u0628\u0629 \u0627\u0644\u0645\u0635\u062f\u0631 
+\u0627\u0644\u0645\u0628\u0627\u0634\u0631 \u0627\u0644\u0628\u062f\u064a\u0644...
+2026-08-30 15:29:05,429 [INFO] Price sync completed: 154/244 live fetched, 90 fallback snapshots, 3 critical feed 
+alerts.
+ok
+test_06_oras_real_market_price_resolution 
+(test_price_sync_service.TestPriceSyncService.test_06_oras_real_market_price_resolution)
+Verify that ORAS.CA is resolved to real EGX price (> 700 EGP) and not frozen at 71.05 or 759. ... ok
+test_07_circuit_breaker_persistent_anomaly_escalation 
+(test_price_sync_service.TestPriceSyncService.test_07_circuit_breaker_persistent_anomaly_escalation)
+Verify that when a ticker exceeds 3 consecutive rejections: ... ok
+test_tc_c01_autonomous_research_cycle_execution 
+(test_promotion_gate_and_research_lab.TestPromotionGateAndResearchLab.test_tc_c01_autonomous_research_cycle_execution)
+TC-C01: Autonomous research cycle execution and SQLite logging. ... ok
+test_tc_c02_critic_auditor_rejection_severe_degradation (test_promotion_gate_and_research_lab.TestPromotionGateAndResea
+rchLab.test_tc_c02_critic_auditor_rejection_severe_degradation)
+TC-C02: Critic Auditor rejection on severe OOS degradation (>35%). ... ok
+test_tc_c03_purged_walk_forward_metrics_and_friction (test_promotion_gate_and_research_lab.TestPromotionGateAndResearch
+Lab.test_tc_c03_purged_walk_forward_metrics_and_friction)
+TC-C03: Purged Walk-Forward metrics calculation with 0.35% friction & 10% tax. ... ok
+test_tc_c04_promoted_strategy_calibration_updates (test_promotion_gate_and_research_lab.TestPromotionGateAndResearchLab
+.test_tc_c04_promoted_strategy_calibration_updates)
+TC-C04: Promoted strategy calibration updates. ... ok
+test_tc_c05_quarantined_pattern_avoidance 
+(test_promotion_gate_and_research_lab.TestPromotionGateAndResearchLab.test_tc_c05_quarantined_pattern_avoidance)
+TC-C05: Quarantined pattern avoidance from failure memory. ... ok
+test_tc_b01_piotroski_f_score (test_quant_books_engine.TestQuantBooksEngine.test_tc_b01_piotroski_f_score)
+TC-B01: Piotroski F-Score on COMI.CA returns score 0-9 with breakdown. ... FAIL
+test_tc_b02_peter_lynch_metrics (test_quant_books_engine.TestQuantBooksEngine.test_tc_b02_peter_lynch_metrics)
+TC-B02: Lynch classification and PEG calculation. ... ok
+test_tc_b03_candlestick_pattern_detection 
+(test_quant_books_engine.TestQuantBooksEngine.test_tc_b03_candlestick_pattern_detection)
+TC-B03: Candlestick pattern detection on simulated/real OHLCV candles. ... ok
+test_tc_b04_murphy_adx_and_fibonacci 
+(test_quant_books_engine.TestQuantBooksEngine.test_tc_b04_murphy_adx_and_fibonacci)
+TC-B04: Murphy ADX trend classification and Fibonacci level calculations. ... ok
+test_tc_b05_anti_revenge_lockout_and_risk_reward 
+(test_quant_books_engine.TestQuantBooksEngine.test_tc_b05_anti_revenge_lockout_and_risk_reward)
+TC-B05: Anti-Revenge lockout triggering on 2 consecutive losses and R:R >= 2.5 enforcement. ... ok
+test_01_real_portfolio_analysis_and_pnl (test_real_portfolio.TestRealPortfolio.test_01_real_portfolio_analysis_and_pnl)
+Verify real portfolio calculates cost basis, unrealized P&L, and equity correctly. ... ok
+test_02_stop_loss_breach_generates_exit_signal 
+(test_real_portfolio.TestRealPortfolio.test_02_stop_loss_breach_generates_exit_signal)
+Verify that when a stock drops below -7% stop loss, an EXIT signal is generated. ... ok
+test_01_add_valid_holding (test_real_portfolio_crud.TestRealPortfolioCRUD.test_01_add_valid_holding)
+Verify adding a new valid EGX holding succeeds and calculates P&L. ... ok
+test_02_duplicate_holding_rejected (test_real_portfolio_crud.TestRealPortfolioCRUD.test_02_duplicate_holding_rejected)
+Verify adding an already existing ticker is rejected with explanation. ... ok
+test_03_invalid_ticker_rejected (test_real_portfolio_crud.TestRealPortfolioCRUD.test_03_invalid_ticker_rejected)
+Verify invalid or non-EGX ticker is rejected. ... ok
+test_04_invalid_quantity_and_price_rejected 
+(test_real_portfolio_crud.TestRealPortfolioCRUD.test_04_invalid_quantity_and_price_rejected)
+Verify zero or negative quantity and price are rejected. ... ok
+test_05_edit_holding (test_real_portfolio_crud.TestRealPortfolioCRUD.test_05_edit_holding)
+Verify editing quantity and entry price updates calculations and timestamp. ... ok
+test_06_delete_holding_with_confirmation 
+(test_real_portfolio_crud.TestRealPortfolioCRUD.test_06_delete_holding_with_confirmation)
+Verify deleting holding removes position cleanly. ... ok
+test_07_audit_log_persists_mutations 
+(test_real_portfolio_crud.TestRealPortfolioCRUD.test_07_audit_log_persists_mutations)
+Verify mutations produce audit records in real_portfolio_audit_log.json. ... ok
+test_data_quality_insufficient_rows 
+(test_red_team_edge_cases.TestRedTeamEdgeCases.test_data_quality_insufficient_rows) ... ok
+test_data_quality_price_outlier (test_red_team_edge_cases.TestRedTeamEdgeCases.test_data_quality_price_outlier) ... ok
+test_empty_portfolio_exit_signals (test_red_team_edge_cases.TestRedTeamEdgeCases.test_empty_portfolio_exit_signals) 
+... FAIL
+test_negative_input_filtering_reset_wizard 
+(test_red_team_edge_cases.TestRedTeamEdgeCases.test_negative_input_filtering_reset_wizard) ... ok
+test_01_fetch_egx30_data_structure (test_regime_hmm_engine.TestRegimeHMMEngine.test_01_fetch_egx30_data_structure)
+Verify fetch_egx30_data returns a valid DataFrame and does not fabricate noise on fallback. ... ok
+test_02_regime_detection_schema (test_regime_hmm_engine.TestRegimeHMMEngine.test_02_regime_detection_schema)
+Verify detect_latent_regime output contains all mandatory keys and valid types. ... ok
+test_03_cash_allocation_rules_for_all_four_regimes 
+(test_regime_hmm_engine.TestRegimeHMMEngine.test_03_cash_allocation_rules_for_all_four_regimes)
+Verify mandatory safe cash reserve percentages for all 4 regimes. ... ok
+test_04_classify_regime_from_metrics (test_regime_hmm_engine.TestRegimeHMMEngine.test_04_classify_regime_from_metrics)
+Verify quantitative metric classifier accurately triggers all 4 regimes. ... ok
+test_05_dynamic_weights_conservation (test_regime_hmm_engine.TestRegimeHMMEngine.test_05_dynamic_weights_conservation)
+Verify that factor weights for all 4 regimes sum to exactly 1.0. ... ok
+test_06_arabic_descriptions_integrity 
+(test_regime_hmm_engine.TestRegimeHMMEngine.test_06_arabic_descriptions_integrity)
+Verify Arabic diagnostic descriptions are informative and present for all states. ... ok
+test_07_regime_adjusted_score_computation 
+(test_regime_hmm_engine.TestRegimeHMMEngine.test_07_regime_adjusted_score_computation)
+Verify regime-adjusted score calculation correctly applies active factor weights. ... ok
+test_01_duplicate_date_session_rejection 
+(test_session_immutability.TestSessionImmutability.test_01_duplicate_date_session_rejection)
+Verify that SessionManager rejects starting a session for an already completed market date. ... ok
+test_02_session_history_integrity (test_session_immutability.TestSessionImmutability.test_02_session_history_integrity)
+Verify that authoritative paper sessions file tracks valid days cleanly. ... ok
+test_01_screen_payload_structure_and_disclaimer 
+(test_short_term_opportunities_screen.TestShortTermOpportunitiesScreen.test_01_screen_payload_structure_and_disclaimer)
+Verify screen payload contains mandatory incubation disclaimer and metadata. ... ok
+test_02_ranking_order_by_reward_to_downside_ratio (test_short_term_opportunities_screen.TestShortTermOpportunitiesScree
+n.test_02_ranking_order_by_reward_to_downside_ratio)
+Verify opportunities are ordered descending by reward_to_downside_ratio. ... ok
+test_03_disqualification_of_thin_liquidity_stocks (test_short_term_opportunities_screen.TestShortTermOpportunitiesScree
+n.test_03_disqualification_of_thin_liquidity_stocks)
+Verify thin liquidity stocks (e.g. EKHO, EKHOA, BINV) are strictly excluded. ... ok
+test_04_disqualification_of_downtrend_setups 
+(test_short_term_opportunities_screen.TestShortTermOpportunitiesScreen.test_04_disqualification_of_downtrend_setups)
+Verify DOWNTREND_PULLBACK setups are excluded. ... ok
+test_05_presence_of_dynamic_atr_stop_and_invalidation (test_short_term_opportunities_screen.TestShortTermOpportunitiesS
+creen.test_05_presence_of_dynamic_atr_stop_and_invalidation)
+Verify required stop loss, invalidation trigger, and target bounds are present. ... ok
+test_06_api_endpoint_short_term_opportunities 
+(test_short_term_opportunities_screen.TestShortTermOpportunitiesScreen.test_06_api_endpoint_short_term_opportunities)
+Verify GET /api/opportunities/short-term endpoint returns 200 and matches logic. ... ok
+test_01_database_prediction_table_and_crud 
+(test_sprint_b_feedback_and_registry.TestSprintBFeedbackAndRegistry.test_01_database_prediction_table_and_crud)
+TC-B01: Verify prediction_vs_actual table CRUD operations. ... ok
+test_02_prediction_actual_tracker_lifecycle 
+(test_sprint_b_feedback_and_registry.TestSprintBFeedbackAndRegistry.test_02_prediction_actual_tracker_lifecycle)
+TC-B02: Verify PredictionActualTracker record and reconciliation. ... ok
+test_03_deflated_sharpe_ratio_and_promotion_stages 
+(test_sprint_b_feedback_and_registry.TestSprintBFeedbackAndRegistry.test_03_deflated_sharpe_ratio_and_promotion_stages)
+TC-B03: Verify Deflated Sharpe Ratio equation and 4-stage lifecycle state machine. ... ok
+test_04_feature_registry_and_winsorization 
+(test_sprint_b_feedback_and_registry.TestSprintBFeedbackAndRegistry.test_04_feature_registry_and_winsorization)
+TC-B04: Verify 48-feature catalog, outlier winsorization, and deprecation logic. ... ok
+test_05_observability_rest_api_endpoints 
+(test_sprint_b_feedback_and_registry.TestSprintBFeedbackAndRegistry.test_05_observability_rest_api_endpoints)
+TC-B05: Verify /api/observability/* REST endpoints. ... ok
+test_01_sector_neutralizer_computation 
+(test_sprint_c_slippage_and_opportunities.TestSprintCSlippageAndOpportunities.test_01_sector_neutralizer_computation)
+TC-C01: Verify SectorNeutralizer calculates cross-sectional Z-scores. ... ok
+test_02_almgren_chriss_dynamic_slippage 
+(test_sprint_c_slippage_and_opportunities.TestSprintCSlippageAndOpportunities.test_02_almgren_chriss_dynamic_slippage)
+TC-C02: Verify Almgren-Chriss dynamic slippage scaling. ... ok
+test_03_statistical_arbitrage_fdr_correction (test_sprint_c_slippage_and_opportunities.TestSprintCSlippageAndOpportunit
+ies.test_03_statistical_arbitrage_fdr_correction)
+TC-C03: Verify Benjamini-Hochberg FDR correction on cointegrated pairs. ... ok
+test_04_short_term_10d_opportunities_engine (test_sprint_c_slippage_and_opportunities.TestSprintCSlippageAndOpportuniti
+es.test_04_short_term_10d_opportunities_engine)
+TC-C04: Verify MultiHorizonEngine 10D short-term opportunities ranking. ... ok
+test_05_rest_api_10d_and_correlation_endpoints (test_sprint_c_slippage_and_opportunities.TestSprintCSlippageAndOpportun
+ities.test_05_rest_api_10d_and_correlation_endpoints)
+TC-C05: Verify /api/opportunities/10d and /api/correlation REST endpoints. ... ok
+test_01_sqlite_acid_insert_close_restart_persistence 
+(test_sqlite_acid_persistence.TestSQLiteACIDPersistence.test_01_sqlite_acid_insert_close_restart_persistence) ... ok
+test_02_real_portfolio_crud_disk_durability 
+(test_sqlite_acid_persistence.TestSQLiteACIDPersistence.test_02_real_portfolio_crud_disk_durability) ... ok
+test_01_egx_known_pairs_structure 
+(test_statistical_arbitrage_engine.TestStatisticalArbitrageEngine.test_01_egx_known_pairs_structure)
+Verify EGX_KNOWN_PAIRS contains essential sector pairs. ... ok
+test_02_calculate_pair_spread_zscore_math 
+(test_statistical_arbitrage_engine.TestStatisticalArbitrageEngine.test_02_calculate_pair_spread_zscore_math)
+Verify mathematical correctness of spread, mean, std, and Z-Score calculation. ... ok
+test_03_calculate_pair_spread_zscore_negative 
+(test_statistical_arbitrage_engine.TestStatisticalArbitrageEngine.test_03_calculate_pair_spread_zscore_negative)
+Verify negative Z-Score when A is undervalued relative to B. ... ok
+test_04_zero_variance_edge_case 
+(test_statistical_arbitrage_engine.TestStatisticalArbitrageEngine.test_04_zero_variance_edge_case)
+Verify zero variance handles division by zero safely (Z-Score = 0.0). ... ok
+test_05_classify_arbitrage_signal_mapping 
+(test_statistical_arbitrage_engine.TestStatisticalArbitrageEngine.test_05_classify_arbitrage_signal_mapping)
+Verify signal mapping for positive, negative, and neutral Z-scores. ... ok
+test_06_evaluate_arbitrage_opportunities 
+(test_statistical_arbitrage_engine.TestStatisticalArbitrageEngine.test_06_evaluate_arbitrage_opportunities)
+Verify evaluate_arbitrage_opportunities returns structured opportunities for all known pairs. ... ok
+test_07_price_history_zero_mock_fallback 
+(test_statistical_arbitrage_engine.TestStatisticalArbitrageEngine.test_07_price_history_zero_mock_fallback)
+Verify fetch_pair_price_history returns empty arrays on failure instead of fake noise. ... ok
+test_01_deflated_sharpe_ratio (test_statistical_validation.TestStatisticalValidation.test_01_deflated_sharpe_ratio)
+Verify Deflated Sharpe Ratio calculation for Tier 1 baseline: ... ok
+test_02_monte_carlo_drawdown_simulation 
+(test_statistical_validation.TestStatisticalValidation.test_02_monte_carlo_drawdown_simulation)
+Verify Monte Carlo trade-sequence bootstrap simulation. ... ok
+test_03_parameter_neighborhood_stability 
+(test_statistical_validation.TestStatisticalValidation.test_03_parameter_neighborhood_stability)
+Verify that lookback parameter neighborhood forms a stable plateau. ... ok
+test_01_stock_dossier_comi (test_stock_dossier_endpoint.TestStockDossierEndpoint.test_01_stock_dossier_comi)
+Verify GET /api/stocks/COMI.CA returns all required keys and numeric prices. ... ok
+test_02_stock_dossier_swdy (test_stock_dossier_endpoint.TestStockDossierEndpoint.test_02_stock_dossier_swdy)
+Verify GET /api/stocks/SWDY.CA returns proper structure. ... ok
+test_03_ranking_endpoint_structure 
+(test_stock_dossier_endpoint.TestStockDossierEndpoint.test_03_ranking_endpoint_structure)
+Verify GET /api/ranking returns structured list with both Arabic name and ticker. ... ok
+test_stop_loss_below_entry_and_current (test_stop_loss.TestStopLossSanity.test_stop_loss_below_entry_and_current) ... 
+ok
+test_strict_sanity_gate_no_inversion (test_stop_loss.TestStopLossSanity.test_strict_sanity_gate_no_inversion) ... ok
+test_trailing_profit_lock_classification (test_stop_loss.TestStopLossSanity.test_trailing_profit_lock_classification) 
+... ok
+test_01_market_gap_shock_resilience (test_stress_framework.TestStressFramework.test_01_market_gap_shock_resilience)
+Verify portfolio response to -15% market gap-down: ... ok
+test_02_liquidity_collapse_downscaling 
+(test_stress_framework.TestStressFramework.test_02_liquidity_collapse_downscaling)
+Verify that 80% volume collapse properly triggers position downscaling. ... ok
+test_03_frozen_invariants_verification_methods 
+(test_stress_framework.TestStressFramework.test_03_frozen_invariants_verification_methods)
+Directly test FrozenRiskInvariants verification helper methods. ... ok
+test_feature_lag_integrity (test_targets.TestTargetsAndFeatures.test_feature_lag_integrity) ... ok
+test_forward_target_alignment_and_dropna 
+(test_targets.TestTargetsAndFeatures.test_forward_target_alignment_and_dropna) ... ok
+test_01_technical_setup_engine_structure 
+(test_technical_and_risk_sizing.TestTechnicalAndRiskSizing.test_01_technical_setup_engine_structure) ... ok
+test_02_risk_position_sizer_formula 
+(test_technical_and_risk_sizing.TestTechnicalAndRiskSizing.test_02_risk_position_sizer_formula) ... ok
+test_03_panic_bear_regime_forces_zero_shares 
+(test_technical_and_risk_sizing.TestTechnicalAndRiskSizing.test_03_panic_bear_regime_forces_zero_shares) ... ok
+test_04_multi_horizon_engine_returns_enhanced_fields 
+(test_technical_and_risk_sizing.TestTechnicalAndRiskSizing.test_04_multi_horizon_engine_returns_enhanced_fields) ... ok
+test_05_ml_confidence_position_sizing_multipliers 
+(test_technical_and_risk_sizing.TestTechnicalAndRiskSizing.test_05_ml_confidence_position_sizing_multipliers) ... ok
+test_01_send_telegram_alert_dispatch_and_logging 
+(test_telegram_notification_gateway.TestTelegramNotificationGateway.test_01_send_telegram_alert_dispatch_and_logging)
+Verify send_telegram_alert logs locally and returns valid delivery status. ... ok
+test_02_send_buy_signal_alert_formatting 
+(test_telegram_notification_gateway.TestTelegramNotificationGateway.test_02_send_buy_signal_alert_formatting)
+Verify send_buy_signal_alert structures entry, target, and stop loss clearly. ... ok
+test_03_send_stop_loss_alert_formatting 
+(test_telegram_notification_gateway.TestTelegramNotificationGateway.test_03_send_stop_loss_alert_formatting)
+Verify send_stop_loss_hit_alert records emergency exit parameters. ... ok
+test_04_get_recent_notifications 
+(test_telegram_notification_gateway.TestTelegramNotificationGateway.test_04_get_recent_notifications)
+Verify get_recent_notifications returns list of recent records. ... ok
+test_01_thndr_to_yfinance_translation_map 
+(test_ticker_mapping.TestTickerMappingAndUniverseExpansion.test_01_thndr_to_yfinance_translation_map)
+Verify THNDR_TO_YFINANCE_MAP correctly translates ONLY verified legal corporate rebrands (Same ISIN). ... ok
+test_02_fake_aliases_strictly_quarantined 
+(test_ticker_mapping.TestTickerMappingAndUniverseExpansion.test_02_fake_aliases_strictly_quarantined)
+Verify that distinct unrelated companies (ESRS!=IRAX, ACRO!=MCQE, KRRE!=ALUM) are NEVER cross-mapped. ... ok
+test_03_cross_sectional_imputer 
+(test_ticker_mapping.TestTickerMappingAndUniverseExpansion.test_03_cross_sectional_imputer)
+Verify CrossSectionalImputer replaces NaNs with neutral sector medians without model crash. ... ok
+test_04_liquidity_gate_single_source_graceful_degradation 
+(test_ticker_mapping.TestTickerMappingAndUniverseExpansion.test_04_liquidity_gate_single_source_graceful_degradation)
+Verify LiquidityGateEngine permits liquid single-source stocks (Vol > 50k, Turnover > 250k). ... ok
+test_05_multi_horizon_engine_active_universe_expansion 
+(test_ticker_mapping.TestTickerMappingAndUniverseExpansion.test_05_multi_horizon_engine_active_universe_expansion)
+Verify MultiHorizonEngine evaluates the expanded active universe (~165-170 stocks). ... ok
+test_01_fundamental_analyst_banking_adaptation 
+(test_trading_agents_framework.TestTradingAgentsFramework.test_01_fundamental_analyst_banking_adaptation)
+Verify FundamentalAnalystAgent applies adapted banking Piotroski (9/9) for COMI.CA. ... ok
+test_02_technical_analyst_nison_and_murphy 
+(test_trading_agents_framework.TestTradingAgentsFramework.test_02_technical_analyst_nison_and_murphy)
+Verify TechnicalAnalystAgent evaluates Nison candlesticks and Murphy indicators. ... ok
+test_03_macro_news_analyst_cbe_corridor 
+(test_trading_agents_framework.TestTradingAgentsFramework.test_03_macro_news_analyst_cbe_corridor)
+Verify MacroNewsAnalystAgent enforces 19% deposit rate and 30.70% hurdle rate. ... ok
+test_04_arabic_sentiment_analyst_breadth 
+(test_trading_agents_framework.TestTradingAgentsFramework.test_04_arabic_sentiment_analyst_breadth)
+Verify ArabicSentimentAnalystAgent computes Advance/Decline breadth ratio. ... ok
+test_05_analyst_team_orchestrator 
+(test_trading_agents_framework.TestTradingAgentsFramework.test_05_analyst_team_orchestrator)
+Verify AnalystTeamOrchestrator runs all 4 analysts in parallel. ... ok
+test_06_bull_vs_bear_debate_dynamics 
+(test_trading_agents_framework.TestTradingAgentsFramework.test_06_bull_vs_bear_debate_dynamics)
+Verify DebateModerator coordinates 2-round structured dialectical debate. ... ok
+test_07_trader_agent_net_edge_calculation 
+(test_trading_agents_framework.TestTradingAgentsFramework.test_07_trader_agent_net_edge_calculation)
+Verify TraderAgent enforces 0.35% friction, slippage, and Net Edge >= 1.00%. ... ok
+test_08_risk_and_fund_manager_executive_gate 
+(test_trading_agents_framework.TestTradingAgentsFramework.test_08_risk_and_fund_manager_executive_gate)
+Verify RiskManagerAgent and FundManagerAgent deliver compliant executive mandate. ... ok
+test_09_end_to_end_orchestrator_and_sqlite_persistence 
+(test_trading_agents_framework.TestTradingAgentsFramework.test_09_end_to_end_orchestrator_and_sqlite_persistence)
+Verify TradingAgentsOrchestrator end-to-end deliberation and SQLite persistence. ... ok
+test_tc_u01_multi_source_intelligence_aggregation (test_unified_pipeline_and_fusion_engine.TestUnifiedPipelineAndFusion
+Engine.test_tc_u01_multi_source_intelligence_aggregation)
+TC-U01: Verify multi-source intelligence gathering across 5 feeds and sentiment scoring. ... ok
+test_tc_u02_deep_quant_fusion_48_tensor_and_meta_labeling (test_unified_pipeline_and_fusion_engine.TestUnifiedPipelineA
+ndFusionEngine.test_tc_u02_deep_quant_fusion_48_tensor_and_meta_labeling)
+TC-U02: Verify 48-feature tensor extraction and Two-Stage Meta-Labeling AI predictor. ... ok
+test_tc_u03_full_unified_pipeline_orchestrator_execution (test_unified_pipeline_and_fusion_engine.TestUnifiedPipelineAn
+dFusionEngine.test_tc_u03_full_unified_pipeline_orchestrator_execution)
+TC-U03: Verify end-to-end execution of UnifiedPipelineOrchestrator for COMI.CA. ... ok
+test_tc_u04_fail_closed_fallback_protection (test_unified_pipeline_and_fusion_engine.TestUnifiedPipelineAndFusionEngine
+.test_tc_u04_fail_closed_fallback_protection)
+TC-U04: Verify fail-closed behavior for invalid or unknown tickers. ... ok
+test_tc_u05_sqlite_persistence_and_rest_api_endpoints (test_unified_pipeline_and_fusion_engine.TestUnifiedPipelineAndFu
+sionEngine.test_tc_u05_sqlite_persistence_and_rest_api_endpoints)
+TC-U05: Verify SQLite persistence and REST API endpoints (/api/intelligence/multi_source, ... ok
+test_01_thndr_universe_json_structure_and_count 
+(test_universe_expansion.TestUniverseExpansionAndLiquidityGate.test_01_thndr_universe_json_structure_and_count)
+Verify data/thndr_egx_244_universe.json exists and contains 244 valid stocks. ... ok
+test_02_universe_manager_loading_and_stats 
+(test_universe_expansion.TestUniverseExpansionAndLiquidityGate.test_02_universe_manager_loading_and_stats)
+Verify UniverseManager methods load catalog and compute stats properly. ... ok
+test_03_universe_manager_batch_download_handles_delisted (test_universe_expansion.TestUniverseExpansionAndLiquidityGate
+.test_03_universe_manager_batch_download_handles_delisted)
+Verify batch downloading chunks with error handling for delisted tickers. ... 2026-08-30 15:34:34,656 [INFO] Starting 
+batch data ingestion for 3 tickers in chunks of 20...
+2026-08-30 15:34:45,455 [INFO] Batch ingestion completed: 3/3 quotes processed.
+ok
+test_04_liquidity_gate_three_rules_enforcement 
+(test_universe_expansion.TestUniverseExpansionAndLiquidityGate.test_04_liquidity_gate_three_rules_enforcement)
+Verify strict enforcement of the 3 institutional liquidity gate rules. ... ok
+test_05_mock_224_universe_100_illiquid_filtering 
+(test_universe_expansion.TestUniverseExpansionAndLiquidityGate.test_05_mock_224_universe_100_illiquid_filtering)
+Mock a full 224-stock universe where exactly 100 are highly illiquid. ... ok
+test_06_multi_horizon_skips_ml_inference_for_illiquid_stocks (test_universe_expansion.TestUniverseExpansionAndLiquidity
+Gate.test_06_multi_horizon_skips_ml_inference_for_illiquid_stocks)
+Verify MultiHorizonEngine skips ML inference for illiquid stocks and flags STATUS=ILLIQUID. ... ok
+test_07_api_funnel_stats_endpoint 
+(test_universe_expansion.TestUniverseExpansionAndLiquidityGate.test_07_api_funnel_stats_endpoint)
+Verify GET /api/universe/funnel_stats returns 200 with 224 total universe and counts. ... ok
+test_01_data_sources_registry_and_3_timestamps 
+(test_v2_architectural_enhancements.TestV2ArchitecturalEnhancements.test_01_data_sources_registry_and_3_timestamps) 
+... ok
+test_02_news_deduplication_engine 
+(test_v2_architectural_enhancements.TestV2ArchitecturalEnhancements.test_02_news_deduplication_engine) ... ok
+test_03_market_breadth_engine 
+(test_v2_architectural_enhancements.TestV2ArchitecturalEnhancements.test_03_market_breadth_engine) ... ok
+test_04_uncertainty_engine 
+(test_v2_architectural_enhancements.TestV2ArchitecturalEnhancements.test_04_uncertainty_engine) ... ok
+test_05_baseline_benchmark_suite 
+(test_v2_architectural_enhancements.TestV2ArchitecturalEnhancements.test_05_baseline_benchmark_suite) ... ok
+test_06_trade_selection_and_multi_objective 
+(test_v2_architectural_enhancements.TestV2ArchitecturalEnhancements.test_06_trade_selection_and_multi_objective) ... ok
+test_07_production_readiness_matrix 
+(test_v2_architectural_enhancements.TestV2ArchitecturalEnhancements.test_07_production_readiness_matrix) ... FAIL
+test_08_flask_observability_endpoints 
+(test_v2_architectural_enhancements.TestV2ArchitecturalEnhancements.test_08_flask_observability_endpoints) ... ok
+test_01_default_base_weights_conservation 
+(test_walk_forward_ml_engine.TestWalkForwardMLEngine.test_01_default_base_weights_conservation)
+Verify baseline default engine weights sum to exactly 1.0. ... ok
+test_02_simulate_historical_accuracy_structure 
+(test_walk_forward_ml_engine.TestWalkForwardMLEngine.test_02_simulate_historical_accuracy_structure)
+Verify simulated rolling accuracy outputs valid percentages. ... ok
+test_03_accuracy_reward_and_penalty_dynamics 
+(test_walk_forward_ml_engine.TestWalkForwardMLEngine.test_03_accuracy_reward_and_penalty_dynamics)
+Verify that high accuracy increases weight and low accuracy reduces weight. ... ok
+test_04_extreme_edge_cases_weights_sum_to_one 
+(test_walk_forward_ml_engine.TestWalkForwardMLEngine.test_04_extreme_edge_cases_weights_sum_to_one)
+Verify strict weight conservation (Sum = 1.0000) under extreme scenarios. ... ok
+test_05_get_active_model_weights_and_rationale 
+(test_walk_forward_ml_engine.TestWalkForwardMLEngine.test_05_get_active_model_weights_and_rationale)
+Verify get_active_model_weights compiles full metadata and diagnostic Arabic rationale. ... ok
+test_06_calculate_walk_forward_composite_score 
+(test_walk_forward_ml_engine.TestWalkForwardMLEngine.test_06_calculate_walk_forward_composite_score)
+Verify composite score weighting math. ... ok
+test_07_invalid_and_negative_accuracy_robustness 
+(test_walk_forward_ml_engine.TestWalkForwardMLEngine.test_07_invalid_and_negative_accuracy_robustness)
+Verify engine gracefully recovers from negative, string, or NaN accuracies. ... ok
+test_08_custom_base_weights (test_walk_forward_ml_engine.TestWalkForwardMLEngine.test_08_custom_base_weights)
+Verify calibration works with custom base weight topologies. ... ok
+test_01_add_and_remove_watchlist (test_watchlist.TestWatchlist.test_01_add_and_remove_watchlist)
+Verify adding and removing tickers from user watchlist. ... ok
+test_02_watchlist_details (test_watchlist.TestWatchlist.test_02_watchlist_details)
+Verify watchlist details return target, stop loss, and scores. ... ok
+test_01_core_navigation_terms_present 
+(ui.test_arabic_dictionary.TestArabicDictionary.test_01_core_navigation_terms_present)
+Verify that all main dashboard navigation sections have Arabic translations. ... ok
+test_02_financial_actions_present (ui.test_arabic_dictionary.TestArabicDictionary.test_02_financial_actions_present)
+Verify BUY, WATCH, HOLD, REDUCE, EXIT translations. ... ok
+test_01_ranking_order_best_to_worst 
+(ui.test_rtl_and_ranking_order.TestRTLRankingSafety.test_01_ranking_order_best_to_worst)
+Verify that Rank #1 corresponds to the highest alpha score, ... ok
+test_02_html_direction_and_ltr_spans 
+(ui.test_rtl_and_ranking_order.TestRTLRankingSafety.test_02_html_direction_and_ltr_spans)
+Verify that dashboard/index.html has dir="rtl" on html root ... ok
+test_01_all_12_navigation_buttons_exist 
+(ui.test_ui_button_integrity.TestUIButtonIntegrity.test_01_all_12_navigation_buttons_exist)
+Verify all 14 navigation tabs have corresponding ID elements. ... ok
+test_02_stress_test_action_buttons_exist 
+(ui.test_ui_button_integrity.TestUIButtonIntegrity.test_02_stress_test_action_buttons_exist)
+Verify stress test action buttons have onclick handlers. ... ok
+test_03_real_portfolio_modal_buttons_exist 
+(ui.test_ui_button_integrity.TestUIButtonIntegrity.test_03_real_portfolio_modal_buttons_exist)
+Verify real portfolio position addition buttons. ... ok
+test_04_macro_and_hazard_ui_elements_exist 
+(ui.test_ui_button_integrity.TestUIButtonIntegrity.test_04_macro_and_hazard_ui_elements_exist)
+Verify macro risk banner and corporate hazard alert elements exist in UI. ... ok
+test_05_ai_forecast_ui_elements_exist 
+(ui.test_ui_button_integrity.TestUIButtonIntegrity.test_05_ai_forecast_ui_elements_exist)
+Verify AI predictive forecast, meta-labeling, and OOS validation elements exist in UI. ... ok
+test_06_algo_execution_and_hrp_ui_elements_exist 
+(ui.test_ui_button_integrity.TestUIButtonIntegrity.test_06_algo_execution_and_hrp_ui_elements_exist)
+Verify Algo Execution EMS, Live Order Blotter, and HRP UI elements exist. ... ok
+test_01_real_portfolio_rejects_empty_symbol 
+(ui.test_ui_forms_and_security.TestUIFormsAndSecurity.test_01_real_portfolio_rejects_empty_symbol)
+Verify that empty symbol is handled safely without crashing. ... ok
+test_02_xss_prevention_in_notes (ui.test_ui_forms_and_security.TestUIFormsAndSecurity.test_02_xss_prevention_in_notes)
+Verify that malicious script tags in notes cannot alter numerical computations. ... ok
+
+======================================================================
+FAIL: test_tc_b01_piotroski_f_score (test_quant_books_engine.TestQuantBooksEngine.test_tc_b01_piotroski_f_score)
+TC-B01: Piotroski F-Score on COMI.CA returns score 0-9 with breakdown.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\New folder\tests\test_quant_books_engine.py", line 49, in 
+test_tc_b01_piotroski_f_score
+    self.assertIn("lower_leverage", res["signals"])
+AssertionError: 'lower_leverage' not found in {'positive_roa': True, 'positive_cfo': True, 'roa_growth': True, 
+'accruals_quality': True, 'capital_adequacy_ratio_car': True, 'liquidity_coverage_ratio': True, 'no_share_dilution': 
+True, 'net_interest_margin_nim_growth': True, 'net_loan_growth_productivity': True}
+
+======================================================================
+FAIL: test_empty_portfolio_exit_signals 
+(test_red_team_edge_cases.TestRedTeamEdgeCases.test_empty_portfolio_exit_signals)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\New folder\tests\test_red_team_edge_cases.py", line 26, in 
+test_empty_portfolio_exit_signals
+    self.assertEqual(analysis["positions_count"], 0)
+AssertionError: 1 != 0
+
+======================================================================
+FAIL: test_07_production_readiness_matrix 
+(test_v2_architectural_enhancements.TestV2ArchitecturalEnhancements.test_07_production_readiness_matrix)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\New folder\tests\test_v2_architectural_enhancements.py", line 202, in 
+test_07_production_readiness_matrix
+    self.assertEqual(matrix["production_status"], "INSTITUTIONAL_PRODUCTION_READY")
+AssertionError: 'OPERATIONAL_ACTIVE' != 'INSTITUTIONAL_PRODUCTION_READY'
+- OPERATIONAL_ACTIVE
++ INSTITUTIONAL_PRODUCTION_READY
+
+
+----------------------------------------------------------------------
+Ran 497 tests in 2121.078s
+
+FAILED (failures=3)

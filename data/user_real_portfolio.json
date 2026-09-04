@@ -1,7 +1,21 @@
 {
   "portfolio_id": "REAL_PORTFOLIO_PRIMARY",
   "version": "3.0.0",
-  "last_updated": "2026-08-30T03:42:27.294616",
+  "last_updated": "2026-08-30T15:35:12.325870",
   "cash_egp": 100000.0,
-  "holdings": []
+  "holdings": [
+    {
+      "holding_id": "POS_COMI_ca92bc",
+      "ticker": "COMI.CA",
+      "company_name": "البنك التجاري الدولي (CIB)",
+      "exchange": "EGX",
+      "sector": "Banking",
+      "quantity": 26,
+      "average_entry_price": 137.5,
+      "manual_notes": "",
+      "created_at": "2026-08-30T13:49:40.048079",
+      "updated_at": "2026-08-30T13:49:40.048079",
+      "active": true
+    }
+  ]
 }

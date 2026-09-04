@@ -18,8 +18,12 @@ from core.watchlist import WatchlistManager
 class TestWatchlist(unittest.TestCase):
 
     def setUp(self):
+        self._orig_watchlist = WatchlistManager.load_watchlist()
         baseline = WatchlistManager.get_initial_watchlist()
         WatchlistManager.save_watchlist(baseline)
+
+    def tearDown(self):
+        WatchlistManager.save_watchlist(self._orig_watchlist)
 
     def test_01_add_and_remove_watchlist(self):
         """Verify adding and removing tickers from user watchlist."""

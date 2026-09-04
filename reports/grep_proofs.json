@@ -1,0 +1,142 @@
+[
+  {
+    "file_path": "full_raw_test_run.txt",
+    "category": "CONFIRMED_UNUSED",
+    "reason": "Temporary raw terminal test output log file.",
+    "search_command": "git grep -n \"full_raw_test_run.txt\"",
+    "raw_search_output": "[No matches found across entire repository]"
+  },
+  {
+    "file_path": "reports/browser_e2e_results.json",
+    "category": "SUPERSEDED",
+    "reason": "Static intermediate audit output superseded by reports/final_forensic_audit.json and reports/consistency_audit_report.json.",
+    "search_command": "git grep -n \"browser_e2e_results.json\"",
+    "raw_search_output": "[No matches found across entire repository]"
+  },
+  {
+    "file_path": "reports/final_product_acceptance.json",
+    "category": "SUPERSEDED",
+    "reason": "Static intermediate audit output superseded by reports/final_forensic_audit.json and reports/consistency_audit_report.json.",
+    "search_command": "git grep -n \"final_product_acceptance.json\"",
+    "raw_search_output": "[No matches found across entire repository]"
+  },
+  {
+    "file_path": "reports/final_system_status.json",
+    "category": "SUPERSEDED",
+    "reason": "Static intermediate audit output superseded by reports/final_forensic_audit.json and reports/consistency_audit_report.json.",
+    "search_command": "git grep -n \"final_system_status.json\"",
+    "raw_search_output": "[No matches found across entire repository]"
+  },
+  {
+    "file_path": "reports/fullstack_runtime_status.json",
+    "category": "SUPERSEDED",
+    "reason": "Static intermediate audit output superseded by reports/final_forensic_audit.json and reports/consistency_audit_report.json.",
+    "search_command": "git grep -n \"fullstack_runtime_status.json\"",
+    "raw_search_output": "[No matches found across entire repository]"
+  },
+  {
+    "file_path": "reports/qa_master_pass_results.json",
+    "category": "SUPERSEDED",
+    "reason": "Static intermediate audit output superseded by reports/final_forensic_audit.json and reports/consistency_audit_report.json.",
+    "search_command": "git grep -n \"qa_master_pass_results.json\"",
+    "raw_search_output": "[No matches found across entire repository]"
+  },
+  {
+    "file_path": "reports/testing_quality.json",
+    "category": "SUPERSEDED",
+    "reason": "Static intermediate audit output superseded by reports/final_forensic_audit.json and reports/consistency_audit_report.json.",
+    "search_command": "git grep -n \"testing_quality.json\"",
+    "raw_search_output": "[No matches found across entire repository]"
+  },
+  {
+    "file_path": "reports/ui_button_test_results.json",
+    "category": "SUPERSEDED",
+    "reason": "Static intermediate audit output superseded by reports/final_forensic_audit.json and reports/consistency_audit_report.json.",
+    "search_command": "git grep -n \"ui_button_test_results.json\"",
+    "raw_search_output": "[No matches found across entire repository]"
+  },
+  {
+    "file_path": "reports/ui_e2e_results.json",
+    "category": "SUPERSEDED",
+    "reason": "Static intermediate audit output superseded by reports/final_forensic_audit.json and reports/consistency_audit_report.json.",
+    "search_command": "git grep -n \"ui_e2e_results.json\"",
+    "raw_search_output": "[No matches found across entire repository]"
+  },
+  {
+    "file_path": "reports/ui_health.json",
+    "category": "SUPERSEDED",
+    "reason": "Static intermediate audit output superseded by reports/final_forensic_audit.json and reports/consistency_audit_report.json.",
+    "search_command": "git grep -n \"ui_health.json\"",
+    "raw_search_output": "[No matches found across entire repository]"
+  },
+  {
+    "file_path": "reports/ui_inventory.json",
+    "category": "SUPERSEDED",
+    "reason": "Static intermediate audit output superseded by reports/final_forensic_audit.json and reports/consistency_audit_report.json.",
+    "search_command": "git grep -n \"ui_inventory.json\"",
+    "raw_search_output": "[No matches found across entire repository]"
+  },
+  {
+    "file_path": "reports/ui_navigation_results.json",
+    "category": "SUPERSEDED",
+    "reason": "Static intermediate audit output superseded by reports/final_forensic_audit.json and reports/consistency_audit_report.json.",
+    "search_command": "git grep -n \"ui_navigation_results.json\"",
+    "raw_search_output": "[No matches found across entire repository]"
+  },
+  {
+    "file_path": "scripts/check_brace_balance.py",
+    "category": "CONFIRMED_UNUSED",
+    "reason": "Temporary diagnostic / debugging scratch script created during ad-hoc maintenance.",
+    "search_command": "git grep -n \"check_brace_balance.py\"",
+    "raw_search_output": "[No matches found across entire repository]"
+  },
+  {
+    "file_path": "scripts/fast_inventory_classifier.py",
+    "category": "CONFIRMED_UNUSED",
+    "reason": "Temporary diagnostic / debugging scratch script created during ad-hoc maintenance.",
+    "search_command": "git grep -n \"fast_inventory_classifier.py\"",
+    "raw_search_output": "[No matches found across entire repository]"
+  },
+  {
+    "file_path": "scripts/find_script_lines.py",
+    "category": "CONFIRMED_UNUSED",
+    "reason": "Temporary diagnostic / debugging scratch script created during ad-hoc maintenance.",
+    "search_command": "git grep -n \"find_script_lines.py\"",
+    "raw_search_output": "[No matches found across entire repository]"
+  },
+  {
+    "file_path": "scripts/inventory_analyzer.py",
+    "category": "CONFIRMED_UNUSED",
+    "reason": "Temporary diagnostic / debugging scratch script created during ad-hoc maintenance.",
+    "search_command": "git grep -n \"inventory_analyzer.py\"",
+    "raw_search_output": "[No matches found across entire repository]"
+  },
+  {
+    "file_path": "scripts/inventory_classifier.py",
+    "category": "CONFIRMED_UNUSED",
+    "reason": "Temporary diagnostic / debugging scratch script created during ad-hoc maintenance.",
+    "search_command": "git grep -n \"inventory_classifier.py\"",
+    "raw_search_output": "[No matches found across entire repository]"
+  },
+  {
+    "file_path": "scripts/system_interconnection_inspector.py",
+    "category": "CONFIRMED_UNUSED",
+    "reason": "Temporary diagnostic / debugging scratch script created during ad-hoc maintenance.",
+    "search_command": "git grep -n \"system_interconnection_inspector.py\"",
+    "raw_search_output": "[No matches found across entire repository]"
+  },
+  {
+    "file_path": "scripts/trace_unclosed_braces.py",
+    "category": "CONFIRMED_UNUSED",
+    "reason": "Temporary diagnostic / debugging scratch script created during ad-hoc maintenance.",
+    "search_command": "git grep -n \"trace_unclosed_braces.py\"",
+    "raw_search_output": "[No matches found across entire repository]"
+  },
+  {
+    "file_path": "test_output_raw.txt",
+    "category": "CONFIRMED_UNUSED",
+    "reason": "Temporary raw terminal test output log file.",
+    "search_command": "git grep -n \"test_output_raw.txt\"",
+    "raw_search_output": "[No matches found across entire repository]"
+  }
+]

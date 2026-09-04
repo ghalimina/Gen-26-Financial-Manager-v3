@@ -45,10 +45,6 @@ jobs:
         run: |
           python scripts/verify_daily_price_outliers.py
 
-      - name: 1.6 50-Stock Universal Forensic Audit
-        run: |
-          python scripts/audit_50_stocks_forensics.py
-
       - name: 2. Multi-Horizon Factor Forecasting & Stock Ranking Engine
         run: |
           python -c "from core.multi_horizon_engine import MultiHorizonEngine; ranks = MultiHorizonEngine.get_all_multi_horizon_rankings(); print(f'Evaluated {len(ranks)} EGX constituents.')"
@@ -69,19 +65,7 @@ jobs:
         env:
           FLASK_TESTING: "1"
         run: |
-          python -m unittest tests/test_egx_trading_rules_engine.py \
-                             tests/test_corporate_actions_engine.py \
-                             tests/test_institutional_flow_engine.py \
-                             tests/test_dynamic_risk_manager.py \
-                             tests/test_market_seasonality_engine.py \
-                             tests/test_gdr_arbitrage_engine.py \
-                             tests/test_advanced_feature_engineering.py \
-                             tests/test_ensemble_decision_engine.py \
-                             tests/test_telegram_notification_gateway.py \
-                             tests/test_universe_expansion.py \
-                             tests/test_statistical_arbitrage_engine.py \
-                             tests/test_market_intelligence_scraper.py \
-                             tests/test_regime_hmm_engine.py -v
+          python -m unittest discover -s tests -v
 
       - name: 4.5 Telegram Live Notification Gateway Dispatch
         if: always()

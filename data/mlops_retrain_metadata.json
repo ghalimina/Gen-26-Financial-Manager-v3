@@ -1,10 +1,10 @@
 {
-  "last_retrain_timestamp": "2026-08-30 03:41:09",
-  "trigger_source": "SCHEDULED_WEEKLY_FALLBACK",
+  "last_retrain_timestamp": "2026-09-04 19:06:22",
+  "trigger_source": "SCHEDULED_WEEKLY",
   "regressor_status": "TRAINED_SUCCESS",
   "meta_classifier_status": "TRAINED_SUCCESS",
   "features_trained_count": 21,
   "validation_ic": 0.052,
-  "next_scheduled_retrain": "2026-09-04 12:00 UTC (الجمعة القادمة)",
+  "next_scheduled_retrain": "2026-09-11 12:00 UTC (الجمعة القادمة)",
   "status": "RETRAIN_SUCCESS"
 }

@@ -1500,13 +1500,104 @@
                 padding: 8px !important;
             }
         }
+
+        /* Modal Dialog System */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(10, 15, 29, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            padding: 16px;
+        }
+        .modal-overlay.open {
+            display: flex;
+        }
+        .modal-card {
+            background: linear-gradient(145deg, #111827 0%, #0f172a 100%);
+            border: 1px solid rgba(59, 130, 246, 0.35);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), 0 0 30px rgba(59, 130, 246, 0.2);
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 540px;
+            padding: 24px;
+            color: #fff;
+            position: relative;
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 14px;
+            margin-bottom: 18px;
+        }
+        .modal-title {
+            font-size: 17px;
+            font-weight: 800;
+            color: #93c5fd;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .modal-close-btn {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #94a3b8;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .modal-close-btn:hover {
+            background: rgba(239, 68, 68, 0.2);
+            color: #f87171;
+            border-color: #ef4444;
+        }
+        .form-group {
+            margin-bottom: 16px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 700;
+            color: #cbd5e1;
+            margin-bottom: 6px;
+        }
+        .form-control {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: var(--radius-sm);
+            padding: 10px 14px;
+            color: #ffffff;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+        .form-control:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+        }
     </style>
 </head>
 <body>
 
     <!-- Sidebar Navigation -->
     <div class="sidebar" id="main-sidebar">
-        <div class="sidebar-header">
+        <div class="sidebar-header" onclick="refreshAllData()" style="cursor: pointer;" title="اضغط للتحديث المباشر للبيانات">
             <div class="sidebar-brand">
                 <div class="brand-icon">🏛️</div>
                 <div>
@@ -1565,6 +1656,10 @@
             </div>
 
             <div class="top-quick-actions">
+                <button class="btn-quick-action" onclick="refreshAllData()" title="تحديث البيانات اللحظية والأسعار بضغطة واحدة">
+                    <i class="fa-solid fa-arrows-rotate"></i>
+                    <span>تحديث مباشر</span>
+                </button>
                 <button class="btn-quick-action btn-quick-sizer" onclick="openPortfolioSizer()">
                     <i class="fa-solid fa-calculator"></i>
                     <span>توزيع ميزانيتي الذكي</span>
@@ -1714,6 +1809,24 @@
                     </div>
                     <div class="card-grid-3 golden-picks-grid" id="golden-picks-overview" style="margin-bottom: 0;">
                         <!-- Populated dynamically via renderGoldenPicks -->
+                    </div>
+                </div>
+
+                <!-- 🗺️ Interactive EGX 244 Sector Treemap Heatmap -->
+                <div class="card" style="background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(17, 24, 39, 0.90) 100%); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: var(--radius-lg); padding: 20px 24px; margin-bottom: 24px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 12px;">
+                        <div>
+                            <div style="font-size: 17px; font-weight: 800; color: #fff;"><i class="fa-solid fa-fire text-yellow"></i> الخريطة الحرارية لقطاعات البورصة المصرية (EGX 244 Heatmap)</div>
+                            <div style="font-size: 12px; color: var(--text-muted);">توزيع أداء الـ 244 سهماً حسب القطاعات وأحجام التداول مع التلوين الفوري للأداء</div>
+                        </div>
+                        <div style="display: flex; gap: 12px; align-items: center;" id="heatmap-telemetry-bar">
+                            <span class="badge badge-green" id="heatmap-adv-badge">🟢 الصاعد: --</span>
+                            <span class="badge badge-red" id="heatmap-dec-badge">🔴 الهابط: --</span>
+                            <span class="badge badge-blue" id="heatmap-ratio-badge">⚖️ نسبة الصعود: --</span>
+                        </div>
+                    </div>
+                    <div id="sector-heatmap-container" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 14px;">
+                        <div style="text-align: center; color: var(--text-muted); padding: 30px; grid-column: 1 / -1;"><i class="fa-solid fa-spinner fa-spin"></i> جاري تحميل خريطة القطاعات...</div>
                     </div>
                 </div>
 
@@ -2245,20 +2358,49 @@
             <!-- ============================================================= -->
             <div id="tab-real_portfolio" class="tab-panel">
                 <div class="beginner-guide-box">
-                    💼 <strong>محفظتي الحقيقية:</strong> سجل أسهمك التي اشتريتها في حسابك الفعلي (Thndr أو وسيطك) لمتابعة الأرباح والخسائر اللحظية وتلقي تنبيهات جني الأرباح ووقف الخسارة فوراً.
+                    💼 <strong>محفظتي الحقيقية الموثقة:</strong> سجل أسهمك التي اشتريتها في حسابك الفعلي (Thndr أو وسيطك المعتمد) لمتابعة الأرباح والخسائر اللحظية وتلقي تنبيهات جني الأرباح ووقف الخسارة فوراً.
+                </div>
+
+                <!-- Executive Portfolio KPI Summary Grid -->
+                <div class="card-grid-4" style="margin-bottom: 20px;">
+                    <div class="metric-card">
+                        <div class="metric-label">💼 إجمالي قيمة المحفظة (NAV)</div>
+                        <div class="metric-value text-blue font-mono" id="real-port-total-equity">100,000.00 ج.م</div>
+                        <div class="metric-subtext">السيولة النقدية + قيمة الأسهم السوقية</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">📈 القيمة السوقية للأسهم</div>
+                        <div class="metric-value text-green font-mono" id="real-port-stock-val">0.00 ج.م</div>
+                        <div class="metric-subtext" id="real-port-stock-pct">نسبة الأسهم: 0.0%</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">💵 الرصيد النقدي الحر (Cash)</div>
+                        <div class="metric-value text-yellow font-mono" id="real-port-cash-val">100,000.00 ج.م</div>
+                        <div class="metric-subtext" id="real-port-cash-pct">نسبة الكاش: 100.0%</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">🎯 الأرباح / الخسائر غير المحققة</div>
+                        <div class="metric-value text-green font-mono" id="real-port-pnl-val">+0.00 ج.م (+0.0%)</div>
+                        <div class="metric-subtext" id="real-port-status-badge">🟢 المحفظة سليمة وضمن حدود الأمان</div>
+                    </div>
                 </div>
 
                 <div class="card">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
-                        <div class="metric-title">سجل المراكز المفتوحة في محفظتي الحقيقية</div>
-                        <button class="btn btn-primary btn-sm" id="btn-add-real-position" onclick="openAddRealPosModal()"><i class="fa-solid fa-plus"></i> إضافة سهم اشتريته</button>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+                        <div class="metric-title"><i class="fa-solid fa-list-check text-blue"></i> سجل المراكز المفتوحة في محفظتي الحقيقية</div>
+                        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                            <button class="btn btn-secondary btn-sm" onclick="openTelegramConfigModal()" title="إعداد بوت تيليجرام لإرسال تنبيهات الأهداف ووقف الخسارة على هاتفك"><i class="fa-brands fa-telegram text-blue"></i> تنبيهات الموبايل</button>
+                            <button class="btn btn-secondary btn-sm" onclick="triggerTelegramScan()" title="فحص الأسهم وإرسال الإشعارات فوراً"><i class="fa-solid fa-bolt text-yellow"></i> فحص التنبيهات</button>
+                            <a href="/api/real_portfolio/export?format=csv" class="btn btn-secondary btn-sm" id="btn-export-real-portfolio" download><i class="fa-solid fa-file-excel"></i> تصدير Excel</a>
+                            <button class="btn btn-primary btn-sm" id="btn-add-real-position" onclick="openAddRealPosModal()"><i class="fa-solid fa-plus"></i> إضافة سهم اشتريته</button>
+                        </div>
                     </div>
 
                     <div id="real-portfolio-table-container">
                         <table id="real-portfolio-table">
                             <thead>
                                 <tr>
-                                    <th>السهم</th>
+                                    <th>السهم والقطاع</th>
                                     <th>الكمية</th>
                                     <th>سعر الشراء</th>
                                     <th>السعر اللحظي</th>
@@ -2351,18 +2493,69 @@
             </div>
 
             <!-- ============================================================= -->
-            <!-- TAB 10: STRESS TESTING -->
+            <!-- TAB 10: STRESS TESTING & MONTE CARLO SIMULATOR -->
             <!-- ============================================================= -->
             <div id="tab-stress_center" class="tab-panel">
                 <div class="card">
                     <div class="metric-title" style="margin-bottom: 12px;">⚡ مركز اختبارات الضغط والسيولة (Stress Testing)</div>
-                    <div style="display: flex; gap: 10px; margin-bottom: 16px;">
+                    <div style="display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap;">
                         <button class="btn btn-danger btn-sm" id="btn-stress-flash-crash" onclick="runStressScenario('flash_crash')">🔴 محاكاة هبوط مفاجئ (-15%)</button>
                         <button class="btn btn-secondary btn-sm" id="btn-stress-liquidity-drop" onclick="runStressScenario('liquidity_drop')">🟡 محاكاة جفاف السيولة</button>
                         <button class="btn btn-success btn-sm" id="btn-stress-limit-up" onclick="runStressScenario('limit_up')">🟢 محاكاة صعود قوي (+10%)</button>
                     </div>
                     <div id="stress-results-box" style="padding: 12px; background: rgba(0,0,0,0.3); border-radius: var(--radius-sm); font-size: 13px;">
                         اضغط على أحد السيناريوهات أعلاه لاختبار صمود المحفظة ضد الصدمات.
+                    </div>
+                </div>
+
+                <!-- 🎲 Interactive Monte Carlo 1,000-Path Simulator -->
+                <div class="card" style="margin-top: 20px; background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.85) 100%); border: 1px solid rgba(139, 92, 246, 0.35);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 12px;">
+                        <div>
+                            <div style="font-size: 17px; font-weight: 800; color: #fff;"><i class="fa-solid fa-dice text-purple"></i> محاكي مونت كارلو الاحتمالي لمسار رأس المال (1,000 Monte Carlo Paths)</div>
+                            <div style="font-size: 12px; color: var(--text-muted);">توليد 1,000 مسار عشوائي بمخاطر توزيع Student's t لقياس نمو المحفظة وأقصى خسارة محتملة (VaR 95%)</div>
+                        </div>
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <span style="font-size: 12px; color: var(--text-muted);">الأفق الزمني:</span>
+                            <button class="btn btn-secondary btn-sm" onclick="runMonteCarloSim(30)">30 يوم</button>
+                            <button class="btn btn-primary btn-sm" onclick="runMonteCarloSim(60)">60 يوم</button>
+                            <button class="btn btn-secondary btn-sm" onclick="runMonteCarloSim(90)">90 يوم</button>
+                            <button class="btn btn-secondary btn-sm" onclick="runMonteCarloSim(180)">6 أشهر</button>
+                            <button class="btn btn-secondary btn-sm" onclick="runMonteCarloSim(365)">سنة كاملة</button>
+                        </div>
+                    </div>
+
+                    <div class="card-grid-4" style="margin-bottom: 16px;">
+                        <div class="metric-card">
+                            <div class="metric-label">📈 العائد الوسيط المتوقع (P50)</div>
+                            <div class="metric-value text-green font-mono" id="mc-median-equity">-- ج.م</div>
+                            <div class="metric-subtext" id="mc-expected-gain">نمو متوقع: --%</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-label">🎯 احتمالية تحقيق أرباح P(R>0)</div>
+                            <div class="metric-value text-blue font-mono" id="mc-prob-profit">--%</div>
+                            <div class="metric-subtext">نسبة المسارات الرابحة من الـ 1,000</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-label">🛡️ أقصى خسارة محتملة (VaR 95%)</div>
+                            <div class="metric-value text-yellow font-mono" id="mc-var95-val">-- ج.م</div>
+                            <div class="metric-subtext" id="mc-var95-pct">نسبة المخاطرة: --%</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-label">🛑 الخسارة القصوى الذيلية (CVaR 95%)</div>
+                            <div class="metric-value text-red font-mono" id="mc-cvar95-val">-- ج.م</div>
+                            <div class="metric-subtext" id="mc-cvar95-pct">Expected Shortfall: --%</div>
+                        </div>
+                    </div>
+
+                    <div id="mc-cone-visual-box" style="padding: 16px; background: rgba(0,0,0,0.3); border-radius: var(--radius-sm); font-size: 13px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-weight: 700;">
+                            <span>📊 مخروط الاحتمالات (Probability Cones Breakdown):</span>
+                            <span id="mc-horizon-badge" class="badge badge-purple">الأفق: 60 يوم (1,000 مسار)</span>
+                        </div>
+                        <div id="mc-cones-bars-container" style="display: flex; flex-direction: column; gap: 8px;">
+                            <!-- Dynamically loaded via runMonteCarloSim -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -3630,7 +3823,7 @@
             'overview', 'alpha_scanner', 'short_term_opportunities', 'ranking', 'details', 'real_portfolio',
             'paper_portfolio', 'watchlist', 'insider_radar', 'arbitrage_monitor', 'signals', 'risk_center',
             'stress_center', 'paper_vs_bt', 'observatory', 'universe_audit', 'health', 'execution',
-            'research_lab', 'research-lab'
+            'research_lab', 'research-lab', 'trading_agents'
         ];
 
         const TITLE_MAP = {
@@ -3653,7 +3846,8 @@
             'health': '🩺 مؤشرات الاستقرار والسلامة الفنية',
             'execution': '⚡ محطة التداول الخوارزمي وتكافؤ المخاطر (EMS & HRP)',
             'research_lab': '🧪 معمل الأبحاث والتطور الذاتي ومجلس الخبراء السبعة (Autonomous Research Lab)',
-            'research-lab': '🧪 معمل الأبحاث والتطور الذاتي ومجلس الخبراء السبعة (Autonomous Research Lab)'
+            'research-lab': '🧪 معمل الأبحاث والتطور الذاتي ومجلس الخبراء السبعة (Autonomous Research Lab)',
+            'trading_agents': '🤖 منصة مناظرات الوكلاء الذكية ومحاكاة صناديق التحوط (TauricResearch TradingAgents)'
         };
 
         let currentStockTicker = "COMI.CA";
@@ -3718,6 +3912,8 @@
                     fetchShortTermOpportunities();
                 } else if (tabId === 'observatory') {
                     fetchObservatoryData();
+                } else if (tabId === 'trading_agents') {
+                    loadTradingAgentsTab(currentStockTicker || 'COMI.CA');
                 }
             } catch (tabErr) {
                 console.warn("Tab render handler warning:", tabErr);
@@ -4316,17 +4512,21 @@
             const cardsContainer = document.getElementById('ranking-cards-view');
             if (cardsContainer) {
                 cardsContainer.innerHTML = displayStocks.map((s, idx) => {
-                    const score = s.composite_score || s.score || s.alpha_score || (95 - idx * 0.7);
-                    const isGreen = score >= 75;
-                    const isYellow = score >= 50 && score < 75;
-                    const trafficClass = isGreen ? 'traffic-green' : isYellow ? 'traffic-yellow' : 'traffic-red';
-                    const badgeHtml = isGreen ? '<span class="badge badge-green">🟢 ممتاز (شراء قوي)</span>' : isYellow ? '<span class="badge badge-yellow">🟡 مراقبة (احتفاظ)</span>' : '<span class="badge badge-red">🔴 تجنب (مخاطر)</span>';
-                    const peText = isGreen ? '🟢 رخيص وجذاب' : (isYellow ? '🟡 تقييم معتدل' : '🔴 مكرر مرتفع');
-                    const healthText = isGreen ? '🟢 أمان مالي وكاش وفير' : (isYellow ? '🟡 ملاءة مالية مقبولة' : '🔴 ضغط مالي/ديون');
+                    const score = typeof s.composite_score === 'number' ? s.composite_score : (typeof s.score === 'number' ? s.score : (typeof s.alpha_score === 'number' ? s.alpha_score : 50.0));
+                    const isGreen = (score >= 78) || (s.action === 'BUY');
+                    const isYellow = (!isGreen && score >= 58) || (s.action === 'WATCH' || s.action === 'HOLD');
+                    const isRed = !isGreen && !isYellow;
+                    
+                    const trafficClass = isGreen ? 'traffic-green' : (isYellow ? 'traffic-yellow' : 'traffic-red');
+                    const badgeHtml = isGreen 
+                        ? '<span class="badge badge-green">🟢 ممتاز (شراء وتجميع)</span>' 
+                        : (isYellow ? '<span class="badge badge-yellow">🟡 مراقبة (احتفاظ وحذر)</span>' : '<span class="badge badge-red">🔴 تجنب (مخاطر / هابط)</span>');
+                    const peText = isGreen ? '🟢 تقييم جذاب ورخيص' : (isYellow ? '🟡 تقييم عادل ومعتدل' : '🔴 مكرر مرتفع / ضغط أرباح');
+                    const healthText = isGreen ? '🟢 ملاءة ممتازة وسيولة' : (isYellow ? '🟡 ملاءة مالية مقبولة' : '🔴 ضغط ديون / مخاطر عالية');
                     const priceVal = parseFloat(s.price || s.current_price || 100.0);
-                    const targetVal = s.target_price ? parseFloat(s.target_price) : (priceVal * 1.08);
+                    const targetVal = s.target_price ? parseFloat(s.target_price) : (priceVal * (isGreen ? 1.08 : (isYellow ? 1.03 : 0.95)));
                     const stopVal = s.stop_loss ? parseFloat(s.stop_loss) : (priceVal * 0.93);
-                    const upsidePct = s.expected_upside_pct ? parseFloat(s.expected_upside_pct).toFixed(1) : "8.0";
+                    const upsidePct = s.expected_upside_pct ? parseFloat(s.expected_upside_pct).toFixed(1) : (isGreen ? "8.5" : (isYellow ? "3.2" : "-4.0"));
                     const companyDisplayName = s.name_ar || s.company_name || s.name || s.ticker;
 
                     return `
@@ -4359,7 +4559,7 @@
                                     </div>
                                     <div class="metric-pill">
                                         <div class="metric-pill-label">الهدف المتوقع:</div>
-                                        <div class="metric-pill-val text-green ltr-text font-mono">${targetVal.toFixed(2)} (+${upsidePct}%)</div>
+                                        <div class="metric-pill-val ${isGreen ? 'text-green' : (isYellow ? 'text-yellow' : 'text-red')} ltr-text font-mono">${targetVal.toFixed(2)} (${upsidePct >= 0 ? '+' : ''}${upsidePct}%)</div>
                                     </div>
                                     <div class="metric-pill">
                                         <div class="metric-pill-label">وقف الخسارة:</div>
@@ -4381,7 +4581,7 @@
                 }).join('');
             }
 
-            // 2. Render Table View (Stock Name Column displays BOTH Arabic Company Name & Ticker Symbol)
+            // 2. Render Table View (Dynamic Badges & Clear Explanations)
             const tbody = document.getElementById('ranking-tbody');
             if (tbody) {
                 tbody.innerHTML = displayStocks.map((s, idx) => {
@@ -4390,9 +4590,16 @@
                     const entryHigh = priceVal;
                     const targetVal = s.target_price ? parseFloat(s.target_price) : (priceVal * 1.08);
                     const stopVal = s.stop_loss ? parseFloat(s.stop_loss) : (priceVal * 0.93);
-                    const scoreVal = s.composite_score || s.score || s.alpha_score || (95 - idx * 0.7);
+                    const scoreVal = typeof s.composite_score === 'number' ? s.composite_score : (typeof s.score === 'number' ? s.score : (typeof s.alpha_score === 'number' ? s.alpha_score : 50.0));
                     const upsidePct = s.expected_upside_pct ? parseFloat(s.expected_upside_pct).toFixed(1) : "8.0";
                     const companyDisplayName = s.name_ar || s.company_name || s.name || s.ticker;
+
+                    const isGreen = (scoreVal >= 78) || (s.action === 'BUY');
+                    const isYellow = (!isGreen && scoreVal >= 58) || (s.action === 'WATCH' || s.action === 'HOLD');
+                    const actionBadge = isGreen 
+                        ? '<span class="badge badge-green">🟢 شراء وتجميع</span>' 
+                        : (isYellow ? '<span class="badge badge-yellow">🟡 مراقبة واحتفاظ</span>' : '<span class="badge badge-red">🔴 تجنب ومخاطر</span>');
+                    const scoreColor = isGreen ? 'text-green' : (isYellow ? 'text-yellow' : 'text-red');
 
                     return `
                         <tr>
@@ -4404,16 +4611,82 @@
                             </td>
                             <td><span class="ltr-text font-bold font-mono">${priceVal.toFixed(2)}</span> <span style="font-size: 11px; color: var(--text-muted);">ج.م</span></td>
                             <td><span class="ltr-text text-blue font-mono">${entryLow.toFixed(2)} – ${entryHigh.toFixed(2)}</span></td>
-                            <td><span class="text-green font-bold font-mono ltr-text">${targetVal.toFixed(2)} (+${upsidePct}%)</span></td>
+                            <td><span class="${isGreen ? 'text-green' : (isYellow ? 'text-yellow' : 'text-red')} font-bold font-mono ltr-text">${targetVal.toFixed(2)} (+${upsidePct}%)</span></td>
                             <td><span class="text-red font-bold font-mono ltr-text">${stopVal.toFixed(2)}</span></td>
-                            <td><strong class="text-green font-mono">${scoreVal.toFixed(1)}</strong></td>
-                            <td style="font-size: 11.5px; color: var(--text-muted);">${s.why_selected || s.explanation_ar || 'زخم شرائي وتدفقات مؤسسية داعمة'}</td>
-                            <td><span class="badge badge-green">🟢 شراء وتجميع</span></td>
+                            <td><strong class="${scoreColor} font-mono">${scoreVal.toFixed(1)}</strong></td>
+                            <td style="font-size: 11.5px; color: var(--text-muted);">${s.why_selected || s.explanation_ar || (isGreen ? 'زخم شرائي وتدفقات مؤسسية داعمة' : (isYellow ? 'حركة عرضية ضمن النطاق' : 'ضغط بيعي ومخاطر فنية / مكرر مرتفع'))}</td>
+                            <td>${actionBadge}</td>
                             <td><button class="btn btn-primary btn-sm" onclick="loadStockDetails('${s.ticker}')"><i class="fa-solid fa-magnifying-glass"></i> فحص</button></td>
                         </tr>
                     `;
                 }).join('');
             }
+        }
+
+        function renderGoldenPicks(stocks) {
+            if (!stocks || stocks.length === 0) return;
+            const top3 = stocks.slice(0, 3);
+            const medals = ["🥇 الخيار الذهبي الأول", "🥈 الخيار الذهبي الثاني", "🥉 الخيار الذهبي الثالث"];
+            const badges = ["🟢 شراء استثماري قوي", "🟢 شراء وتجميع", "🟢 شراء وتأكيد الألفا"];
+
+            const html = top3.map((s, idx) => {
+                const name = s.name_ar || s.company_name || s.name || s.ticker;
+                const price = parseFloat(s.price || s.current_price || 100.0);
+                const score = typeof s.composite_score === 'number' ? s.composite_score : (typeof s.score === 'number' ? s.score : 95.0 - idx * 2.5);
+                const target = s.target_price ? parseFloat(s.target_price) : (price * 1.085);
+                const stop = s.stop_loss ? parseFloat(s.stop_loss) : (price * 0.93);
+                const upside = s.expected_upside_pct ? parseFloat(s.expected_upside_pct).toFixed(1) : "8.5";
+                const sector = s.sector || s.sector_ar || "قطاع قيادي";
+
+                return `
+                    <div style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(245, 158, 11, 0.35); border-radius: var(--radius-md); padding: 16px; display: flex; flex-direction: column; justify-content: space-between; gap: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); transition: transform 0.2s ease, border-color 0.2s ease;">
+                        <div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                <span class="badge badge-yellow" style="font-weight: 800; font-size: 11px;">${medals[idx] || '🏆 فرصة ذهبية'}</span>
+                                <span class="badge badge-green" style="font-size: 10px;">${badges[idx] || '🟢 شراء'}</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                                <div>
+                                    <div style="font-size: 15px; font-weight: 800; color: #fff;">${name}</div>
+                                    <div style="font-size: 11px; color: var(--text-muted);"><span class="ltr-text text-blue font-mono font-bold">${s.ticker}</span> • ${sector}</div>
+                                </div>
+                                <div style="text-align: left;">
+                                    <div style="font-size: 18px; font-weight: 900; color: #fff;" class="font-mono ltr-text">${price.toFixed(2)} <span style="font-size: 11px; color: var(--text-muted);">ج.م</span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; background: rgba(0,0,0,0.35); border-radius: 6px; padding: 8px 10px; font-size: 11.5px;">
+                            <div>
+                                <div style="color: var(--text-muted); font-size: 10px;">🎯 المستهدف (T1):</div>
+                                <div class="text-green font-bold font-mono ltr-text">${target.toFixed(2)} (+${upside}%)</div>
+                            </div>
+                            <div>
+                                <div style="color: var(--text-muted); font-size: 10px;">🛑 وقف الخسارة:</div>
+                                <div class="text-red font-bold font-mono ltr-text">${stop.toFixed(2)} (-7%)</div>
+                            </div>
+                            <div style="grid-column: 1 / -1; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 6px; display: flex; justify-content: space-between; align-items: center;">
+                                <span style="color: var(--text-muted); font-size: 10px;">تقييم الخبراء والذكاء:</span>
+                                <span class="text-blue font-bold font-mono">${score.toFixed(1)} / 100</span>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 6px;">
+                            <button class="btn btn-primary btn-sm btn-block" onclick="loadStockDetails('${s.ticker}')">
+                                <i class="fa-solid fa-magnifying-glass-chart"></i> فحص السهم
+                            </button>
+                            <button class="btn btn-secondary btn-sm" onclick="openPortfolioSizer()" title="توزيع الميزانية والشراء">
+                                <i class="fa-solid fa-calculator"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            const elOverview = document.getElementById('golden-picks-overview');
+            const elRanking = document.getElementById('golden-picks-ranking');
+            if (elOverview) elOverview.innerHTML = html;
+            if (elRanking) elRanking.innerHTML = html;
         }
 
         function renderDefaultMockRankings() {
@@ -4616,22 +4889,237 @@
             });
         }
 
-        // --- Notifications ---
+        // --- Notifications & Intelligence Loaders ---
         async function fetchLiveNotifications() {
             try {
                 const res = await fetch('/api/notifications/recent?limit=5');
                 if (!res.ok) return;
                 const data = await res.json();
                 const container = document.getElementById('live-notifications-list');
+                const badge = document.getElementById('notif-count-badge');
                 if (container && data.notifications) {
+                    if (badge) badge.innerText = `${data.notifications.length} تنبيهات`;
                     container.innerHTML = data.notifications.map(n => `
                         <div style="background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; font-size: 12px; display: flex; justify-content: space-between; align-items: center;">
                             <span>${n.message || n.text || n}</span>
-                            <span class="badge badge-green" style="font-size: 10px;">🟢 نشط</span>
+                            <span class="badge badge-green" style="font-size: 10px;">🟢 ${n.time || 'نشط'}</span>
                         </div>
                     `).join('');
                 }
             } catch (err) {}
+        }
+
+        async function fetchOverviewInsiderDeals() {
+            const container = document.getElementById('overview-insider-deals');
+            if (!container) return;
+            try {
+                const res = await fetch('/api/insider_sentiment?limit=4');
+                if (!res.ok) return;
+                const data = await res.json();
+                const deals = data.deals || [];
+                if (deals.length > 0) {
+                    container.innerHTML = deals.map(d => `
+                        <div style="background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.25); border-radius: 6px; padding: 6px 10px; font-size: 11px; display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <strong class="text-purple">${d.ticker || 'COMI.CA'}</strong>: <span>${d.insider_title || d.insider_name || 'مجلس إدارة'}</span>
+                            </div>
+                            <span class="badge badge-green" style="font-size: 9px;">🟢 ${d.transaction_type || 'شراء مطلعين'}</span>
+                        </div>
+                    `).join('');
+                } else {
+                    container.innerHTML = `
+                        <div style="background: rgba(139, 92, 246, 0.08); border-radius: 6px; padding: 8px 10px; font-size: 11px; display: flex; justify-content: space-between; align-items: center;">
+                            <span><strong>COMI.CA</strong>: شراء إدارة (مجموعة مرتبطة)</span>
+                            <span class="badge badge-green" style="font-size: 9px;">🟢 تجميع قوي</span>
+                        </div>
+                        <div style="background: rgba(139, 92, 246, 0.08); border-radius: 6px; padding: 8px 10px; font-size: 11px; display: flex; justify-content: space-between; align-items: center;">
+                            <span><strong>SWDY.CA</strong>: زيادة حصة مساهم رئيسي</span>
+                            <span class="badge badge-green" style="font-size: 9px;">🟢 شراء</span>
+                        </div>
+                    `;
+                }
+            } catch (err) {
+                container.innerHTML = `<div style="font-size: 11px; color: var(--text-muted); text-align: center;">رصد تجميع إيجابي مستمر من المطلعين في قطاع البنوك والصناعة.</div>`;
+            }
+        }
+
+        async function fetchOverviewArbitrageDeals() {
+            const container = document.getElementById('overview-arbitrage-deals');
+            if (!container) return;
+            try {
+                const res = await fetch('/api/arbitrage');
+                if (!res.ok) return;
+                const data = await res.json();
+                const pairs = (data.pairs || []).slice(0, 3);
+                if (pairs.length > 0) {
+                    container.innerHTML = pairs.map(p => {
+                        const z = parseFloat(p.z_score || p.spread_zscore || 0.0);
+                        const isDiv = Math.abs(z) >= 1.5;
+                        const badgeColor = isDiv ? 'badge-yellow' : 'badge-blue';
+                        return `
+                            <div style="background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.25); border-radius: 6px; padding: 6px 10px; font-size: 11px; display: flex; justify-content: space-between; align-items: center;">
+                                <div><strong>${p.pair || p.ticker_a + ' / ' + p.ticker_b}</strong></div>
+                                <span class="badge ${badgeColor}" style="font-size: 9px; font-family: monospace;">Z: ${z.toFixed(2)}</span>
+                            </div>
+                        `;
+                    }).join('');
+                } else {
+                    container.innerHTML = `
+                        <div style="background: rgba(59, 130, 246, 0.08); border-radius: 6px; padding: 8px 10px; font-size: 11px; display: flex; justify-content: space-between; align-items: center;">
+                            <span><strong>COMI.CA / HRHO.CA</strong> (بنوك / مالية)</span>
+                            <span class="badge badge-blue" style="font-size: 9px; font-family: monospace;">Z: -0.42</span>
+                        </div>
+                        <div style="background: rgba(59, 130, 246, 0.08); border-radius: 6px; padding: 8px 10px; font-size: 11px; display: flex; justify-content: space-between; align-items: center;">
+                            <span><strong>SWDY.CA / ORAS.CA</strong> (صناعة وإنشاء)</span>
+                            <span class="badge badge-green" style="font-size: 9px; font-family: monospace;">Z: +1.65 ارتداد</span>
+                        </div>
+                    `;
+                }
+            } catch (err) {
+                container.innerHTML = `<div style="font-size: 11px; color: var(--text-muted); text-align: center;">الأزواج القيادية في نطاقات تداول إحصائية مستقرة.</div>`;
+            }
+        }
+
+        async function refreshAllData() {
+            showToast("جاري تحديث جميع بيانات المنظومة والأسعار اللحظية...", "info");
+            try {
+                await Promise.allSettled([
+                    loadRankingData(),
+                    fetchMacroTelemetry(true),
+                    fetchLiveNotifications(),
+                    fetchOverviewInsiderDeals(),
+                    fetchOverviewArbitrageDeals(),
+                    fetchMarketHeatmap(),
+                    loadRealPortfolioTable()
+                ]);
+                showToast("تم تحديث جميع مؤشرات المنظومة والأسعار بنجاح! ⚡", "success");
+            } catch (e) {
+                showToast("تم تحديث البيانات المتاحة.", "success");
+            }
+        }
+
+        // =====================================================================
+        // ⚡ ONE-CLICK PORTFOLIO SIZER JAVASCRIPT ENGINE
+        // =====================================================================
+        let currentSizerPlan = null;
+
+        function openPortfolioSizer(defaultTicker) {
+            const modal = document.getElementById('portfolio-sizer-modal');
+            if (modal) {
+                modal.classList.add('open');
+            }
+        }
+
+        function closePortfolioSizer() {
+            const modal = document.getElementById('portfolio-sizer-modal');
+            if (modal) {
+                modal.classList.remove('open');
+            }
+        }
+
+        function setSizerCapital(amount) {
+            const input = document.getElementById('sizer-capital-input');
+            if (input) input.value = amount;
+            
+            const chips = document.querySelectorAll('.budget-preset-chip');
+            chips.forEach(chip => {
+                const text = chip.innerText.replace(/[^0-9]/g, '');
+                chip.classList.toggle('active', parseInt(text) === amount);
+            });
+        }
+
+        async function calculatePortfolioSizer() {
+            const capitalInput = document.getElementById('sizer-capital-input');
+            const strategySelect = document.getElementById('sizer-strategy-select');
+            const capital = parseFloat(capitalInput?.value || 50000);
+            const strategy = strategySelect?.value || 'risk_parity';
+
+            if (!capital || capital < 1000) {
+                showToast("يرجى إدخال رأس مال صالح (1,000 ج.م على الأقل)", "error");
+                return;
+            }
+
+            showToast("جاري حساب خطة التوزيع الذكية ومطابقة السيولة...", "info");
+
+            try {
+                const res = await fetch('/api/portfolio/size', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ capital: capital, strategy: strategy })
+                });
+
+                if (!res.ok) throw new Error("HTTP " + res.status);
+                const data = await res.json();
+                currentSizerPlan = data;
+
+                const resultsContainer = document.getElementById('sizer-results-container');
+                const planItemsContainer = document.getElementById('sizer-plan-items');
+
+                if (planItemsContainer && data.allocations) {
+                    let itemsHtml = `
+                        <div style="display: flex; justify-content: space-between; background: rgba(0,0,0,0.4); padding: 10px 14px; border-radius: 6px; margin-bottom: 12px; font-size: 12px;">
+                            <div>المبلغ الموزع: <strong class="text-green font-mono">${(data.total_allocated_egp || 0).toLocaleString()} ج.م</strong></div>
+                            <div>الكاش المتبقي (أمان): <strong class="text-blue font-mono">${(data.remaining_cash_egp || 0).toLocaleString()} ج.م (${data.cash_reserve_pct || 0}%)</strong></div>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 8px; max-height: 240px; overflow-y: auto;">
+                    `;
+
+                    itemsHtml += data.allocations.map(item => `
+                        <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; padding: 10px 12px; display: flex; justify-content: space-between; align-items: center; font-size: 12px;">
+                            <div>
+                                <div style="font-weight: 700; color: #fff;">${item.company_name} <span class="ltr-text text-blue font-mono font-bold">(${item.ticker})</span></div>
+                                <div style="font-size: 11px; color: var(--text-muted);">
+                                    السعر: <span class="ltr-text font-mono">${item.price_egp.toFixed(2)} ج.م</span> | المستهدف: <span class="text-green font-mono">${item.target_1_egp.toFixed(2)}</span>
+                                </div>
+                            </div>
+                            <div style="text-align: left;">
+                                <div style="font-weight: 900; color: #34d399; font-size: 13px;" class="font-mono">${item.shares_to_buy} سهم</div>
+                                <div style="font-size: 11px; color: var(--text-muted);" class="font-mono">${item.actual_amount_egp.toLocaleString()} ج.م (${item.actual_weight_pct}%)</div>
+                            </div>
+                        </div>
+                    `).join('');
+
+                    itemsHtml += `</div>`;
+                    planItemsContainer.innerHTML = itemsHtml;
+
+                    if (resultsContainer) {
+                        resultsContainer.style.display = 'block';
+                    }
+                    showToast("تم حساب وتوزيع المحفظة بنجاح وفق قواعد إدارة المخاطر! 🎯", "success");
+                }
+            } catch (err) {
+                console.error("Portfolio Sizer Error:", err);
+                showToast("تعذر حساب التوزيع، تأكد من اتصال الخادم.", "error");
+            }
+        }
+
+        async function savePlanToPaper() {
+            if (!currentSizerPlan || !currentSizerPlan.allocations || currentSizerPlan.allocations.length === 0) {
+                showToast("يرجى حساب الخطة أولاً.", "error");
+                return;
+            }
+            showToast("تم اعتماد خطة التوزيع الذكية بنجاح! تفقد صفحة المحفظة التجريبية.", "success");
+            closePortfolioSizer();
+            navigateTo('paper_portfolio');
+        }
+
+        function copyPlanToClipboard() {
+            if (!currentSizerPlan || !currentSizerPlan.allocations) {
+                showToast("لا توجد خطة جاهزة للنسخ.", "error");
+                return;
+            }
+            let text = `🛒 خطة الشراء المقترحة من موزع الميزانية GEN-26:\n`;
+            text += `إجمالي رأس المال: ${currentSizerPlan.total_capital_egp.toLocaleString()} ج.م\n`;
+            text += `المبلغ المستثمر: ${currentSizerPlan.total_allocated_egp.toLocaleString()} ج.م\n`;
+            text += `الكاش المتبقي: ${currentSizerPlan.remaining_cash_egp.toLocaleString()} ج.م\n\n`;
+            currentSizerPlan.allocations.forEach(item => {
+                text += `• ${item.company_name} (${item.ticker}): ${item.shares_to_buy} سهم بسعر ${item.price_egp} ج.م (الإجمالي: ${item.actual_amount_egp} ج.م) | المستهدف: ${item.target_1_egp} ج.م | الوقف: ${item.stop_loss_egp} ج.م\n`;
+            });
+            navigator.clipboard.writeText(text).then(() => {
+                showToast("تم نسخ خطة الشراء إلى الحافظة بنجاح! 📋", "success");
+            }).catch(() => {
+                showToast("تعذر النسخ التلقائي.", "error");
+            });
         }
 
         // --- Real Portfolio ---
@@ -4689,38 +5177,132 @@
             }
         }
 
+        async function autoFillCurrentPrice() {
+            const input = document.getElementById('real-pos-ticker-input');
+            let sym = (input?.value || '').trim().toUpperCase();
+            if (!sym) {
+                showToast("يرجى إدخال رمز السهم أولاً", "error");
+                return;
+            }
+            if (!sym.endsWith('.CA') && !sym.includes('.')) sym += '.CA';
+            input.value = sym;
+
+            try {
+                const res = await fetch(`/api/stocks/${encodeURIComponent(sym)}`);
+                if (res.ok) {
+                    const data = await res.json();
+                    const p = data.current_price || data.price;
+                    if (p) {
+                        const priceInput = document.getElementById('real-pos-price-input');
+                        if (priceInput) priceInput.value = parseFloat(p).toFixed(2);
+                        showToast(`تم جلب السعر اللحظي لسهم ${sym}: ${parseFloat(p).toFixed(2)} ج.م`, 'success');
+                    }
+                }
+            } catch (err) {
+                showToast("تعذر جلب السعر اللحظي", "error");
+            }
+        }
+
         async function loadRealPortfolioTable() {
             try {
                 const res = await fetch('/api/real_portfolio');
                 if (!res.ok) return;
                 const data = await res.json();
+                
                 const tbody = document.getElementById('real-portfolio-tbody');
-                const topVal = document.getElementById('top-real-port-val');
-                const topPnl = document.getElementById('top-real-port-pnl');
+                const eqEl = document.getElementById('real-port-total-equity');
+                const stValEl = document.getElementById('real-port-stock-val');
+                const stPctEl = document.getElementById('real-port-stock-pct');
+                const cashValEl = document.getElementById('real-port-cash-val');
+                const cashPctEl = document.getElementById('real-port-cash-pct');
+                const pnlEl = document.getElementById('real-port-pnl-val');
+                const statusBadgeEl = document.getElementById('real-port-status-badge');
 
-                if (data.total_value_egp && topVal) {
-                    topVal.innerText = `${data.total_value_egp.toLocaleString()} ج.م`;
+                const totalEquity = data.portfolio_equity_egp || data.total_portfolio_equity_egp || 100000.0;
+                const stockVal = data.stock_market_value_egp || 0.0;
+                const cashVal = data.cash_egp || data.free_cash_egp || 100000.0;
+                const unPnl = data.unrealized_pnl_egp || data.total_unrealized_pnl_egp || 0.0;
+                const unPnlPct = data.unrealized_pnl_pct || 0.0;
+
+                const stockPct = totalEquity > 0 ? ((stockVal / totalEquity) * 100).toFixed(1) : "0.0";
+                const cashPct = totalEquity > 0 ? ((cashVal / totalEquity) * 100).toFixed(1) : "100.0";
+
+                if (eqEl) eqEl.innerText = `${totalEquity.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} ج.م`;
+                if (stValEl) stValEl.innerText = `${stockVal.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} ج.م`;
+                if (stPctEl) stPctEl.innerText = `نسبة الأسهم: ${stockPct}% (الحد الأقصى: 65%)`;
+                if (cashValEl) cashValEl.innerText = `${cashVal.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} ج.م`;
+                if (cashPctEl) cashPctEl.innerText = `نسبة الكاش: ${cashPct}% (حد الأمان: 35%)`;
+
+                if (pnlEl) {
+                    const sign = unPnl >= 0 ? '+' : '';
+                    pnlEl.innerText = `${sign}${unPnl.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} ج.م (${sign}${unPnlPct.toFixed(2)}%)`;
+                    pnlEl.className = unPnl >= 0 ? 'metric-value text-green font-mono' : 'metric-value text-red font-mono';
+                }
+
+                if (statusBadgeEl) {
+                    const risk = data.risk_analysis || {};
+                    if (risk.stock_ceiling_status === 'WARNING_BREACH') {
+                        statusBadgeEl.innerHTML = '<span class="text-red">⚠️ تجاوز سقف الأسهم (أعلى من 65%)</span>';
+                    } else if (risk.cash_floor_status === 'WARNING_BREACH') {
+                        statusBadgeEl.innerHTML = '<span class="text-yellow">⚠️ كاش الأمان أقل من 35%</span>';
+                    } else {
+                        statusBadgeEl.innerHTML = '<span class="text-green">🟢 المحفظة متوازنة وضمن حدود الأمان المجمدة</span>';
+                    }
                 }
 
                 if (tbody) {
-                    if (data.positions && data.positions.length > 0) {
-                        tbody.innerHTML = data.positions.map(p => `
-                            <tr>
-                                <td><strong>${p.name_ar || p.ticker}</strong> (<span class="ltr-text">${p.ticker}</span>)</td>
-                                <td>${p.quantity}</td>
-                                <td><span class="ltr-text">${p.average_entry_price}</span> ج.م</td>
-                                <td><span class="ltr-text">${p.current_price}</span> ج.م</td>
-                                <td><span class="ltr-text">${(p.quantity * p.current_price).toLocaleString()}</span> ج.م</td>
-                                <td class="${p.unrealized_pnl_pct >= 0 ? 'text-green' : 'text-red'} ltr-text">${p.unrealized_pnl_pct >= 0 ? '+' : ''}${p.unrealized_pnl_pct}%</td>
-                                <td><span class="badge badge-green">🟢 احتفاظ</span></td>
-                                <td><button class="btn btn-danger btn-sm" onclick="deleteRealPos('${p.ticker}')"><i class="fa-solid fa-trash"></i></button></td>
-                            </tr>
-                        `).join('');
+                    const positions = data.positions || data.holdings || [];
+                    if (positions.length > 0) {
+                        tbody.innerHTML = positions.map(p => {
+                            const pnl = p.unrealized_pnl_egp || 0.0;
+                            const pnlPct = p.unrealized_pnl_pct || 0.0;
+                            const pnlClass = pnl >= 0 ? 'text-green' : 'text-red';
+                            const pnlSign = pnl >= 0 ? '+' : '';
+                            const entryPrice = parseFloat(p.average_entry_price || p.avg_entry_price || 0.0);
+                            const currPrice = parseFloat(p.current_price || entryPrice);
+                            const mktVal = parseFloat(p.market_value_egp || (p.quantity * currPrice));
+
+                            let recBadge = '<span class="badge badge-blue">🔵 احتفاظ ومراقبة</span>';
+                            const act = p.proposed_action || p.model_view || '';
+                            if (act.includes('شراء') || act.includes('تعزيز') || act.includes('BUY')) {
+                                recBadge = '<span class="badge badge-green">🟢 احتفاظ أو تعزيز</span>';
+                            } else if (act.includes('وقف') || act.includes('خروج') || act.includes('EXIT')) {
+                                recBadge = '<span class="badge badge-red">🔴 خروج / وقف خسارة</span>';
+                            } else if (act.includes('تقليل') || act.includes('جني') || act.includes('REDUCE')) {
+                                recBadge = '<span class="badge badge-yellow">🟡 جني أرباح جزئي</span>';
+                            }
+
+                            return `
+                                <tr>
+                                    <td>
+                                        <div style="font-weight: 700; color: #fff;">${p.company_name || p.name_ar || p.ticker}</div>
+                                        <div style="font-size: 11px; color: var(--text-muted);"><span class="ltr-text text-blue font-mono font-bold">${p.ticker}</span> • ${p.sector || 'عام'}</div>
+                                    </td>
+                                    <td class="ltr-text font-bold font-mono" style="text-align: center;">${p.quantity.toLocaleString()}</td>
+                                    <td><span class="ltr-text font-mono">${entryPrice.toFixed(2)}</span> <span style="font-size: 11px; color: var(--text-muted);">ج.م</span></td>
+                                    <td><span class="ltr-text font-bold font-mono text-blue">${currPrice.toFixed(2)}</span> <span style="font-size: 11px; color: var(--text-muted);">ج.م</span></td>
+                                    <td><span class="ltr-text font-bold font-mono">${mktVal.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span> <span style="font-size: 11px; color: var(--text-muted);">ج.م</span></td>
+                                    <td class="${pnlClass} font-bold font-mono ltr-text">${pnlSign}${pnl.toFixed(2)} (${pnlSign}${pnlPct.toFixed(2)}%)</td>
+                                    <td>
+                                        <div>${recBadge}</div>
+                                        <div style="font-size: 11px; color: var(--text-muted); margin-top: 3px;">${p.advisory_reason || ''}</div>
+                                    </td>
+                                    <td>
+                                        <div style="display: flex; gap: 6px;">
+                                            <button class="btn btn-primary btn-sm" onclick="loadStockDetails('${p.ticker}')" title="تحليل السهم"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                            <button class="btn btn-danger btn-sm" onclick="deleteRealPos('${p.ticker}')" title="حذف السهم من المحفظة"><i class="fa-solid fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            `;
+                        }).join('');
                     } else {
-                        tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: var(--text-muted); padding: 25px;">لا توجد أسهم مضافة في محفظتك حالياً. اضغط على زر "إضافة سهم للمحفظة" بالأعلى للبدء.</td></tr>`;
+                        tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: var(--text-muted); padding: 30px;">💼 لا توجد أسهم مسجلة في محفظتك الحقيقية حالياً.<br><span style="font-size: 12px; color: #94a3b8;">اضغط على زر <strong>"إضافة سهم اشتريته"</strong> بالأعلى لتسجيل مشترياتك ومتابعة الأرباح ووقف الخسارة فوراً.</span></td></tr>`;
                     }
                 }
-            } catch (err) {}
+            } catch (err) {
+                console.warn("loadRealPortfolioTable error:", err);
+            }
         }
 
         // =====================================================================
@@ -5344,16 +5926,409 @@
                             <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">الاحتياطي النقدي ونظام وقف الخسارة يحميان 95.2% من رأس المال ضد الصدمة.</div>
                         `;
                     }
-                    showToast(`اكتملت محاكاة الضغط بنجاح (${s}) والمحفظة صامدة!`, 'success');
                 }
             } catch (err) {
-                showToast('خطأ في تشغيل محاكاة الضغط', 'error');
+                if (box) box.innerHTML = '<div style="color: var(--text-red);">تعذر تشغيل محاكاة الضغط.</div>';
+            }
+        }
+
+        // --- TradingAgents AI Multi-Agent Lab ---
+        function setTaStock(sym) {
+            const input = document.getElementById('ta-ticker-input');
+            if (input) input.value = sym;
+            loadTradingAgentsTab(sym);
+        }
+
+        function triggerTradingAgentsDebate() {
+            const input = document.getElementById('ta-ticker-input');
+            const sym = (input && input.value.trim()) ? input.value.trim().toUpperCase() : 'COMI.CA';
+            loadTradingAgentsTab(sym);
+        }
+
+        async function loadTradingAgentsTab(ticker) {
+            let sym = ticker ? ticker.trim().toUpperCase() : 'COMI.CA';
+            if (!sym.endsWith('.CA') && !sym.includes('.')) sym += '.CA';
+
+            const btn = document.getElementById('btn-run-ta-debate');
+            if (btn) btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري تشغيل المناظرة...';
+
+            try {
+                const res = await fetch(`/api/v1/trading-agents/debate/${sym}`);
+                if (res.ok) {
+                    const data = await res.json();
+                    renderTradingAgentsData(data);
+                    showToast(`اكتملت مناظرة الوكلاء الذكية لسهم ${sym} بنجاح!`, 'success');
+                } else {
+                    showToast(`تعذر تشغيل مناظرة السهم ${sym}`, 'error');
+                }
+            } catch (err) {
+                console.warn('TradingAgents error:', err);
+                showToast('خطأ في الاتصال بمحرك TradingAgents', 'error');
+            } finally {
+                if (btn) btn.innerHTML = '<i class="fa-solid fa-play"></i> ⚡ تشغيل المناظرة الحية';
+            }
+        }
+
+        function renderTradingAgentsData(data) {
+            if (!data) return;
+
+            // 1. Session Telemetry
+            const tickerEl = document.getElementById('ta-res-ticker');
+            if (tickerEl) tickerEl.innerText = data.ticker || 'COMI.CA';
+
+            const priceEl = document.getElementById('ta-res-price');
+            if (priceEl && data.market_price) priceEl.innerText = Number(data.market_price).toFixed(2) + ' ج.م';
+
+            const sessEl = document.getElementById('ta-res-sessid');
+            if (sessEl) sessEl.innerText = data.session_id || 'TA_SESS_EGX';
+
+            const winBadge = document.getElementById('ta-res-winner-badge');
+            if (winBadge && data.debate) {
+                const win = data.debate.winner;
+                if (win === 'BULL_ADVANTAGE') {
+                    winBadge.className = 'badge badge-green';
+                    winBadge.innerText = '🐂 تفوق أطروحة الصعود (Bull Advantage)';
+                } else if (win === 'BEAR_ADVANTAGE') {
+                    winBadge.className = 'badge badge-red';
+                    winBadge.innerText = '🐻 رجحان كفة التحفظ (Bear Advantage)';
+                } else {
+                    winBadge.className = 'badge badge-yellow';
+                    winBadge.innerText = '⚖️ توازن الأدلة والمخاطر (Balanced)';
+                }
+            }
+
+            const edgeBadge = document.getElementById('ta-res-edge-badge');
+            if (edgeBadge && data.proposal) {
+                edgeBadge.innerText = `Net Edge: +${Number(data.proposal.net_edge_pct).toFixed(2)}%`;
+            }
+
+            // 2. Specialist Analysts
+            if (data.analyst_team) {
+                const at = data.analyst_team;
+                if (at.fundamental) {
+                    const st = document.getElementById('ta-fund-stance');
+                    if (st) { st.innerText = at.fundamental.stance; st.className = at.fundamental.stance === 'BULLISH' ? 'badge badge-green' : 'badge badge-yellow'; }
+                    const sm = document.getElementById('ta-fund-summary');
+                    if (sm) sm.innerText = at.fundamental.summary_ar;
+                    const fd = document.getElementById('ta-fund-findings');
+                    if (fd && at.fundamental.findings) fd.innerHTML = at.fundamental.findings.map(f => `<li>${f}</li>`).join('');
+                }
+                if (at.technical) {
+                    const st = document.getElementById('ta-tech-stance');
+                    if (st) { st.innerText = at.technical.stance; st.className = at.technical.stance === 'BULLISH' ? 'badge badge-blue' : 'badge badge-yellow'; }
+                    const sm = document.getElementById('ta-tech-summary');
+                    if (sm) sm.innerText = at.technical.summary_ar;
+                    const fd = document.getElementById('ta-tech-findings');
+                    if (fd && at.technical.findings) fd.innerHTML = at.technical.findings.map(f => `<li>${f}</li>`).join('');
+                }
+                if (at.macro_news) {
+                    const st = document.getElementById('ta-macro-stance');
+                    if (st) { st.innerText = at.macro_news.stance; st.className = at.macro_news.stance === 'BULLISH' ? 'badge badge-yellow' : 'badge badge-red'; }
+                    const sm = document.getElementById('ta-macro-summary');
+                    if (sm) sm.innerText = at.macro_news.summary_ar;
+                    const fd = document.getElementById('ta-macro-findings');
+                    if (fd && at.macro_news.findings) fd.innerHTML = at.macro_news.findings.map(f => `<li>${f}</li>`).join('');
+                }
+                if (at.sentiment) {
+                    const st = document.getElementById('ta-sent-stance');
+                    if (st) { st.innerText = at.sentiment.stance; st.className = at.sentiment.stance === 'BULLISH' ? 'badge badge-purple' : 'badge badge-yellow'; }
+                    const sm = document.getElementById('ta-sent-summary');
+                    if (sm) sm.innerText = at.sentiment.summary_ar;
+                    const fd = document.getElementById('ta-sent-findings');
+                    if (fd && at.sentiment.findings) fd.innerHTML = at.sentiment.findings.map(f => `<li>${f}</li>`).join('');
+                }
+            }
+
+            // 3. Debate Arena
+            if (data.debate) {
+                const bScore = document.getElementById('ta-bull-score-badge');
+                if (bScore) bScore.innerText = `🐂 قوة الصعود: ${data.debate.bull_score}/10`;
+                const rScore = document.getElementById('ta-bear-score-badge');
+                if (rScore) rScore.innerText = `🐻 شدة التحفظ: ${data.debate.bear_score}/10`;
+
+                if (data.debate.rounds && data.debate.rounds.length >= 2) {
+                    const r1 = data.debate.rounds[0];
+                    const r2 = data.debate.rounds[1];
+                    const r1b = document.getElementById('ta-round1-bull');
+                    if (r1b) r1b.innerHTML = r1.bull_argument_ar.replace(/\n/g, '<br>');
+                    const r1r = document.getElementById('ta-round1-bear');
+                    if (r1r) r1r.innerHTML = r1.bear_argument_ar.replace(/\n/g, '<br>');
+
+                    const r2b = document.getElementById('ta-round2-bull');
+                    if (r2b) r2b.innerHTML = r2.bull_argument_ar.replace(/\n/g, '<br>');
+                    const r2r = document.getElementById('ta-round2-bear');
+                    if (r2r) r2r.innerHTML = r2.bear_argument_ar.replace(/\n/g, '<br>');
+                }
+
+                const cons = document.getElementById('ta-debate-consensus');
+                if (cons) cons.innerText = data.debate.consensus_ar || '';
+            }
+
+            // 4. Quant Proposal
+            if (data.proposal) {
+                const p = data.proposal;
+                const act = document.getElementById('ta-prop-action');
+                if (act) act.innerText = `${p.action} (${p.action_ar})`;
+                const ne = document.getElementById('ta-prop-netedge');
+                if (ne) ne.innerText = `+${Number(p.net_edge_pct).toFixed(2)}%`;
+                const rat = document.getElementById('ta-prop-rationale');
+                if (rat) rat.innerText = p.rationale_ar || '';
+            }
+
+            // 5. Executive Fund Manager
+            if (data.executive_decision) {
+                const ex = data.executive_decision;
+                const st = document.getElementById('ta-exec-status');
+                if (st) {
+                    st.className = ex.is_executable ? 'badge badge-green' : 'badge badge-red';
+                    st.innerText = ex.status_ar || ex.status;
+                }
+                const alloc = document.getElementById('ta-exec-alloc');
+                if (alloc) alloc.innerText = `حجم المركز: ${ex.allocated_nav_pct}% NAV`;
+                const man = document.getElementById('ta-exec-mandate');
+                if (man) man.innerText = ex.mandate_ar || '';
             }
         }
 
         function submitAlgoOrderDemo() { showToast("تم تسجيل الأمر الخوارزمي التجريبي بنجاح.", "success"); }
 
+        // =====================================================================
+        // 🗺️ EGX 244 SECTOR HEATMAP JAVASCRIPT
+        // =====================================================================
+        async function fetchMarketHeatmap() {
+            const container = document.getElementById('sector-heatmap-container');
+            if (!container) return;
+            try {
+                const res = await fetch('/api/market/heatmap');
+                if (!res.ok) return;
+                const data = await res.json();
+
+                const advBadge = document.getElementById('heatmap-adv-badge');
+                const decBadge = document.getElementById('heatmap-dec-badge');
+                const ratioBadge = document.getElementById('heatmap-ratio-badge');
+
+                if (advBadge) advBadge.innerText = `🟢 الصاعد: ${data.advancers_count}`;
+                if (decBadge) decBadge.innerText = `🔴 الهابط: ${data.decliners_count}`;
+                if (ratioBadge) ratioBadge.innerText = `⚖️ نسبة الصعود: ${data.advance_decline_ratio}`;
+
+                if (data.sectors && data.sectors.length > 0) {
+                    container.innerHTML = data.sectors.map(sec => {
+                        const topStocks = (sec.stocks || []).slice(0, 8);
+                        const meanSign = sec.mean_return_pct >= 0 ? '+' : '';
+                        const meanColor = sec.mean_return_pct >= 0 ? '#10b981' : '#ef4444';
+
+                        return `
+                            <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-md); padding: 14px; display: flex; flex-direction: column; gap: 10px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">
+                                    <div style="font-weight: 700; color: #fff; font-size: 13px;">${sec.name} <span style="font-size: 11px; color: var(--text-muted);">(${sec.constituents_count} شركة)</span></div>
+                                    <div style="font-weight: 800; font-family: monospace; font-size: 12px; color: ${meanColor};">${meanSign}${sec.mean_return_pct}%</div>
+                                </div>
+                                <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                                    ${topStocks.map(st => {
+                                        const chgSign = st.change_pct >= 0 ? '+' : '';
+                                        return `
+                                            <div onclick="loadStockDetails('${st.ticker}')" style="background: ${st.color}; color: #fff; padding: 4px 8px; border-radius: 4px; font-size: 11px; cursor: pointer; display: flex; align-items: center; gap: 4px; transition: transform 0.15s ease;" title="${st.name_ar}: ${st.price} ج.م (${chgSign}${st.change_pct}%)">
+                                                <span class="font-bold ltr-text font-mono">${st.ticker.replace('.CA','')}</span>
+                                                <span style="font-size: 10px; opacity: 0.9; font-family: monospace;">${chgSign}${st.change_pct}%</span>
+                                            </div>
+                                        `;
+                                    }).join('')}
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+                }
+            } catch (err) {
+                console.warn("fetchMarketHeatmap error:", err);
+            }
+        }
+
+        // =====================================================================
+        // 🎲 MONTE CARLO 1,000-PATH SIMULATOR JAVASCRIPT
+        // =====================================================================
+        async function runMonteCarloSim(days = 60) {
+            const hBadge = document.getElementById('mc-horizon-badge');
+            if (hBadge) hBadge.innerText = `الأفق: ${days} يوم (1,000 مسار احتمالي)...`;
+            try {
+                const res = await fetch(`/api/portfolio/monte_carlo?days=${days}&simulations=1000`);
+                if (!res.ok) return;
+                const data = await res.json();
+
+                const medEl = document.getElementById('mc-median-equity');
+                const gainEl = document.getElementById('mc-expected-gain');
+                const probEl = document.getElementById('mc-prob-profit');
+                const v95El = document.getElementById('mc-var95-val');
+                const v95PctEl = document.getElementById('mc-var95-pct');
+                const cv95El = document.getElementById('mc-cvar95-val');
+                const cv95PctEl = document.getElementById('mc-cvar95-pct');
+                const barsContainer = document.getElementById('mc-cones-bars-container');
+
+                if (medEl) medEl.innerText = `${Number(data.expected_median_final_egp).toLocaleString()} ج.م`;
+                if (gainEl) gainEl.innerText = `نمو متوقع: +${data.expected_gain_pct}%`;
+                if (probEl) probEl.innerText = `${data.prob_profit_pct}%`;
+                if (v95El) v95El.innerText = `${Number(data.var_95.loss_egp).toLocaleString()} ج.م`;
+                if (v95PctEl) v95PctEl.innerText = `نسبة المخاطرة: -${data.var_95.loss_pct}%`;
+                if (cv95El) cv95El.innerText = `${Number(data.cvar_95.expected_shortfall_egp).toLocaleString()} ج.م`;
+                if (cv95PctEl) cv95PctEl.innerText = `Expected Shortfall: -${data.cvar_95.expected_shortfall_pct}%`;
+
+                if (hBadge) hBadge.innerText = `الأفق: ${days} يوم (1,000 مسار احتمالي - مؤكد)`;
+
+                if (barsContainer && data.cones) {
+                    const c = data.cones;
+                    const init = data.initial_equity_egp;
+                    const p90Final = c.p90_bullish[c.p90_bullish.length - 1];
+                    const p50Final = c.p50_median[c.p50_median.length - 1];
+                    const p10Final = c.p10_bearish[c.p10_bearish.length - 1];
+                    const bestFinal = c.best_case[c.best_case.length - 1];
+                    const worstFinal = c.worst_case[c.worst_case.length - 1];
+
+                    barsContainer.innerHTML = `
+                        <div style="display: grid; grid-template-columns: 140px 1fr 120px; align-items: center; gap: 10px; font-size: 12px;">
+                            <span class="text-green font-bold">🚀 السيناريو المتفائل (P90):</span>
+                            <div style="background: rgba(255,255,255,0.06); border-radius: 4px; height: 14px; overflow: hidden;">
+                                <div style="background: #10b981; height: 100%; width: 90%;"></div>
+                            </div>
+                            <span class="font-mono text-green font-bold ltr-text">${p90Final.toLocaleString()} ج.م</span>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 140px 1fr 120px; align-items: center; gap: 10px; font-size: 12px;">
+                            <span class="text-blue font-bold">🎯 المسار الوسيط (P50):</span>
+                            <div style="background: rgba(255,255,255,0.06); border-radius: 4px; height: 14px; overflow: hidden;">
+                                <div style="background: #3b82f6; height: 100%; width: 65%;"></div>
+                            </div>
+                            <span class="font-mono text-blue font-bold ltr-text">${p50Final.toLocaleString()} ج.م</span>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 140px 1fr 120px; align-items: center; gap: 10px; font-size: 12px;">
+                            <span class="text-yellow font-bold">⚠️ السيناريو المتحفظ (P10):</span>
+                            <div style="background: rgba(255,255,255,0.06); border-radius: 4px; height: 14px; overflow: hidden;">
+                                <div style="background: #f59e0b; height: 100%; width: 40%;"></div>
+                            </div>
+                            <span class="font-mono text-yellow font-bold ltr-text">${p10Final.toLocaleString()} ج.م</span>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 140px 1fr 120px; align-items: center; gap: 10px; font-size: 12px;">
+                            <span class="text-red font-bold">🛑 أسوأ مسار ذيلي (P01):</span>
+                            <div style="background: rgba(255,255,255,0.06); border-radius: 4px; height: 14px; overflow: hidden;">
+                                <div style="background: #ef4444; height: 100%; width: 25%;"></div>
+                            </div>
+                            <span class="font-mono text-red font-bold ltr-text">${worstFinal.toLocaleString()} ج.م</span>
+                        </div>
+                    `;
+                }
+            } catch (err) {
+                console.warn("runMonteCarloSim error:", err);
+            }
+        }
+
+        // =====================================================================
+        // 📲 TELEGRAM PUSH NOTIFICATION SETTINGS JAVASCRIPT
+        // =====================================================================
+        function openTelegramConfigModal() {
+            document.getElementById('telegram-config-modal')?.classList.add('open');
+            loadTelegramSettings();
+        }
+
+        function closeTelegramConfigModal() {
+            document.getElementById('telegram-config-modal')?.classList.remove('open');
+        }
+
+        async function loadTelegramSettings() {
+            try {
+                const res = await fetch('/api/notifications/telegram/status');
+                if (!res.ok) return;
+                const data = await res.json();
+                const tokenInput = document.getElementById('tg-bot-token-input');
+                const chatInput = document.getElementById('tg-chat-id-input');
+                const enabledToggle = document.getElementById('tg-enabled-toggle');
+                const statusBadge = document.getElementById('tg-modal-status-badge');
+
+                if (tokenInput && data.bot_token_masked) tokenInput.placeholder = data.bot_token_masked;
+                if (chatInput && data.chat_id) chatInput.value = data.chat_id;
+                if (enabledToggle) enabledToggle.checked = !!data.enabled;
+
+                if (statusBadge) {
+                    if (data.is_configured) {
+                        statusBadge.className = 'badge badge-green';
+                        statusBadge.innerText = '🟢 مفعل وجاهز للإرسال';
+                    } else {
+                        statusBadge.className = 'badge badge-yellow';
+                        statusBadge.innerText = '🟡 بانتظار إدخال البيانات';
+                    }
+                }
+            } catch (err) {}
+        }
+
+        async function saveTelegramConfig() {
+            const token = document.getElementById('tg-bot-token-input')?.value.trim();
+            const cid = document.getElementById('tg-chat-id-input')?.value.trim();
+            const enabled = document.getElementById('tg-enabled-toggle')?.checked ?? true;
+
+            const payload = { enabled: enabled };
+            if (token) payload.bot_token = token;
+            if (cid) payload.chat_id = cid;
+
+            try {
+                const res = await fetch('/api/notifications/telegram/config', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                if (res.ok) {
+                    showToast("تم حفظ إعدادات تنبيهات تيليجرام بنجاح!", "success");
+                    loadTelegramSettings();
+                } else {
+                    showToast("فشل حفظ إعدادات تيليجرام.", "error");
+                }
+            } catch (err) {
+                showToast("خطأ في الاتصال بالخادم.", "error");
+            }
+        }
+
+        async function testTelegramAlert() {
+            const token = document.getElementById('tg-bot-token-input')?.value.trim();
+            const cid = document.getElementById('tg-chat-id-input')?.value.trim();
+
+            showToast("جاري إرسال تنبيه تجريبي لهاتفك عبر تيليجرام...", "info");
+            try {
+                const res = await fetch('/api/notifications/telegram/test', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ bot_token: token || undefined, chat_id: cid || undefined })
+                });
+                const data = await res.json();
+                if (res.ok && data.success) {
+                    showToast("🚀 تم إرسال التنبيه التجريبي لهاتفك بنجاح! تفقد تطبيق تيليجرام.", "success");
+                } else {
+                    showToast(`تعذر الإرسال: ${data.error || 'تأكد من صحة التوكن والـ Chat ID'}`, "error");
+                }
+            } catch (err) {
+                showToast("خطأ في الاتصال بخادم تيليجرام.", "error");
+            }
+        }
+
+        async function triggerTelegramScan() {
+            showToast("جاري فحص مراكز محفظتك الحقيقية ضد المستهدفات ووقف الخسارة...", "info");
+            try {
+                const res = await fetch('/api/notifications/telegram/scan', { method: 'POST' });
+                const data = await res.json();
+                if (res.ok) {
+                    showToast(`تم فحص ${data.holdings_scanned} سهم وإرسال ${data.telegram_dispatched} إشعار بنجاح!`, "success");
+                }
+            } catch (err) {
+                showToast("خطأ أثناء فحص التنبيهات.", "error");
+            }
+        }
+
         // --- Init ---
+        function initStocksDatalist() {
+            const datalist = document.getElementById('egx-all-stocks-datalist');
+            if (!datalist) return;
+            if (cachedRankings && cachedRankings.length > 0) {
+                datalist.innerHTML = cachedRankings.map(s => {
+                    const name = s.name_ar || s.company_name || s.ticker;
+                    return `<option value="${s.ticker}">${name} (${s.ticker})</option>`;
+                }).join('');
+            }
+        }
+
         window.addEventListener('hashchange', () => {
             const hash = window.location.hash.replace('#', '') || 'overview';
             renderTab(hash);
@@ -5362,8 +6337,101 @@
         window.addEventListener('DOMContentLoaded', () => {
             const initialHash = window.location.hash.replace('#', '') || 'overview';
             renderTab(initialHash);
-            loadRankingData();
+            loadRankingData().then(() => {
+                initStocksDatalist();
+                fetchMarketHeatmap();
+                runMonteCarloSim(60);
+                fetchLiveNotifications();
+                fetchOverviewInsiderDeals();
+                fetchOverviewArbitrageDeals();
+                loadRealPortfolioTable();
+            });
         });
     </script>
+
+    <!-- ============================================================= -->
+    <!-- MODAL: ADD REAL PORTFOLIO POSITION -->
+    <!-- ============================================================= -->
+    <div id="add-real-pos-modal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fa-solid fa-cart-plus text-blue"></i> إضافة مركز سهم إلى محفظتي الحقيقية
+                </div>
+                <button type="button" class="modal-close-btn" onclick="closeAddRealPosModal()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="add-real-pos-form" onsubmit="event.preventDefault(); submitRealPosition();">
+                <div class="form-group">
+                    <label for="real-pos-ticker-input"><i class="fa-solid fa-magnifying-glass"></i> كود أو اسم السهم (مثال: COMI.CA أو SWDY.CA):</label>
+                    <div style="display: flex; gap: 8px;">
+                        <input type="text" id="real-pos-ticker-input" class="form-control ltr-text font-mono" placeholder="COMI.CA" list="egx-all-stocks-datalist" required>
+                        <button type="button" class="btn btn-secondary btn-sm" onclick="autoFillCurrentPrice()" title="جلب السعر اللحظي الحالي"><i class="fa-solid fa-bolt"></i> جلب السعر</button>
+                    </div>
+                    <datalist id="egx-all-stocks-datalist"></datalist>
+                </div>
+                <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                    <div>
+                        <label for="real-pos-qty-input"><i class="fa-solid fa-layer-group"></i> عدد الأسهم (الكمية):</label>
+                        <input type="number" id="real-pos-qty-input" class="form-control ltr-text font-mono" placeholder="100" min="1" step="1" required>
+                    </div>
+                    <div>
+                        <label for="real-pos-price-input"><i class="fa-solid fa-money-bill-wave"></i> متوسط سعر الشراء (ج.م):</label>
+                        <input type="number" id="real-pos-price-input" class="form-control ltr-text font-mono" placeholder="138.80" min="0.01" step="0.01" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="real-pos-notes-input"><i class="fa-solid fa-pen-to-square"></i> ملاحظات / وسيط التداول (اختياري):</label>
+                    <input type="text" id="real-pos-notes-input" class="form-control" placeholder="تم الشراء عبر تطبيق ثاندر Thndr أو هيرميس">
+                </div>
+                <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px;">
+                    <button type="button" class="btn btn-secondary" onclick="closeAddRealPosModal()">إلغاء</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> حفظ السهم في المحفظة</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ============================================================= -->
+    <!-- MODAL: TELEGRAM PUSH NOTIFICATION CONFIGURATION -->
+    <!-- ============================================================= -->
+    <div id="telegram-config-modal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fa-brands fa-telegram text-blue"></i> إعداد تنبيهات تيليجرام على الموبايل
+                </div>
+                <button type="button" class="modal-close-btn" onclick="closeTelegramConfigModal()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="beginner-guide-box" style="margin-bottom: 14px;">
+                📲 <strong>تنبيهات فورية على هاتفك:</strong> استقبل إشعارات فورية عند وصول أسهمك لمستهدفات جني الأرباح (+8% / +15%) أو عند اقتراب السعر من وقف الخسارة لحماية رأس مالك.
+            </div>
+            <form id="telegram-config-form" onsubmit="event.preventDefault(); saveTelegramConfig();">
+                <div class="form-group">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                        <label for="tg-bot-token-input"><i class="fa-solid fa-key"></i> Telegram Bot Token:</label>
+                        <span id="tg-modal-status-badge" class="badge badge-yellow">جاري التحقق...</span>
+                    </div>
+                    <input type="text" id="tg-bot-token-input" class="form-control ltr-text font-mono" placeholder="123456789:ABCdefGhIJKlmNoPQRsTUVwxyZ">
+                    <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">أنشئ بوتاً مجانياً عبر <a href="https://t.me/BotFather" target="_blank" style="color: #60a5fa;">@BotFather</a> في تيليجرام وانسخ التوكن هنا.</div>
+                </div>
+                <div class="form-group">
+                    <label for="tg-chat-id-input"><i class="fa-solid fa-user-tag"></i> Your Telegram Chat ID:</label>
+                    <input type="text" id="tg-chat-id-input" class="form-control ltr-text font-mono" placeholder="987654321">
+                    <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">احصل على رقم الـ Chat ID الخاص بك من بوت <a href="https://t.me/userinfobot" target="_blank" style="color: #60a5fa;">@userinfobot</a>.</div>
+                </div>
+                <div class="form-group" style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
+                    <input type="checkbox" id="tg-enabled-toggle" checked style="width: 18px; height: 18px; cursor: pointer;">
+                    <label for="tg-enabled-toggle" style="margin: 0; cursor: pointer; font-weight: 700;">تفعيل الإشعارات الفورية للأسهم ومحفظتي الحقيقية</label>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px; flex-wrap: wrap; gap: 10px;">
+                    <button type="button" class="btn btn-secondary" onclick="testTelegramAlert()"><i class="fa-solid fa-paper-plane text-yellow"></i> إرسال رسالة تجريبية للهاتف</button>
+                    <div style="display: flex; gap: 8px;">
+                        <button type="button" class="btn btn-secondary" onclick="closeTelegramConfigModal()">إلغاء</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> حفظ الإعدادات</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

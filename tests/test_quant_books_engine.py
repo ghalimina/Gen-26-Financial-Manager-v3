@@ -45,9 +45,11 @@ class TestQuantBooksEngine(unittest.TestCase):
         self.assertIn(res["rating"], ["STRONG_FINANCIAL_HEALTH", "MODERATE_HEALTH", "WEAK_DISTRESSED"])
         self.assertIsInstance(res["signals"], dict)
         self.assertIn("positive_roa", res["signals"])
-        self.assertIn("positive_cfo", res["signals"])
-        self.assertIn("lower_leverage", res["signals"])
-        self.assertIn("higher_gross_margin", res["signals"])
+        # Check for presence of financial health signals (adapts appropriately for Banking vs Industrial)
+        has_solvency_signal = "lower_leverage" in res["signals"] or "capital_adequacy_ratio_car" in res["signals"]
+        has_margin_signal = "higher_gross_margin" in res["signals"] or "net_interest_margin_nim_growth" in res["signals"]
+        self.assertTrue(has_solvency_signal, "Piotroski signals must contain solvency/CAR metric")
+        self.assertTrue(has_margin_signal, "Piotroski signals must contain profitability/NIM metric")
         self.assertGreater(len(res["breakdown_ar"]), 0)
 
         # Test Flask API Endpoint

@@ -1,0 +1,5183 @@
+[
+  {
+    "file_path": ".env.example",
+    "category": "ACTIVE",
+    "reason": "Essential repository configuration and deployment descriptor.",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      "scripts/fast_inventory_classifier.py",
+      "scripts/inventory_classifier.py"
+    ]
+  },
+  {
+    "file_path": ".github/workflows/daily_pipeline.yml",
+    "category": "ACTIVE",
+    "reason": "GitHub Actions automated CI/CD workflow pipeline.",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      "reports/MASTER_FORENSIC_FULL_STACK_REPORT.md",
+      "scripts/verify_full_stack.py"
+    ]
+  },
+  {
+    "file_path": ".github/workflows/dashboard_deploy.yml",
+    "category": "ACTIVE",
+    "reason": "GitHub Actions automated CI/CD workflow pipeline.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": ".github/workflows/tests.yml",
+    "category": "ACTIVE",
+    "reason": "GitHub Actions automated CI/CD workflow pipeline.",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "scripts/verify_full_stack.py"
+    ]
+  },
+  {
+    "file_path": ".gitignore",
+    "category": "ACTIVE",
+    "reason": "Essential repository configuration and deployment descriptor.",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      "scripts/fast_inventory_classifier.py",
+      "scripts/inventory_classifier.py"
+    ]
+  },
+  {
+    "file_path": "CHANGELOG.md",
+    "category": "ACTIVE",
+    "reason": "Authoritative root documentation and execution entrypoint. Referenced in: scripts/fast_inventory_classifier.py, scripts/generate_changelog.py, scripts/inventory_classifier.py",
+    "confidence": "High",
+    "refs_count": 3,
+    "refs": [
+      "scripts/fast_inventory_classifier.py",
+      "scripts/generate_changelog.py",
+      "scripts/inventory_classifier.py"
+    ]
+  },
+  {
+    "file_path": "GEN26_FINAL_FORENSIC_AUDIT.md",
+    "category": "ACTIVE",
+    "reason": "Authoritative root documentation and execution entrypoint. Referenced in: core/final_forensic_validator.py, scripts/fast_inventory_classifier.py, scripts/inventory_classifier.py",
+    "confidence": "High",
+    "refs_count": 3,
+    "refs": [
+      "core/final_forensic_validator.py",
+      "scripts/fast_inventory_classifier.py",
+      "scripts/inventory_classifier.py"
+    ]
+  },
+  {
+    "file_path": "Procfile",
+    "category": "ACTIVE",
+    "reason": "Essential repository configuration and deployment descriptor.",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      "scripts/fast_inventory_classifier.py",
+      "scripts/inventory_classifier.py"
+    ]
+  },
+  {
+    "file_path": "README.md",
+    "category": "ACTIVE",
+    "reason": "Authoritative root documentation and execution entrypoint. Referenced in: scripts/fast_inventory_classifier.py, scripts/inventory_classifier.py",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      "scripts/fast_inventory_classifier.py",
+      "scripts/inventory_classifier.py"
+    ]
+  },
+  {
+    "file_path": "START.bat",
+    "category": "ACTIVE",
+    "reason": "Authoritative root documentation and execution entrypoint. Referenced in: README.md, scripts/fast_inventory_classifier.py, scripts/inventory_classifier.py",
+    "confidence": "High",
+    "refs_count": 3,
+    "refs": [
+      "README.md",
+      "scripts/fast_inventory_classifier.py",
+      "scripts/inventory_classifier.py"
+    ]
+  },
+  {
+    "file_path": "config.py",
+    "category": "ACTIVE",
+    "reason": "Essential repository configuration and deployment descriptor.",
+    "confidence": "High",
+    "refs_count": 74,
+    "refs": [
+      ".github/workflows/daily_pipeline.yml",
+      "core/ai_generative_engine.py",
+      "core/ai_prediction_model.py",
+      "core/alternative_data_engine.py",
+      "core/database_engine.py"
+    ]
+  },
+  {
+    "file_path": "core/__init__.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/trading_agents/__init__.py (total 1 references)",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "core/trading_agents/__init__.py"
+    ]
+  },
+  {
+    "file_path": "core/advanced_feature_engineering.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: .github/workflows/daily_pipeline.yml, .github/workflows/tests.yml, core/deep_quant_fusion_engine.py (total 6 references)",
+    "confidence": "High",
+    "refs_count": 6,
+    "refs": [
+      ".github/workflows/daily_pipeline.yml",
+      ".github/workflows/tests.yml",
+      "core/deep_quant_fusion_engine.py",
+      "core/multi_agent_council.py",
+      "dashboard/app.py"
+    ]
+  },
+  {
+    "file_path": "core/ai_generative_engine.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: dashboard/app.py, tests/test_ai_generative_engine.py (total 2 references)",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      "dashboard/app.py",
+      "tests/test_ai_generative_engine.py"
+    ]
+  },
+  {
+    "file_path": "core/ai_prediction_model.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: .github/workflows/daily_pipeline.yml, CHANGELOG.md, core/feature_registry.py (total 12 references)",
+    "confidence": "High",
+    "refs_count": 12,
+    "refs": [
+      ".github/workflows/daily_pipeline.yml",
+      "CHANGELOG.md",
+      "core/feature_registry.py",
+      "core/meta_labeling_engine.py",
+      "core/mlops_pipeline.py"
+    ]
+  },
+  {
+    "file_path": "core/alpha_engine.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: reports/GEN26_CAPABILITY_MATRIX.json, reports/GEN26_FINAL_CAPABILITY_MATRIX.json, reports/GEN26_REPOSITORY_FORENSIC_AUDIT.json (total 6 references)",
+    "confidence": "High",
+    "refs_count": 6,
+    "refs": [
+      "reports/GEN26_CAPABILITY_MATRIX.json",
+      "reports/GEN26_FINAL_CAPABILITY_MATRIX.json",
+      "reports/GEN26_REPOSITORY_FORENSIC_AUDIT.json",
+      "tests/test_core_engines.py",
+      "tests/test_gap_closure.py"
+    ]
+  },
+  {
+    "file_path": "core/alpha_scanner/__init__.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/trading_agents/__init__.py (total 1 references)",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "core/trading_agents/__init__.py"
+    ]
+  },
+  {
+    "file_path": "core/alpha_scanner/alpha_scorer.py",
+    "category": "ORPHANED",
+    "reason": "Core engine module with no direct textual import reference in repository.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "core/alpha_scanner/monotonicity_validator.py",
+    "category": "ORPHANED",
+    "reason": "Core engine module with no direct textual import reference in repository.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "core/alpha_scanner/multi_layer_scanner.py",
+    "category": "ORPHANED",
+    "reason": "Core engine module with no direct textual import reference in repository.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "core/alpha_scanner/opportunity_ranker.py",
+    "category": "ORPHANED",
+    "reason": "Core engine module with no direct textual import reference in repository.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "core/alternative_data_engine.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: dashboard/app.py, tests/test_alternative_data_engine.py (total 2 references)",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      "dashboard/app.py",
+      "tests/test_alternative_data_engine.py"
+    ]
+  },
+  {
+    "file_path": "core/arabic_dictionary.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: tests/ui/test_arabic_dictionary.py (total 1 references)",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "tests/ui/test_arabic_dictionary.py"
+    ]
+  },
+  {
+    "file_path": "core/autonomous_research_lab.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/unified_pipeline_orchestrator.py, dashboard/app.py, tests/test_promotion_gate_and_research_lab.py (total 3 references)",
+    "confidence": "High",
+    "refs_count": 3,
+    "refs": [
+      "core/unified_pipeline_orchestrator.py",
+      "dashboard/app.py",
+      "tests/test_promotion_gate_and_research_lab.py"
+    ]
+  },
+  {
+    "file_path": "core/baseline_benchmark_suite.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: tests/test_v2_architectural_enhancements.py (total 1 references)",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "tests/test_v2_architectural_enhancements.py"
+    ]
+  },
+  {
+    "file_path": "core/block_trades_engine.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/multi_horizon_engine.py, scripts/trace_end_to_end.py, tests/test_missing_layers.py (total 3 references)",
+    "confidence": "High",
+    "refs_count": 3,
+    "refs": [
+      "core/multi_horizon_engine.py",
+      "scripts/trace_end_to_end.py",
+      "tests/test_missing_layers.py"
+    ]
+  },
+  {
+    "file_path": "core/broker_adapter.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/paper_trading_orchestrator.py, tests/test_gap_closure.py (total 2 references)",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      "core/paper_trading_orchestrator.py",
+      "tests/test_gap_closure.py"
+    ]
+  },
+  {
+    "file_path": "core/broker_execution_engine.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: dashboard/app.py, tests/test_broker_execution.py (total 2 references)",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      "dashboard/app.py",
+      "tests/test_broker_execution.py"
+    ]
+  },
+  {
+    "file_path": "core/company_intelligence.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: reports/GEN26_CAPABILITY_MATRIX.json, reports/GEN26_FINAL_CAPABILITY_MATRIX.json, reports/GEN26_REPOSITORY_FORENSIC_AUDIT.json (total 5 references)",
+    "confidence": "High",
+    "refs_count": 5,
+    "refs": [
+      "reports/GEN26_CAPABILITY_MATRIX.json",
+      "reports/GEN26_FINAL_CAPABILITY_MATRIX.json",
+      "reports/GEN26_REPOSITORY_FORENSIC_AUDIT.json",
+      "tests/test_core_engines.py",
+      "tests/test_full_temporal_forensics.py"
+    ]
+  },
+  {
+    "file_path": "core/corporate_actions.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/corporate_actions_engine.py, core/ensemble_decision_engine.py, core/multi_agent_council.py (total 10 references)",
+    "confidence": "High",
+    "refs_count": 10,
+    "refs": [
+      "core/corporate_actions_engine.py",
+      "core/ensemble_decision_engine.py",
+      "core/multi_agent_council.py",
+      "core/multi_horizon_engine.py",
+      "core/price_sync_service.py"
+    ]
+  },
+  {
+    "file_path": "core/corporate_actions_calendar.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: CHANGELOG.md, core/corporate_actions_engine.py, core/multi_horizon_engine.py (total 7 references)",
+    "confidence": "High",
+    "refs_count": 7,
+    "refs": [
+      "CHANGELOG.md",
+      "core/corporate_actions_engine.py",
+      "core/multi_horizon_engine.py",
+      "core/price_sync_service.py",
+      "dashboard/app.py"
+    ]
+  },
+  {
+    "file_path": "core/corporate_actions_engine.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: .github/workflows/daily_pipeline.yml, .github/workflows/tests.yml, core/ensemble_decision_engine.py (total 6 references)",
+    "confidence": "High",
+    "refs_count": 6,
+    "refs": [
+      ".github/workflows/daily_pipeline.yml",
+      ".github/workflows/tests.yml",
+      "core/ensemble_decision_engine.py",
+      "core/multi_agent_council.py",
+      "dashboard/app.py"
+    ]
+  },
+  {
+    "file_path": "core/daily_snapshot.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: tests/test_daily_snapshot.py (total 1 references)",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "tests/test_daily_snapshot.py"
+    ]
+  },
+  {
+    "file_path": "core/data_freshness.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: tests/test_data_freshness.py (total 1 references)",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "tests/test_data_freshness.py"
+    ]
+  },
+  {
+    "file_path": "core/data_quality.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/paper_trading_orchestrator.py, reports/GEN26_CAPABILITY_MATRIX.json, reports/GEN26_FINAL_CAPABILITY_MATRIX.json (total 6 references)",
+    "confidence": "High",
+    "refs_count": 6,
+    "refs": [
+      "core/paper_trading_orchestrator.py",
+      "reports/GEN26_CAPABILITY_MATRIX.json",
+      "reports/GEN26_FINAL_CAPABILITY_MATRIX.json",
+      "reports/GEN26_REPOSITORY_FORENSIC_AUDIT.json",
+      "tests/test_core_engines.py"
+    ]
+  },
+  {
+    "file_path": "core/data_sources_registry.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/news_deduplication_engine.py, dashboard/app.py, scripts/automated_consistency_audit.py (total 4 references)",
+    "confidence": "High",
+    "refs_count": 4,
+    "refs": [
+      "core/news_deduplication_engine.py",
+      "dashboard/app.py",
+      "scripts/automated_consistency_audit.py",
+      "tests/test_v2_architectural_enhancements.py"
+    ]
+  },
+  {
+    "file_path": "core/database.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/autonomous_research_lab.py, core/ensemble_decision_engine.py, core/final_forensic_validator.py (total 24 references)",
+    "confidence": "High",
+    "refs_count": 24,
+    "refs": [
+      "core/autonomous_research_lab.py",
+      "core/ensemble_decision_engine.py",
+      "core/final_forensic_validator.py",
+      "core/market_price_service.py",
+      "core/market_scheduler.py"
+    ]
+  },
+  {
+    "file_path": "core/database_engine.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/autonomous_research_lab.py, core/ensemble_decision_engine.py, core/multi_agent_council.py (total 28 references)",
+    "confidence": "High",
+    "refs_count": 28,
+    "refs": [
+      "core/autonomous_research_lab.py",
+      "core/ensemble_decision_engine.py",
+      "core/multi_agent_council.py",
+      "core/prediction_actual_tracker.py",
+      "core/trading_agents/orchestrator.py"
+    ]
+  },
+  {
+    "file_path": "core/decision_builder.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: reports/GEN26_CAPABILITY_MATRIX.json, reports/GEN26_FINAL_CAPABILITY_MATRIX.json, reports/GEN26_REPOSITORY_FORENSIC_AUDIT.json (total 7 references)",
+    "confidence": "High",
+    "refs_count": 7,
+    "refs": [
+      "reports/GEN26_CAPABILITY_MATRIX.json",
+      "reports/GEN26_FINAL_CAPABILITY_MATRIX.json",
+      "reports/GEN26_REPOSITORY_FORENSIC_AUDIT.json",
+      "tests/test_core_engines.py",
+      "tests/test_full_temporal_forensics.py"
+    ]
+  },
+  {
+    "file_path": "core/decision_snapshot.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: tests/test_paper_observatory.py (total 1 references)",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "tests/test_paper_observatory.py"
+    ]
+  },
+  {
+    "file_path": "core/deep_quant_fusion_engine.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/unified_pipeline_orchestrator.py, dashboard/app.py, tests/test_unified_pipeline_and_fusion_engine.py (total 3 references)",
+    "confidence": "High",
+    "refs_count": 3,
+    "refs": [
+      "core/unified_pipeline_orchestrator.py",
+      "dashboard/app.py",
+      "tests/test_unified_pipeline_and_fusion_engine.py"
+    ]
+  },
+  {
+    "file_path": "core/drift_monitor.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: dashboard/app.py, tests/test_paper_observatory.py (total 2 references)",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      "dashboard/app.py",
+      "tests/test_paper_observatory.py"
+    ]
+  },
+  {
+    "file_path": "core/dynamic_risk_manager.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: .github/workflows/daily_pipeline.yml, .github/workflows/tests.yml, core/trade_selection_model.py (total 7 references)",
+    "confidence": "High",
+    "refs_count": 7,
+    "refs": [
+      ".github/workflows/daily_pipeline.yml",
+      ".github/workflows/tests.yml",
+      "core/trade_selection_model.py",
+      "core/unified_pipeline_orchestrator.py",
+      "dashboard/app.py"
+    ]
+  },
+  {
+    "file_path": "core/edge_verifier.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: tests/test_hardening_phase_2.py (total 1 references)",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "tests/test_hardening_phase_2.py"
+    ]
+  },
+  {
+    "file_path": "core/egx_trading_rules_engine.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: .github/workflows/daily_pipeline.yml, .github/workflows/tests.yml, dashboard/app.py (total 4 references)",
+    "confidence": "High",
+    "refs_count": 4,
+    "refs": [
+      ".github/workflows/daily_pipeline.yml",
+      ".github/workflows/tests.yml",
+      "dashboard/app.py",
+      "tests/test_egx_trading_rules_engine.py"
+    ]
+  },
+  {
+    "file_path": "core/egx_universe.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/advanced_feature_engineering.py, core/alpha_scanner/opportunity_ranker.py, core/block_trades_engine.py (total 29 references)",
+    "confidence": "High",
+    "refs_count": 29,
+    "refs": [
+      "core/advanced_feature_engineering.py",
+      "core/alpha_scanner/opportunity_ranker.py",
+      "core/block_trades_engine.py",
+      "core/database.py",
+      "core/dynamic_risk_manager.py"
+    ]
+  },
+  {
+    "file_path": "core/egx_universe_loader.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/advanced_feature_engineering.py, core/alpha_scanner/opportunity_ranker.py, core/block_trades_engine.py (total 27 references)",
+    "confidence": "High",
+    "refs_count": 27,
+    "refs": [
+      "core/advanced_feature_engineering.py",
+      "core/alpha_scanner/opportunity_ranker.py",
+      "core/block_trades_engine.py",
+      "core/database.py",
+      "core/dynamic_risk_manager.py"
+    ]
+  },
+  {
+    "file_path": "core/ensemble_decision_engine.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: .github/workflows/daily_pipeline.yml, .github/workflows/tests.yml, dashboard/app.py (total 4 references)",
+    "confidence": "High",
+    "refs_count": 4,
+    "refs": [
+      ".github/workflows/daily_pipeline.yml",
+      ".github/workflows/tests.yml",
+      "dashboard/app.py",
+      "tests/test_ensemble_decision_engine.py"
+    ]
+  },
+  {
+    "file_path": "core/event_intelligence.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: reports/GEN26_CAPABILITY_MATRIX.json, reports/GEN26_FINAL_CAPABILITY_MATRIX.json, reports/GEN26_REPOSITORY_FORENSIC_AUDIT.json (total 5 references)",
+    "confidence": "High",
+    "refs_count": 5,
+    "refs": [
+      "reports/GEN26_CAPABILITY_MATRIX.json",
+      "reports/GEN26_FINAL_CAPABILITY_MATRIX.json",
+      "reports/GEN26_REPOSITORY_FORENSIC_AUDIT.json",
+      "tests/test_core_engines.py",
+      "tests/test_gap_closure.py"
+    ]
+  },
+  {
+    "file_path": "core/external_providers.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: tests/test_gap_closure.py (total 1 references)",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "tests/test_gap_closure.py"
+    ]
+  },
+  {
+    "file_path": "core/feature_registry.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/ai_prediction_model.py, core/meta_labeling_engine.py, dashboard/app.py (total 13 references)",
+    "confidence": "High",
+    "refs_count": 13,
+    "refs": [
+      "core/ai_prediction_model.py",
+      "core/meta_labeling_engine.py",
+      "dashboard/app.py",
+      "reports/GEN26_CAPABILITY_MATRIX.json",
+      "reports/GEN26_FINAL_CAPABILITY_MATRIX.json"
+    ]
+  },
+  {
+    "file_path": "core/final_forensic_validator.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: tests/test_final_forensic_validation.py (total 1 references)",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "tests/test_final_forensic_validation.py"
+    ]
+  },
+  {
+    "file_path": "core/frozen_invariants.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/final_forensic_validator.py, core/monte_carlo_engine.py, core/paper_observatory.py (total 13 references)",
+    "confidence": "High",
+    "refs_count": 13,
+    "refs": [
+      "core/final_forensic_validator.py",
+      "core/monte_carlo_engine.py",
+      "core/paper_observatory.py",
+      "core/paper_trading_orchestrator.py",
+      "core/portfolio_constructor.py"
+    ]
+  },
+  {
+    "file_path": "core/fundamental_data_engine.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/corporate_actions_engine.py, core/deep_quant_fusion_engine.py, core/multi_agent_council.py (total 6 references)",
+    "confidence": "High",
+    "refs_count": 6,
+    "refs": [
+      "core/corporate_actions_engine.py",
+      "core/deep_quant_fusion_engine.py",
+      "core/multi_agent_council.py",
+      "core/quant_books_engine.py",
+      "dashboard/app.py"
+    ]
+  },
+  {
+    "file_path": "core/gdr_arbitrage_engine.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: .github/workflows/daily_pipeline.yml, .github/workflows/tests.yml, core/deep_quant_fusion_engine.py (total 8 references)",
+    "confidence": "High",
+    "refs_count": 8,
+    "refs": [
+      ".github/workflows/daily_pipeline.yml",
+      ".github/workflows/tests.yml",
+      "core/deep_quant_fusion_engine.py",
+      "core/ensemble_decision_engine.py",
+      "core/multi_agent_council.py"
+    ]
+  },
+  {
+    "file_path": "core/incubation_gate_engine.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: dashboard/app.py, tests/test_incubation_gate_engine.py (total 2 references)",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      "dashboard/app.py",
+      "tests/test_incubation_gate_engine.py"
+    ]
+  },
+  {
+    "file_path": "core/insider_trading_engine.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: dashboard/app.py, tests/test_insider_trading_engine.py, tests/test_mlops_and_notifications.py (total 3 references)",
+    "confidence": "High",
+    "refs_count": 3,
+    "refs": [
+      "dashboard/app.py",
+      "tests/test_insider_trading_engine.py",
+      "tests/test_mlops_and_notifications.py"
+    ]
+  },
+  {
+    "file_path": "core/institutional_flow_engine.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: .github/workflows/daily_pipeline.yml, .github/workflows/tests.yml, core/advanced_feature_engineering.py (total 12 references)",
+    "confidence": "High",
+    "refs_count": 12,
+    "refs": [
+      ".github/workflows/daily_pipeline.yml",
+      ".github/workflows/tests.yml",
+      "core/advanced_feature_engineering.py",
+      "core/ai_prediction_model.py",
+      "core/egx_trading_rules_engine.py"
+    ]
+  },
+  {
+    "file_path": "core/liquidity_engine.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: reports/GEN26_CAPABILITY_MATRIX.json, reports/GEN26_FINAL_CAPABILITY_MATRIX.json, reports/GEN26_REPOSITORY_FORENSIC_AUDIT.json (total 4 references)",
+    "confidence": "High",
+    "refs_count": 4,
+    "refs": [
+      "reports/GEN26_CAPABILITY_MATRIX.json",
+      "reports/GEN26_FINAL_CAPABILITY_MATRIX.json",
+      "reports/GEN26_REPOSITORY_FORENSIC_AUDIT.json",
+      "tests/test_core_engines.py"
+    ]
+  },
+  {
+    "file_path": "core/liquidity_filter.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: CHANGELOG.md, core/multi_horizon_engine.py, dashboard/app.py (total 7 references)",
+    "confidence": "High",
+    "refs_count": 7,
+    "refs": [
+      "CHANGELOG.md",
+      "core/multi_horizon_engine.py",
+      "dashboard/app.py",
+      "scripts/generate_changelog.py",
+      "tests/test_liquidity.py"
+    ]
+  },
+  {
+    "file_path": "core/live_execution_firewall.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/paper_trading_orchestrator.py, tests/test_live_execution_firewall.py, tests/test_paper_trading_orchestrator.py (total 3 references)",
+    "confidence": "High",
+    "refs_count": 3,
+    "refs": [
+      "core/paper_trading_orchestrator.py",
+      "tests/test_live_execution_firewall.py",
+      "tests/test_paper_trading_orchestrator.py"
+    ]
+  },
+  {
+    "file_path": "core/live_fundamentals_engine.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/ai_prediction_model.py, core/multi_horizon_engine.py, scripts/trace_end_to_end.py (total 5 references)",
+    "confidence": "High",
+    "refs_count": 5,
+    "refs": [
+      "core/ai_prediction_model.py",
+      "core/multi_horizon_engine.py",
+      "scripts/trace_end_to_end.py",
+      "tests/test_advanced_methodology_features.py",
+      "tests/test_missing_layers.py"
+    ]
+  },
+  {
+    "file_path": "core/macro_economic_engine.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/deep_quant_fusion_engine.py, core/gdr_arbitrage_engine.py, core/multi_agent_council.py (total 8 references)",
+    "confidence": "High",
+    "refs_count": 8,
+    "refs": [
+      "core/deep_quant_fusion_engine.py",
+      "core/gdr_arbitrage_engine.py",
+      "core/multi_agent_council.py",
+      "core/multi_source_intelligence.py",
+      "core/risk_stress_testing_engine.py"
+    ]
+  },
+  {
+    "file_path": "core/macro_intelligence_engine.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: CHANGELOG.md, core/ai_prediction_model.py, core/mlops_pipeline.py (total 8 references)",
+    "confidence": "High",
+    "refs_count": 8,
+    "refs": [
+      "CHANGELOG.md",
+      "core/ai_prediction_model.py",
+      "core/mlops_pipeline.py",
+      "core/multi_horizon_engine.py",
+      "core/tax_margin_manager.py"
+    ]
+  },
+  {
+    "file_path": "core/market_breadth_engine.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: CHANGELOG.md, core/multi_horizon_engine.py, core/risk_position_sizer.py (total 10 references)",
+    "confidence": "High",
+    "refs_count": 10,
+    "refs": [
+      "CHANGELOG.md",
+      "core/multi_horizon_engine.py",
+      "core/risk_position_sizer.py",
+      "core/trading_agents/analyst_team.py",
+      "dashboard/app.py"
+    ]
+  },
+  {
+    "file_path": "core/market_calendar.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/data_freshness.py, core/market_scheduler.py, core/paper_trading_orchestrator.py (total 7 references)",
+    "confidence": "High",
+    "refs_count": 7,
+    "refs": [
+      "core/data_freshness.py",
+      "core/market_scheduler.py",
+      "core/paper_trading_orchestrator.py",
+      "dashboard/app.py",
+      "scripts/audit_trading_sessions.py"
+    ]
+  },
+  {
+    "file_path": "core/market_data_truth.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: tests/test_market_data_truth.py (total 1 references)",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "tests/test_market_data_truth.py"
+    ]
+  },
+  {
+    "file_path": "core/market_heatmap_engine.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: dashboard/app.py, reports/00_MASTER_CONSOLIDATED_SYSTEM_DOSSIER.md, reports/authoritative_20_reports/01_SYSTEM_ARCHITECTURE_OVERVIEW.md (total 6 references)",
+    "confidence": "High",
+    "refs_count": 6,
+    "refs": [
+      "dashboard/app.py",
+      "reports/00_MASTER_CONSOLIDATED_SYSTEM_DOSSIER.md",
+      "reports/authoritative_20_reports/01_SYSTEM_ARCHITECTURE_OVERVIEW.md",
+      "reports/authoritative_20_reports/02_EGX_244_UNIVERSE_CATALOG.md",
+      "scripts/sync_all_20_reports.py"
+    ]
+  },
+  {
+    "file_path": "core/market_intelligence.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/macro_economic_engine.py, dashboard/app.py, reports/GEN26_CAPABILITY_MATRIX.json (total 9 references)",
+    "confidence": "High",
+    "refs_count": 9,
+    "refs": [
+      "core/macro_economic_engine.py",
+      "dashboard/app.py",
+      "reports/GEN26_CAPABILITY_MATRIX.json",
+      "reports/GEN26_FINAL_CAPABILITY_MATRIX.json",
+      "reports/GEN26_REPOSITORY_FORENSIC_AUDIT.json"
+    ]
+  },
+  {
+    "file_path": "core/market_intelligence_scraper.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: .github/workflows/daily_pipeline.yml, .github/workflows/tests.yml, core/macro_economic_engine.py (total 5 references)",
+    "confidence": "High",
+    "refs_count": 5,
+    "refs": [
+      ".github/workflows/daily_pipeline.yml",
+      ".github/workflows/tests.yml",
+      "core/macro_economic_engine.py",
+      "dashboard/app.py",
+      "tests/test_market_intelligence_scraper.py"
+    ]
+  },
+  {
+    "file_path": "core/market_price_service.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/advanced_feature_engineering.py, core/alpha_scanner/opportunity_ranker.py, core/block_trades_engine.py (total 49 references)",
+    "confidence": "High",
+    "refs_count": 49,
+    "refs": [
+      "core/advanced_feature_engineering.py",
+      "core/alpha_scanner/opportunity_ranker.py",
+      "core/block_trades_engine.py",
+      "core/broker_execution_engine.py",
+      "core/corporate_actions_engine.py"
+    ]
+  },
+  {
+    "file_path": "core/market_scheduler.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/scheduler.py, dashboard/app.py, scripts/verify_pre_deployment_health.py (total 4 references)",
+    "confidence": "High",
+    "refs_count": 4,
+    "refs": [
+      "core/scheduler.py",
+      "dashboard/app.py",
+      "scripts/verify_pre_deployment_health.py",
+      "tests/test_market_scheduler.py"
+    ]
+  },
+  {
+    "file_path": "core/market_seasonality_engine.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: .github/workflows/daily_pipeline.yml, .github/workflows/tests.yml, dashboard/app.py (total 4 references)",
+    "confidence": "High",
+    "refs_count": 4,
+    "refs": [
+      ".github/workflows/daily_pipeline.yml",
+      ".github/workflows/tests.yml",
+      "dashboard/app.py",
+      "tests/test_market_seasonality_engine.py"
+    ]
+  },
+  {
+    "file_path": "core/meta_labeling_engine.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: CHANGELOG.md, core/mlops_pipeline.py, core/model_evaluator.py (total 9 references)",
+    "confidence": "High",
+    "refs_count": 9,
+    "refs": [
+      "CHANGELOG.md",
+      "core/mlops_pipeline.py",
+      "core/model_evaluator.py",
+      "core/multi_horizon_engine.py",
+      "dashboard/app.py"
+    ]
+  },
+  {
+    "file_path": "core/mlops_pipeline.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/multi_horizon_engine.py, dashboard/app.py, scripts/mlops_retrain.py (total 5 references)",
+    "confidence": "High",
+    "refs_count": 5,
+    "refs": [
+      "core/multi_horizon_engine.py",
+      "dashboard/app.py",
+      "scripts/mlops_retrain.py",
+      "tests/test_mlops_and_notifications.py",
+      "tests/test_mlops_triggers.py"
+    ]
+  },
+  {
+    "file_path": "core/model_evaluator.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/meta_labeling_engine.py, dashboard/app.py, tests/test_hardening_phase_2.py (total 4 references)",
+    "confidence": "High",
+    "refs_count": 4,
+    "refs": [
+      "core/meta_labeling_engine.py",
+      "dashboard/app.py",
+      "tests/test_hardening_phase_2.py",
+      "tests/test_model_evaluator.py"
+    ]
+  },
+  {
+    "file_path": "core/monte_carlo_engine.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: dashboard/app.py, reports/00_MASTER_CONSOLIDATED_SYSTEM_DOSSIER.md, reports/authoritative_20_reports/01_SYSTEM_ARCHITECTURE_OVERVIEW.md (total 5 references)",
+    "confidence": "High",
+    "refs_count": 5,
+    "refs": [
+      "dashboard/app.py",
+      "reports/00_MASTER_CONSOLIDATED_SYSTEM_DOSSIER.md",
+      "reports/authoritative_20_reports/01_SYSTEM_ARCHITECTURE_OVERVIEW.md",
+      "scripts/sync_all_20_reports.py",
+      "tests/test_elite_extensions.py"
+    ]
+  },
+  {
+    "file_path": "core/multi_agent_council.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/autonomous_research_lab.py, core/unified_pipeline_orchestrator.py, scripts/run_e2e_pipeline_trace.py (total 6 references)",
+    "confidence": "High",
+    "refs_count": 6,
+    "refs": [
+      "core/autonomous_research_lab.py",
+      "core/unified_pipeline_orchestrator.py",
+      "scripts/run_e2e_pipeline_trace.py",
+      "scripts/simulate_live_quant_cycle.py",
+      "tests/test_multi_agent_council.py"
+    ]
+  },
+  {
+    "file_path": "core/multi_horizon_engine.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: .github/workflows/daily_pipeline.yml, CHANGELOG.md, core/ensemble_decision_engine.py (total 31 references)",
+    "confidence": "High",
+    "refs_count": 31,
+    "refs": [
+      ".github/workflows/daily_pipeline.yml",
+      "CHANGELOG.md",
+      "core/ensemble_decision_engine.py",
+      "core/final_forensic_validator.py",
+      "core/market_scheduler.py"
+    ]
+  },
+  {
+    "file_path": "core/multi_objective_evaluator.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: scripts/automated_consistency_audit.py, tests/test_v2_architectural_enhancements.py (total 2 references)",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      "scripts/automated_consistency_audit.py",
+      "tests/test_v2_architectural_enhancements.py"
+    ]
+  },
+  {
+    "file_path": "core/multi_source_intelligence.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/deep_quant_fusion_engine.py, core/unified_pipeline_orchestrator.py, dashboard/app.py (total 4 references)",
+    "confidence": "High",
+    "refs_count": 4,
+    "refs": [
+      "core/deep_quant_fusion_engine.py",
+      "core/unified_pipeline_orchestrator.py",
+      "dashboard/app.py",
+      "tests/test_unified_pipeline_and_fusion_engine.py"
+    ]
+  },
+  {
+    "file_path": "core/news_deduplication_engine.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/alpha_scanner/multi_layer_scanner.py, scripts/automated_consistency_audit.py, tests/test_v2_architectural_enhancements.py (total 3 references)",
+    "confidence": "High",
+    "refs_count": 3,
+    "refs": [
+      "core/alpha_scanner/multi_layer_scanner.py",
+      "scripts/automated_consistency_audit.py",
+      "tests/test_v2_architectural_enhancements.py"
+    ]
+  },
+  {
+    "file_path": "core/news_ingestion_engine.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/nlp_sentiment_engine.py, tests/test_nlp_sentiment_engine.py (total 2 references)",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      "core/nlp_sentiment_engine.py",
+      "tests/test_nlp_sentiment_engine.py"
+    ]
+  },
+  {
+    "file_path": "core/news_sentiment_engine.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/multi_horizon_engine.py, scripts/trace_end_to_end.py, tests/test_missing_layers.py (total 3 references)",
+    "confidence": "High",
+    "refs_count": 3,
+    "refs": [
+      "core/multi_horizon_engine.py",
+      "scripts/trace_end_to_end.py",
+      "tests/test_missing_layers.py"
+    ]
+  },
+  {
+    "file_path": "core/nlp_sentiment_engine.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/ensemble_decision_engine.py, core/feature_registry.py, core/meta_labeling_engine.py (total 6 references)",
+    "confidence": "High",
+    "refs_count": 6,
+    "refs": [
+      "core/ensemble_decision_engine.py",
+      "core/feature_registry.py",
+      "core/meta_labeling_engine.py",
+      "dashboard/app.py",
+      "scripts/upgrade_nlp_engine.py"
+    ]
+  },
+  {
+    "file_path": "core/notification_gateway.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: .github/workflows/daily_pipeline.yml, .github/workflows/tests.yml, core/autonomous_research_lab.py (total 13 references)",
+    "confidence": "High",
+    "refs_count": 13,
+    "refs": [
+      ".github/workflows/daily_pipeline.yml",
+      ".github/workflows/tests.yml",
+      "core/autonomous_research_lab.py",
+      "core/mlops_pipeline.py",
+      "core/unified_pipeline_orchestrator.py"
+    ]
+  },
+  {
+    "file_path": "core/paper_cohort.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: dashboard/app.py, tests/test_paper_cohort.py (total 2 references)",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      "dashboard/app.py",
+      "tests/test_paper_cohort.py"
+    ]
+  },
+  {
+    "file_path": "core/paper_observatory.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/paper_trading_orchestrator.py, tests/test_paper_observatory.py, tests/test_session_immutability.py (total 3 references)",
+    "confidence": "High",
+    "refs_count": 3,
+    "refs": [
+      "core/paper_trading_orchestrator.py",
+      "tests/test_paper_observatory.py",
+      "tests/test_session_immutability.py"
+    ]
+  },
+  {
+    "file_path": "core/paper_reality_audit.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: dashboard/app.py, tests/test_paper_observatory.py (total 2 references)",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      "dashboard/app.py",
+      "tests/test_paper_observatory.py"
+    ]
+  },
+  {
+    "file_path": "core/paper_trading_orchestrator.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: .github/workflows/daily_pipeline.yml, reports/MASTER_FORENSIC_FULL_STACK_REPORT.md, scripts/verify_full_stack.py (total 4 references)",
+    "confidence": "High",
+    "refs_count": 4,
+    "refs": [
+      ".github/workflows/daily_pipeline.yml",
+      "reports/MASTER_FORENSIC_FULL_STACK_REPORT.md",
+      "scripts/verify_full_stack.py",
+      "tests/test_paper_trading_orchestrator.py"
+    ]
+  },
+  {
+    "file_path": "core/paper_trading_state.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/paper_trading_orchestrator.py, dashboard/app.py, tests/test_paper_state_persistence.py (total 4 references)",
+    "confidence": "High",
+    "refs_count": 4,
+    "refs": [
+      "core/paper_trading_orchestrator.py",
+      "dashboard/app.py",
+      "tests/test_paper_state_persistence.py",
+      "tests/test_paper_trading_orchestrator.py"
+    ]
+  },
+  {
+    "file_path": "core/paper_vs_backtest.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: tests/test_portfolio_construction.py (total 1 references)",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "tests/test_portfolio_construction.py"
+    ]
+  },
+  {
+    "file_path": "core/pit_store.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/egx_universe.py, core/final_forensic_validator.py, core/real_portfolio.py (total 11 references)",
+    "confidence": "High",
+    "refs_count": 11,
+    "refs": [
+      "core/egx_universe.py",
+      "core/final_forensic_validator.py",
+      "core/real_portfolio.py",
+      "core/watchlist.py",
+      "reports/GEN26_CAPABILITY_MATRIX.json"
+    ]
+  },
+  {
+    "file_path": "core/portfolio_alert_engine.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: dashboard/app.py, reports/00_MASTER_CONSOLIDATED_SYSTEM_DOSSIER.md, reports/authoritative_20_reports/01_SYSTEM_ARCHITECTURE_OVERVIEW.md (total 5 references)",
+    "confidence": "High",
+    "refs_count": 5,
+    "refs": [
+      "dashboard/app.py",
+      "reports/00_MASTER_CONSOLIDATED_SYSTEM_DOSSIER.md",
+      "reports/authoritative_20_reports/01_SYSTEM_ARCHITECTURE_OVERVIEW.md",
+      "scripts/sync_all_20_reports.py",
+      "tests/test_elite_extensions.py"
+    ]
+  },
+  {
+    "file_path": "core/portfolio_constructor.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/paper_trading_orchestrator.py, tests/test_portfolio_construction.py (total 2 references)",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      "core/paper_trading_orchestrator.py",
+      "tests/test_portfolio_construction.py"
+    ]
+  },
+  {
+    "file_path": "core/portfolio_correlation_engine.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/ai_prediction_model.py, core/multi_horizon_engine.py, dashboard/app.py (total 5 references)",
+    "confidence": "High",
+    "refs_count": 5,
+    "refs": [
+      "core/ai_prediction_model.py",
+      "core/multi_horizon_engine.py",
+      "dashboard/app.py",
+      "tests/test_advanced_methodology_features.py",
+      "tests/test_sprint_c_slippage_and_opportunities.py"
+    ]
+  },
+  {
+    "file_path": "core/portfolio_journal.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: reports/GEN26_CAPABILITY_MATRIX.json, reports/GEN26_FINAL_CAPABILITY_MATRIX.json, reports/GEN26_REPOSITORY_FORENSIC_AUDIT.json (total 4 references)",
+    "confidence": "High",
+    "refs_count": 4,
+    "refs": [
+      "reports/GEN26_CAPABILITY_MATRIX.json",
+      "reports/GEN26_FINAL_CAPABILITY_MATRIX.json",
+      "reports/GEN26_REPOSITORY_FORENSIC_AUDIT.json",
+      "tests/test_portfolio_journal.py"
+    ]
+  },
+  {
+    "file_path": "core/portfolio_optimizer.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: CHANGELOG.md, dashboard/app.py, scripts/generate_changelog.py (total 4 references)",
+    "confidence": "High",
+    "refs_count": 4,
+    "refs": [
+      "CHANGELOG.md",
+      "dashboard/app.py",
+      "scripts/generate_changelog.py",
+      "tests/test_portfolio_optimizer.py"
+    ]
+  },
+  {
+    "file_path": "core/portfolio_risk.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/portfolio_constructor.py, core/real_portfolio.py, tests/test_portfolio_construction.py (total 3 references)",
+    "confidence": "High",
+    "refs_count": 3,
+    "refs": [
+      "core/portfolio_constructor.py",
+      "core/real_portfolio.py",
+      "tests/test_portfolio_construction.py"
+    ]
+  },
+  {
+    "file_path": "core/prediction_actual_tracker.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: dashboard/app.py, tests/test_sprint_b_feedback_and_registry.py (total 2 references)",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      "dashboard/app.py",
+      "tests/test_sprint_b_feedback_and_registry.py"
+    ]
+  },
+  {
+    "file_path": "core/price_reconciliation.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/final_forensic_validator.py, dashboard/app.py, tests/test_price_reconciliation_and_ux.py (total 3 references)",
+    "confidence": "High",
+    "refs_count": 3,
+    "refs": [
+      "core/final_forensic_validator.py",
+      "dashboard/app.py",
+      "tests/test_price_reconciliation_and_ux.py"
+    ]
+  },
+  {
+    "file_path": "core/price_sync_service.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: .github/workflows/daily_pipeline.yml, core/egx_universe_loader.py, core/market_heatmap_engine.py (total 26 references)",
+    "confidence": "High",
+    "refs_count": 26,
+    "refs": [
+      ".github/workflows/daily_pipeline.yml",
+      "core/egx_universe_loader.py",
+      "core/market_heatmap_engine.py",
+      "core/market_price_service.py",
+      "core/market_scheduler.py"
+    ]
+  },
+  {
+    "file_path": "core/production_readiness_matrix.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: dashboard/app.py, scripts/automated_consistency_audit.py, tests/test_v2_architectural_enhancements.py (total 3 references)",
+    "confidence": "High",
+    "refs_count": 3,
+    "refs": [
+      "dashboard/app.py",
+      "scripts/automated_consistency_audit.py",
+      "tests/test_v2_architectural_enhancements.py"
+    ]
+  },
+  {
+    "file_path": "core/promotion_gate.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/autonomous_research_lab.py, dashboard/app.py, tests/test_backtest.py (total 5 references)",
+    "confidence": "High",
+    "refs_count": 5,
+    "refs": [
+      "core/autonomous_research_lab.py",
+      "dashboard/app.py",
+      "tests/test_backtest.py",
+      "tests/test_promotion_gate_and_research_lab.py",
+      "tests/test_sprint_b_feedback_and_registry.py"
+    ]
+  },
+  {
+    "file_path": "core/quant_books_engine.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/deep_quant_fusion_engine.py, core/multi_agent_council.py, core/trading_agents/analyst_team.py (total 7 references)",
+    "confidence": "High",
+    "refs_count": 7,
+    "refs": [
+      "core/deep_quant_fusion_engine.py",
+      "core/multi_agent_council.py",
+      "core/trading_agents/analyst_team.py",
+      "core/trading_agents/risk_and_fund_manager.py",
+      "core/unified_pipeline_orchestrator.py"
+    ]
+  },
+  {
+    "file_path": "core/ranking_engine.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/paper_trading_orchestrator.py, dashboard/app.py, tests/test_historical_cross_sectional_selection.py (total 4 references)",
+    "confidence": "High",
+    "refs_count": 4,
+    "refs": [
+      "core/paper_trading_orchestrator.py",
+      "dashboard/app.py",
+      "tests/test_historical_cross_sectional_selection.py",
+      "tests/ui/test_rtl_and_ranking_order.py"
+    ]
+  },
+  {
+    "file_path": "core/real_portfolio.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/alpha_scanner/multi_layer_scanner.py, core/feature_registry.py, core/final_forensic_validator.py (total 14 references)",
+    "confidence": "High",
+    "refs_count": 14,
+    "refs": [
+      "core/alpha_scanner/multi_layer_scanner.py",
+      "core/feature_registry.py",
+      "core/final_forensic_validator.py",
+      "core/market_scheduler.py",
+      "core/monte_carlo_engine.py"
+    ]
+  },
+  {
+    "file_path": "core/regime_hmm_engine.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: .github/workflows/daily_pipeline.yml, .github/workflows/tests.yml, core/ensemble_decision_engine.py (total 6 references)",
+    "confidence": "High",
+    "refs_count": 6,
+    "refs": [
+      ".github/workflows/daily_pipeline.yml",
+      ".github/workflows/tests.yml",
+      "core/ensemble_decision_engine.py",
+      "core/multi_agent_council.py",
+      "dashboard/app.py"
+    ]
+  },
+  {
+    "file_path": "core/risk_position_sizer.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/multi_horizon_engine.py, scripts/trace_end_to_end.py, tests/test_technical_and_risk_sizing.py (total 3 references)",
+    "confidence": "High",
+    "refs_count": 3,
+    "refs": [
+      "core/multi_horizon_engine.py",
+      "scripts/trace_end_to_end.py",
+      "tests/test_technical_and_risk_sizing.py"
+    ]
+  },
+  {
+    "file_path": "core/risk_stress_testing_engine.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: dashboard/app.py, tests/test_database_and_stress_engine.py (total 2 references)",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      "dashboard/app.py",
+      "tests/test_database_and_stress_engine.py"
+    ]
+  },
+  {
+    "file_path": "core/scheduler.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/market_scheduler.py, tests/test_market_scheduler.py (total 2 references)",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      "core/market_scheduler.py",
+      "tests/test_market_scheduler.py"
+    ]
+  },
+  {
+    "file_path": "core/sector_rs_engine.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/multi_horizon_engine.py, scripts/trace_end_to_end.py, tests/test_advanced_quant_layers.py (total 3 references)",
+    "confidence": "High",
+    "refs_count": 3,
+    "refs": [
+      "core/multi_horizon_engine.py",
+      "scripts/trace_end_to_end.py",
+      "tests/test_advanced_quant_layers.py"
+    ]
+  },
+  {
+    "file_path": "core/session_manager.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: CHANGELOG.md, core/paper_trading_orchestrator.py, reports/GEN26_CAPABILITY_MATRIX.json (total 6 references)",
+    "confidence": "High",
+    "refs_count": 6,
+    "refs": [
+      "CHANGELOG.md",
+      "core/paper_trading_orchestrator.py",
+      "reports/GEN26_CAPABILITY_MATRIX.json",
+      "reports/GEN26_FINAL_CAPABILITY_MATRIX.json",
+      "reports/GEN26_REPOSITORY_FORENSIC_AUDIT.json"
+    ]
+  },
+  {
+    "file_path": "core/statistical_arbitrage_engine.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: .github/workflows/daily_pipeline.yml, .github/workflows/tests.yml, core/deep_quant_fusion_engine.py (total 8 references)",
+    "confidence": "High",
+    "refs_count": 8,
+    "refs": [
+      ".github/workflows/daily_pipeline.yml",
+      ".github/workflows/tests.yml",
+      "core/deep_quant_fusion_engine.py",
+      "core/multi_agent_council.py",
+      "dashboard/app.py"
+    ]
+  },
+  {
+    "file_path": "core/statistical_validator.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: tests/test_statistical_validation.py (total 1 references)",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "tests/test_statistical_validation.py"
+    ]
+  },
+  {
+    "file_path": "core/stress_testing.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: dashboard/app.py, tests/test_portfolio_optimizer.py, tests/test_stress_framework.py (total 3 references)",
+    "confidence": "High",
+    "refs_count": 3,
+    "refs": [
+      "dashboard/app.py",
+      "tests/test_portfolio_optimizer.py",
+      "tests/test_stress_framework.py"
+    ]
+  },
+  {
+    "file_path": "core/stress_testing_engine.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/risk_stress_testing_engine.py, dashboard/app.py, tests/test_portfolio_optimizer.py (total 3 references)",
+    "confidence": "High",
+    "refs_count": 3,
+    "refs": [
+      "core/risk_stress_testing_engine.py",
+      "dashboard/app.py",
+      "tests/test_portfolio_optimizer.py"
+    ]
+  },
+  {
+    "file_path": "core/tax_margin_manager.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: dashboard/app.py, tests/test_mlops_and_notifications.py (total 2 references)",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      "dashboard/app.py",
+      "tests/test_mlops_and_notifications.py"
+    ]
+  },
+  {
+    "file_path": "core/technical_setup_engine.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: CHANGELOG.md, core/ai_prediction_model.py, core/multi_agent_council.py (total 11 references)",
+    "confidence": "High",
+    "refs_count": 11,
+    "refs": [
+      "CHANGELOG.md",
+      "core/ai_prediction_model.py",
+      "core/multi_agent_council.py",
+      "core/multi_horizon_engine.py",
+      "scripts/generate_changelog.py"
+    ]
+  },
+  {
+    "file_path": "core/telegram_notifier.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/portfolio_alert_engine.py, dashboard/app.py, reports/00_MASTER_CONSOLIDATED_SYSTEM_DOSSIER.md (total 6 references)",
+    "confidence": "High",
+    "refs_count": 6,
+    "refs": [
+      "core/portfolio_alert_engine.py",
+      "dashboard/app.py",
+      "reports/00_MASTER_CONSOLIDATED_SYSTEM_DOSSIER.md",
+      "reports/authoritative_20_reports/01_SYSTEM_ARCHITECTURE_OVERVIEW.md",
+      "scripts/sync_all_20_reports.py"
+    ]
+  },
+  {
+    "file_path": "core/trade_selection_model.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/alpha_scanner/opportunity_ranker.py, core/trading_agents/trader_agent.py, scripts/automated_consistency_audit.py (total 5 references)",
+    "confidence": "High",
+    "refs_count": 5,
+    "refs": [
+      "core/alpha_scanner/opportunity_ranker.py",
+      "core/trading_agents/trader_agent.py",
+      "scripts/automated_consistency_audit.py",
+      "scripts/simulate_live_quant_cycle.py",
+      "tests/test_v2_architectural_enhancements.py"
+    ]
+  },
+  {
+    "file_path": "core/trading_agents/__init__.py",
+    "category": "ORPHANED",
+    "reason": "Core engine module with no direct textual import reference in repository.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "core/trading_agents/analyst_team.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: tests/test_trading_agents_framework.py (total 1 references)",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "tests/test_trading_agents_framework.py"
+    ]
+  },
+  {
+    "file_path": "core/trading_agents/debate_engine.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: tests/test_trading_agents_framework.py (total 1 references)",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "tests/test_trading_agents_framework.py"
+    ]
+  },
+  {
+    "file_path": "core/trading_agents/llm_router.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: dashboard/app.py, reports/00_MASTER_CONSOLIDATED_SYSTEM_DOSSIER.md, reports/authoritative_20_reports/01_SYSTEM_ARCHITECTURE_OVERVIEW.md (total 5 references)",
+    "confidence": "High",
+    "refs_count": 5,
+    "refs": [
+      "dashboard/app.py",
+      "reports/00_MASTER_CONSOLIDATED_SYSTEM_DOSSIER.md",
+      "reports/authoritative_20_reports/01_SYSTEM_ARCHITECTURE_OVERVIEW.md",
+      "scripts/sync_all_20_reports.py",
+      "tests/test_elite_extensions.py"
+    ]
+  },
+  {
+    "file_path": "core/trading_agents/orchestrator.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/paper_trading_orchestrator.py, core/unified_pipeline_orchestrator.py, dashboard/app.py (total 8 references)",
+    "confidence": "High",
+    "refs_count": 8,
+    "refs": [
+      "core/paper_trading_orchestrator.py",
+      "core/unified_pipeline_orchestrator.py",
+      "dashboard/app.py",
+      "reports/MASTER_FORENSIC_FULL_STACK_REPORT.md",
+      "scripts/system_interconnection_inspector.py"
+    ]
+  },
+  {
+    "file_path": "core/trading_agents/risk_and_fund_manager.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: tests/test_trading_agents_framework.py (total 1 references)",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "tests/test_trading_agents_framework.py"
+    ]
+  },
+  {
+    "file_path": "core/trading_agents/trader_agent.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: tests/test_trading_agents_framework.py (total 1 references)",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "tests/test_trading_agents_framework.py"
+    ]
+  },
+  {
+    "file_path": "core/uncertainty_engine.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/trading_agents/trader_agent.py, scripts/automated_consistency_audit.py, scripts/simulate_live_quant_cycle.py (total 4 references)",
+    "confidence": "High",
+    "refs_count": 4,
+    "refs": [
+      "core/trading_agents/trader_agent.py",
+      "scripts/automated_consistency_audit.py",
+      "scripts/simulate_live_quant_cycle.py",
+      "tests/test_v2_architectural_enhancements.py"
+    ]
+  },
+  {
+    "file_path": "core/unified_pipeline_orchestrator.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: dashboard/app.py, tests/test_unified_pipeline_and_fusion_engine.py (total 2 references)",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      "dashboard/app.py",
+      "tests/test_unified_pipeline_and_fusion_engine.py"
+    ]
+  },
+  {
+    "file_path": "core/valuation_engine.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: reports/GEN26_CAPABILITY_MATRIX.json, reports/GEN26_FINAL_CAPABILITY_MATRIX.json, reports/GEN26_REPOSITORY_FORENSIC_AUDIT.json (total 4 references)",
+    "confidence": "High",
+    "refs_count": 4,
+    "refs": [
+      "reports/GEN26_CAPABILITY_MATRIX.json",
+      "reports/GEN26_FINAL_CAPABILITY_MATRIX.json",
+      "reports/GEN26_REPOSITORY_FORENSIC_AUDIT.json",
+      "tests/test_core_engines.py"
+    ]
+  },
+  {
+    "file_path": "core/walk_forward_ml_engine.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: dashboard/app.py, tests/test_walk_forward_ml_engine.py (total 2 references)",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      "dashboard/app.py",
+      "tests/test_walk_forward_ml_engine.py"
+    ]
+  },
+  {
+    "file_path": "core/watchlist.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: dashboard/app.py, tests/e2e_browser_tests.py, tests/test_watchlist.py (total 3 references)",
+    "confidence": "High",
+    "refs_count": 3,
+    "refs": [
+      "dashboard/app.py",
+      "tests/e2e_browser_tests.py",
+      "tests/test_watchlist.py"
+    ]
+  },
+  {
+    "file_path": "core/weight_calibrator.py",
+    "category": "ACTIVE",
+    "reason": "Core quantitative engine module. Imported by: core/edge_verifier.py, core/multi_horizon_engine.py, core/promotion_gate.py (total 5 references)",
+    "confidence": "High",
+    "refs_count": 5,
+    "refs": [
+      "core/edge_verifier.py",
+      "core/multi_horizon_engine.py",
+      "core/promotion_gate.py",
+      "tests/test_hardening_phase_2.py",
+      "tests/test_promotion_gate_and_research_lab.py"
+    ]
+  },
+  {
+    "file_path": "dashboard/app.py",
+    "category": "ACTIVE",
+    "reason": "Web application dashboard template/runtime. Referenced in: Procfile, START.bat, render.yaml",
+    "confidence": "High",
+    "refs_count": 51,
+    "refs": [
+      "Procfile",
+      "START.bat",
+      "render.yaml",
+      "reports/GEN26_CAPABILITY_MATRIX.json",
+      "reports/GEN26_FINAL_CAPABILITY_MATRIX.json"
+    ]
+  },
+  {
+    "file_path": "dashboard/index.html",
+    "category": "ACTIVE",
+    "reason": "Web application dashboard template/runtime. Referenced in: CHANGELOG.md, core/final_forensic_validator.py, dashboard/app.py",
+    "confidence": "High",
+    "refs_count": 19,
+    "refs": [
+      "CHANGELOG.md",
+      "core/final_forensic_validator.py",
+      "dashboard/app.py",
+      "reports/MASTER_FORENSIC_FULL_STACK_REPORT.md",
+      "scripts/build_ui.py"
+    ]
+  },
+  {
+    "file_path": "dashboard/templates/index.html",
+    "category": "ACTIVE",
+    "reason": "Web application dashboard template/runtime. Referenced in: CHANGELOG.md, core/final_forensic_validator.py, dashboard/app.py",
+    "confidence": "High",
+    "refs_count": 19,
+    "refs": [
+      "CHANGELOG.md",
+      "core/final_forensic_validator.py",
+      "dashboard/app.py",
+      "reports/MASTER_FORENSIC_FULL_STACK_REPORT.md",
+      "scripts/build_ui.py"
+    ]
+  },
+  {
+    "file_path": "data/ai_validation_metrics.json",
+    "category": "ACTIVE",
+    "reason": "Canonical SSoT dataset / database persistence store. Accessed by: core/model_evaluator.py",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "core/model_evaluator.py"
+    ]
+  },
+  {
+    "file_path": "data/algo_orders.json",
+    "category": "ACTIVE",
+    "reason": "Canonical SSoT dataset / database persistence store. Accessed by: core/broker_execution_engine.py",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "core/broker_execution_engine.py"
+    ]
+  },
+  {
+    "file_path": "data/authoritative_paper_sessions.json",
+    "category": "ACTIVE",
+    "reason": "Canonical SSoT dataset / database persistence store. Accessed by: core/session_manager.py, scripts/fast_inventory_classifier.py, tests/test_portfolio_journal.py",
+    "confidence": "High",
+    "refs_count": 3,
+    "refs": [
+      "core/session_manager.py",
+      "scripts/fast_inventory_classifier.py",
+      "tests/test_portfolio_journal.py"
+    ]
+  },
+  {
+    "file_path": "data/calibrated_weights.json",
+    "category": "ACTIVE",
+    "reason": "Canonical SSoT dataset / database persistence store. Accessed by: core/weight_calibrator.py",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "core/weight_calibrator.py"
+    ]
+  },
+  {
+    "file_path": "data/canonical_prices_live.json",
+    "category": "ACTIVE",
+    "reason": "Canonical SSoT dataset / database persistence store. Accessed by: core/market_breadth_engine.py, core/market_price_service.py, core/price_sync_service.py",
+    "confidence": "High",
+    "refs_count": 12,
+    "refs": [
+      "core/market_breadth_engine.py",
+      "core/market_price_service.py",
+      "core/price_sync_service.py",
+      "reports/MASTER_FORENSIC_FULL_STACK_REPORT.md",
+      "scripts/comprehensive_data_diagnostic.py"
+    ]
+  },
+  {
+    "file_path": "data/corporate_actions_calendar.json",
+    "category": "ACTIVE",
+    "reason": "Canonical SSoT dataset / database persistence store. Accessed by: core/corporate_actions_calendar.py",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "core/corporate_actions_calendar.py"
+    ]
+  },
+  {
+    "file_path": "data/data_verification_report.json",
+    "category": "ACTIVE",
+    "reason": "Canonical SSoT dataset / database persistence store. Accessed by: scripts/comprehensive_data_diagnostic.py",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "scripts/comprehensive_data_diagnostic.py"
+    ]
+  },
+  {
+    "file_path": "data/decision_snapshots/COMI.CA_2026-08-20_c23393f1.json",
+    "category": "SUPERSEDED",
+    "reason": "Historical snapshot replaced by data/canonical_prices_live.json and data/gen26_market.db.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "data/decision_snapshots/COMI.CA_2026-08-20_d71f8f94.json",
+    "category": "SUPERSEDED",
+    "reason": "Historical snapshot replaced by data/canonical_prices_live.json and data/gen26_market.db.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "data/decision_snapshots/COMI.CA_2026-08-21_7b5a61ef.json",
+    "category": "SUPERSEDED",
+    "reason": "Historical snapshot replaced by data/canonical_prices_live.json and data/gen26_market.db.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "data/decision_snapshots/COMI.CA_2026-08-21_d6433861.json",
+    "category": "SUPERSEDED",
+    "reason": "Historical snapshot replaced by data/canonical_prices_live.json and data/gen26_market.db.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "data/decision_snapshots/COMI.CA_2026-08-23_3b01f1e4.json",
+    "category": "SUPERSEDED",
+    "reason": "Historical snapshot replaced by data/canonical_prices_live.json and data/gen26_market.db.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "data/decision_snapshots/COMI.CA_2026-08-23_d1c9da5e.json",
+    "category": "SUPERSEDED",
+    "reason": "Historical snapshot replaced by data/canonical_prices_live.json and data/gen26_market.db.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "data/decision_snapshots/COMI.CA_2026-08-24_1f7f60e8.json",
+    "category": "SUPERSEDED",
+    "reason": "Historical snapshot replaced by data/canonical_prices_live.json and data/gen26_market.db.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "data/decision_snapshots/COMI.CA_2026-08-24_73a250e2.json",
+    "category": "SUPERSEDED",
+    "reason": "Historical snapshot replaced by data/canonical_prices_live.json and data/gen26_market.db.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "data/decision_snapshots/COMI.CA_2026-08-25_6468813f.json",
+    "category": "SUPERSEDED",
+    "reason": "Historical snapshot replaced by data/canonical_prices_live.json and data/gen26_market.db.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "data/decision_snapshots/COMI.CA_2026-08-25_9cec8c1f.json",
+    "category": "SUPERSEDED",
+    "reason": "Historical snapshot replaced by data/canonical_prices_live.json and data/gen26_market.db.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "data/decision_snapshots/COMI.CA_2026-08-26_57ac8299.json",
+    "category": "SUPERSEDED",
+    "reason": "Historical snapshot replaced by data/canonical_prices_live.json and data/gen26_market.db.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "data/decision_snapshots/COMI.CA_2026-08-26_60552d11.json",
+    "category": "SUPERSEDED",
+    "reason": "Historical snapshot replaced by data/canonical_prices_live.json and data/gen26_market.db.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "data/decision_snapshots/COMI.CA_2026-08-27_3a3f9587.json",
+    "category": "SUPERSEDED",
+    "reason": "Historical snapshot replaced by data/canonical_prices_live.json and data/gen26_market.db.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "data/decision_snapshots/COMI.CA_2026-08-27_41ae1892.json",
+    "category": "SUPERSEDED",
+    "reason": "Historical snapshot replaced by data/canonical_prices_live.json and data/gen26_market.db.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "data/decision_snapshots/COMI.CA_2026-08-28_5f095104.json",
+    "category": "SUPERSEDED",
+    "reason": "Historical snapshot replaced by data/canonical_prices_live.json and data/gen26_market.db.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "data/decision_snapshots/COMI.CA_2026-08-28_61f37c5d.json",
+    "category": "SUPERSEDED",
+    "reason": "Historical snapshot replaced by data/canonical_prices_live.json and data/gen26_market.db.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "data/decision_snapshots/COMI.CA_2026-08-29_b56e7059.json",
+    "category": "SUPERSEDED",
+    "reason": "Historical snapshot replaced by data/canonical_prices_live.json and data/gen26_market.db.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "data/decision_snapshots/COMI.CA_2026-08-29_c027159b.json",
+    "category": "SUPERSEDED",
+    "reason": "Historical snapshot replaced by data/canonical_prices_live.json and data/gen26_market.db.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "data/decision_snapshots/COMI.CA_2026-08-30_4215cce8.json",
+    "category": "SUPERSEDED",
+    "reason": "Historical snapshot replaced by data/canonical_prices_live.json and data/gen26_market.db.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "data/decision_snapshots/COMI.CA_2026-08-30_90209799.json",
+    "category": "SUPERSEDED",
+    "reason": "Historical snapshot replaced by data/canonical_prices_live.json and data/gen26_market.db.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "data/decision_snapshots/DEC_TEST_REPLAY_001.json",
+    "category": "SUPERSEDED",
+    "reason": "Historical snapshot replaced by data/canonical_prices_live.json and data/gen26_market.db.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "data/decision_snapshots/TEST.CA_2026-08-20_31705f7e.json",
+    "category": "SUPERSEDED",
+    "reason": "Historical snapshot replaced by data/canonical_prices_live.json and data/gen26_market.db.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "data/decision_snapshots/TEST.CA_2026-08-21_f533e996.json",
+    "category": "SUPERSEDED",
+    "reason": "Historical snapshot replaced by data/canonical_prices_live.json and data/gen26_market.db.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "data/decision_snapshots/TEST.CA_2026-08-23_f578ca21.json",
+    "category": "SUPERSEDED",
+    "reason": "Historical snapshot replaced by data/canonical_prices_live.json and data/gen26_market.db.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "data/decision_snapshots/TEST.CA_2026-08-24_d9c9c86e.json",
+    "category": "SUPERSEDED",
+    "reason": "Historical snapshot replaced by data/canonical_prices_live.json and data/gen26_market.db.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "data/decision_snapshots/TEST.CA_2026-08-25_35e8012e.json",
+    "category": "SUPERSEDED",
+    "reason": "Historical snapshot replaced by data/canonical_prices_live.json and data/gen26_market.db.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "data/decision_snapshots/TEST.CA_2026-08-26_ede75b97.json",
+    "category": "SUPERSEDED",
+    "reason": "Historical snapshot replaced by data/canonical_prices_live.json and data/gen26_market.db.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "data/decision_snapshots/TEST.CA_2026-08-27_51cddbf3.json",
+    "category": "SUPERSEDED",
+    "reason": "Historical snapshot replaced by data/canonical_prices_live.json and data/gen26_market.db.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "data/decision_snapshots/TEST.CA_2026-08-28_bbca1669.json",
+    "category": "SUPERSEDED",
+    "reason": "Historical snapshot replaced by data/canonical_prices_live.json and data/gen26_market.db.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "data/decision_snapshots/TEST.CA_2026-08-29_8c9c3ae9.json",
+    "category": "SUPERSEDED",
+    "reason": "Historical snapshot replaced by data/canonical_prices_live.json and data/gen26_market.db.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "data/decision_snapshots/TEST.CA_2026-08-30_c74deb10.json",
+    "category": "SUPERSEDED",
+    "reason": "Historical snapshot replaced by data/canonical_prices_live.json and data/gen26_market.db.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "data/gen26_market.db",
+    "category": "ACTIVE",
+    "reason": "Canonical SSoT dataset / database persistence store. Accessed by: core/database_engine.py, reports/ground_truth_audit_report.json, scripts/fast_inventory_classifier.py",
+    "confidence": "High",
+    "refs_count": 4,
+    "refs": [
+      "core/database_engine.py",
+      "reports/ground_truth_audit_report.json",
+      "scripts/fast_inventory_classifier.py",
+      "scripts/system_interconnection_inspector.py"
+    ]
+  },
+  {
+    "file_path": "data/gen26_production.db",
+    "category": "ACTIVE",
+    "reason": "Canonical SSoT dataset / database persistence store. Accessed by: core/database.py, core/incubation_gate_engine.py, core/technical_setup_engine.py",
+    "confidence": "High",
+    "refs_count": 11,
+    "refs": [
+      "core/database.py",
+      "core/incubation_gate_engine.py",
+      "core/technical_setup_engine.py",
+      "core/weight_calibrator.py",
+      "reports/system_status.json"
+    ]
+  },
+  {
+    "file_path": "data/gen26_production.db-shm",
+    "category": "ACTIVE",
+    "reason": "Canonical SSoT dataset / database persistence store. Accessed by: SQLite / Market services",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "data/gen26_production.db-wal",
+    "category": "ACTIVE",
+    "reason": "Canonical SSoT dataset / database persistence store. Accessed by: SQLite / Market services",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "data/historical_paper_sessions_archive.json",
+    "category": "ACTIVE",
+    "reason": "Canonical SSoT dataset / database persistence store. Accessed by: core/paper_cohort.py",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "core/paper_cohort.py"
+    ]
+  },
+  {
+    "file_path": "data/holdout_reserve_locked_20260814.json",
+    "category": "SUPERSEDED",
+    "reason": "Historical snapshot replaced by data/canonical_prices_live.json and data/gen26_market.db.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "data/macro_economic_state.json",
+    "category": "ACTIVE",
+    "reason": "Canonical SSoT dataset / database persistence store. Accessed by: core/macro_economic_engine.py, core/macro_intelligence_engine.py",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      "core/macro_economic_engine.py",
+      "core/macro_intelligence_engine.py"
+    ]
+  },
+  {
+    "file_path": "data/market_price_reconciliation.json",
+    "category": "ACTIVE",
+    "reason": "Canonical SSoT dataset / database persistence store. Accessed by: core/price_reconciliation.py",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "core/price_reconciliation.py"
+    ]
+  },
+  {
+    "file_path": "data/ml_permutation_importance.json",
+    "category": "ACTIVE",
+    "reason": "Canonical SSoT dataset / database persistence store. Accessed by: core/model_evaluator.py",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "core/model_evaluator.py"
+    ]
+  },
+  {
+    "file_path": "data/mlops_retrain_metadata.json",
+    "category": "ACTIVE",
+    "reason": "Canonical SSoT dataset / database persistence store. Accessed by: core/mlops_pipeline.py",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "core/mlops_pipeline.py"
+    ]
+  },
+  {
+    "file_path": "data/model_drift_metrics.json",
+    "category": "ACTIVE",
+    "reason": "Canonical SSoT dataset / database persistence store. Accessed by: core/walk_forward_ml_engine.py, dashboard/app.py, reports/GEN26_CAPABILITY_MATRIX.json",
+    "confidence": "High",
+    "refs_count": 3,
+    "refs": [
+      "core/walk_forward_ml_engine.py",
+      "dashboard/app.py",
+      "reports/GEN26_CAPABILITY_MATRIX.json"
+    ]
+  },
+  {
+    "file_path": "data/multi_horizon_predictions.json",
+    "category": "ACTIVE",
+    "reason": "Canonical SSoT dataset / database persistence store. Accessed by: core/multi_horizon_engine.py",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "core/multi_horizon_engine.py"
+    ]
+  },
+  {
+    "file_path": "data/multi_source_verification.json",
+    "category": "ORPHANED",
+    "reason": "Data file without direct code reference.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "data/my_portfolio_transactions.json",
+    "category": "ORPHANED",
+    "reason": "Data file without direct code reference.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "data/paper_cohort_20260820.json",
+    "category": "ACTIVE",
+    "reason": "Canonical SSoT dataset / database persistence store. Accessed by: core/paper_cohort.py",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "core/paper_cohort.py"
+    ]
+  },
+  {
+    "file_path": "data/paper_trading_journal.json",
+    "category": "ORPHANED",
+    "reason": "Data file without direct code reference.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "data/prediction_actual_telemetry.json",
+    "category": "ORPHANED",
+    "reason": "Data file without direct code reference.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "data/price_sync_anomaly_tracker.json",
+    "category": "ACTIVE",
+    "reason": "Canonical SSoT dataset / database persistence store. Accessed by: core/price_sync_service.py",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "core/price_sync_service.py"
+    ]
+  },
+  {
+    "file_path": "data/raw_yfinance_individual_quotes.json",
+    "category": "ACTIVE",
+    "reason": "Canonical SSoT dataset / database persistence store. Accessed by: scripts/dual_source_price_verification.py",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "scripts/dual_source_price_verification.py"
+    ]
+  },
+  {
+    "file_path": "data/real_portfolio_audit_log.json",
+    "category": "ACTIVE",
+    "reason": "Canonical SSoT dataset / database persistence store. Accessed by: core/real_portfolio.py, reports/authoritative_20_reports/04_DATABASE_SCHEMA_AND_PERSISTENCE.md, scripts/sync_all_20_reports.py",
+    "confidence": "High",
+    "refs_count": 4,
+    "refs": [
+      "core/real_portfolio.py",
+      "reports/authoritative_20_reports/04_DATABASE_SCHEMA_AND_PERSISTENCE.md",
+      "scripts/sync_all_20_reports.py",
+      "tests/test_real_portfolio_crud.py"
+    ]
+  },
+  {
+    "file_path": "data/realized_statistical_edge.json",
+    "category": "ACTIVE",
+    "reason": "Canonical SSoT dataset / database persistence store. Accessed by: core/edge_verifier.py",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "core/edge_verifier.py"
+    ]
+  },
+  {
+    "file_path": "data/system_notifications_log.json",
+    "category": "ACTIVE",
+    "reason": "Canonical SSoT dataset / database persistence store. Accessed by: core/notification_gateway.py, tests/test_notifications.py",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      "core/notification_gateway.py",
+      "tests/test_notifications.py"
+    ]
+  },
+  {
+    "file_path": "data/system_status.json",
+    "category": "ACTIVE",
+    "reason": "Canonical SSoT dataset / database persistence store. Accessed by: core/mlops_pipeline.py",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "core/mlops_pipeline.py"
+    ]
+  },
+  {
+    "file_path": "data/telegram_config.json",
+    "category": "ACTIVE",
+    "reason": "Canonical SSoT dataset / database persistence store. Accessed by: core/telegram_notifier.py",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "core/telegram_notifier.py"
+    ]
+  },
+  {
+    "file_path": "data/thndr_egx_244_universe.json",
+    "category": "ACTIVE",
+    "reason": "Canonical SSoT dataset / database persistence store. Accessed by: core/database_engine.py, core/egx_universe.py, core/egx_universe_loader.py",
+    "confidence": "High",
+    "refs_count": 10,
+    "refs": [
+      "core/database_engine.py",
+      "core/egx_universe.py",
+      "core/egx_universe_loader.py",
+      "data/universe_manager.py",
+      "scripts/dual_source_price_verification.py"
+    ]
+  },
+  {
+    "file_path": "data/universe_manager.py",
+    "category": "ACTIVE",
+    "reason": "Canonical SSoT dataset / database persistence store. Accessed by: core/block_trades_engine.py, core/corporate_actions.py, core/ensemble_decision_engine.py",
+    "confidence": "High",
+    "refs_count": 14,
+    "refs": [
+      "core/block_trades_engine.py",
+      "core/corporate_actions.py",
+      "core/ensemble_decision_engine.py",
+      "core/institutional_flow_engine.py",
+      "core/liquidity_filter.py"
+    ]
+  },
+  {
+    "file_path": "data/user_real_portfolio.json",
+    "category": "ACTIVE",
+    "reason": "Canonical SSoT dataset / database persistence store. Accessed by: core/real_portfolio.py, reports/authoritative_20_reports/04_DATABASE_SCHEMA_AND_PERSISTENCE.md, scripts/sync_all_20_reports.py",
+    "confidence": "High",
+    "refs_count": 4,
+    "refs": [
+      "core/real_portfolio.py",
+      "reports/authoritative_20_reports/04_DATABASE_SCHEMA_AND_PERSISTENCE.md",
+      "scripts/sync_all_20_reports.py",
+      "scripts/verify_full_stack.py"
+    ]
+  },
+  {
+    "file_path": "data/user_watchlist.json",
+    "category": "ACTIVE",
+    "reason": "Canonical SSoT dataset / database persistence store. Accessed by: CHANGELOG.md, core/watchlist.py, scripts/generate_changelog.py",
+    "confidence": "High",
+    "refs_count": 4,
+    "refs": [
+      "CHANGELOG.md",
+      "core/watchlist.py",
+      "scripts/generate_changelog.py",
+      "tests/e2e_browser_tests.py"
+    ]
+  },
+  {
+    "file_path": "data/walk_forward_weights.json",
+    "category": "ACTIVE",
+    "reason": "Canonical SSoT dataset / database persistence store. Accessed by: core/walk_forward_ml_engine.py",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "core/walk_forward_ml_engine.py"
+    ]
+  },
+  {
+    "file_path": "data/watchlist.json",
+    "category": "ACTIVE",
+    "reason": "Canonical SSoT dataset / database persistence store. Accessed by: CHANGELOG.md, core/watchlist.py, scripts/generate_changelog.py",
+    "confidence": "High",
+    "refs_count": 4,
+    "refs": [
+      "CHANGELOG.md",
+      "core/watchlist.py",
+      "scripts/generate_changelog.py",
+      "tests/e2e_browser_tests.py"
+    ]
+  },
+  {
+    "file_path": "data_sources/sources_registry.yaml",
+    "category": "ACTIVE",
+    "reason": "Referenced by: core/data_sources_registry.py, scripts/automated_consistency_audit.py",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      "core/data_sources_registry.py",
+      "scripts/automated_consistency_audit.py"
+    ]
+  },
+  {
+    "file_path": "full_raw_test_run.txt",
+    "category": "CONFIRMED_UNUSED",
+    "reason": "Temporary raw terminal test output log.",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      "scripts/fast_inventory_classifier.py",
+      "scripts/inventory_classifier.py"
+    ]
+  },
+  {
+    "file_path": "render.yaml",
+    "category": "ACTIVE",
+    "reason": "Essential repository configuration and deployment descriptor.",
+    "confidence": "High",
+    "refs_count": 3,
+    "refs": [
+      "reports/MASTER_FORENSIC_FULL_STACK_REPORT.md",
+      "scripts/fast_inventory_classifier.py",
+      "scripts/inventory_classifier.py"
+    ]
+  },
+  {
+    "file_path": "reports/00_MASTER_CONSOLIDATED_SYSTEM_DOSSIER.md",
+    "category": "ACTIVE",
+    "reason": "Master consolidated report or live audit output. Referenced in: README.md, reports/consistency_audit_report.json, scripts/automated_consistency_audit.py",
+    "confidence": "High",
+    "refs_count": 5,
+    "refs": [
+      "README.md",
+      "reports/consistency_audit_report.json",
+      "scripts/automated_consistency_audit.py",
+      "scripts/fast_inventory_classifier.py",
+      "scripts/inventory_classifier.py"
+    ]
+  },
+  {
+    "file_path": "reports/GEN26_CAPABILITY_MATRIX.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/GEN26_DEPLOYMENT_STATUS.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/GEN26_FINAL_CAPABILITY_MATRIX.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/GEN26_FINAL_STATUS.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/GEN26_PAPER_OBSERVATORY_STATUS.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/GEN26_PHASE_NEXT_STATUS.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/GEN26_REAL_PORTFOLIO_STATUS.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/GEN26_REPOSITORY_FORENSIC_AUDIT.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/INCUBATION_FINAL_VERDICT.md",
+    "category": "ACTIVE",
+    "reason": "Audit telemetry report artifact. Referenced in: core/incubation_gate_engine.py",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "core/incubation_gate_engine.py"
+    ]
+  },
+  {
+    "file_path": "reports/MASTER_FORENSIC_FULL_STACK_REPORT.md",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/all_repo_files_list.json",
+    "category": "ACTIVE",
+    "reason": "Audit telemetry report artifact. Referenced in: scripts/inventory_analyzer.py",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "scripts/inventory_analyzer.py"
+    ]
+  },
+  {
+    "file_path": "reports/audit_50_stocks_forensic.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/authoritative_20_reports/01_SYSTEM_ARCHITECTURE_OVERVIEW.md",
+    "category": "ACTIVE",
+    "reason": "Official authoritative report in 20-report system dossier. Referenced in: README.md, reports/consistency_audit_report.json, scripts/automated_consistency_audit.py",
+    "confidence": "High",
+    "refs_count": 4,
+    "refs": [
+      "README.md",
+      "reports/consistency_audit_report.json",
+      "scripts/automated_consistency_audit.py",
+      "scripts/sync_all_20_reports.py"
+    ]
+  },
+  {
+    "file_path": "reports/authoritative_20_reports/02_EGX_244_UNIVERSE_CATALOG.md",
+    "category": "ACTIVE",
+    "reason": "Official authoritative report in 20-report system dossier. Referenced in: README.md, reports/consistency_audit_report.json, scripts/automated_consistency_audit.py",
+    "confidence": "High",
+    "refs_count": 5,
+    "refs": [
+      "README.md",
+      "reports/consistency_audit_report.json",
+      "scripts/automated_consistency_audit.py",
+      "scripts/sync_all_20_reports.py",
+      "scripts/sync_reports_from_ssot.py"
+    ]
+  },
+  {
+    "file_path": "reports/authoritative_20_reports/03_MACRO_REGIME_AND_CBE_CORRIDOR.md",
+    "category": "ACTIVE",
+    "reason": "Official authoritative report in 20-report system dossier. Referenced in: README.md, reports/consistency_audit_report.json, scripts/automated_consistency_audit.py",
+    "confidence": "High",
+    "refs_count": 4,
+    "refs": [
+      "README.md",
+      "reports/consistency_audit_report.json",
+      "scripts/automated_consistency_audit.py",
+      "scripts/sync_all_20_reports.py"
+    ]
+  },
+  {
+    "file_path": "reports/authoritative_20_reports/04_DATABASE_SCHEMA_AND_PERSISTENCE.md",
+    "category": "ACTIVE",
+    "reason": "Official authoritative report in 20-report system dossier. Referenced in: README.md, reports/consistency_audit_report.json, scripts/sync_all_20_reports.py",
+    "confidence": "High",
+    "refs_count": 3,
+    "refs": [
+      "README.md",
+      "reports/consistency_audit_report.json",
+      "scripts/sync_all_20_reports.py"
+    ]
+  },
+  {
+    "file_path": "reports/authoritative_20_reports/05_SEVEN_AGENT_QUANT_COUNCIL.md",
+    "category": "ACTIVE",
+    "reason": "Official authoritative report in 20-report system dossier. Referenced in: README.md, reports/consistency_audit_report.json, scripts/sync_all_20_reports.py",
+    "confidence": "High",
+    "refs_count": 3,
+    "refs": [
+      "README.md",
+      "reports/consistency_audit_report.json",
+      "scripts/sync_all_20_reports.py"
+    ]
+  },
+  {
+    "file_path": "reports/authoritative_20_reports/06_AUTONOMOUS_RESEARCH_LAB.md",
+    "category": "ACTIVE",
+    "reason": "Official authoritative report in 20-report system dossier. Referenced in: README.md, reports/consistency_audit_report.json, scripts/sync_all_20_reports.py",
+    "confidence": "High",
+    "refs_count": 3,
+    "refs": [
+      "README.md",
+      "reports/consistency_audit_report.json",
+      "scripts/sync_all_20_reports.py"
+    ]
+  },
+  {
+    "file_path": "reports/authoritative_20_reports/07_PURGED_WALK_FORWARD_PROMOTION_GATE.md",
+    "category": "ACTIVE",
+    "reason": "Official authoritative report in 20-report system dossier. Referenced in: README.md, reports/consistency_audit_report.json, scripts/sync_all_20_reports.py",
+    "confidence": "High",
+    "refs_count": 3,
+    "refs": [
+      "README.md",
+      "reports/consistency_audit_report.json",
+      "scripts/sync_all_20_reports.py"
+    ]
+  },
+  {
+    "file_path": "reports/authoritative_20_reports/08_EPISODIC_FAILURE_MEMORY.md",
+    "category": "ACTIVE",
+    "reason": "Official authoritative report in 20-report system dossier. Referenced in: README.md, reports/consistency_audit_report.json, scripts/sync_all_20_reports.py",
+    "confidence": "High",
+    "refs_count": 3,
+    "refs": [
+      "README.md",
+      "reports/consistency_audit_report.json",
+      "scripts/sync_all_20_reports.py"
+    ]
+  },
+  {
+    "file_path": "reports/authoritative_20_reports/09_PIOTROSKI_F_SCORE_ANALYSIS.md",
+    "category": "ACTIVE",
+    "reason": "Official authoritative report in 20-report system dossier. Referenced in: README.md, reports/consistency_audit_report.json, scripts/automated_consistency_audit.py",
+    "confidence": "High",
+    "refs_count": 4,
+    "refs": [
+      "README.md",
+      "reports/consistency_audit_report.json",
+      "scripts/automated_consistency_audit.py",
+      "scripts/sync_all_20_reports.py"
+    ]
+  },
+  {
+    "file_path": "reports/authoritative_20_reports/10_PETER_LYNCH_VALUATION_METRICS.md",
+    "category": "ACTIVE",
+    "reason": "Official authoritative report in 20-report system dossier. Referenced in: README.md, reports/consistency_audit_report.json, scripts/automated_consistency_audit.py",
+    "confidence": "High",
+    "refs_count": 4,
+    "refs": [
+      "README.md",
+      "reports/consistency_audit_report.json",
+      "scripts/automated_consistency_audit.py",
+      "scripts/sync_all_20_reports.py"
+    ]
+  },
+  {
+    "file_path": "reports/authoritative_20_reports/11_NISON_CANDLESTICKS_AND_MURPHY_TECH.md",
+    "category": "ACTIVE",
+    "reason": "Official authoritative report in 20-report system dossier. Referenced in: README.md, reports/consistency_audit_report.json, scripts/sync_all_20_reports.py",
+    "confidence": "High",
+    "refs_count": 3,
+    "refs": [
+      "README.md",
+      "reports/consistency_audit_report.json",
+      "scripts/sync_all_20_reports.py"
+    ]
+  },
+  {
+    "file_path": "reports/authoritative_20_reports/12_MARK_DOUGLAS_PSYCHOLOGY_GUARD.md",
+    "category": "ACTIVE",
+    "reason": "Official authoritative report in 20-report system dossier. Referenced in: README.md, reports/consistency_audit_report.json, scripts/sync_all_20_reports.py",
+    "confidence": "High",
+    "refs_count": 3,
+    "refs": [
+      "README.md",
+      "reports/consistency_audit_report.json",
+      "scripts/sync_all_20_reports.py"
+    ]
+  },
+  {
+    "file_path": "reports/authoritative_20_reports/13_LONDON_GDR_ARBITRAGE_REPORT.md",
+    "category": "ACTIVE",
+    "reason": "Official authoritative report in 20-report system dossier. Referenced in: README.md, reports/consistency_audit_report.json, scripts/sync_all_20_reports.py",
+    "confidence": "High",
+    "refs_count": 3,
+    "refs": [
+      "README.md",
+      "reports/consistency_audit_report.json",
+      "scripts/sync_all_20_reports.py"
+    ]
+  },
+  {
+    "file_path": "reports/authoritative_20_reports/14_STATISTICAL_PAIRS_ARBITRAGE.md",
+    "category": "ACTIVE",
+    "reason": "Official authoritative report in 20-report system dossier. Referenced in: README.md, reports/consistency_audit_report.json, scripts/sync_all_20_reports.py",
+    "confidence": "High",
+    "refs_count": 3,
+    "refs": [
+      "README.md",
+      "reports/consistency_audit_report.json",
+      "scripts/sync_all_20_reports.py"
+    ]
+  },
+  {
+    "file_path": "reports/authoritative_20_reports/15_DEEP_QUANT_48_FEATURE_TENSOR.md",
+    "category": "ACTIVE",
+    "reason": "Official authoritative report in 20-report system dossier. Referenced in: README.md, reports/consistency_audit_report.json, scripts/sync_all_20_reports.py",
+    "confidence": "High",
+    "refs_count": 3,
+    "refs": [
+      "README.md",
+      "reports/consistency_audit_report.json",
+      "scripts/sync_all_20_reports.py"
+    ]
+  },
+  {
+    "file_path": "reports/authoritative_20_reports/16_TWO_STAGE_META_LABELING_AI.md",
+    "category": "ACTIVE",
+    "reason": "Official authoritative report in 20-report system dossier. Referenced in: README.md, reports/consistency_audit_report.json, scripts/automated_consistency_audit.py",
+    "confidence": "High",
+    "refs_count": 4,
+    "refs": [
+      "README.md",
+      "reports/consistency_audit_report.json",
+      "scripts/automated_consistency_audit.py",
+      "scripts/sync_all_20_reports.py"
+    ]
+  },
+  {
+    "file_path": "reports/authoritative_20_reports/17_EGX_TRADING_RULES_AND_CGT_TAX.md",
+    "category": "ACTIVE",
+    "reason": "Official authoritative report in 20-report system dossier. Referenced in: README.md, reports/consistency_audit_report.json, scripts/sync_all_20_reports.py",
+    "confidence": "High",
+    "refs_count": 3,
+    "refs": [
+      "README.md",
+      "reports/consistency_audit_report.json",
+      "scripts/sync_all_20_reports.py"
+    ]
+  },
+  {
+    "file_path": "reports/authoritative_20_reports/18_BLACK_SWAN_STRESS_TESTING.md",
+    "category": "ACTIVE",
+    "reason": "Official authoritative report in 20-report system dossier. Referenced in: README.md, reports/consistency_audit_report.json, scripts/sync_all_20_reports.py",
+    "confidence": "High",
+    "refs_count": 3,
+    "refs": [
+      "README.md",
+      "reports/consistency_audit_report.json",
+      "scripts/sync_all_20_reports.py"
+    ]
+  },
+  {
+    "file_path": "reports/authoritative_20_reports/19_DEVOPS_CI_CD_AND_TEST_BATTERY.md",
+    "category": "ACTIVE",
+    "reason": "Official authoritative report in 20-report system dossier. Referenced in: README.md, reports/consistency_audit_report.json, scripts/automated_consistency_audit.py",
+    "confidence": "High",
+    "refs_count": 4,
+    "refs": [
+      "README.md",
+      "reports/consistency_audit_report.json",
+      "scripts/automated_consistency_audit.py",
+      "scripts/sync_all_20_reports.py"
+    ]
+  },
+  {
+    "file_path": "reports/authoritative_20_reports/20_MASTER_INDEX_AND_SYSTEM_GLOSSARY.md",
+    "category": "ACTIVE",
+    "reason": "Official authoritative report in 20-report system dossier. Referenced in: README.md, reports/consistency_audit_report.json, scripts/sync_all_20_reports.py",
+    "confidence": "High",
+    "refs_count": 3,
+    "refs": [
+      "README.md",
+      "reports/consistency_audit_report.json",
+      "scripts/sync_all_20_reports.py"
+    ]
+  },
+  {
+    "file_path": "reports/authoritative_paper_sessions.json",
+    "category": "ACTIVE",
+    "reason": "Master consolidated report or live audit output. Referenced in: core/session_manager.py, scripts/fast_inventory_classifier.py, tests/test_portfolio_journal.py",
+    "confidence": "High",
+    "refs_count": 3,
+    "refs": [
+      "core/session_manager.py",
+      "scripts/fast_inventory_classifier.py",
+      "tests/test_portfolio_journal.py"
+    ]
+  },
+  {
+    "file_path": "reports/browser_e2e_results.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/consistency_audit_report.json",
+    "category": "ACTIVE",
+    "reason": "Master consolidated report or live audit output. Referenced in: README.md, scripts/automated_consistency_audit.py, scripts/fast_inventory_classifier.py",
+    "confidence": "High",
+    "refs_count": 4,
+    "refs": [
+      "README.md",
+      "scripts/automated_consistency_audit.py",
+      "scripts/fast_inventory_classifier.py",
+      "scripts/inventory_classifier.py"
+    ]
+  },
+  {
+    "file_path": "reports/daily/2026-08-20.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/data_truth.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/e2e_results.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/egx_universe.json",
+    "category": "ACTIVE",
+    "reason": "Audit telemetry report artifact. Referenced in: core/egx_universe.py, tests/test_egx_universe.py",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      "core/egx_universe.py",
+      "tests/test_egx_universe.py"
+    ]
+  },
+  {
+    "file_path": "reports/entry_target_stop.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/final_forensic_audit.json",
+    "category": "ACTIVE",
+    "reason": "Master consolidated report or live audit output. Referenced in: core/final_forensic_validator.py, scripts/fast_inventory_classifier.py, scripts/inventory_classifier.py",
+    "confidence": "High",
+    "refs_count": 3,
+    "refs": [
+      "core/final_forensic_validator.py",
+      "scripts/fast_inventory_classifier.py",
+      "scripts/inventory_classifier.py"
+    ]
+  },
+  {
+    "file_path": "reports/final_product_acceptance.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/final_system_status.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/fullstack_runtime_status.json",
+    "category": "SUPERSEDED",
+    "reason": "Static audit log artifact superseded by reports/final_forensic_audit.json and reports/consistency_audit_report.json.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/ground_truth_audit_report.json",
+    "category": "ACTIVE",
+    "reason": "Audit telemetry report artifact. Referenced in: dashboard/app.py, scripts/verify_ground_truth_reality.py",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      "dashboard/app.py",
+      "scripts/verify_ground_truth_reality.py"
+    ]
+  },
+  {
+    "file_path": "reports/incubation_verdict.json",
+    "category": "ACTIVE",
+    "reason": "Master consolidated report or live audit output. Referenced in: core/incubation_gate_engine.py, scripts/fast_inventory_classifier.py, scripts/inventory_classifier.py",
+    "confidence": "High",
+    "refs_count": 3,
+    "refs": [
+      "core/incubation_gate_engine.py",
+      "scripts/fast_inventory_classifier.py",
+      "scripts/inventory_classifier.py"
+    ]
+  },
+  {
+    "file_path": "reports/market_price_reconciliation.json",
+    "category": "ACTIVE",
+    "reason": "Audit telemetry report artifact. Referenced in: core/price_reconciliation.py",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "core/price_reconciliation.py"
+    ]
+  },
+  {
+    "file_path": "reports/market_price_truth.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/market_truth.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/multi_horizon.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/multi_horizon_predictions.json",
+    "category": "ACTIVE",
+    "reason": "Audit telemetry report artifact. Referenced in: core/multi_horizon_engine.py",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "core/multi_horizon_engine.py"
+    ]
+  },
+  {
+    "file_path": "reports/paper_sessions/session_04_2026-08-21.json",
+    "category": "ACTIVE",
+    "reason": "Audit telemetry report artifact. Referenced in: scripts/fast_inventory_classifier.py",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "scripts/fast_inventory_classifier.py"
+    ]
+  },
+  {
+    "file_path": "reports/paper_sessions/session_05_2026-08-24.json",
+    "category": "ACTIVE",
+    "reason": "Audit telemetry report artifact. Referenced in: scripts/fast_inventory_classifier.py",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "scripts/fast_inventory_classifier.py"
+    ]
+  },
+  {
+    "file_path": "reports/paper_sessions/session_98.json",
+    "category": "SUPERSEDED",
+    "reason": "Legacy mock paper sessions replaced by canonical daily session logs (reports/paper_sessions/session_04_2026-08-21.json, session_05_2026-08-24.json).",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "scripts/fast_inventory_classifier.py"
+    ]
+  },
+  {
+    "file_path": "reports/paper_sessions/session_98.md",
+    "category": "SUPERSEDED",
+    "reason": "Legacy mock paper sessions replaced by canonical daily session logs (reports/paper_sessions/session_04_2026-08-21.json, session_05_2026-08-24.json).",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "scripts/fast_inventory_classifier.py"
+    ]
+  },
+  {
+    "file_path": "reports/paper_sessions/session_99.json",
+    "category": "SUPERSEDED",
+    "reason": "Legacy mock paper sessions replaced by canonical daily session logs (reports/paper_sessions/session_04_2026-08-21.json, session_05_2026-08-24.json).",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      "scripts/fast_inventory_classifier.py",
+      "tests/test_paper_observatory.py"
+    ]
+  },
+  {
+    "file_path": "reports/paper_sessions/session_99.md",
+    "category": "SUPERSEDED",
+    "reason": "Legacy mock paper sessions replaced by canonical daily session logs (reports/paper_sessions/session_04_2026-08-21.json, session_05_2026-08-24.json).",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      "scripts/fast_inventory_classifier.py",
+      "tests/test_paper_observatory.py"
+    ]
+  },
+  {
+    "file_path": "reports/paper_trading_state.json",
+    "category": "ACTIVE",
+    "reason": "Audit telemetry report artifact. Referenced in: core/incubation_gate_engine.py, core/paper_trading_state.py",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      "core/incubation_gate_engine.py",
+      "core/paper_trading_state.py"
+    ]
+  },
+  {
+    "file_path": "reports/price_reconciliation.json",
+    "category": "ACTIVE",
+    "reason": "Audit telemetry report artifact. Referenced in: core/price_reconciliation.py",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "core/price_reconciliation.py"
+    ]
+  },
+  {
+    "file_path": "reports/production_readiness.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/qa_master_pass_results.json",
+    "category": "SUPERSEDED",
+    "reason": "Static audit log artifact superseded by reports/final_forensic_audit.json and reports/consistency_audit_report.json.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/ranking_validation.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260823_062235.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260823_062400.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260823_062631.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260823_062904.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260823_063111.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260823_063258.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260823_065024.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260823_065746.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260823_070105.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260823_070249.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260823_152131.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260823_154233.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260823_155814.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260823_160141.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260823_160341.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260823_165801.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260823_170229.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260824_040537.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260824_042114.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260824_042237.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260824_042440.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260824_045136.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260824_050426.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260824_051948.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260824_053704.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260824_053938.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260824_055019.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260824_060724.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260824_061554.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260824_064534.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260824_070917.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260824_072159.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260824_073734.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260824_170012.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260824_170514.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260824_173515.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260824_175555.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260824_180253.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260824_182103.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260824_182311.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260824_182557.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260824_182558.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260824_185104.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260824_191238.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260825_044501.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260825_045442.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260825_052806.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260825_053839.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260825_055438.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260825_062154.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260825_063409.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260825_070208.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260825_182156.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260825_182618.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260825_190901.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260825_191237.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260825_191657.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260825_194740.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260825_195727.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260826_015935.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260826_065035.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260826_070904.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260826_072538.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260826_074235.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260826_080104.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260826_081230.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260826_170532.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260826_172323.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260826_174202.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260827_031726.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260827_031727.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260827_033801.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260827_034431.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260827_035412.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260827_042423.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260827_073445.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260828_035428.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260829_024920.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260829_031305.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260829_050538.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260829_051700.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260829_052648.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260829_053736.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260829_054936.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260829_060222.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260829_061310.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260829_062311.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260829_064116.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260830_003420.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260830_010214.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260830_023431.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260830_025426.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260830_030908.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260830_034123.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/state_backups/state_backup_20260830_152858.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/system_status.json",
+    "category": "ACTIVE",
+    "reason": "Audit telemetry report artifact. Referenced in: core/mlops_pipeline.py",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "core/mlops_pipeline.py"
+    ]
+  },
+  {
+    "file_path": "reports/test_results.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/testing_quality.json",
+    "category": "SUPERSEDED",
+    "reason": "Static audit log artifact superseded by reports/final_forensic_audit.json and reports/consistency_audit_report.json.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/ui_button_test_results.json",
+    "category": "SUPERSEDED",
+    "reason": "Static audit log artifact superseded by reports/final_forensic_audit.json and reports/consistency_audit_report.json.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/ui_e2e_results.json",
+    "category": "SUPERSEDED",
+    "reason": "Static audit log artifact superseded by reports/final_forensic_audit.json and reports/consistency_audit_report.json.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/ui_health.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/ui_inventory.json",
+    "category": "ORPHANED",
+    "reason": "Historical report artifact without active inbound links.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "reports/ui_navigation_results.json",
+    "category": "SUPERSEDED",
+    "reason": "Static audit log artifact superseded by reports/final_forensic_audit.json and reports/consistency_audit_report.json.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "requirements.txt",
+    "category": "ACTIVE",
+    "reason": "Essential repository configuration and deployment descriptor.",
+    "confidence": "High",
+    "refs_count": 5,
+    "refs": [
+      ".github/workflows/daily_pipeline.yml",
+      ".github/workflows/tests.yml",
+      "render.yaml",
+      "scripts/fast_inventory_classifier.py",
+      "scripts/inventory_classifier.py"
+    ]
+  },
+  {
+    "file_path": "runtime.txt",
+    "category": "ACTIVE",
+    "reason": "Essential repository configuration and deployment descriptor.",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      "scripts/fast_inventory_classifier.py",
+      "scripts/inventory_classifier.py"
+    ]
+  },
+  {
+    "file_path": "scripts/apply_authoritative_metadata.py",
+    "category": "ORPHANED",
+    "reason": "Stand-alone maintenance utility script not referenced by other modules.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "scripts/audit_trading_sessions.py",
+    "category": "ACTIVE",
+    "reason": "Operational DevOps, maintenance, or audit execution script. Referenced in: scripts/fast_inventory_classifier.py, scripts/inventory_classifier.py",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      "scripts/fast_inventory_classifier.py",
+      "scripts/inventory_classifier.py"
+    ]
+  },
+  {
+    "file_path": "scripts/automated_consistency_audit.py",
+    "category": "ACTIVE",
+    "reason": "Operational DevOps, maintenance, or audit execution script. Referenced in: README.md, reports/00_MASTER_CONSOLIDATED_SYSTEM_DOSSIER.md, reports/authoritative_20_reports/19_DEVOPS_CI_CD_AND_TEST_BATTERY.md",
+    "confidence": "High",
+    "refs_count": 6,
+    "refs": [
+      "README.md",
+      "reports/00_MASTER_CONSOLIDATED_SYSTEM_DOSSIER.md",
+      "reports/authoritative_20_reports/19_DEVOPS_CI_CD_AND_TEST_BATTERY.md",
+      "scripts/fast_inventory_classifier.py",
+      "scripts/inventory_classifier.py"
+    ]
+  },
+  {
+    "file_path": "scripts/build_ui.py",
+    "category": "ORPHANED",
+    "reason": "Stand-alone maintenance utility script not referenced by other modules.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "scripts/check_brace_balance.py",
+    "category": "CONFIRMED_UNUSED",
+    "reason": "Temporary diagnostic script created during maintenance sessions.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "scripts/comprehensive_data_diagnostic.py",
+    "category": "ORPHANED",
+    "reason": "Stand-alone maintenance utility script not referenced by other modules.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "scripts/debug_frontend_js.py",
+    "category": "ACTIVE",
+    "reason": "Operational DevOps, maintenance, or audit execution script. Referenced in: reports/00_MASTER_CONSOLIDATED_SYSTEM_DOSSIER.md, reports/authoritative_20_reports/19_DEVOPS_CI_CD_AND_TEST_BATTERY.md, scripts/sync_all_20_reports.py",
+    "confidence": "High",
+    "refs_count": 3,
+    "refs": [
+      "reports/00_MASTER_CONSOLIDATED_SYSTEM_DOSSIER.md",
+      "reports/authoritative_20_reports/19_DEVOPS_CI_CD_AND_TEST_BATTERY.md",
+      "scripts/sync_all_20_reports.py"
+    ]
+  },
+  {
+    "file_path": "scripts/dual_source_price_verification.py",
+    "category": "ACTIVE",
+    "reason": "Operational DevOps, maintenance, or audit execution script. Referenced in: scripts/fast_inventory_classifier.py",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "scripts/fast_inventory_classifier.py"
+    ]
+  },
+  {
+    "file_path": "scripts/enforce_strict_244_truth_audit.py",
+    "category": "ACTIVE",
+    "reason": "Operational DevOps, maintenance, or audit execution script. Referenced in: scripts/fast_inventory_classifier.py",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "scripts/fast_inventory_classifier.py"
+    ]
+  },
+  {
+    "file_path": "scripts/fast_inventory_classifier.py",
+    "category": "CONFIRMED_UNUSED",
+    "reason": "Temporary diagnostic script created during maintenance sessions.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "scripts/find_script_lines.py",
+    "category": "CONFIRMED_UNUSED",
+    "reason": "Temporary diagnostic script created during maintenance sessions.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "scripts/generate_changelog.py",
+    "category": "ACTIVE",
+    "reason": "Operational DevOps, maintenance, or audit execution script. Referenced in: CHANGELOG.md",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "CHANGELOG.md"
+    ]
+  },
+  {
+    "file_path": "scripts/inventory_analyzer.py",
+    "category": "CONFIRMED_UNUSED",
+    "reason": "Temporary diagnostic script created during maintenance sessions.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "scripts/inventory_classifier.py",
+    "category": "CONFIRMED_UNUSED",
+    "reason": "Temporary diagnostic script created during maintenance sessions.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "scripts/mlops_retrain.py",
+    "category": "ACTIVE",
+    "reason": "Operational DevOps, maintenance, or audit execution script. Referenced in: .github/workflows/daily_pipeline.yml, scripts/fast_inventory_classifier.py, scripts/inventory_classifier.py",
+    "confidence": "High",
+    "refs_count": 3,
+    "refs": [
+      ".github/workflows/daily_pipeline.yml",
+      "scripts/fast_inventory_classifier.py",
+      "scripts/inventory_classifier.py"
+    ]
+  },
+  {
+    "file_path": "scripts/populate_real_historical_bars.py",
+    "category": "ORPHANED",
+    "reason": "Stand-alone maintenance utility script not referenced by other modules.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "scripts/run_e2e_pipeline_trace.py",
+    "category": "ACTIVE",
+    "reason": "Operational DevOps, maintenance, or audit execution script. Referenced in: scripts/fast_inventory_classifier.py, scripts/inventory_classifier.py",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      "scripts/fast_inventory_classifier.py",
+      "scripts/inventory_classifier.py"
+    ]
+  },
+  {
+    "file_path": "scripts/simulate_live_quant_cycle.py",
+    "category": "ACTIVE",
+    "reason": "Operational DevOps, maintenance, or audit execution script. Referenced in: README.md, scripts/fast_inventory_classifier.py, scripts/inventory_classifier.py",
+    "confidence": "High",
+    "refs_count": 3,
+    "refs": [
+      "README.md",
+      "scripts/fast_inventory_classifier.py",
+      "scripts/inventory_classifier.py"
+    ]
+  },
+  {
+    "file_path": "scripts/sync_all_20_reports.py",
+    "category": "ACTIVE",
+    "reason": "Operational DevOps, maintenance, or audit execution script. Referenced in: reports/00_MASTER_CONSOLIDATED_SYSTEM_DOSSIER.md",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "reports/00_MASTER_CONSOLIDATED_SYSTEM_DOSSIER.md"
+    ]
+  },
+  {
+    "file_path": "scripts/sync_all_244_real_market_data.py",
+    "category": "ORPHANED",
+    "reason": "Stand-alone maintenance utility script not referenced by other modules.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "scripts/sync_daily_ranking_csv.py",
+    "category": "ORPHANED",
+    "reason": "Stand-alone maintenance utility script not referenced by other modules.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "scripts/sync_reports_from_ssot.py",
+    "category": "ACTIVE",
+    "reason": "Operational DevOps, maintenance, or audit execution script. Referenced in: scripts/fast_inventory_classifier.py, scripts/inventory_classifier.py",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      "scripts/fast_inventory_classifier.py",
+      "scripts/inventory_classifier.py"
+    ]
+  },
+  {
+    "file_path": "scripts/system_interconnection_inspector.py",
+    "category": "ORPHANED",
+    "reason": "Stand-alone maintenance utility script not referenced by other modules.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "scripts/test_telegram_alert.py",
+    "category": "ORPHANED",
+    "reason": "Stand-alone maintenance utility script not referenced by other modules.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "scripts/test_weights_significance.py",
+    "category": "ORPHANED",
+    "reason": "Stand-alone maintenance utility script not referenced by other modules.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "scripts/trace_end_to_end.py",
+    "category": "ACTIVE",
+    "reason": "Operational DevOps, maintenance, or audit execution script. Referenced in: reports/MASTER_FORENSIC_FULL_STACK_REPORT.md",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "reports/MASTER_FORENSIC_FULL_STACK_REPORT.md"
+    ]
+  },
+  {
+    "file_path": "scripts/trace_unclosed_braces.py",
+    "category": "CONFIRMED_UNUSED",
+    "reason": "Temporary diagnostic script created during maintenance sessions.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "scripts/update_dashboard_alpha_scanner.py",
+    "category": "ORPHANED",
+    "reason": "Stand-alone maintenance utility script not referenced by other modules.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "scripts/upgrade_nlp_engine.py",
+    "category": "ORPHANED",
+    "reason": "Stand-alone maintenance utility script not referenced by other modules.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "scripts/validate_ui_buttons.py",
+    "category": "ORPHANED",
+    "reason": "Stand-alone maintenance utility script not referenced by other modules.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "scripts/verify_24_stocks_pricing.py",
+    "category": "ORPHANED",
+    "reason": "Stand-alone maintenance utility script not referenced by other modules.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "scripts/verify_all_244_stocks_real_data.py",
+    "category": "ACTIVE",
+    "reason": "Operational DevOps, maintenance, or audit execution script. Referenced in: scripts/fast_inventory_classifier.py",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "scripts/fast_inventory_classifier.py"
+    ]
+  },
+  {
+    "file_path": "scripts/verify_daily_price_outliers.py",
+    "category": "ACTIVE",
+    "reason": "Operational DevOps, maintenance, or audit execution script. Referenced in: .github/workflows/daily_pipeline.yml, dashboard/app.py",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      ".github/workflows/daily_pipeline.yml",
+      "dashboard/app.py"
+    ]
+  },
+  {
+    "file_path": "scripts/verify_egx_universe_expansion.py",
+    "category": "ORPHANED",
+    "reason": "Stand-alone maintenance utility script not referenced by other modules.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "scripts/verify_full_stack.py",
+    "category": "ORPHANED",
+    "reason": "Stand-alone maintenance utility script not referenced by other modules.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "scripts/verify_ground_truth_reality.py",
+    "category": "ACTIVE",
+    "reason": "Operational DevOps, maintenance, or audit execution script. Referenced in: dashboard/app.py, tests/test_database_and_stress_engine.py",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      "dashboard/app.py",
+      "tests/test_database_and_stress_engine.py"
+    ]
+  },
+  {
+    "file_path": "scripts/verify_live_prices_independent.py",
+    "category": "ORPHANED",
+    "reason": "Stand-alone maintenance utility script not referenced by other modules.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "scripts/verify_pre_deployment_health.py",
+    "category": "ORPHANED",
+    "reason": "Stand-alone maintenance utility script not referenced by other modules.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "scripts/verify_real_portfolio_persistence.py",
+    "category": "ORPHANED",
+    "reason": "Stand-alone maintenance utility script not referenced by other modules.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "scripts/verify_ui_enhancements.py",
+    "category": "ORPHANED",
+    "reason": "Stand-alone maintenance utility script not referenced by other modules.",
+    "confidence": "Medium",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "settings.json",
+    "category": "ACTIVE",
+    "reason": "Essential repository configuration and deployment descriptor.",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      "scripts/fast_inventory_classifier.py",
+      "scripts/inventory_classifier.py"
+    ]
+  },
+  {
+    "file_path": "templates/index.html",
+    "category": "ACTIVE",
+    "reason": "Web application dashboard template/runtime. Referenced in: CHANGELOG.md, core/final_forensic_validator.py, dashboard/app.py",
+    "confidence": "High",
+    "refs_count": 19,
+    "refs": [
+      "CHANGELOG.md",
+      "core/final_forensic_validator.py",
+      "dashboard/app.py",
+      "reports/MASTER_FORENSIC_FULL_STACK_REPORT.md",
+      "scripts/build_ui.py"
+    ]
+  },
+  {
+    "file_path": "test_output_raw.txt",
+    "category": "CONFIRMED_UNUSED",
+    "reason": "Temporary raw terminal test output log.",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      "scripts/fast_inventory_classifier.py",
+      "scripts/inventory_classifier.py"
+    ]
+  },
+  {
+    "file_path": "tests/__init__.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "core/trading_agents/__init__.py"
+    ]
+  },
+  {
+    "file_path": "tests/e2e_browser_tests.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      "CHANGELOG.md",
+      "scripts/generate_changelog.py"
+    ]
+  },
+  {
+    "file_path": "tests/test_advanced_feature_engineering.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      ".github/workflows/daily_pipeline.yml",
+      ".github/workflows/tests.yml"
+    ]
+  },
+  {
+    "file_path": "tests/test_advanced_methodology_features.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_advanced_quant_layers.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_ai_api_endpoints.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_ai_generative_engine.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_ai_prediction_model.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_alpha_intelligence_scanner.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_alternative_data_engine.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_api_endpoints.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_backtest.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      "reports/GEN26_FINAL_CAPABILITY_MATRIX.json",
+      "reports/GEN26_REPOSITORY_FORENSIC_AUDIT.json"
+    ]
+  },
+  {
+    "file_path": "tests/test_broker_execution.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_browser_navigation_e2e.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_core_engines.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 3,
+    "refs": [
+      "reports/GEN26_CAPABILITY_MATRIX.json",
+      "reports/GEN26_FINAL_CAPABILITY_MATRIX.json",
+      "reports/GEN26_REPOSITORY_FORENSIC_AUDIT.json"
+    ]
+  },
+  {
+    "file_path": "tests/test_corporate_actions.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_corporate_actions_and_macro.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_corporate_actions_engine.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      ".github/workflows/daily_pipeline.yml",
+      ".github/workflows/tests.yml"
+    ]
+  },
+  {
+    "file_path": "tests/test_daily_snapshot.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_dashboard_quant_widgets.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_dashboard_read_only.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_data_freshness.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_data_leakage.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "reports/GEN26_CAPABILITY_MATRIX.json"
+    ]
+  },
+  {
+    "file_path": "tests/test_database_and_stress_engine.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_database_api_price_consistency.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_database_persistence.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_dynamic_multi_horizon_universe.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_dynamic_risk_manager.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      ".github/workflows/daily_pipeline.yml",
+      ".github/workflows/tests.yml"
+    ]
+  },
+  {
+    "file_path": "tests/test_egx_trading_rules_engine.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      ".github/workflows/daily_pipeline.yml",
+      ".github/workflows/tests.yml"
+    ]
+  },
+  {
+    "file_path": "tests/test_egx_universe.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_egx_universe_loader.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_elite_extensions.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 3,
+    "refs": [
+      "reports/00_MASTER_CONSOLIDATED_SYSTEM_DOSSIER.md",
+      "reports/authoritative_20_reports/19_DEVOPS_CI_CD_AND_TEST_BATTERY.md",
+      "scripts/sync_all_20_reports.py"
+    ]
+  },
+  {
+    "file_path": "tests/test_ensemble_decision_engine.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      ".github/workflows/daily_pipeline.yml",
+      ".github/workflows/tests.yml"
+    ]
+  },
+  {
+    "file_path": "tests/test_final_forensic_validation.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_full_temporal_forensics.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_fundamental_data_engine.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_gap_closure.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_gdr_arbitrage_engine.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      ".github/workflows/daily_pipeline.yml",
+      ".github/workflows/tests.yml"
+    ]
+  },
+  {
+    "file_path": "tests/test_hardening_phase_2.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_historical_cross_sectional_selection.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_incubation_gate_engine.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_insider_trading_engine.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_institutional_flow_engine.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      ".github/workflows/daily_pipeline.yml",
+      ".github/workflows/tests.yml"
+    ]
+  },
+  {
+    "file_path": "tests/test_leakage_forensics.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      "reports/GEN26_FINAL_CAPABILITY_MATRIX.json",
+      "reports/GEN26_REPOSITORY_FORENSIC_AUDIT.json"
+    ]
+  },
+  {
+    "file_path": "tests/test_liquidity.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      "reports/GEN26_FINAL_CAPABILITY_MATRIX.json",
+      "reports/GEN26_REPOSITORY_FORENSIC_AUDIT.json"
+    ]
+  },
+  {
+    "file_path": "tests/test_live_execution_firewall.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_macro_economic_engine.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_market_calendar.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_market_data_truth.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_market_intelligence_scraper.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      ".github/workflows/daily_pipeline.yml",
+      ".github/workflows/tests.yml"
+    ]
+  },
+  {
+    "file_path": "tests/test_market_price_service.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_market_scheduler.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_market_seasonality_engine.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      ".github/workflows/daily_pipeline.yml",
+      ".github/workflows/tests.yml"
+    ]
+  },
+  {
+    "file_path": "tests/test_meta_labeling_engine.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_missing_layers.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_mlops_and_notifications.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_mlops_triggers.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_model_evaluator.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_multi_agent_council.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_multi_horizon_engine.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_nlp_sentiment_engine.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_notifications.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_orthogonal_technical_features.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_paper_cohort.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_paper_observatory.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_paper_state_persistence.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_paper_trading_orchestrator.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_portfolio_construction.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_portfolio_equity.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "reports/GEN26_FINAL_CAPABILITY_MATRIX.json"
+    ]
+  },
+  {
+    "file_path": "tests/test_portfolio_journal.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 3,
+    "refs": [
+      "reports/GEN26_CAPABILITY_MATRIX.json",
+      "reports/GEN26_FINAL_CAPABILITY_MATRIX.json",
+      "reports/GEN26_REPOSITORY_FORENSIC_AUDIT.json"
+    ]
+  },
+  {
+    "file_path": "tests/test_portfolio_optimizer.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_price_reconciliation_and_ux.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_price_sync_service.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_promotion_gate_and_research_lab.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_quant_books_engine.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_real_portfolio.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_real_portfolio_crud.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "reports/00_MASTER_CONSOLIDATED_SYSTEM_DOSSIER.md"
+    ]
+  },
+  {
+    "file_path": "tests/test_red_team_edge_cases.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "reports/GEN26_CAPABILITY_MATRIX.json"
+    ]
+  },
+  {
+    "file_path": "tests/test_regime_hmm_engine.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      ".github/workflows/daily_pipeline.yml",
+      ".github/workflows/tests.yml"
+    ]
+  },
+  {
+    "file_path": "tests/test_session_immutability.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_short_term_opportunities_screen.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_sprint_b_feedback_and_registry.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_sprint_c_slippage_and_opportunities.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_sqlite_acid_persistence.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "scripts/verify_full_stack.py"
+    ]
+  },
+  {
+    "file_path": "tests/test_statistical_arbitrage_engine.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      ".github/workflows/daily_pipeline.yml",
+      ".github/workflows/tests.yml"
+    ]
+  },
+  {
+    "file_path": "tests/test_statistical_validation.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_stock_dossier_endpoint.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_stop_loss.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "reports/GEN26_FINAL_CAPABILITY_MATRIX.json"
+    ]
+  },
+  {
+    "file_path": "tests/test_stress_framework.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_targets.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 3,
+    "refs": [
+      "reports/GEN26_CAPABILITY_MATRIX.json",
+      "reports/GEN26_FINAL_CAPABILITY_MATRIX.json",
+      "reports/GEN26_REPOSITORY_FORENSIC_AUDIT.json"
+    ]
+  },
+  {
+    "file_path": "tests/test_technical_and_risk_sizing.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_telegram_notification_gateway.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      ".github/workflows/daily_pipeline.yml",
+      ".github/workflows/tests.yml"
+    ]
+  },
+  {
+    "file_path": "tests/test_ticker_mapping.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_trading_agents_framework.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_unified_pipeline_and_fusion_engine.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_universe_expansion.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 2,
+    "refs": [
+      ".github/workflows/daily_pipeline.yml",
+      ".github/workflows/tests.yml"
+    ]
+  },
+  {
+    "file_path": "tests/test_v2_architectural_enhancements.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_walk_forward_ml_engine.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/test_watchlist.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/ui/__init__.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 1,
+    "refs": [
+      "core/trading_agents/__init__.py"
+    ]
+  },
+  {
+    "file_path": "tests/ui/test_arabic_dictionary.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/ui/test_rtl_and_ranking_order.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/ui/test_ui_button_integrity.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  },
+  {
+    "file_path": "tests/ui/test_ui_forms_and_security.py",
+    "category": "ACTIVE",
+    "reason": "Automated test suite discovered and executed by unittest / pytest runner.",
+    "confidence": "High",
+    "refs_count": 0,
+    "refs": []
+  }
+]

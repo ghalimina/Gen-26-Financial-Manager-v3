@@ -48,15 +48,15 @@ class AlphaScorer:
             action_verdict = "STRONG_BUY"
         elif alpha_score >= 70.0:
             tier = "MODERATE_ALPHA"
-            tier_ar = "ألفا معةدلة (Alpha 70-84)"
+            tier_ar = "ألفا معتدلة (Alpha 70-84)"
             action_verdict = "BUY"
         elif alpha_score >= 55.0:
             tier = "NEUTRAL_WATCH"
-            tier_ar = "مراقبة واحتفئا (Alpha 55-69)"
+            tier_ar = "مراقبة واحتفاظ (Alpha 55-69)"
             action_verdict = "WATCH"
         else:
-            tier = "UNDERPERFORMASE_AVOID"
-            tier_ar = "تجنن ومخاطر (Alpha < 55)"
+            tier = "UNDERPERFORMANCE_AVOID"
+            tier_ar = "تجنب ومخاطر (Alpha < 55)"
             action_verdict = "AVOID"
 
         return {

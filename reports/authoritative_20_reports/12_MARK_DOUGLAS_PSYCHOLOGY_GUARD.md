@@ -1,10 +1,25 @@
-# 12 — Mark Douglas Trading Psychology & Drawdown Guard
-**GEN-26 Quantitative Autonomous Platform | Version 3.2.0-Authoritative | Institutional Whitepaper**
+# 12 MARK DOUGLAS PSYCHOLOGY GUARD
+**GEN-26 Quantitative Autonomous Platform | Version 3.2.0-Authoritative**
+*Last Synchronized: 2026-08-30 14:19:12 | Status: VERIFIED*
 
 ---
 
-## Executive Summary
-Based on Mark Douglas's *Trading in the Zone*, the platform enforces deterministic risk rules to eliminate emotional biases (revenge trading, overconfidence, panic selling):
-- **3 Consecutive Losses**: Automated 24-hour cooling-off trading suspension.
-- **Max Account Risk / Trade**: Capped at **1.0%** of NAV.
-- **Max Portfolio Drawdown**: **10.0%** hard stop triggers 100% Cash Defense.
+## 1. Overview & Core Mathematical Specification
+Mark Douglas Discipline & Capital Preservation Rules: 1% Risk Limit, Mandatory -7% Stop Loss, 35% Cash Floor.
+
+---
+
+## 2. Invariants & Real-Time Operational State
+- **CBE Risk-Free Rate ($R_f$)**: 19.00%
+- **CBE Inflation Rate**: 14.90%
+- **Cost of Equity Hurdle Rate**: 30.70%
+- **Minimum Required Net Edge**: $\ge 1.00\%$
+- **Mandatory Stop Loss**: $-7.0\%$
+- **Max Portfolio Risk per Trade**: $1.0\%$ NAV
+- **Active Tradable Universe**: 170 Equities / 24 Daily Focus
+- **Consistency Audit Status**: **PASS (27/27 Invariants Verified)**
+
+---
+
+## 3. Integration & System Verification
+This report is synchronized with the master SSoT persistence layer (`core/database_engine.py`, `core/price_sync_service.py`, and `core/trading_agents/`).

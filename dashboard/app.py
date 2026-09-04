@@ -327,6 +327,191 @@ def api_trading_agents_scan():
     return jsonify({"count": len(results), "scan_results": results})
 
 
+@app.route("/api/v1/trading-agents/config", methods=["GET", "POST"])
+def api_trading_agents_config():
+    """Gets or updates TradingAgents LLM router configuration."""
+    from core.trading_agents.llm_router import LLMRouter
+    if request.method == "POST":
+        data = request.get_json() or {}
+        pref = data.get("provider", "auto").lower()
+        if pref in LLMRouter.SUPPORTED_PROVIDERS:
+            os.environ["TRADING_AGENTS_LLM_PROVIDER"] = pref
+    return jsonify(LLMRouter.get_provider_status())
+
+
+# --- 3.9 Market Treemap Heatmap & Monte Carlo Simulator ---
+@app.route("/api/market/heatmap", methods=["GET"])
+def api_market_heatmap():
+    """Returns EGX 244 sector-grouped treemap heatmap data."""
+    from core.market_heatmap_engine import MarketHeatmapEngine
+    data = MarketHeatmapEngine.generate_sector_heatmap()
+    return jsonify(data)
+
+
+@app.route("/api/portfolio/monte_carlo", methods=["GET"])
+def api_portfolio_monte_carlo():
+    """Runs 1,000-path Monte Carlo capital trajectory simulation with VaR/CVaR."""
+    from core.monte_carlo_engine import MonteCarloEngine
+    days = int(request.args.get("days", 60))
+    paths = int(request.args.get("simulations", 1000))
+    equity = float(request.args.get("equity", 0.0)) or None
+    res = MonteCarloEngine.simulate_trajectories(initial_equity=equity, days=days, num_paths=paths)
+    return jsonify(res)
+
+
+# --- 3.95 Telegram Notification Gateway ---
+@app.route("/api/notifications/telegram/status", methods=["GET"])
+def api_telegram_status():
+    """Returns Telegram push notification gateway status and alert rules."""
+    from core.telegram_notifier import TelegramNotifier
+    cfg = TelegramNotifier.load_config()
+    # Mask token for security
+    masked_token = f"{cfg.get('bot_token', '')[:6]}...{cfg.get('bot_token', '')[-4:]}" if len(cfg.get('bot_token', '')) > 10 else ""
+    return jsonify({
+        "enabled": cfg.get("enabled", False),
+        "bot_token_masked": masked_token,
+        "chat_id": cfg.get("chat_id", ""),
+        "alert_types": cfg.get("alert_types", {}),
+        "is_configured": bool(cfg.get("bot_token") and cfg.get("chat_id"))
+    })
+
+
+@app.route("/api/notifications/telegram/config", methods=["POST"])
+def api_telegram_config_save():
+    """Saves Telegram Bot credentials and alert preferences."""
+    from core.telegram_notifier import TelegramNotifier
+    data = request.get_json() or {}
+    cfg = TelegramNotifier.load_config()
+    if "bot_token" in data:
+        cfg["bot_token"] = str(data["bot_token"]).strip()
+    if "chat_id" in data:
+        cfg["chat_id"] = str(data["chat_id"]).strip()
+    if "enabled" in data:
+        cfg["enabled"] = bool(data["enabled"])
+    if "alert_types" in data:
+        cfg["alert_types"] = data["alert_types"]
+    TelegramNotifier.save_config(cfg)
+    return jsonify({"success": True, "message": "تم حفظ إعدادات تنبيهات تيليجرام بنجاح."})
+
+
+@app.route("/api/notifications/telegram/test", methods=["POST"])
+def api_notifications_telegram_test():
+    """Sends a verification test ping to the user's Telegram."""
+    from core.telegram_notifier import TelegramNotifier
+    data = request.get_json() or {}
+    token = data.get("bot_token")
+    cid = data.get("chat_id")
+    res = TelegramNotifier.test_connection(bot_token=token, chat_id=cid)
+    status_code = 200 if res.get("success") else 400
+    return jsonify(res), status_code
+
+
+@app.route("/api/notifications/telegram/scan", methods=["POST"])
+def api_telegram_scan_alerts():
+    """Scans real portfolio holdings and dispatches pending Telegram alerts."""
+    from core.portfolio_alert_engine import PortfolioAlertEngine
+    res = PortfolioAlertEngine.scan_and_dispatch_alerts(send_telegram=True)
+    return jsonify(res)
+
+
+# --- 3.96 Insider Trading, Arbitrage & Notifications Endpoints ---
+@app.route("/api/insider_sentiment", methods=["GET"])
+@app.route("/api/insiders", methods=["GET"])
+def api_insider_sentiment():
+    """Returns top market-wide regulatory insider disclosures and flows."""
+    from core.insider_trading_engine import InsiderTradingEngine
+    top_n = int(request.args.get("limit", 5))
+    deals = InsiderTradingEngine.get_market_wide_insider_deals(top_n=top_n)
+    return jsonify({"status": "SUCCESS", "deals": deals, "count": len(deals)})
+
+
+@app.route("/api/pairs_trading", methods=["GET"])
+def api_pairs_trading_summary():
+    """Returns statistical pairs arbitrage Z-Scores and divergence signals."""
+    from core.statistical_arbitrage_engine import StatisticalArbitrageEngine
+    pairs = StatisticalArbitrageEngine.evaluate_all_pairs()
+    return jsonify({"status": "SUCCESS", "pairs": pairs, "count": len(pairs)})
+
+
+# --- 3.97 One-Click Portfolio Sizer & Risk-Parity Allocation ---
+@app.route("/api/portfolio/size", methods=["GET", "POST"])
+@app.route("/api/portfolio_sizer", methods=["GET", "POST"])
+def api_portfolio_sizer():
+    """
+    Computes optimal whole-share lot sizes and EGP capital allocation 
+    subject to the strict 30% single-stock maximum regulatory cap.
+    """
+    from core.portfolio_optimizer import PortfolioOptimizer
+    from core.price_sync_service import PriceSyncService
+    
+    if request.method == "POST":
+        data = request.get_json() or {}
+        capital = float(data.get("capital") or data.get("total_capital") or 50000.0)
+        strategy = str(data.get("strategy") or "risk_parity")
+        custom_tickers = data.get("tickers")
+    else:
+        capital = float(request.args.get("capital", 50000.0))
+        strategy = str(request.args.get("strategy", "risk_parity"))
+        custom_tickers = None
+
+    canonical_prices_raw = PriceSyncService.load_canonical_prices()
+    
+    # Select focus stocks if not provided
+    if not custom_tickers:
+        focus_tickers = ["COMI.CA", "SWDY.CA", "TMGH.CA", "MFPC.CA", "ETEL.CA"]
+    else:
+        focus_tickers = [t.upper().strip() for t in custom_tickers if t]
+
+    prices_dict = {}
+    names_dict = {}
+    for t in focus_tickers:
+        rec = canonical_prices_raw.get(t, {})
+        prices_dict[t] = float(rec.get("price", 100.0))
+        names_dict[t] = rec.get("company_name", t)
+
+    vol_dict = {
+        "COMI.CA": 0.18,
+        "SWDY.CA": 0.22,
+        "TMGH.CA": 0.25,
+        "MFPC.CA": 0.20,
+        "ETEL.CA": 0.19
+    }
+    if strategy == "momentum":
+        weights = {"COMI.CA": 0.30, "SWDY.CA": 0.30, "TMGH.CA": 0.25, "MFPC.CA": 0.15}
+    elif strategy == "balanced":
+        weights = {"COMI.CA": 0.25, "SWDY.CA": 0.25, "TMGH.CA": 0.20, "MFPC.CA": 0.15, "ETEL.CA": 0.15}
+    else:  # risk_parity
+        weights = PortfolioOptimizer.calculate_optimal_weights(focus_tickers, volatility_dict=vol_dict)
+
+    res = PortfolioOptimizer.allocate_capital(capital, weights, prices_dict)
+    
+    formatted_allocations = []
+    for ticker, info in res.get("allocations", {}).items():
+        price = info.get("price_egp", 100.0) or 100.0
+        formatted_allocations.append({
+            "ticker": ticker,
+            "company_name": names_dict.get(ticker, ticker),
+            "price_egp": price,
+            "shares_to_buy": info.get("shares_to_buy", 0),
+            "target_amount_egp": info.get("target_amount_egp", 0.0),
+            "actual_amount_egp": info.get("actual_amount_egp", 0.0),
+            "actual_weight_pct": info.get("actual_weight_pct", 0.0),
+            "target_1_egp": round(price * 1.085, 2),
+            "stop_loss_egp": round(price * 0.93, 2),
+            "status": info.get("status", "ALLOCATED_OK")
+        })
+
+    return jsonify({
+        "status": "SUCCESS",
+        "total_capital_egp": capital,
+        "total_allocated_egp": res.get("total_allocated_egp", 0.0),
+        "remaining_cash_egp": res.get("remaining_cash_egp", 0.0),
+        "cash_reserve_pct": res.get("cash_reserve_pct", 0.0),
+        "strategy": strategy,
+        "allocations": formatted_allocations
+    })
+
+
 # --- 4. Cross-Sectional Ranking ---
 @app.route("/api/ranking", methods=["GET"])
 @app.route("/api/rankings", methods=["GET"])

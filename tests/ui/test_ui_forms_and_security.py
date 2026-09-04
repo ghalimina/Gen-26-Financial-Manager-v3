@@ -41,21 +41,22 @@ class TestUIFormsAndSecurity(unittest.TestCase):
                 }
             ]
         }
-        # Save temporary
-        RealPortfolioTracker.save_real_portfolio(malicious_holdings)
-        res = RealPortfolioTracker.analyze_real_portfolio(
-            current_market_prices={"COMI.CA": 102.0}
-        )
+        orig = RealPortfolioTracker.load_real_portfolio()
+        try:
+            # Save temporary
+            RealPortfolioTracker.save_real_portfolio(malicious_holdings)
+            res = RealPortfolioTracker.analyze_real_portfolio(
+                current_market_prices={"COMI.CA": 102.0}
+            )
 
-        pos = res["positions"][0]
-        self.assertEqual(pos["symbol"], "COMI.CA")
-        self.assertEqual(pos["cost_basis_egp"], 10000.0)
-        self.assertEqual(pos["market_value_egp"], 10200.0)
-        self.assertEqual(pos["unrealized_pnl_egp"], 200.0)
-
-        # Restore clean portfolio
-        clean = RealPortfolioTracker.get_initial_real_portfolio()
-        RealPortfolioTracker.save_real_portfolio(clean)
+            pos = res["positions"][0]
+            self.assertEqual(pos["symbol"], "COMI.CA")
+            self.assertEqual(pos["cost_basis_egp"], 10000.0)
+            self.assertEqual(pos["market_value_egp"], 10200.0)
+            self.assertEqual(pos["unrealized_pnl_egp"], 200.0)
+        finally:
+            # Restore original portfolio
+            RealPortfolioTracker.save_real_portfolio(orig)
 
 
 if __name__ == "__main__":

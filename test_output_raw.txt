@@ -1,0 +1,60 @@
+﻿python : test_01_triple_barrier_labeling 
+(test_advanced_feature_engineering.TestAdvancedFeatureEngineering.test_01_triple_barrier_labeling)
+At line:1 char:1
++ python -m unittest discover -s tests -v 2>&1 | Out-File -FilePath tes ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (test_01_triple_...rrier_labeling):String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Verify Triple Barrier assigns +1 on profit target, -1 on stop loss, 0 on time expiration. ... ok
+test_02_fractional_differentiation 
+(test_advanced_feature_engineering.TestAdvancedFeatureEngineering.test_02_fractional_differentiation)
+Verify fractional differentiation preserves shape and produces stationary memory-preserving series. ... ok
+test_03_multi_timeframe_momentum 
+(test_advanced_feature_engineering.TestAdvancedFeatureEngineering.test_03_multi_timeframe_momentum)
+Verify momentum score is bounded between 0 and 100 with valid velocity regime. ... ok
+test_04_stealth_accumulation_detection 
+(test_advanced_feature_engineering.TestAdvancedFeatureEngineering.test_04_stealth_accumulation_detection)
+Verify high Volume Z-Score with tight price range flags STEALTH_ACCUMULATION. ... ok
+test_01_macd_and_bollinger_bands_structure 
+(test_advanced_methodology_features.TestAdvancedMethodologyFeatures.test_01_macd_and_bollinger_bands_structure)
+Verify TechnicalSetupEngine computes MACD and Bollinger Bands squeeze/expansion. ... 2026-08-30 14:35:10,691 [INFO] 
+Initiating resilient multi-source price sync for 244 EGX tickers...
+ok
+test_02_retest_setup_classification 
+(test_advanced_methodology_features.TestAdvancedMethodologyFeatures.test_02_retest_setup_classification)
+Verify TechnicalSetupEngine recognizes BREAKOUT_RETEST_SUPPORT setup. ... ok
+test_03_multi_timeframe_weekly_trend 
+(test_advanced_methodology_features.TestAdvancedMethodologyFeatures.test_03_multi_timeframe_weekly_trend)
+Verify Multi-Timeframe weekly trend confirmation filter. ... ok
+test_04_dynamic_atr_stop_loss 
+(test_advanced_methodology_features.TestAdvancedMethodologyFeatures.test_04_dynamic_atr_stop_loss)
+Verify stop loss is dynamic based on ATR and clamped within [3.5%, 10.0%]. ... 2026-08-30 14:35:38,949 [WARNING] 
+[CIRCUIT_BREAKER] Price anomaly #1 for DAPH.CA: fetched 141.60 EGP deviates 20.0% from previous close 118.00 EGP 
+(exceeds ▒15% limit).
+2026-08-30 14:35:38,950 [WARNING] [CIRCUIT_BREAKER] Price anomaly #4 for AIH.CA: fetched 0.60 EGP deviates 20.6% from 
+previous close 0.50 EGP (exceeds ▒15% limit).
+2026-08-30 14:35:38,950 [ERROR] [CRITICAL_FEED_ALERT] \u0633\u0647\u0645 AIH.CA \u062a\u0643\u0631\u0631 
+\u0631\u0641\u0636\u0647 4 \u0645\u0631\u0627\u062a \u0645\u062a\u062a\u0627\u0644\u064a\u0629 ù \u0647\u0630\u0627 
+\u0627\u0644\u0633\u0647\u0645 \u064a\u062d\u062a\u0627\u062c \u0645\u0635\u062f\u0631 
+\u0628\u064a\u0627\u0646\u0627\u062a \u0628\u062f\u064a\u0644 ù \u0627\u0644\u062a\u062c\u0627\u0647\u0644 
+\u0627\u0644\u0645\u062a\u0643\u0631\u0631 \u0644\u0646 \u064a\u062d\u0644 \u0627\u0644\u0645\u0634\u0643\u0644\u0629. 
+\u062c\u0627\u0631\u064a \u062a\u062c\u0631\u0628\u0629 \u0627\u0644\u0645\u0635\u062f\u0631 
+\u0627\u0644\u0645\u0628\u0627\u0634\u0631 \u0627\u0644\u0628\u062f\u064a\u0644...
+2026-08-30 14:35:39,502 [INFO] Price sync completed: 155/244 live fetched, 89 fallback snapshots, 1 critical feed 
+alerts.
+ok
+test_05_expected_upside_and_downside_per_horizon 
+(test_advanced_methodology_features.TestAdvancedMethodologyFeatures.test_05_expected_upside_and_downside_per_horizon)
+Verify each horizon contains both expected_return_pct and expected_downside_pct. ... ok
+test_06_quality_of_earnings_analysis 
+(test_advanced_methodology_features.TestAdvancedMethodologyFeatures.test_06_quality_of_earnings_analysis)
+Verify LiveFundamentalsEngine evaluates Cash Flow Conversion (OCF/NI) and flags. ... ok
+test_07_portfolio_correlation_and_beta_engine 
+(test_advanced_methodology_features.TestAdvancedMethodologyFeatures.test_07_portfolio_correlation_and_beta_engine)
+Verify PortfolioCorrelationEngine computes Beta vs EGX30 and correlation matrix. ... ok
+test_08_multi_horizon_engine_new_report_fields 
+(test_advanced_methodology_features.TestAdvancedMethodologyFeatures.test_08_multi_horizon_engine_new_report_fields)
+Verify MultiHorizonEngine includes confidence, beta, invalidation triggers, and tailored holding. ... ok
+test_09_api_ranking_and_correlation_endpoints 
+(test_advanced_methodology_features.TestAdvancedMethodologyFeatures.test_09_api_ranking_and_correlation_endpoints)

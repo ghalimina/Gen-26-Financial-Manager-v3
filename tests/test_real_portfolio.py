@@ -19,6 +19,7 @@ from core.real_portfolio import RealPortfolioTracker
 class TestRealPortfolio(unittest.TestCase):
 
     def setUp(self):
+        self._original_portfolio = RealPortfolioTracker.load_real_portfolio()
         # Setup clean test fixture with 2 holdings
         fixture = {
             "portfolio_id": "REAL_PORTFOLIO_PRIMARY",
@@ -56,9 +57,8 @@ class TestRealPortfolio(unittest.TestCase):
         RealPortfolioTracker.save_real_portfolio(fixture)
 
     def tearDown(self):
-        # Reset to production empty baseline
-        baseline = RealPortfolioTracker.get_initial_real_portfolio()
-        RealPortfolioTracker.save_real_portfolio(baseline)
+        # Restore user's actual portfolio state
+        RealPortfolioTracker.save_real_portfolio(self._original_portfolio)
 
     def test_01_real_portfolio_analysis_and_pnl(self):
         """

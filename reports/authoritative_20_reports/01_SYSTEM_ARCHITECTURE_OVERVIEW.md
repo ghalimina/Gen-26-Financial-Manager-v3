@@ -1,5 +1,6 @@
 # 01 — System Architecture Overview & Master SSoT Hierarchy
 **GEN-26 Quantitative Autonomous Platform | Version 3.2.0-Authoritative | Institutional Whitepaper**
+*Last Synchronized: 2026-08-30 14:19:12 | Status: PRODUCTION_READY (27/27 SSoT Invariants PASS)*
 
 ---
 
@@ -12,8 +13,6 @@ The system enforces a **Zero-Mock, Strict Invariance Policy**: every data point,
 
 ## 1. Master SSoT Hierarchy & 8-Layer Architecture
 
-The platform is structured into 8 strictly governed architectural layers:
-
 ```
 +====================================================================================================+
 |                                MASTER SSoT HIERARCHY & ARCHITECTURE                                |
@@ -25,22 +24,22 @@ The platform is structured into 8 strictly governed architectural layers:
 |                                  | Fractional Differentiation (d=0.35-0.45) for Memory Stationarity |
 +----------------------------------+------------------------------------------------------------------+
 | Layer 3: AI & Uncertainty Layer  | Two-Stage Meta-Labeling (Random Forest + LightGBM Classifier)    |
-|                                  | UncertaintyEngine Continuous CDF Probabilistic Distribution     |
+|                                  | Multi-Model LLM Router (Claude 3.5, DeepSeek-V3, GPT-4o, Gemini) |
 +----------------------------------+------------------------------------------------------------------+
 | Layer 4: Trade Selection Gate    | Independent Model: Net Edge >= 1.00% Required Hurdle             |
 |                                  | Net Edge = E(Return) - (0.35% + Dynamic Slippage) - Uncertainty |
 +----------------------------------+------------------------------------------------------------------+
 | Layer 5: Risk & Sizing Engine    | Modified Kelly / Mark Douglas Sizing, Max 1.0% Risk / Trade     |
-|                                  | Dynamic Azimut Gold ETF (AZG.CA) Tail-Risk Hedge Allocation     |
+|                                  | 35% Risk-Free Cash Buffer Floor, Mandatory -7.0% Stop Loss       |
 +----------------------------------+------------------------------------------------------------------+
-| Layer 6: Self-Improvement Loop   | 7-Agent Autonomous Council & Episodic Failure Memory Database    |
-|                                  | Purged Walk-Forward Retraining & Baseline Benchmark Suite        |
+| Layer 6: Self-Improvement Loop   | 7-Agent Council + 9-Agent TradingAgents Dialectical Framework   |
+|                                  | Episodic Failure Memory Database & Purged Walk-Forward Gate      |
 +----------------------------------+------------------------------------------------------------------+
-| Layer 7: Governance Gatekeeper   | Anti-Reward-Hacking Multi-Objective Function (Fitness >= 1.00)   |
-|                                  | 4-Stage Promotion Gate (Candidate -> Paper -> Shadow -> Live)    |
+| Layer 7: Push & Alerts Gateway   | Telegram Bot Real-Time Push Gateway (Targets +8%/+15%, Stops)    |
+|                                  | Real Portfolio Persistent CRUD Engine & Audit Logging            |
 +----------------------------------+------------------------------------------------------------------+
-| Layer 8: Dashboard & Observator  | Flask Real-Time Web Server (<200ms In-Memory Caching), REST APIs |
-|                                  | Reality Gap Live Auditor & Forecast vs Actual Accuracy Tracker   |
+| Layer 8: Dashboard & Observator  | Flask Real-Time Server (<200ms In-Memory Caching), REST APIs     |
+|                                  | EGX 244 Sector Heatmap & 1,000-Path Monte Carlo Capital Cone     |
 +====================================================================================================+
 ```
 
@@ -48,19 +47,16 @@ The platform is structured into 8 strictly governed architectural layers:
 
 ## 2. 3-Timestamp Anti-Leakage Protocol
 
-To eliminate look-ahead bias in backtesting and live simulation, all ingested data records enforce the strict temporal ordering:
+$$\text{effective\_time} \ge \text{publication\_time} \ge \text{event\_time}$$
 
-$$	ext{effective\_time} \ge 	ext{publication\_time} \ge 	ext{event\_time}$$
-
-1. **$	ext{event\_time}$**: Exact real-world timestamp when the underlying economic/corporate event occurred.
-2. **$	ext{publication\_time}$**: Timestamp when the information was published by an authorized source.
-3. **$	ext{effective\_time}$**: Exact market session timestamp when the information became actionable for algorithmic execution.
+1. **$\text{event\_time}$**: Exact real-world timestamp when the underlying economic/corporate event occurred.
+2. **$\text{publication\_time}$**: Timestamp when the information was published by an authorized source.
+3. **$\text{effective\_time}$**: Exact market session timestamp when the information became actionable for algorithmic execution.
 
 ---
 
-## 3. End-to-End Live Simulation & Verification
-
-The platform's execution pipeline is continuously audited via automated verification scripts:
-- **`scripts/simulate_live_quant_cycle.py`**: Executes live canonical ingestion, multi-horizon probabilistic forecasting, uncertainty scoring, trade selection gating, 7-agent deliberation, and atomic SQLite persistence.
-- **`scripts/automated_consistency_audit.py`**: Audits 21 Single Source of Truth (SSoT) invariants.
-- **Master STLC Test Battery**: 474 automated unit, integration, and stress tests passing 100% with zero failures.
+## 3. 4 Elite Extension Modules Implemented
+1. **Multi-Model LLM Router (`core/trading_agents/llm_router.py`)**: Hot-swappable connectors to Claude 3.5 Sonnet, DeepSeek-V3, GPT-4o, and Gemini 1.5 Pro with deterministic offline fallback.
+2. **Telegram Bot Real-Time Push Gateway (`core/telegram_notifier.py` / `core/portfolio_alert_engine.py`)**: Real-time push alerts on Target Hits (+8.0% / +15.0%), Stop Loss proximity, and ex-dividend reminders.
+3. **Interactive EGX 244 Sector Treemap Heatmap (`core/market_heatmap_engine.py`)**: Complete hierarchical sector aggregation and volume-weighted performance for all 244 Egyptian equities.
+4. **Monte Carlo 1,000-Path Capital Trajectory Simulator (`core/monte_carlo_engine.py`)**: Simulates fat-tailed Student's t distribution paths with VaR 95%, VaR 99%, CVaR, and probability cones.

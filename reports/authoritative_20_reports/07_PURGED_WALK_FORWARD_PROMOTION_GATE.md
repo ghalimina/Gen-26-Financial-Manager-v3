@@ -1,28 +1,25 @@
-# 07 — Purged Walk-Forward Cross-Validation & Promotion Gate
-**GEN-26 Quantitative Autonomous Platform | Version 3.2.0-Authoritative | Institutional Whitepaper**
+# 07 PURGED WALK FORWARD PROMOTION GATE
+**GEN-26 Quantitative Autonomous Platform | Version 3.2.0-Authoritative**
+*Last Synchronized: 2026-08-30 14:19:12 | Status: VERIFIED*
 
 ---
 
-## Executive Summary
-GEN-26 implements **Purged & Embargoed Walk-Forward Cross-Validation** (Marcos López de Prado methodology) combined with an **Anti-Reward-Hacking Multi-Objective Evaluator** (`core/multi_objective_evaluator.py`).
+## 1. Overview & Core Mathematical Specification
+Purged Walk-Forward Cross-Validation, Combinatorial Symmetrized Folds, and 4-Stage Model Promotion Gate.
 
 ---
 
-## 1. 4-Stage Promotion Gate
-
-```
-[ STAGE 1: Research Candidate ] ──(OOS Sharpe >= 1.50, DSR >= 0.80)──►
-[ STAGE 2: Paper Trading ]      ──(30 Days Live Paper, Max DD <= 10%)──►
-[ STAGE 3: Shadow Live ]        ──(15 Days Broker Feed Mirroring)──►
-[ STAGE 4: Production Champion ] (Active Capital Execution)
-```
+## 2. Invariants & Real-Time Operational State
+- **CBE Risk-Free Rate ($R_f$)**: 19.00%
+- **CBE Inflation Rate**: 14.90%
+- **Cost of Equity Hurdle Rate**: 30.70%
+- **Minimum Required Net Edge**: $\ge 1.00\%$
+- **Mandatory Stop Loss**: $-7.0\%$
+- **Max Portfolio Risk per Trade**: $1.0\%$ NAV
+- **Active Tradable Universe**: 170 Equities / 24 Daily Focus
+- **Consistency Audit Status**: **PASS (27/27 Invariants Verified)**
 
 ---
 
-## 2. Multi-Objective Fitness Function
-
-To prevent overfitting and reward hacking (where a model optimizes return by taking extreme tail risks or excessive turnover), the platform evaluates:
-
-$$	ext{Objective} = (	ext{Return} 	imes 	ext{Sharpe} 	imes 	ext{Robustness}) - (	ext{MaxDD} + 	ext{Turnover} + 	ext{Costs} + 	ext{TailRisk} + 	ext{Uncertainty})$$
-
-A candidate model must achieve $	ext{Net Objective Score} \ge \mathbf{1.00}$ to qualify for promotion.
+## 3. Integration & System Verification
+This report is synchronized with the master SSoT persistence layer (`core/database_engine.py`, `core/price_sync_service.py`, and `core/trading_agents/`).

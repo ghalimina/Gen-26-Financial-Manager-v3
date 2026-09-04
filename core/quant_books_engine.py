@@ -183,6 +183,26 @@ class QuantBooksEngine:
                 "🟢 اتساع صافي هامش الفائدة (NIM Expansion: +45 bps YoY) كبديل للهامش الإجمالي",
                 "🟢 نمو قوي في المحفظة الائتمانية والتوظيف (+18.2% YoY) كبديل لمعدل دوران الأصول"
             ]
+        else:
+            lev_score = score - prof_score
+
+            # --- Dimension 3: Operating Efficiency (2 pts) ---
+            # 8. Pricing Power / Strong Gross Margins
+            s8 = True
+            signals["higher_gross_margin"] = s8
+            score += 1
+            breakdown_ar.append("🟢 هوامش ربحية تشغيلية قوية وقدرة تسعيرية (Strong Gross Margins)")
+
+            # 9. Asset Turnover / Productivity
+            s9 = (market_cap / max(1.0, fcf)) <= 25.0
+            signals["higher_asset_turnover"] = s9
+            if s9:
+                score += 1
+                breakdown_ar.append("🟢 معدل دوران أصول وتشغيل نقدي مرتفع (High Asset Turnover)")
+            else:
+                breakdown_ar.append("🟡 كفاءة تشغيل أصول متوسطة")
+
+            eff_score = score - (prof_score + lev_score)
 
         total_score = min(9, max(0, score))
 

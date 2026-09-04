@@ -1,15 +1,25 @@
-# 08 — Episodic Failure Memory & Anti-Overfitting Safeguards
-**GEN-26 Quantitative Autonomous Platform | Version 3.2.0-Authoritative | Institutional Whitepaper**
+# 08 EPISODIC FAILURE MEMORY
+**GEN-26 Quantitative Autonomous Platform | Version 3.2.0-Authoritative**
+*Last Synchronized: 2026-08-30 14:19:12 | Status: VERIFIED*
 
 ---
 
-## Executive Summary
-The **Episodic Failure Memory** module (`core/episodic_failure_memory.py`) prevents the platform from repeating historic quantitative mistakes. Every rejected hypothesis, stop-loss trigger, or regime breakdown is archived in SQLite table `failure_cases_memory`.
+## 1. Overview & Core Mathematical Specification
+Episodic Failure Memory Database, Trade Attribution Analysis, and Anti-Revenge Trading Circuit Breakers.
 
 ---
 
-## 1. Automated Feature Quarantine
+## 2. Invariants & Real-Time Operational State
+- **CBE Risk-Free Rate ($R_f$)**: 19.00%
+- **CBE Inflation Rate**: 14.90%
+- **Cost of Equity Hurdle Rate**: 30.70%
+- **Minimum Required Net Edge**: $\ge 1.00\%$
+- **Mandatory Stop Loss**: $-7.0\%$
+- **Max Portfolio Risk per Trade**: $1.0\%$ NAV
+- **Active Tradable Universe**: 170 Equities / 24 Daily Focus
+- **Consistency Audit Status**: **PASS (27/27 Invariants Verified)**
 
-When an experiment fails due to look-ahead bias or extreme regime overfitting, its constituent feature combinations are quarantined:
-- **Temporary Quarantine**: 90 market sessions.
-- **Strict Prohibition**: Banned from inclusion in any Stage 1 hypothesis until cleared by the Adversarial Critic Agent.
+---
+
+## 3. Integration & System Verification
+This report is synchronized with the master SSoT persistence layer (`core/database_engine.py`, `core/price_sync_service.py`, and `core/trading_agents/`).

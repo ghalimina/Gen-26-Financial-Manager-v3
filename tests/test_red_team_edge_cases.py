@@ -22,9 +22,11 @@ class TestRedTeamEdgeCases(unittest.TestCase):
 
     def test_empty_portfolio_exit_signals(self):
         # Empty portfolio should return empty analysis without crashing
-        analysis = RealPortfolioTracker.analyze_real_portfolio(current_market_prices={})
-        self.assertEqual(analysis["positions_count"], 0)
-        self.assertEqual(len(analysis["positions"]), 0)
+        from unittest.mock import patch
+        with patch.object(RealPortfolioTracker, 'load_real_portfolio', return_value={"cash_egp": 100000.0, "holdings": []}):
+            analysis = RealPortfolioTracker.analyze_real_portfolio(current_market_prices={})
+            self.assertEqual(analysis["positions_count"], 0)
+            self.assertEqual(len(analysis["positions"]), 0)
 
     def test_data_quality_insufficient_rows(self):
         short_df = pd.DataFrame({

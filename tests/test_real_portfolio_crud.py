@@ -18,6 +18,7 @@ from core.real_portfolio import RealPortfolioTracker
 class TestRealPortfolioCRUD(unittest.TestCase):
 
     def setUp(self):
+        self._original_portfolio = RealPortfolioTracker.load_real_portfolio()
         # Reset to known fixture with 2 initial holdings
         fixture = {
             "portfolio_id": "REAL_PORTFOLIO_PRIMARY",
@@ -55,9 +56,8 @@ class TestRealPortfolioCRUD(unittest.TestCase):
         RealPortfolioTracker.save_real_portfolio(fixture)
 
     def tearDown(self):
-        # Reset to production clean empty state
-        baseline = RealPortfolioTracker.get_initial_real_portfolio()
-        RealPortfolioTracker.save_real_portfolio(baseline)
+        # Restore user's actual portfolio state
+        RealPortfolioTracker.save_real_portfolio(self._original_portfolio)
 
     def test_01_add_valid_holding(self):
         """Verify adding a new valid EGX holding succeeds and calculates P&L."""

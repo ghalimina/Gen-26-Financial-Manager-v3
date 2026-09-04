@@ -1,0 +1,525 @@
+| File Path | Category | Evidence / Reason | Confidence |
+| :--- | :---: | :--- | :---: |
+| `full_raw_test_run.txt` | **CONFIRMED_UNUSED** | Temporary raw terminal test output log file. | High |
+| `scripts/check_brace_balance.py` | **CONFIRMED_UNUSED** | Temporary diagnostic / debugging scratch script created during ad-hoc maintenance. | High |
+| `scripts/fast_inventory_classifier.py` | **CONFIRMED_UNUSED** | Temporary diagnostic / debugging scratch script created during ad-hoc maintenance. | High |
+| `scripts/find_script_lines.py` | **CONFIRMED_UNUSED** | Temporary diagnostic / debugging scratch script created during ad-hoc maintenance. | High |
+| `scripts/inventory_analyzer.py` | **CONFIRMED_UNUSED** | Temporary diagnostic / debugging scratch script created during ad-hoc maintenance. | High |
+| `scripts/inventory_classifier.py` | **CONFIRMED_UNUSED** | Temporary diagnostic / debugging scratch script created during ad-hoc maintenance. | High |
+| `scripts/system_interconnection_inspector.py` | **CONFIRMED_UNUSED** | Temporary diagnostic / debugging scratch script created during ad-hoc maintenance. | High |
+| `scripts/trace_unclosed_braces.py` | **CONFIRMED_UNUSED** | Temporary diagnostic / debugging scratch script created during ad-hoc maintenance. | High |
+| `test_output_raw.txt` | **CONFIRMED_UNUSED** | Temporary raw terminal test output log file. | High |
+| `reports/browser_e2e_results.json` | **SUPERSEDED** | Static intermediate audit output superseded by reports/final_forensic_audit.json and reports/consistency_audit_report.json. | High |
+| `reports/final_product_acceptance.json` | **SUPERSEDED** | Static intermediate audit output superseded by reports/final_forensic_audit.json and reports/consistency_audit_report.json. | High |
+| `reports/final_system_status.json` | **SUPERSEDED** | Static intermediate audit output superseded by reports/final_forensic_audit.json and reports/consistency_audit_report.json. | High |
+| `reports/fullstack_runtime_status.json` | **SUPERSEDED** | Static intermediate audit output superseded by reports/final_forensic_audit.json and reports/consistency_audit_report.json. | High |
+| `reports/qa_master_pass_results.json` | **SUPERSEDED** | Static intermediate audit output superseded by reports/final_forensic_audit.json and reports/consistency_audit_report.json. | High |
+| `reports/testing_quality.json` | **SUPERSEDED** | Static intermediate audit output superseded by reports/final_forensic_audit.json and reports/consistency_audit_report.json. | High |
+| `reports/ui_button_test_results.json` | **SUPERSEDED** | Static intermediate audit output superseded by reports/final_forensic_audit.json and reports/consistency_audit_report.json. | High |
+| `reports/ui_e2e_results.json` | **SUPERSEDED** | Static intermediate audit output superseded by reports/final_forensic_audit.json and reports/consistency_audit_report.json. | High |
+| `reports/ui_health.json` | **SUPERSEDED** | Static intermediate audit output superseded by reports/final_forensic_audit.json and reports/consistency_audit_report.json. | High |
+| `reports/ui_inventory.json` | **SUPERSEDED** | Static intermediate audit output superseded by reports/final_forensic_audit.json and reports/consistency_audit_report.json. | High |
+| `reports/ui_navigation_results.json` | **SUPERSEDED** | Static intermediate audit output superseded by reports/final_forensic_audit.json and reports/consistency_audit_report.json. | High |
+| `data/ai_validation_metrics.json` | **ORPHANED** | Data store file without direct textual reference. | Medium |
+| `data/algo_orders.json` | **ORPHANED** | Data store file without direct textual reference. | Medium |
+| `data/authoritative_paper_sessions.json` | **ORPHANED** | Data store file without direct textual reference. | Medium |
+| `data/calibrated_weights.json` | **ORPHANED** | Data store file without direct textual reference. | Medium |
+| `data/corporate_actions_calendar.json` | **ORPHANED** | Data store file without direct textual reference. | Medium |
+| `data/data_verification_report.json` | **ORPHANED** | Data store file without direct textual reference. | Medium |
+| `data/historical_paper_sessions_archive.json` | **ORPHANED** | Data store file without direct textual reference. | Medium |
+| `data/macro_economic_state.json` | **ORPHANED** | Data store file without direct textual reference. | Medium |
+| `data/market_price_reconciliation.json` | **ORPHANED** | Data store file without direct textual reference. | Medium |
+| `data/ml_permutation_importance.json` | **ORPHANED** | Data store file without direct textual reference. | Medium |
+| `data/mlops_retrain_metadata.json` | **ORPHANED** | Data store file without direct textual reference. | Medium |
+| `data/model_drift_metrics.json` | **ORPHANED** | Data store file without direct textual reference. | Medium |
+| `data/multi_horizon_predictions.json` | **ORPHANED** | Data store file without direct textual reference. | Medium |
+| `data/multi_source_verification.json` | **ORPHANED** | Data store file without direct textual reference. | Medium |
+| `data/my_portfolio_transactions.json` | **ORPHANED** | Data store file without direct textual reference. | Medium |
+| `data/paper_cohort_20260820.json` | **ORPHANED** | Data store file without direct textual reference. | Medium |
+| `data/paper_trading_journal.json` | **ORPHANED** | Data store file without direct textual reference. | Medium |
+| `data/prediction_actual_telemetry.json` | **ORPHANED** | Data store file without direct textual reference. | Medium |
+| `data/price_sync_anomaly_tracker.json` | **ORPHANED** | Data store file without direct textual reference. | Medium |
+| `data/raw_yfinance_individual_quotes.json` | **ORPHANED** | Data store file without direct textual reference. | Medium |
+| `data/real_portfolio_audit_log.json` | **ORPHANED** | Data store file without direct textual reference. | Medium |
+| `data/realized_statistical_edge.json` | **ORPHANED** | Data store file without direct textual reference. | Medium |
+| `data/system_notifications_log.json` | **ORPHANED** | Data store file without direct textual reference. | Medium |
+| `data/system_status.json` | **ORPHANED** | Data store file without direct textual reference. | Medium |
+| `data/user_real_portfolio.json` | **ORPHANED** | Data store file without direct textual reference. | Medium |
+| `data/user_watchlist.json` | **ORPHANED** | Data store file without direct textual reference. | Medium |
+| `data/walk_forward_weights.json` | **ORPHANED** | Data store file without direct textual reference. | Medium |
+| `data/watchlist.json` | **ORPHANED** | Data store file without direct textual reference. | Medium |
+| `data_sources/sources_registry.yaml` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/GEN26_CAPABILITY_MATRIX.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/GEN26_DEPLOYMENT_STATUS.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/GEN26_FINAL_CAPABILITY_MATRIX.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/GEN26_FINAL_STATUS.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/GEN26_PAPER_OBSERVATORY_STATUS.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/GEN26_PHASE_NEXT_STATUS.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/GEN26_REAL_PORTFOLIO_STATUS.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/GEN26_REPOSITORY_FORENSIC_AUDIT.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/INCUBATION_FINAL_VERDICT.md` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/MASTER_FORENSIC_FULL_STACK_REPORT.md` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/all_repo_files_list.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/audit_50_stocks_forensic.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/e2e_results.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260823_062235.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260823_062400.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260823_062631.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260823_062904.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260823_063111.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260823_063258.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260823_065024.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260823_065746.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260823_070105.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260823_070249.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260823_152131.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260823_154233.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260823_155814.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260823_160141.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260823_160341.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260823_165801.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260823_170229.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260824_040537.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260824_042114.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260824_042237.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260824_042440.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260824_045136.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260824_050426.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260824_051948.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260824_053704.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260824_053938.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260824_055019.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260824_060724.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260824_061554.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260824_064534.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260824_070917.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260824_072159.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260824_073734.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260824_170012.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260824_170514.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260824_173515.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260824_175555.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260824_180253.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260824_182103.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260824_182311.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260824_182557.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260824_182558.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260824_185104.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260824_191238.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260825_044501.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260825_045442.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260825_052806.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260825_053839.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260825_055438.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260825_062154.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260825_063409.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260825_070208.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260825_182156.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260825_182618.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260825_190901.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260825_191237.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260825_191657.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260825_194740.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260825_195727.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260826_015935.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260826_065035.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260826_070904.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260826_072538.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260826_074235.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260826_080104.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260826_081230.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260826_170532.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260826_172323.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260826_174202.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260827_031726.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260827_031727.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260827_033801.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260827_034431.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260827_035412.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260827_042423.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260827_073445.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260828_035428.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260829_024920.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260829_031305.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260829_050538.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260829_051700.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260829_052648.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260829_053736.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260829_054936.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260829_060222.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260829_061310.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260829_062311.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260829_064116.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260830_003420.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260830_010214.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260830_023431.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260830_025426.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260830_030908.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260830_034123.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `reports/state_backups/state_backup_20260830_152858.json` | **ORPHANED** | Uncategorized repository file. | Medium |
+| `.env.example` | **ACTIVE** | Essential repository configuration / deployment descriptor. | High |
+| `.github/workflows/daily_pipeline.yml` | **ACTIVE** | GitHub Actions CI/CD automation workflow. | High |
+| `.github/workflows/dashboard_deploy.yml` | **ACTIVE** | GitHub Actions CI/CD automation workflow. | High |
+| `.github/workflows/tests.yml` | **ACTIVE** | GitHub Actions CI/CD automation workflow. | High |
+| `.gitignore` | **ACTIVE** | Essential repository configuration / deployment descriptor. | High |
+| `CHANGELOG.md` | **ACTIVE** | Authoritative project documentation / release history. | High |
+| `GEN26_FINAL_FORENSIC_AUDIT.md` | **ACTIVE** | Authoritative project documentation / release history. | High |
+| `Procfile` | **ACTIVE** | Essential repository configuration / deployment descriptor. | High |
+| `README.md` | **ACTIVE** | Authoritative project documentation / release history. | High |
+| `START.bat` | **ACTIVE** | Essential repository configuration / deployment descriptor. | High |
+| `config.py` | **ACTIVE** | Essential repository configuration / deployment descriptor. | High |
+| `core/__init__.py` | **ACTIVE** | Core quant engine module. Referenced in: core/trading_agents/__init__.py | High |
+| `core/advanced_feature_engineering.py` | **ACTIVE** | Core quant engine module. Referenced in: .github/workflows/daily_pipeline.yml, .github/workflows/tests.yml | High |
+| `core/ai_generative_engine.py` | **ACTIVE** | Core quant engine module. Referenced in: dashboard/app.py, tests/test_ai_generative_engine.py | High |
+| `core/ai_prediction_model.py` | **ACTIVE** | Core quant engine module. Referenced in: .github/workflows/daily_pipeline.yml, CHANGELOG.md | High |
+| `core/alpha_engine.py` | **ACTIVE** | Core quant engine module. Referenced in: reports/GEN26_CAPABILITY_MATRIX.json, reports/GEN26_FINAL_CAPABILITY_MATRIX.json | High |
+| `core/alpha_scanner/__init__.py` | **ACTIVE** | Core quant engine module. Referenced in: core/trading_agents/__init__.py | High |
+| `core/alpha_scanner/alpha_scorer.py` | **ACTIVE** | Core quant engine module. Referenced in: Dynamic loader | High |
+| `core/alpha_scanner/monotonicity_validator.py` | **ACTIVE** | Core quant engine module. Referenced in: Dynamic loader | High |
+| `core/alpha_scanner/multi_layer_scanner.py` | **ACTIVE** | Core quant engine module. Referenced in: Dynamic loader | High |
+| `core/alpha_scanner/opportunity_ranker.py` | **ACTIVE** | Core quant engine module. Referenced in: Dynamic loader | High |
+| `core/alternative_data_engine.py` | **ACTIVE** | Core quant engine module. Referenced in: dashboard/app.py, tests/test_alternative_data_engine.py | High |
+| `core/arabic_dictionary.py` | **ACTIVE** | Core quant engine module. Referenced in: tests/ui/test_arabic_dictionary.py | High |
+| `core/autonomous_research_lab.py` | **ACTIVE** | Core quant engine module. Referenced in: core/unified_pipeline_orchestrator.py, dashboard/app.py | High |
+| `core/baseline_benchmark_suite.py` | **ACTIVE** | Core quant engine module. Referenced in: tests/test_v2_architectural_enhancements.py | High |
+| `core/block_trades_engine.py` | **ACTIVE** | Core quant engine module. Referenced in: core/multi_horizon_engine.py, scripts/trace_end_to_end.py | High |
+| `core/broker_adapter.py` | **ACTIVE** | Core quant engine module. Referenced in: core/paper_trading_orchestrator.py, tests/test_gap_closure.py | High |
+| `core/broker_execution_engine.py` | **ACTIVE** | Core quant engine module. Referenced in: dashboard/app.py, tests/test_broker_execution.py | High |
+| `core/company_intelligence.py` | **ACTIVE** | Core quant engine module. Referenced in: reports/GEN26_CAPABILITY_MATRIX.json, reports/GEN26_FINAL_CAPABILITY_MATRIX.json | High |
+| `core/corporate_actions.py` | **ACTIVE** | Core quant engine module. Referenced in: core/corporate_actions_engine.py, core/ensemble_decision_engine.py | High |
+| `core/corporate_actions_calendar.py` | **ACTIVE** | Core quant engine module. Referenced in: CHANGELOG.md, core/corporate_actions_engine.py | High |
+| `core/corporate_actions_engine.py` | **ACTIVE** | Core quant engine module. Referenced in: .github/workflows/daily_pipeline.yml, .github/workflows/tests.yml | High |
+| `core/daily_snapshot.py` | **ACTIVE** | Core quant engine module. Referenced in: tests/test_daily_snapshot.py | High |
+| `core/data_freshness.py` | **ACTIVE** | Core quant engine module. Referenced in: tests/test_data_freshness.py | High |
+| `core/data_quality.py` | **ACTIVE** | Core quant engine module. Referenced in: core/paper_trading_orchestrator.py, reports/GEN26_CAPABILITY_MATRIX.json | High |
+| `core/data_sources_registry.py` | **ACTIVE** | Core quant engine module. Referenced in: core/news_deduplication_engine.py, dashboard/app.py | High |
+| `core/database.py` | **ACTIVE** | Core quant engine module. Referenced in: core/autonomous_research_lab.py, core/ensemble_decision_engine.py | High |
+| `core/database_engine.py` | **ACTIVE** | Core quant engine module. Referenced in: core/autonomous_research_lab.py, core/ensemble_decision_engine.py | High |
+| `core/decision_builder.py` | **ACTIVE** | Core quant engine module. Referenced in: reports/GEN26_CAPABILITY_MATRIX.json, reports/GEN26_FINAL_CAPABILITY_MATRIX.json | High |
+| `core/decision_snapshot.py` | **ACTIVE** | Core quant engine module. Referenced in: tests/test_paper_observatory.py | High |
+| `core/deep_quant_fusion_engine.py` | **ACTIVE** | Core quant engine module. Referenced in: core/unified_pipeline_orchestrator.py, dashboard/app.py | High |
+| `core/drift_monitor.py` | **ACTIVE** | Core quant engine module. Referenced in: dashboard/app.py, tests/test_paper_observatory.py | High |
+| `core/dynamic_risk_manager.py` | **ACTIVE** | Core quant engine module. Referenced in: .github/workflows/daily_pipeline.yml, .github/workflows/tests.yml | High |
+| `core/edge_verifier.py` | **ACTIVE** | Core quant engine module. Referenced in: tests/test_hardening_phase_2.py | High |
+| `core/egx_trading_rules_engine.py` | **ACTIVE** | Core quant engine module. Referenced in: .github/workflows/daily_pipeline.yml, .github/workflows/tests.yml | High |
+| `core/egx_universe.py` | **ACTIVE** | Core quant engine module. Referenced in: core/advanced_feature_engineering.py, core/alpha_scanner/opportunity_ranker.py | High |
+| `core/egx_universe_loader.py` | **ACTIVE** | Core quant engine module. Referenced in: core/advanced_feature_engineering.py, core/alpha_scanner/opportunity_ranker.py | High |
+| `core/ensemble_decision_engine.py` | **ACTIVE** | Core quant engine module. Referenced in: .github/workflows/daily_pipeline.yml, .github/workflows/tests.yml | High |
+| `core/event_intelligence.py` | **ACTIVE** | Core quant engine module. Referenced in: reports/GEN26_CAPABILITY_MATRIX.json, reports/GEN26_FINAL_CAPABILITY_MATRIX.json | High |
+| `core/external_providers.py` | **ACTIVE** | Core quant engine module. Referenced in: tests/test_gap_closure.py | High |
+| `core/feature_registry.py` | **ACTIVE** | Core quant engine module. Referenced in: core/ai_prediction_model.py, core/meta_labeling_engine.py | High |
+| `core/final_forensic_validator.py` | **ACTIVE** | Core quant engine module. Referenced in: tests/test_final_forensic_validation.py | High |
+| `core/frozen_invariants.py` | **ACTIVE** | Core quant engine module. Referenced in: core/final_forensic_validator.py, core/monte_carlo_engine.py | High |
+| `core/fundamental_data_engine.py` | **ACTIVE** | Core quant engine module. Referenced in: core/corporate_actions_engine.py, core/deep_quant_fusion_engine.py | High |
+| `core/gdr_arbitrage_engine.py` | **ACTIVE** | Core quant engine module. Referenced in: .github/workflows/daily_pipeline.yml, .github/workflows/tests.yml | High |
+| `core/incubation_gate_engine.py` | **ACTIVE** | Core quant engine module. Referenced in: dashboard/app.py, tests/test_incubation_gate_engine.py | High |
+| `core/insider_trading_engine.py` | **ACTIVE** | Core quant engine module. Referenced in: dashboard/app.py, tests/test_insider_trading_engine.py | High |
+| `core/institutional_flow_engine.py` | **ACTIVE** | Core quant engine module. Referenced in: .github/workflows/daily_pipeline.yml, .github/workflows/tests.yml | High |
+| `core/liquidity_engine.py` | **ACTIVE** | Core quant engine module. Referenced in: reports/GEN26_CAPABILITY_MATRIX.json, reports/GEN26_FINAL_CAPABILITY_MATRIX.json | High |
+| `core/liquidity_filter.py` | **ACTIVE** | Core quant engine module. Referenced in: CHANGELOG.md, core/multi_horizon_engine.py | High |
+| `core/live_execution_firewall.py` | **ACTIVE** | Core quant engine module. Referenced in: core/paper_trading_orchestrator.py, tests/test_live_execution_firewall.py | High |
+| `core/live_fundamentals_engine.py` | **ACTIVE** | Core quant engine module. Referenced in: core/ai_prediction_model.py, core/multi_horizon_engine.py | High |
+| `core/macro_economic_engine.py` | **ACTIVE** | Core quant engine module. Referenced in: core/deep_quant_fusion_engine.py, core/gdr_arbitrage_engine.py | High |
+| `core/macro_intelligence_engine.py` | **ACTIVE** | Core quant engine module. Referenced in: CHANGELOG.md, core/ai_prediction_model.py | High |
+| `core/market_breadth_engine.py` | **ACTIVE** | Core quant engine module. Referenced in: CHANGELOG.md, core/multi_horizon_engine.py | High |
+| `core/market_calendar.py` | **ACTIVE** | Core quant engine module. Referenced in: core/data_freshness.py, core/market_scheduler.py | High |
+| `core/market_data_truth.py` | **ACTIVE** | Core quant engine module. Referenced in: tests/test_market_data_truth.py | High |
+| `core/market_heatmap_engine.py` | **ACTIVE** | Core quant engine module. Referenced in: dashboard/app.py, reports/00_MASTER_CONSOLIDATED_SYSTEM_DOSSIER.md | High |
+| `core/market_intelligence.py` | **ACTIVE** | Core quant engine module. Referenced in: core/macro_economic_engine.py, dashboard/app.py | High |
+| `core/market_intelligence_scraper.py` | **ACTIVE** | Core quant engine module. Referenced in: .github/workflows/daily_pipeline.yml, .github/workflows/tests.yml | High |
+| `core/market_price_service.py` | **ACTIVE** | Core quant engine module. Referenced in: core/advanced_feature_engineering.py, core/alpha_scanner/opportunity_ranker.py | High |
+| `core/market_scheduler.py` | **ACTIVE** | Core quant engine module. Referenced in: core/scheduler.py, dashboard/app.py | High |
+| `core/market_seasonality_engine.py` | **ACTIVE** | Core quant engine module. Referenced in: .github/workflows/daily_pipeline.yml, .github/workflows/tests.yml | High |
+| `core/meta_labeling_engine.py` | **ACTIVE** | Core quant engine module. Referenced in: CHANGELOG.md, core/mlops_pipeline.py | High |
+| `core/mlops_pipeline.py` | **ACTIVE** | Core quant engine module. Referenced in: core/multi_horizon_engine.py, dashboard/app.py | High |
+| `core/model_evaluator.py` | **ACTIVE** | Core quant engine module. Referenced in: core/meta_labeling_engine.py, dashboard/app.py | High |
+| `core/monte_carlo_engine.py` | **ACTIVE** | Core quant engine module. Referenced in: dashboard/app.py, reports/00_MASTER_CONSOLIDATED_SYSTEM_DOSSIER.md | High |
+| `core/multi_agent_council.py` | **ACTIVE** | Core quant engine module. Referenced in: core/autonomous_research_lab.py, core/unified_pipeline_orchestrator.py | High |
+| `core/multi_horizon_engine.py` | **ACTIVE** | Core quant engine module. Referenced in: .github/workflows/daily_pipeline.yml, CHANGELOG.md | High |
+| `core/multi_objective_evaluator.py` | **ACTIVE** | Core quant engine module. Referenced in: scripts/automated_consistency_audit.py, tests/test_v2_architectural_enhancements.py | High |
+| `core/multi_source_intelligence.py` | **ACTIVE** | Core quant engine module. Referenced in: core/deep_quant_fusion_engine.py, core/unified_pipeline_orchestrator.py | High |
+| `core/news_deduplication_engine.py` | **ACTIVE** | Core quant engine module. Referenced in: core/alpha_scanner/multi_layer_scanner.py, scripts/automated_consistency_audit.py | High |
+| `core/news_ingestion_engine.py` | **ACTIVE** | Core quant engine module. Referenced in: core/nlp_sentiment_engine.py, tests/test_nlp_sentiment_engine.py | High |
+| `core/news_sentiment_engine.py` | **ACTIVE** | Core quant engine module. Referenced in: core/multi_horizon_engine.py, scripts/trace_end_to_end.py | High |
+| `core/nlp_sentiment_engine.py` | **ACTIVE** | Core quant engine module. Referenced in: core/ensemble_decision_engine.py, core/feature_registry.py | High |
+| `core/notification_gateway.py` | **ACTIVE** | Core quant engine module. Referenced in: .github/workflows/daily_pipeline.yml, .github/workflows/tests.yml | High |
+| `core/paper_cohort.py` | **ACTIVE** | Core quant engine module. Referenced in: dashboard/app.py, tests/test_paper_cohort.py | High |
+| `core/paper_observatory.py` | **ACTIVE** | Core quant engine module. Referenced in: core/paper_trading_orchestrator.py, tests/test_paper_observatory.py | High |
+| `core/paper_reality_audit.py` | **ACTIVE** | Core quant engine module. Referenced in: dashboard/app.py, tests/test_paper_observatory.py | High |
+| `core/paper_trading_orchestrator.py` | **ACTIVE** | Core quant engine module. Referenced in: .github/workflows/daily_pipeline.yml, reports/MASTER_FORENSIC_FULL_STACK_REPORT.md | High |
+| `core/paper_trading_state.py` | **ACTIVE** | Core quant engine module. Referenced in: core/paper_trading_orchestrator.py, dashboard/app.py | High |
+| `core/paper_vs_backtest.py` | **ACTIVE** | Core quant engine module. Referenced in: tests/test_portfolio_construction.py | High |
+| `core/pit_store.py` | **ACTIVE** | Core quant engine module. Referenced in: core/egx_universe.py, core/final_forensic_validator.py | High |
+| `core/portfolio_alert_engine.py` | **ACTIVE** | Core quant engine module. Referenced in: dashboard/app.py, reports/00_MASTER_CONSOLIDATED_SYSTEM_DOSSIER.md | High |
+| `core/portfolio_constructor.py` | **ACTIVE** | Core quant engine module. Referenced in: core/paper_trading_orchestrator.py, tests/test_portfolio_construction.py | High |
+| `core/portfolio_correlation_engine.py` | **ACTIVE** | Core quant engine module. Referenced in: core/ai_prediction_model.py, core/multi_horizon_engine.py | High |
+| `core/portfolio_journal.py` | **ACTIVE** | Core quant engine module. Referenced in: reports/GEN26_CAPABILITY_MATRIX.json, reports/GEN26_FINAL_CAPABILITY_MATRIX.json | High |
+| `core/portfolio_optimizer.py` | **ACTIVE** | Core quant engine module. Referenced in: CHANGELOG.md, dashboard/app.py | High |
+| `core/portfolio_risk.py` | **ACTIVE** | Core quant engine module. Referenced in: core/portfolio_constructor.py, core/real_portfolio.py | High |
+| `core/prediction_actual_tracker.py` | **ACTIVE** | Core quant engine module. Referenced in: dashboard/app.py, tests/test_sprint_b_feedback_and_registry.py | High |
+| `core/price_reconciliation.py` | **ACTIVE** | Core quant engine module. Referenced in: core/final_forensic_validator.py, dashboard/app.py | High |
+| `core/price_sync_service.py` | **ACTIVE** | Core quant engine module. Referenced in: .github/workflows/daily_pipeline.yml, core/egx_universe_loader.py | High |
+| `core/production_readiness_matrix.py` | **ACTIVE** | Core quant engine module. Referenced in: dashboard/app.py, scripts/automated_consistency_audit.py | High |
+| `core/promotion_gate.py` | **ACTIVE** | Core quant engine module. Referenced in: core/autonomous_research_lab.py, dashboard/app.py | High |
+| `core/quant_books_engine.py` | **ACTIVE** | Core quant engine module. Referenced in: core/deep_quant_fusion_engine.py, core/multi_agent_council.py | High |
+| `core/ranking_engine.py` | **ACTIVE** | Core quant engine module. Referenced in: core/paper_trading_orchestrator.py, dashboard/app.py | High |
+| `core/real_portfolio.py` | **ACTIVE** | Core quant engine module. Referenced in: core/alpha_scanner/multi_layer_scanner.py, core/feature_registry.py | High |
+| `core/regime_hmm_engine.py` | **ACTIVE** | Core quant engine module. Referenced in: .github/workflows/daily_pipeline.yml, .github/workflows/tests.yml | High |
+| `core/risk_position_sizer.py` | **ACTIVE** | Core quant engine module. Referenced in: core/multi_horizon_engine.py, scripts/trace_end_to_end.py | High |
+| `core/risk_stress_testing_engine.py` | **ACTIVE** | Core quant engine module. Referenced in: dashboard/app.py, tests/test_database_and_stress_engine.py | High |
+| `core/scheduler.py` | **ACTIVE** | Core quant engine module. Referenced in: core/market_scheduler.py, tests/test_market_scheduler.py | High |
+| `core/sector_rs_engine.py` | **ACTIVE** | Core quant engine module. Referenced in: core/multi_horizon_engine.py, scripts/trace_end_to_end.py | High |
+| `core/session_manager.py` | **ACTIVE** | Core quant engine module. Referenced in: CHANGELOG.md, core/paper_trading_orchestrator.py | High |
+| `core/statistical_arbitrage_engine.py` | **ACTIVE** | Core quant engine module. Referenced in: .github/workflows/daily_pipeline.yml, .github/workflows/tests.yml | High |
+| `core/statistical_validator.py` | **ACTIVE** | Core quant engine module. Referenced in: tests/test_statistical_validation.py | High |
+| `core/stress_testing.py` | **ACTIVE** | Core quant engine module. Referenced in: dashboard/app.py, tests/test_portfolio_optimizer.py | High |
+| `core/stress_testing_engine.py` | **ACTIVE** | Core quant engine module. Referenced in: core/risk_stress_testing_engine.py, dashboard/app.py | High |
+| `core/tax_margin_manager.py` | **ACTIVE** | Core quant engine module. Referenced in: dashboard/app.py, tests/test_mlops_and_notifications.py | High |
+| `core/technical_setup_engine.py` | **ACTIVE** | Core quant engine module. Referenced in: CHANGELOG.md, core/ai_prediction_model.py | High |
+| `core/telegram_notifier.py` | **ACTIVE** | Core quant engine module. Referenced in: core/portfolio_alert_engine.py, dashboard/app.py | High |
+| `core/trade_selection_model.py` | **ACTIVE** | Core quant engine module. Referenced in: core/alpha_scanner/opportunity_ranker.py, core/trading_agents/trader_agent.py | High |
+| `core/trading_agents/__init__.py` | **ACTIVE** | Core quant engine module. Referenced in: Dynamic loader | High |
+| `core/trading_agents/analyst_team.py` | **ACTIVE** | Core quant engine module. Referenced in: tests/test_trading_agents_framework.py | High |
+| `core/trading_agents/debate_engine.py` | **ACTIVE** | Core quant engine module. Referenced in: tests/test_trading_agents_framework.py | High |
+| `core/trading_agents/llm_router.py` | **ACTIVE** | Core quant engine module. Referenced in: dashboard/app.py, reports/00_MASTER_CONSOLIDATED_SYSTEM_DOSSIER.md | High |
+| `core/trading_agents/orchestrator.py` | **ACTIVE** | Core quant engine module. Referenced in: core/paper_trading_orchestrator.py, core/unified_pipeline_orchestrator.py | High |
+| `core/trading_agents/risk_and_fund_manager.py` | **ACTIVE** | Core quant engine module. Referenced in: tests/test_trading_agents_framework.py | High |
+| `core/trading_agents/trader_agent.py` | **ACTIVE** | Core quant engine module. Referenced in: tests/test_trading_agents_framework.py | High |
+| `core/uncertainty_engine.py` | **ACTIVE** | Core quant engine module. Referenced in: core/trading_agents/trader_agent.py, scripts/automated_consistency_audit.py | High |
+| `core/unified_pipeline_orchestrator.py` | **ACTIVE** | Core quant engine module. Referenced in: dashboard/app.py, tests/test_unified_pipeline_and_fusion_engine.py | High |
+| `core/valuation_engine.py` | **ACTIVE** | Core quant engine module. Referenced in: reports/GEN26_CAPABILITY_MATRIX.json, reports/GEN26_FINAL_CAPABILITY_MATRIX.json | High |
+| `core/walk_forward_ml_engine.py` | **ACTIVE** | Core quant engine module. Referenced in: dashboard/app.py, tests/test_walk_forward_ml_engine.py | High |
+| `core/watchlist.py` | **ACTIVE** | Core quant engine module. Referenced in: dashboard/app.py, tests/e2e_browser_tests.py | High |
+| `core/weight_calibrator.py` | **ACTIVE** | Core quant engine module. Referenced in: core/edge_verifier.py, core/multi_horizon_engine.py | High |
+| `dashboard/app.py` | **ACTIVE** | Dashboard UI template / Flask routing application. Referenced in: Procfile, START.bat | High |
+| `dashboard/index.html` | **ACTIVE** | Dashboard UI template / Flask routing application. Referenced in: CHANGELOG.md, core/final_forensic_validator.py | High |
+| `dashboard/templates/index.html` | **ACTIVE** | Dashboard UI template / Flask routing application. Referenced in: CHANGELOG.md, core/final_forensic_validator.py | High |
+| `data/canonical_prices_live.json` | **ACTIVE** | Canonical SSoT dataset / SQLite database persistence layer. | High |
+| `data/decision_snapshots/COMI.CA_2026-08-20_c23393f1.json` | **ACTIVE** | Point-in-time decision snapshot ledger used by DecisionBuilder replay engine. | High |
+| `data/decision_snapshots/COMI.CA_2026-08-20_d71f8f94.json` | **ACTIVE** | Point-in-time decision snapshot ledger used by DecisionBuilder replay engine. | High |
+| `data/decision_snapshots/COMI.CA_2026-08-21_7b5a61ef.json` | **ACTIVE** | Point-in-time decision snapshot ledger used by DecisionBuilder replay engine. | High |
+| `data/decision_snapshots/COMI.CA_2026-08-21_d6433861.json` | **ACTIVE** | Point-in-time decision snapshot ledger used by DecisionBuilder replay engine. | High |
+| `data/decision_snapshots/COMI.CA_2026-08-23_3b01f1e4.json` | **ACTIVE** | Point-in-time decision snapshot ledger used by DecisionBuilder replay engine. | High |
+| `data/decision_snapshots/COMI.CA_2026-08-23_d1c9da5e.json` | **ACTIVE** | Point-in-time decision snapshot ledger used by DecisionBuilder replay engine. | High |
+| `data/decision_snapshots/COMI.CA_2026-08-24_1f7f60e8.json` | **ACTIVE** | Point-in-time decision snapshot ledger used by DecisionBuilder replay engine. | High |
+| `data/decision_snapshots/COMI.CA_2026-08-24_73a250e2.json` | **ACTIVE** | Point-in-time decision snapshot ledger used by DecisionBuilder replay engine. | High |
+| `data/decision_snapshots/COMI.CA_2026-08-25_6468813f.json` | **ACTIVE** | Point-in-time decision snapshot ledger used by DecisionBuilder replay engine. | High |
+| `data/decision_snapshots/COMI.CA_2026-08-25_9cec8c1f.json` | **ACTIVE** | Point-in-time decision snapshot ledger used by DecisionBuilder replay engine. | High |
+| `data/decision_snapshots/COMI.CA_2026-08-26_57ac8299.json` | **ACTIVE** | Point-in-time decision snapshot ledger used by DecisionBuilder replay engine. | High |
+| `data/decision_snapshots/COMI.CA_2026-08-26_60552d11.json` | **ACTIVE** | Point-in-time decision snapshot ledger used by DecisionBuilder replay engine. | High |
+| `data/decision_snapshots/COMI.CA_2026-08-27_3a3f9587.json` | **ACTIVE** | Point-in-time decision snapshot ledger used by DecisionBuilder replay engine. | High |
+| `data/decision_snapshots/COMI.CA_2026-08-27_41ae1892.json` | **ACTIVE** | Point-in-time decision snapshot ledger used by DecisionBuilder replay engine. | High |
+| `data/decision_snapshots/COMI.CA_2026-08-28_5f095104.json` | **ACTIVE** | Point-in-time decision snapshot ledger used by DecisionBuilder replay engine. | High |
+| `data/decision_snapshots/COMI.CA_2026-08-28_61f37c5d.json` | **ACTIVE** | Point-in-time decision snapshot ledger used by DecisionBuilder replay engine. | High |
+| `data/decision_snapshots/COMI.CA_2026-08-29_b56e7059.json` | **ACTIVE** | Point-in-time decision snapshot ledger used by DecisionBuilder replay engine. | High |
+| `data/decision_snapshots/COMI.CA_2026-08-29_c027159b.json` | **ACTIVE** | Point-in-time decision snapshot ledger used by DecisionBuilder replay engine. | High |
+| `data/decision_snapshots/COMI.CA_2026-08-30_4215cce8.json` | **ACTIVE** | Point-in-time decision snapshot ledger used by DecisionBuilder replay engine. | High |
+| `data/decision_snapshots/COMI.CA_2026-08-30_90209799.json` | **ACTIVE** | Point-in-time decision snapshot ledger used by DecisionBuilder replay engine. | High |
+| `data/decision_snapshots/DEC_TEST_REPLAY_001.json` | **ACTIVE** | Point-in-time decision snapshot ledger used by DecisionBuilder replay engine. | High |
+| `data/decision_snapshots/TEST.CA_2026-08-20_31705f7e.json` | **ACTIVE** | Point-in-time decision snapshot ledger used by DecisionBuilder replay engine. | High |
+| `data/decision_snapshots/TEST.CA_2026-08-21_f533e996.json` | **ACTIVE** | Point-in-time decision snapshot ledger used by DecisionBuilder replay engine. | High |
+| `data/decision_snapshots/TEST.CA_2026-08-23_f578ca21.json` | **ACTIVE** | Point-in-time decision snapshot ledger used by DecisionBuilder replay engine. | High |
+| `data/decision_snapshots/TEST.CA_2026-08-24_d9c9c86e.json` | **ACTIVE** | Point-in-time decision snapshot ledger used by DecisionBuilder replay engine. | High |
+| `data/decision_snapshots/TEST.CA_2026-08-25_35e8012e.json` | **ACTIVE** | Point-in-time decision snapshot ledger used by DecisionBuilder replay engine. | High |
+| `data/decision_snapshots/TEST.CA_2026-08-26_ede75b97.json` | **ACTIVE** | Point-in-time decision snapshot ledger used by DecisionBuilder replay engine. | High |
+| `data/decision_snapshots/TEST.CA_2026-08-27_51cddbf3.json` | **ACTIVE** | Point-in-time decision snapshot ledger used by DecisionBuilder replay engine. | High |
+| `data/decision_snapshots/TEST.CA_2026-08-28_bbca1669.json` | **ACTIVE** | Point-in-time decision snapshot ledger used by DecisionBuilder replay engine. | High |
+| `data/decision_snapshots/TEST.CA_2026-08-29_8c9c3ae9.json` | **ACTIVE** | Point-in-time decision snapshot ledger used by DecisionBuilder replay engine. | High |
+| `data/decision_snapshots/TEST.CA_2026-08-30_c74deb10.json` | **ACTIVE** | Point-in-time decision snapshot ledger used by DecisionBuilder replay engine. | High |
+| `data/gen26_market.db` | **ACTIVE** | Canonical SSoT dataset / SQLite database persistence layer. | High |
+| `data/gen26_production.db` | **ACTIVE** | Canonical SSoT dataset / SQLite database persistence layer. | High |
+| `data/gen26_production.db-shm` | **ACTIVE** | Canonical SSoT dataset / SQLite database persistence layer. | High |
+| `data/gen26_production.db-wal` | **ACTIVE** | Canonical SSoT dataset / SQLite database persistence layer. | High |
+| `data/holdout_reserve_locked_20260814.json` | **ACTIVE** | Locked out-of-sample holdout dataset used for overfitting validation. | High |
+| `data/telegram_config.json` | **ACTIVE** | Canonical SSoT dataset / SQLite database persistence layer. | High |
+| `data/thndr_egx_244_universe.json` | **ACTIVE** | Canonical SSoT dataset / SQLite database persistence layer. | High |
+| `data/universe_manager.py` | **ACTIVE** | Canonical SSoT dataset / SQLite database persistence layer. | High |
+| `render.yaml` | **ACTIVE** | Essential repository configuration / deployment descriptor. | High |
+| `reports/00_MASTER_CONSOLIDATED_SYSTEM_DOSSIER.md` | **ACTIVE** | Primary audit artifact or SSoT telemetry report. | High |
+| `reports/authoritative_20_reports/01_SYSTEM_ARCHITECTURE_OVERVIEW.md` | **ACTIVE** | Official report in the 20-report authoritative system dossier. | High |
+| `reports/authoritative_20_reports/02_EGX_244_UNIVERSE_CATALOG.md` | **ACTIVE** | Official report in the 20-report authoritative system dossier. | High |
+| `reports/authoritative_20_reports/03_MACRO_REGIME_AND_CBE_CORRIDOR.md` | **ACTIVE** | Official report in the 20-report authoritative system dossier. | High |
+| `reports/authoritative_20_reports/04_DATABASE_SCHEMA_AND_PERSISTENCE.md` | **ACTIVE** | Official report in the 20-report authoritative system dossier. | High |
+| `reports/authoritative_20_reports/05_SEVEN_AGENT_QUANT_COUNCIL.md` | **ACTIVE** | Official report in the 20-report authoritative system dossier. | High |
+| `reports/authoritative_20_reports/06_AUTONOMOUS_RESEARCH_LAB.md` | **ACTIVE** | Official report in the 20-report authoritative system dossier. | High |
+| `reports/authoritative_20_reports/07_PURGED_WALK_FORWARD_PROMOTION_GATE.md` | **ACTIVE** | Official report in the 20-report authoritative system dossier. | High |
+| `reports/authoritative_20_reports/08_EPISODIC_FAILURE_MEMORY.md` | **ACTIVE** | Official report in the 20-report authoritative system dossier. | High |
+| `reports/authoritative_20_reports/09_PIOTROSKI_F_SCORE_ANALYSIS.md` | **ACTIVE** | Official report in the 20-report authoritative system dossier. | High |
+| `reports/authoritative_20_reports/10_PETER_LYNCH_VALUATION_METRICS.md` | **ACTIVE** | Official report in the 20-report authoritative system dossier. | High |
+| `reports/authoritative_20_reports/11_NISON_CANDLESTICKS_AND_MURPHY_TECH.md` | **ACTIVE** | Official report in the 20-report authoritative system dossier. | High |
+| `reports/authoritative_20_reports/12_MARK_DOUGLAS_PSYCHOLOGY_GUARD.md` | **ACTIVE** | Official report in the 20-report authoritative system dossier. | High |
+| `reports/authoritative_20_reports/13_LONDON_GDR_ARBITRAGE_REPORT.md` | **ACTIVE** | Official report in the 20-report authoritative system dossier. | High |
+| `reports/authoritative_20_reports/14_STATISTICAL_PAIRS_ARBITRAGE.md` | **ACTIVE** | Official report in the 20-report authoritative system dossier. | High |
+| `reports/authoritative_20_reports/15_DEEP_QUANT_48_FEATURE_TENSOR.md` | **ACTIVE** | Official report in the 20-report authoritative system dossier. | High |
+| `reports/authoritative_20_reports/16_TWO_STAGE_META_LABELING_AI.md` | **ACTIVE** | Official report in the 20-report authoritative system dossier. | High |
+| `reports/authoritative_20_reports/17_EGX_TRADING_RULES_AND_CGT_TAX.md` | **ACTIVE** | Official report in the 20-report authoritative system dossier. | High |
+| `reports/authoritative_20_reports/18_BLACK_SWAN_STRESS_TESTING.md` | **ACTIVE** | Official report in the 20-report authoritative system dossier. | High |
+| `reports/authoritative_20_reports/19_DEVOPS_CI_CD_AND_TEST_BATTERY.md` | **ACTIVE** | Official report in the 20-report authoritative system dossier. | High |
+| `reports/authoritative_20_reports/20_MASTER_INDEX_AND_SYSTEM_GLOSSARY.md` | **ACTIVE** | Official report in the 20-report authoritative system dossier. | High |
+| `reports/authoritative_paper_sessions.json` | **ACTIVE** | Primary audit artifact or SSoT telemetry report. | High |
+| `reports/consistency_audit_report.json` | **ACTIVE** | Primary audit artifact or SSoT telemetry report. | High |
+| `reports/daily/2026-08-20.json` | **ACTIVE** | Point-in-time daily market snapshot ledger. | High |
+| `reports/data_truth.json` | **ACTIVE** | Primary audit artifact or SSoT telemetry report. | High |
+| `reports/egx_universe.json` | **ACTIVE** | Primary audit artifact or SSoT telemetry report. | High |
+| `reports/entry_target_stop.json` | **ACTIVE** | Primary audit artifact or SSoT telemetry report. | High |
+| `reports/final_forensic_audit.json` | **ACTIVE** | Primary audit artifact or SSoT telemetry report. | High |
+| `reports/ground_truth_audit_report.json` | **ACTIVE** | Primary audit artifact or SSoT telemetry report. | High |
+| `reports/incubation_verdict.json` | **ACTIVE** | Primary audit artifact or SSoT telemetry report. | High |
+| `reports/market_price_reconciliation.json` | **ACTIVE** | Primary audit artifact or SSoT telemetry report. | High |
+| `reports/market_price_truth.json` | **ACTIVE** | Primary audit artifact or SSoT telemetry report. | High |
+| `reports/market_truth.json` | **ACTIVE** | Primary audit artifact or SSoT telemetry report. | High |
+| `reports/multi_horizon.json` | **ACTIVE** | Primary audit artifact or SSoT telemetry report. | High |
+| `reports/multi_horizon_predictions.json` | **ACTIVE** | Primary audit artifact or SSoT telemetry report. | High |
+| `reports/paper_sessions/session_04_2026-08-21.json` | **ACTIVE** | Authoritative paper trading session record / test fixture referenced by PaperTradingObservatory. | High |
+| `reports/paper_sessions/session_05_2026-08-24.json` | **ACTIVE** | Authoritative paper trading session record / test fixture referenced by PaperTradingObservatory. | High |
+| `reports/paper_sessions/session_98.json` | **ACTIVE** | Authoritative paper trading session record / test fixture referenced by PaperTradingObservatory. | High |
+| `reports/paper_sessions/session_98.md` | **ACTIVE** | Authoritative paper trading session record / test fixture referenced by PaperTradingObservatory. | High |
+| `reports/paper_sessions/session_99.json` | **ACTIVE** | Authoritative paper trading session record / test fixture referenced by PaperTradingObservatory. | High |
+| `reports/paper_sessions/session_99.md` | **ACTIVE** | Authoritative paper trading session record / test fixture referenced by PaperTradingObservatory. | High |
+| `reports/paper_trading_state.json` | **ACTIVE** | Primary audit artifact or SSoT telemetry report. | High |
+| `reports/price_reconciliation.json` | **ACTIVE** | Primary audit artifact or SSoT telemetry report. | High |
+| `reports/production_readiness.json` | **ACTIVE** | Primary audit artifact or SSoT telemetry report. | High |
+| `reports/ranking_validation.json` | **ACTIVE** | Primary audit artifact or SSoT telemetry report. | High |
+| `reports/system_status.json` | **ACTIVE** | Primary audit artifact or SSoT telemetry report. | High |
+| `reports/test_results.json` | **ACTIVE** | Primary audit artifact or SSoT telemetry report. | High |
+| `requirements.txt` | **ACTIVE** | Essential repository configuration / deployment descriptor. | High |
+| `runtime.txt` | **ACTIVE** | Essential repository configuration / deployment descriptor. | High |
+| `scripts/apply_authoritative_metadata.py` | **ACTIVE** | Operational DevOps, maintenance, or audit execution script. | High |
+| `scripts/audit_trading_sessions.py` | **ACTIVE** | Operational DevOps, maintenance, or audit execution script. | High |
+| `scripts/automated_consistency_audit.py` | **ACTIVE** | Operational DevOps, maintenance, or audit execution script. | High |
+| `scripts/build_ui.py` | **ACTIVE** | Operational DevOps, maintenance, or audit execution script. | High |
+| `scripts/comprehensive_data_diagnostic.py` | **ACTIVE** | Operational DevOps, maintenance, or audit execution script. | High |
+| `scripts/debug_frontend_js.py` | **ACTIVE** | Operational DevOps, maintenance, or audit execution script. | High |
+| `scripts/dual_source_price_verification.py` | **ACTIVE** | Operational DevOps, maintenance, or audit execution script. | High |
+| `scripts/enforce_strict_244_truth_audit.py` | **ACTIVE** | Operational DevOps, maintenance, or audit execution script. | High |
+| `scripts/generate_changelog.py` | **ACTIVE** | Operational DevOps, maintenance, or audit execution script. | High |
+| `scripts/mlops_retrain.py` | **ACTIVE** | Operational DevOps, maintenance, or audit execution script. | High |
+| `scripts/populate_real_historical_bars.py` | **ACTIVE** | Operational DevOps, maintenance, or audit execution script. | High |
+| `scripts/run_e2e_pipeline_trace.py` | **ACTIVE** | Operational DevOps, maintenance, or audit execution script. | High |
+| `scripts/simulate_live_quant_cycle.py` | **ACTIVE** | Operational DevOps, maintenance, or audit execution script. | High |
+| `scripts/sync_all_20_reports.py` | **ACTIVE** | Operational DevOps, maintenance, or audit execution script. | High |
+| `scripts/sync_all_244_real_market_data.py` | **ACTIVE** | Operational DevOps, maintenance, or audit execution script. | High |
+| `scripts/sync_daily_ranking_csv.py` | **ACTIVE** | Operational DevOps, maintenance, or audit execution script. | High |
+| `scripts/sync_reports_from_ssot.py` | **ACTIVE** | Operational DevOps, maintenance, or audit execution script. | High |
+| `scripts/test_telegram_alert.py` | **ACTIVE** | Operational DevOps, maintenance, or audit execution script. | High |
+| `scripts/test_weights_significance.py` | **ACTIVE** | Operational DevOps, maintenance, or audit execution script. | High |
+| `scripts/trace_end_to_end.py` | **ACTIVE** | Operational DevOps, maintenance, or audit execution script. | High |
+| `scripts/update_dashboard_alpha_scanner.py` | **ACTIVE** | Operational DevOps, maintenance, or audit execution script. | High |
+| `scripts/upgrade_nlp_engine.py` | **ACTIVE** | Operational DevOps, maintenance, or audit execution script. | High |
+| `scripts/validate_ui_buttons.py` | **ACTIVE** | Operational DevOps, maintenance, or audit execution script. | High |
+| `scripts/verify_24_stocks_pricing.py` | **ACTIVE** | Operational DevOps, maintenance, or audit execution script. | High |
+| `scripts/verify_all_244_stocks_real_data.py` | **ACTIVE** | Operational DevOps, maintenance, or audit execution script. | High |
+| `scripts/verify_daily_price_outliers.py` | **ACTIVE** | Operational DevOps, maintenance, or audit execution script. | High |
+| `scripts/verify_egx_universe_expansion.py` | **ACTIVE** | Operational DevOps, maintenance, or audit execution script. | High |
+| `scripts/verify_full_stack.py` | **ACTIVE** | Operational DevOps, maintenance, or audit execution script. | High |
+| `scripts/verify_ground_truth_reality.py` | **ACTIVE** | Operational DevOps, maintenance, or audit execution script. | High |
+| `scripts/verify_live_prices_independent.py` | **ACTIVE** | Operational DevOps, maintenance, or audit execution script. | High |
+| `scripts/verify_pre_deployment_health.py` | **ACTIVE** | Operational DevOps, maintenance, or audit execution script. | High |
+| `scripts/verify_real_portfolio_persistence.py` | **ACTIVE** | Operational DevOps, maintenance, or audit execution script. | High |
+| `scripts/verify_ui_enhancements.py` | **ACTIVE** | Operational DevOps, maintenance, or audit execution script. | High |
+| `settings.json` | **ACTIVE** | Essential repository configuration / deployment descriptor. | High |
+| `templates/index.html` | **ACTIVE** | Dashboard UI template / Flask routing application. Referenced in: CHANGELOG.md, core/final_forensic_validator.py | High |
+| `tests/__init__.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/e2e_browser_tests.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_advanced_feature_engineering.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_advanced_methodology_features.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_advanced_quant_layers.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_ai_api_endpoints.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_ai_generative_engine.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_ai_prediction_model.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_alpha_intelligence_scanner.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_alternative_data_engine.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_api_endpoints.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_backtest.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_broker_execution.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_browser_navigation_e2e.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_core_engines.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_corporate_actions.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_corporate_actions_and_macro.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_corporate_actions_engine.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_daily_snapshot.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_dashboard_quant_widgets.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_dashboard_read_only.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_data_freshness.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_data_leakage.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_database_and_stress_engine.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_database_api_price_consistency.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_database_persistence.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_dynamic_multi_horizon_universe.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_dynamic_risk_manager.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_egx_trading_rules_engine.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_egx_universe.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_egx_universe_loader.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_elite_extensions.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_ensemble_decision_engine.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_final_forensic_validation.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_full_temporal_forensics.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_fundamental_data_engine.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_gap_closure.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_gdr_arbitrage_engine.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_hardening_phase_2.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_historical_cross_sectional_selection.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_incubation_gate_engine.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_insider_trading_engine.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_institutional_flow_engine.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_leakage_forensics.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_liquidity.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_live_execution_firewall.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_macro_economic_engine.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_market_calendar.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_market_data_truth.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_market_intelligence_scraper.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_market_price_service.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_market_scheduler.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_market_seasonality_engine.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_meta_labeling_engine.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_missing_layers.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_mlops_and_notifications.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_mlops_triggers.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_model_evaluator.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_multi_agent_council.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_multi_horizon_engine.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_nlp_sentiment_engine.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_notifications.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_orthogonal_technical_features.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_paper_cohort.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_paper_observatory.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_paper_state_persistence.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_paper_trading_orchestrator.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_portfolio_construction.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_portfolio_equity.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_portfolio_journal.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_portfolio_optimizer.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_price_reconciliation_and_ux.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_price_sync_service.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_promotion_gate_and_research_lab.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_quant_books_engine.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_real_portfolio.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_real_portfolio_crud.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_red_team_edge_cases.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_regime_hmm_engine.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_session_immutability.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_short_term_opportunities_screen.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_sprint_b_feedback_and_registry.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_sprint_c_slippage_and_opportunities.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_sqlite_acid_persistence.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_statistical_arbitrage_engine.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_statistical_validation.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_stock_dossier_endpoint.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_stop_loss.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_stress_framework.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_targets.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_technical_and_risk_sizing.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_telegram_notification_gateway.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_ticker_mapping.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_trading_agents_framework.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_unified_pipeline_and_fusion_engine.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_universe_expansion.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_v2_architectural_enhancements.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_walk_forward_ml_engine.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/test_watchlist.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/ui/__init__.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/ui/test_arabic_dictionary.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/ui/test_rtl_and_ranking_order.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/ui/test_ui_button_integrity.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |
+| `tests/ui/test_ui_forms_and_security.py` | **ACTIVE** | Automated test suite discovered and executed by unittest runner. | High |

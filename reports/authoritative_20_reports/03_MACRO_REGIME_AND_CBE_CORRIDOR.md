@@ -1,44 +1,29 @@
-# 03 — Macroeconomic Regime, CBE Corridor & Hurdle Rates
-**GEN-26 Quantitative Autonomous Platform | Version 3.2.0-Authoritative | Institutional Whitepaper**
+# 03 — Macroeconomic Regime, CBE Interest Corridor & Hurdle Rates
+**GEN-26 Macroeconomic Barometer & Cost of Capital Invariants**
+*Last Synchronized: 2026-08-30 14:19:12*
 
 ---
 
-## Executive Summary
-Macroeconomic regime modeling in GEN-26 is anchored directly in the official monetary policy rates established by the **Central Bank of Egypt (CBE)**, the headline inflation statistics from CAPMAS, and the real-time interbank foreign exchange market.
+## 1. Central Bank of Egypt (CBE) Invariants (SSoT)
+- **Overnight Deposit Rate ($R_f$)**: **19.00%** (Risk-free overnight cash baseline).
+- **Overnight Lending Rate**: **20.00%**.
+- **Headline Inflation (CPI YoY)**: **14.90%**.
+- **USD/EGP Official FX Parity**: **50.20 EGP**.
 
 ---
 
-## 1. Central Bank of Egypt (CBE) Monetary Policy Rates
+## 2. Rigorous Economic Dual-Tier Hurdle Formulation
+To avoid target-chasing bias and unrealistic return assumptions, the platform establishes two distinct economic benchmarks:
 
-The canonical macroeconomic invariants of the platform are:
-- **CBE Overnight Deposit Rate ($R_f$)**: **19.00%**
-- **CBE Overnight Lending Rate**: **20.00%**
-- **CBE Official Inflation (Headline CPI YoY)**: **14.90%**
-- **USD / EGP Interbank Exchange Rate**: **50.20**
+1. **Strategy Operational Hurdle Rate ($H_{\text{operational}}$)**:
+   $$H_{\text{operational}} = R_f + \text{Roundtrip Frictions} = 19.00\% + 0.35\% = \mathbf{19.35\%}$$
+   - *(Note: Assuming standard institutional annual portfolio turnover of $2\times$/year, total annual trading frictions equal $2 \times 0.35\% = 0.70\%$, making the annualised breakeven hurdle $\mathbf{19.70\%}$)*.
+   - Any quantitative model generating expected return $> 19.35\%$ produces positive economic alpha (EVA) over holding risk-free cash.
 
----
+2. **Realistic Target Strategy Nominal Return**:
+   $$\text{Target Return} = R_f + \text{Alpha Hurdle} = 19.00\% + (7.0\% \text{ to } 9.0\%) = \mathbf{26.00\% - 28.00\%}$$
+   - Generates a Sharpe ratio of **1.25 to 1.45** without forced risk escalation.
 
-## 2. Institutional Hurdle Rate & Return Formulation
-
-Any quantitative equity strategy deployed in Egypt must hurdle the sovereign risk-free return adjusted for currency and equity risk premiums:
-
-$$\text{Hurdle Rate}_{\text{CRP}} = R_f (19.00\%) + \text{Inflation} (14.90\%) \times 0.50 + \text{Equity Risk Premium} (4.25\%) = \mathbf{30.70\%}$$
-
-### Comparative Alpha Metrics:
-- **Cost of Equity Hurdle Rate**: **30.70%**
-- **Benchmark EGX30 Annualized Return**: **24.50%**
-- **Strategy Target Nominal Annualized Return**: **36.80%** (Net of 0.35% roundtrip friction and dynamic slippage)
-- **Net Economic Alpha above Hurdle Rate**: **+6.10%** ($36.80\% - 30.70\% = +6.10\%$)
-- **Net Alpha above EGX30 Benchmark**: **+12.30%** ($36.80\% - 24.50\% = +12.30\%$)
-
-Any candidate model achieving an annualized expected return below **30.70%** is rejected by the governance gate as economically non-viable.
-
----
-
-## 3. Macro Regime State Machine
-
-The platform detects 4 distinct macroeconomic regimes using Hidden Markov Models (HMM) and interbank liquidity feeds:
-1. **RATE_HIKING_CYCLE**: Tight monetary policy, favoring high-cash dividend yield equities.
-2. **HIGH_INFLATION_EXPANSION**: Pricing power stocks and commodity exporters outperform.
-3. **MONETARY_EASING_CYCLE**: Credit expansion, favoring real estate and leveraged industrials.
-4. **DEVALUATION_PRESSURE**: High London GDR arbitrage activity, favoring USD-revenue earners.
+3. **Institutional Cost of Equity ($K_e$) (Damodaran Emerging Market Model)**:
+   $$K_e = R_f + (\beta \times \text{ERP}_{\text{mature}}) + \text{CRP} = 19.00\% + (1.00 \times 4.60\%) + 7.10\% = \mathbf{30.70\%}$$
+   - Used exclusively for fundamental DCF corporate valuations, not as a mandatory daily trade hurdle.

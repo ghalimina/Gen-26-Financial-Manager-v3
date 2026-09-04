@@ -161,6 +161,7 @@ class FundamentalDataEngine:
                 f"Returning clean default structure."
             )
             default_payload["data_source"] = "YFINANCE_UNAVAILABLE_FALLBACK"
+            cls._CACHE[canonical_ticker] = (now, default_payload.copy())
             return default_payload
 
     @classmethod
