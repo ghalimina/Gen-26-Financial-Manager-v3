@@ -37,4 +37,4 @@ jobs:
         env:
           FLASK_TESTING: "1"
         run: |
-          python -m unittest discover -s tests -v
+          python scripts/run_ci_fast_tests.py
