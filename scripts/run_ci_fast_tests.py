@@ -23,7 +23,8 @@ CORE_TEST_FILES = [
     "tests/test_sqlite_acid_persistence.py",
     "tests/test_corporate_actions.py",
     "tests/test_egx_trading_rules_engine.py",
-    "tests/test_market_data_truth.py"
+    "tests/test_market_data_truth.py",
+    "tests/test_direct_feed_and_anomaly.py"
 ]
 
 

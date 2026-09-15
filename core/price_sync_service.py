@@ -732,45 +732,56 @@ class PriceSyncService:
                                 consecutive_rejections[clean_sym] = 0
 
                         if not price_accepted:
-                            # Anomaly detected!
-                            curr_rejections = consecutive_rejections.get(clean_sym, 0) + 1
-                            consecutive_rejections[clean_sym] = curr_rejections
-
-                            logger.warning(
-                                f"[CIRCUIT_BREAKER] Price anomaly #{curr_rejections} for {clean_sym}: fetched {fetched_p:.2f} EGP deviates {pct_jump*100:.1f}% "
-                                f"from previous close {prev_verified_price:.2f} EGP (exceeds ±15% limit)."
+                            # Check automated PriceAnomalyResolver for corporate actions / splits / persistent shifts
+                            from core.price_anomaly_resolver import PriceAnomalyResolver
+                            curr_rej = consecutive_rejections.get(clean_sym, 0) + 1
+                            is_reconciled, adj_prev, recon_msg = PriceAnomalyResolver.reconcile_persistent_anomaly(
+                                clean_sym, fetched_p, prev_verified_price, curr_rej
                             )
+                            if is_reconciled:
+                                logger.info(recon_msg)
+                                price_accepted = True
+                                prev_verified_price = adj_prev
+                                consecutive_rejections[clean_sym] = 0
+                            else:
+                                curr_rejections = curr_rej
+                                consecutive_rejections[clean_sym] = curr_rejections
 
-                        if curr_rejections >= 3:
-                            # CRITICAL PERSISTENT ANOMALY: Emit explicit alert and trigger alternative scraper
-                            rejection_alert_msg = "هذا السهم يحتاج مصدر بيانات بديل — التجاهل المتكرر لن يحل المشكلة"
-                            logger.error(
-                                f"[CRITICAL_FEED_ALERT] سهم {clean_sym} تكرر رفضه {curr_rejections} مرات متتالية — "
-                                f"{rejection_alert_msg}. جاري تجربة المصدر المباشر البديل..."
-                            )
-                            feed_alerts.append({
-                                "ticker": clean_sym,
-                                "rejections": curr_rejections,
-                                "alert": rejection_alert_msg
-                            })
+                                logger.warning(
+                                    f"[CIRCUIT_BREAKER] Price anomaly #{curr_rejections} for {clean_sym}: fetched {fetched_p:.2f} EGP deviates {pct_jump*100:.1f}% "
+                                    f"from previous close {prev_verified_price:.2f} EGP (exceeds ±15% limit)."
+                                )
 
-                            # Attempt Tertiary Failover (Mubasher / Direct Alternative)
-                            alt_quote = cls._fetch_single_mubasher_quote(clean_sym)
-                            if alt_quote and alt_quote["price"] > 0:
-                                alt_p = alt_quote["price"]
-                                alt_jump = abs((alt_p - prev_verified_price) / prev_verified_price) if prev_verified_price > 0 else 0.0
-                                if alt_jump <= 0.15:
-                                    logger.info(f"Tertiary provider resolved {clean_sym} successfully to {alt_p:.2f} EGP. Resetting rejection counter.")
-                                    quote_data = alt_quote
-                                    source_tag = "MUBASHER_FALLBACK_RECOVERY_SSOT"
-                                    consecutive_rejections[clean_sym] = 0
-                                    price_accepted = True
+                                if curr_rejections >= 3:
+                                    # CRITICAL PERSISTENT ANOMALY: Emit explicit alert and trigger alternative scraper
+                                    rejection_alert_msg = "هذا السهم يحتاج مصدر بيانات بديل — التجاهل المتكرر لن يحل المشكلة"
+                                    logger.error(
+                                        f"[CRITICAL_FEED_ALERT] سهم {clean_sym} تكرر رفضه {curr_rejections} مرات متتالية — "
+                                        f"{rejection_alert_msg}. جاري تجربة المصدر المباشر البديل..."
+                                    )
+                                    feed_alerts.append({
+                                        "ticker": clean_sym,
+                                        "rejections": curr_rejections,
+                                        "alert": rejection_alert_msg
+                                    })
+
+                                    # Attempt Tertiary Failover (Mubasher / Direct Alternative)
+                                    alt_quote = cls._fetch_single_mubasher_quote(clean_sym)
+                                    if alt_quote and alt_quote["price"] > 0:
+                                        alt_p = alt_quote["price"]
+                                        alt_jump = abs((alt_p - prev_verified_price) / prev_verified_price) if prev_verified_price > 0 else 0.0
+                                        if alt_jump <= 0.15:
+                                            logger.info(f"Tertiary provider resolved {clean_sym} successfully to {alt_p:.2f} EGP. Resetting rejection counter.")
+                                            quote_data = alt_quote
+                                            source_tag = "MUBASHER_FALLBACK_RECOVERY_SSOT"
+                                            consecutive_rejections[clean_sym] = 0
+                                            price_accepted = True
+                                        else:
+                                            is_anomaly = True
+                                    else:
+                                        is_anomaly = True
                                 else:
                                     is_anomaly = True
-                            else:
-                                is_anomaly = True
-                        else:
-                            is_anomaly = True
                     else:
                         # Price is valid and within normal ±15% volatility band
                         consecutive_rejections[clean_sym] = 0
