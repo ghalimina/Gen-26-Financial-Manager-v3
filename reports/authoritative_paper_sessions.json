@@ -1,1 +1,10 @@
-[]
+[
+  {
+    "session_id": "SESS_20260915_001",
+    "date": "2026-09-15",
+    "status": "COMPLETED",
+    "start_time": "2026-09-15T15:41:20.249867",
+    "completed_at": "2026-09-15T15:41:20.254909",
+    "data_status": "VALID"
+  }
+]
