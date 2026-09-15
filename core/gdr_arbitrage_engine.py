@@ -68,6 +68,7 @@ class GDRArbitrageEngine:
     def fetch_live_gdr_price(cls, gdr_ticker: str) -> float:
         """
         Fetches live or latest close USD price for a London GDR via yfinance with resilient fallback and caching.
+        Prioritizes authoritative 5d daily close over intraday/fast_info zero-volume anomalies.
         """
         sym_clean = gdr_ticker.upper().strip()
         now = time.time()
@@ -77,20 +78,29 @@ class GDRArbitrageEngine:
         try:
             import yfinance as yf
             ticker_obj = yf.Ticker(sym_clean)
-            fast_info = getattr(ticker_obj, "fast_info", None)
-            if fast_info:
-                last_price = getattr(fast_info, "last_price", None) or getattr(fast_info, "regular_market_price", None)
-                if last_price and float(last_price) > 0:
-                    val = round(float(last_price), 3)
-                    cls._GDR_CACHE[sym_clean] = val
-                    cls._GDR_CACHE_TIME[sym_clean] = now
-                    return val
-
+            
+            # 1. Primary authoritative source: 5-day daily close history
             hist = ticker_obj.history(period="5d")
             if not hist.empty and "Close" in hist.columns:
-                val = hist["Close"].dropna().iloc[-1]
-                if float(val) > 0:
-                    val = round(float(val), 3)
+                valid_closes = hist["Close"].dropna()
+                if not valid_closes.empty:
+                    val = float(valid_closes.iloc[-1])
+                    if val > 0:
+                        val = round(val, 3)
+                        cls._GDR_CACHE[sym_clean] = val
+                        cls._GDR_CACHE_TIME[sym_clean] = now
+                        return val
+
+            # 2. Secondary fallback: regularMarketPreviousClose from fast_info
+            fast_info = getattr(ticker_obj, "fast_info", None)
+            if fast_info:
+                prev_close = None
+                try:
+                    prev_close = fast_info.get("regularMarketPreviousClose", None)
+                except Exception:
+                    pass
+                if prev_close and float(prev_close) > 0:
+                    val = round(float(prev_close), 3)
                     cls._GDR_CACHE[sym_clean] = val
                     cls._GDR_CACHE_TIME[sym_clean] = now
                     return val

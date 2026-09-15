@@ -51,12 +51,14 @@ class SessionManager:
         return sess_id
 
     @classmethod
-    def complete_session(cls, session_id: str, summary: Optional[Dict[str, Any]] = None) -> bool:
+    def complete_session(cls, session_id: str, summary: Optional[Dict[str, Any]] = None, data_status: Optional[str] = None, **kwargs) -> bool:
         sessions = cls._load()
         for s in sessions:
             if s.get("session_id") == session_id:
                 s["status"] = "COMPLETED"
                 s["completed_at"] = datetime.datetime.now().isoformat()
+                if data_status:
+                    s["data_status"] = data_status
                 if summary:
                     s["summary"] = summary
                 cls._save(sessions)
@@ -64,12 +66,14 @@ class SessionManager:
         return False
 
     @classmethod
-    def fail_session(cls, session_id: str, error_msg: str) -> bool:
+    def fail_session(cls, session_id: str, error_msg: str = "", reason: Optional[str] = None, **kwargs) -> bool:
         sessions = cls._load()
+        msg = reason or error_msg or "Unknown error"
         for s in sessions:
             if s.get("session_id") == session_id:
                 s["status"] = "FAILED"
-                s["error"] = error_msg
+                s["error"] = msg
+                s["failed_at"] = datetime.datetime.now().isoformat()
                 cls._save(sessions)
                 return True
         return False

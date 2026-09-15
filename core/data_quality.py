@@ -96,9 +96,50 @@ class DataQualityEngine:
         return {
             "ticker": ticker,
             "health": health,
+            "data_health": health,
             "score": round(final_score, 1),
             "issues": issues,
             "can_trade": can_trade,
             "bar_count": len(df),
             "latest_date": str(df.index[-1])[:10] if len(df) > 0 else "N/A"
         }
+
+    @staticmethod
+    def audit_ohlcv_record(ticker: str, record: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Audits a single OHLCV record dictionary (e.g. from real-time stream or paper broker).
+        """
+        if not record or not isinstance(record, dict):
+            return {
+                "ticker": ticker,
+                "health": "FAIL",
+                "data_health": "FAIL",
+                "score": 0.0,
+                "issues": ["Record is empty or not a dict"],
+                "can_trade": False
+            }
+
+        issues: List[str] = []
+        open_p = record.get("open", record.get("Open", 0.0))
+        high_p = record.get("high", record.get("High", 0.0))
+        low_p = record.get("low", record.get("Low", 0.0))
+        close_p = record.get("close", record.get("Close", 0.0))
+        vol = record.get("volume", record.get("Volume", 0.0))
+
+        if close_p <= 0:
+            issues.append(f"Non-positive close price: {close_p}")
+        if high_p < low_p:
+            issues.append(f"High {high_p} is less than Low {low_p}")
+        if vol < 0:
+            issues.append(f"Negative volume: {vol}")
+
+        health = "PASS" if not issues else "FAIL"
+        return {
+            "ticker": ticker,
+            "health": health,
+            "data_health": health,
+            "score": 100.0 if not issues else 0.0,
+            "issues": issues,
+            "can_trade": (health == "PASS")
+        }
+
