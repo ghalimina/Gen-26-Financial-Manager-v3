@@ -8,6 +8,7 @@
 
 import os
 import sys
+import time
 import logging
 from typing import Dict, List, Any, Optional
 
@@ -59,12 +60,20 @@ class GDRArbitrageEngine:
         }
     }
 
+    _GDR_CACHE: Dict[str, float] = {}
+    _GDR_CACHE_TIME: Dict[str, float] = {}
+    CACHE_TTL_SECONDS: float = 3600.0
+
     @classmethod
     def fetch_live_gdr_price(cls, gdr_ticker: str) -> float:
         """
-        Fetches live or latest close USD price for a London GDR via yfinance with resilient fallback.
+        Fetches live or latest close USD price for a London GDR via yfinance with resilient fallback and caching.
         """
         sym_clean = gdr_ticker.upper().strip()
+        now = time.time()
+        if sym_clean in cls._GDR_CACHE and (now - cls._GDR_CACHE_TIME.get(sym_clean, 0.0)) < cls.CACHE_TTL_SECONDS:
+            return cls._GDR_CACHE[sym_clean]
+
         try:
             import yfinance as yf
             ticker_obj = yf.Ticker(sym_clean)
@@ -72,21 +81,32 @@ class GDRArbitrageEngine:
             if fast_info:
                 last_price = getattr(fast_info, "last_price", None) or getattr(fast_info, "regular_market_price", None)
                 if last_price and float(last_price) > 0:
-                    return round(float(last_price), 3)
+                    val = round(float(last_price), 3)
+                    cls._GDR_CACHE[sym_clean] = val
+                    cls._GDR_CACHE_TIME[sym_clean] = now
+                    return val
 
             hist = ticker_obj.history(period="5d")
             if not hist.empty and "Close" in hist.columns:
                 val = hist["Close"].dropna().iloc[-1]
                 if float(val) > 0:
-                    return round(float(val), 3)
+                    val = round(float(val), 3)
+                    cls._GDR_CACHE[sym_clean] = val
+                    cls._GDR_CACHE_TIME[sym_clean] = now
+                    return val
         except Exception as e:
             logger.debug(f"yfinance fetch for GDR {sym_clean} returned fallback: {e}")
 
         # Fallback to benchmark
         for cairo_sym, meta in cls.GDR_REGISTRY.items():
             if meta["gdr_ticker"] == sym_clean:
-                return float(meta["benchmark_gdr_usd"])
+                val = float(meta["benchmark_gdr_usd"])
+                cls._GDR_CACHE[sym_clean] = val
+                cls._GDR_CACHE_TIME[sym_clean] = now
+                return val
 
+        cls._GDR_CACHE[sym_clean] = 2.50
+        cls._GDR_CACHE_TIME[sym_clean] = now
         return 2.50
 
     @classmethod

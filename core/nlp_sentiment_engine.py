@@ -183,21 +183,30 @@ class NLPSentimentEngine:
     """
     Core NLP Engine aggregating ticker news sentiment and feeding FinBERT scores to ML pipelines.
     """
+    _CACHE: Dict[str, Tuple[float, Dict[str, Any]]] = {}
+    _CACHE_TTL: float = 300.0
 
     @classmethod
     def evaluate_ticker_sentiment(cls, ticker: str, timeframe: str = "24h") -> Dict[str, Any]:
         """
         Retrieves recent financial news, scores each item, and returns aggregated sentiment telemetry.
         """
+        import time
         sym = ticker.upper().strip()
         if not sym.endswith(".CA") and "." not in sym:
             sym += ".CA"
+
+        now_t = time.time()
+        if sym in cls._CACHE:
+            ts, cached_res = cls._CACHE[sym]
+            if now_t - ts < cls._CACHE_TTL:
+                return cached_res
 
         news_items = NewsIngestionEngine.get_news_for_ticker(sym, max_items=5)
         now_str = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
         if not news_items:
-            return {
+            res_empty = {
                 "ticker": sym,
                 "sentiment_score": 0.0,
                 "sentiment_label_ar": "⚪ غير متاح (لا توجد أخبار حية مؤكدة)",
@@ -209,6 +218,8 @@ class NLPSentimentEngine:
                 "timeframe": timeframe,
                 "timestamp": now_str
             }
+            cls._CACHE[sym] = (now_t, res_empty)
+            return res_empty
 
         scored_headlines = []
         total_weight = 0.0
@@ -247,7 +258,7 @@ class NLPSentimentEngine:
         else:
             agg_label = "0.00 ⚪ محايد"
 
-        return {
+        res_obj = {
             "ticker": sym,
             "sentiment_score": agg_score,
             "sentiment_label_ar": agg_label,
@@ -258,6 +269,8 @@ class NLPSentimentEngine:
             "timeframe": timeframe,
             "timestamp": now_str
         }
+        cls._CACHE[sym] = (now_t, res_obj)
+        return res_obj
 
 
 # Convenience Module-level function requested by prompt

@@ -174,13 +174,19 @@ class CorporateActionsAdjuster:
 
         return adj_df
 
+    _ACTIONS_CACHE: Dict[str, Optional[pd.DataFrame]] = {}
+
     @classmethod
     def _fetch_actions_for_ticker(cls, ticker: str) -> Optional[pd.DataFrame]:
-        """Queries yfinance for .actions DataFrame containing Dividends & Splits."""
+        """Queries yfinance for .actions DataFrame containing Dividends & Splits with in-memory caching."""
+        clean_sym = ticker.upper().strip()
+        if clean_sym in cls._ACTIONS_CACHE:
+            return cls._ACTIONS_CACHE[clean_sym]
+
+        # Fast skip if known or offline
         try:
             import yfinance as yf
             from data.universe_manager import UniverseManager
-            clean_sym = ticker.upper().strip()
             yf_sym = UniverseManager.get_yfinance_ticker(clean_sym)
             if not yf_sym.endswith(".CA") and "." not in yf_sym:
                 yf_sym = f"{yf_sym}.CA"
@@ -188,9 +194,12 @@ class CorporateActionsAdjuster:
             t = yf.Ticker(yf_sym)
             actions = t.actions
             if actions is not None and len(actions) > 0:
+                cls._ACTIONS_CACHE[clean_sym] = actions
                 return actions
         except Exception as e:
             logger.debug(f"Could not fetch actions for {ticker}: {e}")
+
+        cls._ACTIONS_CACHE[clean_sym] = None
         return None
 
     @classmethod
@@ -201,29 +210,57 @@ class CorporateActionsAdjuster:
         min_bars: int = 20
     ) -> Optional[pd.DataFrame]:
         """
-        Fetches historical data via yfinance, extracts actions, and applies backward adjustments.
+        Fetches historical data via fast local SQLite historical_daily_bars in gen26_production.db,
+        falling back to yfinance only if local data is unavailable.
         """
-        try:
-            import yfinance as yf
-            from data.universe_manager import UniverseManager
-            clean_sym = ticker.upper().strip()
-            yf_sym = UniverseManager.get_yfinance_ticker(clean_sym)
-            if not yf_sym.endswith(".CA") and "." not in yf_sym:
-                yf_sym = f"{yf_sym}.CA"
+        clean_sym = ticker.upper().strip()
+        if not clean_sym.endswith(".CA") and "." not in clean_sym:
+            clean_sym = f"{clean_sym}.CA"
 
-            t = yf.Ticker(yf_sym)
-            hist = t.history(period=period)
-            if hist is None or len(hist) < min_bars:
-                return None
+        hist = None
+        actions = None
 
-            actions = None
+        # 1. High-Speed Local SQLite Database First (< 1ms)
+        db_path = os.path.join(WORKSPACE, "data", "gen26_production.db")
+        if os.path.exists(db_path):
             try:
-                actions = t.actions
-            except Exception:
-                pass
+                import sqlite3
+                conn = sqlite3.connect(db_path)
+                query = (
+                    "SELECT market_date as Date, open_price as Open, high_price as High, "
+                    "low_price as Low, close_price as Close, volume as Volume "
+                    "FROM historical_daily_bars WHERE ticker=? ORDER BY market_date ASC"
+                )
+                db_df = pd.read_sql_query(query, conn, params=(clean_sym,))
+                conn.close()
+                if db_df is not None and len(db_df) >= min_bars:
+                    db_df["Date"] = pd.to_datetime(db_df["Date"])
+                    db_df.set_index("Date", inplace=True)
+                    hist = db_df
+            except Exception as e:
+                logger.debug(f"SQLite lookup failed for {clean_sym}: {e}")
 
-            adjusted_df = cls.adjust_ohlcv_dataframe(hist, actions_df=actions, ticker=clean_sym)
-            return adjusted_df
-        except Exception as e:
-            logger.debug(f"Error fetching/adjusting bars for {ticker}: {e}")
+        # 2. Secondary yfinance fallback if SQLite returned insufficient bars
+        if hist is None or len(hist) < min_bars:
+            try:
+                import yfinance as yf
+                from data.universe_manager import UniverseManager
+                yf_sym = UniverseManager.get_yfinance_ticker(clean_sym)
+                if not yf_sym.endswith(".CA") and "." not in yf_sym:
+                    yf_sym = f"{yf_sym}.CA"
+
+                t = yf.Ticker(yf_sym)
+                hist = t.history(period=period)
+                try:
+                    actions = t.actions
+                except Exception:
+                    pass
+            except Exception as e:
+                logger.debug(f"yfinance fetch failed for {clean_sym}: {e}")
+
+        if hist is None or len(hist) < min_bars:
             return None
+
+        adjusted_df = cls.adjust_ohlcv_dataframe(hist, actions_df=actions, ticker=clean_sym)
+        return adjusted_df
+

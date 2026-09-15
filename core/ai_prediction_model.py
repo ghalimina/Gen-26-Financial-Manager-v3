@@ -304,8 +304,9 @@ class AIPredictionModel:
                 }
 
             # Generate or ingest empirical time-series walk-forward dataset
+            dataset_source = "User Provided"
             if training_data is None or len(training_data) < 20:
-                training_data = cls._generate_synthetic_walkforward_data()
+                training_data, dataset_source = cls._generate_empirical_walkforward_data()
 
             # Sanitize training matrix
             X_df = training_data[cls.FEATURE_NAMES].fillna(0.0)
@@ -418,6 +419,7 @@ class AIPredictionModel:
 
         cls._training_metadata = {
             "algorithm": algorithm_used,
+            "dataset_source": dataset_source,
             "n_samples": len(training_data),
             "n_features": len(cls.FEATURE_NAMES),
             "hyperparameters": {
@@ -529,6 +531,145 @@ class AIPredictionModel:
             "is_trained": cls._is_trained,
             "features_snapshot": feat_dict
         }
+
+    @classmethod
+    def _generate_empirical_walkforward_data(cls) -> Tuple[pd.DataFrame, str]:
+        """
+        Extracts genuine empirical feature vectors and 10-day forward returns from
+        historical_daily_bars in gen26_production.db across active EGX equities.
+        Falls back to _generate_synthetic_walkforward_data only if database is unavailable.
+        """
+        import sqlite3
+        db_path = os.path.join(WORKSPACE, "data", "gen26_production.db")
+        if not os.path.exists(db_path):
+            return cls._generate_synthetic_walkforward_data(), "Synthetic Calibration Fallback (No DB)"
+
+        try:
+            conn = sqlite3.connect(db_path)
+            df = pd.read_sql_query(
+                "SELECT ticker, market_date, open_price, high_price, low_price, close_price, volume "
+                "FROM historical_daily_bars ORDER BY ticker, market_date ASC",
+                conn
+            )
+            conn.close()
+            if df is None or len(df) < 100:
+                return cls._generate_synthetic_walkforward_data(), "Synthetic Calibration Fallback (Empty DB)"
+
+            from core.egx_universe_loader import EGXUniverseLoader
+            active_info = EGXUniverseLoader.ACTIVE_UNIVERSE
+
+            all_dfs = []
+            for sym, group in df.groupby("ticker"):
+                g = group.reset_index(drop=True)
+                if len(g) < 25:
+                    continue
+                c = g["close_price"]
+                h = g["high_price"]
+                l = g["low_price"]
+                v = g["volume"]
+
+                # 10d forward return
+                fwd_10d = (c.shift(-10) - c) / c * 100.0
+
+                # Technical momentum
+                roc_20d = (c / c.shift(20) - 1.0) * 100.0
+                roc_1d_lag = (c.shift(1) / c.shift(2).replace(0, np.nan) - 1.0) * 100.0
+
+                # ATR 14
+                tr1 = h - l
+                tr2 = (h - c.shift(1)).abs()
+                tr3 = (l - c.shift(1)).abs()
+                tr = pd.concat([tr1, tr2, tr3], axis=1).max(axis=1)
+                atr = tr.rolling(14).mean()
+                atr_pct = (atr / c) * 100.0
+                vol_regime = np.where(atr_pct >= 4.5, 1.0, np.where(atr_pct <= 2.5, -1.0, 0.0))
+
+                # RSI 14
+                delta = c.diff()
+                gain = delta.where(delta > 0, 0.0).rolling(14).mean()
+                loss = (-delta.where(delta < 0, 0.0)).rolling(14).mean()
+                rs = gain / (loss.replace(0, 1e-6))
+                rsi14 = 100.0 - (100.0 / (1.0 + rs))
+
+                # MACD
+                ema12 = c.ewm(span=12, adjust=False).mean()
+                ema26 = c.ewm(span=26, adjust=False).mean()
+                macd_line = ema12 - ema26
+                macd_sig = macd_line.ewm(span=9, adjust=False).mean()
+                macd_hist = macd_line - macd_sig
+                macd_hist_lag = macd_hist.shift(1)
+
+                # Volume Z-score and RVOL
+                vol_mean = v.rolling(10).mean()
+                vol_std = v.rolling(10).std().replace(0, 1.0)
+                vol_z = (v - vol_mean) / vol_std
+                vol_z_lag = vol_z.shift(1)
+                rvol = v / (vol_mean.replace(0, 1.0))
+
+                # OBV slope
+                obv = (np.sign(delta.fillna(0)) * v).cumsum()
+                obv_slope = obv.diff(10) / 1000.0
+
+                # Weekly trend alignment
+                w_trend = np.where(c > c.shift(10), 1.0, np.where(c < c.shift(10), -1.0, 0.0))
+
+                # Setup encoded
+                setup_enc = np.where(
+                    rsi14 < 35.0, 1.5,
+                    np.where((macd_hist > 0) & (roc_20d > 2.0), 2.0,
+                    np.where((macd_hist > 0) & (roc_20d <= 2.0), 1.0,
+                    np.where((macd_hist <= 0) & (roc_20d < -2.0), -1.0, 0.0)))
+                )
+
+                # Profile defaults
+                s_info = active_info.get(sym, {})
+                beta_val = float(s_info.get("beta_egx30", 1.0))
+                pe_val = float(s_info.get("pe_ratio", 8.5))
+                roe_val = float(s_info.get("roe_pct", 20.0))
+                de_val = float(s_info.get("debt_to_equity", 0.60))
+                ocf_val = float(s_info.get("ocf_to_ni_ratio", 1.15))
+
+                stock_sample = pd.DataFrame({
+                    "macd_hist": macd_hist,
+                    "macd_hist_lag1": macd_hist_lag,
+                    "rsi14": rsi14,
+                    "atr_pct": atr_pct,
+                    "volatility_regime_encoded": vol_regime,
+                    "weekly_trend_alignment": w_trend,
+                    "volume_z_score": vol_z,
+                    "volume_z_score_lag1": vol_z_lag,
+                    "obv_slope": obv_slope,
+                    "rvol_10d": rvol,
+                    "ocf_to_ni_ratio": ocf_val,
+                    "pe_ratio": pe_val,
+                    "roe_pct": roe_val,
+                    "debt_to_equity": de_val,
+                    "cbe_corridor_rate_pct": 19.75,
+                    "usd_egp_rate": 50.76,
+                    "macro_regime_encoded": 1.0,
+                    "setup_encoded": setup_enc,
+                    "roc_1d_lag1": roc_1d_lag,
+                    "roc_20d": roc_20d,
+                    "beta_egx30": beta_val,
+                    "fwd_10d": fwd_10d
+                }).dropna()
+
+                all_dfs.append(stock_sample)
+
+            if not all_dfs:
+                return cls._generate_synthetic_walkforward_data(), "Synthetic Calibration Fallback (Zero Features)"
+
+            merged = pd.concat(all_dfs, ignore_index=True)
+            if len(merged) < 50:
+                return cls._generate_synthetic_walkforward_data(), "Synthetic Calibration Fallback (Insufficient Rows)"
+
+            benchmark_median = float(merged["fwd_10d"].median())
+            merged["residual_alpha_10d"] = (merged["fwd_10d"] - benchmark_median).round(2)
+            merged.drop(columns=["fwd_10d"], inplace=True)
+
+            return merged, f"Empirical EGX Daily Bars ({len(merged)} walk-forward samples across {len(all_dfs)} equities)"
+        except Exception as e:
+            return cls._generate_synthetic_walkforward_data(), f"Synthetic Fallback ({e})"
 
     @classmethod
     def _generate_synthetic_walkforward_data(cls, n_samples: int = 150) -> pd.DataFrame:

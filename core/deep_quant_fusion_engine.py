@@ -31,6 +31,7 @@ from core.gdr_arbitrage_engine import GDRArbitrageEngine
 from core.statistical_arbitrage_engine import StatisticalArbitrageEngine
 from core.advanced_feature_engineering import AdvancedFeatureEngineering
 from core.multi_source_intelligence import MultiSourceIntelligence
+from core.valuation_engine import ValuationEngine
 
 logger = logging.getLogger("GEN26.DeepQuantFusionEngine")
 
@@ -102,8 +103,10 @@ class DeepQuantFusionEngine:
         lynch_dict = QuantBooksEngine.evaluate_peter_lynch_metrics(sym)
         peg_ratio = float(lynch_dict.get("peg_ratio", 0.45))
         net_cash_share = float(lynch_dict.get("net_cash_per_share", 12.50))
-        dcf_margin = 22.5
-        dcf_fair_val_ratio = 1.25
+        val_eval = ValuationEngine.evaluate_comprehensive_valuation(sym, current_price=cp)
+        dcf_margin = float(val_eval.get("margin_of_safety_pct", 20.0))
+        fv = float(val_eval.get("intrinsic_fair_value", cp * 1.10))
+        dcf_fair_val_ratio = round(fv / max(cp, 0.01), 2)
         ocf_margin = 28.4
         ocf_ni_ratio = 1.35
         roe_pct = 24.5

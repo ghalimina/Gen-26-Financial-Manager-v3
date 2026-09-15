@@ -243,7 +243,14 @@ class SectorNeutralizer:
     }
 
     @classmethod
-    def compute_sector_neutral_features(cls, ticker: str, pe_ratio: float = 8.5, rsi14: float = 50.0, volume_z_score: float = 0.0) -> Dict[str, Any]:
+    def compute_sector_neutral_features(
+        cls,
+        ticker: str,
+        pe_ratio: float = 8.5,
+        rsi14: float = 50.0,
+        volume_z_score: float = 0.0,
+        include_sentiment: bool = True
+    ) -> Dict[str, Any]:
         sym = ticker.upper().strip()
         from core.real_portfolio import RealPortfolioTracker
         raw_sector = RealPortfolioTracker.SECTOR_MAPPINGS.get(sym, "DEFAULT")
@@ -262,13 +269,15 @@ class SectorNeutralizer:
         rsi_z = (rsi14 - bench_classic["rsi14"]) / 12.0
         vol_z = volume_z_score - bench_classic["volume_z_score"]
 
-        # Default live sentiment
-        try:
-            from core.nlp_sentiment_engine import NLPSentimentEngine
-            nlp = NLPSentimentEngine.evaluate_ticker_sentiment(sym)
-            sentiment = float(nlp.get("finbert_sentiment_score", 0.0))
-        except Exception:
-            sentiment = 0.50 if sym in ["COMI.CA", "SWDY.CA", "TMGH.CA"] else 0.0
+        # Default live sentiment (optional for bulk ML training)
+        sentiment = 0.0
+        if include_sentiment:
+            try:
+                from core.nlp_sentiment_engine import NLPSentimentEngine
+                nlp = NLPSentimentEngine.evaluate_ticker_sentiment(sym)
+                sentiment = float(nlp.get("finbert_sentiment_score", 0.0))
+            except Exception:
+                sentiment = 0.50 if sym in ["COMI.CA", "SWDY.CA", "TMGH.CA"] else 0.0
 
         return {
             "sector": sector,

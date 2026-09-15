@@ -214,12 +214,12 @@ class TechnicalSetupEngine:
             try:
                 import sqlite3
                 conn = sqlite3.connect(db_path)
-                query = "SELECT open_price as Open, high_price as High, low_price as Low, close_price as Close, volume as Volume FROM historical_daily_bars WHERE ticker = ? ORDER BY market_date ASC"
+                query = "SELECT market_date as Date, open_price as Open, high_price as High, low_price as Low, close_price as Close, volume as Volume FROM historical_daily_bars WHERE ticker = ? ORDER BY market_date ASC"
                 df_db = pd.read_sql_query(query, conn, params=(sym,))
                 conn.close()
                 if len(df_db) >= min_bars:
-                    from core.corporate_actions import CorporateActionsAdjuster
-                    df_db = CorporateActionsAdjuster.adjust_ohlcv_dataframe(df_db, ticker=sym)
+                    df_db["Date"] = pd.to_datetime(df_db["Date"])
+                    df_db.set_index("Date", inplace=True)
                     with cls._CACHE_LOCK:
                         cls._OHLCV_CACHE[sym] = df_db
                         cls._OHLCV_CACHE_TIME[sym] = time.time()

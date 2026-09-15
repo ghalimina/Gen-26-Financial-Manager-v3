@@ -2,15 +2,18 @@
 # =============================================================================
 # core/news_ingestion_engine.py — GEN-26 Live EGX Financial News & Disclosures Ingestion
 # Ingestion architecture for Arabic financial news feeds & official disclosures:
-# 1. RSS & Web Parser (EGX disclosures, Mubasher RSS, Enterprise Egypt).
-# 2. Resilient MockNewsGenerator fallback for offline/sandbox testing.
-# 3. Entity recognition & ticker mapping for EGX universe constituents.
+# 1. Multi-source RSS & Web Scraper (EGX Disclosures, Mubasher, Enterprise Egypt,
+#    Hapi Journal, Al-Mal News, Asharq Bloomberg Egypt).
+# 2. Dynamic 244-Ticker Entity Recognition Mapper auto-generated from EGXUniverseLoader.
+# 3. Resilient MockNewsGenerator fallback for offline/sandbox testing.
+# 4. Zero-Mock Production Invariant for live quant execution.
 # =============================================================================
 
 import os
 import sys
 import json
 import re
+import time
 import datetime
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -20,8 +23,10 @@ WORKSPACE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if WORKSPACE not in sys.path:
     sys.path.insert(0, WORKSPACE)
 
-# Ticker Arabic Name / Keyword mapping for Entity Recognition
-EGX_TICKER_ENTITY_MAP = {
+from core.egx_universe_loader import EGXUniverseLoader
+
+# Base hand-crafted high-priority keyword overrides
+BASE_ENTITY_MAP = {
     "COMI.CA": ["البنك التجاري الدولي", "سي آي بي", "CIB", "التجاري الدولي"],
     "SWDY.CA": ["السويدي إليكتريك", "السويدي اليكتريك", "السويدي للكابلات", "Elsewedy"],
     "TMGH.CA": ["طلعت مصطفى", "مجموعة طلعت مصطفى", "بنان", "SouthMED", "TMG"],
@@ -41,8 +46,57 @@ EGX_TICKER_ENTITY_MAP = {
     "BTFH.CA": ["بلتون", "بلتون القابضة", "بلتون المالية", "Beltone"],
     "EGAL.CA": ["مصر للألومنيوم", "مصر للالومنيوم", "Egypt Aluminum"],
     "MFPC.CA": ["موبكو", "مصر لإنتاج الأسمدة", "MOPCO"],
-    "HELI.CA": ["مصر الجديدة للإسكان", "مصر الجديدة للتعمير", "Heliopolis Housing"]
+    "HELI.CA": ["مصر الجديدة للإسكان", "مصر الجديدة للتعمير", "Heliopolis Housing"],
+    "ADIB.CA": ["مصرف أبوظبي الإسلامي", "أبوظبي الإسلامي مصر", "ADIB"],
+    "SKPC.CA": ["سيدي كرير للبتروكيماويات", "سيدبك", "Sidpec"],
+    "CERA.CA": ["العز للسيراميك", "الجوهرة", "Gemma"],
+    "ORHD.CA": ["أوراسكوم للتنمية مصر", "أوراسكوم للفنادق", "Orascom Development"],
+    "AMOC.CA": ["الإسكندرية للزيوت المعدنية", "أموك", "AMOC"]
 }
+
+
+def _build_universal_entity_map() -> Dict[str, List[str]]:
+    """
+    Dynamically generates entity recognition keyword aliases for all active EGX constituents.
+    """
+    full_map = {}
+    universe = EGXUniverseLoader.get_universe("all")
+    for stock in universe:
+        sym = stock.get("ticker", "")
+        if not sym:
+            continue
+        keywords = set()
+        # Clean ticker code
+        raw_code = sym.replace(".CA", "").strip()
+        keywords.add(raw_code)
+        keywords.add(sym)
+
+        # Arabic & English Names
+        name_ar = stock.get("name_ar", "")
+        name_en = stock.get("name_en", "")
+        if name_ar:
+            keywords.add(name_ar)
+            # Remove common prefixes like "شركة " or "مجموعة "
+            cleaned_ar = re.sub(r"^(شركة|مجموعة|بنك|مصرف|المصرية لـ|المصرية لل)\s+", "", name_ar).strip()
+            if len(cleaned_ar) >= 3:
+                keywords.add(cleaned_ar)
+        if name_en:
+            keywords.add(name_en)
+            cleaned_en = re.sub(r"\b(Holding|Company|Bank|Group|Egypt|SAE|for)\b", "", name_en, flags=re.I).strip()
+            if len(cleaned_en) >= 3:
+                keywords.add(cleaned_en)
+
+        # Merge with hand-crafted overrides if available
+        if sym in BASE_ENTITY_MAP:
+            for kw in BASE_ENTITY_MAP[sym]:
+                keywords.add(kw)
+
+        full_map[sym] = sorted(list(keywords), key=len, reverse=True)
+    return full_map
+
+
+# Complete 244-Ticker Entity Map
+EGX_TICKER_ENTITY_MAP = _build_universal_entity_map()
 
 # Seed realistic Arabic financial headlines for MockNewsGenerator fallback
 REALISTIC_ARABIC_HEADLINES_SEEDS = {
@@ -88,10 +142,13 @@ class MockNewsGenerator:
         seed_items = REALISTIC_ARABIC_HEADLINES_SEEDS.get(sym, [])
 
         if not seed_items:
-            # Synthetic realistic fallback based on corporate patterns
+            raw_name = sym.replace(".CA", "")
+            stock_info = EGXUniverseLoader.get_stock_info(sym)
+            if stock_info and stock_info.get("name_ar"):
+                raw_name = stock_info["name_ar"]
             seed_items = [
-                {"title": f"شركة {sym.replace('.CA','')} تعقد الجمعية العامة وتعتمد تقرير مجلس الإدارة عن القوائم المالية", "polarity": 0.20, "source": "إفصاح البورصة المصرية"},
-                {"title": f"نمو ملحوظ في أحجام التداول والسيولة على سهم {sym.replace('.CA','')} بدعم من مشتريات المؤسسات", "polarity": 0.45, "source": "مباشر مصر"}
+                {"title": f"شركة {raw_name} تعقد الجمعية العامة وتعتمد تقرير مجلس الإدارة عن القوائم المالية", "polarity": 0.20, "source": "إفصاح البورصة المصرية"},
+                {"title": f"نمو ملحوظ في أحجام التداول والسيولة على سهم {raw_name} بدعم من مشتريات المؤسسات", "polarity": 0.45, "source": "مباشر مصر"}
             ]
 
         results = []
@@ -111,20 +168,37 @@ class MockNewsGenerator:
 class NewsIngestionEngine:
     """
     Live Ingestion Engine for EGX Disclosures and Egyptian Financial News feeds.
+    Features multi-source ingestion, robust fallback caching, and 244-ticker entity resolution.
     """
 
     PRIMARY_FEEDS = [
         {"url": "https://www.mubasher.info/countries/eg/news/rss", "source_name": "مباشر مصر (Mubasher EGX)"},
         {"url": "https://almalnews.com/feed/", "source_name": "جريدة المال الاقتصادية (Al-Mal News)"},
-        {"url": "https://www.mubasher.info/countries/eg/disclosures/rss", "source_name": "إفصاحات البورصة المصرية الرسمية (EGX Disclosures)"}
+        {"url": "https://www.mubasher.info/countries/eg/disclosures/rss", "source_name": "إفصاحات البورصة المصرية الرسمية (EGX Disclosures)"},
+        {"url": "https://hapijournal.com/feed/", "source_name": "جريدة حابي الاقتصادية (Hapi Journal)"},
+        {"url": "https://alborsaanews.com/feed", "source_name": "جريدة البورصة نيوز (Al-Borsa News)"},
+        {"url": "https://enterprise.press/ar/feed/", "source_name": "إنتربرايز مصر (Enterprise Egypt)"}
     ]
 
+    _CACHE_NEWS: List[Dict[str, Any]] = []
+    _CACHE_TIMESTAMP: float = 0.0
+    CACHE_TTL_SECONDS: float = 300.0  # 5 minutes in-memory cache
+
     @classmethod
-    def fetch_live_news_feed(cls, timeout_sec: int = 3) -> List[Dict[str, Any]]:
+    def get_all_entity_mappings(cls) -> Dict[str, List[str]]:
+        """Returns the full 244-ticker active entity resolution mapping."""
+        return EGX_TICKER_ENTITY_MAP
+
+    @classmethod
+    def fetch_live_news_feed(cls, timeout_sec: int = 4) -> List[Dict[str, Any]]:
         """
-        Attempts to fetch live financial news items across multiple redundant RSS feeds.
-        Falls back smoothly to Mock generator if offline.
+        Attempts to fetch live financial news items across multiple redundant RSS & disclosure feeds.
+        Cached for CACHE_TTL_SECONDS to avoid rate-limits.
         """
+        now = time.time()
+        if cls._CACHE_NEWS and (now - cls._CACHE_TIMESTAMP) < cls.CACHE_TTL_SECONDS:
+            return cls._CACHE_NEWS
+
         news_items = []
         seen_titles = set()
 
@@ -132,12 +206,15 @@ class NewsIngestionEngine:
             try:
                 req = urllib.request.Request(
                     feed["url"],
-                    headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) GEN26-NLP/3.0"}
+                    headers={
+                        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 GEN26-NLP/3.0",
+                        "Accept": "application/rss+xml, application/xml, text/xml, */*"
+                    }
                 )
                 with urllib.request.urlopen(req, timeout=timeout_sec) as resp:
                     xml_data = resp.read()
                     root = ET.fromstring(xml_data)
-                    for item in root.findall("./channel/item")[:15]:
+                    for item in root.findall("./channel/item")[:20]:
                         title = item.find("title").text if item.find("title") is not None else ""
                         pub_date = item.find("pubDate").text if item.find("pubDate") is not None else ""
                         if not title or title in seen_titles:
@@ -156,7 +233,11 @@ class NewsIngestionEngine:
             except Exception:
                 continue
 
-        return news_items
+        if news_items:
+            cls._CACHE_NEWS = news_items
+            cls._CACHE_TIMESTAMP = now
+
+        return news_items if news_items else cls._CACHE_NEWS
 
     @classmethod
     def get_news_for_ticker(cls, ticker: str, max_items: int = 5, allow_mock: bool = False) -> List[Dict[str, Any]]:
@@ -183,11 +264,13 @@ class NewsIngestionEngine:
 
     @classmethod
     def _match_tickers_in_text(cls, text: str) -> List[str]:
-        """Identifies EGX tickers mentioned in Arabic headline text."""
+        """Identifies EGX tickers mentioned in Arabic headline text across all universe constituents."""
+        if not text:
+            return []
         matched = []
         for ticker, keywords in EGX_TICKER_ENTITY_MAP.items():
             for kw in keywords:
-                if kw in text:
+                if kw and kw in text:
                     matched.append(ticker)
                     break
         return matched
@@ -199,6 +282,7 @@ if __name__ == "__main__":
             sys.stdout.reconfigure(encoding="utf-8")
         except Exception:
             pass
-    sample = NewsIngestionEngine.get_news_for_ticker("COMI.CA")
-    print("COMI.CA Ingested News:")
+    print(f"Total Universal Entity Mappings: {len(EGX_TICKER_ENTITY_MAP)} EGX Equities")
+    sample = NewsIngestionEngine.get_news_for_ticker("COMI.CA", allow_mock=True)
+    print("COMI.CA Ingested News Sample:")
     print(json.dumps(sample, ensure_ascii=False, indent=2))

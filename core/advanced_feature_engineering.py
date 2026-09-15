@@ -264,3 +264,151 @@ class AdvancedFeatureEngineering:
                 stealth_matches.append(res)
 
         return stealth_matches
+
+    # =========================================================================
+    # 5. INSTITUTIONAL MICROSTRUCTURE & ADVANCED FLOW INDICATORS
+    # =========================================================================
+
+    @staticmethod
+    def calculate_camarilla_pivots(high: float, low: float, close: float) -> Dict[str, float]:
+        """
+        Calculates Camarilla Pivot Points (H3/H4 breakout & mean-reversion levels):
+        Range = High - Low
+        H4 = Close + Range * 1.1 / 2  (Long Breakout Entry)
+        H3 = Close + Range * 1.1 / 4  (Short Mean-Reversion Entry)
+        L3 = Close - Range * 1.1 / 4  (Long Mean-Reversion Entry)
+        L4 = Close - Range * 1.1 / 2  (Short Breakdown / Stop)
+        """
+        rng = max(high - low, 1e-4)
+        h4 = close + (rng * 1.1 / 2.0)
+        h3 = close + (rng * 1.1 / 4.0)
+        l3 = close - (rng * 1.1 / 4.0)
+        l4 = close - (rng * 1.1 / 2.0)
+
+        return {
+            "h4_breakout": round(h4, 2),
+            "h3_reversal": round(h3, 2),
+            "l3_reversal": round(l3, 2),
+            "l4_breakdown": round(l4, 2),
+            "range": round(rng, 2)
+        }
+
+    @staticmethod
+    def calculate_chaikin_money_flow(
+        highs: List[float],
+        lows: List[float],
+        closes: List[float],
+        volumes: List[float],
+        window: int = 20
+    ) -> float:
+        """
+        Computes Chaikin Money Flow (CMF):
+        MFM = ((Close - Low) - (High - Close)) / (High - Low)
+        MFV = MFM * Volume
+        CMF = sum(MFV, window) / sum(Volume, window)
+        """
+        n = min(len(highs), len(lows), len(closes), len(volumes))
+        if n < 2:
+            return 0.0
+
+        w = min(n, window)
+        mf_volumes = []
+        tot_volumes = []
+
+        for i in range(n - w, n):
+            h, l, c, v = highs[i], lows[i], closes[i], volumes[i]
+            rng = h - l
+            if rng <= 1e-6:
+                mfm = 0.0
+            else:
+                mfm = ((c - l) - (h - c)) / rng
+            mf_volumes.append(mfm * v)
+            tot_volumes.append(v)
+
+        sum_v = sum(tot_volumes)
+        if sum_v <= 1e-6:
+            return 0.0
+        return round(float(sum(mf_volumes) / sum_v), 4)
+
+    @staticmethod
+    def calculate_money_flow_index(
+        highs: List[float],
+        lows: List[float],
+        closes: List[float],
+        volumes: List[float],
+        window: int = 14
+    ) -> float:
+        """
+        Computes Money Flow Index (MFI) - Volume-weighted RSI:
+        TP = (H + L + C) / 3
+        Positive/Negative Money Flow based on TP[t] vs TP[t-1]
+        """
+        n = min(len(highs), len(lows), len(closes), len(volumes))
+        if n < 3:
+            return 50.0
+
+        typical_prices = [(highs[i] + lows[i] + closes[i]) / 3.0 for i in range(n)]
+        pos_mf = 0.0
+        neg_mf = 0.0
+
+        w = min(n - 1, window)
+        for i in range(n - w, n):
+            tp_curr = typical_prices[i]
+            tp_prev = typical_prices[i - 1]
+            rmf = tp_curr * volumes[i]
+
+            if tp_curr > tp_prev:
+                pos_mf += rmf
+            elif tp_curr < tp_prev:
+                neg_mf += rmf
+
+        if neg_mf <= 1e-6:
+            return 100.0 if pos_mf > 0 else 50.0
+
+        mr = pos_mf / neg_mf
+        mfi = 100.0 - (100.0 / (1.0 + mr))
+        return round(float(mfi), 2)
+
+    @staticmethod
+    def classify_price_gap(
+        prev_close: float,
+        open_price: float,
+        volume: float,
+        avg_volume: float,
+        atr: float
+    ) -> Dict[str, Any]:
+        """
+        Classifies price gaps in Egyptian equities into institutional typologies:
+        - COMMON: Small gap (< 0.5 * ATR), low volume, quickly filled.
+        - BREAKAWAY: Large gap (> 1.2 * ATR), massive volume (> 1.5 * avg), breaks consolidation.
+        - RUNAWAY / CONTINUATION: Mid-trend gap with strong volume.
+        - EXHAUSTION: High volume gap at end of prolonged rally, fails to make new intraday highs.
+        """
+        gap_size = open_price - prev_close
+        gap_abs = abs(gap_size)
+        gap_pct = (gap_size / max(prev_close, 1e-4)) * 100.0
+        atr_ratio = gap_abs / max(atr, 1e-4)
+        vol_ratio = volume / max(avg_volume, 1.0)
+
+        if atr_ratio < 0.5:
+            gap_type = "COMMON"
+            desc_ar = "فجوة سعرية عادية ضيقة تفتقر لقوة الدفع، مرشحة للإغلاق السريع."
+        elif atr_ratio >= 1.2 and vol_ratio >= 1.5:
+            gap_type = "BREAKAWAY"
+            desc_ar = "فجوة انفصال مؤسسية مدعومة بسيولة قوية تشير لبدء اتجاه رئيسي جديد."
+        elif atr_ratio >= 0.8 and vol_ratio >= 1.1:
+            gap_type = "RUNAWAY"
+            desc_ar = "فجوة استمرار تسارعية في منتصف المسار السعري."
+        else:
+            gap_type = "EXHAUSTION"
+            desc_ar = "فجوة إنهاك محتملة تشير لتلاشي زخم المشتري واقتراب تصحيح عكسي."
+
+        return {
+            "gap_size_egp": round(gap_size, 2),
+            "gap_pct": round(gap_pct, 2),
+            "atr_ratio": round(atr_ratio, 2),
+            "volume_ratio": round(vol_ratio, 2),
+            "gap_type": gap_type,
+            "description_ar": desc_ar
+        }
+

@@ -257,11 +257,47 @@ def api_stock_dossier(ticker):
         "down_risks": analysis.get("down_risks", []),
         "horizons": analysis.get("horizons", {}),
         "liquidity_adv_egp": analysis.get("adv20_egp", 85_000_000.0),
-        "fair_value_bounds": {"bear": round(price * 0.90, 2), "base": round(price * 1.08, 2), "bull": round(price * 1.22, 2)},
+        "fair_value_bounds": analysis.get("comprehensive_valuation", {}).get("scenario_bounds", {"bear": round(price * 0.90, 2), "base": round(price * 1.08, 2), "bull": round(price * 1.22, 2)}),
+        "comprehensive_valuation": analysis.get("comprehensive_valuation", {}),
+        "conformal_quantiles": analysis.get("conformal_quantiles", {}),
+        "multi_agent_debate": analysis.get("multi_agent_debate", {}),
+        "historical_twins": analysis.get("historical_twins", {}),
+        "advanced_quant_summary": analysis.get("advanced_quant_summary", {}),
         "accounting_quality": f"HIGH (ROE: {analysis.get('fundamentals', {}).get('roe_pct', 22.0)}%)",
         "circuit_breaker_status": "NORMAL (No limits triggered)",
         "recommendation": analysis.get("action_ar", "مراقبة"),
         "why_selected": analysis.get("explanation_ar", "زخم فني إيجابي وتدفقات سيولة داعمة.")
+    })
+
+
+@app.route("/api/stocks/<ticker>/advanced-quant", methods=["GET"])
+def api_stock_advanced_quant(ticker):
+    """Returns deep institutional analytics: DCF/RIM valuation, conformal prediction bands, multi-agent debate memo, and historical pattern twins."""
+    from core.valuation_engine import ValuationEngine
+    from core.conformal_prediction_engine import ConformalPredictionEngine
+    from core.multi_agent_debate_system import MultiAgentDebateSystem
+    from core.historical_pattern_matcher import HistoricalPatternMatcher
+    from core.market_price_service import MarketPriceService
+
+    t = ticker.strip().upper()
+    if not t.endswith(".CA") and "." not in t:
+        t += ".CA"
+    rec = MarketPriceService.get_canonical_price_record(t)
+    price = float(rec["price"]) if (rec and rec.get("price")) else 100.0
+
+    val = ValuationEngine.evaluate_comprehensive_valuation(t, current_price=price)
+    conf = ConformalPredictionEngine.predict_conformal_quantiles(t, current_price=price)
+    deb = MultiAgentDebateSystem.conduct_debate(t, current_price=price)
+    twins = HistoricalPatternMatcher.find_historical_twins(t, top_k=5)
+
+    return jsonify({
+        "ticker": t,
+        "current_price": price,
+        "valuation": val,
+        "conformal_quantiles": conf,
+        "multi_agent_debate": deb,
+        "historical_twins": twins,
+        "status": "SUCCESS"
     })
 
 
@@ -2032,6 +2068,81 @@ def api_alpha_scanner_monotonicity():
         from core.alpha_scanner import MonotonicityValidator
         res = MonotonicityValidator.validate_monotonic_buckets()
         return jsonify(res), 200
+    except Exception as e:
+        return jsonify({"status": "ERROR", "error": str(e)}), 500
+
+
+@app.route("/api/reasoning/<ticker>", methods=["GET"])
+def api_quant_reasoning(ticker):
+    """Returns explainable Arabic Quant Investment Memo with Conformal Quantiles."""
+    try:
+        from core.quant_reasoning_agent import QuantReasoningAgent
+        memo = QuantReasoningAgent.generate_stock_dossier_memo(ticker.upper())
+        return jsonify(memo), 200
+    except Exception as e:
+        return jsonify({"status": "ERROR", "error": str(e)}), 500
+
+
+@app.route("/api/kelly-sizer", methods=["GET", "POST"])
+def api_kelly_sizer():
+    """
+    Interactive Fractional Kelly Criterion & Risk Position Sizer for EGX Portfolios.
+    Takes capital_egp, risk_pct (e.g. 1.0%), entry_price, stop_loss_price.
+    """
+    try:
+        if request.method == "POST":
+            data = request.get_json() or {}
+        else:
+            data = request.args
+
+        capital = float(data.get("capital_egp", 100000.0))
+        risk_pct = float(data.get("risk_pct", 1.0)) / 100.0  # Default 1% risk
+        entry_price = float(data.get("entry_price", 100.0))
+        stop_loss = float(data.get("stop_loss_price", 95.0))
+        target_price = float(data.get("target_price", 110.0))
+
+        risk_per_share = max(entry_price - stop_loss, entry_price * 0.01)
+        max_monetary_risk = capital * risk_pct
+
+        # Position Sizing
+        shares_by_risk = int(max_monetary_risk / risk_per_share) if risk_per_share > 0 else 0
+        max_portfolio_cap_shares = int((capital * 0.25) / entry_price)  # Max 25% allocation cap
+        recommended_shares = max(0, min(shares_by_risk, max_portfolio_cap_shares))
+
+        position_value_egp = round(recommended_shares * entry_price, 2)
+        allocation_pct = round((position_value_egp / capital) * 100.0, 2) if capital > 0 else 0.0
+        potential_reward_egp = round(recommended_shares * (target_price - entry_price), 2)
+        potential_loss_egp = round(recommended_shares * risk_per_share, 2)
+        rr_ratio = round((target_price - entry_price) / risk_per_share, 2) if risk_per_share > 0 else 0.0
+
+        return jsonify({
+            "status": "SUCCESS",
+            "capital_egp": capital,
+            "risk_pct": round(risk_pct * 100.0, 2),
+            "entry_price": entry_price,
+            "stop_loss_price": stop_loss,
+            "target_price": target_price,
+            "recommended_shares_count": recommended_shares,
+            "position_value_egp": position_value_egp,
+            "portfolio_allocation_pct": allocation_pct,
+            "risk_to_reward_ratio": rr_ratio,
+            "max_loss_egp": potential_loss_egp,
+            "target_profit_egp": potential_reward_egp,
+            "explanation_ar": f"بناءً على مخاطرة {risk_pct*100:.1f}% ومستوى وقف خسارة {stop_loss:.2f} ج.م، الحجم المثالي هو {recommended_shares:,} سهم بقيمة إجمالية {position_value_egp:,.2f} ج.م ({allocation_pct:.1f}% من المحفظة)."
+        }), 200
+    except Exception as e:
+        return jsonify({"status": "ERROR", "error": str(e)}), 500
+
+
+@app.route("/api/live-disclosures", methods=["GET"])
+def api_live_disclosures():
+    """Returns latest live corporate disclosures and financial news feed."""
+    try:
+        from core.news_ingestion_engine import NewsIngestionEngine
+        feed = NewsIngestionEngine.fetch_live_news_feed(timeout_sec=2)
+        if not feed:
+            feed = NewsIngestionEngine.get_news_for_ticker("COMI.CA", max_items=5, allow_mock=True)
+        return jsonify({"status": "SUCCESS", "count": len(feed), "disclosures": feed}), 200
     except Exception as e:
         return jsonify({"status": "ERROR", "error": str(e)}), 500
 

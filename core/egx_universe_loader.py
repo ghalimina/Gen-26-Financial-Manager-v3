@@ -832,7 +832,7 @@ class EGXUniverseLoader:
 
     @classmethod
     def _init_244_universe(cls):
-        """Loads complete 244-stock EGX/Thndr universe dynamically into ACTIVE_UNIVERSE."""
+        """Loads complete 244-stock EGX/Thndr universe dynamically into ACTIVE_UNIVERSE and syncs canonical prices."""
         try:
             workspace = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
             u_file = os.path.join(workspace, "data", "thndr_egx_244_universe.json")
@@ -857,11 +857,20 @@ class EGXUniverseLoader:
                             "beta_egx30": s.get("beta_egx30", 1.0),
                             "is_active": s.get("is_active", True)
                         }
+
+            # Synchronize all nominal prices from canonical live SSoT
+            p_file = os.path.join(workspace, "data", "canonical_prices_live.json")
+            if os.path.exists(p_file):
+                with open(p_file, "r", encoding="utf-8") as f:
+                    canon_prices = json.load(f)
+                for t, pdata in canon_prices.items():
+                    if t in cls.ACTIVE_UNIVERSE and "price" in pdata:
+                        cls.ACTIVE_UNIVERSE[t]["nominal_price"] = float(pdata["price"])
         except Exception:
             pass
 
 
-# Automatically load full 244-universe
+# Automatically load full 244-universe and sync live prices
 EGXUniverseLoader._init_244_universe()
 
 
