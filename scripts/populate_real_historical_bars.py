@@ -71,11 +71,19 @@ def populate_historical_bars():
     total_inserted = 0
     stocks_populated = 0
 
+    from core.price_sync_service import PriceSyncService
+    canonical_store = PriceSyncService.load_canonical_prices()
+
     for ticker, meta in active_stocks.items():
         if ticker.endswith("_P.CA") or ticker.endswith("_B.CA"):
             continue # Fictitious suffix stocks get ZERO bars
 
-        p_final = float(meta.get("nominal_price", 10.0))
+        rec = canonical_store.get(ticker)
+        if rec and "price" in rec and float(rec["price"]) > 0:
+            p_final = float(rec["price"])
+        else:
+            p_final = float(meta.get("nominal_price", 10.0))
+
         if p_final <= 0:
             continue
 
