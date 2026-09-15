@@ -1,9 +1,9 @@
 {
   "session_metadata": {
-    "session_id": "SESS-20260916-01",
+    "session_id": "SESS-20260915-01",
     "session_number": 1,
-    "market_date": "2026-09-16",
-    "timestamp": "2026-09-15T17:54:14.074942",
+    "market_date": "2026-09-15",
+    "timestamp": "2026-09-15T15:41:20.256080",
     "engine_version": "3.0.0",
     "status": "VERIFIED_PASS",
     "risk_incidents": []
@@ -99,7 +99,7 @@
   "execution": {
     "fills": [
       {
-        "order_id": "PAPER-2C60B9B4",
+        "order_id": "PAPER-4CDBE363",
         "symbol": "COMI.CA",
         "side": "BUY",
         "quantity": 100,
@@ -108,10 +108,10 @@
         "fee": 17.52,
         "order_type": "LIMIT",
         "status": "FILLED",
-        "timestamp": "2026-09-15T17:54:14.056930"
+        "timestamp": "2026-09-15T15:41:20.254708"
       },
       {
-        "order_id": "PAPER-00B203CA",
+        "order_id": "PAPER-5200125E",
         "symbol": "SWDY.CA",
         "side": "BUY",
         "quantity": 250,
@@ -120,10 +120,10 @@
         "fee": 17.52,
         "order_type": "LIMIT",
         "status": "FILLED",
-        "timestamp": "2026-09-15T17:54:14.056930"
+        "timestamp": "2026-09-15T15:41:20.254754"
       },
       {
-        "order_id": "PAPER-4C377544",
+        "order_id": "PAPER-7F3964B3",
         "symbol": "TMGH.CA",
         "side": "BUY",
         "quantity": 200,
@@ -132,7 +132,7 @@
         "fee": 17.52,
         "order_type": "LIMIT",
         "status": "FILLED",
-        "timestamp": "2026-09-15T17:54:14.056930"
+        "timestamp": "2026-09-15T15:41:20.254781"
       }
     ]
   },

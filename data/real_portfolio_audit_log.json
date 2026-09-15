@@ -39462,13 +39462,13 @@
     "notes": "User confirmed deletion"
   },
   {
-    "audit_id": "3b25297d",
-    "timestamp": "2026-09-15T18:01:50.865962",
+    "audit_id": "fa4b2451",
+    "timestamp": "2026-09-15T15:41:30.020571",
     "action": "ADD",
     "ticker": "ABUK.CA",
     "old_values": null,
     "new_values": {
-      "holding_id": "POS_ABUK_2a073f",
+      "holding_id": "POS_ABUK_b432e2",
       "ticker": "ABUK.CA",
       "company_name": "أبو قير للأسمدة",
       "exchange": "EGX",
@@ -39476,20 +39476,20 @@
       "quantity": 100,
       "average_entry_price": 75.4,
       "manual_notes": "ACID Test Position",
-      "created_at": "2026-09-15T18:01:50.827167",
-      "updated_at": "2026-09-15T18:01:50.827167",
+      "created_at": "2026-09-15T15:41:30.003650",
+      "updated_at": "2026-09-15T15:41:30.003661",
       "active": true
     },
     "source": "USER_MANUAL_UI",
     "notes": "ACID Test Position"
   },
   {
-    "audit_id": "f8f3e182",
-    "timestamp": "2026-09-15T18:01:50.988829",
+    "audit_id": "ec867be4",
+    "timestamp": "2026-09-15T15:41:30.097617",
     "action": "DELETE",
     "ticker": "ABUK.CA",
     "old_values": {
-      "holding_id": "POS_ABUK_2a073f",
+      "holding_id": "POS_ABUK_b432e2",
       "ticker": "ABUK.CA",
       "company_name": "أبو قير للأسمدة",
       "exchange": "EGX",
@@ -39497,52 +39497,8 @@
       "quantity": 100,
       "average_entry_price": 75.4,
       "manual_notes": "ACID Test Position",
-      "created_at": "2026-09-15T18:01:50.827167",
-      "updated_at": "2026-09-15T18:01:50.827167",
-      "active": true
-    },
-    "new_values": null,
-    "source": "USER_MANUAL_UI",
-    "notes": "User confirmed deletion"
-  },
-  {
-    "audit_id": "e4b8459e",
-    "timestamp": "2026-09-15T19:05:09.757301",
-    "action": "ADD",
-    "ticker": "ABUK.CA",
-    "old_values": null,
-    "new_values": {
-      "holding_id": "POS_ABUK_c4e6a1",
-      "ticker": "ABUK.CA",
-      "company_name": "أبو قير للأسمدة",
-      "exchange": "EGX",
-      "sector": "Fertilizers",
-      "quantity": 100,
-      "average_entry_price": 75.4,
-      "manual_notes": "ACID Test Position",
-      "created_at": "2026-09-15T19:05:09.722097",
-      "updated_at": "2026-09-15T19:05:09.722097",
-      "active": true
-    },
-    "source": "USER_MANUAL_UI",
-    "notes": "ACID Test Position"
-  },
-  {
-    "audit_id": "724e6641",
-    "timestamp": "2026-09-15T19:05:09.853300",
-    "action": "DELETE",
-    "ticker": "ABUK.CA",
-    "old_values": {
-      "holding_id": "POS_ABUK_c4e6a1",
-      "ticker": "ABUK.CA",
-      "company_name": "أبو قير للأسمدة",
-      "exchange": "EGX",
-      "sector": "Fertilizers",
-      "quantity": 100,
-      "average_entry_price": 75.4,
-      "manual_notes": "ACID Test Position",
-      "created_at": "2026-09-15T19:05:09.722097",
-      "updated_at": "2026-09-15T19:05:09.722097",
+      "created_at": "2026-09-15T15:41:30.003650",
+      "updated_at": "2026-09-15T15:41:30.003661",
       "active": true
     },
     "new_values": null,
