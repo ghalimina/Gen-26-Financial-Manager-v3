@@ -15,7 +15,7 @@
     "ADIB.CA": 0,
     "ETEL.CA": 0,
     "SKPC.CA": 0,
-    "BINV.CA": 1,
+    "BINV.CA": 2,
     "EAST.CA": 0,
     "HRHO.CA": 0,
     "JUFO.CA": 0,
@@ -92,7 +92,7 @@
     "ICID.CA": 0,
     "BIOC.CA": 0,
     "MICH.CA": 0,
-    "SMPP.CA": 3,
+    "SMPP.CA": 4,
     "EFID.CA": 0,
     "OLFI.CA": 0,
     "PACH.CA": 0,
@@ -144,7 +144,7 @@
     "ASCM.CA": 0,
     "CIRA.CA": 0,
     "RUBX.CA": 0,
-    "TALM.CA": 3,
+    "TALM.CA": 4,
     "QNBA.CA": 0,
     "MNHD.CA": 0,
     "PIOH.CA": 0,
@@ -163,5 +163,5 @@
     "SMPP.CA": "هذا السهم يحتاج مصدر بيانات بديل — التجاهل المتكرر لن يحل المشكلة",
     "TALM.CA": "هذا السهم يحتاج مصدر بيانات بديل — التجاهل المتكرر لن يحل المشكلة"
   },
-  "last_updated": "2026-09-16 12:16:12"
+  "last_updated": "2026-09-16 15:31:43"
 }
