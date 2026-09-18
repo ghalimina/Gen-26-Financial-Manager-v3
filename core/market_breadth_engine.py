@@ -36,43 +36,57 @@ class MarketBreadthEngine:
     @classmethod
     def compute_market_breadth(
         cls,
-        prices_dict: Optional[Dict[str, float]] = None,
+        prices_dict: Optional[Dict[str, Any]] = None,
         universe_tickers: Optional[List[str]] = None
     ) -> Dict[str, Any]:
         """
         Computes market breadth metrics given a price mapping or live market data.
+        Uses ticker-specific previous closing prices and moving averages, ensuring
+        price-scale invariance across high-nominal and low-nominal Egyptian equities.
         """
         if prices_dict is not None:
+            # Build reference lookup from universe snapshots to obtain stock-specific baseline
+            ref_lookup = {}
+            for s in cls._load_universe_snapshots():
+                t_code = s.get("ticker")
+                if t_code:
+                    ref_lookup[t_code] = s
+
             snapshots = []
             tickers = universe_tickers or list(prices_dict.keys())
             for t in tickers:
-                p = float(prices_dict.get(t, 100.0))
-                # Baseline canonical reference price (100.0)
-                ref_base = 100.0
-                if p > ref_base:
-                    # Bullish price
-                    prev = ref_base
-                    ma20 = ref_base * 1.05
-                    ma50 = ref_base * 1.02
-                    ma200 = ref_base * 0.95
-                elif p < ref_base * 0.5:
-                    # Deep crash price
-                    prev = ref_base
-                    ma20 = ref_base
-                    ma50 = ref_base
-                    ma200 = ref_base
-                else:
-                    prev = p * 0.99
-                    ma20 = p * 0.98
-                    ma50 = p * 0.96
-                    ma200 = p * 0.92
+                val = prices_dict.get(t)
+                ref = ref_lookup.get(t, {})
 
-                pct = ((p - prev) / prev) * 100.0 if prev > 0 else 0.0
+                if isinstance(val, dict):
+                    p = float(val.get("price", val.get("close", 0.0)) or 0.0)
+                    prev = float(val.get("previous_close", val.get("prev_close", ref.get("price", p))) or p)
+                    pct = float(val.get("change_pct", val.get("pct_change", 0.0)) or 0.0)
+                    if pct == 0.0 and prev > 0 and p != prev:
+                        pct = ((p - prev) / prev) * 100.0
+                    ma20 = float(val.get("ma20", prev * 0.98))
+                    ma50 = float(val.get("ma50", prev * 0.96))
+                    ma200 = float(val.get("ma200", prev * 0.92))
+                    sector = val.get("sector", ref.get("sector", "General"))
+                else:
+                    p = float(val if val is not None else ref.get("price", 1.0))
+                    ref_price = float(ref.get("price", p)) if ref else p
+                    if ref_price <= 0:
+                        ref_price = p if p > 0 else 1.0
+
+                    prev = ref_price
+                    pct = ((p - prev) / prev) * 100.0 if prev > 0 else 0.0
+
+                    ma20 = float(ref.get("ma20", prev * 0.98))
+                    ma50 = float(ref.get("ma50", prev * 0.96))
+                    ma200 = float(ref.get("ma200", prev * 0.92))
+                    sector = ref.get("sector", "General")
+
                 snapshots.append({
                     "ticker": t,
                     "price": p,
                     "change_pct": pct,
-                    "sector": "General",
+                    "sector": sector,
                     "ma20": ma20,
                     "ma50": ma50,
                     "ma200": ma200

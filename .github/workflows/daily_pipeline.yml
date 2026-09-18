@@ -49,7 +49,7 @@ jobs:
       - name: 2. Multi-Horizon Factor Forecasting & Stock Ranking Engine
         continue-on-error: true
         run: |
-          python -c "from core.multi_horizon_engine import MultiHorizonEngine; ranks = MultiHorizonEngine.get_all_multi_horizon_rankings(); print(f'Evaluated {len(ranks)} EGX constituents.')"
+          python scripts/precompute_rankings.py
 
       - name: 2.5 AI Predictive Machine Learning Walk-Forward Engine (XGBoost & Meta-Labeling)
         continue-on-error: true

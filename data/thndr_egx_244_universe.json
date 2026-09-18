@@ -1,7 +1,7 @@
 {
-  "as_of": "2026-08-25",
-  "description": "Comprehensive 244-Stock Egyptian Exchange (EGX) Universe on Thndr",
-  "total_tickers": 244,
+  "as_of": "2026-09-16",
+  "description": "Clean Verified 100% Tradable Egyptian Equities on Thndr Investment Platform (No Rights Issues, No Delisted)",
+  "total_tickers": 181,
   "source": "Thndr / Egyptian Exchange Official Securities Directory",
   "stocks": [
     {
@@ -14,7 +14,8 @@
       "isin": "EGS60121C018",
       "market_cap_tier": "LARGE_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "SWDY.CA",
@@ -26,7 +27,8 @@
       "isin": "EGS3G111C013",
       "market_cap_tier": "LARGE_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "TMGH.CA",
@@ -38,7 +40,8 @@
       "isin": "EGS65851C015",
       "market_cap_tier": "LARGE_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "ORAS.CA",
@@ -50,7 +53,8 @@
       "isin": "EGS21451C017",
       "market_cap_tier": "LARGE_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "EFIH.CA",
@@ -62,7 +66,8 @@
       "isin": "EGS745V1C012",
       "market_cap_tier": "LARGE_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "EGAL.CA",
@@ -74,7 +79,8 @@
       "isin": "EGS34031C016",
       "market_cap_tier": "LARGE_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "ESRS.CA",
@@ -86,9 +92,9 @@
       "isin": "EGS33041C012",
       "market_cap_tier": "LARGE_CAP",
       "thndr_available": true,
-      "is_active": false,
-      "status": "QUARANTINED_ALIAS_CONFLICT",
-      "isolation_note": "Quarantined to prevent data poisoning"
+      "is_active": true,
+      "status": "TRADABLE",
+      "thndr_tradeable": true
     },
     {
       "ticker": "EMFD.CA",
@@ -100,7 +106,8 @@
       "isin": "EGS655Y1C010",
       "market_cap_tier": "LARGE_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "BTFH.CA",
@@ -112,7 +119,8 @@
       "isin": "EGS691S1C011",
       "market_cap_tier": "LARGE_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "EKHO.CA",
@@ -124,7 +132,8 @@
       "isin": "EGS69082C013",
       "market_cap_tier": "LARGE_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "EKHOA.CA",
@@ -136,7 +145,8 @@
       "isin": "EGS69081C014",
       "market_cap_tier": "LARGE_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "ETEL.CA",
@@ -148,7 +158,8 @@
       "isin": "EGS48031C016",
       "market_cap_tier": "LARGE_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "ABUK.CA",
@@ -160,7 +171,8 @@
       "isin": "EGS38191C010",
       "market_cap_tier": "LARGE_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "MFPC.CA",
@@ -172,7 +184,8 @@
       "isin": "EGS38201C017",
       "market_cap_tier": "LARGE_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "EAST.CA",
@@ -184,7 +197,8 @@
       "isin": "EGS37091C013",
       "market_cap_tier": "LARGE_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "SKPC.CA",
@@ -196,7 +210,8 @@
       "isin": "EGS380S1C017",
       "market_cap_tier": "LARGE_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "ADIB.CA",
@@ -208,7 +223,8 @@
       "isin": "EGS60311C016",
       "market_cap_tier": "LARGE_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "HRHO.CA",
@@ -220,7 +236,8 @@
       "isin": "EGS69101C011",
       "market_cap_tier": "LARGE_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "BINV.CA",
@@ -232,7 +249,8 @@
       "isin": "EGS681U1C014",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "JUFO.CA",
@@ -244,7 +262,8 @@
       "isin": "EGS30901C010",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "DOMT.CA",
@@ -256,7 +275,8 @@
       "isin": "EGS305B1C011",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "CICH.CA",
@@ -268,7 +288,8 @@
       "isin": "EGS693V1C014",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "PHDC.CA",
@@ -280,7 +301,8 @@
       "isin": "EGS655L1C012",
       "market_cap_tier": "LARGE_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "MASR.CA",
@@ -292,7 +314,8 @@
       "isin": "EGS65081C016",
       "market_cap_tier": "LARGE_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "ISPH.CA",
@@ -304,7 +327,8 @@
       "isin": "EGS729J1C013",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "POUL.CA",
@@ -316,7 +340,8 @@
       "isin": "EGS02021C018",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "ALCN.CA",
@@ -328,7 +353,8 @@
       "isin": "EGS42081C014",
       "market_cap_tier": "LARGE_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "RAYA.CA",
@@ -340,7 +366,8 @@
       "isin": "EGS70431C019",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "GBCO.CA",
@@ -352,7 +379,8 @@
       "isin": "EGS673T1C012",
       "market_cap_tier": "LARGE_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "FWRY.CA",
@@ -364,7 +392,8 @@
       "isin": "EGS745L1C014",
       "market_cap_tier": "LARGE_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "CLHO.CA",
@@ -376,7 +405,8 @@
       "isin": "EGS72131C011",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "ORHD.CA",
@@ -388,7 +418,8 @@
       "isin": "EGS65011C013",
       "market_cap_tier": "LARGE_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "AMOC.CA",
@@ -400,7 +431,8 @@
       "isin": "EGS38321C019",
       "market_cap_tier": "LARGE_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "MOIL.CA",
@@ -412,7 +444,8 @@
       "isin": "EGS44011C016",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "DSCW.CA",
@@ -424,7 +457,8 @@
       "isin": "EGS320A1C016",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "ACRO.CA",
@@ -436,9 +470,9 @@
       "isin": "EGS3C381C018",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": false,
-      "status": "QUARANTINED_ALIAS_CONFLICT",
-      "isolation_note": "Quarantined to prevent data poisoning"
+      "is_active": true,
+      "status": "TRADABLE",
+      "thndr_tradeable": true
     },
     {
       "ticker": "OIH.CA",
@@ -450,7 +484,8 @@
       "isin": "EGS693T1C018",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "HELI.CA",
@@ -462,7 +497,8 @@
       "isin": "EGS65591C017",
       "market_cap_tier": "LARGE_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "ELSH.CA",
@@ -474,7 +510,8 @@
       "isin": "EGS3B011C016",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "CERA.CA",
@@ -486,7 +523,8 @@
       "isin": "EGS3C341C012",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "CCAP.CA",
@@ -498,7 +536,8 @@
       "isin": "EGS691T1C019",
       "market_cap_tier": "LARGE_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "SPMD.CA",
@@ -510,7 +549,8 @@
       "isin": "EGS729I1C014",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "KZPC.CA",
@@ -522,7 +562,8 @@
       "isin": "EGS38011C010",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "PRDC.CA",
@@ -534,7 +575,8 @@
       "isin": "EGS70421C010",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "EGCH.CA",
@@ -546,7 +588,8 @@
       "isin": "EGS38081C013",
       "market_cap_tier": "LARGE_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "ARAB.CA",
@@ -558,7 +601,8 @@
       "isin": "EGS65A51C014",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "UNIP.CA",
@@ -570,7 +614,8 @@
       "isin": "EGS3B041C013",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "ELEC.CA",
@@ -582,7 +627,8 @@
       "isin": "EGS3G081C016",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "ZMID.CA",
@@ -594,7 +640,8 @@
       "isin": "EGS65101C012",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "RTVC.CA",
@@ -606,7 +653,8 @@
       "isin": "EGS70031C014",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "EXPA.CA",
@@ -618,7 +666,8 @@
       "isin": "EGS60011C010",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "FAIT.CA",
@@ -630,7 +679,8 @@
       "isin": "EGS60131C017",
       "market_cap_tier": "LARGE_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "FAITA.CA",
@@ -642,7 +692,8 @@
       "isin": "EGS60132C016",
       "market_cap_tier": "LARGE_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "CIEB.CA",
@@ -654,7 +705,8 @@
       "isin": "EGS60081C013",
       "market_cap_tier": "LARGE_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "CANA.CA",
@@ -666,7 +718,8 @@
       "isin": "EGS60031C018",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "SAIB.CA",
@@ -678,7 +731,8 @@
       "isin": "EGS60061C015",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "EGBE.CA",
@@ -690,7 +744,8 @@
       "isin": "EGS60051C016",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "HDBK.CA",
@@ -702,7 +757,8 @@
       "isin": "EGS60141C016",
       "market_cap_tier": "LARGE_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "QNBA.CA",
@@ -714,7 +770,8 @@
       "isin": "EGS60041C017",
       "market_cap_tier": "LARGE_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "VALU.CA",
@@ -726,7 +783,8 @@
       "isin": "EGS745W1C010",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "MNHD.CA",
@@ -738,7 +796,8 @@
       "isin": "EGS69011C010",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "ODIN.CA",
@@ -750,7 +809,8 @@
       "isin": "EGS69021C019",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "OFH.CA",
@@ -762,7 +822,8 @@
       "isin": "EGS69551C017",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "PIOH.CA",
@@ -774,7 +835,8 @@
       "isin": "EGS65601C014",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "ASPI.CA",
@@ -786,7 +848,8 @@
       "isin": "EGS69341C014",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "CNFN.CA",
@@ -798,7 +861,8 @@
       "isin": "EGS69331C015",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "ICMI.CA",
@@ -810,7 +874,8 @@
       "isin": "EGS21081C014",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "EIUD.CA",
@@ -822,7 +887,8 @@
       "isin": "EGS65141C018",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "ALEX.CA",
@@ -834,7 +900,8 @@
       "isin": "EGS32011C015",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "ETRS.CA",
@@ -846,7 +913,8 @@
       "isin": "EGS42021C010",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "DAPH.CA",
@@ -858,7 +926,8 @@
       "isin": "EGS61011C014",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "WATP.CA",
@@ -870,7 +939,8 @@
       "isin": "EGS61021C013",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "AIFI.CA",
@@ -882,7 +952,8 @@
       "isin": "EGS69071C014",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "ACAP.CA",
@@ -894,7 +965,8 @@
       "isin": "EGS69501C012",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "PRMH.CA",
@@ -906,7 +978,8 @@
       "isin": "EGS69191C012",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "OCDI.CA",
@@ -918,7 +991,8 @@
       "isin": "EGS65021C012",
       "market_cap_tier": "LARGE_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "AREH.CA",
@@ -930,7 +1004,8 @@
       "isin": "EGS65201C012",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "NCCW.CA",
@@ -942,7 +1017,8 @@
       "isin": "EGS21051C017",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "UEGC.CA",
@@ -954,7 +1030,8 @@
       "isin": "EGS21401C012",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "AIH.CA",
@@ -966,7 +1043,8 @@
       "isin": "EGS69131C018",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "GDWA.CA",
@@ -978,7 +1056,8 @@
       "isin": "EGS69541C018",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "MENA.CA",
@@ -990,7 +1069,8 @@
       "isin": "EGS70021C015",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "ELKA.CA",
@@ -1002,7 +1082,8 @@
       "isin": "EGS65031C011",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "GGCC.CA",
@@ -1014,7 +1095,8 @@
       "isin": "EGS21111C011",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "ROWG.CA",
@@ -1026,9 +1108,9 @@
       "isin": "EGS65121C010",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": false,
-      "status": "QUARANTINED_ALIAS_CONFLICT",
-      "isolation_note": "Quarantined to prevent data poisoning"
+      "is_active": true,
+      "status": "TRADABLE",
+      "thndr_tradeable": true
     },
     {
       "ticker": "PORT.CA",
@@ -1040,9 +1122,9 @@
       "isin": "EGS65621C012",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": false,
-      "status": "QUARANTINED_ALIAS_CONFLICT",
-      "isolation_note": "Quarantined to prevent data poisoning"
+      "is_active": true,
+      "status": "TRADABLE",
+      "thndr_tradeable": true
     },
     {
       "ticker": "ERES.CA",
@@ -1054,9 +1136,9 @@
       "isin": "EGS70041C013",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": false,
-      "status": "QUARANTINED_ALIAS_CONFLICT",
-      "isolation_note": "Quarantined to prevent data poisoning"
+      "is_active": true,
+      "status": "TRADABLE",
+      "thndr_tradeable": true
     },
     {
       "ticker": "RREI.CA",
@@ -1068,7 +1150,8 @@
       "isin": "EGS65431C013",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "UNIT.CA",
@@ -1080,7 +1163,8 @@
       "isin": "EGS65051C019",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "TAQA.CA",
@@ -1092,7 +1176,8 @@
       "isin": "EGS38341C017",
       "market_cap_tier": "LARGE_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "AMIA.CA",
@@ -1104,7 +1189,8 @@
       "isin": "EGS69401C017",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "KRRE.CA",
@@ -1116,9 +1202,9 @@
       "isin": "EGS65241C018",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": false,
-      "status": "QUARANTINED_ALIAS_CONFLICT",
-      "isolation_note": "Quarantined to prevent data poisoning"
+      "is_active": true,
+      "status": "TRADABLE",
+      "thndr_tradeable": true
     },
     {
       "ticker": "GTHE.CA",
@@ -1130,7 +1216,8 @@
       "isin": "EGS48011C018",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "MEPA.CA",
@@ -1142,7 +1229,8 @@
       "isin": "EGS70201C017",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "EGSA.CA",
@@ -1154,7 +1242,8 @@
       "isin": "EGS3C011C015",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "ALUM.CA",
@@ -1166,7 +1255,8 @@
       "isin": "EGS34011C018",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "VERT.CA",
@@ -1178,7 +1268,8 @@
       "isin": "EGS38241C013",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "ICID.CA",
@@ -1190,7 +1281,8 @@
       "isin": "EGS72011C013",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "BIOC.CA",
@@ -1202,7 +1294,8 @@
       "isin": "EGS72051C019",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "MICH.CA",
@@ -1214,7 +1307,8 @@
       "isin": "EGS38051C016",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "SMPP.CA",
@@ -1226,7 +1320,8 @@
       "isin": "EGS30021C018",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "OBUR.CA",
@@ -1238,7 +1333,8 @@
       "isin": "EGS305E1C018",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "EFID.CA",
@@ -1250,7 +1346,8 @@
       "isin": "EGS305C1C019",
       "market_cap_tier": "LARGE_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "OLFI.CA",
@@ -1262,21 +1359,8 @@
       "isin": "EGS30121C018",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "MOFD.CA",
-      "symbol": "MOFD",
-      "name_ar": "مفيدا للصناعات الغذائية المحفوظة",
-      "name_en": "Mofida Food Industries",
-      "sector": "الأغذية والمشروبات والتبغ",
-      "sector_en": "Canned Foods",
-      "isin": "EGS30211C019",
-      "market_cap_tier": "SMALL_CAP",
-      "thndr_available": true,
-      "is_active": false,
-      "status": "QUARANTINED_ALIAS_CONFLICT",
-      "isolation_note": "Quarantined to prevent data poisoning"
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "PACH.CA",
@@ -1288,7 +1372,8 @@
       "isin": "EGS38111C010",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "SCEM.CA",
@@ -1300,7 +1385,8 @@
       "isin": "EGS3C051C011",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "MCQE.CA",
@@ -1312,7 +1398,8 @@
       "isin": "EGS3C101C016",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "ARCC.CA",
@@ -1324,7 +1411,8 @@
       "isin": "EGS3C361C010",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "SVCE.CA",
@@ -1336,7 +1424,8 @@
       "isin": "EGS3C251C011",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "TORA.CA",
@@ -1348,7 +1437,8 @@
       "isin": "EGS3C021C014",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "IFAP.CA",
@@ -1360,7 +1450,8 @@
       "isin": "EGS38221C015",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "MIPH.CA",
@@ -1372,7 +1463,8 @@
       "isin": "EGS38261C011",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "EFIC.CA",
@@ -1384,7 +1476,8 @@
       "isin": "EGS38031C018",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "KABO.CA",
@@ -1396,7 +1489,8 @@
       "isin": "EGS32031C013",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "DICE.CA",
@@ -1408,7 +1502,8 @@
       "isin": "EGS320A1C016",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "ORWE.CA",
@@ -1420,7 +1515,8 @@
       "isin": "EGS32041C012",
       "market_cap_tier": "LARGE_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "SPIN.CA",
@@ -1432,21 +1528,8 @@
       "isin": "EGS32051C011",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "UNAT.CA",
-      "symbol": "UNAT",
-      "name_ar": "المتحدة للغزل والنسيج",
-      "name_en": "United Textiles Company",
-      "sector": "المنسوجات والسلع الاستهلاكية",
-      "sector_en": "Textiles",
-      "isin": "EGS32081C018",
-      "market_cap_tier": "SMALL_CAP",
-      "thndr_available": true,
-      "is_active": false,
-      "status": "QUARANTINED_ALIAS_CONFLICT",
-      "isolation_note": "Quarantined to prevent data poisoning"
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "CSAG.CA",
@@ -1458,7 +1541,8 @@
       "isin": "EGS42041C018",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "MPCO.CA",
@@ -1470,7 +1554,8 @@
       "isin": "EGS02011C019",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "SMPC.CA",
@@ -1482,21 +1567,8 @@
       "isin": "EGS01011C010",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "RITV.CA",
-      "symbol": "RITV",
-      "name_ar": "العربية للراديو والترانزستور (تليمصر)",
-      "name_en": "Arab Radio & Transistor (Telemisr)",
-      "sector": "السلع المعمرة والإلكترونيات",
-      "sector_en": "Consumer Electronics",
-      "isin": "EGS36011C014",
-      "market_cap_tier": "SMALL_CAP",
-      "thndr_available": true,
-      "is_active": false,
-      "status": "QUARANTINED_ALIAS_CONFLICT",
-      "isolation_note": "Quarantined to prevent data poisoning"
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "ECAP.CA",
@@ -1508,7 +1580,8 @@
       "isin": "EGS3C041C012",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "ARCO.CA",
@@ -1520,7 +1593,8 @@
       "isin": "EGS3C301C016",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "EPCO.CA",
@@ -1532,21 +1606,8 @@
       "isin": "EGS3G051C019",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "EGID.CA",
-      "symbol": "EGID",
-      "name_ar": "المصرية للصناعات الهندسية والتبريد",
-      "name_en": "Egyptian Engineering Industries",
-      "sector": "السلع المعمرة والإلكترونيات",
-      "sector_en": "Appliances & Engineering",
-      "isin": "EGS36051C010",
-      "market_cap_tier": "SMALL_CAP",
-      "thndr_available": true,
-      "is_active": false,
-      "status": "QUARANTINED_ALIAS_CONFLICT",
-      "isolation_note": "Quarantined to prevent data poisoning"
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "NIPH.CA",
@@ -1558,7 +1619,8 @@
       "isin": "EGS72021C012",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "AXPH.CA",
@@ -1570,7 +1632,8 @@
       "isin": "EGS72041C010",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "CPCI.CA",
@@ -1582,7 +1645,8 @@
       "isin": "EGS72031C011",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "MPCI.CA",
@@ -1594,7 +1658,8 @@
       "isin": "EGS72061C018",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "ARPU.CA",
@@ -1606,9 +1671,9 @@
       "isin": "EGS72071C017",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": false,
-      "status": "QUARANTINED_ALIAS_CONFLICT",
-      "isolation_note": "Quarantined to prevent data poisoning"
+      "is_active": true,
+      "status": "TRADABLE",
+      "thndr_tradeable": true
     },
     {
       "ticker": "ADPC.CA",
@@ -1620,21 +1685,8 @@
       "isin": "EGS38301C011",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "EGMT.CA",
-      "symbol": "EGMT",
-      "name_ar": "المصرية للصناعات المعدنية",
-      "name_en": "Egyptian Metallurgical Industries",
-      "sector": "الموارد الأساسية والكيماويات",
-      "sector_en": "Metals",
-      "isin": "EGS34051C014",
-      "market_cap_tier": "SMALL_CAP",
-      "thndr_available": true,
-      "is_active": false,
-      "status": "QUARANTINED_ALIAS_CONFLICT",
-      "isolation_note": "Quarantined to prevent data poisoning"
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "NAHO.CA",
@@ -1646,7 +1698,8 @@
       "isin": "EGS69181C013",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "ATQA.CA",
@@ -1658,7 +1711,8 @@
       "isin": "EGS33021C014",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "IRON.CA",
@@ -1670,7 +1724,8 @@
       "isin": "EGS33011C015",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "AJWA.CA",
@@ -1682,7 +1737,8 @@
       "isin": "EGS30041C016",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "SUGR.CA",
@@ -1694,33 +1750,8 @@
       "isin": "EGS30061C014",
       "market_cap_tier": "LARGE_CAP",
       "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "EAST_B.CA",
-      "symbol": "EASTB",
-      "name_ar": "الشرقية للأدخنة (أسهم ممتازة)",
-      "name_en": "Eastern Tobacco Preferred",
-      "sector": "الأغذية والمشروبات والتبغ",
-      "sector_en": "Tobacco",
-      "isin": "EGS37092C012",
-      "market_cap_tier": "SMALL_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "INCO.CA",
-      "symbol": "INCO",
-      "name_ar": "شركة النصر للمحولات والمنتجات الكهربائية (الماكو)",
-      "name_en": "El Nasr Transformers (Elmako)",
-      "sector": "السلع المعمرة والإلكترونيات",
-      "sector_en": "Electrical Transformers",
-      "isin": "EGS3G011C013",
-      "market_cap_tier": "SMALL_CAP",
-      "thndr_available": true,
-      "is_active": false,
-      "status": "QUARANTINED_ALIAS_CONFLICT",
-      "isolation_note": "Quarantined to prevent data poisoning"
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "KRDI.CA",
@@ -1732,7 +1763,8 @@
       "isin": "EGS65301C012",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "AMER.CA",
@@ -1744,7 +1776,8 @@
       "isin": "EGS65571C019",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "CCRS.CA",
@@ -1756,21 +1789,8 @@
       "isin": "EGS65161C016",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "EDBM.CA",
-      "symbol": "EDBM",
-      "name_ar": "المصرية لتطوير مواد البناء",
-      "name_en": "Egyptian Development for Building Materials",
-      "sector": "مواد البناء والتشييد",
-      "sector_en": "Building Materials",
-      "isin": "EGS3C141C012",
-      "market_cap_tier": "SMALL_CAP",
-      "thndr_available": true,
-      "is_active": false,
-      "status": "QUARANTINED_ALIAS_CONFLICT",
-      "isolation_note": "Quarantined to prevent data poisoning"
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "ELWA.CA",
@@ -1782,7 +1802,8 @@
       "isin": "EGS70151C012",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "GSSC.CA",
@@ -1794,7 +1815,8 @@
       "isin": "EGS42011C011",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "ZEOT.CA",
@@ -1806,7 +1828,8 @@
       "isin": "EGS30081C012",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "EXTK.CA",
@@ -1818,7 +1841,8 @@
       "isin": "EGS30091C011",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "TANM.CA",
@@ -1830,45 +1854,8 @@
       "isin": "EGS65181C014",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "BINV_P.CA",
-      "symbol": "BINVP",
-      "name_ar": "بي إنفستمنتس (حقوق اكتتاب)",
-      "name_en": "B Investments Rights",
-      "sector": "الخدمات المالية والبنوك",
-      "sector_en": "Rights Issue",
-      "isin": "EGS681U1R013",
-      "market_cap_tier": "MICRO_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "EGTI.CA",
-      "symbol": "EGTI",
-      "name_ar": "المصرية لخدمات الترفيه والسياحة",
-      "name_en": "Egyptian Tourism & Entertainment",
-      "sector": "السياحة والترفيه",
-      "sector_en": "Tourism",
-      "isin": "EGS70101C017",
-      "market_cap_tier": "SMALL_CAP",
-      "thndr_available": true,
-      "is_active": false,
-      "status": "QUARANTINED_ALIAS_CONFLICT",
-      "isolation_note": "Quarantined to prevent data poisoning"
-    },
-    {
-      "ticker": "VERT_B.CA",
-      "symbol": "VERTB",
-      "name_ar": "فيرت للأسمدة المتخصصة",
-      "name_en": "Fert Special Fertilizers",
-      "sector": "الموارد الأساسية والكيماويات",
-      "sector_en": "Specialty Fertilizers",
-      "isin": "EGS38242C012",
-      "market_cap_tier": "SMALL_CAP",
-      "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "MBSC.CA",
@@ -1880,31 +1867,8 @@
       "isin": "EGS3C121C014",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "SMPP_B.CA",
-      "symbol": "SMPPB",
-      "name_ar": "النشا والخميرة المصرية",
-      "name_en": "Egyptian Yeast and Starch",
-      "sector": "الأغذية والمشروبات والتبغ",
-      "sector_en": "Yeast & Enzymes",
-      "isin": "EGS30022C017",
-      "market_cap_tier": "SMALL_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "CERA_B.CA",
-      "symbol": "CERAB",
-      "name_ar": "الجوهرة للسيراميك (أسهم ممتازة)",
-      "name_en": "Gemma Preferred",
-      "sector": "مواد البناء والتشييد",
-      "sector_en": "Ceramics",
-      "isin": "EGS3C342C011",
-      "market_cap_tier": "SMALL_CAP",
-      "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "PRCL.CA",
@@ -1916,7 +1880,8 @@
       "isin": "EGS3C031C013",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "MOSC.CA",
@@ -1928,7 +1893,8 @@
       "isin": "EGS36031C012",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "EGEL.CA",
@@ -1940,7 +1906,8 @@
       "isin": "EGS3G021C012",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "MTRC.CA",
@@ -1952,7 +1919,8 @@
       "isin": "EGS30151C015",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "MCEG.CA",
@@ -1964,7 +1932,8 @@
       "isin": "EGS30161C014",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "MEFM.CA",
@@ -1976,7 +1945,8 @@
       "isin": "EGS30171C013",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "WCDF.CA",
@@ -1988,7 +1958,8 @@
       "isin": "EGS30181C012",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "UEDA.CA",
@@ -2000,7 +1971,8 @@
       "isin": "EGS30191C011",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "EDFM.CA",
@@ -2012,7 +1984,8 @@
       "isin": "EGS30201C010",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "WDEH.CA",
@@ -2024,7 +1997,8 @@
       "isin": "EGS30221C018",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "SNFC.CA",
@@ -2036,7 +2010,8 @@
       "isin": "EGS02051C015",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "ISMA.CA",
@@ -2048,7 +2023,8 @@
       "isin": "EGS02031C017",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "ISMD.CA",
@@ -2060,7 +2036,8 @@
       "isin": "EGS30111C019",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "IDRE.CA",
@@ -2072,7 +2049,8 @@
       "isin": "EGS65321C010",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "GMCG.CA",
@@ -2084,19 +2062,8 @@
       "isin": "EGS36071C018",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "ACAP_P.CA",
-      "symbol": "ACAPP",
-      "name_ar": "أي كابيتال (أسهم ممتازة)",
-      "name_en": "A Capital Preferred",
-      "sector": "الخدمات المالية والبنوك",
-      "sector_en": "Preferred Shares",
-      "isin": "EGS69502C011",
-      "market_cap_tier": "MICRO_CAP",
-      "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "ATLE.CA",
@@ -2108,7 +2075,8 @@
       "isin": "EGS01031C018",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "EPPK.CA",
@@ -2120,7 +2088,8 @@
       "isin": "EGS3B031C014",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "RREC.CA",
@@ -2132,595 +2101,8 @@
       "isin": "EGS65341C018",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "MASR_P.CA",
-      "symbol": "MASRP",
-      "name_ar": "مدينة مصر (حقوق اكتتاب)",
-      "name_en": "Madinet Masr Rights",
-      "sector": "التطوير العقاري",
-      "sector_en": "Rights Issue",
-      "isin": "EGS65081R015",
-      "market_cap_tier": "MICRO_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "SWDY_P.CA",
-      "symbol": "SWDYP",
-      "name_ar": "السويدي (سندات توريق)",
-      "name_en": "Elsewedy Securitization",
-      "sector": "الصناعة والمقاولات",
-      "sector_en": "Securitized Assets",
-      "isin": "EGS3G111S011",
-      "market_cap_tier": "LARGE_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "COMI_B.CA",
-      "symbol": "COMIB",
-      "name_ar": "التجاري الدولي (شهادات إيداع دولية)",
-      "name_en": "CIB GDR Equiv",
-      "sector": "الخدمات المالية والبنوك",
-      "sector_en": "GDR Equivalent",
-      "isin": "US12504R2085",
-      "market_cap_tier": "LARGE_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "HRHO_B.CA",
-      "symbol": "HRHOB",
-      "name_ar": "إي إف جي القابضة (شهادات إيداع)",
-      "name_en": "EFG GDR Equiv",
-      "sector": "الخدمات المالية والبنوك",
-      "sector_en": "GDR Equivalent",
-      "isin": "US26844A2054",
-      "market_cap_tier": "LARGE_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "EDITA_B.CA",
-      "symbol": "EDITAB",
-      "name_ar": "إيديتا (شهادات إيداع دولية)",
-      "name_en": "Edita GDR Equiv",
-      "sector": "الأغذية والمشروبات والتبغ",
-      "sector_en": "GDR Equivalent",
-      "isin": "US28102R2078",
-      "market_cap_tier": "LARGE_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "FWRY_P.CA",
-      "symbol": "FWRYP",
-      "name_ar": "فوري (حقوق اكتتاب مقيدة)",
-      "name_en": "Fawry Rights Issue",
-      "sector": "تكنولوجيا المدفوعات",
-      "sector_en": "Rights Issue",
-      "isin": "EGS745L1R013",
-      "market_cap_tier": "MICRO_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "BTFH_P.CA",
-      "symbol": "BTFHP",
-      "name_ar": "بلتون القابضة (حقوق اكتتاب)",
-      "name_en": "Beltone Rights",
-      "sector": "الخدمات المالية والبنوك",
-      "sector_en": "Rights Issue",
-      "isin": "EGS691S1R010",
-      "market_cap_tier": "MICRO_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "TMGH_P.CA",
-      "symbol": "TMGHP",
-      "name_ar": "طلعت مصطفى (حقوق مقيدة)",
-      "name_en": "TMG Rights",
-      "sector": "التطوير العقاري",
-      "sector_en": "Rights Issue",
-      "isin": "EGS65851R014",
-      "market_cap_tier": "MICRO_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "PHDC_P.CA",
-      "symbol": "PHDCP",
-      "name_ar": "بالم هيلز (حقوق اكتتاب)",
-      "name_en": "Palm Hills Rights",
-      "sector": "التطوير العقاري",
-      "sector_en": "Rights Issue",
-      "isin": "EGS655L1R011",
-      "market_cap_tier": "MICRO_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "ORAS_B.CA",
-      "symbol": "ORASB",
-      "name_ar": "أوراسكوم للإنشاء (ناسداك دبي مقاصة)",
-      "name_en": "Orascom Construction Nasdaq Dubai",
-      "sector": "الصناعة والمقاولات",
-      "sector_en": "Dual Listing",
-      "isin": "AEDFXA1XE5D7",
-      "market_cap_tier": "LARGE_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "ELEC_P.CA",
-      "symbol": "ELECP",
-      "name_ar": "الكابلات الكهربائية (حقوق اكتتاب)",
-      "name_en": "Electro Cable Rights",
-      "sector": "الصناعة والمقاولات",
-      "sector_en": "Rights Issue",
-      "isin": "EGS3G081R015",
-      "market_cap_tier": "MICRO_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "CCAP_P.CA",
-      "symbol": "CCAPP",
-      "name_ar": "القلعة للاستشارات (أسهم ممتازة)",
-      "name_en": "Qalaa Preferred",
-      "sector": "الخدمات المالية والبنوك",
-      "sector_en": "Preferred Shares",
-      "isin": "EGS691T2C018",
-      "market_cap_tier": "MID_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "OIH_P.CA",
-      "symbol": "OIHP",
-      "name_ar": "أوراسكوم للاستثمار (حقوق)",
-      "name_en": "Orascom Investment Rights",
-      "sector": "الخدمات المالية والبنوك",
-      "sector_en": "Rights Issue",
-      "isin": "EGS693T1R017",
-      "market_cap_tier": "MICRO_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "ALCN_P.CA",
-      "symbol": "ALCNP",
-      "name_ar": "الإسكندرية للحاويات (حقوق زيادة)",
-      "name_en": "Alex Containers Rights",
-      "sector": "خدمات النقل والشحن واللوجستيات",
-      "sector_en": "Rights Issue",
-      "isin": "EGS42081R013",
-      "market_cap_tier": "MICRO_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "POUL_P.CA",
-      "symbol": "POULP",
-      "name_ar": "القاهرة للدواجن (حقوق اكتتاب)",
-      "name_en": "Cairo Poultry Rights",
-      "sector": "الأغذية والمشروبات والتبغ",
-      "sector_en": "Rights Issue",
-      "isin": "EGS02021R017",
-      "market_cap_tier": "MICRO_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "ISPH_P.CA",
-      "symbol": "ISPHP",
-      "name_ar": "ابن سينا فارما (حقوق اكتتاب)",
-      "name_en": "Ibnsina Pharma Rights",
-      "sector": "الرعاية الصحية والأدوية",
-      "sector_en": "Rights Issue",
-      "isin": "EGS729J1R012",
-      "market_cap_tier": "MICRO_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "JUFO_P.CA",
-      "symbol": "JUFOP",
-      "name_ar": "جهينة للصناعات الغذائية (حقوق)",
-      "name_en": "Juhayna Rights",
-      "sector": "الأغذية والمشروبات والتبغ",
-      "sector_en": "Rights Issue",
-      "isin": "EGS30901R019",
-      "market_cap_tier": "MICRO_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "DOMT_P.CA",
-      "symbol": "DOMTP",
-      "name_ar": "دومتي (حقوق زيادة رأس مال)",
-      "name_en": "Domty Rights",
-      "sector": "الأغذية والمشروبات والتبغ",
-      "sector_en": "Rights Issue",
-      "isin": "EGS305B1R010",
-      "market_cap_tier": "MICRO_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "CICH_P.CA",
-      "symbol": "CICHP",
-      "name_ar": "سي آي كابيتال (حقوق مقيدة)",
-      "name_en": "CI Capital Rights",
-      "sector": "الخدمات المالية والبنوك",
-      "sector_en": "Rights Issue",
-      "isin": "EGS693V1R013",
-      "market_cap_tier": "MICRO_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "RAYA_P.CA",
-      "symbol": "RAYAP",
-      "name_ar": "راية القابضة (حقوق اكتتاب)",
-      "name_en": "Raya Holding Rights",
-      "sector": "الاتصالات وتكنولوجيا المعلومات",
-      "sector_en": "Rights Issue",
-      "isin": "EGS70431R018",
-      "market_cap_tier": "MICRO_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "GBCO_P.CA",
-      "symbol": "GBCOP",
-      "name_ar": "جي بي كورب (حقوق مقيدة)",
-      "name_en": "GB Corp Rights",
-      "sector": "السيارات والسلع المعمرة",
-      "sector_en": "Rights Issue",
-      "isin": "EGS673T1R011",
-      "market_cap_tier": "MICRO_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "CLHO_P.CA",
-      "symbol": "CLHOP",
-      "name_ar": "مستشفى كليوباترا (حقوق مقيدة)",
-      "name_en": "Cleopatra Rights",
-      "sector": "الرعاية الصحية والأدوية",
-      "sector_en": "Rights Issue",
-      "isin": "EGS72131R010",
-      "market_cap_tier": "MICRO_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "ORHD_P.CA",
-      "symbol": "ORHDP",
-      "name_ar": "أوراسكوم للتنمية (حقوق)",
-      "name_en": "Orascom Development Rights",
-      "sector": "التطوير العقاري",
-      "sector_en": "Rights Issue",
-      "isin": "EGS65011R012",
-      "market_cap_tier": "MICRO_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "AMOC_P.CA",
-      "symbol": "AMOCP",
-      "name_ar": "أموك (حقوق زيادة رأس مال)",
-      "name_en": "AMOC Rights",
-      "sector": "الطاقة والخدمات البترولية",
-      "sector_en": "Rights Issue",
-      "isin": "EGS38321R018",
-      "market_cap_tier": "MICRO_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "MOIL_P.CA",
-      "symbol": "MOILP",
-      "name_ar": "ماريديف (حقوق اكتتاب)",
-      "name_en": "Maridive Rights",
-      "sector": "الطاقة والخدمات البترولية",
-      "sector_en": "Rights Issue",
-      "isin": "EGS44011R015",
-      "market_cap_tier": "MICRO_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "DSCW_P.CA",
-      "symbol": "DSCWP",
-      "name_ar": "دايس للملابس (حقوق مقيدة)",
-      "name_en": "Dice Rights",
-      "sector": "المنسوجات والسلع الاستهلاكية",
-      "sector_en": "Rights Issue",
-      "isin": "EGS320A1R015",
-      "market_cap_tier": "MICRO_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "ACRO_P.CA",
-      "symbol": "ACROP",
-      "name_ar": "مصر للأسمنت قنا (حقوق)",
-      "name_en": "Qena Cement Rights",
-      "sector": "مواد البناء والتشييد",
-      "sector_en": "Rights Issue",
-      "isin": "EGS3C381R017",
-      "market_cap_tier": "MICRO_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "HELI_P.CA",
-      "symbol": "HELIP",
-      "name_ar": "مصر الجديدة للإسكان (حقوق)",
-      "name_en": "Heliopolis Housing Rights",
-      "sector": "التطوير العقاري",
-      "sector_en": "Rights Issue",
-      "isin": "EGS65591R016",
-      "market_cap_tier": "MICRO_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "ELSH_P.CA",
-      "symbol": "ELSHP",
-      "name_ar": "الشروق للطباعة (حقوق مقيدة)",
-      "name_en": "El Shorouk Printing Rights",
-      "sector": "الطباعة والتغليف",
-      "sector_en": "Rights Issue",
-      "isin": "EGS3B011R015",
-      "market_cap_tier": "MICRO_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "CERA_P.CA",
-      "symbol": "CERAP",
-      "name_ar": "الجوهرة سيراميك (حقوق)",
-      "name_en": "Gemma Rights",
-      "sector": "مواد البناء والتشييد",
-      "sector_en": "Rights Issue",
-      "isin": "EGS3C341R011",
-      "market_cap_tier": "MICRO_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "SPMD_P.CA",
-      "symbol": "SPMDP",
-      "name_ar": "سبيد ميديكال (حقوق مقيدة)",
-      "name_en": "Speed Medical Rights",
-      "sector": "الرعاية الصحية والأدوية",
-      "sector_en": "Rights Issue",
-      "isin": "EGS729I1R013",
-      "market_cap_tier": "MICRO_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "KZPC_P.CA",
-      "symbol": "KZPCP",
-      "name_ar": "كفر الزيات للمبيدات (حقوق)",
-      "name_en": "Kafr El Zayat Rights",
-      "sector": "الموارد الأساسية والكيماويات",
-      "sector_en": "Rights Issue",
-      "isin": "EGS38011R019",
-      "market_cap_tier": "MICRO_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "PRDC_P.CA",
-      "symbol": "PRDCP",
-      "name_ar": "رواد السياحة (حقوق اكتتاب)",
-      "name_en": "Rowad Tourism Rights",
-      "sector": "السياحة والترفيه",
-      "sector_en": "Rights Issue",
-      "isin": "EGS70421R019",
-      "market_cap_tier": "MICRO_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "EGCH_P.CA",
-      "symbol": "EGCHP",
-      "name_ar": "كيما للأسمدة (حقوق اكتتاب)",
-      "name_en": "KIMA Rights",
-      "sector": "الموارد الأساسية والكيماويات",
-      "sector_en": "Rights Issue",
-      "isin": "EGS38081R012",
-      "market_cap_tier": "MICRO_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "ARAB_P.CA",
-      "symbol": "ARABP",
-      "name_ar": "المطورون العرب (حقوق)",
-      "name_en": "Arab Developers Rights",
-      "sector": "التطوير العقاري",
-      "sector_en": "Rights Issue",
-      "isin": "EGS65A51R013",
-      "market_cap_tier": "MICRO_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "UNIP_P.CA",
-      "symbol": "UNIPP",
-      "name_ar": "يونيفرسال للتعبئة (حقوق)",
-      "name_en": "Universal Packaging Rights",
-      "sector": "الطباعة والتغليف",
-      "sector_en": "Rights Issue",
-      "isin": "EGS3B041R012",
-      "market_cap_tier": "MICRO_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "ZMID_P.CA",
-      "symbol": "ZMIDP",
-      "name_ar": "زهراء المعادي (حقوق مقيدة)",
-      "name_en": "Zahraa Maadi Rights",
-      "sector": "التطوير العقاري",
-      "sector_en": "Rights Issue",
-      "isin": "EGS65101R011",
-      "market_cap_tier": "MICRO_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "RTVC_P.CA",
-      "symbol": "RTVCP",
-      "name_ar": "رمكو للقرى السياحية (حقوق)",
-      "name_en": "Remco Tourism Rights",
-      "sector": "السياحة والترفيه",
-      "sector_en": "Rights Issue",
-      "isin": "EGS70031R013",
-      "market_cap_tier": "MICRO_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "ETEL_P.CA",
-      "symbol": "ETELP",
-      "name_ar": "المصرية للاتصالات (حقوق مقيدة)",
-      "name_en": "Telecom Egypt Rights",
-      "sector": "الاتصالات وتكنولوجيا المعلومات",
-      "sector_en": "Rights Issue",
-      "isin": "EGS48031R015",
-      "market_cap_tier": "MICRO_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "ABUK_P.CA",
-      "symbol": "ABUKP",
-      "name_ar": "أبو قير للأسمدة (حقوق)",
-      "name_en": "Abu Qir Fertilizers Rights",
-      "sector": "الموارد الأساسية والكيماويات",
-      "sector_en": "Rights Issue",
-      "isin": "EGS38191R019",
-      "market_cap_tier": "MICRO_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "MFPC_P.CA",
-      "symbol": "MFPCP",
-      "name_ar": "موبكو للأسمدة (حقوق)",
-      "name_en": "MOPCO Rights",
-      "sector": "الموارد الأساسية والكيماويات",
-      "sector_en": "Rights Issue",
-      "isin": "EGS38201R016",
-      "market_cap_tier": "MICRO_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "SKPC_P.CA",
-      "symbol": "SKPCP",
-      "name_ar": "سيدبك للبتروكيماويات (حقوق)",
-      "name_en": "Sidi Kerir Rights",
-      "sector": "الموارد الأساسية والكيماويات",
-      "sector_en": "Rights Issue",
-      "isin": "EGS380S1R016",
-      "market_cap_tier": "MICRO_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "ADIB_P.CA",
-      "symbol": "ADIBP",
-      "name_ar": "أبوظبي الإسلامي مصر (حقوق)",
-      "name_en": "ADIB Egypt Rights",
-      "sector": "الخدمات المالية والبنوك",
-      "sector_en": "Rights Issue",
-      "isin": "EGS60311R015",
-      "market_cap_tier": "MICRO_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "EGAL_P.CA",
-      "symbol": "EGALP",
-      "name_ar": "مصر للألومنيوم (حقوق زيادة)",
-      "name_en": "Egypt Aluminium Rights",
-      "sector": "الموارد الأساسية والكيماويات",
-      "sector_en": "Rights Issue",
-      "isin": "EGS34031R015",
-      "market_cap_tier": "MICRO_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "ESRS_P.CA",
-      "symbol": "ESRSP",
-      "name_ar": "حديد عز (حقوق مقيدة)",
-      "name_en": "Ezz Steel Rights",
-      "sector": "الموارد الأساسية والكيماويات",
-      "sector_en": "Rights Issue",
-      "isin": "EGS33041R011",
-      "market_cap_tier": "MICRO_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "EMFD_P.CA",
-      "symbol": "EMFDP",
-      "name_ar": "إعمار مصر (حقوق مقيدة)",
-      "name_en": "Emaar Misr Rights",
-      "sector": "التطوير العقاري",
-      "sector_en": "Rights Issue",
-      "isin": "EGS655Y1R019",
-      "market_cap_tier": "MICRO_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "TAQA_P.CA",
-      "symbol": "TAQAP",
-      "name_ar": "طاقة عربية (حقوق زيادة)",
-      "name_en": "TAQA Arabia Rights",
-      "sector": "الطاقة والخدمات البترولية",
-      "sector_en": "Rights Issue",
-      "isin": "EGS38341R016",
-      "market_cap_tier": "MICRO_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "VALU_P.CA",
-      "symbol": "VALUP",
-      "name_ar": "فاليو للتمويل (حقوق مقيدة)",
-      "name_en": "ValU Rights Issue",
-      "sector": "الخدمات المالية والبنوك",
-      "sector_en": "Rights Issue",
-      "isin": "EGS745W1R019",
-      "market_cap_tier": "MICRO_CAP",
-      "thndr_available": true,
-      "is_active": true
-    },
-    {
-      "ticker": "EFIH_P.CA",
-      "symbol": "EFIHP",
-      "name_ar": "إي فاينانس (حقوق زيادة)",
-      "name_en": "e-finance Rights",
-      "sector": "تكنولوجيا المدفوعات",
-      "sector_en": "Rights Issue",
-      "isin": "EGS745V1R011",
-      "market_cap_tier": "MICRO_CAP",
-      "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "OIBK.CA",
@@ -2732,7 +2114,8 @@
       "isin": "EGS60061C014",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "SAUD.CA",
@@ -2744,7 +2127,8 @@
       "isin": "EGS60081C012",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "ARVA.CA",
@@ -2756,7 +2140,8 @@
       "isin": "EGS3G251C013",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "ELNA.CA",
@@ -2768,7 +2153,8 @@
       "isin": "EGS34021C012",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "ASCM.CA",
@@ -2780,7 +2166,8 @@
       "isin": "EGS10021C014",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "EUBR.CA",
@@ -2792,7 +2179,8 @@
       "isin": "EGS691O1C018",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "GTHC.CA",
@@ -2804,7 +2192,8 @@
       "isin": "EGS3B311C019",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "MBEN.CA",
@@ -2816,7 +2205,8 @@
       "isin": "EGS3G181C016",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "MASG.CA",
@@ -2828,7 +2218,8 @@
       "isin": "EGS70521C019",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "FAHR.CA",
@@ -2840,7 +2231,8 @@
       "isin": "EGS70351C018",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "CIRA.CA",
@@ -2852,7 +2244,8 @@
       "isin": "EGS729J1C011",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "RUBX.CA",
@@ -2864,7 +2257,8 @@
       "isin": "EGS3G201C018",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "ANFI.CA",
@@ -2876,7 +2270,8 @@
       "isin": "EGS72101C013",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "GPHI.CA",
@@ -2888,7 +2283,8 @@
       "isin": "EGS691P1C015",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "BOCM.CA",
@@ -2900,7 +2296,8 @@
       "isin": "EGS3B341C016",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "NATP.CA",
@@ -2912,7 +2309,8 @@
       "isin": "EGS38281C011",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "MOFR.CA",
@@ -2924,7 +2322,8 @@
       "isin": "EGS38051C018",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "KRTE.CA",
@@ -2936,7 +2335,8 @@
       "isin": "EGS65991C018",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "TALM.CA",
@@ -2948,7 +2348,8 @@
       "isin": "EGS729K1C019",
       "market_cap_tier": "MID_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     },
     {
       "ticker": "UNFO.CA",
@@ -2960,7 +2361,8 @@
       "isin": "EGS3G991C012",
       "market_cap_tier": "SMALL_CAP",
       "thndr_available": true,
-      "is_active": true
+      "is_active": true,
+      "thndr_tradeable": true
     }
   ]
 }

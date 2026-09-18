@@ -1,6 +1,6 @@
 {
   "version": "3.0.0",
-  "last_updated": "2026-09-15T15:41:20.255388",
+  "last_updated": "2026-09-18T17:57:34.521208",
   "deployment_mode": "PAPER_ONLY",
   "live_trading_blocked": true,
   "start_date": "2026-08-23",
@@ -16,12 +16,32 @@
   },
   "portfolio": {
     "portfolio_equity": 100000.0,
-    "cash": 100000.0,
+    "cash": 85000.0,
     "invested_stock_equity": 0.0,
     "stock_allocation_pct": 0.0,
     "cash_reserve_pct": 100.0,
-    "open_positions": [],
-    "closed_positions_count": 0
+    "open_positions": [
+      {
+        "ticker": "COMI.CA",
+        "shares": 60,
+        "entry_price": 130.0,
+        "entry_date": "2026-08-10",
+        "sessions_held": 10,
+        "entry_fee": 13.65,
+        "sector": "Banking & Financial Services"
+      },
+      {
+        "ticker": "SWDY.CA",
+        "shares": 60,
+        "entry_price": 120.0,
+        "entry_date": "2026-09-01",
+        "sessions_held": 4,
+        "entry_fee": 12.6,
+        "sector": "Industrial & Construction"
+      }
+    ],
+    "closed_positions_count": 0,
+    "closed_positions_history": []
   },
   "performance": {
     "realized_pnl_egp": 0.0,

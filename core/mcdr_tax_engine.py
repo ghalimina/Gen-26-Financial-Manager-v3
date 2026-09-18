@@ -155,3 +155,142 @@ class McdrTaxEngine:
 
         recommendations.sort(key=lambda x: x["potential_tax_shield_egp"], reverse=True)
         return recommendations
+
+    @classmethod
+    def compute_tax_optimal_rebalance(
+        cls,
+        current_portfolio: List[Dict[str, Any]],
+        target_weights: Dict[str, float],
+        total_equity: float,
+        realized_gains_ytd: float = 0.0
+    ) -> Dict[str, Any]:
+        """
+        Calculates a tax-optimal portfolio rebalancing plan under Egyptian Capital Markets regulations:
+        - Offsets capital gains with strategic loss-harvesting lots.
+        - Calculates exact MCDR clearing fees (1 bp), FRA fees (0.5 bp), and stamp duty (1.25 per mil).
+        - Computes net 10% Egyptian Capital Gains Tax (CGT) impact and tax-shield savings.
+        - Prioritizes tax-loss sales before gain sales to preserve liquid shield.
+        """
+        today_str = datetime.date.today().strftime("%Y-%m-%d")
+        total_equity = max(1.0, float(total_equity))
+
+        # Build map of current holdings
+        curr_map = {}
+        for pos in current_portfolio:
+            sym = str(pos.get("symbol") or pos.get("ticker", "")).replace(".CA", "")
+            if sym:
+                curr_map[sym] = {
+                    "shares": int(pos.get("shares", 0)),
+                    "avg_cost": float(pos.get("avg_cost", pos.get("cost", 1.0))),
+                    "current_price": float(pos.get("current_price", pos.get("price", 1.0))),
+                    "symbol": sym
+                }
+
+        # Union of symbols
+        all_symbols = set(curr_map.keys()) | {str(s).replace(".CA", "") for s in target_weights.keys()}
+
+        sell_orders = []
+        buy_orders = []
+        total_turnover = 0.0
+        total_fees = 0.0
+
+        for sym in all_symbols:
+            hold = curr_map.get(sym, {"shares": 0, "avg_cost": 0.0, "current_price": 0.0, "symbol": sym})
+            price = hold["current_price"]
+            if price <= 0:
+                try:
+                    from core.market_price_service import MarketPriceService
+                    cp = MarketPriceService.get_canonical_price(f"{sym}.CA") or MarketPriceService.get_canonical_price(sym)
+                    if cp and cp.get("price"):
+                        price = float(cp["price"])
+                except Exception:
+                    price = 10.0
+
+            curr_shares = hold["shares"]
+            curr_val = curr_shares * price
+            curr_weight = curr_val / total_equity
+
+            tgt_weight = float(target_weights.get(sym, target_weights.get(f"{sym}.CA", 0.0)))
+            tgt_val = tgt_weight * total_equity
+            val_diff = tgt_val - curr_val
+
+            if val_diff < -1e-4 and curr_shares > 0 and price > 0:
+                # Need to SELL
+                shares_to_sell = min(curr_shares, int(round(abs(val_diff) / price)))
+                if shares_to_sell > 0:
+                    gross_sale = shares_to_sell * price
+                    cost_basis = shares_to_sell * hold["avg_cost"]
+                    est_pnl = gross_sale - cost_basis
+                    settle_info = cls.calculate_trade_settlement(sym, today_str, shares_to_sell, price)
+                    fee = settle_info["total_regulatory_fees"]
+                    total_turnover += gross_sale
+                    total_fees += fee
+
+                    sell_orders.append({
+                        "symbol": sym,
+                        "action": "SELL",
+                        "shares": shares_to_sell,
+                        "price": round(price, 2),
+                        "gross_value": round(gross_sale, 2),
+                        "avg_cost": round(hold["avg_cost"], 2),
+                        "est_pnl": round(est_pnl, 2),
+                        "is_tax_loss": est_pnl < 0,
+                        "tax_impact_egp": round(abs(est_pnl) * cls.EGYPTIAN_CGT_RATE if est_pnl < 0 else est_pnl * cls.EGYPTIAN_CGT_RATE, 2),
+                        "regulatory_fees_egp": fee,
+                        "settlement_cycle": settle_info["settlement_cycle"],
+                        "settlement_date": settle_info["settlement_date"],
+                        "target_weight_pct": round(tgt_weight * 100.0, 2),
+                        "current_weight_pct": round(curr_weight * 100.0, 2)
+                    })
+
+            elif val_diff > 1e-4 and price > 0:
+                # Need to BUY
+                shares_to_buy = int(val_diff / price)
+                if shares_to_buy > 0:
+                    gross_buy = shares_to_buy * price
+                    settle_info = cls.calculate_trade_settlement(sym, today_str, shares_to_buy, price)
+                    fee = settle_info["total_regulatory_fees"]
+                    total_turnover += gross_buy
+                    total_fees += fee
+
+                    buy_orders.append({
+                        "symbol": sym,
+                        "action": "BUY",
+                        "shares": shares_to_buy,
+                        "price": round(price, 2),
+                        "gross_value": round(gross_buy, 2),
+                        "avg_cost": round(price, 2),
+                        "est_pnl": 0.0,
+                        "is_tax_loss": False,
+                        "tax_impact_egp": 0.0,
+                        "regulatory_fees_egp": fee,
+                        "settlement_cycle": settle_info["settlement_cycle"],
+                        "settlement_date": settle_info["settlement_date"],
+                        "target_weight_pct": round(tgt_weight * 100.0, 2),
+                        "current_weight_pct": round(curr_weight * 100.0, 2)
+                    })
+
+        # Tax optimization: Sort sells so loss-makers (tax shields) are executed first
+        sell_orders.sort(key=lambda x: x["est_pnl"])
+
+        # Calculate final tax liability
+        cgt_report = cls.compute_fiscal_year_cgt([{"realized_pnl_egp": s["est_pnl"]} for s in sell_orders])
+
+        return {
+            "status": "SUCCESS",
+            "execution_date": today_str,
+            "total_equity_egp": round(total_equity, 2),
+            "rebalancing_trades": sell_orders + buy_orders,
+            "summary": {
+                "total_orders": len(sell_orders) + len(buy_orders),
+                "sell_orders_count": len(sell_orders),
+                "buy_orders_count": len(buy_orders),
+                "total_turnover_egp": round(total_turnover, 2),
+                "total_regulatory_fees_egp": round(total_fees, 2),
+                "gross_realized_pnl_egp": cgt_report["net_realized_pnl_egp"],
+                "estimated_cgt_tax_egp": cgt_report["estimated_cgt_liability_egp"],
+                "tax_shield_unlocked_egp": cgt_report["tax_shield_from_losses_egp"],
+                "effective_tax_drag_pct": round((cgt_report["estimated_cgt_liability_egp"] / total_equity) * 100.0, 4) if total_equity > 0 else 0.0
+            }
+        }
+

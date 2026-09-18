@@ -56,6 +56,7 @@ class GDRArbitrageEngine:
             "name_ar": "القابضة المصرية الكويتية (EK Holding GDR)",
             "shares_per_gdr": 1.0,
             "currency": "USD",
+            "cairo_currency": "USD",
             "benchmark_gdr_usd": 0.85
         }
     }
@@ -132,7 +133,7 @@ class GDRArbitrageEngine:
         """
         Calculates GDR Arbitrage Parity:
         1. Implied EGP Price = (GDR_Price_USD * USD_EGP) / shares_per_gdr
-        2. Spread (%) = ((Implied_EGP - Cairo_Price) / Cairo_Price) * 100
+        2. Spread (%) = ((Implied - Cairo) / Cairo) * 100 with strict currency unit parity
         3. Opening Gap Forecast:
            - Spread >= +2.0% -> OVERNIGHT_GDR_BULLISH_GAP
            - Spread <= -2.0% -> OVERNIGHT_GDR_BEARISH_GAP
@@ -147,6 +148,7 @@ class GDRArbitrageEngine:
             "name_ar": sym_clean,
             "shares_per_gdr": shares_per_gdr or 1.0,
             "currency": "USD",
+            "cairo_currency": "EGP",
             "benchmark_gdr_usd": 2.50
         })
 
@@ -158,14 +160,32 @@ class GDRArbitrageEngine:
         if usd_rate <= 0:
             usd_rate = 50.20
 
-        # 2. Fetch Cairo price
+        # Determine Cairo trading currency (handle dual-currency equities like EKHO.CA)
+        canon = MarketPriceService.CANONICAL_PRICES.get(sym_clean, {})
+        cairo_currency = meta.get("cairo_currency")
+        if not cairo_currency:
+            if sym_clean in ["EKHO.CA", "EKHOA.CA"] or canon.get("currency") == "USD" or "دولار" in canon.get("company_name", ""):
+                cairo_currency = "USD"
+            else:
+                cairo_currency = "EGP"
+
+        # 2. Fetch Cairo price (in its native trading currency)
         if override_cairo_price and override_cairo_price > 0:
-            cairo_price = float(override_cairo_price)
+            cairo_raw_price = float(override_cairo_price)
         else:
-            canon = MarketPriceService.CANONICAL_PRICES.get(sym_clean, {})
-            cairo_price = float(canon.get("price", 10.0))
-            if cairo_price <= 0:
-                cairo_price = 10.0
+            cairo_raw_price = float(canon.get("price", 10.0))
+            if cairo_raw_price <= 0:
+                cairo_raw_price = 10.0
+
+        # Normalise Cairo prices into both USD and EGP
+        # Auto-detect if raw price is in USD (e.g. EKHO traded at $0.67 USD)
+        if cairo_currency == "USD" or (cairo_raw_price < 2.5 and sym_clean.startswith("EKHO")):
+            cairo_currency = "USD"
+            cairo_price_usd = cairo_raw_price
+            cairo_price_egp = round(cairo_raw_price * usd_rate, 2)
+        else:
+            cairo_price_egp = cairo_raw_price
+            cairo_price_usd = round(cairo_raw_price / max(usd_rate, 1.0), 3)
 
         # 3. Fetch London GDR USD price
         if override_gdr_price and override_gdr_price > 0:
@@ -173,11 +193,19 @@ class GDRArbitrageEngine:
         else:
             gdr_usd = cls.fetch_live_gdr_price(target_gdr)
 
-        # 4. Implied EGP price calculation
+        # 4. Implied Cairo price calculation per local share
+        implied_usd = round(gdr_usd / max(ratio, 0.01), 3)
         implied_egp = round((gdr_usd * usd_rate) / max(ratio, 0.01), 2)
 
-        # 5. Spread calculation
-        spread_pct = round(((implied_egp - cairo_price) / cairo_price) * 100.0, 2)
+        # 5. Spread calculation with guaranteed dimensional currency parity
+        if cairo_currency == "USD":
+            # Direct USD vs USD comparison (both London GDR and Cairo share trade in USD)
+            spread_pct = round(((implied_usd - cairo_price_usd) / cairo_price_usd) * 100.0, 2)
+            cairo_display = f"{cairo_price_usd:.2f} $ (معادل {cairo_price_egp:.2f} ج.م)"
+        else:
+            # EGP vs EGP comparison
+            spread_pct = round(((implied_egp - cairo_price_egp) / cairo_price_egp) * 100.0, 2)
+            cairo_display = f"{cairo_price_egp:.2f} ج.م"
 
         # 6. Overnight gap classification
         if spread_pct >= 2.0:
@@ -185,14 +213,14 @@ class GDRArbitrageEngine:
             sentiment = "BULLISH"
             action_ar = (
                 f"🟢 فجوة صاعدة متوقعة لافتتاح القاهرة (+{spread_pct:.1f}%): شهادة لندن تتداول بعلاوة سعرية "
-                f"(معادل {implied_egp:.2f} ج.م مقابل {cairo_price:.2f} ج.م في القاهرة)؛ فرصة شراء على الافتتاح."
+                f"(معادل {implied_egp:.2f} ج.م مقابل {cairo_display} في القاهرة)؛ فرصة شراء على الافتتاح."
             )
         elif spread_pct <= -2.0:
             signal = "OVERNIGHT_GDR_BEARISH_GAP"
             sentiment = "BEARISH"
             action_ar = (
                 f"🔴 فجوة هابطة متوقعة لافتتاح القاهرة ({spread_pct:.1f}%): شهادة لندن تتداول بخصم سعري "
-                f"(معادل {implied_egp:.2f} ج.م مقابل {cairo_price:.2f} ج.م في القاهرة)؛ يوصى بالحذر وتجنب الشراء المبكر."
+                f"(معادل {implied_egp:.2f} ج.م مقابل {cairo_display} في القاهرة)؛ يوصى بالحذر وتجنب الشراء المبكر."
             )
         else:
             signal = "GDR_PARITY_NEUTRAL"
@@ -206,11 +234,14 @@ class GDRArbitrageEngine:
             "cairo_ticker": sym_clean,
             "gdr_ticker": target_gdr,
             "name_ar": meta.get("name_ar", sym_clean),
-            "cairo_price_egp": round(cairo_price, 2),
+            "cairo_price_egp": cairo_price_egp,
+            "cairo_price_usd": cairo_price_usd,
+            "cairo_currency": cairo_currency,
             "gdr_price_usd": round(gdr_usd, 3),
             "usd_egp_rate": round(usd_rate, 2),
             "shares_per_gdr": ratio,
             "implied_cairo_egp": implied_egp,
+            "implied_cairo_usd": implied_usd,
             "spread_pct": spread_pct,
             "arbitrage_signal": signal,
             "sentiment": sentiment,

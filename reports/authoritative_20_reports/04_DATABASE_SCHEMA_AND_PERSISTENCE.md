@@ -10,6 +10,17 @@ Generation Mode: Centralized Batch SSoT Generator (All 20 reports are generated 
 
 ---
 
+## التغييرات منذ آخر تحديث (مقارنة بنسخة 2026-09-14)
+
+> [!WARNING]
+> [UNDOCUMENTED CHANGE - NOT YET IN verified_fixes_registry.md - VERIFY MANUALLY BEFORE TRUSTING]
+
+| الموديول المتأثر | نوع التغيير | الحالة قبل | الحالة بعد | أمر التحقق |
+|---|---|---|---|---|
+| `core/real_portfolio.py` & `data/user_real_portfolio.json` | دعم تحديث رصيد السيولة النقدية وحفظه ذرياً وتكامله مع الواجهة | التعديل اليدوي فقط لملف JSON | واجهة برمجية `/api/portfolio/cash/update` وتحديث فوري متزامن مع موزع الميزانية | `python -c "from core.real_portfolio import RealPortfolioTracker; print(RealPortfolioTracker.load_portfolio()['cash_egp'])"` |
+
+---
+
 ## 1. Storage Architecture & Verification
 - **Relational Storage**: SQLite `data/gen26_canonical.db` (WAL Mode enabled: `PRAGMA journal_mode=WAL`).
   - Implemented in: `core/database_engine.py` (1,025 lines, 47,895 bytes).
@@ -37,4 +48,4 @@ pytest tests/test_database_persistence.py tests/test_real_portfolio_crud.py -v
 
 ---
 
-Implementation Status: FULLY IMPLEMENTED
+Implementation Status: UNKNOWN - NOT REVIEWED IN THIS UPDATE

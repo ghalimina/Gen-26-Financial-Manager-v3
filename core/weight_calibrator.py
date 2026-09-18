@@ -198,8 +198,13 @@ class WeightCalibrator:
                             rsi = 100.0 - (100.0 / (1.0 + (avg_g / max(avg_l, 1e-6))))
                             tech_s = float(np.clip(rsi, 10.0, 95.0))
 
-                            # Factor 2: Fund
-                            fund_s = float(np.clip(60.0 + (closes[i] / 10.0), 30.0, 90.0))
+                            # Factor 2: Fund (Quality/Trend Stability proxy - price-scale invariant)
+                            lookback_20 = max(0, i - 20)
+                            ret_20 = (closes[i] - closes[lookback_20]) / max(closes[lookback_20], 1e-4)
+                            vol_slice = np.diff(closes[lookback_20:i+1]) / np.maximum(closes[lookback_20:i], 1e-4)
+                            vol_20 = np.std(vol_slice) if len(vol_slice) > 1 else 0.02
+                            quality_ratio = float(ret_20 / max(vol_20, 1e-3))
+                            fund_s = float(np.clip(60.0 + (quality_ratio * 4.0), 30.0, 90.0))
 
                             # Factor 3: Flow (Volume Z-Score)
                             v_mean = np.mean(vols[:i+1])

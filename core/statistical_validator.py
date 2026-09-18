@@ -46,10 +46,9 @@ class StatisticalValidator:
         else:
             sr_0 = benchmark_sharpe
 
-        # Standard error of Sharpe with skewness and kurtosis correction (Mertens, 2002)
-        # Annualized observations count (years)
-        years = T / 252.0 if T >= 252 else T
-        variance_sr = (1.0 - skewness * sr + ((kurtosis - 1.0) / 4.0) * (sr ** 2)) / max(1.0, years)
+        # Standard error of Sharpe with skewness and kurtosis correction (Mertens, 2002; Bailey & Lopez de Prado, 2014)
+        # Variance of sample Sharpe ratio scales with sample observation count T
+        variance_sr = (1.0 - skewness * sr + ((kurtosis - 1.0) / 4.0) * (sr ** 2)) / max(1.0, float(T))
         std_sr = np.sqrt(max(1e-8, variance_sr))
 
         z_stat = (sr - sr_0) / std_sr
@@ -119,34 +118,81 @@ class StatisticalValidator:
     def evaluate_parameter_neighborhood_stability(
         base_lookback: int = 20,
         lookback_grid: Optional[List[int]] = None,
-        base_pf: float = 2.138
+        base_pf: float = 2.138,
+        custom_df: Optional[pd.DataFrame] = None
     ) -> Dict[str, Any]:
         """
-        Evaluates parameter sensitivity in a +/-30% neighborhood around the optimal parameters.
+        Evaluates parameter sensitivity in a +/-30% neighborhood around base lookback
+        by executing an empirical parameter sweep over historical bars.
         """
+        import os
+        import sqlite3
+
         grid = lookback_grid or [14, 16, 18, 20, 22, 24, 26]
-        # Empirical stability results across lookback neighborhood
-        neighborhood_pf = {
-            14: 1.980,
-            16: 2.050,
-            18: 2.110,
-            20: base_pf,
-            22: 2.125,
-            24: 2.080,
-            26: 2.020
-        }
+        neighborhood_pf: Dict[int, float] = {}
+
+        # 1. Attempt empirical calculation from custom dataframe or SQLite
+        df_bars = custom_df
+        if df_bars is None:
+            try:
+                db_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "gen26_production.db")
+                if os.path.exists(db_path):
+                    conn = sqlite3.connect(db_path)
+                    df_bars = pd.read_sql_query(
+                        "SELECT ticker, market_date, close_price FROM historical_daily_bars ORDER BY ticker, market_date ASC",
+                        conn
+                    )
+                    conn.close()
+            except Exception:
+                df_bars = None
+
+        if df_bars is not None and len(df_bars) > 500:
+            is_gross = (base_pf >= 2.0)
+            cost_rt = 0.0 if is_gross else 0.0090
+            for k in grid:
+                pfs = []
+                for tkr, g in df_bars.groupby("ticker"):
+                    if len(g) < 100:
+                        continue
+                    c = g["close_price"].values
+                    sma50 = pd.Series(c).rolling(50).mean().values
+                    valid_start = max(50, k)
+                    if len(c) <= valid_start + 20:
+                        continue
+                    mom = c[valid_start:] / c[valid_start-k:-k] - 1.0
+                    fwd = c[valid_start+20:] / c[valid_start:-20] - 1.0 - cost_rt
+                    sig = (mom[:-20] > 0) & (c[valid_start:-20] > sma50[valid_start:-20])
+                    trades = fwd[sig]
+                    w = trades[trades > 0].sum()
+                    l = abs(trades[trades < 0].sum())
+                    if l > 0:
+                        pfs.append(w / l)
+                if len(pfs) > 0:
+                    neighborhood_pf[k] = round(float(np.mean(pfs)), 3)
+
+        # Ensure no synthetic fallback is ever used
+        if len(neighborhood_pf) < len(grid):
+            raise RuntimeError(
+                "StatisticalValidator parameter sweep failed: Unable to compute empirical neighborhood from historical_daily_bars. "
+                "Synthetic mock fallback has been completely removed to maintain empirical data integrity."
+            )
 
         pfs = list(neighborhood_pf.values())
         mean_pf = float(np.mean(pfs))
         std_pf = float(np.std(pfs))
         min_pf = float(np.min(pfs))
+        coef_var = round(std_pf / max(1e-6, mean_pf), 3)
+
+        # Stable plateau threshold: min_pf > 1.80 (gross) or > 1.50 (net) and low variance
+        min_threshold = 1.80 if base_pf >= 2.0 else 1.50
+        is_stable = (min_pf >= min_threshold) and (coef_var < 0.15)
 
         return {
             "base_lookback": base_lookback,
             "neighborhood_grid": neighborhood_pf,
             "mean_neighborhood_pf": round(mean_pf, 3),
-            "stability_coef_var": round(std_pf / mean_pf, 3),
+            "stability_coef_var": coef_var,
             "min_neighborhood_pf": round(min_pf, 3),
-            "is_plateau_stable": min_pf > 1.80,
-            "status": "PARAMETRIC_PLATEAU_CONFIRMED" if min_pf > 1.80 else "FRAGILE_SPIKE_RISK"
+            "is_plateau_stable": is_stable,
+            "status": "PARAMETRIC_PLATEAU_CONFIRMED" if is_stable else "FRAGILE_SPIKE_RISK"
         }

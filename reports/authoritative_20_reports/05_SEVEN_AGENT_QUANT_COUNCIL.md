@@ -10,6 +10,21 @@ Generation Mode: Centralized Batch SSoT Generator (All 20 reports are generated 
 
 ---
 
+## التغييرات منذ آخر تحديث (مقارنة بنسخة 2026-09-14)
+
+| الموديول المتأثر | نوع التغيير | الحالة قبل | الحالة بعد | أمر التحقق |
+|---|---|---|---|---|
+| `core/trading_agents/llm_router.py` | توثيق نمط التشغيل الاحتياطي | افتراض الاتصال السحابي الحي للجميع | إقرار تشغيلي بالعمل في نمط Offline/Heuristic Fallback لانعدام مفاتيح API السحابية المدفوعة | `pytest tests/test_elite_extensions.py -k test_01_llm_router_provider_status_and_fallback` |
+
+> [!WARNING]
+> [UNDOCUMENTED CHANGE - NOT YET IN verified_fixes_registry.md - VERIFY MANUALLY BEFORE TRUSTING]
+
+| الموديول المتأثر | نوع التغيير | الحالة قبل | الحالة بعد | أمر التحقق |
+|---|---|---|---|---|
+| `core/theory_engine.py` | توسيع النظريات الاستثمارية إلى 6 نظريات كلاسيكية | 4 نظريات (وايكوف، ICT، مينرفيني، كان سليم) | إضافة نظريتي داو وإليوت (Dow Theory & Elliott Wave) ودمجهما في التقييم الكلي | `python -c "from core.theory_engine import TheoryEngine; print(TheoryEngine.evaluate_comprehensive_theories('COMI.CA')['composite_score'])"` |
+
+---
+
 ## 1. Multi-Agent Architecture Specification
 
 Implemented in: `core/trading_agents/` (6 modules, 1,220 total lines of code):
@@ -36,4 +51,4 @@ pytest tests/test_trading_agents_framework.py -v
 
 ---
 
-Implementation Status: FULLY IMPLEMENTED
+Implementation Status: PARTIALLY WORKING (FALLBACK MODE)

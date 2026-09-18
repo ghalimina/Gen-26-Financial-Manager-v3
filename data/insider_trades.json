@@ -1,0 +1,62 @@
+{
+  "TMGH.CA": [
+    {
+      "date": "2026-09-15",
+      "ticker": "TMGH.CA",
+      "insider_title": "مجموعة طلعت مصطفى القابضة — مساهم رئيسي ومؤسس",
+      "transaction_type": "BUY",
+      "shares_transacted": 500000,
+      "price_egp": 96.50,
+      "total_value_egp": 48250000.0,
+      "summary_ar": "إفصاح رسمي للبورصة: شراء 500,000 سهم من قِبل المساهم الرئيسي لزيادة الحصة الاستثمارية للمجموعة."
+    }
+  ],
+  "COMI.CA": [
+    {
+      "date": "2026-09-14",
+      "ticker": "COMI.CA",
+      "insider_title": "البنك التجاري الدولي — عضو مجلس إدارة تنفيذي",
+      "transaction_type": "BUY",
+      "shares_transacted": 120000,
+      "price_egp": 130.25,
+      "total_value_egp": 15630000.0,
+      "summary_ar": "إفصاح تعاملات مطلعين: شراء 120,000 سهم عبر نظام التداول بالبورصة المصرية بغرض الاستثمار طويل الأجل."
+    }
+  ],
+  "SWDY.CA": [
+    {
+      "date": "2026-09-12",
+      "ticker": "SWDY.CA",
+      "insider_title": "السويدي إليكتريك — مجموعة مرتبطة بأعضاء مجلس الإدارة",
+      "transaction_type": "BUY",
+      "shares_transacted": 250000,
+      "price_egp": 125.00,
+      "total_value_egp": 31250000.0,
+      "summary_ar": "إفصاح رسمي: تنفيذ عملية شراء 250,000 سهم لدعم مركز السيولة للمجموعة المرتبطة."
+    }
+  ],
+  "ABUK.CA": [
+    {
+      "date": "2026-09-10",
+      "ticker": "ABUK.CA",
+      "insider_title": "أبو قير للأسمدة — عضو مجلس إدارة غير تنفيذي",
+      "transaction_type": "BUY",
+      "shares_transacted": 80000,
+      "price_egp": 74.80,
+      "total_value_egp": 5984000.0,
+      "summary_ar": "إفصاح البورصة: شراء 80,000 سهم تعزيزاً لحصص الملكية قبل الإعلان عن نتائج الأعمال الفصلية."
+    }
+  ],
+  "MFPC.CA": [
+    {
+      "date": "2026-09-08",
+      "ticker": "MFPC.CA",
+      "insider_title": "مصر لإنتاج الأسمدة (موبكو) — مساهم رئيسي ومجلس إدارة",
+      "transaction_type": "BUY",
+      "shares_transacted": 150000,
+      "price_egp": 47.90,
+      "total_value_egp": 7185000.0,
+      "summary_ar": "إفصاح رسمي: شراء 150,000 سهم في إطار خطة التوسع الرأسمالي والاستثماري."
+    }
+  ]
+}

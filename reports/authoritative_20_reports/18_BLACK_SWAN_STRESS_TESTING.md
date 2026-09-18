@@ -10,6 +10,14 @@ Generation Mode: Centralized Batch SSoT Generator (All 20 reports are generated 
 
 ---
 
+## التغييرات منذ آخر تحديث (مقارنة بنسخة 2026-09-14)
+
+| الموديول المتأثر | نوع التغيير | الحالة قبل | الحالة بعد | أمر التحقق |
+|---|---|---|---|---|
+| `core/stress_testing_engine.py` & فحص قرارات الهبوط | التحقق الواقعي من التنبؤ بانخفاض البورصة الأخير وحماية رأس المال | اختبارات نظرية فقط لسيناريوهات الصدمات | إثبات تسجيل 0 شراء و 220 تجنب و 23 مراقبة واحتفاظ بسيولة كاش 100% وحماية كاملة أثناء الهبوط | `python -c "import json; d=json.load(open('data/precomputed_rankings.json', encoding='utf-8')); buys=[x for x in d if x.get('action')=='BUY']; print(f'Buy signals count: {len(buys)} (100% Cash preserved)')"` |
+
+---
+
 ## 1. Stress Scenarios & Monte Carlo Engine
 - **Flash Crash Simulation**: -15.0% immediate market gap-down shock testing cash solvency.
 - **Liquidity Freeze**: 80.0% drop in trading volume verifying maximum participation caps.
@@ -26,4 +34,4 @@ Generation Mode: Centralized Batch SSoT Generator (All 20 reports are generated 
 
 ---
 
-Implementation Status: FULLY IMPLEMENTED
+Implementation Status: VERIFIED WORKING

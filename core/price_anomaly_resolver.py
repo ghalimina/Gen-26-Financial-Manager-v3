@@ -133,8 +133,8 @@ class PriceAnomalyResolver:
             logger.info(explanation)
             return True, adj_prev, explanation
 
-        # If consecutive rejections >= 5, market price has permanently shifted
-        if consecutive_count >= 5:
+        # If consecutive rejections >= 2, market price has permanently shifted or undergone corporate adjustment
+        if consecutive_count >= 2:
             # Baseline is obsolete; update previous close to smooth convergence
             adj_prev = round(fetched_price, 2)
             explanation = (

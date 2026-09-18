@@ -7,7 +7,7 @@ def update_templates():
     for tf in target_files:
         if not os.path.exists(tf):
             continue
-        with open(tf, 'r', encoding='5tf-8') as f:
+        with open(tf, 'r', encoding='utf-8') as f:
             html = f.read()
 
         # 1. Sidebar Nav
@@ -19,6 +19,17 @@ def update_templates():
         # 2. JavaScript handler
         if 'fetchAlphaScannerData' not in html:
             js_code = '''
+        async function fetchAlphaScannerData() {
+            try {
+                const res = await fetch('/api/alpha_scanner/scan');
+                const data = await res.json();
+                console.log('Alpha scanner data:', data);
+            } catch (err) {
+                console.error('Error fetching alpha scanner:', err);
+            }
+        }
+        '''
+            html += f"\n<script>{js_code}</script>\n"
 
         with open(tf, 'w', encoding='utf-8') as f:
             f.write(html)
@@ -26,3 +37,4 @@ def update_templates():
 
 if __name__ == '__main__':
     update_templates()
+

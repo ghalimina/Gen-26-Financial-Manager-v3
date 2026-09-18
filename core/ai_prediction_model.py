@@ -87,10 +87,49 @@ class AIPredictionModel:
     _training_metadata: Dict[str, Any] = {}
     _feature_importances: Dict[str, float] = {}
     _TRAIN_LOCK = threading.RLock()
+    ARTIFACTS_FILE = os.path.join(WORKSPACE, "data", "ai_model_artifacts.pkl")
+
+    @classmethod
+    def load_cached_model(cls) -> bool:
+        """Attempts to load pre-trained model artifacts from disk for sub-5ms instant initialization."""
+        import pickle
+        if os.path.exists(cls.ARTIFACTS_FILE):
+            try:
+                with open(cls.ARTIFACTS_FILE, "rb") as f:
+                    artifacts = pickle.load(f)
+                if artifacts and "model" in artifacts and artifacts["model"] is not None:
+                    cls._model = artifacts.get("model")
+                    cls._lgbm = artifacts.get("lgbm")
+                    cls._training_metadata = artifacts.get("metadata", {})
+                    cls._feature_importances = artifacts.get("feature_importances", {})
+                    cls._is_trained = True
+                    return True
+            except Exception:
+                return False
+        return False
+
+    @classmethod
+    def save_model_artifacts(cls):
+        """Persists trained model and metadata to disk."""
+        import pickle
+        try:
+            artifacts = {
+                "model": cls._model,
+                "lgbm": cls._lgbm,
+                "metadata": cls._training_metadata,
+                "feature_importances": cls._feature_importances
+            }
+            tmp_path = f"{cls.ARTIFACTS_FILE}.tmp"
+            with open(tmp_path, "wb") as f:
+                pickle.dump(artifacts, f)
+            os.replace(tmp_path, cls.ARTIFACTS_FILE)
+        except Exception:
+            pass
 
     def __init__(self):
         if not self._is_trained:
-            self.train_model()
+            if not self.load_cached_model():
+                self.train_model(force_retrain=False)
         self.model = self._model
         if LIGHTGBM_AVAILABLE and self._lgbm is None:
             self.lgbm = LGBMRegressor(n_estimators=100, learning_rate=0.05, max_depth=4, random_state=42, verbose=-1)
@@ -288,20 +327,27 @@ class AIPredictionModel:
     def train_model(
         cls,
         training_data: Optional[pd.DataFrame] = None,
-        force_retrain: bool = True
+        force_retrain: bool = False
     ) -> Dict[str, Any]:
         """
         Trains the Gradient Boosting Regressor (XGBoost / HistGradientBoosting)
-        using Purged TimeSeriesSplit with embargo and Hyperparameter Hardening:
-        learning_rate=0.05, max_depth=4, l2_regularization=1.5 (Strict Overfit Penalty).
+        using Purged TimeSeriesSplit with embargo and Hyperparameter Hardening.
+        Loads from persistent disk cache if available unless force_retrain=True.
         """
         with cls._TRAIN_LOCK:
-            if not force_retrain and cls._is_trained and cls._model is not None and training_data is None:
-                return {
-                    "status": "TRAINED_SUCCESS",
-                    "is_trained": True,
-                    "metadata": cls._training_metadata
-                }
+            if not force_retrain and training_data is None:
+                if cls._is_trained and cls._model is not None:
+                    return {
+                        "status": "TRAINED_SUCCESS",
+                        "is_trained": True,
+                        "metadata": cls._training_metadata
+                    }
+                if cls.load_cached_model():
+                    return {
+                        "status": "CACHED_LOAD",
+                        "is_trained": True,
+                        "metadata": cls._training_metadata
+                    }
 
             # Generate or ingest empirical time-series walk-forward dataset
             dataset_source = "User Provided"
@@ -416,6 +462,7 @@ class AIPredictionModel:
 
             cls._model = prod_model
             cls._is_trained = True
+            cls.save_model_artifacts()
 
         cls._training_metadata = {
             "algorithm": algorithm_used,

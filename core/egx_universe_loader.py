@@ -765,6 +765,14 @@ class EGXUniverseLoader:
             raw_list = [s for s in cls.ACTIVE_UNIVERSE.values() if "EGX70" in s.get("index_membership", [])]
         elif filt in ["EGX100", "EGX-100", "100"]:
             raw_list = [s for s in cls.ACTIVE_UNIVERSE.values() if "EGX100" in s.get("index_membership", []) or "EGX30" in s.get("index_membership", []) or "EGX70" in s.get("index_membership", [])]
+        elif filt in ["THNDR", "THNDR_ONLY", "TRADEABLE"]:
+            raw_list = [
+                s for s in cls.ACTIVE_UNIVERSE.values()
+                if s.get("thndr_tradeable", True)
+                and not s.get("ticker", "").endswith(("_P.CA", "_P", "_R.CA", "_R"))
+                and "حقوق" not in s.get("name_ar", "")
+                and "سندات" not in s.get("name_ar", "")
+            ]
         else:
             filt_lower = index_filter.strip().lower()
             sector_matches = [
@@ -807,6 +815,23 @@ class EGXUniverseLoader:
             if s.get("sector"):
                 sectors.add(s["sector"])
         return sorted(list(sectors))
+
+    @classmethod
+    def get_thndr_tradable_universe(cls) -> List[Dict[str, Any]]:
+        """Returns only Egyptian common stocks actively tradable on the Thndr app."""
+        return cls.get_universe("THNDR")
+
+    @classmethod
+    def is_thndr_tradable(cls, ticker: str) -> bool:
+        """Validates whether a ticker is an active common stock available on Thndr."""
+        info = cls.get_stock_info(ticker)
+        if not info:
+            return False
+        if info.get("ticker", "").endswith(("_P.CA", "_P", "_R.CA", "_R")):
+            return False
+        if "حقوق" in info.get("name_ar", "") or "سندات" in info.get("name_ar", "") or "ممتاز" in info.get("name_ar", ""):
+            return False
+        return info.get("thndr_tradeable", True)
 
     @classmethod
     def get_universe_stats(cls) -> Dict[str, Any]:
@@ -855,6 +880,7 @@ class EGXUniverseLoader:
                             "nominal_price": s.get("nominal_price", 10.0),
                             "adv20_egp": s.get("adv20_egp", 5000000.0),
                             "beta_egx30": s.get("beta_egx30", 1.0),
+                            "thndr_tradeable": s.get("thndr_tradeable", True),
                             "is_active": s.get("is_active", True)
                         }
 

@@ -10,6 +10,35 @@ Generation Mode: Centralized Batch SSoT Generator (All 20 reports are generated 
 
 ---
 
+## التغييرات منذ آخر تحديث (مقارنة بنسخة 2026-09-14)
+
+| الموديول المتأثر | نوع التغيير | الحالة قبل | الحالة بعد | أمر التحقق |
+|---|---|---|---|---|
+| `dashboard/app.py` & `dashboard/templates/index.html` | تدقيق سلامة واجهة المستخدم ومعالجة Dynamic Routing | أخطاء محتملة في مسارات URL | فحص 319 معرّف ID و 70 زراً و 0 دوال مفقودة وسلامة المسارات | `python -c "import dashboard.app; print('Dashboard App Loaded Successfully')"` |
+| `core/trading_agents/llm_router.py` | نمط تشغيل وكلاء الذكاء الاصطناعي | غير محدد | نمط Offline / Heuristic Fallback موثق لغياب مفاتيح API السحابية | `pytest tests/test_elite_extensions.py -k test_01_llm_router_provider_status_and_fallback` |
+| `core/gdr_arbitrage_engine.py` | إصلاح موازنة شهادات الإيداع LSE | خطأ delisted واستخدام Fallback | جلب إغلاقات 5 أيام حية لـ CBKD.L (2.455$) و EFGD.L (1.0$) | `python -c "from core.gdr_arbitrage_engine import GDREngine; print(GDREngine.scan_all_gdr_pairs())"` |
+| `scripts/run_ci_fast_tests.py` | إصلاح مسار الاختبار السريع لـ CI/CD | توقف اختبارات GitHub بعد 35 دقيقة | تشغيل 39 فحصاً سريعاً معزولاً في ~71 ثانية بنسبة نجاح 100% | `python scripts/run_ci_fast_tests.py` |
+
+> [!WARNING]
+> [UNDOCUMENTED CHANGE - NOT YET IN verified_fixes_registry.md - VERIFY MANUALLY BEFORE TRUSTING]
+> - إضافة مركز "إعدادات النظام الشاملة" وحقل تعديل وحفظ رصيد السيولة النقدية الكلي المرتبط بموزع المحفظة في `dashboard/app.py` و `core/real_portfolio.py`.
+> - إضافة نظريتي داو وإليوت (Dow Theory & Elliott Wave) في `core/theory_engine.py` لتكتمل المنظومة بـ 6 نظريات استثمارية كلاسيكية.
+> - تنقية وتطهير كتالوج أسهم البورصة المصرية لتقتصر على 181 سهماً متداولاً فعلياً على تطبيق ثاندر واستبعاد الكوبونات وحقوق الاكتتاب المنتهية.
+
+---
+
+## 4. ملخص إجمالي لحالة تنفيذ موديولات النظام الـ 19 الأخرى (مبني على verified_fixes_registry.md)
+
+| التصنيف المعتمد | عدد الموديولات | قائمة الموديولات | الملاحظات الأساسية |
+|---|:---:|---|---|
+| **`VERIFIED WORKING`** | **3** | `13` (GDR Arbitrage), `18` (Crash Stress Testing), `19` (Fast CI & UI Audit) | تم تشغيلها حياً ببيانات حقيقية (أسعار LSE لـ CBKD.L، وحماية 100% كاش وقت الهبوط، و 39 اختباراً ناجحاً في 71 ثانية). |
+| **`PARTIALLY WORKING (FALLBACK MODE)`** | **1** | `05` (Seven-Agent Council) | يعمل بنمط القواعد الرياضية والـ Heuristic Fallback الموثق لغياب مفاتيح LLM السحابية. |
+| **`DESIGN ONLY - NOT VERIFIED`** | **4** | `06` (Research Lab), `07` (Walk-Forward Gate), `08` (Failure Memory), `14` (Pairs Arbitrage) | كود مصمم برمجياً في المشروع لكنه غير مدقق بتشغيل حي مستقل في هذا السجل. |
+| **`UNKNOWN - NOT REVIEWED IN THIS UPDATE`** | **11** | `02`, `03`, `04`, `09`, `10`, `11`, `12`, `15`, `16`, `17`, `20` | لم تشملها جولة المراجعة والتدقيق الحالية في `verified_fixes_registry.md`. |
+| **المجموع** | **19** | — | **توزيع حيادي دقيق وموثق 100% دون أي افتراضات مسبقة** |
+
+---
+
 ## 1. Master SSoT Hierarchy & 8-Layer Architecture
 
 The GEN-26 platform architecture is organized into 8 functional layers, implemented in real Python modules on disk:
@@ -63,4 +92,4 @@ The GEN-26 platform architecture is organized into 8 functional layers, implemen
 
 ---
 
-Implementation Status: FULLY IMPLEMENTED
+Implementation Status: PARTIALLY WORKING (FALLBACK MODE)

@@ -87,28 +87,157 @@ class PaperTradingOrchestrator:
                     "market_date": market_date
                 }
 
-            # 6. Candidate Universe & Ranking
-            candidates = [
-                {"ticker": "COMI.CA", "entry_price": 100.0, "current_price": 102.0, "stop_price": 93.0, "adv_20d_egp": 80_000_000, "alpha_score": 90.0, "previous_close": 101.0},
-                {"ticker": "SWDY.CA", "entry_price": 40.0, "current_price": 41.0, "stop_price": 37.2, "adv_20d_egp": 50_000_000, "alpha_score": 85.0, "previous_close": 40.5},
-                {"ticker": "TMGH.CA", "entry_price": 50.0, "current_price": 51.5, "stop_price": 46.5, "adv_20d_egp": 40_000_000, "alpha_score": 82.0, "previous_close": 51.0}
-            ]
+            # 6. Candidate Universe & Ranking using live canonical prices
+            from core.market_price_service import MarketPriceService
+            from core.egx_universe_loader import EGXUniverseLoader
+            
+            canonical_prices = MarketPriceService.get_all_canonical_prices(universe="core")
+            candidates = []
+            sector_mapping = {}
+
+            for p_rec in canonical_prices[:5]:
+                sym = p_rec.get("ticker", "")
+                if not sym:
+                    continue
+                curr_p = float(p_rec.get("price", 100.0))
+                prev_c = float(p_rec.get("previous_close", curr_p))
+                entry_p = float(p_rec.get("entry_zone_low", round(curr_p * 0.985, 2)))
+                stop_p = float(p_rec.get("hard_stop_loss", round(curr_p * 0.93, 2)))
+                turnover = float(p_rec.get("turnover_egp", 50_000_000))
+                
+                stock_info = EGXUniverseLoader.get_stock_info(sym)
+                sec = stock_info.get("sector_en", "Diversified") if stock_info else "Diversified"
+                sector_mapping[sym] = sec
+
+                candidates.append({
+                    "ticker": sym,
+                    "entry_price": entry_p,
+                    "current_price": curr_p,
+                    "stop_price": stop_p,
+                    "adv_20d_egp": max(turnover, 10_000_000),
+                    "alpha_score": round(80.0 + (float(p_rec.get("change_pct", 0.0) or 0.0) * 2.0), 1),
+                    "previous_close": prev_c
+                })
+
+            if not candidates:
+                candidates = [
+                    {"ticker": "COMI.CA", "entry_price": 138.88, "current_price": 141.0, "stop_price": 131.13, "adv_20d_egp": 80_000_000, "alpha_score": 90.0, "previous_close": 138.98},
+                    {"ticker": "SWDY.CA", "entry_price": 128.05, "current_price": 130.0, "stop_price": 120.90, "adv_20d_egp": 50_000_000, "alpha_score": 85.0, "previous_close": 128.35},
+                    {"ticker": "TMGH.CA", "entry_price": 96.00, "current_price": 97.80, "stop_price": 90.95, "adv_20d_egp": 40_000_000, "alpha_score": 82.0, "previous_close": 97.70}
+                ]
+                sector_mapping = {"COMI.CA": "Banking", "SWDY.CA": "Industrial", "TMGH.CA": "Real Estate"}
+
             ranked = CrossSectionalRankingEngine.rank_universe(candidates, score_key="alpha_score")
 
-            # 7. Portfolio Construction & Risk Sizing
-            curr_equity = state["portfolio"]["portfolio_equity"]
-            curr_cash = state["portfolio"]["cash"]
-            sector_mapping = {"COMI.CA": "Banking", "SWDY.CA": "Industrial", "TMGH.CA": "Real Estate"}
+            # 7. Position Lifecycle & Holding Period Management (> 10 Sessions Automatic Exit)
+            curr_equity = float(state["portfolio"].get("portfolio_equity", 100000.0))
+            curr_cash = float(state["portfolio"].get("cash", 100000.0))
+            open_positions = list(state["portfolio"].get("open_positions", []))
+            closed_positions_history = list(state["portfolio"].get("closed_positions_history", []))
 
+            # Initialize Paper Broker with current cash & existing position inventory
+            broker = PaperBrokerAdapter(initial_cash=curr_cash)
+            for pos in open_positions:
+                broker.positions[pos["ticker"]] = broker.positions.get(pos["ticker"], 0) + pos.get("shares", 0)
+
+            # Build price lookup for today's market prices
+            current_price_lookup = {}
+            for p_rec in canonical_prices:
+                sym = p_rec.get("ticker")
+                if sym:
+                    current_price_lookup[sym] = float(p_rec.get("price", p_rec.get("close", 0.0)) or 0.0)
+            for cand in candidates:
+                sym = cand.get("ticker")
+                if sym and sym not in current_price_lookup:
+                    current_price_lookup[sym] = float(cand.get("current_price", 0.0) or 0.0)
+
+            positions_to_close = []
+            remaining_open_positions = []
+            simulated_fills = []
+            session_realized_pnl = 0.0
+
+            # Increment holding session count and identify positions exceeding 10 sessions
+            for pos in open_positions:
+                pos["sessions_held"] = pos.get("sessions_held", 0) + 1
+                if pos["sessions_held"] > 10:
+                    positions_to_close.append(pos)
+                else:
+                    remaining_open_positions.append(pos)
+
+            # Execute automatic exits for positions open > 10 sessions
+            for pos in positions_to_close:
+                ticker = pos["ticker"]
+                shares = pos.get("shares", 0)
+                entry_price = float(pos.get("entry_price", 0.0))
+                
+                exit_price = current_price_lookup.get(ticker)
+                if not exit_price or exit_price <= 0:
+                    try:
+                        exit_price = MarketPriceService.get_latest_price(ticker)
+                    except Exception:
+                        exit_price = entry_price
+                if not exit_price or exit_price <= 0:
+                    exit_price = entry_price
+
+                # Validate safety firewall on SELL order
+                LiveExecutionFirewall.validate_execution_safety({"mode": "PAPER", "is_live": False})
+
+                sell_fill = broker.place_order(
+                    symbol=ticker,
+                    side="SELL",
+                    quantity=shares,
+                    price=exit_price
+                )
+                simulated_fills.append(sell_fill)
+
+                # Realized PnL: (سعر البيع - سعر الشراء - 0.90% تكاليف)
+                # Turnover = (entry_price + exit_price) * shares
+                # Friction: 0.90% total round trip (0.45% entry + 0.45% exit)
+                gross_pnl = (exit_price - entry_price) * shares
+                turnover = (entry_price + exit_price) * shares
+                cost_egp = turnover * 0.0045  # 0.90% total round-trip costs
+                net_pnl = round(gross_pnl - cost_egp, 2)
+                session_realized_pnl += net_pnl
+
+                closed_positions_history.append({
+                    "ticker": ticker,
+                    "shares": shares,
+                    "entry_price": entry_price,
+                    "exit_price": exit_price,
+                    "entry_date": pos.get("entry_date", "UNKNOWN"),
+                    "exit_date": market_date,
+                    "sessions_held": pos["sessions_held"],
+                    "gross_pnl_egp": round(gross_pnl, 2),
+                    "cost_egp": round(cost_egp, 2),
+                    "net_pnl_egp": net_pnl,
+                    "return_pct": round((net_pnl / (entry_price * shares)) * 100.0, 2) if entry_price * shares > 0 else 0.0
+                })
+
+            # Available free cash after exits
+            available_cash_after_exits = broker.get_cash()
+
+            # Format existing active positions for portfolio constructor
+            existing_pos_dict = {}
+            for pos in remaining_open_positions:
+                t = pos["ticker"]
+                cp = current_price_lookup.get(t, pos["entry_price"])
+                existing_pos_dict[t] = {
+                    "shares": pos["shares"],
+                    "price": cp,
+                    "equity": pos["shares"] * cp,
+                    "sector": pos.get("sector", "General")
+                }
+
+            # 8. Portfolio Construction & Risk Sizing (incorporating existing holdings)
             alloc_plan = InstitutionalPortfolioConstructor.construct_target_portfolio(
                 ranked_candidates=ranked,
                 total_portfolio_equity=curr_equity,
-                available_free_cash=curr_cash,
-                existing_positions={},
+                available_free_cash=available_cash_after_exits,
+                existing_positions=existing_pos_dict,
                 sector_mapping=sector_mapping
             )
 
-            # 8. Frozen Risk Invariant Verification
+            # 9. Frozen Risk Invariant Verification
             if not alloc_plan["is_plan_valid"]:
                 SessionManager.fail_session(sess_id, reason="PORTFOLIO_CONSTRUCTION_INVALID")
                 return {
@@ -118,9 +247,7 @@ class PaperTradingOrchestrator:
                     "market_date": market_date
                 }
 
-            # 9. Paper Broker Simulated Fills
-            broker = PaperBrokerAdapter(initial_cash=curr_cash)
-            simulated_fills = []
+            # 10. Execute New Target BUY Fills
             for ord_req in alloc_plan["allocated_orders"]:
                 # Verify safety firewall on order payload
                 LiveExecutionFirewall.validate_execution_safety({"mode": "PAPER", "is_live": False})
@@ -133,10 +260,35 @@ class PaperTradingOrchestrator:
                 )
                 simulated_fills.append(fill)
 
-            # 10. Complete Session in SessionManager
+                if fill.get("status") == OrderStatus.FILLED:
+                    remaining_open_positions.append({
+                        "ticker": fill["symbol"],
+                        "shares": fill["quantity"],
+                        "entry_price": fill["fill_price"],
+                        "entry_date": market_date,
+                        "sessions_held": 0,
+                        "entry_fee": fill.get("fee", 0.0),
+                        "sector": ord_req.get("sector", "General")
+                    })
+
+            # 11. Mark-to-Market Valuation
+            invested_equity = 0.0
+            unrealized_pnl = 0.0
+            for pos in remaining_open_positions:
+                t = pos["ticker"]
+                cp = current_price_lookup.get(t, pos["entry_price"])
+                pos_val = pos["shares"] * cp
+                invested_equity += pos_val
+                unrealized_pnl += (cp - pos["entry_price"]) * pos["shares"]
+
+            portfolio_equity_after = round(broker.get_cash() + invested_equity, 2)
+            stock_alloc_pct = round((invested_equity / portfolio_equity_after * 100.0), 1) if portfolio_equity_after > 0 else 0.0
+            cash_reserve_pct = round(100.0 - stock_alloc_pct, 1)
+
+            # 12. Complete Session in SessionManager
             SessionManager.complete_session(sess_id, data_status="VALID")
 
-            # 11. State Persistence Update
+            # 13. State Persistence Update
             next_session_num = state["session_progress"]["verified_sessions"] + 1
             state["session_progress"]["verified_sessions"] = next_session_num
             state["session_progress"]["last_successful_session"] = market_date
@@ -144,11 +296,28 @@ class PaperTradingOrchestrator:
                 "session_number": next_session_num,
                 "date": market_date,
                 "status": "COMPLETED",
-                "pnl": 500.0 # Sample session delta
+                "pnl": round(session_realized_pnl, 2),  # Real calculated PnL (replaces fixed 500.0)
+                "closed_trades_count": len(positions_to_close)
             })
+
+            # Update portfolio state
+            state["portfolio"]["open_positions"] = remaining_open_positions
+            state["portfolio"]["closed_positions_count"] = len(closed_positions_history)
+            state["portfolio"]["closed_positions_history"] = closed_positions_history
+            state["portfolio"]["cash"] = round(broker.get_cash(), 2)
+            state["portfolio"]["invested_stock_equity"] = round(invested_equity, 2)
+            state["portfolio"]["stock_allocation_pct"] = stock_alloc_pct
+            state["portfolio"]["cash_reserve_pct"] = cash_reserve_pct
+            state["portfolio"]["portfolio_equity"] = portfolio_equity_after
+
+            # Performance updates
+            prev_realized = float(state["performance"].get("realized_pnl_egp", 0.0))
+            state["performance"]["realized_pnl_egp"] = round(prev_realized + session_realized_pnl, 2)
+            state["performance"]["unrealized_pnl_egp"] = round(unrealized_pnl, 2)
+
             PaperTradingStateManager.save_state(state)
 
-            # 12. Paper Observatory Snapshot
+            # 14. Paper Observatory Snapshot
             obs_snapshot = PaperTradingObservatory.record_session(
                 session_number=next_session_num,
                 market_date=market_date,
@@ -158,11 +327,16 @@ class PaperTradingOrchestrator:
                 portfolio_state=alloc_plan,
                 execution_state={"fills": simulated_fills},
                 risk_state={
-                    "cash_after": broker.get_cash(),
-                    "stock_allocation_pct": round((alloc_plan["allocated_cash"] / curr_equity) * 100.0, 1),
-                    "equity_after": curr_equity + 500.0
+                    "cash_after": round(broker.get_cash(), 2),
+                    "stock_allocation_pct": stock_alloc_pct,
+                    "equity_after": portfolio_equity_after
                 },
-                outcome_state={"realized_pnl_egp": 500.0, "unrealized_pnl_egp": 0.0, "benchmark_return_pct": 0.45}
+                outcome_state={
+                    "realized_pnl_egp": round(session_realized_pnl, 2),
+                    "unrealized_pnl_egp": round(unrealized_pnl, 2),
+                    "closed_trades_count": len(positions_to_close),
+                    "benchmark_return_pct": 0.45
+                }
             )
 
             return {
@@ -174,7 +348,10 @@ class PaperTradingOrchestrator:
                 "verified_sessions": next_session_num,
                 "remaining_sessions": max(0, 30 - next_session_num),
                 "allocated_orders": len(alloc_plan["allocated_orders"]),
-                "simulated_fills": len(simulated_fills)
+                "simulated_fills": len(simulated_fills),
+                "closed_positions_count": len(positions_to_close),
+                "session_realized_pnl": round(session_realized_pnl, 2),
+                "total_equity": portfolio_equity_after
             }
 
         except Exception as e:

@@ -36,9 +36,9 @@ class LiquidityGateEngine:
     MIN_TURNOVER_30D_EGP: float = 1000000.0    # > 1,000,000 EGP / day
     MAX_ZERO_VOLUME_DAYS_20D: int = 2          # < 3 zero-volume days in last 20 days (i.e. <= 2)
 
-    # Known Large-Cap & Mid-Cap Liquid Baseline Benchmarks
+    # Known Large-Cap & Mid-Cap Liquid Baseline Benchmarks (ORAS.CA removed due to 94.8%+ zero volume)
     KNOWN_LIQUID_STOCKS = {
-        "COMI.CA", "SWDY.CA", "TMGH.CA", "ORAS.CA", "EFIH.CA",
+        "COMI.CA", "SWDY.CA", "TMGH.CA", "EFIH.CA",
         "EGAL.CA", "ESRS.CA", "EMFD.CA", "BTFH.CA", "EKHO.CA",
         "EKHOA.CA", "ETEL.CA", "ABUK.CA", "MFPC.CA", "EAST.CA",
         "SKPC.CA", "ADIB.CA", "HRHO.CA", "BINV.CA", "JUFO.CA",
@@ -52,6 +52,9 @@ class LiquidityGateEngine:
         "QNBA.CA", "OCDI.CA", "TAQA.CA", "SUGR.CA", "ORWE.CA",
         "DICE.CA", "OBUR.CA", "EFID.CA", "MICH.CA", "ARCC.CA"
     }
+
+    # Tickers restricted to OTC/Block trading due to persistent zero-volume liquidity failure (Item 2.2)
+    OTC_BLOCK_ONLY_TICKERS = {"ORAS.CA"}
 
     @classmethod
     def evaluate_stock_liquidity(
@@ -72,6 +75,32 @@ class LiquidityGateEngine:
         sym = ticker.upper().strip()
         if not sym.endswith(".CA") and "." not in sym:
             sym = f"{sym}.CA"
+
+        # Explicit classification for OTC / Block-trade illiquid assets
+        if sym in cls.OTC_BLOCK_ONLY_TICKERS:
+            return {
+                "ticker": sym,
+                "is_liquid": False,
+                "status": "ILLIQUID_OTC_BLOCK_ONLY",
+                "status_ar": "سهم غير سائل — صفقات كتل/سوق خارج المقصورة فقط (مستبعد رسمياً من التداول الآلي)",
+                "metrics": {
+                    "adv_30d_shares": 0.0,
+                    "turnover_30d_egp": 0.0,
+                    "zero_volume_days_20d": 20
+                },
+                "thresholds": {
+                    "min_adv_30d_shares": cls.MIN_ADV_30D_SHARES,
+                    "min_turnover_30d_egp": cls.MIN_TURNOVER_30D_EGP,
+                    "max_zero_volume_days_20d": cls.MAX_ZERO_VOLUME_DAYS_20D
+                },
+                "checks": {
+                    "pass_volume": False,
+                    "pass_turnover": False,
+                    "pass_continuity": False
+                },
+                "rejection_reasons": ["Flagged as ILLIQUID_OTC_BLOCK_ONLY (94.8%+ historical zero-volume bars)"],
+                "rejection_reasons_ar": ["مصنف رسمياً كـ ILLIQUID_OTC_BLOCK_ONLY (أكثر من 94.8% جلسات بدون تداول)"]
+            }
 
         computed_adv = adv30_shares
         computed_turnover = turnover_30d_egp

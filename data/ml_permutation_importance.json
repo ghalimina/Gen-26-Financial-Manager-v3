@@ -4,81 +4,76 @@
   "n_repeats": 5,
   "top_5_features": [
     {
-      "feature": "setup_encoded",
-      "importance_mean": 0.176,
-      "importance_std": 0.0097
-    },
-    {
-      "feature": "sector_neutral_pe",
-      "importance_mean": 0.124,
-      "importance_std": 0.002
-    },
-    {
-      "feature": "finbert_sentiment_score",
-      "importance_mean": 0.05,
-      "importance_std": 0.00447
+      "feature": "obv_slope",
+      "importance_mean": 0.4004,
+      "importance_std": 0.00073
     },
     {
       "feature": "sector_neutral_rsi",
-      "importance_mean": 0.045,
-      "importance_std": 0.00707
+      "importance_mean": 0.01268,
+      "importance_std": 0.00028
     },
     {
-      "feature": "atr_pct",
-      "importance_mean": 0.037,
-      "importance_std": 0.00927
+      "feature": "finbert_sentiment_score",
+      "importance_mean": 0.00311,
+      "importance_std": 0.00015
+    },
+    {
+      "feature": "macd_hist",
+      "importance_mean": 0.00249,
+      "importance_std": 0.00019
+    },
+    {
+      "feature": "sector_neutral_pe",
+      "importance_mean": 0.00096,
+      "importance_std": 8e-05
     }
   ],
   "all_features": [
     {
-      "feature": "setup_encoded",
-      "importance_mean": 0.176,
-      "importance_std": 0.0097
-    },
-    {
-      "feature": "sector_neutral_pe",
-      "importance_mean": 0.124,
-      "importance_std": 0.002
-    },
-    {
-      "feature": "finbert_sentiment_score",
-      "importance_mean": 0.05,
-      "importance_std": 0.00447
+      "feature": "obv_slope",
+      "importance_mean": 0.4004,
+      "importance_std": 0.00073
     },
     {
       "feature": "sector_neutral_rsi",
-      "importance_mean": 0.045,
-      "importance_std": 0.00707
+      "importance_mean": 0.01268,
+      "importance_std": 0.00028
     },
     {
-      "feature": "atr_pct",
-      "importance_mean": 0.037,
-      "importance_std": 0.00927
-    },
-    {
-      "feature": "roc_1d_lag1",
-      "importance_mean": 0.028,
-      "importance_std": 0.0051
-    },
-    {
-      "feature": "obv_slope",
-      "importance_mean": 0.023,
-      "importance_std": 0.004
+      "feature": "finbert_sentiment_score",
+      "importance_mean": 0.00311,
+      "importance_std": 0.00015
     },
     {
       "feature": "macd_hist",
-      "importance_mean": 0.02,
-      "importance_std": 0.00548
+      "importance_mean": 0.00249,
+      "importance_std": 0.00019
     },
     {
-      "feature": "macd_hist_lag1",
-      "importance_mean": 0.02,
-      "importance_std": 0.00447
+      "feature": "sector_neutral_pe",
+      "importance_mean": 0.00096,
+      "importance_std": 8e-05
+    },
+    {
+      "feature": "setup_encoded",
+      "importance_mean": 0.00096,
+      "importance_std": 0.00017
+    },
+    {
+      "feature": "atr_pct",
+      "importance_mean": 0.00082,
+      "importance_std": 0.00011
+    },
+    {
+      "feature": "roc_20d",
+      "importance_mean": 5e-05,
+      "importance_std": 2e-05
     },
     {
       "feature": "sector_neutral_volume_zscore",
-      "importance_mean": 0.002,
-      "importance_std": 0.00245
+      "importance_mean": 0.0,
+      "importance_std": 0.0
     },
     {
       "feature": "volatility_regime_encoded",
@@ -101,7 +96,7 @@
       "importance_std": 0.0
     },
     {
-      "feature": "roc_20d",
+      "feature": "roc_1d_lag1",
       "importance_mean": 0.0,
       "importance_std": 0.0
     },
@@ -109,10 +104,21 @@
       "feature": "beta_egx30",
       "importance_mean": 0.0,
       "importance_std": 0.0
+    },
+    {
+      "feature": "macd_hist_lag1",
+      "importance_mean": -1e-05,
+      "importance_std": 2e-05
     }
   ],
-  "noise_fitting_alerts": [],
-  "has_noise_warning": false,
-  "top_feature": "setup_encoded",
-  "top_importance": 0.176
+  "noise_fitting_alerts": [
+    {
+      "feature": "macd_hist_lag1",
+      "score": -1e-05,
+      "alert": "CRITICAL ALERT: Core feature 'macd_hist_lag1' returned non-positive permutation score (-0.00001). Model fitting to noise!"
+    }
+  ],
+  "has_noise_warning": true,
+  "top_feature": "obv_slope",
+  "top_importance": 0.4004
 }

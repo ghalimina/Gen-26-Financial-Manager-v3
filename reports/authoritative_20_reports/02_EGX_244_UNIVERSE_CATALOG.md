@@ -10,6 +10,17 @@ Generation Mode: Centralized Batch SSoT Generator (All 20 reports are generated 
 
 ---
 
+## التغييرات منذ آخر تحديث (مقارنة بنسخة 2026-09-14)
+
+> [!WARNING]
+> [UNDOCUMENTED CHANGE - NOT YET IN verified_fixes_registry.md - VERIFY MANUALLY BEFORE TRUSTING]
+
+| الموديول المتأثر | نوع التغيير | الحالة قبل | الحالة بعد | أمر التحقق |
+|---|---|---|---|---|
+| `data/thndr_egx_244_universe.json` & `core/egx_universe_loader.py` | تطهير وتصفية أسهم تطبيق ثاندر واستبعاد غير المتداول | 244 أصلاً تشمل سندات وحقوق اكتتاب ملغاة وشركات شل غير مدرجة | 181 سهماً عادياً متداولاً فعلياً على منصة ثاندر وحذف 63 أصلاً غير متداول | `python -c "import json; u=json.load(open('data/thndr_egx_244_universe.json', encoding='utf-8')); print(f'Active Thndr Stocks: {len(u)}')"` |
+
+---
+
 ## 1. Catalog Hierarchy & Exact Counts
 - **Total Listed EGX Equities Catalog**: **244 Listed Equities**
   - Stored in: `data/thndr_egx_244_universe.json` (62,540 bytes)
@@ -49,4 +60,4 @@ python -c "import json; u=json.load(open('data/thndr_egx_244_universe.json', enc
 
 ---
 
-Implementation Status: FULLY IMPLEMENTED
+Implementation Status: UNKNOWN - NOT REVIEWED IN THIS UPDATE

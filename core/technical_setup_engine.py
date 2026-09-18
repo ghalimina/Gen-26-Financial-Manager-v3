@@ -206,6 +206,9 @@ class TechnicalSetupEngine:
         # 1. Check Canonical Price & Metadata
         rec = MarketPriceService.get_canonical_price_record(sym)
         if not rec or rec.get("status") == "DATA_INSUFFICIENT" or rec.get("price") is None:
+            with cls._CACHE_LOCK:
+                cls._OHLCV_CACHE[sym] = None
+                cls._OHLCV_CACHE_TIME[sym] = now
             return None
 
         # 2. Query SQLite for Real Historical Daily Bars
@@ -222,38 +225,43 @@ class TechnicalSetupEngine:
                     df_db.set_index("Date", inplace=True)
                     with cls._CACHE_LOCK:
                         cls._OHLCV_CACHE[sym] = df_db
-                        cls._OHLCV_CACHE_TIME[sym] = time.time()
+                        cls._OHLCV_CACHE_TIME[sym] = now
                     return df_db
             except Exception:
                 pass
 
-        # 3. Query yfinance for Real Historical OHLCV Bar Data
-        try:
-            import yfinance as yf
-            from data.universe_manager import UniverseManager
-            raw_sym = sym.replace(".CA", "").strip().upper()
-            yf_ticker = UniverseManager.get_yfinance_ticker(f"{raw_sym}.CA")
-            t = yf.Ticker(yf_ticker)
-            hist = t.history(period="3mo")
-            if len(hist) >= min_bars and "Close" in hist:
-                df_yf = hist[["Open", "High", "Low", "Volume", "Close"]].copy()
-                df_yf = df_yf.dropna()
-                if len(df_yf) >= min_bars:
-                    from core.corporate_actions import CorporateActionsAdjuster
-                    actions = None
-                    try:
-                        actions = t.actions
-                    except Exception:
-                        pass
-                    df_yf = CorporateActionsAdjuster.adjust_ohlcv_dataframe(df_yf, actions_df=actions, ticker=sym)
-                    with cls._CACHE_LOCK:
-                        cls._OHLCV_CACHE[sym] = df_yf
-                        cls._OHLCV_CACHE_TIME[sym] = time.time()
-                    return df_yf
-        except Exception:
-            pass
+        # 3. Query yfinance for Real Historical OHLCV Bar Data (skip preferred/bonus shares that never exist on yfinance)
+        raw_sym = sym.replace(".CA", "").strip().upper()
+        if not (raw_sym.endswith("_P") or raw_sym.endswith("_B")):
+            try:
+                import yfinance as yf
+                from data.universe_manager import UniverseManager
+                yf_ticker = UniverseManager.get_yfinance_ticker(f"{raw_sym}.CA")
+                if not (yf_ticker.endswith("_P.CA") or yf_ticker.endswith("_B.CA")):
+                    t = yf.Ticker(yf_ticker)
+                    hist = t.history(period="3mo")
+                    if len(hist) >= min_bars and "Close" in hist:
+                        df_yf = hist[["Open", "High", "Low", "Volume", "Close"]].copy()
+                        df_yf = df_yf.dropna()
+                        if len(df_yf) >= min_bars:
+                            from core.corporate_actions import CorporateActionsAdjuster
+                            actions = None
+                            try:
+                                actions = t.actions
+                            except Exception:
+                                pass
+                            df_yf = CorporateActionsAdjuster.adjust_ohlcv_dataframe(df_yf, actions_df=actions, ticker=sym)
+                            with cls._CACHE_LOCK:
+                                cls._OHLCV_CACHE[sym] = df_yf
+                                cls._OHLCV_CACHE_TIME[sym] = now
+                            return df_yf
+            except Exception:
+                pass
 
-        # 4. Strictly Return None if Data is Insufficient (< min_bars) — ZERO Synthetic Fallbacks
+        # 4. Strictly Return None if Data is Insufficient (< min_bars) and cache negative result
+        with cls._CACHE_LOCK:
+            cls._OHLCV_CACHE[sym] = None
+            cls._OHLCV_CACHE_TIME[sym] = now
         return None
 
     @classmethod

@@ -97,3 +97,26 @@ class PlatformDriftMonitor:
                 "PORTFOLIO_DRIFT": port_drift
             }
         }
+
+    @classmethod
+    def evaluate_drift(
+        cls,
+        current_mean_slippage_pct: float = 0.10,
+        current_mean_adv_egp: float = 25_000_000,
+        ranking_top5_turnover_pct: float = 20.0,
+        alpha_ic_recent: float = 0.090,
+        **kwargs
+    ) -> Dict[str, Any]:
+        """
+        Convenience wrapper supporting positional evaluation parameters.
+        """
+        if current_mean_adv_egp < 1000.0:
+            current_mean_adv_egp = current_mean_adv_egp * 1_000_000.0
+        return cls.evaluate_all_drifts(
+            current_mean_slippage_pct=current_mean_slippage_pct,
+            current_mean_adv_egp=current_mean_adv_egp,
+            ranking_top5_turnover_pct=ranking_top5_turnover_pct,
+            alpha_ic_recent=alpha_ic_recent,
+            **kwargs
+        )
+

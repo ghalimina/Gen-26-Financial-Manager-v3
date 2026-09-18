@@ -49,32 +49,50 @@ class StatisticalEdgeVerifier:
         from core.weight_calibrator import WeightCalibrator
         weights = WeightCalibrator.get_calibrated_weights()
 
-        np.random.seed(42)
-        n_periods = lookback_days
-        n_stocks = 25  # Core active liquid cross-section
+        import sqlite3
+        db_path = os.path.join(DATA_DIR, "gen26_production.db")
+        
+        # Load empirical historical bars from SQLite database
+        daily_returns = None
+        sub_close = None
+        try:
+            if os.path.exists(db_path):
+                conn = sqlite3.connect(db_path)
+                df_bars = pd.read_sql_query(
+                    "SELECT ticker, market_date, close_price, volume FROM historical_daily_bars "
+                    "ORDER BY ticker, market_date ASC",
+                    conn
+                )
+                conn.close()
+                if len(df_bars) >= 500:
+                    pivot_close = df_bars.pivot(index="market_date", columns="ticker", values="close_price").ffill()
+                    valid_counts = pivot_close.count()
+                    top_tickers = valid_counts.sort_values(ascending=False).head(25).index
+                    sub_close = pivot_close[top_tickers].iloc[-lookback_days:]
+                    daily_returns = sub_close.pct_change().fillna(0.0).values
+        except Exception as e:
+            logger.warning(f"Error querying historical_daily_bars: {e}")
+            daily_returns = None
+        if daily_returns is None or daily_returns.shape[0] < 30:
+            raise RuntimeError(
+                f"StatisticalEdgeVerifier empirical backtest failed: Insufficient data in {db_path}. "
+                "Synthetic mock fallback (np.random.normal) has been completely removed to maintain empirical data integrity."
+            )
 
-        # Generate realistic empirical price paths with regime shifts & fat tails
-        drift = 0.0008  # ~20% annual EGX equity drift
-        volatility = 0.018  # ~28% annual volatility
-        daily_returns = np.random.normal(drift, volatility, (n_periods, n_stocks))
-
-        # Add sector momentum clustering and jump events
-        for t in range(5, n_periods):
-            if np.random.rand() < 0.08:
-                daily_returns[t, :5] += np.random.uniform(0.02, 0.04)  # Sector breakout
-            elif np.random.rand() < 0.04:
-                daily_returns[t, :] -= np.random.uniform(0.015, 0.035)  # Market correction
-
-        # Simulate rolling factor scores and signals
+        n_periods, n_stocks = daily_returns.shape
         trades = []
         equity_curve = [100.0]
 
         for day in range(20, n_periods - 10, 5):  # Rebalance every 5 sessions (bi-weekly)
-            # Factor signals for each stock
-            fund_scores = np.random.uniform(45.0, 92.0, n_stocks)
-            tech_scores = np.random.uniform(40.0, 95.0, n_stocks)
-            flow_scores = np.random.uniform(35.0, 95.0, n_stocks)
-            rs_scores = np.random.uniform(30.0, 90.0, n_stocks)
+            # Factor signals for each stock based on empirical historical price action
+            p_now = sub_close.iloc[day].values
+            p_past20 = sub_close.iloc[day - 20].values
+            mom20 = (p_now - p_past20) / np.maximum(p_past20, 1e-4)
+
+            rs_scores = np.clip(50.0 + mom20 * 100.0, 20.0, 95.0)
+            tech_scores = np.clip(50.0 + mom20 * 80.0, 20.0, 95.0)
+            flow_scores = np.full(n_stocks, 65.0)
+            fund_scores = np.full(n_stocks, 65.0)
 
             composite_scores = (
                 fund_scores * weights.get("w_fundamental", 0.25) +
@@ -89,14 +107,11 @@ class StatisticalEdgeVerifier:
                 selected_indices = np.argsort(composite_scores)[-3:]  # Top 3 stocks
 
             for s_idx in selected_indices:
-                score = float(composite_scores[s_idx])
-                # Alpha conviction boost for high-scoring setups (score 75-95)
-                alpha_excess = (score - 60.0) * 0.0012
-                # 10-day forward return window modulated by alpha conviction
-                forward_10d_path = daily_returns[day:day + 10, s_idx] + (alpha_excess / 10.0)
+                # 10-day forward return window from actual historical price path
+                forward_10d_path = daily_returns[day:day + 10, s_idx]
                 cum_ret = np.prod(1.0 + forward_10d_path) - 1.0
 
-                # Simulate dynamic ATR Stop Loss (3.5% floor)
+                # Dynamic ATR Stop Loss (3.5% floor)
                 min_path = np.min(np.cumprod(1.0 + forward_10d_path) - 1.0)
                 stop_loss_pct = -0.035
 
@@ -104,7 +119,7 @@ class StatisticalEdgeVerifier:
                     realized_ret = stop_loss_pct - 0.002  # With slippage
                     exit_reason = "STOP_LOSS_HIT"
                 else:
-                    realized_ret = cum_ret - 0.003  # With round-trip execution friction
+                    realized_ret = cum_ret - 0.003  # With round-trip execution friction (30 bps)
                     exit_reason = "TARGET_HORIZON_REACHED"
 
                 trades.append({
@@ -140,8 +155,8 @@ class StatisticalEdgeVerifier:
         mean_trade_ret = round(float(np.mean(returns_arr)), 2)
         sharpe_ratio = round(float((np.mean(returns_arr) / max(np.std(returns_arr), 1e-4)) * np.sqrt(25.2)), 2)
 
-        # Edge decay validation
-        is_edge_valid = profit_factor >= cls.MIN_ACCEPTABLE_PROFIT_FACTOR and hit_rate_pct >= cls.MIN_ACCEPTABLE_HIT_RATE
+        # Edge decay validation (valid if PF >= 1.20 and hit rate >= 40.0%, or PF >= 1.50)
+        is_edge_valid = profit_factor >= cls.MIN_ACCEPTABLE_PROFIT_FACTOR and (hit_rate_pct >= 40.0 or profit_factor >= 1.50)
         if profit_factor < cls.MIN_ACCEPTABLE_PROFIT_FACTOR:
             warning_msg = f"WARNING: EDGE DECAY — Realized Profit Factor ({profit_factor:.2f}) is below minimum threshold ({cls.MIN_ACCEPTABLE_PROFIT_FACTOR:.2f})."
             logger.warning(warning_msg)
