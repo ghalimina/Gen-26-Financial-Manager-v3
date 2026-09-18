@@ -6,6 +6,7 @@ __pycache__/
 scratch/
 reports/state_backups/
 data/*.db
+!data/gen26_production.db
 data/*.sqlite
 data/*.pkl
 data/*.bak
