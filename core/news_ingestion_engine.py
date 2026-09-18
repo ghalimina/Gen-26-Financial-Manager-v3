@@ -172,6 +172,8 @@ class NewsIngestionEngine:
     """
 
     PRIMARY_FEEDS = [
+        {"url": "https://news.google.com/rss/search?q=%D8%A7%D9%84%D8%A8%D9%88%D8%B1%D8%B5%D8%A9+%D8%A7%D9%84%D9%85%D8%B5%D8%B1%D9%8A%D8%A9&hl=ar&gl=EG&ceid=EG:ar", "source_name": "أخبار البورصة المصرية المجمعة (Google Finance EGX)"},
+        {"url": "https://news.google.com/rss/search?q=%D8%A3%D8%B3%D9%87%D9%85+%D9%85%D8%B5%D8%B1+EGX&hl=ar&gl=EG&ceid=EG:ar", "source_name": "رادار الأسهم والشركات المصرية (EGX Companies Radar)"},
         {"url": "https://www.mubasher.info/countries/eg/news/rss", "source_name": "مباشر مصر (Mubasher EGX)"},
         {"url": "https://almalnews.com/feed/", "source_name": "جريدة المال الاقتصادية (Al-Mal News)"},
         {"url": "https://www.mubasher.info/countries/eg/disclosures/rss", "source_name": "إفصاحات البورصة المصرية الرسمية (EGX Disclosures)"},
@@ -201,8 +203,10 @@ class NewsIngestionEngine:
 
         news_items = []
         seen_titles = set()
+        import concurrent.futures
 
-        for feed in cls.PRIMARY_FEEDS:
+        def _fetch_single_feed(feed):
+            items = []
             try:
                 req = urllib.request.Request(
                     feed["url"],
@@ -217,7 +221,18 @@ class NewsIngestionEngine:
                     for item in root.findall("./channel/item")[:20]:
                         title = item.find("title").text if item.find("title") is not None else ""
                         pub_date = item.find("pubDate").text if item.find("pubDate") is not None else ""
-                        if not title or title in seen_titles:
+                        if title:
+                            items.append((title.strip(), pub_date, feed["source_name"]))
+            except Exception:
+                pass
+            return items
+
+        with concurrent.futures.ThreadPoolExecutor(max_workers=min(len(cls.PRIMARY_FEEDS), 6)) as executor:
+            futures = [executor.submit(_fetch_single_feed, feed) for feed in cls.PRIMARY_FEEDS]
+            for fut in concurrent.futures.as_completed(futures):
+                try:
+                    for title, pub_date, source_name in fut.result():
+                        if title in seen_titles:
                             continue
                         seen_titles.add(title)
                         matched_tickers = cls._match_tickers_in_text(title)
@@ -225,13 +240,13 @@ class NewsIngestionEngine:
                             news_items.append({
                                 "news_id": f"RSS-{len(news_items)+1:03d}",
                                 "ticker": t,
-                                "headline_ar": title.strip(),
-                                "source": feed["source_name"],
+                                "headline_ar": title,
+                                "source": source_name,
                                 "published_at": pub_date or datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                 "is_mock": False
                             })
-            except Exception:
-                continue
+                except Exception:
+                    continue
 
         if news_items:
             cls._CACHE_NEWS = news_items

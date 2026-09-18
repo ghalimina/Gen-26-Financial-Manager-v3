@@ -24,7 +24,9 @@ CORE_TEST_FILES = [
     "tests/test_corporate_actions.py",
     "tests/test_egx_trading_rules_engine.py",
     "tests/test_market_data_truth.py",
-    "tests/test_direct_feed_and_anomaly.py"
+    "tests/test_direct_feed_and_anomaly.py",
+    "tests/test_forensic_audit_remediation.py",
+    "tests/test_paper_trading_orchestrator.py"
 ]
 
 

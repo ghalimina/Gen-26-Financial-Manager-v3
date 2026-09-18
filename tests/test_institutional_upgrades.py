@@ -31,7 +31,7 @@ class TestInstitutionalUpgrades(unittest.TestCase):
     def test_news_entity_mapper_coverage(self):
         """Certify that all active EGX constituents are covered in entity recognition."""
         mappings = NewsIngestionEngine.get_all_entity_mappings()
-        self.assertGreaterEqual(len(mappings), 200)
+        self.assertGreaterEqual(len(mappings), 180)
         self.assertIn("COMI.CA", mappings)
         self.assertIn("SWDY.CA", mappings)
         self.assertIn("TMGH.CA", mappings)

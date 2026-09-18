@@ -180,7 +180,7 @@ class AIGenerativeEngine:
             "generated_at": now_str,
             "market_regime": regime_clean,
             "market_regime_ar": regime_ar,
-            "headline": f"التقرير الصباحي الكمي للبورصة المصرية ({now_str.split()[0]})",
+            "headline": f"☀️ التقرير الصباحي والتحليل الاستراتيجي للسوق (توقع متوسط إلى طويل الأجل) — {now_str.split()[0]}",
             "summary_markdown": llm_briefing_text,
             "key_recommendations": key_recs,
             "macro_tactics": "التركيز على الأسهم القيادية ذات التدفقات النقدية القوية مع وضع أوامر وقف خسارة متحركة.",
@@ -419,7 +419,7 @@ class AIGenerativeEngine:
 
         stocks_table = "\n".join(stock_lines) if stock_lines else "| - | لا توجد أسهم متاحة حالياً | - | - | - | - | - |"
 
-        return f"""# ☀️ التقرير الصباحي الكمي — البورصة المصرية (EGX)
+        return f"""# ☀️ التقرير الصباحي والتحليل الاستراتيجي للسوق — البورصة المصرية (EGX)
 **تاريخ الجلسة:** `{date_today}` | **حالة السوق العامة:** {regime_ar}
 
 ---
@@ -429,7 +429,7 @@ class AIGenerativeEngine:
 
 ---
 
-### 🎯 2. أبرز الفرص الاستثمارية المرشحة كمياً اليوم
+### 🎯 2. أبرز الأسهم القيادية والاستراتيجية للجلسة (Top Strategic Core Picks)
 تم اختيار هذه القائمة بناءً على نموذج الذكاء الاصطناعي متعدد الأبعاد (الزخم السعري + التدفق النقدي + التحليل الإخباري):
 
 | # | السهم والشركة | السعر الحالي | التقييم الكمي | المستهدف الفني | وقف الخسارة | الإجراء المقترح |
@@ -570,7 +570,7 @@ class AIGenerativeEngine:
             return [
                 {"ticker": "COMI.CA", "price": 140.50, "composite_score": 92.5},
                 {"ticker": "SWDY.CA", "price": 128.00, "composite_score": 88.0},
-                {"ticker": "TMGH.CA", "price": 62.25, "composite_score": 86.4},
+                {"ticker": "TMGH.CA", "price": 97.80, "composite_score": 86.4},
                 {"ticker": "ORAS.CA", "price": 310.00, "composite_score": 84.2},
                 {"ticker": "ABUK.CA", "price": 55.80, "composite_score": 81.0}
             ]
@@ -586,7 +586,16 @@ class AIGenerativeEngine:
                 })
             elif isinstance(item, dict):
                 ticker = item.get("ticker", item.get("symbol", "EGX")).upper().strip()
-                price = float(item.get("price", item.get("current_price", item.get("close", 0.0))))
+                raw_price = item.get("price") or item.get("current_price") or item.get("close")
+                if not raw_price or float(raw_price) <= 0:
+                    try:
+                        from core.market_price_service import MarketPriceService
+                        rec = MarketPriceService.get_canonical_price_record(ticker)
+                        if rec and rec.get("price"):
+                            raw_price = rec["price"]
+                    except Exception:
+                        pass
+                price = float(raw_price) if raw_price else 100.0
                 score = float(item.get("composite_score", item.get("score", 85.0)))
                 results.append({
                     "ticker": ticker,

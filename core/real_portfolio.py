@@ -88,6 +88,36 @@ class RealPortfolioTracker:
     }
 
     @classmethod
+    def get_company_name(cls, ticker: str) -> str:
+        """Resolves company Arabic name across the entire 244-stock EGX universe."""
+        if ticker in cls.COMPANY_NAMES:
+            return cls.COMPANY_NAMES[ticker]
+        try:
+            from core.egx_universe_loader import EGXUniverseLoader
+            info = EGXUniverseLoader.get_stock_info(ticker)
+            if info and info.get("name_ar"):
+                return info["name_ar"]
+        except Exception:
+            pass
+        return ticker
+
+    @classmethod
+    def get_sector(cls, ticker: str) -> str:
+        """Resolves company sector across the entire 244-stock EGX universe."""
+        if ticker in cls.SECTOR_MAPPINGS:
+            return cls.SECTOR_MAPPINGS[ticker]
+        try:
+            from core.egx_universe_loader import EGXUniverseLoader
+            info = EGXUniverseLoader.get_stock_info(ticker)
+            if info and info.get("sector_en"):
+                return info["sector_en"]
+            if info and info.get("sector"):
+                return info["sector"]
+        except Exception:
+            pass
+        return "General"
+
+    @classmethod
     def get_initial_real_portfolio(cls) -> Dict[str, Any]:
         """Returns baseline state for user's real portfolio."""
         return {
@@ -191,9 +221,9 @@ class RealPortfolioTracker:
             new_holding = {
                 "holding_id": f"POS_{t.replace('.CA', '')}_{str(uuid.uuid4())[:6]}",
                 "ticker": t,
-                "company_name": cls.COMPANY_NAMES.get(t, t),
+                "company_name": cls.get_company_name(t),
                 "exchange": "EGX",
-                "sector": cls.SECTOR_MAPPINGS.get(t, "General"),
+                "sector": cls.get_sector(t),
                 "quantity": int(quantity),
                 "average_entry_price": float(average_entry_price),
                 "manual_notes": notes.strip(),
@@ -316,7 +346,7 @@ class RealPortfolioTracker:
             total_invested_cost += cost_basis
             total_stock_market_value += market_val
 
-            sec = h.get("sector") or cls.SECTOR_MAPPINGS.get(sym, "General")
+            sec = h.get("sector") or cls.get_sector(sym)
             sector_weights[sec] = sector_weights.get(sec, 0.0) + market_val
 
             # Model Targets & Limits
@@ -357,7 +387,7 @@ class RealPortfolioTracker:
                 "holding_id": h.get("holding_id", f"POS_{sym}"),
                 "ticker": sym,
                 "symbol": sym,
-                "company_name": h.get("company_name", cls.COMPANY_NAMES.get(sym, sym)),
+                "company_name": h.get("company_name", cls.get_company_name(sym)),
                 "sector": sec,
                 "quantity": qty,
                 "average_entry_price": entry_p,
@@ -424,3 +454,39 @@ class RealPortfolioTracker:
             "unrealized_pnl_pct": round(((total_stock_market_value - total_invested_cost) / total_invested_cost) * 100.0, 2) if total_invested_cost > 0 else 0.0,
             "risk_analysis": risk_report
         }
+
+    @classmethod
+    def update_cash_balance(cls, new_cash_egp: float) -> Dict[str, Any]:
+        """
+        Updates the free cash balance in the real portfolio and logs the audit event.
+        """
+        with cls._PORTFOLIO_LOCK:
+            try:
+                cash_val = float(new_cash_egp)
+            except (ValueError, TypeError):
+                return {"success": False, "error": "قيمة الرصيد النقدي غير صالحة."}
+
+            if cash_val < 0:
+                return {"success": False, "error": "لا يمكن أن يكون رصيد السيولة النقدية سالباً."}
+
+            portfolio = cls.load_real_portfolio()
+            old_cash = float(portfolio.get("cash_egp", 100000.0))
+            portfolio["cash_egp"] = cash_val
+            portfolio["last_updated"] = datetime.datetime.now().isoformat()
+            cls.save_real_portfolio(portfolio)
+
+            cls._log_audit_event(
+                "UPDATE_CASH",
+                "CASH_EGP",
+                {"cash_egp": old_cash},
+                {"cash_egp": cash_val},
+                f"تعديل الرصيد النقدي للمحفظة من {old_cash:,.2f} إلى {cash_val:,.2f} ج.م"
+            )
+
+            return {
+                "success": True,
+                "message": f"تم تحديث رصيد الكاش بنجاح إلى {cash_val:,.2f} ج.م",
+                "cash_egp": cash_val,
+                "old_cash_egp": old_cash
+            }
+

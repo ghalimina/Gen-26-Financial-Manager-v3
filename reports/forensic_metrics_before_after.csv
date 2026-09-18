@@ -1,0 +1,13 @@
+metric_id,component_or_signal,period,before_metric_value,before_nature,after_metric_value,after_nature,numerical_delta,remediation_verdict
+METRIC-01,P2_Breadth_Momentum,Development (2020-2024),2.605,Buggy Lookahead Net PF,2.000,Clean Trailing Net PF,-0.605,LOOKAHEAD_PURGED
+METRIC-02,P2_Breadth_Momentum,Development (2020-2024),3.180,Buggy Lookahead Gross PF,2.429,Clean Trailing Gross PF,-0.751,LOOKAHEAD_PURGED
+METRIC-03,P2_Breadth_Momentum,Development (2020-2024),57.23,Buggy Win Rate %,52.76,Clean Win Rate %,-4.47,LOOKAHEAD_PURGED
+METRIC-04,P2_Breadth_Momentum,Validation (2025),1.592,Buggy Lookahead Net PF,1.454,Clean Trailing Net PF,-0.138,LOOKAHEAD_PURGED
+METRIC-05,P2_Breadth_Momentum,Validation (2025),2.092,Buggy Lookahead Gross PF,1.924,Clean Trailing Gross PF,-0.168,LOOKAHEAD_PURGED
+METRIC-06,P2_Breadth_Momentum,Validation (2025),57.78,Buggy Win Rate %,55.71,Clean Win Rate %,-2.07,LOOKAHEAD_PURGED
+METRIC-07,BL3_Momentum,Development (2020-2024),2.138,Reported Baseline (Gross),1.821,True Net PF after 0.90% cost,-0.317,HURDLE_CORRECTED
+METRIC-08,P2_Breadth_Momentum,Full Period (2020-2025),-100.0,Sequential Compounding DD %,-23.37,Daily Calendar MTM Portfolio DD %,+76.63,ARTIFACT_ELIMINATED
+METRIC-09,Deflated_Sharpe_Ratio,Statistical Validation,0.260,Inverted Mertens Variance z-stat,4.120,Sample Observation T z-stat,+3.860,FORMULA_CORRECTED
+METRIC-10,Parameter_Stability,Statistical Validation,0.027,Static Mock Dict Coef Var,0.084,Real Historical Parametric Coef Var,+0.057,EMPIRICAL_RESTORED
+METRIC-11,Disjoint_Offset_Median,Validation (2025),2.197,Claimed Pooled Net PF,1.591,Isolated 2025 Median Net PF,-0.606,TRUTH_REVEALED
+METRIC-12,Disjoint_Hurdle_Pass_Rate,Validation (2025),100.0,Claimed Pooled Pass %,25.0,Isolated 2025 Pass % (5 of 20),-75.0,TRUTH_REVEALED

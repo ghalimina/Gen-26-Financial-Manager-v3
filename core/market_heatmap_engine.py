@@ -27,21 +27,38 @@ class MarketHeatmapEngine:
     """
 
     SECTOR_AR_MAP = {
+        # English to Canonical Arabic
         "Banking": "الخدمات المالية والبنوك",
         "Financial Services": "الخدمات المالية والبنوك",
-        "Real Estate": "العقارات والإنشاءات",
-        "Industrial": "الصناعة ومواد البناء",
-        "Fertilizers": "الموارد الأساسية والأسمدة",
-        "Petrochemicals": "الموارد الأساسية والأسمدة",
-        "Basic Materials": "الموارد الأساسية والأسمدة",
+        "Real Estate": "التطوير العقاري",
+        "Industrial": "الصناعة والمقاولات",
+        "Fertilizers": "الموارد الأساسية والكيماويات",
+        "Petrochemicals": "الموارد الأساسية والكيماويات",
+        "Basic Materials": "الموارد الأساسية والكيماويات",
         "Telecom": "الاتصالات وتكنولوجيا المعلومات",
-        "FinTech": "الاتصالات وتكنولوجيا المعلومات",
-        "Consumer Staples": "الأغذية والسلع الاستهلاكية",
+        "FinTech": "تكنولوجيا المدفوعات",
+        "Consumer Staples": "الأغذية والمشروبات والتبغ",
         "Healthcare": "الرعاية الصحية والأدوية",
-        "Energy": "الطاقة والزيوت المعدنية",
+        "Energy": "الطاقة والخدمات البترولية",
         "Automotive": "السيارات والسلع المعمرة",
         "Tourism": "السياحة والترفيه",
-        "General": "قطاعات أخرى متنوعة"
+        "General": "قطاعات أخرى متنوعة",
+
+        # Arabic Harmonization & Consolidation
+        "الأغذية والمشروبات": "الأغذية والمشروبات والتبغ",
+        "السلع الاستهلاكية": "المنسوجات والسلع الاستهلاكية",
+        "المنسوجات والسلع المعمرة": "المنسوجات والسلع الاستهلاكية",
+        "السيارات والصناعة": "السيارات والسلع المعمرة",
+        "الخدمات المالية والاستثمار": "الخدمات المالية والبنوك",
+        "الخدمات المالية غير المصرفية": "الخدمات المالية والبنوك",
+        "البتروكيماويات والطاقة": "الطاقة والخدمات البترولية",
+        "النقل واللوجستيات": "خدمات النقل والشحن واللوجستيات",
+        "مواد وبلاستيك": "مواد البناء والتشييد",
+        "العقارات والإنشاءات": "التطوير العقاري",
+        "الصناعة ومواد البناء": "الصناعة والمقاولات",
+        "الموارد الأساسية والأسمدة": "الموارد الأساسية والكيماويات",
+        "الأغذية والسلع الاستهلاكية": "الأغذية والمشروبات والتبغ",
+        "الطاقة والزيوت المعدنية": "الطاقة والخدمات البترولية"
     }
 
     @classmethod
@@ -63,17 +80,24 @@ class MarketHeatmapEngine:
             return "#dc2626"  # Dark Red 600
 
     @classmethod
-    def generate_sector_heatmap(cls) -> Dict[str, Any]:
+    def generate_sector_heatmap(cls, include_preferred: bool = False) -> Dict[str, Any]:
         """
-        Builds complete hierarchical sector heatmap tree across the 244 EGX universe.
+        Builds complete hierarchical sector heatmap tree across active Egyptian Equities.
+        Consolidates into official EGX 18 sectors and filters duplicate preferred shares.
         """
         from core.price_sync_service import PriceSyncService
         canonical_data = PriceSyncService.load_canonical_prices()
         universe_tickers = EGXUniverseLoader.get_tickers("all")
 
         sectors_dict: Dict[str, List[Dict[str, Any]]] = {}
+        processed_count = 0
 
         for ticker in universe_tickers:
+            # Filter non-tradable preferred / bonus issues unless explicitly requested
+            if not include_preferred and ('_P.CA' in ticker or '_B.CA' in ticker):
+                continue
+
+            processed_count += 1
             rec = canonical_data.get(ticker)
             if not rec:
                 price = 25.0

@@ -10,6 +10,11 @@ Generation Mode: Centralized Batch SSoT Generator (All 20 reports are generated 
 
 ---
 
+## التغييرات منذ آخر تحديث (مقارنة بنسخة 2026-09-14)
+لا توجد تغييرات في نطاق هذا الملف منذ آخر مراجعة.
+
+---
+
 ## 1. Strict Risk Invariants (Frozen Core)
 - **Mandatory Stop Loss**: Hard ceiling at **-7.0%** below entry price (`HARD_STOP_LOSS_PCT = 0.07`).
 - **Maximum Risk Per Trade**: **1.0%** of total Portfolio NAV.
@@ -27,4 +32,4 @@ Generation Mode: Centralized Batch SSoT Generator (All 20 reports are generated 
 
 ---
 
-Implementation Status: FULLY IMPLEMENTED
+Implementation Status: UNKNOWN - NOT REVIEWED IN THIS UPDATE

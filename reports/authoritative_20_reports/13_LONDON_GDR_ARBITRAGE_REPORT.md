@@ -10,6 +10,14 @@ Generation Mode: Centralized Batch SSoT Generator (All 20 reports are generated 
 
 ---
 
+## التغييرات منذ آخر تحديث (مقارنة بنسخة 2026-09-14)
+
+| الموديول المتأثر | نوع التغيير | الحالة قبل | الحالة بعد | أمر التحقق |
+|---|---|---|---|---|
+| `core/gdr_arbitrage_engine.py` | إصلاح جلب أسعار شهادات الإيداع ببورصة لندن (LSE) لـ CBKD.L و EFGD.L | خطأ delisted واعتماد قيمة Fallback ثابتة (1.71$) | قراءة إغلاقات 5 أيام حية بنجاح لسهم التجاري الدولي (2.455$) وهيرميس (1.0$) وتحديد فجوة هابطة حقيقية (-4.41%) | `python -c "from core.gdr_arbitrage_engine import GDREngine; res=GDREngine.check_single_gdr_parity('COMI.CA'); print(f'CBKD.L: {res.get("gdr_price_usd")}, Spread: {res.get("spread_pct")}%, Signal: {res.get("arbitrage_signal")}')"` |
+
+---
+
 ## 1. Dual-Listing GDR Mechanics
 - Tracks London Stock Exchange (LSE) GDR prices against Cairo EGX shares for dual-listed Egyptian equities:
   - CIB (`COMI.CA` vs `CBKD.L` — 1 GDR = 1 Local Share)
@@ -28,4 +36,4 @@ Generation Mode: Centralized Batch SSoT Generator (All 20 reports are generated 
 
 ---
 
-Implementation Status: FULLY IMPLEMENTED
+Implementation Status: VERIFIED WORKING

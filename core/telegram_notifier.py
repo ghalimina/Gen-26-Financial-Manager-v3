@@ -125,3 +125,70 @@ class TelegramNotifier:
             f"💼 ستتلقى هنا إشعارات فورية عند تحقيق أهداف أسهمك، وتنبيهات حماية وقف الخسارة، والتوزيعات النقدية."
         )
         return cls.send_message(test_msg, bot_token=bot_token, chat_id=chat_id)
+
+    @classmethod
+    def format_morning_briefing(cls, briefing_data: Dict[str, Any]) -> str:
+        """
+        Formats morning briefing dictionary into an executive Telegram HTML message.
+        """
+        import html
+        data = briefing_data or {}
+        headline = html.escape(str(data.get("headline", "☀️ التقرير الصباحي والتحليل الاستراتيجي للسوق")))
+        regime_ar = html.escape(str(data.get("market_regime_ar") or data.get("market_regime", "اتجاه صاعد (BULLISH)")))
+        date_str = str(data.get("date", datetime.date.today().strftime("%Y-%m-%d")))
+        summary = html.escape(str(data.get("summary_markdown", "استمرار الزخم الإيجابي في الأسهم القيادية مع استقرار السيولة.")))
+
+        # Optional macro indicators
+        macro_line = ""
+        try:
+            from core.cbe_rates_engine import CBERatesEngine
+            macro = CBERatesEngine.get_latest_rates()
+            corridor = float(macro.get("corridor_lending_rate", 28.25))
+            inflation = float(macro.get("headline_cpi_inflation", 14.50))
+            macro_line = f"\n🏛️ <b>فائدة المركزي:</b> {corridor:.2f}% | <b>التضخم:</b> {inflation:.2f}%\n"
+        except Exception:
+            pass
+
+        lines = [
+            f"☀️ <b>{headline}</b>",
+            f"📅 التاريخ: <code>{date_str}</code>",
+            f"🌐 حالة السوق: <b>{regime_ar}</b>{macro_line}",
+            f"━━━━━━━━━━━━━━━━━━",
+            f"📝 <b>الملخص الاستراتيجي:</b>",
+            f"<i>{summary}</i>\n",
+            f"🎯 <b>أبرز الترشيحات والفرص الاستثمارية:</b>"
+        ]
+
+        picks = data.get("key_recommendations", [])
+        if picks and isinstance(picks, list):
+            for i, p in enumerate(picks[:5], 1):
+                sym = html.escape(str(p.get("ticker", "EGX")))
+                name = html.escape(str(p.get("name_ar") or sym))
+                price = float(p.get("current_price") or p.get("price", 0.0))
+                target = float(p.get("target_price") or 0.0)
+                stop = float(p.get("stop_loss") or 0.0)
+                action = html.escape(str(p.get("action", "شراء وتجميع")))
+                score = float(p.get("composite_score") or p.get("score", 85.0))
+                lines.append(
+                    f"{i}. <b>{name} ({sym})</b> — <b>{action}</b> (تقييم: {score:.1f})\n"
+                    f"   💵 السعر: <code>{price:,.2f}</code> ج.م | 🎯 الهدف: <code>{target:,.2f}</code> | 🛑 الوقف: <code>{stop:,.2f}</code>"
+                )
+        else:
+            lines.append("<i>لا توجد مراكز شراء موصى بها حالياً وفق نماذج المخاطر.</i>")
+
+        lines.append("\n⚖️ <i>منظومة GEN-26 Institutional Trading System</i>")
+        return "\n".join(lines)
+
+    @classmethod
+    def send_morning_briefing_alert(
+        cls,
+        briefing_data: Dict[str, Any],
+        bot_token: Optional[str] = None,
+        chat_id: Optional[str] = None
+    ) -> Dict[str, Any]:
+        """
+        Dispatches the formatted morning briefing to Telegram.
+        """
+        msg_text = cls.format_morning_briefing(briefing_data)
+        return cls.send_message(msg_text, bot_token=bot_token, chat_id=chat_id, parse_mode="HTML")
+

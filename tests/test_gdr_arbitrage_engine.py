@@ -79,6 +79,31 @@ class TestGDRArbitrageEngine(unittest.TestCase):
         self.assertIn("COMI.CA", tickers)
         self.assertIn("ETEL.CA", tickers)
 
+    def test_05_ekho_usd_dual_currency_parity(self):
+        """
+        Verify EKHO.CA (quoted in USD on EGX) does not produce dimensional unit mismatch.
+        Spread must be computed in consistent units (USD vs USD or EGP vs EGP),
+        completely preventing the astronomical +6501% calculation defect.
+        """
+        res = GDRArbitrageEngine.calculate_gdr_premium(
+            cairo_ticker="EKHO.CA",
+            gdr_ticker="EKHO.L",
+            shares_per_gdr=1.0,
+            live_usd_egp=50.0,
+            override_cairo_price=0.67,  # Quoted in USD
+            override_gdr_price=0.85     # Quoted in USD
+        )
+        self.assertEqual(res["cairo_currency"], "USD")
+        self.assertEqual(res["cairo_price_usd"], 0.67)
+        self.assertEqual(res["cairo_price_egp"], 33.50)  # 0.67 * 50.0
+        self.assertEqual(res["implied_cairo_usd"], 0.85)
+        self.assertEqual(res["implied_cairo_egp"], 42.50) # 0.85 * 50.0
+        
+        # Expected spread: (0.85 - 0.67) / 0.67 * 100 = +26.87%
+        self.assertAlmostEqual(res["spread_pct"], 26.87, places=1)
+        self.assertLess(res["spread_pct"], 50.0)
+
 
 if __name__ == "__main__":
     unittest.main()
+

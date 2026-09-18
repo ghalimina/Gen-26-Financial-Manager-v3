@@ -7,6 +7,9 @@ scratch/
 reports/state_backups/
 data/*.db
 data/*.sqlite
+data/*.pkl
+data/*.bak
+daily_paper_trade_logger.py
 *.zip
 
 env/

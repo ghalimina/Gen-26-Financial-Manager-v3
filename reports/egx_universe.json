@@ -1,9 +1,9 @@
 {
-  "as_of": "2026-09-12",
+  "as_of": "2026-09-17",
   "provider": "Thndr + Egyptian Exchange Official Securities Directory",
-  "coverage_status": "FULL_UNIVERSE (244 Real Equities)",
-  "total_discovered": 244,
-  "tradable_count": 244,
+  "coverage_status": "FULL_UNIVERSE (181 Real Equities)",
+  "total_discovered": 181,
+  "tradable_count": 181,
   "suspended_count": 0,
   "illiquid_count": 0,
   "missing_data_count": 0,
@@ -1156,17 +1156,6 @@
       "status_reason": "ELIGIBLE_FOR_SCREENING"
     },
     {
-      "ticker": "MOFD.CA",
-      "name": "Mofida Food Industries",
-      "name_ar": "مفيدا للصناعات الغذائية المحفوظة",
-      "sector": "Canned Foods",
-      "sector_ar": "الأغذية والمشروبات والتبغ",
-      "isin": "EGS30211C019",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
       "ticker": "PACH.CA",
       "name": "Paints & Chemical Industries (Pachin)",
       "name_ar": "البويات والصناعات الكيماوية (باكين)",
@@ -1310,17 +1299,6 @@
       "status_reason": "ELIGIBLE_FOR_SCREENING"
     },
     {
-      "ticker": "UNAT.CA",
-      "name": "United Textiles Company",
-      "name_ar": "المتحدة للغزل والنسيج",
-      "sector": "Textiles",
-      "sector_ar": "المنسوجات والسلع الاستهلاكية",
-      "isin": "EGS32081C018",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
       "ticker": "CSAG.CA",
       "name": "Canal Shipping Agencies",
       "name_ar": "القناة للتوكيلات الملاحية",
@@ -1354,17 +1332,6 @@
       "status_reason": "ELIGIBLE_FOR_SCREENING"
     },
     {
-      "ticker": "RITV.CA",
-      "name": "Arab Radio & Transistor (Telemisr)",
-      "name_ar": "العربية للراديو والترانزستور (تليمصر)",
-      "sector": "Consumer Electronics",
-      "sector_ar": "السلع المعمرة والإلكترونيات",
-      "isin": "EGS36011C014",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
       "ticker": "ECAP.CA",
       "name": "Al Ezz Ceramics and Porcelain",
       "name_ar": "العز لصناعة السيراميك والبورسلين (الجوهرة)",
@@ -1393,17 +1360,6 @@
       "sector": "Pipes & Infrastructure",
       "sector_ar": "الصناعة والمقاولات",
       "isin": "EGS3G051C019",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "EGID.CA",
-      "name": "Egyptian Engineering Industries",
-      "name_ar": "المصرية للصناعات الهندسية والتبريد",
-      "sector": "Appliances & Engineering",
-      "sector_ar": "السلع المعمرة والإلكترونيات",
-      "isin": "EGS36051C010",
       "is_core": false,
       "status": "TRADABLE",
       "status_reason": "ELIGIBLE_FOR_SCREENING"
@@ -1475,17 +1431,6 @@
       "status_reason": "ELIGIBLE_FOR_SCREENING"
     },
     {
-      "ticker": "EGMT.CA",
-      "name": "Egyptian Metallurgical Industries",
-      "name_ar": "المصرية للصناعات المعدنية",
-      "sector": "Metals",
-      "sector_ar": "الموارد الأساسية والكيماويات",
-      "isin": "EGS34051C014",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
       "ticker": "NAHO.CA",
       "name": "Naeem Holding",
       "name_ar": "نعيم القابضة للاستثمارات",
@@ -1541,28 +1486,6 @@
       "status_reason": "ELIGIBLE_FOR_SCREENING"
     },
     {
-      "ticker": "EAST_B.CA",
-      "name": "Eastern Tobacco Preferred",
-      "name_ar": "الشرقية للأدخنة (أسهم ممتازة)",
-      "sector": "Tobacco",
-      "sector_ar": "الأغذية والمشروبات والتبغ",
-      "isin": "EGS37092C012",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "INCO.CA",
-      "name": "El Nasr Transformers (Elmako)",
-      "name_ar": "شركة النصر للمحولات والمنتجات الكهربائية (الماكو)",
-      "sector": "Electrical Transformers",
-      "sector_ar": "السلع المعمرة والإلكترونيات",
-      "isin": "EGS3G011C013",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
       "ticker": "KRDI.CA",
       "name": "Kordi for Real Estate Development",
       "name_ar": "الكردي للتنمية والاستثمار العقاري",
@@ -1591,17 +1514,6 @@
       "sector": "Real Estate",
       "sector_ar": "التطوير العقاري",
       "isin": "EGS65161C016",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "EDBM.CA",
-      "name": "Egyptian Development for Building Materials",
-      "name_ar": "المصرية لتطوير مواد البناء",
-      "sector": "Building Materials",
-      "sector_ar": "مواد البناء والتشييد",
-      "isin": "EGS3C141C012",
       "is_core": false,
       "status": "TRADABLE",
       "status_reason": "ELIGIBLE_FOR_SCREENING"
@@ -1662,67 +1574,12 @@
       "status_reason": "ELIGIBLE_FOR_SCREENING"
     },
     {
-      "ticker": "BINV_P.CA",
-      "name": "B Investments Rights",
-      "name_ar": "بي إنفستمنتس (حقوق اكتتاب)",
-      "sector": "Rights Issue",
-      "sector_ar": "الخدمات المالية والبنوك",
-      "isin": "EGS681U1R013",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "EGTI.CA",
-      "name": "Egyptian Tourism & Entertainment",
-      "name_ar": "المصرية لخدمات الترفيه والسياحة",
-      "sector": "Tourism",
-      "sector_ar": "السياحة والترفيه",
-      "isin": "EGS70101C017",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "VERT_B.CA",
-      "name": "Fert Special Fertilizers",
-      "name_ar": "فيرت للأسمدة المتخصصة",
-      "sector": "Specialty Fertilizers",
-      "sector_ar": "الموارد الأساسية والكيماويات",
-      "isin": "EGS38242C012",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
       "ticker": "MBSC.CA",
       "name": "Misr Minya Cement",
       "name_ar": "مصر لأسمنت المنيا",
       "sector": "Cement",
       "sector_ar": "مواد البناء والتشييد",
       "isin": "EGS3C121C014",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "SMPP_B.CA",
-      "name": "Egyptian Yeast and Starch",
-      "name_ar": "النشا والخميرة المصرية",
-      "sector": "Yeast & Enzymes",
-      "sector_ar": "الأغذية والمشروبات والتبغ",
-      "isin": "EGS30022C017",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "CERA_B.CA",
-      "name": "Gemma Preferred",
-      "name_ar": "الجوهرة للسيراميك (أسهم ممتازة)",
-      "sector": "Ceramics",
-      "sector_ar": "مواد البناء والتشييد",
-      "isin": "EGS3C342C011",
       "is_core": false,
       "status": "TRADABLE",
       "status_reason": "ELIGIBLE_FOR_SCREENING"
@@ -1893,17 +1750,6 @@
       "status_reason": "ELIGIBLE_FOR_SCREENING"
     },
     {
-      "ticker": "ACAP_P.CA",
-      "name": "A Capital Preferred",
-      "name_ar": "أي كابيتال (أسهم ممتازة)",
-      "sector": "Preferred Shares",
-      "sector_ar": "الخدمات المالية والبنوك",
-      "isin": "EGS69502C011",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
       "ticker": "ATLE.CA",
       "name": "Atlas for Investment & Food Industries",
       "name_ar": "أطلس للاستثمار والصناعات الغذائية",
@@ -1932,545 +1778,6 @@
       "sector": "Real Estate",
       "sector_ar": "التطوير العقاري",
       "isin": "EGS65341C018",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "MASR_P.CA",
-      "name": "Madinet Masr Rights",
-      "name_ar": "مدينة مصر (حقوق اكتتاب)",
-      "sector": "Rights Issue",
-      "sector_ar": "التطوير العقاري",
-      "isin": "EGS65081R015",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "SWDY_P.CA",
-      "name": "Elsewedy Securitization",
-      "name_ar": "السويدي (سندات توريق)",
-      "sector": "Securitized Assets",
-      "sector_ar": "الصناعة والمقاولات",
-      "isin": "EGS3G111S011",
-      "is_core": true,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "COMI_B.CA",
-      "name": "CIB GDR Equiv",
-      "name_ar": "التجاري الدولي (شهادات إيداع دولية)",
-      "sector": "GDR Equivalent",
-      "sector_ar": "الخدمات المالية والبنوك",
-      "isin": "US12504R2085",
-      "is_core": true,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "HRHO_B.CA",
-      "name": "EFG GDR Equiv",
-      "name_ar": "إي إف جي القابضة (شهادات إيداع)",
-      "sector": "GDR Equivalent",
-      "sector_ar": "الخدمات المالية والبنوك",
-      "isin": "US26844A2054",
-      "is_core": true,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "EDITA_B.CA",
-      "name": "Edita GDR Equiv",
-      "name_ar": "إيديتا (شهادات إيداع دولية)",
-      "sector": "GDR Equivalent",
-      "sector_ar": "الأغذية والمشروبات والتبغ",
-      "isin": "US28102R2078",
-      "is_core": true,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "FWRY_P.CA",
-      "name": "Fawry Rights Issue",
-      "name_ar": "فوري (حقوق اكتتاب مقيدة)",
-      "sector": "Rights Issue",
-      "sector_ar": "تكنولوجيا المدفوعات",
-      "isin": "EGS745L1R013",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "BTFH_P.CA",
-      "name": "Beltone Rights",
-      "name_ar": "بلتون القابضة (حقوق اكتتاب)",
-      "sector": "Rights Issue",
-      "sector_ar": "الخدمات المالية والبنوك",
-      "isin": "EGS691S1R010",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "TMGH_P.CA",
-      "name": "TMG Rights",
-      "name_ar": "طلعت مصطفى (حقوق مقيدة)",
-      "sector": "Rights Issue",
-      "sector_ar": "التطوير العقاري",
-      "isin": "EGS65851R014",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "PHDC_P.CA",
-      "name": "Palm Hills Rights",
-      "name_ar": "بالم هيلز (حقوق اكتتاب)",
-      "sector": "Rights Issue",
-      "sector_ar": "التطوير العقاري",
-      "isin": "EGS655L1R011",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "ORAS_B.CA",
-      "name": "Orascom Construction Nasdaq Dubai",
-      "name_ar": "أوراسكوم للإنشاء (ناسداك دبي مقاصة)",
-      "sector": "Dual Listing",
-      "sector_ar": "الصناعة والمقاولات",
-      "isin": "AEDFXA1XE5D7",
-      "is_core": true,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "ELEC_P.CA",
-      "name": "Electro Cable Rights",
-      "name_ar": "الكابلات الكهربائية (حقوق اكتتاب)",
-      "sector": "Rights Issue",
-      "sector_ar": "الصناعة والمقاولات",
-      "isin": "EGS3G081R015",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "CCAP_P.CA",
-      "name": "Qalaa Preferred",
-      "name_ar": "القلعة للاستشارات (أسهم ممتازة)",
-      "sector": "Preferred Shares",
-      "sector_ar": "الخدمات المالية والبنوك",
-      "isin": "EGS691T2C018",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "OIH_P.CA",
-      "name": "Orascom Investment Rights",
-      "name_ar": "أوراسكوم للاستثمار (حقوق)",
-      "sector": "Rights Issue",
-      "sector_ar": "الخدمات المالية والبنوك",
-      "isin": "EGS693T1R017",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "ALCN_P.CA",
-      "name": "Alex Containers Rights",
-      "name_ar": "الإسكندرية للحاويات (حقوق زيادة)",
-      "sector": "Rights Issue",
-      "sector_ar": "خدمات النقل والشحن واللوجستيات",
-      "isin": "EGS42081R013",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "POUL_P.CA",
-      "name": "Cairo Poultry Rights",
-      "name_ar": "القاهرة للدواجن (حقوق اكتتاب)",
-      "sector": "Rights Issue",
-      "sector_ar": "الأغذية والمشروبات والتبغ",
-      "isin": "EGS02021R017",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "ISPH_P.CA",
-      "name": "Ibnsina Pharma Rights",
-      "name_ar": "ابن سينا فارما (حقوق اكتتاب)",
-      "sector": "Rights Issue",
-      "sector_ar": "الرعاية الصحية والأدوية",
-      "isin": "EGS729J1R012",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "JUFO_P.CA",
-      "name": "Juhayna Rights",
-      "name_ar": "جهينة للصناعات الغذائية (حقوق)",
-      "sector": "Rights Issue",
-      "sector_ar": "الأغذية والمشروبات والتبغ",
-      "isin": "EGS30901R019",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "DOMT_P.CA",
-      "name": "Domty Rights",
-      "name_ar": "دومتي (حقوق زيادة رأس مال)",
-      "sector": "Rights Issue",
-      "sector_ar": "الأغذية والمشروبات والتبغ",
-      "isin": "EGS305B1R010",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "CICH_P.CA",
-      "name": "CI Capital Rights",
-      "name_ar": "سي آي كابيتال (حقوق مقيدة)",
-      "sector": "Rights Issue",
-      "sector_ar": "الخدمات المالية والبنوك",
-      "isin": "EGS693V1R013",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "RAYA_P.CA",
-      "name": "Raya Holding Rights",
-      "name_ar": "راية القابضة (حقوق اكتتاب)",
-      "sector": "Rights Issue",
-      "sector_ar": "الاتصالات وتكنولوجيا المعلومات",
-      "isin": "EGS70431R018",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "GBCO_P.CA",
-      "name": "GB Corp Rights",
-      "name_ar": "جي بي كورب (حقوق مقيدة)",
-      "sector": "Rights Issue",
-      "sector_ar": "السيارات والسلع المعمرة",
-      "isin": "EGS673T1R011",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "CLHO_P.CA",
-      "name": "Cleopatra Rights",
-      "name_ar": "مستشفى كليوباترا (حقوق مقيدة)",
-      "sector": "Rights Issue",
-      "sector_ar": "الرعاية الصحية والأدوية",
-      "isin": "EGS72131R010",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "ORHD_P.CA",
-      "name": "Orascom Development Rights",
-      "name_ar": "أوراسكوم للتنمية (حقوق)",
-      "sector": "Rights Issue",
-      "sector_ar": "التطوير العقاري",
-      "isin": "EGS65011R012",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "AMOC_P.CA",
-      "name": "AMOC Rights",
-      "name_ar": "أموك (حقوق زيادة رأس مال)",
-      "sector": "Rights Issue",
-      "sector_ar": "الطاقة والخدمات البترولية",
-      "isin": "EGS38321R018",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "MOIL_P.CA",
-      "name": "Maridive Rights",
-      "name_ar": "ماريديف (حقوق اكتتاب)",
-      "sector": "Rights Issue",
-      "sector_ar": "الطاقة والخدمات البترولية",
-      "isin": "EGS44011R015",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "DSCW_P.CA",
-      "name": "Dice Rights",
-      "name_ar": "دايس للملابس (حقوق مقيدة)",
-      "sector": "Rights Issue",
-      "sector_ar": "المنسوجات والسلع الاستهلاكية",
-      "isin": "EGS320A1R015",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "ACRO_P.CA",
-      "name": "Qena Cement Rights",
-      "name_ar": "مصر للأسمنت قنا (حقوق)",
-      "sector": "Rights Issue",
-      "sector_ar": "مواد البناء والتشييد",
-      "isin": "EGS3C381R017",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "HELI_P.CA",
-      "name": "Heliopolis Housing Rights",
-      "name_ar": "مصر الجديدة للإسكان (حقوق)",
-      "sector": "Rights Issue",
-      "sector_ar": "التطوير العقاري",
-      "isin": "EGS65591R016",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "ELSH_P.CA",
-      "name": "El Shorouk Printing Rights",
-      "name_ar": "الشروق للطباعة (حقوق مقيدة)",
-      "sector": "Rights Issue",
-      "sector_ar": "الطباعة والتغليف",
-      "isin": "EGS3B011R015",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "CERA_P.CA",
-      "name": "Gemma Rights",
-      "name_ar": "الجوهرة سيراميك (حقوق)",
-      "sector": "Rights Issue",
-      "sector_ar": "مواد البناء والتشييد",
-      "isin": "EGS3C341R011",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "SPMD_P.CA",
-      "name": "Speed Medical Rights",
-      "name_ar": "سبيد ميديكال (حقوق مقيدة)",
-      "sector": "Rights Issue",
-      "sector_ar": "الرعاية الصحية والأدوية",
-      "isin": "EGS729I1R013",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "KZPC_P.CA",
-      "name": "Kafr El Zayat Rights",
-      "name_ar": "كفر الزيات للمبيدات (حقوق)",
-      "sector": "Rights Issue",
-      "sector_ar": "الموارد الأساسية والكيماويات",
-      "isin": "EGS38011R019",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "PRDC_P.CA",
-      "name": "Rowad Tourism Rights",
-      "name_ar": "رواد السياحة (حقوق اكتتاب)",
-      "sector": "Rights Issue",
-      "sector_ar": "السياحة والترفيه",
-      "isin": "EGS70421R019",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "EGCH_P.CA",
-      "name": "KIMA Rights",
-      "name_ar": "كيما للأسمدة (حقوق اكتتاب)",
-      "sector": "Rights Issue",
-      "sector_ar": "الموارد الأساسية والكيماويات",
-      "isin": "EGS38081R012",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "ARAB_P.CA",
-      "name": "Arab Developers Rights",
-      "name_ar": "المطورون العرب (حقوق)",
-      "sector": "Rights Issue",
-      "sector_ar": "التطوير العقاري",
-      "isin": "EGS65A51R013",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "UNIP_P.CA",
-      "name": "Universal Packaging Rights",
-      "name_ar": "يونيفرسال للتعبئة (حقوق)",
-      "sector": "Rights Issue",
-      "sector_ar": "الطباعة والتغليف",
-      "isin": "EGS3B041R012",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "ZMID_P.CA",
-      "name": "Zahraa Maadi Rights",
-      "name_ar": "زهراء المعادي (حقوق مقيدة)",
-      "sector": "Rights Issue",
-      "sector_ar": "التطوير العقاري",
-      "isin": "EGS65101R011",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "RTVC_P.CA",
-      "name": "Remco Tourism Rights",
-      "name_ar": "رمكو للقرى السياحية (حقوق)",
-      "sector": "Rights Issue",
-      "sector_ar": "السياحة والترفيه",
-      "isin": "EGS70031R013",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "ETEL_P.CA",
-      "name": "Telecom Egypt Rights",
-      "name_ar": "المصرية للاتصالات (حقوق مقيدة)",
-      "sector": "Rights Issue",
-      "sector_ar": "الاتصالات وتكنولوجيا المعلومات",
-      "isin": "EGS48031R015",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "ABUK_P.CA",
-      "name": "Abu Qir Fertilizers Rights",
-      "name_ar": "أبو قير للأسمدة (حقوق)",
-      "sector": "Rights Issue",
-      "sector_ar": "الموارد الأساسية والكيماويات",
-      "isin": "EGS38191R019",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "MFPC_P.CA",
-      "name": "MOPCO Rights",
-      "name_ar": "موبكو للأسمدة (حقوق)",
-      "sector": "Rights Issue",
-      "sector_ar": "الموارد الأساسية والكيماويات",
-      "isin": "EGS38201R016",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "SKPC_P.CA",
-      "name": "Sidi Kerir Rights",
-      "name_ar": "سيدبك للبتروكيماويات (حقوق)",
-      "sector": "Rights Issue",
-      "sector_ar": "الموارد الأساسية والكيماويات",
-      "isin": "EGS380S1R016",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "ADIB_P.CA",
-      "name": "ADIB Egypt Rights",
-      "name_ar": "أبوظبي الإسلامي مصر (حقوق)",
-      "sector": "Rights Issue",
-      "sector_ar": "الخدمات المالية والبنوك",
-      "isin": "EGS60311R015",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "EGAL_P.CA",
-      "name": "Egypt Aluminium Rights",
-      "name_ar": "مصر للألومنيوم (حقوق زيادة)",
-      "sector": "Rights Issue",
-      "sector_ar": "الموارد الأساسية والكيماويات",
-      "isin": "EGS34031R015",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "ESRS_P.CA",
-      "name": "Ezz Steel Rights",
-      "name_ar": "حديد عز (حقوق مقيدة)",
-      "sector": "Rights Issue",
-      "sector_ar": "الموارد الأساسية والكيماويات",
-      "isin": "EGS33041R011",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "EMFD_P.CA",
-      "name": "Emaar Misr Rights",
-      "name_ar": "إعمار مصر (حقوق مقيدة)",
-      "sector": "Rights Issue",
-      "sector_ar": "التطوير العقاري",
-      "isin": "EGS655Y1R019",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "TAQA_P.CA",
-      "name": "TAQA Arabia Rights",
-      "name_ar": "طاقة عربية (حقوق زيادة)",
-      "sector": "Rights Issue",
-      "sector_ar": "الطاقة والخدمات البترولية",
-      "isin": "EGS38341R016",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "VALU_P.CA",
-      "name": "ValU Rights Issue",
-      "name_ar": "فاليو للتمويل (حقوق مقيدة)",
-      "sector": "Rights Issue",
-      "sector_ar": "الخدمات المالية والبنوك",
-      "isin": "EGS745W1R019",
-      "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
-    },
-    {
-      "ticker": "EFIH_P.CA",
-      "name": "e-finance Rights",
-      "name_ar": "إي فاينانس (حقوق زيادة)",
-      "sector": "Rights Issue",
-      "sector_ar": "تكنولوجيا المدفوعات",
-      "isin": "EGS745V1R011",
       "is_core": false,
       "status": "TRADABLE",
       "status_reason": "ELIGIBLE_FOR_SCREENING"

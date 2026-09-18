@@ -17,6 +17,7 @@
 import os
 import sys
 import json
+import time
 import uuid
 import datetime
 import logging
@@ -346,18 +347,36 @@ class EnsembleDecisionEngine:
         except Exception as e:
             logger.debug(f"JSON decision log error: {e}")
 
+    _scan_cache: List[Dict[str, Any]] = []
+    _scan_cache_time: float = 0.0
+    _SCAN_CACHE_TTL: float = 300.0
+
     @classmethod
     def scan_top_ensemble_opportunities(cls, limit: int = 10) -> List[Dict[str, Any]]:
         """
-        Scans top liquid EGX equities and ranks by ensemble consensus score.
+        Scans top liquid EGX equities and ranks by ensemble consensus score with parallel execution and caching.
         """
+        now = time.time()
+        if cls._scan_cache and (now - cls._scan_cache_time) < cls._SCAN_CACHE_TTL:
+            return cls._scan_cache[:limit]
+
+        import concurrent.futures
         from data.universe_manager import UniverseManager
-        tickers = UniverseManager.get_all_tickers()[:30] # Top 30 for high-performance scan
+        tickers = UniverseManager.get_all_tickers()[:25]
         results = []
 
-        for t in tickers:
-            res = cls.evaluate_ensemble_consensus(t, persist_decision=False)
-            results.append(res)
+        with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
+            future_to_sym = {executor.submit(cls.evaluate_ensemble_consensus, t, persist_decision=False): t for t in tickers}
+            for future in concurrent.futures.as_completed(future_to_sym):
+                try:
+                    res = future.result()
+                    if res:
+                        results.append(res)
+                except Exception:
+                    continue
 
         results.sort(key=lambda x: x["composite_score"], reverse=True)
+        if results:
+            cls._scan_cache = results
+            cls._scan_cache_time = now
         return results[:limit]
