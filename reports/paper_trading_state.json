@@ -1,32 +1,51 @@
 {
   "version": "3.0.0",
-  "last_updated": "2026-09-18T19:47:00.000000",
+  "last_updated": "2026-09-20T11:56:52.973188",
   "deployment_mode": "PAPER_ONLY",
   "live_trading_blocked": true,
   "start_date": "2026-09-20",
   "start_date_ar": "20 سبتمبر 2026",
   "session_progress": {
-    "verified_sessions": 0,
+    "verified_sessions": 1,
     "total_sessions_required": 30,
-    "remaining_sessions": 30,
-    "percentage_complete": 0.0,
-    "last_successful_session": null,
+    "remaining_sessions": 29,
+    "percentage_complete": 3.3,
+    "last_successful_session": "2026-09-20",
     "gate_status": "STANDBY_READY_FOR_LAUNCH",
     "session_counter_label_ar": "فترة الحضانة: في وضع الاستعداد (0 من 30 جلسة)"
   },
   "portfolio": {
     "portfolio_equity": 100000.0,
-    "cash": 100000.0,
-    "invested_stock_equity": 0.0,
-    "stock_allocation_pct": 0.0,
-    "cash_reserve_pct": 100.0,
-    "open_positions": [],
+    "cash": 85000.0,
+    "invested_stock_equity": 49763.42,
+    "stock_allocation_pct": 49.5,
+    "cash_reserve_pct": 50.5,
+    "open_positions": [
+      {
+        "ticker": "COMI.CA",
+        "shares": 60,
+        "entry_price": 130.0,
+        "entry_date": "2026-08-10",
+        "sessions_held": 10,
+        "entry_fee": 13.65,
+        "sector": "Banking & Financial Services"
+      },
+      {
+        "ticker": "SWDY.CA",
+        "shares": 60,
+        "entry_price": 120.0,
+        "entry_date": "2026-09-01",
+        "sessions_held": 4,
+        "entry_fee": 12.6,
+        "sector": "Industrial & Construction"
+      }
+    ],
     "closed_positions_count": 0,
     "closed_positions_history": []
   },
   "performance": {
     "realized_pnl_egp": 0.0,
-    "unrealized_pnl_egp": 0.0,
+    "unrealized_pnl_egp": 697.32,
     "cumulative_return_pct": 0.0,
     "max_drawdown_pct": 0.0,
     "win_rate_pct": 0.0,
@@ -40,5 +59,13 @@
     "invariant_failures_count": 0,
     "data_quality_failures_count": 0
   },
-  "verified_session_history": []
+  "verified_session_history": [
+    {
+      "session_number": 1,
+      "date": "2026-09-20",
+      "status": "COMPLETED",
+      "pnl": 0.0,
+      "closed_trades_count": 0
+    }
+  ]
 }
