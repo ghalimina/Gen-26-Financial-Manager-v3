@@ -143,7 +143,7 @@
     "ELNA.CA": 0,
     "ASCM.CA": 0,
     "CIRA.CA": 0,
-    "RUBX.CA": 1,
+    "RUBX.CA": 0,
     "TALM.CA": 0,
     "QNBA.CA": 0,
     "MNHD.CA": 0,
@@ -160,5 +160,5 @@
     "WDEH.CA": 0
   },
   "alerts": {},
-  "last_updated": "2026-09-20 11:53:36"
+  "last_updated": "2026-09-20 14:48:58"
 }
