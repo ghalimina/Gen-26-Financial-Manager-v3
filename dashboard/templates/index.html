@@ -6107,7 +6107,16 @@
             currentStockTicker = ticker;
 
             const select = document.getElementById('details-stock-select');
-            if (select) select.value = ticker;
+            if (select) {
+                let hasOpt = Array.from(select.options).some(o => o.value === ticker);
+                if (!hasOpt) {
+                    const opt = document.createElement('option');
+                    opt.value = ticker;
+                    opt.innerText = ticker;
+                    select.appendChild(opt);
+                }
+                select.value = ticker;
+            }
 
             const nameEl = document.getElementById('hero-company-name');
             const tickEl = document.getElementById('hero-ticker');
@@ -6118,7 +6127,67 @@
             renderTradingViewChart(ticker);
             fetchStockFundamentals(ticker);
 
-            // Fetch Deep Intelligence & Exact Live Price from /api/stocks/${ticker}
+            const heroPriceEl = document.getElementById('hero-price');
+            const detailLivePriceEl = document.getElementById('detail-live-price');
+            const mPinPrice = document.getElementById('meter-pin-price');
+
+            // 1. Instant 0-ms Local Memory Lookup
+            let preknownPrice = null;
+            let preknownName = null;
+            let preknownSector = null;
+
+            if (typeof allUniverseSecurities !== 'undefined' && allUniverseSecurities && allUniverseSecurities.length > 0) {
+                const found = allUniverseSecurities.find(s => (s.ticker === ticker || s.symbol === ticker));
+                if (found) {
+                    if (found.price || found.current_price) preknownPrice = parseFloat(found.price || found.current_price);
+                    if (found.name_ar || found.name || found.company_name) preknownName = found.name_ar || found.name || found.company_name;
+                    if (found.sector_ar || found.sector) preknownSector = found.sector_ar || found.sector;
+                }
+            }
+            if (!preknownPrice && typeof cachedRankings !== 'undefined' && cachedRankings && cachedRankings.length > 0) {
+                const found = cachedRankings.find(s => (s.ticker === ticker || s.symbol === ticker));
+                if (found) {
+                    if (found.price || found.current_price) preknownPrice = parseFloat(found.price || found.current_price);
+                    if (found.name_ar || found.name || found.company_name) preknownName = found.name_ar || found.name || found.company_name;
+                }
+            }
+
+            if (preknownName && nameEl) nameEl.innerText = preknownName;
+            if (preknownSector) {
+                const sectorEl = document.getElementById('hero-sector');
+                if (sectorEl) sectorEl.innerText = `القطاع: ${preknownSector}`;
+            }
+
+            if (preknownPrice && preknownPrice > 0) {
+                if (heroPriceEl) heroPriceEl.innerText = preknownPrice.toFixed(2);
+                if (detailLivePriceEl) detailLivePriceEl.innerText = preknownPrice.toFixed(2);
+                if (mPinPrice) mPinPrice.innerText = preknownPrice.toFixed(2);
+            } else {
+                if (heroPriceEl) heroPriceEl.innerHTML = '<i class="fa-solid fa-spinner fa-spin" style="font-size: 18px; color: var(--accent-blue);"></i>';
+                if (detailLivePriceEl) detailLivePriceEl.innerHTML = '<i class="fa-solid fa-spinner fa-spin" style="font-size: 16px; color: var(--accent-blue);"></i>';
+                if (mPinPrice) mPinPrice.innerText = '...';
+            }
+
+            // 2. Sub-millisecond Quick Price Fetch for freshest live quote
+            fetch(`/api/stocks/${encodeURIComponent(ticker)}/price`).then(r => r.json()).then(pData => {
+                if (pData && pData.current_price > 0) {
+                    const fastP = parseFloat(pData.current_price);
+                    if (heroPriceEl) heroPriceEl.innerText = fastP.toFixed(2);
+                    if (detailLivePriceEl) detailLivePriceEl.innerText = fastP.toFixed(2);
+                    if (mPinPrice) mPinPrice.innerText = fastP.toFixed(2);
+                    if (pData.name_ar && nameEl) nameEl.innerText = pData.name_ar;
+                    const sectorEl = document.getElementById('hero-sector');
+                    if (pData.sector && sectorEl) sectorEl.innerText = `القطاع: ${pData.sector}`;
+                    if (select) {
+                        const curOpt = Array.from(select.options).find(o => o.value === ticker);
+                        if (curOpt && (!curOpt.innerText.includes('—') || curOpt.innerText === ticker)) {
+                            curOpt.innerText = `${pData.name_ar} (${ticker}) — ${fastP.toFixed(2)} ج.م`;
+                        }
+                    }
+                }
+            }).catch(() => {});
+
+            // 3. Fetch Deep Intelligence & Exact Live Price from /api/stocks/${ticker}
             try {
                 const res = await fetch(`/api/stocks/${encodeURIComponent(ticker)}`);
                 if (!res.ok) throw new Error("HTTP " + res.status);
@@ -6134,11 +6203,9 @@
 
                 // 2. Display EXACT Current Price to resolve TradingView mismatch
                 const livePrice = parseFloat(data.current_price || 0.0);
-                const heroPriceEl = document.getElementById('hero-price');
-                if (heroPriceEl) heroPriceEl.innerText = livePrice.toFixed(2);
+                if (heroPriceEl && livePrice > 0) heroPriceEl.innerText = livePrice.toFixed(2);
 
-                const detailLivePriceEl = document.getElementById('detail-live-price');
-                if (detailLivePriceEl) detailLivePriceEl.innerText = livePrice.toFixed(2);
+                if (detailLivePriceEl && livePrice > 0) detailLivePriceEl.innerText = livePrice.toFixed(2);
 
                 // 3. Suggested Entry Price / Zone
                 const entryZone = data.entry_zone || `${(livePrice * 0.985).toFixed(2)} – ${(livePrice * 0.998).toFixed(2)}`;

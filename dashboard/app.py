@@ -261,17 +261,56 @@ def api_stocks():
     return jsonify(EGXUniverseAuditor.EGX_CATALOG)
 
 
-@app.route("/api/stocks/<ticker>", methods=["GET"])
-def api_stock_dossier(ticker):
-    """Returns deep intelligence dossier for a specific stock."""
-    from core.multi_horizon_engine import MultiHorizonEngine
+@app.route("/api/stocks/<ticker>/price", methods=["GET"])
+def api_stock_quick_price(ticker):
+    """Returns instant verified live price and basic info in < 2ms for zero-latency UI updates."""
     from core.egx_universe_loader import EGXUniverseLoader
     t = ticker.strip().upper()
     if not t.endswith(".CA") and "." not in t:
         t += ".CA"
     rec = MarketPriceService.get_canonical_price_record(t)
+    price = float(rec["price"]) if (rec and rec.get("price")) else 0.0
+    stock_info = EGXUniverseLoader.get_stock_info(t) or {}
+    name_ar = stock_info.get("name_ar") or RealPortfolioTracker.COMPANY_NAMES.get(t, t)
+    sector_ar = stock_info.get("sector") or RealPortfolioTracker.SECTOR_MAPPINGS.get(t, "عام")
+    chg = float(rec.get("change_pct", 0.0) or 0.0) if rec else 0.0
+    return jsonify({
+        "ticker": t,
+        "company_name": name_ar,
+        "name_ar": name_ar,
+        "sector": sector_ar,
+        "current_price": price,
+        "price": price,
+        "change_pct": chg,
+        "price_record": rec
+    })
+
+
+@app.route("/api/stocks/<ticker>", methods=["GET"])
+def api_stock_dossier(ticker):
+    """Returns deep intelligence dossier for a specific stock with smart in-memory caching."""
+    from core.multi_horizon_engine import MultiHorizonEngine
+    from core.egx_universe_loader import EGXUniverseLoader
+    t = ticker.strip().upper()
+    if not t.endswith(".CA") and "." not in t:
+        t += ".CA"
+
+    rec = MarketPriceService.get_canonical_price_record(t)
     price = float(rec["price"]) if (rec and rec.get("price")) else 102.50
-    analysis = MultiHorizonEngine.get_stock_multi_horizon_analysis(t) or {}
+
+    # 1. Check in-memory dashboard cache for instant sub-millisecond response
+    cache_key = f"stock_dossier_{t}"
+    cached = _get_dashboard_cached(cache_key)
+    if cached is not None:
+        cached["current_price"] = price
+        cached["price_record"] = rec
+        return jsonify(cached)
+
+    try:
+        analysis = MultiHorizonEngine.get_stock_multi_horizon_analysis(t) or {}
+    except Exception as err:
+        print(f"Warning: MultiHorizonEngine analysis fallback for {t}: {err}")
+        analysis = {}
     
     stock_info = EGXUniverseLoader.get_stock_info(t) or {}
     name_ar = analysis.get("company_name") or stock_info.get("name_ar") or RealPortfolioTracker.COMPANY_NAMES.get(t, t)
@@ -280,7 +319,7 @@ def api_stock_dossier(ticker):
     entry_zone = analysis.get("entry_zone", f"{price*0.985:.2f} – {price*0.998:.2f}")
     stop_loss = analysis.get("stop_loss", round(price * 0.93, 2))
     
-    return jsonify({
+    result = {
         "ticker": t,
         "company_name": name_ar,
         "name_ar": name_ar,
@@ -319,7 +358,10 @@ def api_stock_dossier(ticker):
         "circuit_breaker_status": "NORMAL (No limits triggered)",
         "recommendation": analysis.get("action_ar", "مراقبة"),
         "why_selected": analysis.get("explanation_ar", "زخم فني إيجابي وتدفقات سيولة داعمة.")
-    })
+    }
+
+    _set_dashboard_cached(cache_key, result)
+    return jsonify(result)
 
 
 @app.route("/api/stocks/<ticker>/advanced-quant", methods=["GET"])

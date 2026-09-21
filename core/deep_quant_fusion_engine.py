@@ -262,26 +262,42 @@ class DeepQuantFusionEngine:
         )
         fund_score = max(0.0, min(1.0, fund_score))
 
+        # Market Breadth Integration & Damping
+        try:
+            from core.market_breadth_engine import MarketBreadthEngine
+            breadth = MarketBreadthEngine.calculate_market_breadth()
+            ad_ratio = float(breadth.get("ad_ratio", 1.0) or 1.0)
+            breadth_regime = breadth.get("breadth_regime", "NEUTRAL")
+            breadth_multiplier = float(breadth.get("risk_multiplier", 1.0) or 1.0)
+        except Exception:
+            ad_ratio = 1.0
+            breadth_regime = "NEUTRAL"
+            breadth_multiplier = 1.0
+
+        breadth_score = min(1.0, max(0.0, ad_ratio / 1.5))
         macro_score = (
-            (1.0 if feats["gdr_implied_parity_spread_pct"] > 0 else 0.4) * 0.30 +
-            (1.0 if feats["pairs_trading_zscore"] <= 0.0 else 0.5) * 0.30 +
-            (1.0 if feats["market_regime_hmm_code"] == 1.0 else 0.5) * 0.40
+            (1.0 if feats["gdr_implied_parity_spread_pct"] > 0 else 0.4) * 0.25 +
+            (1.0 if feats["pairs_trading_zscore"] <= 0.0 else 0.5) * 0.25 +
+            (1.0 if feats["market_regime_hmm_code"] == 1.0 else 0.4) * 0.25 +
+            breadth_score * 0.25
         )
         macro_score = max(0.0, min(1.0, macro_score))
 
         nlp_score = max(0.0, min(1.0, (feats["multi_source_composite_nlp"] + 1.0) / 2.0))
 
-        primary_composite = (tech_score * 0.30) + (fund_score * 0.30) + (macro_score * 0.20) + (nlp_score * 0.20)
+        # Dynamic multi-modal weighting giving responsiveness to technicals & breadth
+        primary_composite = (tech_score * 0.35) + (fund_score * 0.25) + (macro_score * 0.25) + (nlp_score * 0.15)
 
-        if primary_composite >= 0.70:
+        # Rebalanced, breadth-aware directional thresholds (removing long-only bias)
+        if primary_composite >= 0.65 and ad_ratio >= 0.80:
             primary_direction = "BULLISH"
-            primary_return_forecast_pct = round(4.5 + (primary_composite * 6.0), 2)
-        elif primary_composite <= 0.35:
+            primary_return_forecast_pct = round(3.5 + (primary_composite * 5.0), 2)
+        elif primary_composite < 0.48 or (ad_ratio < 0.65 and primary_composite < 0.60):
             primary_direction = "BEARISH"
-            primary_return_forecast_pct = round(-3.0 - ((1.0 - primary_composite) * 4.0), 2)
+            primary_return_forecast_pct = round(-2.5 - ((0.52 - min(primary_composite, 0.52)) * 6.0), 2)
         else:
             primary_direction = "RANGEBOUND"
-            primary_return_forecast_pct = round((primary_composite - 0.5) * 3.0, 2)
+            primary_return_forecast_pct = round((primary_composite - 0.50) * 2.5, 2)
 
         # --- Stage 2: Meta-Confidence Model (Probability of Signal Success) ---
         # High F-score, high ADX trend, positive NLP, and low ATR enhance meta-confidence
@@ -295,16 +311,19 @@ class DeepQuantFusionEngine:
         vol_penalty = min(0.15, max(0.0, (feats["atr_14_pct"] - 3.5) * 0.05))
         meta_confidence_prob = round(max(0.20, min(0.98, meta_signal_alignment - vol_penalty)), 3)
 
-        # Dynamic Sizing Scaling Multiplier (De Prado Meta-Sizing)
-        if primary_direction == "BULLISH" and meta_confidence_prob >= 0.70:
-            recommended_sizing_multiplier = round(min(1.0, (meta_confidence_prob - 0.50) * 2.0), 2)
-        elif primary_direction == "BULLISH" and meta_confidence_prob >= 0.50:
-            recommended_sizing_multiplier = round(0.50 * meta_confidence_prob, 2)
+        # Dynamic Sizing Scaling Multiplier (De Prado Meta-Sizing scaled by Market Breadth)
+        if primary_direction == "BULLISH" and meta_confidence_prob >= 0.70 and ad_ratio >= 0.85:
+            recommended_sizing_multiplier = round(min(1.0, (meta_confidence_prob - 0.50) * 2.0 * breadth_multiplier), 2)
+        elif primary_direction == "BULLISH" and meta_confidence_prob >= 0.50 and ad_ratio >= 0.75:
+            recommended_sizing_multiplier = round(0.50 * meta_confidence_prob * breadth_multiplier, 2)
         else:
             recommended_sizing_multiplier = 0.0
 
         target_price = round(cp * (1.0 + (primary_return_forecast_pct / 100.0)), 2)
-        stop_loss = round(cp * (1.0 - (feats["atr_14_pct"] * 1.5 / 100.0)), 2)
+        if primary_direction == "BEARISH":
+            stop_loss = round(cp * (1.0 + (feats["atr_14_pct"] * 1.5 / 100.0)), 2)
+        else:
+            stop_loss = round(cp * (1.0 - (feats["atr_14_pct"] * 1.5 / 100.0)), 2)
 
         return {
             "status": "SUCCESS",

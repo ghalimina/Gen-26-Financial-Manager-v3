@@ -1,10 +1,16 @@
 {
   "agent_generation": "GEN-26 Quant Alpha v3.5 (Self-Improving)",
-  "total_learning_cycles": 23,
-  "cumulative_evaluated_signals": 5612,
-  "all_time_win_rate_pct": 99.6,
+  "total_learning_cycles": 24,
+  "cumulative_evaluated_signals": 5793,
+  "all_time_win_rate_pct": 52.4,
   "patterns_corrected_count": 0,
   "history": [
+    {
+      "date": "2026-09-21",
+      "win_rate_pct": 52.38,
+      "buy_signals": 0,
+      "regime": "STRONG_BULL"
+    },
     {
       "date": "2026-09-16",
       "win_rate_pct": 100.0,
@@ -144,5 +150,5 @@
       "regime": "STRONG_BULL"
     }
   ],
-  "last_updated": "2026-09-16 14:44:07"
+  "last_updated": "2026-09-21 21:20:53"
 }
