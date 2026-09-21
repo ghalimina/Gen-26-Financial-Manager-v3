@@ -3,7 +3,7 @@
     "session_id": "SESS-20260917-03",
     "session_number": 3,
     "market_date": "2026-09-17",
-    "timestamp": "2026-09-17T12:17:46.473146",
+    "timestamp": "2026-09-21T13:29:19.337427",
     "engine_version": "3.0.0",
     "status": "VERIFIED_PASS",
     "risk_incidents": []
@@ -22,73 +22,92 @@
     "top_candidates": [
       "COMI.CA",
       "SWDY.CA",
-      "TMGH.CA"
+      "TMGH.CA",
+      "ORAS.CA",
+      "ETEL.CA"
     ]
   },
   "portfolio": {
     "total_portfolio_equity": 100000.0,
-    "initial_cash": 100000.0,
-    "allocated_cash": 30000.0,
-    "remaining_free_cash": 70000.0,
-    "new_order_count": 3,
+    "initial_cash": 92966.45,
+    "allocated_cash": 39747.07,
+    "remaining_free_cash": 53219.38,
+    "new_order_count": 4,
     "allocated_orders": [
       {
         "ticker": "COMI.CA",
-        "sector": "Banking",
-        "entry_price": 100.0,
-        "stop_price": 93.0,
-        "target_shares": 100,
-        "target_capital_egp": 10000.0,
-        "target_weight_pct": 10.0,
-        "penalty_multiplier": 1.0,
-        "correlation_reason": [
-          "NO_EXISTING_POSITIONS"
-        ],
-        "max_allowed_capital_egp": 10000.0,
-        "liquidity_cap_egp": 4000000.0,
-        "sizing_reason": "Risk-Budgeted 100% Sizing (NO_EXISTING_POSITIONS)"
-      },
-      {
-        "ticker": "SWDY.CA",
-        "sector": "Industrial",
-        "entry_price": 40.0,
-        "stop_price": 37.2,
-        "target_shares": 250,
-        "target_capital_egp": 10000.0,
-        "target_weight_pct": 10.0,
+        "sector": "Banking & Financial Services",
+        "entry_price": 131.14,
+        "stop_price": 123.82,
+        "target_shares": 76,
+        "target_capital_egp": 9966.64,
+        "target_weight_pct": 9.97,
         "penalty_multiplier": 1.0,
         "correlation_reason": [
           "DIVERSIFICATION_HEALTHY"
         ],
         "max_allowed_capital_egp": 10000.0,
-        "liquidity_cap_egp": 2500000.0,
+        "liquidity_cap_egp": 45945968.27,
         "sizing_reason": "Risk-Budgeted 100% Sizing (DIVERSIFICATION_HEALTHY)"
       },
       {
         "ticker": "TMGH.CA",
         "sector": "Real Estate",
-        "entry_price": 50.0,
-        "stop_price": 46.5,
-        "target_shares": 200,
-        "target_capital_egp": 10000.0,
-        "target_weight_pct": 10.0,
+        "entry_price": 92.49,
+        "stop_price": 87.33,
+        "target_shares": 108,
+        "target_capital_egp": 9988.92,
+        "target_weight_pct": 9.99,
         "penalty_multiplier": 1.0,
         "correlation_reason": [
           "DIVERSIFICATION_HEALTHY"
         ],
         "max_allowed_capital_egp": 10000.0,
-        "liquidity_cap_egp": 2000000.0,
+        "liquidity_cap_egp": 16350689.62,
+        "sizing_reason": "Risk-Budgeted 100% Sizing (DIVERSIFICATION_HEALTHY)"
+      },
+      {
+        "ticker": "ORAS.CA",
+        "sector": "Industrial & Construction",
+        "entry_price": 822.48,
+        "stop_price": 776.55,
+        "target_shares": 12,
+        "target_capital_egp": 9869.76,
+        "target_weight_pct": 9.87,
+        "penalty_multiplier": 1.0,
+        "correlation_reason": [
+          "DIVERSIFICATION_HEALTHY"
+        ],
+        "max_allowed_capital_egp": 10000.0,
+        "liquidity_cap_egp": 7923565.5,
+        "sizing_reason": "Risk-Budgeted 100% Sizing (DIVERSIFICATION_HEALTHY)"
+      },
+      {
+        "ticker": "ETEL.CA",
+        "sector": "Telecom & Technology",
+        "entry_price": 132.29,
+        "stop_price": 124.9,
+        "target_shares": 75,
+        "target_capital_egp": 9921.75,
+        "target_weight_pct": 9.92,
+        "penalty_multiplier": 1.0,
+        "correlation_reason": [
+          "DIVERSIFICATION_HEALTHY"
+        ],
+        "max_allowed_capital_egp": 10000.0,
+        "liquidity_cap_egp": 18738724.56,
         "sizing_reason": "Risk-Budgeted 100% Sizing (DIVERSIFICATION_HEALTHY)"
       }
     ],
     "projected_portfolio_concentration": {
-      "total_invested_weight": 0.3,
-      "cash_reserve_weight": 0.7,
-      "herfindahl_hirschman_index": 300.0,
+      "total_invested_weight": 0.473,
+      "cash_reserve_weight": 0.527,
+      "herfindahl_hirschman_index": 451.6,
       "sector_exposures": {
-        "Banking": 0.1,
-        "Industrial": 0.1,
-        "Real Estate": 0.1
+        "Industrial & Construction": 0.174,
+        "Banking & Financial Services": 0.1,
+        "Real Estate": 0.1,
+        "Telecom & Technology": 0.099
       },
       "stock_violations": [],
       "sector_violations": [],
@@ -99,51 +118,76 @@
   "execution": {
     "fills": [
       {
-        "order_id": "PAPER-5914B3A5",
+        "order_id": "PAPER-B11D3968",
+        "symbol": "COMI.CA",
+        "side": "SELL",
+        "quantity": 60,
+        "requested_price": 133.14,
+        "fill_price": 133.007,
+        "fee": 13.97,
+        "order_type": "LIMIT",
+        "status": "FILLED",
+        "timestamp": "2026-09-21T13:29:19.336419"
+      },
+      {
+        "order_id": "PAPER-C5D6B647",
         "symbol": "COMI.CA",
         "side": "BUY",
-        "quantity": 100,
-        "requested_price": 100.0,
-        "fill_price": 100.1,
-        "fee": 17.52,
+        "quantity": 76,
+        "requested_price": 131.14,
+        "fill_price": 131.271,
+        "fee": 17.46,
         "order_type": "LIMIT",
         "status": "FILLED",
-        "timestamp": "2026-09-17T12:17:46.472033"
+        "timestamp": "2026-09-21T13:29:19.336541"
       },
       {
-        "order_id": "PAPER-EE2D5FFF",
-        "symbol": "SWDY.CA",
-        "side": "BUY",
-        "quantity": 250,
-        "requested_price": 40.0,
-        "fill_price": 40.04,
-        "fee": 17.52,
-        "order_type": "LIMIT",
-        "status": "FILLED",
-        "timestamp": "2026-09-17T12:17:46.472064"
-      },
-      {
-        "order_id": "PAPER-F07F047F",
+        "order_id": "PAPER-37156DD4",
         "symbol": "TMGH.CA",
         "side": "BUY",
-        "quantity": 200,
-        "requested_price": 50.0,
-        "fill_price": 50.05,
-        "fee": 17.52,
+        "quantity": 108,
+        "requested_price": 92.49,
+        "fill_price": 92.582,
+        "fee": 17.5,
         "order_type": "LIMIT",
         "status": "FILLED",
-        "timestamp": "2026-09-17T12:17:46.472085"
+        "timestamp": "2026-09-21T13:29:19.336559"
+      },
+      {
+        "order_id": "PAPER-5079896D",
+        "symbol": "ORAS.CA",
+        "side": "BUY",
+        "quantity": 12,
+        "requested_price": 822.48,
+        "fill_price": 823.302,
+        "fee": 17.29,
+        "order_type": "LIMIT",
+        "status": "FILLED",
+        "timestamp": "2026-09-21T13:29:19.336574"
+      },
+      {
+        "order_id": "PAPER-3EC9C274",
+        "symbol": "ETEL.CA",
+        "side": "BUY",
+        "quantity": 75,
+        "requested_price": 132.29,
+        "fill_price": 132.422,
+        "fee": 17.38,
+        "order_type": "LIMIT",
+        "status": "FILLED",
+        "timestamp": "2026-09-21T13:29:19.336586"
       }
     ]
   },
   "risk": {
-    "cash_after": 69917.44,
-    "stock_allocation_pct": 30.0,
-    "equity_after": 100500.0
+    "cash_after": 53110.09,
+    "stock_allocation_pct": 47.4,
+    "equity_after": 100988.23
   },
   "outcome": {
-    "realized_pnl_egp": 500.0,
-    "unrealized_pnl_egp": 0.0,
+    "realized_pnl_egp": 117.35,
+    "unrealized_pnl_egp": 891.41,
+    "closed_trades_count": 1,
     "benchmark_return_pct": 0.45
   }
 }

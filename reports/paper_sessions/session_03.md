@@ -2,7 +2,7 @@
 
 **Session ID:** `SESS-20260917-03`  
 **Market Date:** `2026-09-17`  
-**Timestamp:** `2026-09-17T12:17:46.473146`  
+**Timestamp:** `2026-09-21T13:29:19.337427`  
 **Session Status:** `VERIFIED_PASS`  
 
 ---
@@ -18,14 +18,14 @@
 - **Excluded Assets:** `0` (None)
 
 ## 3. Portfolio Allocation & Sizing
-- **Invested Stock Allocation:** `30.0%` (Max Allowed: 65.0%)
+- **Invested Stock Allocation:** `47.4%` (Max Allowed: 65.0%)
 - **Free Cash Reserve:** `100.0%` (Min Required: 35.0%)
-- **Total Portfolio Equity:** `100,500.00 EGP`
-- **Allocated Orders:** `3`
+- **Total Portfolio Equity:** `100,988.23 EGP`
+- **Allocated Orders:** `4`
 
 ## 4. Execution & Risk Audit
 - **Cash Solvency:** `PASS`
-- **Simulated Realized P&L:** `+500.00 EGP`
-- **Unrealized P&L:** `+0.00 EGP`
+- **Simulated Realized P&L:** `+117.35 EGP`
+- **Unrealized P&L:** `+891.41 EGP`
 - **Benchmark (EGX30) Return:** `+0.45%`
 - **Risk Incidents:** `None (Clean Run)`

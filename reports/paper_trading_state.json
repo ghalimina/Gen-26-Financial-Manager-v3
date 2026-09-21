@@ -1,25 +1,25 @@
 {
   "version": "3.0.0",
-  "last_updated": "2026-09-20T15:01:20.656417",
+  "last_updated": "2026-09-21T13:29:19.338129",
   "deployment_mode": "PAPER_ONLY",
   "live_trading_blocked": true,
   "start_date": "2026-09-20",
   "start_date_ar": "20 سبتمبر 2026",
   "session_progress": {
-    "verified_sessions": 1,
+    "verified_sessions": 2,
     "total_sessions_required": 30,
-    "remaining_sessions": 29,
-    "percentage_complete": 3.3,
-    "last_successful_session": "2026-09-20",
+    "remaining_sessions": 28,
+    "percentage_complete": 6.7,
+    "last_successful_session": "2026-09-21",
     "gate_status": "STANDBY_READY_FOR_LAUNCH",
     "session_counter_label_ar": "فترة الحضانة: في وضع الاستعداد (0 من 30 جلسة)"
   },
   "portfolio": {
     "portfolio_equity": 100000.0,
     "cash": 85000.0,
-    "invested_stock_equity": 49763.42,
-    "stock_allocation_pct": 49.5,
-    "cash_reserve_pct": 50.5,
+    "invested_stock_equity": 47878.14,
+    "stock_allocation_pct": 47.4,
+    "cash_reserve_pct": 52.6,
     "open_positions": [
       {
         "ticker": "COMI.CA",
@@ -45,7 +45,7 @@
   },
   "performance": {
     "realized_pnl_egp": 0.0,
-    "unrealized_pnl_egp": 697.32,
+    "unrealized_pnl_egp": 891.41,
     "cumulative_return_pct": 0.0,
     "max_drawdown_pct": 0.0,
     "win_rate_pct": 0.0,
@@ -66,6 +66,13 @@
       "status": "COMPLETED",
       "pnl": 0.0,
       "closed_trades_count": 0
+    },
+    {
+      "session_number": 2,
+      "date": "2026-09-21",
+      "status": "COMPLETED",
+      "pnl": 117.35,
+      "closed_trades_count": 1
     }
   ]
 }

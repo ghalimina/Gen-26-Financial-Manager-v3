@@ -30,5 +30,13 @@
     "start_time": "2026-09-20T11:54:14.215988",
     "completed_at": "2026-09-20T11:54:14.228419",
     "data_status": "VALID"
+  },
+  {
+    "session_id": "SESS_20260921_005",
+    "date": "2026-09-21",
+    "status": "COMPLETED",
+    "start_time": "2026-09-21T13:26:47.653387",
+    "completed_at": "2026-09-21T13:26:47.663625",
+    "data_status": "VALID"
   }
 ]
