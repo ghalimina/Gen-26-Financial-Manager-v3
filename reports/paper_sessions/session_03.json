@@ -3,7 +3,7 @@
     "session_id": "SESS-20260917-03",
     "session_number": 3,
     "market_date": "2026-09-17",
-    "timestamp": "2026-09-21T13:29:19.337427",
+    "timestamp": "2026-09-21T17:13:37.675237",
     "engine_version": "3.0.0",
     "status": "VERIFIED_PASS",
     "risk_incidents": []
@@ -118,7 +118,7 @@
   "execution": {
     "fills": [
       {
-        "order_id": "PAPER-B11D3968",
+        "order_id": "PAPER-1230D904",
         "symbol": "COMI.CA",
         "side": "SELL",
         "quantity": 60,
@@ -127,10 +127,10 @@
         "fee": 13.97,
         "order_type": "LIMIT",
         "status": "FILLED",
-        "timestamp": "2026-09-21T13:29:19.336419"
+        "timestamp": "2026-09-21T17:13:37.674434"
       },
       {
-        "order_id": "PAPER-C5D6B647",
+        "order_id": "PAPER-4E13D112",
         "symbol": "COMI.CA",
         "side": "BUY",
         "quantity": 76,
@@ -139,10 +139,10 @@
         "fee": 17.46,
         "order_type": "LIMIT",
         "status": "FILLED",
-        "timestamp": "2026-09-21T13:29:19.336541"
+        "timestamp": "2026-09-21T17:13:37.674557"
       },
       {
-        "order_id": "PAPER-37156DD4",
+        "order_id": "PAPER-DEE8FB44",
         "symbol": "TMGH.CA",
         "side": "BUY",
         "quantity": 108,
@@ -151,10 +151,10 @@
         "fee": 17.5,
         "order_type": "LIMIT",
         "status": "FILLED",
-        "timestamp": "2026-09-21T13:29:19.336559"
+        "timestamp": "2026-09-21T17:13:37.674573"
       },
       {
-        "order_id": "PAPER-5079896D",
+        "order_id": "PAPER-49763570",
         "symbol": "ORAS.CA",
         "side": "BUY",
         "quantity": 12,
@@ -163,10 +163,10 @@
         "fee": 17.29,
         "order_type": "LIMIT",
         "status": "FILLED",
-        "timestamp": "2026-09-21T13:29:19.336574"
+        "timestamp": "2026-09-21T17:13:37.674584"
       },
       {
-        "order_id": "PAPER-3EC9C274",
+        "order_id": "PAPER-42C53814",
         "symbol": "ETEL.CA",
         "side": "BUY",
         "quantity": 75,
@@ -175,7 +175,7 @@
         "fee": 17.38,
         "order_type": "LIMIT",
         "status": "FILLED",
-        "timestamp": "2026-09-21T13:29:19.336586"
+        "timestamp": "2026-09-21T17:13:37.674593"
       }
     ]
   },
