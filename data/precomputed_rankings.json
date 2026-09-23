@@ -1,12 +1,12 @@
 {
-  "timestamp": "2026-09-22 15:38:45",
-  "mtime": 1790091525.060002,
+  "timestamp": "2026-09-23 12:22:53",
+  "mtime": 1790166173.4650488,
   "core": [
     {
       "ticker": "EGAL.CA",
       "company_name": "مصر للألومنيوم",
       "sector": "الموارد الأساسية والكيماويات",
-      "current_price": 366.0,
+      "current_price": 360.81,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -47,7 +47,7 @@
       "valid_until": "2026-09-15 20:26:44",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 340.38,
+      "stop_loss": 335.55,
       "short_term_score": 88.0,
       "medium_term_score": 87.0,
       "long_term_score": 88.0,
@@ -892,14 +892,14 @@
       "rank": 1,
       "portfolio_cluster_risk": "HIGH_CONCENTRATION",
       "portfolio_cluster_risk_ar": "⚠️ مخاطرة تكدس مرتفعة: الأسهم المختارة شديدة الارتباط، ينصح بتوزيع السيولة على قطاعات أخرى.",
-      "price": 366.0,
-      "target_price": 397.11
+      "price": 360.81,
+      "target_price": 391.48
     },
     {
       "ticker": "ADIB.CA",
       "company_name": "مصرف أبو ظبي الإسلامي - مصر",
       "sector": "الخدمات المالية والبنوك",
-      "current_price": 52.45,
+      "current_price": 51.82,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -940,7 +940,7 @@
       "valid_until": "2026-09-15 20:26:44",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 48.78,
+      "stop_loss": 48.19,
       "short_term_score": 87.0,
       "medium_term_score": 87.0,
       "long_term_score": 88.0,
@@ -1776,14 +1776,14 @@
       "rank": 2,
       "portfolio_cluster_risk": "HIGH_CONCENTRATION",
       "portfolio_cluster_risk_ar": "⚠️ مخاطرة تكدس مرتفعة: الأسهم المختارة شديدة الارتباط، ينصح بتوزيع السيولة على قطاعات أخرى.",
-      "price": 52.45,
-      "target_price": 56.91
+      "price": 51.82,
+      "target_price": 56.22
     },
     {
       "ticker": "ETEL.CA",
       "company_name": "المصرية للاتصالات (WE)",
       "sector": "الاتصالات وتكنولوجيا المعلومات",
-      "current_price": 137.5,
+      "current_price": 138.06,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -1824,7 +1824,7 @@
       "valid_until": "2026-09-15 20:26:43",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 127.88,
+      "stop_loss": 128.4,
       "short_term_score": 82.0,
       "medium_term_score": 83.0,
       "long_term_score": 81.0,
@@ -2663,14 +2663,14 @@
       "rank": 3,
       "portfolio_cluster_risk": "HIGH_CONCENTRATION",
       "portfolio_cluster_risk_ar": "⚠️ مخاطرة تكدس مرتفعة: الأسهم المختارة شديدة الارتباط، ينصح بتوزيع السيولة على قطاعات أخرى.",
-      "price": 137.5,
-      "target_price": 149.19
+      "price": 138.06,
+      "target_price": 149.8
     },
     {
       "ticker": "MFPC.CA",
       "company_name": "مصر لإنتاج الأسمدة (موبكو)",
       "sector": "الموارد الأساسية والكيماويات",
-      "current_price": 48.99,
+      "current_price": 47.5,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -2711,7 +2711,7 @@
       "valid_until": "2026-09-15 20:26:46",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 45.56,
+      "stop_loss": 44.18,
       "short_term_score": 76.0,
       "medium_term_score": 71.0,
       "long_term_score": 75.0,
@@ -3556,14 +3556,14 @@
       "rank": 4,
       "portfolio_cluster_risk": "HIGH_CONCENTRATION",
       "portfolio_cluster_risk_ar": "⚠️ مخاطرة تكدس مرتفعة: الأسهم المختارة شديدة الارتباط، ينصح بتوزيع السيولة على قطاعات أخرى.",
-      "price": 48.99,
-      "target_price": 53.15
+      "price": 47.5,
+      "target_price": 51.54
     },
     {
       "ticker": "COMI.CA",
       "company_name": "البنك التجاري الدولي (CIB)",
       "sector": "الخدمات المالية والبنوك",
-      "current_price": 131.5,
+      "current_price": 128.1,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -3604,7 +3604,7 @@
       "valid_until": "2026-09-15 20:26:44",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 122.3,
+      "stop_loss": 119.13,
       "short_term_score": 88.0,
       "medium_term_score": 82.0,
       "long_term_score": 84.0,
@@ -4443,14 +4443,14 @@
       "rank": 5,
       "portfolio_cluster_risk": "HIGH_CONCENTRATION",
       "portfolio_cluster_risk_ar": "⚠️ مخاطرة تكدس مرتفعة: الأسهم المختارة شديدة الارتباط، ينصح بتوزيع السيولة على قطاعات أخرى.",
-      "price": 131.5,
-      "target_price": 142.68
+      "price": 128.1,
+      "target_price": 138.99
     },
     {
       "ticker": "TMGH.CA",
       "company_name": "مجموعة طلعت مصطفى",
       "sector": "التطوير العقاري",
-      "current_price": 94.27,
+      "current_price": 92.8,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -4491,7 +4491,7 @@
       "valid_until": "2026-09-15 20:26:50",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 87.67,
+      "stop_loss": 86.3,
       "short_term_score": 87.0,
       "medium_term_score": 82.0,
       "long_term_score": 81.0,
@@ -5319,14 +5319,14 @@
         "expected_twin_return_pct": -1.07
       },
       "rank": 6,
-      "price": 94.27,
-      "target_price": 102.28
+      "price": 92.8,
+      "target_price": 100.69
     },
     {
       "ticker": "ABUK.CA",
       "company_name": "أبو قير للأسمدة",
       "sector": "الموارد الأساسية والكيماويات",
-      "current_price": 93.7,
+      "current_price": 92.88,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -5367,7 +5367,7 @@
       "valid_until": "2026-09-15 20:26:44",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 87.14,
+      "stop_loss": 86.38,
       "short_term_score": 69.0,
       "medium_term_score": 65.0,
       "long_term_score": 69.0,
@@ -6210,14 +6210,14 @@
         "expected_twin_return_pct": 0.1
       },
       "rank": 7,
-      "price": 93.7,
-      "target_price": 101.66
+      "price": 92.88,
+      "target_price": 100.77
     },
     {
       "ticker": "EFIH.CA",
       "company_name": "إي فاينانس للاستثمارات المالية والرقمية",
       "sector": "تكنولوجيا المدفوعات",
-      "current_price": 22.97,
+      "current_price": 23.32,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -6258,7 +6258,7 @@
       "valid_until": "2026-09-15 20:26:45",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 21.36,
+      "stop_loss": 21.69,
       "short_term_score": 68.0,
       "medium_term_score": 69.0,
       "long_term_score": 67.0,
@@ -7083,14 +7083,14 @@
         "expected_twin_return_pct": -1.05
       },
       "rank": 8,
-      "price": 22.97,
-      "target_price": 24.92
+      "price": 23.32,
+      "target_price": 25.3
     },
     {
       "ticker": "EAST.CA",
       "company_name": "الشرقية للدخان (إيسترن كومباني)",
       "sector": "السلع الاستهلاكية",
-      "current_price": 31.78,
+      "current_price": 31.74,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -7131,7 +7131,7 @@
       "valid_until": "2026-09-15 20:26:44",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 29.56,
+      "stop_loss": 29.52,
       "short_term_score": 68.0,
       "medium_term_score": 68.0,
       "long_term_score": 69.0,
@@ -7956,14 +7956,14 @@
         "expected_twin_return_pct": -0.82
       },
       "rank": 9,
-      "price": 31.78,
-      "target_price": 34.48
+      "price": 31.74,
+      "target_price": 34.44
     },
     {
       "ticker": "JUFO.CA",
       "company_name": "جهينة للصناعات الغذائية",
       "sector": "الأغذية والمشروبات",
-      "current_price": 27.01,
+      "current_price": 26.83,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -8004,7 +8004,7 @@
       "valid_until": "2026-09-15 20:26:44",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 25.12,
+      "stop_loss": 24.95,
       "short_term_score": 71.0,
       "medium_term_score": 74.0,
       "long_term_score": 70.0,
@@ -8829,14 +8829,14 @@
         "expected_twin_return_pct": -0.6
       },
       "rank": 10,
-      "price": 27.01,
-      "target_price": 29.31
+      "price": 26.83,
+      "target_price": 29.11
     },
     {
       "ticker": "ORAS.CA",
       "company_name": "أوراسكوم للإنشاء",
       "sector": "الصناعة والمقاولات",
-      "current_price": 841.0,
+      "current_price": 835.72,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -8877,7 +8877,7 @@
       "valid_until": "2026-09-15 20:26:44",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 782.13,
+      "stop_loss": 777.22,
       "short_term_score": 70.0,
       "medium_term_score": 65.0,
       "long_term_score": 65.0,
@@ -9702,14 +9702,14 @@
         "expected_twin_return_pct": 0.04
       },
       "rank": 11,
-      "price": 841.0,
-      "target_price": 912.49
+      "price": 835.72,
+      "target_price": 906.76
     },
     {
       "ticker": "AMOC.CA",
       "company_name": "الإسكندرية للزيوت المعدنية (أموك)",
       "sector": "البتروكيماويات والطاقة",
-      "current_price": 13.5,
+      "current_price": 13.4,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -9750,7 +9750,7 @@
       "valid_until": "2026-09-15 20:26:44",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 12.56,
+      "stop_loss": 12.46,
       "short_term_score": 65.0,
       "medium_term_score": 64.0,
       "long_term_score": 65.0,
@@ -10575,14 +10575,14 @@
         "expected_twin_return_pct": -0.98
       },
       "rank": 12,
-      "price": 13.5,
-      "target_price": 14.65
+      "price": 13.4,
+      "target_price": 14.54
     },
     {
       "ticker": "EMFD.CA",
       "company_name": "إعمار مصر للتنمية",
       "sector": "التطوير العقاري",
-      "current_price": 13.48,
+      "current_price": 13.39,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -10623,7 +10623,7 @@
       "valid_until": "2026-09-15 20:26:44",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 12.54,
+      "stop_loss": 12.45,
       "short_term_score": 68.0,
       "medium_term_score": 65.0,
       "long_term_score": 66.0,
@@ -11454,14 +11454,14 @@
         "expected_twin_return_pct": -1.05
       },
       "rank": 13,
-      "price": 13.48,
-      "target_price": 14.63
+      "price": 13.39,
+      "target_price": 14.53
     },
     {
       "ticker": "SWDY.CA",
       "company_name": "السويدي إليكتريك",
       "sector": "الصناعة والمقاولات",
-      "current_price": 125.59,
+      "current_price": 124.0,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -11502,7 +11502,7 @@
       "valid_until": "2026-09-15 20:26:52",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 116.8,
+      "stop_loss": 115.32,
       "short_term_score": 86.0,
       "medium_term_score": 81.0,
       "long_term_score": 81.0,
@@ -12336,14 +12336,14 @@
         "expected_twin_return_pct": -0.96
       },
       "rank": 14,
-      "price": 125.59,
-      "target_price": 136.27
+      "price": 124.0,
+      "target_price": 134.54
     },
     {
       "ticker": "ISPH.CA",
       "company_name": "ابن سينا فارما",
       "sector": "الرعاية الصحية والأدوية",
-      "current_price": 12.2,
+      "current_price": 12.02,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -12384,7 +12384,7 @@
       "valid_until": "2026-09-15 20:26:44",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 11.35,
+      "stop_loss": 11.18,
       "short_term_score": 73.0,
       "medium_term_score": 75.0,
       "long_term_score": 70.0,
@@ -13209,14 +13209,14 @@
         "expected_twin_return_pct": -0.6
       },
       "rank": 15,
-      "price": 12.2,
-      "target_price": 13.24
+      "price": 12.02,
+      "target_price": 13.04
     },
     {
       "ticker": "BTFH.CA",
       "company_name": "بلتون القابضة",
       "sector": "الخدمات المالية غير المصرفية",
-      "current_price": 2.92,
+      "current_price": 2.88,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -13257,7 +13257,7 @@
       "valid_until": "2026-09-15 20:26:44",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 2.72,
+      "stop_loss": 2.68,
       "short_term_score": 82.0,
       "medium_term_score": 81.0,
       "long_term_score": 76.0,
@@ -14088,14 +14088,14 @@
         "expected_twin_return_pct": -0.41
       },
       "rank": 16,
-      "price": 2.92,
-      "target_price": 3.17
+      "price": 2.88,
+      "target_price": 3.12
     },
     {
       "ticker": "FWRY.CA",
       "company_name": "فوري لتكنولوجيا المدفوعات الإلكترونية",
       "sector": "تكنولوجيا المدفوعات",
-      "current_price": 18.93,
+      "current_price": 18.9,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -14136,7 +14136,7 @@
       "valid_until": "2026-09-15 20:26:45",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 17.6,
+      "stop_loss": 17.58,
       "short_term_score": 79.0,
       "medium_term_score": 71.0,
       "long_term_score": 72.0,
@@ -14961,14 +14961,14 @@
         "expected_twin_return_pct": 0.67
       },
       "rank": 17,
-      "price": 18.93,
-      "target_price": 20.54
+      "price": 18.9,
+      "target_price": 20.51
     },
     {
       "ticker": "GBCO.CA",
       "company_name": "جي بي كورب (غبور أوتو)",
       "sector": "السيارات والصناعة",
-      "current_price": 30.74,
+      "current_price": 31.11,
       "price_source": "YFINANCE_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -15009,7 +15009,7 @@
       "valid_until": "2026-09-15 20:26:46",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 28.59,
+      "stop_loss": 28.93,
       "short_term_score": 76.0,
       "medium_term_score": 69.0,
       "long_term_score": 69.0,
@@ -15837,14 +15837,14 @@
         "expected_twin_return_pct": 0.58
       },
       "rank": 18,
-      "price": 30.74,
-      "target_price": 33.35
+      "price": 31.11,
+      "target_price": 33.75
     },
     {
       "ticker": "DOMT.CA",
       "company_name": "الصناعات الغذائية العربية (دومتي)",
       "sector": "الأغذية والمشروبات",
-      "current_price": 26.47,
+      "current_price": 26.01,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -15885,7 +15885,7 @@
       "valid_until": "2026-09-15 20:26:42",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 24.62,
+      "stop_loss": 24.19,
       "short_term_score": 66.0,
       "medium_term_score": 60.0,
       "long_term_score": 61.0,
@@ -16555,14 +16555,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 19,
-      "price": 26.47,
-      "target_price": 28.72
+      "price": 26.01,
+      "target_price": 28.22
     },
     {
       "ticker": "HRHO.CA",
       "company_name": "مجموعة إي إف جي القابضة (هيرميس)",
       "sector": "الخدمات المالية غير المصرفية",
-      "current_price": 24.6,
+      "current_price": 24.41,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -16603,7 +16603,7 @@
       "valid_until": "2026-09-15 20:26:47",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 22.88,
+      "stop_loss": 22.7,
       "short_term_score": 52.0,
       "medium_term_score": 50.0,
       "long_term_score": 48.0,
@@ -17265,14 +17265,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 20,
-      "price": 24.6,
-      "target_price": 26.69
+      "price": 24.41,
+      "target_price": 26.48
     },
     {
       "ticker": "HELI.CA",
       "company_name": "مصر الجديدة للإسكان والتعمير",
       "sector": "التطوير العقاري",
-      "current_price": 8.2,
+      "current_price": 7.9,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -17313,7 +17313,7 @@
       "valid_until": "2026-09-15 20:26:44",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 7.63,
+      "stop_loss": 7.35,
       "short_term_score": 32.0,
       "medium_term_score": 33.0,
       "long_term_score": 28.0,
@@ -17996,14 +17996,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 21,
-      "price": 8.2,
-      "target_price": 8.9
+      "price": 7.9,
+      "target_price": 8.57
     },
     {
       "ticker": "PHDC.CA",
       "company_name": "بالم هيلز للتعمير",
       "sector": "التطوير العقاري",
-      "current_price": 13.44,
+      "current_price": 13.46,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -18044,7 +18044,7 @@
       "valid_until": "2026-09-15 20:26:31",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 12.5,
+      "stop_loss": 12.52,
       "short_term_score": 42.0,
       "medium_term_score": 39.0,
       "long_term_score": 37.0,
@@ -18714,14 +18714,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 22,
-      "price": 13.44,
-      "target_price": 14.58
+      "price": 13.46,
+      "target_price": 14.6
     },
     {
       "ticker": "RAYA.CA",
       "company_name": "راية القابضة للاستثمارات المالية",
       "sector": "الاتصالات وتكنولوجيا المعلومات",
-      "current_price": 7.0,
+      "current_price": 7.05,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -18762,7 +18762,7 @@
       "valid_until": "2026-09-15 20:26:44",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 6.51,
+      "stop_loss": 6.56,
       "short_term_score": 57.0,
       "medium_term_score": 52.0,
       "long_term_score": 47.0,
@@ -19438,14 +19438,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 23,
-      "price": 7.0,
-      "target_price": 7.59
+      "price": 7.05,
+      "target_price": 7.65
     },
     {
       "ticker": "CCAP.CA",
       "company_name": "القلعة للاستشارات المالية",
       "sector": "الخدمات المالية والاستثمار",
-      "current_price": 7.21,
+      "current_price": 7.08,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -19486,7 +19486,7 @@
       "valid_until": "2026-09-15 20:26:51",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 6.71,
+      "stop_loss": 6.58,
       "short_term_score": 56.0,
       "medium_term_score": 49.0,
       "long_term_score": 40.0,
@@ -20168,8 +20168,8 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 24,
-      "price": 7.21,
-      "target_price": 7.82
+      "price": 7.08,
+      "target_price": 7.68
     }
   ],
   "all": [
@@ -20177,7 +20177,7 @@
       "ticker": "EGAL.CA",
       "company_name": "مصر للألومنيوم",
       "sector": "الموارد الأساسية والكيماويات",
-      "current_price": 366.0,
+      "current_price": 360.81,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -20218,7 +20218,7 @@
       "valid_until": "2026-09-15 20:27:01",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 340.38,
+      "stop_loss": 335.55,
       "short_term_score": 88.0,
       "medium_term_score": 87.0,
       "long_term_score": 88.0,
@@ -21063,14 +21063,14 @@
       "rank": 1,
       "portfolio_cluster_risk": "WELL_DIVERSIFIED",
       "portfolio_cluster_risk_ar": "🟢 تنويع قطاعي ممتاز بين الأسهم المختارة.",
-      "price": 366.0,
-      "target_price": 397.11
+      "price": 360.81,
+      "target_price": 391.48
     },
     {
       "ticker": "ADIB.CA",
       "company_name": "مصرف أبو ظبي الإسلامي - مصر",
       "sector": "الخدمات المالية والبنوك",
-      "current_price": 52.45,
+      "current_price": 51.82,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -21111,7 +21111,7 @@
       "valid_until": "2026-09-15 20:27:01",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 48.78,
+      "stop_loss": 48.19,
       "short_term_score": 87.0,
       "medium_term_score": 87.0,
       "long_term_score": 88.0,
@@ -21947,8 +21947,8 @@
       "rank": 2,
       "portfolio_cluster_risk": "WELL_DIVERSIFIED",
       "portfolio_cluster_risk_ar": "🟢 تنويع قطاعي ممتاز بين الأسهم المختارة.",
-      "price": 52.45,
-      "target_price": 56.91
+      "price": 51.82,
+      "target_price": 56.22
     },
     {
       "ticker": "ACRO.CA",
@@ -22826,7 +22826,7 @@
       "ticker": "ETEL.CA",
       "company_name": "المصرية للاتصالات (WE)",
       "sector": "الاتصالات وتكنولوجيا المعلومات",
-      "current_price": 137.5,
+      "current_price": 138.06,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -22867,7 +22867,7 @@
       "valid_until": "2026-09-15 20:27:00",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 127.88,
+      "stop_loss": 128.4,
       "short_term_score": 82.0,
       "medium_term_score": 83.0,
       "long_term_score": 81.0,
@@ -23706,14 +23706,14 @@
       "rank": 4,
       "portfolio_cluster_risk": "WELL_DIVERSIFIED",
       "portfolio_cluster_risk_ar": "🟢 تنويع قطاعي ممتاز بين الأسهم المختارة.",
-      "price": 137.5,
-      "target_price": 149.19
+      "price": 138.06,
+      "target_price": 149.8
     },
     {
       "ticker": "EFID.CA",
       "company_name": "إيديتا للصناعات الغذائية",
       "sector": "الأغذية والمشروبات والتبغ",
-      "current_price": 30.63,
+      "current_price": 30.3,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -23754,7 +23754,7 @@
       "valid_until": "2026-09-15 20:27:09",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 28.49,
+      "stop_loss": 28.18,
       "short_term_score": 83.0,
       "medium_term_score": 84.0,
       "long_term_score": 80.0,
@@ -24581,14 +24581,14 @@
       "rank": 5,
       "portfolio_cluster_risk": "WELL_DIVERSIFIED",
       "portfolio_cluster_risk_ar": "🟢 تنويع قطاعي ممتاز بين الأسهم المختارة.",
-      "price": 30.63,
-      "target_price": 33.23
+      "price": 30.3,
+      "target_price": 32.88
     },
     {
       "ticker": "MFPC.CA",
       "company_name": "مصر لإنتاج الأسمدة (موبكو)",
       "sector": "الموارد الأساسية والكيماويات",
-      "current_price": 48.99,
+      "current_price": 47.5,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -24629,7 +24629,7 @@
       "valid_until": "2026-09-15 20:27:00",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 45.56,
+      "stop_loss": 44.18,
       "short_term_score": 76.0,
       "medium_term_score": 71.0,
       "long_term_score": 75.0,
@@ -25472,14 +25472,14 @@
         "expected_twin_return_pct": 2.14
       },
       "rank": 6,
-      "price": 48.99,
-      "target_price": 53.15
+      "price": 47.5,
+      "target_price": 51.54
     },
     {
       "ticker": "OIH.CA",
       "company_name": "أوراسكوم للاستثمار القابضة",
       "sector": "الخدمات المالية والاستثمار",
-      "current_price": 2.14,
+      "current_price": 2.17,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -25520,7 +25520,7 @@
       "valid_until": "2026-09-15 20:27:02",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 1.99,
+      "stop_loss": 2.02,
       "short_term_score": 82.0,
       "medium_term_score": 81.0,
       "long_term_score": 78.0,
@@ -26339,14 +26339,14 @@
         "expected_twin_return_pct": -0.31
       },
       "rank": 7,
-      "price": 2.14,
-      "target_price": 2.32
+      "price": 2.17,
+      "target_price": 2.35
     },
     {
       "ticker": "COMI.CA",
       "company_name": "البنك التجاري الدولي (CIB)",
       "sector": "الخدمات المالية والبنوك",
-      "current_price": 131.5,
+      "current_price": 128.1,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -26387,7 +26387,7 @@
       "valid_until": "2026-09-15 20:26:59",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 122.3,
+      "stop_loss": 119.13,
       "short_term_score": 88.0,
       "medium_term_score": 82.0,
       "long_term_score": 84.0,
@@ -27224,14 +27224,14 @@
         "expected_twin_return_pct": 0.07
       },
       "rank": 8,
-      "price": 131.5,
-      "target_price": 142.68
+      "price": 128.1,
+      "target_price": 138.99
     },
     {
       "ticker": "TMGH.CA",
       "company_name": "مجموعة طلعت مصطفى",
       "sector": "التطوير العقاري",
-      "current_price": 94.27,
+      "current_price": 92.8,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -27272,7 +27272,7 @@
       "valid_until": "2026-09-15 20:27:00",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 87.67,
+      "stop_loss": 86.3,
       "short_term_score": 87.0,
       "medium_term_score": 82.0,
       "long_term_score": 81.0,
@@ -28100,14 +28100,14 @@
         "expected_twin_return_pct": -1.07
       },
       "rank": 9,
-      "price": 94.27,
-      "target_price": 102.28
+      "price": 92.8,
+      "target_price": 100.69
     },
     {
       "ticker": "ABUK.CA",
       "company_name": "أبو قير للأسمدة",
       "sector": "الموارد الأساسية والكيماويات",
-      "current_price": 93.7,
+      "current_price": 92.88,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -28148,7 +28148,7 @@
       "valid_until": "2026-09-15 20:26:59",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 87.14,
+      "stop_loss": 86.38,
       "short_term_score": 69.0,
       "medium_term_score": 65.0,
       "long_term_score": 69.0,
@@ -28991,14 +28991,14 @@
         "expected_twin_return_pct": 0.1
       },
       "rank": 10,
-      "price": 93.7,
-      "target_price": 101.66
+      "price": 92.88,
+      "target_price": 100.77
     },
     {
       "ticker": "CIEB.CA",
       "company_name": "بنك كريدي أجريكول مصر",
       "sector": "الخدمات المالية والبنوك",
-      "current_price": 24.79,
+      "current_price": 24.78,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -29861,14 +29861,14 @@
         "expected_twin_return_pct": 1.2
       },
       "rank": 11,
-      "price": 24.79,
-      "target_price": 26.9
+      "price": 24.78,
+      "target_price": 26.89
     },
     {
       "ticker": "BINV.CA",
       "company_name": "بي إنفستمنتس القابضة",
       "sector": "الخدمات المالية والاستثمار",
-      "current_price": 56.7,
+      "current_price": 56.37,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -29909,7 +29909,7 @@
       "valid_until": "2026-09-15 20:27:01",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 52.73,
+      "stop_loss": 52.42,
       "short_term_score": 71.0,
       "medium_term_score": 69.0,
       "long_term_score": 67.0,
@@ -30728,14 +30728,14 @@
         "expected_twin_return_pct": 0.57
       },
       "rank": 12,
-      "price": 56.7,
-      "target_price": 61.52
+      "price": 56.37,
+      "target_price": 61.16
     },
     {
       "ticker": "SUGR.CA",
       "company_name": "الدلتا للسكر",
       "sector": "الأغذية والمشروبات والتبغ",
-      "current_price": 59.42,
+      "current_price": 58.0,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -30776,7 +30776,7 @@
       "valid_until": "2026-09-15 20:27:11",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 55.26,
+      "stop_loss": 53.94,
       "short_term_score": 82.0,
       "medium_term_score": 85.0,
       "long_term_score": 80.0,
@@ -31601,14 +31601,14 @@
         "expected_twin_return_pct": -0.39
       },
       "rank": 13,
-      "price": 59.42,
-      "target_price": 64.47
+      "price": 58.0,
+      "target_price": 62.93
     },
     {
       "ticker": "EFIH.CA",
       "company_name": "إي فاينانس للاستثمارات المالية والرقمية",
       "sector": "تكنولوجيا المدفوعات",
-      "current_price": 22.97,
+      "current_price": 23.32,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -31649,7 +31649,7 @@
       "valid_until": "2026-09-15 20:27:00",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 21.36,
+      "stop_loss": 21.69,
       "short_term_score": 68.0,
       "medium_term_score": 69.0,
       "long_term_score": 67.0,
@@ -32474,8 +32474,8 @@
         "expected_twin_return_pct": -1.05
       },
       "rank": 14,
-      "price": 22.97,
-      "target_price": 24.92
+      "price": 23.32,
+      "target_price": 25.3
     },
     {
       "ticker": "ESRS.CA",
@@ -33360,7 +33360,7 @@
       "ticker": "CLHO.CA",
       "company_name": "مستشفى كليوباترا",
       "sector": "الرعاية الصحية والأدوية",
-      "current_price": 15.83,
+      "current_price": 15.8,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -33401,7 +33401,7 @@
       "valid_until": "2026-09-15 20:27:01",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 14.72,
+      "stop_loss": 14.69,
       "short_term_score": 83.0,
       "medium_term_score": 83.0,
       "long_term_score": 80.0,
@@ -34226,14 +34226,14 @@
         "expected_twin_return_pct": 2.14
       },
       "rank": 16,
-      "price": 15.83,
-      "target_price": 17.18
+      "price": 15.8,
+      "target_price": 17.14
     },
     {
       "ticker": "EAST.CA",
       "company_name": "الشرقية للدخان (إيسترن كومباني)",
       "sector": "السلع الاستهلاكية",
-      "current_price": 31.78,
+      "current_price": 31.74,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -34274,7 +34274,7 @@
       "valid_until": "2026-09-15 20:27:00",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 29.56,
+      "stop_loss": 29.52,
       "short_term_score": 68.0,
       "medium_term_score": 68.0,
       "long_term_score": 69.0,
@@ -35099,14 +35099,14 @@
         "expected_twin_return_pct": -0.82
       },
       "rank": 17,
-      "price": 31.78,
-      "target_price": 34.48
+      "price": 31.74,
+      "target_price": 34.44
     },
     {
       "ticker": "EXPA.CA",
       "company_name": "بنك تنمية الصادرات",
       "sector": "الخدمات المالية والبنوك",
-      "current_price": 21.9,
+      "current_price": 21.8,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -35147,7 +35147,7 @@
       "valid_until": "2026-09-15 20:27:07",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 20.37,
+      "stop_loss": 20.27,
       "short_term_score": 70.0,
       "medium_term_score": 69.0,
       "long_term_score": 66.0,
@@ -35963,14 +35963,14 @@
         "expected_twin_return_pct": -1.11
       },
       "rank": 18,
-      "price": 21.9,
-      "target_price": 23.76
+      "price": 21.8,
+      "target_price": 23.65
     },
     {
       "ticker": "KZPC.CA",
       "company_name": "كفر الزيات للمبيدات والكيماويات",
       "sector": "الموارد الأساسية والكيماويات",
-      "current_price": 13.69,
+      "current_price": 13.7,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -36011,7 +36011,7 @@
       "valid_until": "2026-09-15 20:27:06",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 12.73,
+      "stop_loss": 12.74,
       "short_term_score": 74.0,
       "medium_term_score": 77.0,
       "long_term_score": 72.0,
@@ -36842,14 +36842,14 @@
         "expected_twin_return_pct": 1.61
       },
       "rank": 19,
-      "price": 13.69,
-      "target_price": 14.85
+      "price": 13.7,
+      "target_price": 14.86
     },
     {
       "ticker": "HDBK.CA",
       "company_name": "بنك التعمير والإسكان",
       "sector": "الخدمات المالية والبنوك",
-      "current_price": 117.63,
+      "current_price": 112.0,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -36890,7 +36890,7 @@
       "valid_until": "2026-09-15 20:27:07",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 109.4,
+      "stop_loss": 104.16,
       "short_term_score": 73.0,
       "medium_term_score": 74.0,
       "long_term_score": 70.0,
@@ -37712,14 +37712,14 @@
         "expected_twin_return_pct": -0.65
       },
       "rank": 20,
-      "price": 117.63,
-      "target_price": 127.63
+      "price": 112.0,
+      "target_price": 121.52
     },
     {
       "ticker": "JUFO.CA",
       "company_name": "جهينة للصناعات الغذائية",
       "sector": "الأغذية والمشروبات",
-      "current_price": 27.01,
+      "current_price": 26.83,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -37760,7 +37760,7 @@
       "valid_until": "2026-09-15 20:26:59",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 25.12,
+      "stop_loss": 24.95,
       "short_term_score": 71.0,
       "medium_term_score": 74.0,
       "long_term_score": 70.0,
@@ -38585,14 +38585,14 @@
         "expected_twin_return_pct": -0.6
       },
       "rank": 21,
-      "price": 27.01,
-      "target_price": 29.31
+      "price": 26.83,
+      "target_price": 29.11
     },
     {
       "ticker": "ALCN.CA",
       "company_name": "الإسكندرية لتداول الحاويات والبضائع",
       "sector": "النقل واللوجستيات",
-      "current_price": 34.02,
+      "current_price": 34.2,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -38633,7 +38633,7 @@
       "valid_until": "2026-09-15 20:27:00",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 31.64,
+      "stop_loss": 31.81,
       "short_term_score": 79.0,
       "medium_term_score": 78.0,
       "long_term_score": 75.0,
@@ -39458,14 +39458,14 @@
         "expected_twin_return_pct": 0.72
       },
       "rank": 22,
-      "price": 34.02,
-      "target_price": 36.91
+      "price": 34.2,
+      "target_price": 37.11
     },
     {
       "ticker": "FAIT.CA",
       "company_name": "بنك فيصل الإسلامي المصري (جنيه)",
       "sector": "الخدمات المالية والبنوك",
-      "current_price": 47.08,
+      "current_price": 46.57,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -39506,7 +39506,7 @@
       "valid_until": "2026-09-15 20:27:07",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 43.78,
+      "stop_loss": 43.31,
       "short_term_score": 80.0,
       "medium_term_score": 80.0,
       "long_term_score": 76.0,
@@ -40328,14 +40328,14 @@
         "expected_twin_return_pct": -0.36
       },
       "rank": 23,
-      "price": 47.08,
-      "target_price": 51.08
+      "price": 46.57,
+      "target_price": 50.53
     },
     {
       "ticker": "ORAS.CA",
       "company_name": "أوراسكوم للإنشاء",
       "sector": "الصناعة والمقاولات",
-      "current_price": 841.0,
+      "current_price": 835.72,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -40376,7 +40376,7 @@
       "valid_until": "2026-09-15 20:27:00",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 782.13,
+      "stop_loss": 777.22,
       "short_term_score": 70.0,
       "medium_term_score": 65.0,
       "long_term_score": 65.0,
@@ -41201,14 +41201,14 @@
         "expected_twin_return_pct": 0.04
       },
       "rank": 24,
-      "price": 841.0,
-      "target_price": 912.49
+      "price": 835.72,
+      "target_price": 906.76
     },
     {
       "ticker": "CANA.CA",
       "company_name": "بنك قناة السويس",
       "sector": "الخدمات المالية والبنوك",
-      "current_price": 46.8,
+      "current_price": 45.93,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -41249,7 +41249,7 @@
       "valid_until": "2026-09-15 20:27:06",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 43.52,
+      "stop_loss": 42.71,
       "short_term_score": 82.0,
       "medium_term_score": 79.0,
       "long_term_score": 77.0,
@@ -42059,14 +42059,14 @@
         "expected_twin_return_pct": 1.2
       },
       "rank": 25,
-      "price": 46.8,
-      "target_price": 50.78
+      "price": 45.93,
+      "target_price": 49.83
     },
     {
       "ticker": "AMOC.CA",
       "company_name": "الإسكندرية للزيوت المعدنية (أموك)",
       "sector": "البتروكيماويات والطاقة",
-      "current_price": 13.5,
+      "current_price": 13.4,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -42107,7 +42107,7 @@
       "valid_until": "2026-09-15 20:27:01",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 12.56,
+      "stop_loss": 12.46,
       "short_term_score": 65.0,
       "medium_term_score": 64.0,
       "long_term_score": 65.0,
@@ -42932,14 +42932,14 @@
         "expected_twin_return_pct": -0.98
       },
       "rank": 26,
-      "price": 13.5,
-      "target_price": 14.65
+      "price": 13.4,
+      "target_price": 14.54
     },
     {
       "ticker": "EMFD.CA",
       "company_name": "إعمار مصر للتنمية",
       "sector": "التطوير العقاري",
-      "current_price": 13.48,
+      "current_price": 13.39,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -42980,7 +42980,7 @@
       "valid_until": "2026-09-15 20:26:59",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 12.54,
+      "stop_loss": 12.45,
       "short_term_score": 68.0,
       "medium_term_score": 65.0,
       "long_term_score": 66.0,
@@ -43811,14 +43811,14 @@
         "expected_twin_return_pct": -1.05
       },
       "rank": 27,
-      "price": 13.48,
-      "target_price": 14.63
+      "price": 13.39,
+      "target_price": 14.53
     },
     {
       "ticker": "SKPC.CA",
       "company_name": "سيدي كرير للبتروكيماويات (سيدبك)",
       "sector": "البتروكيماويات والطاقة",
-      "current_price": 18.0,
+      "current_price": 17.6,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -43859,7 +43859,7 @@
       "valid_until": "2026-09-15 20:27:01",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 16.74,
+      "stop_loss": 16.37,
       "short_term_score": 68.0,
       "medium_term_score": 71.0,
       "long_term_score": 66.0,
@@ -44684,14 +44684,14 @@
         "expected_twin_return_pct": 0.93
       },
       "rank": 28,
-      "price": 18.0,
-      "target_price": 19.53
+      "price": 17.6,
+      "target_price": 19.1
     },
     {
       "ticker": "SWDY.CA",
       "company_name": "السويدي إليكتريك",
       "sector": "الصناعة والمقاولات",
-      "current_price": 125.59,
+      "current_price": 124.0,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -44732,7 +44732,7 @@
       "valid_until": "2026-09-15 20:27:00",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 116.8,
+      "stop_loss": 115.32,
       "short_term_score": 86.0,
       "medium_term_score": 81.0,
       "long_term_score": 81.0,
@@ -45566,8 +45566,8 @@
         "expected_twin_return_pct": -0.96
       },
       "rank": 29,
-      "price": 125.59,
-      "target_price": 136.27
+      "price": 124.0,
+      "target_price": 134.54
     },
     {
       "ticker": "POUL.CA",
@@ -46446,7 +46446,7 @@
       "ticker": "ISPH.CA",
       "company_name": "ابن سينا فارما",
       "sector": "الرعاية الصحية والأدوية",
-      "current_price": 12.2,
+      "current_price": 12.02,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -46487,7 +46487,7 @@
       "valid_until": "2026-09-15 20:27:01",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 11.35,
+      "stop_loss": 11.18,
       "short_term_score": 73.0,
       "medium_term_score": 75.0,
       "long_term_score": 70.0,
@@ -47312,14 +47312,14 @@
         "expected_twin_return_pct": -0.6
       },
       "rank": 31,
-      "price": 12.2,
-      "target_price": 13.24
+      "price": 12.02,
+      "target_price": 13.04
     },
     {
       "ticker": "ORHD.CA",
       "company_name": "أوراسكوم للتنمية مصر",
       "sector": "التطوير العقاري",
-      "current_price": 41.92,
+      "current_price": 40.5,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -47360,7 +47360,7 @@
       "valid_until": "2026-09-15 20:27:01",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 38.99,
+      "stop_loss": 37.66,
       "short_term_score": 65.0,
       "medium_term_score": 63.0,
       "long_term_score": 61.0,
@@ -48173,14 +48173,14 @@
         "expected_twin_return_pct": -0.82
       },
       "rank": 32,
-      "price": 41.92,
-      "target_price": 45.48
+      "price": 40.5,
+      "target_price": 43.94
     },
     {
       "ticker": "MASR.CA",
       "company_name": "مدينة مصر للإسكان والتعمير (MNHD)",
       "sector": "التطوير العقاري",
-      "current_price": 7.68,
+      "current_price": 7.59,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -48221,7 +48221,7 @@
       "valid_until": "2026-09-15 20:27:00",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 7.14,
+      "stop_loss": 7.06,
       "short_term_score": 81.0,
       "medium_term_score": 78.0,
       "long_term_score": 76.0,
@@ -49049,14 +49049,14 @@
         "expected_twin_return_pct": 0.6
       },
       "rank": 33,
-      "price": 7.68,
-      "target_price": 8.33
+      "price": 7.59,
+      "target_price": 8.24
     },
     {
       "ticker": "BTFH.CA",
       "company_name": "بلتون القابضة",
       "sector": "الخدمات المالية غير المصرفية",
-      "current_price": 2.92,
+      "current_price": 2.88,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -49097,7 +49097,7 @@
       "valid_until": "2026-09-15 20:26:59",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 2.72,
+      "stop_loss": 2.68,
       "short_term_score": 82.0,
       "medium_term_score": 81.0,
       "long_term_score": 76.0,
@@ -49928,14 +49928,14 @@
         "expected_twin_return_pct": -0.41
       },
       "rank": 34,
-      "price": 2.92,
-      "target_price": 3.17
+      "price": 2.88,
+      "target_price": 3.12
     },
     {
       "ticker": "FWRY.CA",
       "company_name": "فوري لتكنولوجيا المدفوعات الإلكترونية",
       "sector": "تكنولوجيا المدفوعات",
-      "current_price": 18.93,
+      "current_price": 18.9,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -49976,7 +49976,7 @@
       "valid_until": "2026-09-15 20:27:00",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 17.6,
+      "stop_loss": 17.58,
       "short_term_score": 79.0,
       "medium_term_score": 71.0,
       "long_term_score": 72.0,
@@ -50801,14 +50801,14 @@
         "expected_twin_return_pct": 0.67
       },
       "rank": 35,
-      "price": 18.93,
-      "target_price": 20.54
+      "price": 18.9,
+      "target_price": 20.51
     },
     {
       "ticker": "ORWE.CA",
       "company_name": "النساجون الشرقيون للسجاد",
       "sector": "المنسوجات والسلع الاستهلاكية",
-      "current_price": 27.78,
+      "current_price": 27.55,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -50849,7 +50849,7 @@
       "valid_until": "2026-09-15 20:27:10",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 25.84,
+      "stop_loss": 25.62,
       "short_term_score": 70.0,
       "medium_term_score": 68.0,
       "long_term_score": 66.0,
@@ -51662,14 +51662,14 @@
         "expected_twin_return_pct": 1.51
       },
       "rank": 36,
-      "price": 27.78,
-      "target_price": 30.14
+      "price": 27.55,
+      "target_price": 29.89
     },
     {
       "ticker": "ARCC.CA",
       "company_name": "الأسمنت العربية",
       "sector": "مواد البناء والتشييد",
-      "current_price": 70.52,
+      "current_price": 68.54,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -51710,7 +51710,7 @@
       "valid_until": "2026-09-15 20:27:09",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 65.58,
+      "stop_loss": 63.74,
       "short_term_score": 81.0,
       "medium_term_score": 78.0,
       "long_term_score": 76.0,
@@ -52523,14 +52523,14 @@
         "expected_twin_return_pct": -0.65
       },
       "rank": 37,
-      "price": 70.52,
-      "target_price": 76.51
+      "price": 68.54,
+      "target_price": 74.37
     },
     {
       "ticker": "OBUR.CA",
       "company_name": "عبور لاند للصناعات الغذائية",
       "sector": "الأغذية والمشروبات والتبغ",
-      "current_price": 22.92,
+      "current_price": 22.59,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -52571,7 +52571,7 @@
       "valid_until": "2026-09-15 20:27:09",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 21.32,
+      "stop_loss": 21.01,
       "short_term_score": 60.0,
       "medium_term_score": 59.0,
       "long_term_score": 56.0,
@@ -53378,14 +53378,14 @@
         "expected_twin_return_pct": 2.16
       },
       "rank": 38,
-      "price": 22.92,
-      "target_price": 24.87
+      "price": 22.59,
+      "target_price": 24.51
     },
     {
       "ticker": "TAQA.CA",
       "company_name": "طاقة عربية",
       "sector": "الطاقة والخدمات البترولية",
-      "current_price": 15.0,
+      "current_price": 16.7,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -53426,7 +53426,7 @@
       "valid_until": "2026-09-15 20:27:07",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 13.95,
+      "stop_loss": 15.53,
       "short_term_score": 83.0,
       "medium_term_score": 80.0,
       "long_term_score": 78.0,
@@ -54242,14 +54242,14 @@
         "expected_twin_return_pct": -0.83
       },
       "rank": 39,
-      "price": 15.0,
-      "target_price": 16.27
+      "price": 16.7,
+      "target_price": 18.12
     },
     {
       "ticker": "EGCH.CA",
       "company_name": "الصناعات الكيماوية المصرية (كيما)",
       "sector": "الموارد الأساسية والكيماويات",
-      "current_price": 13.92,
+      "current_price": 13.9,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -54290,7 +54290,7 @@
       "valid_until": "2026-09-15 20:27:06",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 12.95,
+      "stop_loss": 12.93,
       "short_term_score": 57.0,
       "medium_term_score": 56.0,
       "long_term_score": 53.0,
@@ -55109,14 +55109,14 @@
         "expected_twin_return_pct": -0.81
       },
       "rank": 40,
-      "price": 13.92,
-      "target_price": 15.1
+      "price": 13.9,
+      "target_price": 15.08
     },
     {
       "ticker": "GBCO.CA",
       "company_name": "جي بي كورب (غبور أوتو)",
       "sector": "السيارات والصناعة",
-      "current_price": 30.74,
+      "current_price": 31.11,
       "price_source": "YFINANCE_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -55157,7 +55157,7 @@
       "valid_until": "2026-09-15 20:27:00",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 28.59,
+      "stop_loss": 28.93,
       "short_term_score": 76.0,
       "medium_term_score": 69.0,
       "long_term_score": 69.0,
@@ -55985,14 +55985,14 @@
         "expected_twin_return_pct": 0.58
       },
       "rank": 41,
-      "price": 30.74,
-      "target_price": 33.35
+      "price": 31.11,
+      "target_price": 33.75
     },
     {
       "ticker": "ELEC.CA",
       "company_name": "الكابلات الكهربائية المصرية",
       "sector": "الصناعة والمقاولات",
-      "current_price": 1.97,
+      "current_price": 1.96,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -56033,7 +56033,7 @@
       "valid_until": "2026-09-15 20:27:07",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 1.83,
+      "stop_loss": 1.82,
       "short_term_score": 78.0,
       "medium_term_score": 74.0,
       "long_term_score": 72.0,
@@ -56858,14 +56858,14 @@
         "expected_twin_return_pct": -0.65
       },
       "rank": 42,
-      "price": 1.97,
-      "target_price": 2.14
+      "price": 1.96,
+      "target_price": 2.13
     },
     {
       "ticker": "CERA.CA",
       "company_name": "العز للسيراميك والبورسلين (الجوهرة)",
       "sector": "الصناعة والمقاولات",
-      "current_price": 1.39,
+      "current_price": 1.35,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -56906,7 +56906,7 @@
       "valid_until": "2026-09-15 20:27:03",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 1.29,
+      "stop_loss": 1.26,
       "short_term_score": 67.0,
       "medium_term_score": 65.0,
       "long_term_score": 63.0,
@@ -57719,14 +57719,14 @@
         "expected_twin_return_pct": 0.58
       },
       "rank": 43,
-      "price": 1.39,
-      "target_price": 1.51
+      "price": 1.35,
+      "target_price": 1.46
     },
     {
       "ticker": "DOMT.CA",
       "company_name": "الصناعات الغذائية العربية (دومتي)",
       "sector": "الأغذية والمشروبات",
-      "current_price": 26.47,
+      "current_price": 26.01,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -57767,7 +57767,7 @@
       "valid_until": "2026-09-15 20:26:55",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 24.62,
+      "stop_loss": 24.19,
       "short_term_score": 66.0,
       "medium_term_score": 60.0,
       "long_term_score": 61.0,
@@ -58437,14 +58437,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 44,
-      "price": 26.47,
-      "target_price": 28.72
+      "price": 26.01,
+      "target_price": 28.22
     },
     {
       "ticker": "HRHO.CA",
       "company_name": "مجموعة إي إف جي القابضة (هيرميس)",
       "sector": "الخدمات المالية غير المصرفية",
-      "current_price": 24.6,
+      "current_price": 24.41,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -58485,7 +58485,7 @@
       "valid_until": "2026-09-15 20:26:55",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 22.88,
+      "stop_loss": 22.7,
       "short_term_score": 52.0,
       "medium_term_score": 50.0,
       "long_term_score": 48.0,
@@ -59147,14 +59147,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 45,
-      "price": 24.6,
-      "target_price": 26.69
+      "price": 24.41,
+      "target_price": 26.48
     },
     {
       "ticker": "ZMID.CA",
       "company_name": "زهراء المعادي للاستثمار والتعمير",
       "sector": "التطوير العقاري",
-      "current_price": 8.3,
+      "current_price": 8.31,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -59195,7 +59195,7 @@
       "valid_until": "2026-09-15 20:27:03",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 7.72,
+      "stop_loss": 7.73,
       "short_term_score": 67.0,
       "medium_term_score": 60.0,
       "long_term_score": 60.0,
@@ -59872,14 +59872,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 46,
-      "price": 8.3,
-      "target_price": 9.01
+      "price": 8.31,
+      "target_price": 9.02
     },
     {
       "ticker": "DICE.CA",
       "company_name": "دايس للملابس الجاهزة",
       "sector": "المنسوجات والسلع الاستهلاكية",
-      "current_price": 1.79,
+      "current_price": 1.78,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -60597,14 +60597,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 47,
-      "price": 1.79,
-      "target_price": 1.94
+      "price": 1.78,
+      "target_price": 1.93
     },
     {
       "ticker": "MICH.CA",
       "company_name": "مصر للكيماويات",
       "sector": "الموارد الأساسية والكيماويات",
-      "current_price": 47.5,
+      "current_price": 47.16,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -60645,7 +60645,7 @@
       "valid_until": "2026-09-15 20:27:08",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 44.18,
+      "stop_loss": 43.86,
       "short_term_score": 81.0,
       "medium_term_score": 79.0,
       "long_term_score": 77.0,
@@ -61316,14 +61316,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 48,
-      "price": 47.5,
-      "target_price": 51.54
+      "price": 47.16,
+      "target_price": 51.17
     },
     {
       "ticker": "DSCW.CA",
       "company_name": "دايس للملابس الجاهزة",
       "sector": "السلع الاستهلاكية",
-      "current_price": 1.79,
+      "current_price": 1.78,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -62034,14 +62034,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 49,
-      "price": 1.79,
-      "target_price": 1.94
+      "price": 1.78,
+      "target_price": 1.93
     },
     {
       "ticker": "CICH.CA",
       "company_name": "سي آي كابيتال القابضة",
       "sector": "الخدمات المالية والاستثمار",
-      "current_price": 12.61,
+      "current_price": 12.34,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -62082,7 +62082,7 @@
       "valid_until": "2026-09-15 20:26:55",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 11.73,
+      "stop_loss": 11.48,
       "short_term_score": 62.0,
       "medium_term_score": 57.0,
       "long_term_score": 56.0,
@@ -62752,14 +62752,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 50,
-      "price": 12.61,
-      "target_price": 13.68
+      "price": 12.34,
+      "target_price": 13.39
     },
     {
       "ticker": "HELI.CA",
       "company_name": "مصر الجديدة للإسكان والتعمير",
       "sector": "التطوير العقاري",
-      "current_price": 8.2,
+      "current_price": 7.9,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -62800,7 +62800,7 @@
       "valid_until": "2026-09-15 20:27:02",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 7.63,
+      "stop_loss": 7.35,
       "short_term_score": 32.0,
       "medium_term_score": 33.0,
       "long_term_score": 28.0,
@@ -63483,8 +63483,8 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 51,
-      "price": 8.2,
-      "target_price": 8.9
+      "price": 7.9,
+      "target_price": 8.57
     },
     {
       "ticker": "EKHOA.CA",
@@ -64196,7 +64196,7 @@
       "ticker": "ELSH.CA",
       "company_name": "الشمس للإسكان والتعمير",
       "sector": "التطوير العقاري",
-      "current_price": 12.7,
+      "current_price": 12.5,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -64237,7 +64237,7 @@
       "valid_until": "2026-09-15 20:27:02",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 11.81,
+      "stop_loss": 11.62,
       "short_term_score": 45.0,
       "medium_term_score": 42.0,
       "long_term_score": 40.0,
@@ -64907,14 +64907,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 53,
-      "price": 12.7,
-      "target_price": 13.78
+      "price": 12.5,
+      "target_price": 13.56
     },
     {
       "ticker": "PRDC.CA",
       "company_name": "رواد السياحة (رواد)",
       "sector": "السياحة والترفيه",
-      "current_price": 7.55,
+      "current_price": 7.36,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -64955,7 +64955,7 @@
       "valid_until": "2026-09-15 20:27:03",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 7.02,
+      "stop_loss": 6.84,
       "short_term_score": 51.0,
       "medium_term_score": 45.0,
       "long_term_score": 45.0,
@@ -65625,14 +65625,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 54,
-      "price": 7.55,
-      "target_price": 8.19
+      "price": 7.36,
+      "target_price": 7.99
     },
     {
       "ticker": "QNBA.CA",
       "company_name": "بنك قطر الوطني الأهلي (QNB)",
       "sector": "الخدمات المالية والبنوك",
-      "current_price": 61.73,
+      "current_price": 62.83,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -65673,7 +65673,7 @@
       "valid_until": "2026-09-15 20:27:04",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 57.41,
+      "stop_loss": 58.43,
       "short_term_score": 29.0,
       "medium_term_score": 28.0,
       "long_term_score": 28.0,
@@ -66346,14 +66346,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 55,
-      "price": 61.73,
-      "target_price": 66.98
+      "price": 62.83,
+      "target_price": 68.17
     },
     {
       "ticker": "PHDC.CA",
       "company_name": "بالم هيلز للتعمير",
       "sector": "التطوير العقاري",
-      "current_price": 13.44,
+      "current_price": 13.46,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -66394,7 +66394,7 @@
       "valid_until": "2026-09-15 20:26:55",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 12.5,
+      "stop_loss": 12.52,
       "short_term_score": 42.0,
       "medium_term_score": 39.0,
       "long_term_score": 37.0,
@@ -67064,14 +67064,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 56,
-      "price": 13.44,
-      "target_price": 14.58
+      "price": 13.46,
+      "target_price": 14.6
     },
     {
       "ticker": "RTVC.CA",
       "company_name": "رمكو لإنشاء القرى السياحية",
       "sector": "السياحة والترفيه",
-      "current_price": 3.86,
+      "current_price": 3.81,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -67112,7 +67112,7 @@
       "valid_until": "2026-09-15 20:27:03",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 3.59,
+      "stop_loss": 3.54,
       "short_term_score": 41.0,
       "medium_term_score": 37.0,
       "long_term_score": 35.0,
@@ -67788,14 +67788,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 57,
-      "price": 3.86,
-      "target_price": 4.19
+      "price": 3.81,
+      "target_price": 4.13
     },
     {
       "ticker": "OCDI.CA",
       "company_name": "سوديك - السادس من أكتوبر للتنمية والاستثمار",
       "sector": "التطوير العقاري",
-      "current_price": 29.19,
+      "current_price": 28.17,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -67836,7 +67836,7 @@
       "valid_until": "2026-09-15 20:27:05",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 27.15,
+      "stop_loss": 26.2,
       "short_term_score": 40.0,
       "medium_term_score": 33.0,
       "long_term_score": 33.0,
@@ -68512,14 +68512,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 58,
-      "price": 29.19,
-      "target_price": 31.67
+      "price": 28.17,
+      "target_price": 30.56
     },
     {
       "ticker": "RAYA.CA",
       "company_name": "راية القابضة للاستثمارات المالية",
       "sector": "الاتصالات وتكنولوجيا المعلومات",
-      "current_price": 7.0,
+      "current_price": 7.05,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -68560,7 +68560,7 @@
       "valid_until": "2026-09-15 20:26:56",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 6.51,
+      "stop_loss": 6.56,
       "short_term_score": 57.0,
       "medium_term_score": 52.0,
       "long_term_score": 47.0,
@@ -69236,14 +69236,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 59,
-      "price": 7.0,
-      "target_price": 7.59
+      "price": 7.05,
+      "target_price": 7.65
     },
     {
       "ticker": "CCAP.CA",
       "company_name": "القلعة للاستشارات المالية",
       "sector": "الخدمات المالية والاستثمار",
-      "current_price": 7.21,
+      "current_price": 7.08,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -69284,7 +69284,7 @@
       "valid_until": "2026-09-15 20:27:02",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 6.71,
+      "stop_loss": 6.58,
       "short_term_score": 56.0,
       "medium_term_score": 49.0,
       "long_term_score": 40.0,
@@ -69966,8 +69966,8 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 60,
-      "price": 7.21,
-      "target_price": 7.82
+      "price": 7.08,
+      "target_price": 7.68
     },
     {
       "ticker": "EKHO.CA",
@@ -71083,7 +71083,7 @@
       "ticker": "SPMD.CA",
       "company_name": "سبيد ميديكال",
       "sector": "الرعاية الصحية والأدوية",
-      "current_price": 0.41,
+      "current_price": 0.42,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -71128,7 +71128,7 @@
       "valid_until": "2026-09-15 20:27:03",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 0.38,
+      "stop_loss": 0.39,
       "short_term_score": 60.0,
       "medium_term_score": 53.0,
       "long_term_score": 53.0,
@@ -71643,14 +71643,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 63,
-      "price": 0.41,
-      "target_price": 0.44
+      "price": 0.42,
+      "target_price": 0.46
     },
     {
       "ticker": "ARAB.CA",
       "company_name": "المطورون العرب القابضة",
       "sector": "التطوير العقاري",
-      "current_price": 0.24,
+      "current_price": 0.23,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -71695,7 +71695,7 @@
       "valid_until": "2026-09-15 20:27:03",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 0.22,
+      "stop_loss": 0.21,
       "short_term_score": 65.0,
       "medium_term_score": 62.0,
       "long_term_score": 60.0,
@@ -72198,8 +72198,8 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 64,
-      "price": 0.24,
-      "target_price": 0.26
+      "price": 0.23,
+      "target_price": 0.25
     },
     {
       "ticker": "UNIP.CA",
@@ -72766,7 +72766,7 @@
       "ticker": "FAITA.CA",
       "company_name": "بنك فيصل الإسلامي المصري (دولار)",
       "sector": "الخدمات المالية والبنوك",
-      "current_price": 0.99,
+      "current_price": 0.98,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -72815,7 +72815,7 @@
       "valid_until": "2026-09-15 20:27:03",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 0.92,
+      "stop_loss": 0.91,
       "short_term_score": 60.0,
       "medium_term_score": 58.0,
       "long_term_score": 56.0,
@@ -73308,8 +73308,8 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 66,
-      "price": 0.99,
-      "target_price": 1.07
+      "price": 0.98,
+      "target_price": 1.06
     },
     {
       "ticker": "SAIB.CA",
@@ -74438,7 +74438,7 @@
       "ticker": "VALU.CA",
       "company_name": "يو جي إكس / فاليو للتمويل الاستهلاكي",
       "sector": "الخدمات المالية والبنوك",
-      "current_price": 10.65,
+      "current_price": 10.78,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -74485,7 +74485,7 @@
       "valid_until": "2026-09-15 20:27:04",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 9.9,
+      "stop_loss": 10.03,
       "short_term_score": 60.0,
       "medium_term_score": 56.0,
       "long_term_score": 54.0,
@@ -74990,14 +74990,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 69,
-      "price": 10.65,
-      "target_price": 11.56
+      "price": 10.78,
+      "target_price": 11.7
     },
     {
       "ticker": "MNHD.CA",
       "company_name": "مجموعة نماء للاستثمار",
       "sector": "الخدمات المالية والبنوك",
-      "current_price": 7.68,
+      "current_price": 7.59,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -75046,7 +75046,7 @@
       "valid_until": "2026-09-15 20:27:04",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 7.14,
+      "stop_loss": 7.06,
       "short_term_score": 66.0,
       "medium_term_score": 63.0,
       "long_term_score": 61.0,
@@ -75558,14 +75558,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 70,
-      "price": 7.68,
-      "target_price": 8.33
+      "price": 7.59,
+      "target_price": 8.24
     },
     {
       "ticker": "ODIN.CA",
       "company_name": "أودن للاستثمارات المالية",
       "sector": "الخدمات المالية والبنوك",
-      "current_price": 2.83,
+      "current_price": 2.75,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -75614,7 +75614,7 @@
       "valid_until": "2026-09-15 20:27:04",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 2.63,
+      "stop_loss": 2.56,
       "short_term_score": 66.0,
       "medium_term_score": 67.0,
       "long_term_score": 63.0,
@@ -76126,8 +76126,8 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 71,
-      "price": 2.83,
-      "target_price": 3.07
+      "price": 2.75,
+      "target_price": 2.98
     },
     {
       "ticker": "OFH.CA",
@@ -76701,7 +76701,7 @@
       "ticker": "PIOH.CA",
       "company_name": "بايونيرز بروبرتيز للتنمية العمرانية",
       "sector": "الخدمات المالية والبنوك",
-      "current_price": 7.55,
+      "current_price": 7.36,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -76750,7 +76750,7 @@
       "valid_until": "2026-09-15 20:27:04",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 7.02,
+      "stop_loss": 6.84,
       "short_term_score": 57.0,
       "medium_term_score": 50.0,
       "long_term_score": 50.0,
@@ -77255,14 +77255,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 73,
-      "price": 7.55,
-      "target_price": 8.19
+      "price": 7.36,
+      "target_price": 7.99
     },
     {
       "ticker": "ASPI.CA",
       "company_name": "أسبيك للاستشارات والاستثمار",
       "sector": "الخدمات المالية والبنوك",
-      "current_price": 0.43,
+      "current_price": 0.41,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -77311,7 +77311,7 @@
       "valid_until": "2026-09-15 20:27:04",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 0.4,
+      "stop_loss": 0.38,
       "short_term_score": 52.0,
       "medium_term_score": 55.0,
       "long_term_score": 50.0,
@@ -77823,14 +77823,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 74,
-      "price": 0.43,
-      "target_price": 0.47
+      "price": 0.41,
+      "target_price": 0.44
     },
     {
       "ticker": "CNFN.CA",
       "company_name": "كونتكت المالية القابضة",
       "sector": "الخدمات المالية والبنوك",
-      "current_price": 4.51,
+      "current_price": 4.44,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -77879,7 +77879,7 @@
       "valid_until": "2026-09-15 20:27:04",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 4.19,
+      "stop_loss": 4.13,
       "short_term_score": 67.0,
       "medium_term_score": 66.0,
       "long_term_score": 63.0,
@@ -78385,14 +78385,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 75,
-      "price": 4.51,
-      "target_price": 4.89
+      "price": 4.44,
+      "target_price": 4.82
     },
     {
       "ticker": "ICMI.CA",
       "company_name": "المجموعة المتكاملة للأعمال الهندسية",
       "sector": "الخدمات المالية والبنوك",
-      "current_price": 0.7,
+      "current_price": 0.69,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -78441,7 +78441,7 @@
       "valid_until": "2026-09-15 20:27:05",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 0.65,
+      "stop_loss": 0.64,
       "short_term_score": 28.0,
       "medium_term_score": 28.0,
       "long_term_score": 28.0,
@@ -78940,14 +78940,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 76,
-      "price": 0.7,
-      "target_price": 0.76
+      "price": 0.69,
+      "target_price": 0.75
     },
     {
       "ticker": "ALEX.CA",
       "company_name": "الإسكندرية للغزل والنسيج (سبينالكس)",
       "sector": "الخدمات المالية والبنوك",
-      "current_price": 22.0,
+      "current_price": 21.99,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -78994,7 +78994,7 @@
       "valid_until": "2026-09-15 20:27:05",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 20.46,
+      "stop_loss": 20.45,
       "short_term_score": 61.0,
       "medium_term_score": 55.0,
       "long_term_score": 55.0,
@@ -79506,8 +79506,8 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 77,
-      "price": 22.0,
-      "target_price": 23.87
+      "price": 21.99,
+      "target_price": 23.86
     },
     {
       "ticker": "EIUD.CA",
@@ -80069,7 +80069,7 @@
       "ticker": "ETRS.CA",
       "company_name": "المصرية لخدمات النقل (إيجيترانس)",
       "sector": "الخدمات المالية والبنوك",
-      "current_price": 10.8,
+      "current_price": 10.63,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -80116,7 +80116,7 @@
       "valid_until": "2026-09-15 20:27:05",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 10.04,
+      "stop_loss": 9.89,
       "short_term_score": 69.0,
       "medium_term_score": 68.0,
       "long_term_score": 65.0,
@@ -80622,14 +80622,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 79,
-      "price": 10.8,
-      "target_price": 11.72
+      "price": 10.63,
+      "target_price": 11.53
     },
     {
       "ticker": "DAPH.CA",
       "company_name": "الدلتا للتأمين",
       "sector": "الخدمات المالية والبنوك",
-      "current_price": 111.0,
+      "current_price": 109.01,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -80676,7 +80676,7 @@
       "valid_until": "2026-09-15 20:27:05",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 103.23,
+      "stop_loss": 101.38,
       "short_term_score": 70.0,
       "medium_term_score": 73.0,
       "long_term_score": 68.0,
@@ -81188,8 +81188,8 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 80,
-      "price": 111.0,
-      "target_price": 120.44
+      "price": 109.01,
+      "target_price": 118.28
     },
     {
       "ticker": "WATP.CA",
@@ -81742,7 +81742,7 @@
       "ticker": "AIFI.CA",
       "company_name": "الأهلي للتنمية والاستثمار",
       "sector": "الخدمات المالية والبنوك",
-      "current_price": 2.31,
+      "current_price": 2.24,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -81791,7 +81791,7 @@
       "valid_until": "2026-09-15 20:27:05",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 2.15,
+      "stop_loss": 2.08,
       "short_term_score": 63.0,
       "medium_term_score": 61.0,
       "long_term_score": 59.0,
@@ -82297,14 +82297,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 82,
-      "price": 2.31,
-      "target_price": 2.51
+      "price": 2.24,
+      "target_price": 2.43
     },
     {
       "ticker": "ACAP.CA",
       "company_name": "أي كابيتال القابضة",
       "sector": "الخدمات المالية والبنوك",
-      "current_price": 8.64,
+      "current_price": 8.68,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -82353,7 +82353,7 @@
       "valid_until": "2026-09-15 20:27:05",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 8.04,
+      "stop_loss": 8.07,
       "short_term_score": 59.0,
       "medium_term_score": 53.0,
       "long_term_score": 53.0,
@@ -82865,8 +82865,8 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 83,
-      "price": 8.64,
-      "target_price": 9.37
+      "price": 8.68,
+      "target_price": 9.42
     },
     {
       "ticker": "PRMH.CA",
@@ -84005,7 +84005,7 @@
       "ticker": "NCCW.CA",
       "company_name": "النصر للأعمال المدنية",
       "sector": "التطوير العقاري",
-      "current_price": 7.21,
+      "current_price": 7.65,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -84054,7 +84054,7 @@
       "valid_until": "2026-09-15 20:27:06",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 6.71,
+      "stop_loss": 7.11,
       "short_term_score": 62.0,
       "medium_term_score": 55.0,
       "long_term_score": 55.0,
@@ -84569,14 +84569,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 86,
-      "price": 7.21,
-      "target_price": 7.82
+      "price": 7.65,
+      "target_price": 8.3
     },
     {
       "ticker": "UEGC.CA",
       "company_name": "الصعيد العامة للمقاولات والاستثمار العقاري",
       "sector": "التطوير العقاري",
-      "current_price": 1.69,
+      "current_price": 1.62,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -84625,7 +84625,7 @@
       "valid_until": "2026-09-15 20:27:06",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 1.57,
+      "stop_loss": 1.51,
       "short_term_score": 61.0,
       "medium_term_score": 58.0,
       "long_term_score": 56.0,
@@ -85121,14 +85121,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 87,
-      "price": 1.69,
-      "target_price": 1.83
+      "price": 1.62,
+      "target_price": 1.76
     },
     {
       "ticker": "AIH.CA",
       "company_name": "العروبة للتجارة والتعدين والتوريدات",
       "sector": "التطوير العقاري",
-      "current_price": 0.75,
+      "current_price": 0.73,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -85177,7 +85177,7 @@
       "valid_until": "2026-09-15 20:27:06",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 0.7,
+      "stop_loss": 0.68,
       "short_term_score": 61.0,
       "medium_term_score": 54.0,
       "long_term_score": 54.0,
@@ -85692,14 +85692,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 88,
-      "price": 0.75,
-      "target_price": 0.81
+      "price": 0.73,
+      "target_price": 0.79
     },
     {
       "ticker": "GDWA.CA",
       "company_name": "جدوى للتنمية الصناعية",
       "sector": "التطوير العقاري",
-      "current_price": 0.75,
+      "current_price": 0.74,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -85748,7 +85748,7 @@
       "valid_until": "2026-09-15 20:27:06",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 0.7,
+      "stop_loss": 0.69,
       "short_term_score": 61.0,
       "medium_term_score": 59.0,
       "long_term_score": 57.0,
@@ -86244,14 +86244,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 89,
-      "price": 0.75,
-      "target_price": 0.81
+      "price": 0.74,
+      "target_price": 0.8
     },
     {
       "ticker": "MENA.CA",
       "company_name": "مينا للاستثمار السياحي والعقاري",
       "sector": "التطوير العقاري",
-      "current_price": 6.72,
+      "current_price": 6.63,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -86300,7 +86300,7 @@
       "valid_until": "2026-09-15 20:27:06",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 6.25,
+      "stop_loss": 6.17,
       "short_term_score": 61.0,
       "medium_term_score": 58.0,
       "long_term_score": 56.0,
@@ -86796,14 +86796,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 90,
-      "price": 6.72,
-      "target_price": 7.29
+      "price": 6.63,
+      "target_price": 7.19
     },
     {
       "ticker": "ELKA.CA",
       "company_name": "القاهرة للإسكان والتعمير",
       "sector": "التطوير العقاري",
-      "current_price": 1.67,
+      "current_price": 1.65,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -86852,7 +86852,7 @@
       "valid_until": "2026-09-15 20:27:06",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 1.55,
+      "stop_loss": 1.53,
       "short_term_score": 67.0,
       "medium_term_score": 67.0,
       "long_term_score": 64.0,
@@ -87367,8 +87367,8 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 91,
-      "price": 1.67,
-      "target_price": 1.81
+      "price": 1.65,
+      "target_price": 1.79
     },
     {
       "ticker": "ROWG.CA",
@@ -87939,7 +87939,7 @@
       "ticker": "GGCC.CA",
       "company_name": "الجيزة العامة للمقاولات والاستثمار العقاري",
       "sector": "التطوير العقاري",
-      "current_price": 0.81,
+      "current_price": 0.78,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -87988,7 +87988,7 @@
       "valid_until": "2026-09-15 20:27:06",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 0.75,
+      "stop_loss": 0.73,
       "short_term_score": 65.0,
       "medium_term_score": 68.0,
       "long_term_score": 63.0,
@@ -88497,8 +88497,8 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 93,
-      "price": 0.81,
-      "target_price": 0.88
+      "price": 0.78,
+      "target_price": 0.85
     },
     {
       "ticker": "PORT.CA",
@@ -89634,7 +89634,7 @@
       "ticker": "RREI.CA",
       "company_name": "رواج للتمويل العقاري والاستثمار",
       "sector": "التطوير العقاري",
-      "current_price": 4.21,
+      "current_price": 4.1,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -89683,7 +89683,7 @@
       "valid_until": "2026-09-15 20:27:07",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 3.92,
+      "stop_loss": 3.81,
       "short_term_score": 68.0,
       "medium_term_score": 65.0,
       "long_term_score": 63.0,
@@ -90186,14 +90186,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 96,
-      "price": 4.21,
-      "target_price": 4.57
+      "price": 4.1,
+      "target_price": 4.45
     },
     {
       "ticker": "UNIT.CA",
       "company_name": "المتحدة للإسكان والتعمير",
       "sector": "التطوير العقاري",
-      "current_price": 18.13,
+      "current_price": 18.02,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -90240,7 +90240,7 @@
       "valid_until": "2026-09-15 20:27:07",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 16.86,
+      "stop_loss": 16.76,
       "short_term_score": 63.0,
       "medium_term_score": 56.0,
       "long_term_score": 56.0,
@@ -90755,14 +90755,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 97,
-      "price": 18.13,
-      "target_price": 19.67
+      "price": 18.02,
+      "target_price": 19.55
     },
     {
       "ticker": "AMIA.CA",
       "company_name": "العربية لإدارة وتطوير الأصول",
       "sector": "التطوير العقاري",
-      "current_price": 18.49,
+      "current_price": 18.31,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -90809,7 +90809,7 @@
       "valid_until": "2026-09-15 20:27:07",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 17.2,
+      "stop_loss": 17.03,
       "short_term_score": 63.0,
       "medium_term_score": 58.0,
       "long_term_score": 57.0,
@@ -91324,8 +91324,8 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 98,
-      "price": 18.49,
-      "target_price": 20.06
+      "price": 18.31,
+      "target_price": 19.87
     },
     {
       "ticker": "KRRE.CA",
@@ -91890,7 +91890,7 @@
       "ticker": "GTHE.CA",
       "company_name": "جلوبال تليكوم القابضة (تصفية)",
       "sector": "الاتصالات وتكنولوجيا المعلومات",
-      "current_price": 4.99,
+      "current_price": 4.9,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -91939,7 +91939,7 @@
       "valid_until": "2026-09-15 20:27:08",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 4.64,
+      "stop_loss": 4.56,
       "short_term_score": 61.0,
       "medium_term_score": 54.0,
       "long_term_score": 54.0,
@@ -92454,14 +92454,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 100,
-      "price": 4.99,
-      "target_price": 5.41
+      "price": 4.9,
+      "target_price": 5.32
     },
     {
       "ticker": "MEPA.CA",
       "company_name": "مرسى علم للتنمية السياحية",
       "sector": "السياحة والترفيه",
-      "current_price": 1.9,
+      "current_price": 1.85,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -92510,7 +92510,7 @@
       "valid_until": "2026-09-15 20:27:08",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 1.77,
+      "stop_loss": 1.72,
       "short_term_score": 62.0,
       "medium_term_score": 58.0,
       "long_term_score": 57.0,
@@ -93025,8 +93025,8 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 101,
-      "price": 1.9,
-      "target_price": 2.06
+      "price": 1.85,
+      "target_price": 2.01
     },
     {
       "ticker": "EGSA.CA",
@@ -93584,7 +93584,7 @@
       "ticker": "ALUM.CA",
       "company_name": "الألومنيوم العربية",
       "sector": "الموارد الأساسية والكيماويات",
-      "current_price": 25.5,
+      "current_price": 24.95,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -93631,7 +93631,7 @@
       "valid_until": "2026-09-15 20:27:08",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 23.71,
+      "stop_loss": 23.2,
       "short_term_score": 64.0,
       "medium_term_score": 65.0,
       "long_term_score": 61.0,
@@ -94146,14 +94146,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 103,
-      "price": 25.5,
-      "target_price": 27.67
+      "price": 24.95,
+      "target_price": 27.07
     },
     {
       "ticker": "VERT.CA",
       "company_name": "فيرتكيم لتصنيع الأسمدة",
       "sector": "الموارد الأساسية والكيماويات",
-      "current_price": 5.9,
+      "current_price": 6.33,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -94202,7 +94202,7 @@
       "valid_until": "2026-09-15 20:27:08",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 5.49,
+      "stop_loss": 5.89,
       "short_term_score": 62.0,
       "medium_term_score": 55.0,
       "long_term_score": 55.0,
@@ -94723,14 +94723,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 104,
-      "price": 5.9,
-      "target_price": 6.4
+      "price": 6.33,
+      "target_price": 6.87
     },
     {
       "ticker": "ICID.CA",
       "company_name": "الصناعات الكيماوية المصرية (سيد)",
       "sector": "الرعاية الصحية والأدوية",
-      "current_price": 17.07,
+      "current_price": 17.0,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -94777,7 +94777,7 @@
       "valid_until": "2026-09-15 20:27:08",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 15.88,
+      "stop_loss": 15.81,
       "short_term_score": 63.0,
       "medium_term_score": 62.0,
       "long_term_score": 59.0,
@@ -95286,14 +95286,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 105,
-      "price": 17.07,
-      "target_price": 18.52
+      "price": 17.0,
+      "target_price": 18.45
     },
     {
       "ticker": "BIOC.CA",
       "company_name": "بيو فارما إيجيبت للأدوية",
       "sector": "الرعاية الصحية والأدوية",
-      "current_price": 271.12,
+      "current_price": 263.61,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -95340,7 +95340,7 @@
       "valid_until": "2026-09-15 20:27:08",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 252.14,
+      "stop_loss": 245.16,
       "short_term_score": 30.0,
       "medium_term_score": 28.0,
       "long_term_score": 28.0,
@@ -95836,14 +95836,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 106,
-      "price": 271.12,
-      "target_price": 294.17
+      "price": 263.61,
+      "target_price": 286.02
     },
     {
       "ticker": "SMPP.CA",
       "company_name": "المصرية لتصنيع النشا والجلوكوز",
       "sector": "الأغذية والمشروبات والتبغ",
-      "current_price": 106.0,
+      "current_price": 105.7,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -95890,7 +95890,7 @@
       "valid_until": "2026-09-15 20:27:08",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 98.58,
+      "stop_loss": 98.3,
       "short_term_score": 61.0,
       "medium_term_score": 54.0,
       "long_term_score": 54.0,
@@ -96405,14 +96405,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 107,
-      "price": 106.0,
-      "target_price": 115.01
+      "price": 105.7,
+      "target_price": 114.68
     },
     {
       "ticker": "OLFI.CA",
       "company_name": "العربية للأغذية والزيوت (أولفي)",
       "sector": "الأغذية والمشروبات والتبغ",
-      "current_price": 22.92,
+      "current_price": 22.59,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -96459,7 +96459,7 @@
       "valid_until": "2026-09-15 20:27:08",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 21.32,
+      "stop_loss": 21.01,
       "short_term_score": 65.0,
       "medium_term_score": 64.0,
       "long_term_score": 61.0,
@@ -96968,14 +96968,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 108,
-      "price": 22.92,
-      "target_price": 24.87
+      "price": 22.59,
+      "target_price": 24.51
     },
     {
       "ticker": "PACH.CA",
       "company_name": "البويات والصناعات الكيماوية (باكين)",
       "sector": "الموارد الأساسية والكيماويات",
-      "current_price": 81.0,
+      "current_price": 85.0,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -97022,7 +97022,7 @@
       "valid_until": "2026-09-15 20:27:08",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 75.33,
+      "stop_loss": 79.05,
       "short_term_score": 65.0,
       "medium_term_score": 65.0,
       "long_term_score": 62.0,
@@ -97543,14 +97543,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 110,
-      "price": 81.0,
-      "target_price": 87.88
+      "price": 85.0,
+      "target_price": 92.22
     },
     {
       "ticker": "SCEM.CA",
       "company_name": "أسمنت سيناء",
       "sector": "مواد البناء والتشييد",
-      "current_price": 86.0,
+      "current_price": 84.1,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -97597,7 +97597,7 @@
       "valid_until": "2026-09-15 20:27:09",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 79.98,
+      "stop_loss": 78.21,
       "short_term_score": 64.0,
       "medium_term_score": 59.0,
       "long_term_score": 58.0,
@@ -98112,14 +98112,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 111,
-      "price": 86.0,
-      "target_price": 93.31
+      "price": 84.1,
+      "target_price": 91.25
     },
     {
       "ticker": "MCQE.CA",
       "company_name": "أسمنت مصر بني سويف",
       "sector": "مواد البناء والتشييد",
-      "current_price": 206.96,
+      "current_price": 203.0,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -98166,7 +98166,7 @@
       "valid_until": "2026-09-15 20:27:09",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 192.47,
+      "stop_loss": 188.79,
       "short_term_score": 62.0,
       "medium_term_score": 57.0,
       "long_term_score": 56.0,
@@ -98681,14 +98681,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 112,
-      "price": 206.96,
-      "target_price": 224.55
+      "price": 203.0,
+      "target_price": 220.25
     },
     {
       "ticker": "TORA.CA",
       "company_name": "أسمنت بورتلاند طرة المصرية",
       "sector": "مواد البناء والتشييد",
-      "current_price": 61.77,
+      "current_price": 61.0,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -98735,7 +98735,7 @@
       "valid_until": "2026-09-15 20:27:09",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 57.45,
+      "stop_loss": 56.73,
       "short_term_score": 59.0,
       "medium_term_score": 52.0,
       "long_term_score": 52.0,
@@ -99250,14 +99250,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 113,
-      "price": 61.77,
-      "target_price": 67.02
+      "price": 61.0,
+      "target_price": 66.19
     },
     {
       "ticker": "SVCE.CA",
       "company_name": "جنوب الوادي للأسمنت",
       "sector": "مواد البناء والتشييد",
-      "current_price": 11.21,
+      "current_price": 11.06,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -99304,7 +99304,7 @@
       "valid_until": "2026-09-15 20:27:09",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 10.43,
+      "stop_loss": 10.29,
       "short_term_score": 65.0,
       "medium_term_score": 64.0,
       "long_term_score": 61.0,
@@ -99813,14 +99813,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 114,
-      "price": 11.21,
-      "target_price": 12.16
+      "price": 11.06,
+      "target_price": 12.0
     },
     {
       "ticker": "IFAP.CA",
       "company_name": "الدولية للأسمدة والكيماويات",
       "sector": "الموارد الأساسية والكيماويات",
-      "current_price": 20.59,
+      "current_price": 20.08,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -99867,7 +99867,7 @@
       "valid_until": "2026-09-15 20:27:09",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 19.15,
+      "stop_loss": 18.67,
       "short_term_score": 61.0,
       "medium_term_score": 59.0,
       "long_term_score": 56.0,
@@ -100370,14 +100370,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 115,
-      "price": 20.59,
-      "target_price": 22.34
+      "price": 20.08,
+      "target_price": 21.79
     },
     {
       "ticker": "MIPH.CA",
       "company_name": "مصر لصناعة الفوسفات",
       "sector": "الموارد الأساسية والكيماويات",
-      "current_price": 879.95,
+      "current_price": 839.08,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -100424,7 +100424,7 @@
       "valid_until": "2026-09-15 20:27:09",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 818.35,
+      "stop_loss": 780.34,
       "short_term_score": 65.0,
       "medium_term_score": 64.0,
       "long_term_score": 61.0,
@@ -100939,14 +100939,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 116,
-      "price": 879.95,
-      "target_price": 954.75
+      "price": 839.08,
+      "target_price": 910.4
     },
     {
       "ticker": "EFIC.CA",
       "company_name": "المصرية المالية والصناعية (إفيك)",
       "sector": "الموارد الأساسية والكيماويات",
-      "current_price": 185.1,
+      "current_price": 184.15,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -100993,7 +100993,7 @@
       "valid_until": "2026-09-15 20:27:09",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 172.14,
+      "stop_loss": 171.26,
       "short_term_score": 57.0,
       "medium_term_score": 50.0,
       "long_term_score": 50.0,
@@ -101508,14 +101508,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 117,
-      "price": 185.1,
-      "target_price": 200.83
+      "price": 184.15,
+      "target_price": 199.8
     },
     {
       "ticker": "KABO.CA",
       "company_name": "النصر للغزل والنسيج (كابو)",
       "sector": "المنسوجات والسلع الاستهلاكية",
-      "current_price": 9.27,
+      "current_price": 9.05,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -101564,7 +101564,7 @@
       "valid_until": "2026-09-15 20:27:09",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 8.62,
+      "stop_loss": 8.42,
       "short_term_score": 65.0,
       "medium_term_score": 60.0,
       "long_term_score": 59.0,
@@ -102079,14 +102079,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 118,
-      "price": 9.27,
-      "target_price": 10.06
+      "price": 9.05,
+      "target_price": 9.82
     },
     {
       "ticker": "SPIN.CA",
       "company_name": "الإسكندرية للغزل والنسيج",
       "sector": "المنسوجات والسلع الاستهلاكية",
-      "current_price": 17.3,
+      "current_price": 17.02,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -102133,7 +102133,7 @@
       "valid_until": "2026-09-15 20:27:10",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 16.09,
+      "stop_loss": 15.83,
       "short_term_score": 60.0,
       "medium_term_score": 53.0,
       "long_term_score": 53.0,
@@ -102648,14 +102648,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 119,
-      "price": 17.3,
-      "target_price": 18.77
+      "price": 17.02,
+      "target_price": 18.47
     },
     {
       "ticker": "CSAG.CA",
       "company_name": "القناة للتوكيلات الملاحية",
       "sector": "خدمات النقل والشحن واللوجستيات",
-      "current_price": 38.23,
+      "current_price": 37.65,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -102702,7 +102702,7 @@
       "valid_until": "2026-09-15 20:27:10",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 35.55,
+      "stop_loss": 35.01,
       "short_term_score": 58.0,
       "medium_term_score": 51.0,
       "long_term_score": 51.0,
@@ -103210,14 +103210,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 121,
-      "price": 38.23,
-      "target_price": 41.48
+      "price": 37.65,
+      "target_price": 40.85
     },
     {
       "ticker": "MPCO.CA",
       "company_name": "المنصورة للدواجن",
       "sector": "الأغذية والمشروبات والتبغ",
-      "current_price": 2.75,
+      "current_price": 2.63,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -103266,7 +103266,7 @@
       "valid_until": "2026-09-15 20:27:10",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 2.56,
+      "stop_loss": 2.45,
       "short_term_score": 64.0,
       "medium_term_score": 67.0,
       "long_term_score": 62.0,
@@ -103775,14 +103775,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 122,
-      "price": 2.75,
-      "target_price": 2.98
+      "price": 2.63,
+      "target_price": 2.85
     },
     {
       "ticker": "SMPC.CA",
       "company_name": "شمال الصعيد للتنمية والإنتاج الزراعي (نيوداب)",
       "sector": "الأغذية والمشروبات والتبغ",
-      "current_price": 2.72,
+      "current_price": 2.75,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -103831,7 +103831,7 @@
       "valid_until": "2026-09-15 20:27:10",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 2.53,
+      "stop_loss": 2.56,
       "short_term_score": 64.0,
       "medium_term_score": 59.0,
       "long_term_score": 58.0,
@@ -104346,14 +104346,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 123,
-      "price": 2.72,
-      "target_price": 2.95
+      "price": 2.75,
+      "target_price": 2.98
     },
     {
       "ticker": "ARCO.CA",
       "company_name": "العربية للأسمنت المسلح",
       "sector": "مواد البناء والتشييد",
-      "current_price": 2.0,
+      "current_price": 1.98,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -104402,7 +104402,7 @@
       "valid_until": "2026-09-15 20:27:10",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 1.86,
+      "stop_loss": 1.84,
       "short_term_score": 66.0,
       "medium_term_score": 63.0,
       "long_term_score": 61.0,
@@ -104905,14 +104905,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 125,
-      "price": 2.0,
-      "target_price": 2.17
+      "price": 1.98,
+      "target_price": 2.15
     },
     {
       "ticker": "ECAP.CA",
       "company_name": "العز لصناعة السيراميك والبورسلين (الجوهرة)",
       "sector": "مواد البناء والتشييد",
-      "current_price": 31.85,
+      "current_price": 31.5,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -104959,7 +104959,7 @@
       "valid_until": "2026-09-15 20:27:10",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 29.62,
+      "stop_loss": 29.3,
       "short_term_score": 61.0,
       "medium_term_score": 59.0,
       "long_term_score": 57.0,
@@ -105455,14 +105455,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 126,
-      "price": 31.85,
-      "target_price": 34.56
+      "price": 31.5,
+      "target_price": 34.18
     },
     {
       "ticker": "EPCO.CA",
       "company_name": "مصر لصناعة وتجارة الأنابيب",
       "sector": "الصناعة والمقاولات",
-      "current_price": 10.77,
+      "current_price": 10.63,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -105509,7 +105509,7 @@
       "valid_until": "2026-09-15 20:27:10",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 10.02,
+      "stop_loss": 9.89,
       "short_term_score": 69.0,
       "medium_term_score": 71.0,
       "long_term_score": 66.0,
@@ -106024,14 +106024,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 127,
-      "price": 10.77,
-      "target_price": 11.69
+      "price": 10.63,
+      "target_price": 11.53
     },
     {
       "ticker": "NIPH.CA",
       "company_name": "النيل للأدوية والصناعات الكيماوية",
       "sector": "الرعاية الصحية والأدوية",
-      "current_price": 342.0,
+      "current_price": 333.01,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -106078,7 +106078,7 @@
       "valid_until": "2026-09-15 20:27:10",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 318.06,
+      "stop_loss": 309.7,
       "short_term_score": 59.0,
       "medium_term_score": 53.0,
       "long_term_score": 52.0,
@@ -106586,14 +106586,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 129,
-      "price": 342.0,
-      "target_price": 371.07
+      "price": 333.01,
+      "target_price": 361.32
     },
     {
       "ticker": "AXPH.CA",
       "company_name": "الإسكندرية للأدوية والصناعات الكيماوية",
       "sector": "الرعاية الصحية والأدوية",
-      "current_price": 1691.79,
+      "current_price": 1669.41,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -106640,7 +106640,7 @@
       "valid_until": "2026-09-15 20:27:11",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 1573.36,
+      "stop_loss": 1552.55,
       "short_term_score": 53.0,
       "medium_term_score": 53.0,
       "long_term_score": 49.0,
@@ -107155,14 +107155,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 130,
-      "price": 1691.79,
-      "target_price": 1835.59
+      "price": 1669.41,
+      "target_price": 1811.31
     },
     {
       "ticker": "CPCI.CA",
       "company_name": "القاهرة للأدوية والصناعات الكيماوية",
       "sector": "الرعاية الصحية والأدوية",
-      "current_price": 562.0,
+      "current_price": 563.28,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -107209,7 +107209,7 @@
       "valid_until": "2026-09-15 20:27:11",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 522.66,
+      "stop_loss": 523.85,
       "short_term_score": 42.0,
       "medium_term_score": 40.0,
       "long_term_score": 38.0,
@@ -107718,14 +107718,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 131,
-      "price": 562.0,
-      "target_price": 609.77
+      "price": 563.28,
+      "target_price": 611.16
     },
     {
       "ticker": "MPCI.CA",
       "company_name": "ممفيس للأدوية والصناعات الكيماوية",
       "sector": "الرعاية الصحية والأدوية",
-      "current_price": 393.11,
+      "current_price": 386.0,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -107772,7 +107772,7 @@
       "valid_until": "2026-09-15 20:27:11",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 365.59,
+      "stop_loss": 358.98,
       "short_term_score": 58.0,
       "medium_term_score": 55.0,
       "long_term_score": 53.0,
@@ -108280,8 +108280,8 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 132,
-      "price": 393.11,
-      "target_price": 426.52
+      "price": 386.0,
+      "target_price": 418.81
     },
     {
       "ticker": "ARPU.CA",
@@ -109411,7 +109411,7 @@
       "ticker": "NAHO.CA",
       "company_name": "نعيم القابضة للاستثمارات",
       "sector": "الخدمات المالية والبنوك",
-      "current_price": 0.13,
+      "current_price": 0.12,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -109460,7 +109460,7 @@
       "valid_until": "2026-09-15 20:27:11",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 0.12,
+      "stop_loss": 0.11,
       "short_term_score": 61.0,
       "medium_term_score": 58.0,
       "long_term_score": 56.0,
@@ -109953,14 +109953,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 136,
-      "price": 0.13,
-      "target_price": 0.14
+      "price": 0.12,
+      "target_price": 0.13
     },
     {
       "ticker": "ATQA.CA",
       "company_name": "مصر الوطنية للصلب (عتاقة)",
       "sector": "الموارد الأساسية والكيماويات",
-      "current_price": 13.05,
+      "current_price": 12.89,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -110007,7 +110007,7 @@
       "valid_until": "2026-09-15 20:27:11",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 12.14,
+      "stop_loss": 11.99,
       "short_term_score": 67.0,
       "medium_term_score": 64.0,
       "long_term_score": 62.0,
@@ -110516,14 +110516,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 137,
-      "price": 13.05,
-      "target_price": 14.16
+      "price": 12.89,
+      "target_price": 13.99
     },
     {
       "ticker": "IRON.CA",
       "company_name": "الحديد والصلب المصرية (تحت التصفية)",
       "sector": "الموارد الأساسية والكيماويات",
-      "current_price": 27.17,
+      "current_price": 27.95,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -110570,7 +110570,7 @@
       "valid_until": "2026-09-15 20:27:11",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 25.27,
+      "stop_loss": 25.99,
       "short_term_score": 40.0,
       "medium_term_score": 33.0,
       "long_term_score": 33.0,
@@ -111085,14 +111085,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 138,
-      "price": 27.17,
-      "target_price": 29.48
+      "price": 27.95,
+      "target_price": 30.33
     },
     {
       "ticker": "AJWA.CA",
       "company_name": "أجواء للصناعات الغذائية - مصر",
       "sector": "الأغذية والمشروبات والتبغ",
-      "current_price": 179.01,
+      "current_price": 178.63,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -111139,7 +111139,7 @@
       "valid_until": "2026-09-15 20:27:11",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 166.48,
+      "stop_loss": 166.13,
       "short_term_score": 63.0,
       "medium_term_score": 60.0,
       "long_term_score": 58.0,
@@ -111642,14 +111642,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 139,
-      "price": 179.01,
-      "target_price": 194.23
+      "price": 178.63,
+      "target_price": 193.81
     },
     {
       "ticker": "KRDI.CA",
       "company_name": "الكردي للتنمية والاستثمار العقاري",
       "sector": "التطوير العقاري",
-      "current_price": 0.43,
+      "current_price": 0.44,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -111698,7 +111698,7 @@
       "valid_until": "2026-09-15 20:27:12",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 0.4,
+      "stop_loss": 0.41,
       "short_term_score": 63.0,
       "medium_term_score": 66.0,
       "long_term_score": 61.0,
@@ -112207,14 +112207,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 142,
-      "price": 0.43,
-      "target_price": 0.47
+      "price": 0.44,
+      "target_price": 0.48
     },
     {
       "ticker": "AMER.CA",
       "company_name": "مجموعة عامر القابضة (عامر جروب)",
       "sector": "التطوير العقاري",
-      "current_price": 5.2,
+      "current_price": 5.01,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -112263,7 +112263,7 @@
       "valid_until": "2026-09-15 20:27:12",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 4.84,
+      "stop_loss": 4.66,
       "short_term_score": 67.0,
       "medium_term_score": 69.0,
       "long_term_score": 65.0,
@@ -112778,14 +112778,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 143,
-      "price": 5.2,
-      "target_price": 5.64
+      "price": 5.01,
+      "target_price": 5.44
     },
     {
       "ticker": "CCRS.CA",
       "company_name": "القاهرة للاستثمارات والتنمية",
       "sector": "التطوير العقاري",
-      "current_price": 2.57,
+      "current_price": 2.55,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -112834,7 +112834,7 @@
       "valid_until": "2026-09-15 20:27:12",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 2.39,
+      "stop_loss": 2.37,
       "short_term_score": 65.0,
       "medium_term_score": 68.0,
       "long_term_score": 63.0,
@@ -113343,14 +113343,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 144,
-      "price": 2.57,
-      "target_price": 2.79
+      "price": 2.55,
+      "target_price": 2.77
     },
     {
       "ticker": "ELWA.CA",
       "company_name": "الوادي العالمية للاستثمار والتنمية",
       "sector": "السياحة والترفيه",
-      "current_price": 1.71,
+      "current_price": 1.69,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -113399,7 +113399,7 @@
       "valid_until": "2026-09-15 20:27:12",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 1.59,
+      "stop_loss": 1.57,
       "short_term_score": 41.0,
       "medium_term_score": 34.0,
       "long_term_score": 34.0,
@@ -113907,14 +113907,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 146,
-      "price": 1.71,
-      "target_price": 1.86
+      "price": 1.69,
+      "target_price": 1.83
     },
     {
       "ticker": "GSSC.CA",
       "company_name": "العامة للصوامع والتخزين",
       "sector": "خدمات النقل والشحن واللوجستيات",
-      "current_price": 306.49,
+      "current_price": 299.44,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -113961,7 +113961,7 @@
       "valid_until": "2026-09-15 20:27:12",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 285.04,
+      "stop_loss": 278.48,
       "short_term_score": 62.0,
       "medium_term_score": 59.0,
       "long_term_score": 57.0,
@@ -114470,14 +114470,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 147,
-      "price": 306.49,
-      "target_price": 332.54
+      "price": 299.44,
+      "target_price": 324.89
     },
     {
       "ticker": "ZEOT.CA",
       "company_name": "الإسكندرية للزيوت والصابون",
       "sector": "الأغذية والمشروبات والتبغ",
-      "current_price": 13.06,
+      "current_price": 12.7,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -114524,7 +114524,7 @@
       "valid_until": "2026-09-15 20:27:13",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 12.15,
+      "stop_loss": 11.81,
       "short_term_score": 63.0,
       "medium_term_score": 60.0,
       "long_term_score": 58.0,
@@ -115039,14 +115039,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 148,
-      "price": 13.06,
-      "target_price": 14.17
+      "price": 12.7,
+      "target_price": 13.78
     },
     {
       "ticker": "EXTK.CA",
       "company_name": "مستخلصات الزيوت ومنتجاتها",
       "sector": "الأغذية والمشروبات والتبغ",
-      "current_price": 13.06,
+      "current_price": 12.7,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -115093,7 +115093,7 @@
       "valid_until": "2026-09-15 20:27:13",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 12.15,
+      "stop_loss": 11.81,
       "short_term_score": 64.0,
       "medium_term_score": 61.0,
       "long_term_score": 59.0,
@@ -115608,14 +115608,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 149,
-      "price": 13.06,
-      "target_price": 14.17
+      "price": 12.7,
+      "target_price": 13.78
     },
     {
       "ticker": "TANM.CA",
       "company_name": "تنمية للاستثمار العقاري والمقاولات",
       "sector": "التطوير العقاري",
-      "current_price": 7.0,
+      "current_price": 7.4,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -115664,7 +115664,7 @@
       "valid_until": "2026-09-15 20:27:13",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 6.51,
+      "stop_loss": 6.88,
       "short_term_score": 60.0,
       "medium_term_score": 56.0,
       "long_term_score": 54.0,
@@ -116172,14 +116172,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 150,
-      "price": 7.0,
-      "target_price": 7.59
+      "price": 7.4,
+      "target_price": 8.03
     },
     {
       "ticker": "MBSC.CA",
       "company_name": "مصر لأسمنت المنيا",
       "sector": "مواد البناء والتشييد",
-      "current_price": 341.0,
+      "current_price": 339.49,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -116226,7 +116226,7 @@
       "valid_until": "2026-09-15 20:27:13",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 317.13,
+      "stop_loss": 315.73,
       "short_term_score": 65.0,
       "medium_term_score": 58.0,
       "long_term_score": 58.0,
@@ -116741,14 +116741,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 154,
-      "price": 341.0,
-      "target_price": 369.99
+      "price": 339.49,
+      "target_price": 368.35
     },
     {
       "ticker": "PRCL.CA",
       "company_name": "الخزف والصيني المصرية المتقدمة",
       "sector": "مواد البناء والتشييد",
-      "current_price": 30.95,
+      "current_price": 31.44,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -116795,7 +116795,7 @@
       "valid_until": "2026-09-15 20:27:13",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 28.78,
+      "stop_loss": 29.24,
       "short_term_score": 52.0,
       "medium_term_score": 52.0,
       "long_term_score": 49.0,
@@ -117310,14 +117310,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 157,
-      "price": 30.95,
-      "target_price": 33.58
+      "price": 31.44,
+      "target_price": 34.11
     },
     {
       "ticker": "MOSC.CA",
       "company_name": "مصر لصناعة الأجهزة والمبردات",
       "sector": "السلع المعمرة والإلكترونيات",
-      "current_price": 298.15,
+      "current_price": 299.78,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -117364,7 +117364,7 @@
       "valid_until": "2026-09-15 20:27:13",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 277.28,
+      "stop_loss": 278.8,
       "short_term_score": 64.0,
       "medium_term_score": 58.0,
       "long_term_score": 58.0,
@@ -117879,8 +117879,8 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 158,
-      "price": 298.15,
-      "target_price": 323.49
+      "price": 299.78,
+      "target_price": 325.26
     },
     {
       "ticker": "EGEL.CA",
@@ -118451,7 +118451,7 @@
       "ticker": "MTRC.CA",
       "company_name": "مطاحن ومخابز شمال القاهرة",
       "sector": "الأغذية والمشروبات والتبغ",
-      "current_price": 191.0,
+      "current_price": 190.57,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -118498,7 +118498,7 @@
       "valid_until": "2026-09-15 20:27:13",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 177.63,
+      "stop_loss": 177.23,
       "short_term_score": 61.0,
       "medium_term_score": 58.0,
       "long_term_score": 56.0,
@@ -119013,14 +119013,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 160,
-      "price": 191.0,
-      "target_price": 207.23
+      "price": 190.57,
+      "target_price": 206.77
     },
     {
       "ticker": "MCEG.CA",
       "company_name": "مطاحن ومخابز جنوب القاهرة والجيزة",
       "sector": "الأغذية والمشروبات والتبغ",
-      "current_price": 266.07,
+      "current_price": 266.54,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -119067,7 +119067,7 @@
       "valid_until": "2026-09-15 20:27:13",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 247.45,
+      "stop_loss": 247.88,
       "short_term_score": 63.0,
       "medium_term_score": 61.0,
       "long_term_score": 58.0,
@@ -119570,14 +119570,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 161,
-      "price": 266.07,
-      "target_price": 288.69
+      "price": 266.54,
+      "target_price": 289.2
     },
     {
       "ticker": "MEFM.CA",
       "company_name": "مطاحن مصر الوسطى",
       "sector": "الأغذية والمشروبات والتبغ",
-      "current_price": 145.6,
+      "current_price": 143.52,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -119624,7 +119624,7 @@
       "valid_until": "2026-09-15 20:27:13",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 135.41,
+      "stop_loss": 133.47,
       "short_term_score": 69.0,
       "medium_term_score": 67.0,
       "long_term_score": 64.0,
@@ -120127,14 +120127,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 162,
-      "price": 145.6,
-      "target_price": 157.98
+      "price": 143.52,
+      "target_price": 155.72
     },
     {
       "ticker": "WCDF.CA",
       "company_name": "مطاحن ومخابز الإسكندرية",
       "sector": "الأغذية والمشروبات والتبغ",
-      "current_price": 710.0,
+      "current_price": 700.33,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -120181,7 +120181,7 @@
       "valid_until": "2026-09-15 20:27:13",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 660.3,
+      "stop_loss": 651.31,
       "short_term_score": 66.0,
       "medium_term_score": 69.0,
       "long_term_score": 64.0,
@@ -120696,14 +120696,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 163,
-      "price": 710.0,
-      "target_price": 770.35
+      "price": 700.33,
+      "target_price": 759.86
     },
     {
       "ticker": "UEDA.CA",
       "company_name": "مطاحن مصر العليا",
       "sector": "الأغذية والمشروبات والتبغ",
-      "current_price": 480.0,
+      "current_price": 476.98,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -120750,7 +120750,7 @@
       "valid_until": "2026-09-15 20:27:13",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 446.4,
+      "stop_loss": 443.59,
       "short_term_score": 40.0,
       "medium_term_score": 40.0,
       "long_term_score": 37.0,
@@ -121265,14 +121265,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 164,
-      "price": 480.0,
-      "target_price": 520.8
+      "price": 476.98,
+      "target_price": 517.52
     },
     {
       "ticker": "EDFM.CA",
       "company_name": "مطاحن شرق الدلتا",
       "sector": "الأغذية والمشروبات والتبغ",
-      "current_price": 396.0,
+      "current_price": 393.0,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -121319,7 +121319,7 @@
       "valid_until": "2026-09-15 20:27:14",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 368.28,
+      "stop_loss": 365.49,
       "short_term_score": 61.0,
       "medium_term_score": 57.0,
       "long_term_score": 56.0,
@@ -121834,14 +121834,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 165,
-      "price": 396.0,
-      "target_price": 429.66
+      "price": 393.0,
+      "target_price": 426.4
     },
     {
       "ticker": "WDEH.CA",
       "company_name": "مطاحن وسط وغرب الدلتا",
       "sector": "الأغذية والمشروبات والتبغ",
-      "current_price": 710.0,
+      "current_price": 700.33,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -121888,7 +121888,7 @@
       "valid_until": "2026-09-15 20:27:14",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 660.3,
+      "stop_loss": 651.31,
       "short_term_score": 69.0,
       "medium_term_score": 72.0,
       "long_term_score": 67.0,
@@ -122403,8 +122403,8 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 166,
-      "price": 710.0,
-      "target_price": 770.35
+      "price": 700.33,
+      "target_price": 759.86
     },
     {
       "ticker": "SNFC.CA",
@@ -122979,7 +122979,7 @@
       "ticker": "ISMA.CA",
       "company_name": "الإسماعيلية مصر للدواجن",
       "sector": "الأغذية والمشروبات والتبغ",
-      "current_price": 30.47,
+      "current_price": 29.86,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -123026,7 +123026,7 @@
       "valid_until": "2026-09-15 20:27:14",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 28.34,
+      "stop_loss": 27.77,
       "short_term_score": 60.0,
       "medium_term_score": 54.0,
       "long_term_score": 54.0,
@@ -123534,8 +123534,8 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 168,
-      "price": 30.47,
-      "target_price": 33.06
+      "price": 29.86,
+      "target_price": 32.4
     },
     {
       "ticker": "ISMD.CA",
@@ -124100,7 +124100,7 @@
       "ticker": "IDRE.CA",
       "company_name": "التنمية العمرانية الدولية",
       "sector": "التطوير العقاري",
-      "current_price": 54.24,
+      "current_price": 53.03,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -124147,7 +124147,7 @@
       "valid_until": "2026-09-15 20:27:14",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 50.44,
+      "stop_loss": 49.32,
       "short_term_score": 66.0,
       "medium_term_score": 69.0,
       "long_term_score": 64.0,
@@ -124662,8 +124662,8 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 170,
-      "price": 54.24,
-      "target_price": 58.85
+      "price": 53.03,
+      "target_price": 57.54
     },
     {
       "ticker": "GMCG.CA",
@@ -127466,7 +127466,7 @@
       "ticker": "SAUD.CA",
       "company_name": "بنك البركة مصر",
       "sector": "الخدمات المالية والبنوك",
-      "current_price": 25.6,
+      "current_price": 24.58,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -127513,7 +127513,7 @@
       "valid_until": "2026-09-15 20:27:17",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 23.81,
+      "stop_loss": 22.86,
       "short_term_score": 62.0,
       "medium_term_score": 62.0,
       "long_term_score": 59.0,
@@ -128019,8 +128019,8 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 226,
-      "price": 25.6,
-      "target_price": 27.78
+      "price": 24.58,
+      "target_price": 26.67
     },
     {
       "ticker": "ARVA.CA",
@@ -128583,7 +128583,7 @@
       "ticker": "ELNA.CA",
       "company_name": "النصر للملابس والمنسوجات (كابو)",
       "sector": "المنسوجات والسلع المعمرة",
-      "current_price": 35.21,
+      "current_price": 35.22,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -129138,14 +129138,14 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 228,
-      "price": 35.21,
-      "target_price": 38.2
+      "price": 35.22,
+      "target_price": 38.21
     },
     {
       "ticker": "ASCM.CA",
       "company_name": "أسيك للتعدين (أسكوم)",
       "sector": "الموارد الأساسية والكيماويات",
-      "current_price": 58.86,
+      "current_price": 57.86,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -129192,7 +129192,7 @@
       "valid_until": "2026-09-15 20:27:18",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 54.74,
+      "stop_loss": 53.81,
       "short_term_score": 61.0,
       "medium_term_score": 56.0,
       "long_term_score": 55.0,
@@ -129713,8 +129713,8 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 229,
-      "price": 58.86,
-      "target_price": 63.86
+      "price": 57.86,
+      "target_price": 62.78
     },
     {
       "ticker": "EUBR.CA",
@@ -133114,7 +133114,7 @@
       "ticker": "CIRA.CA",
       "company_name": "القاهرة للاستثمار والتنمية العقارية (سيرا)",
       "sector": "خدمات تعليمية",
-      "current_price": 40.35,
+      "current_price": 39.91,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -133161,7 +133161,7 @@
       "valid_until": "2026-09-15 20:27:18",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 37.53,
+      "stop_loss": 37.12,
       "short_term_score": 59.0,
       "medium_term_score": 59.0,
       "long_term_score": 56.0,
@@ -133676,8 +133676,8 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 236,
-      "price": 40.35,
-      "target_price": 43.78
+      "price": 39.91,
+      "target_price": 43.3
     },
     {
       "ticker": "ANFI.CA",
@@ -137067,7 +137067,7 @@
       "ticker": "TALM.CA",
       "company_name": "تعليم لخدمات الإدارة",
       "sector": "خدمات تعليمية",
-      "current_price": 20.86,
+      "current_price": 20.78,
       "price_source": "TRADINGVIEW_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -137114,7 +137114,7 @@
       "valid_until": "2026-09-15 20:27:18",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 19.4,
+      "stop_loss": 19.33,
       "short_term_score": 67.0,
       "medium_term_score": 70.0,
       "long_term_score": 65.0,
@@ -137629,8 +137629,8 @@
         "expected_twin_return_pct": 2.5
       },
       "rank": 243,
-      "price": 20.86,
-      "target_price": 22.63
+      "price": 20.78,
+      "target_price": 22.55
     },
     {
       "ticker": "UNFO.CA",

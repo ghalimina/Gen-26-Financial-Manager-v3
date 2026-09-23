@@ -1,23 +1,23 @@
 {
   "version": "3.0.0",
-  "last_updated": "2026-09-22T15:41:48.530142",
+  "last_updated": "2026-09-23T12:26:08.036381",
   "deployment_mode": "PAPER_ONLY",
   "live_trading_blocked": true,
   "start_date": "2026-09-20",
   "start_date_ar": "20 سبتمبر 2026",
   "session_progress": {
-    "verified_sessions": 3,
+    "verified_sessions": 4,
     "total_sessions_required": 30,
-    "remaining_sessions": 27,
-    "percentage_complete": 10.0,
-    "last_successful_session": "2026-09-22",
+    "remaining_sessions": 26,
+    "percentage_complete": 13.3,
+    "last_successful_session": "2026-09-23",
     "gate_status": "STANDBY_READY_FOR_LAUNCH",
     "session_counter_label_ar": "فترة الحضانة: في وضع الاستعداد (0 من 30 جلسة)"
   },
   "portfolio": {
     "portfolio_equity": 100000.0,
     "cash": 85000.0,
-    "invested_stock_equity": 47877.29,
+    "invested_stock_equity": 47782.12,
     "stock_allocation_pct": 47.5,
     "cash_reserve_pct": 52.5,
     "open_positions": [
@@ -45,7 +45,7 @@
   },
   "performance": {
     "realized_pnl_egp": 0.0,
-    "unrealized_pnl_egp": 900.03,
+    "unrealized_pnl_egp": 805.1,
     "cumulative_return_pct": 0.0,
     "max_drawdown_pct": 0.0,
     "win_rate_pct": 0.0,
@@ -79,6 +79,13 @@
       "date": "2026-09-22",
       "status": "COMPLETED",
       "pnl": 19.4,
+      "closed_trades_count": 1
+    },
+    {
+      "session_number": 4,
+      "date": "2026-09-23",
+      "status": "COMPLETED",
+      "pnl": -183.69,
       "closed_trades_count": 1
     }
   ]
