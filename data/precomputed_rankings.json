@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-09-24 15:54:30",
-  "mtime": 1790265270.9945962,
+  "timestamp": "2026-09-25 16:36:11",
+  "mtime": 1790354171.7111924,
   "core": [
     {
       "ticker": "EGAL.CA",
@@ -14968,7 +14968,7 @@
       "ticker": "GBCO.CA",
       "company_name": "جي بي كورب (غبور أوتو)",
       "sector": "السيارات والصناعة",
-      "current_price": 31.11,
+      "current_price": 30.41,
       "price_source": "YFINANCE_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -15009,7 +15009,7 @@
       "valid_until": "2026-09-15 20:26:46",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 28.93,
+      "stop_loss": 28.28,
       "short_term_score": 76.0,
       "medium_term_score": 69.0,
       "long_term_score": 69.0,
@@ -15837,8 +15837,8 @@
         "expected_twin_return_pct": 0.58
       },
       "rank": 18,
-      "price": 31.11,
-      "target_price": 33.75
+      "price": 30.41,
+      "target_price": 32.99
     },
     {
       "ticker": "DOMT.CA",
@@ -55116,7 +55116,7 @@
       "ticker": "GBCO.CA",
       "company_name": "جي بي كورب (غبور أوتو)",
       "sector": "السيارات والصناعة",
-      "current_price": 31.11,
+      "current_price": 30.41,
       "price_source": "YFINANCE_EGX_LIVE_SSOT",
       "price_timestamp": "2026-09-15 15:40:25",
       "price_type": "OFFICIAL_LAST_CLOSE",
@@ -55157,7 +55157,7 @@
       "valid_until": "2026-09-15 20:27:00",
       "ttl_minutes": 30,
       "is_expired": false,
-      "stop_loss": 28.93,
+      "stop_loss": 28.28,
       "short_term_score": 76.0,
       "medium_term_score": 69.0,
       "long_term_score": 69.0,
@@ -55985,8 +55985,8 @@
         "expected_twin_return_pct": 0.58
       },
       "rank": 41,
-      "price": 31.11,
-      "target_price": 33.75
+      "price": 30.41,
+      "target_price": 32.99
     },
     {
       "ticker": "ELEC.CA",
