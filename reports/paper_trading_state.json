@@ -1,6 +1,6 @@
 {
   "version": "3.0.0",
-  "last_updated": "2026-09-27T15:50:26.276419",
+  "last_updated": "2026-09-27T19:52:44.118300",
   "deployment_mode": "PAPER_ONLY",
   "live_trading_blocked": true,
   "start_date": "2026-09-20",
@@ -12,41 +12,59 @@
     "percentage_complete": 20.0,
     "last_successful_session": "2026-09-27",
     "gate_status": "STANDBY_READY_FOR_LAUNCH",
-    "session_counter_label_ar": "فترة الحضانة: في وضع الاستعداد (0 من 30 جلسة)"
+    "session_counter_label_ar": "فترة الحضانة: قيد التشغيل (6 من 30 جلسة)"
   },
   "portfolio": {
-    "portfolio_equity": 100000.0,
-    "cash": 85000.0,
+    "portfolio_equity": 100002.19,
+    "cash": 53212.67,
     "invested_stock_equity": 46789.52,
     "stock_allocation_pct": 46.8,
     "cash_reserve_pct": 53.2,
     "open_positions": [
       {
         "ticker": "COMI.CA",
-        "shares": 60,
-        "entry_price": 130.0,
-        "entry_date": "2026-08-10",
-        "sessions_held": 10,
-        "entry_fee": 13.65,
+        "shares": 78,
+        "entry_price": 126.937,
+        "entry_date": "2026-09-27",
+        "sessions_held": 1,
+        "entry_fee": 17.33,
         "sector": "Banking & Financial Services"
       },
       {
-        "ticker": "SWDY.CA",
-        "shares": 60,
-        "entry_price": 120.0,
-        "entry_date": "2026-09-01",
-        "sessions_held": 4,
-        "entry_fee": 12.6,
+        "ticker": "TMGH.CA",
+        "shares": 112,
+        "entry_price": 89.129,
+        "entry_date": "2026-09-27",
+        "sessions_held": 1,
+        "entry_fee": 17.47,
+        "sector": "Real Estate"
+      },
+      {
+        "ticker": "ORAS.CA",
+        "shares": 12,
+        "entry_price": 797.667,
+        "entry_date": "2026-09-27",
+        "sessions_held": 1,
+        "entry_fee": 16.75,
         "sector": "Industrial & Construction"
+      },
+      {
+        "ticker": "ETEL.CA",
+        "shares": 76,
+        "entry_price": 131.131,
+        "entry_date": "2026-09-27",
+        "sessions_held": 1,
+        "entry_fee": 17.44,
+        "sector": "Telecom & Technology"
       }
     ],
     "closed_positions_count": 0,
     "closed_positions_history": []
   },
   "performance": {
-    "realized_pnl_egp": 0.0,
+    "realized_pnl_egp": -370.11,
     "unrealized_pnl_egp": 168.03,
-    "cumulative_return_pct": 0.0,
+    "cumulative_return_pct": -0.37,
     "max_drawdown_pct": 0.0,
     "win_rate_pct": 0.0,
     "profit_factor": 1.0,

@@ -30,10 +30,11 @@ class TestPaperTradingOrchestrator(unittest.TestCase):
         Verify that attempting to run an already completed date returns SKIPPED with reason code.
         """
         from core.paper_trading_state import PaperTradingStateManager
-        orig_state = PaperTradingStateManager.load_state()
+        import copy
+        orig_state = copy.deepcopy(PaperTradingStateManager.load_state())
         try:
             # Seed a mock completed session in history
-            test_state = dict(orig_state)
+            test_state = copy.deepcopy(orig_state)
             test_state["verified_session_history"] = [
                 {"session_number": 1, "date": "2026-08-18", "status": "COMPLETED", "pnl": 0.0}
             ]
@@ -52,15 +53,17 @@ class TestPaperTradingOrchestrator(unittest.TestCase):
         """
         from core.paper_trading_state import PaperTradingStateManager
         from core.session_manager import SessionManager
-        orig_state = PaperTradingStateManager.load_state()
-        orig_sessions = SessionManager._load()
+        import copy
+        orig_state = copy.deepcopy(PaperTradingStateManager.load_state())
+        orig_sessions = copy.deepcopy(SessionManager._load())
+        created_session_num = None
         try:
             # Clean any existing session for the test date
             test_date = "2026-09-17"
             filtered_sessions = [s for s in orig_sessions if s.get("date") != test_date]
             SessionManager._save(filtered_sessions)
 
-            test_state = dict(orig_state)
+            test_state = copy.deepcopy(orig_state)
             test_state["portfolio"]["open_positions"] = [
                 {
                     "ticker": "COMI.CA",
@@ -92,6 +95,7 @@ class TestPaperTradingOrchestrator(unittest.TestCase):
             res = PaperTradingOrchestrator.run_session(target_date=test_date, force_paper_mode=True)
             self.assertEqual(res["status"], "SUCCESS")
             self.assertEqual(res["closed_positions_count"], 1)
+            created_session_num = res.get("session_number")
 
             updated_state = PaperTradingStateManager.load_state()
             closed_hist = updated_state["portfolio"].get("closed_positions_history", [])
@@ -115,7 +119,14 @@ class TestPaperTradingOrchestrator(unittest.TestCase):
         finally:
             PaperTradingStateManager.save_state(orig_state)
             SessionManager._save(orig_sessions)
-            for p in ["reports/paper_sessions/session_02.json", "reports/paper_sessions/session_02.md"]:
+            # Hermetically clean up any created session report files
+            candidates_to_clean = ["reports/paper_sessions/session_02.json", "reports/paper_sessions/session_02.md"]
+            if created_session_num:
+                candidates_to_clean.extend([
+                    f"reports/paper_sessions/session_{created_session_num:02d}.json",
+                    f"reports/paper_sessions/session_{created_session_num:02d}.md"
+                ])
+            for p in candidates_to_clean:
                 if os.path.exists(p):
                     try:
                         os.remove(p)
