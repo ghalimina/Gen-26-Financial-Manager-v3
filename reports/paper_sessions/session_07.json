@@ -1,9 +1,9 @@
 {
   "session_metadata": {
-    "session_id": "SESS-20260927-06",
-    "session_number": 6,
-    "market_date": "2026-09-27",
-    "timestamp": "2026-09-27T12:33:58.068345",
+    "session_id": "SESS-20260917-07",
+    "session_number": 7,
+    "market_date": "2026-09-17",
+    "timestamp": "2026-09-27T12:36:31.450367",
     "engine_version": "3.0.0",
     "status": "VERIFIED_PASS",
     "risk_incidents": []
@@ -118,7 +118,7 @@
   "execution": {
     "fills": [
       {
-        "order_id": "PAPER-4809D349",
+        "order_id": "PAPER-DB17319F",
         "symbol": "COMI.CA",
         "side": "SELL",
         "quantity": 60,
@@ -127,10 +127,10 @@
         "fee": 13.5,
         "order_type": "LIMIT",
         "status": "FILLED",
-        "timestamp": "2026-09-27T12:33:58.066149"
+        "timestamp": "2026-09-27T12:36:31.449129"
       },
       {
-        "order_id": "PAPER-4249A7D7",
+        "order_id": "PAPER-F7AECF44",
         "symbol": "COMI.CA",
         "side": "BUY",
         "quantity": 78,
@@ -139,10 +139,10 @@
         "fee": 17.33,
         "order_type": "LIMIT",
         "status": "FILLED",
-        "timestamp": "2026-09-27T12:33:58.066320"
+        "timestamp": "2026-09-27T12:36:31.449251"
       },
       {
-        "order_id": "PAPER-97EA9BBE",
+        "order_id": "PAPER-14820992",
         "symbol": "TMGH.CA",
         "side": "BUY",
         "quantity": 112,
@@ -151,10 +151,10 @@
         "fee": 17.47,
         "order_type": "LIMIT",
         "status": "FILLED",
-        "timestamp": "2026-09-27T12:33:58.066347"
+        "timestamp": "2026-09-27T12:36:31.449270"
       },
       {
-        "order_id": "PAPER-A261E4B2",
+        "order_id": "PAPER-3DE1C4D5",
         "symbol": "ORAS.CA",
         "side": "BUY",
         "quantity": 12,
@@ -163,10 +163,10 @@
         "fee": 16.75,
         "order_type": "LIMIT",
         "status": "FILLED",
-        "timestamp": "2026-09-27T12:33:58.066367"
+        "timestamp": "2026-09-27T12:36:31.449284"
       },
       {
-        "order_id": "PAPER-A9FF9851",
+        "order_id": "PAPER-15AC8AFD",
         "symbol": "ETEL.CA",
         "side": "BUY",
         "quantity": 76,
@@ -175,7 +175,7 @@
         "fee": 17.44,
         "order_type": "LIMIT",
         "status": "FILLED",
-        "timestamp": "2026-09-27T12:33:58.066385"
+        "timestamp": "2026-09-27T12:36:31.449296"
       }
     ]
   },
