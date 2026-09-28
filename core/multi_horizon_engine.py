@@ -56,10 +56,10 @@ class MultiHorizonEngine:
             base_prob -= 0.02
 
         prob_1d = round(base_prob, 2)
-        prob_5d = round(min(base_prob + 0.04, 0.78), 2)
-        prob_10d = round(min(base_prob + 0.07, 0.82), 2)
-        prob_20d = round(min(base_prob + 0.10, 0.85), 2)
-        prob_60d = round(min(base_prob + 0.13, 0.88), 2)
+        prob_5d = round(min(base_prob + 0.02, 0.72), 2)
+        prob_10d = round(min(base_prob + 0.03, 0.74), 2)
+        prob_20d = round(min(base_prob + 0.04, 0.75), 2)
+        prob_60d = round(min(base_prob + 0.05, 0.76), 2)
 
         conf = 0.85 if tier == "LARGE_CAP" else (0.80 if tier == "MID_CAP" else 0.75)
 
@@ -395,6 +395,17 @@ class MultiHorizonEngine:
             t1_low = round(t1 * (1.0 - err_margin_pct / 100.0), 2)
             t1_high = round(t1 * (1.0 + err_margin_pct / 100.0), 2)
 
+            # Rigorous probability distribution over return scenarios
+            thresh = 3.0 if days <= 5 else 5.0
+            sigma_eff = max(atr_pct * math.sqrt(days / 5.0) * max(breadth_risk_mult, 0.7), 1.0)
+            z_up = (thresh - adj_ret) / sigma_eff
+            z_down = (-thresh - adj_ret) / sigma_eff
+            p_up_calc = round((1.0 - 0.5 * (1.0 + math.erf(z_up / math.sqrt(2)))) * 100.0, 1)
+            p_down_calc = round((0.5 * (1.0 + math.erf(z_down / math.sqrt(2)))) * 100.0, 1)
+            p_up_calc = max(min(p_up_calc, 90.0), 5.0)
+            p_down_calc = max(min(p_down_calc, 90.0), 5.0)
+            p_range_calc = round(max(100.0 - p_up_calc - p_down_calc, 0.0), 1)
+
             horizons_data[h_key] = {
                 "horizon_label": h_cfg["label"],
                 "days": h_cfg["days"],
@@ -404,6 +415,12 @@ class MultiHorizonEngine:
                 "expected_price": exp_price,
                 "prob_up": adj_prob,
                 "confidence": adj_conf,
+                "probability_distribution": {
+                    "threshold_pct": thresh,
+                    "prob_up_pct": p_up_calc,
+                    "prob_range_pct": p_range_calc,
+                    "prob_down_pct": p_down_calc
+                },
                 "target_1": t1,
                 "target_1_bounds": {"low": t1_low, "high": t1_high, "confidence_pct": round(adj_conf * 100, 1)},
                 "target_2": t2,

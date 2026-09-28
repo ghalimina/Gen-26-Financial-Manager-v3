@@ -38,6 +38,8 @@ class ConformalPredictionEngine:
     4. Evaluates Quantile Risk-to-Reward (RR) gating (Required RR >= 2.0).
     """
 
+    ARTIFACTS_FILE = os.path.join(WORKSPACE, "data", "conformal_model_artifacts.pkl")
+
     _LOCK = threading.RLock()
     _is_trained = False
     _model_q10: Optional[GradientBoostingRegressor] = None
@@ -46,13 +48,54 @@ class ConformalPredictionEngine:
     _training_metadata: Dict[str, Any] = {}
 
     @classmethod
+    def load_cached_model(cls) -> bool:
+        """Attempts to load pre-trained quantile model artifacts from disk for sub-5ms instant initialization."""
+        import pickle
+        if os.path.exists(cls.ARTIFACTS_FILE):
+            try:
+                with open(cls.ARTIFACTS_FILE, "rb") as f:
+                    artifacts = pickle.load(f)
+                if artifacts and "model_q50" in artifacts and artifacts["model_q50"] is not None:
+                    cls._model_q10 = artifacts.get("model_q10")
+                    cls._model_q50 = artifacts.get("model_q50")
+                    cls._model_q90 = artifacts.get("model_q90")
+                    cls._training_metadata = artifacts.get("metadata", {})
+                    cls._is_trained = True
+                    return True
+            except Exception:
+                return False
+        return False
+
+    @classmethod
+    def save_model_artifacts(cls):
+        """Persists trained quantile models and metadata to disk."""
+        import pickle
+        try:
+            artifacts = {
+                "model_q10": cls._model_q10,
+                "model_q50": cls._model_q50,
+                "model_q90": cls._model_q90,
+                "metadata": cls._training_metadata
+            }
+            tmp_path = f"{cls.ARTIFACTS_FILE}.tmp"
+            with open(tmp_path, "wb") as f:
+                pickle.dump(artifacts, f)
+            os.replace(tmp_path, cls.ARTIFACTS_FILE)
+        except Exception:
+            pass
+
+    @classmethod
     def train_conformal_models(cls, force_retrain: bool = False) -> Dict[str, Any]:
         """
         Trains Quantile Regressors (alpha=0.10, 0.50, 0.90) on empirical EGX walk-forward features.
+        Loads from persistent disk cache if available.
         """
         with cls._LOCK:
-            if cls._is_trained and not force_retrain and cls._model_q50 is not None:
-                return {"status": "ALREADY_TRAINED", "is_trained": True, "metadata": cls._training_metadata}
+            if not force_retrain:
+                if cls._is_trained and cls._model_q50 is not None:
+                    return {"status": "ALREADY_TRAINED", "is_trained": True, "metadata": cls._training_metadata}
+                if cls.load_cached_model():
+                    return {"status": "CACHED_LOAD", "is_trained": True, "metadata": cls._training_metadata}
 
             # Ingest empirical walk-forward dataset from AIPredictionModel
             train_df, source = AIPredictionModel._generate_empirical_walkforward_data()
@@ -90,6 +133,8 @@ class ConformalPredictionEngine:
                 "coverage_target_pct": 90.0,
                 "algorithm": "Quantile Gradient Boosting (Pinball Loss)"
             }
+
+            cls.save_model_artifacts()
 
             return {"status": "TRAINED_SUCCESS", "is_trained": True, "metadata": cls._training_metadata}
 
