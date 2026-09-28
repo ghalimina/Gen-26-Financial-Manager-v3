@@ -70,5 +70,13 @@
     "start_time": "2026-09-27T12:33:58.056328",
     "completed_at": "2026-09-27T12:33:58.066505",
     "data_status": "VALID"
+  },
+  {
+    "session_id": "SESS_20260928_010",
+    "date": "2026-09-28",
+    "status": "FAILED",
+    "start_time": "2026-09-28T14:38:10.933458",
+    "error": "PORTFOLIO_CONSTRUCTION_INVALID",
+    "failed_at": "2026-09-28T14:38:10.940975"
   }
 ]
