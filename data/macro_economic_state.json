@@ -41,11 +41,11 @@
       "days_since_update": 19
     },
     "usd_egp_rate": {
-      "value": 52.10,
+      "value": 51.97,
       "unit": "EGP",
       "label_ar": "سعر صرف الجنيه أمام الدولار الأمريكي",
       "source": "LIVE_YAHOO_FINANCE_USDEGP",
-      "last_updated": "2026-09-29 13:30:00",
+      "last_updated": "2026-09-29 13:28:35",
       "is_stale": false,
       "staleness_threshold_days": 2,
       "days_since_update": 0
@@ -61,17 +61,17 @@
       "days_since_update": 0
     },
     "brent_oil_usd": {
-      "value": 97.41,
+      "value": 95.98,
       "unit": "USD/bbl",
       "label_ar": "سعر خام برنت العالمي للنفط — ارتفاع ملحوظ بسبب توترات الشرق الأوسط",
       "source": "LIVE_YAHOO_FINANCE_BZ_F",
-      "last_updated": "2026-09-29 13:30:00",
+      "last_updated": "2026-09-29 13:28:35",
       "is_stale": false,
       "staleness_threshold_days": 2,
       "days_since_update": 0
     },
     "gold_spot_usd": {
-      "value": 4179.60,
+      "value": 4179.6,
       "unit": "USD/oz",
       "label_ar": "سعر أونصة الذهب عالمياً — مستوى قياسي مرتفع (ملاذ آمن)",
       "source": "LIVE_YAHOO_FINANCE_GC_F",
@@ -112,8 +112,8 @@
     }
   },
   "egx_market_context": {
-    "egx30_level": 52498.0,
-    "market_direction_30d": "DECLINING",
+    "egx30_level": 52297.1015625,
+    "market_direction_30d": "SIDEWAYS",
     "key_stock_30d_changes": {
       "TMGH.CA": -9.7,
       "COMI.CA": -5.5,
@@ -123,11 +123,12 @@
       "ETEL.CA": 17.7
     },
     "market_breadth": "MIXED_TO_NEGATIVE",
-    "analyst_note": "البورصة في مرحلة هبوط انتقائي — الأسهم القيادية تضغط السوق والتوترات الجيوسياسية وارتفاع أسعار النفط يُضغطان على الهوامش"
+    "analyst_note": "البورصة في مرحلة هبوط انتقائي — الأسهم القيادية تضغط السوق والتوترات الجيوسياسية وارتفاع أسعار النفط يُضغطان على الهوامش",
+    "egx30_30d_change_pct": 0.0
   },
   "macro_regime": "HIGH_RATES_GEOPOLITICAL_PRESSURE",
   "macro_regime_ar": "🟡 فائدة مرتفعة مع ضغوط جيوسياسية ونفط متصاعد — يُوصى بالحذر والتحوط",
-  "last_sync_timestamp": "2026-09-29 13:30:00",
+  "last_sync_timestamp": "2026-09-29 13:28:35",
   "staleness_warnings_count": 0,
   "stale_indicators": []
 }
