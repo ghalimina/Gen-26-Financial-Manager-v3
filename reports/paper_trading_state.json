@@ -1,8 +1,6 @@
 {
   "version": "3.0.0",
-  "last_updated": "2026-09-30T02:44:00.000000",
-  "trading_mode": "PAPER",
-  "portfolio_value_egp": 100002.19,
+  "last_updated": "2026-09-29T17:02:47.698781",
   "deployment_mode": "PAPER_ONLY",
   "live_trading_blocked": true,
   "start_date": "2026-09-20",
