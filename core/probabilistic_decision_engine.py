@@ -23,6 +23,7 @@ from core.regime_hmm_engine import RegimeHMMEngine
 from core.multi_horizon_engine import MultiHorizonEngine
 from core.conformal_prediction_engine import ConformalPredictionEngine
 from core.adversarial_ai_agent import AdversarialAIAgent
+from core.news_ingestion_engine import NewsIngestionEngine
 from core.live_fundamentals_engine import LiveFundamentalsEngine
 from core.valuation_engine import ValuationEngine
 from core.technical_setup_engine import TechnicalSetupEngine
@@ -37,6 +38,7 @@ class ProbabilisticDecisionEngine:
     Transforms raw AI forecasts into actionable, probabilistic risk-reward cards:
     - Multi-Horizon Probability Distributions: P(Up), P(Range), P(Down) summing to 100%.
     - Conformal Prediction Quantiles: Q10 (VaR Stop), Q50 (Median Alpha), Q90 (Target).
+    - Global Geopolitical & War Radar: Scans international conflicts, oil, and Red Sea impacts.
     - Tripartite Adversarial Debate: Bull Offensive Thesis vs Bear Red-Team Dissection.
     - Explicit Invalidation Triggers: Precise events and price levels that cancel the setup.
     """
@@ -65,11 +67,19 @@ class ProbabilisticDecisionEngine:
         sector = info.get("sector", "عام")
         beta = float(info.get("beta_egx30", 1.0))
 
-        # 2. Market Regime and Global Risk Guidance
+        # 2. Market Regime and Global Geopolitical Risk Guidance
         regime_data = RegimeHMMEngine.detect_latent_regime()
         regime_code = regime_data.get("regime", "SIDEWAYS_CHOP")
         regime_ar = regime_data.get("regime_name_ar") or regime_data.get("name_ar") or "حركة عرضية متوازنة (SIDEWAYS_CHOP)"
-        recommended_cash_pct = float(regime_data.get("cash_reserve_pct", 40.0))
+        base_cash_pct = float(regime_data.get("cash_reserve_pct", 40.0))
+
+        # 2b. Global Geopolitical Conflict & Energy Shock Monitor
+        geo_state = NewsIngestionEngine.get_global_geopolitical_risk_state()
+        geo_threat = geo_state.get("threat_level", "LOW_STABLE")
+        geo_threat_ar = geo_state.get("threat_level_ar", "🟢 استقرار جيوسياسي نسبي")
+        geo_buffer_cash = float(geo_state.get("threat_buffer_cash_pct", 0.0))
+        recommended_cash_pct = min(base_cash_pct + geo_buffer_cash, 80.0)
+        geo_events = geo_state.get("top_geopolitical_events", [])
 
         # 3. Multi-Horizon Probabilistic Forecasts
         mh_analysis = MultiHorizonEngine.get_stock_multi_horizon_analysis(clean_sym, mock_price=price) or {}
@@ -168,7 +178,25 @@ class ProbabilisticDecisionEngine:
 🎯 درجة الثقة الكمية (Confidence):         {confidence_pct:.1f}%
 🏛️ القيمة العادلة الاسترشادية (DCF):        {fair_value:.2f} ج.م (هامش أمان: {margin_of_safety:.1f}%)
 --------------------------------------------------------------------------------
-🟢 أقوى العوامل الداعمة (Catalysts):
+"""
+        if geo_threat != "LOW_STABLE" and geo_events:
+            card_md += f"""🌍 رادار النزاعات والحروب والأزمات العالمية (Global Geopolitical & War Radar):
+  • حالة التهديد العالمي: {geo_threat_ar}
+  • زيادة الكاش التحوطي الإلزامي: +{geo_buffer_cash:.0f}% (إجمالي الكاش الموصى به للمحفظة: {recommended_cash_pct:.0f}%)
+  • أبرز الأحداث والنزاعات المرصودة لحظياً:
+"""
+            for ev in geo_events[:3]:
+                card_md += f"    - [{ev.get('source')}]: {ev.get('headline_ar')}\n"
+
+            if any(k in sector for k in ["بترول", "كيماويات", "أسمدة", "طاقة", "Industrial"]):
+                card_md += f"  • 🛡️ الأثر النوعي على السهم ({clean_sym}): يستفيد جزئياً من صعود أسعار الطاقة العالمية وهوامش التصدير بالعملة الصعبة.\n"
+            elif any(k in sector for k in ["بنوك", "مدفوعات", "عقارات"]):
+                card_md += f"  • ⚠️ الأثر النوعي على السهم ({clean_sym}): يستلزم الحذر من انسحاب السيولة الساخنة للمؤسسات الأجنبية (Risk-Off Flight).\n"
+            else:
+                card_md += f"  • ⚠️ الأثر النوعي على السهم ({clean_sym}): يوصى بتضييق وقف الخسارة وتجنب الشراء بالهامش (Margin) أثناء التوترات.\n"
+            card_md += "--------------------------------------------------------------------------------\n"
+
+        card_md += """🟢 أقوى العوامل الداعمة (Catalysts):
 """
         for i, cat in enumerate(catalysts[:3], 1):
             card_md += f"  {i}. {cat}\n"

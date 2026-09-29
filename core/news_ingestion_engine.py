@@ -182,8 +182,16 @@ class NewsIngestionEngine:
         {"url": "https://enterprise.press/ar/feed/", "source_name": "إنتربرايز مصر (Enterprise Egypt)"}
     ]
 
+    GLOBAL_GEOPOLITICAL_FEEDS = [
+        {"url": "https://news.google.com/rss/search?q=%D8%AD%D8%B1%D8%A8+OR+%D8%B5%D8%B1%D8%A7%D8%B9+OR+%D8%AA%D9%88%D8%AA%D8%B1%D8%A7%D8%AA+%D8%B9%D8%B3%D9%83%D8%B1%D9%8A%D8%A9+OR+%D8%A7%D9%84%D8%B4%D8%B1%D9%82+%D8%A7%D9%84%D8%A3%D9%88%D8%B3%D8%B7&hl=ar&gl=EG&ceid=EG:ar", "source_name": "رادار النزاعات والحروب الإقليمية (Geopolitical Conflict Radar)"},
+        {"url": "https://news.google.com/rss/search?q=%D8%A7%D9%84%D9%86%D9%81%D8%B7+OR+%D8%A7%D9%84%D9%81%D9%8A%D8%AF%D8%B1%D8%A7%D9%84%D9%8A+OR+%D8%A8%D8%A7%D8%A8+%D8%A7%D9%84%D9%85%D9%86%D8%AF%D8%A8+OR+%D9%82%D9%86%D8%A7%D8%A9+%D8%A7%D9%84%D8%B3%D9%88%D9%8A%D8%B3&hl=ar&gl=EG&ceid=EG:ar", "source_name": "رادار الطاقة والممرات الملاحية (Global Energy & Maritime Radar)"},
+        {"url": "https://feeds.bbci.co.uk/arabic/rss.xml", "source_name": "بي بي سي عربي - شؤون العالم والأزمات (BBC World Arabic)"}
+    ]
+
     _CACHE_NEWS: List[Dict[str, Any]] = []
     _CACHE_TIMESTAMP: float = 0.0
+    _CACHE_GLOBAL_NEWS: List[Dict[str, Any]] = []
+    _CACHE_GLOBAL_TIMESTAMP: float = 0.0
     CACHE_TTL_SECONDS: float = 300.0  # 5 minutes in-memory cache
 
     @classmethod
@@ -279,16 +287,147 @@ class NewsIngestionEngine:
 
     @classmethod
     def _match_tickers_in_text(cls, text: str) -> List[str]:
-        """Identifies EGX tickers mentioned in Arabic headline text across all universe constituents."""
+        """
+        Identifies EGX tickers mentioned in Arabic headline text across all universe constituents.
+        Enforces strict regex word boundaries for short keywords (<= 3 chars) to prevent false substring collisions.
+        """
         if not text:
             return []
         matched = []
         for ticker, keywords in EGX_TICKER_ENTITY_MAP.items():
             for kw in keywords:
-                if kw and kw in text:
-                    matched.append(ticker)
-                    break
+                if not kw:
+                    continue
+                # For short keywords (<= 3 chars, e.g. "وي", "عز", "WE", "CIB"), enforce whole-word match
+                if len(kw) <= 3:
+                    pattern = r'(?:\b|[^\w\u0600-\u06FF])' + re.escape(kw) + r'(?:\b|[^\w\u0600-\u06FF])'
+                    if re.search(pattern, text, re.IGNORECASE):
+                        matched.append(ticker)
+                        break
+                else:
+                    if kw in text:
+                        matched.append(ticker)
+                        break
         return matched
+
+    @classmethod
+    def fetch_global_geopolitical_news(cls, timeout_sec: int = 5) -> List[Dict[str, Any]]:
+        """
+        Fetches live international, regional war, shipping, and global commodity conflict news.
+        Cached for CACHE_TTL_SECONDS.
+        """
+        now = time.time()
+        if cls._CACHE_GLOBAL_NEWS and (now - cls._CACHE_GLOBAL_TIMESTAMP) < cls.CACHE_TTL_SECONDS:
+            return cls._CACHE_GLOBAL_NEWS
+
+        WAR_KEYWORDS = ["حرب", "صراع", "ضربة", "هجوم", "صواريخ", "مسيرة", "عسكرية", "اغتيال", "توترات", "غارات", "جيش", "تصعيد"]
+        SHIPPING_KEYWORDS = ["باب المندب", "قناة السويس", "البحر الأحمر", "ملاحة", "سفن", "شحن"]
+        OIL_KEYWORDS = ["النفط", "برنت", "طاقة", "غاز", "أوبك"]
+
+        import concurrent.futures
+        events = []
+        seen = set()
+
+        def _fetch_feed(f_info):
+            items = []
+            try:
+                req = urllib.request.Request(
+                    f_info["url"],
+                    headers={
+                        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 GEN26-GlobalFeed/3.0",
+                        "Accept": "application/rss+xml, application/xml, text/xml, */*"
+                    }
+                )
+                with urllib.request.urlopen(req, timeout=timeout_sec) as resp:
+                    xml_data = resp.read()
+                    root = ET.fromstring(xml_data)
+                    for item in root.findall("./channel/item")[:15]:
+                        title = item.find("title").text if item.find("title") is not None else ""
+                        pub_date = item.find("pubDate").text if item.find("pubDate") is not None else ""
+                        if title:
+                            items.append((title.strip(), pub_date, f_info["source_name"]))
+            except Exception:
+                pass
+            return items
+
+        with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
+            futures = [executor.submit(_fetch_feed, feed) for feed in cls.GLOBAL_GEOPOLITICAL_FEEDS]
+            for fut in concurrent.futures.as_completed(futures):
+                try:
+                    for title, pub_date, source_name in fut.result():
+                        if title in seen:
+                            continue
+                        seen.add(title)
+                        cats = []
+                        if any(k in title for k in WAR_KEYWORDS):
+                            cats.append("WAR_MILITARY")
+                        if any(k in title for k in SHIPPING_KEYWORDS):
+                            cats.append("SHIPPING_CANAL")
+                        if any(k in title for k in OIL_KEYWORDS):
+                            cats.append("OIL_ENERGY")
+
+                        if cats:
+                            severity = "HIGH" if ("WAR_MILITARY" in cats and any(w in title for w in ["تصعيد", "ضربة", "هجوم", "صواريخ", "اغتيال"])) else "MEDIUM"
+                            events.append({
+                                "headline_ar": title,
+                                "source": source_name,
+                                "categories": cats,
+                                "severity": severity,
+                                "published_at": pub_date or datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                            })
+                except Exception:
+                    continue
+
+        if events:
+            cls._CACHE_GLOBAL_NEWS = events
+            cls._CACHE_GLOBAL_TIMESTAMP = now
+
+        return events if events else cls._CACHE_GLOBAL_NEWS
+
+    @classmethod
+    def get_global_geopolitical_risk_state(cls) -> Dict[str, Any]:
+        """
+        Analyzes live global conflict & energy feeds to evaluate geopolitical risk for EGX equities.
+        """
+        events = cls.fetch_global_geopolitical_news()
+        if not events:
+            return {
+                "threat_level": "LOW_STABLE",
+                "threat_level_ar": "🟢 استقرار جيوسياسي نسبي",
+                "threat_buffer_cash_pct": 0.0,
+                "has_war_conflict": False,
+                "has_shipping_disruption": False,
+                "has_oil_shock": False,
+                "top_geopolitical_events": []
+            }
+
+        high_severity_count = sum(1 for e in events if e.get("severity") == "HIGH")
+        has_war = any("WAR_MILITARY" in e.get("categories", []) for e in events)
+        has_shipping = any("SHIPPING_CANAL" in e.get("categories", []) for e in events)
+        has_oil = any("OIL_ENERGY" in e.get("categories", []) for e in events)
+
+        if high_severity_count >= 3 or (has_war and (has_shipping or has_oil)):
+            threat_level = "ELEVATED_WAR_RISK"
+            threat_level_ar = "🚨 توترات عسكرية وحروب إقليمية نشطة (مخاطر طاقة وملاحة)"
+            buffer_cash = 15.0  # Extra cash buffer
+        elif has_war or has_shipping or has_oil:
+            threat_level = "MODERATE_TENSION"
+            threat_level_ar = "⚠️ تصاعد في التوترات الجيوسياسية الإقليمية"
+            buffer_cash = 5.0
+        else:
+            threat_level = "LOW_STABLE"
+            threat_level_ar = "🟢 استقرار جيوسياسي نسبي"
+            buffer_cash = 0.0
+
+        return {
+            "threat_level": threat_level,
+            "threat_level_ar": threat_level_ar,
+            "threat_buffer_cash_pct": buffer_cash,
+            "has_war_conflict": has_war,
+            "has_shipping_disruption": has_shipping,
+            "has_oil_shock": has_oil,
+            "top_geopolitical_events": events[:5]
+        }
 
 
 if __name__ == "__main__":
