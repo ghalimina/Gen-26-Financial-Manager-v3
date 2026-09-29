@@ -40428,5 +40428,283 @@
     "new_values": null,
     "source": "USER_MANUAL_UI",
     "notes": "User confirmed deletion"
+  },
+  {
+    "audit_id": "2831c3c4",
+    "timestamp": "2026-09-29T01:42:01.625475",
+    "action": "DELETE",
+    "ticker": "COMI.CA",
+    "old_values": {
+      "holding_id": "POS_COMI_ca92bc",
+      "ticker": "COMI.CA",
+      "company_name": "البنك التجاري الدولي (CIB)",
+      "exchange": "EGX",
+      "sector": "Banking",
+      "quantity": 26,
+      "average_entry_price": 137.5,
+      "manual_notes": "",
+      "created_at": "2026-08-30T13:49:40.048079",
+      "updated_at": "2026-08-30T13:49:40.048079",
+      "active": true
+    },
+    "new_values": null,
+    "source": "USER_MANUAL_UI",
+    "notes": "User confirmed deletion"
+  },
+  {
+    "audit_id": "8e1b28c0",
+    "timestamp": "2026-09-29T01:42:35.153244",
+    "action": "ADD",
+    "ticker": "COMI.CA",
+    "old_values": null,
+    "new_values": {
+      "holding_id": "POS_COMI_1b4dbd",
+      "ticker": "COMI.CA",
+      "company_name": "البنك التجاري الدولي (CIB)",
+      "exchange": "EGX",
+      "sector": "Banking",
+      "quantity": 45,
+      "average_entry_price": 134.26,
+      "manual_notes": "",
+      "created_at": "2026-09-29T01:42:35.051371",
+      "updated_at": "2026-09-29T01:42:35.051371",
+      "active": true
+    },
+    "source": "USER_MANUAL_UI",
+    "notes": ""
+  },
+  {
+    "audit_id": "d2c6ab5a",
+    "timestamp": "2026-09-29T01:43:15.838360",
+    "action": "ADD",
+    "ticker": "TMGH.CA",
+    "old_values": null,
+    "new_values": {
+      "holding_id": "POS_TMGH_b3e730",
+      "ticker": "TMGH.CA",
+      "company_name": "مجموعة طلعت مصطفى",
+      "exchange": "EGX",
+      "sector": "Real Estate",
+      "quantity": 91,
+      "average_entry_price": 30.0,
+      "manual_notes": "",
+      "created_at": "2026-09-29T01:43:15.803365",
+      "updated_at": "2026-09-29T01:43:15.803365",
+      "active": true
+    },
+    "source": "USER_MANUAL_UI",
+    "notes": ""
+  },
+  {
+    "audit_id": "d8da993d",
+    "timestamp": "2026-09-29T01:43:48.263488",
+    "action": "ADD",
+    "ticker": "PHDC.CA",
+    "old_values": null,
+    "new_values": {
+      "holding_id": "POS_PHDC_83b3b8",
+      "ticker": "PHDC.CA",
+      "company_name": "بالم هيلز للتعمير",
+      "exchange": "EGX",
+      "sector": "Real Estate",
+      "quantity": 162,
+      "average_entry_price": 13.46,
+      "manual_notes": "",
+      "created_at": "2026-09-29T01:43:48.236455",
+      "updated_at": "2026-09-29T01:43:48.236455",
+      "active": true
+    },
+    "source": "USER_MANUAL_UI",
+    "notes": ""
+  },
+  {
+    "audit_id": "95e65bdb",
+    "timestamp": "2026-09-29T01:44:17.477105",
+    "action": "ADD",
+    "ticker": "SWDY.CA",
+    "old_values": null,
+    "new_values": {
+      "holding_id": "POS_SWDY_a2361b",
+      "ticker": "SWDY.CA",
+      "company_name": "السويدي إليكتريك",
+      "exchange": "EGX",
+      "sector": "Industrial",
+      "quantity": 13,
+      "average_entry_price": 115.83,
+      "manual_notes": "",
+      "created_at": "2026-09-29T01:44:17.453107",
+      "updated_at": "2026-09-29T01:44:17.453107",
+      "active": true
+    },
+    "source": "USER_MANUAL_UI",
+    "notes": ""
+  },
+  {
+    "audit_id": "07b07ae2",
+    "timestamp": "2026-09-29T01:45:06.699504",
+    "action": "ADD",
+    "ticker": "RAYA.CA",
+    "old_values": null,
+    "new_values": {
+      "holding_id": "POS_RAYA_8ee121",
+      "ticker": "RAYA.CA",
+      "company_name": "راية القابضة",
+      "exchange": "EGX",
+      "sector": "Financial Services",
+      "quantity": 159,
+      "average_entry_price": 7.57,
+      "manual_notes": "",
+      "created_at": "2026-09-29T01:45:06.596822",
+      "updated_at": "2026-09-29T01:45:06.596822",
+      "active": true
+    },
+    "source": "USER_MANUAL_UI",
+    "notes": ""
+  },
+  {
+    "audit_id": "3cc04249",
+    "timestamp": "2026-09-29T01:45:35.875688",
+    "action": "DELETE",
+    "ticker": "TMGH.CA",
+    "old_values": {
+      "holding_id": "POS_TMGH_b3e730",
+      "ticker": "TMGH.CA",
+      "company_name": "مجموعة طلعت مصطفى",
+      "exchange": "EGX",
+      "sector": "Real Estate",
+      "quantity": 91,
+      "average_entry_price": 30.0,
+      "manual_notes": "",
+      "created_at": "2026-09-29T01:43:15.803365",
+      "updated_at": "2026-09-29T01:43:15.803365",
+      "active": true
+    },
+    "new_values": null,
+    "source": "USER_MANUAL_UI",
+    "notes": "User confirmed deletion"
+  },
+  {
+    "audit_id": "dc459564",
+    "timestamp": "2026-09-29T01:45:52.604041",
+    "action": "ADD",
+    "ticker": "TMGH.CA",
+    "old_values": null,
+    "new_values": {
+      "holding_id": "POS_TMGH_6e7c74",
+      "ticker": "TMGH.CA",
+      "company_name": "مجموعة طلعت مصطفى",
+      "exchange": "EGX",
+      "sector": "Real Estate",
+      "quantity": 30,
+      "average_entry_price": 91.5,
+      "manual_notes": "",
+      "created_at": "2026-09-29T01:45:52.506618",
+      "updated_at": "2026-09-29T01:45:52.506618",
+      "active": true
+    },
+    "source": "USER_MANUAL_UI",
+    "notes": ""
+  },
+  {
+    "audit_id": "1a411efa",
+    "timestamp": "2026-09-29T01:47:13.496361",
+    "action": "UPDATE_CASH",
+    "ticker": "CASH_EGP",
+    "old_values": {
+      "cash_egp": 100000.0
+    },
+    "new_values": {
+      "cash_egp": 1.0
+    },
+    "source": "USER_MANUAL_UI",
+    "notes": "تعديل الرصيد النقدي للمحفظة من 100,000.00 إلى 1.00 ج.م"
+  },
+  {
+    "audit_id": "871a73de",
+    "timestamp": "2026-09-29T02:03:35.082107",
+    "action": "ADD",
+    "ticker": "ABUK.CA",
+    "old_values": null,
+    "new_values": {
+      "holding_id": "POS_ABUK_c4c996",
+      "ticker": "ABUK.CA",
+      "company_name": "أبو قير للأسمدة",
+      "exchange": "EGX",
+      "sector": "Fertilizers",
+      "quantity": 100,
+      "average_entry_price": 75.4,
+      "manual_notes": "ACID Test Position",
+      "created_at": "2026-09-29T02:03:35.048733",
+      "updated_at": "2026-09-29T02:03:35.048733",
+      "active": true
+    },
+    "source": "USER_MANUAL_UI",
+    "notes": "ACID Test Position"
+  },
+  {
+    "audit_id": "3f998fe9",
+    "timestamp": "2026-09-29T02:03:35.183138",
+    "action": "DELETE",
+    "ticker": "ABUK.CA",
+    "old_values": {
+      "holding_id": "POS_ABUK_c4c996",
+      "ticker": "ABUK.CA",
+      "company_name": "أبو قير للأسمدة",
+      "exchange": "EGX",
+      "sector": "Fertilizers",
+      "quantity": 100,
+      "average_entry_price": 75.4,
+      "manual_notes": "ACID Test Position",
+      "created_at": "2026-09-29T02:03:35.048733",
+      "updated_at": "2026-09-29T02:03:35.048733",
+      "active": true
+    },
+    "new_values": null,
+    "source": "USER_MANUAL_UI",
+    "notes": "User confirmed deletion"
+  },
+  {
+    "audit_id": "5100792e",
+    "timestamp": "2026-09-29T13:09:48.363729",
+    "action": "ADD",
+    "ticker": "ABUK.CA",
+    "old_values": null,
+    "new_values": {
+      "holding_id": "POS_ABUK_636557",
+      "ticker": "ABUK.CA",
+      "company_name": "أبو قير للأسمدة",
+      "exchange": "EGX",
+      "sector": "Fertilizers",
+      "quantity": 100,
+      "average_entry_price": 75.4,
+      "manual_notes": "ACID Test Position",
+      "created_at": "2026-09-29T13:09:48.335615",
+      "updated_at": "2026-09-29T13:09:48.335615",
+      "active": true
+    },
+    "source": "USER_MANUAL_UI",
+    "notes": "ACID Test Position"
+  },
+  {
+    "audit_id": "7c6143d9",
+    "timestamp": "2026-09-29T13:09:48.454728",
+    "action": "DELETE",
+    "ticker": "ABUK.CA",
+    "old_values": {
+      "holding_id": "POS_ABUK_636557",
+      "ticker": "ABUK.CA",
+      "company_name": "أبو قير للأسمدة",
+      "exchange": "EGX",
+      "sector": "Fertilizers",
+      "quantity": 100,
+      "average_entry_price": 75.4,
+      "manual_notes": "ACID Test Position",
+      "created_at": "2026-09-29T13:09:48.335615",
+      "updated_at": "2026-09-29T13:09:48.335615",
+      "active": true
+    },
+    "new_values": null,
+    "source": "USER_MANUAL_UI",
+    "notes": "User confirmed deletion"
   }
 ]

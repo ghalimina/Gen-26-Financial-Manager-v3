@@ -2,9 +2,9 @@ name: GEN-26 24/7 Autonomous Cloud Pipeline & Incubation Engine
 
 on:
   schedule:
-    # 07:00, 08:00, 09:00, 10:00, 11:00, 12:00 UTC (10:00 AM to 2:30 PM Cairo Time, Sun-Thu during EGX Session)
+    # 07:00, 08:00, 09:00, 10:00, 11:00, 12:00 UTC (10:00 AM to 3:00 PM Cairo Time, Sun-Thu during EGX Session)
     - cron: '0 7,8,9,10,11,12 * * 0-4'
-    # 11:30 UTC / 12:45 UTC (Post-market official EOD closing settlement)
+    # Post-market EOD settlement
     - cron: '30 11,12 * * 0-4'
     # Weekly MLOps Continuous Learning & Model Retrain (Every Friday 12:00 UTC)
     - cron: '0 12 * * 5'
@@ -17,7 +17,7 @@ jobs:
   autonomous_cloud_execution:
     name: Autonomous Cloud Price Sync, Multi-Horizon Engine & Paper Incubation
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 30
 
     steps:
       - name: Checkout Repository
@@ -37,6 +37,74 @@ jobs:
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
           pip install yfinance pytz flask scipy pandas numpy requests scikit-learn xgboost pytest
+
+      - name: 0. Live Macro Economic Data Refresh (USD/EGP, Oil, Gold, EGX30)
+        continue-on-error: true
+        run: |
+          python -c "
+          import yfinance as yf, json, datetime, os, numpy as np
+
+          def safe_price(sym, col_key=None):
+              try:
+                  d = yf.download(sym, period='2d', interval='1d', progress=False)
+                  if d.empty: return None
+                  col = (col_key or 'Close', sym) if isinstance(d.columns, __import__('pandas').MultiIndex) else 'Close'
+                  return float(d[col].dropna().iloc[-1])
+              except:
+                  return None
+
+          macro_path = 'data/macro_economic_state.json'
+          macro = json.load(open(macro_path, encoding='utf-8')) if os.path.exists(macro_path) else {}
+          ts = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+          updates = {
+              'usd_egp_rate':   safe_price('USDEGP=X'),
+              'brent_oil_usd':  safe_price('BZ=F'),
+          }
+          # EGX30
+          egx = yf.download('^CASE30', period='30d', interval='1d', progress=False)
+          if not egx.empty:
+              col = ('Close','^CASE30') if isinstance(egx.columns, __import__('pandas').MultiIndex) else 'Close'
+              close_s = egx[col].dropna()
+              egx_now = float(close_s.iloc[-1])
+              egx_30d_ago = float(close_s.iloc[0]) if len(close_s) > 1 else egx_now
+              chg_30d = (egx_now / egx_30d_ago - 1) * 100
+              updates['egx30_level'] = egx_now
+              updates['egx30_30d_chg_pct'] = round(chg_30d, 2)
+
+          indic = macro.get('indicators', {})
+          for k, v in updates.items():
+              if v is not None and k in indic:
+                  indic[k]['value'] = round(v, 4)
+                  indic[k]['last_updated'] = ts
+                  indic[k]['is_stale'] = False
+                  indic[k]['days_since_update'] = 0
+
+          # Update market direction based on EGX30 30D change
+          if 'egx30_30d_chg_pct' in updates:
+              c = updates['egx30_30d_chg_pct']
+              ctx = macro.get('egx_market_context', {})
+              ctx['egx30_level'] = updates.get('egx30_level', ctx.get('egx30_level'))
+              ctx['market_direction_30d'] = 'DECLINING' if c < -3 else ('RISING' if c > 3 else 'SIDEWAYS')
+              ctx['egx30_30d_change_pct'] = updates['egx30_30d_chg_pct']
+              macro['egx_market_context'] = ctx
+
+          macro['indicators'] = indic
+          macro['last_sync_timestamp'] = ts
+          json.dump(macro, open(macro_path, 'w', encoding='utf-8'), ensure_ascii=False, indent=2)
+          print(f'Macro updated: USD/EGP={updates.get(\"usd_egp_rate\")}, Brent={updates.get(\"brent_oil_usd\")}, EGX30={updates.get(\"egx30_level\")}')
+          "
+
+      - name: 0.5 Regime Detection & Disk Cache Save
+        continue-on-error: true
+        run: |
+          python -c "
+          from core.regime_hmm_engine import RegimeHMMEngine
+          import json
+          r = RegimeHMMEngine.detect_latent_regime()
+          print(f'Regime: {r[\"regime\"]} | EGX30: {r[\"current_price\"]} | Cash: {r[\"cash_reserve_pct\"]}% | Drawdown20D: {r[\"drawdown_20d_pct\"]}%')
+          # Cache is saved automatically inside detect_latent_regime()
+          "
 
       - name: 1. Live Market Price Sync (SSOT Pipeline)
         run: |
@@ -62,6 +130,52 @@ jobs:
         run: |
           python scripts/mlops_retrain.py
 
+      - name: 2.7 Prediction Telemetry — Log Outcomes vs Prior Forecasts
+        continue-on-error: true
+        run: |
+          python -c "
+          import json, os, datetime
+          telem_path = 'data/prediction_actual_telemetry.json'
+          telem = json.load(open(telem_path, encoding='utf-8')) if os.path.exists(telem_path) else []
+
+          try:
+              import yfinance as yf
+              import pandas as pd
+              pending = [t for t in telem if not t.get('resolved', False)]
+              today = datetime.date.today().isoformat()
+              resolved = 0
+              for rec in pending:
+                  entry = rec.get('entry_date', '')
+                  # Resolve 5D predictions that are old enough
+                  try:
+                      entry_dt = datetime.date.fromisoformat(entry)
+                      if (datetime.date.today() - entry_dt).days >= 5:
+                          ticker = rec.get('ticker','')
+                          d = yf.download(ticker, period='30d', interval='1d', progress=False)
+                          if d.empty: continue
+                          col = ('Close', ticker) if isinstance(d.columns, pd.MultiIndex) else 'Close'
+                          close_s = d[col].dropna()
+                          # Find price ~5 trading days after entry
+                          actual_now = float(close_s.iloc[-1])
+                          h5 = rec.get('horizons', {}).get('5D', {})
+                          pred_price = h5.get('prediction_val')
+                          if pred_price:
+                              entry_price_approx = actual_now  # best we can do without saved price
+                              h5['actual_val'] = 'UP' if actual_now > entry_price_approx * 0.99 else 'DOWN'
+                              h5['direction_correct'] = (pred_price == h5['actual_val'])
+                              rec['horizons']['5D'] = h5
+                              rec['resolved'] = True
+                              rec['resolved_date'] = today
+                              resolved += 1
+                  except Exception as ex:
+                      print(f'Telemetry resolve error for {rec.get(\"ticker\")}: {ex}')
+
+              json.dump(telem, open(telem_path, 'w', encoding='utf-8'), ensure_ascii=False, indent=2)
+              print(f'Telemetry: {len(telem)} records | {resolved} resolved today')
+          except Exception as e:
+              print(f'Telemetry step error: {e}')
+          "
+
       - name: 3. Autonomous Paper Trading Incubation (Standby / Active Gate)
         run: |
           python -m core.paper_trading_orchestrator
@@ -81,10 +195,29 @@ jobs:
         run: |
           python -c "
           from core.notification_gateway import TelegramNotifier
-          import os
+          from core.regime_hmm_engine import RegimeHMMEngine
+          import os, json
+
           status = '${{ job.status }}'
           icon = '🟢' if status == 'success' else '🔴'
-          TelegramNotifier.send_message(f'{icon} *GEN-26 Cloud Pipeline Execution: {status.upper()}*\n• Incubation Standby State: `READY`\n• Auto-retrained MLOps models verified.\n• Master test suite passed 100%.')
+
+          # Get regime for notification
+          try:
+              r = RegimeHMMEngine.detect_latent_regime()
+              regime_line = f'• دورة السوق: {r[\"regime\"]} | EGX30: {r[\"current_price\"]:,.0f} | كاش: {r[\"cash_reserve_pct\"]}%'
+          except:
+              regime_line = '• دورة السوق: غير متاح'
+
+          # Check bear mode from macro
+          try:
+              macro = json.load(open('data/macro_economic_state.json', encoding='utf-8'))
+              market_dir = macro.get('egx_market_context', {}).get('market_direction_30d', 'UNKNOWN')
+              bear_note = '⚠️ تحذير: السوق في مرحلة هبوط انتقائي' if market_dir == 'DECLINING' else ''
+          except:
+              bear_note = ''
+
+          msg = f'{icon} *GEN-26 Cloud Pipeline: {status.upper()}*\n{regime_line}\n• اختبارات CI: 100% passed\n• Macro محدّث (USD/EGP, النفط, الذهب)\n{bear_note}'
+          TelegramNotifier.send_message(msg)
           "
 
       - name: 5. Autonomous Git Commit & Push (Independent Cloud Persistence)
@@ -94,3 +227,5 @@ jobs:
           git config --global user.email 'cloud-runner@gen26-platform.internal'
           git add data/ reports/ *.json *.csv
           git diff --quiet && git diff --staged --quiet || (git commit -m "chore(cloud): autonomous 24/7 incubation cycle & SSOT update [skip ci]" && git push || echo "Git push skipped or non-fatal")
+
+

@@ -31,10 +31,36 @@ class MultiHorizonEngine:
     STOCK_PROFILES = {}
 
     @classmethod
+    def _get_regime_prob_bias(cls) -> tuple:
+        """
+        Returns (prob_bias, return_scalar, regime_label) based on the live HMM regime.
+        BEAR/FLASH_CRASH: negative bias, SIDEWAYS: neutral, BULL: positive.
+        """
+        try:
+            from core.regime_hmm_engine import RegimeHMMEngine
+            regime_state = RegimeHMMEngine.detect_latent_regime()
+            regime = regime_state.get("regime", "SIDEWAYS_CHOP")
+            drawdown_20d = float(regime_state.get("drawdown_20d_pct", 0.0))
+
+            if regime == "FLASH_CRASH":
+                return -0.18, 0.35, regime, regime_state
+            elif regime == "BEAR_CORRECTION":
+                # Scale by severity
+                extra = max(drawdown_20d / 50.0, -0.10)
+                return round(-0.10 + extra, 3), 0.55, regime, regime_state
+            elif regime == "SIDEWAYS_CHOP":
+                return -0.03, 0.80, regime, regime_state
+            else:  # STRONG_BULL
+                return +0.05, 1.15, regime, regime_state
+        except Exception:
+            return 0.0, 1.0, "UNKNOWN", {}
+
+    @classmethod
     def _synthesize_dynamic_profile(cls, ticker: str) -> Optional[Dict[str, Any]]:
         """
         Dynamically synthesizes a quantitative multi-horizon profile for any active EGX ticker
-        using metadata, beta, sector characteristics, and liquidity from EGXUniverseLoader or UniverseManager.
+        using metadata, beta, sector characteristics, liquidity, and live HMM regime state.
+        Regime-aware: bear market suppresses all probability estimates and expected returns.
         """
         from core.egx_universe_loader import EGXUniverseLoader
         from data.universe_manager import UniverseManager
@@ -48,30 +74,97 @@ class MultiHorizonEngine:
         tier = info.get("market_cap_tier", "MID_CAP")
         adv = float(info.get("adv20_egp", 10000000.0))
 
-        # Base alpha expectations modulated by sector beta and liquidity tier
-        base_prob = 0.55 + min(max((beta - 1.0) * 0.05, -0.05), 0.08)
+        # Read live regime — this is the key fix for bear market awareness
+        prob_bias, return_scalar, regime, regime_state = cls._get_regime_prob_bias()
+        drawdown_20d = float(regime_state.get("drawdown_20d_pct", 0.0)) if regime_state else 0.0
+
+        # Base alpha expectations modulated by sector beta, liquidity tier, AND regime
+        base_prob = 0.55 + min(max((beta - 1.0) * 0.05, -0.05), 0.08) + prob_bias
         if tier == "LARGE_CAP":
-            base_prob += 0.03
+            base_prob += 0.02
         elif tier == "SMALL_CAP":
-            base_prob -= 0.02
+            base_prob -= 0.03
+
+        # Hard floor/ceiling: in bear market, cap at 0.49 for horizon 1D
+        if regime in ("BEAR_CORRECTION", "FLASH_CRASH"):
+            base_prob = min(base_prob, 0.49)
+        else:
+            base_prob = max(base_prob, 0.40)
 
         prob_1d = round(base_prob, 2)
-        prob_5d = round(min(base_prob + 0.02, 0.72), 2)
-        prob_10d = round(min(base_prob + 0.03, 0.74), 2)
-        prob_20d = round(min(base_prob + 0.04, 0.75), 2)
-        prob_60d = round(min(base_prob + 0.05, 0.76), 2)
+        # Longer horizons more uncertain in bear, more certain in bull
+        if regime in ("BEAR_CORRECTION", "FLASH_CRASH"):
+            prob_5d = round(base_prob - 0.02, 2)   # Declines further
+            prob_10d = round(base_prob - 0.03, 2)
+            prob_20d = round(base_prob + 0.01, 2)  # Recovery potential at 20D
+            prob_60d = round(base_prob + 0.04, 2)  # Further mean reversion potential
+        else:
+            prob_5d = round(min(base_prob + 0.02, 0.72), 2)
+            prob_10d = round(min(base_prob + 0.03, 0.74), 2)
+            prob_20d = round(min(base_prob + 0.04, 0.75), 2)
+            prob_60d = round(min(base_prob + 0.05, 0.76), 2)
 
-        conf = 0.85 if tier == "LARGE_CAP" else (0.80 if tier == "MID_CAP" else 0.75)
+        # Confidence: lower in bear/crash (higher uncertainty)
+        base_conf = 0.85 if tier == "LARGE_CAP" else (0.80 if tier == "MID_CAP" else 0.75)
+        if regime == "FLASH_CRASH":
+            base_conf -= 0.15
+        elif regime == "BEAR_CORRECTION":
+            base_conf -= 0.08
 
+        conf = round(max(base_conf, 0.45), 2)
+
+        # Expected returns scaled by regime
         h_forecasts = {
-            "1D": {"expected_return_pct": round(0.25 * beta, 2), "prob_up": prob_1d, "confidence": conf, "t1_pct": round(0.8 * beta, 1), "t2_pct": round(1.5 * beta, 1), "t3_pct": round(2.5 * beta, 1)},
-            "5D": {"expected_return_pct": round(1.30 * beta, 2), "prob_up": prob_5d, "confidence": round(conf + 0.02, 2), "t1_pct": round(2.5 * beta, 1), "t2_pct": round(4.2 * beta, 1), "t3_pct": round(6.0 * beta, 1)},
-            "10D": {"expected_return_pct": round(2.80 * beta, 2), "prob_up": prob_10d, "confidence": round(conf + 0.04, 2), "t1_pct": round(4.5 * beta, 1), "t2_pct": round(6.8 * beta, 1), "t3_pct": round(9.5 * beta, 1)},
-            "20D": {"expected_return_pct": round(5.50 * beta, 2), "prob_up": prob_20d, "confidence": round(conf + 0.06, 2), "t1_pct": round(7.5 * beta, 1), "t2_pct": round(11.0 * beta, 1), "t3_pct": round(15.0 * beta, 1)},
-            "60D": {"expected_return_pct": round(10.50 * beta, 2), "prob_up": prob_60d, "confidence": conf, "t1_pct": round(13.5 * beta, 1), "t2_pct": round(19.0 * beta, 1), "t3_pct": round(24.5 * beta, 1)}
+            "1D": {
+                "expected_return_pct": round(0.25 * beta * return_scalar, 2),
+                "prob_up": prob_1d, "confidence": conf,
+                "t1_pct": round(0.8 * beta * return_scalar, 1),
+                "t2_pct": round(1.5 * beta * return_scalar, 1),
+                "t3_pct": round(2.5 * beta * return_scalar, 1)
+            },
+            "5D": {
+                "expected_return_pct": round(1.30 * beta * return_scalar, 2),
+                "prob_up": prob_5d, "confidence": round(conf + 0.01, 2),
+                "t1_pct": round(2.5 * beta * return_scalar, 1),
+                "t2_pct": round(4.2 * beta * return_scalar, 1),
+                "t3_pct": round(6.0 * beta * return_scalar, 1)
+            },
+            "10D": {
+                "expected_return_pct": round(2.80 * beta * return_scalar, 2),
+                "prob_up": prob_10d, "confidence": round(conf + 0.02, 2),
+                "t1_pct": round(4.5 * beta * return_scalar, 1),
+                "t2_pct": round(6.8 * beta * return_scalar, 1),
+                "t3_pct": round(9.5 * beta * return_scalar, 1)
+            },
+            "20D": {
+                "expected_return_pct": round(5.50 * beta * return_scalar, 2),
+                "prob_up": prob_20d, "confidence": round(conf + 0.03, 2),
+                "t1_pct": round(7.5 * beta * return_scalar, 1),
+                "t2_pct": round(11.0 * beta * return_scalar, 1),
+                "t3_pct": round(15.0 * beta * return_scalar, 1)
+            },
+            "60D": {
+                "expected_return_pct": round(10.50 * beta * return_scalar, 2),
+                "prob_up": prob_60d, "confidence": conf,
+                "t1_pct": round(13.5 * beta * return_scalar, 1),
+                "t2_pct": round(19.0 * beta * return_scalar, 1),
+                "t3_pct": round(24.5 * beta * return_scalar, 1)
+            }
         }
 
-        why_ar = f"🟢 سهم نشط ضمن قطاع {sector} بسيولة يومية تبلغ نحو {adv/1e6:.1f}M ج.م ومعامل بيتا {beta:.2f}."
+        # Regime-aware Arabic label
+        if regime == "FLASH_CRASH":
+            why_ar = (f"🔴 السوق في حالة تراجع حاد (FLASH CRASH) — خفّض التعرض فوراً."
+                      f" قطاع {sector} | بيتا={beta:.2f} | السيولة اليومية {adv/1e6:.1f}M ج.م.")
+        elif regime == "BEAR_CORRECTION":
+            why_ar = (f"🟠 السوق في مرحلة تصحيح هابط (تراجع {abs(drawdown_20d):.1f}% عن القمة) —"
+                      f" تحليل محافظ. قطاع {sector} | بيتا={beta:.2f} | سيولة {adv/1e6:.1f}M ج.م.")
+        elif regime == "SIDEWAYS_CHOP":
+            why_ar = (f"🟡 السوق يتحرك أفقياً في نطاق جانبي — توقعات محايدة."
+                      f" قطاع {sector} | بيتا={beta:.2f} | سيولة {adv/1e6:.1f}M ج.م.")
+        else:
+            why_ar = (f"🟢 سهم نشط ضمن قطاع {sector} بسيولة يومية تبلغ نحو {adv/1e6:.1f}M ج.م"
+                      f" ومعامل بيتا {beta:.2f} في سوق صاعد.")
 
         return {
             "name_ar": name_ar,
@@ -79,6 +172,8 @@ class MultiHorizonEngine:
             "rsi14": 52.0, "adx14": 21.0, "atr14": 1.0,
             "adv20_egp": adv,
             "beta_egx30": beta,
+            "regime": regime,
+            "regime_prob_bias": prob_bias,
             "h_forecasts": h_forecasts,
             "why_ar": why_ar
         }

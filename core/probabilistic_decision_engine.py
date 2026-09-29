@@ -76,10 +76,35 @@ class ProbabilisticDecisionEngine:
         # 2b. Global Geopolitical Conflict & Energy Shock Monitor
         geo_state = NewsIngestionEngine.get_global_geopolitical_risk_state()
         geo_threat = geo_state.get("threat_level", "LOW_STABLE")
-        geo_threat_ar = geo_state.get("threat_level_ar", "🟢 استقرار جيوسياسي نسبي")
+        geo_threat_ar = geo_state.get("threat_level_ar", "استقرار جيوسياسي نسبي")
         geo_buffer_cash = float(geo_state.get("threat_buffer_cash_pct", 0.0))
-        recommended_cash_pct = min(base_cash_pct + geo_buffer_cash, 80.0)
         geo_events = geo_state.get("top_geopolitical_events", [])
+
+        # 2c. Bear Market Breadth Detection — reads real 30D stock moves from macro state
+        bear_market_mode = False
+        stock_30d_chg = None
+        macro_regime_label = "UNKNOWN"
+        try:
+            import json
+            macro_path = os.path.join(WORKSPACE, "data", "macro_economic_state.json")
+            with open(macro_path, "r", encoding="utf-8") as _f:
+                _macro = json.load(_f)
+            macro_regime_label = _macro.get("macro_regime", "UNKNOWN")
+            egx_ctx = _macro.get("egx_market_context", {})
+            market_dir = egx_ctx.get("market_direction_30d", "UNKNOWN")
+            key_changes = egx_ctx.get("key_stock_30d_changes", {})
+            stock_30d_chg = key_changes.get(clean_sym)
+            breadth = egx_ctx.get("market_breadth", "UNKNOWN")
+            if market_dir == "DECLINING" or breadth in ("MIXED_TO_NEGATIVE", "NEGATIVE"):
+                bear_market_mode = True
+            if stock_30d_chg is not None and float(stock_30d_chg) <= -5.0:
+                bear_market_mode = True
+        except Exception:
+            pass
+
+        # If bear mode: add +15% cash buffer on top of geo buffer
+        bear_cash_addon = 15.0 if bear_market_mode else 0.0
+        recommended_cash_pct = min(base_cash_pct + geo_buffer_cash + bear_cash_addon, 80.0)
 
         # 3. Multi-Horizon Probabilistic Forecasts
         mh_analysis = MultiHorizonEngine.get_stock_multi_horizon_analysis(clean_sym, mock_price=price) or {}
@@ -158,9 +183,19 @@ class ProbabilisticDecisionEngine:
 
         confidence_pct = float(swing_h.get("confidence", 0.78) * 100.0)
 
-        # 8. Generate Formatted Arabic Markdown Card
-        card_md = f"""================================================================================
-📊 بطاقة الرادار الاحتمالي الذكي — GEN-26 DECISION COPILOT
+        card_md = "================================================================================\n"
+
+        # *** BEAR MARKET ALERT — shown prominently if bear conditions detected ***
+        if bear_market_mode:
+            chg_str = f" (هذا السهم تراجع {stock_30d_chg:+.1f}% خلال 30 يوم)" if stock_30d_chg is not None else ""
+            card_md += (
+                f"!!! تحذير: السوق في مرحلة هبوط انتقائي{chg_str}\n"
+                f"!!! البيئة الراهنة تستلزم الحذر الشديد وتجنب الشراء بالمديونية\n"
+                f"!!! نسبة الكاش الموصى بها ارتفعت تلقائياً إلى {recommended_cash_pct:.0f}%\n"
+                f"================================================================================\n"
+            )
+
+        card_md += f"""📊 بطاقة الرادار الاحتمالي الذكي — GEN-26 DECISION COPILOT
 ================================================================================
 🏢 السهم: {name_ar} ({clean_sym})
 🏷️ القطاع: {sector}                       💵 السعر الحالي: {price:.2f} ج.م
@@ -169,9 +204,9 @@ class ProbabilisticDecisionEngine:
 🎯 المدى الزمني المستهدف: تداول سوينج (5 إلى 10 أيام عمل)
 --------------------------------------------------------------------------------
 📈 توزيع الاحتمالات الإحصائي (Probability Distribution - أفق 5 أيام):
-  • 🟢 احتمال صعود أكبر من +{p_dist.get('threshold_pct', 3.0):.1f}%:       {p_dist.get('prob_up_pct', 55.0):.1f}%   [هدف Q90: {price_q90:.2f} ج.م | +{q90_pct:.1f}%]
-  • 🟡 احتمال حركة عرضية (نطاق ±{p_dist.get('threshold_pct', 3.0):.1f}%): {p_dist.get('prob_range_pct', 30.0):.1f}%   [نطاق متوازن: {price_q10:.2f} - {price_q90:.2f} ج.م]
-  • 🔴 احتمال هبوط أكبر من -{p_dist.get('threshold_pct', 3.0):.1f}%:       {p_dist.get('prob_down_pct', 15.0):.1f}%   [قاع Q10: {price_q10:.2f} ج.م | {q10_pct:.1f}%]
+  • احتمال صعود أكبر من +{p_dist.get('threshold_pct', 3.0):.1f}%:       {p_dist.get('prob_up_pct', 55.0):.1f}%   [هدف Q90: {price_q90:.2f} ج.م | +{q90_pct:.1f}%]
+  • احتمال حركة عرضية (نطاق +/-{p_dist.get('threshold_pct', 3.0):.1f}%): {p_dist.get('prob_range_pct', 30.0):.1f}%   [نطاق: {price_q10:.2f} - {price_q90:.2f} ج.م]
+  • احتمال هبوط أكبر من -{p_dist.get('threshold_pct', 3.0):.1f}%:       {p_dist.get('prob_down_pct', 15.0):.1f}%   [قاع Q10: {price_q10:.2f} ج.م | {q10_pct:.1f}%]
 
 📊 العائد المتوقع الإحصائي (Median Q50):   +{q50_pct:.1f}% ({price_q50:.2f} ج.م)
 ⚖️ نسبة العائد إلى المخاطرة (Reward/Risk): {rr_ratio:.2f} : 1
