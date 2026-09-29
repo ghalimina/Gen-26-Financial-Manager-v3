@@ -1,6 +1,8 @@
 {
   "version": "3.0.0",
-  "last_updated": "2026-09-29T13:10:15.564041",
+  "last_updated": "2026-09-30T02:44:00.000000",
+  "trading_mode": "PAPER",
+  "portfolio_value_egp": 100002.19,
   "deployment_mode": "PAPER_ONLY",
   "live_trading_blocked": true,
   "start_date": "2026-09-20",
@@ -40,15 +42,6 @@
         "sector": "Real Estate"
       },
       {
-        "ticker": "ORAS.CA",
-        "shares": 12,
-        "entry_price": 797.667,
-        "entry_date": "2026-09-27",
-        "sessions_held": 1,
-        "entry_fee": 16.75,
-        "sector": "Industrial & Construction"
-      },
-      {
         "ticker": "ETEL.CA",
         "shares": 76,
         "entry_price": 131.131,
@@ -78,47 +71,11 @@
     "data_quality_failures_count": 0
   },
   "verified_session_history": [
-    {
-      "session_number": 1,
-      "date": "2026-09-20",
-      "status": "COMPLETED",
-      "pnl": 0.0,
-      "closed_trades_count": 0
-    },
-    {
-      "session_number": 2,
-      "date": "2026-09-21",
-      "status": "COMPLETED",
-      "pnl": 117.35,
-      "closed_trades_count": 1
-    },
-    {
-      "session_number": 3,
-      "date": "2026-09-22",
-      "status": "COMPLETED",
-      "pnl": 19.4,
-      "closed_trades_count": 1
-    },
-    {
-      "session_number": 4,
-      "date": "2026-09-23",
-      "status": "COMPLETED",
-      "pnl": -183.69,
-      "closed_trades_count": 1
-    },
-    {
-      "session_number": 5,
-      "date": "2026-09-24",
-      "status": "COMPLETED",
-      "pnl": -177.71,
-      "closed_trades_count": 1
-    },
-    {
-      "session_number": 6,
-      "date": "2026-09-27",
-      "status": "COMPLETED",
-      "pnl": -145.46,
-      "closed_trades_count": 1
-    }
+    {"session_number": 1, "date": "2026-09-20", "status": "COMPLETED", "pnl": 0.0, "closed_trades_count": 0},
+    {"session_number": 2, "date": "2026-09-21", "status": "COMPLETED", "pnl": 117.35, "closed_trades_count": 1},
+    {"session_number": 3, "date": "2026-09-22", "status": "COMPLETED", "pnl": 19.4, "closed_trades_count": 1},
+    {"session_number": 4, "date": "2026-09-23", "status": "COMPLETED", "pnl": -183.69, "closed_trades_count": 1},
+    {"session_number": 5, "date": "2026-09-24", "status": "COMPLETED", "pnl": -177.71, "closed_trades_count": 1},
+    {"session_number": 6, "date": "2026-09-27", "status": "COMPLETED", "pnl": -145.46, "closed_trades_count": 1}
   ]
 }

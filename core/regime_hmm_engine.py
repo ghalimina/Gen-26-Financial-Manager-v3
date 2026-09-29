@@ -484,34 +484,6 @@ class RegimeHMMEngine:
         else:  # FLASH_CRASH
             prob_dist = {cls.REGIME_FLASH_CRASH: 0.90, cls.REGIME_BEAR_CORRECTION: 0.10, cls.REGIME_SIDEWAYS_CHOP: 0.00, cls.REGIME_STRONG_BULL: 0.00}
 
-        return {
-            "regime": regime,
-            "current_regime_state": regime,
-            "recommended_cash_reserve_pct": cash_reserve_pct,
-            "cash_reserve_pct": cash_reserve_pct,
-            "safe_cash_pct": cash_reserve_pct,
-            "recommended_equity_pct": equity_allocation_pct,
-            "equity_allocation_pct": equity_allocation_pct,
-            "description_ar": weights_info["description_ar"],
-            "regime_name_ar": weights_info["name_ar"],
-            "raw_volatility_score": raw_volatility_score,
-            "current_price": round(current_price, 2),
-            "ma_50": round(ma_50, 2),
-            "ma_200": round(ma_200, 2),
-            "drawdown_5d_pct": drawdown_5d_pct,
-            "drawdown_20d_pct": drawdown_20d_pct,
-            "state_probabilities": prob_dist,
-            "active_factor_weights": {
-                "technicals": weights_info["technicals"],
-                "volatility": weights_info["volatility"],
-                "fundamentals": weights_info["fundamentals"],
-                "macro": weights_info["macro"]
-            },
-            "model": "EGX30 HMM Volatility & Trend Crash Detector",
-            "data_source": "LIVE_LOCAL_PROXY"
-        }
-
-        # Save to disk cache so offline runs use last real data
         result = {
             "regime": regime,
             "current_regime_state": regime,
@@ -522,6 +494,7 @@ class RegimeHMMEngine:
             "equity_allocation_pct": equity_allocation_pct,
             "description_ar": weights_info["description_ar"],
             "regime_name_ar": weights_info["name_ar"],
+            "name_ar": weights_info["name_ar"],
             "raw_volatility_score": raw_volatility_score,
             "current_price": round(current_price, 2),
             "ma_50": round(ma_50, 2),
@@ -535,11 +508,15 @@ class RegimeHMMEngine:
                 "fundamentals": weights_info["fundamentals"],
                 "macro": weights_info["macro"]
             },
+            "is_live_data": True,
+            "data_source": "LIVE_LOCAL_PROXY",
             "model": "EGX30 HMM Volatility & Trend Crash Detector",
-            "data_source": "LIVE_LOCAL_PROXY"
+            "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         }
+        # Persist to disk so offline/GitHub Actions fallback uses last real regime
         cls._save_regime_to_cache(result)
         return result
+
 
     # =========================================================================
     # 4. COMPOSITE SCORING WEIGHTS
