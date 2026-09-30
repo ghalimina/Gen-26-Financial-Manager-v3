@@ -894,7 +894,8 @@ class MultiHorizonEngine:
     def get_all_multi_horizon_rankings(
         cls,
         tickers: Optional[List[str]] = None,
-        universe: str = "all"
+        universe: str = "all",
+        force_refresh: bool = False
     ) -> List[Dict[str, Any]]:
         """
         Calculates rankings across specified tickers or index universe.
@@ -902,11 +903,11 @@ class MultiHorizonEngine:
         """
         cache_key = f"{universe}_{','.join(tickers or [])}"
         now = time.time()
-        if cache_key in cls._RANKINGS_CACHE and len(cls._RANKINGS_CACHE[cache_key]) > 0 and (now - cls._RANKINGS_CACHE_TIME.get(cache_key, 0.0)) < cls._CACHE_TTL_SEC:
+        if not force_refresh and cache_key in cls._RANKINGS_CACHE and len(cls._RANKINGS_CACHE[cache_key]) > 0 and (now - cls._RANKINGS_CACHE_TIME.get(cache_key, 0.0)) < cls._CACHE_TTL_SEC:
             return cls._RANKINGS_CACHE[cache_key]
 
-        # Fast disk fallback if memory cache is cold
-        if not tickers and universe.lower() in ["all", "core"]:
+        # Fast disk fallback if memory cache is cold and force_refresh is False
+        if not force_refresh and not tickers and universe.lower() in ["all", "core"]:
             import os
             import json
             disk_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "precomputed_rankings.json")
@@ -925,6 +926,15 @@ class MultiHorizonEngine:
                                     live_p = float(rec["price"])
                                     item["current_price"] = live_p
                                     item["price"] = live_p
+                                    # Strict mathematical guard: entry zone must ALWAYS be below current price (pullback entry)
+                                    e_low = float(rec.get("entry_zone_low") or round(live_p * 0.985, 2))
+                                    e_high = float(rec.get("entry_zone_high") or round(live_p * 0.998, 2))
+                                    if e_high >= live_p or e_low >= live_p:
+                                        e_low = round(live_p * 0.985, 2)
+                                        e_high = round(live_p * 0.998, 2)
+                                    item["entry_low"] = e_low
+                                    item["entry_high"] = e_high
+                                    item["entry_zone"] = f"{e_low:.2f} – {e_high:.2f}"
                                     item["target_price"] = round(live_p * 1.085, 2)
                                     item["stop_loss"] = round(live_p * 0.93, 2)
                         cls._RANKINGS_CACHE[cache_key] = disk_data[u_key]

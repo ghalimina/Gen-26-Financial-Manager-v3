@@ -30,12 +30,12 @@ def precompute():
     t0 = time.time()
     
     # 1. Compute Core Top Liquid Universe
-    core_rankings = MultiHorizonEngine.get_all_multi_horizon_rankings(universe="core")
+    core_rankings = MultiHorizonEngine.get_all_multi_horizon_rankings(universe="core", force_refresh=True)
     logger.info(f"Core rankings pre-computed: {len(core_rankings)} stocks in {time.time()-t0:.2f}s")
     
     # 2. Compute Full Active Universe
     t1 = time.time()
-    all_rankings = MultiHorizonEngine.get_all_multi_horizon_rankings(universe="all")
+    all_rankings = MultiHorizonEngine.get_all_multi_horizon_rankings(universe="all", force_refresh=True)
     logger.info(f"All rankings pre-computed: {len(all_rankings)} stocks in {time.time()-t1:.2f}s")
 
     payload = {
