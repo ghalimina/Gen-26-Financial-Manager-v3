@@ -10,6 +10,8 @@ data/*.db
 data/*.sqlite
 data/*.pkl
 data/*.bak
+*.db-shm
+*.db-wal
 daily_paper_trade_logger.py
 *.zip
 

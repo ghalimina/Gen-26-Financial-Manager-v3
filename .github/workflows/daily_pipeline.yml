@@ -180,6 +180,14 @@ jobs:
         run: |
           python -m core.paper_trading_orchestrator
 
+      - name: 3.5 EOD Top-6 Telegram Detailed Report Dispatch
+        continue-on-error: true
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          python scripts/send_eod_telegram_report.py --force
+
       - name: 4. Fast Institutional Test Battery Verification
         env:
           FLASK_TESTING: "1"
