@@ -1,32 +1,32 @@
 {
   "version": "3.0.0",
-  "last_updated": "2026-09-30T13:09:22.438522",
+  "last_updated": "2026-09-30T16:25:45.064209",
   "deployment_mode": "PAPER_ONLY",
   "live_trading_blocked": true,
   "start_date": "2026-09-20",
   "start_date_ar": "20 سبتمبر 2026",
   "session_progress": {
-    "verified_sessions": 6,
+    "verified_sessions": 7,
     "total_sessions_required": 30,
-    "remaining_sessions": 24,
-    "percentage_complete": 20.0,
-    "last_successful_session": "2026-09-27",
+    "remaining_sessions": 23,
+    "percentage_complete": 23.3,
+    "last_successful_session": "2026-09-30",
     "gate_status": "STANDBY_READY_FOR_LAUNCH",
     "session_counter_label_ar": "فترة الحضانة: قيد التشغيل (6 من 30 جلسة)"
   },
   "portfolio": {
-    "portfolio_equity": 100002.19,
-    "cash": 53212.67,
-    "invested_stock_equity": 46789.52,
-    "stock_allocation_pct": 46.8,
-    "cash_reserve_pct": 53.2,
+    "portfolio_equity": 83238.11,
+    "cash": 33300.95,
+    "invested_stock_equity": 49937.16,
+    "stock_allocation_pct": 60.0,
+    "cash_reserve_pct": 40.0,
     "open_positions": [
       {
         "ticker": "COMI.CA",
         "shares": 78,
         "entry_price": 126.937,
         "entry_date": "2026-09-27",
-        "sessions_held": 1,
+        "sessions_held": 2,
         "entry_fee": 17.33,
         "sector": "Banking & Financial Services"
       },
@@ -35,7 +35,7 @@
         "shares": 112,
         "entry_price": 89.129,
         "entry_date": "2026-09-27",
-        "sessions_held": 1,
+        "sessions_held": 2,
         "entry_fee": 17.47,
         "sector": "Real Estate"
       },
@@ -44,9 +44,27 @@
         "shares": 76,
         "entry_price": 131.131,
         "entry_date": "2026-09-27",
-        "sessions_held": 1,
+        "sessions_held": 2,
         "entry_fee": 17.44,
         "sector": "Telecom & Technology"
+      },
+      {
+        "ticker": "SWDY.CA",
+        "shares": 96,
+        "entry_price": 103.523,
+        "entry_date": "2026-09-30",
+        "sessions_held": 0,
+        "entry_fee": 17.39,
+        "sector": "Industrial & Construction"
+      },
+      {
+        "ticker": "EGAL.CA",
+        "shares": 30,
+        "entry_price": 331.291,
+        "entry_date": "2026-09-30",
+        "sessions_held": 0,
+        "entry_fee": 17.39,
+        "sector": "Basic Materials & Metals"
       }
     ],
     "closed_positions_count": 0,
@@ -54,7 +72,7 @@
   },
   "performance": {
     "realized_pnl_egp": -370.11,
-    "unrealized_pnl_egp": 168.03,
+    "unrealized_pnl_egp": 210.73,
     "cumulative_return_pct": -0.37,
     "max_drawdown_pct": 0.0,
     "win_rate_pct": 0.0,
@@ -110,6 +128,13 @@
       "status": "COMPLETED",
       "pnl": -145.46,
       "closed_trades_count": 1
+    },
+    {
+      "session_number": 7,
+      "date": "2026-09-30",
+      "status": "COMPLETED",
+      "pnl": 0.0,
+      "closed_trades_count": 0
     }
   ]
 }

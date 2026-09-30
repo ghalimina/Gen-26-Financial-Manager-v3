@@ -1,0 +1,126 @@
+{
+  "session_metadata": {
+    "session_id": "SESS-20260930-07",
+    "session_number": 7,
+    "market_date": "2026-09-30",
+    "timestamp": "2026-09-30T16:24:27.749469",
+    "engine_version": "3.0.0",
+    "status": "VERIFIED_PASS",
+    "risk_incidents": []
+  },
+  "market_state": {
+    "regime": "BULL_MOMENTUM",
+    "breadth_advance_pct": 65.0,
+    "data_health": "PASS"
+  },
+  "universe": {
+    "total_candidates": 27,
+    "tradable_count": 27,
+    "excluded_count": 0
+  },
+  "ranking": {
+    "top_candidates": [
+      "COMI.CA",
+      "SWDY.CA",
+      "TMGH.CA",
+      "ETEL.CA",
+      "EGAL.CA"
+    ]
+  },
+  "portfolio": {
+    "total_portfolio_equity": 100002.19,
+    "initial_cash": 53212.67,
+    "allocated_cash": 19857.12,
+    "remaining_free_cash": 33355.55,
+    "new_order_count": 2,
+    "allocated_orders": [
+      {
+        "ticker": "SWDY.CA",
+        "sector": "Industrial & Construction",
+        "entry_price": 103.42,
+        "stop_price": 97.65,
+        "target_shares": 96,
+        "target_capital_egp": 9928.32,
+        "target_weight_pct": 9.93,
+        "penalty_multiplier": 1.0,
+        "correlation_reason": [
+          "DIVERSIFICATION_HEALTHY"
+        ],
+        "max_allowed_capital_egp": 10000.22,
+        "liquidity_cap_egp": 7766477.25,
+        "sizing_reason": "Risk-Budgeted 100% Sizing (DIVERSIFICATION_HEALTHY)"
+      },
+      {
+        "ticker": "EGAL.CA",
+        "sector": "Basic Materials & Metals",
+        "entry_price": 330.96,
+        "stop_price": 312.48,
+        "target_shares": 30,
+        "target_capital_egp": 9928.8,
+        "target_weight_pct": 9.93,
+        "penalty_multiplier": 1.0,
+        "correlation_reason": [
+          "DIVERSIFICATION_HEALTHY"
+        ],
+        "max_allowed_capital_egp": 10000.22,
+        "liquidity_cap_egp": 2103410.4,
+        "sizing_reason": "Risk-Budgeted 100% Sizing (DIVERSIFICATION_HEALTHY)"
+      }
+    ],
+    "projected_portfolio_concentration": {
+      "total_invested_weight": 0.496,
+      "cash_reserve_weight": 0.504,
+      "herfindahl_hirschman_index": 492.8,
+      "sector_exposures": {
+        "Banking & Financial Services": 0.099,
+        "Real Estate": 0.097,
+        "Telecom & Technology": 0.102,
+        "Industrial & Construction": 0.099,
+        "Basic Materials & Metals": 0.099
+      },
+      "stock_violations": [],
+      "sector_violations": [],
+      "is_concentration_safe": true
+    },
+    "is_plan_valid": true
+  },
+  "execution": {
+    "fills": [
+      {
+        "order_id": "PAPER-47D65986",
+        "symbol": "SWDY.CA",
+        "side": "BUY",
+        "quantity": 96,
+        "requested_price": 103.42,
+        "fill_price": 103.523,
+        "fee": 17.39,
+        "order_type": "LIMIT",
+        "status": "FILLED",
+        "timestamp": "2026-09-30T16:24:27.738466"
+      },
+      {
+        "order_id": "PAPER-9A47C0F9",
+        "symbol": "EGAL.CA",
+        "side": "BUY",
+        "quantity": 30,
+        "requested_price": 330.96,
+        "fill_price": 331.291,
+        "fee": 17.39,
+        "order_type": "LIMIT",
+        "status": "FILLED",
+        "timestamp": "2026-09-30T16:24:27.738466"
+      }
+    ]
+  },
+  "risk": {
+    "cash_after": 33300.95,
+    "stock_allocation_pct": 60.0,
+    "equity_after": 83238.11
+  },
+  "outcome": {
+    "realized_pnl_egp": 0.0,
+    "unrealized_pnl_egp": 210.73,
+    "closed_trades_count": 0,
+    "benchmark_return_pct": 0.45
+  }
+}

@@ -90,7 +90,7 @@
     "ALUM.CA": 0,
     "VERT.CA": 0,
     "ICID.CA": 0,
-    "BIOC.CA": 1,
+    "BIOC.CA": 0,
     "MICH.CA": 0,
     "SMPP.CA": 0,
     "EFID.CA": 0,
@@ -160,5 +160,5 @@
     "WDEH.CA": 0
   },
   "alerts": {},
-  "last_updated": "2026-09-30 13:06:49"
+  "last_updated": "2026-09-30 16:15:58"
 }

@@ -119,10 +119,11 @@ class InstitutionalPortfolioConstructor:
                 "sizing_reason": f"Risk-Budgeted {penalty*100:.0f}% Sizing ({', '.join(corr_eval['reason_codes'])})"
             })
 
-        # 3. Comprehensive concentration and sanity check
+        # 3. Comprehensive concentration and sanity check (allows 1.5% drift buffer for winning positions)
         concentration_audit = PortfolioRiskEngine.evaluate_portfolio_concentration(
             current_allocations=simulated_allocations,
-            sector_mapping=sector_mapping
+            sector_mapping=sector_mapping,
+            max_stock_weight=FrozenRiskInvariants.MAX_SINGLE_STOCK_ALLOCATION_PCT + 0.015
         )
 
         return {

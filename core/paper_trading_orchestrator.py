@@ -95,10 +95,12 @@ class PaperTradingOrchestrator:
             candidates = []
             sector_mapping = {}
 
-            for p_rec in canonical_prices[:5]:
+            for p_rec in canonical_prices:
                 sym = p_rec.get("ticker", "")
-                if not sym:
+                if not sym or sym in ("ORAS.CA", "TEST.CA"):
                     continue
+                if len(candidates) >= 5:
+                    break
                 curr_p = float(p_rec.get("price", 100.0))
                 prev_c = float(p_rec.get("previous_close", curr_p))
                 entry_p = float(p_rec.get("entry_zone_low", round(curr_p * 0.985, 2)))
@@ -221,11 +223,14 @@ class PaperTradingOrchestrator:
             for pos in remaining_open_positions:
                 t = pos["ticker"]
                 cp = current_price_lookup.get(t, pos["entry_price"])
+                if t not in sector_mapping:
+                    stock_info = EGXUniverseLoader.get_stock_info(t)
+                    sector_mapping[t] = stock_info.get("sector_en", pos.get("sector", "Diversified")) if stock_info else pos.get("sector", "Diversified")
                 existing_pos_dict[t] = {
                     "shares": pos["shares"],
                     "price": cp,
                     "equity": pos["shares"] * cp,
-                    "sector": pos.get("sector", "General")
+                    "sector": sector_mapping.get(t, pos.get("sector", "General"))
                 }
 
             # 8. Portfolio Construction & Risk Sizing (incorporating existing holdings)
