@@ -41,11 +41,11 @@
       "days_since_update": 19
     },
     "usd_egp_rate": {
-      "value": 51.89,
+      "value": 52.23,
       "unit": "EGP",
       "label_ar": "سعر صرف الجنيه أمام الدولار الأمريكي",
       "source": "LIVE_YAHOO_FINANCE_USDEGP",
-      "last_updated": "2026-09-30 16:59:52",
+      "last_updated": "2026-10-01 13:59:27",
       "is_stale": false,
       "staleness_threshold_days": 2,
       "days_since_update": 0
@@ -61,11 +61,11 @@
       "days_since_update": 0
     },
     "brent_oil_usd": {
-      "value": 98.76,
+      "value": 100.75,
       "unit": "USD/bbl",
       "label_ar": "سعر خام برنت العالمي للنفط — ارتفاع ملحوظ بسبب توترات الشرق الأوسط",
       "source": "LIVE_YAHOO_FINANCE_BZ_F",
-      "last_updated": "2026-09-30 16:59:52",
+      "last_updated": "2026-10-01 13:59:27",
       "is_stale": false,
       "staleness_threshold_days": 2,
       "days_since_update": 0
@@ -112,7 +112,7 @@
     }
   },
   "egx_market_context": {
-    "egx30_level": 51894.80078125,
+    "egx30_level": 53055.0,
     "market_direction_30d": "SIDEWAYS",
     "key_stock_30d_changes": {
       "TMGH.CA": -9.7,
@@ -128,7 +128,7 @@
   },
   "macro_regime": "HIGH_RATES_GEOPOLITICAL_PRESSURE",
   "macro_regime_ar": "🟡 فائدة مرتفعة مع ضغوط جيوسياسية ونفط متصاعد — يُوصى بالحذر والتحوط",
-  "last_sync_timestamp": "2026-09-30 16:59:52",
+  "last_sync_timestamp": "2026-10-01 13:59:27",
   "staleness_warnings_count": 0,
   "stale_indicators": []
 }
