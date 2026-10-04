@@ -97,7 +97,7 @@
     "OLFI.CA": 0,
     "PACH.CA": 0,
     "SCEM.CA": 0,
-    "MCQE.CA": 0,
+    "MCQE.CA": 1,
     "ARCC.CA": 0,
     "SVCE.CA": 0,
     "TORA.CA": 0,
@@ -129,7 +129,7 @@
     "GSSC.CA": 0,
     "ZEOT.CA": 0,
     "TANM.CA": 0,
-    "MBSC.CA": 0,
+    "MBSC.CA": 1,
     "PRCL.CA": 0,
     "MOSC.CA": 0,
     "WCDF.CA": 0,
@@ -160,5 +160,5 @@
     "WDEH.CA": 0
   },
   "alerts": {},
-  "last_updated": "2026-10-02 17:30:57"
+  "last_updated": "2026-10-04 12:54:58"
 }
