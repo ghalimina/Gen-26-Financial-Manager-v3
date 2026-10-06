@@ -42278,5 +42278,19 @@
     "new_values": null,
     "source": "USER_MANUAL_UI",
     "notes": "User confirmed deletion"
+  },
+  {
+    "audit_id": "e82312e0",
+    "timestamp": "2026-10-07T01:42:22.157226",
+    "action": "UPDATE_CASH",
+    "ticker": "CASH_EGP",
+    "old_values": {
+      "cash_egp": 85000.0
+    },
+    "new_values": {
+      "cash_egp": 1200.0
+    },
+    "source": "USER_MANUAL_UI",
+    "notes": "تعديل الرصيد النقدي للمحفظة من 85,000.00 إلى 1,200.00 ج.م"
   }
 ]

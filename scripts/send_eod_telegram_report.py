@@ -127,12 +127,22 @@ def get_top_stocks(limit: int = 6) -> List[Dict[str, Any]]:
     """Loads and sorts top liquid stocks by overall score."""
     rankings_data = load_json_safe(RANKINGS_FILE)
     core = rankings_data.get("core", [])
-    if not core:
+    all_stocks = rankings_data.get("all", [])
+
+    candidates = list(core) if core else []
+    seen_tickers = {s.get("ticker") for s in candidates if s.get("ticker")}
+    for s in all_stocks:
+        ticker = s.get("ticker", "")
+        if ticker and ticker not in seen_tickers:
+            candidates.append(s)
+            seen_tickers.add(ticker)
+
+    if not candidates:
         print("[WARN] No stocks found in precomputed_rankings.json")
         return []
 
     valid_stocks = []
-    for s in core:
+    for s in candidates:
         ticker = s.get("ticker", "")
         if ticker in ("ORAS.CA", "TEST.CA"):
             continue
@@ -420,8 +430,8 @@ def build_concise_reports(regime_data: Dict[str, Any], macro_data: Dict[str, Any
         radar_section = (
             f"🛡️ <b>رادار كاش الحماية الذكي والبدائل الاستثمارية (ثاندر):</b>\n"
             f"• نسبة الكاش الحالي: <code>{c_pct:.1f}%</code> (الحد الإلزامي للحماية: 35.0%)\n"
-            f"• 🟡 <b>صندوق أزيموت للذهب (AZG):</b> تحوط من التضخم وتراجع الجنيه (+38.2% سنوياً)\n"
-            f"• 🟢 <b>صندوق ثاندر توفير / ادخار (AZS):</b> عائد يومي مركب 21.2% مع سيولة سحب فورية T+0\n\n"
+            f"• 🟡 <b>صندوق أزيموت للذهب (AZG) / بلتون سبائك:</b> تحوط من التضخم وتراجع الجنيه (+38.2% سنوياً)\n"
+            f"• 🟢 <b>صناديق السيولة اليومية (AZS / بلتون كاش):</b> عائد يومي مركب 21.2% مع سيولة سحب فورية T+0\n\n"
         )
 
     # 4. Top Core Market Picks (Compact)

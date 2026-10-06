@@ -1,6 +1,6 @@
 {
   "status": "SUCCESS",
-  "as_of": "2026-10-06 23:22:03",
+  "as_of": "2026-10-07 01:45:37",
   "thndr_daily_card": {
     "ticker": "SWDY.CA",
     "name_ar": "السويدي إليكتريك",
@@ -17,11 +17,11 @@
     "target_1_price": 123.9,
     "target_2_price": 132.16,
     "risk_reward_ratio": 1.0,
-    "suggested_shares": 80,
-    "order_value_egp": 9459.2,
-    "allocation_pct": 9.9,
+    "suggested_shares": 0,
+    "order_value_egp": 0.0,
+    "allocation_pct": 0.0,
     "thndr_order_type_ar": "أمر محدد (Limit Order) — مزاد الافتتاح 9:30 ص",
-    "execution_instruction_ar": "قم بفتح تطبيق ثاندر واطلب شراء 80 سهم بسعر 118.24 ج.م كأمر محدد.",
+    "execution_instruction_ar": "قم بفتح تطبيق ثاندر واطلب شراء 0 سهم بسعر 118.24 ج.م كأمر محدد.",
     "breakeven_rule_ar": "⚠️ فور وصول السعر إلى الهدف الأول (123.90 ج.م)، قم برفع أمر وقف الخسارة فوراً إلى سعر الشراء (118.24 ج.م) لحجز الأرباح وتأمين الصفقة بنسبة مخاطرة 0%.",
     "trailing_rule_ar": "اترك النصف المتبقي مع تتبع الوقف المتحرك (Trailing Stop) حتى الهدف الثاني.",
     "theories_passed_count": 5,
@@ -35,13 +35,13 @@
     "rejection_reasons_ar": []
   },
   "smart_cash_radar": {
-    "total_equity_egp": 95289.5,
-    "free_cash_egp": 85000.0,
-    "cash_reserve_pct": 89.2,
+    "total_equity_egp": 11489.5,
+    "free_cash_egp": 1200.0,
+    "cash_reserve_pct": 10.4,
     "mandatory_cash_floor_pct": 35.0,
-    "mandatory_cash_floor_egp": 33351.32,
-    "investable_surplus_cash": 51648.68,
-    "cash_floor_status": "PROTECTED_SAFE",
+    "mandatory_cash_floor_egp": 4021.32,
+    "investable_surplus_cash": 0.0,
+    "cash_floor_status": "CASH_FLOOR_DEFICIT",
     "recommended_funds": [
       {
         "ticker": "AZG",

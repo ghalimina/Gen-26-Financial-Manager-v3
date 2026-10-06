@@ -273,12 +273,14 @@ def api_funds():
     workspace = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     funds_file = os.path.join(workspace, "data", "thndr_mutual_funds.json")
     
-    funds = []
+    all_funds = []
     if os.path.exists(funds_file):
         with open(funds_file, "r", encoding="utf-8") as f:
             data = json.load(f)
-            funds = data.get("funds", [])
+            all_funds = data.get("funds", [])
             
+    funds = list(all_funds)
+
     # Filter by category if requested
     cat = request.args.get("category", "ALL").strip().upper()
     if cat and cat != "ALL":
@@ -287,9 +289,10 @@ def api_funds():
         else:
             funds = [f for f in funds if f.get("category", "").upper() == cat]
             
-    # Text search
+    # Text search with support for Beltone / بيلتون / بلتون aliases
     q = request.args.get("search", "").strip().lower()
     if q:
+        q_alt = q.replace("بيلتون", "بلتون") if "بيلتون" in q else (q.replace("بلتون", "بيلتون") if "بلتون" in q else q)
         funds = [
             f for f in funds
             if q in f.get("name_ar", "").lower()
@@ -297,12 +300,13 @@ def api_funds():
             or q in f.get("ticker", "").lower()
             or q in f.get("manager", "").lower()
             or q in f.get("sponsor", "").lower()
+            or (q_alt and (q_alt in f.get("name_ar", "").lower() or q_alt in f.get("manager", "").lower()))
         ]
         
     return jsonify({
         "status": "SUCCESS",
         "total_count": len(funds),
-        "all_catalog_count": 67,
+        "all_catalog_count": len(all_funds),
         "funds": funds
     })
 
@@ -1909,6 +1913,15 @@ def api_thndr_daily_card():
                     "nav_egp": 10.50,
                     "liquidity_ar": "يومي فوري (T+0)",
                     "action_advice_ar": "تشغيل تلقائي للسيولة الفائضة داخل تطبيق ثاندر دون تجميد."
+                },
+                {
+                    "ticker": "BELTONE-CASH",
+                    "name_ar": "صندوق بيلتون للسيولة النقدية اليومية (Beltone Cash)",
+                    "category_ar": "أسواق نقد ودخل ثابت",
+                    "annual_return_pct": 21.2,
+                    "nav_egp": 12.15,
+                    "liquidity_ar": "يومي فوري (T+0)",
+                    "action_advice_ar": "استثمار السيولة في أذون خزانة وأسواق نقد لتحقيق أعلى عائد تراكمي فوري."
                 }
             ]
         }
