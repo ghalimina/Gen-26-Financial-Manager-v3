@@ -258,8 +258,95 @@ def api_universe_funnel_stats():
 # --- 3. Stocks Catalog & Dossiers ---
 @app.route("/api/stocks", methods=["GET"])
 def api_stocks():
-    """Returns all discovered securities in the catalog."""
+    """Returns all discovered securities in the catalog (270 stocks)."""
     return jsonify(EGXUniverseAuditor.EGX_CATALOG)
+
+
+# --- Mutual Funds Endpoints (Thndr 67 Funds) ---
+@app.route("/api/funds", methods=["GET"])
+def api_funds():
+    """
+    Returns full directory of all 67 Egyptian mutual funds available on Thndr,
+    with optional category filtering and text search.
+    """
+    import json
+    workspace = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    funds_file = os.path.join(workspace, "data", "thndr_mutual_funds.json")
+    
+    funds = []
+    if os.path.exists(funds_file):
+        with open(funds_file, "r", encoding="utf-8") as f:
+            data = json.load(f)
+            funds = data.get("funds", [])
+            
+    # Filter by category if requested
+    cat = request.args.get("category", "ALL").strip().upper()
+    if cat and cat != "ALL":
+        if cat in ["ETF", "FIXED_INCOME"]:
+            funds = [f for f in funds if f.get("category", "").upper() in ["ETF", "FIXED_INCOME"]]
+        else:
+            funds = [f for f in funds if f.get("category", "").upper() == cat]
+            
+    # Text search
+    q = request.args.get("search", "").strip().lower()
+    if q:
+        funds = [
+            f for f in funds
+            if q in f.get("name_ar", "").lower()
+            or q in f.get("name_en", "").lower()
+            or q in f.get("ticker", "").lower()
+            or q in f.get("manager", "").lower()
+            or q in f.get("sponsor", "").lower()
+        ]
+        
+    return jsonify({
+        "status": "SUCCESS",
+        "total_count": len(funds),
+        "all_catalog_count": 67,
+        "funds": funds
+    })
+
+
+@app.route("/api/funds/<fund_id>", methods=["GET"])
+def api_fund_detail(fund_id):
+    """Returns comprehensive detail for a specific fund by ID or ticker."""
+    import json
+    workspace = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    funds_file = os.path.join(workspace, "data", "thndr_mutual_funds.json")
+    
+    fid = fund_id.strip().upper()
+    if os.path.exists(funds_file):
+        with open(funds_file, "r", encoding="utf-8") as f:
+            data = json.load(f)
+            for f in data.get("funds", []):
+                if f.get("fund_id", "").upper() == fid or f.get("ticker", "").upper() == fid:
+                    return jsonify({"status": "SUCCESS", "fund": f})
+                    
+    return jsonify({"status": "ERROR", "message": f"Fund {fund_id} not found"}), 404
+
+
+@app.route("/api/funds/categories", methods=["GET"])
+def api_fund_categories():
+    """Returns category breakdown and counts for UI filter chips."""
+    import json
+    workspace = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    funds_file = os.path.join(workspace, "data", "thndr_mutual_funds.json")
+    
+    funds = []
+    if os.path.exists(funds_file):
+        with open(funds_file, "r", encoding="utf-8") as f:
+            funds = json.load(f).get("funds", [])
+            
+    cats = [
+        {"id": "ALL", "label_ar": "جميع الصناديق", "label_en": "All Funds", "count": len(funds), "icon": "🏦"},
+        {"id": "GOLD", "label_ar": "صناديق الذهب", "label_en": "Gold Funds", "count": sum(1 for f in funds if f.get("category") == "GOLD"), "icon": "🥇"},
+        {"id": "MONEY_MARKET", "label_ar": "أسواق النقد والسيولة", "label_en": "Money Market & Cash", "count": sum(1 for f in funds if f.get("category") == "MONEY_MARKET"), "icon": "💵"},
+        {"id": "EQUITY", "label_ar": "صناديق الأسهم", "label_en": "Equity Funds", "count": sum(1 for f in funds if f.get("category") == "EQUITY"), "icon": "📈"},
+        {"id": "ISLAMIC_SHARIA", "label_ar": "صناديق الشريعة الإسلامية", "label_en": "Sharia Compliant", "count": sum(1 for f in funds if f.get("category") == "ISLAMIC_SHARIA"), "icon": "🌙"},
+        {"id": "BALANCED", "label_ar": "صناديق متوازنة", "label_en": "Balanced Funds", "count": sum(1 for f in funds if f.get("category") == "BALANCED"), "icon": "⚖️"},
+        {"id": "ETF", "label_ar": "صناديق المؤشرات والسندات", "label_en": "ETFs & Fixed Income", "count": sum(1 for f in funds if f.get("category") in ("ETF", "FIXED_INCOME")), "icon": "📊"}
+    ]
+    return jsonify({"status": "SUCCESS", "categories": cats})
 
 
 @app.route("/api/stocks/<ticker>/price", methods=["GET"])

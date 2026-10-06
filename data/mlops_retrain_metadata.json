@@ -1,7 +1,7 @@
 {
-  "last_retrain_timestamp": "2026-10-05 19:59:53",
-  "trigger_source": "SCHEDULED_WEEKLY",
-  "regressor_status": "CACHED_LOAD",
+  "last_retrain_timestamp": "2026-10-06 15:00:46",
+  "trigger_source": "SCHEDULED_WEEKLY_FALLBACK",
+  "regressor_status": "TRAINED_SUCCESS",
   "meta_classifier_status": "TRAINED_SUCCESS",
   "features_trained_count": 21,
   "validation_ic": 0.052,

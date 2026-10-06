@@ -41378,5 +41378,149 @@
     "new_values": null,
     "source": "USER_MANUAL_UI",
     "notes": "User confirmed deletion"
+  },
+  {
+    "audit_id": "66adfbb5",
+    "timestamp": "2026-10-06T15:01:10.168973",
+    "action": "ADD",
+    "ticker": "TMGH.CA",
+    "old_values": null,
+    "new_values": {
+      "holding_id": "POS_TMGH_a08b6e",
+      "ticker": "TMGH.CA",
+      "company_name": "مجموعة طلعت مصطفى",
+      "exchange": "EGX",
+      "sector": "Real Estate",
+      "quantity": 200,
+      "average_entry_price": 50.0,
+      "manual_notes": "شراء استثماري في قطاع العقارات",
+      "created_at": "2026-10-06T15:01:10.137975",
+      "updated_at": "2026-10-06T15:01:10.138983",
+      "active": true
+    },
+    "source": "USER_MANUAL_UI",
+    "notes": "شراء استثماري في قطاع العقارات"
+  },
+  {
+    "audit_id": "bf221234",
+    "timestamp": "2026-10-06T15:01:10.328797",
+    "action": "EDIT",
+    "ticker": "SWDY.CA",
+    "old_values": {
+      "holding_id": "POS_SWDY_002",
+      "ticker": "SWDY.CA",
+      "company_name": "السويدي إليكتريك",
+      "exchange": "EGX",
+      "sector": "Industrial",
+      "quantity": 300,
+      "average_entry_price": 38.5,
+      "manual_notes": "تخصيص صناعي",
+      "created_at": "2026-08-12T11:30:00",
+      "updated_at": "2026-08-12T11:30:00",
+      "active": true
+    },
+    "new_values": {
+      "holding_id": "POS_SWDY_002",
+      "ticker": "SWDY.CA",
+      "company_name": "السويدي إليكتريك",
+      "exchange": "EGX",
+      "sector": "Industrial",
+      "quantity": 500,
+      "average_entry_price": 39.0,
+      "manual_notes": "تعديل الكمية بعد تنفيذ صفقة إضافية",
+      "created_at": "2026-08-12T11:30:00",
+      "updated_at": "2026-10-06T15:01:10.305065",
+      "active": true
+    },
+    "source": "USER_MANUAL_UI",
+    "notes": "تعديل الكمية بعد تنفيذ صفقة إضافية"
+  },
+  {
+    "audit_id": "39c125f8",
+    "timestamp": "2026-10-06T15:01:10.447550",
+    "action": "DELETE",
+    "ticker": "COMI.CA",
+    "old_values": {
+      "holding_id": "POS_COMI_001",
+      "ticker": "COMI.CA",
+      "company_name": "البنك التجاري الدولي (CIB)",
+      "exchange": "EGX",
+      "sector": "Banking",
+      "quantity": 150,
+      "average_entry_price": 95.0,
+      "manual_notes": "مركز أساسي",
+      "created_at": "2026-08-10T10:00:00",
+      "updated_at": "2026-08-10T10:00:00",
+      "active": true
+    },
+    "new_values": null,
+    "source": "USER_MANUAL_UI",
+    "notes": "User confirmed deletion"
+  },
+  {
+    "audit_id": "5ed7b283",
+    "timestamp": "2026-10-06T15:01:10.552069",
+    "action": "ADD",
+    "ticker": "ETEL.CA",
+    "old_values": null,
+    "new_values": {
+      "holding_id": "POS_ETEL_1d1291",
+      "ticker": "ETEL.CA",
+      "company_name": "المصرية للاتصالات",
+      "exchange": "EGX",
+      "sector": "Telecom",
+      "quantity": 100,
+      "average_entry_price": 32.0,
+      "manual_notes": "سهم اتصالات",
+      "created_at": "2026-10-06T15:01:10.528067",
+      "updated_at": "2026-10-06T15:01:10.528067",
+      "active": true
+    },
+    "source": "USER_MANUAL_UI",
+    "notes": "سهم اتصالات"
+  },
+  {
+    "audit_id": "08dcb10c",
+    "timestamp": "2026-10-06T15:01:11.724215",
+    "action": "ADD",
+    "ticker": "ABUK.CA",
+    "old_values": null,
+    "new_values": {
+      "holding_id": "POS_ABUK_96d103",
+      "ticker": "ABUK.CA",
+      "company_name": "أبو قير للأسمدة",
+      "exchange": "EGX",
+      "sector": "Fertilizers",
+      "quantity": 100,
+      "average_entry_price": 75.4,
+      "manual_notes": "ACID Test Position",
+      "created_at": "2026-10-06T15:01:11.697334",
+      "updated_at": "2026-10-06T15:01:11.697334",
+      "active": true
+    },
+    "source": "USER_MANUAL_UI",
+    "notes": "ACID Test Position"
+  },
+  {
+    "audit_id": "31d909da",
+    "timestamp": "2026-10-06T15:01:11.824451",
+    "action": "DELETE",
+    "ticker": "ABUK.CA",
+    "old_values": {
+      "holding_id": "POS_ABUK_96d103",
+      "ticker": "ABUK.CA",
+      "company_name": "أبو قير للأسمدة",
+      "exchange": "EGX",
+      "sector": "Fertilizers",
+      "quantity": 100,
+      "average_entry_price": 75.4,
+      "manual_notes": "ACID Test Position",
+      "created_at": "2026-10-06T15:01:11.697334",
+      "updated_at": "2026-10-06T15:01:11.697334",
+      "active": true
+    },
+    "new_values": null,
+    "source": "USER_MANUAL_UI",
+    "notes": "User confirmed deletion"
   }
 ]

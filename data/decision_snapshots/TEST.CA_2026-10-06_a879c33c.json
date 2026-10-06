@@ -1,0 +1,86 @@
+{
+  "decision": {
+    "decision_id": "TEST.CA_2026-10-06_a879c33c",
+    "timestamp": "2026-10-06T14:58:21.171673",
+    "ticker": "TEST.CA",
+    "name": "Test Company",
+    "market_data": {
+      "current_price": 50.0,
+      "price_timestamp": "2026-10-06T14:58:21.171673"
+    },
+    "portfolio": {
+      "equity": 100000.0,
+      "cash": 100000.0,
+      "allocation_pct": 10.0,
+      "position_qty": 0
+    },
+    "signal": {
+      "action": "BUY LIMIT (PULLBACK)",
+      "status": "APPROVED",
+      "reason": "ألفا استثمارية قوية (75.0/100) | جودة تشغيلية ومالية ممتازة (80.0/100) | تقييم مغري ومضاعفات عادلة (70.0/100) | دخول تراجعي آمن بخصم 4.0% عن سعر السوق",
+      "confidence_pct": 80.0
+    },
+    "entry": {
+      "price": 48.0,
+      "type": "PULLBACK_LIMIT",
+      "distance_pct": 4.0
+    },
+    "risk": {
+      "stop": 45.0,
+      "target": 60.0,
+      "risk_score": 35.0,
+      "risk_reason_codes": [
+        "ACCOUNTING_HIGH_RISK",
+        "LIQUIDITY_INSUFFICIENT"
+      ],
+      "risk_reward": "1:2.0"
+    },
+    "explainability": {
+      "why": [
+        "ألفا استثمارية قوية (75.0/100)",
+        "جودة تشغيلية ومالية ممتازة (80.0/100)",
+        "تقييم مغري ومضاعفات عادلة (70.0/100)",
+        "دخول تراجعي آمن بخصم 4.0% عن سعر السوق"
+      ],
+      "why_not": [
+        "مخاطر محاسبية مرتفعة في جودة التدفقات النقدية",
+        "سيولة متوسطة تتطلب الحذر في حجم الأمر"
+      ],
+      "alpha_score": 75.0,
+      "quality_score": 80.0,
+      "valuation_score": 70.0,
+      "liquidity_score": 40.0,
+      "risk_score": 35.0,
+      "accounting_risk": "HIGH",
+      "risk_reason_codes": [
+        "ACCOUNTING_HIGH_RISK",
+        "LIQUIDITY_INSUFFICIENT"
+      ]
+    },
+    "gates": {
+      "cash_gate": "PASS",
+      "allocation_gate": "PASS",
+      "pullback_gate": "PASS",
+      "quality_gate": "PASS"
+    }
+  },
+  "state_snapshot": {
+    "alpha": {
+      "alpha_score": 75.0,
+      "confidence_pct": 80.0
+    },
+    "quality": {
+      "quality_score": 80.0,
+      "accounting_risk": "HIGH"
+    },
+    "valuation": {
+      "valuation_score": 70.0
+    },
+    "liquidity": {
+      "liquidity_score": 40.0
+    },
+    "portfolio_equity": 100000.0,
+    "cash": 100000.0
+  },
+  "saved_at": "2026-10-06T14:58:21.171673"
+}

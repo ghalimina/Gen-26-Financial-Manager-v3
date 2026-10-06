@@ -61,12 +61,12 @@
     "sample_verified": [
       {
         "ticker": "COMI.CA",
-        "price": 138.17,
+        "price": 125.16,
         "currency": "EGP",
         "price_type": "OFFICIAL_LAST_CLOSE",
         "is_adjusted": false,
         "source": "TRADINGVIEW_EGX_LIVE_SSOT",
-        "timestamp": "2026-09-12 16:59:14",
+        "timestamp": "2026-10-06 14:54:01",
         "timezone": "Africa/Cairo",
         "freshness": "FRESH_LIVE_SSOT",
         "is_real_time": false,
@@ -74,12 +74,12 @@
       },
       {
         "ticker": "SWDY.CA",
-        "price": 127.5,
+        "price": 118.0,
         "currency": "EGP",
         "price_type": "OFFICIAL_LAST_CLOSE",
         "is_adjusted": false,
         "source": "TRADINGVIEW_EGX_LIVE_SSOT",
-        "timestamp": "2026-09-12 16:59:14",
+        "timestamp": "2026-10-06 14:54:01",
         "timezone": "Africa/Cairo",
         "freshness": "FRESH_LIVE_SSOT",
         "is_real_time": false,
@@ -87,12 +87,12 @@
       },
       {
         "ticker": "TMGH.CA",
-        "price": 99.05,
+        "price": 88.39,
         "currency": "EGP",
         "price_type": "OFFICIAL_LAST_CLOSE",
         "is_adjusted": false,
         "source": "TRADINGVIEW_EGX_LIVE_SSOT",
-        "timestamp": "2026-09-12 16:59:14",
+        "timestamp": "2026-10-06 14:54:01",
         "timezone": "Africa/Cairo",
         "freshness": "FRESH_LIVE_SSOT",
         "is_real_time": false,
@@ -100,12 +100,12 @@
       },
       {
         "ticker": "ORAS.CA",
-        "price": 858.0,
+        "price": 842.99,
         "currency": "EGP",
         "price_type": "OFFICIAL_LAST_CLOSE",
         "is_adjusted": false,
         "source": "TRADINGVIEW_EGX_LIVE_SSOT",
-        "timestamp": "2026-09-12 16:59:14",
+        "timestamp": "2026-10-06 14:54:01",
         "timezone": "Africa/Cairo",
         "freshness": "FRESH_LIVE_SSOT",
         "is_real_time": false,
@@ -113,12 +113,12 @@
       },
       {
         "ticker": "ETEL.CA",
-        "price": 125.25,
+        "price": 149.88,
         "currency": "EGP",
         "price_type": "OFFICIAL_LAST_CLOSE",
         "is_adjusted": false,
         "source": "TRADINGVIEW_EGX_LIVE_SSOT",
-        "timestamp": "2026-09-12 16:59:14",
+        "timestamp": "2026-10-06 14:54:01",
         "timezone": "Africa/Cairo",
         "freshness": "FRESH_LIVE_SSOT",
         "is_real_time": false,
@@ -128,12 +128,12 @@
   },
   "phase_3_universe": {
     "status": "VERIFIED",
-    "total_discovered_catalog": 244,
-    "tradable_liquid_core": 244,
+    "total_discovered_catalog": 181,
+    "tradable_liquid_core": 181,
     "suspended_count": 0,
     "illiquid_count": 0,
     "missing_data_count": 0,
-    "honest_labeling_displayed": "244 of 244 discovered assets tradable (100.0% coverage of unified EGX active universe)"
+    "honest_labeling_displayed": "181 of 181 discovered assets tradable (100.0% coverage of unified EGX active universe)"
   },
   "phase_4_multi_horizon": {
     "status": "VERIFIED_INDEPENDENT",
@@ -144,7 +144,7 @@
       "20D",
       "60D"
     ],
-    "total_ranked_companies": 244,
+    "total_ranked_companies": 181,
     "horizon_weights": {
       "1D": 0.15,
       "5D": 0.2,
@@ -158,104 +158,134 @@
         "days": 1,
         "term": "short",
         "expected_return_pct": 0.17,
-        "expected_downside_pct": -0.19,
-        "expected_price": 138.4,
-        "prob_up": 0.88,
-        "confidence": 0.78,
-        "target_1": 139.82,
-        "target_1_bounds": {
-          "low": 138.28,
-          "high": 141.36,
-          "confidence_pct": 78.0
+        "expected_downside_pct": -0.2,
+        "expected_price": 125.37,
+        "prob_up": 0.87,
+        "confidence": 0.74,
+        "probability_distribution": {
+          "threshold_pct": 3.0,
+          "prob_up_pct": 5.0,
+          "prob_range_pct": 90.0,
+          "prob_down_pct": 5.0
         },
-        "target_2": 140.72,
-        "target_3": 141.96,
-        "stop_loss": 133.33,
-        "reward_to_risk": 0.34,
+        "target_1": 126.58,
+        "target_1_bounds": {
+          "low": 124.93,
+          "high": 128.23,
+          "confidence_pct": 74.0
+        },
+        "target_2": 127.36,
+        "target_3": 128.42,
+        "stop_loss": 120.77,
+        "reward_to_risk": 0.32,
         "direction": "UP"
       },
       "5D": {
         "horizon_label": "5 أيام (أسبوع تداول)",
         "days": 5,
         "term": "short",
-        "expected_return_pct": 0.93,
-        "expected_downside_pct": -0.42,
-        "expected_price": 139.45,
-        "prob_up": 0.88,
-        "confidence": 0.78,
-        "target_1": 141.85,
-        "target_1_bounds": {
-          "low": 140.29,
-          "high": 143.41,
-          "confidence_pct": 78.0
+        "expected_return_pct": 0.56,
+        "expected_downside_pct": -0.46,
+        "expected_price": 125.86,
+        "prob_up": 0.87,
+        "confidence": 0.74,
+        "probability_distribution": {
+          "threshold_pct": 3.0,
+          "prob_up_pct": 5.0,
+          "prob_range_pct": 90.0,
+          "prob_down_pct": 5.0
         },
-        "target_2": 143.88,
-        "target_3": 146.64,
-        "stop_loss": 133.33,
-        "reward_to_risk": 0.76,
+        "target_1": 128.33,
+        "target_1_bounds": {
+          "low": 126.66,
+          "high": 130.0,
+          "confidence_pct": 74.0
+        },
+        "target_2": 130.07,
+        "target_3": 132.45,
+        "stop_loss": 120.77,
+        "reward_to_risk": 0.72,
         "direction": "UP"
       },
       "10D": {
         "horizon_label": "10 أيام (أسبوعين)",
         "days": 10,
         "term": "medium",
-        "expected_return_pct": 1.99,
+        "expected_return_pct": 1.03,
         "expected_downside_pct": -0.94,
-        "expected_price": 140.92,
+        "expected_price": 126.45,
         "prob_up": 0.81,
-        "confidence": 0.78,
-        "target_1": 143.38,
-        "target_1_bounds": {
-          "low": 141.8,
-          "high": 144.96,
-          "confidence_pct": 78.0
+        "confidence": 0.74,
+        "probability_distribution": {
+          "threshold_pct": 5.0,
+          "prob_up_pct": 5.0,
+          "prob_range_pct": 90.0,
+          "prob_down_pct": 5.0
         },
-        "target_2": 146.24,
-        "target_3": 150.14,
-        "stop_loss": 133.33,
-        "reward_to_risk": 1.08,
+        "target_1": 129.64,
+        "target_1_bounds": {
+          "low": 127.95,
+          "high": 131.33,
+          "confidence_pct": 74.0
+        },
+        "target_2": 132.11,
+        "target_3": 135.47,
+        "stop_loss": 120.77,
+        "reward_to_risk": 1.02,
         "direction": "UP"
       },
       "20D": {
         "horizon_label": "20 يوم (شهر تداول)",
         "days": 20,
         "term": "medium",
-        "expected_return_pct": 5.32,
+        "expected_return_pct": 2.69,
         "expected_downside_pct": -1.33,
-        "expected_price": 145.52,
+        "expected_price": 128.53,
         "prob_up": 0.81,
-        "confidence": 0.78,
-        "target_1": 145.53,
-        "target_1_bounds": {
-          "low": 143.93,
-          "high": 147.13,
-          "confidence_pct": 78.0
+        "confidence": 0.74,
+        "probability_distribution": {
+          "threshold_pct": 5.0,
+          "prob_up_pct": 21.7,
+          "prob_range_pct": 73.3,
+          "prob_down_pct": 5.0
         },
-        "target_2": 149.58,
-        "target_3": 155.1,
-        "stop_loss": 133.33,
-        "reward_to_risk": 1.52,
+        "target_1": 131.5,
+        "target_1_bounds": {
+          "low": 129.79,
+          "high": 133.21,
+          "confidence_pct": 74.0
+        },
+        "target_2": 134.98,
+        "target_3": 139.74,
+        "stop_loss": 120.77,
+        "reward_to_risk": 1.44,
         "direction": "UP"
       },
       "60D": {
         "horizon_label": "60 يوم (ربع سنوي)",
         "days": 60,
         "term": "long",
-        "expected_return_pct": 11.22,
-        "expected_downside_pct": -1.94,
-        "expected_price": 153.67,
-        "prob_up": 0.84,
-        "confidence": 0.78,
-        "target_1": 150.92,
-        "target_1_bounds": {
-          "low": 149.26,
-          "high": 152.58,
-          "confidence_pct": 78.0
+        "expected_return_pct": 5.61,
+        "expected_downside_pct": -2.07,
+        "expected_price": 132.18,
+        "prob_up": 0.83,
+        "confidence": 0.74,
+        "probability_distribution": {
+          "threshold_pct": 5.0,
+          "prob_up_pct": 54.7,
+          "prob_range_pct": 40.3,
+          "prob_down_pct": 5.0
         },
-        "target_2": 157.93,
-        "target_3": 167.5,
-        "stop_loss": 133.33,
-        "reward_to_risk": 2.63,
+        "target_1": 136.14,
+        "target_1_bounds": {
+          "low": 134.37,
+          "high": 137.91,
+          "confidence_pct": 74.0
+        },
+        "target_2": 142.18,
+        "target_3": 150.41,
+        "stop_loss": 120.77,
+        "reward_to_risk": 2.5,
         "direction": "UP"
       }
     }
@@ -314,22 +344,22 @@
   },
   "phase_9_10_ranking_reasons": {
     "status": "VERIFIED_DYNAMIC",
-    "total_ranked": 244,
+    "total_ranked": 181,
     "top_1": {
       "rank": 1,
       "ticker": "EGAL.CA",
       "name": "مصر للألومنيوم",
-      "score": 76.2,
-      "price": 377.99,
-      "reason_ar": "🟢 سهم نشط ضمن قطاع الموارد الأساسية والكيماويات بسيولة يومية تبلغ نحو 68.0M ج.م ومعامل بيتا 1.15."
+      "score": 75.6,
+      "price": 343.41,
+      "reason_ar": "🟢 سهم نشط ضمن قطاع الموارد الأساسية والكيماويات بسيولة يومية تبلغ نحو 68.0M ج.م ومعامل بيتا 1.15 في سوق صاعد."
     },
     "bottom_1": {
-      "rank": 244,
-      "ticker": "UNFO.CA",
-      "name": "يونيفرسال للتجارة والمقاولات",
+      "rank": 181,
+      "ticker": "RUBX.CA",
+      "name": "روبكس العالمية لتصنيع البلاستيك والريبكس",
       "score": 20.0,
-      "price": 10.0,
-      "reason_ar": "🟢 سهم نشط ضمن قطاع الصناعة والمقاولات بسيولة يومية تبلغ نحو 5.0M ج.م ومعامل بيتا 1.00."
+      "price": 17.98,
+      "reason_ar": "🟢 سهم نشط ضمن قطاع مواد وبلاستيك بسيولة يومية تبلغ نحو 5.0M ج.م ومعامل بيتا 1.00 في سوق صاعد."
     },
     "all_stocks_have_reasons": true
   },
@@ -390,7 +420,7 @@
   "phase_23_performance": {
     "status": "PASS_HIGH_PERFORMANCE",
     "ranking_generation_latency_ms": 0.0,
-    "reconciliation_latency_ms": 1.11,
+    "reconciliation_latency_ms": 0.45,
     "database_query_latency_ms": 1.2
   },
   "phase_24_honest_status": {
@@ -404,8 +434,8 @@
     ]
   },
   "audit_metadata": {
-    "audit_timestamp": "2026-09-12T17:06:55.550975",
-    "execution_duration_seconds": 62.599,
+    "audit_timestamp": "2026-10-06T14:57:50.051018",
+    "execution_duration_seconds": 3.43,
     "total_phases_executed": 25,
     "master_verdict": "FORENSIC_VALIDATION_COMPLETE_TRUTH_VERIFIED"
   }
