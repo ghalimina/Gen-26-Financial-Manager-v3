@@ -67,6 +67,41 @@ class TestAdvancedFeatureEngineering(unittest.TestCase):
         self.assertEqual(res["pattern"], "STEALTH_ACCUMULATION")
         self.assertIn("تجميع خفي", res["description_ar"])
 
+    def test_05_cost_adjusted_triple_barrier_labeling(self):
+        """Verify Cost-Adjusted Triple Barrier assigns 1 only on profit target, 0 on stop loss or timeout."""
+        # Scenario A: Hits upper barrier (+5.0% > max(4%, 2*2%)) before stop loss -> Label 1
+        prices_a = [100.0, 102.0, 105.5, 98.0, 96.0]
+        labels_a = AdvancedFeatureEngineering.label_cost_adjusted_triple_barrier(
+            prices=prices_a,
+            atr_14_pct=2.0,
+            is_mega_cap=True,
+            stop_loss_pct=5.0,
+            time_horizon_days=5
+        )
+        self.assertEqual(labels_a[0], 1)
+
+        # Scenario B: Hits stop loss (-5.0%) before profit target -> Label 0
+        prices_b = [100.0, 98.0, 94.0, 106.0]
+        labels_b = AdvancedFeatureEngineering.label_cost_adjusted_triple_barrier(
+            prices=prices_b,
+            atr_14_pct=2.0,
+            is_mega_cap=False,
+            stop_loss_pct=5.0,
+            time_horizon_days=5
+        )
+        self.assertEqual(labels_b[0], 0)
+
+        # Scenario C: Time horizon expires without touching upper barrier -> Label 0
+        prices_c = [100.0, 101.0, 101.5, 102.0, 101.0, 100.5]
+        labels_c = AdvancedFeatureEngineering.label_cost_adjusted_triple_barrier(
+            prices=prices_c,
+            atr_14_pct=2.0,
+            is_mega_cap=False,
+            stop_loss_pct=5.0,
+            time_horizon_days=3
+        )
+        self.assertEqual(labels_c[0], 0)
+
 
 if __name__ == "__main__":
     unittest.main()

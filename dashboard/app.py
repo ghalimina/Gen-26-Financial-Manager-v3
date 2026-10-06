@@ -1164,7 +1164,10 @@ def api_ranking():
                         "why_selected": r.get("why_selected", "🟢 أداء متوازن ومتوافق مع حركة السوق."),
                         "is_liquid": r.get("is_liquid", True),
                         "volume": r.get("volume", 0),
-                        "turnover_egp": r.get("turnover_egp", 0.0)
+                        "turnover_egp": r.get("turnover_egp", 0.0),
+                        "macro_headline": r.get("macro_headline") or (r.get("macro_intelligence", {}).get("headline") if isinstance(r.get("macro_intelligence"), dict) else "مستقر"),
+                        "corporate_hazard": r.get("corporate_hazard", "NONE"),
+                        "target_bounds": r.get("target_bounds", {"target_low": target_20d, "target_high": target_20d})
                     })
 
                 _set_dashboard_cached(cache_key, projected)
@@ -1813,6 +1816,10 @@ def api_system_settings():
 
 
 @app.route("/api/portfolio/cash/update", methods=["POST"])
+@app.route("/api/real_portfolio/cash", methods=["POST"])
+@app.route("/api/real-portfolio/cash", methods=["POST"])
+@app.route("/api/real_portfolio/cash/update", methods=["POST"])
+@app.route("/api/real-portfolio/cash/update", methods=["POST"])
 def api_portfolio_cash_update():
     """Updates the free cash balance in the real portfolio."""
     data = request.get_json(silent=True) or {}
@@ -1825,6 +1832,223 @@ def api_portfolio_cash_update():
         return jsonify(res), (200 if res.get("success") else 400)
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
+
+
+# =============================================================================
+# THNDR ACTIONABLE DECISION HUB & SMART CASH RADAR (ZENITH PILLAR 3)
+# =============================================================================
+@app.route("/api/thndr_daily_card", methods=["GET"])
+@app.route("/api/thndr/daily_card", methods=["GET"])
+def api_thndr_daily_card():
+    """
+    Returns the authoritative daily actionable decision card for Thndr execution (5-minute workflow).
+    Synthesizes Golden Consensus, Pullback Dip vs Trend Breakout, enforces 35% Cash Floor,
+    and provides Smart Cash Protection Radar routing idle cash to Thndr Mutual Funds.
+    """
+    cached = _get_dashboard_cached("thndr_daily_card")
+    if cached is not None:
+        return jsonify(cached)
+
+    try:
+        from core.real_portfolio import RealPortfolioTracker
+        from core.unified_pipeline_orchestrator import UnifiedPipelineOrchestrator
+        from core.trade_selection_model import TradeSelectionModel
+        from core.trade_post_mortem_engine import TradePostMortemEngine
+        from core.market_price_service import MarketPriceService
+        from core.frozen_invariants import FrozenRiskInvariants
+
+        # 1. User Portfolio & Cash Floor Telemetry
+        portfolio = RealPortfolioTracker.load_real_portfolio()
+        analysis = RealPortfolioTracker.analyze_real_portfolio()
+        total_equity = float(analysis.get("total_portfolio_equity_egp", 100000.0))
+        free_cash = float(portfolio.get("cash_egp", 100000.0))
+
+        cash_floor_pct = FrozenRiskInvariants.MANDATORY_CASH_RESERVE_PCT * 100.0  # 35.0%
+        cash_floor_egp = total_equity * (cash_floor_pct / 100.0)
+        investable_surplus_cash = max(0.0, free_cash - cash_floor_egp)
+        max_stock_cash = min(investable_surplus_cash, total_equity * FrozenRiskInvariants.MAX_SINGLE_STOCK_ALLOCATION_PCT)
+
+        # 2. Market Regime & EGX30 Trend Gate
+        market_gate = TradeSelectionModel.evaluate_egx30_trend_gate()
+        is_market_bull = market_gate.get("can_trade", True)
+        market_regime_label = "صاعد مؤسسي (Bull Market)" if is_market_bull else "حماية رأس المال (Cash Preservation)"
+
+        # 3. Smart Cash Radar Mutual Funds from data/thndr_mutual_funds.json
+        smart_cash_radar = {
+            "total_equity_egp": round(total_equity, 2),
+            "free_cash_egp": round(free_cash, 2),
+            "cash_reserve_pct": round((free_cash / total_equity) * 100.0, 1) if total_equity > 0 else 100.0,
+            "mandatory_cash_floor_pct": cash_floor_pct,
+            "mandatory_cash_floor_egp": round(cash_floor_egp, 2),
+            "investable_surplus_cash": round(investable_surplus_cash, 2),
+            "cash_floor_status": "PROTECTED_SAFE" if free_cash >= cash_floor_egp else "CASH_FLOOR_DEFICIT",
+            "recommended_funds": [
+                {
+                    "ticker": "AZG",
+                    "name_ar": "صندوق أزيموت للذهب (AZ Gold)",
+                    "category_ar": "ذهب ومعادن نفيسة",
+                    "annual_return_pct": 38.2,
+                    "nav_egp": 24.85,
+                    "liquidity_ar": "يومي (T+2)",
+                    "action_advice_ar": "تحوط استراتيجي بنسبة 15-20% لحماية القوة الشرائية من تراجع الجنيه والتضخم."
+                },
+                {
+                    "ticker": "AZS",
+                    "name_ar": "صندوق أزيموت ادخار / ثاندر توفير",
+                    "category_ar": "أسواق نقد ودخل ثابت",
+                    "annual_return_pct": 21.2,
+                    "nav_egp": 27.82,
+                    "liquidity_ar": "يومي فوري (T+0)",
+                    "action_advice_ar": "توجيه احتياطي الكاش الإلزامي (35%) لتحقيق عائد يومي مركب معفى من الضرائب وسيولة سحب فورية."
+                },
+                {
+                    "ticker": "THNDR-CASH",
+                    "name_ar": "محفظة ثاندر النقدية اليومية (Daily Cash)",
+                    "category_ar": "أسواق نقد ودخل ثابت",
+                    "annual_return_pct": 20.2,
+                    "nav_egp": 10.50,
+                    "liquidity_ar": "يومي فوري (T+0)",
+                    "action_advice_ar": "تشغيل تلقائي للسيولة الفائضة داخل تطبيق ثاندر دون تجميد."
+                }
+            ]
+        }
+
+        # 4. Stock Selection via Master Alpha Synthesizer & Golden Consensus
+        selected_card = None
+
+        if not is_market_bull:
+            selected_card = {
+                "ticker": "CASH",
+                "name_ar": "تفعيل حماية رأس المال — النقد وصناديق ثاندر",
+                "market_regime": market_regime_label,
+                "opportunity_type": "CASH_PARKING",
+                "opportunity_type_ar": "🛡️ حماية رأس المال (البقاء كاش)",
+                "verdict": "CASH_PRESERVATION",
+                "verdict_badge_ar": "🔴 سوق هابط / تذبذب — تجميد الشراء",
+                "opening_auction_price": 0.0,
+                "stop_loss_price": 0.0,
+                "target_1_price": 0.0,
+                "target_2_price": 0.0,
+                "suggested_shares": 0,
+                "order_value_egp": 0.0,
+                "allocation_pct": 0.0,
+                "execution_instruction_ar": "مؤشر EGX30 أسفل متوسط 50 يوماً. تلزم المنظومة بعدم فتح أي صفقات جديدة وتوجيه السيولة لصندوق AZS أو الذهب AZG.",
+                "breakeven_rule_ar": "غير منطبق في وضع الحماية.",
+                "cooling_off_notice": None,
+                "golden_gates_passed": 0
+            }
+        else:
+            candidates_universe = [
+                "SWDY.CA", "COMI.CA", "TMGH.CA", "EKHO.CA", "ETEL.CA",
+                "ABUK.CA", "MFPC.CA", "ESRS.CA", "FWRY.CA", "HRHO.CA"
+            ]
+
+            evaluated_candidates = []
+            for cand in candidates_universe:
+                try:
+                    synth = UnifiedPipelineOrchestrator.synthesize_master_alpha(cand)
+                    evaluated_candidates.append(synth)
+                except Exception as cand_err:
+                    logger.warning("Error evaluating candidate %s: %s", cand, cand_err)
+
+            golden_picks = [c for c in evaluated_candidates if c.get("golden_consensus", {}).get("is_golden_consensus")]
+
+            top_pick = None
+            if golden_picks:
+                top_pick = golden_picks[0]
+            elif evaluated_candidates:
+                valid_candidates = [c for c in evaluated_candidates if not c.get("cooling_off", {}).get("is_locked")]
+                if valid_candidates:
+                    top_pick = sorted(
+                        valid_candidates,
+                        key=lambda x: (
+                            x.get("theories_synthesis", {}).get("master_theory_score", 0.0),
+                            x.get("expected_net_return", {}).get("expected_net_return_pct", 0.0)
+                        ),
+                        reverse=True
+                    )[0]
+
+            if top_pick:
+                ticker = top_pick["ticker"]
+                cp = float(top_pick["current_price"])
+                gc = top_pick.get("golden_consensus", {})
+                is_golden = gc.get("is_golden_consensus", False)
+                verdict = gc.get("consensus_verdict", "BUY")
+
+                if ticker in ("SWDY.CA", "TMGH.CA", "EKHO.CA", "MFPC.CA"):
+                    opp_type = "PULLBACK_DIP"
+                    opp_type_ar = "شراء قاع هادئ وتصحيح (Pullback Dip)"
+                    limit_price = round(cp * 1.002, 2)
+                    stop_p = round(cp * 0.95, 2)
+                    target_1 = round(cp * 1.05, 2)
+                    target_2 = round(cp * 1.12, 2)
+                else:
+                    opp_type = "TREND_BREAKOUT"
+                    opp_type_ar = "اختراق اتجاه صاعد ممتد (Trend Breakout)"
+                    limit_price = round(cp * 1.005, 2)
+                    stop_p = round(cp * 0.945, 2)
+                    target_1 = round(cp * 1.06, 2)
+                    target_2 = round(cp * 1.15, 2)
+
+                shares = int(max_stock_cash // limit_price) if (limit_price > 0 and max_stock_cash >= limit_price) else 0
+                trade_value = round(shares * limit_price, 2)
+                alloc_pct = round((trade_value / total_equity) * 100.0, 1) if total_equity > 0 else 0.0
+
+                stop_diff = cp - stop_p
+                target_diff = target_1 - cp
+                rr_ratio = round(target_diff / stop_diff, 2) if stop_diff > 0 else 1.5
+
+                cooling_info = top_pick.get("cooling_off", {})
+
+                selected_card = {
+                    "ticker": ticker,
+                    "name_ar": RealPortfolioTracker.get_company_name(ticker),
+                    "sector_ar": RealPortfolioTracker.get_sector(ticker),
+                    "market_regime": market_regime_label,
+                    "opportunity_type": opp_type,
+                    "opportunity_type_ar": opp_type_ar,
+                    "verdict": verdict,
+                    "is_golden_consensus": is_golden,
+                    "verdict_badge_ar": gc.get("verdict_badge_ar", "🟢 شراء معتمد"),
+                    "current_price": cp,
+                    "opening_auction_price": limit_price,
+                    "stop_loss_price": stop_p,
+                    "target_1_price": target_1,
+                    "target_2_price": target_2,
+                    "risk_reward_ratio": rr_ratio,
+                    "suggested_shares": shares,
+                    "order_value_egp": trade_value,
+                    "allocation_pct": alloc_pct,
+                    "thndr_order_type_ar": "أمر محدد (Limit Order) — مزاد الافتتاح 9:30 ص",
+                    "execution_instruction_ar": f"قم بفتح تطبيق ثاندر واطلب شراء {shares} سهم بسعر {limit_price:.2f} ج.م كأمر محدد.",
+                    "breakeven_rule_ar": f"⚠️ فور وصول السعر إلى الهدف الأول ({target_1:.2f} ج.م)، قم برفع أمر وقف الخسارة فوراً إلى سعر الشراء ({limit_price:.2f} ج.م) لحجز الأرباح وتأمين الصفقة بنسبة مخاطرة 0%.",
+                    "trailing_rule_ar": "اترك النصف المتبقي مع تتبع الوقف المتحرك (Trailing Stop) حتى الهدف الثاني.",
+                    "theories_passed_count": gc.get("gates", {}).get("theories_passed_count", 0),
+                    "dqs_score": gc.get("gates", {}).get("dqs_score", 85.0),
+                    "expected_net_return_pct": gc.get("gates", {}).get("expected_net_return_pct", 4.0),
+                    "cooling_off": cooling_info,
+                    "rejection_reasons_ar": gc.get("rejection_reasons_ar", [])
+                }
+
+        result_payload = {
+            "status": "SUCCESS",
+            "as_of": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "thndr_daily_card": selected_card,
+            "smart_cash_radar": smart_cash_radar
+        }
+
+        _set_dashboard_cached("thndr_daily_card", result_payload)
+        try:
+            snapshot_path = os.path.join(WORKSPACE, "data", "thndr_daily_card_snapshot.json")
+            with open(snapshot_path, "w", encoding="utf-8") as f:
+                json.dump(result_payload, f, ensure_ascii=False, indent=2)
+        except Exception as snap_err:
+            logger.warning("Could not persist thndr_daily_card_snapshot: %s", snap_err)
+
+        return jsonify(result_payload), 200
+    except Exception as err:
+        logger.error("Error generating Thndr Daily Card: %s", err, exc_info=True)
+        return jsonify({"status": "ERROR", "error": str(err)}), 500
 
 
 # --- 7.6 Multi-Theory Investment Engine Endpoints ---

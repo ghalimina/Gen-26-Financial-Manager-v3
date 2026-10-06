@@ -2,10 +2,14 @@ name: GEN-26 24/7 Autonomous Cloud Pipeline & Incubation Engine
 
 on:
   schedule:
-    # 07:00, 08:00, 09:00, 10:00, 11:00, 12:00 UTC (10:00 AM to 3:00 PM Cairo Time, Sun-Thu during EGX Session)
+    # 07:00, 08:00, 09:00, 10:00, 11:00, 12:00 UTC (Intraday hourly sync during EGX session, Sun-Thu)
     - cron: '0 7,8,9,10,11,12 * * 0-4'
-    # Post-market EOD settlement
-    - cron: '30 11,12 * * 0-4'
+    # Post-market EOD settlement & Telegram Report Dispatch (Sun-Thu)
+    # 12:30 UTC = 3:30 PM Cairo (Summer) / 2:30 PM Cairo (Winter)
+    # 13:30 UTC = 4:30 PM Cairo (Summer) / 3:30 PM Cairo (Winter)
+    # 14:00 UTC = 5:00 PM Cairo (Summer) / 4:00 PM Cairo (Winter)
+    - cron: '30 12,13 * * 0-4'
+    - cron: '0 14 * * 0-4'
     # Weekly MLOps Continuous Learning & Model Retrain (Every Friday 12:00 UTC)
     - cron: '0 12 * * 5'
   workflow_dispatch:
@@ -233,7 +237,10 @@ jobs:
         run: |
           git config --global user.name 'gen26-cloud-runner[bot]'
           git config --global user.email 'cloud-runner@gen26-platform.internal'
-          git add data/ reports/ *.json *.csv
-          git diff --quiet && git diff --staged --quiet || (git commit -m "chore(cloud): autonomous 24/7 incubation cycle & SSOT update [skip ci]" && git push || echo "Git push skipped or non-fatal")
+          git config --global pull.rebase true
+          git pull --rebase origin main || true
+          git add -f data/gen26_production.db
+          git add data/user_real_portfolio.json data/cooling_off_registry.json data/thndr_daily_card_snapshot.json data/system_notifications_log.json data/real_portfolio_audit_log.json data/*.json data/*.csv reports/
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore(cloud): autonomous 24/7 incubation cycle & SSOT update [skip ci]" && (git push origin main || (git pull --rebase origin main && git push origin main)))
 
 

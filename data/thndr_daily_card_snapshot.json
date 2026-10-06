@@ -1,0 +1,75 @@
+{
+  "status": "SUCCESS",
+  "as_of": "2026-10-06 23:22:03",
+  "thndr_daily_card": {
+    "ticker": "SWDY.CA",
+    "name_ar": "السويدي إليكتريك",
+    "sector_ar": "Industrial",
+    "market_regime": "صاعد مؤسسي (Bull Market)",
+    "opportunity_type": "PULLBACK_DIP",
+    "opportunity_type_ar": "شراء قاع هادئ وتصحيح (Pullback Dip)",
+    "verdict": "STRONG_BUY",
+    "is_golden_consensus": true,
+    "verdict_badge_ar": "🟢 إجماع ذهبي معتمد (STRONG_BUY)",
+    "current_price": 118.0,
+    "opening_auction_price": 118.24,
+    "stop_loss_price": 112.1,
+    "target_1_price": 123.9,
+    "target_2_price": 132.16,
+    "risk_reward_ratio": 1.0,
+    "suggested_shares": 80,
+    "order_value_egp": 9459.2,
+    "allocation_pct": 9.9,
+    "thndr_order_type_ar": "أمر محدد (Limit Order) — مزاد الافتتاح 9:30 ص",
+    "execution_instruction_ar": "قم بفتح تطبيق ثاندر واطلب شراء 80 سهم بسعر 118.24 ج.م كأمر محدد.",
+    "breakeven_rule_ar": "⚠️ فور وصول السعر إلى الهدف الأول (123.90 ج.م)، قم برفع أمر وقف الخسارة فوراً إلى سعر الشراء (118.24 ج.م) لحجز الأرباح وتأمين الصفقة بنسبة مخاطرة 0%.",
+    "trailing_rule_ar": "اترك النصف المتبقي مع تتبع الوقف المتحرك (Trailing Stop) حتى الهدف الثاني.",
+    "theories_passed_count": 5,
+    "dqs_score": 85.0,
+    "expected_net_return_pct": 4.27,
+    "cooling_off": {
+      "is_locked": false,
+      "remaining_hours": 0.0,
+      "reason_ar": ""
+    },
+    "rejection_reasons_ar": []
+  },
+  "smart_cash_radar": {
+    "total_equity_egp": 95289.5,
+    "free_cash_egp": 85000.0,
+    "cash_reserve_pct": 89.2,
+    "mandatory_cash_floor_pct": 35.0,
+    "mandatory_cash_floor_egp": 33351.32,
+    "investable_surplus_cash": 51648.68,
+    "cash_floor_status": "PROTECTED_SAFE",
+    "recommended_funds": [
+      {
+        "ticker": "AZG",
+        "name_ar": "صندوق أزيموت للذهب (AZ Gold)",
+        "category_ar": "ذهب ومعادن نفيسة",
+        "annual_return_pct": 38.2,
+        "nav_egp": 24.85,
+        "liquidity_ar": "يومي (T+2)",
+        "action_advice_ar": "تحوط استراتيجي بنسبة 15-20% لحماية القوة الشرائية من تراجع الجنيه والتضخم."
+      },
+      {
+        "ticker": "AZS",
+        "name_ar": "صندوق أزيموت ادخار / ثاندر توفير",
+        "category_ar": "أسواق نقد ودخل ثابت",
+        "annual_return_pct": 21.2,
+        "nav_egp": 27.82,
+        "liquidity_ar": "يومي فوري (T+0)",
+        "action_advice_ar": "توجيه احتياطي الكاش الإلزامي (35%) لتحقيق عائد يومي مركب معفى من الضرائب وسيولة سحب فورية."
+      },
+      {
+        "ticker": "THNDR-CASH",
+        "name_ar": "محفظة ثاندر النقدية اليومية (Daily Cash)",
+        "category_ar": "أسواق نقد ودخل ثابت",
+        "annual_return_pct": 20.2,
+        "nav_egp": 10.5,
+        "liquidity_ar": "يومي فوري (T+0)",
+        "action_advice_ar": "تشغيل تلقائي للسيولة الفائضة داخل تطبيق ثاندر دون تجميد."
+      }
+    ]
+  }
+}

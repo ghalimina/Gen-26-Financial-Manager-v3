@@ -3,16 +3,145 @@
   "evaluation_engine": "Purged & Embargoed Rolling Walk-Forward (Ensemble XGB 60% + LGBM 40%)",
   "n_oos_samples": 140052,
   "n_folds": 5,
-  "information_coefficient": 0.0437,
-  "mean_fold_ic": 0.0439,
+  "information_coefficient": 0.0445,
+  "mean_fold_ic": 0.0443,
   "ic_target_threshold": 0.05,
   "ic_target_met": false,
   "hit_rate_pct": 49.67,
-  "mean_fold_hit_rate_pct": 49.67,
+  "mean_fold_hit_rate_pct": 49.66,
   "hit_rate_target_threshold": 53.0,
   "hit_rate_target_met": false,
   "rmse_pct": 14.301,
   "information_ratio": 0.59,
+  "brier_score": 0.2486,
+  "expected_calibration_error": 0.0004,
+  "max_calibration_error": 0.9482,
+  "calibration_bins": [
+    {
+      "bin_index": 1,
+      "bin_range": "0.0 - 0.1",
+      "lower_bound": 0.0,
+      "upper_bound": 0.1,
+      "confidence": 0.01,
+      "accuracy": 0.2,
+      "calibration_gap": 0.19,
+      "sample_count": 5
+    },
+    {
+      "bin_index": 2,
+      "bin_range": "0.1 - 0.2",
+      "lower_bound": 0.1,
+      "upper_bound": 0.2,
+      "confidence": 0.15,
+      "accuracy": 0.0,
+      "calibration_gap": 0.0,
+      "sample_count": 0
+    },
+    {
+      "bin_index": 3,
+      "bin_range": "0.2 - 0.3",
+      "lower_bound": 0.2,
+      "upper_bound": 0.3,
+      "confidence": 0.2584,
+      "accuracy": 0.4545,
+      "calibration_gap": 0.1962,
+      "sample_count": 66
+    },
+    {
+      "bin_index": 4,
+      "bin_range": "0.3 - 0.4",
+      "lower_bound": 0.3,
+      "upper_bound": 0.4,
+      "confidence": 0.3939,
+      "accuracy": 0.395,
+      "calibration_gap": 0.0011,
+      "sample_count": 12013
+    },
+    {
+      "bin_index": 5,
+      "bin_range": "0.4 - 0.5",
+      "lower_bound": 0.4,
+      "upper_bound": 0.5,
+      "confidence": 0.4717,
+      "accuracy": 0.4716,
+      "calibration_gap": 0.0,
+      "sample_count": 27449
+    },
+    {
+      "bin_index": 6,
+      "bin_range": "0.5 - 0.6",
+      "lower_bound": 0.5,
+      "upper_bound": 0.6,
+      "confidence": 0.5155,
+      "accuracy": 0.5153,
+      "calibration_gap": 0.0002,
+      "sample_count": 100497
+    },
+    {
+      "bin_index": 7,
+      "bin_range": "0.6 - 0.7",
+      "lower_bound": 0.6,
+      "upper_bound": 0.7,
+      "confidence": 0.6299,
+      "accuracy": 0.4,
+      "calibration_gap": 0.2299,
+      "sample_count": 15
+    },
+    {
+      "bin_index": 8,
+      "bin_range": "0.7 - 0.8",
+      "lower_bound": 0.7,
+      "upper_bound": 0.8,
+      "confidence": 0.7475,
+      "accuracy": 0.8,
+      "calibration_gap": 0.0525,
+      "sample_count": 5
+    },
+    {
+      "bin_index": 9,
+      "bin_range": "0.8 - 0.9",
+      "lower_bound": 0.8,
+      "upper_bound": 0.9,
+      "confidence": 0.85,
+      "accuracy": 0.0,
+      "calibration_gap": 0.0,
+      "sample_count": 0
+    },
+    {
+      "bin_index": 10,
+      "bin_range": "0.9 - 1.0",
+      "lower_bound": 0.9,
+      "upper_bound": 1.0,
+      "confidence": 0.9482,
+      "accuracy": 0.0,
+      "calibration_gap": 0.9482,
+      "sample_count": 2
+    }
+  ],
+  "calibration_verdict_ar": "🟢 نموذج عالي المعايرة المؤسسية (ECE <= 0.08) — الاحتمالية تطابق الواقع بدقة",
+  "calibration_triad": {
+    "p_up": 0.4964,
+    "p_up_pct": 49.64,
+    "p_down": 0.5036,
+    "r_up_mean_pct": 8.62,
+    "r_down_mean_pct": -5.18,
+    "expected_return_pct": 1.67,
+    "formula_str": "E[R] = (0.50 * +8.62%) + (0.50 * -5.18%) = +1.67%",
+    "conformal_interval_90": {
+      "lower_bound_pct": -8.36,
+      "upper_bound_pct": 12.83,
+      "interval_width_pct": 21.19,
+      "formatted_str": "[-8.4% → +12.8%]"
+    }
+  },
   "oos_period": "Rolling Walk-Forward 6M/1M Calibration (Purged 10D)",
+  "holdout_classification": {
+    "2020_2024": "2020-01-01 -> 2024-12-31 (In-Sample Development)",
+    "2025": "2025-01-01 -> 2025-12-31 (Out-of-Sample Hyperparameter Tuning)",
+    "2026": "2026-01-01 -> 2026-12-31 (Contaminated Research / Tainted Iterations - NOT Blind Holdout)",
+    "2027_plus": "2027-01-01+ (True Out-of-Sample Blind Evaluation)",
+    "is_2026_blind_holdout": false,
+    "audit_note_ar": "فترة 2026 مصنفة رسمياً كـ Contaminated Research وليست Blind Holdout نظراً للتعرض المسبق أثناء دورات البحث"
+  },
   "verdict_ar": "🟡 أداء مقبول ضمن هوامش الأمان"
 }

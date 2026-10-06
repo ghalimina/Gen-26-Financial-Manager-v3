@@ -60,70 +60,77 @@ class DataQualityEngine:
                 "is_usable": False
             }
 
-        # 1. Check minimum bar count
+        # 1. Missing data gaps and missing required columns (-20 points)
         min_bars = 40
-        if len(df) < min_bars:
-            issues.append(f"Insufficient history: {len(df)} bars < {min_bars}")
-            deductions += 35.0
-
-        # 2. Check required columns
         required_cols = ['Open', 'High', 'Low', 'Close', 'Volume']
         missing_cols = [col for col in required_cols if col not in df.columns]
-        if missing_cols:
-            issues.append(f"Missing required columns: {missing_cols}")
-            deductions += 50.0
+        if missing_cols or len(df) < min_bars:
+            gap_reasons = []
+            if missing_cols:
+                gap_reasons.append(f"Missing columns: {missing_cols}")
+            if len(df) < min_bars:
+                gap_reasons.append(f"Insufficient history: {len(df)} bars < {min_bars}")
+            issues.append(f"Missing data gaps: {', '.join(gap_reasons)}")
+            deductions += 20.0
 
-        # 3. Structural Price Boundary Integrity
+        # 2. Structural Unreasonable Candles (High < Low, Non-positive close, or negative volume) (-30 points)
+        candle_anomalies = []
         if 'High' in df.columns and 'Low' in df.columns:
             invalid_hl = (df['High'] < df['Low']).sum()
             if invalid_hl > 0:
-                issues.append(f"Invalid High < Low detected in {invalid_hl} bars")
-                deductions += 40.0
+                candle_anomalies.append(f"Invalid High < Low detected in {invalid_hl} bars")
 
+        if 'Close' in df.columns:
+            non_positive_close = (df['Close'] <= 0).sum()
+            if non_positive_close > 0:
+                candle_anomalies.append(f"Close <= 0 in {non_positive_close} bars")
+
+        if 'Volume' in df.columns:
+            neg_vol = (df['Volume'] < 0).sum()
+            if neg_vol > 0:
+                candle_anomalies.append(f"Negative Volume in {neg_vol} bars")
+
+        if candle_anomalies:
+            issues.append(f"Unreasonable candles: {', '.join(candle_anomalies)}")
+            deductions += 30.0
+
+        # Boundary checks on Open and Close vs [Low, High]
         if 'Open' in df.columns and 'High' in df.columns and 'Low' in df.columns:
             open_out_of_bounds = ((df['Open'] > df['High']) | (df['Open'] < df['Low'])).sum()
             if open_out_of_bounds > 0:
                 issues.append(f"Open price outside [Low, High] range in {open_out_of_bounds} bars")
-                deductions += 30.0
+                deductions += 15.0
 
         if 'Close' in df.columns and 'High' in df.columns and 'Low' in df.columns:
             close_out_of_bounds = ((df['Close'] > df['High']) | (df['Close'] < df['Low'])).sum()
             if close_out_of_bounds > 0:
                 issues.append(f"Close price outside [Low, High] range in {close_out_of_bounds} bars")
-                deductions += 30.0
+                deductions += 15.0
 
-        if 'Close' in df.columns:
-            non_positive_close = (df['Close'] <= 0).sum()
-            if non_positive_close > 0:
-                issues.append(f"Non-positive Close prices detected in {non_positive_close} bars")
-                deductions += 50.0
-
-        # 4. Duplicate timestamps / indices
+        # Duplicate timestamps / indices
         dup_count = df.index.duplicated().sum()
         if dup_count > 0:
             issues.append(f"Duplicate timestamps found: {dup_count}")
-            deductions += 25.0
+            deductions += 15.0
 
-        # 5. Stale / Flatlined prices (unchanged Close for > 10 consecutive bars)
+        # 3. Days of zero liquidity or unjustified price freezes (-25 points)
+        liquidity_anomalies = []
         if 'Close' in df.columns and len(df) >= 10:
             consecutive_unchanged = (df['Close'].diff().fillna(1.0) == 0).astype(int)
             rolling_flat = consecutive_unchanged.rolling(10).sum().max()
             if rolling_flat >= 9:
-                issues.append("Stale / flatlined prices detected (10+ bars unchanged)")
-                deductions += 25.0
+                liquidity_anomalies.append("10+ consecutive bars unchanged price freeze")
 
-        # 6. Volume = 0 anomalies (excessive illiquid or suspended sessions)
         if 'Volume' in df.columns and len(df) >= 10:
             zero_vol_pct = (df['Volume'] <= 0).mean() * 100.0
             if zero_vol_pct > 30.0:
-                issues.append(f"Excessive zero-volume sessions: {zero_vol_pct:.1f}% of bars")
-                deductions += 20.0
-            neg_vol = (df['Volume'] < 0).sum()
-            if neg_vol > 0:
-                issues.append(f"Negative volume found: {neg_vol} bars")
-                deductions += 40.0
+                liquidity_anomalies.append(f"Zero volume on {zero_vol_pct:.1f}% of sessions")
 
-        # 7. Extreme single-bar price jumps (> 35% without registered corporate action)
+        if liquidity_anomalies:
+            issues.append(f"Liquidity/freeze anomaly: {', '.join(liquidity_anomalies)}")
+            deductions += 25.0
+
+        # 4. Extreme single-bar price jumps (> 35% without registered corporate action)
         if 'Close' in df.columns and len(df) >= 2:
             pct_changes = df['Close'].pct_change().abs()
             extreme_jumps = (pct_changes > 0.35).sum()
@@ -140,20 +147,30 @@ class DataQualityEngine:
         # Calculate final continuous DQS (0.0 - 100.0)
         dqs = max(0.0, min(100.0, 100.0 - deductions))
 
-        # Enforce strict 3-tier classification
-        has_critical = any("Non-positive" in i or "Invalid High < Low" in i or "Missing required" in i for i in issues)
+        # Enforce strict 3-tier classification per Task 4:
+        # DATA_VALID (DQS >= 85): Normal trading, 100% position size.
+        # DATA_WARNING (70 <= DQS < 85): Permitted with mandatory 50% position sizing reduction.
+        # DATA_UNUSABLE (DQS < 70): Strictly prohibited from buying/recommending.
+        has_critical = any("High < Low" in i or "Close <= 0" in i or "Negative Volume" in i for i in issues)
+
         if dqs >= 85.0 and not has_critical and len(issues) == 0:
             tier = cls.TIER_DATA_VALID
             health = "PASS"
             can_trade = True
-        elif dqs >= 60.0 and not has_critical:
+            position_size_multiplier = 1.0
+            action_restriction = "NORMAL_TRADING"
+        elif dqs >= 70.0 and not has_critical:
             tier = cls.TIER_DATA_WARNING
             health = "WARN"
             can_trade = True
+            position_size_multiplier = 0.50
+            action_restriction = "REDUCE_SIZE_50_PCT"
         else:
             tier = cls.TIER_DATA_UNUSABLE
             health = "FAIL"
             can_trade = False
+            position_size_multiplier = 0.0
+            action_restriction = "PROHIBITED_BUY_BAN"
 
         return {
             "ticker": ticker,
@@ -164,6 +181,8 @@ class DataQualityEngine:
             "data_health": health,
             "issues": issues,
             "can_trade": can_trade,
+            "position_size_multiplier": position_size_multiplier,
+            "action_restriction": action_restriction,
             "is_usable": (tier != cls.TIER_DATA_UNUSABLE),
             "bar_count": len(df),
             "latest_date": str(df.index[-1])[:10] if len(df) > 0 else "N/A"
@@ -214,12 +233,21 @@ class DataQualityEngine:
         if dqs >= 85.0 and len(issues) == 0:
             tier = cls.TIER_DATA_VALID
             health = "PASS"
-        elif dqs >= 60.0:
+            can_trade = True
+            pos_mult = 1.0
+            act_restr = "NORMAL_TRADING"
+        elif dqs >= 70.0:
             tier = cls.TIER_DATA_WARNING
             health = "WARN"
+            can_trade = True
+            pos_mult = 0.50
+            act_restr = "REDUCE_SIZE_50_PCT"
         else:
             tier = cls.TIER_DATA_UNUSABLE
             health = "FAIL"
+            can_trade = False
+            pos_mult = 0.0
+            act_restr = "PROHIBITED_BUY_BAN"
 
         return {
             "ticker": ticker,
@@ -229,7 +257,9 @@ class DataQualityEngine:
             "health": health,
             "data_health": health,
             "issues": issues,
-            "can_trade": (tier != cls.TIER_DATA_UNUSABLE)
+            "can_trade": can_trade,
+            "position_size_multiplier": pos_mult,
+            "action_restriction": act_restr
         }
 
     @classmethod

@@ -139,8 +139,10 @@ class HistoricalTradableUniverse:
     def CORE_EGX_UNIVERSE(self) -> List[str]:
         return self.get_core_universe()
 
+    DEFAULT_DELISTING_CAPITAL_LOSS_PCT = -100.0  # Full capital loss assumption per quant guidelines
+
     def __init__(self):
-        # Maps date -> set of tradable tickers
+        # Maps date -> set of tradable tickers or custom corporate actions
         self.universe_events: List[Dict[str, Any]] = []
 
     def register_corporate_action(
@@ -159,17 +161,49 @@ class HistoricalTradableUniverse:
             "action_type": action_type.upper(),
             "effective_date": effective_date,
             "announcement_date": announcement_date,
-            "details": details
+            "details": details or {}
         })
 
     def is_tradable_on(self, ticker: str, date: str) -> bool:
         """
         Returns True if the ticker was active and tradable on the given date (Survivorship-free).
+        Checks registered dynamic actions (e.g. temporary suspensions, emergency delistings)
+        and historical Point-in-Time registry.
         """
+        sym = ticker.upper().strip()
+        d_str = str(date)[:10]
+
+        # 1. Evaluate registered instance events (suspensions & delistings)
+        for ev in self.universe_events:
+            if ev.get("ticker") == sym:
+                act = ev.get("action_type")
+                eff = str(ev.get("effective_date", ""))[:10]
+                details = ev.get("details", {})
+                if act == "SUSPENSION":
+                    end_d = str(details.get("end_date") or details.get("suspension_end") or "9999-12-31")[:10]
+                    if eff <= d_str <= end_d:
+                        return False
+                elif act == "DELISTING":
+                    if d_str >= eff:
+                        return False
+
+        # 2. Query centralized Point-in-Time Universe Manager
         from core.historical_universe_manager import HistoricalUniverseManager
-        return HistoricalUniverseManager.is_tradable_on(ticker, date)
+        return HistoricalUniverseManager.is_tradable_on(sym, d_str)
 
     def get_tradable_universe(self, date: str) -> List[str]:
         """Returns the list of all tradable tickers on a specific date."""
         from core.historical_universe_manager import HistoricalUniverseManager
-        return HistoricalUniverseManager.get_tradable_universe(date)
+        base_universe = HistoricalUniverseManager.get_tradable_universe(date)
+        return [t for t in base_universe if self.is_tradable_on(t, date)]
+
+    def get_delisting_terminal_loss_pct(self, ticker: str) -> float:
+        """
+        Returns terminal capital loss percentage for delisted equities to correct survivorship bias.
+        Defaults to -100.0% (total wipeout) unless tender offer / MBO terms exist.
+        """
+        sym = ticker.upper().strip()
+        for ev in self.universe_events:
+            if ev.get("ticker") == sym and ev.get("action_type") == "DELISTING":
+                return float(ev.get("details", {}).get("capital_loss_pct", self.DEFAULT_DELISTING_CAPITAL_LOSS_PCT))
+        return self.DEFAULT_DELISTING_CAPITAL_LOSS_PCT

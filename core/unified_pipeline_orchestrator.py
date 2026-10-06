@@ -32,6 +32,13 @@ from core.dynamic_risk_manager import DynamicRiskManager
 from core.database_engine import db_engine
 from core.autonomous_research_lab import AutonomousResearchLab
 from core.notification_gateway import NotificationEngine
+from core.theory_engine import TheoryEngine
+from core.gdr_arbitrage_engine import GDRArbitrageEngine
+from core.statistical_arbitrage_engine import StatisticalArbitrageEngine, EGX_KNOWN_PAIRS
+from core.meta_labeling_engine import MetaLabelingEngine
+from core.data_quality import DataQualityEngine
+from core.trade_selection_model import TradeSelectionModel
+from core.trade_post_mortem_engine import TradePostMortemEngine
 
 logger = logging.getLogger("GEN26.UnifiedPipelineOrchestrator")
 
@@ -116,6 +123,11 @@ class UnifiedPipelineOrchestrator:
             current_stop=stop_loss
         )
 
+        # --- Step 5.5: Master Alpha Synthesizer & Golden Consensus Gate ---
+        master_alpha = cls.synthesize_master_alpha(sym, current_price=cp, portfolio_equity=portfolio_equity)
+        golden_gate = master_alpha.get("golden_consensus", {})
+        is_golden = golden_gate.get("is_golden_consensus", False)
+
         # --- Step 6: Master Consensus Synthesis & Execution Approval ---
         council_verdict = council.get("consensus_verdict", "HOLD")
         primary_dir = fusion.get("primary_model", {}).get("predicted_direction", "RANGEBOUND")
@@ -124,14 +136,16 @@ class UnifiedPipelineOrchestrator:
         risk_approved = council.get("risk_sizer_vote", {}).get("approved", True)
 
         approved = (
-            council_verdict in ["STRONG_BUY", "BUY"] and
-            primary_dir == "BULLISH" and
-            meta_prob >= 0.60 and
+            (is_golden or (council_verdict in ["STRONG_BUY", "BUY"] and primary_dir == "BULLISH")) and
+            meta_prob >= 0.55 and
             not is_psych_locked and
-            risk_approved
+            risk_approved and
+            not master_alpha.get("cooling_off", {}).get("is_locked", False)
         )
 
         final_verdict = "APPROVED_BUY" if approved else "HOLD_OR_REJECT"
+        if is_golden:
+            final_verdict = "APPROVED_STRONG_BUY"
 
         # --- Step 7: Persist Deliberation to SQLite ---
         vote_dict = {
@@ -143,8 +157,8 @@ class UnifiedPipelineOrchestrator:
             "technician_vote": council.get("technician_vote"),
             "quant_modeler_vote": council.get("quant_modeler_vote"),
             "risk_sizer_vote": council.get("risk_sizer_vote"),
-            "consensus_verdict": council_verdict,
-            "conviction_score": council.get("conviction_score", 50.0)
+            "consensus_verdict": "STRONG_BUY" if is_golden else council_verdict,
+            "conviction_score": 95.0 if is_golden else council.get("conviction_score", 50.0)
         }
         try:
             db_engine.record_council_vote(vote_dict)
@@ -169,9 +183,20 @@ class UnifiedPipelineOrchestrator:
             "stop_loss": stop_loss,
             "final_decision": final_verdict,
             "approved_for_execution": approved,
-            "composite_conviction_score": round(
+            "is_golden_consensus": is_golden,
+            "golden_consensus_badge_ar": golden_gate.get("verdict_badge_ar", "⚪ استبعاد"),
+            "composite_conviction_score": 95.0 if is_golden else round(
                 (council.get("conviction_score", 70.0) * 0.5) + (meta_prob * 100.0 * 0.5), 1
             ),
+            "master_alpha_synthesis": {
+                "theories_passed_count": golden_gate.get("gates", {}).get("theories_passed_count", 0),
+                "theories_gate_passed": golden_gate.get("gates", {}).get("theories_gate_passed", False),
+                "dqs_score": golden_gate.get("gates", {}).get("dqs_score", 90.0),
+                "expected_net_return_pct": golden_gate.get("gates", {}).get("expected_net_return_pct", 0.0),
+                "gdr_spread_pct": golden_gate.get("gates", {}).get("gdr_spread_pct"),
+                "cooling_off_locked": master_alpha.get("cooling_off", {}).get("is_locked", False),
+                "rejection_reasons_ar": golden_gate.get("rejection_reasons_ar", [])
+            },
             "multi_source_intelligence": {
                 "composite_sentiment_score": intel.get("composite_sentiment_score", 0.5),
                 "sentiment_label_ar": intel.get("sentiment_label_ar", "محايد"),
@@ -184,6 +209,7 @@ class UnifiedPipelineOrchestrator:
                 "meta_confidence_prob": meta_prob,
                 "recommended_sizing_multiplier": fusion.get("meta_confidence_model", {}).get("recommended_sizing_multiplier", 0.0)
             },
+            "theories_breakdown": master_alpha.get("theories_synthesis", {}).get("theories", {}),
             "council_deliberation": {
                 "consensus_verdict": council_verdict,
                 "conviction_score": council.get("conviction_score", 0.0),
@@ -207,3 +233,123 @@ class UnifiedPipelineOrchestrator:
         }
 
         return decision
+
+    @classmethod
+    def synthesize_master_alpha(
+        cls,
+        ticker: str,
+        current_price: Optional[float] = None,
+        portfolio_equity: float = 100_000.0
+    ) -> Dict[str, Any]:
+        """
+        Master Alpha Synthesizer (Zenith Optimization Pillar 1):
+        Nervous interconnection binding the 4 core institutional engines:
+        1. TheoryEngine: 6 classical & institutional theories (Wyckoff, ICT, VCP, CAN SLIM, Dow, Elliott).
+        2. GDRArbitrageEngine: London GDR parity spread & overnight gap forecast.
+        3. StatisticalArbitrageEngine: Pairs co-integration Z-Score deviation.
+        4. MetaLabelingEngine & DeepQuantFusion: 48-feature tensor, calibrated probability & expected net return.
+        Enforces Golden Consensus Gate (STRONG_BUY iff all 5 criteria + anti-revenge cooling-off cleared).
+        """
+        sym = (ticker or "COMI.CA").upper().strip()
+        cp = current_price or MarketPriceService.get_latest_price(sym)
+        if cp <= 0:
+            cp = 100.0
+
+        # 1. Engine 1: 6 Theories Synthesis
+        try:
+            theories_res = TheoryEngine.evaluate_comprehensive_theories(sym, current_price=cp)
+        except Exception as e:
+            logger.warning("TheoryEngine evaluation error for %s: %s", sym, e)
+            theories_res = {"theories": {}, "master_theory_score": 50.0}
+
+        # 2. Engine 2: London GDR Lead-Lag Arbitrage
+        try:
+            has_gdr = sym in GDRArbitrageEngine.GDR_REGISTRY
+            if has_gdr:
+                gdr_res = GDRArbitrageEngine.calculate_gdr_premium(sym, override_cairo_price=cp)
+                gdr_spread = float(gdr_res.get("spread_pct", 0.0))
+            else:
+                gdr_res = {"has_gdr": False, "spread_pct": 0.0, "status": "NO_GDR_LISTED"}
+                gdr_spread = None
+        except Exception as e:
+            logger.warning("GDRArbitrageEngine error for %s: %s", sym, e)
+            gdr_res = {"status": "NO_GDR", "spread_pct": 0.0}
+            gdr_spread = None
+            has_gdr = False
+
+        # 3. Engine 3: Statistical Arbitrage & Pairs Z-Score
+        stat_pair_info = None
+        for pair in EGX_KNOWN_PAIRS:
+            if pair["ticker_A"] == sym or pair["ticker_B"] == sym:
+                try:
+                    stat_pair_info = StatisticalArbitrageEngine.calculate_pair_spread_zscore(
+                        pair["ticker_A"], pair["ticker_B"]
+                    )
+                    break
+                except Exception:
+                    pass
+
+        # 4. Engine 4: 48-factor Deep Quant Fusion & Calibrated Meta-Labeling
+        try:
+            fusion = DeepQuantFusionEngine.compute_fusion(sym, current_price=cp)
+            p_calibrated = float(fusion.get("meta_confidence_model", {}).get("probability_profitable", 0.60))
+        except Exception as e:
+            logger.warning("DeepQuantFusion error for %s: %s", sym, e)
+            fusion = {"features_tensor": {"feature_dimensions": 48}}
+            p_calibrated = 0.60
+
+        is_mega = sym in {
+            "COMI.CA", "ESRS.CA", "TMGH.CA", "SWDY.CA", "ABUK.CA",
+            "ETEL.CA", "MFPC.CA", "EKHO.CA", "FWRY.CA", "ORAS.CA"
+        }
+        fric_val = 1.10 if is_mega else 2.90
+        exp_net_dict = MetaLabelingEngine.calculate_expected_net_return(
+            p_calibrated_up=p_calibrated,
+            target_pct=8.0,
+            stop_loss_pct=3.5,
+            ticker=sym,
+            friction_pct=fric_val
+        )
+        e_net = float(exp_net_dict.get("expected_net_return_pct", 0.0))
+
+        # 5. Data Quality Score
+        dqs_dict = DataQualityEngine.get_stock_dqs(sym)
+        dqs_score = float(dqs_dict.get("dqs", 90.0))
+
+        # 6. EGX30 Market Trend Gate
+        market_gate = TradeSelectionModel.evaluate_egx30_trend_gate()
+        is_market_bull = market_gate.get("can_trade", True)
+
+        # 7. Episodic Failure Memory: 48-Hour Cooling-Off Check
+        is_cooling_off, rem_hours, cool_reason = TradePostMortemEngine.is_ticker_in_cooling_off(sym)
+
+        # 8. Golden Consensus Filter
+        consensus = TradeSelectionModel.evaluate_golden_consensus(
+            ticker=sym,
+            current_price=cp,
+            theories_result=theories_res,
+            dqs_score=dqs_score,
+            gdr_spread_pct=gdr_spread if has_gdr else None,
+            is_market_bull=is_market_bull,
+            expected_net_return_pct=e_net,
+            cooling_off_active=is_cooling_off
+        )
+
+        return {
+            "ticker": sym,
+            "current_price": cp,
+            "golden_consensus": consensus,
+            "theories_synthesis": theories_res,
+            "gdr_arbitrage": gdr_res,
+            "statistical_arbitrage": stat_pair_info,
+            "deep_quant_fusion": fusion,
+            "expected_net_return": exp_net_dict,
+            "data_quality": dqs_dict,
+            "market_regime_gate": market_gate,
+            "cooling_off": {
+                "is_locked": is_cooling_off,
+                "remaining_hours": rem_hours,
+                "reason_ar": cool_reason
+            }
+        }
+

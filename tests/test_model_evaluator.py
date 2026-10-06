@@ -94,6 +94,77 @@ class TestModelEvaluator(unittest.TestCase):
         prices_flat = [100.0, 101.0, 101.5, 100.5]
         self.assertEqual(compute_triple_barrier_label(prices_flat, 0, target_pct=0.05, stop_pct=0.03, max_days=3), 0)
 
+    def test_08_brier_score_calibration(self):
+        """Verify Brier Score computation on perfect, random, and inverse probabilities."""
+        # Perfect probabilities
+        y_prob_perf = np.array([1.0, 0.0, 1.0, 0.0])
+        y_true_perf = np.array([1, 0, 1, 0])
+        self.assertAlmostEqual(WalkForwardValidator.calculate_brier_score(y_prob_perf, y_true_perf), 0.0, places=3)
+
+        # Uninformative 50% coin flip
+        y_prob_coin = np.array([0.5, 0.5, 0.5, 0.5])
+        self.assertAlmostEqual(WalkForwardValidator.calculate_brier_score(y_prob_coin, y_true_perf), 0.25, places=3)
+
+        # Inverse probabilities (worst case)
+        y_prob_inv = np.array([0.0, 1.0, 0.0, 1.0])
+        self.assertAlmostEqual(WalkForwardValidator.calculate_brier_score(y_prob_inv, y_true_perf), 1.0, places=3)
+
+    def test_09_expected_calibration_error_decile_bins(self):
+        """Verify Expected Calibration Error (ECE) partitions across 10 deciles and returns reliability diagram."""
+        # 100 samples with perfect calibration
+        np.random.seed(42)
+        y_prob = np.linspace(0.05, 0.95, 100)
+        y_true = (np.random.rand(100) < y_prob).astype(int)
+
+        ece_res = WalkForwardValidator.calculate_expected_calibration_error(y_prob, y_true, n_bins=10)
+        self.assertIn("ece", ece_res)
+        self.assertIn("mce", ece_res)
+        self.assertIn("reliability_bins", ece_res)
+        self.assertEqual(len(ece_res["reliability_bins"]), 10)
+        self.assertLessEqual(ece_res["ece"], 0.15)
+
+        # Check bin structure
+        first_bin = ece_res["reliability_bins"][0]
+        self.assertEqual(first_bin["bin_index"], 1)
+        self.assertIn("bin_range", first_bin)
+        self.assertIn("confidence", first_bin)
+        self.assertIn("accuracy", first_bin)
+        self.assertIn("sample_count", first_bin)
+
+    def test_10_calibrated_triad_disentanglement(self):
+        """Verify triad mathematically decouples P(Up) in [0, 1], E[R] expectation, and 90% Conformal Interval."""
+        p_up = 0.70
+        r_up = +6.0
+        r_down = -4.0
+        q10 = -2.1
+        q90 = +8.4
+
+        triad = WalkForwardValidator.calculate_calibrated_triad(
+            p_up=p_up,
+            r_up_mean=r_up,
+            r_down_mean=r_down,
+            q10_downside_pct=q10,
+            q90_upside_pct=q90
+        )
+
+        self.assertEqual(triad["p_up"], 0.70)
+        self.assertEqual(triad["p_down"], 0.30)
+        # Expected return: 0.70 * 6.0 + 0.30 * (-4.0) = 4.2 - 1.2 = 3.0
+        self.assertAlmostEqual(triad["expected_return_pct"], 3.0, places=2)
+        self.assertEqual(triad["conformal_interval_90"]["lower_bound_pct"], -2.1)
+        self.assertEqual(triad["conformal_interval_90"]["upper_bound_pct"], +8.4)
+        self.assertIn("formula_str", triad)
+
+    def test_11_insufficient_real_data_aborts_walkforward(self):
+        """Verify walk-forward evaluation strictly aborts when empirical samples < 30."""
+        import pandas as pd
+        small_df = pd.DataFrame({
+            "residual_alpha_10d": [0.1, 0.2, -0.1]
+        })
+        with self.assertRaises(ValueError) as ctx:
+            WalkForwardValidator.run_walk_forward_simulation(dataset=small_df)
+        self.assertIn("EVALUATION_FAILED_INSUFFICIENT_DATA", str(ctx.exception))
+
 
 if __name__ == "__main__":
     unittest.main()

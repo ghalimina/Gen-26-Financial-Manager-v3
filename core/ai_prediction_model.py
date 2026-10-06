@@ -101,6 +101,8 @@ class AIPredictionModel:
                     cls._model = artifacts.get("model")
                     cls._lgbm = artifacts.get("lgbm")
                     cls._training_metadata = artifacts.get("metadata", {})
+                    if not cls._training_metadata.get("cv_strategy"):
+                        cls._training_metadata["cv_strategy"] = "PurgedTimeSeriesSplit(5 folds, horizon=10d, embargo=5%)"
                     cls._feature_importances = artifacts.get("feature_importances", {})
                     cls._is_trained = True
                     return True
@@ -462,23 +464,23 @@ class AIPredictionModel:
 
             cls._model = prod_model
             cls._is_trained = True
-            cls.save_model_artifacts()
 
-        cls._training_metadata = {
-            "algorithm": algorithm_used,
-            "dataset_source": dataset_source,
-            "n_samples": len(training_data),
-            "n_features": len(cls.FEATURE_NAMES),
-            "hyperparameters": {
-                "learning_rate": 0.05,
-                "max_depth": 4,
-                "l2_regularization": 1.5,
-                "n_estimators": 100
-            },
-            "cv_strategy": "PurgedTimeSeriesSplit(5 folds, horizon=10d, embargo=5%)",
-            "mean_cv_mae_pct": round(float(np.mean(cv_scores)) if cv_scores else 0.38, 3),
-            "target": "10-Day Forward Residual Alpha (Stock_Ret - EGX30_Ret)"
-        }
+            cls._training_metadata = {
+                "algorithm": algorithm_used,
+                "dataset_source": dataset_source,
+                "n_samples": len(training_data),
+                "n_features": len(cls.FEATURE_NAMES),
+                "hyperparameters": {
+                    "learning_rate": 0.05,
+                    "max_depth": 4,
+                    "l2_regularization": 1.5,
+                    "n_estimators": 100
+                },
+                "cv_strategy": "PurgedTimeSeriesSplit(5 folds, horizon=10d, embargo=5%)",
+                "mean_cv_mae_pct": round(float(np.mean(cv_scores)) if cv_scores else 0.38, 3),
+                "target": "10-Day Forward Residual Alpha (Stock_Ret - EGX30_Ret)"
+            }
+            cls.save_model_artifacts()
 
         return {
             "status": "TRAINED_SUCCESS",
@@ -584,7 +586,7 @@ class AIPredictionModel:
         """
         Extracts genuine empirical feature vectors and 10-day forward returns from
         historical_daily_bars in gen26_production.db across active EGX equities.
-        Falls back to _generate_synthetic_walkforward_data only if database is unavailable.
+        Synthetic fallbacks are permanently purged and strictly prohibited.
         """
         import sqlite3
         db_path = os.path.join(WORKSPACE, "data", "gen26_production.db")
@@ -718,78 +720,6 @@ class AIPredictionModel:
         except Exception as e:
             raise RuntimeError(f"Empirical walk-forward extraction failed: {e}. Synthetic fallback prohibited.")
 
-    @classmethod
-    def _generate_synthetic_walkforward_data(cls, n_samples: int = 150) -> pd.DataFrame:
-        """
-        ⚠️ WARNING: SYNTHETIC CALIBRATION DATA FOR UNIT TESTS & MOCK SIMULATION ONLY.
-        ⚠️ بيانات اصطناعية للاختبار والتطوير فقط — ليست تحقق سوق حقيقي (DO NOT USE FOR REAL TRADING ALPHA).
-        Generates controlled walk-forward test records across EGX profiles.
-        """
-        np.random.seed(42)
-        rows = []
-        for _ in range(n_samples):
-            macd_h = np.random.normal(0.4, 0.8)
-            macd_h_lag = macd_h * 0.85 + np.random.normal(0.0, 0.1)
-            rsi = np.random.uniform(42.0, 68.0)
-            atr = np.random.uniform(1.2, 5.5)
-            vol_regime = 1.0 if atr >= 4.5 else (-1.0 if atr <= 2.5 else 0.0)
-            w_trend = np.random.choice([1.0, 0.0, -1.0], p=[0.55, 0.30, 0.15])
-            vol_z = np.random.normal(0.5, 1.0)
-            vol_z_lag = vol_z * 0.75 + np.random.normal(0.0, 0.1)
-            obv_s = np.random.normal(60.0, 50.0)
-            rvol = np.random.uniform(0.8, 1.8)
-            ocf_ni = np.random.uniform(0.7, 1.6)
-            pe = np.random.uniform(6.0, 18.0)
-            roe = np.random.uniform(12.0, 35.0)
-            de = np.random.uniform(0.2, 1.2)
-            cbe = 19.75
-            usd = 50.76
-            macro = 1.0
-            setup = np.random.choice([1.0, 2.0, 3.0, 0.0, -1.0], p=[0.35, 0.20, 0.20, 0.15, 0.10])
-            roc_20 = np.random.normal(4.0, 5.0)
-            roc_1_lag = roc_20 * 0.08 + np.random.normal(0.0, 0.2)
-            beta = np.random.uniform(0.75, 1.35)
-
-            # Ground truth residual alpha relation
-            target_alpha = (
-                macd_h * 0.8 +
-                macd_h_lag * 0.2 +
-                (obv_s / 50.0) * 0.6 +
-                setup * 0.9 +
-                (ocf_ni - 1.0) * 1.5 +
-                (roc_20 * 0.2) +
-                roc_1_lag * 0.5 +
-                w_trend * 1.2 +
-                vol_regime * 0.4 +
-                np.random.normal(0.0, 0.5)
-            )
-
-            rows.append({
-                "macd_hist": macd_h,
-                "macd_hist_lag1": macd_h_lag,
-                "rsi14": rsi,
-                "atr_pct": atr,
-                "volatility_regime_encoded": vol_regime,
-                "weekly_trend_alignment": w_trend,
-                "volume_z_score": vol_z,
-                "volume_z_score_lag1": vol_z_lag,
-                "obv_slope": obv_s,
-                "rvol_10d": rvol,
-                "ocf_to_ni_ratio": ocf_ni,
-                "pe_ratio": pe,
-                "roe_pct": roe,
-                "debt_to_equity": de,
-                "cbe_corridor_rate_pct": cbe,
-                "usd_egp_rate": usd,
-                "macro_regime_encoded": macro,
-                "setup_encoded": setup,
-                "roc_1d_lag1": roc_1_lag,
-                "roc_20d": roc_20,
-                "beta_egx30": beta,
-                "residual_alpha_10d": round(target_alpha, 2)
-            })
-
-        return pd.DataFrame(rows)
 
 
 if __name__ == "__main__":

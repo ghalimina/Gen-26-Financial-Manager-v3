@@ -80,6 +80,74 @@ class AdvancedFeatureEngineering:
 
         return labels
 
+    @staticmethod
+    def label_cost_adjusted_triple_barrier(
+        prices: Union[List[float], np.ndarray, pd.Series],
+        highs: Optional[Union[List[float], np.ndarray, pd.Series]] = None,
+        lows: Optional[Union[List[float], np.ndarray, pd.Series]] = None,
+        atr_14_pct: Optional[Union[List[float], np.ndarray, pd.Series, float]] = None,
+        is_mega_cap: bool = False,
+        stop_loss_pct: float = 5.0,
+        time_horizon_days: int = 10
+    ) -> np.ndarray:
+        """
+        Cost-Adjusted Triple Barrier Labeling (Institutional Mandate):
+        - Upper Barrier (Profit Target): max(4.0%, 2.0 * ATR_14)
+          with minimum floor: +3.5% for Mega-Caps, +4.5% for Mid/Small-Caps.
+        - Lower Barrier (Stop Loss): hard at -stop_loss_pct (default -5.0%, max -7.0%).
+        - Time Horizon: time_horizon_days (10 sessions).
+        - Binary Label:
+          * 1 (Real Success) ONLY if Upper Barrier touched BEFORE Stop Loss within 10 sessions.
+          * 0 (Failure) if Stop Loss touched first, OR 10 sessions expire without touching Upper Barrier.
+        """
+        arr_c = np.asarray(prices, dtype=float)
+        n = len(arr_c)
+        arr_h = np.asarray(highs, dtype=float) if highs is not None else arr_c
+        arr_l = np.asarray(lows, dtype=float) if lows is not None else arr_c
+
+        stop_loss_pct = min(max(abs(stop_loss_pct), 5.0), 7.0)
+        min_target_pct = 3.5 if is_mega_cap else 4.5
+
+        labels = np.zeros(n, dtype=int)
+
+        for i in range(n):
+            entry_p = arr_c[i]
+            if entry_p <= 0 or np.isnan(entry_p):
+                labels[i] = 0
+                continue
+
+            if atr_14_pct is not None:
+                if isinstance(atr_14_pct, (int, float)):
+                    bar_atr_pct = float(atr_14_pct)
+                else:
+                    bar_atr_pct = float(atr_14_pct[i]) if i < len(atr_14_pct) else 2.0
+            else:
+                bar_atr_pct = 2.0
+
+            target_pct = max(min_target_pct, max(4.0, 2.0 * bar_atr_pct))
+
+            upper_barrier = entry_p * (1.0 + (target_pct / 100.0))
+            lower_barrier = entry_p * (1.0 - (stop_loss_pct / 100.0))
+
+            max_horizon = min(n, i + time_horizon_days + 1)
+            hit_upper = False
+            hit_lower = False
+
+            for j in range(i + 1, max_horizon):
+                if arr_l[j] <= lower_barrier:
+                    hit_lower = True
+                    break
+                if arr_h[j] >= upper_barrier:
+                    hit_upper = True
+                    break
+
+            if hit_upper and not hit_lower:
+                labels[i] = 1
+            else:
+                labels[i] = 0
+
+        return labels
+
     # =========================================================================
     # 2. FRACTIONAL DIFFERENTIATION (MEMORY PRESERVATION)
     # =========================================================================

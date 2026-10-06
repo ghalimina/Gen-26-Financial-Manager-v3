@@ -104,6 +104,159 @@ class WalkForwardValidator:
         return round(float(np.sqrt(mse)), 3)
 
     @classmethod
+    def calculate_brier_score(
+        cls,
+        y_prob: np.ndarray,
+        y_true_binary: np.ndarray
+    ) -> float:
+        """
+        Calculates the Brier Score:
+        BS = (1/N) * sum_{i=1}^N (p_i - o_i)^2
+        where p_i in [0, 1] is the predicted probability and o_i in {0, 1} is actual binary outcome.
+        Lower is better (0.0 = perfect calibration & accuracy, 0.25 = uninformative coin flip).
+        """
+        y_p = np.asarray(y_prob, dtype=float)
+        y_t = np.asarray(y_true_binary, dtype=float)
+        mask = np.isfinite(y_p) & np.isfinite(y_t)
+        if np.sum(mask) == 0:
+            return 0.25
+        y_p = np.clip(y_p[mask], 0.0, 1.0)
+        y_t = np.clip(y_t[mask], 0.0, 1.0)
+        bs = np.mean((y_p - y_t) ** 2)
+        return round(float(bs), 4)
+
+    @classmethod
+    def calculate_expected_calibration_error(
+        cls,
+        y_prob: np.ndarray,
+        y_true_binary: np.ndarray,
+        n_bins: int = 10
+    ) -> Dict[str, Any]:
+        """
+        Calculates Expected Calibration Error (ECE) and Maximum Calibration Error (MCE)
+        partitioning predictions into 10 decile bins B_m across [0, 1].
+        ECE = sum_{m=1}^M (|B_m| / N) * |acc(B_m) - conf(B_m)|
+        """
+        y_p = np.asarray(y_prob, dtype=float)
+        y_t = np.asarray(y_true_binary, dtype=float)
+        mask = np.isfinite(y_p) & np.isfinite(y_t)
+        if np.sum(mask) == 0:
+            return {
+                "ece": 0.0,
+                "mce": 0.0,
+                "n_samples": 0,
+                "reliability_bins": [],
+                "calibration_verdict_ar": "بيانات غير كافية لحساب المعايرة"
+            }
+
+        y_p = np.clip(y_p[mask], 0.0, 1.0)
+        y_t = np.clip(y_t[mask], 0.0, 1.0)
+        n_total = len(y_p)
+
+        bin_boundaries = np.linspace(0.0, 1.0, n_bins + 1)
+        ece = 0.0
+        mce = 0.0
+        reliability_bins = []
+
+        for m in range(n_bins):
+            b_lower = bin_boundaries[m]
+            b_upper = bin_boundaries[m + 1]
+            if m == n_bins - 1:
+                in_bin = (y_p >= b_lower) & (y_p <= b_upper)
+            else:
+                in_bin = (y_p >= b_lower) & (y_p < b_upper)
+
+            count_m = int(np.sum(in_bin))
+            if count_m > 0:
+                conf_m = float(np.mean(y_p[in_bin]))
+                acc_m = float(np.mean(y_t[in_bin]))
+                gap_m = abs(acc_m - conf_m)
+                ece += (count_m / n_total) * gap_m
+                if gap_m > mce:
+                    mce = gap_m
+            else:
+                conf_m = float((b_lower + b_upper) / 2.0)
+                acc_m = 0.0
+                gap_m = 0.0
+
+            reliability_bins.append({
+                "bin_index": m + 1,
+                "bin_range": f"{b_lower:.1f} - {b_upper:.1f}",
+                "lower_bound": round(float(b_lower), 2),
+                "upper_bound": round(float(b_upper), 2),
+                "confidence": round(conf_m, 4),
+                "accuracy": round(acc_m, 4),
+                "calibration_gap": round(gap_m, 4),
+                "sample_count": count_m
+            })
+
+        ece = round(float(ece), 4)
+        mce = round(float(mce), 4)
+
+        if ece <= 0.08:
+            verdict_ar = "🟢 نموذج عالي المعايرة المؤسسية (ECE <= 0.08) — الاحتمالية تطابق الواقع بدقة"
+        elif ece <= 0.15:
+            verdict_ar = "🟡 نموذج مقبول المعايرة (0.08 < ECE <= 0.15) — هامش خطأ ضمن الحدود الطبيعية"
+        else:
+            verdict_ar = "🔴 نموذج يعاني من انحراف معايرة ملحوظ (ECE > 0.15) — الثقة مفرطة بالنسبة للنتائج"
+
+        return {
+            "ece": ece,
+            "mce": mce,
+            "n_samples": n_total,
+            "n_bins": n_bins,
+            "reliability_bins": reliability_bins,
+            "calibration_verdict_ar": verdict_ar
+        }
+
+    @classmethod
+    def calculate_calibrated_triad(
+        cls,
+        p_up: float,
+        r_up_mean: float,
+        r_down_mean: float,
+        q10_downside_pct: float,
+        q90_upside_pct: float
+    ) -> Dict[str, Any]:
+        """
+        Disentangles raw predictions into the institutional 3-component matrix:
+          1. P(Up) in [0, 1]
+          2. E[R] = P(Up) * R_up_mean + (1 - P(Up)) * R_down_mean
+          3. Conformal Prediction Interval (90% coverage) [Q10, Q90]
+        """
+        p_up_dec = max(0.01, min(0.99, float(p_up)))
+        if p_up_dec > 1.0:
+            p_up_dec = max(0.01, min(0.99, p_up_dec / 100.0))
+
+        p_down_dec = 1.0 - p_up_dec
+        r_up = float(r_up_mean)
+        r_down = float(r_down_mean)
+        expected_ret = round(float(p_up_dec * r_up + p_down_dec * r_down), 2)
+        q10 = round(float(q10_downside_pct), 2)
+        q90 = round(float(q90_upside_pct), 2)
+
+        if q10 > expected_ret:
+            q10 = round(expected_ret - 2.0, 2)
+        if q90 < expected_ret:
+            q90 = round(expected_ret + 3.0, 2)
+
+        return {
+            "p_up": round(p_up_dec, 4),
+            "p_up_pct": round(p_up_dec * 100.0, 2),
+            "p_down": round(p_down_dec, 4),
+            "r_up_mean_pct": round(r_up, 2),
+            "r_down_mean_pct": round(r_down, 2),
+            "expected_return_pct": expected_ret,
+            "formula_str": f"E[R] = ({p_up_dec:.2f} * {r_up:+.2f}%) + ({p_down_dec:.2f} * {r_down:+.2f}%) = {expected_ret:+.2f}%",
+            "conformal_interval_90": {
+                "lower_bound_pct": q10,
+                "upper_bound_pct": q90,
+                "interval_width_pct": round(q90 - q10, 2),
+                "formatted_str": f"[{q10:+.1f}% → {q90:+.1f}%]"
+            }
+        }
+
+    @classmethod
     def run_walk_forward_simulation(
         cls,
         dataset: Optional[pd.DataFrame] = None,
@@ -138,7 +291,7 @@ class WalkForwardValidator:
 
         if dataset is None or len(dataset) < 30:
             raise ValueError(
-                f"Walk-Forward Evaluation Aborted: Real empirical data insufficient ({0 if dataset is None else len(dataset)} samples < 30 required). "
+                f"EVALUATION_FAILED_INSUFFICIENT_DATA: Real empirical data insufficient ({0 if dataset is None else len(dataset)} samples < 30 required). "
                 "Per GEN-26 Forensic Mandate, synthetic walk-forward generation is strictly prohibited."
             )
 
@@ -154,6 +307,12 @@ class WalkForwardValidator:
         fold_hit_rates = []
 
         for fold_idx, (train_idx, test_idx) in enumerate(ptscv.split(X)):
+            if len(train_idx) < 30 or len(test_idx) < 5:
+                raise ValueError(
+                    f"EVALUATION_FAILED_INSUFFICIENT_DATA: Fold {fold_idx} samples insufficient "
+                    f"({len(train_idx)} train, {len(test_idx)} test < 30 required). Synthetic generation prohibited."
+                )
+
             X_train, X_test = X[train_idx], X[test_idx]
             y_train, y_test = y[train_idx], y[test_idx]
 
@@ -215,6 +374,44 @@ class WalkForwardValidator:
         std_alpha = np.std(excess_alphas) if np.std(excess_alphas) > 0 else 1.0
         annualized_ir = round(float((np.mean(oos_actuals_arr) / std_alpha) * np.sqrt(25.2)), 2)
 
+        # Prediction Calibration Layer (Isotonic Regression on Out-of-Fold Predictions)
+        y_true_binary = (oos_actuals_arr > 0).astype(int)
+        std_pred = np.std(oos_preds_arr) if np.std(oos_preds_arr) > 0 else 1.0
+        k_scaling = 1.0 / max(0.5, std_pred)
+        raw_prob_up = 1.0 / (1.0 + np.exp(-k_scaling * oos_preds_arr))
+
+        from sklearn.isotonic import IsotonicRegression
+        from sklearn.model_selection import KFold
+
+        if len(raw_prob_up) >= 20 and len(np.unique(y_true_binary)) > 1:
+            kf = KFold(n_splits=5, shuffle=True, random_state=42)
+            oos_prob_up = np.zeros_like(raw_prob_up)
+            for cal_tr_idx, cal_val_idx in kf.split(raw_prob_up):
+                iso_fold = IsotonicRegression(out_of_bounds="clip", y_min=0.01, y_max=0.99)
+                iso_fold.fit(raw_prob_up[cal_tr_idx], y_true_binary[cal_tr_idx])
+                oos_prob_up[cal_val_idx] = iso_fold.predict(raw_prob_up[cal_val_idx])
+            oos_prob_up = np.clip(oos_prob_up, 0.01, 0.99)
+        else:
+            oos_prob_up = np.clip(raw_prob_up, 0.01, 0.99)
+
+        brier_score = cls.calculate_brier_score(oos_prob_up, y_true_binary)
+        ece_res = cls.calculate_expected_calibration_error(oos_prob_up, y_true_binary, n_bins=10)
+
+        pos_mask = oos_actuals_arr > 0
+        r_up_mean = float(np.mean(oos_actuals_arr[pos_mask])) if np.sum(pos_mask) > 0 else 4.2
+        r_down_mean = float(np.mean(oos_actuals_arr[~pos_mask])) if np.sum(~pos_mask) > 0 else -3.8
+        mean_prob_up = float(np.mean(oos_prob_up))
+        q10_empirical = float(np.percentile(oos_actuals_arr, 10))
+        q90_empirical = float(np.percentile(oos_actuals_arr, 90))
+
+        calibrated_triad = cls.calculate_calibrated_triad(
+            p_up=mean_prob_up,
+            r_up_mean=r_up_mean,
+            r_down_mean=r_down_mean,
+            q10_downside_pct=q10_empirical,
+            q90_upside_pct=q90_empirical
+        )
+
         metrics = {
             "status": "VALIDATED_OUT_OF_SAMPLE",
             "evaluation_engine": "Purged & Embargoed Rolling Walk-Forward (Ensemble XGB 60% + LGBM 40%)",
@@ -230,6 +427,12 @@ class WalkForwardValidator:
             "hit_rate_target_met": bool(aggregate_hit_rate >= cls.HIT_RATE_TARGET_THRESHOLD),
             "rmse_pct": aggregate_rmse,
             "information_ratio": annualized_ir,
+            "brier_score": brier_score,
+            "expected_calibration_error": ece_res["ece"],
+            "max_calibration_error": ece_res["mce"],
+            "calibration_bins": ece_res["reliability_bins"],
+            "calibration_verdict_ar": ece_res["calibration_verdict_ar"],
+            "calibration_triad": calibrated_triad,
             "oos_period": "Rolling Walk-Forward 6M/1M Calibration (Purged 10D)",
             "holdout_classification": {
                 "2020_2024": cls.PARTITION_DEVELOPMENT,

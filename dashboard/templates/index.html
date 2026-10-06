@@ -1863,7 +1863,181 @@
             <!-- TAB 1: OVERVIEW & MORNING BRIEFING -->
             <!-- ============================================================= -->
             <div id="tab-overview" class="tab-panel active">
-                
+
+                <!-- ============================================================= -->
+                <!-- ⚡ THNDR 5-MINUTE ACTIONABLE DECISION HUB & SMART CASH RADAR -->
+                <!-- ============================================================= -->
+                <div class="card" id="thndr-decision-hub" style="background: linear-gradient(135deg, rgba(15, 23, 42, 0.98) 0%, rgba(30, 41, 59, 0.92) 50%, rgba(17, 24, 39, 0.98) 100%); border: 1.5px solid rgba(59, 130, 246, 0.4); border-radius: var(--radius-lg); padding: 24px; margin-bottom: 24px; box-shadow: 0 12px 40px rgba(0,0,0,0.5); position: relative; overflow: hidden;">
+                    <!-- Ambient Glow -->
+                    <div style="position: absolute; top: -50px; right: -50px; width: 180px; height: 180px; background: radial-gradient(circle, rgba(59, 130, 246, 0.25) 0%, transparent 70%); border-radius: 50%; pointer-events: none;"></div>
+                    <div style="position: absolute; bottom: -50px; left: -50px; width: 180px; height: 180px; background: radial-gradient(circle, rgba(16, 185, 129, 0.2) 0%, transparent 70%); border-radius: 50%; pointer-events: none;"></div>
+
+                    <!-- Header Row -->
+                    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 16px; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
+                        <div style="display: flex; align-items: center; gap: 14px;">
+                            <div style="width: 48px; height: 48px; border-radius: 14px; background: linear-gradient(135deg, #2563eb, #1d4ed8); display: flex; align-items: center; justify-content: center; font-size: 24px; color: #ffffff; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);">
+                                <i class="fa-solid fa-bolt"></i>
+                            </div>
+                            <div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <h2 style="font-size: 19px; font-weight: 900; color: #ffffff; margin: 0;">⚡ بطاقة قرار ثاندر اليومية المعتمدة (Thndr 5-Min Action Card)</h2>
+                                    <span class="badge badge-blue" style="font-size: 11px; padding: 4px 10px;">تنفيذ فوري في 5 دقائق</span>
+                                </div>
+                                <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">توليف عصبي موحد: إجماع النظريات الـ 6، مراجحة لندن GDR، ومصفوفة الـ 48 بعداً لقرار خالٍ من العواطف</div>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 10px; align-items: center;">
+                            <span class="badge" id="thndr-card-regime-badge" style="font-size: 12px; padding: 6px 14px; background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3);">🟢 اتجاه صاعد معتمد</span>
+                            <button class="btn btn-secondary btn-sm" onclick="fetchThndrDailyCard()" title="تحديث بطاقة ثاندر">
+                                <i class="fa-solid fa-rotate-right"></i>
+                                <span>تحديث الإشارة</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Split Grid: Stock Execution vs Cash Radar -->
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 20px;">
+                        
+                        <!-- Col 1: Actionable Stock Card -->
+                        <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: var(--radius-md); padding: 18px; display: flex; flex-direction: column; justify-content: space-between;">
+                            <div>
+                                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px;">
+                                    <div>
+                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                            <span style="font-size: 20px; font-weight: 900; color: #ffffff;" id="thndr-stock-name">السويدي إليكتريك</span>
+                                            <span class="badge badge-blue font-mono" id="thndr-stock-ticker" style="font-size: 13px;">SWDY.CA</span>
+                                        </div>
+                                        <div style="font-size: 12px; color: #94a3b8; margin-top: 4px;" id="thndr-stock-setup">🎯 نوع الفرصة: <strong class="text-green" id="thndr-setup-type">شراء قاع هادئ وتصحيح (Pullback Dip)</strong></div>
+                                    </div>
+                                    <div style="text-align: left;">
+                                        <span class="badge badge-green badge-pulse" id="thndr-consensus-badge" style="font-size: 13px; font-weight: 800; padding: 6px 12px;">🟢 STRONG_BUY</span>
+                                        <div style="font-size: 11px; color: #94a3b8; margin-top: 4px;" id="thndr-theories-count">موافقة 5 من 6 نظريات</div>
+                                    </div>
+                                </div>
+
+                                <!-- Metric Cards 2x2 Grid -->
+                                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 14px;">
+                                    <div style="background: rgba(30, 41, 59, 0.6); padding: 12px; border-radius: var(--radius-sm); border: 1px solid rgba(59, 130, 246, 0.2);">
+                                        <div style="font-size: 11px; color: #94a3b8;">سعر أمر الشراء (مزاد 9:30 ص)</div>
+                                        <div style="font-size: 18px; font-weight: 800; color: #60a5fa; margin-top: 2px;" id="thndr-order-price">118.25 <span style="font-size: 11px; color: #94a3b8;">ج.م</span></div>
+                                        <div style="font-size: 10px; color: #64748b;">أمر محدد Limit Order</div>
+                                    </div>
+                                    <div style="background: rgba(30, 41, 59, 0.6); padding: 12px; border-radius: var(--radius-sm); border: 1px solid rgba(239, 68, 68, 0.2);">
+                                        <div style="font-size: 11px; color: #94a3b8;">وقف الخسارة الإلزامي</div>
+                                        <div style="font-size: 18px; font-weight: 800; color: #f87171; margin-top: 2px;" id="thndr-stop-loss">112.10 <span style="font-size: 11px; color: #94a3b8;">ج.م</span></div>
+                                        <div style="font-size: 10px; color: #64748b;">-5.0% حماية قطعية</div>
+                                    </div>
+                                    <div style="background: rgba(30, 41, 59, 0.6); padding: 12px; border-radius: var(--radius-sm); border: 1px solid rgba(16, 185, 129, 0.2);">
+                                        <div style="font-size: 11px; color: #94a3b8;">الهدف الأول (رفع الوقف)</div>
+                                        <div style="font-size: 18px; font-weight: 800; color: #34d399; margin-top: 2px;" id="thndr-target-1">123.90 <span style="font-size: 11px; color: #94a3b8;">ج.م</span></div>
+                                        <div style="font-size: 10px; color: #64748b;">+5.0% تأمين التعادل</div>
+                                    </div>
+                                    <div style="background: rgba(30, 41, 59, 0.6); padding: 12px; border-radius: var(--radius-sm); border: 1px solid rgba(245, 158, 11, 0.2);">
+                                        <div style="font-size: 11px; color: #94a3b8;">عدد الأسهم المقترح</div>
+                                        <div style="font-size: 18px; font-weight: 800; color: #fbbf24; margin-top: 2px;" id="thndr-suggested-shares">0 <span style="font-size: 11px; color: #94a3b8;">سهم</span></div>
+                                        <div style="font-size: 10px; color: #64748b;" id="thndr-shares-note">بناءً على الكاش الحر</div>
+                                    </div>
+                                </div>
+
+                                <!-- Action Instruction & Rules -->
+                                <div style="background: rgba(245, 158, 11, 0.08); border-right: 3px solid #f59e0b; padding: 10px 14px; border-radius: 4px; font-size: 12px; color: #fde68a; line-height: 1.6; margin-bottom: 12px;" id="thndr-instruction-box">
+                                    <i class="fa-solid fa-shield-halved text-yellow" style="margin-left: 6px;"></i>
+                                    <span id="thndr-breakeven-text">⚠️ فور وصول السعر للهدف الأول، قم فوراً برفع أمر وقف الخسارة إلى سعر الشراء في تطبيق ثاندر لتأمين الصفقة بنسبة مخاطرة 0%.</span>
+                                </div>
+                            </div>
+
+                            <!-- Execution Button -->
+                            <div style="display: flex; gap: 8px;">
+                                <button class="btn btn-primary" style="flex: 1;" onclick="copyThndrOrderToClipboard()">
+                                    <i class="fa-solid fa-copy"></i>
+                                    <span>نسخ أمر ثاندر للحافظة (Copy Order)</span>
+                                </button>
+                                <button class="btn btn-secondary" onclick="openPortfolioSizer()">
+                                    <i class="fa-solid fa-sliders"></i>
+                                    <span>موزع الحجم</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Col 2: Smart Cash Radar & Thndr Mutual Funds -->
+                        <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: var(--radius-md); padding: 18px; display: flex; flex-direction: column; justify-content: space-between;">
+                            <div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <div style="width: 32px; height: 32px; border-radius: 8px; background: rgba(16, 185, 129, 0.2); display: flex; align-items: center; justify-content: center; color: #34d399; font-size: 16px;">
+                                            <i class="fa-solid fa-piggy-bank"></i>
+                                        </div>
+                                        <div>
+                                            <div style="font-size: 15px; font-weight: 800; color: #ffffff;">رادار كاش الحماية الذكي وصناديق ثاندر</div>
+                                            <div style="font-size: 11px; color: #94a3b8;">إلزامية الاحتياطي النقدي (35% Cash Floor) وتوجيه السيولة</div>
+                                        </div>
+                                    </div>
+                                    <span class="badge badge-green" id="thndr-cash-floor-badge" style="font-size: 11px;">كاش آمن (35%+)</span>
+                                </div>
+
+                                <!-- Cash Breakdown Bar -->
+                                <div style="margin-bottom: 14px;">
+                                    <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 6px;">
+                                        <span style="color: #94a3b8;">السيولة الحرة: <strong class="text-white" id="thndr-free-cash">0.00 ج.م</strong></span>
+                                        <span style="color: #94a3b8;">الاحتياطي الإلزامي (35%): <strong class="text-yellow" id="thndr-cash-floor">0.00 ج.م</strong></span>
+                                    </div>
+                                    <div style="width: 100%; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; display: flex;">
+                                        <div id="thndr-cash-bar-reserve" style="width: 35%; height: 100%; background: #f59e0b;" title="احتياطي الحماية الإلزامي 35%"></div>
+                                        <div id="thndr-cash-bar-surplus" style="width: 15%; height: 100%; background: #10b981;" title="كاش متاح للشراء"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Recommended Mutual Funds for Idle Cash -->
+                                <div style="font-size: 12px; font-weight: 700; color: #cbd5e1; margin-bottom: 8px;">
+                                    <i class="fa-solid fa-layer-group text-blue" style="margin-left: 6px;"></i>
+                                    أفضل صناديق استثمار ثاندر لتشغيل السيولة والتحوط:
+                                </div>
+
+                                <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px;" id="thndr-funds-container">
+                                    <!-- Fund 1: AZG Gold -->
+                                    <div style="background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(245, 158, 11, 0.25); border-radius: var(--radius-sm); padding: 9px 12px; display: flex; justify-content: space-between; align-items: center;">
+                                        <div style="display: flex; align-items: center; gap: 10px;">
+                                            <span style="font-size: 18px;">🟡</span>
+                                            <div>
+                                                <div style="font-size: 13px; font-weight: 700; color: #ffffff;">صندوق أزيموت للذهب (AZ Gold - AZG)</div>
+                                                <div style="font-size: 10px; color: #94a3b8;">تحوط ضد التضخم وتراجع الجنيه • سبائك 24 عيار</div>
+                                            </div>
+                                        </div>
+                                        <div style="text-align: left;">
+                                            <span class="badge badge-green" style="font-size: 10px;">+38.2% سنوياً</span>
+                                            <div style="font-size: 10px; color: #64748b; margin-top: 2px;">يومي T+2</div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Fund 2: AZS Savings -->
+                                    <div style="background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: var(--radius-sm); padding: 9px 12px; display: flex; justify-content: space-between; align-items: center;">
+                                        <div style="display: flex; align-items: center; gap: 10px;">
+                                            <span style="font-size: 18px;">🟢</span>
+                                            <div>
+                                                <div style="font-size: 13px; font-weight: 700; color: #ffffff;">صندوق أزيموت ادخار / ثاندر توفير (AZS)</div>
+                                                <div style="font-size: 10px; color: #94a3b8;">عائد يومي مركب معفى من الضرائب • سحب فوري T+0</div>
+                                            </div>
+                                        </div>
+                                        <div style="text-align: left;">
+                                            <span class="badge badge-green" style="font-size: 10px;">+21.2% سنوياً</span>
+                                            <div style="font-size: 10px; color: #64748b; margin-top: 2px;">فوري T+0</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 10px;">
+                                <span style="font-size: 11px; color: #94a3b8;"><i class="fa-solid fa-circle-info text-blue"></i> متوافق مع الشريعة الإسلامية وأحكام الرقابة المالية</span>
+                                <button class="btn btn-secondary btn-sm" onclick="navigateTo('portfolio')">
+                                    <i class="fa-solid fa-wallet"></i>
+                                    <span>إدارة المحفظة والكاش</span>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
                 <!-- ☀️ Morning Briefing Hero Section -->
                 <div class="hero-briefing-card" id="morning-briefing-hero">
                     <div class="hero-header-row">
@@ -4783,6 +4957,7 @@
                 } else if (tabId === 'watchlist') {
                     loadWatchlistTable();
                 } else if (tabId === 'overview') {
+                    fetchThndrDailyCard();
                     fetchMorningBriefing();
                     fetchMacroTelemetry();
                     fetchInsiderRadarData();
@@ -5564,6 +5739,115 @@
                     </div>
                 </div>
             `).join('');
+        }
+
+        // =====================================================================
+        // ⚡ THNDR DAILY ACTIONABLE CARD & SMART CASH RADAR (ZENITH PILLAR 3)
+        // =====================================================================
+        let _currentThndrCard = null;
+
+        async function fetchThndrDailyCard() {
+            try {
+                const res = await fetch('/api/thndr_daily_card');
+                if (!res.ok) throw new Error("HTTP " + res.status);
+                const data = await res.json();
+                const card = data.thndr_daily_card;
+                const radar = data.smart_cash_radar;
+                _currentThndrCard = card;
+
+                if (card) {
+                    const nameEl = document.getElementById('thndr-stock-name');
+                    const tickerEl = document.getElementById('thndr-stock-ticker');
+                    const setupEl = document.getElementById('thndr-setup-type');
+                    const badgeEl = document.getElementById('thndr-consensus-badge');
+                    const countEl = document.getElementById('thndr-theories-count');
+                    const priceEl = document.getElementById('thndr-order-price');
+                    const stopEl = document.getElementById('thndr-stop-loss');
+                    const targetEl = document.getElementById('thndr-target-1');
+                    const sharesEl = document.getElementById('thndr-suggested-shares');
+                    const sharesNoteEl = document.getElementById('thndr-shares-note');
+                    const breakevenEl = document.getElementById('thndr-breakeven-text');
+                    const regimeBadge = document.getElementById('thndr-card-regime-badge');
+
+                    if (nameEl) nameEl.innerText = card.name_ar || card.ticker;
+                    if (tickerEl) tickerEl.innerText = card.ticker;
+                    if (setupEl) setupEl.innerText = card.opportunity_type_ar || card.opportunity_type;
+                    if (badgeEl) {
+                        badgeEl.innerText = card.verdict_badge_ar || card.verdict;
+                        badgeEl.className = card.is_golden_consensus ? 'badge badge-green badge-pulse' : 'badge badge-yellow';
+                    }
+                    if (countEl) countEl.innerText = `موافقة ${card.theories_passed_count || 0} من 6 نظريات (DQS: ${card.dqs_score || 85})`;
+                    if (priceEl) priceEl.innerHTML = `${(card.opening_auction_price || 0).toFixed(2)} <span style="font-size: 11px; color: #94a3b8;">ج.م</span>`;
+                    if (stopEl) stopEl.innerHTML = `${(card.stop_loss_price || 0).toFixed(2)} <span style="font-size: 11px; color: #94a3b8;">ج.م</span>`;
+                    if (targetEl) targetEl.innerHTML = `${(card.target_1_price || 0).toFixed(2)} <span style="font-size: 11px; color: #94a3b8;">ج.م</span>`;
+                    if (sharesEl) sharesEl.innerHTML = `${card.suggested_shares || 0} <span style="font-size: 11px; color: #94a3b8;">سهم</span>`;
+                    if (sharesNoteEl) {
+                        if (card.suggested_shares > 0) {
+                            sharesNoteEl.innerText = `قيمة: ${(card.order_value_egp || 0).toLocaleString()} ج.م (${card.allocation_pct || 0}%)`;
+                        } else {
+                            sharesNoteEl.innerText = `السيولة بالحد الأدنى للأمان`;
+                        }
+                    }
+                    if (breakevenEl) breakevenEl.innerText = card.breakeven_rule_ar || "⚠️ فور وصول السعر للهدف الأول، قم برفع أمر وقف الخسارة إلى سعر الشراء لتأمين الصفقة.";
+                    if (regimeBadge) {
+                        regimeBadge.innerText = card.market_regime || "🟢 اتجاه صاعد معتمد";
+                    }
+                }
+
+                if (radar) {
+                    const freeCashEl = document.getElementById('thndr-free-cash');
+                    const cashFloorEl = document.getElementById('thndr-cash-floor');
+                    const cashBadge = document.getElementById('thndr-cash-floor-badge');
+                    const barReserve = document.getElementById('thndr-cash-bar-reserve');
+                    const barSurplus = document.getElementById('thndr-cash-bar-surplus');
+
+                    if (freeCashEl) freeCashEl.innerText = `${(radar.free_cash_egp || 0).toLocaleString()} ج.م`;
+                    if (cashFloorEl) cashFloorEl.innerText = `${(radar.mandatory_cash_floor_egp || 0).toLocaleString()} ج.م`;
+                    if (cashBadge) {
+                        if (radar.cash_floor_status === "PROTECTED_SAFE") {
+                            cashBadge.className = "badge badge-green";
+                            cashBadge.innerText = `كاش آمن (${radar.cash_reserve_pct}%)`;
+                        } else {
+                            cashBadge.className = "badge badge-yellow";
+                            cashBadge.innerText = `عجز كاش (${radar.cash_reserve_pct}%)`;
+                        }
+                    }
+                    if (barReserve) {
+                        const pct = Math.min(100, Math.max(0, radar.cash_reserve_pct || 0));
+                        barReserve.style.width = `${Math.min(35, pct)}%`;
+                    }
+                    if (barSurplus) {
+                        const surplusPct = Math.max(0, (radar.cash_reserve_pct || 0) - 35);
+                        barSurplus.style.width = `${Math.min(65, surplusPct)}%`;
+                    }
+                }
+            } catch (err) {
+                console.warn("Thndr card fetch notice:", err);
+            }
+        }
+
+        function copyThndrOrderToClipboard() {
+            if (!_currentThndrCard) {
+                alert("جاري تحميل بيانات الأمر...");
+                return;
+            }
+            const c = _currentThndrCard;
+            const textToCopy = `⚡ أمر تداول ثاندر (GEN-26 Hub)
+السهم: ${c.name_ar} (${c.ticker})
+النوع: ${c.opportunity_type_ar}
+السعر المقترح (مزاد 9:30 ص): ${c.opening_auction_price.toFixed(2)} ج.م
+وقف الخسارة الإلزامي: ${c.stop_loss_price.toFixed(2)} ج.م
+الهدف الأول (تأمين التعادل): ${c.target_1_price.toFixed(2)} ج.م
+الكمية المقترحة: ${c.suggested_shares} سهم
+القيمة الإجمالية: ${c.order_value_egp.toLocaleString()} ج.م
+قاعدة الأمان: ${c.breakeven_rule_ar}`;
+
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                alert("✅ تم نسخ بيانات أمر ثاندر بنجاح إلى الحافظة! يمكنك الآن فتح تطبيق ثاندر ولصق البيانات.");
+            }).catch(err => {
+                console.error("Clipboard copy failed:", err);
+                prompt("انسخ بيانات الأمر يدوياً:", textToCopy);
+            });
         }
 
         // =====================================================================
@@ -8617,6 +8901,7 @@
         window.addEventListener('DOMContentLoaded', () => {
             const initialHash = window.location.hash.replace('#', '') || 'overview';
             renderTab(initialHash);
+            fetchThndrDailyCard();
             loadRankingData().then(() => {
                 initStocksDatalist();
                 fetchMarketHeatmap();

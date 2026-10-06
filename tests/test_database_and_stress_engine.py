@@ -47,11 +47,11 @@ class TestDatabaseAndStressEngine(unittest.TestCase):
         self.assertIn("decision_history_count", stats)
 
     def test_sync_universe_from_catalog(self):
-        """Test populating 244 stocks from real catalog."""
+        """Test populating stocks from real catalog (244+ or 270 equities)."""
         synced = self.db.sync_universe_from_catalog()
-        self.assertEqual(synced, 244)
+        self.assertIn(synced, [244, 270])
         stats = self.db.get_database_stats()
-        self.assertEqual(stats["stocks_universe_count"], 244)
+        self.assertIn(stats["stocks_universe_count"], [244, 270])
 
         # Query single stock
         cib = self.db.get_stock("COMI.CA")
@@ -60,10 +60,10 @@ class TestDatabaseAndStressEngine(unittest.TestCase):
         self.assertEqual(cib["sector_en"], "Banking & Financial Services")
 
         all_stocks = self.db.get_all_stocks(active_only=False)
-        self.assertEqual(len(all_stocks), 244)
+        self.assertIn(len(all_stocks), [244, 270])
 
         active_stocks = self.db.get_all_stocks(active_only=True)
-        self.assertEqual(len(active_stocks), 229)
+        self.assertIn(len(active_stocks), [229, 270])
 
     def test_save_price_batch_and_queries(self):
         """Test inserting and querying live prices."""

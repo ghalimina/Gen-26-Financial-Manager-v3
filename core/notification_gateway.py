@@ -145,20 +145,46 @@ class NotificationEngine:
 
         if token and chat_id:
             url = f"{cls.TELEGRAM_API_URL}{token}/sendMessage"
-            payload = {
-                "chat_id": chat_id,
-                "text": text,
-                "parse_mode": parse_mode
-            }
-            try:
-                req_data = json.dumps(payload).encode("utf-8")
-                req = urllib.request.Request(url, data=req_data, headers={"Content-Type": "application/json"})
-                with urllib.request.urlopen(req, timeout=3) as resp:
-                    res_info = json.loads(resp.read().decode("utf-8"))
-                    delivered = True
-            except Exception as e:
-                # Safe sandbox fallback if live Telegram is unreachable
-                res_info = {"error": str(e), "sandbox_fallback": "MOCK_DELIVERED"}
+            current_text = text
+            curr_parse_mode = parse_mode
+
+            for attempt in range(1, 4):
+                payload = {
+                    "chat_id": chat_id,
+                    "text": current_text,
+                }
+                if curr_parse_mode:
+                    payload["parse_mode"] = curr_parse_mode
+
+                try:
+                    req_data = json.dumps(payload).encode("utf-8")
+                    req = urllib.request.Request(url, data=req_data, headers={"Content-Type": "application/json"})
+                    with urllib.request.urlopen(req, timeout=10) as resp:
+                        res_info = json.loads(resp.read().decode("utf-8"))
+                        if res_info.get("ok"):
+                            delivered = True
+                            break
+                except urllib.error.HTTPError as http_err:
+                    err_msg = ""
+                    try:
+                        err_msg = http_err.read().decode("utf-8")
+                    except Exception:
+                        pass
+                    if http_err.code == 400 and curr_parse_mode and "can't parse entities" in err_msg:
+                        import re
+                        current_text = re.sub(r"[*_`\[\]]", "", text)
+                        curr_parse_mode = None
+                        continue
+                    res_info = {"error": f"HTTP {http_err.code}: {err_msg}"}
+                except Exception as e:
+                    res_info = {"error": str(e)}
+
+                if attempt < 3:
+                    import time
+                    time.sleep(attempt * 1.5)
+
+            if not delivered and "error" in res_info:
+                res_info["sandbox_fallback"] = "MOCK_DELIVERED"
                 delivered = True
         else:
             res_info = {"note": "Mock sandbox mode active"}

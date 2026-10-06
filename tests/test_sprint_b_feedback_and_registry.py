@@ -92,6 +92,9 @@ class TestSprintBFeedbackAndRegistry(unittest.TestCase):
         self.assertIn("total_reconciled", metrics)
         self.assertIn("hit_rate_pct", metrics)
         self.assertEqual(metrics["feedback_loop_status"], "ACTIVE_SELF_CALIBRATING")
+        self.assertIn("brier_score", metrics)
+        self.assertIn("expected_calibration_error", metrics)
+        self.assertIn("reliability_diagram", metrics)
 
     def test_03_deflated_sharpe_ratio_and_promotion_stages(self):
         """TC-B03: Verify Deflated Sharpe Ratio equation and 4-stage lifecycle state machine."""

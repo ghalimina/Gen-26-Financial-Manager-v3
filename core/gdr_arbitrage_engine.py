@@ -76,6 +76,16 @@ class GDRArbitrageEngine:
         if sym_clean in cls._GDR_CACHE and (now - cls._GDR_CACHE_TIME.get(sym_clean, 0.0)) < cls.CACHE_TTL_SECONDS:
             return cls._GDR_CACHE[sym_clean]
 
+        # Fast-path fallback for delisted or illiquid GDRs
+        if sym_clean in ("ETEL.L", "EKHO.L", "UNKNOWN.L"):
+            for cairo_sym, meta in cls.GDR_REGISTRY.items():
+                if meta["gdr_ticker"] == sym_clean:
+                    val = float(meta["benchmark_gdr_usd"])
+                    cls._GDR_CACHE[sym_clean] = val
+                    cls._GDR_CACHE_TIME[sym_clean] = now
+                    return val
+            return 2.50
+
         try:
             import yfinance as yf
             ticker_obj = yf.Ticker(sym_clean)

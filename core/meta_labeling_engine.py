@@ -33,6 +33,7 @@ except ImportError:
     XGB_AVAILABLE = False
 
 from sklearn.ensemble import HistGradientBoostingClassifier, HistGradientBoostingRegressor
+from sklearn.calibration import CalibratedClassifierCV
 
 
 class MetaLabelingEngine:
@@ -149,9 +150,9 @@ class MetaLabelingEngine:
         y_binary = np.nan_to_num(training_data["hit_target_t1_binary"].values, nan=0.0)
         y_vol_adj = np.nan_to_num(training_data["vol_adj_return"].values, nan=0.0)
 
-        # 1. Train Meta-Classifier with Purged TimeSeriesSplit
+        # 1. Train Meta-Classifier with CalibratedClassifierCV (Isotonic Regression)
         if XGB_AVAILABLE:
-            cls._meta_classifier = xgb.XGBClassifier(
+            base_clf = xgb.XGBClassifier(
                 n_estimators=100,
                 max_depth=4,
                 learning_rate=0.05,
@@ -160,15 +161,8 @@ class MetaLabelingEngine:
                 random_state=42,
                 eval_metric="logloss"
             )
-            cls._meta_classifier.fit(X, y_binary)
-            raw_imp = cls._meta_classifier.feature_importances_
-            total_imp = float(np.sum(raw_imp)) if np.sum(raw_imp) > 0 else 1.0
-            cls._meta_feature_importances = {
-                feat: round(float(raw_imp[i] / total_imp), 4)
-                for i, feat in enumerate(cls.META_FEATURE_NAMES)
-            }
         else:
-            cls._meta_classifier = HistGradientBoostingClassifier(
+            base_clf = HistGradientBoostingClassifier(
                 max_iter=100,
                 max_depth=4,
                 min_samples_leaf=5,
@@ -176,7 +170,31 @@ class MetaLabelingEngine:
                 learning_rate=0.05,
                 random_state=42
             )
-            cls._meta_classifier.fit(X, y_binary)
+
+        # Calibrate probabilities using Isotonic Regression over 3 folds
+        min_class_count = int(np.min(np.bincount(y_binary.astype(int)))) if len(np.unique(y_binary)) > 1 else 2
+        cv_splits = min(3, max(2, min_class_count)) if len(np.unique(y_binary)) > 1 else 2
+        cls._meta_classifier = CalibratedClassifierCV(
+            estimator=base_clf,
+            method="isotonic",
+            cv=cv_splits
+        )
+        cls._meta_classifier.fit(X, y_binary)
+
+        # Extract feature importances from calibrated base estimators
+        imps = []
+        for cc in getattr(cls._meta_classifier, "calibrated_classifiers_", []):
+            est = getattr(cc, "estimator", getattr(cc, "base_estimator", None))
+            if est is not None and hasattr(est, "feature_importances_"):
+                imps.append(est.feature_importances_)
+        if imps:
+            raw_imp = np.mean(imps, axis=0)
+            total_imp = float(np.sum(raw_imp)) if np.sum(raw_imp) > 0 else 1.0
+            cls._meta_feature_importances = {
+                feat: round(float(raw_imp[i] / total_imp), 4)
+                for i, feat in enumerate(cls.META_FEATURE_NAMES)
+            }
+        else:
             cls._meta_feature_importances = {
                 "sector_neutral_pe": 0.16,
                 "sector_neutral_rsi": 0.14,
@@ -218,13 +236,13 @@ class MetaLabelingEngine:
 
         cls._is_trained = True
         cls._training_metadata = {
-            "paradigm": "Marcos Lopez de Prado Meta-Labeling (Triple-Barrier T1 / ATR Stop)",
+            "paradigm": "Marcos Lopez de Prado Meta-Labeling (Cost-Adjusted Triple-Barrier / Calibrated Isotonic)",
             "primary_model": "Multi-Factor Quantitative Engine (Base Score >= 80)",
-            "secondary_model": "Gradient Boosting Meta-Classifier (Binary Hit Rate Optimization)",
+            "secondary_model": "CalibratedClassifierCV (Isotonic Regression on Out-of-Fold Predictions)",
             "dataset_source": dataset_source,
             "n_samples": len(training_data),
             "n_features": len(cls.META_FEATURE_NAMES),
-            "hyperparameters": {"learning_rate": 0.05, "max_depth": 4, "l2_regularization": 1.5},
+            "hyperparameters": {"calibration": "isotonic", "cv": cv_splits, "learning_rate": 0.05, "max_depth": 4},
             "permutation_importance": perm_metrics
         }
 
@@ -236,6 +254,50 @@ class MetaLabelingEngine:
         }
 
     @classmethod
+    def calculate_expected_net_return(
+        cls,
+        p_calibrated_up: float,
+        target_pct: float = 5.0,
+        stop_loss_pct: float = 5.0,
+        ticker: str = "",
+        friction_pct: Optional[float] = None
+    ) -> Dict[str, Any]:
+        """
+        Computes expected net return after probability calibration and frictions:
+        E[R_net] = P_calibrated(Up) * Target - (1 - P_calibrated(Up)) * |Stop Loss| - Friction
+        Where Friction = Spread + Roundtrip Fees ~= 2.50% (1.10% for Mega-Caps, 2.90% for Mid/Small).
+        Hard Ban Rule: If E[R_net] <= 0.50%, BUY signal is strictly prohibited.
+        """
+        p = float(p_calibrated_up)
+        if p > 1.0:
+            p = p / 100.0
+        p = max(0.0, min(1.0, p))
+
+        is_mega = any(m in ticker.upper() for m in ["COMI", "ESRS", "TMGH", "SWDY", "ABUK", "ETEL", "MFPC", "EKHO", "FWRY", "ORAS"])
+        if friction_pct is None:
+            friction_pct = 1.10 if is_mega else 2.50
+
+        target_pct = float(target_pct)
+        stop_loss_pct = abs(float(stop_loss_pct))
+
+        expected_net = (p * target_pct) - ((1.0 - p) * stop_loss_pct) - friction_pct
+        expected_net = round(float(expected_net), 3)
+
+        is_banned = bool(expected_net <= 0.50)
+
+        return {
+            "p_calibrated_up": round(p, 4),
+            "p_calibrated_up_pct": round(p * 100.0, 2),
+            "target_pct": round(target_pct, 2),
+            "stop_loss_pct": round(stop_loss_pct, 2),
+            "friction_pct": round(float(friction_pct), 2),
+            "expected_net_return_pct": expected_net,
+            "is_banned": is_banned,
+            "hard_ban_threshold_pct": 0.50,
+            "status": "HARD_BANNED" if is_banned else "EDGE_CONFIRMED"
+        }
+
+    @classmethod
     def evaluate_meta_label(
         cls,
         ticker: str,
@@ -243,26 +305,41 @@ class MetaLabelingEngine:
         base_quant_score: float = 80.0
     ) -> Dict[str, Any]:
         """
-        Executes Meta-Labeling inference for a specific stock:
-        Computes probability of hitting Target T1 before ATR Stop-Loss.
+        Executes Meta-Labeling inference with Calibrated Probability & Cost-Adjusted Gate.
+        Enforces Hard Ban Rule: E[R_net] <= 0.50% -> Zero BUY Signal.
         """
         if not cls._is_trained:
             cls.train_meta_models()
 
         vec, feat_dict = cls.extract_meta_feature_vector(ticker, current_price)
 
-        # 1. Meta-Classifier Probability
+        # 1. Meta-Classifier Calibrated Probability
         if cls._meta_classifier is not None:
             proba = cls._meta_classifier.predict_proba(vec.reshape(1, -1))[0]
-            # Index 1 corresponds to True Positive (Hit T1)
             prob_success = float(proba[1]) if len(proba) > 1 else float(proba[0])
         else:
-            # Calibrated heuristic fallback
             tech_s = 1.0 if feat_dict.get("macd_hist", 0) > 0 and feat_dict.get("obv_slope", 0) > 0 else 0.0
             sec_s = 1.0 if feat_dict.get("sector_neutral_pe", 0) > 0 else 0.0
             prob_success = 0.55 + (tech_s * 0.20) + (sec_s * 0.15)
 
-        prob_success_pct = round(min(max(prob_success * 100.0, 15.0), 96.0), 1)
+        prob_success_pct = round(min(max(prob_success * 100.0, 5.0), 96.0), 1)
+
+        # Dynamic target calculation based on ATR and Mega-Cap minimums
+        is_mega = any(m in ticker.upper() for m in ["COMI", "ESRS", "TMGH", "SWDY", "ABUK", "ETEL", "MFPC", "EKHO", "FWRY", "ORAS"])
+        min_target_pct = 3.5 if is_mega else 4.5
+        atr_pct = float(feat_dict.get("atr_pct", 2.5))
+        dyn_target_pct = max(min_target_pct, max(4.0, 2.0 * atr_pct))
+        stop_pct = 5.0
+
+        # Calculate Expected Net Return
+        exp_net_dict = cls.calculate_expected_net_return(
+            p_calibrated_up=prob_success,
+            target_pct=dyn_target_pct,
+            stop_loss_pct=stop_pct,
+            ticker=ticker
+        )
+        expected_net_return_pct = exp_net_dict["expected_net_return_pct"]
+        is_banned = exp_net_dict["is_banned"]
 
         # 2. Volatility-Adjusted Target Return (Alpha / ATR)
         if cls._vol_regressor is not None:
@@ -271,14 +348,16 @@ class MetaLabelingEngine:
             raw_vol_adj = (feat_dict.get("macd_hist", 0) * 0.4) + (feat_dict.get("sector_neutral_rsi", 0) * 0.3)
         vol_adj_return = round(max(min(raw_vol_adj, 4.5), -3.0), 2)
 
-        # 3. Meta-Decision Consensus
-        # A BUY is confirmed if base score >= 70.0 AND meta probability >= 58.0%
-        if base_quant_score >= 70.0 and prob_success_pct >= 58.0:
+        # 3. Meta-Decision Consensus with Mandatory Hard Ban Rule
+        if is_banned:
+            meta_decision = "REJECT_BUY"
+            meta_decision_ar = f"🔴 حظر إشارة الشراء نهائياً (العائد الصافي المتوقع {expected_net_return_pct:+.2f}% <= 0.50% لا يغطي تكاليف السبريد والعمولات)"
+        elif base_quant_score >= 70.0 and prob_success_pct >= 58.0:
             meta_decision = "CONFIRM_BUY"
-            meta_decision_ar = "🟢 تأكيد إشارة الشراء (إجماع الذكاء الفوقي Meta-Label)"
+            meta_decision_ar = f"🟢 تأكيد إشارة الشراء (فائض عائد صافي {expected_net_return_pct:+.2f}% واحتمالية صعود معايرة {prob_success_pct:.1f}%)"
         elif base_quant_score >= 70.0:
             meta_decision = "REJECT_BUY"
-            meta_decision_ar = "🔴 رفض إشارة الشراء (فشل التحقق الفوقي — احتمالية ضرب الوقف مرتفعة)"
+            meta_decision_ar = "🔴 رفض إشارة الشراء (احتمالية الصعود المعايرة غير كافية لتغطية المخاطر)"
         else:
             meta_decision = "NEUTRAL"
             meta_decision_ar = "🟡 مراقبة واحتفاظ (خارج نطاق إشارات الشراء النشطة)"
@@ -303,6 +382,9 @@ class MetaLabelingEngine:
             "meta_decision_ar": meta_decision_ar,
             "probability_of_success_pct": prob_success_pct,
             "volatility_adjusted_return": vol_adj_return,
+            "expected_net_return_pct": expected_net_return_pct,
+            "expected_net_analysis": exp_net_dict,
+            "is_hard_banned": is_banned,
             "top_meta_drivers": top_meta_drivers,
             "sector_neutral_features": {
                 "sector": feat_dict.get("sector", "DEFAULT"),
@@ -322,7 +404,7 @@ class MetaLabelingEngine:
         Triple Barrier Rule:
           Target 1 reached (Upper barrier: Entry + max(1.5*ATR, 4%)) BEFORE Stop Loss (Lower barrier: Entry - max(1.0*ATR, 5%))
           over a 10-day forward window.
-        Falls back to _generate_synthetic_meta_training_data only if database is unavailable.
+        Synthetic fallbacks are strictly prohibited under the GEN-26 Forensic Mandate.
         """
         import sqlite3
         db_path = os.path.join(WORKSPACE, "data", "gen26_production.db")
@@ -394,26 +476,37 @@ class MetaLabelingEngine:
                 beta_val = float(f_data.get("beta", 1.0))
                 ocf_val = float(f_data.get("ocf_to_ni_ratio", 1.15))
 
+                is_mega = any(m in sym.upper() for m in ["COMI", "ESRS", "TMGH", "SWDY", "ABUK", "ETEL", "MFPC", "EKHO", "FWRY", "ORAS"])
+
                 for i in range(14, n - 10):
                     entry_p = c[i]
                     curr_atr = atr_s[i]
                     if np.isnan(curr_atr) or curr_atr <= 0 or np.isnan(rsi14_s[i]):
                         continue
 
-                    up_barrier = entry_p + max(1.5 * curr_atr, 0.04 * entry_p)
-                    dn_barrier = entry_p - max(1.0 * curr_atr, 0.05 * entry_p)
+                    atr_pct = (curr_atr / entry_p) * 100.0
+                    min_target_pct = 3.5 if is_mega else 4.5
+                    target_pct = max(min_target_pct, max(4.0, 2.0 * atr_pct))
+                    stop_loss_pct = 5.0
+
+                    up_barrier = entry_p * (1.0 + target_pct / 100.0)
+                    dn_barrier = entry_p * (1.0 - stop_loss_pct / 100.0)
 
                     hit_upper = False
                     hit_lower = False
                     for k in range(i + 1, min(i + 11, n)):
-                        if h[k] >= up_barrier:
-                            hit_upper = True
-                            break
                         if l[k] <= dn_barrier:
                             hit_lower = True
                             break
+                        if h[k] >= up_barrier:
+                            hit_upper = True
+                            break
 
-                    vol_reg = 1.0 if (curr_atr / entry_p * 100.0) >= 4.0 else (-1.0 if (curr_atr / entry_p * 100.0) <= 2.2 else 0.0)
+                    # Institutional Cost-Adjusted Triple-Barrier Label:
+                    # 1 only if hit upper barrier before stop loss within 10 sessions; 0 otherwise.
+                    binary_label = 1 if (hit_upper and not hit_lower) else 0
+
+                    vol_reg = 1.0 if atr_pct >= 4.0 else (-1.0 if atr_pct <= 2.2 else 0.0)
                     rsi_norm = (rsi14_s[i] - 50.0) / 15.0
                     m_hist = float(macd_hist_s[i]) if not np.isnan(macd_hist_s[i]) else 0.0
                     m_hist_lag = float(macd_hist_s[i - 1]) if not np.isnan(macd_hist_s[i - 1]) else 0.0
@@ -426,20 +519,7 @@ class MetaLabelingEngine:
                     finbert = np.clip(0.05 * roc_20 + 0.15 * vol_z + 0.12 * m_hist + 0.10 * sec_pe, -0.8, 0.8)
                     setup_enc = 1.5 if rsi14_s[i] < 35.0 else (2.0 if (m_hist > 0 and roc_20 > 2.0) else (1.0 if m_hist > 0 else (-1.0 if roc_20 < -2.0 else 0.0)))
 
-                    barrier_val = (1.5 if hit_upper else 0.0) - (1.5 if hit_lower else 0.0)
-                    latent = (
-                        barrier_val * 1.0 +
-                        sec_pe * 0.65 +
-                        finbert * 0.75 +
-                        rsi_norm * 0.40 +
-                        m_hist * 0.50 +
-                        (obv_sl / 40.0) * 0.35 +
-                        setup_enc * 0.30
-                    )
-                    binary_label = 1 if latent > 0.5 else 0
-
                     fwd_ret = (c[min(i + 10, n - 1)] - entry_p) / entry_p * 100.0
-                    atr_pct = (curr_atr / entry_p) * 100.0
                     vol_adj = fwd_ret / max(atr_pct, 0.5)
 
                     all_rows.append({
@@ -471,70 +551,7 @@ class MetaLabelingEngine:
         except Exception as e:
             raise RuntimeError(f"Empirical meta-labeling extraction failed: {e}. Synthetic fallback prohibited.")
 
-    @classmethod
-    def _generate_synthetic_meta_training_data(cls, n_samples: int = 200) -> pd.DataFrame:
-        """
-        ⚠️ WARNING: SYNTHETIC CALIBRATION DATA FOR UNIT TESTS & MOCK SIMULATION ONLY.
-        ⚠️ بيانات اصطناعية للاختبار والتطوير فقط — ليست تحقق سوق حقيقي (DO NOT USE FOR REAL TRADING ALPHA).
-        Generates controlled meta-labeling test records.
-        """
-        np.random.seed(42)
-        rows = []
-        for _ in range(n_samples):
-            sec_pe = np.random.normal(0.2, 0.9)
-            sec_rsi = np.random.normal(0.3, 0.8)
-            sec_volz = np.random.normal(0.4, 0.9)
-            finbert = np.random.uniform(-0.4, 0.8)
-            macd_h = np.random.normal(0.4, 0.7)
-            macd_h_lag = macd_h * 0.85 + np.random.normal(0.0, 0.1)
-            obv_s = np.random.normal(65.0, 45.0)
-            atr = np.random.uniform(1.2, 5.0)
-            vol_regime = 1.0 if atr >= 4.0 else (-1.0 if atr <= 2.2 else 0.0)
-            ocf_ni = np.random.uniform(0.8, 1.6)
-            cbe = 19.75
-            usd = 50.76
-            setup = np.random.choice([1.0, 2.0, 3.0, 0.0, -1.0], p=[0.35, 0.25, 0.20, 0.10, 0.10])
-            roc_1_lag = np.random.normal(0.3, 1.2)
-            roc_20 = np.random.normal(4.5, 4.0)
-            beta = np.random.uniform(0.8, 1.3)
 
-            # Target 1 hit probability formula (Triple-Barrier)
-            latent_score = (
-                sec_pe * 0.8 +
-                sec_rsi * 0.7 +
-                finbert * 1.2 +
-                macd_h * 0.9 +
-                (obv_s / 50.0) * 0.6 +
-                setup * 0.8 +
-                (ocf_ni - 1.0) * 1.0 -
-                (atr * 0.3) +
-                np.random.normal(0.0, 0.5)
-            )
-            hit_t1_binary = 1 if latent_score > 1.2 else 0
-            vol_adj_ret = round((latent_score / max(atr, 0.5)), 2)
-
-            rows.append({
-                "sector_neutral_pe": sec_pe,
-                "sector_neutral_rsi": sec_rsi,
-                "sector_neutral_volume_zscore": sec_volz,
-                "finbert_sentiment_score": finbert,
-                "macd_hist": macd_h,
-                "macd_hist_lag1": macd_h_lag,
-                "obv_slope": obv_s,
-                "atr_pct": atr,
-                "volatility_regime_encoded": vol_regime,
-                "ocf_to_ni_ratio": ocf_ni,
-                "cbe_corridor_rate_pct": cbe,
-                "usd_egp_rate": usd,
-                "setup_encoded": setup,
-                "roc_1d_lag1": roc_1_lag,
-                "roc_20d": roc_20,
-                "beta_egx30": beta,
-                "hit_target_t1_binary": hit_t1_binary,
-                "vol_adj_return": vol_adj_ret
-            })
-
-        return pd.DataFrame(rows)
 
 
 if __name__ == "__main__":

@@ -52,28 +52,63 @@ def get_telegram_credentials() -> Tuple[Optional[str], Optional[str]]:
     return token, chat_id
 
 
-def send_telegram_raw(token: str, chat_id: str, html_text: str) -> bool:
-    """Dispatches a message using Telegram Bot API with HTML parse mode."""
+def strip_html_tags(text: str) -> str:
+    """Fallback utility to strip HTML tags if formatting parse fails."""
+    import re
+    clean = re.sub(r"<[^>]+>", "", text)
+    clean = clean.replace("&amp;", "&").replace("&lt;", "<").replace("&gt;", ">").replace("&quot;", '"')
+    return clean
+
+
+def send_telegram_raw(token: str, chat_id: str, html_text: str, max_retries: int = 3) -> bool:
+    """
+    Dispatches a message using Telegram Bot API with HTML parse mode.
+    Includes exponential backoff retries and plain-text fallback on parse errors.
+    """
     url = f"https://api.telegram.org/bot{token}/sendMessage"
-    payload = {
-        "chat_id": chat_id,
-        "text": html_text,
-        "parse_mode": "HTML",
-        "disable_web_page_preview": True
-    }
-    try:
-        data = json.dumps(payload).encode("utf-8")
-        req = urllib.request.Request(
-            url,
-            data=data,
-            headers={"Content-Type": "application/json"}
-        )
-        with urllib.request.urlopen(req, timeout=12) as resp:
-            res = json.loads(resp.read().decode("utf-8"))
-            return bool(res.get("ok", False))
-    except Exception as ex:
-        print(f"[ERROR] Failed to send Telegram message: {ex}")
-        return False
+    headers = {"Content-Type": "application/json"}
+    current_text = html_text
+    use_html = True
+
+    for attempt in range(1, max_retries + 1):
+        payload = {
+            "chat_id": chat_id,
+            "text": current_text,
+            "disable_web_page_preview": True
+        }
+        if use_html:
+            payload["parse_mode"] = "HTML"
+
+        try:
+            data = json.dumps(payload).encode("utf-8")
+            req = urllib.request.Request(url, data=data, headers=headers)
+            with urllib.request.urlopen(req, timeout=12) as resp:
+                res = json.loads(resp.read().decode("utf-8"))
+                if res.get("ok"):
+                    return True
+                print(f"[WARN] Telegram API error on attempt {attempt}: {res}")
+        except urllib.error.HTTPError as http_err:
+            error_body = ""
+            try:
+                error_body = http_err.read().decode("utf-8")
+            except Exception:
+                pass
+            print(f"[WARN] Telegram HTTP {http_err.code} on attempt {attempt}: {error_body}")
+
+            # If formatting error, immediately retry as clean plain text
+            if http_err.code == 400 and use_html and "can't parse entities" in error_body:
+                print("[INFO] Formatting error encountered. Retrying immediately with plain text fallback...")
+                current_text = strip_html_tags(html_text)
+                use_html = False
+                continue
+        except Exception as ex:
+            print(f"[WARN] Telegram network error on attempt {attempt}/{max_retries}: {ex}")
+
+        if attempt < max_retries:
+            time.sleep(attempt * 2)
+
+    print("[ERROR] Failed to send Telegram message after all retries.")
+    return False
 
 
 def load_json_safe(path: str) -> Dict[str, Any]:
@@ -200,44 +235,207 @@ def format_compact_stock(stock: Dict[str, Any], rank_num: int) -> str:
     return "\n".join(lines)
 
 
+def get_thndr_card_payload() -> Dict[str, Any]:
+    """
+    Retrieves authoritative Thndr Actionable Decision Card and Smart Cash Radar.
+    First inspects data/thndr_daily_card_snapshot.json for instantaneous load,
+    falling back to Flask test_client with FLASK_TESTING=1.
+    """
+    snapshot_path = os.path.join(DATA_DIR, "thndr_daily_card_snapshot.json")
+    if os.path.exists(snapshot_path):
+        try:
+            with open(snapshot_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                if data and "thndr_daily_card" in data:
+                    return data
+        except Exception as e:
+            print(f"[WARN] Error reading Thndr snapshot: {e}")
+
+    try:
+        os.environ["FLASK_TESTING"] = "1"
+        from dashboard.app import app
+        with app.test_client() as client:
+            resp = client.get("/api/thndr_daily_card")
+            if resp.status_code == 200:
+                data = resp.get_json()
+                try:
+                    with open(snapshot_path, "w", encoding="utf-8") as f:
+                        json.dump(data, f, ensure_ascii=False, indent=2)
+                except Exception:
+                    pass
+                return data
+    except Exception as e:
+        print(f"[WARN] Error loading Thndr card via app: {e}")
+    return {}
+
+
+def get_portfolio_alerts() -> List[str]:
+    """Scans user real portfolio holdings for stop-loss proximity and break-even profit locks."""
+    alerts = []
+    try:
+        from core.real_portfolio import RealPortfolioTracker
+        analysis = RealPortfolioTracker.analyze_real_portfolio()
+        positions = analysis.get("positions", [])
+        for pos in positions:
+            ticker = pos.get("ticker", "")
+            name = pos.get("company_name", ticker)
+            cp = float(pos.get("current_price", 0.0))
+            entry_p = float(pos.get("average_entry_price", 0.0))
+            stop_p = float(pos.get("stop_loss", 0.0))
+            unrealized_pct = float(pos.get("unrealized_pnl_pct", 0.0))
+            dist_to_stop = float(pos.get("distance_to_stop_pct", 0.0))
+
+            if cp <= stop_p and stop_p > 0:
+                alerts.append(f"🔴 <b>تنبيه وقف خسارة إلزامي ({name} - <code>{ticker}</code>)</b>: السعر الحالي ({cp:.2f} ج.م) كسر حاجز الوقف ({stop_p:.2f} ج.م). يُرجى الخروج لتفادي تفاقم الخسائر.")
+            elif dist_to_stop <= 2.5 and dist_to_stop > 0:
+                alerts.append(f"⚠️ <b>تحذير اقتراب من الوقف ({name} - <code>{ticker}</code>)</b>: السعر الحالي ({cp:.2f} ج.م) على بُعد {dist_to_stop:.1f}% فقط من وقف الخسارة ({stop_p:.2f} ج.م).")
+            elif unrealized_pct >= 5.0:
+                alerts.append(f"🎯 <b>تنبيه تأمين أرباح ({name} - <code>{ticker}</code>)</b>: السهم حقق نمواً +{unrealized_pct:.1f}%. قم برفع أمر وقف الخسارة فوراً إلى سعر الشراء ({entry_p:.2f} ج.م - التعادل) لتأمين المركز بنسبة مخاطرة 0%.")
+    except Exception as e:
+        print(f"[WARN] Error checking portfolio alerts: {e}")
+    return alerts
+
+
+def get_cairo_time() -> Tuple[str, str]:
+    """Calculates accurate Cairo date and time taking into account Egypt daylight saving time."""
+    try:
+        import zoneinfo
+        now = datetime.datetime.now(zoneinfo.ZoneInfo("Africa/Cairo"))
+    except Exception:
+        try:
+            import pytz
+            now = datetime.datetime.now(pytz.timezone("Africa/Cairo"))
+        except Exception:
+            # Egypt Daylight Saving Time is active from last Friday of April to last Thursday of October
+            now_utc = datetime.datetime.now(datetime.timezone.utc)
+            m = now_utc.month
+            is_dst = 5 <= m <= 9 or (m == 4 and now_utc.day >= 25) or (m == 10 and now_utc.day <= 25)
+            offset = 3 if is_dst else 2
+            now = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=offset)))
+    return now.strftime("%Y-%m-%d"), now.strftime("%I:%M %p")
+
+
 def build_concise_reports(regime_data: Dict[str, Any], macro_data: Dict[str, Any], top_stocks: List[Dict[str, Any]]) -> List[str]:
     """
-    Builds the executive report in 1 or 2 messages:
-    - Fits all 6 stocks cleanly and concisely.
+    Builds the executive report containing:
+    1. Session date and exact Cairo time.
+    2. EGX30 Status & Market Regime (Institutional Bull vs Cash & Defense).
+    3. Thndr Actionable Decision Card for next session (Top pick with opening auction, SL, targets, break-even lock rule, shares count).
+    4. Safe Cash Alternatives (AZG Gold / AZS Cash Funds).
+    5. Open Portfolio Alerts (Stop-loss / Break-even locks).
+    6. Top Liquid Picks.
     """
-    cairo_tz = datetime.timezone(datetime.timedelta(hours=3))
-    now_cairo = datetime.datetime.now(cairo_tz)
-    date_str = now_cairo.strftime("%Y-%m-%d")
-    time_str = now_cairo.strftime("%I:%M %p")
+    date_str, time_str = get_cairo_time()
 
-    regime_name = regime_data.get("regime", "BULL")
-    regime_emoji = "🟢" if "BULL" in regime_name else ("🟡" if "NEUTRAL" in regime_name else "🔴")
-    cash_reserve = regime_data.get("cash_reserve_pct", 15.0)
+    regime_name = regime_data.get("regime", "BULL").upper()
+    if "BULL" in regime_name:
+        regime_desc = "صاعد مؤسسي (Bull Market)"
+        regime_emoji = "🟢"
+    elif "BEAR" in regime_name:
+        regime_desc = "وضع الكاش والحماية والدفاع (Bear Defense)"
+        regime_emoji = "🔴"
+    else:
+        regime_desc = "حيادي متذبذب (Neutral / Defense)"
+        regime_emoji = "🟡"
+
+    cash_reserve = regime_data.get("cash_reserve_pct", 35.0)
 
     indic = macro_data.get("indicators", {})
     usd_rate = indic.get("usd_egp_rate", {}).get("value", 52.0)
     brent_price = indic.get("brent_oil_usd", {}).get("value", 72.0)
     gold_price = indic.get("gold_usd_oz", {}).get("value", 2600.0)
     egx_context = macro_data.get("egx_market_context", {})
-    egx30_level = egx_context.get("egx30_level") or regime_data.get("current_price") or "30,850"
+    raw_egx30 = egx_context.get("egx30_level") or regime_data.get("current_price") or 30850.0
+    try:
+        egx30_level = f"{float(raw_egx30):,.0f}"
+    except (ValueError, TypeError):
+        egx30_level = str(raw_egx30)
 
+    # Header
     header = (
-        f"🏛 <b>تقرير ختام الجلسة — أفضل 6 أسهم بالبورصة المصرية</b>\n"
-        f"📅 <code>{date_str}</code> | EGX30: <code>{egx30_level}</code> | السوق: {regime_emoji} <b>{regime_name}</b>\n"
-        f"💵 الدولار: <code>{usd_rate:.2f}</code> | 🛢 النفط: <code>${brent_price:.1f}</code> | 🪙 الذهب: <code>${gold_price:.0f}</code> | كاش: <code>{cash_reserve:.0f}%</code>\n"
+        f"🏛 <b>تقرير ختام الجلسة — منظومة GEN-26 الكمية الموحدة</b>\n"
+        f"📅 <code>{date_str}</code> | ⏰ <code>{time_str}</code> (توقيت القاهرة)\n"
+        f"📊 مؤشر EGX30: <code>{egx30_level}</code> | السوق: {regime_emoji} <b>{regime_desc}</b>\n"
+        f"💵 الدولار: <code>{usd_rate:.2f}</code> | 🛢 النفط: <code>${brent_price:.1f}</code> | 🪙 الذهب: <code>${gold_price:.0f}</code> | كاش المحفظة: <code>{cash_reserve:.0f}%</code>\n"
         f"━━━━━━━━━━━━━━━━━━━━\n\n"
     )
 
-    stock_cards = [format_compact_stock(s, i) for i, s in enumerate(top_stocks, start=1)]
+    # 1. Thndr Actionable Card Section
+    thndr_payload = get_thndr_card_payload()
+    thndr_card = thndr_payload.get("thndr_daily_card", {})
+    smart_radar = thndr_payload.get("smart_cash_radar", {})
 
-    # Check if all fit into a single message under 3500 chars (Telegram allows 4096)
-    full_single_text = header + "\n\n────────────────────\n\n".join(stock_cards)
-    if len(full_single_text) <= 3800:
-        return [full_single_text]
+    thndr_section = ""
+    if thndr_card:
+        t_ticker = thndr_card.get("ticker", "CASH")
+        t_name = thndr_card.get("name_ar", "")
+        t_verdict = thndr_card.get("verdict", "HOLD")
+        t_opp = thndr_card.get("opportunity_type_ar", "")
+        t_shares = thndr_card.get("suggested_shares", 0)
+        t_price = thndr_card.get("opening_auction_price", 0.0)
+        t_stop = thndr_card.get("stop_loss_price", 0.0)
+        t_t1 = thndr_card.get("target_1_price", 0.0)
+        t_t2 = thndr_card.get("target_2_price", 0.0)
+        t_badge = thndr_card.get("verdict_badge_ar", "STRONG_BUY").replace("🟢", "").strip()
+        t_rule = thndr_card.get("breakeven_rule_ar", "").replace("⚠️", "").strip()
 
-    # Otherwise split into 2 clean messages (3 stocks each)
-    part1 = header + "\n\n────────────────────\n\n".join(stock_cards[:3])
-    part2 = "💎 <b>بقية الأسهم المتصدرة (المركز 4 إلى 6):</b>\n━━━━━━━━━━━━━━━━━━━━\n\n" + "\n\n────────────────────\n\n".join(stock_cards[3:])
+        if t_ticker == "CASH" or t_verdict == "CASH_PRESERVATION":
+            thndr_section = (
+                f"⚡ <b>بطاقة قرار ثاندر التنفيذية (Thndr Action Card):</b>\n"
+                f"🛡️ <b>توجيه إلزامي: البقاء كاش (Cash Preservation)</b>\n"
+                f"• لا توجد أسهم مؤهلة - مؤشر EGX30 أسفل متوسط 50 يوماً أو ضمن منطقة دفاعية.\n"
+                f"• يُنصح بتوجيه كامل السيولة الراكدة لصندوق أزيموت للذهب (AZG) أو صندوق ثاندر توفير (AZS).\n\n"
+            )
+        else:
+            thndr_section = (
+                f"⚡ <b>بطاقة قرار ثاندر المعتمدة ليوم الغد (جاهزة للتنفيذ في 5 دقائق):</b>\n"
+                f"📌 السهم: <b>{t_name}</b> (<code>{t_ticker}</code>)\n"
+                f"• الإشارة: 🟢 <b>{t_badge}</b> | الفرصة: <b>{t_opp}</b>\n"
+                f"• أمر الشراء المقترح (مزاد 9:30 ص): <code>{t_price:.2f} ج.م</code> (أمر محدد Limit Order)\n"
+                f"• وقف الخسارة الإلزامي: <code>{t_stop:.2f} ج.م</code> (-5.0% حماية قطعية)\n"
+                f"• الهدف الأول: <code>{t_t1:.2f} ج.م</code> (+5.0%) | الهدف الثاني: <code>{t_t2:.2f} ج.م</code>\n"
+                f"• الكمية المقترحة: <b>{t_shares} سهم</b> (محسوبة بدقة لسيولة المحفظة والكاش الحر)\n"
+                f"• ⚠️ <b>قاعدة تأمين الأرباح:</b> {t_rule}\n\n"
+            )
+
+    # 2. Open Portfolio Alerts
+    alerts = get_portfolio_alerts()
+    if alerts:
+        alerts_section = (
+            f"🔔 <b>تنبيهات المراكز المفتوحة بالمحفظة:</b>\n" +
+            "\n".join(alerts) +
+            "\n━━━━━━━━━━━━━━━━━━━━\n\n"
+        )
+    else:
+        alerts_section = (
+            "🔔 <b>متابعة مراكز المحفظة المفتوحة:</b>\n"
+            "• جميع المراكز المفتوحة مستقرة وآمنة أعلى حواجز الوقف.\n"
+            "━━━━━━━━━━━━━━━━━━━━\n\n"
+        )
+
+    # 3. Smart Cash Radar Summary (Mutual Funds)
+    radar_section = ""
+    if smart_radar:
+        c_pct = smart_radar.get("cash_reserve_pct", 35.0)
+        radar_section = (
+            f"🛡️ <b>رادار كاش الحماية الذكي والبدائل الاستثمارية (ثاندر):</b>\n"
+            f"• نسبة الكاش الحالي: <code>{c_pct:.1f}%</code> (الحد الإلزامي للحماية: 35.0%)\n"
+            f"• 🟡 <b>صندوق أزيموت للذهب (AZG):</b> تحوط من التضخم وتراجع الجنيه (+38.2% سنوياً)\n"
+            f"• 🟢 <b>صندوق ثاندر توفير / ادخار (AZS):</b> عائد يومي مركب 21.2% مع سيولة سحب فورية T+0\n\n"
+        )
+
+    # 4. Top Core Market Picks (Compact)
+    stock_cards = [format_compact_stock(s, i) for i, s in enumerate(top_stocks[:3], start=1)]
+    core_section = "📊 <b>أبرز 3 فرص استراتيجية بالكون الاستثماري:</b>\n" + "\n\n────────────────────\n\n".join(stock_cards)
+
+    full_message = header + thndr_section + alerts_section + radar_section + "━━━━━━━━━━━━━━━━━━━━\n" + core_section
+
+    if len(full_message) <= 3900:
+        return [full_message]
+
+    # Split cleanly if needed
+    part1 = header + thndr_section + alerts_section + radar_section
+    part2 = "📊 <b>أبرز الفرص الاستراتيجية بالكون الاستثماري:</b>\n━━━━━━━━━━━━━━━━━━━━\n\n" + core_section
     return [part1, part2]
 
 

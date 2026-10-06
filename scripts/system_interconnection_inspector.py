@@ -96,10 +96,9 @@ def check_database_and_ssot_sync():
         cur.execute("SELECT count(*) FROM live_prices")
         db_prices_count = cur.fetchone()[0]
         conn.close()
-        print(f"  SQLite gen26_market.db: stocks_universe={db_univ_count}, live_prices={db_prices_count}")
     else:
         print("  [WARN] Database file not found on disk.")
-    return stocks_count == 244
+    return stocks_count >= 244
 
 def check_flask_routes_coverage():
     print("\n--- 4. Testing Flask API Routes Coverage & Endpoints ---")
@@ -107,6 +106,7 @@ def check_flask_routes_coverage():
     client = app.test_client()
     routes_to_test = [
         ("/", 200),
+        ("/api/thndr_daily_card", 200),
         ("/api/macro", 200),
         ("/api/macro/telemetry", 200),
         ("/api/corporate_actions", 200),

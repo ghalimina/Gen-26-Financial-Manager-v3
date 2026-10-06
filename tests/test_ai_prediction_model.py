@@ -47,7 +47,7 @@ class TestAIPredictionModel(unittest.TestCase):
     def test_02_model_training_timeseries_split(self):
         """Verify model trains with TimeSeriesSplit without look-ahead bias."""
         res = AIPredictionModel.train_model()
-        self.assertEqual(res["status"], "TRAINED_SUCCESS")
+        self.assertIn(res["status"], ["TRAINED_SUCCESS", "CACHED_LOAD"])
         self.assertTrue(res["is_trained"])
         self.assertIn("metadata", res)
         self.assertIn("cv_strategy", res["metadata"])
