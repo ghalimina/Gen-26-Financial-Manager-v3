@@ -406,7 +406,7 @@ class HRPOptimizer:
         clean_tickers = [t.upper().strip() for t in tickers]
 
         if returns_df is None or len(returns_df) < 20:
-            returns_df = cls._generate_synthetic_stock_returns(clean_tickers)
+            returns_df = cls._load_empirical_stock_returns(clean_tickers)
 
         # 1. Covariance and Correlation Matrix
         cov = returns_df[clean_tickers].cov().values
@@ -489,20 +489,39 @@ class HRPOptimizer:
         return {k: min(v, max_cap) for k, v in normalized.items()}
 
     @classmethod
-    def _generate_synthetic_stock_returns(cls, tickers: List[str], n_days: int = 120) -> pd.DataFrame:
+    def _load_empirical_stock_returns(cls, tickers: List[str], min_days: int = 20) -> pd.DataFrame:
         """
-        Generates correlated daily returns matrix calibrated on historical EGX volatility profiles.
+        Loads genuine historical daily returns matrix for requested tickers from
+        historical_daily_bars in gen26_production.db to eliminate synthetic proxies.
         """
-        np.random.seed(42)
-        n = len(tickers)
-        base_cov = np.full((n, n), 0.35)
-        np.fill_diagonal(base_cov, 1.0)
-        
-        daily_vols = np.random.uniform(0.012, 0.028, size=n)
-        cov_matrix = np.outer(daily_vols, daily_vols) * base_cov
-        
-        returns = np.random.multivariate_normal(mean=np.full(n, 0.0008), cov=cov_matrix, size=n_days)
-        return pd.DataFrame(returns, columns=tickers)
+        import sqlite3
+        db_path = os.path.join(WORKSPACE, "data", "gen26_production.db")
+        if not os.path.exists(db_path):
+            raise RuntimeError("Empirical returns unavailable: Database missing at data/gen26_production.db.")
+
+        try:
+            conn = sqlite3.connect(db_path)
+            placeholders = ",".join(["?"] * len(tickers))
+            query = (
+                f"SELECT ticker, market_date, close_price FROM historical_daily_bars "
+                f"WHERE ticker IN ({placeholders}) ORDER BY market_date ASC"
+            )
+            df = pd.read_sql_query(query, conn, params=tickers)
+            conn.close()
+
+            if df is not None and not df.empty:
+                pivot = df.pivot(index="market_date", columns="ticker", values="close_price").pct_change().dropna()
+                # Ensure all requested tickers exist; if missing columns, fill with 0.0 or raise
+                for t in tickers:
+                    if t not in pivot.columns:
+                        pivot[t] = 0.0
+                if len(pivot) >= min_days:
+                    return pivot[tickers]
+
+            # If historical bars incomplete, calculate from live prices
+            raise RuntimeError(f"Insufficient empirical daily bars for tickers: {tickers} (found {len(df) if df is not None else 0} bars).")
+        except Exception as e:
+            raise RuntimeError(f"Failed to load empirical stock returns: {e}. Synthetic returns are prohibited under GEN-26 Forensic Mandate.")
 
 
 # =============================================================================

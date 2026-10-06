@@ -5,70 +5,75 @@
   "top_5_features": [
     {
       "feature": "obv_slope",
-      "importance_mean": 0.4004,
-      "importance_std": 0.00073
+      "importance_mean": 0.39998,
+      "importance_std": 0.00079
     },
     {
       "feature": "sector_neutral_rsi",
-      "importance_mean": 0.01268,
-      "importance_std": 0.00028
+      "importance_mean": 0.01236,
+      "importance_std": 0.0003
     },
     {
       "feature": "finbert_sentiment_score",
-      "importance_mean": 0.00311,
-      "importance_std": 0.00015
+      "importance_mean": 0.00361,
+      "importance_std": 0.00012
     },
     {
       "feature": "macd_hist",
-      "importance_mean": 0.00249,
-      "importance_std": 0.00019
+      "importance_mean": 0.00263,
+      "importance_std": 0.00022
     },
     {
-      "feature": "sector_neutral_pe",
-      "importance_mean": 0.00096,
-      "importance_std": 8e-05
+      "feature": "setup_encoded",
+      "importance_mean": 0.00105,
+      "importance_std": 0.00011
     }
   ],
   "all_features": [
     {
       "feature": "obv_slope",
-      "importance_mean": 0.4004,
-      "importance_std": 0.00073
+      "importance_mean": 0.39998,
+      "importance_std": 0.00079
     },
     {
       "feature": "sector_neutral_rsi",
-      "importance_mean": 0.01268,
-      "importance_std": 0.00028
+      "importance_mean": 0.01236,
+      "importance_std": 0.0003
     },
     {
       "feature": "finbert_sentiment_score",
-      "importance_mean": 0.00311,
-      "importance_std": 0.00015
+      "importance_mean": 0.00361,
+      "importance_std": 0.00012
     },
     {
       "feature": "macd_hist",
-      "importance_mean": 0.00249,
-      "importance_std": 0.00019
-    },
-    {
-      "feature": "sector_neutral_pe",
-      "importance_mean": 0.00096,
-      "importance_std": 8e-05
+      "importance_mean": 0.00263,
+      "importance_std": 0.00022
     },
     {
       "feature": "setup_encoded",
-      "importance_mean": 0.00096,
-      "importance_std": 0.00017
+      "importance_mean": 0.00105,
+      "importance_std": 0.00011
     },
     {
       "feature": "atr_pct",
-      "importance_mean": 0.00082,
-      "importance_std": 0.00011
+      "importance_mean": 0.00094,
+      "importance_std": 0.00017
+    },
+    {
+      "feature": "sector_neutral_pe",
+      "importance_mean": 0.0008,
+      "importance_std": 8e-05
     },
     {
       "feature": "roc_20d",
       "importance_mean": 5e-05,
-      "importance_std": 2e-05
+      "importance_std": 3e-05
+    },
+    {
+      "feature": "macd_hist_lag1",
+      "importance_mean": 3e-05,
+      "importance_std": 1e-05
     },
     {
       "feature": "sector_neutral_volume_zscore",
@@ -104,21 +109,10 @@
       "feature": "beta_egx30",
       "importance_mean": 0.0,
       "importance_std": 0.0
-    },
-    {
-      "feature": "macd_hist_lag1",
-      "importance_mean": -1e-05,
-      "importance_std": 2e-05
     }
   ],
-  "noise_fitting_alerts": [
-    {
-      "feature": "macd_hist_lag1",
-      "score": -1e-05,
-      "alert": "CRITICAL ALERT: Core feature 'macd_hist_lag1' returned non-positive permutation score (-0.00001). Model fitting to noise!"
-    }
-  ],
-  "has_noise_warning": true,
+  "noise_fitting_alerts": [],
+  "has_noise_warning": false,
   "top_feature": "obv_slope",
-  "top_importance": 0.4004
+  "top_importance": 0.39998
 }

@@ -127,11 +127,13 @@ class HistoricalTradableUniverse:
     """
     Manages the universe of eligible stocks across historical dates.
     Tracks listing status, suspension status, and trading eligibility to eliminate survivorship bias.
+    Delegates to HistoricalUniverseManager for full point-in-time accuracy.
     """
     @classmethod
     def get_core_universe(cls) -> List[str]:
-        from core.egx_universe_loader import EGXUniverseLoader
-        return EGXUniverseLoader.get_tickers()
+        from core.historical_universe_manager import HistoricalUniverseManager
+        reg = HistoricalUniverseManager.load_registry()
+        return sorted(list(reg.keys()))
 
     @property
     def CORE_EGX_UNIVERSE(self) -> List[str]:
@@ -162,25 +164,12 @@ class HistoricalTradableUniverse:
 
     def is_tradable_on(self, ticker: str, date: str) -> bool:
         """
-        Returns True if the ticker was active and tradable on the given date.
+        Returns True if the ticker was active and tradable on the given date (Survivorship-free).
         """
-        t = ticker.upper()
-        if t not in self.CORE_EGX_UNIVERSE:
-            return False
-        
-        # Check for any active suspensions on this date
-        for event in self.universe_events:
-            if event["ticker"] == t:
-                if event["action_type"] == "SUSPENSION":
-                    start = event["effective_date"]
-                    end = event["details"].get("end_date", "9999-12-31")
-                    if start <= date <= end:
-                        return False
-                elif event["action_type"] == "DELISTING":
-                    if date >= event["effective_date"]:
-                        return False
-        return True
+        from core.historical_universe_manager import HistoricalUniverseManager
+        return HistoricalUniverseManager.is_tradable_on(ticker, date)
 
     def get_tradable_universe(self, date: str) -> List[str]:
         """Returns the list of all tradable tickers on a specific date."""
-        return [t for t in self.CORE_EGX_UNIVERSE if self.is_tradable_on(t, date)]
+        from core.historical_universe_manager import HistoricalUniverseManager
+        return HistoricalUniverseManager.get_tradable_universe(date)

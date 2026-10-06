@@ -589,7 +589,7 @@ class AIPredictionModel:
         import sqlite3
         db_path = os.path.join(WORKSPACE, "data", "gen26_production.db")
         if not os.path.exists(db_path):
-            return cls._generate_synthetic_walkforward_data(), "Synthetic Calibration Fallback (No DB)"
+            raise RuntimeError("Empirical dataset unavailable: Database missing at data/gen26_production.db. Synthetic fallback is strictly prohibited.")
 
         try:
             conn = sqlite3.connect(db_path)
@@ -600,7 +600,7 @@ class AIPredictionModel:
             )
             conn.close()
             if df is None or len(df) < 100:
-                return cls._generate_synthetic_walkforward_data(), "Synthetic Calibration Fallback (Empty DB)"
+                raise RuntimeError("Empirical dataset unavailable: historical_daily_bars is empty (< 100 rows). Synthetic fallback is strictly prohibited.")
 
             from core.egx_universe_loader import EGXUniverseLoader
             active_info = EGXUniverseLoader.ACTIVE_UNIVERSE
@@ -704,11 +704,11 @@ class AIPredictionModel:
                 all_dfs.append(stock_sample)
 
             if not all_dfs:
-                return cls._generate_synthetic_walkforward_data(), "Synthetic Calibration Fallback (Zero Features)"
+                raise RuntimeError("Empirical dataset extraction yielded zero feature frames across active universe.")
 
             merged = pd.concat(all_dfs, ignore_index=True)
             if len(merged) < 50:
-                return cls._generate_synthetic_walkforward_data(), "Synthetic Calibration Fallback (Insufficient Rows)"
+                raise RuntimeError(f"Empirical dataset insufficient: only {len(merged)} rows extracted (< 50 required).")
 
             benchmark_median = float(merged["fwd_10d"].median())
             merged["residual_alpha_10d"] = (merged["fwd_10d"] - benchmark_median).round(2)
@@ -716,7 +716,7 @@ class AIPredictionModel:
 
             return merged, f"Empirical EGX Daily Bars ({len(merged)} walk-forward samples across {len(all_dfs)} equities)"
         except Exception as e:
-            return cls._generate_synthetic_walkforward_data(), f"Synthetic Fallback ({e})"
+            raise RuntimeError(f"Empirical walk-forward extraction failed: {e}. Synthetic fallback prohibited.")
 
     @classmethod
     def _generate_synthetic_walkforward_data(cls, n_samples: int = 150) -> pd.DataFrame:

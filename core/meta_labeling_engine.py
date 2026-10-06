@@ -327,7 +327,7 @@ class MetaLabelingEngine:
         import sqlite3
         db_path = os.path.join(WORKSPACE, "data", "gen26_production.db")
         if not os.path.exists(db_path):
-            return cls._generate_synthetic_meta_training_data(), "Synthetic Calibration Fallback (No DB)"
+            raise RuntimeError("Empirical dataset unavailable: Database missing at data/gen26_production.db. Synthetic fallback is strictly prohibited.")
 
         try:
             conn = sqlite3.connect(db_path)
@@ -338,7 +338,7 @@ class MetaLabelingEngine:
             )
             conn.close()
             if df is None or len(df) < 100:
-                return cls._generate_synthetic_meta_training_data(), "Synthetic Calibration Fallback (Empty DB)"
+                raise RuntimeError("Empirical dataset unavailable: historical_daily_bars is empty (< 100 rows). Synthetic fallback is strictly prohibited.")
 
             from core.egx_universe_loader import EGXUniverseLoader
             active_info = EGXUniverseLoader.ACTIVE_UNIVERSE
@@ -464,12 +464,12 @@ class MetaLabelingEngine:
                     })
 
             if len(all_rows) < 50:
-                return cls._generate_synthetic_meta_training_data(), "Synthetic Calibration Fallback (Insufficient Rows)"
+                raise RuntimeError(f"Empirical meta dataset insufficient: only {len(all_rows)} samples extracted (< 50 required).")
 
             res_df = pd.DataFrame(all_rows)
             return res_df, f"Empirical Triple-Barrier EGX Bars ({len(res_df)} samples across equities)"
         except Exception as e:
-            return cls._generate_synthetic_meta_training_data(), f"Synthetic Fallback ({e})"
+            raise RuntimeError(f"Empirical meta-labeling extraction failed: {e}. Synthetic fallback prohibited.")
 
     @classmethod
     def _generate_synthetic_meta_training_data(cls, n_samples: int = 200) -> pd.DataFrame:

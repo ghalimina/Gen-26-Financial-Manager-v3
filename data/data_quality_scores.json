@@ -1,0 +1,2644 @@
+{
+  "ABUK.CA": {
+    "ticker": "ABUK.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1626,
+    "latest_date": "2026-09-10"
+  },
+  "ACAP.CA": {
+    "ticker": "ACAP.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "ACRO.CA": {
+    "ticker": "ACRO.CA",
+    "dqs": 65.0,
+    "score": 65.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Insufficient history: 36 bars < 40"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 36,
+    "latest_date": "2026-09-10"
+  },
+  "ADIB.CA": {
+    "ticker": "ADIB.CA",
+    "dqs": 85.0,
+    "score": 85.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Extreme price jumps (>35%) detected: 1 bars"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1629,
+    "latest_date": "2026-09-10"
+  },
+  "ADPC.CA": {
+    "ticker": "ADPC.CA",
+    "dqs": 75.0,
+    "score": 75.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "AIFI.CA": {
+    "ticker": "AIFI.CA",
+    "dqs": 40.0,
+    "score": 40.0,
+    "tier": "DATA_UNUSABLE",
+    "health": "FAIL",
+    "data_health": "FAIL",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)",
+      "Excessive zero-volume sessions: 70.0% of bars",
+      "Extreme price jumps (>35%) detected: 2 bars"
+    ],
+    "can_trade": false,
+    "is_usable": false,
+    "bar_count": 1631,
+    "latest_date": "2026-09-16"
+  },
+  "AIH.CA": {
+    "ticker": "AIH.CA",
+    "dqs": 85.0,
+    "score": 85.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Extreme price jumps (>35%) detected: 1 bars"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "AJWA.CA": {
+    "ticker": "AJWA.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "ALCN.CA": {
+    "ticker": "ALCN.CA",
+    "dqs": 85.0,
+    "score": 85.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Extreme price jumps (>35%) detected: 1 bars"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "ALEX.CA": {
+    "ticker": "ALEX.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "ALUM.CA": {
+    "ticker": "ALUM.CA",
+    "dqs": 75.0,
+    "score": 75.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "AMER.CA": {
+    "ticker": "AMER.CA",
+    "dqs": 75.0,
+    "score": 75.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "AMIA.CA": {
+    "ticker": "AMIA.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "AMOC.CA": {
+    "ticker": "AMOC.CA",
+    "dqs": 85.0,
+    "score": 85.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Extreme price jumps (>35%) detected: 1 bars"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1626,
+    "latest_date": "2026-09-10"
+  },
+  "ANFI.CA": {
+    "ticker": "ANFI.CA",
+    "dqs": 65.0,
+    "score": 65.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Insufficient history: 36 bars < 40"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 36,
+    "latest_date": "2026-09-10"
+  },
+  "ARAB.CA": {
+    "ticker": "ARAB.CA",
+    "dqs": 85.0,
+    "score": 85.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Extreme price jumps (>35%) detected: 1 bars"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1629,
+    "latest_date": "2026-09-16"
+  },
+  "ARCC.CA": {
+    "ticker": "ARCC.CA",
+    "dqs": 75.0,
+    "score": 75.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "ARCO.CA": {
+    "ticker": "ARCO.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "AREH.CA": {
+    "ticker": "AREH.CA",
+    "dqs": 60.0,
+    "score": 60.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)",
+      "Extreme price jumps (>35%) detected: 1 bars"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "ARPU.CA": {
+    "ticker": "ARPU.CA",
+    "dqs": 65.0,
+    "score": 65.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Insufficient history: 36 bars < 40"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 36,
+    "latest_date": "2026-09-10"
+  },
+  "ARVA.CA": {
+    "ticker": "ARVA.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "ASCM.CA": {
+    "ticker": "ASCM.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "ASPI.CA": {
+    "ticker": "ASPI.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "ATLE.CA": {
+    "ticker": "ATLE.CA",
+    "dqs": 65.0,
+    "score": 65.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Insufficient history: 36 bars < 40"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 36,
+    "latest_date": "2026-09-10"
+  },
+  "ATQA.CA": {
+    "ticker": "ATQA.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "AXPH.CA": {
+    "ticker": "AXPH.CA",
+    "dqs": 75.0,
+    "score": 75.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1629,
+    "latest_date": "2026-09-16"
+  },
+  "BINV.CA": {
+    "ticker": "BINV.CA",
+    "dqs": 75.0,
+    "score": 75.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1626,
+    "latest_date": "2026-09-10"
+  },
+  "BIOC.CA": {
+    "ticker": "BIOC.CA",
+    "dqs": 75.0,
+    "score": 75.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "BOCM.CA": {
+    "ticker": "BOCM.CA",
+    "dqs": 65.0,
+    "score": 65.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Insufficient history: 36 bars < 40"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 36,
+    "latest_date": "2026-09-10"
+  },
+  "BTFH.CA": {
+    "ticker": "BTFH.CA",
+    "dqs": 60.0,
+    "score": 60.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)",
+      "Extreme price jumps (>35%) detected: 1 bars"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1500,
+    "latest_date": "2026-09-10"
+  },
+  "CCAP.CA": {
+    "ticker": "CCAP.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "CCRS.CA": {
+    "ticker": "CCRS.CA",
+    "dqs": 60.0,
+    "score": 60.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)",
+      "Extreme price jumps (>35%) detected: 2 bars"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "CERA.CA": {
+    "ticker": "CERA.CA",
+    "dqs": 75.0,
+    "score": 75.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "CICH.CA": {
+    "ticker": "CICH.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1626,
+    "latest_date": "2026-09-10"
+  },
+  "CIEB.CA": {
+    "ticker": "CIEB.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "CIRA.CA": {
+    "ticker": "CIRA.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "CLHO.CA": {
+    "ticker": "CLHO.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1626,
+    "latest_date": "2026-09-10"
+  },
+  "CNFN.CA": {
+    "ticker": "CNFN.CA",
+    "dqs": 75.0,
+    "score": 75.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "COMI.CA": {
+    "ticker": "COMI.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1626,
+    "latest_date": "2026-09-10"
+  },
+  "CPCI.CA": {
+    "ticker": "CPCI.CA",
+    "dqs": 75.0,
+    "score": 75.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "CSAG.CA": {
+    "ticker": "CSAG.CA",
+    "dqs": 75.0,
+    "score": 75.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "DAPH.CA": {
+    "ticker": "DAPH.CA",
+    "dqs": 75.0,
+    "score": 75.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "DICE.CA": {
+    "ticker": "DICE.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "DOMT.CA": {
+    "ticker": "DOMT.CA",
+    "dqs": 60.0,
+    "score": 60.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)",
+      "Extreme price jumps (>35%) detected: 1 bars"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1626,
+    "latest_date": "2026-09-10"
+  },
+  "DSCW.CA": {
+    "ticker": "DSCW.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1500,
+    "latest_date": "2026-09-10"
+  },
+  "EAST.CA": {
+    "ticker": "EAST.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "EDBM.CA": {
+    "ticker": "EDBM.CA",
+    "dqs": 85.0,
+    "score": 85.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Extreme price jumps (>35%) detected: 1 bars"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "EDFM.CA": {
+    "ticker": "EDFM.CA",
+    "dqs": 75.0,
+    "score": 75.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "EFIC.CA": {
+    "ticker": "EFIC.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "EFID.CA": {
+    "ticker": "EFID.CA",
+    "dqs": 60.0,
+    "score": 60.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)",
+      "Extreme price jumps (>35%) detected: 1 bars"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "EFIH.CA": {
+    "ticker": "EFIH.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1194,
+    "latest_date": "2026-09-16"
+  },
+  "EGAL.CA": {
+    "ticker": "EGAL.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "EGBE.CA": {
+    "ticker": "EGBE.CA",
+    "dqs": 10.0,
+    "score": 10.0,
+    "tier": "DATA_UNUSABLE",
+    "health": "FAIL",
+    "data_health": "FAIL",
+    "issues": [
+      "Non-positive Close prices detected in 265 bars",
+      "Stale / flatlined prices detected (10+ bars unchanged)",
+      "Extreme price jumps (>35%) detected: 2 bars"
+    ],
+    "can_trade": false,
+    "is_usable": false,
+    "bar_count": 1632,
+    "latest_date": "2026-09-16"
+  },
+  "EGCH.CA": {
+    "ticker": "EGCH.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "EGEL.CA": {
+    "ticker": "EGEL.CA",
+    "dqs": 65.0,
+    "score": 65.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Insufficient history: 36 bars < 40"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 36,
+    "latest_date": "2026-09-10"
+  },
+  "EGID.CA": {
+    "ticker": "EGID.CA",
+    "dqs": 65.0,
+    "score": 65.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Insufficient history: 36 bars < 40"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 36,
+    "latest_date": "2026-09-10"
+  },
+  "EGMT.CA": {
+    "ticker": "EGMT.CA",
+    "dqs": 65.0,
+    "score": 65.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Insufficient history: 36 bars < 40"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 36,
+    "latest_date": "2026-09-10"
+  },
+  "EGSA.CA": {
+    "ticker": "EGSA.CA",
+    "dqs": 75.0,
+    "score": 75.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1629,
+    "latest_date": "2026-09-16"
+  },
+  "EGTI.CA": {
+    "ticker": "EGTI.CA",
+    "dqs": 65.0,
+    "score": 65.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Insufficient history: 36 bars < 40"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 36,
+    "latest_date": "2026-09-10"
+  },
+  "EIUD.CA": {
+    "ticker": "EIUD.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "EKHO.CA": {
+    "ticker": "EKHO.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "EKHOA.CA": {
+    "ticker": "EKHOA.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "ELEC.CA": {
+    "ticker": "ELEC.CA",
+    "dqs": 75.0,
+    "score": 75.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "ELKA.CA": {
+    "ticker": "ELKA.CA",
+    "dqs": 60.0,
+    "score": 60.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)",
+      "Extreme price jumps (>35%) detected: 1 bars"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "ELNA.CA": {
+    "ticker": "ELNA.CA",
+    "dqs": 75.0,
+    "score": 75.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "ELWA.CA": {
+    "ticker": "ELWA.CA",
+    "dqs": 75.0,
+    "score": 75.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "EMFD.CA": {
+    "ticker": "EMFD.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "EPCO.CA": {
+    "ticker": "EPCO.CA",
+    "dqs": 75.0,
+    "score": 75.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "EPPK.CA": {
+    "ticker": "EPPK.CA",
+    "dqs": 75.0,
+    "score": 75.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1630,
+    "latest_date": "2026-09-16"
+  },
+  "ERES.CA": {
+    "ticker": "ERES.CA",
+    "dqs": 65.0,
+    "score": 65.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Insufficient history: 36 bars < 40"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 36,
+    "latest_date": "2026-09-10"
+  },
+  "ESRS.CA": {
+    "ticker": "ESRS.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1299,
+    "latest_date": "2026-09-10"
+  },
+  "ETEL.CA": {
+    "ticker": "ETEL.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1626,
+    "latest_date": "2026-09-10"
+  },
+  "ETRS.CA": {
+    "ticker": "ETRS.CA",
+    "dqs": 75.0,
+    "score": 75.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "EUBR.CA": {
+    "ticker": "EUBR.CA",
+    "dqs": 65.0,
+    "score": 65.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Insufficient history: 36 bars < 40"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 36,
+    "latest_date": "2026-09-10"
+  },
+  "EXPA.CA": {
+    "ticker": "EXPA.CA",
+    "dqs": 75.0,
+    "score": 75.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1626,
+    "latest_date": "2026-09-10"
+  },
+  "EXTK.CA": {
+    "ticker": "EXTK.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "FAHR.CA": {
+    "ticker": "FAHR.CA",
+    "dqs": 65.0,
+    "score": 65.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Insufficient history: 36 bars < 40"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 36,
+    "latest_date": "2026-09-10"
+  },
+  "FAIT.CA": {
+    "ticker": "FAIT.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "FAITA.CA": {
+    "ticker": "FAITA.CA",
+    "dqs": 75.0,
+    "score": 75.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "FWRY.CA": {
+    "ticker": "FWRY.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1626,
+    "latest_date": "2026-09-10"
+  },
+  "GBCO.CA": {
+    "ticker": "GBCO.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1626,
+    "latest_date": "2026-09-10"
+  },
+  "GDWA.CA": {
+    "ticker": "GDWA.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "GGCC.CA": {
+    "ticker": "GGCC.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "GMCG.CA": {
+    "ticker": "GMCG.CA",
+    "dqs": 65.0,
+    "score": 65.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Insufficient history: 36 bars < 40"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 36,
+    "latest_date": "2026-09-10"
+  },
+  "GPHI.CA": {
+    "ticker": "GPHI.CA",
+    "dqs": 65.0,
+    "score": 65.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Insufficient history: 36 bars < 40"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 36,
+    "latest_date": "2026-09-10"
+  },
+  "GSSC.CA": {
+    "ticker": "GSSC.CA",
+    "dqs": 75.0,
+    "score": 75.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "GTHC.CA": {
+    "ticker": "GTHC.CA",
+    "dqs": 65.0,
+    "score": 65.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Insufficient history: 36 bars < 40"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 36,
+    "latest_date": "2026-09-10"
+  },
+  "GTHE.CA": {
+    "ticker": "GTHE.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "HDBK.CA": {
+    "ticker": "HDBK.CA",
+    "dqs": 85.0,
+    "score": 85.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Extreme price jumps (>35%) detected: 1 bars"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1629,
+    "latest_date": "2026-09-16"
+  },
+  "HELI.CA": {
+    "ticker": "HELI.CA",
+    "dqs": 85.0,
+    "score": 85.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Extreme price jumps (>35%) detected: 1 bars"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1626,
+    "latest_date": "2026-09-10"
+  },
+  "HRHO.CA": {
+    "ticker": "HRHO.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1626,
+    "latest_date": "2026-09-10"
+  },
+  "ICID.CA": {
+    "ticker": "ICID.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "ICMI.CA": {
+    "ticker": "ICMI.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "IDRE.CA": {
+    "ticker": "IDRE.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "IFAP.CA": {
+    "ticker": "IFAP.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "INCO.CA": {
+    "ticker": "INCO.CA",
+    "dqs": 65.0,
+    "score": 65.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Insufficient history: 36 bars < 40"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 36,
+    "latest_date": "2026-09-10"
+  },
+  "IRON.CA": {
+    "ticker": "IRON.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "ISMA.CA": {
+    "ticker": "ISMA.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "ISMD.CA": {
+    "ticker": "ISMD.CA",
+    "dqs": 65.0,
+    "score": 65.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Insufficient history: 36 bars < 40"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 36,
+    "latest_date": "2026-09-10"
+  },
+  "ISPH.CA": {
+    "ticker": "ISPH.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1626,
+    "latest_date": "2026-09-10"
+  },
+  "JUFO.CA": {
+    "ticker": "JUFO.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1626,
+    "latest_date": "2026-09-10"
+  },
+  "KABO.CA": {
+    "ticker": "KABO.CA",
+    "dqs": 85.0,
+    "score": 85.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Extreme price jumps (>35%) detected: 1 bars"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1500,
+    "latest_date": "2026-09-10"
+  },
+  "KRDI.CA": {
+    "ticker": "KRDI.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "KRRE.CA": {
+    "ticker": "KRRE.CA",
+    "dqs": 65.0,
+    "score": 65.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Insufficient history: 36 bars < 40"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 36,
+    "latest_date": "2026-09-10"
+  },
+  "KRTE.CA": {
+    "ticker": "KRTE.CA",
+    "dqs": 65.0,
+    "score": 65.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Insufficient history: 36 bars < 40"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 36,
+    "latest_date": "2026-09-10"
+  },
+  "KZPC.CA": {
+    "ticker": "KZPC.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "MASG.CA": {
+    "ticker": "MASG.CA",
+    "dqs": 65.0,
+    "score": 65.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Insufficient history: 36 bars < 40"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 36,
+    "latest_date": "2026-09-10"
+  },
+  "MASR.CA": {
+    "ticker": "MASR.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1626,
+    "latest_date": "2026-09-10"
+  },
+  "MBEN.CA": {
+    "ticker": "MBEN.CA",
+    "dqs": 65.0,
+    "score": 65.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Insufficient history: 36 bars < 40"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 36,
+    "latest_date": "2026-09-10"
+  },
+  "MBSC.CA": {
+    "ticker": "MBSC.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "MCEG.CA": {
+    "ticker": "MCEG.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "MCQE.CA": {
+    "ticker": "MCQE.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "MEFM.CA": {
+    "ticker": "MEFM.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "MENA.CA": {
+    "ticker": "MENA.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "MFPC.CA": {
+    "ticker": "MFPC.CA",
+    "dqs": 85.0,
+    "score": 85.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Extreme price jumps (>35%) detected: 1 bars"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1626,
+    "latest_date": "2026-09-10"
+  },
+  "MICH.CA": {
+    "ticker": "MICH.CA",
+    "dqs": 75.0,
+    "score": 75.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1630,
+    "latest_date": "2026-09-16"
+  },
+  "MIPH.CA": {
+    "ticker": "MIPH.CA",
+    "dqs": 75.0,
+    "score": 75.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "MNHD.CA": {
+    "ticker": "MNHD.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "MOFD.CA": {
+    "ticker": "MOFD.CA",
+    "dqs": 65.0,
+    "score": 65.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Insufficient history: 36 bars < 40"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 36,
+    "latest_date": "2026-09-10"
+  },
+  "MOFR.CA": {
+    "ticker": "MOFR.CA",
+    "dqs": 65.0,
+    "score": 65.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Insufficient history: 36 bars < 40"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 36,
+    "latest_date": "2026-09-10"
+  },
+  "MOIL.CA": {
+    "ticker": "MOIL.CA",
+    "dqs": 75.0,
+    "score": 75.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "MOSC.CA": {
+    "ticker": "MOSC.CA",
+    "dqs": 55.0,
+    "score": 55.0,
+    "tier": "DATA_UNUSABLE",
+    "health": "FAIL",
+    "data_health": "FAIL",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)",
+      "Excessive zero-volume sessions: 37.4% of bars"
+    ],
+    "can_trade": false,
+    "is_usable": false,
+    "bar_count": 1629,
+    "latest_date": "2026-09-16"
+  },
+  "MPCI.CA": {
+    "ticker": "MPCI.CA",
+    "dqs": 60.0,
+    "score": 60.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)",
+      "Extreme price jumps (>35%) detected: 1 bars"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "MPCO.CA": {
+    "ticker": "MPCO.CA",
+    "dqs": 85.0,
+    "score": 85.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Extreme price jumps (>35%) detected: 1 bars"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "MTRC.CA": {
+    "ticker": "MTRC.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "NAHO.CA": {
+    "ticker": "NAHO.CA",
+    "dqs": 75.0,
+    "score": 75.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "NATP.CA": {
+    "ticker": "NATP.CA",
+    "dqs": 65.0,
+    "score": 65.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Insufficient history: 36 bars < 40"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 36,
+    "latest_date": "2026-09-10"
+  },
+  "NCCW.CA": {
+    "ticker": "NCCW.CA",
+    "dqs": 75.0,
+    "score": 75.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "NIPH.CA": {
+    "ticker": "NIPH.CA",
+    "dqs": 60.0,
+    "score": 60.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)",
+      "Extreme price jumps (>35%) detected: 1 bars"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "OBUR.CA": {
+    "ticker": "OBUR.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "OCDI.CA": {
+    "ticker": "OCDI.CA",
+    "dqs": 60.0,
+    "score": 60.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)",
+      "Extreme price jumps (>35%) detected: 1 bars"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "ODIN.CA": {
+    "ticker": "ODIN.CA",
+    "dqs": 60.0,
+    "score": 60.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)",
+      "Extreme price jumps (>35%) detected: 2 bars"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1630,
+    "latest_date": "2026-09-16"
+  },
+  "OFH.CA": {
+    "ticker": "OFH.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "OIBK.CA": {
+    "ticker": "OIBK.CA",
+    "dqs": 65.0,
+    "score": 65.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Insufficient history: 36 bars < 40"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 36,
+    "latest_date": "2026-09-10"
+  },
+  "OIH.CA": {
+    "ticker": "OIH.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "OLFI.CA": {
+    "ticker": "OLFI.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "ORAS.CA": {
+    "ticker": "ORAS.CA",
+    "dqs": 5.0,
+    "score": 5.0,
+    "tier": "DATA_UNUSABLE",
+    "health": "FAIL",
+    "data_health": "FAIL",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)",
+      "Excessive zero-volume sessions: 94.9% of bars",
+      "Extreme price jumps (>35%) detected: 1 bars",
+      "Known historical dual-currency USD/EGP reporting discrepancy (EGP/USD translation gap)"
+    ],
+    "can_trade": false,
+    "is_usable": false,
+    "bar_count": 1243,
+    "latest_date": "2026-09-10"
+  },
+  "ORHD.CA": {
+    "ticker": "ORHD.CA",
+    "dqs": 85.0,
+    "score": 85.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Extreme price jumps (>35%) detected: 1 bars"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1500,
+    "latest_date": "2026-09-10"
+  },
+  "ORWE.CA": {
+    "ticker": "ORWE.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1626,
+    "latest_date": "2026-09-10"
+  },
+  "PACH.CA": {
+    "ticker": "PACH.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "PHDC.CA": {
+    "ticker": "PHDC.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1626,
+    "latest_date": "2026-09-10"
+  },
+  "PIOH.CA": {
+    "ticker": "PIOH.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "PORT.CA": {
+    "ticker": "PORT.CA",
+    "dqs": 65.0,
+    "score": 65.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Insufficient history: 36 bars < 40"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 36,
+    "latest_date": "2026-09-10"
+  },
+  "POUL.CA": {
+    "ticker": "POUL.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "PRCL.CA": {
+    "ticker": "PRCL.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "PRDC.CA": {
+    "ticker": "PRDC.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "PRMH.CA": {
+    "ticker": "PRMH.CA",
+    "dqs": 75.0,
+    "score": 75.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "QNBA.CA": {
+    "ticker": "QNBA.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "RAYA.CA": {
+    "ticker": "RAYA.CA",
+    "dqs": 60.0,
+    "score": 60.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)",
+      "Extreme price jumps (>35%) detected: 1 bars"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1627,
+    "latest_date": "2026-09-10"
+  },
+  "RITV.CA": {
+    "ticker": "RITV.CA",
+    "dqs": 65.0,
+    "score": 65.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Insufficient history: 36 bars < 40"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 36,
+    "latest_date": "2026-09-10"
+  },
+  "RMDA.CA": {
+    "ticker": "RMDA.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1606,
+    "latest_date": "2026-08-16"
+  },
+  "ROWG.CA": {
+    "ticker": "ROWG.CA",
+    "dqs": 65.0,
+    "score": 65.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Insufficient history: 36 bars < 40"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 36,
+    "latest_date": "2026-09-10"
+  },
+  "RREC.CA": {
+    "ticker": "RREC.CA",
+    "dqs": 65.0,
+    "score": 65.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Insufficient history: 36 bars < 40"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 36,
+    "latest_date": "2026-09-10"
+  },
+  "RREI.CA": {
+    "ticker": "RREI.CA",
+    "dqs": 60.0,
+    "score": 60.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)",
+      "Extreme price jumps (>35%) detected: 1 bars"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1500,
+    "latest_date": "2026-09-10"
+  },
+  "RTVC.CA": {
+    "ticker": "RTVC.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "RUBX.CA": {
+    "ticker": "RUBX.CA",
+    "dqs": 75.0,
+    "score": 75.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "SAIB.CA": {
+    "ticker": "SAIB.CA",
+    "dqs": 55.0,
+    "score": 55.0,
+    "tier": "DATA_UNUSABLE",
+    "health": "FAIL",
+    "data_health": "FAIL",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)",
+      "Excessive zero-volume sessions: 87.4% of bars"
+    ],
+    "can_trade": false,
+    "is_usable": false,
+    "bar_count": 1633,
+    "latest_date": "2026-09-16"
+  },
+  "SAUD.CA": {
+    "ticker": "SAUD.CA",
+    "dqs": 75.0,
+    "score": 75.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "SCEM.CA": {
+    "ticker": "SCEM.CA",
+    "dqs": 75.0,
+    "score": 75.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "SDTI.CA": {
+    "ticker": "SDTI.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1455,
+    "latest_date": "2025-12-31"
+  },
+  "SKPC.CA": {
+    "ticker": "SKPC.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1626,
+    "latest_date": "2026-09-10"
+  },
+  "SMPC.CA": {
+    "ticker": "SMPC.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "SMPP.CA": {
+    "ticker": "SMPP.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "SNFC.CA": {
+    "ticker": "SNFC.CA",
+    "dqs": 75.0,
+    "score": 75.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "SPIN.CA": {
+    "ticker": "SPIN.CA",
+    "dqs": 75.0,
+    "score": 75.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "SPMD.CA": {
+    "ticker": "SPMD.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1406,
+    "latest_date": "2026-09-10"
+  },
+  "SUGR.CA": {
+    "ticker": "SUGR.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "SVCE.CA": {
+    "ticker": "SVCE.CA",
+    "dqs": 75.0,
+    "score": 75.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "SWDY.CA": {
+    "ticker": "SWDY.CA",
+    "dqs": 85.0,
+    "score": 85.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Extreme price jumps (>35%) detected: 1 bars"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1626,
+    "latest_date": "2026-09-10"
+  },
+  "TALM.CA": {
+    "ticker": "TALM.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "TANM.CA": {
+    "ticker": "TANM.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "TAQA.CA": {
+    "ticker": "TAQA.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "TMGH.CA": {
+    "ticker": "TMGH.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1626,
+    "latest_date": "2026-09-10"
+  },
+  "TORA.CA": {
+    "ticker": "TORA.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "UEDA.CA": {
+    "ticker": "UEDA.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "UEGC.CA": {
+    "ticker": "UEGC.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "UNAT.CA": {
+    "ticker": "UNAT.CA",
+    "dqs": 65.0,
+    "score": 65.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Insufficient history: 36 bars < 40"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 36,
+    "latest_date": "2026-09-10"
+  },
+  "UNFO.CA": {
+    "ticker": "UNFO.CA",
+    "dqs": 65.0,
+    "score": 65.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Insufficient history: 36 bars < 40"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 36,
+    "latest_date": "2026-09-10"
+  },
+  "UNIP.CA": {
+    "ticker": "UNIP.CA",
+    "dqs": 60.0,
+    "score": 60.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)",
+      "Extreme price jumps (>35%) detected: 1 bars"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "UNIT.CA": {
+    "ticker": "UNIT.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "VALU.CA": {
+    "ticker": "VALU.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "VERT.CA": {
+    "ticker": "VERT.CA",
+    "dqs": 65.0,
+    "score": 65.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Insufficient history: 36 bars < 40"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 36,
+    "latest_date": "2026-09-10"
+  },
+  "WATP.CA": {
+    "ticker": "WATP.CA",
+    "dqs": 85.0,
+    "score": 85.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Extreme price jumps (>35%) detected: 1 bars"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "WCDF.CA": {
+    "ticker": "WCDF.CA",
+    "dqs": 75.0,
+    "score": 75.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  },
+  "WDEH.CA": {
+    "ticker": "WDEH.CA",
+    "dqs": 100.0,
+    "score": 100.0,
+    "tier": "DATA_VALID",
+    "health": "PASS",
+    "data_health": "PASS",
+    "issues": [],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 45,
+    "latest_date": "2026-09-10"
+  },
+  "ZEOT.CA": {
+    "ticker": "ZEOT.CA",
+    "dqs": 75.0,
+    "score": 75.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
+    "issues": [
+      "Stale / flatlined prices detected (10+ bars unchanged)"
+    ],
+    "can_trade": true,
+    "is_usable": true,
+    "bar_count": 1628,
+    "latest_date": "2026-09-16"
+  }
+}

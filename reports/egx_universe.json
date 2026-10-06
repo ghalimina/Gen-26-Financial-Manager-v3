@@ -1,13 +1,13 @@
 {
-  "as_of": "2026-08-20",
+  "as_of": "2026-10-06",
   "provider": "Thndr + Egyptian Exchange Official Securities Directory",
   "coverage_status": "FULL_UNIVERSE (270 Real Equities)",
   "total_discovered": 270,
-  "tradable_count": 270,
+  "tradable_count": 268,
   "suspended_count": 0,
   "illiquid_count": 0,
   "missing_data_count": 0,
-  "excluded_count": 0,
+  "excluded_count": 2,
   "delisted_count": 0,
   "unknown_count": 0,
   "securities": [
@@ -448,8 +448,8 @@
       "sector_ar": "الصناعة والمقاولات",
       "isin": "EGS21021C010",
       "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
+      "status": "EXCLUDED",
+      "status_reason": "EXCLUDED_BY_PIT_UNIVERSE"
     },
     {
       "ticker": "OIH.CA",
@@ -954,8 +954,8 @@
       "sector_ar": "التطوير العقاري",
       "isin": "EGS65621C012",
       "is_core": false,
-      "status": "TRADABLE",
-      "status_reason": "ELIGIBLE_FOR_SCREENING"
+      "status": "EXCLUDED",
+      "status_reason": "EXCLUDED_BY_PIT_UNIVERSE"
     },
     {
       "ticker": "ERES.CA",

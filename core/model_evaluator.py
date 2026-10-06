@@ -35,6 +35,12 @@ class WalkForwardValidator:
     IC_TARGET_THRESHOLD = 0.05       # Institutional Quant Standard: IC >= 0.05
     HIT_RATE_TARGET_THRESHOLD = 53.0  # Directional Edge: Hit Rate >= 53.0%
 
+    # Phase 8 Mandate: Strict Holdout Integrity Partitions
+    PARTITION_DEVELOPMENT = "2020-01-01 -> 2024-12-31 (In-Sample Development)"
+    PARTITION_VALIDATION = "2025-01-01 -> 2025-12-31 (Out-of-Sample Hyperparameter Tuning)"
+    PARTITION_CONTAMINATED_RESEARCH = "2026-01-01 -> 2026-12-31 (Contaminated Research / Tainted Iterations - NOT Blind Holdout)"
+    PARTITION_TRUE_BLIND_HOLDOUT = "2027-01-01+ (True Out-of-Sample Blind Evaluation)"
+
     _cached_metrics: Optional[Dict[str, Any]] = None
 
     @classmethod
@@ -120,8 +126,21 @@ class WalkForwardValidator:
             has_lgbm = False
         from sklearn.ensemble import HistGradientBoostingRegressor
 
+        # Phase 1 Forensic Mandate: Strict Empirical Walk-Forward Protocol
+        # Synthetic fallbacks are strictly prohibited. Only genuine market data is admitted.
+        if dataset is None:
+            dataset, desc = AIPredictionModel._generate_empirical_walkforward_data()
+            if "Synthetic" in desc:
+                raise ValueError(
+                    f"Forensic Mandate Violation: Synthetic fallback detected ({desc}). "
+                    "Walk-forward evaluation strictly requires genuine empirical EGX market data."
+                )
+
         if dataset is None or len(dataset) < 30:
-            dataset = AIPredictionModel._generate_synthetic_walkforward_data(n_samples=240)
+            raise ValueError(
+                f"Walk-Forward Evaluation Aborted: Real empirical data insufficient ({0 if dataset is None else len(dataset)} samples < 30 required). "
+                "Per GEN-26 Forensic Mandate, synthetic walk-forward generation is strictly prohibited."
+            )
 
         feature_cols = AIPredictionModel.FEATURE_NAMES
         X = np.nan_to_num(dataset[feature_cols].values, nan=0.0)
@@ -212,6 +231,14 @@ class WalkForwardValidator:
             "rmse_pct": aggregate_rmse,
             "information_ratio": annualized_ir,
             "oos_period": "Rolling Walk-Forward 6M/1M Calibration (Purged 10D)",
+            "holdout_classification": {
+                "2020_2024": cls.PARTITION_DEVELOPMENT,
+                "2025": cls.PARTITION_VALIDATION,
+                "2026": cls.PARTITION_CONTAMINATED_RESEARCH,
+                "2027_plus": cls.PARTITION_TRUE_BLIND_HOLDOUT,
+                "is_2026_blind_holdout": False,
+                "audit_note_ar": "فترة 2026 مصنفة رسمياً كـ Contaminated Research وليست Blind Holdout نظراً للتعرض المسبق أثناء دورات البحث"
+            },
             "verdict_ar": "🟢 النموذج يحقق تفوقاً إحصائياً خارج العينة (OOS Validated)" if (aggregate_ic >= cls.IC_TARGET_THRESHOLD and aggregate_hit_rate >= cls.HIT_RATE_TARGET_THRESHOLD) else "🟡 أداء مقبول ضمن هوامش الأمان"
         }
 

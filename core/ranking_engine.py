@@ -158,3 +158,84 @@ class CrossSectionalRankingEngine:
             "is_monotonic": mono_corr > 0.70,
             "quantile_means": {f"Q{k+1}": round(float(v), 4) for k, v in grouped.items()}
         }
+
+    @classmethod
+    def evaluate_ranking_quality(
+        cls,
+        df_ranks: pd.DataFrame,
+        score_col: str,
+        fwd_return_col: str,
+        k_list: List[int] = [5, 10, 20]
+    ) -> Dict[str, Any]:
+        """
+        Phase 10 Mandate: Comprehensive Institutional Ranking Evaluation.
+        Computes:
+          - Precision@K (K=5, 10, 20)
+          - Recall@K
+          - NDCG@K (Normalized Discounted Cumulative Gain)
+          - Top-K Portfolio Returns vs Universe Equal-Weight Benchmark
+          - Spearman Rank IC and ICIR
+        """
+        valid = df_ranks[[score_col, fwd_return_col]].dropna().copy()
+        n_samples = len(valid)
+        if n_samples < 10:
+            return {
+                "status": "INSUFFICIENT_SAMPLES",
+                "n_samples": n_samples,
+                "rank_ic": 0.0,
+                "precision_at_5": 0.0,
+                "precision_at_10": 0.0
+            }
+
+        # 1. Rank IC
+        rank_ic = float(valid[score_col].corr(valid[fwd_return_col], method="spearman"))
+
+        # Sort descending by model score
+        sorted_df = valid.sort_values(by=score_col, ascending=False).reset_index(drop=True)
+        benchmark_mean_return = float(valid[fwd_return_col].mean())
+        total_positive_stocks = int((valid[fwd_return_col] > 0).sum())
+
+        k_metrics = {}
+        for k in k_list:
+            if k > n_samples:
+                continue
+            top_k_slice = sorted_df.iloc[:k]
+            pos_in_top_k = int((top_k_slice[fwd_return_col] > 0).sum())
+            prec_k = round((pos_in_top_k / k) * 100.0, 2)
+            recall_k = round((pos_in_top_k / max(1, total_positive_stocks)) * 100.0, 2)
+            top_k_return = round(float(top_k_slice[fwd_return_col].mean()), 2)
+            alpha_spread = round(top_k_return - benchmark_mean_return, 2)
+
+            # Compute NDCG@K
+            # Relevance = non-negative return or rank order
+            # DCG = sum((2^rel - 1) / log2(i + 1))
+            gains = np.maximum(0.0, top_k_slice[fwd_return_col].values)
+            discounts = np.log2(np.arange(len(gains)) + 2)
+            dcg = np.sum(gains / discounts)
+
+            ideal_gains = np.sort(np.maximum(0.0, valid[fwd_return_col].values))[::-1][:k]
+            ideal_discounts = np.log2(np.arange(len(ideal_gains)) + 2)
+            idcg = np.sum(ideal_gains / ideal_discounts)
+            ndcg_k = round(float(dcg / idcg) if idcg > 0 else 0.0, 4)
+
+            k_metrics[f"top_{k}"] = {
+                "k": k,
+                "precision_at_k_pct": prec_k,
+                "recall_at_k_pct": recall_k,
+                "ndcg_at_k": ndcg_k,
+                "top_k_mean_return_pct": top_k_return,
+                "benchmark_mean_return_pct": round(benchmark_mean_return, 2),
+                "alpha_spread_pct": alpha_spread
+            }
+
+        return {
+            "status": "RANKING_EVALUATED_SUCCESS",
+            "universe_size": n_samples,
+            "rank_ic": round(rank_ic, 4),
+            "precision_at_5_pct": k_metrics.get("top_5", {}).get("precision_at_k_pct", 0.0),
+            "precision_at_10_pct": k_metrics.get("top_10", {}).get("precision_at_k_pct", 0.0),
+            "ndcg_at_10": k_metrics.get("top_10", {}).get("ndcg_at_k", 0.0),
+            "top_5_alpha_spread_pct": k_metrics.get("top_5", {}).get("alpha_spread_pct", 0.0),
+            "top_10_alpha_spread_pct": k_metrics.get("top_10", {}).get("alpha_spread_pct", 0.0),
+            "k_evaluations": k_metrics
+        }

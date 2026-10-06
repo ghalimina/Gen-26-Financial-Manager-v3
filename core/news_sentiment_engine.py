@@ -1,12 +1,25 @@
 #!/usr/bin/env python3
 # =============================================================================
-# core/news_sentiment_engine.py — GEN-26 EGX News & Corporate Disclosures NLP Engine
-# Ingests corporate disclosures and market headlines, performing Arabic/English
-# financial sentiment scoring and outputting event shock impact to forecasts.
+# core/news_sentiment_engine.py — GEN-26 News & Corporate Disclosures NLP Engine
+# Ingests corporate disclosures and market headlines with rigorous Point-in-Time
+# timestamps, classifying events across a 15-category institutional event taxonomy.
 # =============================================================================
 
+import os
+import sys
 import re
+import json
+import sqlite3
+import datetime
 from typing import Dict, List, Any, Optional
+
+WORKSPACE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if WORKSPACE not in sys.path:
+    sys.path.insert(0, WORKSPACE)
+
+DATA_DIR = os.path.join(WORKSPACE, "data")
+DB_PATH = os.path.join(DATA_DIR, "gen26_production.db")
+NEWS_JSON_FILE = os.path.join(DATA_DIR, "news_events.json")
 
 
 class NewsSentimentEngine:
@@ -23,199 +36,117 @@ class NewsSentimentEngine:
     IMPACT_MEDIUM = "MEDIUM"
     IMPACT_LOW = "LOW"
 
-    # Seed Disclosures & Recent News Knowledge Base for EGX Universe
-    LATEST_DISCLOSURES = {
-        "COMI.CA": {
-            "headline_ar": "نمو صافي أرباح البنك بنسبة 48% وتوزيعات كوبونات نقدية استثنائية للمساهمين",
-            "headline_en": "Net profit surges 48% YoY with strong loan portfolio growth and cash dividend announcement",
-            "event_type": "EARNINGS_BEAT_DIVIDEND",
-            "sentiment": "POSITIVE",
-            "materiality": "HIGH",
-            "raw_score": 0.85,
-            "alpha_shock_pct": +2.40,
-            "date": "2026-08-20"
-        },
-        "SWDY.CA": {
-            "headline_ar": "توقيع عقود مشروعات بنية تحتية وطاقة كبرى بالخليج وإفريقيا بقيمة تتجاوز 400 مليون دولار",
-            "headline_en": "Elsewedy signs major $400M+ energy and infrastructure contracts across GCC and Africa",
-            "event_type": "MAJOR_CONTRACT",
-            "sentiment": "POSITIVE",
-            "materiality": "HIGH",
-            "raw_score": 0.80,
-            "alpha_shock_pct": +2.10,
-            "date": "2026-08-19"
-        },
-        "TMGH.CA": {
-            "headline_ar": "مبيعات تعاقدية غير مسبوقة لمشروع بنان بالرياض والساحل الشمالي وتدفقات نقدية قوية",
-            "headline_en": "Record contractual sales exceeding expectations for Banan and SouthMED developments",
-            "event_type": "RECORD_SALES",
-            "sentiment": "POSITIVE",
-            "materiality": "HIGH",
-            "raw_score": 0.78,
-            "alpha_shock_pct": +1.90,
-            "date": "2026-08-18"
-        },
-        "ORAS.CA": {
-            "headline_ar": "إضافة مشروعات جديدة لمحفظة الأعمال تحت التنفيذ بقيمة 1.8 مليار دولار مع تركيز دولاري",
-            "headline_en": "Backlog adds $1.8B in new high-margin infrastructure projects",
-            "event_type": "BACKLOG_GROWTH",
-            "sentiment": "POSITIVE",
-            "materiality": "MEDIUM",
-            "raw_score": 0.70,
-            "alpha_shock_pct": +1.50,
-            "date": "2026-08-15"
-        },
-        "ETEL.CA": {
-            "headline_ar": "نمو قوي في إيرادات خدمات البيانات والإنترنت الثابت والتحول الرقمي الحكومي",
-            "headline_en": "Strong data revenue growth and high operational EBITDA margins",
-            "event_type": "EARNINGS_GROWTH",
-            "sentiment": "POSITIVE",
-            "materiality": "MEDIUM",
-            "raw_score": 0.72,
-            "alpha_shock_pct": +1.60,
-            "date": "2026-08-14"
-        },
-        "EGAL.CA": {
-            "headline_ar": "قفزة في هوامش ربحية التصدير وتحسن أسعار الألومنيوم العالمية ببورصة لندن للمعادن",
-            "headline_en": "Export revenue surges on favorable global LME aluminum prices",
-            "event_type": "COMMODITY_SURGE",
-            "sentiment": "POSITIVE",
-            "materiality": "HIGH",
-            "raw_score": 0.82,
-            "alpha_shock_pct": +2.20,
-            "date": "2026-08-17"
-        },
-        "ABUK.CA": {
-            "headline_ar": "استقرار خطوط الإنتاج بعد انتظام إمدادات الغاز الطبيعي وتوزيع كوبون نقدي سخي",
-            "headline_en": "Full operational resumption with steady natural gas feed and attractive dividend payout",
-            "event_type": "OPERATIONAL_STABILITY",
-            "sentiment": "POSITIVE",
-            "materiality": "MEDIUM",
-            "raw_score": 0.74,
-            "alpha_shock_pct": +1.70,
-            "date": "2026-08-16"
-        },
-        "MFPC.CA": {
-            "headline_ar": "ارتفاع أسعار اليوريا عالمياً واستمرار التصدير للأسواق الأوروبية بالعملة الصعبة",
-            "headline_en": "Global urea prices rebound driving hard-currency export earnings",
-            "event_type": "EXPORT_GROWTH",
-            "sentiment": "POSITIVE",
-            "materiality": "MEDIUM",
-            "raw_score": 0.72,
-            "alpha_shock_pct": +1.50,
-            "date": "2026-08-15"
-        },
-        "ADIB.CA": {
-            "headline_ar": "تحقيق أعلى عائد على حقوق الملكية بالقطاع المصرفي ونمو التمويلات المتوافقة مع الشريعة",
-            "headline_en": "Record ROE and Islamic financing expansion supporting double-digit EPS growth",
-            "event_type": "EARNINGS_BEAT",
-            "sentiment": "POSITIVE",
-            "materiality": "HIGH",
-            "raw_score": 0.80,
-            "alpha_shock_pct": +2.00,
-            "date": "2026-08-18"
-        },
-        "EAST.CA": {
-            "headline_ar": "تحسن هوامش الربحية بعد إعادة تسعير المنتجات واعتماد توزيعات أرباح نقدية تاريخية",
-            "headline_en": "Product price adjustments restore margins alongside historic dividend distribution",
-            "event_type": "MARGIN_EXPANSION",
-            "sentiment": "POSITIVE",
-            "materiality": "HIGH",
-            "raw_score": 0.79,
-            "alpha_shock_pct": +1.95,
-            "date": "2026-08-12"
-        },
-        "FWRY.CA": {
-            "headline_ar": "توسع متسارع في خدمات التمويل متناهي الصغر وإطلاق حلول دفع رقمية جديدة للمدفوعات",
-            "headline_en": "Fintech microfinance portfolio expands 60%+ with digital payment throughput gains",
-            "event_type": "EXPANSION",
-            "sentiment": "POSITIVE",
-            "materiality": "MEDIUM",
-            "raw_score": 0.73,
-            "alpha_shock_pct": +1.65,
-            "date": "2026-08-16"
-        },
-        "RAYA.CA": {
-            "headline_ar": "ضغوط تضخمية مؤقتة على هوامش ربحية قطاع التوزيع وتجارة الأجهزة الاستهلاكية",
-            "headline_en": "Margin compression in consumer distribution segment due to financing costs",
-            "event_type": "MARGIN_PRESSURE",
-            "sentiment": "NEGATIVE",
-            "materiality": "MEDIUM",
-            "raw_score": -0.45,
-            "alpha_shock_pct": -1.20,
-            "date": "2026-08-10"
-        },
-        "CCAP.CA": {
-            "headline_ar": "محادثات مستمرة لإعادة هيكلة مديونيات الشركات التابعة وتقييم حصص التخارج",
-            "headline_en": "Ongoing subsidiary debt restructuring talks and asset disposal evaluations",
-            "event_type": "DEBT_RESTRUCTURING",
-            "sentiment": "NEGATIVE",
-            "materiality": "HIGH",
-            "raw_score": -0.55,
-            "alpha_shock_pct": -1.80,
-            "date": "2026-08-11"
-        }
-    }
-
-    # NLP Lexicon for On-the-Fly Text Scoring
-    POSITIVE_KEYWORDS = [
-        "نمو", "أرباح", "توزيعات", "عقد", "استحواذ", "توسع", "تجاوز التوقعات", "قياسي", "شراء أسهم خزينة",
-        "ارتفاع", "تصدير", "دولاري", "عائد", "surge", "growth", "beat", "dividend", "record", "profit"
-    ]
-    NEGATIVE_KEYWORDS = [
-        "خسائر", "تراجع", "تأجيل", "دعوى", "غرامة", "انخفاض", "ضغط", "هبوط", "ديون", "مخاطر", "نزاع",
-        "drop", "loss", "decline", "pressure", "debt", "risk", "penalty"
-    ]
+    # Institutional Event Taxonomy
+    EVENT_EARNINGS = "EARNINGS"
+    EVENT_DIVIDEND = "DIVIDEND"
+    EVENT_ACQUISITION = "ACQUISITION"
+    EVENT_MERGER = "MERGER"
+    EVENT_CAPITAL_INCREASE = "CAPITAL_INCREASE"
+    EVENT_MANAGEMENT_CHANGE = "MANAGEMENT_CHANGE"
+    EVENT_REGULATORY = "REGULATORY"
+    EVENT_LEGAL = "LEGAL"
+    EVENT_CONTRACT = "CONTRACT"
+    EVENT_EXPANSION = "EXPANSION"
+    EVENT_DEBT = "DEBT"
+    EVENT_DEFAULT = "DEFAULT"
+    EVENT_GOVERNMENT = "GOVERNMENT"
+    EVENT_MACRO = "MACRO"
+    EVENT_GEOPOLITICAL = "GEOPOLITICAL"
 
     @classmethod
-    def score_text_sentiment(cls, text: str) -> Dict[str, Any]:
-        """Performs dictionary-based financial NLP sentiment scoring on arbitrary headlines."""
-        if not text:
-            return {"score": 0.0, "label": cls.SENTIMENT_NEUTRAL, "impact": cls.IMPACT_LOW}
-
-        txt = text.lower()
-        pos_matches = sum(1 for kw in cls.POSITIVE_KEYWORDS if kw in txt)
-        neg_matches = sum(1 for kw in cls.NEGATIVE_KEYWORDS if kw in txt)
-
-        net = pos_matches - neg_matches
-        if net > 0:
-            score = min(0.30 + net * 0.20, 0.95)
-            label = cls.SENTIMENT_POSITIVE
-            impact = cls.IMPACT_HIGH if net >= 2 else cls.IMPACT_MEDIUM
-        elif net < 0:
-            score = max(-0.30 + net * 0.20, -0.95)
-            label = cls.SENTIMENT_NEGATIVE
-            impact = cls.IMPACT_HIGH if abs(net) >= 2 else cls.IMPACT_MEDIUM
-        else:
-            score = 0.0
-            label = cls.SENTIMENT_NEUTRAL
-            impact = cls.IMPACT_LOW
-
-        return {
-            "score": round(score, 2),
-            "label": label,
-            "impact": impact,
-            "pos_tokens": pos_matches,
-            "neg_tokens": neg_matches
-        }
+    def init_db(cls):
+        """Initializes the news_events table in gen26_production.db."""
+        os.makedirs(DATA_DIR, exist_ok=True)
+        conn = sqlite3.connect(DB_PATH)
+        cur = conn.cursor()
+        cur.execute("""
+            CREATE TABLE IF NOT EXISTS news_events (
+                news_id TEXT PRIMARY KEY,
+                source TEXT NOT NULL,
+                url TEXT,
+                published_at TEXT NOT NULL,
+                retrieved_at TEXT NOT NULL,
+                company TEXT NOT NULL,
+                ticker TEXT NOT NULL,
+                sector TEXT NOT NULL,
+                country TEXT DEFAULT 'EG',
+                event_type TEXT NOT NULL,
+                sentiment TEXT NOT NULL,
+                sentiment_confidence REAL NOT NULL,
+                importance TEXT NOT NULL,
+                language TEXT DEFAULT 'ar',
+                headline TEXT NOT NULL,
+                alpha_shock_pct REAL DEFAULT 0.0,
+                created_at TEXT NOT NULL
+            )
+        """)
+        cur.execute("CREATE INDEX IF NOT EXISTS idx_news_ticker_pub ON news_events(ticker, published_at)")
+        conn.commit()
+        conn.close()
 
     @classmethod
-    def get_sentiment_impact(cls, ticker: str) -> Dict[str, Any]:
+    def get_latest_news_for_ticker(cls, ticker: str, as_of_time: Optional[str] = None) -> List[Dict[str, Any]]:
+        """Retrieves news events strictly published on or before as_of_time."""
+        cls.init_db()
+        sym = ticker.upper().strip()
+        if not sym.endswith(".CA") and "." not in sym:
+            sym = f"{sym}.CA"
+
+        cutoff = as_of_time or datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        conn = sqlite3.connect(DB_PATH)
+        cur = conn.cursor()
+        cur.execute("""
+            SELECT news_id, source, url, published_at, retrieved_at, company,
+                   ticker, sector, country, event_type, sentiment, sentiment_confidence,
+                   importance, language, headline, alpha_shock_pct
+            FROM news_events
+            WHERE ticker = ? AND published_at <= ?
+            ORDER BY published_at DESC LIMIT 5
+        """, (sym, cutoff))
+        rows = cur.fetchall()
+        conn.close()
+
+        results = []
+        for r in rows:
+            results.append({
+                "news_id": r[0],
+                "source": r[1],
+                "url": r[2],
+                "published_at": r[3],
+                "retrieved_at": r[4],
+                "company": r[5],
+                "ticker": r[6],
+                "sector": r[7],
+                "country": r[8],
+                "event_type": r[9],
+                "sentiment": r[10],
+                "sentiment_confidence": r[11],
+                "importance": r[12],
+                "language": r[13],
+                "headline": r[14],
+                "alpha_shock_pct": r[15]
+            })
+        return results
+
+    @classmethod
+    def get_sentiment_impact(cls, ticker: str, as_of_time: Optional[str] = None) -> Dict[str, Any]:
         """
         Returns sentiment analysis, materiality, and alpha shock percentage for a stock.
+        Guaranteed to obey point-in-time constraints (as_of_time).
         """
         sym = ticker.upper().strip()
         if not sym.endswith(".CA") and "." not in sym:
             sym = f"{sym}.CA"
 
-        disc = cls.LATEST_DISCLOSURES.get(sym)
-        if disc:
-            score = disc["raw_score"]
-            sentiment = disc["sentiment"]
-            materiality = disc["materiality"]
-            alpha_shock = disc["alpha_shock_pct"]
-            headline = disc["headline_ar"]
-            event_type = disc["event_type"]
+        news = cls.get_latest_news_for_ticker(sym, as_of_time=as_of_time)
+        if news:
+            latest = news[0]
+            sentiment = latest["sentiment"]
+            materiality = latest["importance"]
+            score = 0.85 if sentiment == cls.SENTIMENT_POSITIVE else (-0.85 if sentiment == cls.SENTIMENT_NEGATIVE else 0.10)
+            alpha_shock = latest["alpha_shock_pct"]
+            headline = latest["headline"]
+            event_type = latest["event_type"]
         else:
             score = 0.15
             sentiment = cls.SENTIMENT_NEUTRAL

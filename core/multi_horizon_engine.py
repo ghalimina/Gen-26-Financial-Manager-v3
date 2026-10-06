@@ -789,8 +789,25 @@ class MultiHorizonEngine:
         valid_until = (now_dt + datetime.timedelta(minutes=30)).strftime("%Y-%m-%d %H:%M:%S")
         max_entry_price = round(p * 1.005, 2)
 
+        # Phase 9 Mandate: Disentangle P(UP), Expected Return, and Conformal Uncertainty
+        from core.prediction_disentangler import PredictionDisentangler
+        p_success = float(meta_label.get("probability_of_success_pct", 65.0))
+        exp_ret = float(ai_forecast.get("expected_alpha_10d_pct", 4.2))
+        conf_q10 = float(adv_conformal.get("quantile_10_downside_pct", -2.5))
+        conf_q90 = float(adv_conformal.get("quantile_90_upside_pct", 11.5))
+        pred_triad = PredictionDisentangler.disentangle(
+            prob_up_pct=p_success,
+            expected_return_pct=exp_ret,
+            q10_downside_pct=conf_q10,
+            q90_upside_pct=conf_q90
+        )
+
         return {
             "ticker": sym,
+            "prediction_triad": pred_triad,
+            "probability_up_pct": pred_triad["probability_up_pct"],
+            "expected_return_pct": pred_triad["expected_return_pct"],
+            "prediction_interval_90": pred_triad["prediction_interval_90"],
             "company_name": prof["name_ar"],
             "sector": prof["sector"],
             "current_price": p,

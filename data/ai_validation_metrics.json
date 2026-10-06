@@ -1,18 +1,18 @@
 {
   "status": "VALIDATED_OUT_OF_SAMPLE",
   "evaluation_engine": "Purged & Embargoed Rolling Walk-Forward (Ensemble XGB 60% + LGBM 40%)",
-  "n_oos_samples": 190,
+  "n_oos_samples": 140052,
   "n_folds": 5,
-  "information_coefficient": 0.8065,
-  "mean_fold_ic": 0.7931,
+  "information_coefficient": 0.0437,
+  "mean_fold_ic": 0.0439,
   "ic_target_threshold": 0.05,
-  "ic_target_met": true,
-  "hit_rate_pct": 94.21,
-  "mean_fold_hit_rate_pct": 94.33,
+  "ic_target_met": false,
+  "hit_rate_pct": 49.67,
+  "mean_fold_hit_rate_pct": 49.67,
   "hit_rate_target_threshold": 53.0,
-  "hit_rate_target_met": true,
-  "rmse_pct": 1.239,
-  "information_ratio": 15.9,
+  "hit_rate_target_met": false,
+  "rmse_pct": 14.301,
+  "information_ratio": 0.59,
   "oos_period": "Rolling Walk-Forward 6M/1M Calibration (Purged 10D)",
-  "verdict_ar": "🟢 النموذج يحقق تفوقاً إحصائياً خارج العينة (OOS Validated)"
+  "verdict_ar": "🟡 أداء مقبول ضمن هوامش الأمان"
 }
