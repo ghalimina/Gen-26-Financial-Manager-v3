@@ -627,6 +627,7 @@ def api_pairs_trading_summary():
 def api_portfolio_sizer():
     """
     Computes optimal whole-share lot sizes and EGP capital allocation 
+    dynamically synchronized with top quant & AI recommendations,
     subject to the strict 30% single-stock maximum regulatory cap.
     """
     from core.portfolio_optimizer import PortfolioOptimizer
@@ -634,40 +635,117 @@ def api_portfolio_sizer():
     
     if request.method == "POST":
         data = request.get_json() or {}
-        capital = float(data.get("capital") or data.get("total_capital") or 50000.0)
+        capital = float(data.get("capital") or data.get("budget") or data.get("total_capital") or data.get("amount") or 50000.0)
         strategy = str(data.get("strategy") or "risk_parity")
         custom_tickers = data.get("tickers")
     else:
-        capital = float(request.args.get("capital", 50000.0))
+        capital = float(request.args.get("capital") or request.args.get("budget") or request.args.get("amount") or 50000.0)
         strategy = str(request.args.get("strategy", "risk_parity"))
-        custom_tickers = None
+        custom_tickers = request.args.getlist("tickers") or None
 
     canonical_prices_raw = PriceSyncService.load_canonical_prices()
     
-    # Select focus stocks if not provided
-    if not custom_tickers:
-        focus_tickers = ["COMI.CA", "SWDY.CA", "TMGH.CA", "MFPC.CA", "ETEL.CA"]
-    else:
-        focus_tickers = [t.upper().strip() for t in custom_tickers if t]
+    # 1. Load active rankings to retrieve real-time top AI & quant opportunities
+    rankings_file = os.path.join(WORKSPACE, "data", "precomputed_rankings.json")
+    ranked_pool = []
+    if os.path.exists(rankings_file):
+        try:
+            with open(rankings_file, "r", encoding="utf-8") as f:
+                r_data = json.load(f)
+            # Gather candidates from core and all, preserving rank order
+            pool_items = r_data.get("core", []) + r_data.get("all", [])
+            seen_pool = set()
+            for item in pool_items:
+                t = item.get("ticker")
+                if t and t not in seen_pool:
+                    seen_pool.add(t)
+                    # Filter for liquid tradable stocks with valid prices
+                    if item.get("is_liquid", True) and item.get("status") != "ILLIQUID":
+                        ranked_pool.append(item)
+        except Exception as e:
+            logger.error(f"Error loading rankings for sizer: {e}")
 
+    # Build focus tickers list
+    focus_tickers = []
+    if custom_tickers:
+        for t in custom_tickers:
+            sym = t.upper().strip()
+            if not sym.endswith(".CA") and "." not in sym:
+                sym += ".CA"
+            if sym not in focus_tickers:
+                focus_tickers.append(sym)
+    
+    # Complete up to 5 stocks using the best available market opportunities
+    # Prioritizing BUY signals, then high-ranking WATCH signals
+    buy_picks = [p["ticker"] for p in ranked_pool if p.get("decision") == "BUY" and p["ticker"] not in focus_tickers]
+    watch_picks = [p["ticker"] for p in ranked_pool if p.get("decision") == "WATCH" and p["ticker"] not in focus_tickers and p["ticker"] not in buy_picks]
+    
+    for t in buy_picks:
+        if len(focus_tickers) < 5:
+            focus_tickers.append(t)
+    for t in watch_picks:
+        if len(focus_tickers) < 5:
+            focus_tickers.append(t)
+            
+    # Fallback if pool is empty
+    if not focus_tickers:
+        focus_tickers = ["COMI.CA", "ETEL.CA", "ACRO.CA", "OIH.CA", "EMFD.CA"]
+
+    # 2. Extract real dynamic prices, names, targets, stop-losses, scores, and volatilities
     prices_dict = {}
     names_dict = {}
-    for t in focus_tickers:
-        rec = canonical_prices_raw.get(t, {})
-        prices_dict[t] = float(rec.get("price", 100.0))
-        names_dict[t] = rec.get("company_name", t)
+    targets_dict = {}
+    stops_dict = {}
+    scores_dict = {}
+    decisions_dict = {}
+    vol_dict = {}
 
-    vol_dict = {
-        "COMI.CA": 0.18,
-        "SWDY.CA": 0.22,
-        "TMGH.CA": 0.25,
-        "MFPC.CA": 0.20,
-        "ETEL.CA": 0.19
-    }
+    ranked_lookup = {r["ticker"]: r for r in ranked_pool}
+
+    for t in focus_tickers:
+        r_item = ranked_lookup.get(t, {})
+        rec = canonical_prices_raw.get(t, {})
+        
+        # Real live price
+        p = float(r_item.get("current_price") or r_item.get("price") or rec.get("price") or 100.0)
+        prices_dict[t] = p
+        
+        # Real company name
+        name = r_item.get("name_ar") or r_item.get("company_name") or rec.get("name_ar") or rec.get("company_name") or t
+        names_dict[t] = name
+        
+        # Real targets and stops from MultiHorizonEngine
+        t1 = float(r_item.get("target_price") or r_item.get("horizons_data", {}).get("20D", {}).get("target_1") or round(p * 1.085, 2))
+        sl = float(r_item.get("stop_loss") or round(p * 0.93, 2))
+        targets_dict[t] = t1
+        stops_dict[t] = sl
+        
+        # Score and Decision
+        scores_dict[t] = float(r_item.get("overall_score") or r_item.get("composite_score") or 70.0)
+        decisions_dict[t] = r_item.get("decision", "BUY" if scores_dict[t] >= 70.0 else "WATCH")
+        
+        # Real volatility from technical ATR%
+        atr_pct = float(r_item.get("technical", {}).get("volatility_metrics", {}).get("atr_pct", 3.0))
+        vol_dict[t] = max(atr_pct / 100.0, 0.05)
+
+    # 3. Calculate weights based on selected strategy
     if strategy == "momentum":
-        weights = {"COMI.CA": 0.30, "SWDY.CA": 0.30, "TMGH.CA": 0.25, "MFPC.CA": 0.15}
+        # Proportional to overall_score, capped at 30%
+        raw_w = {t: max(scores_dict[t] - 40.0, 5.0) for t in focus_tickers}
+        tot_w = sum(raw_w.values()) or 1.0
+        weights = {}
+        for t in focus_tickers:
+            weights[t] = min(round(raw_w[t] / tot_w, 4), 0.30)
+        # Re-normalize
+        sum_w = sum(weights.values()) or 1.0
+        weights = {t: round(w / sum_w, 4) for t, w in weights.items()}
     elif strategy == "balanced":
-        weights = {"COMI.CA": 0.25, "SWDY.CA": 0.25, "TMGH.CA": 0.20, "MFPC.CA": 0.15, "ETEL.CA": 0.15}
+        # Equal weighting across chosen assets, capped at 30%
+        n = max(len(focus_tickers), 1)
+        w_each = min(round(1.0 / n, 4), 0.30)
+        weights = {t: w_each for t in focus_tickers}
+        sum_w = sum(weights.values()) or 1.0
+        weights = {t: round(w / sum_w, 4) for t, w in weights.items()}
     else:  # risk_parity
         weights = PortfolioOptimizer.calculate_optimal_weights(focus_tickers, volatility_dict=vol_dict)
 
@@ -684,8 +762,10 @@ def api_portfolio_sizer():
             "target_amount_egp": info.get("target_amount_egp", 0.0),
             "actual_amount_egp": info.get("actual_amount_egp", 0.0),
             "actual_weight_pct": info.get("actual_weight_pct", 0.0),
-            "target_1_egp": round(price * 1.085, 2),
-            "stop_loss_egp": round(price * 0.93, 2),
+            "target_1_egp": targets_dict.get(ticker, round(price * 1.085, 2)),
+            "stop_loss_egp": stops_dict.get(ticker, round(price * 0.93, 2)),
+            "overall_score": scores_dict.get(ticker, 70.0),
+            "decision": decisions_dict.get(ticker, "BUY"),
             "status": info.get("status", "ALLOCATED_OK")
         })
 
@@ -698,6 +778,145 @@ def api_portfolio_sizer():
         "strategy": strategy,
         "allocations": formatted_allocations
     })
+
+
+@app.route("/api/portfolio/adopt_plan", methods=["POST"])
+def api_portfolio_adopt_plan():
+    """
+    Adopts the calculated smart portfolio sizer plan directly into the active paper portfolio.
+    Updates cash balance, adds open positions with real targets and stops, and logs transactions.
+    """
+    data = request.get_json(silent=True) or {}
+    allocations = data.get("allocations", [])
+    if not allocations:
+        return jsonify({"status": "ERROR", "message": "لا توجد أسهم مخصصة في الخطة لاعتمادها."}), 400
+
+    try:
+        from core.paper_trading_state import PaperTradingStateManager
+        state = PaperTradingStateManager.load_state()
+        
+        now_str = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        date_str = datetime.datetime.now().strftime("%Y-%m-%d")
+
+        existing_open = {p["ticker"]: p for p in state["portfolio"].get("open_positions", [])}
+        total_spent = 0.0
+        adopted_items = []
+
+        for item in allocations:
+            ticker = item.get("ticker")
+            shares = int(item.get("shares_to_buy", 0))
+            price = float(item.get("price_egp", 0.0))
+            if not ticker or shares <= 0 or price <= 0:
+                continue
+
+            cost = round(shares * price, 2)
+            total_spent += cost
+
+            if ticker in existing_open:
+                # Average up/down existing position
+                curr = existing_open[ticker]
+                old_shares = curr.get("shares", 0)
+                old_cost = old_shares * curr.get("entry_price", price)
+                new_total_shares = old_shares + shares
+                new_avg_price = round((old_cost + cost) / new_total_shares, 2)
+                curr["shares"] = new_total_shares
+                curr["entry_price"] = new_avg_price
+                curr["target_price"] = item.get("target_1_egp", round(price * 1.085, 2))
+                curr["stop_loss"] = item.get("stop_loss_egp", round(price * 0.93, 2))
+                curr["last_updated"] = now_str
+            else:
+                new_pos = {
+                    "ticker": ticker,
+                    "company_name": item.get("company_name", ticker),
+                    "shares": shares,
+                    "entry_price": price,
+                    "entry_date": date_str,
+                    "target_price": item.get("target_1_egp", round(price * 1.085, 2)),
+                    "stop_loss": item.get("stop_loss_egp", round(price * 0.93, 2)),
+                    "sessions_held": 0,
+                    "entry_fee": round(cost * 0.0015, 2),
+                    "sector": item.get("sector", "General")
+                }
+                state["portfolio"]["open_positions"].append(new_pos)
+                existing_open[ticker] = new_pos
+
+            adopted_items.append({"ticker": ticker, "shares": shares, "price": price, "cost": cost})
+
+        # Update cash
+        curr_cash = state["portfolio"].get("cash", 100000.0)
+        state["portfolio"]["cash"] = max(0.0, round(curr_cash - total_spent, 2))
+        
+        # Update invested stock equity
+        invested = sum(p["shares"] * p["entry_price"] for p in state["portfolio"]["open_positions"])
+        state["portfolio"]["invested_stock_equity"] = round(invested, 2)
+        state["portfolio"]["portfolio_equity"] = round(state["portfolio"]["cash"] + invested, 2)
+
+        PaperTradingStateManager.save_state(state)
+
+        # Append to journal and my_portfolio_transactions
+        journal_file = os.path.join(WORKSPACE, "data", "paper_trading_journal.json")
+        if os.path.exists(journal_file):
+            try:
+                with open(journal_file, "r", encoding="utf-8") as f:
+                    journal = json.load(f)
+            except Exception:
+                journal = {}
+        else:
+            journal = {}
+        
+        if isinstance(journal, dict):
+            active_list = journal.setdefault("open_orders", [])
+        else:
+            active_list = journal
+            
+        for ad in adopted_items:
+            active_list.append({
+                "timestamp": now_str,
+                "action": "BUY_ALLOCATION",
+                "ticker": ad["ticker"],
+                "shares": ad["shares"],
+                "price": ad["price"],
+                "total_egp": ad["cost"],
+                "strategy": data.get("strategy", "risk_parity")
+            })
+        
+        with open(journal_file, "w", encoding="utf-8") as f:
+            json.dump(journal, f, ensure_ascii=False, indent=2)
+
+        # Also append to my_portfolio_transactions.json
+        tx_file = os.path.join(WORKSPACE, "data", "my_portfolio_transactions.json")
+        tx_list = []
+        if os.path.exists(tx_file):
+            try:
+                with open(tx_file, "r", encoding="utf-8") as f:
+                    tx_list = json.load(f)
+            except Exception:
+                tx_list = []
+        for ad in adopted_items:
+            tx_list.append({
+                "id": f"TX-{int(datetime.datetime.now().timestamp()*1000)}-{ad['ticker']}",
+                "date": now_str,
+                "ticker": ad["ticker"],
+                "type": "BUY",
+                "shares": ad["shares"],
+                "price": ad["price"],
+                "amount": ad["cost"]
+            })
+        with open(tx_file, "w", encoding="utf-8") as f:
+            json.dump(tx_list, f, ensure_ascii=False, indent=2)
+
+        return jsonify({
+            "status": "SUCCESS",
+            "message": f"تم اعتماد الخطة وشراء {len(adopted_items)} مراكز بنجاح في المحفظة التجريبية! 🎯",
+            "adopted_count": len(adopted_items),
+            "total_spent_egp": round(total_spent, 2),
+            "remaining_cash_egp": state["portfolio"]["cash"]
+        }), 200
+
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return jsonify({"status": "ERROR", "message": f"حدث خطأ أثناء اعتماد الخطة: {str(e)}"}), 500
 
 
 # --- 4. Cross-Sectional Ranking ---
@@ -753,8 +972,7 @@ def api_ranking():
                     exp_upside = r.get("horizons", {}).get("20D", {}).get("expected_return_pct", 0.0) if r.get("horizons") else r.get("expected_upside_pct", 0.0)
                     exp_downside = r.get("horizons", {}).get("20D", {}).get("expected_downside_pct", -2.5) if r.get("horizons") else r.get("expected_downside_pct", -2.5)
                     stop_val = r.get("stop_loss") or (round(curr_p * 0.93, 2) if curr_p else None)
-                    score = r.get("overall_score", r.get("composite_score", r.get("alpha_score", 50.0)))
-                    action = r.get("action") or ("BUY" if score >= 80 else ("WATCH" if score >= 60 else "AVOID"))
+                    action = r.get("action") or r.get("decision") or ("BUY" if score >= 70.0 else ("WATCH" if score >= 58.0 else "AVOID"))
 
                     projected.append({
                         "rank": r.get("rank", len(projected) + 1),
@@ -811,6 +1029,9 @@ def api_ranking():
         exp_upside = r.get("horizons", {}).get("20D", {}).get("expected_return_pct", 0.0) if r.get("horizons") else 0.0
         exp_downside = r.get("horizons", {}).get("20D", {}).get("expected_downside_pct", -2.5) if r.get("horizons") else -2.5
 
+        is_buy_res = (r.get("action") == "BUY" or r.get("decision") == "BUY" or r.get("overall_score", 0) >= 70.0)
+        is_watch_res = (not is_buy_res and (r.get("overall_score", 0) >= 58.0 or r.get("action") == "WATCH" or r.get("decision") == "WATCH"))
+
         results.append({
             "rank": r.get("rank", 0),
             "ticker": r["ticker"],
@@ -834,9 +1055,9 @@ def api_ranking():
             "composite_score": r["overall_score"],
             "score": r["overall_score"],
             "risk_score": 85.0,
-            "recommendation": "شراء تراجعي (Limit)" if r["overall_score"] >= 80 else ("مراقبة الاتجاه" if r["overall_score"] >= 60 else "تجنب الشراء حالياً"),
-            "action": "BUY" if r["overall_score"] >= 80 else ("WATCH" if r["overall_score"] >= 60 else "AVOID"),
-            "action_ar": "🟢 شراء وتجميع" if r["overall_score"] >= 80 else ("🟡 مراقبة واحتفاظ" if r["overall_score"] >= 60 else "🔴 تجنب ومخاطر"),
+            "recommendation": "شراء وتجميع ممتاز" if is_buy_res else ("مراقبة الاتجاه" if is_watch_res else "تجنب الشراء حالياً"),
+            "action": "BUY" if is_buy_res else ("WATCH" if is_watch_res else "AVOID"),
+            "action_ar": "🟢 شراء وتجميع" if is_buy_res else ("🟡 مراقبة واحتفاظ" if is_watch_res else "🔴 تجنب ومخاطر"),
             "why_selected": r.get("why_selected", "🟢 أداء متوازن ومتوافق مع حركة السوق."),
             "explanation_ar": r.get("why_selected", "🟢 أداء متوازن ومتوافق مع حركة السوق."),
             "quality_of_earnings": r.get("fundamentals", {}).get("earnings_quality_flag_ar", ""),

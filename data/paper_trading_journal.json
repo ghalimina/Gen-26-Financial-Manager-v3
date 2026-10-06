@@ -325,5 +325,70 @@
       "return_pct": 4.31,
       "status": "CLOSED"
     }
+  ],
+  "open_orders": [
+    {
+      "timestamp": "2026-10-06 14:28:56",
+      "action": "BUY_ALLOCATION",
+      "ticker": "COMI.CA",
+      "shares": 39,
+      "price": 126.05,
+      "total_egp": 4915.95,
+      "strategy": "risk_parity"
+    },
+    {
+      "timestamp": "2026-10-06 14:28:56",
+      "action": "BUY_ALLOCATION",
+      "ticker": "ETEL.CA",
+      "shares": 33,
+      "price": 151.0,
+      "total_egp": 4983.0,
+      "strategy": "risk_parity"
+    },
+    {
+      "timestamp": "2026-10-06 14:33:14",
+      "action": "BUY_ALLOCATION",
+      "ticker": "COMI.CA",
+      "shares": 39,
+      "price": 126.05,
+      "total_egp": 4915.95,
+      "strategy": "risk_parity"
+    },
+    {
+      "timestamp": "2026-10-06 14:33:14",
+      "action": "BUY_ALLOCATION",
+      "ticker": "ETEL.CA",
+      "shares": 33,
+      "price": 151.0,
+      "total_egp": 4983.0,
+      "strategy": "risk_parity"
+    },
+    {
+      "timestamp": "2026-10-06 14:33:14",
+      "action": "BUY_ALLOCATION",
+      "ticker": "ACRO.CA",
+      "shares": 92,
+      "price": 54.0,
+      "total_egp": 4968.0,
+      "strategy": "risk_parity"
+    },
+    {
+      "timestamp": "2026-10-06 14:33:14",
+      "action": "BUY_ALLOCATION",
+      "ticker": "OIH.CA",
+      "shares": 2645,
+      "price": 1.89,
+      "total_egp": 4999.05,
+      "strategy": "risk_parity"
+    },
+    {
+      "timestamp": "2026-10-06 14:33:14",
+      "action": "BUY_ALLOCATION",
+      "ticker": "EGAL.CA",
+      "shares": 14,
+      "price": 345.99,
+      "total_egp": 4843.86,
+      "strategy": "risk_parity"
+    }
   ]
 }

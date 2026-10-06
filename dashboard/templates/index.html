@@ -6482,6 +6482,7 @@
             if (modal) {
                 modal.classList.add('open');
             }
+            window.currentSizerTicker = defaultTicker || null;
             if (window.userPortfolioCash && window.userPortfolioCash > 0) {
                 const input = document.getElementById('sizer-capital-input');
                 if (input && (!input.value || input.value === '50000')) {
@@ -6496,6 +6497,7 @@
             if (modal) {
                 modal.classList.remove('open');
             }
+            window.currentSizerTicker = null;
         }
 
         function setSizerCapital(amount) {
@@ -6520,13 +6522,18 @@
                 return;
             }
 
-            showToast("جاري حساب خطة التوزيع الذكية ومطابقة السيولة...", "info");
+            showToast("جاري حساب خطة التوزيع الذكية ومطابقة سيولة البورصة...", "info");
 
             try {
+                const payload = { 
+                    capital: capital, 
+                    strategy: strategy,
+                    tickers: window.currentSizerTicker ? [window.currentSizerTicker] : null
+                };
                 const res = await fetch('/api/portfolio/size', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ capital: capital, strategy: strategy })
+                    body: JSON.stringify(payload)
                 });
 
                 if (!res.ok) throw new Error("HTTP " + res.status);
@@ -6542,23 +6549,35 @@
                             <div>المبلغ الموزع: <strong class="text-green font-mono">${(data.total_allocated_egp || 0).toLocaleString()} ج.م</strong></div>
                             <div>الكاش المتبقي (أمان): <strong class="text-blue font-mono">${(data.remaining_cash_egp || 0).toLocaleString()} ج.م (${data.cash_reserve_pct || 0}%)</strong></div>
                         </div>
-                        <div style="display: flex; flex-direction: column; gap: 8px; max-height: 240px; overflow-y: auto;">
+                        <div style="display: flex; flex-direction: column; gap: 8px; max-height: 280px; overflow-y: auto;">
                     `;
 
-                    itemsHtml += data.allocations.map(item => `
-                        <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; padding: 10px 12px; display: flex; justify-content: space-between; align-items: center; font-size: 12px;">
-                            <div>
-                                <div style="font-weight: 700; color: #fff;">${item.company_name} <span class="ltr-text text-blue font-mono font-bold">(${item.ticker})</span></div>
-                                <div style="font-size: 11px; color: var(--text-muted);">
-                                    السعر: <span class="ltr-text font-mono">${item.price_egp.toFixed(2)} ج.م</span> | المستهدف: <span class="text-green font-mono">${item.target_1_egp.toFixed(2)}</span>
+                    itemsHtml += data.allocations.map(item => {
+                        const isBuy = item.decision === 'BUY' || (item.overall_score && item.overall_score >= 70.0);
+                        const badge = isBuy 
+                            ? '<span class="badge badge-green" style="font-size:10px;">🟢 شراء وتجميع</span>' 
+                            : '<span class="badge badge-yellow" style="font-size:10px;">🟡 مراقبة واحتفاظ</span>';
+                        return `
+                            <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; padding: 10px 12px; display: flex; justify-content: space-between; align-items: center; font-size: 12px;">
+                                <div>
+                                    <div style="display: flex; align-items: center; gap: 6px;">
+                                        <strong style="color: #fff;">${item.company_name}</strong> 
+                                        <span class="ltr-text text-blue font-mono font-bold">(${item.ticker})</span>
+                                        ${badge}
+                                    </div>
+                                    <div style="font-size: 11px; color: var(--text-muted); margin-top: 3px;">
+                                        السعر: <span class="ltr-text font-mono">${item.price_egp.toFixed(2)} ج.م</span> | 
+                                        المستهدف: <span class="text-green font-mono">${item.target_1_egp.toFixed(2)}</span> | 
+                                        الوقف: <span class="text-red font-mono">${item.stop_loss_egp.toFixed(2)}</span>
+                                    </div>
+                                </div>
+                                <div style="text-align: left;">
+                                    <div style="font-weight: 900; color: #34d399; font-size: 13px;" class="font-mono">${item.shares_to_buy} سهم</div>
+                                    <div style="font-size: 11px; color: var(--text-muted);" class="font-mono">${item.actual_amount_egp.toLocaleString()} ج.م (${item.actual_weight_pct}%)</div>
                                 </div>
                             </div>
-                            <div style="text-align: left;">
-                                <div style="font-weight: 900; color: #34d399; font-size: 13px;" class="font-mono">${item.shares_to_buy} سهم</div>
-                                <div style="font-size: 11px; color: var(--text-muted);" class="font-mono">${item.actual_amount_egp.toLocaleString()} ج.م (${item.actual_weight_pct}%)</div>
-                            </div>
-                        </div>
-                    `).join('');
+                        `;
+                    }).join('');
 
                     itemsHtml += `</div>`;
                     planItemsContainer.innerHTML = itemsHtml;
@@ -6579,9 +6598,28 @@
                 showToast("يرجى حساب الخطة أولاً.", "error");
                 return;
             }
-            showToast("تم اعتماد خطة التوزيع الذكية بنجاح! تفقد صفحة المحفظة التجريبية.", "success");
-            closePortfolioSizer();
-            navigateTo('paper_portfolio');
+            showToast("جاري اعتماد الخطة وشراء الأسهم في المحفظة التجريبية...", "info");
+            try {
+                const res = await fetch('/api/portfolio/adopt_plan', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(currentSizerPlan)
+                });
+                const data = await res.json();
+                if (data.status === 'SUCCESS') {
+                    showToast(data.message || "تم اعتماد خطة التوزيع الذكية بنجاح! 🎯", "success");
+                    closePortfolioSizer();
+                    window.currentSizerTicker = null;
+                    if (typeof loadPaperPortfolio === 'function') {
+                        loadPaperPortfolio();
+                    }
+                    navigateTo('paper_portfolio');
+                } else {
+                    showToast(data.message || "تعذر اعتماد الخطة", "error");
+                }
+            } catch (e) {
+                showToast("حدث خطأ أثناء الاتصال بالخادم لاعتماد الخطة.", "error");
+            }
         }
 
         function copyPlanToClipboard() {

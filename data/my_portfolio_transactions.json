@@ -1,1 +1,65 @@
-[]
+[
+  {
+    "id": "TX-1791286136602-COMI.CA",
+    "date": "2026-10-06 14:28:56",
+    "ticker": "COMI.CA",
+    "type": "BUY",
+    "shares": 39,
+    "price": 126.05,
+    "amount": 4915.95
+  },
+  {
+    "id": "TX-1791286136602-ETEL.CA",
+    "date": "2026-10-06 14:28:56",
+    "ticker": "ETEL.CA",
+    "type": "BUY",
+    "shares": 33,
+    "price": 151.0,
+    "amount": 4983.0
+  },
+  {
+    "id": "TX-1791286394055-COMI.CA",
+    "date": "2026-10-06 14:33:14",
+    "ticker": "COMI.CA",
+    "type": "BUY",
+    "shares": 39,
+    "price": 126.05,
+    "amount": 4915.95
+  },
+  {
+    "id": "TX-1791286394055-ETEL.CA",
+    "date": "2026-10-06 14:33:14",
+    "ticker": "ETEL.CA",
+    "type": "BUY",
+    "shares": 33,
+    "price": 151.0,
+    "amount": 4983.0
+  },
+  {
+    "id": "TX-1791286394055-ACRO.CA",
+    "date": "2026-10-06 14:33:14",
+    "ticker": "ACRO.CA",
+    "type": "BUY",
+    "shares": 92,
+    "price": 54.0,
+    "amount": 4968.0
+  },
+  {
+    "id": "TX-1791286394055-OIH.CA",
+    "date": "2026-10-06 14:33:14",
+    "ticker": "OIH.CA",
+    "type": "BUY",
+    "shares": 2645,
+    "price": 1.89,
+    "amount": 4999.05
+  },
+  {
+    "id": "TX-1791286394055-EGAL.CA",
+    "date": "2026-10-06 14:33:14",
+    "ticker": "EGAL.CA",
+    "type": "BUY",
+    "shares": 14,
+    "price": 345.99,
+    "amount": 4843.86
+  }
+]
