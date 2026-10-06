@@ -712,14 +712,14 @@ class MultiHorizonEngine:
         else:
             meta_prob = meta_label.get("probability_of_success_pct", ai_forecast.get("ai_confidence_score", 70.0))
             meta_dec = meta_label.get("meta_decision", "CONFIRM_BUY")
-            if overall_score >= 80.0:
-                if meta_prob >= 65.0 and meta_dec == "CONFIRM_BUY":
+            if overall_score >= 70.0:
+                if meta_prob >= 58.0 and meta_dec == "CONFIRM_BUY":
                     decision = "BUY"
                     action_ar = "🟢 فرصة شراء وتجميع ممتازة (توافق كمي وإجماع الذكاء الفوقي Meta-Label)"
                 else:
                     decision = "WATCH"
-                    action_ar = f"🟡 مراقبة واحتفاظ (الموديل الكمي يوصي بالشراء لكن احتمالية نجاح الذكاء الفوقي {meta_prob:.1f}% دون عتبة الإجماع 65%)"
-            elif overall_score >= 65.0:
+                    action_ar = f"🟡 مراقبة واحتفاظ (الموديل الكمي يوصي بالشراء لكن احتمالية نجاح الذكاء الفوقي {meta_prob:.1f}% دون عتبة الإجماع 58%)"
+            elif overall_score >= 58.0:
                 decision = "WATCH"
                 action_ar = "🟡 مراقبة / احتفاظ بالمركز"
             else:

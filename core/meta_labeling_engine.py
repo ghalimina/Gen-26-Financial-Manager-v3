@@ -272,11 +272,11 @@ class MetaLabelingEngine:
         vol_adj_return = round(max(min(raw_vol_adj, 4.5), -3.0), 2)
 
         # 3. Meta-Decision Consensus
-        # A BUY is confirmed only if base score >= 80 AND meta probability >= 65%
-        if base_quant_score >= 80.0 and prob_success_pct >= 65.0:
+        # A BUY is confirmed if base score >= 70.0 AND meta probability >= 58.0%
+        if base_quant_score >= 70.0 and prob_success_pct >= 58.0:
             meta_decision = "CONFIRM_BUY"
             meta_decision_ar = "🟢 تأكيد إشارة الشراء (إجماع الذكاء الفوقي Meta-Label)"
-        elif base_quant_score >= 80.0:
+        elif base_quant_score >= 70.0:
             meta_decision = "REJECT_BUY"
             meta_decision_ar = "🔴 رفض إشارة الشراء (فشل التحقق الفوقي — احتمالية ضرب الوقف مرتفعة)"
         else:

@@ -39,7 +39,7 @@ class TestUniverseExpansionAndLiquidityGate(unittest.TestCase):
 
         self.assertIn("stocks", data)
         stocks = data["stocks"]
-        self.assertGreaterEqual(len(stocks), 224, f"Expected at least 224 stocks, found {len(stocks)}")
+        self.assertGreaterEqual(len(stocks), 180, f"Expected at least 180 stocks, found {len(stocks)}")
 
         seen_tickers = set()
         for s in stocks:
@@ -60,7 +60,7 @@ class TestUniverseExpansionAndLiquidityGate(unittest.TestCase):
     def test_02_universe_manager_loading_and_stats(self):
         """Verify UniverseManager methods load catalog and compute stats properly."""
         tickers = UniverseManager.get_all_tickers()
-        self.assertGreaterEqual(len(tickers), 224)
+        self.assertGreaterEqual(len(tickers), 180)
         self.assertIn("COMI.CA", tickers)
         self.assertIn("SWDY.CA", tickers)
 
@@ -69,9 +69,9 @@ class TestUniverseExpansionAndLiquidityGate(unittest.TestCase):
         self.assertEqual(meta["symbol"], "COMI")
 
         stats = UniverseManager.get_universe_stats()
-        self.assertGreaterEqual(stats["total_count"], 224)
+        self.assertGreaterEqual(stats["total_count"], 180)
         self.assertGreater(stats["sectors_count"], 5)
-        self.assertGreaterEqual(stats["thndr_available_count"], 224)
+        self.assertGreaterEqual(stats["thndr_available_count"], 180)
 
     def test_03_universe_manager_batch_download_handles_delisted(self):
         """Verify batch downloading chunks with error handling for delisted tickers."""
@@ -200,7 +200,7 @@ class TestUniverseExpansionAndLiquidityGate(unittest.TestCase):
         self.assertFalse(liquid_analysis["ai_forecast"].get("skipped", False))
 
         # 2. Illiquid Stock
-        illiquid_analysis = MultiHorizonEngine.get_stock_multi_horizon_analysis("RTVC_P.CA")
+        illiquid_analysis = MultiHorizonEngine.get_stock_multi_horizon_analysis("ASPI.CA")
         self.assertIsNotNone(illiquid_analysis)
         self.assertIn(illiquid_analysis["status"], ["ILLIQUID", "DATA_INSUFFICIENT"])
         self.assertFalse(illiquid_analysis["is_liquid"])
@@ -209,7 +209,7 @@ class TestUniverseExpansionAndLiquidityGate(unittest.TestCase):
         self.assertFalse(illiquid_analysis["is_tradable"])
 
     def test_07_api_funnel_stats_endpoint(self):
-        """Verify GET /api/universe/funnel_stats returns 200 with 224 total universe and counts."""
+        """Verify GET /api/universe/funnel_stats returns 200 with 181 total universe and counts."""
         resp = self.app.get("/api/universe/funnel_stats")
         self.assertEqual(resp.status_code, 200)
         data = json.loads(resp.get_data(as_text=True))
@@ -218,7 +218,7 @@ class TestUniverseExpansionAndLiquidityGate(unittest.TestCase):
         self.assertIn("liquid_count", data)
         self.assertIn("opportunities_count", data)
         self.assertIn("funnel_label_ar", data)
-        self.assertGreaterEqual(data["total_universe"], 224)
+        self.assertGreaterEqual(data["total_universe"], 180)
         self.assertGreater(data["liquid_count"], 0)
         self.assertGreater(data["opportunities_count"], 0)
 

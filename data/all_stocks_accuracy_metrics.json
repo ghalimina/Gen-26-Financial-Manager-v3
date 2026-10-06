@@ -1,14 +1,14 @@
 {
   "status": "VALIDATED_ACROSS_ENTIRE_UNIVERSE",
   "as_of_predictions": "2026-08-29 03:47:01",
-  "audit_timestamp": "2026-10-06 01:32:48",
+  "audit_timestamp": "2026-10-06 04:33:18",
   "total_equities_evaluated": 244,
-  "total_predictions_evaluated": 796,
-  "overall_hit_rate_pct": 67.09,
-  "overall_hits": 534,
+  "total_predictions_evaluated": 733,
+  "overall_hit_rate_pct": 64.26,
+  "overall_hits": 471,
   "overall_misses": 262,
-  "mean_forecast_error_pct": 7.23,
-  "median_forecast_error_pct": 5.19,
+  "mean_forecast_error_pct": 7.39,
+  "median_forecast_error_pct": 4.53,
   "horizons": {
     "10D": {
       "total": 184,
@@ -29,12 +29,12 @@
       "target_hit_rate_pct": 63.59
     },
     "20D": {
-      "total": 244,
-      "hits": 145,
+      "total": 181,
+      "hits": 82,
       "target_hits": 0,
-      "mean_error": 10.67934426229508,
-      "mean_return": -2.1506147540983607,
-      "hit_rate_pct": 59.43,
+      "mean_error": 12.531270718232044,
+      "mean_return": -2.9791160220994475,
+      "hit_rate_pct": 45.3,
       "target_hit_rate_pct": 0.0
     },
     "5D": {
@@ -55,60 +55,60 @@
       "hit_rate_pct": 65.8
     },
     "small_cap_or_illiquid": {
-      "total": 565.0,
-      "hits": 382.0,
-      "mean_error": 7.1452920353982305,
-      "hit_rate_pct": 67.61
+      "total": 502.0,
+      "hits": 319.0,
+      "mean_error": 7.369501992031872,
+      "hit_rate_pct": 63.55
     }
   },
   "sectors": {
     "التطوير العقاري": {
-      "total": 130,
-      "hits": 92,
-      "mean_error": 8.869461538461538,
-      "hit_rate_pct": 70.77
+      "total": 122,
+      "hits": 84,
+      "mean_error": 9.103524590163936,
+      "hit_rate_pct": 68.85
     },
     "الخدمات المالية والبنوك": {
-      "total": 127,
-      "hits": 76,
-      "mean_error": 8.399133858267717,
-      "hit_rate_pct": 59.84
+      "total": 117,
+      "hits": 66,
+      "mean_error": 8.664017094017094,
+      "hit_rate_pct": 56.41
     },
     "الأغذية والمشروبات والتبغ": {
-      "total": 94,
-      "hits": 52,
-      "mean_error": 6.913297872340426,
-      "hit_rate_pct": 55.32
+      "total": 87,
+      "hits": 45,
+      "mean_error": 7.043103448275862,
+      "hit_rate_pct": 51.72
     },
     "الموارد الأساسية والكيماويات": {
-      "total": 80,
-      "hits": 65,
-      "mean_error": 6.7871250000000005,
-      "hit_rate_pct": 81.25
+      "total": 71,
+      "hits": 56,
+      "mean_error": 6.975633802816901,
+      "hit_rate_pct": 78.87
     },
     "الرعاية الصحية والأدوية": {
-      "total": 51,
-      "hits": 32,
-      "mean_error": 7.341176470588235,
-      "hit_rate_pct": 62.75
+      "total": 48,
+      "hits": 29,
+      "mean_error": 7.46875,
+      "hit_rate_pct": 60.42
     },
     "مواد البناء والتشييد": {
-      "total": 44,
-      "hits": 30,
-      "mean_error": 5.4795454545454545,
-      "hit_rate_pct": 68.18
+      "total": 40,
+      "hits": 26,
+      "mean_error": 5.404999999999999,
+      "hit_rate_pct": 65.0
     },
     "الصناعة والمقاولات": {
-      "total": 39,
-      "hits": 26,
-      "mean_error": 5.641538461538461,
-      "hit_rate_pct": 66.67
+      "total": 36,
+      "hits": 23,
+      "mean_error": 5.67,
+      "hit_rate_pct": 63.89
     },
     "السياحة والترفيه": {
-      "total": 27,
-      "hits": 16,
-      "mean_error": 7.677777777777778,
-      "hit_rate_pct": 59.26
+      "total": 24,
+      "hits": 13,
+      "mean_error": 7.9750000000000005,
+      "hit_rate_pct": 54.17
     },
     "الخدمات المالية والاستثمار": {
       "total": 24,
@@ -117,16 +117,16 @@
       "hit_rate_pct": 83.33
     },
     "السلع المعمرة والإلكترونيات": {
-      "total": 24,
-      "hits": 15,
-      "mean_error": 4.252916666666667,
-      "hit_rate_pct": 62.5
+      "total": 21,
+      "hits": 12,
+      "mean_error": 4.1033333333333335,
+      "hit_rate_pct": 57.14
     },
     "المنسوجات والسلع الاستهلاكية": {
-      "total": 21,
-      "hits": 17,
-      "mean_error": 4.819523809523809,
-      "hit_rate_pct": 80.95
+      "total": 19,
+      "hits": 15,
+      "mean_error": 4.768947368421053,
+      "hit_rate_pct": 78.95
     },
     "الخدمات المالية غير المصرفية": {
       "total": 16,
@@ -135,16 +135,10 @@
       "hit_rate_pct": 62.5
     },
     "الاتصالات وتكنولوجيا المعلومات": {
-      "total": 14,
-      "hits": 11,
-      "mean_error": 10.202857142857143,
-      "hit_rate_pct": 78.57
-    },
-    "البتروكيماويات والطاقة": {
       "total": 12,
-      "hits": 11,
-      "mean_error": 10.695833333333333,
-      "hit_rate_pct": 91.67
+      "hits": 9,
+      "mean_error": 11.020000000000001,
+      "hit_rate_pct": 75.0
     },
     "الأغذية والمشروبات": {
       "total": 12,
@@ -158,28 +152,22 @@
       "mean_error": 6.178333333333334,
       "hit_rate_pct": 66.67
     },
-    "الطاقة والخدمات البترولية": {
-      "total": 11,
-      "hits": 7,
-      "mean_error": 5.334545454545455,
-      "hit_rate_pct": 63.64
-    },
-    "تكنولوجيا المدفوعات": {
-      "total": 10,
-      "hits": 6,
-      "mean_error": 3.7649999999999997,
-      "hit_rate_pct": 60.0
-    },
-    "خدمات النقل والشحن واللوجستيات": {
-      "total": 9,
-      "hits": 7,
-      "mean_error": 3.978888888888889,
-      "hit_rate_pct": 77.78
+    "البتروكيماويات والطاقة": {
+      "total": 12,
+      "hits": 11,
+      "mean_error": 10.695833333333333,
+      "hit_rate_pct": 91.67
     },
     "التجارة والموزعون": {
       "total": 8,
       "hits": 4,
       "mean_error": 4.575,
+      "hit_rate_pct": 50.0
+    },
+    "الطاقة والخدمات البترولية": {
+      "total": 8,
+      "hits": 4,
+      "mean_error": 5.3475,
       "hit_rate_pct": 50.0
     },
     "خدمات تعليمية": {
@@ -188,11 +176,17 @@
       "mean_error": 6.4,
       "hit_rate_pct": 100.0
     },
-    "الطباعة والتغليف": {
-      "total": 6,
-      "hits": 2,
-      "mean_error": 15.69,
-      "hit_rate_pct": 33.33
+    "تكنولوجيا المدفوعات": {
+      "total": 8,
+      "hits": 4,
+      "mean_error": 3.38125,
+      "hit_rate_pct": 50.0
+    },
+    "خدمات النقل والشحن واللوجستيات": {
+      "total": 8,
+      "hits": 6,
+      "mean_error": 3.81375,
+      "hit_rate_pct": 75.0
     },
     "السيارات والصناعة": {
       "total": 4,
@@ -200,11 +194,11 @@
       "mean_error": 4.109999999999999,
       "hit_rate_pct": 100.0
     },
-    "النقل واللوجستيات": {
+    "الطباعة والتغليف": {
       "total": 4,
-      "hits": 4,
-      "mean_error": 6.42,
-      "hit_rate_pct": 100.0
+      "hits": 0,
+      "mean_error": 20.884999999999998,
+      "hit_rate_pct": 0.0
     },
     "المنسوجات والسلع المعمرة": {
       "total": 4,
@@ -212,16 +206,16 @@
       "mean_error": 7.4125,
       "hit_rate_pct": 0.0
     },
+    "النقل واللوجستيات": {
+      "total": 4,
+      "hits": 4,
+      "mean_error": 6.42,
+      "hit_rate_pct": 100.0
+    },
     "مواد وبلاستيك": {
       "total": 4,
       "hits": 4,
       "mean_error": 7.54,
-      "hit_rate_pct": 100.0
-    },
-    "السيارات والسلع المعمرة": {
-      "total": 1,
-      "hits": 1,
-      "mean_error": 5.3,
       "hit_rate_pct": 100.0
     }
   }
