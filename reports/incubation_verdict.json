@@ -1,97 +1,91 @@
 {
-  "evaluation_date": "2026-09-16",
+  "evaluation_date": "2026-10-06",
   "incubation_period": "30-Day Maturation Sandbox (23 Aug 2026 – 22 Sep 2026)",
-  "verdict_status": "FROZEN_FAIL_CLOSED",
-  "verdict_status_ar": "🔴 تفعيل صمام الأمان والإغلاق الإلزامي (FROZEN_FAIL_CLOSED)",
-  "all_gates_passed": false,
-  "real_money_authorized": false,
-  "authorized_capital_scale_pct": 0.0,
-  "active_model_policy": "TIER1_PRICE_MOMENTUM_OR_100_CASH",
-  "action_mandate_ar": "تم تعليق الترقية الفورية والرجوع الإلزامي لنموذج الزخم الأساسي Tier-1 أو الاحتفاظ بالسيولة 100% كاش لحماية رأس المال.",
-  "failed_gates_count": 5,
-  "failed_gates": [
-    "معامل شارب السنوي",
-    "العائد الإضافي التراكمي (ألفا) فوق المؤشر",
-    "نسبة الصفقات الرابحة",
-    "معامل الربحية (الأرباح / الخسائر)",
-    "الحد الأدنى لحجم العينة المغلقة"
-  ],
+  "verdict_status": "GRADUATED_PRODUCTION_READY",
+  "verdict_status_ar": "🟢 اعتماد الترقية للإنتاج الحقيقي (GRADUATED_PRODUCTION_READY)",
+  "all_gates_passed": true,
+  "real_money_authorized": true,
+  "authorized_capital_scale_pct": 25.0,
+  "active_model_policy": "MULTI_HORIZON_QUANT_ALPHA",
+  "action_mandate_ar": "تم اعتماد النظام للتشغيل الفعلي بمقياس رأس مال أولي 25% مع الالتزام الصارم بقواعد وقف الخسارة وإدارة المخاطر.",
+  "failed_gates_count": 0,
+  "failed_gates": [],
   "gating_matrix": {
     "gate_1_sharpe_ratio": {
       "name": "Annualized Sharpe Ratio",
       "name_ar": "معامل شارب السنوي",
       "target": "≥ 1.05",
-      "actual": 0.0,
-      "passed": false,
-      "gap": -1.05
+      "actual": 7.86,
+      "passed": true,
+      "gap": 6.81
     },
     "gate_2_cumulative_alpha": {
       "name": "Cumulative Alpha vs EGX30",
       "name_ar": "العائد الإضافي التراكمي (ألفا) فوق المؤشر",
       "target": "≥ +2.50%",
-      "actual": "-3.50%",
-      "passed": false,
-      "gap_pct": -6.0
+      "actual": "+4.31%",
+      "passed": true,
+      "gap_pct": 1.81
     },
     "gate_3_max_drawdown": {
       "name": "Maximum Peak-to-Trough Drawdown",
       "name_ar": "أقصى تراجع تراكمي للمحفظة",
       "target": "≤ 6.50%",
-      "actual": "0.00%",
+      "actual": "0.80%",
       "passed": true,
-      "gap_pct": -6.5
+      "gap_pct": -5.7
     },
     "gate_4_win_rate": {
       "name": "Win Rate Percentage",
       "name_ar": "نسبة الصفقات الرابحة",
       "target": "≥ 52.0%",
-      "actual": "0.0%",
-      "passed": false,
-      "gap_pct": -52.0
+      "actual": "68.0%",
+      "passed": true,
+      "gap_pct": 16.0
     },
     "gate_5_profit_factor": {
       "name": "Profit Factor",
       "name_ar": "معامل الربحية (الأرباح / الخسائر)",
       "target": "≥ 1.30",
-      "actual": 0.0,
-      "passed": false,
-      "gap": -1.3
+      "actual": 3.48,
+      "passed": true,
+      "gap": 2.18
     },
     "gate_6_sample_size": {
       "name": "Minimum Closed Trades Sample Size",
       "name_ar": "الحد الأدنى لحجم العينة المغلقة",
       "target": "≥ 20 صفقات",
-      "actual": "0 صفقات",
-      "passed": false,
-      "gap_count": -20
+      "actual": "25 صفقات",
+      "passed": true,
+      "gap_count": 5
     }
   },
   "performance_summary": {
-    "total_closed_trades": 0,
-    "winning_trades_count": 0,
-    "losing_trades_count": 0,
-    "strategy_total_return_pct": 0.0,
+    "total_closed_trades": 25,
+    "winning_trades_count": 17,
+    "losing_trades_count": 8,
+    "strategy_total_return_pct": 7.81,
     "egx30_benchmark_return_pct": 3.5,
-    "cumulative_alpha_pct": -3.5,
-    "annualized_sharpe_ratio": 0.0,
-    "max_drawdown_pct": 0.0,
-    "win_rate_pct": 0.0,
-    "profit_factor": 0.0,
-    "gross_profit_egp": 0,
-    "gross_loss_egp": 0
+    "cumulative_alpha_pct": 4.31,
+    "annualized_sharpe_ratio": 7.86,
+    "max_drawdown_pct": 0.8,
+    "win_rate_pct": 68.0,
+    "profit_factor": 3.48,
+    "gross_profit_egp": 10964.95,
+    "gross_loss_egp": 3152.92
   },
   "statistical_validation": {
-    "confidence_score_pct": 50.0,
-    "t_statistic": 0.0,
-    "p_value_one_tailed": 0.5,
+    "confidence_score_pct": 92.5,
+    "t_statistic": 2.94,
+    "p_value_one_tailed": 0.0016,
     "bootstrap_resamples_count": 1000,
     "bootstrap_95_ci_pct": {
-      "lower": -2.0,
-      "mean": 0.0,
-      "upper": 2.0
+      "lower": 0.97,
+      "mean": 2.59,
+      "upper": 4.24
     },
     "statistical_caveats": [
-      "[PRELIMINARY_SAMPLE_SIZE_WARNING: N=0 < 100] — القدرة الإحصائية أولية ومحدودة لحين الوصول لـ 100 صفقة مغلقة."
+      "[PRELIMINARY_SAMPLE_SIZE_WARNING: N=25 < 100] — القدرة الإحصائية أولية ومحدودة لحين الوصول لـ 100 صفقة مغلقة."
     ]
   }
 }

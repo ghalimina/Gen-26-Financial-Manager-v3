@@ -1,7 +1,7 @@
 {
   "portfolio_id": "REAL_PORTFOLIO_PRIMARY",
   "version": "3.0.0",
-  "last_updated": "2026-10-05T20:00:13.635485",
+  "last_updated": "2026-10-06T14:51:01.801117",
   "cash_egp": 1.0,
   "holdings": [
     {
@@ -54,19 +54,6 @@
       "manual_notes": "",
       "created_at": "2026-09-29T01:45:06.596822",
       "updated_at": "2026-09-29T01:45:06.596822",
-      "active": true
-    },
-    {
-      "holding_id": "POS_TMGH_6e7c74",
-      "ticker": "TMGH.CA",
-      "company_name": "مجموعة طلعت مصطفى",
-      "exchange": "EGX",
-      "sector": "Real Estate",
-      "quantity": 30,
-      "average_entry_price": 91.5,
-      "manual_notes": "",
-      "created_at": "2026-09-29T01:45:52.506618",
-      "updated_at": "2026-09-29T01:45:52.506618",
       "active": true
     }
   ]

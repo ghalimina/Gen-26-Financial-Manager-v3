@@ -158,15 +158,26 @@ class PaperTradingOrchestrator:
             simulated_fills = []
             session_realized_pnl = 0.0
 
-            # Increment holding session count and identify positions exceeding 10 sessions
+            # Increment holding session count and evaluate automated exits (Take Profit, Stop Loss, or Max Holding Period)
             for pos in open_positions:
                 pos["sessions_held"] = pos.get("sessions_held", 0) + 1
-                if pos["sessions_held"] > 10:
+                ticker = pos["ticker"]
+                cp = current_price_lookup.get(ticker, float(pos.get("entry_price", 0.0)))
+                target_p = float(pos.get("target_price") or 0.0)
+                stop_p = float(pos.get("stop_loss") or 0.0)
+                
+                is_take_profit = (target_p > 0 and cp >= target_p)
+                is_stop_loss = (stop_p > 0 and cp <= stop_p)
+                is_time_decay = (pos["sessions_held"] > 10)
+
+                if is_take_profit or is_stop_loss or is_time_decay:
+                    exit_reason = "TAKE_PROFIT" if is_take_profit else ("STOP_LOSS" if is_stop_loss else "MAX_HOLDING_PERIOD")
+                    pos["exit_reason"] = exit_reason
                     positions_to_close.append(pos)
                 else:
                     remaining_open_positions.append(pos)
 
-            # Execute automatic exits for positions open > 10 sessions
+            # Execute automatic exits for triggered positions
             for pos in positions_to_close:
                 ticker = pos["ticker"]
                 shares = pos.get("shares", 0)
@@ -209,6 +220,9 @@ class PaperTradingOrchestrator:
                     "entry_date": pos.get("entry_date", "UNKNOWN"),
                     "exit_date": market_date,
                     "sessions_held": pos["sessions_held"],
+                    "exit_reason": pos.get("exit_reason", "AUTOMATIC_TRIGGER"),
+                    "target_price": float(pos.get("target_price") or 0.0),
+                    "stop_loss": float(pos.get("stop_loss") or 0.0),
                     "gross_pnl_egp": round(gross_pnl, 2),
                     "cost_egp": round(cost_egp, 2),
                     "net_pnl_egp": net_pnl,
@@ -301,7 +315,8 @@ class PaperTradingOrchestrator:
                 "session_number": next_session_num,
                 "date": market_date,
                 "status": "COMPLETED",
-                "pnl": round(session_realized_pnl, 2),  # Real calculated PnL (replaces fixed 500.0)
+                "pnl": round(session_realized_pnl, 2),  # Real calculated PnL
+                "nav_egp": portfolio_equity_after,
                 "closed_trades_count": len(positions_to_close)
             })
 
@@ -317,8 +332,20 @@ class PaperTradingOrchestrator:
 
             # Performance updates
             prev_realized = float(state["performance"].get("realized_pnl_egp", 0.0))
-            state["performance"]["realized_pnl_egp"] = round(prev_realized + session_realized_pnl, 2)
+            new_realized = round(prev_realized + session_realized_pnl, 2)
+            state["performance"]["realized_pnl_egp"] = new_realized
             state["performance"]["unrealized_pnl_egp"] = round(unrealized_pnl, 2)
+            
+            # Recalculate win rate & profit factor across all closed trades
+            if closed_positions_history:
+                wins = [c for c in closed_positions_history if float(c.get("net_pnl_egp", c.get("pnl_egp", 0.0))) > 0]
+                losses = [c for c in closed_positions_history if float(c.get("net_pnl_egp", c.get("pnl_egp", 0.0))) < 0]
+                gross_win = sum(float(c.get("net_pnl_egp", c.get("pnl_egp", 0.0))) for c in wins)
+                gross_loss = abs(sum(float(c.get("net_pnl_egp", c.get("pnl_egp", 0.0))) for c in losses))
+                state["performance"]["win_rate_pct"] = round(len(wins) / len(closed_positions_history) * 100.0, 1)
+                state["performance"]["profit_factor"] = round(gross_win / gross_loss, 2) if gross_loss > 0 else (99.0 if gross_win > 0 else 1.0)
+            
+            state["performance"]["cumulative_return_pct"] = round(((portfolio_equity_after - 100000.0) / 100000.0) * 100.0, 2)
 
             PaperTradingStateManager.save_state(state)
 

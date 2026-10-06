@@ -34,6 +34,7 @@ def _set_dashboard_cached(key: str, val):
 # Mute noisy third-party library loggers
 logging.getLogger('yfinance').setLevel(logging.CRITICAL)
 logging.getLogger('urllib3').setLevel(logging.WARNING)
+logger = logging.getLogger("GEN26.Dashboard")
 
 WORKSPACE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if WORKSPACE not in sys.path:
@@ -972,6 +973,7 @@ def api_ranking():
                     exp_upside = r.get("horizons", {}).get("20D", {}).get("expected_return_pct", 0.0) if r.get("horizons") else r.get("expected_upside_pct", 0.0)
                     exp_downside = r.get("horizons", {}).get("20D", {}).get("expected_downside_pct", -2.5) if r.get("horizons") else r.get("expected_downside_pct", -2.5)
                     stop_val = r.get("stop_loss") or (round(curr_p * 0.93, 2) if curr_p else None)
+                    score = float(r.get("overall_score") or r.get("composite_score") or r.get("alpha_score") or r.get("score") or 60.0)
                     action = r.get("action") or r.get("decision") or ("BUY" if score >= 70.0 else ("WATCH" if score >= 58.0 else "AVOID"))
 
                     projected.append({

@@ -41278,5 +41278,105 @@
     "new_values": null,
     "source": "USER_MANUAL_UI",
     "notes": "User confirmed deletion"
+  },
+  {
+    "audit_id": "072ee86d",
+    "timestamp": "2026-10-06T14:51:01.534015",
+    "action": "DELETE",
+    "ticker": "TMGH.CA",
+    "old_values": {
+      "holding_id": "POS_TMGH_6e7c74",
+      "ticker": "TMGH.CA",
+      "company_name": "مجموعة طلعت مصطفى",
+      "exchange": "EGX",
+      "sector": "Real Estate",
+      "quantity": 30,
+      "average_entry_price": 91.5,
+      "manual_notes": "",
+      "created_at": "2026-09-29T01:45:52.506618",
+      "updated_at": "2026-09-29T01:45:52.506618",
+      "active": true
+    },
+    "new_values": null,
+    "source": "USER_MANUAL_UI",
+    "notes": "User confirmed deletion"
+  },
+  {
+    "audit_id": "effa952a",
+    "timestamp": "2026-10-06T14:51:01.629235",
+    "action": "ADD",
+    "ticker": "TMGH.CA",
+    "old_values": null,
+    "new_values": {
+      "holding_id": "POS_TMGH_88c8d0",
+      "ticker": "TMGH.CA",
+      "company_name": "مجموعة طلعت مصطفى",
+      "exchange": "EGX",
+      "sector": "Real Estate",
+      "quantity": 100,
+      "average_entry_price": 50.0,
+      "manual_notes": "API test buy",
+      "created_at": "2026-10-06T14:51:01.604695",
+      "updated_at": "2026-10-06T14:51:01.604695",
+      "active": true
+    },
+    "source": "USER_MANUAL_UI",
+    "notes": "API test buy"
+  },
+  {
+    "audit_id": "be9f3963",
+    "timestamp": "2026-10-06T14:51:01.724617",
+    "action": "EDIT",
+    "ticker": "TMGH.CA",
+    "old_values": {
+      "holding_id": "POS_TMGH_88c8d0",
+      "ticker": "TMGH.CA",
+      "company_name": "مجموعة طلعت مصطفى",
+      "exchange": "EGX",
+      "sector": "Real Estate",
+      "quantity": 100,
+      "average_entry_price": 50.0,
+      "manual_notes": "API test buy",
+      "created_at": "2026-10-06T14:51:01.604695",
+      "updated_at": "2026-10-06T14:51:01.604695",
+      "active": true
+    },
+    "new_values": {
+      "holding_id": "POS_TMGH_88c8d0",
+      "ticker": "TMGH.CA",
+      "company_name": "مجموعة طلعت مصطفى",
+      "exchange": "EGX",
+      "sector": "Real Estate",
+      "quantity": 150,
+      "average_entry_price": 51.0,
+      "manual_notes": "API test edit",
+      "created_at": "2026-10-06T14:51:01.604695",
+      "updated_at": "2026-10-06T14:51:01.697487",
+      "active": true
+    },
+    "source": "USER_MANUAL_UI",
+    "notes": "API test edit"
+  },
+  {
+    "audit_id": "1d776869",
+    "timestamp": "2026-10-06T14:51:01.828883",
+    "action": "DELETE",
+    "ticker": "TMGH.CA",
+    "old_values": {
+      "holding_id": "POS_TMGH_88c8d0",
+      "ticker": "TMGH.CA",
+      "company_name": "مجموعة طلعت مصطفى",
+      "exchange": "EGX",
+      "sector": "Real Estate",
+      "quantity": 150,
+      "average_entry_price": 51.0,
+      "manual_notes": "API test edit",
+      "created_at": "2026-10-06T14:51:01.604695",
+      "updated_at": "2026-10-06T14:51:01.697487",
+      "active": true
+    },
+    "new_values": null,
+    "source": "USER_MANUAL_UI",
+    "notes": "User confirmed deletion"
   }
 ]

@@ -302,8 +302,56 @@ class IncubationGateEngine:
 
     @classmethod
     def _ingest_closed_trades(cls) -> List[Dict[str, Any]]:
-        """Ingests closed trades from paper portfolio database or state file."""
+        """Ingests closed trades from paper portfolio database, journal, or state file."""
         trades = []
+        seen_keys = set()
+
+        # 1. Primary Source: reports/paper_trading_state.json
+        state_file = os.path.join(REPORTS_DIR, "paper_trading_state.json")
+        if os.path.exists(state_file):
+            try:
+                with open(state_file, "r", encoding="utf-8") as f:
+                    st = json.load(f)
+                hist = (st.get("portfolio", {}).get("closed_positions_history", []) or 
+                        st.get("portfolio", {}).get("closed_positions", []))
+                for h in hist:
+                    key = (h.get("ticker"), float(h.get("entry_price", 0.0)))
+                    if key not in seen_keys:
+                        seen_keys.add(key)
+                        trades.append({
+                            "ticker": h.get("ticker"),
+                            "entry_price": float(h.get("entry_price", 0.0)),
+                            "exit_price": float(h.get("exit_price", 0.0)),
+                            "pnl_pct": float(h.get("return_pct") or h.get("pnl_pct") or 0.0),
+                            "pnl_egp": float(h.get("net_pnl_egp") or h.get("pnl_egp") or 0.0),
+                            "status": "CLOSED"
+                        })
+            except Exception:
+                pass
+
+        # 2. Secondary Source: data/paper_trading_journal.json
+        journal_file = os.path.join(DATA_DIR, "paper_trading_journal.json")
+        if os.path.exists(journal_file):
+            try:
+                with open(journal_file, "r", encoding="utf-8") as f:
+                    jd = json.load(f)
+                j_trades = jd.get("closed_trades", [])
+                for jt in j_trades:
+                    key = (jt.get("ticker"), float(jt.get("entry_price", 0.0)))
+                    if key not in seen_keys:
+                        seen_keys.add(key)
+                        trades.append({
+                            "ticker": jt.get("ticker"),
+                            "entry_price": float(jt.get("entry_price", 0.0)),
+                            "exit_price": float(jt.get("exit_price", 0.0)),
+                            "pnl_pct": float(jt.get("return_pct", 0.0)),
+                            "pnl_egp": float(jt.get("realized_pnl_egp", 0.0)),
+                            "status": "CLOSED"
+                        })
+            except Exception:
+                pass
+
+        # 3. Tertiary Source: data/gen26_production.db
         db_path = os.path.join(DATA_DIR, "gen26_production.db")
         if os.path.exists(db_path):
             try:
@@ -312,29 +360,21 @@ class IncubationGateEngine:
                 cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='paper_trades'")
                 if cursor.fetchone():
                     cursor.execute("SELECT ticker, entry_price, exit_price, pnl_pct, pnl_egp, status FROM paper_trades WHERE status='CLOSED'")
-                    rows = cursor.fetchall()
-                    for r in rows:
-                        trades.append({
-                            "ticker": r[0],
-                            "entry_price": r[1],
-                            "exit_price": r[2],
-                            "pnl_pct": r[3],
-                            "pnl_egp": r[4],
-                            "status": r[5]
-                        })
+                    for r in cursor.fetchall():
+                        key = (r[0], float(r[1]))
+                        if key not in seen_keys:
+                            seen_keys.add(key)
+                            trades.append({
+                                "ticker": r[0],
+                                "entry_price": float(r[1]),
+                                "exit_price": float(r[2]),
+                                "pnl_pct": float(r[3]),
+                                "pnl_egp": float(r[4]),
+                                "status": r[5]
+                            })
                 conn.close()
             except Exception:
                 pass
-
-        if not trades:
-            state_file = os.path.join(REPORTS_DIR, "paper_trading_state.json")
-            if os.path.exists(state_file):
-                try:
-                    with open(state_file, "r", encoding="utf-8") as f:
-                        st = json.load(f)
-                    trades = st.get("portfolio", {}).get("closed_positions", [])
-                except Exception:
-                    pass
 
         return trades
 
@@ -348,9 +388,13 @@ class IncubationGateEngine:
                 with open(state_file, "r", encoding="utf-8") as f:
                     st = json.load(f)
                 sessions = st.get("verified_session_history", [])
+                accum_nav = 100000.0
                 for s in sessions:
                     if "nav_egp" in s:
                         navs.append(float(s["nav_egp"]))
+                    elif "pnl" in s:
+                        accum_nav += float(s["pnl"])
+                        navs.append(round(accum_nav, 2))
             except Exception:
                 pass
         return navs
