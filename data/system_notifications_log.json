@@ -1,5 +1,38 @@
 [
   {
+    "notification_id": "NOTIF_CAD56AE0",
+    "timestamp": "2026-10-07 14:20:01",
+    "iso_timestamp": "2026-10-07T14:20:01.249597",
+    "category": "GENERAL",
+    "icon": "🔔",
+    "title": "إشعار نظام",
+    "message": "🟢 *GEN-26 Cloud Pipeline: SUCCESS*\n• دورة السوق: STRONG_BULL | EGX30: 52,359 | كاش: 5.0%\n• اختبارات CI: 100% passed\n• Macro محدّث (USD/EGP, النفط, الذهب)\n",
+    "delivered_telegram": true,
+    "metadata": {}
+  },
+  {
+    "notification_id": "NOTIF_996088C1",
+    "timestamp": "2026-10-07 14:19:59",
+    "iso_timestamp": "2026-10-07T14:19:59.180575",
+    "category": "BUY_SIGNAL",
+    "icon": "🚨",
+    "title": "🚨 إشارة شراء: COMI.CA",
+    "message": "🚨 *إشارة شراء مؤكدة:* `COMI.CA` (البنك التجاري الدولي)\n━━━━━━━━━━━━━━━━━━━━\n• *سعر الإشارة اللحظي:* `140.00` ج.م\n⏱️ *صلاحية الإشارة:* `30 دقيقة` (تنتهي في `14:30:00`)\n🎯 *النطاق الآمن للدخول:* من `138.00` إلى حد أقصى `140.70` ج.م\n🛑 *وقف الخسارة الصارم:* `130.20` ج.م\n🏹 *الهدف الأول:* `148.50` ج.م\n⭐ *ثقة النموذج الكمي:* `89.5%`\n━━━━━━━━━━━━━━━━━━━━\n⚠️ *تحذير:* يُمنع الشراء إذا تجاوز السعر `140.70` ج.م للحفاظ على إدارة المخاطر.\n━━━━━━━━━━━━━━━━━━━━\n🏛️ _منظومة GEN-26 لإدارة التداول اليدوي الذكي (Human-in-the-Loop)_",
+    "delivered_telegram": true,
+    "metadata": {}
+  },
+  {
+    "notification_id": "NOTIF_9671E945",
+    "timestamp": "2026-10-07 14:19:03",
+    "iso_timestamp": "2026-10-07T14:19:03.813890",
+    "category": "ROUTINE_RETRAIN",
+    "icon": "🧠",
+    "title": "🧠 اكتمال تدريب الذكاء الاصطناعي",
+    "message": "🧠 *اكتمال تدريب الذكاء الاصطناعي بنجاح*\n━━━━━━━━━━━━━━━━━━━━\n• *مصدر الزناد:* `SCHEDULED_WEEKLY`\n• *نموذج التوقع (XGBoost):* `CACHED_LOAD`\n• *نموذج التصنيف الفوقي (Meta-Label):* `TRAINED_SUCCESS`\n• *معامل التحقق OOS:* `IC = 0.0520`\n• *التدريب القادم:* `2026-10-09 12:00 UTC (الجمعة القادمة)`\n━━━━━━━━━━━━━━━━━━━━\n🚀 _تم تحديث وتثبيت أوزان الموديل بنجاح_",
+    "delivered_telegram": true,
+    "metadata": {}
+  },
+  {
     "notification_id": "NOTIF_ACE0E82E",
     "timestamp": "2026-10-07 01:06:00",
     "iso_timestamp": "2026-10-07T01:06:00.846538",
@@ -1059,39 +1092,6 @@
     "notification_id": "NOTIF_8E47970A",
     "timestamp": "2026-09-20 14:58:50",
     "iso_timestamp": "2026-09-20T14:58:50.649081",
-    "category": "ROUTINE_RETRAIN",
-    "icon": "🧠",
-    "title": "🧠 اكتمال تدريب الذكاء الاصطناعي",
-    "message": "🧠 *اكتمال تدريب الذكاء الاصطناعي بنجاح*\n━━━━━━━━━━━━━━━━━━━━\n• *مصدر الزناد:* `SCHEDULED_WEEKLY`\n• *نموذج التوقع (XGBoost):* `CACHED_LOAD`\n• *نموذج التصنيف الفوقي (Meta-Label):* `TRAINED_SUCCESS`\n• *معامل التحقق OOS:* `IC = 0.0520`\n• *التدريب القادم:* `2026-09-25 12:00 UTC (الجمعة القادمة)`\n━━━━━━━━━━━━━━━━━━━━\n🚀 _تم تحديث وتثبيت أوزان الموديل بنجاح_",
-    "delivered_telegram": true,
-    "metadata": {}
-  },
-  {
-    "notification_id": "NOTIF_BD2D52E4",
-    "timestamp": "2026-09-20 14:52:25",
-    "iso_timestamp": "2026-09-20T14:52:25.824566",
-    "category": "GENERAL",
-    "icon": "🔔",
-    "title": "إشعار نظام",
-    "message": "🟢 *GEN-26 Cloud Pipeline Execution: SUCCESS*\n• Incubation Standby State: \n• Auto-retrained MLOps models verified.\n• Master test suite passed 100%.",
-    "delivered_telegram": true,
-    "metadata": {}
-  },
-  {
-    "notification_id": "NOTIF_497B0FD2",
-    "timestamp": "2026-09-20 14:52:24",
-    "iso_timestamp": "2026-09-20T14:52:24.577534",
-    "category": "BUY_SIGNAL",
-    "icon": "🚨",
-    "title": "🚨 إشارة شراء: COMI.CA",
-    "message": "🚨 *إشارة شراء مؤكدة:* `COMI.CA` (البنك التجاري الدولي)\n━━━━━━━━━━━━━━━━━━━━\n• *سعر الإشارة اللحظي:* `140.00` ج.م\n⏱️ *صلاحية الإشارة:* `30 دقيقة` (تنتهي في `14:30:00`)\n🎯 *النطاق الآمن للدخول:* من `138.00` إلى حد أقصى `140.70` ج.م\n🛑 *وقف الخسارة الصارم:* `130.20` ج.م\n🏹 *الهدف الأول:* `148.50` ج.م\n⭐ *ثقة النموذج الكمي:* `89.5%`\n━━━━━━━━━━━━━━━━━━━━\n⚠️ *تحذير:* يُمنع الشراء إذا تجاوز السعر `140.70` ج.م للحفاظ على إدارة المخاطر.\n━━━━━━━━━━━━━━━━━━━━\n🏛️ _منظومة GEN-26 لإدارة التداول اليدوي الذكي (Human-in-the-Loop)_",
-    "delivered_telegram": true,
-    "metadata": {}
-  },
-  {
-    "notification_id": "NOTIF_B8F84D24",
-    "timestamp": "2026-09-20 14:49:35",
-    "iso_timestamp": "2026-09-20T14:49:35.915156",
     "category": "ROUTINE_RETRAIN",
     "icon": "🧠",
     "title": "🧠 اكتمال تدريب الذكاء الاصطناعي",

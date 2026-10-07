@@ -34,7 +34,7 @@
     "CCAP.CA": 0,
     "RAYA.CA": 0,
     "CLHO.CA": 0,
-    "ORHD.CA": 0,
+    "ORHD.CA": 1,
     "CERA.CA": 0,
     "SPMD.CA": 0,
     "DSCW.CA": 0,
@@ -54,7 +54,7 @@
     "FAITA.CA": 0,
     "CIEB.CA": 0,
     "CANA.CA": 0,
-    "SAIB.CA": 0,
+    "SAIB.CA": 1,
     "EGBE.CA": 0,
     "HDBK.CA": 0,
     "VALU.CA": 0,
@@ -183,5 +183,5 @@
     "EBSC.CA": 0
   },
   "alerts": {},
-  "last_updated": "2026-10-07 01:35:48"
+  "last_updated": "2026-10-07 14:02:00"
 }
