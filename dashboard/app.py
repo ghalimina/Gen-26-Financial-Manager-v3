@@ -3857,45 +3857,52 @@ def api_portfolio_swing_advisor():
                     "action_badge_ar": "⚪ لا توجد تعاملات مسجلة"
                 }
 
-            # 4. Synthesize 50% Swing Decision Logic
-            is_nearing_resistance = cur_price >= (meta["resistance"] * 0.92)
-            vpin_is_low = (not vpin_meta.get("is_toxic", False)) and (vpin_meta.get("vpin", 0.5) < 0.40)
-            insider_is_bullish = insider_meta.get("conviction_score", 0.0) >= 30.0
+            # 4. Synthesize 50% Swing Decision Logic with Piastre Accuracy
+            is_at_resistance = cur_price >= (meta["resistance"] * 0.98)
+            is_near_breakout = cur_price >= (meta["resistance"] * 0.92)
+            insider_is_bullish = insider_meta.get("conviction_score", 0.0) >= 20.0
+            smart_accumulation = vpin_meta.get("vpin", 0.5) < 0.45 or insider_is_bullish
 
             sell_50_shares = max(1, int(user_qty * 0.5))
             sell_50_cash_egp = round(sell_50_shares * meta["resistance"], 2)
             rebuy_cash_egp = round(sell_50_shares * meta["buyback"], 2)
             swing_profit_egp = round(sell_50_cash_egp - rebuy_cash_egp, 2)
 
-            if is_nearing_resistance and vpin_is_low and insider_is_bullish:
+            if is_near_breakout and (insider_is_bullish or (smart_accumulation and cur_price >= meta["resistance"])):
                 action_code = "BREAKOUT_CONFIRMED"
-                badge_ar = "🚀 اختراق مؤسسي مؤكد (Breakout)"
+                badge_ar = f"🚀 اختراق مؤسسي مؤكد (هدف {meta['breakout_target']:.2f} ج)"
                 order_command_ar = (
-                    f"BREAKOUT_CONFIRMED: لا تبع عند {meta['resistance']:.2f} ج، "
-                    f"السهم في اختراق مؤسسي نحو {meta['breakout_target']:.2f} ج مع رفع الوقف المتسلّق لـ {meta['trailing_stop']:.2f} ج."
+                    f"BREAKOUT_CONFIRMED: لا تبع عند {meta['resistance']:.2f} ج! "
+                    f"السهم في مسار اختراق مؤسسي ممتد نحو القمة {meta['breakout_target']:.2f} ج. "
+                    f"احتفظ بكامل الكمية (100%) مع رفع الوقف المتسلّق لـ {meta['trailing_stop']:.2f} ج لمنع الخروج المبكر."
                 )
-                allocation_decision = "احتفاظ كامل 100% (Hold Full) وتفعيل Trailing Stop"
-            elif is_nearing_resistance or vpin_meta.get("is_toxic", False) or vpin_meta.get("vpin", 0.5) >= 0.45:
+                allocation_decision = f"احتفاظ كامل 100% لملاحقة قمم {meta['breakout_target']:.2f} ج مع Trailing Stop"
+            elif is_at_resistance and not smart_accumulation:
                 action_code = "PEAK_REJECTION"
                 badge_ar = "⚠️ مقاومة حادة وسيولة تصريفية (Sell 50%)"
                 order_command_ar = (
-                    f"PEAK_REJECTION: بِع 50% من أسهمك ({sell_50_shares} سهم) عند {meta['resistance']:.2f} ج فوراً، "
-                    f"واطلب إعادة الشراء عند {meta['buyback']:.2f} ج."
+                    f"PEAK_REJECTION: وصل السهم لحاجز المقاومة عند {meta['resistance']:.2f} ج. "
+                    f"بِع 50% من أسهمك ({sell_50_shares} سهم) فوراً، واطلب إعادة الشراء بالقرش عند {meta['buyback']:.2f} ج."
                 )
                 allocation_decision = f"تدوير 50% كاش (توفير {sell_50_cash_egp:,.2f} ج.م مع ربح فارق {swing_profit_egp:,.2f} ج.م)"
             else:
                 action_code = "RANGE_ACCUMULATE"
-                badge_ar = "🔄 تجميع في نطاق التداول (Range)"
+                badge_ar = "🔄 تجميع في نطاق التداول (Range Accumulate)"
                 order_command_ar = (
-                    f"RANGE_ACCUMULATE: احتفظ بمركزك ({user_qty} سهم). الدخول الإضافي قرب {meta['buyback']:.2f} ج، "
-                    f"والهدف الأول عند {meta['resistance']:.2f} ج مع وقف خسارة {meta['hard_stop']:.2f} ج."
+                    f"RANGE_ACCUMULATE: احتفظ بمركزك كاملاً ({user_qty} سهم). لا تخرج مبكراً قبل الأهداف. "
+                    f"سعر الشراء الإضافي في الانخفاض: {meta['buyback']:.2f} ج، ومستوى بيع 50% القادم: {meta['resistance']:.2f} ج، والهدف الأقصى: {meta['breakout_target']:.2f} ج."
                 )
-                allocation_decision = "احتفاظ وتمركز (Hold & Wait for Swing Trigger)"
+                allocation_decision = f"احتفاظ وتمركز (Hold Full & Wait for Resistance {meta['resistance']:.2f} ج)"
 
             advisor_results.append({
                 "ticker": sym,
                 "company_name_ar": meta["name_ar"],
                 "current_price": round(cur_price, 2),
+                "dip_rebuy_price": round(float(meta["buyback"]), 2),
+                "peak_sell_half_price": round(float(meta["resistance"]), 2),
+                "breakout_target_price": round(float(meta["breakout_target"]), 2),
+                "trailing_stop_price": round(float(meta["trailing_stop"]), 2),
+                "hard_stop_price": round(float(meta["hard_stop"]), 2),
                 "resistance_price": meta["resistance"],
                 "buyback_support": meta["buyback"],
                 "breakout_target": meta["breakout_target"],

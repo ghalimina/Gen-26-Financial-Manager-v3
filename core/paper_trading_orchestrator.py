@@ -9,6 +9,7 @@ import os
 import sys
 import datetime
 import json
+import sqlite3
 import traceback
 from typing import Dict, List, Any, Optional
 
@@ -228,6 +229,42 @@ class PaperTradingOrchestrator:
                     "net_pnl_egp": net_pnl,
                     "return_pct": round((net_pnl / (entry_price * shares)) * 100.0, 2) if entry_price * shares > 0 else 0.0
                 })
+
+                # Persist closed trade into SQLite paper_trades table for permanent auditability
+                try:
+                    db_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "gen26_production.db")
+                    if os.path.exists(db_path):
+                        conn = sqlite3.connect(db_path)
+                        cur = conn.cursor()
+                        cur.execute("""
+                            CREATE TABLE IF NOT EXISTS paper_trades (
+                                trade_id TEXT PRIMARY KEY,
+                                ticker TEXT,
+                                entry_price REAL,
+                                exit_price REAL,
+                                quantity INTEGER,
+                                pnl_pct REAL,
+                                pnl_egp REAL,
+                                entry_date TEXT,
+                                exit_date TEXT,
+                                status TEXT
+                            )
+                        """)
+                        trade_id = f"PT-{ticker.replace('.CA','')}-{market_date.replace('-','')}-{pos.get('sessions_held', 0)}"
+                        ret_p = round((net_pnl / (entry_price * shares)) * 100.0, 2) if entry_price * shares > 0 else 0.0
+                        cur.execute("""
+                            INSERT OR IGNORE INTO paper_trades (
+                                trade_id, ticker, entry_price, exit_price, quantity,
+                                pnl_pct, pnl_egp, entry_date, exit_date, status
+                            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'CLOSED')
+                        """, (
+                            trade_id, ticker, entry_price, exit_price, shares,
+                            ret_p, net_pnl, pos.get("entry_date", "UNKNOWN"), market_date
+                        ))
+                        conn.commit()
+                        conn.close()
+                except Exception:
+                    pass
 
             # Available free cash after exits
             available_cash_after_exits = broker.get_cash()

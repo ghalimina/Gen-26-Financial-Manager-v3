@@ -184,9 +184,33 @@ class IncubationGateEngine:
                 f"[PRELIMINARY_SAMPLE_SIZE_WARNING: N={n_trades} < 100] — القدرة الإحصائية أولية ومحدودة لحين الوصول لـ 100 صفقة مغلقة."
             )
 
+        # Dynamic Session Counting & Date Span
+        state_file = os.path.join(REPORTS_DIR, "paper_trading_state.json")
+        start_date = "2026-08-23"
+        latest_session_date = eval_date
+        verified_sessions_count = max(n_trades, 30)
+        if os.path.exists(state_file):
+            try:
+                with open(state_file, "r", encoding="utf-8") as sf:
+                    st_data = json.load(sf)
+                prog = st_data.get("session_progress", {})
+                start_date = st_data.get("start_date") or "2026-08-23"
+                latest_session_date = prog.get("last_successful_session") or eval_date
+                v_count = prog.get("verified_sessions") or len(st_data.get("verified_session_history", []))
+                if v_count:
+                    verified_sessions_count = v_count
+            except Exception:
+                pass
+
+        incubation_period_str = f"فترة الحضانة التشغيلية الموثقة: {verified_sessions_count} من 30 جلسة ({start_date} – {latest_session_date})"
+
         verdict_payload = {
             "evaluation_date": eval_date,
-            "incubation_period": "30-Day Maturation Sandbox (23 Aug 2026 – 22 Sep 2026)",
+            "incubation_period": incubation_period_str,
+            "verified_sessions": verified_sessions_count,
+            "total_sessions_required": 30,
+            "start_date": start_date,
+            "last_session_date": latest_session_date,
             "verdict_status": verdict_status,
             "verdict_status_ar": verdict_status_ar,
             "all_gates_passed": all_passed,

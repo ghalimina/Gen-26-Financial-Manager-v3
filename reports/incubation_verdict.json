@@ -1,6 +1,10 @@
 {
   "evaluation_date": "2026-10-08",
-  "incubation_period": "30-Day Maturation Sandbox (23 Aug 2026 – 22 Sep 2026)",
+  "incubation_period": "فترة الحضانة التشغيلية الموثقة: 31 من 30 جلسة (2026-08-23 – 2026-10-05)",
+  "verified_sessions": 31,
+  "total_sessions_required": 30,
+  "start_date": "2026-08-23",
+  "last_session_date": "2026-10-05",
   "verdict_status": "GRADUATED_PRODUCTION_READY",
   "verdict_status_ar": "🟢 اعتماد الترقية للإنتاج الحقيقي (GRADUATED_PRODUCTION_READY)",
   "all_gates_passed": true,
