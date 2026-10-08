@@ -91,6 +91,11 @@ def _set_dashboard_cached(key: str, val):
     _DASHBOARD_CACHE[key] = val
     _DASHBOARD_CACHE_TS[key] = time.time()
 
+def _clear_dashboard_cache():
+    """Invalidates and clears all in-memory dashboard response caches."""
+    _DASHBOARD_CACHE.clear()
+    _DASHBOARD_CACHE_TS.clear()
+
 # Mute noisy third-party library loggers
 logging.getLogger('yfinance').setLevel(logging.CRITICAL)
 logging.getLogger('urllib3').setLevel(logging.WARNING)
@@ -149,28 +154,225 @@ try:
 except Exception:
     pass
 
-# Start background scheduler gracefully if not running in testing mode
+# =============================================================================
+# AUTOMATIC CLOUD-TO-LOCAL GIT SYNC & ENVIRONMENT HYDRATION
+# =============================================================================
+
+_LAST_AUTO_SYNC_STATUS = {
+    "status": "NOT_RUN",
+    "timestamp": None,
+    "is_local": None,
+    "git_rc": None,
+    "git_output": None,
+    "thndr_reloaded": False,
+    "portfolio_reloaded": False,
+    "prices_reloaded": False,
+    "duration_sec": 0.0,
+    "message": "Awaiting initial startup trigger."
+}
+import threading
+_LAST_AUTO_SYNC_LOCK = threading.Lock()
+_LAST_SYNC_TIMESTAMP = 0.0
+
+
+def is_local_environment() -> bool:
+    """
+    Checks whether the application is executing on a local workstation
+    as opposed to a cloud deployment container (Render, GitHub Actions, CI, Heroku, etc.).
+    """
+    cloud_indicators = [
+        "RENDER",
+        "RENDER_SERVICE_ID",
+        "GITHUB_ACTIONS",
+        "CI",
+        "HEROKU",
+        "K_SERVICE",
+        "AWS_EXECUTION_ENV",
+        "VERCEL",
+    ]
+    if any(os.environ.get(k) for k in cloud_indicators):
+        return False
+
+    if os.environ.get("FLASK_TESTING") == "1" or os.environ.get("PYTEST_CURRENT_TEST"):
+        return False
+
+    git_dir = os.path.join(WORKSPACE, ".git")
+    if not os.path.isdir(git_dir):
+        return False
+
+    return True
+
+
+def auto_sync_from_remote_on_startup(background: bool = True, force: bool = False, timeout_sec: float = 15.0) -> dict:
+    """
+    Automatic Cloud-to-Local Git Sync on Dashboard Startup.
+    Target: Seamless local dashboard hydration from GitHub remote when the user opens the laptop.
+
+    Execution Flow:
+    1. Checks if running locally (not inside a cloud container like Render, GitHub Actions, or CI).
+    2. Runs safely in the background: `git pull --rebase origin main` with a 15-second timeout
+       and quiet error handling in case of offline / network unavailability.
+    3. Reloads Thndr daily card snapshot, portfolio metrics, and canonical prices to reflect
+       everything the cloud (GitHub Actions) executed while the laptop was closed.
+    """
+    global _LAST_SYNC_TIMESTAMP
+    now = time.time()
+
+    if not force and (now - _LAST_SYNC_TIMESTAMP) < 30.0 and _LAST_SYNC_TIMESTAMP > 0:
+        return {
+            "status": "RECENTLY_SYNCED",
+            "message": "Auto-sync was already executed within the last 30 seconds.",
+            "last_auto_sync": _LAST_AUTO_SYNC_STATUS,
+            "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        }
+
+    if background:
+        t = threading.Thread(
+            target=lambda: auto_sync_from_remote_on_startup(background=False, force=True, timeout_sec=timeout_sec),
+            name="CloudToLocalAutoSync",
+            daemon=True
+        )
+        t.start()
+        return {
+            "status": "QUEUED_IN_BACKGROUND",
+            "message": "Auto-sync from remote started asynchronously in background thread.",
+            "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        }
+
+    with _LAST_AUTO_SYNC_LOCK:
+        _LAST_SYNC_TIMESTAMP = time.time()
+        start_time = time.time()
+        result = {
+            "status": "SUCCESS",
+            "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "is_local": True,
+            "git_rc": 0,
+            "git_output": "",
+            "thndr_reloaded": False,
+            "portfolio_reloaded": False,
+            "prices_reloaded": False,
+            "duration_sec": 0.0,
+            "message": ""
+        }
+
+        # 1. Verify local environment (skip on Render / GitHub Actions / CI)
+        if not is_local_environment():
+            result["status"] = "SKIPPED"
+            result["is_local"] = False
+            result["message"] = "Skipped remote sync: running in cloud container or testing environment."
+            logger.info(result["message"])
+            _LAST_AUTO_SYNC_STATUS.update(result)
+            return result
+
+        # 2. Execute git pull --rebase origin main safely (Timeout 15s)
+        import subprocess
+        try:
+            logger.info("Executing auto-sync from remote: git pull --rebase origin main (timeout=%.1fs)...", timeout_sec)
+            cmd = ["git", "pull", "--rebase", "--autostash", "origin", "main"]
+            proc = subprocess.run(
+                cmd,
+                cwd=WORKSPACE,
+                capture_output=True,
+                text=True,
+                timeout=timeout_sec
+            )
+            if proc.returncode != 0 and "unrecognized" in (proc.stderr or "").lower():
+                proc = subprocess.run(
+                    ["git", "pull", "--rebase", "origin", "main"],
+                    cwd=WORKSPACE,
+                    capture_output=True,
+                    text=True,
+                    timeout=timeout_sec
+                )
+
+            result["git_rc"] = proc.returncode
+            stdout = (proc.stdout or "").strip()
+            stderr = (proc.stderr or "").strip()
+            result["git_output"] = stdout if stdout else stderr
+
+            if proc.returncode == 0:
+                logger.info("Auto-sync git pull completed successfully: %s", stdout or "Already up to date.")
+                result["message"] = "Git pull completed successfully."
+            else:
+                logger.warning("Auto-sync git pull warning (code %s): %s", proc.returncode, stderr or stdout)
+                result["status"] = "WARNING"
+                result["message"] = f"Git pull returned non-zero code {proc.returncode}."
+                # If rebase conflict detected, quietly abort rebase to preserve local repo integrity
+                if "rebase in progress" in (stderr + stdout).lower():
+                    try:
+                        subprocess.run(["git", "rebase", "--abort"], cwd=WORKSPACE, capture_output=True, timeout=5.0)
+                    except Exception:
+                        pass
+
+        except subprocess.TimeoutExpired:
+            logger.info("Auto-sync notice: git pull timed out after %.1fs (network slow or offline). Retaining local state.", timeout_sec)
+            result["status"] = "TIMEOUT"
+            result["git_rc"] = 124
+            result["git_output"] = f"TimeoutExpired({timeout_sec}s)"
+            result["message"] = f"Git pull timed out after {timeout_sec}s; offline or slow connection."
+        except Exception as git_err:
+            logger.info("Auto-sync notice: git pull skipped due to network/system condition: %s", git_err)
+            result["status"] = "NETWORK_ERROR"
+            result["git_rc"] = -1
+            result["git_output"] = str(git_err)
+            result["message"] = f"Git pull skipped: {git_err}"
+
+        # 3. State hydration: Thndr daily card snapshot, portfolio, and canonical prices
+        try:
+            # Invalidate in-memory cached responses so dashboard immediately reflects latest cloud state
+            _clear_dashboard_cache()
+
+            # Reload Thndr Daily Card Snapshot from disk
+            snapshot_path = os.path.join(WORKSPACE, "data", "thndr_daily_card_snapshot.json")
+            if os.path.exists(snapshot_path):
+                try:
+                    with open(snapshot_path, "r", encoding="utf-8") as f:
+                        snap_data = json.load(f)
+                    if snap_data and isinstance(snap_data, dict) and "thndr_daily_card" in snap_data:
+                        _set_dashboard_cached("thndr_daily_card", snap_data)
+                        result["thndr_reloaded"] = True
+                        logger.info("Thndr daily card snapshot reloaded successfully from disk.")
+                except Exception as snap_err:
+                    logger.warning("Notice loading Thndr card snapshot: %s", snap_err)
+
+            # Reload & re-analyze Real Portfolio
+            try:
+                RealPortfolioTracker.load_portfolio()
+                RealPortfolioTracker.analyze_real_portfolio()
+                result["portfolio_reloaded"] = True
+                logger.info("Real portfolio reloaded and re-analyzed successfully.")
+            except Exception as p_err:
+                logger.warning("Notice reloading real portfolio: %s", p_err)
+
+            # Re-sync Canonical Market Prices
+            try:
+                PriceSyncService.load_canonical_prices(force_reload=True)
+                MarketPriceService.sync_live_prices_to_database()
+                PriceSyncService.sync_all_prices(force=True)
+                result["prices_reloaded"] = True
+            except Exception as pr_err:
+                logger.debug("Notice re-syncing canonical prices: %s", pr_err)
+
+        except Exception as hyd_err:
+            logger.warning("Post-sync state hydration notice: %s", hyd_err)
+
+        result["duration_sec"] = round(time.time() - start_time, 2)
+        _LAST_AUTO_SYNC_STATUS.update(result)
+        return result
+
+
+# Start background scheduler and auto-sync from remote gracefully if not running in testing mode
 if not os.environ.get("FLASK_TESTING"):
     try:
         EGXMarketScheduler.start()
     except Exception as e:
         print(f"Warning: Failed to start market scheduler: {e}")
 
-    # Auto-sync live prices and pull latest state in background thread on server start
-    import threading
-    def _auto_startup_sync():
-        try:
-            import subprocess
-            subprocess.run(["git", "pull", "--ff-only"], cwd=WORKSPACE, capture_output=True, timeout=5)
-        except Exception:
-            pass
-        try:
-            PriceSyncService.sync_all_prices(force=True)
-            MarketPriceService.sync_live_prices_to_database()
-        except Exception as err:
-            print(f"Startup live price sync notice: {err}")
+    try:
+        auto_sync_from_remote_on_startup(background=True)
+    except Exception as e:
+        print(f"Startup auto-sync notice: {e}")
 
-    threading.Thread(target=_auto_startup_sync, daemon=True).start()
 
 
 # =============================================================================
@@ -1559,9 +1761,28 @@ def api_system_health():
         "cache_entries": len(_DASHBOARD_CACHE),
         "active_universe_equities": 181,
         "scheduler_status": "RUNNING",
+        "auto_sync_status": _LAST_AUTO_SYNC_STATUS.get("status", "NOT_RUN"),
         "api_latency_ms": 1.2,
         "mode": "PAPER_AND_ADVISORY"
     })
+
+
+@app.route("/api/system/sync_remote", methods=["GET", "POST"])
+def api_system_sync_remote():
+    """
+    Endpoint for inspecting or manually triggering cloud-to-local git synchronization.
+    GET: Returns current auto-sync telemetry and environment status.
+    POST / ?force=1: Triggers an immediate re-sync from origin main with Thndr card & portfolio hydration.
+    """
+    force = request.args.get("force", "").lower() in ("1", "true", "yes") or request.method == "POST"
+    if force:
+        res = auto_sync_from_remote_on_startup(background=False, force=True)
+        return jsonify(res), 200
+    return jsonify({
+        "status": "SUCCESS",
+        "last_auto_sync": _LAST_AUTO_SYNC_STATUS,
+        "is_local_environment": is_local_environment()
+    }), 200
 
 
 @app.route("/api/risk/compliance", methods=["GET"])
@@ -2093,9 +2314,22 @@ def api_thndr_daily_card():
     Synthesizes Golden Consensus, Pullback Dip vs Trend Breakout, enforces 35% Cash Floor,
     and provides Smart Cash Protection Radar routing idle cash to Thndr Mutual Funds.
     """
-    cached = _get_dashboard_cached("thndr_daily_card")
-    if cached is not None:
-        return jsonify(cached)
+    force_refresh = request.args.get("force", "").lower() in ("1", "true", "yes")
+    if not force_refresh:
+        cached = _get_dashboard_cached("thndr_daily_card")
+        if cached is not None:
+            return jsonify(cached)
+
+        snapshot_path = os.path.join(WORKSPACE, "data", "thndr_daily_card_snapshot.json")
+        if os.path.exists(snapshot_path):
+            try:
+                with open(snapshot_path, "r", encoding="utf-8") as f:
+                    snap_data = json.load(f)
+                if snap_data and isinstance(snap_data, dict) and "thndr_daily_card" in snap_data:
+                    _set_dashboard_cached("thndr_daily_card", snap_data)
+                    return jsonify(snap_data)
+            except Exception:
+                pass
 
     try:
         from core.real_portfolio import RealPortfolioTracker
@@ -4060,6 +4294,12 @@ if __name__ == "__main__":
     print("   Mode: PAPER & ADVISORY TRACKING ONLY")
     print("   Live Trading: STRICTLY BLOCKED")
     print("=" * 70)
+
+    # Automatic Cloud-to-Local Git Sync on startup (non-blocking daemon thread)
+    try:
+        auto_sync_from_remote_on_startup(background=True)
+    except Exception as _sync_err:
+        print("Startup auto-sync notice:", _sync_err)
 
     def _async_warmup():
         try:
