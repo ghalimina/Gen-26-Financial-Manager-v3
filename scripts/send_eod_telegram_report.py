@@ -14,6 +14,7 @@ import os
 import sys
 import json
 import time
+import math
 import argparse
 import datetime
 import urllib.request
@@ -85,6 +86,8 @@ def send_telegram_raw(token: str, chat_id: str, html_text: str, max_retries: int
             with urllib.request.urlopen(req, timeout=12) as resp:
                 res = json.loads(resp.read().decode("utf-8"))
                 if res.get("ok"):
+                    msg_id = res.get("result", {}).get("message_id")
+                    print(f"[HTTP 200 OK] Telegram API Response OK - Message {msg_id} delivered successfully to Chat ID: {chat_id}")
                     return True
                 print(f"[WARN] Telegram API error on attempt {attempt}: {res}")
         except urllib.error.HTTPError as http_err:
@@ -160,10 +163,28 @@ def format_compact_stock(stock: Dict[str, Any], rank_num: int) -> str:
     - 3 Horizons displayed clearly on single compact lines.
     - AI Confidence and top catalyst driver.
     """
+    def _safe_float(val, default_val=0.0):
+        try:
+            v = float(val)
+            return default_val if (v is None or math.isnan(v)) else v
+        except (ValueError, TypeError):
+            return default_val
+
+    def _safe_pct_int(val, default_pct=80):
+        try:
+            v = float(val)
+            if math.isnan(v):
+                return default_pct
+            if 0.0 < v <= 1.0:
+                v = v * 100.0
+            return int(round(v))
+        except (ValueError, TypeError):
+            return default_pct
+
     ticker = stock.get("ticker", "").replace(".CA", "")
     name = stock.get("company_name", ticker)
-    price = float(stock.get("current_price") or 0.0)
-    score = float(stock.get("overall_score") or 0.0)
+    price = _safe_float(stock.get("current_price"), 0.0)
+    score = _safe_float(stock.get("overall_score"), 0.0)
 
     # Decision emoji & text
     dec_raw = stock.get("decision", "WATCH").upper()
@@ -177,47 +198,43 @@ def format_compact_stock(stock: Dict[str, Any], rank_num: int) -> str:
     # Strict mathematical guarantee: Entry zone MUST be below current price (0.2% - 1.5% pullback)
     entry_low = stock.get("entry_low")
     entry_high = stock.get("entry_high")
-    try:
-        e_l = float(entry_low) if entry_low is not None else round(price * 0.985, 2)
-        e_h = float(entry_high) if entry_high is not None else round(price * 0.998, 2)
-    except (ValueError, TypeError):
-        e_l = round(price * 0.985, 2)
-        e_h = round(price * 0.998, 2)
+    e_l = _safe_float(entry_low, round(price * 0.985, 2))
+    e_h = _safe_float(entry_high, round(price * 0.998, 2))
 
     # Enforce pullback invariant: Entry price < Current Price
     if e_h >= price or e_l >= price or e_l <= 0:
         e_l = round(price * 0.985, 2)
         e_h = round(price * 0.998, 2)
 
-    stop_loss = float(stock.get("stop_loss") or round(price * 0.93, 2))
+    stop_loss = _safe_float(stock.get("stop_loss"), round(price * 0.93, 2))
     if stop_loss >= price:
         stop_loss = round(price * 0.93, 2)
     sl_pct = ((stop_loss / price) - 1.0) * 100 if price > 0 else -7.0
 
     # Multi-horizon data
     horizons = stock.get("horizons", {})
-    h_5d = horizons.get("5D", {})
-    h_20d = horizons.get("20D", {})
-    h_60d = horizons.get("60D", {})
+    h_5d = horizons.get("5D", {}) if isinstance(horizons, dict) else {}
+    h_20d = horizons.get("20D", {}) if isinstance(horizons, dict) else {}
+    h_60d = horizons.get("60D", {}) if isinstance(horizons, dict) else {}
 
     # Short (5D)
-    t1_5d = float(h_5d.get("target_1") or round(price * 1.025, 2))
+    t1_5d = _safe_float(h_5d.get("target_1"), round(price * 1.025, 2))
     g_5d = ((t1_5d / price) - 1.0) * 100 if price > 0 else 2.5
-    prob_5d = int(round((h_5d.get("prob_up") or 0.80) * 100))
+    prob_5d = _safe_pct_int(h_5d.get("prob_up"), 80)
 
     # Medium (20D)
-    t1_20d = float(h_20d.get("target_1") or round(price * 1.065, 2))
+    t1_20d = _safe_float(h_20d.get("target_1"), round(price * 1.065, 2))
     g_20d = ((t1_20d / price) - 1.0) * 100 if price > 0 else 6.5
-    prob_20d = int(round((h_20d.get("prob_up") or 0.75) * 100))
+    prob_20d = _safe_pct_int(h_20d.get("prob_up"), 75)
 
     # Long (60D)
-    t1_60d = float(h_60d.get("target_1") or round(price * 1.13, 2))
+    t1_60d = _safe_float(h_60d.get("target_1"), round(price * 1.13, 2))
     g_60d = ((t1_60d / price) - 1.0) * 100 if price > 0 else 13.0
-    prob_60d = int(round((h_60d.get("prob_up") or 0.70) * 100))
+    prob_60d = _safe_pct_int(h_60d.get("prob_up"), 70)
 
     # AI Data & Top Catalyst
-    ai_data = stock.get("ai_forecast", {})
-    ai_conf = int(round(ai_data.get("ai_confidence_score") or stock.get("ml_confidence_score") or 85.0))
+    ai_data = stock.get("ai_forecast", {}) if isinstance(stock.get("ai_forecast"), dict) else {}
+    ai_conf = _safe_pct_int(ai_data.get("ai_confidence_score") or stock.get("ml_confidence_score"), 85)
     drivers = ai_data.get("top_3_drivers") or stock.get("ai_top_drivers") or []
     top_driver = ""
     if drivers and isinstance(drivers, list):

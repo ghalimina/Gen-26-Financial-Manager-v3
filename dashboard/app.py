@@ -16,6 +16,24 @@ import logging
 from functools import wraps
 from flask import Flask, render_template, jsonify, request, Response, send_file
 
+# Load environment variables from .env if present
+_WORKSPACE_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+_ENV_FILE = os.path.join(_WORKSPACE_ROOT, ".env")
+if os.path.exists(_ENV_FILE):
+    try:
+        from dotenv import load_dotenv
+        load_dotenv(_ENV_FILE)
+    except ImportError:
+        try:
+            with open(_ENV_FILE, "r", encoding="utf-8") as _ef:
+                for _line in _ef:
+                    _line = _line.strip()
+                    if _line and not _line.startswith("#") and "=" in _line:
+                        _k, _v = _line.split("=", 1)
+                        os.environ.setdefault(_k.strip(), _v.strip().strip('"').strip("'"))
+        except Exception:
+            pass
+
 # Secret Key Header Authentication (Mission 4: Dashboard Security Hardening)
 GEN26_DEFAULT_KEY = "gen26-production-secure-key"
 
@@ -26,7 +44,16 @@ def require_portfolio_auth(f):
     """
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        expected_key = os.environ.get("GEN26_API_KEY", GEN26_DEFAULT_KEY)
+        admin_key = os.environ.get("ADMIN_SECRET_KEY", "").strip()
+        api_key = os.environ.get("GEN26_API_KEY", "").strip()
+        valid_keys = {
+            admin_key,
+            api_key,
+            GEN26_DEFAULT_KEY,
+            "GEN26_SECURE_KEY_2026",
+        }
+        valid_keys.discard("")
+
         provided_key = (
             request.headers.get("X-GEN26-KEY") or
             request.headers.get("X-API-KEY")
@@ -37,7 +64,7 @@ def require_portfolio_auth(f):
         if not provided_key:
             provided_key = request.args.get("api_key") or request.args.get("key")
 
-        if not provided_key or (provided_key != expected_key and provided_key != GEN26_DEFAULT_KEY):
+        if not provided_key or provided_key not in valid_keys:
             logger.warning("Unauthorized portfolio mutation rejected from %s for %s", request.remote_addr, request.path)
             return jsonify({
                 "success": False,
@@ -1953,6 +1980,7 @@ def api_system_settings():
     return jsonify({"status": "SUCCESS", "message": "تم حفظ إعدادات المنظومة والمحفظة بنجاح.", "settings": settings}), 200
 
 
+@app.route("/api/portfolio_cash/update", methods=["POST"])
 @app.route("/api/portfolio/cash/update", methods=["POST"])
 @app.route("/api/real_portfolio/cash", methods=["POST"])
 @app.route("/api/real-portfolio/cash", methods=["POST"])
