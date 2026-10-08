@@ -3225,6 +3225,41 @@ def api_gdr_arbitrage():
         return jsonify({"status": "ERROR", "error": str(e)}), 500
 
 
+@app.route("/api/gdr/evening_sync", methods=["GET", "POST"])
+@app.route("/api/gdr-evening-sync", methods=["GET", "POST"])
+def api_gdr_evening_sync():
+    """
+    Synchronizes London GDR 6:30 PM evening closes (CBKD.L, EFGD.L, ETEL.L)
+    and forecasts next morning's 10:00 AM Cairo opening gap.
+    """
+    try:
+        from core.gdr_arbitrage_engine import GDRArbitrageEngine
+        res = GDRArbitrageEngine.sync_evening_lse_gdr_closes()
+        return jsonify(res), 200
+    except Exception as e:
+        return jsonify({"status": "ERROR", "error": str(e)}), 500
+
+
+@app.route("/api/auction/divergence", methods=["GET"])
+@app.route("/api/auction-divergence", methods=["GET"])
+def api_auction_divergence():
+    """
+    Returns EGX Closing Auction VWAP divergence analysis.
+    Supports ?ticker=COMI.CA or scans all 5 portfolio holdings if omitted.
+    """
+    try:
+        from core.order_book_vpin_engine import OrderBookVpinEngine
+        from flask import request
+        ticker = request.args.get("ticker")
+        if ticker:
+            res = OrderBookVpinEngine.analyze_closing_auction_divergence(ticker)
+        else:
+            res = OrderBookVpinEngine.scan_portfolio_auction_divergence()
+        return jsonify(res), 200
+    except Exception as e:
+        return jsonify({"status": "ERROR", "error": str(e)}), 500
+
+
 # --- 29. Ensemble Consensus Decisions ---
 @app.route("/api/signals/ensemble", methods=["GET"])
 @app.route("/api/signals-ensemble", methods=["GET"])
@@ -3501,6 +3536,18 @@ def api_observability_forecast_vs_actual():
         return jsonify({"status": "ERROR", "error": str(e)}), 500
 
 
+@app.route("/api/predictions/accuracy", methods=["GET"])
+@app.route("/api/predictions-accuracy", methods=["GET"])
+def api_predictions_accuracy():
+    """Returns daily ex-ante accuracy telemetry, realized hit rates, and target T1 verification."""
+    try:
+        ticker = request.args.get("ticker", None)
+        res = PredictionActualTracker.audit_daily_recommendation_accuracy(ticker=ticker)
+        return jsonify(res), 200
+    except Exception as e:
+        return jsonify({"status": "ERROR", "error": str(e)}), 500
+
+
 @app.route("/api/observability/feature_registry", methods=["GET"])
 @app.route("/api/observability/features", methods=["GET"])
 def api_observability_feature_registry():
@@ -3621,6 +3668,30 @@ def api_observability_market_breadth():
     try:
         from core.market_breadth_engine import MarketBreadthEngine
         res = MarketBreadthEngine.calculate_market_breadth()
+        return jsonify(res), 200
+    except Exception as e:
+        return jsonify({"status": "ERROR", "error": str(e)}), 500
+
+
+@app.route("/api/sector_rotation", methods=["GET"])
+@app.route("/api/sector-rotation", methods=["GET"])
+def api_sector_rotation():
+    """Returns institutional sector capital rotation over 5d vs 10d lookbacks."""
+    try:
+        from core.market_heatmap_engine import MarketHeatmapEngine
+        res = MarketHeatmapEngine.calculate_sector_capital_rotation()
+        return jsonify(res), 200
+    except Exception as e:
+        return jsonify({"status": "ERROR", "error": str(e)}), 500
+
+
+@app.route("/api/portfolio_fx_hedge", methods=["GET"])
+@app.route("/api/portfolio-fx-hedge", methods=["GET"])
+def api_portfolio_fx_hedge():
+    """Returns FX devaluation and inflation pass-through hedge score for portfolio holdings."""
+    try:
+        from core.valuation_engine import ValuationEngine
+        res = ValuationEngine.calculate_portfolio_fx_inflation_hedge()
         return jsonify(res), 200
     except Exception as e:
         return jsonify({"status": "ERROR", "error": str(e)}), 500
@@ -3760,6 +3831,8 @@ def api_portfolio_swing_advisor():
 
         real_portfolio = RealPortfolioTracker.load_portfolio()
         holdings_map = {h["ticker"]: h for h in real_portfolio.get("holdings", [])}
+        cost_basis_data = RealPortfolioTracker.calculate_effective_cost_basis(real_portfolio)
+        cost_tracker_map = {item["ticker"]: item for item in cost_basis_data.get("effective_cost_tracker", [])}
 
         target_tickers = ["COMI.CA", "SWDY.CA", "TMGH.CA", "PHDC.CA", "RAYA.CA"]
 
@@ -3806,8 +3879,8 @@ def api_portfolio_swing_advisor():
                 "resistance": 7.15,
                 "buyback": 6.35,
                 "breakout_target": 7.85,
-                "trailing_stop": 6.95,
-                "hard_stop": 6.15,
+                "trailing_stop": 6.90,
+                "hard_stop": 6.20,
                 "default_qty": 159
             }
         }
@@ -3894,10 +3967,26 @@ def api_portfolio_swing_advisor():
                 )
                 allocation_decision = f"احتفاظ وتمركز (Hold Full & Wait for Resistance {meta['resistance']:.2f} ج)"
 
+            # Cost-basis tracker details for this stock
+            cost_info = cost_tracker_map.get(sym, {
+                "original_entry_price": avg_entry,
+                "realized_swing_profit_egp": 0.0,
+                "effective_cost_per_share": avg_entry,
+                "cost_reduction_per_share": 0.0,
+                "safety_cushion_pct": 0.0,
+                "summary_card_ar": f"سعر شرائك {avg_entry:.2f} ج — السعر الفعلي: {avg_entry:.2f} ج"
+            })
+
             advisor_results.append({
                 "ticker": sym,
                 "company_name_ar": meta["name_ar"],
                 "current_price": round(cur_price, 2),
+                "original_entry_price": round(float(cost_info.get("original_entry_price", avg_entry)), 2),
+                "realized_swing_profit_egp": round(float(cost_info.get("realized_swing_profit_egp", 0.0)), 2),
+                "effective_cost_per_share": round(float(cost_info.get("effective_cost_per_share", avg_entry)), 2),
+                "cost_reduction_per_share": round(float(cost_info.get("cost_reduction_per_share", 0.0)), 2),
+                "safety_cushion_pct": round(float(cost_info.get("safety_cushion_pct", 0.0)), 2),
+                "effective_cost_card_ar": cost_info.get("summary_card_ar", ""),
                 "dip_rebuy_price": round(float(meta["buyback"]), 2),
                 "peak_sell_half_price": round(float(meta["resistance"]), 2),
                 "breakout_target_price": round(float(meta["breakout_target"]), 2),
@@ -3927,10 +4016,13 @@ def api_portfolio_swing_advisor():
 
         conn.close()
 
+        total_realized_profit = cost_basis_data.get("total_realized_swing_profit_egp", 0.0)
         return jsonify({
             "status": "SUCCESS",
             "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             "advisor_model": "GEN-26 VPIN & Insider 50% Swing Trading Engine",
+            "total_realized_swing_profit_egp": round(total_realized_profit, 2),
+            "effective_cost_summary_ar": f"إجمالي أرباح التدوير المحققة للمحفظة: {total_realized_profit:,.2f} ج.م مع خفض مباشر لمتوسطات التكلفة لكافة المراكز.",
             "count": len(advisor_results),
             "recommendations": advisor_results
         }), 200

@@ -396,3 +396,144 @@ class ValuationEngine:
                 "bull_fair_value": round(fv * 1.25, 2)
             }
         }
+
+    @classmethod
+    def calculate_portfolio_fx_inflation_hedge(cls, portfolio_data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+        """
+        Calculates FX devaluation and Inflation Pass-Through Score for portfolio holdings:
+        Evaluates:
+        1. Foreign currency & export revenue share (Hard currency generation).
+        2. Real asset inflation repricing (Hospitality USD revenues & land banks).
+        3. London LSE Dollar GDR arbitrage link.
+        4. Overall weighted Portfolio Inflation Hedge Index (0-100).
+        """
+        from core.real_portfolio import RealPortfolioTracker
+
+        data = portfolio_data or RealPortfolioTracker.load_real_portfolio()
+        holdings = data.get("holdings", [])
+
+        # Fundamental FX & Inflation Hedge Archetypes for Egyptian Equities
+        HEDGE_PROFILES = {
+            "COMI.CA": {
+                "ticker": "COMI.CA",
+                "name_ar": "البنك التجاري الدولي (CIB)",
+                "hedge_score": 82.0,
+                "hard_currency_exposure_pct": 35.0,
+                "lse_gdr_dollar_link": True,
+                "lse_gdr_symbol": "CBKD.L (London USD)",
+                "inflation_mechanism_ar": "أصول دولارية وتسهيلات ائتمانية بالعملة الأجنبية مع هوامش فائدة تضخمية مرنة.",
+                "shield_badge_ar": "🛡️ درع دولاري مصرفي قوي",
+                "pass_through_class": "STRONG_FX_HEDGE"
+            },
+            "SWDY.CA": {
+                "ticker": "SWDY.CA",
+                "name_ar": "السويدي إليكتريك",
+                "hedge_score": 92.0,
+                "hard_currency_exposure_pct": 65.0,
+                "lse_gdr_dollar_link": False,
+                "lse_gdr_symbol": None,
+                "inflation_mechanism_ar": "أكثر من 65% إيرادات تصديرية ومشاريع بنية تحتية دولية بالدولار واليورو تترجم لأرباح قياسية عند تحريك الجنيه.",
+                "shield_badge_ar": "🛡️ حصن تصديري دولاري فائق",
+                "pass_through_class": "MAXIMUM_FX_HEDGE"
+            },
+            "TMGH.CA": {
+                "ticker": "TMGH.CA",
+                "name_ar": "مجموعة طلعت مصطفى",
+                "hedge_score": 78.0,
+                "hard_currency_exposure_pct": 45.0,
+                "lse_gdr_dollar_link": False,
+                "lse_gdr_symbol": None,
+                "inflation_mechanism_ar": "إيرادات قطاع الفنادق الفاخرة بالدولار (فور سيزونز) ومخزون أراضٍ يعيد تسعير عقود البيع بمعدلات تفوق التضخم.",
+                "shield_badge_ar": "🛡️ درع عقاري وسياحي مقاوم للتضخم",
+                "pass_through_class": "STRONG_INFLATION_HEDGE"
+            },
+            "PHDC.CA": {
+                "ticker": "PHDC.CA",
+                "name_ar": "بالم هيلز للتعمير",
+                "hedge_score": 68.0,
+                "hard_currency_exposure_pct": 25.0,
+                "lse_gdr_dollar_link": False,
+                "lse_gdr_symbol": None,
+                "inflation_mechanism_ar": "مبيعات بالعملة الصعبة للمصريين بالخارج، مع إعادة تسعير مراحل المشروعات الجديدة لمواكبة تضخم تكاليف البناء.",
+                "shield_badge_ar": "🛡️ تحوط عقاري تضخمي متزن",
+                "pass_through_class": "MODERATE_HEDGE"
+            },
+            "RAYA.CA": {
+                "ticker": "RAYA.CA",
+                "name_ar": "راية القابضة",
+                "hedge_score": 64.0,
+                "hard_currency_exposure_pct": 40.0,
+                "lse_gdr_dollar_link": False,
+                "lse_gdr_symbol": None,
+                "inflation_mechanism_ar": "إيرادات خدمات التعهيد والاتصال الدولي (Raya Contact Center) مقومة بالدولار واليورو.",
+                "shield_badge_ar": "🛡️ تدفقات تعهيد رقمية بالدولار",
+                "pass_through_class": "MODERATE_HEDGE"
+            }
+        }
+
+        evaluated_holdings = []
+        weighted_score_sum = 0.0
+        total_market_value = 0.0
+
+        for h in holdings:
+            if not h.get("active", True):
+                continue
+            sym = h.get("ticker") or h.get("symbol", "")
+            qty = int(h.get("quantity", 0))
+            if qty <= 0:
+                continue
+
+            entry_p = float(h.get("average_entry_price", 10.0))
+            profile = HEDGE_PROFILES.get(sym, {
+                "ticker": sym,
+                "name_ar": h.get("company_name", sym),
+                "hedge_score": 50.0,
+                "hard_currency_exposure_pct": 10.0,
+                "lse_gdr_dollar_link": False,
+                "lse_gdr_symbol": None,
+                "inflation_mechanism_ar": "تسعير محلي بالجنيه المصري مع حساسية طبيعية للتضخم.",
+                "shield_badge_ar": "⚪ تحوط محلي متوازن",
+                "pass_through_class": "NEUTRAL_HEDGE"
+            })
+
+            pos_val = qty * entry_p
+            total_market_value += pos_val
+            weighted_score_sum += pos_val * profile["hedge_score"]
+
+            evaluated_holdings.append({
+                "ticker": sym,
+                "company_name": profile["name_ar"],
+                "quantity": qty,
+                "position_value_egp": round(pos_val, 2),
+                "hedge_score": profile["hedge_score"],
+                "hard_currency_exposure_pct": profile["hard_currency_exposure_pct"],
+                "lse_gdr_dollar_link": profile["lse_gdr_dollar_link"],
+                "lse_gdr_symbol": profile["lse_gdr_symbol"],
+                "shield_badge_ar": profile["shield_badge_ar"],
+                "inflation_mechanism_ar": profile["inflation_mechanism_ar"],
+                "pass_through_class": profile["pass_through_class"]
+            })
+
+        # Weighted score (normalized 0-100)
+        overall_index = round(weighted_score_sum / max(total_market_value, 1.0), 1) if total_market_value > 0 else 76.0
+
+        if overall_index >= 75.0:
+            overall_verdict_ar = "درع دولاري وتضخمي قوي (Strong FX & Inflation Shield)"
+            grade = "A+"
+        elif overall_index >= 60.0:
+            overall_verdict_ar = "تحوط دولاري وتضخمي متزن (Moderate FX Hedge)"
+            grade = "B"
+        else:
+            overall_verdict_ar = "تحوط محدود؛ محفظة تعتمد أساساً على السوق المحلي"
+            grade = "C"
+
+        return {
+            "status": "SUCCESS",
+            "portfolio_inflation_hedge_index": overall_index,
+            "headline_score_card": f"Portfolio Inflation Hedge Index: {int(overall_index)}/100 ({overall_verdict_ar})",
+            "overall_grade": grade,
+            "overall_verdict_ar": overall_verdict_ar,
+            "total_portfolio_value_evaluated_egp": round(total_market_value, 2),
+            "holdings_count": len(evaluated_holdings),
+            "holdings_breakdown": evaluated_holdings
+        }

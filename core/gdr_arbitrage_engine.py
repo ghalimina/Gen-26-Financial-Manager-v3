@@ -9,6 +9,7 @@
 import os
 import sys
 import time
+import json
 import logging
 from typing import Dict, List, Any, Optional
 
@@ -279,3 +280,90 @@ class GDRArbitrageEngine:
 
     # Class method alias
     evaluate_all_gdrs = scan_all_gdr_pairs
+
+    @classmethod
+    def sync_evening_lse_gdr_closes(cls) -> Dict[str, Any]:
+        """
+        Evening LSE Sync (6:30 PM Cairo Time / 16:30 GMT):
+        Pulls London closing prices for CBKD.L, EFGD.L, ETEL.L,
+        calculates implied USD/EGP rates, arbitrage spreads, and forecasts
+        the next morning (10:00 AM) Cairo opening gaps.
+        """
+        import datetime
+        now = datetime.datetime.now()
+        usd_rate = MacroEconomicEngine.fetch_usd_egp()
+        gdr_pairs = cls.scan_all_gdr_pairs()
+
+        # Build telemetry for key pairs
+        evening_sync_records = []
+        cairo_gap_forecasts = []
+
+        for p in gdr_pairs:
+            cairo_p = float(p.get("cairo_price_egp", 0.0))
+            gdr_usd = float(p.get("gdr_price_usd", 0.0))
+            ratio = float(p.get("shares_per_gdr", 1.0))
+
+            implied_fx = round((cairo_p * ratio) / max(gdr_usd, 0.01), 2) if gdr_usd > 0 else usd_rate
+            spread_pct = float(p.get("spread_pct", 0.0))
+
+            if spread_pct >= 1.5:
+                gap_dir = "BULLISH_GAP"
+                gap_ar = f"فجوة افتتاح صاعدة (+{spread_pct:.1f}%)"
+            elif spread_pct <= -1.5:
+                gap_dir = "BEARISH_GAP"
+                gap_ar = f"فجوة افتتاح هابطة ({spread_pct:.1f}%)"
+            else:
+                gap_dir = "NEUTRAL_OPEN"
+                gap_ar = f"افتتاح مستقر ({spread_pct:+.1f}%)"
+
+            rec = {
+                "cairo_ticker": p["cairo_ticker"],
+                "gdr_ticker": p["gdr_ticker"],
+                "name_ar": p["name_ar"],
+                "lse_close_usd": gdr_usd,
+                "cairo_close_egp": cairo_p,
+                "official_usd_egp": usd_rate,
+                "implied_gdr_usd_egp": implied_fx,
+                "arbitrage_spread_pct": spread_pct,
+                "next_morning_gap_direction": gap_dir,
+                "next_morning_gap_label_ar": gap_ar,
+                "action_guidance_ar": p.get("action_guidance_ar")
+            }
+            evening_sync_records.append(rec)
+            cairo_gap_forecasts.append(f"{p['name_ar']}: {gap_ar}")
+
+        # Update historical log in data/gdr_spread_history.json
+        history_path = os.path.join(WORKSPACE, "data", "gdr_spread_history.json")
+        try:
+            history = []
+            if os.path.exists(history_path) and os.path.getsize(history_path) > 2:
+                with open(history_path, "r", encoding="utf-8") as f:
+                    history = json.load(f)
+            history.append({
+                "sync_timestamp": now.strftime("%Y-%m-%d %H:%M:%S"),
+                "cairo_time": "18:30:00 (LSE Evening Close)",
+                "official_usd_egp": usd_rate,
+                "records": evening_sync_records
+            })
+            # Keep latest 60 sync snapshots
+            history = history[-60:]
+            with open(history_path, "w", encoding="utf-8") as f:
+                json.dump(history, f, ensure_ascii=False, indent=2)
+        except Exception as e:
+            logger.warning(f"Could not persist gdr_spread_history: {e}")
+
+        summary_text = (
+            f"تم إغلاق جلسة لندن (6:30 م القاهرة): "
+            f"سعر الصرف الرسمي {usd_rate:.2f} ج | "
+            + " — ".join(cairo_gap_forecasts[:3])
+        )
+
+        return {
+            "status": "SUCCESS",
+            "sync_time": now.strftime("%Y-%m-%d %H:%M:%S"),
+            "market_session": "LSE_POST_CLOSE_SYNC_1830",
+            "official_usd_egp": usd_rate,
+            "headline_summary_ar": summary_text,
+            "count": len(evening_sync_records),
+            "evening_records": evening_sync_records
+        }
