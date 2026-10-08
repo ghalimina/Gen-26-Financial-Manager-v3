@@ -103,6 +103,10 @@ class RegimeHMMEngine:
     CACHE_TTL_SECONDS: int = 3600
     _cached_df: Optional[pd.DataFrame] = None
     _last_cache_time: float = 0.0
+    _cached_base_level: Optional[float] = None
+    _last_base_level_time: float = 0.0
+    _cached_regime_result: Optional[Dict[str, Any]] = None
+    _last_regime_result_time: float = 0.0
     # Persistent fallback: last known regime saved to disk
     _REGIME_CACHE_PATH: str = os.path.join(WORKSPACE, "data", "cached_regime_state.json")
 
@@ -111,30 +115,42 @@ class RegimeHMMEngine:
         """
         Fetches the real current EGX30 level from yfinance ^CASE30.
         Falls back to last known value from disk cache.
+        Cached in-memory to prevent repeated yfinance network blocking.
         """
+        now = datetime.datetime.now().timestamp()
+        if cls._cached_base_level is not None and (now - cls._last_base_level_time) < cls.CACHE_TTL_SECONDS:
+            return cls._cached_base_level
+
+        price = None
         # 1. Try yfinance
         try:
             import yfinance as yf
             d = yf.download('^CASE30', period='1d', interval='1d', progress=False, timeout=5)
             if d is not None and not d.empty:
-                price = float(d['Close'].iloc[-1]) if not hasattr(d['Close'].iloc[-1], '__len__') else float(d['Close'].squeeze().iloc[-1])
-                if price > 10000:
-                    return price
+                val = float(d['Close'].iloc[-1]) if not hasattr(d['Close'].iloc[-1], '__len__') else float(d['Close'].squeeze().iloc[-1])
+                if val > 10000:
+                    price = val
         except Exception:
             pass
         # 2. Try from cached regime file
-        try:
-            import json
-            if os.path.exists(cls._REGIME_CACHE_PATH):
-                with open(cls._REGIME_CACHE_PATH, 'r', encoding='utf-8') as f:
-                    cached = json.load(f)
-                cached_price = float(cached.get('egx30_level', 0))
-                if cached_price > 10000:
-                    return cached_price
-        except Exception:
-            pass
+        if price is None:
+            try:
+                import json
+                if os.path.exists(cls._REGIME_CACHE_PATH):
+                    with open(cls._REGIME_CACHE_PATH, 'r', encoding='utf-8') as f:
+                        cached = json.load(f)
+                    cached_price = float(cached.get('egx30_level', 0))
+                    if cached_price > 10000:
+                        price = cached_price
+            except Exception:
+                pass
         # 3. Hard fallback — use 52494 (real Sept 2026 level)
-        return 52494.0
+        if price is None:
+            price = 52494.0
+
+        cls._cached_base_level = price
+        cls._last_base_level_time = now
+        return price
 
     @classmethod
     def _save_regime_to_cache(cls, regime_result: Dict[str, Any]) -> None:
@@ -392,6 +408,11 @@ class RegimeHMMEngine:
         Analyzes EGX30 index data (moving averages, returns, and volatility)
         to detect the market regime and output mandatory safe cash reserve rules.
         """
+        now = datetime.datetime.now().timestamp()
+        if egx30_df is None and market_returns is None and market_volatilities is None:
+            if cls._cached_regime_result is not None and (now - cls._last_regime_result_time) < 300:
+                return cls._cached_regime_result.copy()
+
         # Fetch or use provided index data
         df = egx30_df if egx30_df is not None else cls.fetch_egx30_data()
 
@@ -400,6 +421,8 @@ class RegimeHMMEngine:
             disk_cached = cls._load_cached_regime_fallback()
             if disk_cached is not None:
                 logger.warning("Regime fallback: using last known cached regime '%s' from disk.", disk_cached.get('regime'))
+                cls._cached_regime_result = disk_cached
+                cls._last_regime_result_time = now
                 return disk_cached
             # Last resort: SIDEWAYS_CHOP (conservative)
             default_reg = cls.REGIME_SIDEWAYS_CHOP
@@ -515,6 +538,8 @@ class RegimeHMMEngine:
         }
         # Persist to disk so offline/GitHub Actions fallback uses last real regime
         cls._save_regime_to_cache(result)
+        cls._cached_regime_result = result
+        cls._last_regime_result_time = now
         return result
 
 

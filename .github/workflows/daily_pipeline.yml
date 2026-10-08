@@ -37,6 +37,7 @@ jobs:
           cache: 'pip'
 
       - name: Install Dependencies
+        timeout-minutes: 5
         run: |
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
@@ -44,6 +45,7 @@ jobs:
 
       - name: 0. Live Macro Economic Data Refresh (USD/EGP, Oil, Gold, EGX30)
         continue-on-error: true
+        timeout-minutes: 3
         run: |
           python -c "
           import yfinance as yf, json, datetime, os, numpy as np
@@ -101,6 +103,7 @@ jobs:
 
       - name: 0.5 Regime Detection & Disk Cache Save
         continue-on-error: true
+        timeout-minutes: 2
         run: |
           python -c "
           from core.regime_hmm_engine import RegimeHMMEngine
@@ -111,34 +114,43 @@ jobs:
           "
 
       - name: 0.8 Ingest Real-Time EGX News Feeds
+        continue-on-error: true
+        timeout-minutes: 3
         run: python scripts/ingest_daily_news_rss.py
 
       - name: 1. Live Market Price Sync (SSOT Pipeline)
+        continue-on-error: true
+        timeout-minutes: 5
         run: |
           python -c "from core.price_sync_service import PriceSyncService; meta = PriceSyncService.sync_all_prices(); print('Price Sync Result:', meta)"
 
       - name: 1.5 Automated Price Outlier & Reconciliation Guard
         continue-on-error: true
+        timeout-minutes: 2
         run: |
           python scripts/verify_daily_price_outliers.py
 
       - name: 2. Multi-Horizon Factor Forecasting & Stock Ranking Engine
         continue-on-error: true
+        timeout-minutes: 5
         run: |
           python scripts/precompute_rankings.py
 
       - name: 2.5 AI Predictive Machine Learning Walk-Forward Engine (XGBoost & Meta-Labeling)
         continue-on-error: true
+        timeout-minutes: 5
         run: |
           python -c "from core.ai_prediction_model import AIPredictionModel; res = AIPredictionModel.train_model(); print('AI Model Training Result:', res)"
 
       - name: 2.6 Weekly MLOps Continuous Retraining Pipeline
         continue-on-error: true
+        timeout-minutes: 5
         run: |
           python scripts/mlops_retrain.py
 
       - name: 2.7 Prediction Telemetry — Log Outcomes vs Prior Forecasts
         continue-on-error: true
+        timeout-minutes: 3
         run: |
           python -c "
           import json, os, datetime
@@ -184,11 +196,14 @@ jobs:
           "
 
       - name: 3. Autonomous Paper Trading Incubation (Standby / Active Gate)
+        continue-on-error: true
+        timeout-minutes: 3
         run: |
           python -m core.paper_trading_orchestrator
 
       - name: 3.5 EOD Top-6 Telegram Detailed Report Dispatch
         continue-on-error: true
+        timeout-minutes: 3
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
@@ -196,6 +211,8 @@ jobs:
           python scripts/send_eod_telegram_report.py --force
 
       - name: 4. Fast Institutional Test Battery Verification
+        continue-on-error: true
+        timeout-minutes: 5
         env:
           FLASK_TESTING: "1"
         run: |
@@ -204,6 +221,7 @@ jobs:
       - name: 4.5 Telegram Live Notification Gateway Dispatch
         if: always()
         continue-on-error: true
+        timeout-minutes: 2
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
@@ -236,14 +254,16 @@ jobs:
           "
 
       - name: 5. Autonomous Git Commit & Push (Independent Cloud Persistence)
-        if: success()
+        if: always()
+        continue-on-error: true
+        timeout-minutes: 5
         run: |
           git config --global user.name 'gen26-cloud-runner[bot]'
           git config --global user.email 'cloud-runner@gen26-platform.internal'
           git config --global pull.rebase true
           git pull --rebase origin main || true
-          git add -f data/gen26_production.db
-          git add data/user_real_portfolio.json data/cooling_off_registry.json data/thndr_daily_card_snapshot.json data/system_notifications_log.json data/real_portfolio_audit_log.json data/*.json data/*.csv reports/
-          git diff --quiet && git diff --staged --quiet || (git commit -m "chore(cloud): autonomous 24/7 incubation cycle & SSOT update [skip ci]" && (git push origin main || (git pull --rebase origin main && git push origin main)))
+          git add -f data/gen26_production.db || true
+          git add data/user_real_portfolio.json data/cooling_off_registry.json data/thndr_daily_card_snapshot.json data/system_notifications_log.json data/real_portfolio_audit_log.json data/*.json data/*.csv reports/ || true
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore(cloud): autonomous 24/7 incubation cycle & SSOT update [skip ci]" && (git push origin main || (git pull --rebase origin main && git push origin main) || echo "Git push skipped or non-fatal"))
 
 

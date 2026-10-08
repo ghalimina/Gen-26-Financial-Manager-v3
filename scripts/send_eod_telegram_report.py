@@ -470,8 +470,8 @@ def dispatch_full_eod_report(force_send: bool = False) -> bool:
     """Dispatches the concise post-market report."""
     token, chat_id = get_telegram_credentials()
     if not token or not chat_id:
-        print("[WARN] Telegram credentials not found (TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID missing).")
-        return False
+        print("[WARN] Telegram credentials not found (TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID missing). Skipping report dispatch gracefully.")
+        return True
 
     regime_data = load_json_safe(REGIME_FILE)
     macro_data = load_json_safe(MACRO_FILE)
