@@ -110,6 +110,9 @@ jobs:
           # Cache is saved automatically inside detect_latent_regime()
           "
 
+      - name: 0.8 Ingest Real-Time EGX News Feeds
+        run: python scripts/ingest_daily_news_rss.py
+
       - name: 1. Live Market Price Sync (SSOT Pipeline)
         run: |
           python -c "from core.price_sync_service import PriceSyncService; meta = PriceSyncService.sync_all_prices(); print('Price Sync Result:', meta)"
