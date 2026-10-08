@@ -430,13 +430,17 @@
             padding: 24px 28px 100px;
         }
 
-        .tab-panel {
+        .tab-panel, .tab-pane {
             display: none;
             animation: fadeIn 0.25s ease forwards;
         }
 
-        .tab-panel.active {
+        .tab-panel.active, .tab-pane.active {
             display: block;
+        }
+
+        .hidden {
+            display: none !important;
         }
 
         @keyframes fadeIn {
@@ -1742,44 +1746,40 @@
 
         <ul class="nav-list">
             <div class="nav-section-title">📊 لوحة القيادة والمستشار</div>
-            <li class="nav-item active" id="nav-overview" onclick="navigateTo('overview')"><i class="fa-solid fa-house"></i> ☀️ ملخص السوق والمستشار</li>
-            <li class="nav-item" id="nav-alpha_scanner" onclick="navigateTo('alpha_scanner')"><i class="fa-solid fa-radar"></i> 🔎 ماسح الألفا الذكي (Alpha Scanner)</li>
-            <li class="nav-item" id="nav-short_term_opportunities" onclick="navigateTo('short_term_opportunities')"><i class="fa-solid fa-bolt"></i> ⚡ الفرص السريعة (10D)</li>
-            <li class="nav-item" id="nav-ranking" onclick="navigateTo('ranking')"><i class="fa-solid fa-trophy"></i> 🏆 أفضل الأسهم والترتيب (270 سهم)</li>
-            <li class="nav-item" id="nav-details" onclick="navigateTo('details')"><i class="fa-solid fa-chart-line"></i> 🔍 ملف وتحليل السهم الشامل</li>
+            <li class="nav-item active" id="nav-overview" data-tab="overview" onclick="switchTab('overview')"><i class="fa-solid fa-house"></i> ☀️ ملخص السوق والمستشار</li>
+            <li class="nav-item" id="nav-alpha_scanner" data-tab="alpha_scanner" onclick="switchTab('alpha_scanner')"><i class="fa-solid fa-radar"></i> 🔎 ماسح الألفا الذكي (Alpha Scanner)</li>
+            <li class="nav-item" id="nav-short_term_opportunities" data-tab="short_term_opportunities" onclick="switchTab('short_term_opportunities')"><i class="fa-solid fa-bolt"></i> ⚡ الفرص السريعة (10D)</li>
+            <li class="nav-item" id="nav-ranking" data-tab="ranking" onclick="switchTab('ranking')"><i class="fa-solid fa-trophy"></i> 🏆 أفضل الأسهم والترتيب (270 سهم)</li>
+            <li class="nav-item" id="nav-details" data-tab="details" onclick="switchTab('details')"><i class="fa-solid fa-chart-line"></i> 🔍 ملف وتحليل السهم الشامل</li>
 
             <div class="nav-section-title">💼 إدارة المحافظ والأموال</div>
-            <li class="nav-item" id="nav-real_portfolio" onclick="navigateTo('real_portfolio')"><i class="fa-solid fa-wallet"></i> 💼 المحفظة الحقيقية والأرباح</li>
-            <li class="nav-item" id="nav-mutual_funds" onclick="navigateTo('mutual_funds')"><i class="fa-solid fa-building-columns"></i> 🏦 صناديق الاستثمار (Thndr 67 Funds)</li>
-            <li class="nav-item" id="nav-paper_portfolio" onclick="navigateTo('paper_portfolio')"><i class="fa-solid fa-file-signature"></i> 📝 المحفظة التجريبية المعتمدة</li>
-            <li class="nav-item" id="nav-watchlist" onclick="navigateTo('watchlist')"><i class="fa-solid fa-star"></i> ⭐ قائمة المراقبة الذكية</li>
+            <li class="nav-item" id="nav-real_portfolio" data-tab="real_portfolio" onclick="switchTab('real_portfolio')"><i class="fa-solid fa-wallet"></i> 💼 المحفظة الحقيقية والأرباح</li>
+            <li class="nav-item" id="nav-mutual_funds" data-tab="mutual_funds" onclick="switchTab('mutual_funds')"><i class="fa-solid fa-building-columns"></i> 🏦 صناديق الاستثمار (Thndr Funds)</li>
+            <li class="nav-item" id="nav-paper_portfolio" data-tab="paper_portfolio" onclick="switchTab('paper_portfolio')"><i class="fa-solid fa-file-signature"></i> 📝 المحفظة التجريبية المعتمدة</li>
+            <li class="nav-item" id="nav-watchlist" data-tab="watchlist" onclick="switchTab('watchlist')"><i class="fa-solid fa-star"></i> ⭐ قائمة المراقبة الذكية</li>
 
             <div class="nav-section-title">🔍 الاستخبارات والمحركات الكمية</div>
-            <li class="nav-item" id="nav-insider_radar" onclick="navigateTo('insider_radar')"><i class="fa-solid fa-user-secret"></i> 🕵️ رادار المطلعين والحيتان</li>
-            <li class="nav-item" id="nav-arbitrage_monitor" onclick="navigateTo('arbitrage_monitor')"><i class="fa-solid fa-arrows-split-up-and-left"></i> ⚖️ المراجحة الإحصائية وتداول الأزواج</li>
+            <li class="nav-item" id="nav-insider_radar" data-tab="insider_radar" onclick="switchTab('insider_radar')"><i class="fa-solid fa-user-secret"></i> 🕵️ رادار المطلعين والحيتان</li>
+            <li class="nav-item" id="nav-arbitrage_monitor" data-tab="arbitrage_monitor" onclick="switchTab('arbitrage_monitor')"><i class="fa-solid fa-arrows-split-up-and-left"></i> ⚖️ المراجحة الإحصائية وتداول الأزواج</li>
 
             <div class="nav-section-title">🧪 الذكاء الاصطناعي ومعمل الأبحاث</div>
-            <li class="nav-item" id="nav-trading_agents" onclick="navigateTo('trading_agents')"><i class="fa-solid fa-users-gear"></i> 🤖 مناظرات الوكلاء (TradingAgents)</li>
-            <li class="nav-item" id="nav-research_lab" onclick="navigateTo('research-lab')">
-                <a href="#" class="nav-item" onclick="navigateTo('research-lab'); return false;" style="color: inherit; text-decoration: none; padding: 0; width: 100%; display: flex; align-items: center; gap: 10px;">
-                    <i class="fas fa-flask"></i> معمل الأبحاث والتطور الذاتي
-                </a>
-            </li>
+            <li class="nav-item" id="nav-trading_agents" data-tab="trading_agents" onclick="switchTab('trading_agents')"><i class="fa-solid fa-users-gear"></i> 🤖 مناظرات الوكلاء (TradingAgents)</li>
+            <li class="nav-item" id="nav-research-lab" data-tab="research-lab" onclick="switchTab('research-lab')"><i class="fas fa-flask"></i> 🧪 معمل الأبحاث والتطور الذاتي</li>
 
             <div class="nav-section-title">🛡️ صمامات الأمان والمخاطر</div>
-            <li class="nav-item" id="nav-signals" onclick="navigateTo('signals')"><i class="fa-solid fa-tower-broadcast"></i> 📡 سجل الإشارات الصادرة</li>
-            <li class="nav-item" id="nav-risk_center" onclick="navigateTo('risk_center')"><i class="fa-solid fa-shield-halved"></i> 🛡️ مركز إدارة المخاطر</li>
-            <li class="nav-item" id="nav-stress_center" onclick="navigateTo('stress_center')"><i class="fa-solid fa-heart-pulse"></i> ⚡ اختبارات الضغط والسيولة</li>
-            <li class="nav-item" id="nav-paper_vs_bt" onclick="navigateTo('paper_vs_bt')"><i class="fa-solid fa-scale-balanced"></i> ⚖️ التجريبي مقابل التاريخي</li>
+            <li class="nav-item" id="nav-signals" data-tab="signals" onclick="switchTab('signals')"><i class="fa-solid fa-tower-broadcast"></i> 📡 سجل الإشارات الصادرة</li>
+            <li class="nav-item" id="nav-risk_center" data-tab="risk_center" onclick="switchTab('risk_center')"><i class="fa-solid fa-shield-halved"></i> 🛡️ مركز إدارة المخاطر</li>
+            <li class="nav-item" id="nav-stress_center" data-tab="stress_center" onclick="switchTab('stress_center')"><i class="fa-solid fa-heart-pulse"></i> ⚡ اختبارات الضغط والسيولة</li>
+            <li class="nav-item" id="nav-paper_vs_bt" data-tab="paper_vs_bt" onclick="switchTab('paper_vs_bt')"><i class="fa-solid fa-scale-balanced"></i> ⚖️ التجريبي مقابل التاريخي</li>
 
             <div class="nav-section-title">🔬 الرقابة الفنية والتداول</div>
-            <li class="nav-item" id="nav-observatory" onclick="navigateTo('observatory')"><i class="fa-solid fa-binoculars"></i> 🔭 مرصد الانحراف والانزلاق</li>
-            <li class="nav-item" id="nav-universe_audit" onclick="navigateTo('universe_audit')"><i class="fa-solid fa-globe"></i> 🌐 فحص وتغطية بورصة مصر</li>
-            <li class="nav-item" id="nav-health" onclick="navigateTo('health')"><i class="fa-solid fa-microchip"></i> 🩺 صحة واستقرار النظام</li>
-            <li class="nav-item" id="nav-execution" onclick="navigateTo('execution')"><i class="fa-solid fa-terminal"></i> ⚡ محطة التداول الخوارزمي (EMS)</li>
+            <li class="nav-item" id="nav-observatory" data-tab="observatory" onclick="switchTab('observatory')"><i class="fa-solid fa-binoculars"></i> 🔭 مرصد الانحراف والانزلاق</li>
+            <li class="nav-item" id="nav-universe_audit" data-tab="universe_audit" onclick="switchTab('universe_audit')"><i class="fa-solid fa-globe"></i> 🌐 فحص وتغطية بورصة مصر</li>
+            <li class="nav-item" id="nav-health" data-tab="health" onclick="switchTab('health')"><i class="fa-solid fa-microchip"></i> 🩺 صحة واستقرار النظام</li>
+            <li class="nav-item" id="nav-execution" data-tab="execution" onclick="switchTab('execution')"><i class="fa-solid fa-terminal"></i> ⚡ محطة التداول الخوارزمي (EMS)</li>
 
             <div class="nav-section-title">⚙️ الإعدادات وتخصيص المنظومة</div>
-            <li class="nav-item" id="nav-system_settings" onclick="navigateTo('system_settings')"><i class="fa-solid fa-sliders text-blue"></i> ⚙️ إعدادات النظام ورصيد المحفظة</li>
+            <li class="nav-item" id="nav-system_settings" data-tab="system_settings" onclick="switchTab('system_settings')"><i class="fa-solid fa-sliders text-blue"></i> ⚙️ إعدادات النظام ورصيد المحفظة</li>
         </ul>
     </div>
 
@@ -4905,11 +4905,11 @@
                         <div>
                             <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
                                 <span style="font-size: 28px;">🏦</span>
-                                <h2 style="font-size: 22px; font-weight: 900; color: #fff; margin: 0;">دليل صناديق الاستثمار الشامل في مصر (Thndr 67 Funds)</h2>
-                                <span class="badge badge-green" style="font-size: 11px;">محدث لحظياً بالأسعار والعوائد</span>
+                                <h2 style="font-size: 22px; font-weight: 900; color: #fff; margin: 0;">دليل صناديق الاستثمار الشامل في مصر (Thndr 76 Funds)</h2>
+                                <span class="badge badge-green" style="font-size: 11px;">محدث ومكتمل بالكامل (76 صندوقاً)</span>
                             </div>
                             <div style="font-size: 13.5px; color: #cbd5e1; max-width: 820px; line-height: 1.6;">
-                                تغطية حصرية لكافة الـ <strong>67 صندوقاً استثمارياً</strong> المرخصة من الهيئة العامة للرقابة المالية (FRA) والمتاحة للشراء المباشر على منصة ثاندر (Thndr). تصنيف احترافي عبر 7 فئات أصول، ومتابعة فورية لصافي قيمة الوثيقة (NAV)، العائد السنوي، ومستوى المخاطرة.
+                                تغطية حصرية لكافة الـ <strong>76 صندوقاً استثمارياً</strong> المرخصة من الهيئة العامة للرقابة المالية (FRA) والمتاحة للشراء المباشر على منصة ثاندر (Thndr). تصنيف احترافي عبر 7 فئات أصول، ومتابعة فورية لصافي قيمة الوثيقة (NAV)، العائد السنوي، ومستوى المخاطرة.
                             </div>
                         </div>
                         <div style="display: flex; gap: 10px;">
@@ -4926,23 +4926,23 @@
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 20px;">
                         <div style="background: rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-sm); padding: 12px 14px;">
                             <div style="font-size: 11px; color: var(--text-muted);">إجمالي الصناديق المتوفرة</div>
-                            <div style="font-size: 20px; font-weight: 900; color: #fff; font-family: 'JetBrains Mono', monospace;">67 <span style="font-size: 12px; color: #94a3b8;">صندوقاً</span></div>
+                            <div id="kpi-funds-total" style="font-size: 20px; font-weight: 900; color: #fff; font-family: 'JetBrains Mono', monospace;">76 <span style="font-size: 12px; color: #94a3b8;">صندوقاً</span></div>
                         </div>
                         <div style="background: rgba(0,0,0,0.35); border: 1px solid rgba(245,158,11,0.2); border-radius: var(--radius-sm); padding: 12px 14px;">
                             <div style="font-size: 11px; color: #fbbf24;">🥇 صناديق الذهب والمعادن</div>
-                            <div style="font-size: 20px; font-weight: 900; color: #fbbf24; font-family: 'JetBrains Mono', monospace;">3 <span style="font-size: 12px; color: #94a3b8;">(AZG, B-Gold, Dahab)</span></div>
+                            <div id="kpi-funds-gold" style="font-size: 20px; font-weight: 900; color: #fbbf24; font-family: 'JetBrains Mono', monospace;">3 <span style="font-size: 12px; color: #94a3b8;">(AZG, B-Gold, Dahab)</span></div>
                         </div>
                         <div style="background: rgba(0,0,0,0.35); border: 1px solid rgba(16,185,129,0.2); border-radius: var(--radius-sm); padding: 12px 14px;">
                             <div style="font-size: 11px; color: #34d399;">💵 أسواق النقد والسيولة اليومية</div>
-                            <div style="font-size: 20px; font-weight: 900; color: #34d399; font-family: 'JetBrains Mono', monospace;">26 <span style="font-size: 12px; color: #94a3b8;">صندوقاً نقدياً</span></div>
+                            <div id="kpi-funds-mm" style="font-size: 20px; font-weight: 900; color: #34d399; font-family: 'JetBrains Mono', monospace;">27 <span style="font-size: 12px; color: #94a3b8;">صندوقاً نقدياً</span></div>
                         </div>
                         <div style="background: rgba(0,0,0,0.35); border: 1px solid rgba(59,130,246,0.2); border-radius: var(--radius-sm); padding: 12px 14px;">
                             <div style="font-size: 11px; color: #60a5fa;">📈 صناديق الأسهم والشريعة</div>
-                            <div style="font-size: 20px; font-weight: 900; color: #60a5fa; font-family: 'JetBrains Mono', monospace;">30 <span style="font-size: 12px; color: #94a3b8;">(18 أسهم + 12 شريعة)</span></div>
+                            <div id="kpi-funds-equity" style="font-size: 20px; font-weight: 900; color: #60a5fa; font-family: 'JetBrains Mono', monospace;">38 <span style="font-size: 12px; color: #94a3b8;">(22 أسهم + 16 شريعة)</span></div>
                         </div>
                         <div style="background: rgba(0,0,0,0.35); border: 1px solid rgba(139,92,246,0.2); border-radius: var(--radius-sm); padding: 12px 14px;">
                             <div style="font-size: 11px; color: #c084fc;">⚖️ صناديق متوازنة ومؤشرات</div>
-                            <div style="font-size: 20px; font-weight: 900; color: #c084fc; font-family: 'JetBrains Mono', monospace;">8 <span style="font-size: 12px; color: #94a3b8;">(6 متوازنة + 2 سندات/مؤشر)</span></div>
+                            <div id="kpi-funds-balanced" style="font-size: 20px; font-weight: 900; color: #c084fc; font-family: 'JetBrains Mono', monospace;">8 <span style="font-size: 12px; color: #94a3b8;">(6 متوازنة + 2 سندات/مؤشر)</span></div>
                         </div>
                     </div>
                 </div>
@@ -4952,13 +4952,13 @@
                     <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
                         <!-- Category Pills -->
                         <div style="display: flex; gap: 8px; flex-wrap: wrap;" id="funds-category-pills">
-                            <button class="btn btn-sm fund-filter-chip active" onclick="filterFundsByCategory('ALL', this)">🏦 الكل (67)</button>
-                            <button class="btn btn-sm fund-filter-chip" onclick="filterFundsByCategory('GOLD', this)">🥇 ذهب (3)</button>
-                            <button class="btn btn-sm fund-filter-chip" onclick="filterFundsByCategory('MONEY_MARKET', this)">💵 نقدية وسيولة (26)</button>
-                            <button class="btn btn-sm fund-filter-chip" onclick="filterFundsByCategory('EQUITY', this)">📈 أسهم (18)</button>
-                            <button class="btn btn-sm fund-filter-chip" onclick="filterFundsByCategory('ISLAMIC_SHARIA', this)">🌙 شريعة إسلامية (12)</button>
-                            <button class="btn btn-sm fund-filter-chip" onclick="filterFundsByCategory('BALANCED', this)">⚖️ متوازنة (6)</button>
-                            <button class="btn btn-sm fund-filter-chip" onclick="filterFundsByCategory('ETF', this)">📊 مؤشرات وسندات (2)</button>
+                            <button id="pill-fund-ALL" class="btn btn-sm fund-filter-chip active" onclick="filterFundsByCategory('ALL', this)">🏦 الكل (76)</button>
+                            <button id="pill-fund-GOLD" class="btn btn-sm fund-filter-chip" onclick="filterFundsByCategory('GOLD', this)">🥇 ذهب (3)</button>
+                            <button id="pill-fund-MONEY_MARKET" class="btn btn-sm fund-filter-chip" onclick="filterFundsByCategory('MONEY_MARKET', this)">💵 نقدية وسيولة (27)</button>
+                            <button id="pill-fund-EQUITY" class="btn btn-sm fund-filter-chip" onclick="filterFundsByCategory('EQUITY', this)">📈 أسهم (22)</button>
+                            <button id="pill-fund-ISLAMIC_SHARIA" class="btn btn-sm fund-filter-chip" onclick="filterFundsByCategory('ISLAMIC_SHARIA', this)">🌙 شريعة إسلامية (16)</button>
+                            <button id="pill-fund-BALANCED" class="btn btn-sm fund-filter-chip" onclick="filterFundsByCategory('BALANCED', this)">⚖️ متوازنة (6)</button>
+                            <button id="pill-fund-ETF" class="btn btn-sm fund-filter-chip" onclick="filterFundsByCategory('ETF', this)">📊 مؤشرات وسندات (2)</button>
                         </div>
 
                         <!-- Search Box -->
@@ -4967,7 +4967,7 @@
                                 <input type="text" id="funds-search-input" class="form-control" placeholder="ابحث باسم الصندوق، الكود، أو المدير..." oninput="renderMutualFunds()" style="padding-right: 36px;">
                                 <i class="fa-solid fa-magnifying-glass" style="position: absolute; right: 12px; top: 12px; color: var(--text-muted);"></i>
                             </div>
-                            <span id="funds-visible-count" class="badge badge-blue" style="white-space: nowrap; font-size: 12px; padding: 6px 10px;">67 من 67</span>
+                            <span id="funds-visible-count" class="badge badge-blue" style="white-space: nowrap; font-size: 12px; padding: 6px 10px;">76 من 76</span>
                         </div>
                     </div>
                 </div>
@@ -5132,7 +5132,7 @@
             'ranking': '🏆 أفضل الأسهم والفرص في البورصة المصرية (270 سهم على ثاندر)',
             'details': '🔍 ملف الاستخبارات والتقييم الأساسي للسهم',
             'real_portfolio': '💼 سجل محفظتي الحقيقية وتوصيات الذكاء الاصطناعي',
-            'mutual_funds': '🏦 دليل صناديق الاستثمار في مصر (67 صندوق استثماري على منصة ثاندر Thndr)',
+            'mutual_funds': '🏦 دليل صناديق الاستثمار في مصر (76 صندوقاً استثمارياً على منصة ثاندر Thndr)',
             'paper_portfolio': '📝 المحفظة التجريبية المعتمدة (Production Ready)',
             'watchlist': '⭐ قائمة المراقبة للأسهم المفضلة',
             'insider_radar': '🕵️ رادار المطلعين والحيتان وإفصاحات الإدارة (Smart Money Radar)',
@@ -5155,38 +5155,81 @@
         let cachedRankings = [];
         let currentRankingView = "cards";
 
-        // --- Navigation ---
-        function navigateTo(tabId) {
-            if (!VALID_TABS.includes(tabId)) tabId = 'overview';
-            if (window.location.hash !== '#' + tabId) {
-                window.location.hash = tabId;
-            }
-            renderTab(tabId);
-            const sb = document.getElementById('main-sidebar');
-            if (sb && sb.classList.contains('mobile-open')) {
-                sb.classList.remove('mobile-open');
+        // =====================================================================
+        // --- Fortified Navigation Engine (switchTab / navigateTo) ---
+        // =====================================================================
+        function switchTab(tabId) {
+            try {
+                if (!tabId) tabId = 'overview';
+                if (tabId === 'research_lab') tabId = 'research-lab';
+                if (!VALID_TABS.includes(tabId)) tabId = 'overview';
+
+                const targetTabId = (tabId === 'research-lab' || tabId === 'research_lab') ? 'research-lab' : tabId;
+
+                // 1. Immediately hide all tab panels & tab panes
+                document.querySelectorAll('.tab-panel, .tab-pane').forEach(p => {
+                    p.classList.remove('active');
+                    p.classList.add('hidden');
+                    p.style.display = 'none';
+                });
+
+                // 2. Deactivate all navigation items
+                document.querySelectorAll('.nav-item, [data-tab]').forEach(n => {
+                    n.classList.remove('active');
+                });
+
+                // 3. Reveal and activate target panel
+                const panel = document.getElementById('tab-' + targetTabId) ||
+                              document.getElementById('tab-' + tabId) ||
+                              document.getElementById(targetTabId);
+
+                if (panel) {
+                    panel.classList.remove('hidden');
+                    panel.classList.add('active');
+                    panel.style.display = 'block';
+                }
+
+                // 4. Activate target nav item in sidebar
+                const navItem = document.getElementById('nav-' + targetTabId) ||
+                                document.getElementById('nav-' + tabId) ||
+                                document.querySelector(`[data-tab="${targetTabId}"]`) ||
+                                document.querySelector(`[data-tab="${tabId}"]`);
+                if (navItem) {
+                    navItem.classList.add('active');
+                }
+
+                // 5. Update header page title
+                const titleEl = document.getElementById('page-title');
+                if (titleEl && TITLE_MAP[tabId]) {
+                    titleEl.innerText = TITLE_MAP[tabId];
+                }
+
+                // 6. Safely update hash without triggering loop
+                if (window.location.hash !== '#' + tabId) {
+                    try {
+                        window.location.hash = tabId;
+                    } catch (e) {}
+                }
+
+                // 7. Auto close mobile sidebar
+                const sb = document.getElementById('main-sidebar');
+                if (sb && sb.classList.contains('mobile-open')) {
+                    sb.classList.remove('mobile-open');
+                }
+
+                // 8. Decouple tab-specific asynchronous data fetching with a microtask
+                setTimeout(() => {
+                    executeTabLoaders(tabId);
+                }, 10);
+            } catch (err) {
+                console.error("switchTab error:", err);
             }
         }
-        window.switchTab = navigateTo;
-        window.navigateTo = navigateTo;
+        window.switchTab = switchTab;
+        window.navigateTo = switchTab;
+        window.renderTab = switchTab;
 
-        function renderTab(tabId) {
-            if (!VALID_TABS.includes(tabId)) tabId = 'overview';
-
-            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-
-            const targetTabId = (tabId === 'research-lab' || tabId === 'research_lab') ? 'research-lab' : tabId;
-            const panel = document.getElementById('tab-' + targetTabId) || document.getElementById('tab-' + tabId);
-            const navItem = document.getElementById('nav-' + targetTabId) || document.getElementById('nav-' + tabId) || document.getElementById('nav-research_lab');
-
-            if (panel) panel.classList.add('active');
-            if (navItem) navItem.classList.add('active');
-
-            const titleEl = document.getElementById('page-title');
-            if (titleEl) titleEl.innerText = TITLE_MAP[tabId] || 'منظومة GEN-26';
-
-            // Tab-specific fetchers
+        function executeTabLoaders(tabId) {
             try {
                 if (tabId === 'mutual_funds') {
                     loadMutualFundsData();
@@ -5244,7 +5287,7 @@
                     runMonteCarloSim(60);
                 }
             } catch (tabErr) {
-                console.warn("Tab render handler warning:", tabErr);
+                console.warn("Tab loader execution warning:", tabErr);
             }
         }
 
@@ -7681,6 +7724,9 @@
                         </div>
                     `).join('');
                 }
+            } catch (err) {
+                console.warn("fetchPortfolioFxHedge error:", err);
+            }
         }
 
         // =====================================================================
@@ -8724,16 +8770,19 @@
             if (!container) return;
             try {
                 const res = await fetch('/api/market/heatmap');
-                if (!res.ok) return;
+                if (!res.ok) {
+                    container.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 25px; grid-column: 1 / -1;"><i class="fa-solid fa-chart-pie text-blue"></i> خريطة القطاعات جاهزة بانتظار استئناف التداولات.</div>`;
+                    return;
+                }
                 const data = await res.json();
 
                 const advBadge = document.getElementById('heatmap-adv-badge');
                 const decBadge = document.getElementById('heatmap-dec-badge');
                 const ratioBadge = document.getElementById('heatmap-ratio-badge');
 
-                if (advBadge) advBadge.innerText = `🟢 الصاعد: ${data.advancers_count}`;
-                if (decBadge) decBadge.innerText = `🔴 الهابط: ${data.decliners_count}`;
-                if (ratioBadge) ratioBadge.innerText = `⚖️ نسبة الصعود: ${data.advance_decline_ratio}`;
+                if (advBadge) advBadge.innerText = `🟢 الصاعد: ${data.advancers_count || 0}`;
+                if (decBadge) decBadge.innerText = `🔴 الهابط: ${data.decliners_count || 0}`;
+                if (ratioBadge) ratioBadge.innerText = `⚖️ نسبة الصعود: ${data.advance_decline_ratio || '1.0'}`;
 
                 if (data.sectors && data.sectors.length > 0) {
                     container.innerHTML = data.sectors.map(sec => {
@@ -8761,9 +8810,12 @@
                             </div>
                         `;
                     }).join('');
+                } else {
+                    container.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 25px; grid-column: 1 / -1;"><i class="fa-solid fa-chart-pie text-blue"></i> خريطة القطاعات جاهزة بانتظار استئناف التداولات.</div>`;
                 }
             } catch (err) {
                 console.warn("fetchMarketHeatmap error:", err);
+                container.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 25px; grid-column: 1 / -1;"><i class="fa-solid fa-chart-pie text-blue"></i> خريطة القطاعات جاهزة بانتظار استئناف التداولات.</div>`;
             }
         }
 
@@ -9410,7 +9462,7 @@
         async function loadMutualFundsData() {
             const container = document.getElementById('funds-grid-container');
             if (container && (!allFundsData || allFundsData.length === 0)) {
-                container.innerHTML = '<div style="text-align: center; padding: 40px; color: var(--text-muted); grid-column: 1/-1;"><i class="fa-solid fa-spinner fa-spin fa-2x"></i><br><br>جاري تحميل بيانات الصناديق الـ 67 من الخادم...</div>';
+                container.innerHTML = '<div style="text-align: center; padding: 40px; color: var(--text-muted); grid-column: 1/-1;"><i class="fa-solid fa-spinner fa-spin fa-2x"></i><br><br>جاري تحميل بيانات الصناديق من الخادم...</div>';
             }
 
             try {
@@ -9419,6 +9471,7 @@
                 const data = await res.json();
                 if (data.status === 'SUCCESS' && Array.isArray(data.funds)) {
                     allFundsData = data.funds;
+                    updateCategoryPillCounts();
                     renderMutualFunds();
                 }
             } catch (e) {
@@ -9427,6 +9480,44 @@
                     container.innerHTML = '<div style="color: #ef4444; padding: 30px; text-align: center; grid-column: 1/-1;">تعذر تحميل الصناديق. يرجى التأكد من اتصال الخادم.</div>';
                 }
             }
+        }
+
+        function updateCategoryPillCounts() {
+            if (!allFundsData || allFundsData.length === 0) return;
+            const counts = {
+                'ALL': allFundsData.length,
+                'GOLD': 0,
+                'MONEY_MARKET': 0,
+                'EQUITY': 0,
+                'ISLAMIC_SHARIA': 0,
+                'BALANCED': 0,
+                'ETF': 0
+            };
+            allFundsData.forEach(f => {
+                if (f.category === 'ETF' || f.category === 'FIXED_INCOME') counts['ETF']++;
+                else if (counts[f.category] !== undefined) counts[f.category]++;
+            });
+            const pillAll = document.getElementById('pill-fund-ALL');
+            if (pillAll) pillAll.innerText = `🏦 الكل (${counts['ALL']})`;
+            const pillGold = document.getElementById('pill-fund-GOLD');
+            if (pillGold) pillGold.innerText = `🥇 ذهب (${counts['GOLD']})`;
+            const pillMM = document.getElementById('pill-fund-MONEY_MARKET');
+            if (pillMM) pillMM.innerText = `💵 نقدية وسيولة (${counts['MONEY_MARKET']})`;
+            const pillEq = document.getElementById('pill-fund-EQUITY');
+            if (pillEq) pillEq.innerText = `📈 أسهم (${counts['EQUITY']})`;
+            const pillSharia = document.getElementById('pill-fund-ISLAMIC_SHARIA');
+            if (pillSharia) pillSharia.innerText = `🌙 شريعة إسلامية (${counts['ISLAMIC_SHARIA']})`;
+            const pillBal = document.getElementById('pill-fund-BALANCED');
+            if (pillBal) pillBal.innerText = `⚖️ متوازنة (${counts['BALANCED']})`;
+            const pillEtf = document.getElementById('pill-fund-ETF');
+            if (pillEtf) pillEtf.innerText = `📊 مؤشرات وسندات (${counts['ETF']})`;
+
+            const totalKpi = document.getElementById('kpi-funds-total');
+            if (totalKpi) totalKpi.innerHTML = `${counts['ALL']} <span style="font-size: 12px; color: #94a3b8;">صندوقاً</span>`;
+            const mmKpi = document.getElementById('kpi-funds-mm');
+            if (mmKpi) mmKpi.innerHTML = `${counts['MONEY_MARKET']} <span style="font-size: 12px; color: #94a3b8;">صندوقاً نقدياً</span>`;
+            const eqKpi = document.getElementById('kpi-funds-equity');
+            if (eqKpi) eqKpi.innerHTML = `${counts['EQUITY'] + counts['ISLAMIC_SHARIA']} <span style="font-size: 12px; color: #94a3b8;">(${counts['EQUITY']} أسهم + ${counts['ISLAMIC_SHARIA']} شريعة)</span>`;
         }
 
         function filterFundsByCategory(cat, btn) {
@@ -9461,7 +9552,7 @@
             }
 
             const countEl = document.getElementById('funds-visible-count');
-            if (countEl) countEl.innerText = `${filtered.length} من 67 صندوقاً`;
+            if (countEl) countEl.innerText = `${filtered.length} من ${(allFundsData || []).length} صندوقاً`;
 
             if (filtered.length === 0) {
                 container.innerHTML = '<div style="text-align: center; padding: 40px; color: var(--text-muted); grid-column: 1/-1;">لا توجد صناديق مطابقة لمعايير البحث.</div>';
@@ -9628,25 +9719,53 @@
 
         window.addEventListener('hashchange', () => {
             const hash = window.location.hash.replace('#', '') || 'overview';
-            renderTab(hash);
+            switchTab(hash);
         });
 
         window.addEventListener('DOMContentLoaded', () => {
-            const initialHash = window.location.hash.replace('#', '') || 'overview';
-            renderTab(initialHash);
-            fetchThndrDailyCard();
-            loadRankingData().then(() => {
-                initStocksDatalist();
-                fetchMarketHeatmap();
-                runMonteCarloSim(60);
-                fetchLiveNotifications();
-                fetchOverviewInsiderDeals();
-                fetchOverviewArbitrageDeals();
-                loadRealPortfolioTable();
-                loadAIStatusScorecard();
-                startRealtimePriceStream();
-                loadSystemSettings();
+            // Bind all sidebar and navigation items with clean addEventListener('click')
+            document.querySelectorAll('.nav-item, [data-tab]').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const tab = this.getAttribute('data-tab') || 
+                                (this.id ? this.id.replace('nav-', '') : null);
+                    if (tab) {
+                        e.preventDefault();
+                        switchTab(tab);
+                    }
+                });
             });
+
+            // Initial Tab Activation
+            const initialHash = window.location.hash.replace('#', '') || 'overview';
+            switchTab(initialHash);
+
+            // Execute initial data fetchers in isolated asynchronous blocks
+            setTimeout(() => {
+                try { fetchThndrDailyCard(); } catch(e) {}
+            }, 30);
+
+            setTimeout(() => {
+                try {
+                    loadRankingData().then(() => {
+                        try { initStocksDatalist(); } catch(e) {}
+                    }).catch(e => console.warn("Ranking data load error:", e));
+                } catch(e) {}
+            }, 60);
+
+            setTimeout(() => {
+                try { fetchMarketHeatmap(); } catch(e) {}
+                try { fetchOverviewInsiderDeals(); } catch(e) {}
+                try { fetchOverviewArbitrageDeals(); } catch(e) {}
+            }, 100);
+
+            setTimeout(() => {
+                try { runMonteCarloSim(60); } catch(e) {}
+                try { fetchLiveNotifications(); } catch(e) {}
+                try { loadRealPortfolioTable(); } catch(e) {}
+                try { loadAIStatusScorecard(); } catch(e) {}
+                try { startRealtimePriceStream(); } catch(e) {}
+                try { loadSystemSettings(); } catch(e) {}
+            }, 150);
         });
     </script>
 
