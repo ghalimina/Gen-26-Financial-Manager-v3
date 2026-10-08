@@ -2993,6 +2993,8 @@
                                 <tr>
                                     <th>السهم والمركز</th>
                                     <th>السعر اللحظي</th>
+                                    <th>📉 أدنى سعر متوقع اليوم (اشترِ عنده)</th>
+                                    <th>📈 أعلى سعر متوقع اليوم (بِع 50% عنده)</th>
                                     <th>مقاومة بيع 50%</th>
                                     <th>دعم إعادة الشراء</th>
                                     <th>سمية السيولة والمطلعين</th>
@@ -3002,8 +3004,8 @@
                             </thead>
                             <tbody id="portfolio-swing-tbody">
                                 <tr>
-                                    <td colspan="7" style="text-align: center; color: var(--text-muted); padding: 18px;">
-                                        <i class="fa-solid fa-spinner fa-spin"></i> جاري استدعاء محرك التدوير وحساب مؤشرات VPIN...
+                                    <td colspan="9" style="text-align: center; color: var(--text-muted); padding: 18px;">
+                                        <i class="fa-solid fa-spinner fa-spin"></i> جاري استدعاء محرك التدوير وحساب مؤشرات VPIN والنطاق السعري اليومي...
                                     </td>
                                 </tr>
                             </tbody>
@@ -7449,12 +7451,12 @@
             const tbody = document.getElementById('portfolio-swing-tbody');
             if (!tbody) return;
 
-            tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: var(--text-muted); padding: 18px;"><i class="fa-solid fa-spinner fa-spin"></i> جاري استدعاء محرك التدوير وحساب مؤشرات VPIN وتدفقات المطلعين وخفض التكلفة...</td></tr>`;
+            tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; color: var(--text-muted); padding: 18px;"><i class="fa-solid fa-spinner fa-spin"></i> جاري استدعاء محرك التدوير وحساب مؤشرات VPIN والنطاق السعري اليومي...</td></tr>`;
 
             try {
                 const res = await fetch('/api/portfolio_swing_advisor');
                 if (!res.ok) {
-                    tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: var(--accent-red); padding: 18px;">تعذر جلب توصيات التدوير: HTTP ${res.status}</td></tr>`;
+                    tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; color: var(--accent-red); padding: 18px;">تعذر جلب توصيات التدوير: HTTP ${res.status}</td></tr>`;
                     return;
                 }
 
@@ -7468,11 +7470,21 @@
                 }
 
                 if (recs.length === 0) {
-                    tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: var(--text-muted); padding: 20px;">لا توجد أسهم حالياً بحاجة لتدوير في المحفظة.</td></tr>`;
+                    tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; color: var(--text-muted); padding: 20px;">لا توجد أسهم حالياً بحاجة لتدوير في المحفظة.</td></tr>`;
                     return;
                 }
 
                 tbody.innerHTML = recs.map(item => {
+                    // Session Direction Badge
+                    let sessionDirBadge = '';
+                    if (item.session_direction === 'BULLISH') {
+                        sessionDirBadge = `<span class="badge badge-green" style="font-size: 10.5px; font-weight: 700;"><i class="fa-solid fa-arrow-trend-up"></i> ${item.session_direction_ar || 'صاعد 🟢'}</span>`;
+                    } else if (item.session_direction === 'BEARISH') {
+                        sessionDirBadge = `<span class="badge badge-red" style="font-size: 10.5px; font-weight: 700;"><i class="fa-solid fa-arrow-trend-down"></i> ${item.session_direction_ar || 'هابط 🔴'}</span>`;
+                    } else {
+                        sessionDirBadge = `<span class="badge badge-yellow" style="font-size: 10.5px; font-weight: 700;"><i class="fa-solid fa-arrows-left-right"></i> ${item.session_direction_ar || 'محايد 🟡'}</span>`;
+                    }
+
                     // VPIN Badge
                     const vpinPct = Number(item.vpin_pct || (item.vpin_score ? item.vpin_score * 100 : 25)).toFixed(0);
                     let vpinBadge = '';
@@ -7523,15 +7535,35 @@
                                 <div style="font-weight: 700; color: #fff; font-size: 14px;">
                                     ${item.company_name_ar || item.ticker}
                                 </div>
-                                <div style="display: flex; gap: 6px; align-items: center; margin-top: 3px;">
+                                <div style="display: flex; gap: 6px; align-items: center; margin-top: 3px; flex-wrap: wrap;">
                                     <span class="font-mono text-muted" style="font-size: 11px;">${item.ticker}</span>
                                     <span class="badge badge-blue" style="font-size: 10px;">${item.quantity_owned || 0} سهم</span>
+                                    ${sessionDirBadge}
                                 </div>
                                 ${effectiveCostHtml}
                             </td>
                             <td>
                                 <div class="font-mono" style="font-size: 15px; font-weight: 700; color: #f8fafc;">
                                     ${Number(item.current_price).toFixed(2)} <span style="font-size: 11px; color: var(--text-muted);">ج.م</span>
+                                </div>
+                                <div style="font-size: 10.5px; color: var(--text-muted); margin-top: 2px;">
+                                    ارتكاز: ${Number(item.daily_pivot || item.current_price).toFixed(2)} ج
+                                </div>
+                            </td>
+                            <td>
+                                <div class="font-mono text-green" style="font-size: 15px; font-weight: 800;">
+                                    ${Number(item.expected_session_low || item.buyback_support).toFixed(2)} <span style="font-size: 11px;">ج.م</span>
+                                </div>
+                                <div style="font-size: 10.5px; color: #4ade80; margin-top: 2px; font-weight: 600;">
+                                    <i class="fa-solid fa-arrow-down"></i> قاع الدعم S1 (اشترِ)
+                                </div>
+                            </td>
+                            <td>
+                                <div class="font-mono text-red" style="font-size: 15px; font-weight: 800;">
+                                    ${Number(item.expected_session_high || item.resistance_price).toFixed(2)} <span style="font-size: 11px;">ج.م</span>
+                                </div>
+                                <div style="font-size: 10.5px; color: #f87171; margin-top: 2px; font-weight: 600;">
+                                    <i class="fa-solid fa-arrow-up"></i> قمة المقاومة R1 (بِع 50%)
                                 </div>
                             </td>
                             <td>
@@ -7574,7 +7606,7 @@
 
             } catch (err) {
                 console.warn("fetchPortfolioSwingAdvisor error:", err);
-                tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: var(--accent-red); padding: 18px;">حدث خطأ أثناء تحميل مستشار التدوير.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; color: var(--accent-red); padding: 18px;">حدث خطأ أثناء تحميل مستشار التدوير.</td></tr>`;
             }
         }
 

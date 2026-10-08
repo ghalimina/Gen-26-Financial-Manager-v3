@@ -323,6 +323,36 @@ def get_portfolio_alerts() -> List[str]:
     return alerts
 
 
+def get_daily_swing_ranges_report() -> str:
+    """
+    Computes and formats the precise expected daily swing low & high range
+    and directional session bias for the 5 target portfolio holdings on Thndr:
+    SWDY, COMI, TMGH, PHDC, RAYA.
+    """
+    lines = [
+        "🎯 <b>نطاق التدوير والمضاربة اليومية لأسهمك في ثاندر (Daily Swing Ranges):</b>"
+    ]
+    target_stocks = ["SWDY.CA", "COMI.CA", "TMGH.CA", "PHDC.CA", "RAYA.CA"]
+    try:
+        from core.technical_setup_engine import TechnicalSetupEngine
+        from core.market_price_service import MarketPriceService
+        for sym in target_stocks:
+            rec = MarketPriceService.get_canonical_price_record(sym)
+            raw_sym = sym.replace(".CA", "")
+            forecast = TechnicalSetupEngine.calculate_daily_forecast_range(sym, current_price=rec.get("price"))
+            direction_ar = forecast.get("session_direction_ar", "محايد 🟡")
+            low = float(forecast.get("expected_session_low", 0.0))
+            high = float(forecast.get("expected_session_high", 0.0))
+            lines.append(
+                f"• {raw_sym}: الاتجاه {direction_ar} | قاع الجلسة المتوقع: <code>{low:.2f} ج</code> | قمة الجلسة المتوقعة: <code>{high:.2f} ج</code> | نفّذ التدوير داخل هذا النطاق"
+            )
+        lines.append("━━━━━━━━━━━━━━━━━━━━\n")
+        return "\n".join(lines) + "\n"
+    except Exception as e:
+        print(f"[WARN] Error formatting daily swing ranges: {e}")
+        return ""
+
+
 def get_cairo_time() -> Tuple[str, str]:
     """Calculates accurate Cairo date and time taking into account Egypt daylight saving time."""
     try:
@@ -425,8 +455,10 @@ def build_concise_reports(regime_data: Dict[str, Any], macro_data: Dict[str, Any
                 f"• ⚠️ <b>قاعدة تأمين الأرباح:</b> {t_rule}\n\n"
             )
 
-    # 2. Open Portfolio Alerts
+    # 2. Open Portfolio Alerts & Daily Swing Ranges
     alerts = get_portfolio_alerts()
+    swing_ranges_section = get_daily_swing_ranges_report()
+
     if alerts:
         alerts_section = (
             f"🔔 <b>تنبيهات المراكز المفتوحة بالمحفظة:</b>\n" +
@@ -439,6 +471,8 @@ def build_concise_reports(regime_data: Dict[str, Any], macro_data: Dict[str, Any
             "• جميع المراكز المفتوحة مستقرة وآمنة أعلى حواجز الوقف.\n"
             "━━━━━━━━━━━━━━━━━━━━\n\n"
         )
+
+    portfolio_section = alerts_section + swing_ranges_section
 
     # 3. Smart Cash Radar Summary (Mutual Funds)
     radar_section = ""
@@ -470,13 +504,13 @@ def build_concise_reports(regime_data: Dict[str, Any], macro_data: Dict[str, Any
     stock_cards = [format_compact_stock(s, i) for i, s in enumerate(top_stocks[:3], start=1)]
     core_section = "📊 <b>أبرز 3 فرص استراتيجية بالكون الاستثماري:</b>\n" + "\n\n────────────────────\n\n".join(stock_cards)
 
-    full_message = header + thndr_section + alerts_section + radar_section + sector_rotation_section + core_section
+    full_message = header + thndr_section + portfolio_section + radar_section + sector_rotation_section + core_section
 
     if len(full_message) <= 3900:
         return [full_message]
 
     # Split cleanly if needed
-    part1 = header + thndr_section + alerts_section + radar_section + sector_rotation_section
+    part1 = header + thndr_section + portfolio_section + radar_section + sector_rotation_section
     part2 = "📊 <b>أبرز الفرص الاستراتيجية بالكون الاستثماري:</b>\n━━━━━━━━━━━━━━━━━━━━\n\n" + core_section
     return [part1, part2]
 

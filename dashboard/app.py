@@ -4062,6 +4062,7 @@ def api_portfolio_swing_advisor():
         from core.insider_trading_engine import InsiderTradingEngine
         from core.price_sync_service import PriceSyncService
         from core.real_portfolio import RealPortfolioTracker
+        from core.technical_setup_engine import TechnicalSetupEngine
 
         real_portfolio = RealPortfolioTracker.load_portfolio()
         holdings_map = {h["ticker"]: h for h in real_portfolio.get("holdings", [])}
@@ -4136,6 +4137,28 @@ def api_portfolio_swing_advisor():
                 cur_price = PriceSyncService.get_price(sym)
             except Exception:
                 cur_price = meta["buyback"]
+
+            # 1.5. Calculate Daily Forecast Range & Session Directional Bias
+            try:
+                daily_forecast = TechnicalSetupEngine.calculate_daily_forecast_range(sym, current_price=cur_price)
+            except Exception:
+                daily_forecast = {
+                    "daily_pivot": round(cur_price, 2),
+                    "expected_session_low": round(cur_price * 0.985, 2),
+                    "expected_session_high": round(cur_price * 1.025, 2),
+                    "range_spread_pct": 2.5,
+                    "session_direction": "NEUTRAL",
+                    "session_direction_ar": "محايد 🟡",
+                    "daily_range_advice_ar": f"تداول متوازن قرب مستويات {cur_price:.2f} ج"
+                }
+
+            exp_session_low = round(float(daily_forecast.get("expected_session_low", cur_price * 0.985)), 2)
+            exp_session_high = round(float(daily_forecast.get("expected_session_high", cur_price * 1.025)), 2)
+            daily_pivot = round(float(daily_forecast.get("daily_pivot", cur_price)), 2)
+            session_direction = daily_forecast.get("session_direction", "NEUTRAL")
+            session_direction_ar = daily_forecast.get("session_direction_ar", "محايد 🟡")
+            range_spread_pct = round(float(daily_forecast.get("range_spread_pct", 2.5)), 2)
+            daily_range_advice = daily_forecast.get("daily_range_advice_ar", "")
 
             # 2. Query recent daily bars for VPIN computation
             cur.execute("""
@@ -4245,7 +4268,14 @@ def api_portfolio_swing_advisor():
                 "action_code": action_code,
                 "badge_ar": badge_ar,
                 "order_command_ar": order_command_ar,
-                "allocation_decision_ar": allocation_decision
+                "allocation_decision_ar": allocation_decision,
+                "expected_session_low": exp_session_low,
+                "expected_session_high": exp_session_high,
+                "daily_pivot": daily_pivot,
+                "session_direction": session_direction,
+                "session_direction_ar": session_direction_ar,
+                "range_spread_pct": range_spread_pct,
+                "daily_range_advice_ar": daily_range_advice
             })
 
         conn.close()

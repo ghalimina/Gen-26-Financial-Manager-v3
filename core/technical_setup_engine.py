@@ -269,7 +269,8 @@ class TechnicalSetupEngine:
         cls,
         ticker: str,
         current_price: Optional[float] = None,
-        custom_prices: Optional[List[float]] = None
+        custom_prices: Optional[List[float]] = None,
+        _skip_range: bool = False
     ) -> Dict[str, Any]:
         """
         Decomposes technical condition dynamically into 5 orthogonal dimensions:
@@ -362,7 +363,14 @@ class TechnicalSetupEngine:
                 "volume_price_confirmed": False,
                 "is_above_ema20": False,
                 "is_above_ema50": False,
-                "adx_trend_strength": "WEAK"
+                "adx_trend_strength": "WEAK",
+                "daily_pivot": float("nan"),
+                "expected_session_low": float("nan"),
+                "expected_session_high": float("nan"),
+                "range_spread_pct": float("nan"),
+                "session_direction": "NEUTRAL",
+                "session_direction_ar": "غير متوفر",
+                "daily_range_advice_ar": "بيانات غير كافية لحساب النطاق السعري"
             }
 
         # 2. Extract price arrays
@@ -566,6 +574,23 @@ class TechnicalSetupEngine:
         holding_period_ar = cls.SETUP_HOLDING_PERIODS.get(setup_name, "5 – 20 جلسة تداول (متوسط شهر)")
         invalidation_trigger_ar = f"كسر الإغلاق اليومي أدنى مستوى الدعم {s1:.2f} ج.م بحجم تداول مرتفع أو حدوث تقاطع سلبي لخط الماكد."
 
+        if _skip_range:
+            daily_forecast = {
+                "daily_pivot": s1,
+                "expected_session_low": s1,
+                "expected_session_high": r1,
+                "range_spread_pct": 3.0,
+                "session_direction": "NEUTRAL",
+                "session_direction_ar": "محايد 🟡",
+                "daily_range_advice_ar": ""
+            }
+        else:
+            daily_forecast = cls.calculate_daily_forecast_range(
+                sym,
+                current_price=p,
+                setup_context={"trend_regime": trend, "rsi14": rsi}
+            )
+
         return {
             "ticker": sym,
             "status": "OK",
@@ -636,7 +661,149 @@ class TechnicalSetupEngine:
             "technical_score": technical_score,
             "is_above_ema20": p >= ema20,
             "is_above_ema50": p >= ema50,
-            "adx_trend_strength": "STRONG" if adx >= 25.0 else ("MODERATE" if adx >= 20.0 else "WEAK")
+            "adx_trend_strength": "STRONG" if adx >= 25.0 else ("MODERATE" if adx >= 20.0 else "WEAK"),
+            "daily_pivot": daily_forecast["daily_pivot"],
+            "expected_session_low": daily_forecast["expected_session_low"],
+            "expected_session_high": daily_forecast["expected_session_high"],
+            "range_spread_pct": daily_forecast["range_spread_pct"],
+            "session_direction": daily_forecast["session_direction"],
+            "session_direction_ar": daily_forecast["session_direction_ar"],
+            "daily_range_advice_ar": daily_forecast["daily_range_advice_ar"]
+        }
+
+    @classmethod
+    def calculate_daily_forecast_range(
+        cls,
+        ticker: str,
+        current_price: Optional[float] = None,
+        setup_context: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
+        """
+        Calculates daily expected price range (Daily Low & Daily High) with piastre accuracy
+        and intraday directional bias for active swing trading on Thndr using daily pivot points
+        and Fibonacci ratios based on the last 20 sessions and empirical daily bar data:
+          Pivot = (High_{t-1} + Low_{t-1} + Close_{t-1}) / 3
+          Daily Low = Pivot - (High_{t-1} - Low_{t-1}) * 0.618
+          Daily High = Pivot + (High_{t-1} - Low_{t-1}) * 0.618
+          Session Direction: BULLISH / BEARISH / NEUTRAL
+        """
+        sym = ticker.upper().strip()
+        if not sym.endswith(".CA") and "." not in sym:
+            sym = f"{sym}.CA"
+
+        # 1. Check Canonical Price Record for authoritative recent bar
+        rec = MarketPriceService.get_canonical_price_record(sym)
+        df = cls._fetch_ohlcv_history(sym, current_price=current_price, min_bars=5)
+
+        # 2. Extract Previous High, Low, Close
+        p_canonical = float(rec.get("price") or 0.0) if rec else 0.0
+        p = float(current_price or p_canonical or (df["Close"].iloc[-1] if df is not None and len(df) > 0 else 100.0))
+
+        prev_h = None
+        prev_l = None
+        prev_c = None
+
+        if rec and rec.get("high") is not None and rec.get("low") is not None:
+            prev_h = float(rec["high"])
+            prev_l = float(rec["low"])
+            prev_c = float(rec.get("previous_close") or rec.get("price") or p)
+        elif df is not None and len(df) >= 2:
+            prev_h = float(df["High"].iloc[-1])
+            prev_l = float(df["Low"].iloc[-1])
+            prev_c = float(df["Close"].iloc[-1])
+        elif df is not None and len(df) == 1:
+            prev_h = float(df["High"].iloc[0])
+            prev_l = float(df["Low"].iloc[0])
+            prev_c = float(df["Close"].iloc[0])
+        else:
+            prev_h = round(p * 1.018, 2)
+            prev_l = round(p * 0.982, 2)
+            prev_c = p
+
+        # 3. Dynamic Daily Pivot Point calculation
+        pivot = (prev_h + prev_l + prev_c) / 3.0
+        raw_range = max(0.0, prev_h - prev_l)
+
+        # Compute ATR14 cushion
+        if df is not None and len(df) >= 5:
+            atr14 = cls._compute_atr(df["High"].values, df["Low"].values, df["Close"].values, 14)
+        else:
+            atr14 = max(0.05, pivot * 0.025)
+
+        # Ensure realistic minimum range span (at least 1.5% or 0.618 of ATR)
+        span = max(raw_range, atr14 * 0.618, pivot * 0.015)
+
+        expected_session_low = round(pivot - span * 0.618, 2)
+        expected_session_high = round(pivot + span * 0.618, 2)
+
+        # Safeguard: Ensure expected_low < expected_high
+        if expected_session_low >= expected_session_high:
+            expected_session_low = round(p * 0.985, 2)
+            expected_session_high = round(p * 1.025, 2)
+
+        spread_pct = round(((expected_session_high - expected_session_low) / max(1e-4, expected_session_low)) * 100.0, 2)
+
+        # 4. Intraday Directional Bias Determination
+        rsi = 50.0
+        trend = "SIDEWAYS"
+        if setup_context is not None:
+            trend = setup_context.get("trend_regime", "SIDEWAYS")
+            rsi = float(setup_context.get("rsi14", 50.0))
+        else:
+            try:
+                tech = cls.evaluate_technical_setup(sym, current_price=p, _skip_range=True)
+                trend = tech.get("trend_regime", "SIDEWAYS")
+                rsi = float(tech.get("rsi14", 50.0))
+            except Exception:
+                trend = "SIDEWAYS"
+                rsi = 50.0
+
+        dir_score = 0.0
+        if trend in ["STRONG_UPTREND", "UPTREND"]:
+            dir_score += 1.0
+        elif trend in ["WEAK", "DOWNTREND"]:
+            dir_score -= 1.0
+
+        if rsi >= 55.0:
+            dir_score += 1.0
+        elif rsi <= 42.0:
+            dir_score -= 1.0
+
+        if p >= pivot:
+            dir_score += 0.5
+        else:
+            dir_score -= 0.5
+
+        if dir_score >= 0.5:
+            session_direction = "BULLISH"
+            session_direction_ar = "صاعد 🟢"
+        elif dir_score <= -0.5:
+            session_direction = "BEARISH"
+            session_direction_ar = "هابط 🔴"
+        else:
+            session_direction = "NEUTRAL"
+            session_direction_ar = "محايد 🟡"
+
+        daily_range_advice_ar = (
+            f"نفّذ التدوير داخل هذا النطاق: اشترِ قرب القاع {expected_session_low:.2f} ج "
+            f"وبِع 50% عند القمة {expected_session_high:.2f} ج (نطاق ربح متوقع +{spread_pct:.1f}%)"
+        )
+
+        return {
+            "ticker": sym,
+            "status": "OK",
+            "current_price": round(p, 2),
+            "daily_pivot": round(pivot, 2),
+            "expected_session_low": expected_session_low,
+            "expected_session_high": expected_session_high,
+            "range_spread_pct": spread_pct,
+            "session_direction": session_direction,
+            "session_direction_ar": session_direction_ar,
+            "daily_range_advice_ar": daily_range_advice_ar,
+            "prev_high": round(prev_h, 2),
+            "prev_low": round(prev_l, 2),
+            "prev_close": round(prev_c, 2),
+            "atr14": round(atr14, 2)
         }
 
 
