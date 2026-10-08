@@ -162,5 +162,59 @@
     "description_ar": "زيادة رأس المال المصدر بالاكتتاب لقدامى المساهمين بسعر 100 ج.م للسهم",
     "description_en": "Rights issue capital increase at 100 EGP per share",
     "is_completed": true
+  },
+  {
+    "event_id": "PHDC_2026_DIV_01",
+    "ticker": "PHDC.CA",
+    "action_type": "CASH_DIVIDEND",
+    "announcement_date": "2026-04-12",
+    "ex_date": "2026-05-18",
+    "payment_date": "2026-05-30",
+    "value": 0.35,
+    "currency": "EGP",
+    "equivalent_egp": 0.35,
+    "description_ar": "توزيع كوبون نقدي بقيمة 0.35 ج.م للسهم عن أرباح عام 2025",
+    "description_en": "Cash dividend of 0.35 EGP per share",
+    "is_completed": true
+  },
+  {
+    "event_id": "PHDC_2026_CAP_01",
+    "ticker": "PHDC.CA",
+    "action_type": "BONUS_SHARES",
+    "announcement_date": "2026-09-20",
+    "ex_date": "2026-11-20",
+    "payment_date": "2026-12-05",
+    "value": 0.1,
+    "currency": "SHARES",
+    "description_ar": "مقترح توزيع أسهم مجانية بواقع 1 سهم مجاني لكل 10 أسهم لزيادة رأس المال",
+    "description_en": "Proposed 1:10 bonus shares",
+    "is_completed": false
+  },
+  {
+    "event_id": "RAYA_2026_DIV_01",
+    "ticker": "RAYA.CA",
+    "action_type": "CASH_DIVIDEND",
+    "announcement_date": "2026-05-02",
+    "ex_date": "2026-06-15",
+    "payment_date": "2026-06-30",
+    "value": 0.25,
+    "currency": "EGP",
+    "equivalent_egp": 0.25,
+    "description_ar": "كوبون نقدي بقيمة 0.25 ج.م للسهم",
+    "description_en": "Cash dividend of 0.25 EGP per share",
+    "is_completed": true
+  },
+  {
+    "event_id": "RAYA_2026_BUYBACK_01",
+    "ticker": "RAYA.CA",
+    "action_type": "PAR_VALUE_CHANGE",
+    "announcement_date": "2026-09-28",
+    "ex_date": "2026-10-25",
+    "payment_date": "2026-11-10",
+    "value": 7.5,
+    "currency": "EGP",
+    "description_ar": "برنامج شراء أسهم خزينة لدعم القيمة السوقية للسهم بسعر استرشادي 7.50 ج.م",
+    "description_en": "Treasury share buyback program at 7.50 EGP",
+    "is_completed": false
   }
 ]
