@@ -8,6 +8,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 1626,
     "latest_date": "2026-09-10"
@@ -21,21 +23,25 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
   },
   "ACRO.CA": {
     "ticker": "ACRO.CA",
-    "dqs": 65.0,
-    "score": 65.0,
+    "dqs": 80.0,
+    "score": 80.0,
     "tier": "DATA_WARNING",
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Insufficient history: 36 bars < 40"
+      "Missing data gaps: Insufficient history: 36 bars < 40"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 36,
     "latest_date": "2026-09-10"
@@ -51,6 +57,8 @@
       "Extreme price jumps (>35%) detected: 1 bars"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1629,
     "latest_date": "2026-09-10"
@@ -63,26 +71,29 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)"
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
   },
   "AIFI.CA": {
     "ticker": "AIFI.CA",
-    "dqs": 40.0,
-    "score": 40.0,
+    "dqs": 60.0,
+    "score": 60.0,
     "tier": "DATA_UNUSABLE",
     "health": "FAIL",
     "data_health": "FAIL",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)",
-      "Excessive zero-volume sessions: 70.0% of bars",
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze, Zero volume on 70.0% of sessions",
       "Extreme price jumps (>35%) detected: 2 bars"
     ],
     "can_trade": false,
+    "position_size_multiplier": 0.0,
+    "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
     "bar_count": 1631,
     "latest_date": "2026-09-16"
@@ -98,6 +109,8 @@
       "Extreme price jumps (>35%) detected: 1 bars"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
@@ -111,6 +124,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
@@ -126,6 +141,8 @@
       "Extreme price jumps (>35%) detected: 1 bars"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
@@ -139,6 +156,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
@@ -151,9 +170,11 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)"
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
@@ -166,9 +187,11 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)"
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
@@ -182,6 +205,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
@@ -197,21 +222,25 @@
       "Extreme price jumps (>35%) detected: 1 bars"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1626,
     "latest_date": "2026-09-10"
   },
   "ANFI.CA": {
     "ticker": "ANFI.CA",
-    "dqs": 65.0,
-    "score": 65.0,
+    "dqs": 80.0,
+    "score": 80.0,
     "tier": "DATA_WARNING",
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Insufficient history: 36 bars < 40"
+      "Missing data gaps: Insufficient history: 36 bars < 40"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 36,
     "latest_date": "2026-09-10"
@@ -227,6 +256,8 @@
       "Extreme price jumps (>35%) detected: 1 bars"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1629,
     "latest_date": "2026-09-16"
@@ -239,9 +270,11 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)"
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
@@ -255,6 +288,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
@@ -263,29 +298,33 @@
     "ticker": "AREH.CA",
     "dqs": 60.0,
     "score": 60.0,
-    "tier": "DATA_WARNING",
-    "health": "WARN",
-    "data_health": "WARN",
+    "tier": "DATA_UNUSABLE",
+    "health": "FAIL",
+    "data_health": "FAIL",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)",
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze",
       "Extreme price jumps (>35%) detected: 1 bars"
     ],
-    "can_trade": true,
-    "is_usable": true,
+    "can_trade": false,
+    "position_size_multiplier": 0.0,
+    "action_restriction": "PROHIBITED_BUY_BAN",
+    "is_usable": false,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
   },
   "ARPU.CA": {
     "ticker": "ARPU.CA",
-    "dqs": 65.0,
-    "score": 65.0,
+    "dqs": 80.0,
+    "score": 80.0,
     "tier": "DATA_WARNING",
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Insufficient history: 36 bars < 40"
+      "Missing data gaps: Insufficient history: 36 bars < 40"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 36,
     "latest_date": "2026-09-10"
@@ -299,6 +338,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
@@ -312,6 +353,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
@@ -325,21 +368,25 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
   },
   "ATLE.CA": {
     "ticker": "ATLE.CA",
-    "dqs": 65.0,
-    "score": 65.0,
+    "dqs": 80.0,
+    "score": 80.0,
     "tier": "DATA_WARNING",
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Insufficient history: 36 bars < 40"
+      "Missing data gaps: Insufficient history: 36 bars < 40"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 36,
     "latest_date": "2026-09-10"
@@ -353,6 +400,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
@@ -365,9 +414,11 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)"
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1629,
     "latest_date": "2026-09-16"
@@ -380,9 +431,11 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)"
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1626,
     "latest_date": "2026-09-10"
@@ -395,24 +448,28 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)"
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
   },
   "BOCM.CA": {
     "ticker": "BOCM.CA",
-    "dqs": 65.0,
-    "score": 65.0,
+    "dqs": 80.0,
+    "score": 80.0,
     "tier": "DATA_WARNING",
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Insufficient history: 36 bars < 40"
+      "Missing data gaps: Insufficient history: 36 bars < 40"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 36,
     "latest_date": "2026-09-10"
@@ -421,15 +478,17 @@
     "ticker": "BTFH.CA",
     "dqs": 60.0,
     "score": 60.0,
-    "tier": "DATA_WARNING",
-    "health": "WARN",
-    "data_health": "WARN",
+    "tier": "DATA_UNUSABLE",
+    "health": "FAIL",
+    "data_health": "FAIL",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)",
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze",
       "Extreme price jumps (>35%) detected: 1 bars"
     ],
-    "can_trade": true,
-    "is_usable": true,
+    "can_trade": false,
+    "position_size_multiplier": 0.0,
+    "action_restriction": "PROHIBITED_BUY_BAN",
+    "is_usable": false,
     "bar_count": 1500,
     "latest_date": "2026-09-10"
   },
@@ -442,6 +501,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
@@ -450,15 +511,17 @@
     "ticker": "CCRS.CA",
     "dqs": 60.0,
     "score": 60.0,
-    "tier": "DATA_WARNING",
-    "health": "WARN",
-    "data_health": "WARN",
+    "tier": "DATA_UNUSABLE",
+    "health": "FAIL",
+    "data_health": "FAIL",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)",
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze",
       "Extreme price jumps (>35%) detected: 2 bars"
     ],
-    "can_trade": true,
-    "is_usable": true,
+    "can_trade": false,
+    "position_size_multiplier": 0.0,
+    "action_restriction": "PROHIBITED_BUY_BAN",
+    "is_usable": false,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
   },
@@ -470,9 +533,11 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)"
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
@@ -486,6 +551,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 1626,
     "latest_date": "2026-09-10"
@@ -499,6 +566,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
@@ -512,6 +581,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
@@ -525,6 +596,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 1626,
     "latest_date": "2026-09-10"
@@ -537,9 +610,11 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)"
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
@@ -553,6 +628,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 1626,
     "latest_date": "2026-09-10"
@@ -565,9 +642,11 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)"
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
@@ -580,9 +659,11 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)"
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
@@ -595,9 +676,11 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)"
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
@@ -611,6 +694,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
@@ -619,15 +704,17 @@
     "ticker": "DOMT.CA",
     "dqs": 60.0,
     "score": 60.0,
-    "tier": "DATA_WARNING",
-    "health": "WARN",
-    "data_health": "WARN",
+    "tier": "DATA_UNUSABLE",
+    "health": "FAIL",
+    "data_health": "FAIL",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)",
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze",
       "Extreme price jumps (>35%) detected: 1 bars"
     ],
-    "can_trade": true,
-    "is_usable": true,
+    "can_trade": false,
+    "position_size_multiplier": 0.0,
+    "action_restriction": "PROHIBITED_BUY_BAN",
+    "is_usable": false,
     "bar_count": 1626,
     "latest_date": "2026-09-10"
   },
@@ -640,6 +727,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 1500,
     "latest_date": "2026-09-10"
@@ -653,6 +742,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
@@ -668,6 +759,8 @@
       "Extreme price jumps (>35%) detected: 1 bars"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
@@ -680,9 +773,11 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)"
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
@@ -696,6 +791,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
@@ -704,15 +801,17 @@
     "ticker": "EFID.CA",
     "dqs": 60.0,
     "score": 60.0,
-    "tier": "DATA_WARNING",
-    "health": "WARN",
-    "data_health": "WARN",
+    "tier": "DATA_UNUSABLE",
+    "health": "FAIL",
+    "data_health": "FAIL",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)",
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze",
       "Extreme price jumps (>35%) detected: 1 bars"
     ],
-    "can_trade": true,
-    "is_usable": true,
+    "can_trade": false,
+    "position_size_multiplier": 0.0,
+    "action_restriction": "PROHIBITED_BUY_BAN",
+    "is_usable": false,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
   },
@@ -725,6 +824,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 1194,
     "latest_date": "2026-09-16"
@@ -738,23 +839,27 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
   },
   "EGBE.CA": {
     "ticker": "EGBE.CA",
-    "dqs": 10.0,
-    "score": 10.0,
+    "dqs": 30.0,
+    "score": 30.0,
     "tier": "DATA_UNUSABLE",
     "health": "FAIL",
     "data_health": "FAIL",
     "issues": [
-      "Non-positive Close prices detected in 265 bars",
-      "Stale / flatlined prices detected (10+ bars unchanged)",
+      "Unreasonable candles: Close <= 0 in 265 bars",
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze",
       "Extreme price jumps (>35%) detected: 2 bars"
     ],
     "can_trade": false,
+    "position_size_multiplier": 0.0,
+    "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
     "bar_count": 1632,
     "latest_date": "2026-09-16"
@@ -768,51 +873,59 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
   },
   "EGEL.CA": {
     "ticker": "EGEL.CA",
-    "dqs": 65.0,
-    "score": 65.0,
+    "dqs": 80.0,
+    "score": 80.0,
     "tier": "DATA_WARNING",
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Insufficient history: 36 bars < 40"
+      "Missing data gaps: Insufficient history: 36 bars < 40"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 36,
     "latest_date": "2026-09-10"
   },
   "EGID.CA": {
     "ticker": "EGID.CA",
-    "dqs": 65.0,
-    "score": 65.0,
+    "dqs": 80.0,
+    "score": 80.0,
     "tier": "DATA_WARNING",
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Insufficient history: 36 bars < 40"
+      "Missing data gaps: Insufficient history: 36 bars < 40"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 36,
     "latest_date": "2026-09-10"
   },
   "EGMT.CA": {
     "ticker": "EGMT.CA",
-    "dqs": 65.0,
-    "score": 65.0,
+    "dqs": 80.0,
+    "score": 80.0,
     "tier": "DATA_WARNING",
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Insufficient history: 36 bars < 40"
+      "Missing data gaps: Insufficient history: 36 bars < 40"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 36,
     "latest_date": "2026-09-10"
@@ -825,24 +938,28 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)"
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1629,
     "latest_date": "2026-09-16"
   },
   "EGTI.CA": {
     "ticker": "EGTI.CA",
-    "dqs": 65.0,
-    "score": 65.0,
+    "dqs": 80.0,
+    "score": 80.0,
     "tier": "DATA_WARNING",
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Insufficient history: 36 bars < 40"
+      "Missing data gaps: Insufficient history: 36 bars < 40"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 36,
     "latest_date": "2026-09-10"
@@ -856,6 +973,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
@@ -869,6 +988,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
@@ -882,6 +1003,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
@@ -894,9 +1017,11 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)"
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
@@ -905,15 +1030,17 @@
     "ticker": "ELKA.CA",
     "dqs": 60.0,
     "score": 60.0,
-    "tier": "DATA_WARNING",
-    "health": "WARN",
-    "data_health": "WARN",
+    "tier": "DATA_UNUSABLE",
+    "health": "FAIL",
+    "data_health": "FAIL",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)",
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze",
       "Extreme price jumps (>35%) detected: 1 bars"
     ],
-    "can_trade": true,
-    "is_usable": true,
+    "can_trade": false,
+    "position_size_multiplier": 0.0,
+    "action_restriction": "PROHIBITED_BUY_BAN",
+    "is_usable": false,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
   },
@@ -925,9 +1052,11 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)"
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
@@ -940,9 +1069,11 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)"
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
@@ -956,6 +1087,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
@@ -968,9 +1101,11 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)"
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
@@ -983,24 +1118,28 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)"
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1630,
     "latest_date": "2026-09-16"
   },
   "ERES.CA": {
     "ticker": "ERES.CA",
-    "dqs": 65.0,
-    "score": 65.0,
+    "dqs": 80.0,
+    "score": 80.0,
     "tier": "DATA_WARNING",
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Insufficient history: 36 bars < 40"
+      "Missing data gaps: Insufficient history: 36 bars < 40"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 36,
     "latest_date": "2026-09-10"
@@ -1014,6 +1153,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 1299,
     "latest_date": "2026-09-10"
@@ -1027,6 +1168,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 1626,
     "latest_date": "2026-09-10"
@@ -1039,24 +1182,28 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)"
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
   },
   "EUBR.CA": {
     "ticker": "EUBR.CA",
-    "dqs": 65.0,
-    "score": 65.0,
+    "dqs": 80.0,
+    "score": 80.0,
     "tier": "DATA_WARNING",
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Insufficient history: 36 bars < 40"
+      "Missing data gaps: Insufficient history: 36 bars < 40"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 36,
     "latest_date": "2026-09-10"
@@ -1069,9 +1216,11 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)"
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1626,
     "latest_date": "2026-09-10"
@@ -1085,21 +1234,25 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
   },
   "FAHR.CA": {
     "ticker": "FAHR.CA",
-    "dqs": 65.0,
-    "score": 65.0,
+    "dqs": 80.0,
+    "score": 80.0,
     "tier": "DATA_WARNING",
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Insufficient history: 36 bars < 40"
+      "Missing data gaps: Insufficient history: 36 bars < 40"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 36,
     "latest_date": "2026-09-10"
@@ -1113,6 +1266,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
@@ -1125,9 +1280,11 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)"
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
@@ -1141,6 +1298,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 1626,
     "latest_date": "2026-09-10"
@@ -1154,6 +1313,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 1626,
     "latest_date": "2026-09-10"
@@ -1167,6 +1328,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
@@ -1180,36 +1343,42 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
   },
   "GMCG.CA": {
     "ticker": "GMCG.CA",
-    "dqs": 65.0,
-    "score": 65.0,
+    "dqs": 80.0,
+    "score": 80.0,
     "tier": "DATA_WARNING",
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Insufficient history: 36 bars < 40"
+      "Missing data gaps: Insufficient history: 36 bars < 40"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 36,
     "latest_date": "2026-09-10"
   },
   "GPHI.CA": {
     "ticker": "GPHI.CA",
-    "dqs": 65.0,
-    "score": 65.0,
+    "dqs": 80.0,
+    "score": 80.0,
     "tier": "DATA_WARNING",
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Insufficient history: 36 bars < 40"
+      "Missing data gaps: Insufficient history: 36 bars < 40"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 36,
     "latest_date": "2026-09-10"
@@ -1222,24 +1391,28 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)"
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
   },
   "GTHC.CA": {
     "ticker": "GTHC.CA",
-    "dqs": 65.0,
-    "score": 65.0,
+    "dqs": 80.0,
+    "score": 80.0,
     "tier": "DATA_WARNING",
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Insufficient history: 36 bars < 40"
+      "Missing data gaps: Insufficient history: 36 bars < 40"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 36,
     "latest_date": "2026-09-10"
@@ -1253,6 +1426,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
@@ -1268,6 +1443,8 @@
       "Extreme price jumps (>35%) detected: 1 bars"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1629,
     "latest_date": "2026-09-16"
@@ -1283,6 +1460,8 @@
       "Extreme price jumps (>35%) detected: 1 bars"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1626,
     "latest_date": "2026-09-10"
@@ -1296,6 +1475,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 1626,
     "latest_date": "2026-09-10"
@@ -1309,6 +1490,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
@@ -1322,6 +1505,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
@@ -1335,6 +1520,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
@@ -1348,21 +1535,25 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
   },
   "INCO.CA": {
     "ticker": "INCO.CA",
-    "dqs": 65.0,
-    "score": 65.0,
+    "dqs": 80.0,
+    "score": 80.0,
     "tier": "DATA_WARNING",
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Insufficient history: 36 bars < 40"
+      "Missing data gaps: Insufficient history: 36 bars < 40"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 36,
     "latest_date": "2026-09-10"
@@ -1376,6 +1567,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
@@ -1389,21 +1582,25 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
   },
   "ISMD.CA": {
     "ticker": "ISMD.CA",
-    "dqs": 65.0,
-    "score": 65.0,
+    "dqs": 80.0,
+    "score": 80.0,
     "tier": "DATA_WARNING",
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Insufficient history: 36 bars < 40"
+      "Missing data gaps: Insufficient history: 36 bars < 40"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 36,
     "latest_date": "2026-09-10"
@@ -1417,6 +1614,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 1626,
     "latest_date": "2026-09-10"
@@ -1430,6 +1629,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 1626,
     "latest_date": "2026-09-10"
@@ -1445,6 +1646,8 @@
       "Extreme price jumps (>35%) detected: 1 bars"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1500,
     "latest_date": "2026-09-10"
@@ -1458,36 +1661,42 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
   },
   "KRRE.CA": {
     "ticker": "KRRE.CA",
-    "dqs": 65.0,
-    "score": 65.0,
+    "dqs": 80.0,
+    "score": 80.0,
     "tier": "DATA_WARNING",
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Insufficient history: 36 bars < 40"
+      "Missing data gaps: Insufficient history: 36 bars < 40"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 36,
     "latest_date": "2026-09-10"
   },
   "KRTE.CA": {
     "ticker": "KRTE.CA",
-    "dqs": 65.0,
-    "score": 65.0,
+    "dqs": 80.0,
+    "score": 80.0,
     "tier": "DATA_WARNING",
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Insufficient history: 36 bars < 40"
+      "Missing data gaps: Insufficient history: 36 bars < 40"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 36,
     "latest_date": "2026-09-10"
@@ -1501,21 +1710,25 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
   },
   "MASG.CA": {
     "ticker": "MASG.CA",
-    "dqs": 65.0,
-    "score": 65.0,
+    "dqs": 80.0,
+    "score": 80.0,
     "tier": "DATA_WARNING",
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Insufficient history: 36 bars < 40"
+      "Missing data gaps: Insufficient history: 36 bars < 40"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 36,
     "latest_date": "2026-09-10"
@@ -1529,21 +1742,25 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 1626,
     "latest_date": "2026-09-10"
   },
   "MBEN.CA": {
     "ticker": "MBEN.CA",
-    "dqs": 65.0,
-    "score": 65.0,
+    "dqs": 80.0,
+    "score": 80.0,
     "tier": "DATA_WARNING",
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Insufficient history: 36 bars < 40"
+      "Missing data gaps: Insufficient history: 36 bars < 40"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 36,
     "latest_date": "2026-09-10"
@@ -1557,6 +1774,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
@@ -1570,6 +1789,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
@@ -1583,6 +1804,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
@@ -1596,6 +1819,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
@@ -1609,6 +1834,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
@@ -1624,6 +1851,8 @@
       "Extreme price jumps (>35%) detected: 1 bars"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1626,
     "latest_date": "2026-09-10"
@@ -1636,9 +1865,11 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)"
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1630,
     "latest_date": "2026-09-16"
@@ -1651,9 +1882,11 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)"
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
@@ -1667,36 +1900,42 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
   },
   "MOFD.CA": {
     "ticker": "MOFD.CA",
-    "dqs": 65.0,
-    "score": 65.0,
+    "dqs": 80.0,
+    "score": 80.0,
     "tier": "DATA_WARNING",
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Insufficient history: 36 bars < 40"
+      "Missing data gaps: Insufficient history: 36 bars < 40"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 36,
     "latest_date": "2026-09-10"
   },
   "MOFR.CA": {
     "ticker": "MOFR.CA",
-    "dqs": 65.0,
-    "score": 65.0,
+    "dqs": 80.0,
+    "score": 80.0,
     "tier": "DATA_WARNING",
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Insufficient history: 36 bars < 40"
+      "Missing data gaps: Insufficient history: 36 bars < 40"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 36,
     "latest_date": "2026-09-10"
@@ -1709,26 +1948,29 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)"
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
   },
   "MOSC.CA": {
     "ticker": "MOSC.CA",
-    "dqs": 55.0,
-    "score": 55.0,
-    "tier": "DATA_UNUSABLE",
-    "health": "FAIL",
-    "data_health": "FAIL",
+    "dqs": 75.0,
+    "score": 75.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)",
-      "Excessive zero-volume sessions: 37.4% of bars"
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze, Zero volume on 37.4% of sessions"
     ],
-    "can_trade": false,
-    "is_usable": false,
+    "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
+    "is_usable": true,
     "bar_count": 1629,
     "latest_date": "2026-09-16"
   },
@@ -1736,15 +1978,17 @@
     "ticker": "MPCI.CA",
     "dqs": 60.0,
     "score": 60.0,
-    "tier": "DATA_WARNING",
-    "health": "WARN",
-    "data_health": "WARN",
+    "tier": "DATA_UNUSABLE",
+    "health": "FAIL",
+    "data_health": "FAIL",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)",
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze",
       "Extreme price jumps (>35%) detected: 1 bars"
     ],
-    "can_trade": true,
-    "is_usable": true,
+    "can_trade": false,
+    "position_size_multiplier": 0.0,
+    "action_restriction": "PROHIBITED_BUY_BAN",
+    "is_usable": false,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
   },
@@ -1759,6 +2003,8 @@
       "Extreme price jumps (>35%) detected: 1 bars"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
@@ -1772,6 +2018,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
@@ -1784,24 +2032,28 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)"
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
   },
   "NATP.CA": {
     "ticker": "NATP.CA",
-    "dqs": 65.0,
-    "score": 65.0,
+    "dqs": 80.0,
+    "score": 80.0,
     "tier": "DATA_WARNING",
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Insufficient history: 36 bars < 40"
+      "Missing data gaps: Insufficient history: 36 bars < 40"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 36,
     "latest_date": "2026-09-10"
@@ -1814,9 +2066,11 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)"
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
@@ -1825,15 +2079,17 @@
     "ticker": "NIPH.CA",
     "dqs": 60.0,
     "score": 60.0,
-    "tier": "DATA_WARNING",
-    "health": "WARN",
-    "data_health": "WARN",
+    "tier": "DATA_UNUSABLE",
+    "health": "FAIL",
+    "data_health": "FAIL",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)",
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze",
       "Extreme price jumps (>35%) detected: 1 bars"
     ],
-    "can_trade": true,
-    "is_usable": true,
+    "can_trade": false,
+    "position_size_multiplier": 0.0,
+    "action_restriction": "PROHIBITED_BUY_BAN",
+    "is_usable": false,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
   },
@@ -1846,6 +2102,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
@@ -1854,15 +2112,17 @@
     "ticker": "OCDI.CA",
     "dqs": 60.0,
     "score": 60.0,
-    "tier": "DATA_WARNING",
-    "health": "WARN",
-    "data_health": "WARN",
+    "tier": "DATA_UNUSABLE",
+    "health": "FAIL",
+    "data_health": "FAIL",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)",
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze",
       "Extreme price jumps (>35%) detected: 1 bars"
     ],
-    "can_trade": true,
-    "is_usable": true,
+    "can_trade": false,
+    "position_size_multiplier": 0.0,
+    "action_restriction": "PROHIBITED_BUY_BAN",
+    "is_usable": false,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
   },
@@ -1870,15 +2130,17 @@
     "ticker": "ODIN.CA",
     "dqs": 60.0,
     "score": 60.0,
-    "tier": "DATA_WARNING",
-    "health": "WARN",
-    "data_health": "WARN",
+    "tier": "DATA_UNUSABLE",
+    "health": "FAIL",
+    "data_health": "FAIL",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)",
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze",
       "Extreme price jumps (>35%) detected: 2 bars"
     ],
-    "can_trade": true,
-    "is_usable": true,
+    "can_trade": false,
+    "position_size_multiplier": 0.0,
+    "action_restriction": "PROHIBITED_BUY_BAN",
+    "is_usable": false,
     "bar_count": 1630,
     "latest_date": "2026-09-16"
   },
@@ -1891,21 +2153,25 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
   },
   "OIBK.CA": {
     "ticker": "OIBK.CA",
-    "dqs": 65.0,
-    "score": 65.0,
+    "dqs": 80.0,
+    "score": 80.0,
     "tier": "DATA_WARNING",
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Insufficient history: 36 bars < 40"
+      "Missing data gaps: Insufficient history: 36 bars < 40"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 36,
     "latest_date": "2026-09-10"
@@ -1919,6 +2185,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
@@ -1932,24 +2200,27 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
   },
   "ORAS.CA": {
     "ticker": "ORAS.CA",
-    "dqs": 5.0,
-    "score": 5.0,
+    "dqs": 25.0,
+    "score": 25.0,
     "tier": "DATA_UNUSABLE",
     "health": "FAIL",
     "data_health": "FAIL",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)",
-      "Excessive zero-volume sessions: 94.9% of bars",
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze, Zero volume on 94.9% of sessions",
       "Extreme price jumps (>35%) detected: 1 bars",
       "Known historical dual-currency USD/EGP reporting discrepancy (EGP/USD translation gap)"
     ],
     "can_trade": false,
+    "position_size_multiplier": 0.0,
+    "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
     "bar_count": 1243,
     "latest_date": "2026-09-10"
@@ -1965,6 +2236,8 @@
       "Extreme price jumps (>35%) detected: 1 bars"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1500,
     "latest_date": "2026-09-10"
@@ -1978,6 +2251,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 1626,
     "latest_date": "2026-09-10"
@@ -1991,6 +2266,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
@@ -2004,6 +2281,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 1626,
     "latest_date": "2026-09-10"
@@ -2017,21 +2296,25 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
   },
   "PORT.CA": {
     "ticker": "PORT.CA",
-    "dqs": 65.0,
-    "score": 65.0,
+    "dqs": 80.0,
+    "score": 80.0,
     "tier": "DATA_WARNING",
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Insufficient history: 36 bars < 40"
+      "Missing data gaps: Insufficient history: 36 bars < 40"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 36,
     "latest_date": "2026-09-10"
@@ -2045,6 +2328,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
@@ -2058,6 +2343,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
@@ -2071,6 +2358,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
@@ -2083,9 +2372,11 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)"
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
@@ -2099,6 +2390,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
@@ -2107,29 +2400,33 @@
     "ticker": "RAYA.CA",
     "dqs": 60.0,
     "score": 60.0,
-    "tier": "DATA_WARNING",
-    "health": "WARN",
-    "data_health": "WARN",
+    "tier": "DATA_UNUSABLE",
+    "health": "FAIL",
+    "data_health": "FAIL",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)",
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze",
       "Extreme price jumps (>35%) detected: 1 bars"
     ],
-    "can_trade": true,
-    "is_usable": true,
+    "can_trade": false,
+    "position_size_multiplier": 0.0,
+    "action_restriction": "PROHIBITED_BUY_BAN",
+    "is_usable": false,
     "bar_count": 1627,
     "latest_date": "2026-09-10"
   },
   "RITV.CA": {
     "ticker": "RITV.CA",
-    "dqs": 65.0,
-    "score": 65.0,
+    "dqs": 80.0,
+    "score": 80.0,
     "tier": "DATA_WARNING",
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Insufficient history: 36 bars < 40"
+      "Missing data gaps: Insufficient history: 36 bars < 40"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 36,
     "latest_date": "2026-09-10"
@@ -2143,36 +2440,42 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 1606,
     "latest_date": "2026-08-16"
   },
   "ROWG.CA": {
     "ticker": "ROWG.CA",
-    "dqs": 65.0,
-    "score": 65.0,
+    "dqs": 80.0,
+    "score": 80.0,
     "tier": "DATA_WARNING",
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Insufficient history: 36 bars < 40"
+      "Missing data gaps: Insufficient history: 36 bars < 40"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 36,
     "latest_date": "2026-09-10"
   },
   "RREC.CA": {
     "ticker": "RREC.CA",
-    "dqs": 65.0,
-    "score": 65.0,
+    "dqs": 80.0,
+    "score": 80.0,
     "tier": "DATA_WARNING",
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Insufficient history: 36 bars < 40"
+      "Missing data gaps: Insufficient history: 36 bars < 40"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 36,
     "latest_date": "2026-09-10"
@@ -2181,15 +2484,17 @@
     "ticker": "RREI.CA",
     "dqs": 60.0,
     "score": 60.0,
-    "tier": "DATA_WARNING",
-    "health": "WARN",
-    "data_health": "WARN",
+    "tier": "DATA_UNUSABLE",
+    "health": "FAIL",
+    "data_health": "FAIL",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)",
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze",
       "Extreme price jumps (>35%) detected: 1 bars"
     ],
-    "can_trade": true,
-    "is_usable": true,
+    "can_trade": false,
+    "position_size_multiplier": 0.0,
+    "action_restriction": "PROHIBITED_BUY_BAN",
+    "is_usable": false,
     "bar_count": 1500,
     "latest_date": "2026-09-10"
   },
@@ -2202,6 +2507,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
@@ -2214,26 +2521,29 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)"
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
   },
   "SAIB.CA": {
     "ticker": "SAIB.CA",
-    "dqs": 55.0,
-    "score": 55.0,
-    "tier": "DATA_UNUSABLE",
-    "health": "FAIL",
-    "data_health": "FAIL",
+    "dqs": 75.0,
+    "score": 75.0,
+    "tier": "DATA_WARNING",
+    "health": "WARN",
+    "data_health": "WARN",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)",
-      "Excessive zero-volume sessions: 87.4% of bars"
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze, Zero volume on 87.4% of sessions"
     ],
-    "can_trade": false,
-    "is_usable": false,
+    "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
+    "is_usable": true,
     "bar_count": 1633,
     "latest_date": "2026-09-16"
   },
@@ -2245,9 +2555,11 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)"
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
@@ -2260,9 +2572,11 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)"
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
@@ -2276,6 +2590,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 1455,
     "latest_date": "2025-12-31"
@@ -2289,6 +2605,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 1626,
     "latest_date": "2026-09-10"
@@ -2302,6 +2620,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
@@ -2315,6 +2635,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
@@ -2327,9 +2649,11 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)"
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
@@ -2342,9 +2666,11 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)"
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
@@ -2358,6 +2684,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 1406,
     "latest_date": "2026-09-10"
@@ -2371,6 +2699,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
@@ -2383,9 +2713,11 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)"
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
@@ -2401,6 +2733,8 @@
       "Extreme price jumps (>35%) detected: 1 bars"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1626,
     "latest_date": "2026-09-10"
@@ -2414,6 +2748,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
@@ -2427,6 +2763,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
@@ -2440,6 +2778,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
@@ -2453,6 +2793,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 1626,
     "latest_date": "2026-09-10"
@@ -2466,6 +2808,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
@@ -2479,6 +2823,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
@@ -2492,36 +2838,42 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
   },
   "UNAT.CA": {
     "ticker": "UNAT.CA",
-    "dqs": 65.0,
-    "score": 65.0,
+    "dqs": 80.0,
+    "score": 80.0,
     "tier": "DATA_WARNING",
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Insufficient history: 36 bars < 40"
+      "Missing data gaps: Insufficient history: 36 bars < 40"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 36,
     "latest_date": "2026-09-10"
   },
   "UNFO.CA": {
     "ticker": "UNFO.CA",
-    "dqs": 65.0,
-    "score": 65.0,
+    "dqs": 80.0,
+    "score": 80.0,
     "tier": "DATA_WARNING",
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Insufficient history: 36 bars < 40"
+      "Missing data gaps: Insufficient history: 36 bars < 40"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 36,
     "latest_date": "2026-09-10"
@@ -2530,15 +2882,17 @@
     "ticker": "UNIP.CA",
     "dqs": 60.0,
     "score": 60.0,
-    "tier": "DATA_WARNING",
-    "health": "WARN",
-    "data_health": "WARN",
+    "tier": "DATA_UNUSABLE",
+    "health": "FAIL",
+    "data_health": "FAIL",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)",
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze",
       "Extreme price jumps (>35%) detected: 1 bars"
     ],
-    "can_trade": true,
-    "is_usable": true,
+    "can_trade": false,
+    "position_size_multiplier": 0.0,
+    "action_restriction": "PROHIBITED_BUY_BAN",
+    "is_usable": false,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
   },
@@ -2551,6 +2905,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
@@ -2564,21 +2920,25 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
   },
   "VERT.CA": {
     "ticker": "VERT.CA",
-    "dqs": 65.0,
-    "score": 65.0,
+    "dqs": 80.0,
+    "score": 80.0,
     "tier": "DATA_WARNING",
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Insufficient history: 36 bars < 40"
+      "Missing data gaps: Insufficient history: 36 bars < 40"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 36,
     "latest_date": "2026-09-10"
@@ -2594,6 +2954,8 @@
       "Extreme price jumps (>35%) detected: 1 bars"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
@@ -2606,9 +2968,11 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)"
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"
@@ -2622,6 +2986,8 @@
     "data_health": "PASS",
     "issues": [],
     "can_trade": true,
+    "position_size_multiplier": 1.0,
+    "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
     "bar_count": 45,
     "latest_date": "2026-09-10"
@@ -2634,9 +3000,11 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Stale / flatlined prices detected (10+ bars unchanged)"
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze"
     ],
     "can_trade": true,
+    "position_size_multiplier": 0.5,
+    "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
     "bar_count": 1628,
     "latest_date": "2026-09-16"

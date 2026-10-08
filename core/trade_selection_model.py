@@ -23,7 +23,7 @@ class TradeSelectionModel:
     """
 
     MINIMUM_NET_EDGE_REQUIRED_PCT: float = 1.00  # Minimum 1.00% net alpha hurdle
-    ROUNDTRIP_FRICTION_PCT: float = 0.35
+    ROUNDTRIP_FRICTION_PCT: float = 0.94  # 0.94% roundtrip friction (SSoT)
 
     @classmethod
     def evaluate_egx30_trend_gate(

@@ -52,8 +52,8 @@ class EGXTradingRulesEngine:
         "ACAMD.CA", "BINV.CA", "ORWE.CA", "OCDI.CA", "CLHO.CA", "ALCN.CA"
     }
 
-    # Default Egyptian Exchange transaction friction parameters
-    ROUNDTRIP_FRICTION_RATE = 0.0035  # ~0.35% (0.20% Brokerage + 0.15% EGX/MCDR/Guarantee/FRA fees)
+    # Default Egyptian Exchange transaction friction parameters (SSoT Thndr + EGX + MCDR)
+    ROUNDTRIP_FRICTION_RATE = 0.0094  # 0.94% (Brokerage + EGX/MCDR/Guarantee/FRA fees)
     CAPITAL_GAINS_TAX_RATE = 0.10     # 10% Egyptian CGT on net realized capital gains
 
     # =========================================================================

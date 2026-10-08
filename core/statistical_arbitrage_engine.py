@@ -97,6 +97,7 @@ class StatisticalArbitrageEngine:
     CACHE_TTL_SECONDS: int = 3600
     _cache: Dict[str, Any] = {}
     _cache_timestamps: Dict[str, float] = {}
+    _network_offline: bool = False
 
     # =========================================================================
     # 1. HISTORICAL PRICE SERIES & SPREAD FETCHING
@@ -123,7 +124,7 @@ class StatisticalArbitrageEngine:
 
         prices_A, prices_B = None, None
 
-        if not force_fallback:
+        if not force_fallback and not cls._network_offline:
             try:
                 import yfinance as yf
                 data = yf.download([ticker_A, ticker_B], period="3mo", progress=False, timeout=1.5)
@@ -134,7 +135,10 @@ class StatisticalArbitrageEngine:
                         if len(df_pair) >= 15:
                             prices_A = df_pair[ticker_A].values[-window_days:]
                             prices_B = df_pair[ticker_B].values[-window_days:]
+                if prices_A is None or prices_B is None:
+                    cls._network_offline = True
             except Exception as e:
+                cls._network_offline = True
                 logger.debug("Live fetch failed for pair (%s, %s): %s", ticker_A, ticker_B, e)
 
         if prices_A is None or prices_B is None or len(prices_A) < 15:

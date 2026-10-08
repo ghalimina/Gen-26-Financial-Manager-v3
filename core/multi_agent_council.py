@@ -563,8 +563,8 @@ class CriticAuditorAgent:
                     overlap = set(feats).intersection(set(q_list))
                     if overlap:
                         rejections.append(f"استخدام ميزات محظورة ومحجورة في ذاكرة الإخفاقات السابقة: {list(overlap)}.")
-                except Exception:
-                    pass
+                except Exception as e:
+                    logger.error(f"CriticAuditor: failed to parse quarantined parameters: {e}")
 
         # 5. Look-Ahead Bias & Circular Data Leakage Test
         if exp.get("has_lookahead_bias") or exp.get("has_data_leakage"):

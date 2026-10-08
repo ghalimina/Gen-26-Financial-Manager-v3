@@ -39,6 +39,8 @@ wheels/
 *.token
 *pat.txt
 credentials.json
+data/telegram_config.json
+data/system_settings.json
 
 # Environment
 .venv

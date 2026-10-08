@@ -129,6 +129,11 @@ class RealPortfolioTracker:
         }
 
     @classmethod
+    def load_portfolio(cls) -> Dict[str, Any]:
+        """Authoritative SSoT loader for user real portfolio."""
+        return cls.load_real_portfolio()
+
+    @classmethod
     def load_real_portfolio(cls) -> Dict[str, Any]:
         """Loads real portfolio from persistent JSON."""
         os.makedirs(cls.DATA_DIR, exist_ok=True)

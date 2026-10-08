@@ -99,8 +99,8 @@ class ProbabilisticDecisionEngine:
                 bear_market_mode = True
             if stock_30d_chg is not None and float(stock_30d_chg) <= -5.0:
                 bear_market_mode = True
-        except Exception:
-            pass
+        except Exception as e:
+            logger.error(f"Error evaluating EGX market context in ProbabilisticDecisionEngine: {e}")
 
         # If bear mode: add +15% cash buffer on top of geo buffer
         bear_cash_addon = 15.0 if bear_market_mode else 0.0

@@ -33,6 +33,7 @@ class StatisticalEdgeVerifier:
 
     MIN_ACCEPTABLE_PROFIT_FACTOR = 1.20
     MIN_ACCEPTABLE_HIT_RATE = 52.0
+    ROUNDTRIP_FRICTION_PCT = 0.0094  # 0.94% roundtrip friction (SSoT)
 
     _cached_results: Optional[Dict[str, Any]] = None
 
@@ -119,7 +120,7 @@ class StatisticalEdgeVerifier:
                     realized_ret = stop_loss_pct - 0.002  # With slippage
                     exit_reason = "STOP_LOSS_HIT"
                 else:
-                    realized_ret = cum_ret - 0.003  # With round-trip execution friction (30 bps)
+                    realized_ret = cum_ret - cls.ROUNDTRIP_FRICTION_PCT  # 0.94% round-trip execution friction
                     exit_reason = "TARGET_HORIZON_REACHED"
 
                 trades.append({

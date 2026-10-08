@@ -111,12 +111,24 @@ class TestPromotionGateAndResearchLab(unittest.TestCase):
         wf_res = PromotionGate.evaluate_candidate_strategy(hypo)
         
         self.assertEqual(wf_res["folds_evaluated"], 5)
-        self.assertEqual(wf_res["friction_applied_pct"], 0.35)
+        self.assertEqual(wf_res["friction_applied_pct"], 0.94)
         self.assertEqual(wf_res["tax_applied_pct"], 10.0)
         self.assertGreater(wf_res["in_sample_sharpe"], 0.0)
         self.assertGreater(wf_res["oos_sharpe"], 0.0)
         self.assertGreater(wf_res["deflated_sharpe_ratio"], 0.50)
         self.assertGreaterEqual(wf_res["degradation_pct"], 0.0)
+
+    def test_tc_c03b_rejection_on_insufficient_real_data(self):
+        """
+        TC-C03b: Zero-Fake Policy rejection when real trade data is insufficient.
+        """
+        res = PromotionGate.evaluate_candidate_strategy({})
+        self.assertEqual(res["status"], "PROMOTION_REJECTED_INSUFFICIENT_REAL_DATA")
+        self.assertFalse(res["approved"])
+
+        judge_res = PromotionGate.judge_promotion(res)
+        self.assertEqual(judge_res["promotion_status"], "PROMOTION_REJECTED_INSUFFICIENT_REAL_DATA")
+        self.assertFalse(judge_res["approved"])
 
     def test_tc_c04_promoted_strategy_calibration_updates(self):
         """

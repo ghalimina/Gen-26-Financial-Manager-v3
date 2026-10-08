@@ -51,7 +51,7 @@ class TraderAgent:
     NAME = "QuantTrader"
     ROLE_AR = "المتداول الكمي ومدير الصفقات (Quant Trader)"
 
-    ROUNDTRIP_FRICTION = 0.0035  # 0.35%
+    ROUNDTRIP_FRICTION = 0.0094  # 0.94% (Thndr + EGX + MCDR SSoT)
 
     @classmethod
     def construct_proposal(

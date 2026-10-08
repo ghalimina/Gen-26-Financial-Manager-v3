@@ -44,7 +44,7 @@ class ConsistencyAuditor:
         "universe_catalog_count": 244,
         "tradable_universe_count": 170,
         "active_focus_count": 24,
-        "roundtrip_friction": "0.35%",
+        "roundtrip_friction": "0.94%",
         "master_test_count": 474,
         "piotroski_cib_score": "9 / 9",
         "meta_labeling_threshold_min": "0.60",
@@ -176,7 +176,7 @@ class ConsistencyAuditor:
         v2_audit["uncertainty_engine_thresholds"] = "LOW" in UncertaintyEngine.UNCERTAINTY_THRESHOLDS and "HIGH" in UncertaintyEngine.UNCERTAINTY_THRESHOLDS
 
         from core.trade_selection_model import TradeSelectionModel
-        v2_audit["trade_selection_net_edge_gate"] = TradeSelectionModel.MINIMUM_NET_EDGE_REQUIRED_PCT == 1.00 and TradeSelectionModel.ROUNDTRIP_FRICTION_PCT == 0.35
+        v2_audit["trade_selection_net_edge_gate"] = TradeSelectionModel.MINIMUM_NET_EDGE_REQUIRED_PCT == 1.00 and TradeSelectionModel.ROUNDTRIP_FRICTION_PCT == 0.94
 
         from core.multi_objective_evaluator import MultiObjectiveEvaluator
         v2_audit["multi_objective_evaluator_present"] = hasattr(MultiObjectiveEvaluator, "evaluate_strategy_objective")

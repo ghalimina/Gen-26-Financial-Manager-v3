@@ -14,7 +14,7 @@
   "rmse_pct": 14.301,
   "information_ratio": 0.59,
   "brier_score": 0.2486,
-  "expected_calibration_error": 0.0004,
+  "expected_calibration_error": "CALIBRATION_UNAVAILABLE",
   "max_calibration_error": 0.9482,
   "calibration_bins": [
     {
@@ -143,5 +143,6 @@
     "is_2026_blind_holdout": false,
     "audit_note_ar": "فترة 2026 مصنفة رسمياً كـ Contaminated Research وليست Blind Holdout نظراً للتعرض المسبق أثناء دورات البحث"
   },
-  "verdict_ar": "🟡 أداء مقبول ضمن هوامش الأمان"
+  "verdict_ar": "🟡 أداء مقبول ضمن هوامش الأمان",
+  "last_recalibration_timestamp": "2026-10-08 04:09:17"
 }

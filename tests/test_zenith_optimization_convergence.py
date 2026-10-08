@@ -128,10 +128,11 @@ def test_04_thndr_daily_card_endpoint():
 
 
 def test_05_real_portfolio_crud_and_cash_api():
-    """Verifies that real portfolio CRUD and cash endpoints mutate data cleanly."""
+    """Verifies that real portfolio CRUD and cash endpoints mutate data cleanly with valid X-GEN26-KEY."""
+    headers = {"X-GEN26-KEY": "gen26-production-secure-key"}
     with app.test_client() as client:
         # 1. Update cash
-        resp_cash = client.post("/api/real_portfolio/cash", json={"cash_egp": 85000.0})
+        resp_cash = client.post("/api/real_portfolio/cash", json={"cash_egp": 85000.0}, headers=headers)
         assert resp_cash.status_code in (200, 201)
 
         # 2. Add holding
@@ -140,16 +141,16 @@ def test_05_real_portfolio_crud_and_cash_api():
             "quantity": 100,
             "average_entry_price": 32.50,
             "manual_notes": "Zenith Unit Test"
-        })
+        }, headers=headers)
         # If already exists, delete first then add
         if resp_add.status_code != 200:
-            client.post("/api/real_portfolio/delete", json={"ticker": "ETEL.CA", "confirm": True})
+            client.post("/api/real_portfolio/delete", json={"ticker": "ETEL.CA", "confirm": True}, headers=headers)
             resp_add = client.post("/api/real_portfolio/add", json={
                 "ticker": "ETEL.CA",
                 "quantity": 100,
                 "average_entry_price": 32.50,
                 "manual_notes": "Zenith Unit Test"
-            })
+            }, headers=headers)
         assert resp_add.status_code == 200
 
         # 3. Edit holding
@@ -158,15 +159,25 @@ def test_05_real_portfolio_crud_and_cash_api():
             "quantity": 120,
             "average_entry_price": 33.00,
             "manual_notes": "Zenith Unit Test Edited"
-        })
+        }, headers=headers)
         assert resp_edit.status_code == 200
 
         # 4. Delete holding
         resp_del = client.post("/api/real_portfolio/delete", json={
             "ticker": "ETEL.CA",
             "confirm": True
-        })
+        }, headers=headers)
         assert resp_del.status_code == 200
+
+
+def test_05b_real_portfolio_unauthorized_post_blocked():
+    """Verifies that unauthorized POST requests without X-GEN26-KEY are rejected with 401."""
+    with app.test_client() as client:
+        resp = client.post("/api/real_portfolio/cash", json={"cash_egp": 85000.0})
+        assert resp.status_code == 401
+        data = resp.get_json()
+        assert data["success"] is False
+        assert "Unauthorized" in data["error"]
 
 
 def test_06_eod_telegram_report_formatting():

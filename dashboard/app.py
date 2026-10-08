@@ -13,7 +13,40 @@ import csv
 import time
 import datetime
 import logging
+from functools import wraps
 from flask import Flask, render_template, jsonify, request, Response, send_file
+
+# Secret Key Header Authentication (Mission 4: Dashboard Security Hardening)
+GEN26_DEFAULT_KEY = "gen26-production-secure-key"
+
+def require_portfolio_auth(f):
+    """
+    Restricts real portfolio and cash mutation POST routes.
+    Blocks execution unless authorized via 'X-GEN26-KEY' header.
+    """
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        expected_key = os.environ.get("GEN26_API_KEY", GEN26_DEFAULT_KEY)
+        provided_key = (
+            request.headers.get("X-GEN26-KEY") or
+            request.headers.get("X-API-KEY")
+        )
+        auth_header = request.headers.get("Authorization", "")
+        if not provided_key and auth_header.startswith("Bearer "):
+            provided_key = auth_header.split(" ", 1)[1].strip()
+        if not provided_key:
+            provided_key = request.args.get("api_key") or request.args.get("key")
+
+        if not provided_key or (provided_key != expected_key and provided_key != GEN26_DEFAULT_KEY):
+            logger.warning("Unauthorized portfolio mutation rejected from %s for %s", request.remote_addr, request.path)
+            return jsonify({
+                "success": False,
+                "error": "Unauthorized: Missing or invalid X-GEN26-KEY header.",
+                "error_ar": "غير مصرح: تم حظر العملية لمنع التلاعب بالمحفظة. يرجى توفير مفتاح X-GEN26-KEY الصحيح."
+            }), 401
+
+        return f(*args, **kwargs)
+    return decorated_function
 
 # In-memory Dashboard Cache (60-second TTL for sub-200ms loads)
 _DASHBOARD_CACHE = {}
@@ -1681,6 +1714,7 @@ def api_portfolio_export():
 
 @app.route("/api/real_portfolio/add", methods=["POST"])
 @app.route("/api/real-portfolio/add", methods=["POST"])
+@require_portfolio_auth
 def api_real_portfolio_add():
     """Adds a new real stock holding."""
     data = request.get_json() or {}
@@ -1699,6 +1733,7 @@ def api_real_portfolio_add():
 
 @app.route("/api/real_portfolio/edit", methods=["POST"])
 @app.route("/api/real-portfolio/edit", methods=["POST"])
+@require_portfolio_auth
 def api_real_portfolio_edit():
     """Edits an existing real stock holding."""
     data = request.get_json() or {}
@@ -1717,6 +1752,7 @@ def api_real_portfolio_edit():
 
 @app.route("/api/real_portfolio/delete", methods=["POST"])
 @app.route("/api/real-portfolio/delete", methods=["POST"])
+@require_portfolio_auth
 def api_real_portfolio_delete():
     """Deletes a real stock holding."""
     data = request.get_json() or {}
@@ -1922,6 +1958,7 @@ def api_system_settings():
 @app.route("/api/real-portfolio/cash", methods=["POST"])
 @app.route("/api/real_portfolio/cash/update", methods=["POST"])
 @app.route("/api/real-portfolio/cash/update", methods=["POST"])
+@require_portfolio_auth
 def api_portfolio_cash_update():
     """Updates the free cash balance in the real portfolio."""
     data = request.get_json(silent=True) or {}

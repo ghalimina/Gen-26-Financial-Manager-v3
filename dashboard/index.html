@@ -3657,9 +3657,13 @@
                                 <span>معايرة الاحتمالات (Brier Calibration Score):</span>
                                 <strong class="font-mono text-green">0.2603 (معايرة مثالية &lt; 0.30)</strong>
                             </div>
-                            <div style="display: flex; justify-content: space-between;">
+                            <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed var(--border); padding-bottom: 8px;">
                                 <span>إعادة تدريب النماذج ومراقبة الانجراف:</span>
-                                <strong class="text-yellow">أسبوعياً (كل سبت تلقائياً)</strong>
+                                <strong class="text-yellow" id="mlops-next-retrain-val">أسبوعياً (كل سبت تلقائياً)</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span>حالة بوت تنبيهات تيليجرام:</span>
+                                <strong class="text-blue" id="telegram-bot-status-val">متصل ومفعل</strong>
                             </div>
                         </div>
                     </div>

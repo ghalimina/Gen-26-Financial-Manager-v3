@@ -1,6 +1,6 @@
 {
   "status": "SUCCESS",
-  "as_of": "2026-10-07 01:45:37",
+  "as_of": "2026-10-08 04:11:23",
   "thndr_daily_card": {
     "ticker": "SWDY.CA",
     "name_ar": "السويدي إليكتريك",
@@ -11,18 +11,18 @@
     "verdict": "STRONG_BUY",
     "is_golden_consensus": true,
     "verdict_badge_ar": "🟢 إجماع ذهبي معتمد (STRONG_BUY)",
-    "current_price": 118.0,
-    "opening_auction_price": 118.24,
-    "stop_loss_price": 112.1,
-    "target_1_price": 123.9,
-    "target_2_price": 132.16,
+    "current_price": 116.0,
+    "opening_auction_price": 116.23,
+    "stop_loss_price": 110.2,
+    "target_1_price": 121.8,
+    "target_2_price": 129.92,
     "risk_reward_ratio": 1.0,
     "suggested_shares": 0,
     "order_value_egp": 0.0,
     "allocation_pct": 0.0,
     "thndr_order_type_ar": "أمر محدد (Limit Order) — مزاد الافتتاح 9:30 ص",
-    "execution_instruction_ar": "قم بفتح تطبيق ثاندر واطلب شراء 0 سهم بسعر 118.24 ج.م كأمر محدد.",
-    "breakeven_rule_ar": "⚠️ فور وصول السعر إلى الهدف الأول (123.90 ج.م)، قم برفع أمر وقف الخسارة فوراً إلى سعر الشراء (118.24 ج.م) لحجز الأرباح وتأمين الصفقة بنسبة مخاطرة 0%.",
+    "execution_instruction_ar": "قم بفتح تطبيق ثاندر واطلب شراء 0 سهم بسعر 116.23 ج.م كأمر محدد.",
+    "breakeven_rule_ar": "⚠️ فور وصول السعر إلى الهدف الأول (121.80 ج.م)، قم برفع أمر وقف الخسارة فوراً إلى سعر الشراء (116.23 ج.م) لحجز الأرباح وتأمين الصفقة بنسبة مخاطرة 0%.",
     "trailing_rule_ar": "اترك النصف المتبقي مع تتبع الوقف المتحرك (Trailing Stop) حتى الهدف الثاني.",
     "theories_passed_count": 5,
     "dqs_score": 85.0,
@@ -35,11 +35,12 @@
     "rejection_reasons_ar": []
   },
   "smart_cash_radar": {
-    "total_equity_egp": 11489.5,
+    "total_equity_egp": 13658.56,
     "free_cash_egp": 1200.0,
-    "cash_reserve_pct": 10.4,
+    "stock_market_value_egp": 12458.56,
+    "cash_reserve_pct": 8.8,
     "mandatory_cash_floor_pct": 35.0,
-    "mandatory_cash_floor_egp": 4021.32,
+    "mandatory_cash_floor_egp": 4780.5,
     "investable_surplus_cash": 0.0,
     "cash_floor_status": "CASH_FLOOR_DEFICIT",
     "recommended_funds": [
@@ -69,6 +70,15 @@
         "nav_egp": 10.5,
         "liquidity_ar": "يومي فوري (T+0)",
         "action_advice_ar": "تشغيل تلقائي للسيولة الفائضة داخل تطبيق ثاندر دون تجميد."
+      },
+      {
+        "ticker": "BELTONE-CASH",
+        "name_ar": "صندوق بيلتون للسيولة النقدية اليومية (Beltone Cash)",
+        "category_ar": "أسواق نقد ودخل ثابت",
+        "annual_return_pct": 21.2,
+        "nav_egp": 12.15,
+        "liquidity_ar": "يومي فوري (T+0)",
+        "action_advice_ar": "استثمار السيولة في أذون خزانة وأسواق نقد لتحقيق أعلى عائد تراكمي فوري."
       }
     ]
   }

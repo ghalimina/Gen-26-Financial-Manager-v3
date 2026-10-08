@@ -68,16 +68,16 @@ class TestEGXTradingRulesEngine(unittest.TestCase):
         self.assertFalse(t2["is_marginable"])
 
     def test_05_net_profit_and_cgt_tax_calculation(self):
-        """Verify deduction of 0.35% roundtrip friction and 10% CGT on positive profit."""
+        """Verify deduction of 0.94% roundtrip friction and 10% CGT on positive profit."""
         # 100,000 gross pnl on 500,000 turnover
         calc = EGXTradingRulesEngine.calculate_net_proceeds(gross_pnl=100000.0, holding_days=10, order_turnover_egp=500000.0, is_resident=True)
-        # Friction = 500,000 * 0.0035 = 1,750
-        self.assertEqual(calc["friction_fees_egp"], 1750.0)
-        # Net before tax = 100,000 - 1,750 = 98,250
-        # CGT = 98,250 * 0.10 = 9,825.0
-        self.assertEqual(calc["cgt_tax_egp"], 9825.0)
-        # Net proceeds = 98,250 - 9,825 = 88,425.0
-        self.assertEqual(calc["net_proceeds_egp"], 88425.0)
+        # Friction = 500,000 * 0.0094 = 4,700
+        self.assertEqual(calc["friction_fees_egp"], 4700.0)
+        # Net before tax = 100,000 - 4,700 = 95,300
+        # CGT = 95,300 * 0.10 = 9,530.0
+        self.assertEqual(calc["cgt_tax_egp"], 9530.0)
+        # Net proceeds = 95,300 - 9,530 = 85,770.0
+        self.assertEqual(calc["net_proceeds_egp"], 85770.0)
         self.assertTrue(calc["is_profitable_net"])
 
         # Loss case: No CGT tax

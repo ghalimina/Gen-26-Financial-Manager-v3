@@ -16,6 +16,8 @@ import uuid
 import urllib.request
 import urllib.parse
 import datetime
+import hashlib
+import re
 from typing import Dict, List, Any, Optional, Tuple
 
 WORKSPACE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -57,20 +59,78 @@ class NotificationEngine:
         return token, chat_id
 
     @classmethod
-    def _append_to_persistent_log(
+    def _generate_fingerprint(cls, ticker: Optional[str], event_type: str, date_str: str) -> str:
+        """Generates deterministic unique SHA-256 fingerprint for (ticker + event_type + date)."""
+        sym = (ticker or "MARKET").strip().upper()
+        evt = (event_type or "GENERAL").strip().upper()
+        dt = (date_str or "")[:10].strip()
+        raw = f"{sym}::{evt}::{dt}"
+        return hashlib.sha256(raw.encode("utf-8")).hexdigest()[:16]
+
+    @classmethod
+    def add_notification(
         cls,
         category: str,
         icon: str,
         title: str,
         message: str,
+        ticker: Optional[str] = None,
         metadata: Optional[Dict[str, Any]] = None,
         delivered_telegram: bool = True
-    ) -> Dict[str, Any]:
-        """Appends notification record to data/system_notifications_log.json."""
+    ) -> Optional[Dict[str, Any]]:
+        """
+        Authoritative SSoT entry point for adding notifications with strict 24-hour deduplication.
+        Creates a unique fingerprint: (ticker + event_type + date).
+        Strictly prevents adding duplicate alerts if recorded in the last 24 hours.
+        """
         os.makedirs(DATA_DIR, exist_ok=True)
         now_dt = datetime.datetime.now()
+        date_str = now_dt.strftime("%Y-%m-%d")
+
+        meta = dict(metadata or {})
+        t = ticker or meta.get("ticker")
+        if not t:
+            m = re.search(r'\b([A-Z0-9]{3,5}\.CA)\b', f"{title} {message}")
+            if m:
+                t = m.group(1)
+                meta["ticker"] = t
+
+        fingerprint = cls._generate_fingerprint(t, category, date_str)
+        existing_logs = cls.load_notifications_log()
+
+        # Deduplication Check: Check 24-hour window
+        one_day_ago = now_dt - datetime.timedelta(hours=24)
+        for log in existing_logs:
+            log_fp = log.get("fingerprint")
+            log_ts_str = log.get("timestamp") or log.get("iso_timestamp")
+
+            if not log_fp:
+                log_ticker = log.get("metadata", {}).get("ticker") or log.get("ticker")
+                if not log_ticker:
+                    m = re.search(r'\b([A-Z0-9]{3,5}\.CA)\b', f"{log.get('title','')} {log.get('message','')}")
+                    if m:
+                        log_ticker = m.group(1)
+                log_cat = log.get("category", "")
+                log_date = (log_ts_str or "")[:10]
+                log_fp = cls._generate_fingerprint(log_ticker, log_cat, log_date)
+
+            if log_fp == fingerprint:
+                try:
+                    if log_ts_str:
+                        if "T" in log_ts_str:
+                            log_dt = datetime.datetime.fromisoformat(log_ts_str.split(".")[0])
+                        else:
+                            log_dt = datetime.datetime.strptime(log_ts_str[:19], "%Y-%m-%d %H:%M:%S")
+                        if log_dt >= one_day_ago:
+                            # Duplicate within 24h: Reject addition!
+                            return None
+                except Exception:
+                    if (log_ts_str or "")[:10] == date_str:
+                        return None
+
         record = {
             "notification_id": f"NOTIF_{uuid.uuid4().hex[:8].upper()}",
+            "fingerprint": fingerprint,
             "timestamp": now_dt.strftime("%Y-%m-%d %H:%M:%S"),
             "iso_timestamp": now_dt.isoformat(),
             "category": category,
@@ -78,12 +138,10 @@ class NotificationEngine:
             "title": title,
             "message": message,
             "delivered_telegram": delivered_telegram,
-            "metadata": metadata or {}
+            "metadata": meta
         }
 
-        existing_logs = cls.load_notifications_log()
         existing_logs.insert(0, record)
-        # Keep recent 100 notifications
         existing_logs = existing_logs[:100]
 
         tmp_f = f"{NOTIFICATIONS_LOG_FILE}.tmp"
@@ -100,6 +158,39 @@ class NotificationEngine:
                 time.sleep(0.05)
 
         return record
+
+    @classmethod
+    def _append_to_persistent_log(
+        cls,
+        category: str,
+        icon: str,
+        title: str,
+        message: str,
+        metadata: Optional[Dict[str, Any]] = None,
+        delivered_telegram: bool = True
+    ) -> Dict[str, Any]:
+        """Routes through add_notification ensuring strict deduplication."""
+        rec = cls.add_notification(
+            category=category,
+            icon=icon,
+            title=title,
+            message=message,
+            metadata=metadata,
+            delivered_telegram=delivered_telegram
+        )
+        if rec is None:
+            # Return pseudo record if deduplicated, preserving message content
+            return {
+                "notification_id": "DEDUPLICATED",
+                "category": category,
+                "icon": icon,
+                "title": title,
+                "message": message,
+                "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                "delivered_telegram": False,
+                "deduplicated": True
+            }
+        return rec
 
     @classmethod
     def load_notifications_log(cls) -> List[Dict[str, Any]]:
@@ -123,9 +214,26 @@ class NotificationEngine:
 
     @classmethod
     def get_recent_notifications(cls, limit: int = 15) -> List[Dict[str, Any]]:
-        """Returns the 15 most recent notifications sorted newest first."""
+        """Returns clean, deduplicated recent notifications sorted newest first."""
         logs = cls.load_notifications_log()
-        return logs[:limit]
+        seen = set()
+        deduped = []
+        now_dt = datetime.datetime.now()
+        for l in logs:
+            ticker = l.get("metadata", {}).get("ticker") or l.get("ticker")
+            if not ticker:
+                m = re.search(r'\b([A-Z0-9]{3,5}\.CA)\b', f"{l.get('title','')} {l.get('message','')}")
+                if m:
+                    ticker = m.group(1)
+            cat = l.get("category", "")
+            # Key by (ticker + category) to ensure zero duplicate alerts in notifications center
+            dedup_key = f"{(ticker or 'GLOBAL').upper()}::{(cat or 'GENERAL').upper()}"
+            if dedup_key not in seen:
+                seen.add(dedup_key)
+                deduped.append(l)
+            if len(deduped) >= limit:
+                break
+        return deduped
 
     @classmethod
     def send_message(

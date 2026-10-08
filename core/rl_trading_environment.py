@@ -18,7 +18,7 @@ class RlTradingEnvironment:
     Simulated Reinforcement Learning Environment for Training Autonomous Trading Agents.
     """
 
-    ROUNDTRIP_FRICTION = 0.0035  # 0.35%
+    ROUNDTRIP_FRICTION = 0.0094  # 0.94% (Thndr + EGX + MCDR SSoT)
     EGYPTIAN_CGT = 0.10          # 10% Capital Gains Tax
 
     def __init__(

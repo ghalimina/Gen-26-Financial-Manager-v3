@@ -287,6 +287,6 @@ class TradePostMortemEngine:
                     rec_copy = dict(rec)
                     rec_copy["remaining_hours"] = round((exp - now).total_seconds() / 3600.0, 1)
                     active.append(rec_copy)
-            except Exception:
-                pass
+            except Exception as e:
+                logger.error(f"TradePostMortemEngine: error parsing cooling off expiration for {sym}: {e}")
         return active

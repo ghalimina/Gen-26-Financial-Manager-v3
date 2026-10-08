@@ -23,7 +23,8 @@ class FrozenRiskInvariants:
     EGX_LIMIT_DOWN_BAND_PCT = -0.195       # -19.5% daily loss blocks SELL (Locked at Limit Down)
 
     # 3. Friction & Fee Defaults
-    ROUND_TRIP_STANDARD_FRICTION_PCT = 0.0090 # 0.90% standard friction (fees + slippage)
+    ROUNDTRIP_FRICTION_PCT = 0.0094            # 0.94% net roundtrip friction (Thndr + EGX + MCDR SSoT)
+    ROUND_TRIP_STANDARD_FRICTION_PCT = 0.0094 # 0.94% standard friction (fees + slippage)
     BREAK_EVEN_FRICTION_THRESHOLD_PCT = 0.036041 # 3.6041% break-even boundary
 
     # 4. Verification Methods
@@ -62,3 +63,7 @@ class FrozenRiskInvariants:
         if side.upper() == "SELL" and chg <= cls.EGX_LIMIT_DOWN_BAND_PCT:
             return False
         return True
+ 
+# Module-level SSoT exports
+ROUNDTRIP_FRICTION_PCT = FrozenRiskInvariants.ROUNDTRIP_FRICTION_PCT
+ROUND_TRIP_STANDARD_FRICTION_PCT = FrozenRiskInvariants.ROUND_TRIP_STANDARD_FRICTION_PCT

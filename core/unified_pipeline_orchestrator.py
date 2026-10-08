@@ -286,8 +286,8 @@ class UnifiedPipelineOrchestrator:
                         pair["ticker_A"], pair["ticker_B"]
                     )
                     break
-                except Exception:
-                    pass
+                except Exception as e:
+                    logger.error(f"Error calculating pair spread Z-Score for {sym}: {e}")
 
         # 4. Engine 4: 48-factor Deep Quant Fusion & Calibrated Meta-Labeling
         try:

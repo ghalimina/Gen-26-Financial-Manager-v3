@@ -110,7 +110,21 @@ class MarketHeatmapEngine:
                 prev_close = float(rec.get("previous_close", price))
                 name_ar = rec.get("company_name") or rec.get("name_ar", ticker)
                 sec = rec.get("sector") or "قطاعات أخرى متنوعة"
-                chg_pct = round(((price - prev_close) / prev_close) * 100.0, 2) if prev_close > 0 else 0.0
+                volume = float(rec.get("volume", 0.0) or 0.0)
+                turnover = float(rec.get("turnover_egp", 0.0) or 0.0)
+                raw_chg = round(((price - prev_close) / prev_close) * 100.0, 2) if prev_close > 0 else 0.0
+
+                # Mandatory Safety Filter & EGX Circuit Breaker (Cap +-20.0%):
+                if abs(raw_chg) > 20.0:
+                    logger.warning("Excluding unadjusted/anomalous stock %s (raw_chg=%.2f%%) from heatmap", ticker, raw_chg)
+                    continue
+
+                # Exclude untraded stocks with zero volume and zero turnover if price hasn't moved
+                if volume <= 0 and turnover <= 0 and price == prev_close:
+                    continue
+
+                # Strict mathematical circuit breaker clamp
+                chg_pct = max(-20.0, min(20.0, raw_chg))
 
             sec_ar = cls.SECTOR_AR_MAP.get(sec, sec)
             weight = max(1.0, round(price * 100.0, 1))

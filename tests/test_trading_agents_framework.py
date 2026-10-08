@@ -102,12 +102,12 @@ class TestTradingAgentsFramework(unittest.TestCase):
         self.assertGreater(len(transcript.consensus_summary_ar), 10)
 
     def test_07_trader_agent_net_edge_calculation(self):
-        """Verify TraderAgent enforces 0.35% friction, slippage, and Net Edge >= 1.00%."""
+        """Verify TraderAgent enforces 0.94% friction, slippage, and Net Edge >= 1.00%."""
         team_rep = AnalystTeamOrchestrator.run_all(self.ticker)
         transcript = DebateModerator.conduct_debate(team_rep)
         proposal = TraderAgent.construct_proposal(team_rep, transcript)
         self.assertIsInstance(proposal, TradeProposal)
-        self.assertEqual(proposal.roundtrip_friction_pct, 0.35)
+        self.assertEqual(proposal.roundtrip_friction_pct, 0.94)
         self.assertGreaterEqual(proposal.hard_stop_loss, 0.0)
         if proposal.meets_edge_hurdle and transcript.debate_winner == "BULL_ADVANTAGE":
             self.assertEqual(proposal.action, "BUY_LIMIT")

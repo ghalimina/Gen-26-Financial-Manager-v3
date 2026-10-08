@@ -24,7 +24,10 @@ import sys
 import json
 import csv
 import datetime
+import logging
 from typing import Dict, List, Any, Optional, Tuple
+
+logger = logging.getLogger("GEN26.MLOps")
 
 WORKSPACE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if WORKSPACE not in sys.path:
@@ -422,22 +425,22 @@ class MLOpsPipeline:
                         break
 
             if not trades:
-                return 0.85, 10, 0
+                return 0.0, 0, consecutive_stops
             recent = trades[-cls.ROLLING_WINDOW_TRADES:]
             acc = sum(recent) / len(recent)
             return float(acc), len(recent), consecutive_stops
-        except Exception:
-            return 0.85, 10, 0
+        except Exception as e:
+            logger.error("Error computing closed trades metrics: %s", e)
+            return 0.0, 0, 0
 
     @classmethod
     def run_adaptive_recalibration_audit(cls, window_days: int = 30) -> Dict[str, Any]:
         """
         Adaptive Recalibration Loop (Zenith Optimization Pillar 2):
-        1. Automated weekly check measuring Brier Score, ECE, and Hit Rate on rolling 30-day window.
-        2. If Data Drift detected (ECE > 0.06 or Brier Score > 0.25 or Hit Rate < 40%):
-           - Retrains Isotonic Regression calibrator on latest ground-truth in data/gen26_production.db.
-           - Updates theory weights & calibration metadata.
-           - Persists updated calibration state to data/ai_validation_metrics.json.
+        1. Automated weekly check measuring Brier Score, ECE, and Hit Rate on rolling window.
+        2. Zero-Fake Policy:
+           - Completely purges artificial ECE constant (0.0004) and random predictions.
+           - If empirical paired data is insufficient for calibration, returns CALIBRATION_UNAVAILABLE.
         """
         import sqlite3
         import numpy as np
@@ -452,38 +455,80 @@ class MLOpsPipeline:
             try:
                 with open(metrics_file, "r", encoding="utf-8") as f:
                     current_metrics = json.load(f)
-            except Exception:
-                pass
+            except Exception as e:
+                logger.error("Error reading ai_validation_metrics.json: %s", e)
 
-        brier_score = float(current_metrics.get("brier_score", 0.2486))
-        ece = float(current_metrics.get("expected_calibration_error", 0.0004))
-        hit_rate = float(current_metrics.get("hit_rate_pct", 49.67))
+        brier_score = current_metrics.get("brier_score")
+        raw_ece = current_metrics.get("expected_calibration_error")
+        hit_rate = current_metrics.get("hit_rate_pct")
+
+        # Zero-Fake SSoT: purge artificial 0.0004 fallback
+        if raw_ece == 0.0004 or raw_ece is None or raw_ece == "CALIBRATION_UNAVAILABLE":
+            ece = "CALIBRATION_UNAVAILABLE"
+        else:
+            try:
+                ece = float(raw_ece)
+            except (ValueError, TypeError):
+                ece = "CALIBRATION_UNAVAILABLE"
 
         # Check for drift
-        is_drift_detected = (ece > 0.06) or (brier_score > 0.250) or (hit_rate < 40.0)
+        is_drift_detected = False
+        if isinstance(ece, (int, float)) and ece > 0.06:
+            is_drift_detected = True
+        if brier_score is not None and float(brier_score) > 0.250:
+            is_drift_detected = True
+        if hit_rate is not None and float(hit_rate) < 40.0:
+            is_drift_detected = True
+        if ece == "CALIBRATION_UNAVAILABLE":
+            is_drift_detected = True
 
         action_taken = "NO_DRIFT_STEADY_STATE"
         recalibrated_ece = ece
         recalibrated_brier = brier_score
 
         if is_drift_detected or not os.path.exists(metrics_file):
+            # Check for real paired predictions and outcomes
+            paired_rows = []
             try:
                 conn = sqlite3.connect(db_path)
-                df = pd.read_sql_query(
-                    "SELECT close_price FROM historical_daily_bars WHERE market_date >= '2024-01-01' LIMIT 5000",
-                    conn
+                cursor = conn.cursor()
+                cursor.execute(
+                    "SELECT name FROM sqlite_master WHERE type='table' AND name='model_prediction_log'"
                 )
+                if cursor.fetchone():
+                    cursor.execute(
+                        "SELECT predicted_prob, actual_outcome FROM model_prediction_log "
+                        "WHERE actual_outcome IS NOT NULL AND predicted_prob IS NOT NULL LIMIT 5000"
+                    )
+                    paired_rows = cursor.fetchall()
                 conn.close()
-                if not df.empty:
-                    y_true = (df["close_price"].pct_change().dropna() > 0).astype(int).values
-                    p_pred = np.clip(np.random.normal(0.52, 0.08, len(y_true)), 0.01, 0.99)
-                    iso = IsotonicRegression(out_of_bounds="clip")
-                    iso.fit(p_pred, y_true)
-                    recalibrated_ece = 0.0004
-                    recalibrated_brier = round(float(np.mean((iso.predict(p_pred) - y_true) ** 2)), 4)
-                    action_taken = "ISOTONIC_CALIBRATOR_RETRAINED_AND_WEIGHTS_UPDATED"
             except Exception as e:
-                action_taken = f"RECALIBRATION_ATTEMPTED_FALLBACK: {e}"
+                logger.error("Error querying prediction logs: %s", e)
+                paired_rows = []
+
+            if len(paired_rows) >= 30:
+                p_pred = np.array([r[0] for r in paired_rows], dtype=float)
+                y_true = np.array([r[1] for r in paired_rows], dtype=int)
+                iso = IsotonicRegression(out_of_bounds="clip")
+                iso.fit(p_pred, y_true)
+                cal_probs = iso.predict(p_pred)
+                recalibrated_brier = round(float(np.mean((cal_probs - y_true) ** 2)), 4)
+
+                n_bins = 10
+                bin_boundaries = np.linspace(0, 1, n_bins + 1)
+                ece_val = 0.0
+                for b in range(n_bins):
+                    mask = (cal_probs >= bin_boundaries[b]) & (cal_probs < bin_boundaries[b + 1])
+                    if np.sum(mask) > 0:
+                        acc_b = np.mean(y_true[mask])
+                        conf_b = np.mean(cal_probs[mask])
+                        ece_val += (np.sum(mask) / len(cal_probs)) * abs(acc_b - conf_b)
+                recalibrated_ece = round(float(ece_val), 4)
+                action_taken = "ISOTONIC_CALIBRATOR_RETRAINED_ON_EMPIRICAL_DATA"
+            else:
+                # Zero-Fake Policy: Prohibit random prediction generation; report truth
+                recalibrated_ece = "CALIBRATION_UNAVAILABLE"
+                action_taken = "CALIBRATION_UNAVAILABLE"
 
         updated_payload = {
             "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
@@ -493,7 +538,10 @@ class MLOpsPipeline:
             "hit_rate_pct": hit_rate,
             "data_drift_detected": is_drift_detected,
             "recalibration_action": action_taken,
-            "status_ar": "🟢 النموذج معاير بدقة فائقة بعد فحص النافذة المتحركة" if not is_drift_detected else "🔄 تم إعادة تدريب طبقة المعايرة وتحديث أوزان النظريات"
+            "status": "CALIBRATION_UNAVAILABLE" if recalibrated_ece == "CALIBRATION_UNAVAILABLE" else "CALIBRATED",
+            "status_ar": "⚠️ بيانات المعايرة الحقيقية غير متوفرة حالياً (CALIBRATION_UNAVAILABLE)" if recalibrated_ece == "CALIBRATION_UNAVAILABLE" else (
+                "🟢 النموذج معاير بدقة فائقة بعد فحص النافذة المتحركة" if not is_drift_detected else "🔄 تم إعادة تدريب طبقة المعايرة وتحديث أوزان النظريات"
+            )
         }
 
         if is_drift_detected:
@@ -503,10 +551,11 @@ class MLOpsPipeline:
             try:
                 with open(metrics_file, "w", encoding="utf-8") as f:
                     json.dump(current_metrics, f, ensure_ascii=False, indent=2)
-            except Exception:
-                pass
+            except Exception as e:
+                logger.error("Error saving updated metrics: %s", e)
 
         return updated_payload
+
 
 
 if __name__ == "__main__":
