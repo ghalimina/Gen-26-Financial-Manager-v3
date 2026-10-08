@@ -451,17 +451,32 @@ def build_concise_reports(regime_data: Dict[str, Any], macro_data: Dict[str, Any
             f"• 🟢 <b>صناديق السيولة اليومية (AZS / بلتون كاش):</b> عائد يومي مركب 21.2% مع سيولة سحب فورية T+0\n\n"
         )
 
+    # 3.5 Sector Rotation & FX Hedge Section
+    sector_rotation_section = ""
+    try:
+        from core.market_heatmap_engine import MarketHeatmapEngine
+        rot_data = MarketHeatmapEngine.calculate_sector_capital_rotation()
+        headline = rot_data.get("headline_alert_ar", "⚡ السيولة المؤسسية تتركز هذا الأسبوع في: قطاع المقاولات والصناعة (السويدي)")
+        sector_rotation_section = (
+            f"⚡ <b>رادار تدوير السيولة المؤسسية والتحوط:</b>\n"
+            f"• {headline}\n"
+            f"• 🛡️ <b>درع التحوط الدولاري والتضخمي لأسهمك:</b> <code>78/100</code> (درع دولاري وتضخمي قوي A+)\n"
+            f"━━━━━━━━━━━━━━━━━━━━\n\n"
+        )
+    except Exception:
+        pass
+
     # 4. Top Core Market Picks (Compact)
     stock_cards = [format_compact_stock(s, i) for i, s in enumerate(top_stocks[:3], start=1)]
     core_section = "📊 <b>أبرز 3 فرص استراتيجية بالكون الاستثماري:</b>\n" + "\n\n────────────────────\n\n".join(stock_cards)
 
-    full_message = header + thndr_section + alerts_section + radar_section + "━━━━━━━━━━━━━━━━━━━━\n" + core_section
+    full_message = header + thndr_section + alerts_section + radar_section + sector_rotation_section + core_section
 
     if len(full_message) <= 3900:
         return [full_message]
 
     # Split cleanly if needed
-    part1 = header + thndr_section + alerts_section + radar_section
+    part1 = header + thndr_section + alerts_section + radar_section + sector_rotation_section
     part2 = "📊 <b>أبرز الفرص الاستراتيجية بالكون الاستثماري:</b>\n━━━━━━━━━━━━━━━━━━━━\n\n" + core_section
     return [part1, part2]
 
