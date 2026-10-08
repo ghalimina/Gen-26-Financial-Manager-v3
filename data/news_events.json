@@ -1,7 +1,26 @@
 {
-  "last_sync": "2026-10-08 18:58:07",
-  "total_events": 109,
+  "last_sync": "2026-10-08 19:36:08",
+  "total_events": 110,
   "events": [
+    {
+      "news_id": "RSS_EGX30_31ef6b98f8bc",
+      "source": "رادار البورصة المصرية",
+      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE53NTF0RmMzemwwdzdETWo1R080RXlnTmJtbGlJS2xLR09VQ0FPTXJHVVZOVVdYYWVVcExvZU1RQV85UVNrU3hPUTV3el9uZlJKQnpV?oc=5",
+      "published_at": "2026-10-08 15:58:40",
+      "retrieved_at": "2026-10-08 19:36:08",
+      "company": "المؤشر الرئيسي للبورصة المصرية EGX30",
+      "ticker": "EGX30.CA",
+      "sector": "Index & Macro",
+      "country": "EG",
+      "event_type": "REGULATORY",
+      "sentiment": "NEUTRAL",
+      "sentiment_confidence": 0.7,
+      "importance": "LOW",
+      "language": "ar",
+      "headline": "البورصة المصرية تخرج من قائمة المراقبة.. ماذا يعني ذلك للمستثمرين؟ - شبكة تواصل الإخبارية",
+      "alpha_shock_pct": 0.0,
+      "created_at": "2026-10-08 19:36:08"
+    },
     {
       "news_id": "RSS_EGX30_447f81329132",
       "source": "رادار البورصة المصرية",
@@ -930,25 +949,6 @@
       "importance": "LOW",
       "language": "ar",
       "headline": "محمد صبري: المصرية للاتصالات تتصدر أكبر طروحات البورصة المصرية بـ779.1 مليون دولار - جريدة المال",
-      "alpha_shock_pct": 0.0,
-      "created_at": "2026-10-08 05:06:57"
-    },
-    {
-      "news_id": "RSS_COMI_0a5891ef3cca",
-      "source": "رادار البورصة المصرية",
-      "url": "https://news.google.com/rss/articles/CBMi-gNBVV95cUxNUFBpbkFjZ0ZTd0pYWGFXcHdEZ21mUjRKTjdJMXFMTnQ1WHZFeFFGRUI5VHkxTWNNc3hhMlF3b1hUVC1VY0ZVNUpTdGdvV040RVFfQ3dpaUU3LV9zUmxSNFFSRzFNY0Z6X0dRVHlpMDE1VW9ISGxyb2M2c0h6YWhOOGwwelBDc0lubWpkd3pMRjB5dDQ3UGJUTTZFZ0dudFUwQ1Y2M2wzcUVCRzlVSGdsRTNQZHhfaWVmS1dMNTJJbVlmUjYxUzRXbUdLSzUwNVFWTXJVN2NXQmhFU0szR21XYXNBMUlFc0dsTzJlWkJuaW9DdlVLWFhBR1hUR3FzRHRwdEdzUFZ2R0lzelhqZzRNdFJEWFdPdFRPWngtejhVOGhoU2dPS2Z2MGtOWHh4d2h1blhTMmNyNlJwMV8yZTg5bElXSXpLSXlDWHpUZFlKZEpvTHdzbmo0OUlHNlY1aUhXLTZKcVY0Z19lQkZzcjFjZVI5RFBwS2tYLUI3ckNVd1RQMllCUDNRNEpfTW83aGplS0QxdWpHZC1ONVo3UHBUMkNOeFlVVXEtWXZLcTZyNnN3QkFuTjBZbEx1M0g3M2YyQWpvTV9MS2o1ckc3eEYzQUZNNkhTX0cxTXZ5SWhXeXZRa1h3SC1qZl9Zcl8zMnplb2JUald0V3JXQQ?oc=5",
-      "published_at": "2026-10-07 11:34:00",
-      "retrieved_at": "2026-10-08 05:06:57",
-      "company": "البنك التجاري الدولي",
-      "ticker": "COMI.CA",
-      "sector": "Banking",
-      "country": "EG",
-      "event_type": "MARKET_UPDATE",
-      "sentiment": "NEUTRAL",
-      "sentiment_confidence": 0.7,
-      "importance": "LOW",
-      "language": "ar",
-      "headline": "من CIB إلى اتصالات.. كواليس وأرقام شهادات الإيداع للشركات الأربع الكبار في مصر - اليوم السابع",
       "alpha_shock_pct": 0.0,
       "created_at": "2026-10-08 05:06:57"
     }
