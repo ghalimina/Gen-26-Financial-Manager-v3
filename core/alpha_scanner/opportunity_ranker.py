@@ -18,20 +18,21 @@ class OpportunityRanker:
 
     @classmethod
     def evaluate_stock_scan(cls, ticker: str, regime: str = "BULL_EXPANSION") -> Optional[Dict[str, Any]]:
-        stock_rec = MultiLayerScanner.get_stock_ranking_record(ticker)
         rec = MarketPriceService.get_canonical_price_record(ticker)
-        if stock_rec and stock_rec.get("current_price"):
-            price = float(stock_rec["current_price"])
+        stock_rec = MultiLayerScanner.get_stock_ranking_record(ticker)
+
+        if rec and rec.get("price") is not None and float(rec.get("price", 0)) > 0:
+            price = round(float(rec["price"]), 2)
+            name_ar = rec.get("name_ar") or (stock_rec.get("company_name") or stock_rec.get("name_ar") if stock_rec else ticker)
+            sector = rec.get("sector") or (stock_rec.get("sector") if stock_rec else "القطاع العام")
+        elif stock_rec and stock_rec.get("current_price") is not None and float(stock_rec.get("current_price", 0)) > 0:
+            price = round(float(stock_rec["current_price"]), 2)
             name_ar = stock_rec.get("company_name") or stock_rec.get("name_ar", ticker)
-            sector = stock_rec.get("sector", "General")
-        elif rec and rec.get("price"):
-            price = float(rec["price"])
-            name_ar = rec.get("name_ar", ticker)
-            sector = rec.get("sector", "General")
+            sector = stock_rec.get("sector", "القطاع العام")
         else:
             price = 100.0
             name_ar = ticker
-            sector = "General"
+            sector = "القطاع العام"
 
         scan_res = MultiLayerScanner.scan_single_stock(ticker, price, regime, stock_rec=stock_rec)
         scored_res = AlphaScorer.calculate_alpha_score(scan_res)
@@ -46,20 +47,21 @@ class OpportunityRanker:
         return {
             "ticker": ticker,
             "name_ar": name_ar,
+            "company_name": name_ar,
             "sector": sector,
-            "current_price": price,
-            "alpha_score": scored_res["alpha_score"],
-            "win_prob": scored_res["win_prob"],
-            "win_probability_pct": scored_res["win_probability_pct"],
-            "expected_return": scored_res["expected_return"],
-            "expected_return_pct": scored_res["expected_return_pct"],
-            "uncertainty_score": scored_res["uncertainty_score"],
-            "opportunity_score": scored_res["opportunity_score"],
-            "net_edge_pct": trade_gate.get("net_edge_pct", round(scored_res["expected_return_pct"] - 0.94 - (scored_res["uncertainty_score"] * 1.5), 2)),
+            "current_price": float(price),
+            "alpha_score": float(scored_res["alpha_score"]),
+            "win_prob": float(scored_res["win_prob"]),
+            "win_probability_pct": float(scored_res["win_probability_pct"]),
+            "expected_return": float(scored_res["expected_return"]),
+            "expected_return_pct": float(scored_res["expected_return_pct"]),
+            "uncertainty_score": float(scored_res["uncertainty_score"]),
+            "opportunity_score": float(scored_res["opportunity_score"]),
+            "net_edge_pct": float(trade_gate.get("net_edge_pct", round(scored_res["expected_return_pct"] - 0.94 - (scored_res["uncertainty_score"] * 1.5), 2))),
             "tier": scored_res["tier"],
             "tier_ar": scored_res["tier_ar"],
             "action_verdict": scored_res["action_verdict"],
-            "is_tradeable": trade_gate.get("is_tradeable", scored_res["alpha_score"] >= 65.0),
+            "is_tradeable": bool(trade_gate.get("is_tradeable", scored_res["alpha_score"] >= 65.0)),
             "layer_scores": scored_res["layer_scores"],
             "scan_details": scan_res
         }

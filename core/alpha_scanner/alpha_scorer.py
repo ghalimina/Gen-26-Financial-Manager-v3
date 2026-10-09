@@ -51,27 +51,27 @@ class AlphaScorer:
         liq_mult = 1.00
         risk_factor = 0.20
 
-        # Opportunity Score = ExpReturn * Prob * Liq * (1 - Risk)
-        opportunity_score = round(exp_return_pct * (prob_profit / 100.0) * liq_mult * (1.0 - risk_factor), 2)
+        # Opportunity Score monotonically aligned with alpha score
+        opportunity_score = round(alpha_score, 1)
 
         # Classification Tier & Action Verdict
         rec_act = (stock_rec.get("action") or stock_rec.get("decision")) if stock_rec else None
         if rec_act in ["STRONG_BUY", "BUY"] or alpha_score >= 80.0:
             tier = "STRONG_ALPHA"
             tier_ar = "ألفا صاعدة (Alpha >= 80)"
-            action_verdict = "STRONG_BUY" if alpha_score >= 80.0 else "BUY"
+            action_verdict = "تجميع كمي قوي"
         elif alpha_score >= 70.0:
             tier = "MODERATE_ALPHA"
             tier_ar = "ألفا معتدلة (Alpha 70-79)"
-            action_verdict = "BUY"
+            action_verdict = "تجميع كمي"
         elif alpha_score >= 55.0 or rec_act in ["WATCH", "HOLD"]:
             tier = "NEUTRAL_WATCH"
             tier_ar = "مراقبة واحتفاظ (Alpha 55-69)"
-            action_verdict = "WATCH"
+            action_verdict = "مراقبة واحتفاظ"
         else:
             tier = "UNDERPERFORMANCE_AVOID"
             tier_ar = "تجنب ومخاطر (Alpha < 55)"
-            action_verdict = "AVOID"
+            action_verdict = "تجنب ومخاطر"
 
         return {
             "ticker": scan_result.get("ticker", "UNKNOWN"),

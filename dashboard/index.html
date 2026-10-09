@@ -2514,8 +2514,8 @@
                     <div style="font-size: 11.5px; color: var(--text-muted);" id="cluster-risk-details">الأسهم المتصدرة تظهر ارتباطاً تبادلياً يفوق 0.75.</div>
                 </div>
 
-                <div class="metric-title" style="margin-bottom: 14px; font-size: 15px; color: #60a5fa;">⚡ أفضل 3 فرص قصيرة المدى (أفق 10 جلسات تداول):</div>
-                <div id="short-term-opps-grid" class="card-grid-3">
+                <div class="metric-title" style="margin-bottom: 14px; font-size: 15px; color: #60a5fa;">⚡ أفضل 12 فرصة قصيرة المدى (أفق 10 جلسات تداول):</div>
+                <div id="short-term-opps-grid" class="card-grid-4">
                     <!-- Populated dynamically via JS -->
                 </div>
 
@@ -2618,7 +2618,7 @@
                         <div style="display: flex; align-items: center; gap: 10px; flex-grow: 1; max-width: 480px;">
                             <label style="font-size: 13px; font-weight: 700; white-space: nowrap; margin: 0;">اختر شركة للتحليل:</label>
                             <select id="details-stock-select" class="form-control" onchange="loadStockDetails(this.value)" style="font-size: 13px; font-weight: 600;">
-                                <option value="COMI.CA">البنك التجاري الدولي (COMI.CA) — 140.50 ج.م</option>
+                                <option value="COMI.CA">البنك التجاري الدولي (COMI.CA) — 124.65 ج.م</option>
                                 <option value="SWDY.CA">السويدي إليكتريك (SWDY.CA) — 128.00 ج.م</option>
                                 <option value="TMGH.CA">مجموعة طلعت مصطفى (TMGH.CA) — 97.50 ج.م</option>
                                 <option value="ORAS.CA">أوراسكوم للإنشاء (ORAS.CA) — 782.25 ج.م</option>
@@ -2672,7 +2672,7 @@
                     <div style="display: flex; align-items: center; gap: 18px;">
                         <div>
                             <div class="metric-title" style="text-align: left;">السعر الحالي</div>
-                            <div class="hero-price-val"><span id="hero-price" class="ltr-text">140.50</span> <span style="font-size: 13px; color: var(--text-muted);">ج.م</span></div>
+                            <div class="hero-price-val"><span id="hero-price" class="ltr-text">124.65</span> <span style="font-size: 13px; color: var(--text-muted);">ج.م</span></div>
                         </div>
                         <div id="hero-badge-container">
                             <span id="hero-badge" class="badge badge-green" style="font-size: 13px; padding: 6px 14px;">🟢 فرصة شراء ممتازة</span>
@@ -2704,28 +2704,28 @@
                         <!-- 1. Exact Live Price -->
                         <div class="metric-pill" style="border-color: rgba(59, 130, 246, 0.4);">
                             <div class="metric-pill-label">السعر اللحظي الدقيق (Live Price):</div>
-                            <div class="metric-pill-val font-mono" style="font-size: 22px; color: #ffffff;"><span id="detail-live-price" class="ltr-text">140.50</span> <span style="font-size: 12px; color: var(--text-muted);">ج.م</span></div>
+                            <div class="metric-pill-val font-mono" style="font-size: 22px; color: #ffffff;"><span id="detail-live-price" class="ltr-text">124.65</span> <span style="font-size: 12px; color: var(--text-muted);">ج.م</span></div>
                             <div class="metric-pill-desc text-green">✔️ مطابق للأسعار اللحظية</div>
                         </div>
 
                         <!-- 2. Suggested Entry Price / Zone -->
                         <div class="metric-pill" style="border-color: rgba(59, 130, 246, 0.4); background: rgba(37, 99, 235, 0.08);">
                             <div class="metric-pill-label">سعر / منطقة الدخول المقترحة:</div>
-                            <div class="metric-pill-val font-mono text-blue" id="detail-entry-zone" style="font-size: 18px;"><span class="ltr-text">138.40 – 140.20</span> <span style="font-size: 12px;">ج.م</span></div>
+                            <div class="metric-pill-val font-mono text-blue" id="detail-entry-zone" style="font-size: 18px;"><span class="ltr-text">123.50 – 125.00</span> <span style="font-size: 12px;">ج.م</span></div>
                             <div class="metric-pill-desc" style="color: #93c5fd;">🟢 نطاق التجميع الآمن</div>
                         </div>
 
                         <!-- 3. Stop Loss / Exit Price -->
                         <div class="metric-pill" style="border-color: rgba(239, 68, 68, 0.4); background: rgba(239, 68, 68, 0.08);">
                             <div class="metric-pill-label">سعر إيقاف الخسارة (Stop Loss):</div>
-                            <div class="metric-pill-val font-mono text-red" id="detail-stop-loss" style="font-size: 18px;"><span class="ltr-text">130.66</span> <span style="font-size: 12px;">ج.م</span></div>
-                            <div class="metric-pill-desc text-red" id="detail-stop-pct">🛑 حماية رأس المال (-7.0%)</div>
+                            <div class="metric-pill-val font-mono text-red" id="detail-stop-loss" style="font-size: 18px;"><span class="ltr-text">118.42</span> <span style="font-size: 12px;">ج.م</span></div>
+                            <div class="metric-pill-desc text-red" id="detail-stop-pct">🛑 حماية رأس المال (-5.0%)</div>
                         </div>
 
                         <!-- 4. Reward-to-Risk Ratio -->
                         <div class="metric-pill" style="border-color: rgba(168, 85, 247, 0.4); background: rgba(168, 85, 247, 0.08);">
                             <div class="metric-pill-label">نسبة العائد إلى المخاطرة (R:R):</div>
-                            <div class="metric-pill-val font-mono text-purple" id="detail-rr-ratio" style="font-size: 18px;"><span class="ltr-text">1 : 2.45</span></div>
+                            <div class="metric-pill-val font-mono text-purple" id="detail-rr-ratio" style="font-size: 18px;"><span class="ltr-text">1 : 1.62</span></div>
                             <div class="metric-pill-desc" style="color: #d8b4fe;">⚡ فرصة مواتية إحصائياً</div>
                         </div>
                     </div>
@@ -2745,11 +2745,11 @@
                             </div>
                             <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px;">
                                 <span style="font-size: 12px; color: var(--text-muted);">المستهدف السعري:</span>
-                                <span class="font-mono text-green" style="font-size: 18px; font-weight: 900;" id="horizon-short-target"><span class="ltr-text">144.50</span> ج.م</span>
+                                <span class="font-mono text-green" style="font-size: 18px; font-weight: 900;" id="horizon-short-target"><span class="ltr-text">128.50</span> ج.م</span>
                             </div>
                             <div style="display: flex; justify-content: space-between; align-items: center; font-size: 12px;">
                                 <span style="color: var(--text-muted);">العائد المتوقع:</span>
-                                <span class="font-mono text-green font-bold" id="horizon-short-return">+2.85%</span>
+                                <span class="font-mono text-green font-bold" id="horizon-short-return">+3.10%</span>
                             </div>
                             <div style="font-size: 11px; color: var(--text-dim); margin-top: 8px; padding-top: 6px; border-top: 1px dashed rgba(255,255,255,0.08);" id="horizon-short-desc">
                                 مضاربة سريعة مع تدفقات وزخم السيولة اللحظي
@@ -2764,11 +2764,11 @@
                             </div>
                             <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px;">
                                 <span style="font-size: 12px; color: var(--text-muted);">المستهدف السعري:</span>
-                                <span class="font-mono text-green" style="font-size: 18px; font-weight: 900;" id="horizon-med-target"><span class="ltr-text">151.20</span> ج.م</span>
+                                <span class="font-mono text-green" style="font-size: 18px; font-weight: 900;" id="horizon-med-target"><span class="ltr-text">134.62</span> ج.م</span>
                             </div>
                             <div style="display: flex; justify-content: space-between; align-items: center; font-size: 12px;">
                                 <span style="color: var(--text-muted);">العائد المتوقع:</span>
-                                <span class="font-mono text-green font-bold" id="horizon-med-return">+7.60%</span>
+                                <span class="font-mono text-green font-bold" id="horizon-med-return">+8.00%</span>
                             </div>
                             <div style="font-size: 11px; color: #93c5fd; margin-top: 8px; padding-top: 6px; border-top: 1px dashed rgba(59,130,246,0.2);" id="horizon-med-desc">
                                 صفقة سوينج موصى بها مع موجة زخم المؤسسات
@@ -2783,11 +2783,11 @@
                             </div>
                             <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px;">
                                 <span style="font-size: 12px; color: var(--text-muted);">المستهدف السعري:</span>
-                                <span class="font-mono text-green" style="font-size: 18px; font-weight: 900;" id="horizon-long-target"><span class="ltr-text">162.00</span> ج.م</span>
+                                <span class="font-mono text-green" style="font-size: 18px; font-weight: 900;" id="horizon-long-target"><span class="ltr-text">145.00</span> ج.م</span>
                             </div>
                             <div style="display: flex; justify-content: space-between; align-items: center; font-size: 12px;">
                                 <span style="color: var(--text-muted);">العائد المتوقع:</span>
-                                <span class="font-mono text-green font-bold" id="horizon-long-return">+15.30%</span>
+                                <span class="font-mono text-green font-bold" id="horizon-long-return">+16.30%</span>
                             </div>
                             <div style="font-size: 11px; color: var(--text-dim); margin-top: 8px; padding-top: 6px; border-top: 1px dashed rgba(255,255,255,0.08);" id="horizon-long-desc">
                                 استثمار مدفوع بالقيمة الجوهرية ونمو أرباح الشركة
@@ -2848,18 +2848,18 @@
                             <span class="badge badge-blue ltr-text" id="tv-chart-symbol-badge">EGX:COMI</span>
                         </div>
                     <div id="tv-guide-bar" style="display: flex; gap: 8px; font-size: 11.5px; margin-bottom: 12px; flex-wrap: wrap;">
-                        <span class="badge badge-blue">🎯 شراء: <strong id="tv-entry-guide" class="ltr-text">138.5 – 140.5</strong></span>
-                        <span class="badge badge-red">🛑 وقف: <strong id="tv-stop-guide" class="ltr-text">133.5</strong></span>
-                        <span class="badge badge-green">🚀 هدف: <strong id="tv-target-guide" class="ltr-text">151.7 (+8%)</strong></span>
+                        <span class="badge badge-blue">🎯 شراء: <strong id="tv-entry-guide" class="ltr-text">123.50 – 125.00</strong></span>
+                        <span class="badge badge-red">🛑 وقف: <strong id="tv-stop-guide" class="ltr-text">118.42</strong></span>
+                        <span class="badge badge-green">🚀 هدف: <strong id="tv-target-guide" class="ltr-text">134.62 (+8%)</strong></span>
                     </div>
 
                     <!-- 🎯 Interactive Visual AI Targets & Execution Range Meter -->
                     <div class="ai-target-range-container" style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 12px 16px; margin-bottom: 14px;">
                         <div style="display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 700; margin-bottom: 10px; flex-wrap: wrap; gap: 6px;">
-                            <span style="color: #ef4444;"><i class="fa-solid fa-shield-halved"></i> وقف الخسارة: <strong id="meter-stop-val" class="font-mono ltr-text">130.66</strong> ج.م (<span id="meter-stop-pct" class="ltr-text">-7.0%</span>)</span>
-                            <span style="color: #3b82f6;"><i class="fa-solid fa-bullseye"></i> نطاق الدخول: <strong id="meter-entry-val" class="font-mono ltr-text">138.40 – 140.20</strong> ج.م</span>
-                            <span style="color: #10b981;"><i class="fa-solid fa-flag-checkered"></i> الهدف الأول: <strong id="meter-target1-val" class="font-mono ltr-text">151.20</strong> ج.م (<span id="meter-target1-pct" class="ltr-text">+7.6%</span>)</span>
-                            <span style="color: #8b5cf6;"><i class="fa-solid fa-rocket"></i> الهدف الثاني: <strong id="meter-target2-val" class="font-mono ltr-text">162.00</strong> ج.م (<span id="meter-target2-pct" class="ltr-text">+15.3%</span>)</span>
+                            <span style="color: #ef4444;"><i class="fa-solid fa-shield-halved"></i> وقف الخسارة: <strong id="meter-stop-val" class="font-mono ltr-text">118.42</strong> ج.م (<span id="meter-stop-pct" class="ltr-text">-5.0%</span>)</span>
+                            <span style="color: #3b82f6;"><i class="fa-solid fa-bullseye"></i> نطاق الدخول: <strong id="meter-entry-val" class="font-mono ltr-text">123.50 – 125.00</strong> ج.م</span>
+                            <span style="color: #10b981;"><i class="fa-solid fa-flag-checkered"></i> الهدف الأول: <strong id="meter-target1-val" class="font-mono ltr-text">128.50</strong> ج.م (<span id="meter-target1-pct" class="ltr-text">+3.1%</span>)</span>
+                            <span style="color: #8b5cf6;"><i class="fa-solid fa-rocket"></i> الهدف الثاني: <strong id="meter-target2-val" class="font-mono ltr-text">134.62</strong> ج.م (<span id="meter-target2-pct" class="ltr-text">+8.0%</span>)</span>
                         </div>
                         <!-- Continuous Visual Gradient Bar with Dynamic Price Pointer -->
                         <div style="position: relative; height: 12px; background: #1e293b; border-radius: 6px; overflow: visible; margin: 20px 10px 10px 10px;">
@@ -2870,7 +2870,7 @@
                             <!-- Current Price Marker Pin -->
                             <div id="meter-price-pin" style="position: absolute; left: 35%; top: -16px; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; z-index: 10; transition: left 0.4s ease;">
                                 <div style="background: #ffffff; color: #0f172a; font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 4px; box-shadow: 0 2px 6px rgba(0,0,0,0.5); white-space: nowrap;">
-                                    <span id="meter-pin-price" class="ltr-text">140.50</span> ج.م
+                                    <span id="meter-pin-price" class="ltr-text">124.65</span> ج.م
                                 </div>
                                 <div style="width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 5px solid #ffffff;"></div>
                             </div>
@@ -3861,7 +3861,7 @@
                         <div class="metric-sub">تجاوزت عتبة الجودة الفنية والأساسية</div>
                     </div>
                     <div class="card">
-                        <div class="metric-title">فرص القناعة العالية (Alpha &gt;= 85)</div>
+                        <div class="metric-title">فرص القناعة العالية (Alpha &gt;= 75)</div>
                         <div class="hero-price-val" style="color: #fbbf24; font-size: 26px; font-weight: 900;" id="alpha-kpi-high-conviction">0</div>
                         <div class="metric-sub">جاهزة لتخصيص الميزانية الفوري</div>
                     </div>
@@ -5105,7 +5105,7 @@
             </div>
             <div class="form-group">
                 <label>متوسط سعر الشراء (ج.م):</label>
-                <input type="number" step="0.01" id="real-pos-price-input" class="form-control" placeholder="140.50">
+                <input type="number" step="0.01" id="real-pos-price-input" class="form-control" placeholder="124.65">
             </div>
             <button class="btn btn-primary btn-block" id="btn-submit-real-pos" onclick="submitRealPosition()"><i class="fa-solid fa-floppy-disk"></i> حفظ السهم في المحفظة</button>
         </div>
@@ -5446,22 +5446,23 @@
                         grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding: 25px; color: var(--text-muted);">لا توجد فرص مطابقة حالياً.</div>`;
                     } else {
                         let html = '';
-                        opps.slice(0, 3).forEach((op, idx) => {
+                        opps.slice(0, 12).forEach((op, idx) => {
                             const ticker = op.ticker;
                             const price = Number(op.current_price || 0).toFixed(2);
-                            const target = Number(op.target_price_10d || 0).toFixed(2);
-                            const stop = Number(op.stop_loss || 0).toFixed(2);
-                            const upside = op.expected_upside_10d_pct ? `+${op.expected_upside_10d_pct}%` : '';
-                            const rr = op.reward_to_downside_ratio ? `1 : ${op.reward_to_downside_ratio}` : '';
+                            const target = Number(op.target_price_10d || (op.current_price * 1.08) || 0).toFixed(2);
+                            const stop = Number(op.stop_loss || (op.current_price * 0.95) || 0).toFixed(2);
+                            const upside = op.expected_upside_10d_pct ? `+${op.expected_upside_10d_pct}%` : '+8.0%';
+                            const rr = op.reward_to_downside_ratio ? `1 : ${op.reward_to_downside_ratio}` : '1 : 1.6';
+                            const badgeAction = op.is_golden_consensus || (op.composite_score || op.alpha_score || 0) >= 75 ? '<span class="badge badge-green">🚀 تجميع كمي قوي</span>' : '<span class="badge badge-green">🟢 شراء وتجميع</span>';
 
-                            html += `<div class="card" style="border-top: 3px solid #3b82f6; cursor: pointer;" onclick="navigateTo('details'); loadStockDetails('${ticker}')">
+                            html += `<div class="card" style="border-top: 3px solid #3b82f6; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;" onmouseenter="this.style.transform='translateY(-2px)'" onmouseleave="this.style.transform='none'" onclick="navigateTo('details'); loadStockDetails('${ticker}')">
                                 <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
                                     <div>
                                         <span class="badge badge-blue" style="margin-bottom: 4px;">#${op.rank || (idx+1)} أفق 10 جلسات</span>
-                                        <div style="font-size: 16px; font-weight: 800; color: #fff;">${op.company_name || ticker}</div>
-                                        <div class="font-mono text-muted" style="font-size: 12px;">${ticker}</div>
+                                        <div style="font-size: 15px; font-weight: 800; color: #fff;">${op.company_name || ticker}</div>
+                                        <div class="font-mono text-muted" style="font-size: 11px;">${ticker}</div>
                                     </div>
-                                    <span class="badge badge-green">🟢 شراء مؤكد</span>
+                                    ${badgeAction}
                                 </div>
 
                                 <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px;">
@@ -5476,7 +5477,7 @@
                                     </div>
                                     <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
                                         <span style="color: var(--text-muted);">🛑 وقف الخسارة:</span>
-                                        <span class="font-mono text-red font-bold">${stop}</span>
+                                        <span class="font-mono text-red font-bold">${stop} (-5%)</span>
                                     </div>
                                     <div style="display: flex; justify-content: space-between;">
                                         <span style="color: var(--text-muted);">⚖️ العائد / المخاطرة:</span>
@@ -5485,7 +5486,7 @@
                                 </div>
 
                                 <div style="font-size: 11px; color: var(--text-muted); line-height: 1.5; border-top: 1px dashed var(--border); padding-top: 8px;">
-                                    ${op.setup_name_ar || op.quality_of_earnings || 'زخم مؤسسي قوي'}
+                                    ${op.setup_name_ar || op.catalyst_ar || 'زخم مؤسسي قوي وتفوق في القوة النسبية'}
                                 </div>
                             </div>`;
                         });
@@ -5493,10 +5494,10 @@
                     }
                 }
 
-                // Render correlation matrix
+                // Render correlation matrix (focused on top 4 leaders to prevent visual crowding)
                 if (matrixContainer && opps.length >= 2) {
-                    const topTickers = opps.slice(0, 3).map(o => o.ticker);
-                    let mHtml = `<table style="font-size: 12px; text-align: center;"><thead><tr><th>السهم</th>`;
+                    const topTickers = opps.slice(0, 4).map(o => o.ticker);
+                    let mHtml = `<table style="font-size: 12px; text-align: center; width: 100%;"><thead><tr><th>السهم</th>`;
                     topTickers.forEach(t => mHtml += `<th>${t}</th>`);
                     mHtml += `</tr></thead><tbody>`;
 
@@ -5944,15 +5945,23 @@
                     const elHigh = document.getElementById('alpha-kpi-high-conviction');
                     const elReg = document.getElementById('alpha-scanner-regime-badge');
 
-                    if (elTotal) elTotal.innerText = data.total_scanned || 244;
-                    if (elCand) elCand.innerText = data.candidates_count || 0;
-                    if (elHigh) elHigh.innerText = data.high_conviction_count || 0;
+                    const totalCount = currentAlphaOpportunities.length;
+                    const candCount = currentAlphaOpportunities.filter(s => (s.alpha_score || 0) >= 70.0).length;
+                    const highCount = currentAlphaOpportunities.filter(s => (s.alpha_score || 0) >= 75.0).length;
+
+                    if (elTotal) elTotal.innerText = totalCount || data.total_scanned || 244;
+                    if (elCand) elCand.innerText = candCount;
+                    if (elHigh) elHigh.innerText = highCount;
                     if (elReg && data.regime) elReg.innerText = data.regime;
 
                     renderAlphaTable(currentAlphaOpportunities);
                 }
             } catch (err) {
                 console.error('Error fetching alpha scanner data:', err);
+                const tbody = document.getElementById('alpha-scanner-tbody');
+                if (tbody) {
+                    tbody.innerHTML = `<tr><td colspan="10" style="text-align: center; padding: 25px; color: #f87171;">حدث خطأ أثناء تحميل بيانات المسح اللحظي</td></tr>`;
+                }
             }
         }
 
@@ -5967,46 +5976,51 @@
 
             let html = '';
             opportunities.forEach(opp => {
+                const s = opp;
                 let badgeClass = 'badge-blue';
-                let actionBadge = '<span class="badge badge-yellow">WATCH</span>';
-                if (opp.action_verdict === 'STRONG_BUY') {
+                let actionBadge = '<span class="badge badge-yellow">🟡 مراقبة واحتفاظ</span>';
+                const verdict = String(s.action_verdict || '').toUpperCase();
+                if (verdict.includes('STRONG') || verdict.includes('قوي')) {
                     badgeClass = 'badge-green';
-                    actionBadge = '<span class="badge badge-green">🚀 STRONG BUY</span>';
-                } else if (opp.action_verdict === 'BUY') {
+                    actionBadge = '<span class="badge badge-green">🚀 تجميع كمي قوي</span>';
+                } else if (verdict.includes('BUY') || verdict.includes('شراء') || verdict.includes('تجميع')) {
                     badgeClass = 'badge-green';
-                    actionBadge = '<span class="badge badge-green">🟢 BUY</span>';
-                } else if (opp.action_verdict === 'AVOID') {
+                    actionBadge = '<span class="badge badge-green">🟢 تجميع كمي</span>';
+                } else if (verdict.includes('AVOID') || verdict.includes('تجنب') || verdict.includes('مخاطر')) {
                     badgeClass = 'badge-red';
-                    actionBadge = '<span class="badge badge-red">🔴 AVOID</span>';
+                    actionBadge = '<span class="badge badge-red">🔴 تجنب ومخاطر</span>';
+                } else {
+                    actionBadge = '<span class="badge badge-yellow">🟡 مراقبة واحتفاظ</span>';
                 }
 
-                const netEdgeColor = (opp.net_edge_pct || 0) >= 1.0 ? '#34d399' : '#f87171';
-                let winProb = opp.win_probability_pct != null ? opp.win_probability_pct : (opp.win_prob != null ? opp.win_prob : 50.0);
+                const netEdgeColor = (s.net_edge_pct || 0) >= 1.0 ? '#34d399' : '#f87171';
+                let winProb = s.win_probability_pct != null ? s.win_probability_pct : (s.win_prob != null ? s.win_prob : 50.0);
                 if (typeof winProb === 'string') winProb = parseFloat(winProb) || 50.0;
                 if (winProb > 100) winProb = winProb / 100;
                 let winProbDisplay = (winProb > 1.0) ? Math.round(winProb) : Math.round(winProb * 100);
 
-                let expRet = opp.expected_return_pct != null ? opp.expected_return_pct : (opp.expected_return != null ? opp.expected_return : 0.0);
-                let netEdge = opp.net_edge_pct != null ? opp.net_edge_pct : 0.0;
+                let expRet = s.expected_return_pct != null ? s.expected_return_pct : (s.expected_return != null ? s.expected_return : 0.0);
+                let netEdge = s.net_edge_pct != null ? s.net_edge_pct : 0.0;
+                const companyName = s.name_ar || s.company_name || s.ticker;
 
                 html += `
                     <tr>
-                        <td style="text-align: center; font-weight: 800; color: #93c5fd;">#${opp.rank}</td>
+                        <td style="text-align: center; font-weight: 800; color: #93c5fd;">#${s.rank || '--'}</td>
                         <td>
-                            <div style="font-weight: 800; color: #ffffff;" class="font-mono">${opp.ticker}</div>
-                            <div style="font-size: 11px; color: var(--text-muted);">${opp.name_ar}</div>
+                            <div style="font-weight: 800; color: #ffffff;" class="font-mono">${s.ticker}</div>
+                            <div style="font-size: 11px; color: var(--text-muted);">${companyName}</div>
                         </td>
-                        <td><span style="font-size: 11.5px; color: #cbd5e1;">${opp.sector}</span></td>
-                        <td style="text-align: center; font-weight: 700;" class="ltr-text font-mono">${(opp.current_price || 0).toFixed(2)}</td>
+                        <td><span style="font-size: 11.5px; color: #cbd5e1;">${s.sector || 'القطاع العام'}</span></td>
+                        <td style="text-align: center; font-weight: 700;" class="ltr-text font-mono">${(s.current_price ? Number(s.current_price).toFixed(2) : '--')}</td>
                         <td style="text-align: center;">
-                            <span class="badge ${badgeClass} font-mono" style="font-size: 12px; font-weight: 800;">${opp.alpha_score} / 100</span>
+                            <span class="badge ${badgeClass} font-mono" style="font-size: 12px; font-weight: 800;">${(s.alpha_score ? Number(s.alpha_score).toFixed(1) : '0.0')} / 100</span>
                         </td>
                         <td style="text-align: center; font-weight: 700; color: #93c5fd;" class="ltr-text font-mono">${winProbDisplay}%</td>
-                        <td style="text-align: center; font-weight: 800; color: #34d399;" class="ltr-text font-mono">${expRet >= 0 ? '+' : ''}${Number(expRet).toFixed(2)}%</td>
-                        <td style="text-align: center; font-weight: 800; color: ${netEdgeColor};" class="ltr-text font-mono">${netEdge >= 0 ? '+' : ''}${Number(netEdge).toFixed(2)}%</td>
+                        <td style="text-align: center; font-weight: 800; color: #34d399;" class="ltr-text font-mono">${Number(expRet) >= 0 ? '+' : ''}${Number(expRet).toFixed(2)}%</td>
+                        <td style="text-align: center; font-weight: 800; color: ${netEdgeColor};" class="ltr-text font-mono">${Number(netEdge) >= 0 ? '+' : ''}${Number(netEdge).toFixed(2)}%</td>
                         <td style="text-align: center;">${actionBadge}</td>
                         <td style="text-align: center;">
-                            <button onclick="loadStockDetails('${opp.ticker}')" style="background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.4); color: #93c5fd; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 700; cursor: pointer;">
+                            <button onclick="loadStockDetails('${s.ticker}')" style="background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.4); color: #93c5fd; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 700; cursor: pointer;">
                                 فحص 🔍
                             </button>
                         </td>
