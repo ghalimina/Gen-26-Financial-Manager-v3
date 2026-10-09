@@ -5118,6 +5118,55 @@
     <!-- 🧠 CLIENT-SIDE JAVASCRIPT LOGIC & API CONSUMPTION -->
     <!-- ================================================================= -->
     <script>
+        // =====================================================================
+        // 🛡️ DEDUPLICATING IN-FLIGHT REQUEST GUARD & DEBOUNCER
+        // =====================================================================
+        const _inFlightRequests = new Map();
+        const _recentResponses = new Map();
+        const _originalFetch = window.fetch;
+
+        window.fetch = async function(resource, init) {
+            const url = (typeof resource === 'string') ? resource : (resource ? resource.url : '');
+            const method = (init && init.method) ? init.method.toUpperCase() : 'GET';
+
+            if (method === 'GET' && url.startsWith('/api/')) {
+                // 1. In-Flight Request Guard: reuse pending Promise to avoid duplicate network hits
+                if (_inFlightRequests.has(url)) {
+                    try {
+                        const inFlightRes = await _inFlightRequests.get(url);
+                        return inFlightRes.clone();
+                    } catch (e) {
+                        // If previous attempt failed, allow fresh attempt
+                    }
+                }
+
+                // 2. Short-term Cache / Throttle: deduplicate identical GET calls within 600ms
+                const now = Date.now();
+                const cached = _recentResponses.get(url);
+                if (cached && (now - cached.time < 600)) {
+                    return cached.response.clone();
+                }
+
+                const promise = _originalFetch.apply(this, arguments)
+                    .then(res => {
+                        _inFlightRequests.delete(url);
+                        try {
+                            _recentResponses.set(url, { response: res.clone(), time: Date.now() });
+                        } catch (e) {}
+                        return res;
+                    })
+                    .catch(err => {
+                        _inFlightRequests.delete(url);
+                        throw err;
+                    });
+
+                _inFlightRequests.set(url, promise);
+                return promise;
+            }
+
+            return _originalFetch.apply(this, arguments);
+        };
+
         const VALID_TABS = [
             'overview', 'alpha_scanner', 'short_term_opportunities', 'ranking', 'details', 'real_portfolio',
             'mutual_funds', 'paper_portfolio', 'watchlist', 'insider_radar', 'arbitrage_monitor', 'signals',
@@ -5154,6 +5203,9 @@
         let currentStockTicker = "COMI.CA";
         let cachedRankings = [];
         let currentRankingView = "cards";
+        let currentActiveTab = null;
+        let _switchTabDebounceTimer = null;
+        let _suppressHashChange = false;
 
         // =====================================================================
         // --- Fortified Navigation Engine (switchTab / navigateTo) ---
@@ -5165,6 +5217,15 @@
                 if (!VALID_TABS.includes(tabId)) tabId = 'overview';
 
                 const targetTabId = (tabId === 'research-lab' || tabId === 'research_lab') ? 'research-lab' : tabId;
+
+                // Tab Deduplication Guard: if already active and displayed, do not fire loader storm
+                if (currentActiveTab === targetTabId) {
+                    const activeP = document.getElementById('tab-' + targetTabId);
+                    if (activeP && activeP.classList.contains('active') && activeP.style.display === 'block') {
+                        return;
+                    }
+                }
+                currentActiveTab = targetTabId;
 
                 // 1. Immediately hide all tab panels & tab panes
                 document.querySelectorAll('.tab-panel, .tab-pane').forEach(p => {
@@ -5205,10 +5266,12 @@
                 }
 
                 // 6. Safely update hash without triggering loop
-                if (window.location.hash !== '#' + tabId) {
+                if (window.location.hash !== '#' + targetTabId) {
+                    _suppressHashChange = true;
                     try {
-                        window.location.hash = tabId;
+                        window.location.hash = targetTabId;
                     } catch (e) {}
+                    setTimeout(() => { _suppressHashChange = false; }, 80);
                 }
 
                 // 7. Auto close mobile sidebar
@@ -5217,10 +5280,13 @@
                     sb.classList.remove('mobile-open');
                 }
 
-                // 8. Decouple tab-specific asynchronous data fetching with a microtask
-                setTimeout(() => {
-                    executeTabLoaders(tabId);
-                }, 10);
+                // 8. Debounced tab loaders execution: only run once after 35ms of calm
+                if (_switchTabDebounceTimer) {
+                    clearTimeout(_switchTabDebounceTimer);
+                }
+                _switchTabDebounceTimer = setTimeout(() => {
+                    executeTabLoaders(targetTabId);
+                }, 35);
             } catch (err) {
                 console.error("switchTab error:", err);
             }
@@ -6663,72 +6729,6 @@
                     `;
                 }).join('');
             }
-        }
-
-        function renderGoldenPicks(stocks) {
-            if (!stocks || stocks.length === 0) return;
-            const top3 = stocks.slice(0, 3);
-            const medals = ["🥇 الخيار الذهبي الأول", "🥈 الخيار الذهبي الثاني", "🥉 الخيار الذهبي الثالث"];
-            const badges = ["🟢 شراء استثماري قوي", "🟢 شراء وتجميع", "🟢 شراء وتأكيد الألفا"];
-
-            const html = top3.map((s, idx) => {
-                const name = s.name_ar || s.company_name || s.name || s.ticker;
-                const price = parseFloat(s.price || s.current_price || 100.0);
-                const score = typeof s.overall_score === 'number' ? s.overall_score : (typeof s.composite_score === 'number' ? s.composite_score : (typeof s.score === 'number' ? s.score : 85.0 - idx * 2.5));
-                const target = s.target_price ? parseFloat(s.target_price) : (price * 1.085);
-                const stop = s.stop_loss ? parseFloat(s.stop_loss) : (price * 0.93);
-                const upside = s.expected_upside_pct ? parseFloat(s.expected_upside_pct).toFixed(1) : "8.5";
-                const sector = s.sector || s.sector_ar || "قطاع قيادي";
-
-                return `
-                    <div style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(245, 158, 11, 0.35); border-radius: var(--radius-md); padding: 16px; display: flex; flex-direction: column; justify-content: space-between; gap: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); transition: transform 0.2s ease, border-color 0.2s ease;">
-                        <div>
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                                <span class="badge badge-yellow" style="font-weight: 800; font-size: 11px;">${medals[idx] || '🏆 فرصة ذهبية'}</span>
-                                <span class="badge badge-green" style="font-size: 10px;">${badges[idx] || '🟢 شراء'}</span>
-                            </div>
-                            <div style="display: flex; justify-content: space-between; align-items: baseline;">
-                                <div>
-                                    <div style="font-size: 15px; font-weight: 800; color: #fff;">${name}</div>
-                                    <div style="font-size: 11px; color: var(--text-muted);"><span class="ltr-text text-blue font-mono font-bold">${s.ticker}</span> • ${sector}</div>
-                                </div>
-                                <div style="text-align: left;">
-                                    <div style="font-size: 18px; font-weight: 900; color: #fff;" class="font-mono ltr-text">${price.toFixed(2)} <span style="font-size: 11px; color: var(--text-muted);">ج.م</span></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; background: rgba(0,0,0,0.35); border-radius: 6px; padding: 8px 10px; font-size: 11.5px;">
-                            <div>
-                                <div style="color: var(--text-muted); font-size: 10px;">🎯 المستهدف (T1):</div>
-                                <div class="text-green font-bold font-mono ltr-text">${target.toFixed(2)} (+${upside}%)</div>
-                            </div>
-                            <div>
-                                <div style="color: var(--text-muted); font-size: 10px;">🛑 وقف الخسارة:</div>
-                                <div class="text-red font-bold font-mono ltr-text">${stop.toFixed(2)} (-7%)</div>
-                            </div>
-                            <div style="grid-column: 1 / -1; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 6px; display: flex; justify-content: space-between; align-items: center;">
-                                <span style="color: var(--text-muted); font-size: 10px;">تقييم الخبراء والذكاء:</span>
-                                <span class="text-blue font-bold font-mono">${score.toFixed(1)} / 100</span>
-                            </div>
-                        </div>
-
-                        <div style="display: flex; gap: 6px;">
-                            <button class="btn btn-primary btn-sm btn-block" onclick="loadStockDetails('${s.ticker}')">
-                                <i class="fa-solid fa-magnifying-glass-chart"></i> فحص السهم
-                            </button>
-                            <button class="btn btn-secondary btn-sm" onclick="openPortfolioSizer()" title="توزيع الميزانية والشراء">
-                                <i class="fa-solid fa-calculator"></i>
-                            </button>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-
-            const elOverview = document.getElementById('golden-picks-overview');
-            const elRanking = document.getElementById('golden-picks-ranking');
-            if (elOverview) elOverview.innerHTML = html;
-            if (elRanking) elRanking.innerHTML = html;
         }
 
         function renderDefaultMockRankings() {
@@ -9011,27 +9011,20 @@
                         cashInput.value = s.portfolio_cash_egp;
                         window.userPortfolioCash = parseFloat(s.portfolio_cash_egp);
                     }
-                    if (s.max_single_stock_pct && document.getElementById('settings-max-single-stock')) {
-                        document.getElementById('settings-max-single-stock').value = s.max_single_stock_pct;
-                    }
-                    if (s.max_total_allocation_pct && document.getElementById('settings-max-total-alloc')) {
-                        document.getElementById('settings-max-total-alloc').value = s.max_total_allocation_pct;
-                    }
-                    if (s.default_stop_loss_pct && document.getElementById('settings-hard-stop-loss')) {
-                        document.getElementById('settings-hard-stop-loss').value = s.default_stop_loss_pct;
-                    }
-                    if (s.ml_mode && document.getElementById('settings-ml-mode')) {
-                        document.getElementById('settings-ml-mode').value = s.ml_mode;
-                    }
-                    if (s.telegram_bot_token && document.getElementById('settings-tg-token')) {
-                        document.getElementById('settings-tg-token').value = s.telegram_bot_token;
-                    }
-                    if (s.telegram_chat_id && document.getElementById('settings-tg-chatid')) {
-                        document.getElementById('settings-tg-chatid').value = s.telegram_chat_id;
-                    }
-                    if (document.getElementById('settings-tg-toggle')) {
-                        document.getElementById('settings-tg-toggle').checked = s.telegram_enabled !== false;
-                    }
+                    const elMaxSingle = document.getElementById('settings-max-single-stock');
+                    if (elMaxSingle && s.max_single_stock_pct != null) elMaxSingle.value = s.max_single_stock_pct;
+                    const elMaxTotal = document.getElementById('settings-max-total-alloc');
+                    if (elMaxTotal && s.max_total_allocation_pct != null) elMaxTotal.value = s.max_total_allocation_pct;
+                    const elHardStop = document.getElementById('settings-hard-stop-loss');
+                    if (elHardStop && s.default_stop_loss_pct != null) elHardStop.value = s.default_stop_loss_pct;
+                    const elMlMode = document.getElementById('settings-ml-mode');
+                    if (elMlMode && s.ml_mode) elMlMode.value = s.ml_mode;
+                    const elTgToken = document.getElementById('settings-tg-token');
+                    if (elTgToken && s.telegram_bot_token) elTgToken.value = s.telegram_bot_token;
+                    const elTgChat = document.getElementById('settings-tg-chatid');
+                    if (elTgChat && s.telegram_chat_id) elTgChat.value = s.telegram_chat_id;
+                    const elTgToggle = document.getElementById('settings-tg-toggle');
+                    if (elTgToggle) elTgToggle.checked = s.telegram_enabled !== false;
                 }
 
                 // 2. Fetch real portfolio equity numbers to update telemetry badges
@@ -9224,63 +9217,79 @@
         }
 
         // =====================================================================
-        // ⚡ REAL-TIME DIRECT LIVE PRICE STREAMER (SUB-SECOND PULSES)
+        // ⚡ CENTRAL MASTER HEARTBEAT (30s CALM PULSE) & LIVE PRICE STREAMER
         // =====================================================================
-        let _realtimeStreamInterval = null;
-        function startRealtimePriceStream() {
-            if (_realtimeStreamInterval) clearInterval(_realtimeStreamInterval);
+        let _masterHeartbeatInterval = null;
 
-            async function updateStream() {
-                try {
-                    const res = await fetch('/api/realtime_stream');
-                    if (!res.ok) return;
-                    const data = await res.json();
-                    const quotes = data.quotes || {};
+        async function updateStreamPrices() {
+            try {
+                const res = await fetch('/api/realtime_stream');
+                if (!res || !res.ok) return;
+                const data = await res.json();
+                const quotes = data.quotes || {};
 
-                    // 1. Update Market Breadth Badges if available
-                    if (data.breadth) {
-                        const advEl = document.getElementById('heatmap-adv-badge');
-                        const decEl = document.getElementById('heatmap-dec-badge');
-                        if (advEl) advEl.textContent = `🟢 الصاعد: ${data.breadth.advancers || 0}`;
-                        if (decEl) decEl.textContent = `🔴 الهابط: ${data.breadth.decliners || 0}`;
-                    }
+                // 1. Update Market Breadth Badges if available
+                if (data.breadth) {
+                    const advEl = document.getElementById('heatmap-adv-badge');
+                    const decEl = document.getElementById('heatmap-dec-badge');
+                    if (advEl) advEl.textContent = `🟢 الصاعد: ${data.breadth.advancers || 0}`;
+                    if (decEl) decEl.textContent = `🔴 الهابط: ${data.breadth.decliners || 0}`;
+                }
 
-                    // 2. Update Live Prices across cards, table and ticker bar
-                    Object.keys(quotes).forEach(ticker => {
-                        const q = quotes[ticker];
-                        if (!q || q.price == null) return;
-                        const newPrice = parseFloat(q.price);
+                // 2. Update Live Prices across cards, table and ticker bar
+                Object.keys(quotes).forEach(ticker => {
+                    const q = quotes[ticker];
+                    if (!q || q.price == null) return;
+                    const newPrice = parseFloat(q.price);
 
-                        document.querySelectorAll(`[data-ticker-price="${ticker}"]`).forEach(el => {
-                            const oldPrice = parseFloat(el.textContent);
-                            if (!isNaN(oldPrice) && Math.abs(oldPrice - newPrice) > 0.001) {
-                                el.textContent = newPrice.toFixed(2);
-                                el.classList.remove('price-pulse-up', 'price-pulse-down');
-                                void el.offsetWidth;
-                                el.classList.add(newPrice >= oldPrice ? 'price-pulse-up' : 'price-pulse-down');
-                            }
-                        });
-
-                        document.querySelectorAll(`[data-ticker-change="${ticker}"]`).forEach(el => {
-                            const chg = parseFloat(q.change_pct || 0);
-                            el.textContent = (chg >= 0 ? '+' : '') + chg.toFixed(2) + '%';
-                            el.className = 'badge ' + (chg > 0 ? 'badge-green' : (chg < 0 ? 'badge-red' : 'badge-neutral'));
-                        });
+                    document.querySelectorAll(`[data-ticker-price="${ticker}"]`).forEach(el => {
+                        const oldPrice = parseFloat(el.textContent);
+                        if (!isNaN(oldPrice) && Math.abs(oldPrice - newPrice) > 0.001) {
+                            el.textContent = newPrice.toFixed(2);
+                            el.classList.remove('price-pulse-up', 'price-pulse-down');
+                            void el.offsetWidth;
+                            el.classList.add(newPrice >= oldPrice ? 'price-pulse-up' : 'price-pulse-down');
+                        }
                     });
 
-                    // Update live status indicator
-                    const liveBadge = document.getElementById('live-stream-status-badge');
-                    if (liveBadge) {
-                        const tStr = data.timestamp ? data.timestamp.split(' ')[1] : '';
-                        liveBadge.innerHTML = `<span class="live-dot-pulse"></span> بث حي مباشر ${tStr}`;
-                    }
-                } catch (e) {
-                    console.debug('Live stream poll notice:', e);
+                    document.querySelectorAll(`[data-ticker-change="${ticker}"]`).forEach(el => {
+                        const chg = parseFloat(q.change_pct || 0);
+                        el.textContent = (chg >= 0 ? '+' : '') + chg.toFixed(2) + '%';
+                        el.className = 'badge ' + (chg > 0 ? 'badge-green' : (chg < 0 ? 'badge-red' : 'badge-neutral'));
+                    });
+                });
+
+                // Update live status indicator
+                const liveBadge = document.getElementById('live-stream-status-badge');
+                if (liveBadge) {
+                    const tStr = data.timestamp ? data.timestamp.split(' ')[1] : '';
+                    liveBadge.innerHTML = `<span class="live-dot-pulse"></span> بث حي مباشر ${tStr}`;
                 }
+            } catch (e) {
+                console.debug('Live stream poll notice:', e);
+            }
+        }
+
+        function startMasterHeartbeat() {
+            if (_masterHeartbeatInterval) {
+                clearInterval(_masterHeartbeatInterval);
+                _masterHeartbeatInterval = null;
             }
 
-            updateStream();
-            _realtimeStreamInterval = setInterval(updateStream, 3500); // Poll every 3.5s
+            // Single unified central master heartbeat running every 30 seconds
+            _masterHeartbeatInterval = setInterval(async () => {
+                await updateStreamPrices();
+                if (currentActiveTab === 'overview') {
+                    try { fetchLiveNotifications(); } catch(e) {}
+                } else if (currentActiveTab === 'real_portfolio') {
+                    try { loadRealPortfolioTable(); } catch(e) {}
+                }
+            }, 30000);
+        }
+
+        function startRealtimePriceStream() {
+            updateStreamPrices();
+            startMasterHeartbeat();
         }
 
         // =====================================================================
@@ -9718,18 +9727,21 @@
         }
 
         window.addEventListener('hashchange', () => {
+            if (_suppressHashChange) return;
             const hash = window.location.hash.replace('#', '') || 'overview';
             switchTab(hash);
         });
 
         window.addEventListener('DOMContentLoaded', () => {
-            // Bind all sidebar and navigation items with clean addEventListener('click')
+            // Bind all sidebar and navigation items with clean, deduplicated click listeners
             document.querySelectorAll('.nav-item, [data-tab]').forEach(btn => {
+                btn.removeAttribute('onclick');
                 btn.addEventListener('click', function(e) {
                     const tab = this.getAttribute('data-tab') || 
                                 (this.id ? this.id.replace('nav-', '') : null);
                     if (tab) {
                         e.preventDefault();
+                        e.stopPropagation();
                         switchTab(tab);
                     }
                 });
