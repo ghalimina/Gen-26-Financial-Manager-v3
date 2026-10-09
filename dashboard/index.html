@@ -5980,7 +5980,14 @@
                     actionBadge = '<span class="badge badge-red">🔴 AVOID</span>';
                 }
 
-                const netEdgeColor = opp.net_edge_pct >= 1.0 ? '#34d399' : '#f87171';
+                const netEdgeColor = (opp.net_edge_pct || 0) >= 1.0 ? '#34d399' : '#f87171';
+                let winProb = opp.win_probability_pct != null ? opp.win_probability_pct : (opp.win_prob != null ? opp.win_prob : 50.0);
+                if (typeof winProb === 'string') winProb = parseFloat(winProb) || 50.0;
+                if (winProb > 100) winProb = winProb / 100;
+                let winProbDisplay = (winProb > 1.0) ? Math.round(winProb) : Math.round(winProb * 100);
+
+                let expRet = opp.expected_return_pct != null ? opp.expected_return_pct : (opp.expected_return != null ? opp.expected_return : 0.0);
+                let netEdge = opp.net_edge_pct != null ? opp.net_edge_pct : 0.0;
 
                 html += `
                     <tr>
@@ -5994,9 +6001,9 @@
                         <td style="text-align: center;">
                             <span class="badge ${badgeClass} font-mono" style="font-size: 12px; font-weight: 800;">${opp.alpha_score} / 100</span>
                         </td>
-                        <td style="text-align: center; font-weight: 700; color: #93c5fd;" class="ltr-text font-mono">${opp.win_probability_pct}%</td>
-                        <td style="text-align: center; font-weight: 800; color: #34d399;" class="ltr-text font-mono">+${opp.expected_return_pct}%</td>
-                        <td style="text-align: center; font-weight: 800; color: ${netEdgeColor};" class="ltr-text font-mono">+${opp.net_edge_pct}%</td>
+                        <td style="text-align: center; font-weight: 700; color: #93c5fd;" class="ltr-text font-mono">${winProbDisplay}%</td>
+                        <td style="text-align: center; font-weight: 800; color: #34d399;" class="ltr-text font-mono">${expRet >= 0 ? '+' : ''}${Number(expRet).toFixed(2)}%</td>
+                        <td style="text-align: center; font-weight: 800; color: ${netEdgeColor};" class="ltr-text font-mono">${netEdge >= 0 ? '+' : ''}${Number(netEdge).toFixed(2)}%</td>
                         <td style="text-align: center;">${actionBadge}</td>
                         <td style="text-align: center;">
                             <button onclick="loadStockDetails('${opp.ticker}')" style="background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.4); color: #93c5fd; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 700; cursor: pointer;">
@@ -6499,14 +6506,14 @@
                 const targetVal = s.target_price ? parseFloat(s.target_price) : (priceVal * 1.085);
                 const stopVal = s.stop_loss ? parseFloat(s.stop_loss) : (priceVal * 0.935);
                 const upsidePct = (((targetVal - priceVal) / priceVal) * 100).toFixed(1);
-                const rawConf = s.confidence != null ? s.confidence : (s.ai_confidence != null ? s.ai_confidence : null);
-                let confidencePct;
-                if (rawConf != null) {
-                    const num = parseFloat(rawConf);
-                    confidencePct = (num > 1.0) ? num.toFixed(0) : (num * 100).toFixed(0);
-                } else {
-                    confidencePct = (94 - idx * 3);
-                }
+                const downsidePct = priceVal > 0 ? (((priceVal - stopVal) / priceVal) * 100).toFixed(1) : "6.5";
+
+                // الإصلاح الصارم:
+                let conf = s.confidence || s.ai_confidence || s.probability_up_pct || (94 - idx * 3);
+                if (typeof conf === 'string') conf = parseFloat(conf) || 75;
+                if (conf > 100) conf = conf / 100; // تصحيح أي مضاعفة سابقة
+                let confDisplay = (conf > 1.0) ? Math.round(conf) : Math.round(conf * 100);
+
                 const name = s.name_ar || s.company_name || s.name || s.ticker;
                 const councilStatus = s.council_status || s.action || "🟢 إجماع مجلس الخبراء: شراء قوي";
 
@@ -6542,7 +6549,7 @@
 
                             <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(59, 130, 246, 0.08); padding: 6px 10px; border-radius: 6px; margin-bottom: 14px; font-size: 11px;">
                                 <span style="color: #93c5fd;">🤖 ثقة نموذج الذكاء الاصطناعي:</span>
-                                <span class="badge badge-blue font-bold">${confidencePct}% (High Alpha)</span>
+                                <span class="badge badge-blue font-bold">${confDisplay}% (High Alpha)</span>
                             </div>
                             <div style="font-size: 11px; color: #a7f3d0; margin-bottom: 14px; display: flex; align-items: center; gap: 4px;">
                                 <i class="fa-solid fa-check-double"></i> <span>${councilStatus}</span>
@@ -6922,7 +6929,10 @@
                 const hShort = horizons['10D'] || horizons['5D'] || {};
                 const sTarget = parseFloat(hShort.target_1 || (livePrice * 1.035));
                 const sRet = parseFloat(hShort.expected_return_pct || 2.85);
-                const sProb = Math.round((hShort.prob_up || 0.82) * 100);
+                let sProbRaw = hShort.prob_up != null ? hShort.prob_up : (hShort.probability_up_pct != null ? hShort.probability_up_pct : 0.82);
+                if (typeof sProbRaw === 'string') sProbRaw = parseFloat(sProbRaw) || 0.82;
+                if (sProbRaw > 100) sProbRaw = sProbRaw / 100;
+                const sProb = (sProbRaw > 1.0) ? Math.round(sProbRaw) : Math.round(sProbRaw * 100);
 
                 const shortTargetEl = document.getElementById('horizon-short-target');
                 if (shortTargetEl) shortTargetEl.innerHTML = `<span class="ltr-text">${sTarget.toFixed(2)}</span> ج.م`;
@@ -6940,7 +6950,10 @@
                 const hMed = horizons['20D'] || {};
                 const mTarget = parseFloat(hMed.target_1 || (livePrice * 1.076));
                 const mRet = parseFloat(hMed.expected_return_pct || 7.6);
-                const mProb = Math.round((hMed.prob_up || 0.85) * 100);
+                let mProbRaw = hMed.prob_up != null ? hMed.prob_up : (hMed.probability_up_pct != null ? hMed.probability_up_pct : 0.85);
+                if (typeof mProbRaw === 'string') mProbRaw = parseFloat(mProbRaw) || 0.85;
+                if (mProbRaw > 100) mProbRaw = mProbRaw / 100;
+                const mProb = (mProbRaw > 1.0) ? Math.round(mProbRaw) : Math.round(mProbRaw * 100);
 
                 const medTargetEl = document.getElementById('horizon-med-target');
                 if (medTargetEl) medTargetEl.innerHTML = `<span class="ltr-text">${mTarget.toFixed(2)}</span> ج.م`;
@@ -6958,7 +6971,10 @@
                 const hLong = horizons['60D'] || {};
                 const lTarget = parseFloat(hLong.target_1 || (livePrice * 1.153));
                 const lRet = parseFloat(hLong.expected_return_pct || 15.3);
-                const lProb = Math.round((hLong.prob_up || 0.88) * 100);
+                let lProbRaw = hLong.prob_up != null ? hLong.prob_up : (hLong.probability_up_pct != null ? hLong.probability_up_pct : 0.88);
+                if (typeof lProbRaw === 'string') lProbRaw = parseFloat(lProbRaw) || 0.88;
+                if (lProbRaw > 100) lProbRaw = lProbRaw / 100;
+                const lProb = (lProbRaw > 1.0) ? Math.round(lProbRaw) : Math.round(lProbRaw * 100);
 
                 const longTargetEl = document.getElementById('horizon-long-target');
                 if (longTargetEl) longTargetEl.innerHTML = `<span class="ltr-text">${lTarget.toFixed(2)}</span> ج.م`;

@@ -4002,7 +4002,7 @@ def api_portfolio_fx_hedge():
 
 @app.route("/api/alpha_scanner/scan", methods=["GET"])
 def api_alpha_scanner_scan():
-    """Returns the full universe scan results and ranked opportunity matrix."""
+    """Returns dynamic stock-by-stock EGX universe scan results with unique alpha scores and non-cloned metrics."""
     try:
         from core.alpha_scanner import OpportunityRanker
         regime = request.args.get("regime", "BULL_EXPANSION")
