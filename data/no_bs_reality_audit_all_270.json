@@ -1,7 +1,7 @@
 {
   "report_title": "تقرير التدقيق الواقعي المجرد لمنظومة GEN-26 (بدون تجميل)",
-  "audit_timestamp": "2026-10-10 05:30:43",
-  "audit_duration_seconds": 14.31,
+  "audit_timestamp": "2026-10-10 06:00:54",
+  "audit_duration_seconds": 15.08,
   "executive_summary": {
     "total_universe_stocks": 270,
     "safe_tradable_universe_stocks": 212,

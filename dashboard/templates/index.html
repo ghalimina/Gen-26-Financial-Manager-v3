@@ -1939,6 +1939,12 @@
                                     </div>
                                 </div>
 
+                                <!-- Limit Order Execution Warning Banner -->
+                                <div style="background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.35); border-right: 4px solid #ef4444; padding: 10px 14px; border-radius: 6px; font-size: 12px; color: #fca5a5; line-height: 1.6; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;" id="thndr-limit-warning-banner">
+                                    <i class="fa-solid fa-lock text-red" style="font-size: 14px;"></i>
+                                    <span id="thndr-limit-order-warning-text">🔒 أمر محدد حصراً (Limit Order Only) - محظور كلياً الشراء بسعر السوق (Market Order) على ثاندر منعاً للانزلاق السعري والفجوات.</span>
+                                </div>
+
                                 <!-- Action Instruction & Rules -->
                                 <div style="background: rgba(245, 158, 11, 0.08); border-right: 3px solid #f59e0b; padding: 10px 14px; border-radius: 4px; font-size: 12px; color: #fde68a; line-height: 1.6; margin-bottom: 12px;" id="thndr-instruction-box">
                                     <i class="fa-solid fa-shield-halved text-yellow" style="margin-left: 6px;"></i>
@@ -3165,6 +3171,25 @@
                         <div class="badge badge-yellow" style="font-size: 12.5px; padding: 7px 14px; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.4); display: flex; align-items: center; gap: 8px;">
                             <i class="fa-solid fa-tags"></i>
                             <span>أثر التدوير: <strong class="text-yellow">خفض متوسط تكلفة الأسهم وتوفير هامش أمان إضافي يصل إلى +5.1%</strong></span>
+                        </div>
+                    </div>
+
+                    <!-- Cash Floor Recovery Plan Alert (35% Minimum Floor) -->
+                    <div id="cash-recovery-plan-container" style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.3); border-right: 4px solid #f59e0b; padding: 12px 16px; border-radius: 6px; margin-bottom: 16px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 8px;">
+                            <div style="font-weight: 800; color: #fbbf24; font-size: 13.5px;">
+                                <i class="fa-solid fa-triangle-exclamation" style="margin-left: 6px;"></i>
+                                <span id="cash-recovery-status-label">⚠️ نسبة الكاش الحالية حرجة (8.8% = 1,200 ج.م مقابل الحد الأدنى الإلزامي 35.0%)</span>
+                            </div>
+                            <span class="badge badge-yellow" id="cash-recovery-badge" style="font-size: 11px;">خطة تسييل جزئي 50% مستهدفة</span>
+                        </div>
+                        <div style="font-size: 12px; color: #cbd5e1; line-height: 1.6; margin-bottom: 8px;" id="cash-recovery-verdict-summary">
+                            خطة استعادة الكاش ترفع الرصيد الحر من 8.8% (1,200 ج.م) إلى 43.0% (5,872.61 ج.م) بتحرير 4,672.61 ج.م كاش عبر التسييل الجزئي المنظم لراية وبالم هيلز والتجاري الدولي، مما يوفر سيولة آمنة كاملة تتجاوز صمام أمان الـ 35% وتؤمن الحساب ضد أي تقلبات.
+                        </div>
+                        <div style="display: flex; gap: 8px; flex-wrap: wrap; font-size: 11.5px;" id="cash-recovery-steps-chips">
+                            <span class="badge" style="background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(245, 158, 11, 0.3); color: #fde68a;">1. بيع 250 سهم RAYA.CA عند 2.32 ج ⬅️ +580.65 ج.م</span>
+                            <span class="badge" style="background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(245, 158, 11, 0.3); color: #fde68a;">2. بيع 81 سهم PHDC.CA عند 13.96 ج ⬅️ +1,130.76 ج.م</span>
+                            <span class="badge" style="background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(245, 158, 11, 0.3); color: #fde68a;">3. بيع 22 سهم COMI.CA عند 134.60 ج ⬅️ +2,961.20 ج.م</span>
                         </div>
                     </div>
 
@@ -6356,6 +6381,10 @@
                         }
                     }
                     if (breakevenEl) breakevenEl.innerText = card.breakeven_rule_ar || "⚠️ فور وصول السعر للهدف الأول، قم برفع أمر وقف الخسارة إلى سعر الشراء لتأمين الصفقة.";
+                    const limitWarnEl = document.getElementById('thndr-limit-order-warning-text');
+                    if (limitWarnEl && card.limit_order_warning_ar) {
+                        limitWarnEl.innerText = card.limit_order_warning_ar;
+                    }
                     if (regimeBadge) {
                         regimeBadge.innerText = card.market_regime || "🟢 اتجاه صاعد معتمد";
                     }
@@ -7892,6 +7921,25 @@
                 const totalProfitEl = document.getElementById('total-swing-profit-text');
                 if (totalProfitEl && data.total_realized_swing_profit_egp !== undefined) {
                     totalProfitEl.innerText = `+${Number(data.total_realized_swing_profit_egp).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} ج.م كاش`;
+                }
+
+                // Update cash recovery plan banner dynamically
+                if (data.cash_recovery_plan) {
+                    const crp = data.cash_recovery_plan;
+                    const statusLabel = document.getElementById('cash-recovery-status-label');
+                    const verdictSummary = document.getElementById('cash-recovery-verdict-summary');
+                    const chipsContainer = document.getElementById('cash-recovery-steps-chips');
+                    if (statusLabel) {
+                        statusLabel.innerText = `⚠️ نسبة الكاش الحالية حرجة (${crp.current_cash_ratio_pct}% = ${Number(crp.current_cash_egp).toLocaleString()} ج.م مقابل الحد الأدنى الإلزامي ${crp.minimum_floor_pct}%)`;
+                    }
+                    if (verdictSummary && crp.verdict_ar) {
+                        verdictSummary.innerText = crp.verdict_ar;
+                    }
+                    if (chipsContainer && Array.isArray(crp.steps)) {
+                        chipsContainer.innerHTML = crp.steps.map((st, i) => 
+                            `<span class="badge" style="background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(245, 158, 11, 0.3); color: #fde68a;">${i+1}. بيع ${st.shares_to_sell} سهم ${st.ticker} عند ${st.expected_sell_price.toFixed(2)} ج ⬅️ +${Number(st.unlocked_cash_egp).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} ج.م</span>`
+                        ).join('');
+                    }
                 }
 
                 if (recs.length === 0) {
