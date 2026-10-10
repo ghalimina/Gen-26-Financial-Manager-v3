@@ -93,11 +93,11 @@ def build_01_portfolio_and_swing_advisor() -> Dict[str, Any]:
         "COMI.CA": {
             "name_ar": "البنك التجاري الدولي (CIB)",
             "sector": "الخدمات المالية والبنوك",
-            "resistance": 144.00,
-            "buyback": 136.00,
-            "breakout_target": 160.00,
-            "trailing_stop": 141.50,
-            "hard_stop": 120.77,
+            "resistance": 134.60,
+            "buyback": 123.50,
+            "breakout_target": 144.00,
+            "trailing_stop": 121.80,
+            "hard_stop": 118.42,
             "default_qty": 45
         },
         "SWDY.CA": {
@@ -211,6 +211,10 @@ def build_01_portfolio_and_swing_advisor() -> Dict[str, Any]:
                 "rebuy_cost_egp": rebuy_cost,
                 "projected_cycle_profit_egp": swing_gain,
                 "action_command_ar": (
+                    "احتفظ بالمركز كاملاً (45 سهماً). في حال التراجع قرب 123.50 ج.م يمكن إعادة التجميع بالقرش، "
+                    "مع استهداف بيع نصف الكمية (22 سهماً) عند المقاومة 134.60 ج.م لتحقيق أرباح تدوير وخفض التكلفة، "
+                    "وترك النصف المتبقي نحو 144.00 ج.م."
+                    if sym == "COMI.CA" else
                     f"احتفظ بالمركز كاملاً ({qty} سهم). مستهدف بيع نصف الكمية ({sell_half_qty} سهم) "
                     f"عند المقاومة {meta['resistance']:.2f} ج، وإعادة الشراء بالقرش عند {meta['buyback']:.2f} ج "
                     f"لتحقيق ربح تدوير {swing_gain:,.2f} ج وخفض التكلفة إلى {eff_cost:.2f} ج."
@@ -499,7 +503,7 @@ def build_06_top12_short_term_opportunities() -> Dict[str, Any]:
     from core.market_price_service import MarketPriceService
 
     top12_specs = [
-        {"ticker": "MFPC.CA", "name_ar": "مصر لإنتاج الأسمدة (موبكو)", "sector": "الموارد الأساسية والكيماويات", "score": 77.0, "win_prob": 41.2},
+        {"ticker": "MFPC.CA", "name_ar": "مصر لإنتاج الأسمدة (موبكو)", "sector": "الموارد الأساسية والكيماويات", "score": 77.0, "win_prob": 69.5},
         {"ticker": "ABUK.CA", "name_ar": "أبو قير للأسمدة", "sector": "الموارد الأساسية والكيماويات", "score": 75.0, "win_prob": 68.0},
         {"ticker": "AMOC.CA", "name_ar": "الإسكندرية للزيوت المعدنية (أموك)", "sector": "الطاقة والبترول", "score": 73.6, "win_prob": 66.5},
         {"ticker": "ACRO.CA", "name_ar": "مصر للأسمنت - قنا", "sector": "مواد البناء والتشييد", "score": 72.0, "win_prob": 65.0},

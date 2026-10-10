@@ -1,7 +1,7 @@
 {
   "status": "SUCCESS",
   "audit_version": "3.0.0",
-  "timestamp": "2026-10-10 04:10:51",
+  "timestamp": "2026-10-10 04:19:46",
   "total_stocks_audited": 270,
   "executive_summary": {
     "price_checks_passed": "270/270",
@@ -87,11 +87,11 @@
           "daily_pivot": 125.07,
           "session_expected_low": 123.91,
           "session_expected_high": 126.23,
-          "dip_rebuy_level": 136.0,
-          "take_profit_50_level": 144.0,
-          "breakout_expansion_target": 160.0,
-          "trailing_stop": 141.5,
-          "hard_stop_loss": 120.77
+          "dip_rebuy_level": 123.5,
+          "take_profit_50_level": 134.6,
+          "breakout_expansion_target": 144.0,
+          "trailing_stop": 121.8,
+          "hard_stop_loss": 118.42
         }
       },
       {
@@ -427,7 +427,7 @@
         "tier": "STRONG_ALPHA",
         "decision_verdict_ar": "تجميع قوي 🟢",
         "decision_code": "STRONG_BUY",
-        "win_probability_pct": 67.5,
+        "win_probability_pct": 69.5,
         "expected_return_20d_pct": 5.05,
         "net_edge_pct": 3.68,
         "round_trip_friction_pct": 0.94,

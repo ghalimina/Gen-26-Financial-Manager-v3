@@ -2,7 +2,7 @@
   "status": "SUCCESS",
   "portfolio_id": "GEN26_REAL_USER_PORTFOLIO",
   "currency": "EGP",
-  "as_of": "2026-10-10 04:02:46",
+  "as_of": "2026-10-10 04:22:16",
   "summary": {
     "total_portfolio_equity_egp": 13658.56,
     "free_cash_egp": 1200.0,
@@ -34,18 +34,18 @@
         "expected_session_low": 123.91,
         "expected_session_high": 126.23,
         "session_direction_ar": "صاعد 🟢",
-        "dip_rebuy_level": 136.0,
-        "peak_resistance_sell_50": 144.0,
-        "breakout_expansion_target": 160.0,
-        "trailing_stop": 141.5,
-        "hard_stop_loss": 120.77
+        "dip_rebuy_level": 123.5,
+        "peak_resistance_sell_50": 134.6,
+        "breakout_expansion_target": 144.0,
+        "trailing_stop": 121.8,
+        "hard_stop_loss": 118.42
       },
       "swing_execution_50": {
         "shares_to_sell_half": 22,
-        "sell_proceeds_egp": 3168.0,
-        "rebuy_cost_egp": 2992.0,
-        "projected_cycle_profit_egp": 176.0,
-        "action_command_ar": "احتفظ بالمركز كاملاً (45 سهم). مستهدف بيع نصف الكمية (22 سهم) عند المقاومة 144.00 ج، وإعادة الشراء بالقرش عند 136.00 ج لتحقيق ربح تدوير 176.00 ج وخفض التكلفة إلى 122.70 ج."
+        "sell_proceeds_egp": 2961.2,
+        "rebuy_cost_egp": 2717.0,
+        "projected_cycle_profit_egp": 244.2,
+        "action_command_ar": "احتفظ بالمركز كاملاً (45 سهماً). في حال التراجع قرب 123.50 ج.م يمكن إعادة التجميع بالقرش، مع استهداف بيع نصف الكمية (22 سهماً) عند المقاومة 134.60 ج.م لتحقيق أرباح تدوير وخفض التكلفة، وترك النصف المتبقي نحو 144.00 ج.م."
       }
     },
     {

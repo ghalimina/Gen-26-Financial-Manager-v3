@@ -1,6 +1,6 @@
 {
   "status": "SUCCESS",
-  "as_of": "2026-10-10 04:02:50",
+  "as_of": "2026-10-10 04:22:19",
   "time_horizon": "10 TRADING SESSIONS",
   "opportunities_count": 12,
   "target_rules": {
@@ -21,7 +21,7 @@
       "expected_upside_10d_pct": 8.0,
       "risk_reward_ratio": 1.6,
       "alpha_score": 77.0,
-      "win_probability_pct": 41.2,
+      "win_probability_pct": 69.5,
       "action": "BUY",
       "action_verdict": "شراء مؤسسي معتمد",
       "is_golden_consensus": true,
