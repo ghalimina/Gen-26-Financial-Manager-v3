@@ -2390,7 +2390,7 @@ def api_thndr_daily_card():
     force_refresh = request.args.get("force", "").lower() in ("1", "true", "yes")
     if not force_refresh:
         cached = _get_dashboard_cached("thndr_daily_card")
-        if cached is not None:
+        if cached is not None and "auction_trap_analysis" in cached.get("thndr_daily_card", {}):
             return jsonify(cached)
 
         snapshot_path = os.path.join(WORKSPACE, "data", "thndr_daily_card_snapshot.json")
@@ -2399,6 +2399,13 @@ def api_thndr_daily_card():
                 with open(snapshot_path, "r", encoding="utf-8") as f:
                     snap_data = json.load(f)
                 if snap_data and isinstance(snap_data, dict) and "thndr_daily_card" in snap_data:
+                    card_inner = snap_data.get("thndr_daily_card", {})
+                    if card_inner and isinstance(card_inner, dict) and "auction_trap_analysis" not in card_inner:
+                        try:
+                            from core.auction_trap_detector import AuctionTrapDetector
+                            snap_data["thndr_daily_card"] = AuctionTrapDetector.enrich_thndr_daily_card(card_inner)
+                        except Exception:
+                            pass
                     _set_dashboard_cached("thndr_daily_card", snap_data)
                     return jsonify(snap_data)
             except Exception:
@@ -2567,6 +2574,13 @@ def api_thndr_daily_card():
                     "cooling_off": cooling_info,
                     "rejection_reasons_ar": gc.get("rejection_reasons_ar", [])
                 }
+
+        if selected_card:
+            try:
+                from core.auction_trap_detector import AuctionTrapDetector
+                selected_card = AuctionTrapDetector.enrich_thndr_daily_card(selected_card)
+            except Exception as _trap_err:
+                logger.debug("Could not enrich thndr card with auction trap: %s", _trap_err)
 
         result_payload = {
             "status": "SUCCESS",
@@ -4426,8 +4440,72 @@ def api_portfolio_swing_advisor():
     except Exception as e:
         import traceback
         tb = traceback.format_exc()
-        print(f"Error in api_portfolio_swing_advisor: {tb}")
         return jsonify({"status": "ERROR", "error": str(e), "traceback": tb}), 500
+
+
+# --- 14. Advanced AI & Market Qualitative Extensions Endpoints ---
+
+@app.route("/api/ai/self_learning/feedback", methods=["GET"])
+def api_ai_self_learning_feedback():
+    """
+    Returns Closed-Loop AI Error Attribution Report, Attribution Matrix,
+    and Adaptive Uncertainty Penalties across current portfolio holdings.
+    """
+    try:
+        from core.ai_self_learning_feedback import AISelfLearningFeedback
+        data = AISelfLearningFeedback.get_feedback_summary()
+        return jsonify(data), 200
+    except Exception as e:
+        logger.error(f"Error in api_ai_self_learning_feedback: {e}", exc_info=True)
+        return jsonify({"status": "ERROR", "error": str(e)}), 500
+
+
+@app.route("/api/ai/regime_weights", methods=["GET"])
+def api_ai_regime_weights():
+    """
+    Returns active Online Regime-Adaptive Weights and layer configuration
+    governed by macroeconomic regime (DEVALUATION_BOOM, BEAR_CONTRACTION, BULL_MOMENTUM).
+    """
+    try:
+        from core.regime_adaptive_weights import RegimeAdaptiveWeights
+        data = RegimeAdaptiveWeights.get_regime_state_report()
+        return jsonify(data), 200
+    except Exception as e:
+        logger.error(f"Error in api_ai_regime_weights: {e}", exc_info=True)
+        return jsonify({"status": "ERROR", "error": str(e)}), 500
+
+
+@app.route("/api/auction_trap/<ticker>", methods=["GET"])
+def api_auction_trap_ticker(ticker):
+    """
+    Monitors EGX opening auction (09:30 - 10:00 AM) and detects bull traps,
+    fake shakeouts, and spoofing manipulation for any ticker.
+    """
+    try:
+        from core.auction_trap_detector import AuctionTrapDetector
+        sym = ticker.upper().strip()
+        if not sym.endswith(".CA") and len(sym) <= 5:
+            sym = f"{sym}.CA"
+        data = AuctionTrapDetector.analyze_ticker_auction(sym)
+        return jsonify(data), 200
+    except Exception as e:
+        logger.error(f"Error in api_auction_trap_ticker: {e}", exc_info=True)
+        return jsonify({"status": "ERROR", "error": str(e)}), 500
+
+
+@app.route("/api/market/institutional_flows", methods=["GET"])
+def api_market_institutional_flows():
+    """
+    Returns Egyptian, Arab, Foreign, and Retail net flows, Smart Money Index (SMI),
+    and sector accumulation matrix with Alpha Boost allocation.
+    """
+    try:
+        from core.institutional_flow_tracker import InstitutionalFlowTracker
+        data = InstitutionalFlowTracker.get_daily_flows_summary()
+        return jsonify(data), 200
+    except Exception as e:
+        logger.error(f"Error in api_market_institutional_flows: {e}", exc_info=True)
+        return jsonify({"status": "ERROR", "error": str(e)}), 500
 
 
 @app.errorhandler(404)

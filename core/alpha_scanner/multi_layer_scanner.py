@@ -35,15 +35,19 @@ class MultiLayerScanner:
             return None
 
     @classmethod
-    def get_regime_weights(cls, regime: str = "BULL_EXPANSION") -> Dict[str, float]:
-        reg_clean = regime.upper().strip()
-        if "BEAR" in reg_clean or "CRASH" in reg_clean:
-            return cls.REGIME_LAYER_WEIGHTS["BEAR_CORRECTION"]
-        elif "SIDEWAYS" in reg_clean or "CHOP" in reg_clean or "RANGE" in reg_clean:
-            return cls.REGIME_LAYER_WEIGHTS["SIDEWAYS_CHOP"]
-        elif "VOLATIL" in reg_clean or "INFLATION" in reg_clean:
-            return cls.REGIME_LAYER_WEIGHTS["HIGH_VOLATILITY"]
-        return cls.REGIME_LAYER_WEIGHTS["BULL_EXPANSION"]
+    def get_regime_weights(cls, regime: Optional[str] = None) -> Dict[str, float]:
+        try:
+            from core.regime_adaptive_weights import RegimeAdaptiveWeights
+            return RegimeAdaptiveWeights.get_adaptive_weights(forced_regime=regime)
+        except Exception:
+            reg_clean = (regime or "BULL_EXPANSION").upper().strip()
+            if "BEAR" in reg_clean or "CRASH" in reg_clean:
+                return cls.REGIME_LAYER_WEIGHTS["BEAR_CORRECTION"]
+            elif "SIDEWAYS" in reg_clean or "CHOP" in reg_clean or "RANGE" in reg_clean:
+                return cls.REGIME_LAYER_WEIGHTS["SIDEWAYS_CHOP"]
+            elif "VOLATIL" in reg_clean or "INFLATION" in reg_clean:
+                return cls.REGIME_LAYER_WEIGHTS["HIGH_VOLATILITY"]
+            return cls.REGIME_LAYER_WEIGHTS["BULL_EXPANSION"]
 
     @classmethod
     def evaluate_layer_technical(cls, ticker: str, current_price: float, stock_rec: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:

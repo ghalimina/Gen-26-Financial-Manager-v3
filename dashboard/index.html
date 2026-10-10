@@ -2179,6 +2179,187 @@
 
                 </div>
 
+                <!-- ============================================================= -->
+                <!-- 🧠 ADVANCED AI QUALITATIVE ENGINES & MARKET RADARS -->
+                <!-- ============================================================= -->
+                <div class="card" id="advanced-ai-engines-card" style="background: linear-gradient(135deg, rgba(15, 23, 42, 0.98) 0%, rgba(30, 41, 59, 0.94) 50%, rgba(15, 23, 42, 0.98) 100%); border: 1.5px solid rgba(139, 92, 246, 0.35); border-radius: var(--radius-lg); padding: 24px; margin-bottom: 24px; box-shadow: 0 12px 40px rgba(0,0,0,0.5); position: relative; overflow: hidden;">
+                    <!-- Ambient Glow -->
+                    <div style="position: absolute; top: -60px; left: -60px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(139, 92, 246, 0.22) 0%, transparent 70%); border-radius: 50%; pointer-events: none;"></div>
+                    <div style="position: absolute; bottom: -60px; right: -60px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, transparent 70%); border-radius: 50%; pointer-events: none;"></div>
+
+                    <!-- Header Row -->
+                    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 16px; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
+                        <div style="display: flex; align-items: center; gap: 14px;">
+                            <div style="width: 48px; height: 48px; border-radius: 14px; background: linear-gradient(135deg, #7c3aed, #4f46e5); display: flex; align-items: center; justify-content: center; font-size: 24px; color: #ffffff; box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);">
+                                <i class="fa-solid fa-brain"></i>
+                            </div>
+                            <div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <h2 style="font-size: 19px; font-weight: 900; color: #ffffff; margin: 0;">🧠 منظومة الذكاء الاصطناعي التكيفي ورادارات السوق الكمية</h2>
+                                    <span class="badge" id="ai-active-regime-badge" style="font-size: 11px; padding: 4px 10px; background: rgba(139, 92, 246, 0.2); color: #c084fc; border: 1px solid rgba(139, 92, 246, 0.4);">DEVALUATION_BOOM</span>
+                                </div>
+                                <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">أوزان الطبقات المتكيفة لحظياً مع خفض الجنيه والتضخم، كاشف مصائد مزاد الافتتاح، ورادار التدفقات المؤسسية</div>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 10px; align-items: center;">
+                            <span class="badge" id="ai-smart-money-smi-badge" style="font-size: 12px; padding: 6px 14px; background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3);">🏛️ SMI: 80.3 / 100</span>
+                            <button class="btn btn-secondary btn-sm" onclick="refreshAllAIEngines()" title="تحديث محركات الذكاء الاصطناعي">
+                                <i class="fa-solid fa-rotate-right"></i>
+                                <span>تحديث المحركات</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 3-Column Grid -->
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;">
+                        
+                        <!-- Col 1: Adaptive Weights -->
+                        <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(139, 92, 246, 0.25); border-radius: var(--radius-md); padding: 18px; display: flex; flex-direction: column; justify-content: space-between;">
+                            <div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                    <div style="font-weight: 800; color: #c084fc; font-size: 14.5px;">
+                                        <i class="fa-solid fa-sliders"></i> الأوزان النشطة لدورة السوق
+                                    </div>
+                                    <span class="badge badge-purple" id="ai-regime-code-pill" style="font-size: 11px;">DEVALUATION_BOOM</span>
+                                </div>
+                                <div style="font-size: 12px; color: #94a3b8; line-height: 1.5; margin-bottom: 14px;" id="ai-regime-desc-text">
+                                    بيئة تحوط تضخمي وارتفاع سعر الصرف؛ رفع وزن التحليل المالي والشركات التصديرية ذات الإيرادات الدولارية إلى 45%.
+                                </div>
+                                
+                                <!-- Weight Bars -->
+                                <div style="display: flex; flex-direction: column; gap: 8px;">
+                                    <div>
+                                        <div style="display: flex; justify-content: space-between; font-size: 11.5px; margin-bottom: 3px;">
+                                            <span style="color: #e2e8f0;">التحليل المالي والإيرادات الدولارية</span>
+                                            <span style="color: #34d399; font-weight: 700;" id="ai-w-fund">45%</span>
+                                        </div>
+                                        <div style="width: 100%; height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden;">
+                                            <div id="ai-bar-fund" style="width: 45%; height: 100%; background: #34d399;"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div style="display: flex; justify-content: space-between; font-size: 11.5px; margin-bottom: 3px;">
+                                            <span style="color: #e2e8f0;">القوة النسبية وريادة القطاع</span>
+                                            <span style="color: #60a5fa; font-weight: 700;" id="ai-w-rs">25%</span>
+                                        </div>
+                                        <div style="width: 100%; height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden;">
+                                            <div id="ai-bar-rs" style="width: 25%; height: 100%; background: #60a5fa;"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div style="display: flex; justify-content: space-between; font-size: 11.5px; margin-bottom: 3px;">
+                                            <span style="color: #e2e8f0;">الزخم الفني واختراق المقاومات</span>
+                                            <span style="color: #f59e0b; font-weight: 700;" id="ai-w-tech">15%</span>
+                                        </div>
+                                        <div style="width: 100%; height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden;">
+                                            <div id="ai-bar-tech" style="width: 15%; height: 100%; background: #f59e0b;"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div style="display: flex; justify-content: space-between; font-size: 11.5px; margin-bottom: 3px;">
+                                            <span style="color: #e2e8f0;">الأحداث والمحفزات والمعنويات</span>
+                                            <span style="color: #c084fc; font-weight: 700;" id="ai-w-sent">15%</span>
+                                        </div>
+                                        <div style="width: 100%; height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden;">
+                                            <div id="ai-bar-sent" style="width: 15%; height: 100%; background: #c084fc;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="margin-top: 14px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; font-size: 11px; color: #94a3b8;">
+                                <span>الكاش الاستراتيجي الموصى به: <strong class="text-green" id="ai-rec-cash-floor">10%</strong></span>
+                                <span>EGX30: <strong class="font-mono text-blue" id="ai-egx30-level">52,494</strong></span>
+                            </div>
+                        </div>
+
+                        <!-- Col 2: Auction Trap Detector -->
+                        <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(239, 68, 68, 0.25); border-radius: var(--radius-md); padding: 18px; display: flex; flex-direction: column; justify-content: space-between;">
+                            <div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                    <div style="font-weight: 800; color: #f87171; font-size: 14.5px;">
+                                        <i class="fa-solid fa-shield-virus"></i> رادار مصائد مزاد الافتتاح
+                                    </div>
+                                    <select id="trap-ticker-select" onchange="fetchAuctionTrapRadar(this.value)" style="background: rgba(30, 41, 59, 0.8); color: #ffffff; border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; padding: 3px 8px; font-size: 12px; font-family: monospace;">
+                                        <option value="COMI.CA">COMI.CA</option>
+                                        <option value="SWDY.CA">SWDY.CA</option>
+                                        <option value="RAYA.CA">RAYA.CA</option>
+                                        <option value="MFPC.CA">MFPC.CA</option>
+                                        <option value="TMGH.CA">TMGH.CA</option>
+                                        <option value="PHDC.CA">PHDC.CA</option>
+                                    </select>
+                                </div>
+
+                                <!-- Trap Status Badge -->
+                                <div style="padding: 10px 14px; border-radius: 8px; margin-bottom: 12px; background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.3);" id="trap-status-banner">
+                                    <div style="font-size: 13px; font-weight: 800; color: #34d399;" id="trap-verdict-title">🟢 مزاد طبيعي ومتوازن (AUCTION_NORMAL)</div>
+                                    <div style="font-size: 11px; color: #cbd5e1; margin-top: 4px;" id="trap-warning-text">تنفيذ طبيعي وفق سعر العرض والطلب المعتمد أو استخدام أمر محدد.</div>
+                                </div>
+
+                                <!-- Trap Metrics 3x1 -->
+                                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; text-align: center;">
+                                    <div style="background: rgba(30, 41, 59, 0.5); padding: 8px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.06);">
+                                        <div style="font-size: 10px; color: #94a3b8;">فجوة الافتتاح</div>
+                                        <div style="font-size: 13px; font-weight: 800; color: #ffffff; margin-top: 2px;" id="trap-gap-pct">-0.41%</div>
+                                    </div>
+                                    <div style="background: rgba(30, 41, 59, 0.5); padding: 8px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.06);">
+                                        <div style="font-size: 10px; color: #94a3b8;">سيولة الافتتاح</div>
+                                        <div style="font-size: 13px; font-weight: 800; color: #60a5fa; margin-top: 2px;" id="trap-vol-ratio">0.70x</div>
+                                    </div>
+                                    <div style="background: rgba(30, 41, 59, 0.5); padding: 8px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.06);">
+                                        <div style="font-size: 10px; color: #94a3b8;">اختلال الطلب/العرض</div>
+                                        <div style="font-size: 13px; font-weight: 800; color: #f59e0b; margin-top: 2px;" id="trap-imbalance">+0.034</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="margin-top: 14px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.06); font-size: 11px; color: #94a3b8;">
+                                <span>📱 التوجيه: <strong class="text-green" id="trap-execution-guidance">أمر محدد (Limit Order) آمن</strong></span>
+                            </div>
+                        </div>
+
+                        <!-- Col 3: Institutional Flows -->
+                        <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: var(--radius-md); padding: 18px; display: flex; flex-direction: column; justify-content: space-between;">
+                            <div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                    <div style="font-weight: 800; color: #34d399; font-size: 14.5px;">
+                                        <i class="fa-solid fa-building-columns"></i> تدفقات المؤسسات (عرب / أجانب)
+                                    </div>
+                                    <span class="badge badge-green" id="inst-smi-pill" style="font-size: 11px;">SMI: 80.3</span>
+                                </div>
+                                <div style="font-size: 12px; color: #94a3b8; line-height: 1.5; margin-bottom: 12px;" id="inst-smi-regime-text">
+                                    🟢 تجميع مؤسسي مكثف: الصناديق العربية والأجنبية تشتري بصافي +203.6 مليون ج.م.
+                                </div>
+
+                                <!-- Net Flow Grid 2x2 -->
+                                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 12px;">
+                                    <div style="background: rgba(30, 41, 59, 0.5); padding: 8px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.06);">
+                                        <div style="font-size: 10px; color: #94a3b8;">صناديق عربية</div>
+                                        <div style="font-size: 13px; font-weight: 800; color: #34d399; margin-top: 2px;" id="inst-arab-net">+88.2 م.ج</div>
+                                    </div>
+                                    <div style="background: rgba(30, 41, 59, 0.5); padding: 8px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.06);">
+                                        <div style="font-size: 10px; color: #94a3b8;">مؤسسات أجنبية</div>
+                                        <div style="font-size: 13px; font-weight: 800; color: #34d399; margin-top: 2px;" id="inst-foreign-net">+115.4 م.ج</div>
+                                    </div>
+                                    <div style="background: rgba(30, 41, 59, 0.5); padding: 8px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.06);">
+                                        <div style="font-size: 10px; color: #94a3b8;">مؤسسات مصرية</div>
+                                        <div style="font-size: 13px; font-weight: 800; color: #60a5fa; margin-top: 2px;" id="inst-egypt-net">+142.5 م.ج</div>
+                                    </div>
+                                    <div style="background: rgba(30, 41, 59, 0.5); padding: 8px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.06);">
+                                        <div style="font-size: 10px; color: #94a3b8;">أفراد ومضاربين</div>
+                                        <div style="font-size: 13px; font-weight: 800; color: #f87171; margin-top: 2px;" id="inst-retail-net">-346.1 م.ج</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="margin-top: 14px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: center; font-size: 11px;">
+                                <span style="color: #94a3b8;">قطاع الألفا المعزز (+5%):</span>
+                                <span class="badge badge-purple" style="font-size: 10.5px; font-weight: 700;" id="inst-favored-sector-badge">🌱 الأسمدة والبتروكيماويات</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
                 <!-- ☀️ Morning Briefing Hero Section -->
                 <div class="hero-briefing-card" id="morning-briefing-hero">
                     <div class="hero-header-row">
@@ -6237,6 +6418,162 @@
         }
 
         // =====================================================================
+        // 🧠 1.5 ADVANCED AI QUALITATIVE ENGINES & MARKET RADARS
+        // =====================================================================
+        async function fetchAdaptiveAIWeights() {
+            try {
+                const res = await fetch('/api/ai/regime_weights');
+                if (!res.ok) throw new Error("HTTP " + res.status);
+                const data = await res.json();
+                
+                const badgeEl = document.getElementById('ai-active-regime-badge');
+                const pillEl = document.getElementById('ai-regime-code-pill');
+                const descEl = document.getElementById('ai-regime-desc-text');
+                const cashFloorEl = document.getElementById('ai-rec-cash-floor');
+                const egxLevelEl = document.getElementById('ai-egx30-level');
+
+                if (badgeEl) badgeEl.innerText = data.active_regime || 'DEVALUATION_BOOM';
+                if (pillEl) pillEl.innerText = data.active_regime || 'DEVALUATION_BOOM';
+                if (descEl) descEl.innerText = data.description_ar || '';
+                if (cashFloorEl) cashFloorEl.innerText = `${data.recommended_cash_floor_pct || 10}%`;
+                if (egxLevelEl) egxLevelEl.innerText = Number(data.egx30_level || 52494).toLocaleString();
+
+                const weights = data.active_layer_weights || {};
+                const fundPct = Math.round((weights.fundamental || 0.45) * 100);
+                const rsPct = Math.round((weights.relative_strength || 0.25) * 100);
+                const techPct = Math.round((weights.technical || 0.15) * 100);
+                const sentPct = Math.round(((weights.events || 0.08) + (weights.sentiment || 0.07)) * 100);
+
+                const wFund = document.getElementById('ai-w-fund');
+                const bFund = document.getElementById('ai-bar-fund');
+                const wRs = document.getElementById('ai-w-rs');
+                const bRs = document.getElementById('ai-bar-rs');
+                const wTech = document.getElementById('ai-w-tech');
+                const bTech = document.getElementById('ai-bar-tech');
+                const wSent = document.getElementById('ai-w-sent');
+                const bSent = document.getElementById('ai-bar-sent');
+
+                if (wFund) wFund.innerText = `${fundPct}%`;
+                if (bFund) bFund.style.width = `${fundPct}%`;
+                if (wRs) wRs.innerText = `${rsPct}%`;
+                if (bRs) bRs.style.width = `${rsPct}%`;
+                if (wTech) wTech.innerText = `${techPct}%`;
+                if (bTech) bTech.style.width = `${techPct}%`;
+                if (wSent) wSent.innerText = `${sentPct}%`;
+                if (bSent) bSent.style.width = `${sentPct}%`;
+            } catch (err) {
+                console.warn("fetchAdaptiveAIWeights notice:", err);
+            }
+        }
+
+        async function fetchAuctionTrapRadar(ticker = 'COMI.CA') {
+            try {
+                const res = await fetch('/api/auction_trap/' + encodeURIComponent(ticker));
+                if (!res.ok) throw new Error("HTTP " + res.status);
+                const data = await res.json();
+
+                const bannerEl = document.getElementById('trap-status-banner');
+                const titleEl = document.getElementById('trap-verdict-title');
+                const textEl = document.getElementById('trap-warning-text');
+                const gapEl = document.getElementById('trap-gap-pct');
+                const volEl = document.getElementById('trap-vol-ratio');
+                const imbEl = document.getElementById('trap-imbalance');
+                const guideEl = document.getElementById('trap-execution-guidance');
+
+                if (gapEl) gapEl.innerText = `${(data.opening_gap_pct > 0 ? '+' : '')}${data.opening_gap_pct || 0}%`;
+                if (volEl) volEl.innerText = `${(data.opening_volume_ratio || 1).toFixed(2)}x`;
+                if (imbEl) imbEl.innerText = `${(data.bid_ask_imbalance > 0 ? '+' : '')}${(data.bid_ask_imbalance || 0).toFixed(3)}`;
+
+                if (data.is_bull_trap) {
+                    if (bannerEl) {
+                        bannerEl.style.background = 'rgba(239, 68, 68, 0.18)';
+                        bannerEl.style.border = '1px solid rgba(239, 68, 68, 0.4)';
+                    }
+                    if (titleEl) {
+                        titleEl.style.color = '#f87171';
+                        titleEl.innerText = '⚠️ مصيدة تداول (BULL_TRAP_DETECTED)';
+                    }
+                    if (textEl) textEl.innerText = data.warning_message_ar || 'تجنب الشراء بسعر السوق على تطبيق ثاندر.';
+                    if (guideEl) {
+                        guideEl.className = 'text-red font-bold';
+                        guideEl.innerText = 'تجنب أمر السوق — خطر مصيدة';
+                    }
+                } else if (data.is_bear_trap) {
+                    if (bannerEl) {
+                        bannerEl.style.background = 'rgba(245, 158, 11, 0.18)';
+                        bannerEl.style.border = '1px solid rgba(245, 158, 11, 0.4)';
+                    }
+                    if (titleEl) {
+                        titleEl.style.color = '#fbbf24';
+                        titleEl.innerText = '⚠️ كسر وهمي ومصيدة بيع (BEAR_TRAP)';
+                    }
+                    if (textEl) textEl.innerText = data.warning_message_ar || 'تجنب البيع الهلعي، امتصاص مؤسسي خفي.';
+                    if (guideEl) {
+                        guideEl.className = 'text-yellow font-bold';
+                        guideEl.innerText = 'انتظر اكتمال الارتداد';
+                    }
+                } else {
+                    if (bannerEl) {
+                        bannerEl.style.background = 'rgba(16, 185, 129, 0.12)';
+                        bannerEl.style.border = '1px solid rgba(16, 185, 129, 0.3)';
+                    }
+                    if (titleEl) {
+                        titleEl.style.color = '#34d399';
+                        titleEl.innerText = '🟢 مزاد طبيعي ومتوازن (AUCTION_NORMAL)';
+                    }
+                    if (textEl) textEl.innerText = data.warning_message_ar || 'تنفيذ طبيعي وفق الخطة.';
+                    if (guideEl) {
+                        guideEl.className = 'text-green font-bold';
+                        guideEl.innerText = 'أمر محدد (Limit Order) آمن';
+                    }
+                }
+            } catch (err) {
+                console.warn("fetchAuctionTrapRadar notice:", err);
+            }
+        }
+
+        async function fetchInstitutionalFlowsRadar() {
+            try {
+                const res = await fetch('/api/market/institutional_flows');
+                if (!res.ok) throw new Error("HTTP " + res.status);
+                const data = await res.json();
+
+                const topSmi = document.getElementById('ai-smart-money-smi-badge');
+                const smiPill = document.getElementById('inst-smi-pill');
+                const smiRegime = document.getElementById('inst-smi-regime-text');
+                const arabEl = document.getElementById('inst-arab-net');
+                const forEl = document.getElementById('inst-foreign-net');
+                const egEl = document.getElementById('inst-egypt-net');
+                const retEl = document.getElementById('inst-retail-net');
+                const sectorBadge = document.getElementById('inst-favored-sector-badge');
+
+                const smi = data.smart_money_index || 80.3;
+                if (topSmi) topSmi.innerText = `🏛️ SMI: ${smi} / 100`;
+                if (smiPill) smiPill.innerText = `SMI: ${smi}`;
+                if (smiRegime) smiRegime.innerText = data.smi_regime_ar || '🟢 تجميع مؤسسي مكثف';
+
+                const net = data.net_flows_summary_m_egp || {};
+                if (arabEl) arabEl.innerText = `${(net.arab_institutions > 0 ? '+' : '')}${net.arab_institutions || 88.2} م.ج`;
+                if (forEl) forEl.innerText = `${(net.foreign_institutions > 0 ? '+' : '')}${net.foreign_institutions || 115.4} م.ج`;
+                if (egEl) egEl.innerText = `${(net.egyptian_institutions > 0 ? '+' : '')}${net.egyptian_institutions || 142.5} م.ج`;
+                if (retEl) retEl.innerText = `${(net.retail_speculators > 0 ? '+' : '')}${net.retail_speculators || -346.1} م.ج`;
+
+                if (sectorBadge && data.active_alpha_boost_sectors && data.active_alpha_boost_sectors.length > 0) {
+                    sectorBadge.innerText = `🌱 ${data.active_alpha_boost_sectors[0]} (+5% Alpha)`;
+                }
+            } catch (err) {
+                console.warn("fetchInstitutionalFlowsRadar notice:", err);
+            }
+        }
+
+        function refreshAllAIEngines() {
+            fetchAdaptiveAIWeights();
+            const sel = document.getElementById('trap-ticker-select');
+            fetchAuctionTrapRadar(sel ? sel.value : 'COMI.CA');
+            fetchInstitutionalFlowsRadar();
+        }
+
+        // =====================================================================
         // 💬 2. AI QUANT CHATBOT API INTEGRATION (/api/chat)
         // =====================================================================
         
@@ -9817,6 +10154,7 @@
             // Execute initial data fetchers in isolated asynchronous blocks
             setTimeout(() => {
                 try { fetchThndrDailyCard(); } catch(e) {}
+                try { refreshAllAIEngines(); } catch(e) {}
             }, 30);
 
             setTimeout(() => {

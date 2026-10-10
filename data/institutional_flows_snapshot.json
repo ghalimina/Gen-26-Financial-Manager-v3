@@ -1,0 +1,76 @@
+{
+  "status": "SUCCESS",
+  "as_of": "2026-10-10 04:32:49",
+  "session_date": "2026-10-10",
+  "currency": "EGP",
+  "market_turnover_m_egp": 4850.0,
+  "smart_money_index": 80.3,
+  "smi_regime_ar": "🟢 تجميع مؤسسي مكثف (Smart Money Heavy Accumulation)",
+  "net_flows_summary_m_egp": {
+    "egyptian_institutions": 142.5,
+    "arab_institutions": 88.2,
+    "foreign_institutions": 115.4,
+    "retail_speculators": -346.1,
+    "total_smart_money_institutions": 346.1
+  },
+  "investor_participation_pct": {
+    "egyptian_institutions": 42.5,
+    "arab_institutions": 18.2,
+    "foreign_institutions": 19.8,
+    "retail_speculators": 19.5
+  },
+  "sector_accumulation_matrix": [
+    {
+      "sector": "Petrochemicals & Fertilizers",
+      "sector_ar": "الأسمدة والبتروكيماويات",
+      "arab_net_m_egp": 45.2,
+      "foreign_net_m_egp": 62.8,
+      "egypt_net_m_egp": 35.0,
+      "total_inst_net_m_egp": 143.0,
+      "accumulation_conviction_score": 92.5,
+      "is_smart_money_favored": true,
+      "alpha_boost_pct": 5.0,
+      "boost_reason_ar": "شراء صافي مكثف من الصناديق العربية والأجنبية للاستفادة من الإيرادات الدولارية وهوامش التصدير."
+    },
+    {
+      "sector": "Banking",
+      "sector_ar": "البنوك والخدمات المالية",
+      "arab_net_m_egp": 22.0,
+      "foreign_net_m_egp": 38.5,
+      "egypt_net_m_egp": 52.0,
+      "total_inst_net_m_egp": 112.5,
+      "accumulation_conviction_score": 84.0,
+      "is_smart_money_favored": true,
+      "alpha_boost_pct": 3.0,
+      "boost_reason_ar": "تجميع مؤسسي مستمر بدعم من هوامش الفائدة القياسية لدى البنك التجاري الدولي."
+    },
+    {
+      "sector": "Industrial & Energy",
+      "sector_ar": "الصناعة والطاقة",
+      "arab_net_m_egp": 15.0,
+      "foreign_net_m_egp": 10.2,
+      "egypt_net_m_egp": 28.0,
+      "total_inst_net_m_egp": 53.2,
+      "accumulation_conviction_score": 76.5,
+      "is_smart_money_favored": false,
+      "alpha_boost_pct": 0.0,
+      "boost_reason_ar": "تدفقات مؤسسية إيجابية متوازنة مع تركيز على الكابلات والمقاولات الدولية."
+    },
+    {
+      "sector": "Real Estate",
+      "sector_ar": "العقارات والإنشاءات",
+      "arab_net_m_egp": 6.0,
+      "foreign_net_m_egp": 3.9,
+      "egypt_net_m_egp": 27.5,
+      "total_inst_net_m_egp": 37.4,
+      "accumulation_conviction_score": 68.0,
+      "is_smart_money_favored": false,
+      "alpha_boost_pct": 0.0,
+      "boost_reason_ar": "شراء مؤسسي محلي تحوطي لحماية القيمة في الأصول العقارية ذات المبيعات التعاقدية الضخمة."
+    }
+  ],
+  "active_alpha_boost_sectors": [
+    "الأسمدة والبتروكيماويات",
+    "البنوك والخدمات المالية"
+  ]
+}

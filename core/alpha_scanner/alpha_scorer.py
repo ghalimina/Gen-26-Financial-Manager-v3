@@ -27,6 +27,18 @@ class AlphaScorer:
                 raw_score += layer_scores.get(k, 50.0) * w
             alpha_score = round(max(10.0, min(100.0, raw_score)), 1)
 
+        # Apply institutional sector alpha boost (+5% for petrochemicals/fertilizers)
+        try:
+            from core.institutional_flow_tracker import InstitutionalFlowTracker
+            sector_name = scan_result.get("fundamental_details", {}).get("sector", "")
+            if not sector_name and stock_rec:
+                sector_name = stock_rec.get("sector", "")
+            boost_pct = InstitutionalFlowTracker.get_sector_alpha_boost(sector_name)
+            if boost_pct > 0:
+                alpha_score = round(min(100.0, alpha_score * (1.0 + (boost_pct / 100.0))), 1)
+        except Exception:
+            pass
+
         # Empirically calibrated Win Probability P(R > 0)
         if stock_rec and stock_rec.get("probability_up_pct") is not None:
             prob_profit = round(float(stock_rec["probability_up_pct"]), 1)
@@ -41,11 +53,23 @@ class AlphaScorer:
             exp_return_pct = round(1.0 + ((alpha_score - 50.0) / 50.0) * 8.0, 2)
 
         # Uncertainty Score (0.05 - 0.90)
+        ticker_sym = scan_result.get("ticker", "UNKNOWN")
+        try:
+            from core.ai_self_learning_feedback import AISelfLearningFeedback
+            u_penalty = AISelfLearningFeedback.get_ticker_uncertainty_penalty(ticker_sym)
+        except Exception:
+            u_penalty = 0.0
+
         if stock_rec and stock_rec.get("uncertainty_score") is not None:
             uncertainty_score = round(float(stock_rec["uncertainty_score"]), 2)
         else:
             uncertainty_score = round(1.0 - (alpha_score / 120.0), 2)
             uncertainty_score = max(0.10, min(0.90, uncertainty_score))
+
+        # Adjust uncertainty and win probability if ticker has high learning penalty
+        if u_penalty > 0:
+            uncertainty_score = round(min(0.95, uncertainty_score + (u_penalty * 0.5)), 2)
+            prob_profit = round(max(20.0, prob_profit - (u_penalty * 15.0)), 1)
 
         # Liquidity multiplier
         liq_mult = 1.00

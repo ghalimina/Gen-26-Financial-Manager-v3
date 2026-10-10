@@ -1,0 +1,126 @@
+{
+  "version": "1.0.0",
+  "last_cycle_timestamp": "2026-10-10 04:44:22",
+  "total_trades_analyzed": 5,
+  "total_errors_diagnosed": 3,
+  "system_mean_uncertainty_penalty": 0.083,
+  "attribution_aggregate_weights": {
+    "BETA_MARKET_SHOCK": 0.28,
+    "INSIDER_OUTFLOW": 0.32,
+    "LIQUIDITY_DRYING": 0.24,
+    "VOLATILITY_EXPANSION": 0.16
+  },
+  "ticker_penalties": {
+    "COMI.CA": {
+      "uncertainty_penalty": 0.109,
+      "primary_cause": "LIQUIDITY_DRYING",
+      "loss_pct": -7.16,
+      "last_evaluated": "2026-10-10 04:44:22"
+    },
+    "PHDC.CA": {
+      "uncertainty_penalty": 0.073,
+      "primary_cause": "LIQUIDITY_DRYING",
+      "loss_pct": -3.94,
+      "last_evaluated": "2026-10-10 04:44:22"
+    },
+    "SWDY.CA": {
+      "uncertainty_penalty": 0.03,
+      "primary_cause": "LIQUIDITY_DRYING",
+      "loss_pct": 0.15,
+      "last_evaluated": "2026-10-10 04:44:22"
+    },
+    "RAYA.CA": {
+      "uncertainty_penalty": 0.171,
+      "primary_cause": "INSIDER_OUTFLOW",
+      "loss_pct": -12.81,
+      "last_evaluated": "2026-10-10 04:44:22"
+    },
+    "TMGH.CA": {
+      "uncertainty_penalty": 0.03,
+      "primary_cause": "LIQUIDITY_DRYING",
+      "loss_pct": 1.61,
+      "last_evaluated": "2026-10-10 04:44:22"
+    }
+  },
+  "sector_penalties": {
+    "Financial Services": 0.12,
+    "Real Estate": 0.06,
+    "Banking": 0.04,
+    "Industrial": 0.03,
+    "Petrochemicals & Fertilizers": 0.02
+  },
+  "error_attribution_log": [
+    {
+      "ticker": "COMI.CA",
+      "sector": "Banking",
+      "entry_price": 134.26,
+      "current_price": 124.65,
+      "loss_pct": -7.16,
+      "is_loss": true,
+      "primary_cause": "LIQUIDITY_DRYING",
+      "primary_cause_ar": "جفاف وانكماش السيولة النقدية للسهم (Volume Liquidity Drying)",
+      "attribution_matrix": {
+        "BETA_MARKET_SHOCK": 10.9,
+        "INSIDER_OUTFLOW": 32.5,
+        "LIQUIDITY_DRYING": 41.0,
+        "VOLATILITY_EXPANSION": 15.6
+      },
+      "weights_normalized": {
+        "BETA_MARKET_SHOCK": 0.109,
+        "INSIDER_OUTFLOW": 0.325,
+        "LIQUIDITY_DRYING": 0.41,
+        "VOLATILITY_EXPANSION": 0.156
+      },
+      "uncertainty_penalty": 0.109,
+      "mitigation_action_ar": "خفض حجم أوامر الشراء تدريجياً؛ استخدام أوامر محددة بدقة (Limit Orders) وتجنب كسر مستويات الدعم بضغط انعدام السيولة."
+    },
+    {
+      "ticker": "PHDC.CA",
+      "sector": "Real Estate",
+      "entry_price": 13.46,
+      "current_price": 12.93,
+      "loss_pct": -3.94,
+      "is_loss": true,
+      "primary_cause": "LIQUIDITY_DRYING",
+      "primary_cause_ar": "جفاف وانكماش السيولة النقدية للسهم (Volume Liquidity Drying)",
+      "attribution_matrix": {
+        "BETA_MARKET_SHOCK": 14.0,
+        "INSIDER_OUTFLOW": 25.0,
+        "LIQUIDITY_DRYING": 40.9,
+        "VOLATILITY_EXPANSION": 20.1
+      },
+      "weights_normalized": {
+        "BETA_MARKET_SHOCK": 0.14,
+        "INSIDER_OUTFLOW": 0.25,
+        "LIQUIDITY_DRYING": 0.409,
+        "VOLATILITY_EXPANSION": 0.201
+      },
+      "uncertainty_penalty": 0.073,
+      "mitigation_action_ar": "خفض حجم أوامر الشراء تدريجياً؛ استخدام أوامر محددة بدقة (Limit Orders) وتجنب كسر مستويات الدعم بضغط انعدام السيولة."
+    },
+    {
+      "ticker": "RAYA.CA",
+      "sector": "Financial Services",
+      "entry_price": 7.57,
+      "current_price": 6.6,
+      "loss_pct": -12.81,
+      "is_loss": true,
+      "primary_cause": "INSIDER_OUTFLOW",
+      "primary_cause_ar": "تخارج ومبيعات مكثفة للمطلعين ومجلس الإدارة (Insider & Board Selling)",
+      "attribution_matrix": {
+        "BETA_MARKET_SHOCK": 5.0,
+        "INSIDER_OUTFLOW": 52.2,
+        "LIQUIDITY_DRYING": 29.2,
+        "VOLATILITY_EXPANSION": 13.6
+      },
+      "weights_normalized": {
+        "BETA_MARKET_SHOCK": 0.05,
+        "INSIDER_OUTFLOW": 0.522,
+        "LIQUIDITY_DRYING": 0.292,
+        "VOLATILITY_EXPANSION": 0.136
+      },
+      "uncertainty_penalty": 0.171,
+      "mitigation_action_ar": "تفعيل حظر الشراء والتوسع على سهم RAYA.CA؛ خفض وزن السهم ورفع عتبة التأكيد المؤسسي لحين توقف تخارج كبار الملاك."
+    }
+  ]
+}
