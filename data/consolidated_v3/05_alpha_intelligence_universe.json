@@ -1,0 +1,5460 @@
+{
+  "status": "SUCCESS",
+  "as_of": "2026-10-10 04:02:50",
+  "total_universe_size": 270,
+  "monotonicity_validation": {
+    "validation_status": "MATHEMATICALLY_MONOTONIC_VERIFIED",
+    "spearman_rank_ic": 0.375,
+    "is_monotonic": true,
+    "total_tested_samples": 2119,
+    "performance_buckets": [
+      {
+        "range": "90-100",
+        "min_score": 90.0,
+        "max_score": 100.0,
+        "samples": 142,
+        "mean_5d_return_pct": 2.85,
+        "std_dev_pct": 1.12,
+        "win_rate_pct": 78.4
+      },
+      {
+        "range": "80-89",
+        "min_score": 80.0,
+        "max_score": 89.9,
+        "samples": 288,
+        "mean_5d_return_pct": 1.92,
+        "std_dev_pct": 1.25,
+        "win_rate_pct": 72.1
+      },
+      {
+        "range": "70-79",
+        "min_score": 70.0,
+        "max_score": 79.9,
+        "samples": 510,
+        "mean_5d_return_pct": 1.15,
+        "std_dev_pct": 1.32,
+        "win_rate_pct": 64.5
+      },
+      {
+        "range": "60-69",
+        "min_score": 60.0,
+        "max_score": 69.9,
+        "samples": 694,
+        "mean_5d_return_pct": 0.48,
+        "std_dev_pct": 1.45,
+        "win_rate_pct": 55.8
+      },
+      {
+        "range": "50-59",
+        "min_score": 50.0,
+        "max_score": 59.9,
+        "samples": 485,
+        "mean_5d_return_pct": 0.12,
+        "std_dev_pct": 1.6,
+        "win_rate_pct": 50.2
+      }
+    ]
+  },
+  "ranked_universe": [
+    {
+      "rank": 1,
+      "ticker": "MFPC.CA",
+      "company_name": "مصر لإنتاج الأسمدة (موبكو)",
+      "sector": "الموارد الأساسية والكيماويات",
+      "current_price": 46.5,
+      "alpha_score": 77.0,
+      "probability_up_pct": 41.2,
+      "expected_return_pct": 1.42,
+      "prediction_interval_90": {
+        "lower_bound_pct": -5.71,
+        "upper_bound_pct": 10.11,
+        "interval_width_pct": 15.82,
+        "formatted_str": "[-5.7% → +10.1%]"
+      },
+      "decision": "WATCH",
+      "action_ar": "🟡 مراقبة واحتفاظ (الموديل الكمي يوصي بالشراء لكن احتمالية نجاح الذكاء الفوقي 41.2% دون عتبة الإجماع 58%)",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 2,
+      "ticker": "ABUK.CA",
+      "company_name": "أبو قير للأسمدة",
+      "sector": "الموارد الأساسية والكيماويات",
+      "current_price": 90.0,
+      "alpha_score": 75.0,
+      "probability_up_pct": 42.3,
+      "expected_return_pct": 1.37,
+      "prediction_interval_90": {
+        "lower_bound_pct": -5.71,
+        "upper_bound_pct": 9.92,
+        "interval_width_pct": 15.63,
+        "formatted_str": "[-5.7% → +9.9%]"
+      },
+      "decision": "WATCH",
+      "action_ar": "🟡 مراقبة واحتفاظ (الموديل الكمي يوصي بالشراء لكن احتمالية نجاح الذكاء الفوقي 42.3% دون عتبة الإجماع 58%)",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 3,
+      "ticker": "AMOC.CA",
+      "company_name": "الإسكندرية للزيوت المعدنية (أموك)",
+      "sector": "البتروكيماويات والطاقة",
+      "current_price": 14.48,
+      "alpha_score": 73.6,
+      "probability_up_pct": 41.9,
+      "expected_return_pct": 1.54,
+      "prediction_interval_90": {
+        "lower_bound_pct": -5.84,
+        "upper_bound_pct": 10.9,
+        "interval_width_pct": 16.74,
+        "formatted_str": "[-5.8% → +10.9%]"
+      },
+      "decision": "WATCH",
+      "action_ar": "🟡 مراقبة واحتفاظ (الموديل الكمي يوصي بالشراء لكن احتمالية نجاح الذكاء الفوقي 41.9% دون عتبة الإجماع 58%)",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 4,
+      "ticker": "ACRO.CA",
+      "company_name": "أكرو مصر للشدات والسقالات المعدنية",
+      "sector": "الصناعة والمقاولات",
+      "current_price": 54.0,
+      "alpha_score": 72.0,
+      "probability_up_pct": 46.4,
+      "expected_return_pct": 2.17,
+      "prediction_interval_90": {
+        "lower_bound_pct": -5.46,
+        "upper_bound_pct": 9.6,
+        "interval_width_pct": 15.06,
+        "formatted_str": "[-5.5% → +9.6%]"
+      },
+      "decision": "WATCH",
+      "action_ar": "🟡 مراقبة واحتفاظ (الموديل الكمي يوصي بالشراء لكن احتمالية نجاح الذكاء الفوقي 46.4% دون عتبة الإجماع 58%)",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 5,
+      "ticker": "FWRY.CA",
+      "company_name": "فوري لتكنولوجيا المدفوعات الإلكترونية",
+      "sector": "تكنولوجيا المدفوعات",
+      "current_price": 19.06,
+      "alpha_score": 70.0,
+      "probability_up_pct": 40.8,
+      "expected_return_pct": 1.87,
+      "prediction_interval_90": {
+        "lower_bound_pct": -6.54,
+        "upper_bound_pct": 11.56,
+        "interval_width_pct": 18.1,
+        "formatted_str": "[-6.5% → +11.6%]"
+      },
+      "decision": "WATCH",
+      "action_ar": "🟡 مراقبة واحتفاظ (الموديل الكمي يوصي بالشراء لكن احتمالية نجاح الذكاء الفوقي 40.8% دون عتبة الإجماع 58%)",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 6,
+      "ticker": "OIH.CA",
+      "company_name": "أوراسكوم للاستثمار القابضة",
+      "sector": "الخدمات المالية والاستثمار",
+      "current_price": 1.88,
+      "alpha_score": 70.0,
+      "probability_up_pct": 46.2,
+      "expected_return_pct": 1.73,
+      "prediction_interval_90": {
+        "lower_bound_pct": -5.89,
+        "upper_bound_pct": 9.56,
+        "interval_width_pct": 15.45,
+        "formatted_str": "[-5.9% → +9.6%]"
+      },
+      "decision": "WATCH",
+      "action_ar": "🟡 مراقبة واحتفاظ (الموديل الكمي يوصي بالشراء لكن احتمالية نجاح الذكاء الفوقي 46.2% دون عتبة الإجماع 58%)",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 7,
+      "ticker": "POUL.CA",
+      "company_name": "القاهرة للدواجن",
+      "sector": "الأغذية والمشروبات",
+      "current_price": 9.99,
+      "alpha_score": 69.7,
+      "probability_up_pct": 46.4,
+      "expected_return_pct": 1.72,
+      "prediction_interval_90": {
+        "lower_bound_pct": -5.46,
+        "upper_bound_pct": 9.24,
+        "interval_width_pct": 14.7,
+        "formatted_str": "[-5.5% → +9.2%]"
+      },
+      "decision": "WATCH",
+      "action_ar": "🟡 مراقبة / احتفاظ بالمركز",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 8,
+      "ticker": "ORWE.CA",
+      "company_name": "النساجون الشرقيون للسجاد",
+      "sector": "المنسوجات والسلع الاستهلاكية",
+      "current_price": 27.14,
+      "alpha_score": 69.5,
+      "probability_up_pct": 43.0,
+      "expected_return_pct": 1.99,
+      "prediction_interval_90": {
+        "lower_bound_pct": -5.51,
+        "upper_bound_pct": 9.88,
+        "interval_width_pct": 15.39,
+        "formatted_str": "[-5.5% → +9.9%]"
+      },
+      "decision": "WATCH",
+      "action_ar": "🟡 مراقبة / احتفاظ بالمركز",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 9,
+      "ticker": "SKPC.CA",
+      "company_name": "سيدي كرير للبتروكيماويات (سيدبك)",
+      "sector": "البتروكيماويات والطاقة",
+      "current_price": 16.19,
+      "alpha_score": 69.4,
+      "probability_up_pct": 43.0,
+      "expected_return_pct": 2.08,
+      "prediction_interval_90": {
+        "lower_bound_pct": -5.51,
+        "upper_bound_pct": 10.77,
+        "interval_width_pct": 16.28,
+        "formatted_str": "[-5.5% → +10.8%]"
+      },
+      "decision": "WATCH",
+      "action_ar": "🟡 مراقبة / احتفاظ بالمركز",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 10,
+      "ticker": "MASR.CA",
+      "company_name": "مدينة مصر للإسكان والتعمير (MNHD)",
+      "sector": "التطوير العقاري",
+      "current_price": 7.86,
+      "alpha_score": 68.0,
+      "probability_up_pct": 47.1,
+      "expected_return_pct": 1.97,
+      "prediction_interval_90": {
+        "lower_bound_pct": -6.52,
+        "upper_bound_pct": 10.09,
+        "interval_width_pct": 16.61,
+        "formatted_str": "[-6.5% → +10.1%]"
+      },
+      "decision": "WATCH",
+      "action_ar": "🟡 مراقبة / احتفاظ بالمركز",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 11,
+      "ticker": "BINV.CA",
+      "company_name": "بي إنفستمنتس القابضة",
+      "sector": "الخدمات المالية والاستثمار",
+      "current_price": 58.26,
+      "alpha_score": 67.9,
+      "probability_up_pct": 43.0,
+      "expected_return_pct": 1.7,
+      "prediction_interval_90": {
+        "lower_bound_pct": -5.51,
+        "upper_bound_pct": 9.09,
+        "interval_width_pct": 14.6,
+        "formatted_str": "[-5.5% → +9.1%]"
+      },
+      "decision": "WATCH",
+      "action_ar": "🟡 مراقبة / احتفاظ بالمركز",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 12,
+      "ticker": "JUFO.CA",
+      "company_name": "جهينة للصناعات الغذائية",
+      "sector": "الأغذية والمشروبات",
+      "current_price": 25.0,
+      "alpha_score": 67.9,
+      "probability_up_pct": 37.0,
+      "expected_return_pct": 1.65,
+      "prediction_interval_90": {
+        "lower_bound_pct": -5.59,
+        "upper_bound_pct": 8.95,
+        "interval_width_pct": 14.54,
+        "formatted_str": "[-5.6% → +8.9%]"
+      },
+      "decision": "WATCH",
+      "action_ar": "🟡 مراقبة / احتفاظ بالمركز",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 13,
+      "ticker": "FAIT.CA",
+      "company_name": "بنك فيصل الإسلامي المصري (جنيه)",
+      "sector": "الخدمات المالية والبنوك",
+      "current_price": 45.59,
+      "alpha_score": 67.9,
+      "probability_up_pct": 45.2,
+      "expected_return_pct": 1.8,
+      "prediction_interval_90": {
+        "lower_bound_pct": -6.16,
+        "upper_bound_pct": 12.09,
+        "interval_width_pct": 18.25,
+        "formatted_str": "[-6.2% → +12.1%]"
+      },
+      "decision": "WATCH",
+      "action_ar": "🟡 مراقبة / احتفاظ بالمركز",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 14,
+      "ticker": "KZPC.CA",
+      "company_name": "كفر الزيات للمبيدات والكيماويات",
+      "sector": "الموارد الأساسية والكيماويات",
+      "current_price": 13.17,
+      "alpha_score": 67.7,
+      "probability_up_pct": 42.6,
+      "expected_return_pct": 1.57,
+      "prediction_interval_90": {
+        "lower_bound_pct": -5.59,
+        "upper_bound_pct": 9.3,
+        "interval_width_pct": 14.89,
+        "formatted_str": "[-5.6% → +9.3%]"
+      },
+      "decision": "WATCH",
+      "action_ar": "🟡 مراقبة / احتفاظ بالمركز",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 15,
+      "ticker": "GBCO.CA",
+      "company_name": "جي بي كورب (غبور أوتو)",
+      "sector": "السيارات والصناعة",
+      "current_price": 31.78,
+      "alpha_score": 67.5,
+      "probability_up_pct": 42.1,
+      "expected_return_pct": 1.74,
+      "prediction_interval_90": {
+        "lower_bound_pct": -6.03,
+        "upper_bound_pct": 10.83,
+        "interval_width_pct": 16.86,
+        "formatted_str": "[-6.0% → +10.8%]"
+      },
+      "decision": "WATCH",
+      "action_ar": "🟡 مراقبة / احتفاظ بالمركز",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 16,
+      "ticker": "HDBK.CA",
+      "company_name": "بنك التعمير والإسكان",
+      "sector": "الخدمات المالية والبنوك",
+      "current_price": 107.79,
+      "alpha_score": 67.4,
+      "probability_up_pct": 25.5,
+      "expected_return_pct": 2.12,
+      "prediction_interval_90": {
+        "lower_bound_pct": -10.56,
+        "upper_bound_pct": 16.49,
+        "interval_width_pct": 27.05,
+        "formatted_str": "[-10.6% → +16.5%]"
+      },
+      "decision": "WATCH",
+      "action_ar": "🟡 مراقبة / احتفاظ بالمركز",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 17,
+      "ticker": "SUGR.CA",
+      "company_name": "الدلتا للسكر",
+      "sector": "الأغذية والمشروبات والتبغ",
+      "current_price": 55.76,
+      "alpha_score": 67.2,
+      "probability_up_pct": 30.9,
+      "expected_return_pct": 1.92,
+      "prediction_interval_90": {
+        "lower_bound_pct": -8.98,
+        "upper_bound_pct": 14.69,
+        "interval_width_pct": 23.67,
+        "formatted_str": "[-9.0% → +14.7%]"
+      },
+      "decision": "WATCH",
+      "action_ar": "🟡 مراقبة / احتفاظ بالمركز",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 18,
+      "ticker": "ADIB.CA",
+      "company_name": "مصرف أبو ظبي الإسلامي - مصر",
+      "sector": "الخدمات المالية والبنوك",
+      "current_price": 47.8,
+      "alpha_score": 67.1,
+      "probability_up_pct": 33.7,
+      "expected_return_pct": 1.41,
+      "prediction_interval_90": {
+        "lower_bound_pct": -6.62,
+        "upper_bound_pct": 9.73,
+        "interval_width_pct": 16.35,
+        "formatted_str": "[-6.6% → +9.7%]"
+      },
+      "decision": "WATCH",
+      "action_ar": "🟡 مراقبة / احتفاظ بالمركز",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 19,
+      "ticker": "DSCW.CA",
+      "company_name": "دايس للملابس الجاهزة",
+      "sector": "السلع الاستهلاكية",
+      "current_price": 1.7,
+      "alpha_score": 67.0,
+      "probability_up_pct": 40.6,
+      "expected_return_pct": 1.66,
+      "prediction_interval_90": {
+        "lower_bound_pct": -5.84,
+        "upper_bound_pct": 11.05,
+        "interval_width_pct": 16.89,
+        "formatted_str": "[-5.8% → +11.1%]"
+      },
+      "decision": "WATCH",
+      "action_ar": "🟡 مراقبة / احتفاظ بالمركز",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 20,
+      "ticker": "EGAL.CA",
+      "company_name": "مصر للألومنيوم",
+      "sector": "الموارد الأساسية والكيماويات",
+      "current_price": 339.4,
+      "alpha_score": 66.8,
+      "probability_up_pct": 40.0,
+      "expected_return_pct": 2.53,
+      "prediction_interval_90": {
+        "lower_bound_pct": -6.93,
+        "upper_bound_pct": 12.53,
+        "interval_width_pct": 19.46,
+        "formatted_str": "[-6.9% → +12.5%]"
+      },
+      "decision": "WATCH",
+      "action_ar": "🟡 مراقبة / احتفاظ بالمركز",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 21,
+      "ticker": "DICE.CA",
+      "company_name": "دايس للملابس الجاهزة",
+      "sector": "المنسوجات والسلع الاستهلاكية",
+      "current_price": 1.7,
+      "alpha_score": 66.8,
+      "probability_up_pct": 39.4,
+      "expected_return_pct": 1.7,
+      "prediction_interval_90": {
+        "lower_bound_pct": -5.59,
+        "upper_bound_pct": 9.22,
+        "interval_width_pct": 14.81,
+        "formatted_str": "[-5.6% → +9.2%]"
+      },
+      "decision": "WATCH",
+      "action_ar": "🟡 مراقبة / احتفاظ بالمركز",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 22,
+      "ticker": "EFIH.CA",
+      "company_name": "إي فاينانس للاستثمارات المالية والرقمية",
+      "sector": "تكنولوجيا المدفوعات",
+      "current_price": 25.23,
+      "alpha_score": 66.7,
+      "probability_up_pct": 37.9,
+      "expected_return_pct": 1.88,
+      "prediction_interval_90": {
+        "lower_bound_pct": -5.84,
+        "upper_bound_pct": 11.11,
+        "interval_width_pct": 16.95,
+        "formatted_str": "[-5.8% → +11.1%]"
+      },
+      "decision": "WATCH",
+      "action_ar": "🟡 مراقبة / احتفاظ بالمركز",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 23,
+      "ticker": "COMI.CA",
+      "company_name": "البنك التجاري الدولي (CIB)",
+      "sector": "الخدمات المالية والبنوك",
+      "current_price": 124.65,
+      "alpha_score": 65.8,
+      "probability_up_pct": 37.4,
+      "expected_return_pct": 2.41,
+      "prediction_interval_90": {
+        "lower_bound_pct": -6.52,
+        "upper_bound_pct": 12.35,
+        "interval_width_pct": 18.87,
+        "formatted_str": "[-6.5% → +12.3%]"
+      },
+      "decision": "WATCH",
+      "action_ar": "🟡 مراقبة / احتفاظ بالمركز",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 24,
+      "ticker": "EGCH.CA",
+      "company_name": "الصناعات الكيماوية المصرية (كيما)",
+      "sector": "الموارد الأساسية والكيماويات",
+      "current_price": 13.36,
+      "alpha_score": 65.5,
+      "probability_up_pct": 41.1,
+      "expected_return_pct": 1.84,
+      "prediction_interval_90": {
+        "lower_bound_pct": -5.9,
+        "upper_bound_pct": 10.06,
+        "interval_width_pct": 15.96,
+        "formatted_str": "[-5.9% → +10.1%]"
+      },
+      "decision": "WATCH",
+      "action_ar": "🟡 مراقبة / احتفاظ بالمركز",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 25,
+      "ticker": "CICH.CA",
+      "company_name": "سي آي كابيتال القابضة",
+      "sector": "الخدمات المالية والاستثمار",
+      "current_price": 12.1,
+      "alpha_score": 65.3,
+      "probability_up_pct": 38.9,
+      "expected_return_pct": 1.71,
+      "prediction_interval_90": {
+        "lower_bound_pct": -5.59,
+        "upper_bound_pct": 8.96,
+        "interval_width_pct": 14.55,
+        "formatted_str": "[-5.6% → +9.0%]"
+      },
+      "decision": "WATCH",
+      "action_ar": "🟡 مراقبة / احتفاظ بالمركز",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 26,
+      "ticker": "OBUR.CA",
+      "company_name": "عبور لاند للصناعات الغذائية",
+      "sector": "الأغذية والمشروبات والتبغ",
+      "current_price": 21.09,
+      "alpha_score": 64.4,
+      "probability_up_pct": 46.2,
+      "expected_return_pct": 1.52,
+      "prediction_interval_90": {
+        "lower_bound_pct": -5.46,
+        "upper_bound_pct": 9.57,
+        "interval_width_pct": 15.03,
+        "formatted_str": "[-5.5% → +9.6%]"
+      },
+      "decision": "WATCH",
+      "action_ar": "🟡 مراقبة / احتفاظ بالمركز",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 27,
+      "ticker": "ETEL.CA",
+      "company_name": "المصرية للاتصالات (WE)",
+      "sector": "الاتصالات وتكنولوجيا المعلومات",
+      "current_price": 148.0,
+      "alpha_score": 64.3,
+      "probability_up_pct": 42.7,
+      "expected_return_pct": 1.95,
+      "prediction_interval_90": {
+        "lower_bound_pct": -5.51,
+        "upper_bound_pct": 9.7,
+        "interval_width_pct": 15.21,
+        "formatted_str": "[-5.5% → +9.7%]"
+      },
+      "decision": "WATCH",
+      "action_ar": "🟡 مراقبة / احتفاظ بالمركز",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 28,
+      "ticker": "ARCC.CA",
+      "company_name": "الأسمنت العربية",
+      "sector": "مواد البناء والتشييد",
+      "current_price": 71.07,
+      "alpha_score": 63.8,
+      "probability_up_pct": 38.1,
+      "expected_return_pct": 2.52,
+      "prediction_interval_90": {
+        "lower_bound_pct": -6.65,
+        "upper_bound_pct": 11.94,
+        "interval_width_pct": 18.59,
+        "formatted_str": "[-6.7% → +11.9%]"
+      },
+      "decision": "WATCH",
+      "action_ar": "🟡 مراقبة / احتفاظ بالمركز",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 29,
+      "ticker": "BTFH.CA",
+      "company_name": "بلتون القابضة",
+      "sector": "الخدمات المالية غير المصرفية",
+      "current_price": 2.77,
+      "alpha_score": 63.6,
+      "probability_up_pct": 44.0,
+      "expected_return_pct": -0.32,
+      "prediction_interval_90": {
+        "lower_bound_pct": -8.91,
+        "upper_bound_pct": 9.73,
+        "interval_width_pct": 18.64,
+        "formatted_str": "[-8.9% → +9.7%]"
+      },
+      "decision": "WATCH",
+      "action_ar": "🟡 مراقبة / احتفاظ بالمركز",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 30,
+      "ticker": "EKHOA.CA",
+      "company_name": "القابضة المصرية الكويتية (بالجنيه)",
+      "sector": "الخدمات المالية والاستثمار",
+      "current_price": 24.13,
+      "alpha_score": 63.5,
+      "probability_up_pct": 43.0,
+      "expected_return_pct": 1.85,
+      "prediction_interval_90": {
+        "lower_bound_pct": -5.51,
+        "upper_bound_pct": 9.35,
+        "interval_width_pct": 14.86,
+        "formatted_str": "[-5.5% → +9.3%]"
+      },
+      "decision": "WATCH",
+      "action_ar": "🟡 مراقبة / احتفاظ بالمركز",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 31,
+      "ticker": "EFID.CA",
+      "company_name": "إيديتا للصناعات الغذائية",
+      "sector": "الأغذية والمشروبات والتبغ",
+      "current_price": 19.07,
+      "alpha_score": 63.3,
+      "probability_up_pct": 39.8,
+      "expected_return_pct": 2.51,
+      "prediction_interval_90": {
+        "lower_bound_pct": -7.04,
+        "upper_bound_pct": 12.08,
+        "interval_width_pct": 19.12,
+        "formatted_str": "[-7.0% → +12.1%]"
+      },
+      "decision": "WATCH",
+      "action_ar": "🟡 مراقبة / احتفاظ بالمركز",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 32,
+      "ticker": "PRDC.CA",
+      "company_name": "رواد السياحة (رواد)",
+      "sector": "السياحة والترفيه",
+      "current_price": 7.11,
+      "alpha_score": 63.0,
+      "probability_up_pct": 44.7,
+      "expected_return_pct": 1.38,
+      "prediction_interval_90": {
+        "lower_bound_pct": -5.71,
+        "upper_bound_pct": 9.43,
+        "interval_width_pct": 15.14,
+        "formatted_str": "[-5.7% → +9.4%]"
+      },
+      "decision": "WATCH",
+      "action_ar": "🟡 مراقبة / احتفاظ بالمركز",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 33,
+      "ticker": "ISPH.CA",
+      "company_name": "ابن سينا فارما",
+      "sector": "الرعاية الصحية والأدوية",
+      "current_price": 11.7,
+      "alpha_score": 62.9,
+      "probability_up_pct": 37.7,
+      "expected_return_pct": 1.4,
+      "prediction_interval_90": {
+        "lower_bound_pct": -5.84,
+        "upper_bound_pct": 8.95,
+        "interval_width_pct": 14.79,
+        "formatted_str": "[-5.8% → +8.9%]"
+      },
+      "decision": "WATCH",
+      "action_ar": "🟡 مراقبة / احتفاظ بالمركز",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 34,
+      "ticker": "RTVC.CA",
+      "company_name": "رمكو لإنشاء القرى السياحية",
+      "sector": "السياحة والترفيه",
+      "current_price": 3.68,
+      "alpha_score": 62.6,
+      "probability_up_pct": 41.1,
+      "expected_return_pct": 1.74,
+      "prediction_interval_90": {
+        "lower_bound_pct": -6.23,
+        "upper_bound_pct": 10.58,
+        "interval_width_pct": 16.81,
+        "formatted_str": "[-6.2% → +10.6%]"
+      },
+      "decision": "WATCH",
+      "action_ar": "🟡 مراقبة / احتفاظ بالمركز",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 35,
+      "ticker": "OCDI.CA",
+      "company_name": "سوديك - السادس من أكتوبر للتنمية والاستثمار",
+      "sector": "التطوير العقاري",
+      "current_price": 27.32,
+      "alpha_score": 62.6,
+      "probability_up_pct": 35.1,
+      "expected_return_pct": 2.39,
+      "prediction_interval_90": {
+        "lower_bound_pct": -7.47,
+        "upper_bound_pct": 12.61,
+        "interval_width_pct": 20.08,
+        "formatted_str": "[-7.5% → +12.6%]"
+      },
+      "decision": "WATCH",
+      "action_ar": "🟡 مراقبة / احتفاظ بالمركز",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 36,
+      "ticker": "SWDY.CA",
+      "company_name": "السويدي إليكتريك",
+      "sector": "الصناعة والمقاولات",
+      "current_price": 116.0,
+      "alpha_score": 62.3,
+      "probability_up_pct": 40.9,
+      "expected_return_pct": 1.62,
+      "prediction_interval_90": {
+        "lower_bound_pct": -6.69,
+        "upper_bound_pct": 11.94,
+        "interval_width_pct": 18.63,
+        "formatted_str": "[-6.7% → +11.9%]"
+      },
+      "decision": "WATCH",
+      "action_ar": "🟡 مراقبة / احتفاظ بالمركز",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 37,
+      "ticker": "EAST.CA",
+      "company_name": "الشرقية للدخان (إيسترن كومباني)",
+      "sector": "السلع الاستهلاكية",
+      "current_price": 28.21,
+      "alpha_score": 62.2,
+      "probability_up_pct": 40.9,
+      "expected_return_pct": 2.05,
+      "prediction_interval_90": {
+        "lower_bound_pct": -5.83,
+        "upper_bound_pct": 10.14,
+        "interval_width_pct": 15.97,
+        "formatted_str": "[-5.8% → +10.1%]"
+      },
+      "decision": "WATCH",
+      "action_ar": "🟡 مراقبة / احتفاظ بالمركز",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 38,
+      "ticker": "EMFD.CA",
+      "company_name": "إعمار مصر للتنمية",
+      "sector": "التطوير العقاري",
+      "current_price": 12.7,
+      "alpha_score": 61.6,
+      "probability_up_pct": 34.2,
+      "expected_return_pct": 1.77,
+      "prediction_interval_90": {
+        "lower_bound_pct": -8.78,
+        "upper_bound_pct": 14.54,
+        "interval_width_pct": 23.32,
+        "formatted_str": "[-8.8% → +14.5%]"
+      },
+      "decision": "WATCH",
+      "action_ar": "🟡 مراقبة / احتفاظ بالمركز",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 39,
+      "ticker": "HELI.CA",
+      "company_name": "مصر الجديدة للإسكان والتعمير",
+      "sector": "التطوير العقاري",
+      "current_price": 7.49,
+      "alpha_score": 61.0,
+      "probability_up_pct": 42.9,
+      "expected_return_pct": 1.77,
+      "prediction_interval_90": {
+        "lower_bound_pct": -6.65,
+        "upper_bound_pct": 11.23,
+        "interval_width_pct": 17.88,
+        "formatted_str": "[-6.7% → +11.2%]"
+      },
+      "decision": "WATCH",
+      "action_ar": "🟡 مراقبة / احتفاظ بالمركز",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 40,
+      "ticker": "TMGH.CA",
+      "company_name": "مجموعة طلعت مصطفى",
+      "sector": "التطوير العقاري",
+      "current_price": 87.89,
+      "alpha_score": 60.1,
+      "probability_up_pct": 47.4,
+      "expected_return_pct": 2.41,
+      "prediction_interval_90": {
+        "lower_bound_pct": -6.54,
+        "upper_bound_pct": 11.74,
+        "interval_width_pct": 18.28,
+        "formatted_str": "[-6.5% → +11.7%]"
+      },
+      "decision": "WATCH",
+      "action_ar": "🟡 مراقبة / احتفاظ بالمركز",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 41,
+      "ticker": "TAQA.CA",
+      "company_name": "طاقة عربية",
+      "sector": "الطاقة والخدمات البترولية",
+      "current_price": 17.1,
+      "alpha_score": 59.3,
+      "probability_up_pct": 47.4,
+      "expected_return_pct": 2.82,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "WATCH",
+      "action_ar": "🟡 مراقبة / احتفاظ بالمركز",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 42,
+      "ticker": "CCAP.CA",
+      "company_name": "القلعة للاستشارات المالية",
+      "sector": "الخدمات المالية والاستثمار",
+      "current_price": 6.62,
+      "alpha_score": 59.2,
+      "probability_up_pct": 45.9,
+      "expected_return_pct": 2.95,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "WATCH",
+      "action_ar": "🟡 مراقبة / احتفاظ بالمركز",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 43,
+      "ticker": "EXPA.CA",
+      "company_name": "بنك تنمية الصادرات",
+      "sector": "الخدمات المالية والبنوك",
+      "current_price": 15.82,
+      "alpha_score": 59.1,
+      "probability_up_pct": 42.6,
+      "expected_return_pct": 1.67,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "WATCH",
+      "action_ar": "🟡 مراقبة / احتفاظ بالمركز",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 44,
+      "ticker": "ELSH.CA",
+      "company_name": "الشمس للإسكان والتعمير",
+      "sector": "التطوير العقاري",
+      "current_price": 12.08,
+      "alpha_score": 59.0,
+      "probability_up_pct": 25.5,
+      "expected_return_pct": 1.67,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "WATCH",
+      "action_ar": "🟡 مراقبة / احتفاظ بالمركز",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 45,
+      "ticker": "CLHO.CA",
+      "company_name": "مستشفى كليوباترا",
+      "sector": "الرعاية الصحية والأدوية",
+      "current_price": 15.35,
+      "alpha_score": 58.6,
+      "probability_up_pct": 42.5,
+      "expected_return_pct": 1.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "WATCH",
+      "action_ar": "🟡 مراقبة / احتفاظ بالمركز",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 46,
+      "ticker": "HRHO.CA",
+      "company_name": "مجموعة إي إف جي القابضة (هيرميس)",
+      "sector": "الخدمات المالية غير المصرفية",
+      "current_price": 26.57,
+      "alpha_score": 58.2,
+      "probability_up_pct": 41.4,
+      "expected_return_pct": 2.05,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "WATCH",
+      "action_ar": "🟡 مراقبة / احتفاظ بالمركز",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 47,
+      "ticker": "CANA.CA",
+      "company_name": "بنك قناة السويس",
+      "sector": "الخدمات المالية والبنوك",
+      "current_price": 44.93,
+      "alpha_score": 57.3,
+      "probability_up_pct": 23.7,
+      "expected_return_pct": 1.88,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 تجنب فتح مراكز جديدة حالياً",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 48,
+      "ticker": "ORHD.CA",
+      "company_name": "أوراسكوم للتنمية مصر",
+      "sector": "التطوير العقاري",
+      "current_price": 12.0,
+      "alpha_score": 56.6,
+      "probability_up_pct": 42.9,
+      "expected_return_pct": 1.97,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 تجنب فتح مراكز جديدة حالياً",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 49,
+      "ticker": "MICH.CA",
+      "company_name": "مصر للكيماويات",
+      "sector": "الموارد الأساسية والكيماويات",
+      "current_price": 47.04,
+      "alpha_score": 56.6,
+      "probability_up_pct": 37.3,
+      "expected_return_pct": 2.35,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 تجنب فتح مراكز جديدة حالياً",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 50,
+      "ticker": "ESRS.CA",
+      "company_name": "حديد عز",
+      "sector": "الموارد الأساسية والكيماويات",
+      "current_price": 128.5,
+      "alpha_score": 56.5,
+      "probability_up_pct": 39.6,
+      "expected_return_pct": 1.46,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 تجنب فتح مراكز جديدة حالياً",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 51,
+      "ticker": "RAYA.CA",
+      "company_name": "راية القابضة للاستثمارات المالية",
+      "sector": "الاتصالات وتكنولوجيا المعلومات",
+      "current_price": 6.6,
+      "alpha_score": 56.4,
+      "probability_up_pct": 40.7,
+      "expected_return_pct": 4.55,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 تجنب فتح مراكز جديدة حالياً",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 52,
+      "ticker": "CIEB.CA",
+      "company_name": "بنك كريدي أجريكول مصر",
+      "sector": "الخدمات المالية والبنوك",
+      "current_price": 24.0,
+      "alpha_score": 56.3,
+      "probability_up_pct": 42.9,
+      "expected_return_pct": 1.63,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 تجنب فتح مراكز جديدة حالياً",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 53,
+      "ticker": "DOMT.CA",
+      "company_name": "الصناعات الغذائية العربية (دومتي)",
+      "sector": "الأغذية والمشروبات",
+      "current_price": 24.0,
+      "alpha_score": 55.9,
+      "probability_up_pct": 41.2,
+      "expected_return_pct": 1.4,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 تجنب فتح مراكز جديدة حالياً",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 54,
+      "ticker": "ALCN.CA",
+      "company_name": "الإسكندرية لتداول الحاويات والبضائع",
+      "sector": "النقل واللوجستيات",
+      "current_price": 33.55,
+      "alpha_score": 55.5,
+      "probability_up_pct": 38.2,
+      "expected_return_pct": 2.22,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 تجنب فتح مراكز جديدة حالياً",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 55,
+      "ticker": "ELEC.CA",
+      "company_name": "الكابلات الكهربائية المصرية",
+      "sector": "الصناعة والمقاولات",
+      "current_price": 1.87,
+      "alpha_score": 55.4,
+      "probability_up_pct": 40.3,
+      "expected_return_pct": 1.74,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 تجنب فتح مراكز جديدة حالياً",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 56,
+      "ticker": "PHDC.CA",
+      "company_name": "بالم هيلز للتعمير",
+      "sector": "التطوير العقاري",
+      "current_price": 12.93,
+      "alpha_score": 54.0,
+      "probability_up_pct": 41.7,
+      "expected_return_pct": 1.7,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 تجنب فتح مراكز جديدة حالياً",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 57,
+      "ticker": "QNBA.CA",
+      "company_name": "بنك قطر الوطني الأهلي (QNB)",
+      "sector": "الخدمات المالية والبنوك",
+      "current_price": 58.26,
+      "alpha_score": 53.1,
+      "probability_up_pct": 44.7,
+      "expected_return_pct": 1.9,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 تجنب فتح مراكز جديدة حالياً",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 58,
+      "ticker": "ZMID.CA",
+      "company_name": "زهراء المعادي للاستثمار والتعمير",
+      "sector": "التطوير العقاري",
+      "current_price": 7.53,
+      "alpha_score": 53.0,
+      "probability_up_pct": 24.7,
+      "expected_return_pct": 2.02,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 تجنب فتح مراكز جديدة حالياً",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 59,
+      "ticker": "CERA.CA",
+      "company_name": "العز للسيراميك والبورسلين (الجوهرة)",
+      "sector": "الصناعة والمقاولات",
+      "current_price": 1.38,
+      "alpha_score": 52.3,
+      "probability_up_pct": 17.4,
+      "expected_return_pct": 2.02,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 تجنب فتح مراكز جديدة حالياً",
+      "is_liquid": true,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 60,
+      "ticker": "EKHO.CA",
+      "company_name": "القابضة المصرية الكويتية (بالدولار)",
+      "sector": "الخدمات المالية والاستثمار",
+      "current_price": 0.67,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 61,
+      "ticker": "ORAS.CA",
+      "company_name": "أوراسكوم للإنشاء",
+      "sector": "الصناعة والمقاولات",
+      "current_price": 877.02,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 62,
+      "ticker": "MOIL.CA",
+      "company_name": "الخدمات الملاحية والبترولية (ماريديف)",
+      "sector": "البتروكيماويات والطاقة",
+      "current_price": 0.69,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 63,
+      "ticker": "SPMD.CA",
+      "company_name": "سبيد ميديكال",
+      "sector": "الرعاية الصحية والأدوية",
+      "current_price": 0.39,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 64,
+      "ticker": "ARAB.CA",
+      "company_name": "المطورون العرب القابضة",
+      "sector": "التطوير العقاري",
+      "current_price": 0.27,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 65,
+      "ticker": "UNIP.CA",
+      "company_name": "يونيفرسال لصناعة مواد التعبئة والتغليف (يونيباك)",
+      "sector": "السلع الاستهلاكية",
+      "current_price": 0.36,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 66,
+      "ticker": "FAITA.CA",
+      "company_name": "بنك فيصل الإسلامي المصري (دولار)",
+      "sector": "الخدمات المالية والبنوك",
+      "current_price": 1.01,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 67,
+      "ticker": "SAIB.CA",
+      "company_name": "بنك الشركة المصرفية العربية الدولية",
+      "sector": "الخدمات المالية والبنوك",
+      "current_price": 2.53,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 68,
+      "ticker": "MNHD.CA",
+      "company_name": "مجموعة نماء للاستثمار",
+      "sector": "الخدمات المالية والبنوك",
+      "current_price": 7.86,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 69,
+      "ticker": "VALU.CA",
+      "company_name": "يو جي إكس / فاليو للتمويل الاستهلاكي",
+      "sector": "الخدمات المالية والبنوك",
+      "current_price": 11.24,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 70,
+      "ticker": "EGBE.CA",
+      "company_name": "البنك المصري الخليجي (إيجي بنك)",
+      "sector": "الخدمات المالية والبنوك",
+      "current_price": 0.54,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 71,
+      "ticker": "OFH.CA",
+      "company_name": "أوراسكوم المالية القابضة",
+      "sector": "الخدمات المالية والبنوك",
+      "current_price": 0.88,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 72,
+      "ticker": "PIOH.CA",
+      "company_name": "بايونيرز بروبرتيز للتنمية العمرانية",
+      "sector": "الخدمات المالية والبنوك",
+      "current_price": 7.11,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 73,
+      "ticker": "ODIN.CA",
+      "company_name": "أودن للاستثمارات المالية",
+      "sector": "الخدمات المالية والبنوك",
+      "current_price": 2.53,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 74,
+      "ticker": "ASPI.CA",
+      "company_name": "أسبيك للاستشارات والاستثمار",
+      "sector": "الخدمات المالية والبنوك",
+      "current_price": 0.36,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 75,
+      "ticker": "ICMI.CA",
+      "company_name": "المجموعة المتكاملة للأعمال الهندسية",
+      "sector": "الخدمات المالية والبنوك",
+      "current_price": 0.73,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 76,
+      "ticker": "EIUD.CA",
+      "company_name": "المصرية لتطوير صناعة البناء",
+      "sector": "الخدمات المالية والبنوك",
+      "current_price": 0.73,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 77,
+      "ticker": "ALEX.CA",
+      "company_name": "الإسكندرية للغزل والنسيج (سبينالكس)",
+      "sector": "الخدمات المالية والبنوك",
+      "current_price": 22.1,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 78,
+      "ticker": "ACAP.CA",
+      "company_name": "أي كابيتال القابضة",
+      "sector": "الخدمات المالية والبنوك",
+      "current_price": 8.21,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 79,
+      "ticker": "WATP.CA",
+      "company_name": "المهندس للتأمين",
+      "sector": "الخدمات المالية والبنوك",
+      "current_price": 22.0,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 80,
+      "ticker": "AIFI.CA",
+      "company_name": "الأهلي للتنمية والاستثمار",
+      "sector": "الخدمات المالية والبنوك",
+      "current_price": 2.22,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 81,
+      "ticker": "ETRS.CA",
+      "company_name": "المصرية لخدمات النقل (إيجيترانس)",
+      "sector": "الخدمات المالية والبنوك",
+      "current_price": 10.8,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 82,
+      "ticker": "CNFN.CA",
+      "company_name": "كونتكت المالية القابضة",
+      "sector": "الخدمات المالية والبنوك",
+      "current_price": 4.33,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 83,
+      "ticker": "DAPH.CA",
+      "company_name": "الدلتا للتأمين",
+      "sector": "الخدمات المالية والبنوك",
+      "current_price": 106.63,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 84,
+      "ticker": "PRMH.CA",
+      "company_name": "برايم القابضة للاستثمارات المالية",
+      "sector": "الخدمات المالية والبنوك",
+      "current_price": 2.24,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 85,
+      "ticker": "GDWA.CA",
+      "company_name": "جدوى للتنمية الصناعية",
+      "sector": "التطوير العقاري",
+      "current_price": 0.67,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 86,
+      "ticker": "AIH.CA",
+      "company_name": "العروبة للتجارة والتعدين والتوريدات",
+      "sector": "التطوير العقاري",
+      "current_price": 0.84,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 87,
+      "ticker": "NCCW.CA",
+      "company_name": "النصر للأعمال المدنية",
+      "sector": "التطوير العقاري",
+      "current_price": 7.02,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 88,
+      "ticker": "AREH.CA",
+      "company_name": "المجموعة العربية العقارية",
+      "sector": "التطوير العقاري",
+      "current_price": 1.29,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 89,
+      "ticker": "ERES.CA",
+      "company_name": "المصرية للمنتجعات السياحية",
+      "sector": "التطوير العقاري",
+      "current_price": 10.0,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 90,
+      "ticker": "PORT.CA",
+      "company_name": "بورتو جروب (المجموعة الإفريقية)",
+      "sector": "التطوير العقاري",
+      "current_price": 10.0,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 91,
+      "ticker": "UEGC.CA",
+      "company_name": "الصعيد العامة للمقاولات والاستثمار العقاري",
+      "sector": "التطوير العقاري",
+      "current_price": 1.55,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 92,
+      "ticker": "ROWG.CA",
+      "company_name": "رواد الهندسة والتنمية",
+      "sector": "التطوير العقاري",
+      "current_price": 10.0,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 93,
+      "ticker": "RREI.CA",
+      "company_name": "رواج للتمويل العقاري والاستثمار",
+      "sector": "التطوير العقاري",
+      "current_price": 3.91,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 94,
+      "ticker": "GTHE.CA",
+      "company_name": "جلوبال تليكوم القابضة (تصفية)",
+      "sector": "الاتصالات وتكنولوجيا المعلومات",
+      "current_price": 4.41,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 95,
+      "ticker": "ELKA.CA",
+      "company_name": "القاهرة للإسكان والتعمير",
+      "sector": "التطوير العقاري",
+      "current_price": 1.61,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 96,
+      "ticker": "KRRE.CA",
+      "company_name": "العمران للتطوير العقاري",
+      "sector": "التطوير العقاري",
+      "current_price": 10.0,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 97,
+      "ticker": "MENA.CA",
+      "company_name": "مينا للاستثمار السياحي والعقاري",
+      "sector": "التطوير العقاري",
+      "current_price": 6.74,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 98,
+      "ticker": "GGCC.CA",
+      "company_name": "الجيزة العامة للمقاولات والاستثمار العقاري",
+      "sector": "التطوير العقاري",
+      "current_price": 0.72,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 99,
+      "ticker": "MEPA.CA",
+      "company_name": "مرسى علم للتنمية السياحية",
+      "sector": "السياحة والترفيه",
+      "current_price": 1.72,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 100,
+      "ticker": "AMIA.CA",
+      "company_name": "العربية لإدارة وتطوير الأصول",
+      "sector": "التطوير العقاري",
+      "current_price": 19.18,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 101,
+      "ticker": "VERT.CA",
+      "company_name": "فيرتكيم لتصنيع الأسمدة",
+      "sector": "الموارد الأساسية والكيماويات",
+      "current_price": 6.07,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 102,
+      "ticker": "UNIT.CA",
+      "company_name": "المتحدة للإسكان والتعمير",
+      "sector": "التطوير العقاري",
+      "current_price": 17.71,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 103,
+      "ticker": "ICID.CA",
+      "company_name": "الصناعات الكيماوية المصرية (سيد)",
+      "sector": "الرعاية الصحية والأدوية",
+      "current_price": 18.17,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 104,
+      "ticker": "SMPP.CA",
+      "company_name": "المصرية لتصنيع النشا والجلوكوز",
+      "sector": "الأغذية والمشروبات والتبغ",
+      "current_price": 100.0,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 105,
+      "ticker": "EGSA.CA",
+      "company_name": "العامة لمنتجات الخزف والصيني (شيني)",
+      "sector": "مواد البناء والتشييد",
+      "current_price": 9.02,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 106,
+      "ticker": "PACH.CA",
+      "company_name": "البويات والصناعات الكيماوية (باكين)",
+      "sector": "الموارد الأساسية والكيماويات",
+      "current_price": 86.5,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 107,
+      "ticker": "OLFI.CA",
+      "company_name": "العربية للأغذية والزيوت (أولفي)",
+      "sector": "الأغذية والمشروبات والتبغ",
+      "current_price": 21.09,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 108,
+      "ticker": "IFAP.CA",
+      "company_name": "الدولية للأسمدة والكيماويات",
+      "sector": "الموارد الأساسية والكيماويات",
+      "current_price": 19.4,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 109,
+      "ticker": "TORA.CA",
+      "company_name": "أسمنت بورتلاند طرة المصرية",
+      "sector": "مواد البناء والتشييد",
+      "current_price": 63.02,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 110,
+      "ticker": "SVCE.CA",
+      "company_name": "جنوب الوادي للأسمنت",
+      "sector": "مواد البناء والتشييد",
+      "current_price": 10.4,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 111,
+      "ticker": "ALUM.CA",
+      "company_name": "الألومنيوم العربية",
+      "sector": "الموارد الأساسية والكيماويات",
+      "current_price": 23.53,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 112,
+      "ticker": "BIOC.CA",
+      "company_name": "بيو فارما إيجيبت للأدوية",
+      "sector": "الرعاية الصحية والأدوية",
+      "current_price": 330.0,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 113,
+      "ticker": "KABO.CA",
+      "company_name": "النصر للغزل والنسيج (كابو)",
+      "sector": "المنسوجات والسلع الاستهلاكية",
+      "current_price": 9.05,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 114,
+      "ticker": "EFIC.CA",
+      "company_name": "المصرية المالية والصناعية (إفيك)",
+      "sector": "الموارد الأساسية والكيماويات",
+      "current_price": 162.5,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 115,
+      "ticker": "MIPH.CA",
+      "company_name": "مصر لصناعة الفوسفات",
+      "sector": "الموارد الأساسية والكيماويات",
+      "current_price": 827.0,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 116,
+      "ticker": "SCEM.CA",
+      "company_name": "أسمنت سيناء",
+      "sector": "مواد البناء والتشييد",
+      "current_price": 85.59,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 117,
+      "ticker": "CSAG.CA",
+      "company_name": "القناة للتوكيلات الملاحية",
+      "sector": "خدمات النقل والشحن واللوجستيات",
+      "current_price": 36.73,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 118,
+      "ticker": "MCQE.CA",
+      "company_name": "أسمنت مصر بني سويف",
+      "sector": "مواد البناء والتشييد",
+      "current_price": 196.73,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 119,
+      "ticker": "SMPC.CA",
+      "company_name": "شمال الصعيد للتنمية والإنتاج الزراعي (نيوداب)",
+      "sector": "الأغذية والمشروبات والتبغ",
+      "current_price": 2.65,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 120,
+      "ticker": "ARCO.CA",
+      "company_name": "العربية للأسمنت المسلح",
+      "sector": "مواد البناء والتشييد",
+      "current_price": 2.05,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 121,
+      "ticker": "ECAP.CA",
+      "company_name": "العز لصناعة السيراميك والبورسلين (الجوهرة)",
+      "sector": "مواد البناء والتشييد",
+      "current_price": 30.1,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 122,
+      "ticker": "SPIN.CA",
+      "company_name": "الإسكندرية للغزل والنسيج",
+      "sector": "المنسوجات والسلع الاستهلاكية",
+      "current_price": 16.31,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 123,
+      "ticker": "ARPU.CA",
+      "company_name": "العربية للأدوية والصناعات الكيماوية",
+      "sector": "الرعاية الصحية والأدوية",
+      "current_price": 10.0,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 124,
+      "ticker": "MPCO.CA",
+      "company_name": "المنصورة للدواجن",
+      "sector": "الأغذية والمشروبات والتبغ",
+      "current_price": 2.39,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 125,
+      "ticker": "CPCI.CA",
+      "company_name": "القاهرة للأدوية والصناعات الكيماوية",
+      "sector": "الرعاية الصحية والأدوية",
+      "current_price": 600.0,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 126,
+      "ticker": "AXPH.CA",
+      "company_name": "الإسكندرية للأدوية والصناعات الكيماوية",
+      "sector": "الرعاية الصحية والأدوية",
+      "current_price": 1493.0,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 127,
+      "ticker": "EPCO.CA",
+      "company_name": "مصر لصناعة وتجارة الأنابيب",
+      "sector": "الصناعة والمقاولات",
+      "current_price": 9.79,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 128,
+      "ticker": "ADPC.CA",
+      "company_name": "العربية لأنابيب البترول",
+      "sector": "الطاقة والخدمات البترولية",
+      "current_price": 3.53,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 129,
+      "ticker": "IRON.CA",
+      "company_name": "الحديد والصلب المصرية (تحت التصفية)",
+      "sector": "الموارد الأساسية والكيماويات",
+      "current_price": 29.79,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 130,
+      "ticker": "ATQA.CA",
+      "company_name": "مصر الوطنية للصلب (عتاقة)",
+      "sector": "الموارد الأساسية والكيماويات",
+      "current_price": 12.25,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 131,
+      "ticker": "MPCI.CA",
+      "company_name": "ممفيس للأدوية والصناعات الكيماوية",
+      "sector": "الرعاية الصحية والأدوية",
+      "current_price": 346.01,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 132,
+      "ticker": "AJWA.CA",
+      "company_name": "أجواء للصناعات الغذائية - مصر",
+      "sector": "الأغذية والمشروبات والتبغ",
+      "current_price": 196.16,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 133,
+      "ticker": "NIPH.CA",
+      "company_name": "النيل للأدوية والصناعات الكيماوية",
+      "sector": "الرعاية الصحية والأدوية",
+      "current_price": 315.5,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 134,
+      "ticker": "KRDI.CA",
+      "company_name": "الكردي للتنمية والاستثمار العقاري",
+      "sector": "التطوير العقاري",
+      "current_price": 0.43,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 135,
+      "ticker": "NAHO.CA",
+      "company_name": "نعيم القابضة للاستثمارات",
+      "sector": "الخدمات المالية والبنوك",
+      "current_price": 0.13,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 136,
+      "ticker": "EXTK.CA",
+      "company_name": "مستخلصات الزيوت ومنتجاتها",
+      "sector": "الأغذية والمشروبات والتبغ",
+      "current_price": 12.6,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 137,
+      "ticker": "ZEOT.CA",
+      "company_name": "الإسكندرية للزيوت والصابون",
+      "sector": "الأغذية والمشروبات والتبغ",
+      "current_price": 12.6,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 138,
+      "ticker": "TANM.CA",
+      "company_name": "تنمية للاستثمار العقاري والمقاولات",
+      "sector": "التطوير العقاري",
+      "current_price": 6.55,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 139,
+      "ticker": "CCRS.CA",
+      "company_name": "القاهرة للاستثمارات والتنمية",
+      "sector": "التطوير العقاري",
+      "current_price": 2.32,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 140,
+      "ticker": "ELWA.CA",
+      "company_name": "الوادي العالمية للاستثمار والتنمية",
+      "sector": "السياحة والترفيه",
+      "current_price": 1.57,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 141,
+      "ticker": "GSSC.CA",
+      "company_name": "العامة للصوامع والتخزين",
+      "sector": "خدمات النقل والشحن واللوجستيات",
+      "current_price": 284.89,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 142,
+      "ticker": "AMER.CA",
+      "company_name": "مجموعة عامر القابضة (عامر جروب)",
+      "sector": "التطوير العقاري",
+      "current_price": 5.03,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 143,
+      "ticker": "MBSC.CA",
+      "company_name": "مصر لأسمنت المنيا",
+      "sector": "مواد البناء والتشييد",
+      "current_price": 377.0,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 144,
+      "ticker": "PRCL.CA",
+      "company_name": "الخزف والصيني المصرية المتقدمة",
+      "sector": "مواد البناء والتشييد",
+      "current_price": 25.62,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 145,
+      "ticker": "EGEL.CA",
+      "company_name": "المصرية للصناعات الكهربائية المتقدمة",
+      "sector": "السلع المعمرة والإلكترونيات",
+      "current_price": 10.0,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 146,
+      "ticker": "MTRC.CA",
+      "company_name": "مطاحن ومخابز شمال القاهرة",
+      "sector": "الأغذية والمشروبات والتبغ",
+      "current_price": 183.87,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 147,
+      "ticker": "MCEG.CA",
+      "company_name": "مطاحن ومخابز جنوب القاهرة والجيزة",
+      "sector": "الأغذية والمشروبات والتبغ",
+      "current_price": 248.65,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 148,
+      "ticker": "WCDF.CA",
+      "company_name": "مطاحن ومخابز الإسكندرية",
+      "sector": "الأغذية والمشروبات والتبغ",
+      "current_price": 662.98,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 149,
+      "ticker": "MEFM.CA",
+      "company_name": "مطاحن مصر الوسطى",
+      "sector": "الأغذية والمشروبات والتبغ",
+      "current_price": 137.8,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 150,
+      "ticker": "UEDA.CA",
+      "company_name": "مطاحن مصر العليا",
+      "sector": "الأغذية والمشروبات والتبغ",
+      "current_price": 520.0,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 151,
+      "ticker": "WDEH.CA",
+      "company_name": "مطاحن وسط وغرب الدلتا",
+      "sector": "الأغذية والمشروبات والتبغ",
+      "current_price": 662.98,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 152,
+      "ticker": "MOSC.CA",
+      "company_name": "مصر لصناعة الأجهزة والمبردات",
+      "sector": "السلع المعمرة والإلكترونيات",
+      "current_price": 278.65,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 153,
+      "ticker": "EDFM.CA",
+      "company_name": "مطاحن شرق الدلتا",
+      "sector": "الأغذية والمشروبات والتبغ",
+      "current_price": 410.0,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 154,
+      "ticker": "ISMD.CA",
+      "company_name": "الإسماعيلية الوطنية للصناعات الغذائية (فوديكو)",
+      "sector": "الأغذية والمشروبات والتبغ",
+      "current_price": 10.0,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 155,
+      "ticker": "ISMA.CA",
+      "company_name": "الإسماعيلية مصر للدواجن",
+      "sector": "الأغذية والمشروبات والتبغ",
+      "current_price": 25.6,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 156,
+      "ticker": "IDRE.CA",
+      "company_name": "التنمية العمرانية الدولية",
+      "sector": "التطوير العقاري",
+      "current_price": 50.1,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 157,
+      "ticker": "GMCG.CA",
+      "company_name": "جي إم سي للاستثمارات الصناعية والتجارية",
+      "sector": "السلع المعمرة والإلكترونيات",
+      "current_price": 10.0,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 158,
+      "ticker": "ATLE.CA",
+      "company_name": "أطلس للاستثمار والصناعات الغذائية",
+      "sector": "الأغذية والمشروبات والتبغ",
+      "current_price": 10.0,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 159,
+      "ticker": "EPPK.CA",
+      "company_name": "المصرية للتعبئة والكرتون (إيجيباك)",
+      "sector": "الطباعة والتغليف",
+      "current_price": 9.78,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 160,
+      "ticker": "RREC.CA",
+      "company_name": "رواد التعمير العقاري",
+      "sector": "التطوير العقاري",
+      "current_price": 10.0,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 161,
+      "ticker": "OIBK.CA",
+      "company_name": "البنك الأهلي الكويتي - مصر",
+      "sector": "الخدمات المالية والبنوك",
+      "current_price": 10.0,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 162,
+      "ticker": "SNFC.CA",
+      "company_name": "الشرقية الوطنية للأمن الغذائي",
+      "sector": "الأغذية والمشروبات والتبغ",
+      "current_price": 11.64,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 163,
+      "ticker": "ARVA.CA",
+      "company_name": "العربية للمحابس",
+      "sector": "الصناعة والمقاولات",
+      "current_price": 12.35,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 164,
+      "ticker": "SAUD.CA",
+      "company_name": "بنك البركة مصر",
+      "sector": "الخدمات المالية والبنوك",
+      "current_price": 23.12,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 165,
+      "ticker": "ASCM.CA",
+      "company_name": "أسيك للتعدين (أسكوم)",
+      "sector": "الموارد الأساسية والكيماويات",
+      "current_price": 57.53,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 166,
+      "ticker": "EUBR.CA",
+      "company_name": "يوروبروكر لتداول الأوراق المالية",
+      "sector": "الخدمات المالية غير المصرفية",
+      "current_price": 10.0,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 167,
+      "ticker": "GTHC.CA",
+      "company_name": "جلوبال للتجارة والاستثمار",
+      "sector": "التجارة والموزعون",
+      "current_price": 10.0,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 168,
+      "ticker": "MASG.CA",
+      "company_name": "مرسى مرسى علم للتنمية السياحية",
+      "sector": "السياحة والترفيه",
+      "current_price": 10.0,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 169,
+      "ticker": "MBEN.CA",
+      "company_name": "إم بي للهندسة",
+      "sector": "الصناعة والمقاولات",
+      "current_price": 10.0,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 170,
+      "ticker": "FAHR.CA",
+      "company_name": "فنادق العروبة مصر",
+      "sector": "السياحة والترفيه",
+      "current_price": 10.0,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 171,
+      "ticker": "CIRA.CA",
+      "company_name": "القاهرة للاستثمار والتنمية العقارية (سيرا)",
+      "sector": "خدمات تعليمية",
+      "current_price": 39.42,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 172,
+      "ticker": "ANFI.CA",
+      "company_name": "الإسكندرية للخدمات الطبية (المركز الطبي الجديد)",
+      "sector": "الرعاية الصحية والأدوية",
+      "current_price": 10.0,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 173,
+      "ticker": "ELNA.CA",
+      "company_name": "النصر للملابس والمنسوجات (كابو)",
+      "sector": "المنسوجات والسلع المعمرة",
+      "current_price": 34.35,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 174,
+      "ticker": "GPHI.CA",
+      "company_name": "جراند فيستمنت القابضة للاستثمارات المالية",
+      "sector": "الخدمات المالية غير المصرفية",
+      "current_price": 10.0,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 175,
+      "ticker": "NATP.CA",
+      "company_name": "الوطنية للصناعات الدوائية",
+      "sector": "الرعاية الصحية والأدوية",
+      "current_price": 10.0,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 176,
+      "ticker": "BOCM.CA",
+      "company_name": "البركة للتجارة والتوريدات",
+      "sector": "التجارة والموزعون",
+      "current_price": 10.0,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 177,
+      "ticker": "MOFR.CA",
+      "company_name": "مصر لصناعة الكيماويات والزيوت",
+      "sector": "الموارد الأساسية والكيماويات",
+      "current_price": 10.0,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 178,
+      "ticker": "RUBX.CA",
+      "company_name": "روبكس العالمية لتصنيع البلاستيك والريبكس",
+      "sector": "مواد وبلاستيك",
+      "current_price": 18.01,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 179,
+      "ticker": "KRTE.CA",
+      "company_name": "كاتو للاستثمار والتطوير العقاري",
+      "sector": "التطوير العقاري",
+      "current_price": 10.0,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 180,
+      "ticker": "TALM.CA",
+      "company_name": "تعليم لخدمات الإدارة",
+      "sector": "خدمات تعليمية",
+      "current_price": 21.71,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 181,
+      "ticker": "UNFO.CA",
+      "company_name": "يونيفرسال للتجارة والمقاولات",
+      "sector": "الصناعة والمقاولات",
+      "current_price": 10.0,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 182,
+      "ticker": "BIGP.CA",
+      "company_name": "بيج تريد للتجارة والاستثمار",
+      "sector": "التجارة والتوزيع",
+      "current_price": 0.24,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 183,
+      "ticker": "UTOP.CA",
+      "company_name": "يوتوبيا للاستثمار العقاري والسياحي",
+      "sector": "التطوير العقاري",
+      "current_price": 101.5,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 184,
+      "ticker": "BIPC.CA",
+      "company_name": "البدر للبلاستيك (بورصة النيل)",
+      "sector": "الصناعة والمقاولات",
+      "current_price": 1.48,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 185,
+      "ticker": "INVE.CA",
+      "company_name": "إنترناشيونال بيزنس كوربوريشن",
+      "sector": "التجارة والموزعون",
+      "current_price": 4.12,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 186,
+      "ticker": "FPIH.CA",
+      "company_name": "المؤشر للبرمجيات وتكنولوجيا المعلومات",
+      "sector": "الاتصالات وتكنولوجيا المعلومات",
+      "current_price": 0.95,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 187,
+      "ticker": "OBAH.CA",
+      "company_name": "أكتوبر فارما للصناعات الدوائية",
+      "sector": "الرعاية الصحية والأدوية",
+      "current_price": 118.0,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 188,
+      "ticker": "LECI.CA",
+      "company_name": "ليسيكو مصر للسراميك والأدوات الصحية",
+      "sector": "الصناعة ومواد البناء",
+      "current_price": 24.5,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 189,
+      "ticker": "ENGC.CA",
+      "company_name": "الهندسية للصناعات التشييدية",
+      "sector": "الصناعة والمقاولات",
+      "current_price": 37.0,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 190,
+      "ticker": "RMDA.CA",
+      "company_name": "العاشر من رمضان للصناعات الدوائية (راميدا)",
+      "sector": "الرعاية الصحية والأدوية",
+      "current_price": 5.41,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 191,
+      "ticker": "MTIE.CA",
+      "company_name": "إم إم جروب للصناعة والتجارة العالمية",
+      "sector": "التجارة والموزعون",
+      "current_price": 8.06,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 192,
+      "ticker": "PHAR.CA",
+      "company_name": "الإسكندرية للأدوية والصناعات الكيماوية",
+      "sector": "الرعاية الصحية والأدوية",
+      "current_price": 114.1,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 193,
+      "ticker": "MENG.CA",
+      "company_name": "المهندس للتأمين",
+      "sector": "الخدمات المالية والبنوك",
+      "current_price": 26.4,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 194,
+      "ticker": "DEIN.CA",
+      "company_name": "الدلتا للتأمين",
+      "sector": "الخدمات المالية والبنوك",
+      "current_price": 12.42,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 195,
+      "ticker": "MHOT.CA",
+      "company_name": "مصر للفنادق",
+      "sector": "السياحة والترفيه",
+      "current_price": 17.39,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 196,
+      "ticker": "EMHA.CA",
+      "company_name": "مطاحن مصر الوسطى",
+      "sector": "الأغذية والمشروبات والسلع التموينية",
+      "current_price": 62.0,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 197,
+      "ticker": "MAAL.CA",
+      "company_name": "مطاحن ومخابز الإسكندرية",
+      "sector": "الأغذية والمشروبات والسلع التموينية",
+      "current_price": 10.9,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 198,
+      "ticker": "EMMC.CA",
+      "company_name": "مطاحن ومخابز شمال القاهرة",
+      "sector": "الأغذية والمشروبات والسلع التموينية",
+      "current_price": 44.8,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 199,
+      "ticker": "ENAE.CA",
+      "company_name": "مطاحن شرق الدلتا",
+      "sector": "الأغذية والمشروبات والسلع التموينية",
+      "current_price": 178.0,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 200,
+      "ticker": "GMCI.CA",
+      "company_name": "مطاحن ومخابز جنوب القاهرة والجيزة",
+      "sector": "الأغذية والمشروبات والسلع التموينية",
+      "current_price": 80.11,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 201,
+      "ticker": "MSEA.CA",
+      "company_name": "مصر شبين الكوم للغزل والنسيج",
+      "sector": "المنسوجات والملابس الجاهزة",
+      "current_price": 3.8,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 202,
+      "ticker": "AFMC.CA",
+      "company_name": "الإسكندرية للغزل والنسيج (سبينالكس)",
+      "sector": "المنسوجات والملابس الجاهزة",
+      "current_price": 152.0,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 203,
+      "ticker": "GTFI.CA",
+      "company_name": "جولدن تكس للأصواف",
+      "sector": "المنسوجات والملابس الجاهزة",
+      "current_price": 36.2,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 204,
+      "ticker": "RACT.CA",
+      "company_name": "العامة لصناعة الورق (راكتا)",
+      "sector": "الموارد الأساسية والورق",
+      "current_price": 19.8,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 205,
+      "ticker": "NASR.CA",
+      "company_name": "النصر لتصنيع الحاصلات الزراعية",
+      "sector": "الأغذية والمشروبات والزراعة",
+      "current_price": 28.9,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 206,
+      "ticker": "NBKE.CA",
+      "company_name": "بنك الكويت الوطني - مصر",
+      "sector": "الخدمات المالية والبنوك",
+      "current_price": 35.29,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 207,
+      "ticker": "NCOI.CA",
+      "company_name": "الوطنية للإسكان للنقابات المهنية",
+      "sector": "التطوير العقاري",
+      "current_price": 42.0,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 208,
+      "ticker": "NEDA.CA",
+      "company_name": "شمال الصعيد للتنمية والإنتاج الزراعي (نيوداب)",
+      "sector": "الأغذية والمشروبات والزراعة",
+      "current_price": 2.65,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 209,
+      "ticker": "GPPL.CA",
+      "company_name": "جولدن بيراميدز بلازا",
+      "sector": "السياحة والترفيه",
+      "current_price": 1.4,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 210,
+      "ticker": "GOST.CA",
+      "company_name": "جولدن كوست للأستثمار والقرى السياحية",
+      "sector": "السياحة والترفيه",
+      "current_price": 0.58,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 211,
+      "ticker": "MINA.CA",
+      "company_name": "مينا للاستثمار السياحي والعقاري",
+      "sector": "التطوير العقاري",
+      "current_price": 2.15,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 212,
+      "ticker": "MAOT.CA",
+      "company_name": "مرسى علم للتنمية السياحية",
+      "sector": "السياحة والترفيه",
+      "current_price": 3.4,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 213,
+      "ticker": "REAP.CA",
+      "company_name": "رواد السياحة (الرواد)",
+      "sector": "السياحة والترفيه",
+      "current_price": 35.8,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 214,
+      "ticker": "REAL.CA",
+      "company_name": "العقارية للبنوك الوطنية للتنمية",
+      "sector": "التطوير العقاري",
+      "current_price": 1.1,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 215,
+      "ticker": "EGTI.CA",
+      "company_name": "المصرية للنقل وخدمات البترول",
+      "sector": "الطاقة والخدمات البترولية",
+      "current_price": 6.8,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 216,
+      "ticker": "EFRH.CA",
+      "company_name": "المجموعة العقارية المصرية (ليفت سلاب)",
+      "sector": "التطوير العقاري",
+      "current_price": 0.42,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 217,
+      "ticker": "SEMR.CA",
+      "company_name": "سماد مصر (إيجيفرت)",
+      "sector": "الموارد الأساسية والكيماويات",
+      "current_price": 64.0,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 218,
+      "ticker": "SINA.CA",
+      "company_name": "سيناء للأسمنت",
+      "sector": "الصناعة ومواد البناء",
+      "current_price": 15.0,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 219,
+      "ticker": "WATA.CA",
+      "company_name": "الوطنية لمنتجات الذرة والدواجن",
+      "sector": "الأغذية والمشروبات والزراعة",
+      "current_price": 52.0,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 220,
+      "ticker": "KAMA.CA",
+      "company_name": "كفر الزيات للمبيدات والكيماويات",
+      "sector": "الموارد الأساسية والكيماويات",
+      "current_price": 11.2,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 221,
+      "ticker": "ARTI.CA",
+      "company_name": "أرابيلا للاستثمار والتنمية العقارية",
+      "sector": "التطوير العقاري",
+      "current_price": 0.65,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 222,
+      "ticker": "ACAMD.CA",
+      "company_name": "العربية لإدارة وتطوير الأصول",
+      "sector": "التطوير العقاري",
+      "current_price": 2.05,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 223,
+      "ticker": "PRAP.CA",
+      "company_name": "برايم القابضة للاستثمارات المالية",
+      "sector": "الخدمات المالية والبنوك",
+      "current_price": 0.94,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 224,
+      "ticker": "EALR.CA",
+      "company_name": "العز الدخيلة للصلب - الإسكندرية",
+      "sector": "الموارد الأساسية والمعادن",
+      "current_price": 344.0,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 225,
+      "ticker": "NAEH.CA",
+      "company_name": "النعيم القابضة للاستثمارات",
+      "sector": "الخدمات المالية والبنوك",
+      "current_price": 0.16,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 226,
+      "ticker": "INBK.CA",
+      "company_name": "بنك الاستثمار العربي (aiBANK)",
+      "sector": "الخدمات المالية والبنوك",
+      "current_price": 16.5,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 227,
+      "ticker": "TAPH.CA",
+      "company_name": "طيبة للخدمات الطبية والتجهيزات",
+      "sector": "الرعاية الصحية والأدوية",
+      "current_price": 4.6,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 228,
+      "ticker": "UBEE.CA",
+      "company_name": "بنك أبوظبي التجاري مصر",
+      "sector": "الخدمات المالية والبنوك",
+      "current_price": 16.1,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 229,
+      "ticker": "MILK.CA",
+      "company_name": "العربية لمنتجات الألبان (آراب ديري - باندا)",
+      "sector": "الأغذية والمشروبات والسلع التموينية",
+      "current_price": 2.85,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 230,
+      "ticker": "MISR.CA",
+      "company_name": "مصر لصناعة الكيماويات المتطورة",
+      "sector": "الموارد الأساسية والكيماويات",
+      "current_price": 5.51,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 231,
+      "ticker": "PLST.CA",
+      "company_name": "المصرية لصناعة البلاستيك ومستلزمات التعبئة",
+      "sector": "الصناعة والمقاولات",
+      "current_price": 1.75,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 232,
+      "ticker": "SILK.CA",
+      "company_name": "مصر للحرير الصناعي وألياف البوليستر",
+      "sector": "المنسوجات والملابس الجاهزة",
+      "current_price": 2.3,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 233,
+      "ticker": "SICO.CA",
+      "company_name": "الشركة المصرية لصناعات السيليكون (سيكو مصر)",
+      "sector": "الاتصالات وتكنولوجيا المعلومات",
+      "current_price": 5.2,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 234,
+      "ticker": "TOUR.CA",
+      "company_name": "مصر للسياحة ونقل الركاب",
+      "sector": "السياحة والترفيه",
+      "current_price": 10.0,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 235,
+      "ticker": "SREC.CA",
+      "company_name": "الشروق الحديثة للطباعة والتغليف",
+      "sector": "الموارد الأساسية والورق",
+      "current_price": 14.8,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 236,
+      "ticker": "TRCO.CA",
+      "company_name": "ترانس كيميا للشحن وتداول الكيماويات",
+      "sector": "النقل واللوجستيات",
+      "current_price": 8.4,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 237,
+      "ticker": "APEX.CA",
+      "company_name": "أبيكس الطبية للأدوية والمستلزمات",
+      "sector": "الرعاية الصحية والأدوية",
+      "current_price": 8.7,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 238,
+      "ticker": "WBCO.CA",
+      "company_name": "غرب الدلتا للنقل والإنشاءات",
+      "sector": "الصناعة والمقاولات",
+      "current_price": 3.6,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 239,
+      "ticker": "ROBO.CA",
+      "company_name": "روبوتكس مصر للأنظمة الذكية والتحكم",
+      "sector": "الاتصالات وتكنولوجيا المعلومات",
+      "current_price": 2.9,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 240,
+      "ticker": "WETH.CA",
+      "company_name": "الواحة للمنتجعات والتنمية السياحية",
+      "sector": "السياحة والترفيه",
+      "current_price": 1.85,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 241,
+      "ticker": "FITA.CA",
+      "company_name": "فيرست للاستثمار والتنمية العقارية",
+      "sector": "التطوير العقاري",
+      "current_price": 1.15,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 242,
+      "ticker": "AUTO.CA",
+      "company_name": "الوطنية للسيارات وخدمات التوزيع",
+      "sector": "التجارة والموزعون",
+      "current_price": 15.2,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 243,
+      "ticker": "GRCA.CA",
+      "company_name": "جراند كابيتال القابضة للاستثمارات",
+      "sector": "الخدمات المالية والبنوك",
+      "current_price": 37.7,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 244,
+      "ticker": "IBAG.CA",
+      "company_name": "إنترناشيونال بيزنس للتحويلات والخدمات المالية",
+      "sector": "الخدمات المالية والبنوك",
+      "current_price": 31.0,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 245,
+      "ticker": "PRED.CA",
+      "company_name": "بورسعيد للتنمية وتجارة الحبوب",
+      "sector": "الأغذية والمشروبات والزراعة",
+      "current_price": 4.4,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 246,
+      "ticker": "INTP.CA",
+      "company_name": "إنترناشيونال بيبر مصر لمنتجات الكرتون",
+      "sector": "الموارد الأساسية والورق",
+      "current_price": 6.3,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 247,
+      "ticker": "HOPL.CA",
+      "company_name": "هوسبيتاليتي مصر للفنادق والمنتجعات",
+      "sector": "السياحة والترفيه",
+      "current_price": 4.1,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 248,
+      "ticker": "MERT.CA",
+      "company_name": "البحر الأحمر لليخوت ومارينا السياحية",
+      "sector": "السياحة والترفيه",
+      "current_price": 2.5,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 249,
+      "ticker": "NMTC.CA",
+      "company_name": "الحديثة للتجارة وتوزيع الأدوية",
+      "sector": "الرعاية الصحية والأدوية",
+      "current_price": 5.6,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 250,
+      "ticker": "PRMG.CA",
+      "company_name": "برايم للوساطة في الأوراق المالية",
+      "sector": "الخدمات المالية والبنوك",
+      "current_price": 1.6,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 251,
+      "ticker": "MFSC.CA",
+      "company_name": "مصر للشحن والتفريغ والخدمات اللوجستية",
+      "sector": "النقل واللوجستيات",
+      "current_price": 43.91,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 252,
+      "ticker": "PTIT.CA",
+      "company_name": "بتروليوم تكنولوجي لتطوير الحقول",
+      "sector": "الطاقة والخدمات البترولية",
+      "current_price": 28.0,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 253,
+      "ticker": "SDRE.CA",
+      "company_name": "الصعيد للتنمية والتطوير العمراني",
+      "sector": "التطوير العقاري",
+      "current_price": 1.35,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 254,
+      "ticker": "SOMP.CA",
+      "company_name": "الخدمات البترولية المتخصصة للشحن",
+      "sector": "الطاقة والخدمات البترولية",
+      "current_price": 18.5,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 255,
+      "ticker": "RDIN.CA",
+      "company_name": "الدلتا للإنشاءات والتطوير الصناعي",
+      "sector": "الصناعة والمقاولات",
+      "current_price": 6.7,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 256,
+      "ticker": "RAPA.CA",
+      "company_name": "النيل للغزل والمنسوجات الراقية",
+      "sector": "المنسوجات والملابس الجاهزة",
+      "current_price": 1.95,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 257,
+      "ticker": "TECH.CA",
+      "company_name": "تكنولوجيا الاتصالات والشبكات الذكية",
+      "sector": "الاتصالات وتكنولوجيا المعلومات",
+      "current_price": 8.1,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 258,
+      "ticker": "TERA.CA",
+      "company_name": "تراست كابيتال للاستثمارات المالية",
+      "sector": "الخدمات المالية والبنوك",
+      "current_price": 2.2,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 259,
+      "ticker": "VITA.CA",
+      "company_name": "فيتا فارما للأدوية والمكملات الغذائية",
+      "sector": "الرعاية الصحية والأدوية",
+      "current_price": 10.5,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 260,
+      "ticker": "FTRP.CA",
+      "company_name": "فيوتشر بارتنرز للاستثمار والنمو",
+      "sector": "الخدمات المالية والبنوك",
+      "current_price": 3.45,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 261,
+      "ticker": "ALCO.CA",
+      "company_name": "ألكو للصناعات المعدنية والتطوير",
+      "sector": "الموارد الأساسية والمعادن",
+      "current_price": 13.4,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 262,
+      "ticker": "EBSC.CA",
+      "company_name": "المصرية للبطاقات الذكية وحلول الدفع",
+      "sector": "الاتصالات وتكنولوجيا المعلومات",
+      "current_price": 1.78,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 263,
+      "ticker": "EHCA.CA",
+      "company_name": "إيجي هيلث للرعاية الطبية والعيادات",
+      "sector": "الرعاية الصحية والأدوية",
+      "current_price": 7.3,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 264,
+      "ticker": "GYPT.CA",
+      "company_name": "الجبس الدولية للصناعات ومواد البناء",
+      "sector": "الصناعة ومواد البناء",
+      "current_price": 16.8,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 265,
+      "ticker": "HECA.CA",
+      "company_name": "هليوبوليس للكيماويات والمواد المتقدمة",
+      "sector": "الموارد الأساسية والكيماويات",
+      "current_price": 21.0,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 266,
+      "ticker": "AQUA.CA",
+      "company_name": "النيل للاستزراع المائي والإنتاج السمكي",
+      "sector": "الأغذية والمشروبات والزراعة",
+      "current_price": 1.8,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 267,
+      "ticker": "MPNZ.CA",
+      "company_name": "مصر للمستحضرات الطبية واللقاحات",
+      "sector": "الرعاية الصحية والأدوية",
+      "current_price": 32.5,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 268,
+      "ticker": "SOLR.CA",
+      "company_name": "المصرية للطاقة الشمسية والحلول الخضراء",
+      "sector": "الطاقة والمرافق",
+      "current_price": 5.8,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 269,
+      "ticker": "CASH.CA",
+      "company_name": "كاش بلس للحلول التمويلية متناهية الصغر",
+      "sector": "الخدمات المالية والبنوك",
+      "current_price": 3.1,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 270,
+      "ticker": "LOGI.CA",
+      "company_name": "لوجستيكا مصر للشحن السريع والتخزين",
+      "sector": "النقل واللوجستيات",
+      "current_price": 4.9,
+      "alpha_score": 30.0,
+      "probability_up_pct": 5.0,
+      "expected_return_pct": 4.2,
+      "prediction_interval_90": {
+        "lower_bound_pct": -4.0,
+        "upper_bound_pct": 7.5,
+        "interval_width_pct": 11.5,
+        "formatted_str": "[-4.0% → +7.5%]"
+      },
+      "decision": "AVOID",
+      "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
+      "is_liquid": false,
+      "market_regime": "STRONG_BULL"
+    }
+  ]
+}

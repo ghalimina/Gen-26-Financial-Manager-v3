@@ -1,0 +1,71 @@
+{
+  "status": "SUCCESS",
+  "as_of": "2026-10-10 04:02:49",
+  "macro_indicators": {
+    "usd_egp": {
+      "rate": 52.32,
+      "currency": "EGP",
+      "label_ar": "سعر صرف الجنيه أمام الدولار الأمريكي (Interbank / Live SSoT)",
+      "status": "VERIFIED_LIVE"
+    },
+    "cbe_corridor_interest_rate": {
+      "rate_pct": 19.0,
+      "label_ar": "سعر الكوريدور المعتمد لدى البنك المركزي المصري",
+      "status": "OFFICIAL_MONETARY_POLICY"
+    },
+    "cpi_inflation_yoy": {
+      "rate_pct": 14.5,
+      "label_ar": "معدل التضخم السنوي العام للحضر (الجهاز المركزي للتعبئة والإحصاء)",
+      "status": "OFFICIAL_BULLETIN"
+    },
+    "real_interest_rate_pct": 4.5
+  },
+  "regime_classification": {
+    "current_regime": "DEVALUATION_BOOM",
+    "regime_label_ar": "🚀 طفرة تصديرية واستفادة من خفض الجنيه (Devaluation Boom)",
+    "rationale_ar": "مع انخفاض قيمة الجنيه المصري، تحقق الشركات ذات الإيرادات الدولارية أو المرتبطة بالأسعار العالمية (مثل مصدري الأسمدة والألومنيوم والخدمات اللوجستية) طفرات في هوامش الربحية وإعادة تقييم أصولها، في حين تتكبد الشركات المعتمدة على استيراد المكونات تكاليف تشغيلية مضاعفة.",
+    "market_stance_ar": "بيئة تفضيلية للمصدرين والشركات ذات السيولة الدولارية وأصول التحوط."
+  },
+  "sector_rotation_matrix": {
+    "overweight_sectors_en": [
+      "Fertilizers & Petrochemicals (USD Revenue)",
+      "Basic Resources & Export Metals (EGAL/ESRS)",
+      "Export-Oriented Industrials (SWDY/ORAS)",
+      "Dollar-Earning Logistics & Ports"
+    ],
+    "overweight_sectors_ar": [
+      "الأسمدة والكيماويات المصدرة (إيرادات دولارية)",
+      "الموارد الأساسية وتصدير المعادن (مصر للألومنيوم والحديد)",
+      "المقاولات والصناعات متعددة الجنسيات (السويدي وأوراسكوم)",
+      "الخدمات اللوجستية والموانئ"
+    ],
+    "underweight_sectors_en": [
+      "Import-Dependent Consumer Goods",
+      "Automotive Assembly & Import Retail (GBCO)",
+      "Electronics & Appliance Retail"
+    ],
+    "underweight_sectors_ar": [
+      "السلع الاستهلاكية المعتمدة على الاستيراد",
+      "تجميع وتوزيع السيارات ومستوردي التجزئة",
+      "الأجهزة الإلكترونية المستوردة"
+    ],
+    "neutral_sectors_en": [
+      "Banking & Financial Services",
+      "Healthcare & Pharmaceuticals",
+      "Real Estate (Asset-Backed Wealth Hedge)"
+    ],
+    "sector_multipliers": {
+      "Fertilizers": 1.35,
+      "Basic Resources": 1.3,
+      "Industrials": 1.2,
+      "Banking": 1.05,
+      "Automotive": 0.7,
+      "Import Consumer": 0.65
+    }
+  },
+  "egx_market_context": {
+    "egx30_level": 53265.1992,
+    "market_breadth": "MIXED_TO_NEGATIVE",
+    "analyst_assessment_ar": "البورصة في مرحلة هبوط انتقائي — الأسهم القيادية تضغط السوق والتوترات الجيوسياسية وارتفاع أسعار النفط يُضغطان على الهوامش"
+  }
+}

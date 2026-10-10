@@ -1,0 +1,265 @@
+{
+  "status": "SUCCESS",
+  "as_of": "2026-10-10 04:02:50",
+  "dossiers_count": 6,
+  "dossiers": {
+    "COMI.CA": {
+      "ticker": "COMI.CA",
+      "company_name_ar": "البنك التجاري الدولي (CIB)",
+      "sector": "الخدمات المالية والبنوك",
+      "current_live_price": 124.65,
+      "valuation_multiples": {
+        "pe_ratio": 3.91,
+        "pb_ratio": 1.16,
+        "return_on_equity_pct": 32.0,
+        "dividend_yield_pct": 4.41,
+        "accounting_quality": "HIGH_INSTITUTIONAL"
+      },
+      "execution_boundaries": {
+        "accumulation_entry_zone": "123.50 – 125.00",
+        "strict_stop_loss": 118.42,
+        "swing_target_20d": 134.62
+      },
+      "multi_horizon_targets": {
+        "horizon_5d": {
+          "days": 5,
+          "target_price": 128.5,
+          "expected_gain_pct": 3.09,
+          "label_ar": "المدى القصير (5 أيام)"
+        },
+        "horizon_20d": {
+          "days": 20,
+          "target_price": 134.62,
+          "expected_gain_pct": 8.0,
+          "label_ar": "المدى المتوسط (20 يوماً - سوينج)"
+        },
+        "horizon_60d": {
+          "days": 60,
+          "target_price": 145.0,
+          "expected_gain_pct": 16.33,
+          "label_ar": "المدى الاستثماري (60 يوماً)"
+        }
+      },
+      "technical_indicators": {
+        "trend": "BULLISH_EXPANSION",
+        "relative_strength": "OUTPERFORMING_BENCHMARK",
+        "volatility_regime": "CONTROLLED"
+      }
+    },
+    "SWDY.CA": {
+      "ticker": "SWDY.CA",
+      "company_name_ar": "السويدي إليكتريك",
+      "sector": "الصناعة والمقاولات",
+      "current_live_price": 116.0,
+      "valuation_multiples": {
+        "pe_ratio": 8.2,
+        "pb_ratio": 1.65,
+        "return_on_equity_pct": 24.0,
+        "dividend_yield_pct": 3.45,
+        "accounting_quality": "HIGH_INSTITUTIONAL"
+      },
+      "execution_boundaries": {
+        "accumulation_entry_zone": "114.93 – 116.32",
+        "strict_stop_loss": 110.2,
+        "swing_target_20d": 125.28
+      },
+      "multi_horizon_targets": {
+        "horizon_5d": {
+          "days": 5,
+          "target_price": 119.58,
+          "expected_gain_pct": 3.09,
+          "label_ar": "المدى القصير (5 أيام)"
+        },
+        "horizon_20d": {
+          "days": 20,
+          "target_price": 125.28,
+          "expected_gain_pct": 8.0,
+          "label_ar": "المدى المتوسط (20 يوماً - سوينج)"
+        },
+        "horizon_60d": {
+          "days": 60,
+          "target_price": 134.94,
+          "expected_gain_pct": 16.33,
+          "label_ar": "المدى الاستثماري (60 يوماً)"
+        }
+      },
+      "technical_indicators": {
+        "trend": "BULLISH_EXPANSION",
+        "relative_strength": "OUTPERFORMING_BENCHMARK",
+        "volatility_regime": "CONTROLLED"
+      }
+    },
+    "TMGH.CA": {
+      "ticker": "TMGH.CA",
+      "company_name_ar": "مجموعة طلعت مصطفى",
+      "sector": "العقارات",
+      "current_live_price": 87.89,
+      "valuation_multiples": {
+        "pe_ratio": 14.5,
+        "pb_ratio": 2.1,
+        "return_on_equity_pct": 19.0,
+        "dividend_yield_pct": 2.5,
+        "accounting_quality": "HIGH_INSTITUTIONAL"
+      },
+      "execution_boundaries": {
+        "accumulation_entry_zone": "87.08 – 88.14",
+        "strict_stop_loss": 83.5,
+        "swing_target_20d": 94.92
+      },
+      "multi_horizon_targets": {
+        "horizon_5d": {
+          "days": 5,
+          "target_price": 90.6,
+          "expected_gain_pct": 3.08,
+          "label_ar": "المدى القصير (5 أيام)"
+        },
+        "horizon_20d": {
+          "days": 20,
+          "target_price": 94.92,
+          "expected_gain_pct": 8.0,
+          "label_ar": "المدى المتوسط (20 يوماً - سوينج)"
+        },
+        "horizon_60d": {
+          "days": 60,
+          "target_price": 102.24,
+          "expected_gain_pct": 16.33,
+          "label_ar": "المدى الاستثماري (60 يوماً)"
+        }
+      },
+      "technical_indicators": {
+        "trend": "BULLISH_EXPANSION",
+        "relative_strength": "OUTPERFORMING_BENCHMARK",
+        "volatility_regime": "CONTROLLED"
+      }
+    },
+    "MFPC.CA": {
+      "ticker": "MFPC.CA",
+      "company_name_ar": "مصر لإنتاج الأسمدة (موبكو)",
+      "sector": "الموارد الأساسية والكيماويات",
+      "current_live_price": 46.5,
+      "valuation_multiples": {
+        "pe_ratio": 7.1,
+        "pb_ratio": 2.8,
+        "return_on_equity_pct": 35.0,
+        "dividend_yield_pct": 6.2,
+        "accounting_quality": "HIGH_INSTITUTIONAL"
+      },
+      "execution_boundaries": {
+        "accumulation_entry_zone": "46.07 – 46.63",
+        "strict_stop_loss": 44.17,
+        "swing_target_20d": 50.22
+      },
+      "multi_horizon_targets": {
+        "horizon_5d": {
+          "days": 5,
+          "target_price": 47.94,
+          "expected_gain_pct": 3.1,
+          "label_ar": "المدى القصير (5 أيام)"
+        },
+        "horizon_20d": {
+          "days": 20,
+          "target_price": 50.22,
+          "expected_gain_pct": 8.0,
+          "label_ar": "المدى المتوسط (20 يوماً - سوينج)"
+        },
+        "horizon_60d": {
+          "days": 60,
+          "target_price": 54.09,
+          "expected_gain_pct": 16.32,
+          "label_ar": "المدى الاستثماري (60 يوماً)"
+        }
+      },
+      "technical_indicators": {
+        "trend": "BULLISH_EXPANSION",
+        "relative_strength": "OUTPERFORMING_BENCHMARK",
+        "volatility_regime": "CONTROLLED"
+      }
+    },
+    "PHDC.CA": {
+      "ticker": "PHDC.CA",
+      "company_name_ar": "بالم هيلز للتعمير",
+      "sector": "العقارات",
+      "current_live_price": 12.93,
+      "valuation_multiples": {
+        "pe_ratio": 6.4,
+        "pb_ratio": 1.35,
+        "return_on_equity_pct": 21.0,
+        "dividend_yield_pct": 2.71,
+        "accounting_quality": "HIGH_INSTITUTIONAL"
+      },
+      "execution_boundaries": {
+        "accumulation_entry_zone": "12.81 – 12.97",
+        "strict_stop_loss": 12.28,
+        "swing_target_20d": 13.96
+      },
+      "multi_horizon_targets": {
+        "horizon_5d": {
+          "days": 5,
+          "target_price": 13.33,
+          "expected_gain_pct": 3.09,
+          "label_ar": "المدى القصير (5 أيام)"
+        },
+        "horizon_20d": {
+          "days": 20,
+          "target_price": 13.96,
+          "expected_gain_pct": 7.97,
+          "label_ar": "المدى المتوسط (20 يوماً - سوينج)"
+        },
+        "horizon_60d": {
+          "days": 60,
+          "target_price": 15.04,
+          "expected_gain_pct": 16.32,
+          "label_ar": "المدى الاستثماري (60 يوماً)"
+        }
+      },
+      "technical_indicators": {
+        "trend": "BULLISH_EXPANSION",
+        "relative_strength": "OUTPERFORMING_BENCHMARK",
+        "volatility_regime": "CONTROLLED"
+      }
+    },
+    "RAYA.CA": {
+      "ticker": "RAYA.CA",
+      "company_name_ar": "راية القابضة",
+      "sector": "الاتصالات والتكنولوجيا",
+      "current_live_price": 6.6,
+      "valuation_multiples": {
+        "pe_ratio": 5.8,
+        "pb_ratio": 1.2,
+        "return_on_equity_pct": 18.5,
+        "dividend_yield_pct": 3.79,
+        "accounting_quality": "HIGH_INSTITUTIONAL"
+      },
+      "execution_boundaries": {
+        "accumulation_entry_zone": "6.54 – 6.62",
+        "strict_stop_loss": 6.27,
+        "swing_target_20d": 7.13
+      },
+      "multi_horizon_targets": {
+        "horizon_5d": {
+          "days": 5,
+          "target_price": 6.8,
+          "expected_gain_pct": 3.03,
+          "label_ar": "المدى القصير (5 أيام)"
+        },
+        "horizon_20d": {
+          "days": 20,
+          "target_price": 7.13,
+          "expected_gain_pct": 8.03,
+          "label_ar": "المدى المتوسط (20 يوماً - سوينج)"
+        },
+        "horizon_60d": {
+          "days": 60,
+          "target_price": 7.68,
+          "expected_gain_pct": 16.36,
+          "label_ar": "المدى الاستثماري (60 يوماً)"
+        }
+      },
+      "technical_indicators": {
+        "trend": "BULLISH_EXPANSION",
+        "relative_strength": "OUTPERFORMING_BENCHMARK",
+        "volatility_regime": "CONTROLLED"
+      }
+    }
+  }
+}
