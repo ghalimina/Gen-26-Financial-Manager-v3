@@ -256,16 +256,28 @@ def auto_sync_from_remote_on_startup(background: bool = True, force: bool = Fals
         }
 
         # 1. Verify local environment (skip on Render / GitHub Actions / CI)
-        if not is_local_environment():
+        if not is_local_environment() or os.getenv("SKIP_AUTO_GIT_SYNC") == "1":
             result["status"] = "SKIPPED"
             result["is_local"] = False
-            result["message"] = "Skipped remote sync: running in cloud container or testing environment."
+            result["message"] = "Skipped remote sync: running in cloud container or disabled via SKIP_AUTO_GIT_SYNC."
             logger.info(result["message"])
             _LAST_AUTO_SYNC_STATUS.update(result)
             return result
 
-        # 2. Execute git pull --rebase origin main safely (Timeout 15s)
         import subprocess
+        # Check if local working tree has unstaged edits; if so, skip pull to protect active work
+        try:
+            st_proc = subprocess.run(["git", "status", "--porcelain"], cwd=WORKSPACE, capture_output=True, text=True, timeout=5.0)
+            if st_proc.stdout.strip():
+                result["status"] = "SKIPPED_DIRTY_TREE"
+                result["message"] = "Skipped auto-pull: local working tree contains active uncommitted edits."
+                logger.info(result["message"])
+                _LAST_AUTO_SYNC_STATUS.update(result)
+                return result
+        except Exception:
+            pass
+
+        # 2. Execute git pull --rebase origin main safely (Timeout 15s)
         try:
             logger.info("Executing auto-sync from remote: git pull --rebase origin main (timeout=%.1fs)...", timeout_sec)
             cmd = ["git", "pull", "--rebase", "--autostash", "origin", "main"]
