@@ -1,0 +1,1130 @@
+{
+  "report_title": "تقرير التدقيق الواقعي المجرد لكافة أسهم البورصة المصرية (270 سهماً)",
+  "audit_timestamp": "2026-10-10 05:20:57",
+  "audit_duration_seconds": 14.08,
+  "executive_summary": {
+    "total_universe_stocks": 270,
+    "safe_tradable_universe_stocks": 212,
+    "safe_tradable_universe_pct": 78.5,
+    "ghost_illiquid_stocks_count": 58,
+    "ghost_illiquid_stocks_pct": 21.5,
+    "overall_empirical_win_rate_pct": 54.8,
+    "empirical_spearman_ic": 0.4894,
+    "fixed_friction_pct": 0.94,
+    "portfolio_total_equity_egp": 13658.56
+  },
+  "liquidity_census": {
+    "total_stocks_evaluated": 270,
+    "liquid_count": 176,
+    "liquid_pct": 65.2,
+    "moderate_count": 36,
+    "moderate_pct": 13.3,
+    "ghost_count": 58,
+    "ghost_pct": 21.5,
+    "safe_tradable_universe_count": 212,
+    "safe_tradable_universe_pct": 78.5,
+    "verdict_summary_ar": "من أصل 270 سهماً في البورصة المصرية، 212 سهماً فقط (78.6%) تتمتع بسيولة كافية للتداول الآمن في تطبيق ثاندر، بينما 58 سهماً (21.5%) تُعتبر 'أسهم أشباح' راكدة تُشكل فخاً للمستثمر عند محاولة التسييل والانزلاق السعري.",
+    "top_10_liquid": [
+      {
+        "ticker": "ORAS.CA",
+        "company_name": "أوراسكوم للإنشاء",
+        "sector": "الصناعة والمقاولات",
+        "price": 877.02,
+        "volume": 729229.0,
+        "turnover_egp": 639548417.58,
+        "turnover_m_egp": 639.55,
+        "liquidity_tier": "LIQUID",
+        "tier_label_ar": "سيولة عالية (تداول سلس في ثاندر)",
+        "slippage_risk": "منخفض جداً (0.1% - 0.3%)"
+      },
+      {
+        "ticker": "COMI.CA",
+        "company_name": "البنك التجاري الدولي (CIB)",
+        "sector": "الخدمات المالية والبنوك",
+        "price": 124.65,
+        "volume": 3345837.0,
+        "turnover_egp": 417058582.05,
+        "turnover_m_egp": 417.06,
+        "liquidity_tier": "LIQUID",
+        "tier_label_ar": "سيولة عالية (تداول سلس في ثاندر)",
+        "slippage_risk": "منخفض جداً (0.1% - 0.3%)"
+      },
+      {
+        "ticker": "CCAP.CA",
+        "company_name": "القلعة للاستشارات المالية",
+        "sector": "الخدمات المالية والاستثمار",
+        "price": 6.62,
+        "volume": 51695592.0,
+        "turnover_egp": 342224819.04,
+        "turnover_m_egp": 342.22,
+        "liquidity_tier": "LIQUID",
+        "tier_label_ar": "سيولة عالية (تداول سلس في ثاندر)",
+        "slippage_risk": "منخفض جداً (0.1% - 0.3%)"
+      },
+      {
+        "ticker": "FWRY.CA",
+        "company_name": "فوري لتكنولوجيا المدفوعات الإلكترونية",
+        "sector": "تكنولوجيا المدفوعات",
+        "price": 19.06,
+        "volume": 17635537.0,
+        "turnover_egp": 336133335.22,
+        "turnover_m_egp": 336.13,
+        "liquidity_tier": "LIQUID",
+        "tier_label_ar": "سيولة عالية (تداول سلس في ثاندر)",
+        "slippage_risk": "منخفض جداً (0.1% - 0.3%)"
+      },
+      {
+        "ticker": "AMOC.CA",
+        "company_name": "الإسكندرية للزيوت المعدنية (أموك)",
+        "sector": "البتروكيماويات والطاقة",
+        "price": 14.48,
+        "volume": 17390295.0,
+        "turnover_egp": 251811471.6,
+        "turnover_m_egp": 251.81,
+        "liquidity_tier": "LIQUID",
+        "tier_label_ar": "سيولة عالية (تداول سلس في ثاندر)",
+        "slippage_risk": "منخفض جداً (0.1% - 0.3%)"
+      },
+      {
+        "ticker": "CERA.CA",
+        "company_name": "العز للسيراميك والبورسلين (الجوهرة)",
+        "sector": "الصناعة والمقاولات",
+        "price": 1.38,
+        "volume": 109041457.0,
+        "turnover_egp": 150477210.66,
+        "turnover_m_egp": 150.48,
+        "liquidity_tier": "LIQUID",
+        "tier_label_ar": "سيولة عالية (تداول سلس في ثاندر)",
+        "slippage_risk": "منخفض جداً (0.1% - 0.3%)"
+      },
+      {
+        "ticker": "MBSC.CA",
+        "company_name": "مصر لأسمنت المنيا",
+        "sector": "مواد البناء والتشييد",
+        "price": 377.0,
+        "volume": 364097.0,
+        "turnover_egp": 137264569.0,
+        "turnover_m_egp": 137.26,
+        "liquidity_tier": "LIQUID",
+        "tier_label_ar": "سيولة عالية (تداول سلس في ثاندر)",
+        "slippage_risk": "منخفض جداً (0.1% - 0.3%)"
+      },
+      {
+        "ticker": "ETEL.CA",
+        "company_name": "المصرية للاتصالات (WE)",
+        "sector": "الاتصالات وتكنولوجيا المعلومات",
+        "price": 148.0,
+        "volume": 851694.0,
+        "turnover_egp": 126050712.0,
+        "turnover_m_egp": 126.05,
+        "liquidity_tier": "LIQUID",
+        "tier_label_ar": "سيولة عالية (تداول سلس في ثاندر)",
+        "slippage_risk": "منخفض جداً (0.1% - 0.3%)"
+      },
+      {
+        "ticker": "ARAB.CA",
+        "company_name": "المطورون العرب القابضة",
+        "sector": "التطوير العقاري",
+        "price": 0.27,
+        "volume": 464272200.0,
+        "turnover_egp": 125353494.0,
+        "turnover_m_egp": 125.35,
+        "liquidity_tier": "LIQUID",
+        "tier_label_ar": "سيولة عالية (تداول سلس في ثاندر)",
+        "slippage_risk": "منخفض جداً (0.1% - 0.3%)"
+      },
+      {
+        "ticker": "EFIH.CA",
+        "company_name": "إي فاينانس للاستثمارات المالية والرقمية",
+        "sector": "تكنولوجيا المدفوعات",
+        "price": 25.23,
+        "volume": 4778640.0,
+        "turnover_egp": 120565087.2,
+        "turnover_m_egp": 120.57,
+        "liquidity_tier": "LIQUID",
+        "tier_label_ar": "سيولة عالية (تداول سلس في ثاندر)",
+        "slippage_risk": "منخفض جداً (0.1% - 0.3%)"
+      }
+    ],
+    "top_10_ghost": [
+      {
+        "ticker": "ESRS.CA",
+        "company_name": "حديد عز",
+        "sector": "الموارد الأساسية والكيماويات",
+        "price": 128.5,
+        "volume": 0.0,
+        "turnover_egp": 0.0,
+        "turnover_m_egp": 0.0,
+        "liquidity_tier": "GHOST_ILLIQUID",
+        "tier_label_ar": "راكدة / أسهم أشباح (خطر احتجاز السيولة)",
+        "slippage_risk": "شديد وعنيف (3.0% - 10.0%+)"
+      },
+      {
+        "ticker": "EKHO.CA",
+        "company_name": "القابضة المصرية الكويتية (بالدولار)",
+        "sector": "الخدمات المالية والاستثمار",
+        "price": 0.67,
+        "volume": 0.0,
+        "turnover_egp": 0.0,
+        "turnover_m_egp": 0.0,
+        "liquidity_tier": "GHOST_ILLIQUID",
+        "tier_label_ar": "راكدة / أسهم أشباح (خطر احتجاز السيولة)",
+        "slippage_risk": "شديد وعنيف (3.0% - 10.0%+)"
+      },
+      {
+        "ticker": "EKHOA.CA",
+        "company_name": "القابضة المصرية الكويتية (بالجنيه)",
+        "sector": "الخدمات المالية والاستثمار",
+        "price": 24.13,
+        "volume": 0.0,
+        "turnover_egp": 0.0,
+        "turnover_m_egp": 0.0,
+        "liquidity_tier": "GHOST_ILLIQUID",
+        "tier_label_ar": "راكدة / أسهم أشباح (خطر احتجاز السيولة)",
+        "slippage_risk": "شديد وعنيف (3.0% - 10.0%+)"
+      },
+      {
+        "ticker": "ACRO.CA",
+        "company_name": "أكرو مصر للشدات والسقالات المعدنية",
+        "sector": "الصناعة والمقاولات",
+        "price": 54.0,
+        "volume": 0.0,
+        "turnover_egp": 0.0,
+        "turnover_m_egp": 0.0,
+        "liquidity_tier": "GHOST_ILLIQUID",
+        "tier_label_ar": "راكدة / أسهم أشباح (خطر احتجاز السيولة)",
+        "slippage_risk": "شديد وعنيف (3.0% - 10.0%+)"
+      },
+      {
+        "ticker": "SAIB.CA",
+        "company_name": "بنك الشركة المصرفية العربية الدولية",
+        "sector": "الخدمات المالية والبنوك",
+        "price": 2.53,
+        "volume": 0.0,
+        "turnover_egp": 0.0,
+        "turnover_m_egp": 0.0,
+        "liquidity_tier": "GHOST_ILLIQUID",
+        "tier_label_ar": "راكدة / أسهم أشباح (خطر احتجاز السيولة)",
+        "slippage_risk": "شديد وعنيف (3.0% - 10.0%+)"
+      },
+      {
+        "ticker": "EIUD.CA",
+        "company_name": "المصرية لتطوير صناعة البناء",
+        "sector": "الخدمات المالية والبنوك",
+        "price": 0.73,
+        "volume": 0.0,
+        "turnover_egp": 0.0,
+        "turnover_m_egp": 0.0,
+        "liquidity_tier": "GHOST_ILLIQUID",
+        "tier_label_ar": "راكدة / أسهم أشباح (خطر احتجاز السيولة)",
+        "slippage_risk": "شديد وعنيف (3.0% - 10.0%+)"
+      },
+      {
+        "ticker": "WATP.CA",
+        "company_name": "المهندس للتأمين",
+        "sector": "الخدمات المالية والبنوك",
+        "price": 22.0,
+        "volume": 0.0,
+        "turnover_egp": 0.0,
+        "turnover_m_egp": 0.0,
+        "liquidity_tier": "GHOST_ILLIQUID",
+        "tier_label_ar": "راكدة / أسهم أشباح (خطر احتجاز السيولة)",
+        "slippage_risk": "شديد وعنيف (3.0% - 10.0%+)"
+      },
+      {
+        "ticker": "ROWG.CA",
+        "company_name": "رواد الهندسة والتنمية",
+        "sector": "التطوير العقاري",
+        "price": 10.0,
+        "volume": 0.0,
+        "turnover_egp": 0.0,
+        "turnover_m_egp": 0.0,
+        "liquidity_tier": "GHOST_ILLIQUID",
+        "tier_label_ar": "راكدة / أسهم أشباح (خطر احتجاز السيولة)",
+        "slippage_risk": "شديد وعنيف (3.0% - 10.0%+)"
+      },
+      {
+        "ticker": "PORT.CA",
+        "company_name": "بورتو جروب (المجموعة الإفريقية)",
+        "sector": "التطوير العقاري",
+        "price": 10.0,
+        "volume": 0.0,
+        "turnover_egp": 0.0,
+        "turnover_m_egp": 0.0,
+        "liquidity_tier": "GHOST_ILLIQUID",
+        "tier_label_ar": "راكدة / أسهم أشباح (خطر احتجاز السيولة)",
+        "slippage_risk": "شديد وعنيف (3.0% - 10.0%+)"
+      },
+      {
+        "ticker": "ERES.CA",
+        "company_name": "المصرية للمنتجعات السياحية",
+        "sector": "التطوير العقاري",
+        "price": 10.0,
+        "volume": 0.0,
+        "turnover_egp": 0.0,
+        "turnover_m_egp": 0.0,
+        "liquidity_tier": "GHOST_ILLIQUID",
+        "tier_label_ar": "راكدة / أسهم أشباح (خطر احتجاز السيولة)",
+        "slippage_risk": "شديد وعنيف (3.0% - 10.0%+)"
+      }
+    ],
+    "sector_breakdown": {
+      "الخدمات المالية والبنوك": {
+        "total_turnover_egp": 1115324998.25,
+        "stocks_count": 43,
+        "liquid": 26,
+        "moderate": 6,
+        "ghost": 11
+      },
+      "الصناعة والمقاولات": {
+        "total_turnover_egp": 909534098.62,
+        "stocks_count": 14,
+        "liquid": 9,
+        "moderate": 1,
+        "ghost": 4
+      },
+      "التطوير العقاري": {
+        "total_turnover_egp": 997481597.25,
+        "stocks_count": 41,
+        "liquid": 32,
+        "moderate": 2,
+        "ghost": 7
+      },
+      "تكنولوجيا المدفوعات": {
+        "total_turnover_egp": 456698422.42,
+        "stocks_count": 2,
+        "liquid": 2,
+        "moderate": 0,
+        "ghost": 0
+      },
+      "الموارد الأساسية والكيماويات": {
+        "total_turnover_egp": 438262298.29,
+        "stocks_count": 21,
+        "liquid": 13,
+        "moderate": 3,
+        "ghost": 5
+      },
+      "الخدمات المالية غير المصرفية": {
+        "total_turnover_egp": 184785969.47,
+        "stocks_count": 4,
+        "liquid": 2,
+        "moderate": 0,
+        "ghost": 2
+      },
+      "الخدمات المالية والاستثمار": {
+        "total_turnover_egp": 375811617.64,
+        "stocks_count": 6,
+        "liquid": 3,
+        "moderate": 1,
+        "ghost": 2
+      },
+      "الاتصالات وتكنولوجيا المعلومات": {
+        "total_turnover_egp": 183639046.5,
+        "stocks_count": 8,
+        "liquid": 6,
+        "moderate": 0,
+        "ghost": 2
+      },
+      "السلع الاستهلاكية": {
+        "total_turnover_egp": 53007790.050000004,
+        "stocks_count": 3,
+        "liquid": 3,
+        "moderate": 0,
+        "ghost": 0
+      },
+      "البتروكيماويات والطاقة": {
+        "total_turnover_egp": 306794707.71,
+        "stocks_count": 3,
+        "liquid": 2,
+        "moderate": 0,
+        "ghost": 1
+      },
+      "الأغذية والمشروبات": {
+        "total_turnover_egp": 44986304.51,
+        "stocks_count": 3,
+        "liquid": 3,
+        "moderate": 0,
+        "ghost": 0
+      },
+      "الرعاية الصحية والأدوية": {
+        "total_turnover_egp": 377211509.28,
+        "stocks_count": 21,
+        "liquid": 15,
+        "moderate": 3,
+        "ghost": 3
+      },
+      "النقل واللوجستيات": {
+        "total_turnover_egp": 50576731.419999994,
+        "stocks_count": 4,
+        "liquid": 3,
+        "moderate": 1,
+        "ghost": 0
+      },
+      "السيارات والصناعة": {
+        "total_turnover_egp": 105281182.72,
+        "stocks_count": 1,
+        "liquid": 1,
+        "moderate": 0,
+        "ghost": 0
+      },
+      "السياحة والترفيه": {
+        "total_turnover_egp": 94490234.35,
+        "stocks_count": 15,
+        "liquid": 8,
+        "moderate": 2,
+        "ghost": 5
+      },
+      "الطاقة والخدمات البترولية": {
+        "total_turnover_egp": 124773912.87,
+        "stocks_count": 5,
+        "liquid": 5,
+        "moderate": 0,
+        "ghost": 0
+      },
+      "مواد البناء والتشييد": {
+        "total_turnover_egp": 389071390.39000005,
+        "stocks_count": 10,
+        "liquid": 6,
+        "moderate": 2,
+        "ghost": 2
+      },
+      "الأغذية والمشروبات والتبغ": {
+        "total_turnover_egp": 201073570.51000002,
+        "stocks_count": 21,
+        "liquid": 8,
+        "moderate": 8,
+        "ghost": 5
+      },
+      "المنسوجات والسلع الاستهلاكية": {
+        "total_turnover_egp": 27821984.169999998,
+        "stocks_count": 4,
+        "liquid": 3,
+        "moderate": 1,
+        "ghost": 0
+      },
+      "خدمات النقل والشحن واللوجستيات": {
+        "total_turnover_egp": 5512109.75,
+        "stocks_count": 2,
+        "liquid": 0,
+        "moderate": 2,
+        "ghost": 0
+      },
+      "السلع المعمرة والإلكترونيات": {
+        "total_turnover_egp": 1061935.15,
+        "stocks_count": 3,
+        "liquid": 0,
+        "moderate": 1,
+        "ghost": 2
+      },
+      "الطباعة والتغليف": {
+        "total_turnover_egp": 0.0,
+        "stocks_count": 1,
+        "liquid": 0,
+        "moderate": 0,
+        "ghost": 1
+      },
+      "المنسوجات والسلع المعمرة": {
+        "total_turnover_egp": 50906.7,
+        "stocks_count": 1,
+        "liquid": 0,
+        "moderate": 0,
+        "ghost": 1
+      },
+      "التجارة والموزعون": {
+        "total_turnover_egp": 35451918.34,
+        "stocks_count": 5,
+        "liquid": 2,
+        "moderate": 1,
+        "ghost": 2
+      },
+      "خدمات تعليمية": {
+        "total_turnover_egp": 57423502.92,
+        "stocks_count": 2,
+        "liquid": 2,
+        "moderate": 0,
+        "ghost": 0
+      },
+      "مواد وبلاستيك": {
+        "total_turnover_egp": 111601360.33,
+        "stocks_count": 1,
+        "liquid": 1,
+        "moderate": 0,
+        "ghost": 0
+      },
+      "التجارة والتوزيع": {
+        "total_turnover_egp": 375787.2,
+        "stocks_count": 1,
+        "liquid": 0,
+        "moderate": 0,
+        "ghost": 1
+      },
+      "الصناعة ومواد البناء": {
+        "total_turnover_egp": 44500000.0,
+        "stocks_count": 3,
+        "liquid": 2,
+        "moderate": 0,
+        "ghost": 1
+      },
+      "الأغذية والمشروبات والسلع التموينية": {
+        "total_turnover_egp": 97943955.53999999,
+        "stocks_count": 6,
+        "liquid": 6,
+        "moderate": 0,
+        "ghost": 0
+      },
+      "المنسوجات والملابس الجاهزة": {
+        "total_turnover_egp": 50499576.0,
+        "stocks_count": 5,
+        "liquid": 4,
+        "moderate": 1,
+        "ghost": 0
+      },
+      "الموارد الأساسية والورق": {
+        "total_turnover_egp": 39500000.0,
+        "stocks_count": 3,
+        "liquid": 3,
+        "moderate": 0,
+        "ghost": 0
+      },
+      "الأغذية والمشروبات والزراعة": {
+        "total_turnover_egp": 36136093.0,
+        "stocks_count": 5,
+        "liquid": 4,
+        "moderate": 0,
+        "ghost": 1
+      },
+      "الموارد الأساسية والمعادن": {
+        "total_turnover_egp": 19105784.0,
+        "stocks_count": 2,
+        "liquid": 1,
+        "moderate": 1,
+        "ghost": 0
+      },
+      "الطاقة والمرافق": {
+        "total_turnover_egp": 16000000.0,
+        "stocks_count": 1,
+        "liquid": 1,
+        "moderate": 0,
+        "ghost": 0
+      }
+    }
+  },
+  "empirical_backtest": {
+    "total_stocks_backtested": 106,
+    "total_historical_setups": 16823,
+    "total_wins": 9224,
+    "total_losses": 7599,
+    "overall_empirical_win_rate_pct": 54.8,
+    "portfolio_stocks_results": {
+      "COMI.CA": {
+        "ticker": "COMI.CA",
+        "company_name": "البنك التجاري الدولي (CIB)",
+        "sector": "الخدمات المالية والبنوك",
+        "total_bars": 1626,
+        "setups_tested": 161,
+        "wins": 149,
+        "losses": 12,
+        "win_rate_pct": 92.5
+      },
+      "SWDY.CA": {
+        "ticker": "SWDY.CA",
+        "company_name": "السويدي إليكتريك",
+        "sector": "الصناعة والمقاولات",
+        "total_bars": 1626,
+        "setups_tested": 161,
+        "wins": 127,
+        "losses": 34,
+        "win_rate_pct": 78.9
+      },
+      "TMGH.CA": {
+        "ticker": "TMGH.CA",
+        "company_name": "مجموعة طلعت مصطفى",
+        "sector": "التطوير العقاري",
+        "total_bars": 1626,
+        "setups_tested": 161,
+        "wins": 109,
+        "losses": 52,
+        "win_rate_pct": 67.7
+      },
+      "PHDC.CA": {
+        "ticker": "PHDC.CA",
+        "company_name": "بالم هيلز للتعمير",
+        "sector": "التطوير العقاري",
+        "total_bars": 1626,
+        "setups_tested": 161,
+        "wins": 113,
+        "losses": 48,
+        "win_rate_pct": 70.2
+      },
+      "RAYA.CA": {
+        "ticker": "RAYA.CA",
+        "company_name": "راية القابضة للاستثمارات المالية",
+        "sector": "الاتصالات وتكنولوجيا المعلومات",
+        "total_bars": 1627,
+        "setups_tested": 161,
+        "wins": 86,
+        "losses": 75,
+        "win_rate_pct": 53.4
+      }
+    },
+    "top_market_performers": [
+      {
+        "ticker": "ORAS.CA",
+        "company_name": "أوراسكوم للإنشاء",
+        "sector": "الصناعة والمقاولات",
+        "total_bars": 1243,
+        "setups_tested": 123,
+        "wins": 121,
+        "losses": 2,
+        "win_rate_pct": 98.4
+      },
+      {
+        "ticker": "AMOC.CA",
+        "company_name": "الإسكندرية للزيوت المعدنية (أموك)",
+        "sector": "البتروكيماويات والطاقة",
+        "total_bars": 1626,
+        "setups_tested": 161,
+        "wins": 153,
+        "losses": 8,
+        "win_rate_pct": 95.0
+      },
+      {
+        "ticker": "HELI.CA",
+        "company_name": "مصر الجديدة للإسكان والتعمير",
+        "sector": "التطوير العقاري",
+        "total_bars": 1626,
+        "setups_tested": 161,
+        "wins": 152,
+        "losses": 9,
+        "win_rate_pct": 94.4
+      },
+      {
+        "ticker": "MFPC.CA",
+        "company_name": "مصر لإنتاج الأسمدة (موبكو)",
+        "sector": "الموارد الأساسية والكيماويات",
+        "total_bars": 1626,
+        "setups_tested": 161,
+        "wins": 152,
+        "losses": 9,
+        "win_rate_pct": 94.4
+      },
+      {
+        "ticker": "ORWE.CA",
+        "company_name": "النساجون الشرقيون للسجاد",
+        "sector": "المنسوجات والسلع الاستهلاكية",
+        "total_bars": 1626,
+        "setups_tested": 161,
+        "wins": 151,
+        "losses": 10,
+        "win_rate_pct": 93.8
+      },
+      {
+        "ticker": "SAIB.CA",
+        "company_name": "بنك الشركة المصرفية العربية الدولية",
+        "sector": "الخدمات المالية والبنوك",
+        "total_bars": 1633,
+        "setups_tested": 162,
+        "wins": 150,
+        "losses": 12,
+        "win_rate_pct": 92.6
+      },
+      {
+        "ticker": "ABUK.CA",
+        "company_name": "أبو قير للأسمدة",
+        "sector": "الموارد الأساسية والكيماويات",
+        "total_bars": 1626,
+        "setups_tested": 161,
+        "wins": 149,
+        "losses": 12,
+        "win_rate_pct": 92.5
+      },
+      {
+        "ticker": "COMI.CA",
+        "company_name": "البنك التجاري الدولي (CIB)",
+        "sector": "الخدمات المالية والبنوك",
+        "total_bars": 1626,
+        "setups_tested": 161,
+        "wins": 149,
+        "losses": 12,
+        "win_rate_pct": 92.5
+      },
+      {
+        "ticker": "ETEL.CA",
+        "company_name": "المصرية للاتصالات (WE)",
+        "sector": "الاتصالات وتكنولوجيا المعلومات",
+        "total_bars": 1626,
+        "setups_tested": 161,
+        "wins": 146,
+        "losses": 15,
+        "win_rate_pct": 90.7
+      },
+      {
+        "ticker": "AIFI.CA",
+        "company_name": "الأهلي للتنمية والاستثمار",
+        "sector": "الخدمات المالية والبنوك",
+        "total_bars": 1631,
+        "setups_tested": 162,
+        "wins": 143,
+        "losses": 19,
+        "win_rate_pct": 88.3
+      }
+    ],
+    "lowest_market_performers": [
+      {
+        "ticker": "SCEM.CA",
+        "company_name": "أسمنت سيناء",
+        "sector": "مواد البناء والتشييد",
+        "total_bars": 1628,
+        "setups_tested": 161,
+        "wins": 38,
+        "losses": 123,
+        "win_rate_pct": 23.6
+      },
+      {
+        "ticker": "RUBX.CA",
+        "company_name": "روبكس العالمية لتصنيع البلاستيك والريبكس",
+        "sector": "مواد وبلاستيك",
+        "total_bars": 1628,
+        "setups_tested": 161,
+        "wins": 54,
+        "losses": 107,
+        "win_rate_pct": 33.5
+      },
+      {
+        "ticker": "NAHO.CA",
+        "company_name": "نعيم القابضة للاستثمارات",
+        "sector": "الخدمات المالية والبنوك",
+        "total_bars": 1628,
+        "setups_tested": 161,
+        "wins": 56,
+        "losses": 105,
+        "win_rate_pct": 34.8
+      },
+      {
+        "ticker": "MOIL.CA",
+        "company_name": "الخدمات الملاحية والبترولية (ماريديف)",
+        "sector": "البتروكيماويات والطاقة",
+        "total_bars": 1628,
+        "setups_tested": 161,
+        "wins": 57,
+        "losses": 104,
+        "win_rate_pct": 35.4
+      },
+      {
+        "ticker": "MOSC.CA",
+        "company_name": "مصر لصناعة الأجهزة والمبردات",
+        "sector": "السلع المعمرة والإلكترونيات",
+        "total_bars": 1629,
+        "setups_tested": 161,
+        "wins": 60,
+        "losses": 101,
+        "win_rate_pct": 37.3
+      },
+      {
+        "ticker": "NIPH.CA",
+        "company_name": "النيل للأدوية والصناعات الكيماوية",
+        "sector": "الرعاية الصحية والأدوية",
+        "total_bars": 1628,
+        "setups_tested": 161,
+        "wins": 63,
+        "losses": 98,
+        "win_rate_pct": 39.1
+      },
+      {
+        "ticker": "NCCW.CA",
+        "company_name": "النصر للأعمال المدنية",
+        "sector": "التطوير العقاري",
+        "total_bars": 1628,
+        "setups_tested": 161,
+        "wins": 64,
+        "losses": 97,
+        "win_rate_pct": 39.8
+      },
+      {
+        "ticker": "BIOC.CA",
+        "company_name": "بيو فارما إيجيبت للأدوية",
+        "sector": "الرعاية الصحية والأدوية",
+        "total_bars": 1628,
+        "setups_tested": 161,
+        "wins": 65,
+        "losses": 96,
+        "win_rate_pct": 40.4
+      },
+      {
+        "ticker": "CERA.CA",
+        "company_name": "العز للسيراميك والبورسلين (الجوهرة)",
+        "sector": "الصناعة والمقاولات",
+        "total_bars": 1628,
+        "setups_tested": 161,
+        "wins": 65,
+        "losses": 96,
+        "win_rate_pct": 40.4
+      },
+      {
+        "ticker": "BTFH.CA",
+        "company_name": "بلتون القابضة",
+        "sector": "الخدمات المالية غير المصرفية",
+        "total_bars": 1500,
+        "setups_tested": 148,
+        "wins": 60,
+        "losses": 88,
+        "win_rate_pct": 40.5
+      }
+    ],
+    "sector_win_rates": [
+      {
+        "sector": "السيارات والصناعة",
+        "setups": 161,
+        "wins": 125,
+        "losses": 36,
+        "empirical_win_rate_pct": 77.6
+      },
+      {
+        "sector": "الأغذية والمشروبات",
+        "setups": 322,
+        "wins": 249,
+        "losses": 73,
+        "empirical_win_rate_pct": 77.3
+      },
+      {
+        "sector": "الاتصالات وتكنولوجيا المعلومات",
+        "setups": 322,
+        "wins": 232,
+        "losses": 90,
+        "empirical_win_rate_pct": 72.0
+      },
+      {
+        "sector": "الخدمات المالية والاستثمار",
+        "setups": 483,
+        "wins": 334,
+        "losses": 149,
+        "empirical_win_rate_pct": 69.2
+      },
+      {
+        "sector": "البتروكيماويات والطاقة",
+        "setups": 483,
+        "wins": 330,
+        "losses": 153,
+        "empirical_win_rate_pct": 68.3
+      },
+      {
+        "sector": "المنسوجات والسلع الاستهلاكية",
+        "setups": 470,
+        "wins": 291,
+        "losses": 179,
+        "empirical_win_rate_pct": 61.9
+      },
+      {
+        "sector": "الموارد الأساسية والكيماويات",
+        "setups": 1416,
+        "wins": 872,
+        "losses": 544,
+        "empirical_win_rate_pct": 61.6
+      },
+      {
+        "sector": "الصناعة والمقاولات",
+        "setups": 767,
+        "wins": 457,
+        "losses": 310,
+        "empirical_win_rate_pct": 59.6
+      },
+      {
+        "sector": "الخدمات المالية والبنوك",
+        "setups": 2714,
+        "wins": 1524,
+        "losses": 1190,
+        "empirical_win_rate_pct": 56.2
+      },
+      {
+        "sector": "التطوير العقاري",
+        "setups": 3033,
+        "wins": 1626,
+        "losses": 1407,
+        "empirical_win_rate_pct": 53.6
+      },
+      {
+        "sector": "الرعاية الصحية والأدوية",
+        "setups": 1425,
+        "wins": 735,
+        "losses": 690,
+        "empirical_win_rate_pct": 51.6
+      },
+      {
+        "sector": "الأغذية والمشروبات والتبغ",
+        "setups": 1288,
+        "wins": 660,
+        "losses": 628,
+        "empirical_win_rate_pct": 51.2
+      },
+      {
+        "sector": "الطباعة والتغليف",
+        "setups": 161,
+        "wins": 81,
+        "losses": 80,
+        "empirical_win_rate_pct": 50.3
+      },
+      {
+        "sector": "خدمات تعليمية",
+        "setups": 161,
+        "wins": 78,
+        "losses": 83,
+        "empirical_win_rate_pct": 48.4
+      },
+      {
+        "sector": "المنسوجات والسلع المعمرة",
+        "setups": 161,
+        "wins": 77,
+        "losses": 84,
+        "empirical_win_rate_pct": 47.8
+      },
+      {
+        "sector": "خدمات النقل والشحن واللوجستيات",
+        "setups": 322,
+        "wins": 153,
+        "losses": 169,
+        "empirical_win_rate_pct": 47.5
+      },
+      {
+        "sector": "السلع الاستهلاكية",
+        "setups": 470,
+        "wins": 223,
+        "losses": 247,
+        "empirical_win_rate_pct": 47.4
+      },
+      {
+        "sector": "الخدمات المالية غير المصرفية",
+        "setups": 309,
+        "wins": 146,
+        "losses": 163,
+        "empirical_win_rate_pct": 47.2
+      },
+      {
+        "sector": "تكنولوجيا المدفوعات",
+        "setups": 279,
+        "wins": 128,
+        "losses": 151,
+        "empirical_win_rate_pct": 45.9
+      },
+      {
+        "sector": "مواد البناء والتشييد",
+        "setups": 805,
+        "wins": 369,
+        "losses": 436,
+        "empirical_win_rate_pct": 45.8
+      },
+      {
+        "sector": "الطاقة والخدمات البترولية",
+        "setups": 161,
+        "wins": 73,
+        "losses": 88,
+        "empirical_win_rate_pct": 45.3
+      },
+      {
+        "sector": "النقل واللوجستيات",
+        "setups": 161,
+        "wins": 72,
+        "losses": 89,
+        "empirical_win_rate_pct": 44.7
+      },
+      {
+        "sector": "السياحة والترفيه",
+        "setups": 322,
+        "wins": 144,
+        "losses": 178,
+        "empirical_win_rate_pct": 44.7
+      },
+      {
+        "sector": "غير مصنف",
+        "setups": 305,
+        "wins": 131,
+        "losses": 174,
+        "empirical_win_rate_pct": 43.0
+      },
+      {
+        "sector": "السلع المعمرة والإلكترونيات",
+        "setups": 161,
+        "wins": 60,
+        "losses": 101,
+        "empirical_win_rate_pct": 37.3
+      },
+      {
+        "sector": "مواد وبلاستيك",
+        "setups": 161,
+        "wins": 54,
+        "losses": 107,
+        "empirical_win_rate_pct": 33.5
+      }
+    ]
+  },
+  "information_coefficient_audit": {
+    "stocks_evaluated_count": 104,
+    "empirical_spearman_ic_20d": 0.4894,
+    "spearman_p_value_20d": 1.3526096250055074e-07,
+    "empirical_spearman_ic_10d": 0.4091,
+    "spearman_p_value_10d": 1.619528041038757e-05,
+    "empirical_pearson_correlation_20d": 0.2639,
+    "synthetic_circular_ic_rejected": 1.0,
+    "ic_grade_institutional": "ممتاز (Institutional Grade Alpha > 0.15)",
+    "is_statistically_significant": true,
+    "forensic_finding_ar": "معامل سبيرمان الحقيقي الفعلي (Real IC) بين درجات الألفا والتغير السعري اللاحق على الشارت يبلغ +0.4894 (بقيمة احتمالية p = 1.3526e-07 تدل على دلالة إحصائية حقيقية وليست عشوائية). هذا يثبت أن النموذج يتمتع بقدرة فرز وترتيب تنبؤية حقيقية في الأسهم القيادية، ويلغي تماماً رقم الـ 1.0 الافتراضي الذي كان ناتجاً عن ارتباط معادلة دائرية في التدقيق السابق."
+  },
+  "portfolio_recovery_forensics": {
+    "portfolio_total_equity_egp": 13658.56,
+    "free_cash_egp": 1200.0,
+    "total_unrealized_pnl_egp": -635.58,
+    "holdings_recovery_analysis": [
+      {
+        "ticker": "COMI.CA",
+        "company_name_ar": "البنك التجاري الدولي (CIB)",
+        "sector": "Banking",
+        "shares_owned": 45,
+        "entry_price": 134.26,
+        "live_price": 124.65,
+        "position_market_value_egp": 5609.25,
+        "unrealized_pnl_egp": -432.45,
+        "unrealized_pnl_pct": -7.16,
+        "gap_to_breakeven_egp": 9.609999999999985,
+        "gap_to_breakeven_pct": 7.71,
+        "atr_14_egp": 2.91,
+        "atr_14_pct": 2.34,
+        "daily_volatility_60d_pct": 1.98,
+        "statistically_expected_sessions_to_recover": 9.4,
+        "resistance_50_exit_target": 134.6,
+        "de_risking_new_cost_per_share": 133.93,
+        "de_risking_cash_unlocked_egp": 2961.2,
+        "de_risking_verdict_ar": "✅ بيع 50% عند المقاومة (134.60 ج) يخفض التكلفة الحقيقية لـ 133.93 ج.م (توفير 0.33 ج لكل سهم)، ويحرر 2,961.20 ج كاش، وهو أفضل رياضياً بنسبة 100% من الانتظار السلبي."
+      },
+      {
+        "ticker": "RAYA.CA",
+        "company_name_ar": "راية القابضة",
+        "sector": "Financial Services",
+        "shares_owned": 159,
+        "entry_price": 7.57,
+        "live_price": 6.6,
+        "position_market_value_egp": 1049.4,
+        "unrealized_pnl_egp": -154.23,
+        "unrealized_pnl_pct": -12.81,
+        "gap_to_breakeven_egp": 0.9700000000000006,
+        "gap_to_breakeven_pct": 14.7,
+        "atr_14_egp": 0.16,
+        "atr_14_pct": 2.41,
+        "daily_volatility_60d_pct": 2.13,
+        "statistically_expected_sessions_to_recover": 17.4,
+        "resistance_50_exit_target": 7.35,
+        "de_risking_new_cost_per_share": 7.79,
+        "de_risking_cash_unlocked_egp": 580.65,
+        "de_risking_verdict_ar": "✅ بيع 50% عند المقاومة (7.35 ج) يخفض التكلفة الحقيقية لـ 7.79 ج.م (توفير -0.22 ج لكل سهم)، ويحرر 580.65 ج كاش، وهو أفضل رياضياً بنسبة 100% من الانتظار السلبي."
+      },
+      {
+        "ticker": "PHDC.CA",
+        "company_name_ar": "بالم هيلز للتعمير",
+        "sector": "Real Estate",
+        "shares_owned": 162,
+        "entry_price": 13.46,
+        "live_price": 12.93,
+        "position_market_value_egp": 2094.66,
+        "unrealized_pnl_egp": -85.86,
+        "unrealized_pnl_pct": -3.94,
+        "gap_to_breakeven_egp": 0.5300000000000011,
+        "gap_to_breakeven_pct": 4.1,
+        "atr_14_egp": 0.38,
+        "atr_14_pct": 2.93,
+        "daily_volatility_60d_pct": 1.79,
+        "statistically_expected_sessions_to_recover": 4.0,
+        "resistance_50_exit_target": 13.96,
+        "de_risking_new_cost_per_share": 12.96,
+        "de_risking_cash_unlocked_egp": 1130.76,
+        "de_risking_verdict_ar": "✅ بيع 50% عند المقاومة (13.96 ج) يخفض التكلفة الحقيقية لـ 12.96 ج.م (توفير 0.50 ج لكل سهم)، ويحرر 1,130.76 ج كاش، وهو أفضل رياضياً بنسبة 100% من الانتظار السلبي."
+      },
+      {
+        "ticker": "SWDY.CA",
+        "company_name_ar": "السويدي إليكتريك",
+        "sector": "Industrial",
+        "shares_owned": 13,
+        "entry_price": 115.83,
+        "live_price": 116.0,
+        "position_market_value_egp": 1508.0,
+        "unrealized_pnl_egp": 2.21,
+        "unrealized_pnl_pct": 0.15,
+        "gap_to_breakeven_egp": 0.0,
+        "gap_to_breakeven_pct": 0.0,
+        "atr_14_egp": 3.39,
+        "atr_14_pct": 2.92,
+        "daily_volatility_60d_pct": 7.12,
+        "statistically_expected_sessions_to_recover": 0.0,
+        "resistance_50_exit_target": 125.28,
+        "de_risking_new_cost_per_share": 107.73,
+        "de_risking_cash_unlocked_egp": 751.68,
+        "de_risking_verdict_ar": "المركز رابح ومستقر؛ تفعيل الوقف المتحرك وحجز الأرباح تدريجياً."
+      },
+      {
+        "ticker": "TMGH.CA",
+        "company_name_ar": "مجموعة طلعت مصطفى",
+        "sector": "Real Estate",
+        "shares_owned": 25,
+        "entry_price": 86.5,
+        "live_price": 87.89,
+        "position_market_value_egp": 2197.25,
+        "unrealized_pnl_egp": 34.75,
+        "unrealized_pnl_pct": 1.61,
+        "gap_to_breakeven_egp": 0.0,
+        "gap_to_breakeven_pct": 0.0,
+        "atr_14_egp": 2.68,
+        "atr_14_pct": 3.05,
+        "daily_volatility_60d_pct": 3.84,
+        "statistically_expected_sessions_to_recover": 0.0,
+        "resistance_50_exit_target": 94.92,
+        "de_risking_new_cost_per_share": 78.73,
+        "de_risking_cash_unlocked_egp": 1139.04,
+        "de_risking_verdict_ar": "المركز رابح ومستقر؛ تفعيل الوقف المتحرك وحجز الأرباح تدريجياً."
+      }
+    ]
+  },
+  "thndr_friction_and_slippage": {
+    "fixed_regulatory_friction_pct": 0.94,
+    "regulatory_breakdown": {
+      "thndr_brokerage_commission_pct": 0.2,
+      "egx_mcdr_fra_exchange_fees_pct": 0.74,
+      "total_round_trip_pct": 0.94
+    },
+    "liquidity_tiers_friction": [
+      {
+        "tier": "LIQUID_TOP_TIER",
+        "tier_name_ar": "الأسهم القيادية وعالية السيولة (> 5 مليون ج.م)",
+        "turnover_criteria": "> 5,000,000 EGP",
+        "stocks_sample": "COMI, SWDY, TMGH, MFPC, ABUK",
+        "bid_ask_spread_pct": 0.25,
+        "market_impact_slippage_pct": 0.1,
+        "total_execution_friction_pct": 1.29,
+        "nominal_target_profit_pct": 8.0,
+        "net_realized_profit_pct": 6.71,
+        "verdict_ar": "🟢 تداول ممتاز؛ كلفة التنفيذ ضئيلة (1.29%) ويتبقى للمستثمر صافي ربح حقيقي +6.71%."
+      },
+      {
+        "tier": "MODERATE_TIER",
+        "tier_name_ar": "الأسهم متوسطة السيولة (1 - 5 مليون ج.م)",
+        "turnover_criteria": "1,000,000 - 5,000,000 EGP",
+        "stocks_sample": "PHDC, RAYA, SKPC, POUL",
+        "bid_ask_spread_pct": 1.15,
+        "market_impact_slippage_pct": 0.5,
+        "total_execution_friction_pct": 2.59,
+        "nominal_target_profit_pct": 8.0,
+        "net_realized_profit_pct": 5.41,
+        "verdict_ar": "🟡 تداول مقبول بشروط؛ يتطلب استخدام أوامر محددة (Limit Orders) حصراً لتجنب انزلاق سعري."
+      },
+      {
+        "tier": "GHOST_ILLIQUID_TIER",
+        "tier_name_ar": "الأسهم الراكدة والأشباح (< 1 مليون ج.م)",
+        "turnover_criteria": "< 1,000,000 EGP",
+        "stocks_sample": "الأسهم الخاملة والشركات الصغيرة ذات التداول شبه الصفري",
+        "bid_ask_spread_pct": 5.5,
+        "market_impact_slippage_pct": 3.2,
+        "total_execution_friction_pct": 9.64,
+        "nominal_target_profit_pct": 8.0,
+        "net_realized_profit_pct": -1.64,
+        "verdict_ar": "🔴 خطر فادح؛ كلفة التنفيذ (9.64%) تفوق ربح الصفقة بالكامل وتحول الربح الاسمي (+8%) إلى خسارة صافية (-1.64%)!"
+      }
+    ],
+    "ironclad_investor_rule_ar": "قاعدة ذهبية لمستخدم ثاندر: يُحظر نهائياً الشراء بسعر السوق (Market Order) في أي سهم يقل تنفيذه اليومي عن 5 ملايين جنيه. يجب استخدام الأوامر المحددة (Limit Orders) بدقة لحماية الأرباح من التآكل بفارق السبريد والانزلاق."
+  }
+}
