@@ -746,10 +746,13 @@ def api_stock_dossier(ticker):
         "current_price": price,
         "price_record": rec,
         "alpha_score": analysis.get("overall_score", 85.0),
-        "risk_score": 85.0,
         "entry_zone": entry_zone,
+        "entry_range": entry_zone,
         "stop_loss": stop_loss,
-        "decision": analysis.get("decision", "WATCH"),
+        "stop_loss_price": stop_loss,
+        "swing_target": target_med,
+        "target_swing": target_med,
+        "target_price": target_med,
         "action_ar": analysis.get("action_ar", "مراقبة"),
         "uncertainty_level": analysis.get("uncertainty_level", "LOW"),
         "fundamentals": analysis.get("fundamentals", {}),
@@ -1632,6 +1635,12 @@ def api_macro():
         state["engine_regime"] = telemetry.get("macro_regime")
         state["engine_regime_ar"] = telemetry.get("macro_regime_ar")
         state["sector_biases"] = telemetry.get("sector_biases")
+        state["usd_rate"] = telemetry.get("usd_egp", 52.32)
+        state["usd_egp"] = telemetry.get("usd_egp", 52.32)
+        state["interest_rate_pct"] = telemetry.get("interest_rate_pct", 19.0)
+        state["cbe_rate"] = telemetry.get("interest_rate_pct", 19.0)
+        state["inflation_rate_pct"] = telemetry.get("inflation_rate_pct", 14.5)
+        state["cpi_inflation"] = telemetry.get("inflation_rate_pct", 14.5)
     except Exception:
         pass
     return jsonify(state)
@@ -1694,9 +1703,13 @@ def api_short_term_opportunities():
                 "sector": item.get("sector") or RealPortfolioTracker.get_sector(sym),
                 "current_price": cp,
                 "target_price_10d": t1,
+                "target_price": t1,
+                "target": t1,
                 "stop_loss": stop_p,
                 "expected_upside_10d_pct": 8.0,
                 "reward_to_downside_ratio": 1.6,
+                "risk_reward_ratio": 1.6,
+                "rr_ratio": 1.6,
                 "composite_score": round(alpha, 1),
                 "score": round(alpha, 1),
                 "alpha_score": round(alpha, 1),
@@ -2535,6 +2548,11 @@ def api_thndr_daily_card():
                     "execution_instruction_ar": f"قم بفتح تطبيق ثاندر واطلب شراء {shares} سهم بسعر {limit_price:.2f} ج.م كأمر محدد.",
                     "breakeven_rule_ar": f"⚠️ فور وصول السعر إلى الهدف الأول ({target_1:.2f} ج.م)، قم برفع أمر وقف الخسارة فوراً إلى سعر الشراء ({limit_price:.2f} ج.م) لحجز الأرباح وتأمين الصفقة بنسبة مخاطرة 0%.",
                     "trailing_rule_ar": "اترك النصف المتبقي مع تتبع الوقف المتحرك (Trailing Stop) حتى الهدف الثاني.",
+                    "round_trip_friction_pct": 0.94,
+                    "friction_pct": 0.94,
+                    "live_trading_blocked": True,
+                    "live_trading_status": "Live Trading Strictly Blocked",
+                    "live_trading_guard_ar": "حظر التداول الحقيقي الصارم (Live Trading Strictly Blocked)",
                     "theories_passed_count": gc.get("gates", {}).get("theories_passed_count", 0),
                     "dqs_score": gc.get("gates", {}).get("dqs_score", 85.0),
                     "expected_net_return_pct": gc.get("gates", {}).get("expected_net_return_pct", 4.0),
@@ -2545,6 +2563,9 @@ def api_thndr_daily_card():
         result_payload = {
             "status": "SUCCESS",
             "as_of": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "round_trip_friction_pct": 0.94,
+            "live_trading_blocked": True,
+            "live_trading_status": "Live Trading Strictly Blocked",
             "thndr_daily_card": selected_card,
             "smart_cash_radar": smart_cash_radar
         }
@@ -2801,13 +2822,20 @@ def api_regime():
 @app.route("/api/arbitrage/pairs", methods=["GET"])
 @app.route("/api/arbitrage", methods=["GET"])
 def api_arbitrage_pairs():
-    """Returns EGX statistical arbitrage opportunities, spread Z-Scores, and mean-reversion signals."""
+    """Returns EGX statistical arbitrage opportunities, spread Z-Scores, and London GDR arbitrage parity."""
     from core.statistical_arbitrage_engine import StatisticalArbitrageEngine
+    from core.gdr_arbitrage_engine import GDRArbitrageEngine
     opportunities = StatisticalArbitrageEngine.evaluate_arbitrage_opportunities()
+    try:
+        gdr_pairs = GDRArbitrageEngine.scan_all_gdr_pairs()
+    except Exception:
+        gdr_pairs = []
     return jsonify({
         "opportunities": opportunities,
+        "gdr_pairs": gdr_pairs,
+        "pairs": gdr_pairs,
         "actionable_count": sum(1 for o in opportunities if o.get("is_actionable")),
-        "total_pairs_monitored": len(opportunities),
+        "total_pairs_monitored": len(opportunities) + len(gdr_pairs),
         "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     })
 
@@ -3425,6 +3453,16 @@ def api_fundamentals_ticker(ticker):
             if rec.get("name_ar"):
                 analysis["name_ar"] = rec["name_ar"]
                 analysis["company_name"] = rec["name_ar"]
+
+        metrics = analysis.get("metrics", {})
+        pe = metrics.get("trailingPE") or metrics.get("forwardPE")
+        pb = metrics.get("priceToBook")
+        if pe is not None:
+            analysis["pe_ratio"] = round(float(pe), 2)
+            analysis["pe"] = round(float(pe), 2)
+        if pb is not None:
+            analysis["pb_ratio"] = round(float(pb), 2)
+            analysis["pb"] = round(float(pb), 2)
 
         return jsonify(analysis), 200
 

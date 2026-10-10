@@ -54,19 +54,6 @@ class CorporateActionsCalendar:
             "description_en": "Cash dividend of USD 0.275 per share",
             "is_completed": True
         },
-        {
-            "event_id": "ORAS_2026_CAP_01",
-            "ticker": "ORAS.CA",
-            "action_type": ActionType.PAR_VALUE_CHANGE.value,
-            "announcement_date": "2026-07-01",
-            "ex_date": "2026-08-10",
-            "payment_date": "2026-08-15",
-            "value": 1.0,
-            "currency": "USD",
-            "description_ar": "إعادة هيكلة رأس المال وتعديل القيمة الاسمية بالدولار الأمريكي",
-            "description_en": "Capital restructuring and nominal value realignment",
-            "is_completed": True
-        },
         # --- COMMERCIAL INTERNATIONAL BANK (COMI.CA) ---
         {
             "event_id": "COMI_2026_DIV_01",
@@ -80,19 +67,6 @@ class CorporateActionsCalendar:
             "equivalent_egp": 5.50,
             "description_ar": "كوبون نقدي بقيمة 5.50 ج.م للسهم عن أرباح عام 2025",
             "description_en": "Cash dividend of 5.50 EGP per share for FY2025",
-            "is_completed": True
-        },
-        {
-            "event_id": "COMI_2026_BONUS_01",
-            "ticker": "COMI.CA",
-            "action_type": ActionType.BONUS_SHARES.value,
-            "announcement_date": "2026-04-15",
-            "ex_date": "2026-05-22",
-            "payment_date": "2026-05-25",
-            "value": 0.20,  # 1 bonus share per 5 shares held
-            "currency": "SHARES",
-            "description_ar": "توزيع أسهم مجانية بواقع 1 سهم مجاني لكل 5 أسهم أصلية (زيادة رأسمال)",
-            "description_en": "Bonus share distribution: 1 bonus share for every 5 existing shares",
             "is_completed": True
         },
         # --- ELSEWEDY ELECTRIC (SWDY.CA) ---
@@ -228,19 +202,6 @@ class CorporateActionsCalendar:
             "description_en": "Cash dividend of 0.35 EGP per share",
             "is_completed": True
         },
-        {
-            "event_id": "PHDC_2026_CAP_01",
-            "ticker": "PHDC.CA",
-            "action_type": ActionType.BONUS_SHARES.value,
-            "announcement_date": "2026-09-20",
-            "ex_date": "2026-11-20",
-            "payment_date": "2026-12-05",
-            "value": 0.10,
-            "currency": "SHARES",
-            "description_ar": "مقترح توزيع أسهم مجانية بواقع 1 سهم مجاني لكل 10 أسهم لزيادة رأس المال",
-            "description_en": "Proposed 1:10 bonus shares",
-            "is_completed": False
-        },
         # --- RAYA HOLDING (RAYA.CA) ---
         {
             "event_id": "RAYA_2026_DIV_01",
@@ -255,19 +216,6 @@ class CorporateActionsCalendar:
             "description_ar": "كوبون نقدي بقيمة 0.25 ج.م للسهم",
             "description_en": "Cash dividend of 0.25 EGP per share",
             "is_completed": True
-        },
-        {
-            "event_id": "RAYA_2026_BUYBACK_01",
-            "ticker": "RAYA.CA",
-            "action_type": ActionType.PAR_VALUE_CHANGE.value,
-            "announcement_date": "2026-09-28",
-            "ex_date": "2026-10-25",
-            "payment_date": "2026-11-10",
-            "value": 7.50,
-            "currency": "EGP",
-            "description_ar": "برنامج شراء أسهم خزينة لدعم القيمة السوقية للسهم بسعر استرشادي 7.50 ج.م",
-            "description_en": "Treasury share buyback program at 7.50 EGP",
-            "is_completed": False
         }
     ]
 

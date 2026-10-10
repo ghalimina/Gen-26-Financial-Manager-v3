@@ -32,8 +32,16 @@
       "remaining_hours": 0.0,
       "reason_ar": ""
     },
+    "round_trip_friction_pct": 0.94,
+    "friction_pct": 0.94,
+    "live_trading_blocked": true,
+    "live_trading_status": "Live Trading Strictly Blocked",
+    "live_trading_guard_ar": "حظر التداول الحقيقي الصارم (Live Trading Strictly Blocked)",
     "rejection_reasons_ar": []
   },
+  "round_trip_friction_pct": 0.94,
+  "live_trading_blocked": true,
+  "live_trading_status": "Live Trading Strictly Blocked",
   "smart_cash_radar": {
     "total_equity_egp": 13658.56,
     "free_cash_egp": 1200.0,
