@@ -164,7 +164,7 @@
     "ENGC.CA": 0,
     "MTIE.CA": 0,
     "PHAR.CA": 0,
-    "DEIN.CA": 0,
+    "DEIN.CA": 1,
     "MHOT.CA": 0,
     "MAAL.CA": 0,
     "GMCI.CA": 0,
@@ -183,5 +183,5 @@
     "EBSC.CA": 0
   },
   "alerts": {},
-  "last_updated": "2026-10-10 03:50:40"
+  "last_updated": "2026-10-11 13:36:35"
 }
