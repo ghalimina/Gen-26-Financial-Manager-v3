@@ -1,6 +1,6 @@
 {
-  "last_sync": "2026-10-12 21:22:16",
-  "total_events": 296,
+  "last_sync": "2026-10-12 21:56:44",
+  "total_events": 297,
   "events": [
     {
       "news_id": "RSS_COMI_06380f4c70de",
@@ -134,6 +134,25 @@
       "headline": "البورصة المصرية تتراجع بمقدار 71 مليار جنيه خلال جلسة اليوم وسط ضغوط بيعية وتصاعد التوترات الجيوسياسية - جريدة آخر الأخبار",
       "alpha_shock_pct": -1.87,
       "created_at": "2026-10-12 21:22:16"
+    },
+    {
+      "news_id": "RSS_EGX30_7f669e93e02c",
+      "source": "رادار البورصة المصرية",
+      "url": "https://news.google.com/rss/articles/CBMilAVBVV95cUxOQUdkWm9GN1FEendtSDdmNDNvQ2lUcUtodDJpZWNYREwxSjhwTXk2V0RnbFN2RG1RZnh4WGRRWXBuSDUzTjBneVJlYlN1amM1QjM0aUpWZWlxd1JpRnpjdlRlV2pDZ2MxR3pycEpPZ0VIeHJlS1NNNzRnWElDTzVNckJ3b2ZWQTJ3TFI0bENVWm1rTjNaZXNTaHhjTTNrTE9xTWE3RVJ0amF2YW1VSTBFOUQyZ0twNGlVYmhRSEp6WlJ4eG5OODZGX18tN1pVSkRZVXF4M0tJLVZkOTVCVnk5OGdqRzVSYXdQR0xkcGx1S3gyUW5OM0tfY193M3JWSFpaN3ZDXzZiZGx6Vm5iY0p0bDFWY0NCZmZ0OEVLZFFwUVBpMlY0aGh2b1dPeHBwMkF3SG8wRkFuNlR0SmR1WGhscHl5ZTRGcW1HcEw1Zk9raUtmYURKcU40MW9abk1yTDI5TmwwZ195TDRaRUlFNk9NcXlHM2FfRzNVT0djekxnamlZS3c0QTVLMng5ZXNjaG5vVDRoVU9tODJQdnZfSkhEVkxRdWFPVUpRUnZWVGc4NnZzbk9wTnZneUR6LUdHYnJLSE9lWlU1S1Z6Vms0alJmaG44UXpyQnhvQTc2MHlJdGZEMlRYUnAxS2V6S0R4QWhQSU5pOVVEX3FUd3BlY0dWanlJcTR4VVo2NGUwTjVJM2x4RUhNcWRldWRTWVdaM09VV2Y3SFlYY3JSX3VOOVdOUU1lNC03RVVMOEN1eGwwcmZnS2pkTlVkaUVxVVFlcXF3aWE5eHVkUjR2eFNnVjNyM21KZlh1TnhOQ2V1V0l1Wk5FTmVnSDhkTUhuSF9aSlJ3M3lmSElkZ1VmYTh6bXE5ZVhMT2M?oc=5",
+      "published_at": "2026-10-12 15:46:18",
+      "retrieved_at": "2026-10-12 21:56:44",
+      "company": "المؤشر الرئيسي للبورصة المصرية EGX30",
+      "ticker": "EGX30.CA",
+      "sector": "Index & Macro",
+      "country": "EG",
+      "event_type": "REGULATORY",
+      "sentiment": "NEUTRAL",
+      "sentiment_confidence": 0.7,
+      "importance": "LOW",
+      "language": "ar",
+      "headline": "البورصة المصرية.. أسعار الأسهم الأكثر ارتفاعًا وانخفاضًا اليوم الاثنين 12-10-2026 | أموال الغد - اخبارك نت",
+      "alpha_shock_pct": 0.0,
+      "created_at": "2026-10-12 21:56:44"
     },
     {
       "news_id": "RSS_EGX30_75c8a02f29dc",
@@ -932,25 +951,6 @@
       "headline": "البورصة المصرية تغرم بريميم هيلثكير جروب 40 ألف جنيه بسبب القوائم المالية - شبكة تواصل الإخبارية",
       "alpha_shock_pct": 0.0,
       "created_at": "2026-10-12 21:22:16"
-    },
-    {
-      "news_id": "RSS_EGX30_9601f957a41b",
-      "source": "رادار البورصة المصرية",
-      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFBiR0lfdm9XZzV2ZktaNERObjF0LVVLakVoUnVZN3NCTktJVmRQblZ3eXMxZUExSkc3R0VHeWc3dGVYRnB2MXhMSmxVRXRaVE5ScnNV?oc=5",
-      "published_at": "2026-10-12 08:38:23",
-      "retrieved_at": "2026-10-12 16:13:27",
-      "company": "المؤشر الرئيسي للبورصة المصرية EGX30",
-      "ticker": "EGX30.CA",
-      "sector": "Index & Macro",
-      "country": "EG",
-      "event_type": "REGULATORY",
-      "sentiment": "NEGATIVE",
-      "sentiment_confidence": 0.8,
-      "importance": "MEDIUM",
-      "language": "ar",
-      "headline": "تراجع جماعي لمؤشرات البورصة المصرية في مستهل تعاملات الاثنين - شبكة تواصل الإخبارية",
-      "alpha_shock_pct": -1.43,
-      "created_at": "2026-10-12 16:13:27"
     }
   ]
 }
