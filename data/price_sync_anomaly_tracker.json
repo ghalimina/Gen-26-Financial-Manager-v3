@@ -129,8 +129,8 @@
     "CCRS.CA": 0,
     "ELWA.CA": 0,
     "GSSC.CA": 0,
-    "ZEOT.CA": 1,
-    "EXTK.CA": 1,
+    "ZEOT.CA": 0,
+    "EXTK.CA": 0,
     "TANM.CA": 0,
     "MBSC.CA": 0,
     "PRCL.CA": 0,
@@ -138,10 +138,10 @@
     "MTRC.CA": 0,
     "MCEG.CA": 0,
     "MEFM.CA": 0,
-    "WCDF.CA": 1,
+    "WCDF.CA": 0,
     "UEDA.CA": 0,
     "EDFM.CA": 0,
-    "WDEH.CA": 1,
+    "WDEH.CA": 0,
     "SNFC.CA": 0,
     "ISMA.CA": 0,
     "IDRE.CA": 0,
@@ -182,5 +182,5 @@
     "ANFI.CA": 0
   },
   "alerts": {},
-  "last_updated": "2026-10-13 14:39:16"
+  "last_updated": "2026-10-13 19:27:23"
 }
