@@ -1,6 +1,6 @@
 {
   "status": "SUCCESS",
-  "as_of": "2026-10-13 04:24:33",
+  "as_of": "2026-10-14 02:23:18",
   "macro_indicators": {
     "usd_egp": {
       "rate": 52.32,
@@ -14,11 +14,11 @@
       "status": "OFFICIAL_MONETARY_POLICY"
     },
     "cpi_inflation_yoy": {
-      "rate_pct": 14.5,
+      "rate_pct": 13.9,
       "label_ar": "معدل التضخم السنوي العام للحضر (الجهاز المركزي للتعبئة والإحصاء)",
       "status": "OFFICIAL_BULLETIN"
     },
-    "real_interest_rate_pct": 4.5
+    "real_interest_rate_pct": 5.1
   },
   "regime_classification": {
     "current_regime": "DEVALUATION_BOOM",
@@ -65,7 +65,20 @@
   },
   "egx_market_context": {
     "egx30_level": 31450.0,
-    "market_breadth": "MIXED_TO_NEGATIVE",
-    "analyst_assessment_ar": "البورصة في مرحلة هبوط انتقائي — الأسهم القيادية تضغط السوق والتوترات الجيوسياسية وارتفاع أسعار النفط يُضغطان على الهوامش"
+    "egx100_level": 53265.0,
+    "market_regime": "DISTRIBUTION_SELL_OFF",
+    "market_regime_name_ar": "🚨 موجة تصريف وضغط بيعي عام (DISTRIBUTION_SELL_OFF)",
+    "circuit_breaker_active": true,
+    "warning_directive_ar": "🚨 إنذار ضغط بيعي وتصريف مؤسسي (أكثر من 54% من السوق هابط): الشركات والمؤسسات تجني أرباحها — يُحظر فتح مراكز شراء جديدة اليوم، ويُنصح بالاحتفاظ بالكاش وتفعيل خطة التسييل الجزئي عند الارتداد.",
+    "market_breadth": {
+      "advances": 97,
+      "declines": 148,
+      "unchanged": 25,
+      "total_stocks": 270,
+      "declines_pct": 54.8,
+      "ad_ratio": 0.66,
+      "sentiment_label_ar": "🔴 ضغط بيعي وتصريف (A/D = 0.66) — الحذر واجب"
+    },
+    "analyst_assessment_ar": "🚨 إنذار ضغط بيعي وتصريف مؤسسي (أكثر من 54% من السوق هابط): الشركات والمؤسسات تجني أرباحها — يُحظر فتح مراكز شراء جديدة اليوم، ويُنصح بالاحتفاظ بالكاش وتفعيل خطة التسييل الجزئي عند الارتداد."
   }
 }

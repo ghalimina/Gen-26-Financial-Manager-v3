@@ -132,14 +132,14 @@
       "ABUK.CA": 17.1,
       "ETEL.CA": 17.7
     },
-    "market_breadth": "MIXED_TO_NEGATIVE",
-    "analyst_note": "البورصة في مرحلة هبوط انتقائي — الأسهم القيادية تضغط السوق والتوترات الجيوسياسية وارتفاع أسعار النفط يُضغطان على الهوامش",
+    "market_breadth": "DISTRIBUTION_SELL_OFF",
+    "analyst_note": "🚨 إنذار ضغط بيعي وتصريف مؤسسي (أكثر من 54% من السوق هابط): الشركات والمؤسسات تجني أرباحها — يُحظر فتح مراكز شراء جديدة اليوم، ويُنصح بالاحتفاظ بالكاش وتفعيل خطة التسييل الجزئي عند الارتداد.",
     "egx30_30d_change_pct": 0.0,
     "egx100_level": 53265.0
   },
-  "macro_regime": "HIGH_RATES_GEOPOLITICAL_PRESSURE",
-  "macro_regime_ar": "🟡 فائدة مرتفعة مع ضغوط جيوسياسية ونفط متصاعد — يُوصى بالحذر والتحوط",
-  "last_sync_timestamp": "2026-10-12 21:56:41",
+  "macro_regime": "DISTRIBUTION_SELL_OFF",
+  "macro_regime_ar": "🚨 إنذار ضغط بيعي وتصريف مؤسسي (أكثر من 54% من السوق هابط) — حظر الشراء الجديد",
+  "last_sync_timestamp": "2026-10-14 02:00:00",
   "staleness_warnings_count": 0,
   "stale_indicators": []
 }

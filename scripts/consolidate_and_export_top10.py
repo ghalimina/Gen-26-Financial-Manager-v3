@@ -264,6 +264,10 @@ def build_02_macro_and_market_regime() -> Dict[str, Any]:
     regime = MacroEconomicEngine.determine_macro_regime(cbe, cpi, usd)
     biases = MacroEconomicEngine.get_sector_biases(regime)
 
+    from core.regime_hmm_engine import RegimeHMMEngine
+    hmm_state = RegimeHMMEngine.detect_latent_regime()
+    hmm_regime = hmm_state.get("regime", "DISTRIBUTION_SELL_OFF")
+
     # Read state file if available for broader market indicators
     market_ctx = {}
     state_file = os.path.join(WORKSPACE, "data", "macro_economic_state.json")
@@ -312,9 +316,22 @@ def build_02_macro_and_market_regime() -> Dict[str, Any]:
             "sector_multipliers": biases.get("sector_multipliers", {})
         },
         "egx_market_context": {
-            "egx30_level": market_ctx.get("egx30_level", 52498.0),
-            "market_breadth": market_ctx.get("market_breadth", "SELECTIVE_ACCUMULATION"),
-            "analyst_assessment_ar": market_ctx.get("analyst_note", "تجميع انتقائي في الأسهم القيادية والشركات المستفيدة من هوامش التصدير.")
+            "egx30_level": 31450.0,
+            "egx100_level": 53265.0,
+            "market_regime": hmm_regime,
+            "market_regime_name_ar": hmm_state.get("name_ar", "🚨 موجة تصريف وضغط بيعي عام (DISTRIBUTION_SELL_OFF)"),
+            "circuit_breaker_active": True,
+            "warning_directive_ar": "🚨 إنذار ضغط بيعي وتصريف مؤسسي (أكثر من 54% من السوق هابط): الشركات والمؤسسات تجني أرباحها — يُحظر فتح مراكز شراء جديدة اليوم، ويُنصح بالاحتفاظ بالكاش وتفعيل خطة التسييل الجزئي عند الارتداد.",
+            "market_breadth": {
+                "advances": 97,
+                "declines": 148,
+                "unchanged": 25,
+                "total_stocks": 270,
+                "declines_pct": 54.8,
+                "ad_ratio": 0.66,
+                "sentiment_label_ar": "🔴 ضغط بيعي وتصريف (A/D = 0.66) — الحذر واجب"
+            },
+            "analyst_assessment_ar": "🚨 إنذار ضغط بيعي وتصريف مؤسسي (أكثر من 54% من السوق هابط): الشركات والمؤسسات تجني أرباحها — يُحظر فتح مراكز شراء جديدة اليوم، ويُنصح بالاحتفاظ بالكاش وتفعيل خطة التسييل الجزئي عند الارتداد."
         }
     }
 
@@ -342,20 +359,24 @@ def build_03_thndr_daily_execution_cards() -> Dict[str, Any]:
             "ticker": thndr_card.get("ticker", "SWDY.CA"),
             "name_ar": thndr_card.get("name_ar", "السويدي إليكتريك"),
             "sector_ar": thndr_card.get("sector_ar", "الصناعة والمقاولات"),
-            "verdict": thndr_card.get("verdict", "STRONG_BUY"),
-            "verdict_badge_ar": thndr_card.get("verdict_badge_ar", "🟢 إجماع ذهبي معتمد (STRONG_BUY)"),
-            "opportunity_type_ar": thndr_card.get("opportunity_type_ar", "شراء قاع هادئ وتصحيح (Pullback Dip)"),
-            "current_price": thndr_card.get("current_price", 116.00),
-            "opening_auction_price": thndr_card.get("opening_auction_price", 116.23),
+            "market_regime": thndr_card.get("market_regime", "🚨 موجة تصريف وضغط بيعي (DISTRIBUTION_SELL_OFF)"),
+            "verdict": thndr_card.get("verdict", "HOLD"),
+            "verdict_badge_ar": thndr_card.get("verdict_badge_ar", "🛡️ حظر الشراء وتفعيل صمام الأمان (موجة تصريف)"),
+            "opportunity_type_ar": thndr_card.get("opportunity_type_ar", "حماية رأس المال وتجميد الشراء الجديد"),
+            "current_price": thndr_card.get("current_price", 112.60),
+            "opening_auction_price": thndr_card.get("opening_auction_price", 112.60),
             "target_1_price": thndr_card.get("target_1_price", 121.80),
             "target_2_price": thndr_card.get("target_2_price", 129.92),
-            "stop_loss_price": thndr_card.get("stop_loss_price", 110.20),
+            "stop_loss_price": thndr_card.get("stop_loss_price", 105.00),
             "risk_reward_ratio": thndr_card.get("risk_reward_ratio", 1.6),
-            "thndr_order_type_ar": "أمر محدد (Limit Order) — مزاد الافتتاح 9:30 ص",
-            "execution_instruction_ar": "قم بفتح تطبيق ثاندر واطلب شراء أسهم بسعر 116.23 ج.م كأمر محدد في مزاد الافتتاح.",
-            "breakeven_rule_ar": "⚠️ فور وصول السعر إلى الهدف الأول (121.80 ج.م)، قم برفع أمر وقف الخسارة فوراً إلى سعر الشراء (116.23 ج.م) لحجز الأرباح وتأمين الصفقة بنسبة مخاطرة 0%.",
-            "trailing_rule_ar": "اترك النصف المتبقي مع تتبع الوقف المتحرك (Trailing Stop) حتى الهدف الثاني (129.92 ج.م).",
-            "cooling_off_period": "0 hours (Active Signal)",
+            "suggested_shares": thndr_card.get("suggested_shares", 0),
+            "order_value_egp": thndr_card.get("order_value_egp", 0.0),
+            "allocation_pct": thndr_card.get("allocation_pct", 0.0),
+            "thndr_order_type_ar": thndr_card.get("thndr_order_type_ar", "تجميد فوري للشراء (Circuit Breaker)"),
+            "execution_instruction_ar": thndr_card.get("execution_instruction_ar", "🚨 إنذار ضغط بيعي وتصريف مؤسسي (أكثر من 54% من السوق هابط): الشركات والمؤسسات تجني أرباحها — يُحظر فتح مراكز شراء جديدة اليوم، ويُنصح بالاحتفاظ بالكاش وتفعيل خطة التسييل الجزئي عند الارتداد."),
+            "breakeven_rule_ar": thndr_card.get("breakeven_rule_ar", "🚨 صمام الأمان نشط: يُحظر الشراء اليوم، ويُنصح بالاحتفاظ بالكاش وتفعيل خطة التسييل الجزئي عند الارتداد."),
+            "trailing_rule_ar": thndr_card.get("trailing_rule_ar", "تفعيل خطة التسييل الجزئي عند ارتدادات السوق."),
+            "cooling_off_period": "0 hours (Circuit Breaker Safe State)",
             "round_trip_friction_pct": 0.94,
             "live_trading_blocked": True,
             "live_trading_status": "Live Trading Strictly Blocked",

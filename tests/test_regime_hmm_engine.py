@@ -45,7 +45,8 @@ class TestRegimeHMMEngine(unittest.TestCase):
             RegimeHMMEngine.REGIME_STRONG_BULL,
             RegimeHMMEngine.REGIME_SIDEWAYS_CHOP,
             RegimeHMMEngine.REGIME_BEAR_CORRECTION,
-            RegimeHMMEngine.REGIME_FLASH_CRASH
+            RegimeHMMEngine.REGIME_FLASH_CRASH,
+            RegimeHMMEngine.REGIME_DISTRIBUTION_SELL_OFF
         ])
         self.assertIn("recommended_cash_reserve_pct", res)
         self.assertIn("description_ar", res)
@@ -57,12 +58,16 @@ class TestRegimeHMMEngine(unittest.TestCase):
         self.assertIn("active_factor_weights", res)
 
     def test_03_cash_allocation_rules_for_all_four_regimes(self):
-        """Verify mandatory safe cash reserve percentages for all 4 regimes."""
+        """Verify mandatory safe cash reserve percentages for all 5 regimes."""
         weights = RegimeHMMEngine.DYNAMIC_WEIGHTS
 
         # STRONG_BULL -> 5% Cash Reserve (95% Equities)
         self.assertEqual(weights[RegimeHMMEngine.REGIME_STRONG_BULL]["cash_reserve_pct"], 5.0)
         self.assertEqual(weights[RegimeHMMEngine.REGIME_STRONG_BULL]["equity_allocation_pct"], 95.0)
+
+        # DISTRIBUTION_SELL_OFF -> 45% Cash Reserve (55% Equities)
+        self.assertEqual(weights[RegimeHMMEngine.REGIME_DISTRIBUTION_SELL_OFF]["cash_reserve_pct"], 45.0)
+        self.assertEqual(weights[RegimeHMMEngine.REGIME_DISTRIBUTION_SELL_OFF]["equity_allocation_pct"], 55.0)
 
         # SIDEWAYS_CHOP -> 40% Cash Reserve (60% Equities)
         self.assertEqual(weights[RegimeHMMEngine.REGIME_SIDEWAYS_CHOP]["cash_reserve_pct"], 40.0)
@@ -75,6 +80,17 @@ class TestRegimeHMMEngine(unittest.TestCase):
         # FLASH_CRASH -> 100% Cash Reserve (0% Equities)
         self.assertEqual(weights[RegimeHMMEngine.REGIME_FLASH_CRASH]["cash_reserve_pct"], 100.0)
         self.assertEqual(weights[RegimeHMMEngine.REGIME_FLASH_CRASH]["equity_allocation_pct"], 0.0)
+
+    def test_03b_market_breadth_circuit_breaker(self):
+        """Verify Market Breadth & Institutional Distribution Circuit Breaker triggers accurately."""
+        cb = RegimeHMMEngine.check_market_breadth_circuit_breaker()
+        self.assertIn("triggered", cb)
+        self.assertIn("advances", cb)
+        self.assertIn("declines", cb)
+        self.assertIn("unchanged", cb)
+        self.assertIn("ad_ratio", cb)
+        self.assertIn("red_leaders", cb)
+        self.assertIn("directive_ar", cb)
 
     def test_04_classify_regime_from_metrics(self):
         """Verify quantitative metric classifier accurately triggers all 4 regimes."""

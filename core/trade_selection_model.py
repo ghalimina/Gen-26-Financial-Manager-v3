@@ -53,9 +53,15 @@ class TradeSelectionModel:
                 regime = regime or "SIDEWAYS_CHOP"
 
         is_below_sma50 = bool(egx30_price < egx30_ma50)
-        is_bear_or_crash = regime in ["BEAR_CORRECTION", "FLASH_CRASH", "BEAR_DEFENSIVE"]
+        is_distribution = regime == "DISTRIBUTION_SELL_OFF"
+        is_bear_or_crash = regime in ["BEAR_CORRECTION", "FLASH_CRASH", "BEAR_DEFENSIVE", "DISTRIBUTION_SELL_OFF"]
 
-        if is_below_sma50 or is_bear_or_crash:
+        if is_distribution:
+            market_mode = "CASH_PRESERVATION"
+            can_trade = False
+            cash_target_pct = 45.0
+            reason_ar = "🚨 إنذار ضغط بيعي وتصريف مؤسسي (أكثر من 54% من السوق هابط): الشركات والمؤسسات تجني أرباحها — يُحظر فتح مراكز شراء جديدة اليوم، ويُنصح بالاحتفاظ بالكاش وتفعيل خطة التسييل الجزئي عند الارتداد."
+        elif is_below_sma50 or is_bear_or_crash:
             market_mode = "CASH_PRESERVATION"
             can_trade = False
             cash_target_pct = 100.0

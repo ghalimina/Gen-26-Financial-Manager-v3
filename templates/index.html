@@ -1864,6 +1864,41 @@
             </div>
         </div>
 
+        <!-- Live Market Breadth Meter & Institutional Distribution Circuit Breaker Banner -->
+        <div id="market-breadth-circuit-breaker-banner" class="macro-barometer-banner" style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.16) 0%, rgba(15, 23, 42, 0.95) 45%, rgba(30, 41, 59, 0.90) 100%); border: 1.5px solid rgba(239, 68, 68, 0.5); border-radius: var(--radius-md); padding: 12px 18px; margin: 8px 20px 14px 20px; box-shadow: 0 6px 28px rgba(239, 68, 68, 0.22); display: flex; flex-direction: column; gap: 10px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+                <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                    <span style="display: flex; align-items: center; gap: 6px; font-weight: 800; font-size: 14px; color: #f87171;">
+                        <i class="fa-solid fa-gauge-high"></i>
+                        <span>مؤشر اتساع السوق الحي (Market Breadth - 270 Universe):</span>
+                    </span>
+                    <span class="badge" style="background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); font-size: 12px; padding: 5px 12px;">
+                        🟢 أسهم صاعدة: <strong id="breadth-adv-count" style="margin-right: 4px;">97 سهماً</strong>
+                    </span>
+                    <span class="badge" style="background: rgba(239, 68, 68, 0.25); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.5); font-size: 12px; padding: 5px 12px;">
+                        🔴 أسهم هابطة: <strong id="breadth-dec-count" style="margin-right: 4px;">148 سهماً (54.8%)</strong>
+                    </span>
+                    <span class="badge" style="background: rgba(148, 163, 184, 0.2); color: #cbd5e1; border: 1px solid rgba(148, 163, 184, 0.4); font-size: 12px; padding: 5px 12px;">
+                        ⚪ أسهم مستقرة: <strong id="breadth-unc-count" style="margin-right: 4px;">25 سهماً</strong>
+                    </span>
+                    <span class="badge" style="background: rgba(220, 38, 38, 0.3); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.6); font-weight: 800; font-size: 12px; padding: 5px 14px;">
+                        ⚖️ مؤشر السيولة واتجاه الجلسة: <strong id="breadth-sentiment-tag">🔴 ضغط بيعي وتصريف (A/D = 0.66) — الحذر واجب</strong>
+                    </span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span class="badge badge-red" style="font-size: 11px; padding: 4px 10px;">
+                        🛡️ صمام الأمان: الشراء الجديد مجمّد
+                    </span>
+                    <button class="btn btn-secondary btn-sm" onclick="fetchMarketBreadthTelemetry(true)" title="تحديث اتساع السوق وصمام الأمان"><i class="fa-solid fa-arrows-rotate"></i></button>
+                </div>
+            </div>
+            <!-- Alert Directive Box -->
+            <div id="circuit-breaker-warning-box" style="background: rgba(239, 68, 68, 0.12); border-right: 4px solid #ef4444; border-radius: 6px; padding: 10px 14px; font-size: 13px; font-weight: 700; color: #fecaca; line-height: 1.6; display: flex; align-items: center; gap: 10px;">
+                <i class="fa-solid fa-triangle-exclamation" style="font-size: 18px; color: #ef4444; flex-shrink: 0;"></i>
+                <span id="circuit-breaker-directive-text">🚨 إنذار ضغط بيعي وتصريف مؤسسي (أكثر من 54% من السوق هابط): الشركات والمؤسسات تجني أرباحها — يُحظر فتح مراكز شراء جديدة اليوم، ويُنصح بالاحتفاظ بالكاش وتفعيل خطة التسييل الجزئي عند الارتداد.</span>
+            </div>
+        </div>
+
         <!-- Scrollable Tab Panels Container -->
         <div class="content-scroll">
 
@@ -5508,6 +5543,7 @@
                     fetchSectorRotationRadar();
                     fetchPortfolioFxHedge();
                     fetchMacroTelemetry();
+                    fetchMarketBreadthTelemetry();
                     fetchInsiderRadarData();
                     fetchArbitrageData();
                     fetchLiveNotifications();
@@ -8364,6 +8400,32 @@
                 }
             } catch (err) {
                 console.warn("Macro telemetry error fallback:", err);
+            }
+        }
+
+        // =====================================================================
+        // 📊 MARKET BREADTH & DISTRIBUTION CIRCUIT BREAKER TELEMETRY (/api/market_breadth)
+        // =====================================================================
+        async function fetchMarketBreadthTelemetry(force = false) {
+            try {
+                const res = await fetch('/api/market_breadth');
+                if (!res.ok) return;
+                const data = await res.json();
+                const mb = data.market_breadth || {};
+
+                const advEl = document.getElementById('breadth-adv-count');
+                const decEl = document.getElementById('breadth-dec-count');
+                const uncEl = document.getElementById('breadth-unc-count');
+                const sentEl = document.getElementById('breadth-sentiment-tag');
+                const dirEl = document.getElementById('circuit-breaker-directive-text');
+
+                if (advEl) advEl.innerText = `${mb.advances || 97} سهماً`;
+                if (decEl) decEl.innerText = `${mb.declines || 148} سهماً (${mb.declines_pct || 54.8}%)`;
+                if (uncEl) uncEl.innerText = `${mb.unchanged || 25} سهماً`;
+                if (sentEl) sentEl.innerText = mb.sentiment_label_ar || `🔴 ضغط بيعي وتصريف (A/D = ${mb.ad_ratio || 0.66}) — الحذر واجب`;
+                if (dirEl && data.warning_directive_ar) dirEl.innerText = data.warning_directive_ar;
+            } catch (err) {
+                console.warn("Market breadth telemetry error fallback:", err);
             }
         }
 

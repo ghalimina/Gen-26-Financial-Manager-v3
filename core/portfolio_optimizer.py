@@ -15,9 +15,12 @@ import math
 import logging
 from typing import Dict, List, Any, Optional, Tuple, Union
 import numpy as np
-import pandas as pd
-import scipy.cluster.hierarchy as sch
-from scipy.spatial.distance import squareform
+try:
+    import scipy.cluster.hierarchy as sch
+    from scipy.spatial.distance import squareform
+except ImportError:
+    sch = None
+    squareform = None
 
 # Configure structured logger
 logger = logging.getLogger("PortfolioOptimizer")

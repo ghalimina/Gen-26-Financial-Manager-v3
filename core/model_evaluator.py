@@ -15,8 +15,10 @@ import json
 import math
 import numpy as np
 import pandas as pd
-from typing import Dict, List, Any, Optional, Tuple
-from scipy.stats import spearmanr
+try:
+    from scipy.stats import spearmanr
+except ImportError:
+    spearmanr = None
 
 WORKSPACE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if WORKSPACE not in sys.path:

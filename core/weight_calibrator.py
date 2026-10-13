@@ -11,8 +11,10 @@ import sys
 import json
 import numpy as np
 import pandas as pd
-from typing import Dict, List, Any, Optional
-from scipy.optimize import minimize
+try:
+    from scipy.optimize import minimize
+except ImportError:
+    minimize = None
 
 WORKSPACE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if WORKSPACE not in sys.path:

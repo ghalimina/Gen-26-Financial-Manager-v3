@@ -136,6 +136,9 @@ class EnsembleDecisionEngine:
             if regime == "STRONG_BULL":
                 macro_score = 88.0
                 macro_vote = "BULLISH"
+            elif regime == "DISTRIBUTION_SELL_OFF":
+                macro_score = 22.0
+                macro_vote = "BEARISH"
             elif regime in ("BEAR_CORRECTION", "FLASH_CRASH"):
                 macro_score = 30.0
                 macro_vote = "BEARISH"
@@ -264,6 +267,13 @@ class EnsembleDecisionEngine:
             final_action = "HOLD"
             conviction = "MODERATE"
             action_badge_ar = "🟡 احتفاظ ومراقبة (Hold)"
+
+        # Circuit Breaker Protection: Freeze and prohibit new buy signals during distribution sell-off
+        if regime == "DISTRIBUTION_SELL_OFF" or reg_info.get("buy_blocked", False):
+            if final_action in ("STRONG_BUY", "BUY"):
+                final_action = "HOLD"
+                conviction = "DEFENSIVE"
+                action_badge_ar = "🛡️ تجميد الشراء: إنذار تصريف مؤسسي وضغط بيعي (حظر مراكز جديدة)"
 
         # Price Target & Stop Loss Levels
         target_1 = round(current_price * 1.08, 2)   # +8%
