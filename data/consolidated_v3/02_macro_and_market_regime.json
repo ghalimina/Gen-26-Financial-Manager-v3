@@ -1,6 +1,6 @@
 {
   "status": "SUCCESS",
-  "as_of": "2026-10-14 02:23:18",
+  "as_of": "2026-10-14 02:46:38",
   "macro_indicators": {
     "usd_egp": {
       "rate": 52.32,
@@ -14,11 +14,11 @@
       "status": "OFFICIAL_MONETARY_POLICY"
     },
     "cpi_inflation_yoy": {
-      "rate_pct": 13.9,
+      "rate_pct": 14.5,
       "label_ar": "معدل التضخم السنوي العام للحضر (الجهاز المركزي للتعبئة والإحصاء)",
       "status": "OFFICIAL_BULLETIN"
     },
-    "real_interest_rate_pct": 5.1
+    "real_interest_rate_pct": 4.5
   },
   "regime_classification": {
     "current_regime": "DEVALUATION_BOOM",
