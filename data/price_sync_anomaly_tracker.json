@@ -129,8 +129,8 @@
     "CCRS.CA": 0,
     "ELWA.CA": 0,
     "GSSC.CA": 0,
-    "ZEOT.CA": 0,
-    "EXTK.CA": 0,
+    "ZEOT.CA": 1,
+    "EXTK.CA": 1,
     "TANM.CA": 0,
     "MBSC.CA": 0,
     "PRCL.CA": 0,
@@ -138,10 +138,10 @@
     "MTRC.CA": 0,
     "MCEG.CA": 0,
     "MEFM.CA": 0,
-    "WCDF.CA": 0,
+    "WCDF.CA": 1,
     "UEDA.CA": 0,
     "EDFM.CA": 0,
-    "WDEH.CA": 0,
+    "WDEH.CA": 1,
     "SNFC.CA": 0,
     "ISMA.CA": 0,
     "IDRE.CA": 0,
@@ -158,7 +158,7 @@
     "ENGC.CA": 0,
     "MTIE.CA": 0,
     "PHAR.CA": 0,
-    "DEIN.CA": 1,
+    "DEIN.CA": 0,
     "MHOT.CA": 0,
     "MAAL.CA": 0,
     "GMCI.CA": 0,
@@ -174,8 +174,13 @@
     "TOUR.CA": 0,
     "GRCA.CA": 0,
     "MFSC.CA": 0,
-    "EBSC.CA": 0
+    "EBSC.CA": 0,
+    "ESRS.CA": 0,
+    "ARPU.CA": 0,
+    "ATLE.CA": 0,
+    "GTHC.CA": 0,
+    "ANFI.CA": 0
   },
   "alerts": {},
-  "last_updated": "2026-10-12 03:03:27"
+  "last_updated": "2026-10-13 14:39:16"
 }
