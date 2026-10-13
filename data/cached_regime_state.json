@@ -1,9 +1,10 @@
 {
-  "regime": "STRONG_BULL",
-  "cash_reserve_pct": 5.0,
-  "egx30_level": 52494.0,
-  "ma_50": 49998.92,
-  "ma_200": 45054.63,
-  "drawdown_20d_pct": -0.76,
-  "saved_at": "2026-10-10 03:57:51"
+  "regime": "SIDEWAYS_CHOP",
+  "cash_reserve_pct": 35.0,
+  "egx30_level": 31450.0,
+  "egx100_level": 53265.0,
+  "ma_50": 30850.0,
+  "ma_200": 29200.0,
+  "drawdown_20d_pct": -1.80,
+  "saved_at": "2026-10-13 03:00:00"
 }

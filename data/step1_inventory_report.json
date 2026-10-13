@@ -1,0 +1,2980 @@
+{
+  "audit_meta": {
+    "generated_at": "2026-10-13 02:45:42",
+    "workspace": "C:\\Users\\Administrator\\Desktop\\New folder",
+    "auditor": "Antigravity Forensic Auditor (Systems & Financial Data)"
+  },
+  "axis_1_files_and_git": {
+    "total_workspace_size": "9.20 GB",
+    "total_workspace_files": 6203,
+    "git_size": "9.08 GB",
+    "git_files": 4876,
+    "dir_metrics": {
+      "data": {
+        "count": 114,
+        "size_bytes": 61018618,
+        "size_formatted": "58.19 MB"
+      },
+      "core": {
+        "count": 289,
+        "size_bytes": 4039942,
+        "size_formatted": "3.85 MB"
+      },
+      "dashboard": {
+        "count": 4,
+        "size_bytes": 1870313,
+        "size_formatted": "1.78 MB"
+      },
+      "scripts": {
+        "count": 39,
+        "size_bytes": 550144,
+        "size_formatted": "537.25 KB"
+      },
+      "tests": {
+        "count": 147,
+        "size_bytes": 854615,
+        "size_formatted": "834.58 KB"
+      },
+      "templates": {
+        "count": 1,
+        "size_bytes": 693552,
+        "size_formatted": "677.30 KB"
+      },
+      "reports": {
+        "count": 248,
+        "size_bytes": 6274054,
+        "size_formatted": "5.98 MB"
+      },
+      "research_v5": {
+        "count": 3,
+        "size_bytes": 1448141,
+        "size_formatted": "1.38 MB"
+      },
+      "archive": {
+        "count": 31,
+        "size_bytes": 33403069,
+        "size_formatted": "31.86 MB"
+      },
+      "scratch": {
+        "count": 383,
+        "size_bytes": 18965845,
+        "size_formatted": "18.09 MB"
+      },
+      "docs": {
+        "count": 1,
+        "size_bytes": 62029,
+        "size_formatted": "60.58 KB"
+      },
+      "root_files": {
+        "count": 54,
+        "size_bytes": 757200,
+        "size_formatted": "739.45 KB"
+      }
+    },
+    "delete_candidates": [
+      {
+        "file": "ARCHITECTURE_AND_DATAFLOW.md",
+        "size": "15.25 KB",
+        "size_bytes": 15611,
+        "reason": "وثيقة تدقيق جنائي تاريخية مكررة تثقل المستودع"
+      },
+      {
+        "file": "audit_all_270_stocks.py",
+        "size": "28.62 KB",
+        "size_bytes": 29308,
+        "reason": "سكريبت فحص جنائي قديم ومؤقت غير مستخدم في التشغيل الإنتاجي"
+      },
+      {
+        "file": "BACKTEST_TIMING_AND_ACCOUNTING_AUDIT.md",
+        "size": "7.70 KB",
+        "size_bytes": 7882,
+        "reason": "وثيقة تدقيق جنائي تاريخية مكررة تثقل المستودع"
+      },
+      {
+        "file": "CONFIRMED_FIX_PLAN.md",
+        "size": "9.21 KB",
+        "size_bytes": 9433,
+        "reason": "وثيقة تدقيق جنائي تاريخية مكررة تثقل المستودع"
+      },
+      {
+        "file": "CORRECTIVE_ACTION_PLAN.md",
+        "size": "12.50 KB",
+        "size_bytes": 12799,
+        "reason": "وثيقة تدقيق جنائي تاريخية مكررة تثقل المستودع"
+      },
+      {
+        "file": "COST_AND_LIQUIDITY_AUDIT.md",
+        "size": "8.54 KB",
+        "size_bytes": 8745,
+        "reason": "وثيقة تدقيق جنائي تاريخية مكررة تثقل المستودع"
+      },
+      {
+        "file": "CURRENT_STATE_INVENTORY.md",
+        "size": "25.49 KB",
+        "size_bytes": 26101,
+        "reason": "وثيقة تدقيق جنائي تاريخية مكررة تثقل المستودع"
+      },
+      {
+        "file": "DATA_INTEGRITY_AUDIT.md",
+        "size": "12.17 KB",
+        "size_bytes": 12465,
+        "reason": "وثيقة تدقيق جنائي تاريخية مكررة تثقل المستودع"
+      },
+      {
+        "file": "DATA_LINEAGE_AUDIT.md",
+        "size": "7.24 KB",
+        "size_bytes": 7416,
+        "reason": "وثيقة تدقيق جنائي تاريخية مكررة تثقل المستودع"
+      },
+      {
+        "file": "FINAL_FORENSIC_AUDIT_SUMMARY.md",
+        "size": "19.48 KB",
+        "size_bytes": 19952,
+        "reason": "وثيقة تدقيق جنائي تاريخية مكررة تثقل المستودع"
+      },
+      {
+        "file": "FINDINGS_REGISTER.md",
+        "size": "10.97 KB",
+        "size_bytes": 11235,
+        "reason": "وثيقة تدقيق جنائي تاريخية مكررة تثقل المستودع"
+      },
+      {
+        "file": "FINDINGS_VERIFICATION_REPORT.md",
+        "size": "10.08 KB",
+        "size_bytes": 10319,
+        "reason": "وثيقة تدقيق جنائي تاريخية مكررة تثقل المستودع"
+      },
+      {
+        "file": "full_raw_test_run.txt",
+        "size": "127.45 KB",
+        "size_bytes": 130507,
+        "reason": "ملف مخرجات فحص مؤقت أو سجلات خام ضخمة"
+      },
+      {
+        "file": "GEN26_FINAL_FORENSIC_AUDIT.md",
+        "size": "10.62 KB",
+        "size_bytes": 10878,
+        "reason": "وثيقة تدقيق جنائي تاريخية مكررة تثقل المستودع"
+      },
+      {
+        "file": "HISTORICAL_REPRODUCTION_MATRIX.md",
+        "size": "9.17 KB",
+        "size_bytes": 9387,
+        "reason": "وثيقة تدقيق جنائي تاريخية مكررة تثقل المستودع"
+      },
+      {
+        "file": "LOCKED_SPEC_RECONCILIATION.md",
+        "size": "10.94 KB",
+        "size_bytes": 11203,
+        "reason": "وثيقة تدقيق جنائي تاريخية مكررة تثقل المستودع"
+      },
+      {
+        "file": "MAIN_RUNTIME_FORENSIC_AUDIT.md",
+        "size": "7.65 KB",
+        "size_bytes": 7832,
+        "reason": "وثيقة تدقيق جنائي تاريخية مكررة تثقل المستودع"
+      },
+      {
+        "file": "MASTER_PROJECT_INVENTORY.md",
+        "size": "60.58 KB",
+        "size_bytes": 62029,
+        "reason": "وثيقة تدقيق جنائي تاريخية مكررة تثقل المستودع"
+      },
+      {
+        "file": "PIT_LEAKAGE_AUDIT.md",
+        "size": "7.07 KB",
+        "size_bytes": 7241,
+        "reason": "وثيقة تدقيق جنائي تاريخية مكررة تثقل المستودع"
+      },
+      {
+        "file": "PIT_LOOKAHEAD_FORENSIC.md",
+        "size": "13.87 KB",
+        "size_bytes": 14198,
+        "reason": "وثيقة تدقيق جنائي تاريخية مكررة تثقل المستودع"
+      },
+      {
+        "file": "real_market_stress_test_all_270.py",
+        "size": "35.62 KB",
+        "size_bytes": 36478,
+        "reason": "سكريبت فحص جنائي قديم ومؤقت غير مستخدم في التشغيل الإنتاجي"
+      },
+      {
+        "file": "REPOSITORY_ARCHITECTURE_MAP.md",
+        "size": "12.40 KB",
+        "size_bytes": 12701,
+        "reason": "وثيقة تدقيق جنائي تاريخية مكررة تثقل المستودع"
+      },
+      {
+        "file": "RESEARCH_AUDIT_SUMMARY.md",
+        "size": "10.57 KB",
+        "size_bytes": 10828,
+        "reason": "وثيقة تدقيق جنائي تاريخية مكررة تثقل المستودع"
+      },
+      {
+        "file": "SIGNAL_SPEC_COMPLIANCE_REPORT.md",
+        "size": "6.96 KB",
+        "size_bytes": 7129,
+        "reason": "وثيقة تدقيق جنائي تاريخية مكررة تثقل المستودع"
+      },
+      {
+        "file": "STATISTICAL_REPRODUCTION_RESULTS.md",
+        "size": "6.32 KB",
+        "size_bytes": 6469,
+        "reason": "وثيقة تدقيق جنائي تاريخية مكررة تثقل المستودع"
+      },
+      {
+        "file": "STATISTICAL_VALIDATION_AUDIT.md",
+        "size": "8.94 KB",
+        "size_bytes": 9154,
+        "reason": "وثيقة تدقيق جنائي تاريخية مكررة تثقل المستودع"
+      },
+      {
+        "file": "step1_full_system_inventory_and_audit.py",
+        "size": "35.93 KB",
+        "size_bytes": 36791,
+        "reason": "سكريبت فحص جنائي قديم ومؤقت غير مستخدم في التشغيل الإنتاجي"
+      },
+      {
+        "file": "SURVIVORSHIP_AND_UNIVERSE_AUDIT.md",
+        "size": "6.78 KB",
+        "size_bytes": 6946,
+        "reason": "وثيقة تدقيق جنائي تاريخية مكررة تثقل المستودع"
+      },
+      {
+        "file": "TARGET_AND_BACKTEST_AUDIT.md",
+        "size": "10.54 KB",
+        "size_bytes": 10793,
+        "reason": "وثيقة تدقيق جنائي تاريخية مكررة تثقل المستودع"
+      },
+      {
+        "file": "test_all_7_pillars_end_to_end.py",
+        "size": "39.97 KB",
+        "size_bytes": 40930,
+        "reason": "سكريبت فحص جنائي قديم ومؤقت غير مستخدم في التشغيل الإنتاجي"
+      },
+      {
+        "file": "TEST_COVERAGE_AND_VALIDATION_REPORT.md",
+        "size": "6.46 KB",
+        "size_bytes": 6620,
+        "reason": "وثيقة تدقيق جنائي تاريخية مكررة تثقل المستودع"
+      },
+      {
+        "file": "test_output_raw.txt",
+        "size": "4.52 KB",
+        "size_bytes": 4628,
+        "reason": "ملف مخرجات فحص مؤقت أو سجلات خام ضخمة"
+      },
+      {
+        "file": "VALIDATION_RECONCILIATION_REPORT.md",
+        "size": "7.02 KB",
+        "size_bytes": 7193,
+        "reason": "وثيقة تدقيق جنائي تاريخية مكررة تثقل المستودع"
+      },
+      {
+        "file": "verified_fixes_registry.md",
+        "size": "76.62 KB",
+        "size_bytes": 78456,
+        "reason": "وثيقة تدقيق جنائي تاريخية مكررة تثقل المستودع"
+      },
+      {
+        "file": "verify_fixes.py",
+        "size": "7.48 KB",
+        "size_bytes": 7660,
+        "reason": "سكريبت فحص جنائي قديم ومؤقت غير مستخدم في التشغيل الإنتاجي"
+      },
+      {
+        "file": "data/precomputed_rankings.json.bak",
+        "size": "6.86 MB",
+        "size_bytes": 7188905,
+        "reason": "نسخة احتياطية قديمة مكررة غير مستخدمة (Backup)"
+      },
+      {
+        "file": "data/thndr_egx_244_universe.json.bak",
+        "size": "108.88 KB",
+        "size_bytes": 111497,
+        "reason": "نسخة احتياطية قديمة مكررة غير مستخدمة (Backup)"
+      },
+      {
+        "file": "dashboard/index.html",
+        "size": "681.37 KB",
+        "size_bytes": 697718,
+        "reason": "نسخة مكررة بالكامل من templates/index.html (تزيد حجم المشروع)"
+      },
+      {
+        "file": "dashboard/templates/index.html",
+        "size": "682.47 KB",
+        "size_bytes": 698851,
+        "reason": "نسخة مكررة ثالثة من templates/index.html"
+      },
+      {
+        "file": "archive/ (Directory)",
+        "size": "31.86 MB",
+        "size_bytes": 33403069,
+        "reason": "مجلد أرشيف قديم غير نشط يحتوي على قواعد بيانات وملفات ميتة"
+      },
+      {
+        "file": "scratch/ (Directory)",
+        "size": "18.09 MB",
+        "size_bytes": 18965845,
+        "reason": "مجلد مسودات وتجارب مؤقتة يجب استثناؤه من Git"
+      },
+      {
+        "file": "research_v5/data_copies/egx_historical_snapshot.csv",
+        "size": "1.38 MB",
+        "size_bytes": 1445500,
+        "reason": "نسخة مكررة طبق الأصل من data/egx_historical_snapshot.csv"
+      },
+      {
+        "file": ".pytest_cache (Cache)",
+        "size": "65.24 KB",
+        "size_bytes": 66808,
+        "reason": "مجلد كاش بايثون المؤقت"
+      },
+      {
+        "file": "__pycache__ (Cache)",
+        "size": "828 B",
+        "size_bytes": 828,
+        "reason": "مجلد كاش بايثون المؤقت"
+      },
+      {
+        "file": "core\\__pycache__ (Cache)",
+        "size": "1.82 MB",
+        "size_bytes": 1906247,
+        "reason": "مجلد كاش بايثون المؤقت"
+      },
+      {
+        "file": "core\\alpha_scanner\\__pycache__ (Cache)",
+        "size": "28.28 KB",
+        "size_bytes": 28955,
+        "reason": "مجلد كاش بايثون المؤقت"
+      },
+      {
+        "file": "core\\trading_agents\\__pycache__ (Cache)",
+        "size": "54.97 KB",
+        "size_bytes": 56293,
+        "reason": "مجلد كاش بايثون المؤقت"
+      },
+      {
+        "file": "dashboard\\__pycache__ (Cache)",
+        "size": "251.57 KB",
+        "size_bytes": 257603,
+        "reason": "مجلد كاش بايثون المؤقت"
+      },
+      {
+        "file": "data\\__pycache__ (Cache)",
+        "size": "13.07 KB",
+        "size_bytes": 13382,
+        "reason": "مجلد كاش بايثون المؤقت"
+      },
+      {
+        "file": "scratch\\__pycache__ (Cache)",
+        "size": "6.15 KB",
+        "size_bytes": 6299,
+        "reason": "مجلد كاش بايثون المؤقت"
+      },
+      {
+        "file": "scripts\\__pycache__ (Cache)",
+        "size": "43.43 KB",
+        "size_bytes": 44473,
+        "reason": "مجلد كاش بايثون المؤقت"
+      },
+      {
+        "file": "tests\\__pycache__ (Cache)",
+        "size": "242.24 KB",
+        "size_bytes": 248055,
+        "reason": "مجلد كاش بايثون المؤقت"
+      },
+      {
+        "file": "tests\\ui\\__pycache__ (Cache)",
+        "size": "159 B",
+        "size_bytes": 159,
+        "reason": "مجلد كاش بايثون المؤقت"
+      }
+    ],
+    "total_deletable_size": "62.80 MB",
+    "total_deletable_count": 53,
+    "keep_summary": {
+      "total_keep_files": 80,
+      "production_db_retained": [
+        "data/gen26_production.db",
+        "data/gen26_market.db"
+      ],
+      "consolidated_v3_retained": "data/consolidated_v3/ (10 Active Files)",
+      "core_retained": "core/ (289 files)",
+      "dashboard_retained": "dashboard/app.py & templates/index.html"
+    }
+  },
+  "axis_2_price_and_text_contradictions": {
+    "total_audited_stocks": 270,
+    "stocks_with_price_conflicts": 156,
+    "zero_price_stocks": [],
+    "missing_sectors_count": 0,
+    "missing_sectors": [],
+    "missing_arabic_names_in_cpl_count": 66,
+    "missing_arabic_names_sample": [
+      {
+        "ticker": "ALCO.CA",
+        "cpl_name": null,
+        "db_name": "ألكو للصناعات المعدنية والتطوير"
+      },
+      {
+        "ticker": "APEX.CA",
+        "cpl_name": null,
+        "db_name": "أبيكس الطبية للأدوية والمستلزمات"
+      },
+      {
+        "ticker": "AQUA.CA",
+        "cpl_name": null,
+        "db_name": "النيل للاستزراع المائي والإنتاج السمكي"
+      },
+      {
+        "ticker": "ARTI.CA",
+        "cpl_name": null,
+        "db_name": "أرابيلا للاستثمار والتنمية العقارية"
+      },
+      {
+        "ticker": "AUTO.CA",
+        "cpl_name": null,
+        "db_name": "الوطنية للسيارات وخدمات التوزيع"
+      },
+      {
+        "ticker": "BIPC.CA",
+        "cpl_name": null,
+        "db_name": "البدر للبلاستيك (بورصة النيل)"
+      },
+      {
+        "ticker": "CASH.CA",
+        "cpl_name": null,
+        "db_name": "كاش بلس للحلول التمويلية متناهية الصغر"
+      },
+      {
+        "ticker": "EFRH.CA",
+        "cpl_name": null,
+        "db_name": "المجموعة العقارية المصرية (ليفت سلاب)"
+      },
+      {
+        "ticker": "EGTI.CA",
+        "cpl_name": null,
+        "db_name": "المصرية للنقل وخدمات البترول"
+      },
+      {
+        "ticker": "EHCA.CA",
+        "cpl_name": null,
+        "db_name": "إيجي هيلث للرعاية الطبية والعيادات"
+      },
+      {
+        "ticker": "EMHA.CA",
+        "cpl_name": null,
+        "db_name": "مطاحن مصر الوسطى"
+      },
+      {
+        "ticker": "EMMC.CA",
+        "cpl_name": null,
+        "db_name": "مطاحن ومخابز شمال القاهرة"
+      },
+      {
+        "ticker": "ENAE.CA",
+        "cpl_name": null,
+        "db_name": "مطاحن شرق الدلتا"
+      },
+      {
+        "ticker": "FITA.CA",
+        "cpl_name": null,
+        "db_name": "فيرست للاستثمار والتنمية العقارية"
+      },
+      {
+        "ticker": "FPIH.CA",
+        "cpl_name": null,
+        "db_name": "المؤشر للبرمجيات وتكنولوجيا المعلومات"
+      }
+    ],
+    "top_discrepancies": [
+      {
+        "ticker": "EKHO.CA",
+        "name_ar": "القابضة المصرية الكويتية (بالدولار)",
+        "sector": "الخدمات المالية والاستثمار",
+        "s1_dropdown": null,
+        "s2_canonical_live": 35.0,
+        "s3_consolidated_v3": 0.67,
+        "s4_precomputed_rankings": 0.67,
+        "s5_production_db": 35.0,
+        "has_conflict": true,
+        "variance_pct": 5123.88
+      },
+      {
+        "ticker": "ARPU.CA",
+        "name_ar": "العربية للأدوية والصناعات الكيماوية",
+        "sector": "الرعاية الصحية والأدوية",
+        "s1_dropdown": null,
+        "s2_canonical_live": 269.04,
+        "s3_consolidated_v3": 10.0,
+        "s4_precomputed_rankings": 10.0,
+        "s5_production_db": 269.04,
+        "has_conflict": true,
+        "variance_pct": 2590.4
+      },
+      {
+        "ticker": "ESRS.CA",
+        "name_ar": "حديد عز",
+        "sector": "الموارد الأساسية والكيماويات",
+        "s1_dropdown": null,
+        "s2_canonical_live": 1250.0,
+        "s3_consolidated_v3": 128.5,
+        "s4_precomputed_rankings": 128.5,
+        "s5_production_db": 1250.0,
+        "has_conflict": true,
+        "variance_pct": 872.76
+      },
+      {
+        "ticker": "ATLE.CA",
+        "name_ar": "أطلس للاستثمار والصناعات الغذائية",
+        "sector": "الأغذية والمشروبات والتبغ",
+        "s1_dropdown": null,
+        "s2_canonical_live": 2.11,
+        "s3_consolidated_v3": 10.0,
+        "s4_precomputed_rankings": 10.0,
+        "s5_production_db": 2.11,
+        "has_conflict": true,
+        "variance_pct": 373.93
+      },
+      {
+        "ticker": "ANFI.CA",
+        "name_ar": "الإسكندرية للخدمات الطبية (المركز الطبي الجديد)",
+        "sector": "الرعاية الصحية والأدوية",
+        "s1_dropdown": null,
+        "s2_canonical_live": 43.83,
+        "s3_consolidated_v3": 10.0,
+        "s4_precomputed_rankings": 10.0,
+        "s5_production_db": 43.83,
+        "has_conflict": true,
+        "variance_pct": 338.3
+      },
+      {
+        "ticker": "GTHC.CA",
+        "name_ar": "جلوبال للتجارة والاستثمار",
+        "sector": "التجارة والموزعون",
+        "s1_dropdown": null,
+        "s2_canonical_live": 4.41,
+        "s3_consolidated_v3": 10.0,
+        "s4_precomputed_rankings": 10.0,
+        "s5_production_db": 4.41,
+        "has_conflict": true,
+        "variance_pct": 126.76
+      },
+      {
+        "ticker": "DOMT.CA",
+        "name_ar": "الصناعات الغذائية العربية (دومتي)",
+        "sector": "الأغذية والمشروبات",
+        "s1_dropdown": 15.2,
+        "s2_canonical_live": 23.87,
+        "s3_consolidated_v3": 24.0,
+        "s4_precomputed_rankings": 24.0,
+        "s5_production_db": 23.87,
+        "has_conflict": true,
+        "variance_pct": 57.89
+      },
+      {
+        "ticker": "ETEL.CA",
+        "name_ar": "المصرية للاتصالات (WE)",
+        "sector": "الاتصالات وتكنولوجيا المعلومات",
+        "s1_dropdown": 114.89,
+        "s2_canonical_live": 145.0,
+        "s3_consolidated_v3": 148.0,
+        "s4_precomputed_rankings": 148.0,
+        "s5_production_db": 145.0,
+        "has_conflict": true,
+        "variance_pct": 28.82
+      },
+      {
+        "ticker": "EAST.CA",
+        "name_ar": "الشرقية للدخان (إيسترن كومباني)",
+        "sector": "السلع الاستهلاكية",
+        "s1_dropdown": 36.02,
+        "s2_canonical_live": 28.11,
+        "s3_consolidated_v3": 28.21,
+        "s4_precomputed_rankings": 28.21,
+        "s5_production_db": 28.11,
+        "has_conflict": true,
+        "variance_pct": 28.14
+      },
+      {
+        "ticker": "AMOC.CA",
+        "name_ar": "الإسكندرية للزيوت المعدنية (أموك)",
+        "sector": "البتروكيماويات والطاقة",
+        "s1_dropdown": 11.35,
+        "s2_canonical_live": 13.74,
+        "s3_consolidated_v3": 14.48,
+        "s4_precomputed_rankings": 14.48,
+        "s5_production_db": 13.74,
+        "has_conflict": true,
+        "variance_pct": 27.58
+      },
+      {
+        "ticker": "DEIN.CA",
+        "name_ar": "الدلتا للتأمين",
+        "sector": "الخدمات المالية والبنوك",
+        "s1_dropdown": null,
+        "s2_canonical_live": 10.35,
+        "s3_consolidated_v3": 12.42,
+        "s4_precomputed_rankings": 12.42,
+        "s5_production_db": 10.35,
+        "has_conflict": true,
+        "variance_pct": 20.0
+      },
+      {
+        "ticker": "ABUK.CA",
+        "name_ar": "أبو قير للأسمدة",
+        "sector": "الموارد الأساسية والكيماويات",
+        "s1_dropdown": 75.52,
+        "s2_canonical_live": 87.06,
+        "s3_consolidated_v3": 90.0,
+        "s4_precomputed_rankings": 90.0,
+        "s5_production_db": 87.06,
+        "has_conflict": true,
+        "variance_pct": 19.17
+      },
+      {
+        "ticker": "CCAP.CA",
+        "name_ar": "القلعة للاستشارات المالية",
+        "sector": "الخدمات المالية والاستثمار",
+        "s1_dropdown": 5.6,
+        "s2_canonical_live": 6.51,
+        "s3_consolidated_v3": 6.62,
+        "s4_precomputed_rankings": 6.62,
+        "s5_production_db": 6.51,
+        "has_conflict": true,
+        "variance_pct": 18.21
+      },
+      {
+        "ticker": "PHDC.CA",
+        "name_ar": "بالم هيلز للتعمير",
+        "sector": "التطوير العقاري",
+        "s1_dropdown": 15.15,
+        "s2_canonical_live": 12.87,
+        "s3_consolidated_v3": 12.93,
+        "s4_precomputed_rankings": 12.93,
+        "s5_production_db": 12.87,
+        "has_conflict": true,
+        "variance_pct": 17.72
+      },
+      {
+        "ticker": "ADIB.CA",
+        "name_ar": "مصرف أبو ظبي الإسلامي - مصر",
+        "sector": "الخدمات المالية والبنوك",
+        "s1_dropdown": 53.42,
+        "s2_canonical_live": 46.6,
+        "s3_consolidated_v3": 47.8,
+        "s4_precomputed_rankings": 47.8,
+        "s5_production_db": 46.6,
+        "has_conflict": true,
+        "variance_pct": 14.64
+      },
+      {
+        "ticker": "ISPH.CA",
+        "name_ar": "ابن سينا فارما",
+        "sector": "الرعاية الصحية والأدوية",
+        "s1_dropdown": 13.02,
+        "s2_canonical_live": 11.4,
+        "s3_consolidated_v3": 11.7,
+        "s4_precomputed_rankings": 11.7,
+        "s5_production_db": 11.4,
+        "has_conflict": true,
+        "variance_pct": 14.21
+      },
+      {
+        "ticker": "SWDY.CA",
+        "name_ar": "السويدي إليكتريك",
+        "sector": "الصناعة والمقاولات",
+        "s1_dropdown": 128.0,
+        "s2_canonical_live": 112.6,
+        "s3_consolidated_v3": 116.0,
+        "s4_precomputed_rankings": 116.0,
+        "s5_production_db": 112.6,
+        "has_conflict": true,
+        "variance_pct": 13.68
+      },
+      {
+        "ticker": "TMGH.CA",
+        "name_ar": "مجموعة طلعت مصطفى",
+        "sector": "التطوير العقاري",
+        "s1_dropdown": 97.5,
+        "s2_canonical_live": 86.3,
+        "s3_consolidated_v3": 87.89,
+        "s4_precomputed_rankings": 87.89,
+        "s5_production_db": 86.3,
+        "has_conflict": true,
+        "variance_pct": 12.98
+      },
+      {
+        "ticker": "ORAS.CA",
+        "name_ar": "أوراسكوم للإنشاء",
+        "sector": "الصناعة والمقاولات",
+        "s1_dropdown": 782.25,
+        "s2_canonical_live": 856.07,
+        "s3_consolidated_v3": 877.02,
+        "s4_precomputed_rankings": 877.02,
+        "s5_production_db": 856.07,
+        "has_conflict": true,
+        "variance_pct": 12.12
+      },
+      {
+        "ticker": "RAYA.CA",
+        "name_ar": "راية القابضة للاستثمارات المالية",
+        "sector": "الاتصالات وتكنولوجيا المعلومات",
+        "s1_dropdown": 7.0,
+        "s2_canonical_live": 6.33,
+        "s3_consolidated_v3": 6.6,
+        "s4_precomputed_rankings": 6.6,
+        "s5_production_db": 6.33,
+        "has_conflict": true,
+        "variance_pct": 10.58
+      },
+      {
+        "ticker": "BTFH.CA",
+        "name_ar": "بلتون القابضة",
+        "sector": "الخدمات المالية غير المصرفية",
+        "s1_dropdown": 2.98,
+        "s2_canonical_live": 2.7,
+        "s3_consolidated_v3": 2.77,
+        "s4_precomputed_rankings": 2.77,
+        "s5_production_db": 2.7,
+        "has_conflict": true,
+        "variance_pct": 10.37
+      },
+      {
+        "ticker": "ICMI.CA",
+        "name_ar": "المجموعة المتكاملة للأعمال الهندسية",
+        "sector": "الخدمات المالية والبنوك",
+        "s1_dropdown": null,
+        "s2_canonical_live": 0.67,
+        "s3_consolidated_v3": 0.73,
+        "s4_precomputed_rankings": 0.73,
+        "s5_production_db": 0.67,
+        "has_conflict": true,
+        "variance_pct": 8.96
+      },
+      {
+        "ticker": "HELI.CA",
+        "name_ar": "مصر الجديدة للإسكان والتعمير",
+        "sector": "التطوير العقاري",
+        "s1_dropdown": 7.69,
+        "s2_canonical_live": 7.06,
+        "s3_consolidated_v3": 7.49,
+        "s4_precomputed_rankings": 7.49,
+        "s5_production_db": 7.06,
+        "has_conflict": true,
+        "variance_pct": 8.92
+      },
+      {
+        "ticker": "GBCO.CA",
+        "name_ar": "جي بي كورب (غبور أوتو)",
+        "sector": "السيارات والصناعة",
+        "s1_dropdown": 29.32,
+        "s2_canonical_live": 31.01,
+        "s3_consolidated_v3": 31.01,
+        "s4_precomputed_rankings": 31.78,
+        "s5_production_db": 31.01,
+        "has_conflict": true,
+        "variance_pct": 8.39
+      },
+      {
+        "ticker": "BIOC.CA",
+        "name_ar": "بيو فارما إيجيبت للأدوية",
+        "sector": "الرعاية الصحية والأدوية",
+        "s1_dropdown": null,
+        "s2_canonical_live": 306.0,
+        "s3_consolidated_v3": 330.0,
+        "s4_precomputed_rankings": 330.0,
+        "s5_production_db": 306.0,
+        "has_conflict": true,
+        "variance_pct": 7.84
+      },
+      {
+        "ticker": "MFPC.CA",
+        "name_ar": "مصر لإنتاج الأسمدة (موبكو)",
+        "sector": "الموارد الأساسية والكيماويات",
+        "s1_dropdown": 48.5,
+        "s2_canonical_live": 45.01,
+        "s3_consolidated_v3": 46.5,
+        "s4_precomputed_rankings": 46.5,
+        "s5_production_db": 45.01,
+        "has_conflict": true,
+        "variance_pct": 7.75
+      },
+      {
+        "ticker": "EMFD.CA",
+        "name_ar": "إعمار مصر للتنمية",
+        "sector": "التطوير العقاري",
+        "s1_dropdown": 11.81,
+        "s2_canonical_live": 12.4,
+        "s3_consolidated_v3": 12.7,
+        "s4_precomputed_rankings": 12.7,
+        "s5_production_db": 12.4,
+        "has_conflict": true,
+        "variance_pct": 7.54
+      },
+      {
+        "ticker": "GRCA.CA",
+        "name_ar": "جراند كابيتال القابضة للاستثمارات",
+        "sector": "الخدمات المالية والبنوك",
+        "s1_dropdown": null,
+        "s2_canonical_live": 35.21,
+        "s3_consolidated_v3": 37.7,
+        "s4_precomputed_rankings": 37.7,
+        "s5_production_db": 35.21,
+        "has_conflict": true,
+        "variance_pct": 7.07
+      },
+      {
+        "ticker": "JUFO.CA",
+        "name_ar": "جهينة للصناعات الغذائية",
+        "sector": "الأغذية والمشروبات",
+        "s1_dropdown": 26.71,
+        "s2_canonical_live": 25.0,
+        "s3_consolidated_v3": 25.0,
+        "s4_precomputed_rankings": 25.0,
+        "s5_production_db": 25.0,
+        "has_conflict": true,
+        "variance_pct": 6.84
+      },
+      {
+        "ticker": "TANM.CA",
+        "name_ar": "تنمية للاستثمار العقاري والمقاولات",
+        "sector": "التطوير العقاري",
+        "s1_dropdown": null,
+        "s2_canonical_live": 6.16,
+        "s3_consolidated_v3": 6.55,
+        "s4_precomputed_rankings": 6.55,
+        "s5_production_db": 6.16,
+        "has_conflict": true,
+        "variance_pct": 6.33
+      }
+    ],
+    "all_discrepancies": [
+      {
+        "ticker": "EKHO.CA",
+        "name_ar": "القابضة المصرية الكويتية (بالدولار)",
+        "sector": "الخدمات المالية والاستثمار",
+        "s1_dropdown": null,
+        "s2_canonical_live": 35.0,
+        "s3_consolidated_v3": 0.67,
+        "s4_precomputed_rankings": 0.67,
+        "s5_production_db": 35.0,
+        "has_conflict": true,
+        "variance_pct": 5123.88
+      },
+      {
+        "ticker": "ARPU.CA",
+        "name_ar": "العربية للأدوية والصناعات الكيماوية",
+        "sector": "الرعاية الصحية والأدوية",
+        "s1_dropdown": null,
+        "s2_canonical_live": 269.04,
+        "s3_consolidated_v3": 10.0,
+        "s4_precomputed_rankings": 10.0,
+        "s5_production_db": 269.04,
+        "has_conflict": true,
+        "variance_pct": 2590.4
+      },
+      {
+        "ticker": "ESRS.CA",
+        "name_ar": "حديد عز",
+        "sector": "الموارد الأساسية والكيماويات",
+        "s1_dropdown": null,
+        "s2_canonical_live": 1250.0,
+        "s3_consolidated_v3": 128.5,
+        "s4_precomputed_rankings": 128.5,
+        "s5_production_db": 1250.0,
+        "has_conflict": true,
+        "variance_pct": 872.76
+      },
+      {
+        "ticker": "ATLE.CA",
+        "name_ar": "أطلس للاستثمار والصناعات الغذائية",
+        "sector": "الأغذية والمشروبات والتبغ",
+        "s1_dropdown": null,
+        "s2_canonical_live": 2.11,
+        "s3_consolidated_v3": 10.0,
+        "s4_precomputed_rankings": 10.0,
+        "s5_production_db": 2.11,
+        "has_conflict": true,
+        "variance_pct": 373.93
+      },
+      {
+        "ticker": "ANFI.CA",
+        "name_ar": "الإسكندرية للخدمات الطبية (المركز الطبي الجديد)",
+        "sector": "الرعاية الصحية والأدوية",
+        "s1_dropdown": null,
+        "s2_canonical_live": 43.83,
+        "s3_consolidated_v3": 10.0,
+        "s4_precomputed_rankings": 10.0,
+        "s5_production_db": 43.83,
+        "has_conflict": true,
+        "variance_pct": 338.3
+      },
+      {
+        "ticker": "GTHC.CA",
+        "name_ar": "جلوبال للتجارة والاستثمار",
+        "sector": "التجارة والموزعون",
+        "s1_dropdown": null,
+        "s2_canonical_live": 4.41,
+        "s3_consolidated_v3": 10.0,
+        "s4_precomputed_rankings": 10.0,
+        "s5_production_db": 4.41,
+        "has_conflict": true,
+        "variance_pct": 126.76
+      },
+      {
+        "ticker": "DOMT.CA",
+        "name_ar": "الصناعات الغذائية العربية (دومتي)",
+        "sector": "الأغذية والمشروبات",
+        "s1_dropdown": 15.2,
+        "s2_canonical_live": 23.87,
+        "s3_consolidated_v3": 24.0,
+        "s4_precomputed_rankings": 24.0,
+        "s5_production_db": 23.87,
+        "has_conflict": true,
+        "variance_pct": 57.89
+      },
+      {
+        "ticker": "ETEL.CA",
+        "name_ar": "المصرية للاتصالات (WE)",
+        "sector": "الاتصالات وتكنولوجيا المعلومات",
+        "s1_dropdown": 114.89,
+        "s2_canonical_live": 145.0,
+        "s3_consolidated_v3": 148.0,
+        "s4_precomputed_rankings": 148.0,
+        "s5_production_db": 145.0,
+        "has_conflict": true,
+        "variance_pct": 28.82
+      },
+      {
+        "ticker": "EAST.CA",
+        "name_ar": "الشرقية للدخان (إيسترن كومباني)",
+        "sector": "السلع الاستهلاكية",
+        "s1_dropdown": 36.02,
+        "s2_canonical_live": 28.11,
+        "s3_consolidated_v3": 28.21,
+        "s4_precomputed_rankings": 28.21,
+        "s5_production_db": 28.11,
+        "has_conflict": true,
+        "variance_pct": 28.14
+      },
+      {
+        "ticker": "AMOC.CA",
+        "name_ar": "الإسكندرية للزيوت المعدنية (أموك)",
+        "sector": "البتروكيماويات والطاقة",
+        "s1_dropdown": 11.35,
+        "s2_canonical_live": 13.74,
+        "s3_consolidated_v3": 14.48,
+        "s4_precomputed_rankings": 14.48,
+        "s5_production_db": 13.74,
+        "has_conflict": true,
+        "variance_pct": 27.58
+      },
+      {
+        "ticker": "DEIN.CA",
+        "name_ar": "الدلتا للتأمين",
+        "sector": "الخدمات المالية والبنوك",
+        "s1_dropdown": null,
+        "s2_canonical_live": 10.35,
+        "s3_consolidated_v3": 12.42,
+        "s4_precomputed_rankings": 12.42,
+        "s5_production_db": 10.35,
+        "has_conflict": true,
+        "variance_pct": 20.0
+      },
+      {
+        "ticker": "ABUK.CA",
+        "name_ar": "أبو قير للأسمدة",
+        "sector": "الموارد الأساسية والكيماويات",
+        "s1_dropdown": 75.52,
+        "s2_canonical_live": 87.06,
+        "s3_consolidated_v3": 90.0,
+        "s4_precomputed_rankings": 90.0,
+        "s5_production_db": 87.06,
+        "has_conflict": true,
+        "variance_pct": 19.17
+      },
+      {
+        "ticker": "CCAP.CA",
+        "name_ar": "القلعة للاستشارات المالية",
+        "sector": "الخدمات المالية والاستثمار",
+        "s1_dropdown": 5.6,
+        "s2_canonical_live": 6.51,
+        "s3_consolidated_v3": 6.62,
+        "s4_precomputed_rankings": 6.62,
+        "s5_production_db": 6.51,
+        "has_conflict": true,
+        "variance_pct": 18.21
+      },
+      {
+        "ticker": "PHDC.CA",
+        "name_ar": "بالم هيلز للتعمير",
+        "sector": "التطوير العقاري",
+        "s1_dropdown": 15.15,
+        "s2_canonical_live": 12.87,
+        "s3_consolidated_v3": 12.93,
+        "s4_precomputed_rankings": 12.93,
+        "s5_production_db": 12.87,
+        "has_conflict": true,
+        "variance_pct": 17.72
+      },
+      {
+        "ticker": "ADIB.CA",
+        "name_ar": "مصرف أبو ظبي الإسلامي - مصر",
+        "sector": "الخدمات المالية والبنوك",
+        "s1_dropdown": 53.42,
+        "s2_canonical_live": 46.6,
+        "s3_consolidated_v3": 47.8,
+        "s4_precomputed_rankings": 47.8,
+        "s5_production_db": 46.6,
+        "has_conflict": true,
+        "variance_pct": 14.64
+      },
+      {
+        "ticker": "ISPH.CA",
+        "name_ar": "ابن سينا فارما",
+        "sector": "الرعاية الصحية والأدوية",
+        "s1_dropdown": 13.02,
+        "s2_canonical_live": 11.4,
+        "s3_consolidated_v3": 11.7,
+        "s4_precomputed_rankings": 11.7,
+        "s5_production_db": 11.4,
+        "has_conflict": true,
+        "variance_pct": 14.21
+      },
+      {
+        "ticker": "SWDY.CA",
+        "name_ar": "السويدي إليكتريك",
+        "sector": "الصناعة والمقاولات",
+        "s1_dropdown": 128.0,
+        "s2_canonical_live": 112.6,
+        "s3_consolidated_v3": 116.0,
+        "s4_precomputed_rankings": 116.0,
+        "s5_production_db": 112.6,
+        "has_conflict": true,
+        "variance_pct": 13.68
+      },
+      {
+        "ticker": "TMGH.CA",
+        "name_ar": "مجموعة طلعت مصطفى",
+        "sector": "التطوير العقاري",
+        "s1_dropdown": 97.5,
+        "s2_canonical_live": 86.3,
+        "s3_consolidated_v3": 87.89,
+        "s4_precomputed_rankings": 87.89,
+        "s5_production_db": 86.3,
+        "has_conflict": true,
+        "variance_pct": 12.98
+      },
+      {
+        "ticker": "ORAS.CA",
+        "name_ar": "أوراسكوم للإنشاء",
+        "sector": "الصناعة والمقاولات",
+        "s1_dropdown": 782.25,
+        "s2_canonical_live": 856.07,
+        "s3_consolidated_v3": 877.02,
+        "s4_precomputed_rankings": 877.02,
+        "s5_production_db": 856.07,
+        "has_conflict": true,
+        "variance_pct": 12.12
+      },
+      {
+        "ticker": "RAYA.CA",
+        "name_ar": "راية القابضة للاستثمارات المالية",
+        "sector": "الاتصالات وتكنولوجيا المعلومات",
+        "s1_dropdown": 7.0,
+        "s2_canonical_live": 6.33,
+        "s3_consolidated_v3": 6.6,
+        "s4_precomputed_rankings": 6.6,
+        "s5_production_db": 6.33,
+        "has_conflict": true,
+        "variance_pct": 10.58
+      },
+      {
+        "ticker": "BTFH.CA",
+        "name_ar": "بلتون القابضة",
+        "sector": "الخدمات المالية غير المصرفية",
+        "s1_dropdown": 2.98,
+        "s2_canonical_live": 2.7,
+        "s3_consolidated_v3": 2.77,
+        "s4_precomputed_rankings": 2.77,
+        "s5_production_db": 2.7,
+        "has_conflict": true,
+        "variance_pct": 10.37
+      },
+      {
+        "ticker": "ICMI.CA",
+        "name_ar": "المجموعة المتكاملة للأعمال الهندسية",
+        "sector": "الخدمات المالية والبنوك",
+        "s1_dropdown": null,
+        "s2_canonical_live": 0.67,
+        "s3_consolidated_v3": 0.73,
+        "s4_precomputed_rankings": 0.73,
+        "s5_production_db": 0.67,
+        "has_conflict": true,
+        "variance_pct": 8.96
+      },
+      {
+        "ticker": "HELI.CA",
+        "name_ar": "مصر الجديدة للإسكان والتعمير",
+        "sector": "التطوير العقاري",
+        "s1_dropdown": 7.69,
+        "s2_canonical_live": 7.06,
+        "s3_consolidated_v3": 7.49,
+        "s4_precomputed_rankings": 7.49,
+        "s5_production_db": 7.06,
+        "has_conflict": true,
+        "variance_pct": 8.92
+      },
+      {
+        "ticker": "GBCO.CA",
+        "name_ar": "جي بي كورب (غبور أوتو)",
+        "sector": "السيارات والصناعة",
+        "s1_dropdown": 29.32,
+        "s2_canonical_live": 31.01,
+        "s3_consolidated_v3": 31.01,
+        "s4_precomputed_rankings": 31.78,
+        "s5_production_db": 31.01,
+        "has_conflict": true,
+        "variance_pct": 8.39
+      },
+      {
+        "ticker": "BIOC.CA",
+        "name_ar": "بيو فارما إيجيبت للأدوية",
+        "sector": "الرعاية الصحية والأدوية",
+        "s1_dropdown": null,
+        "s2_canonical_live": 306.0,
+        "s3_consolidated_v3": 330.0,
+        "s4_precomputed_rankings": 330.0,
+        "s5_production_db": 306.0,
+        "has_conflict": true,
+        "variance_pct": 7.84
+      },
+      {
+        "ticker": "MFPC.CA",
+        "name_ar": "مصر لإنتاج الأسمدة (موبكو)",
+        "sector": "الموارد الأساسية والكيماويات",
+        "s1_dropdown": 48.5,
+        "s2_canonical_live": 45.01,
+        "s3_consolidated_v3": 46.5,
+        "s4_precomputed_rankings": 46.5,
+        "s5_production_db": 45.01,
+        "has_conflict": true,
+        "variance_pct": 7.75
+      },
+      {
+        "ticker": "EMFD.CA",
+        "name_ar": "إعمار مصر للتنمية",
+        "sector": "التطوير العقاري",
+        "s1_dropdown": 11.81,
+        "s2_canonical_live": 12.4,
+        "s3_consolidated_v3": 12.7,
+        "s4_precomputed_rankings": 12.7,
+        "s5_production_db": 12.4,
+        "has_conflict": true,
+        "variance_pct": 7.54
+      },
+      {
+        "ticker": "GRCA.CA",
+        "name_ar": "جراند كابيتال القابضة للاستثمارات",
+        "sector": "الخدمات المالية والبنوك",
+        "s1_dropdown": null,
+        "s2_canonical_live": 35.21,
+        "s3_consolidated_v3": 37.7,
+        "s4_precomputed_rankings": 37.7,
+        "s5_production_db": 35.21,
+        "has_conflict": true,
+        "variance_pct": 7.07
+      },
+      {
+        "ticker": "JUFO.CA",
+        "name_ar": "جهينة للصناعات الغذائية",
+        "sector": "الأغذية والمشروبات",
+        "s1_dropdown": 26.71,
+        "s2_canonical_live": 25.0,
+        "s3_consolidated_v3": 25.0,
+        "s4_precomputed_rankings": 25.0,
+        "s5_production_db": 25.0,
+        "has_conflict": true,
+        "variance_pct": 6.84
+      },
+      {
+        "ticker": "TANM.CA",
+        "name_ar": "تنمية للاستثمار العقاري والمقاولات",
+        "sector": "التطوير العقاري",
+        "s1_dropdown": null,
+        "s2_canonical_live": 6.16,
+        "s3_consolidated_v3": 6.55,
+        "s4_precomputed_rankings": 6.55,
+        "s5_production_db": 6.16,
+        "has_conflict": true,
+        "variance_pct": 6.33
+      },
+      {
+        "ticker": "IDRE.CA",
+        "name_ar": "التنمية العمرانية الدولية",
+        "sector": "التطوير العقاري",
+        "s1_dropdown": null,
+        "s2_canonical_live": 47.37,
+        "s3_consolidated_v3": 50.1,
+        "s4_precomputed_rankings": 50.1,
+        "s5_production_db": 47.37,
+        "has_conflict": true,
+        "variance_pct": 5.76
+      },
+      {
+        "ticker": "CCRS.CA",
+        "name_ar": "القاهرة للاستثمارات والتنمية",
+        "sector": "التطوير العقاري",
+        "s1_dropdown": null,
+        "s2_canonical_live": 2.2,
+        "s3_consolidated_v3": 2.32,
+        "s4_precomputed_rankings": 2.32,
+        "s5_production_db": 2.2,
+        "has_conflict": true,
+        "variance_pct": 5.45
+      },
+      {
+        "ticker": "ELKA.CA",
+        "name_ar": "القاهرة للإسكان والتعمير",
+        "sector": "التطوير العقاري",
+        "s1_dropdown": null,
+        "s2_canonical_live": 1.53,
+        "s3_consolidated_v3": 1.61,
+        "s4_precomputed_rankings": 1.61,
+        "s5_production_db": 1.53,
+        "has_conflict": true,
+        "variance_pct": 5.23
+      },
+      {
+        "ticker": "IRON.CA",
+        "name_ar": "الحديد والصلب المصرية (تحت التصفية)",
+        "sector": "الموارد الأساسية والكيماويات",
+        "s1_dropdown": null,
+        "s2_canonical_live": 28.31,
+        "s3_consolidated_v3": 29.79,
+        "s4_precomputed_rankings": 29.79,
+        "s5_production_db": 28.31,
+        "has_conflict": true,
+        "variance_pct": 5.23
+      },
+      {
+        "ticker": "AIFI.CA",
+        "name_ar": "الأهلي للتنمية والاستثمار",
+        "sector": "الخدمات المالية والبنوك",
+        "s1_dropdown": null,
+        "s2_canonical_live": 2.11,
+        "s3_consolidated_v3": 2.22,
+        "s4_precomputed_rankings": 2.22,
+        "s5_production_db": 2.11,
+        "has_conflict": true,
+        "variance_pct": 5.21
+      },
+      {
+        "ticker": "MAAL.CA",
+        "name_ar": "مطاحن ومخابز الإسكندرية",
+        "sector": "الأغذية والمشروبات والسلع التموينية",
+        "s1_dropdown": null,
+        "s2_canonical_live": 10.37,
+        "s3_consolidated_v3": 10.9,
+        "s4_precomputed_rankings": 10.9,
+        "s5_production_db": 10.37,
+        "has_conflict": true,
+        "variance_pct": 5.11
+      },
+      {
+        "ticker": "RREI.CA",
+        "name_ar": "رواج للتمويل العقاري والاستثمار",
+        "sector": "التطوير العقاري",
+        "s1_dropdown": null,
+        "s2_canonical_live": 3.72,
+        "s3_consolidated_v3": 3.91,
+        "s4_precomputed_rankings": 3.91,
+        "s5_production_db": 3.72,
+        "has_conflict": true,
+        "variance_pct": 5.11
+      },
+      {
+        "ticker": "CIRA.CA",
+        "name_ar": "القاهرة للاستثمار والتنمية العقارية (سيرا)",
+        "sector": "خدمات تعليمية",
+        "s1_dropdown": null,
+        "s2_canonical_live": 37.53,
+        "s3_consolidated_v3": 39.42,
+        "s4_precomputed_rankings": 39.42,
+        "s5_production_db": 37.53,
+        "has_conflict": true,
+        "variance_pct": 5.04
+      },
+      {
+        "ticker": "AREH.CA",
+        "name_ar": "المجموعة العربية العقارية",
+        "sector": "التطوير العقاري",
+        "s1_dropdown": null,
+        "s2_canonical_live": 1.23,
+        "s3_consolidated_v3": 1.29,
+        "s4_precomputed_rankings": 1.29,
+        "s5_production_db": 1.23,
+        "has_conflict": true,
+        "variance_pct": 4.88
+      },
+      {
+        "ticker": "KRDI.CA",
+        "name_ar": "الكردي للتنمية والاستثمار العقاري",
+        "sector": "التطوير العقاري",
+        "s1_dropdown": null,
+        "s2_canonical_live": 0.41,
+        "s3_consolidated_v3": 0.43,
+        "s4_precomputed_rankings": 0.43,
+        "s5_production_db": 0.41,
+        "has_conflict": true,
+        "variance_pct": 4.88
+      },
+      {
+        "ticker": "OFH.CA",
+        "name_ar": "أوراسكوم المالية القابضة",
+        "sector": "الخدمات المالية والبنوك",
+        "s1_dropdown": null,
+        "s2_canonical_live": 0.84,
+        "s3_consolidated_v3": 0.88,
+        "s4_precomputed_rankings": 0.88,
+        "s5_production_db": 0.84,
+        "has_conflict": true,
+        "variance_pct": 4.76
+      },
+      {
+        "ticker": "KABO.CA",
+        "name_ar": "النصر للغزل والنسيج (كابو)",
+        "sector": "المنسوجات والسلع الاستهلاكية",
+        "s1_dropdown": null,
+        "s2_canonical_live": 8.66,
+        "s3_consolidated_v3": 9.05,
+        "s4_precomputed_rankings": 9.05,
+        "s5_production_db": 8.66,
+        "has_conflict": true,
+        "variance_pct": 4.5
+      },
+      {
+        "ticker": "CANA.CA",
+        "name_ar": "بنك قناة السويس",
+        "sector": "الخدمات المالية والبنوك",
+        "s1_dropdown": null,
+        "s2_canonical_live": 43.02,
+        "s3_consolidated_v3": 44.93,
+        "s4_precomputed_rankings": 44.93,
+        "s5_production_db": 43.02,
+        "has_conflict": true,
+        "variance_pct": 4.44
+      },
+      {
+        "ticker": "MPCO.CA",
+        "name_ar": "المنصورة للدواجن",
+        "sector": "الأغذية والمشروبات والتبغ",
+        "s1_dropdown": null,
+        "s2_canonical_live": 2.29,
+        "s3_consolidated_v3": 2.39,
+        "s4_precomputed_rankings": 2.39,
+        "s5_production_db": 2.29,
+        "has_conflict": true,
+        "variance_pct": 4.37
+      },
+      {
+        "ticker": "DAPH.CA",
+        "name_ar": "الدلتا للتأمين",
+        "sector": "الخدمات المالية والبنوك",
+        "s1_dropdown": null,
+        "s2_canonical_live": 102.18,
+        "s3_consolidated_v3": 106.63,
+        "s4_precomputed_rankings": 106.63,
+        "s5_production_db": 102.18,
+        "has_conflict": true,
+        "variance_pct": 4.36
+      },
+      {
+        "ticker": "EALR.CA",
+        "name_ar": "العز الدخيلة للصلب - الإسكندرية",
+        "sector": "الموارد الأساسية والمعادن",
+        "s1_dropdown": null,
+        "s2_canonical_live": 330.0,
+        "s3_consolidated_v3": 344.0,
+        "s4_precomputed_rankings": 344.0,
+        "s5_production_db": 330.0,
+        "has_conflict": true,
+        "variance_pct": 4.24
+      },
+      {
+        "ticker": "EXTK.CA",
+        "name_ar": "مستخلصات الزيوت ومنتجاتها",
+        "sector": "الأغذية والمشروبات والتبغ",
+        "s1_dropdown": null,
+        "s2_canonical_live": 12.09,
+        "s3_consolidated_v3": 12.6,
+        "s4_precomputed_rankings": 12.6,
+        "s5_production_db": 12.09,
+        "has_conflict": true,
+        "variance_pct": 4.22
+      },
+      {
+        "ticker": "ZEOT.CA",
+        "name_ar": "الإسكندرية للزيوت والصابون",
+        "sector": "الأغذية والمشروبات والتبغ",
+        "s1_dropdown": null,
+        "s2_canonical_live": 12.09,
+        "s3_consolidated_v3": 12.6,
+        "s4_precomputed_rankings": 12.6,
+        "s5_production_db": 12.09,
+        "has_conflict": true,
+        "variance_pct": 4.22
+      },
+      {
+        "ticker": "TAQA.CA",
+        "name_ar": "طاقة عربية",
+        "sector": "الطاقة والخدمات البترولية",
+        "s1_dropdown": null,
+        "s2_canonical_live": 16.41,
+        "s3_consolidated_v3": 17.1,
+        "s4_precomputed_rankings": 17.1,
+        "s5_production_db": 16.41,
+        "has_conflict": true,
+        "variance_pct": 4.2
+      },
+      {
+        "ticker": "MPCI.CA",
+        "name_ar": "ممفيس للأدوية والصناعات الكيماوية",
+        "sector": "الرعاية الصحية والأدوية",
+        "s1_dropdown": null,
+        "s2_canonical_live": 332.18,
+        "s3_consolidated_v3": 346.01,
+        "s4_precomputed_rankings": 346.01,
+        "s5_production_db": 332.18,
+        "has_conflict": true,
+        "variance_pct": 4.16
+      },
+      {
+        "ticker": "RUBX.CA",
+        "name_ar": "روبكس العالمية لتصنيع البلاستيك والريبكس",
+        "sector": "مواد وبلاستيك",
+        "s1_dropdown": null,
+        "s2_canonical_live": 17.3,
+        "s3_consolidated_v3": 18.01,
+        "s4_precomputed_rankings": 18.01,
+        "s5_production_db": 17.3,
+        "has_conflict": true,
+        "variance_pct": 4.1
+      },
+      {
+        "ticker": "UEGC.CA",
+        "name_ar": "الصعيد العامة للمقاولات والاستثمار العقاري",
+        "sector": "التطوير العقاري",
+        "s1_dropdown": null,
+        "s2_canonical_live": 1.49,
+        "s3_consolidated_v3": 1.55,
+        "s4_precomputed_rankings": 1.55,
+        "s5_production_db": 1.49,
+        "has_conflict": true,
+        "variance_pct": 4.03
+      },
+      {
+        "ticker": "SCEM.CA",
+        "name_ar": "أسمنت سيناء",
+        "sector": "مواد البناء والتشييد",
+        "s1_dropdown": null,
+        "s2_canonical_live": 89.0,
+        "s3_consolidated_v3": 85.59,
+        "s4_precomputed_rankings": 85.59,
+        "s5_production_db": 89.0,
+        "has_conflict": true,
+        "variance_pct": 3.98
+      },
+      {
+        "ticker": "ORHD.CA",
+        "name_ar": "أوراسكوم للتنمية مصر",
+        "sector": "التطوير العقاري",
+        "s1_dropdown": null,
+        "s2_canonical_live": 11.55,
+        "s3_consolidated_v3": 12.0,
+        "s4_precomputed_rankings": 12.0,
+        "s5_production_db": 11.55,
+        "has_conflict": true,
+        "variance_pct": 3.9
+      },
+      {
+        "ticker": "ELWA.CA",
+        "name_ar": "الوادي العالمية للاستثمار والتنمية",
+        "sector": "السياحة والترفيه",
+        "s1_dropdown": null,
+        "s2_canonical_live": 1.63,
+        "s3_consolidated_v3": 1.57,
+        "s4_precomputed_rankings": 1.57,
+        "s5_production_db": 1.63,
+        "has_conflict": true,
+        "variance_pct": 3.82
+      },
+      {
+        "ticker": "AFMC.CA",
+        "name_ar": "الإسكندرية للغزل والنسيج (سبينالكس)",
+        "sector": "المنسوجات والملابس الجاهزة",
+        "s1_dropdown": null,
+        "s2_canonical_live": 146.42,
+        "s3_consolidated_v3": 152.0,
+        "s4_precomputed_rankings": 152.0,
+        "s5_production_db": 146.42,
+        "has_conflict": true,
+        "variance_pct": 3.81
+      },
+      {
+        "ticker": "MFSC.CA",
+        "name_ar": "مصر للشحن والتفريغ والخدمات اللوجستية",
+        "sector": "النقل واللوجستيات",
+        "s1_dropdown": null,
+        "s2_canonical_live": 42.3,
+        "s3_consolidated_v3": 43.91,
+        "s4_precomputed_rankings": 43.91,
+        "s5_production_db": 42.3,
+        "has_conflict": true,
+        "variance_pct": 3.81
+      },
+      {
+        "ticker": "VERT.CA",
+        "name_ar": "فيرتكيم لتصنيع الأسمدة",
+        "sector": "الموارد الأساسية والكيماويات",
+        "s1_dropdown": null,
+        "s2_canonical_live": 6.3,
+        "s3_consolidated_v3": 6.07,
+        "s4_precomputed_rankings": 6.07,
+        "s5_production_db": 6.3,
+        "has_conflict": true,
+        "variance_pct": 3.79
+      },
+      {
+        "ticker": "MTRC.CA",
+        "name_ar": "مطاحن ومخابز شمال القاهرة",
+        "sector": "الأغذية والمشروبات والتبغ",
+        "s1_dropdown": null,
+        "s2_canonical_live": 177.2,
+        "s3_consolidated_v3": 183.87,
+        "s4_precomputed_rankings": 183.87,
+        "s5_production_db": 177.2,
+        "has_conflict": true,
+        "variance_pct": 3.76
+      },
+      {
+        "ticker": "NIPH.CA",
+        "name_ar": "النيل للأدوية والصناعات الكيماوية",
+        "sector": "الرعاية الصحية والأدوية",
+        "s1_dropdown": null,
+        "s2_canonical_live": 304.13,
+        "s3_consolidated_v3": 315.5,
+        "s4_precomputed_rankings": 315.5,
+        "s5_production_db": 304.13,
+        "has_conflict": true,
+        "variance_pct": 3.74
+      },
+      {
+        "ticker": "UTOP.CA",
+        "name_ar": "يوتوبيا للاستثمار العقاري والسياحي",
+        "sector": "التطوير العقاري",
+        "s1_dropdown": null,
+        "s2_canonical_live": 98.0,
+        "s3_consolidated_v3": 101.5,
+        "s4_precomputed_rankings": 101.5,
+        "s5_production_db": 98.0,
+        "has_conflict": true,
+        "variance_pct": 3.57
+      },
+      {
+        "ticker": "EXPA.CA",
+        "name_ar": "بنك تنمية الصادرات",
+        "sector": "الخدمات المالية والبنوك",
+        "s1_dropdown": null,
+        "s2_canonical_live": 15.3,
+        "s3_consolidated_v3": 15.82,
+        "s4_precomputed_rankings": 15.82,
+        "s5_production_db": 15.3,
+        "has_conflict": true,
+        "variance_pct": 3.4
+      },
+      {
+        "ticker": "EFIC.CA",
+        "name_ar": "المصرية المالية والصناعية (إفيك)",
+        "sector": "الموارد الأساسية والكيماويات",
+        "s1_dropdown": null,
+        "s2_canonical_live": 157.24,
+        "s3_consolidated_v3": 162.5,
+        "s4_precomputed_rankings": 162.5,
+        "s5_production_db": 157.24,
+        "has_conflict": true,
+        "variance_pct": 3.35
+      },
+      {
+        "ticker": "CNFN.CA",
+        "name_ar": "كونتكت المالية القابضة",
+        "sector": "الخدمات المالية والبنوك",
+        "s1_dropdown": null,
+        "s2_canonical_live": 4.19,
+        "s3_consolidated_v3": 4.33,
+        "s4_precomputed_rankings": 4.33,
+        "s5_production_db": 4.19,
+        "has_conflict": true,
+        "variance_pct": 3.34
+      },
+      {
+        "ticker": "ELEC.CA",
+        "name_ar": "الكابلات الكهربائية المصرية",
+        "sector": "الصناعة والمقاولات",
+        "s1_dropdown": null,
+        "s2_canonical_live": 1.81,
+        "s3_consolidated_v3": 1.87,
+        "s4_precomputed_rankings": 1.87,
+        "s5_production_db": 1.81,
+        "has_conflict": true,
+        "variance_pct": 3.31
+      },
+      {
+        "ticker": "PRCL.CA",
+        "name_ar": "الخزف والصيني المصرية المتقدمة",
+        "sector": "مواد البناء والتشييد",
+        "s1_dropdown": null,
+        "s2_canonical_live": 24.8,
+        "s3_consolidated_v3": 25.62,
+        "s4_precomputed_rankings": 25.62,
+        "s5_production_db": 24.8,
+        "has_conflict": true,
+        "variance_pct": 3.31
+      },
+      {
+        "ticker": "FWRY.CA",
+        "name_ar": "فوري لتكنولوجيا المدفوعات الإلكترونية",
+        "sector": "تكنولوجيا المدفوعات",
+        "s1_dropdown": 19.21,
+        "s2_canonical_live": 18.6,
+        "s3_consolidated_v3": 19.06,
+        "s4_precomputed_rankings": 19.06,
+        "s5_production_db": 18.6,
+        "has_conflict": true,
+        "variance_pct": 3.28
+      },
+      {
+        "ticker": "EPCO.CA",
+        "name_ar": "مصر لصناعة وتجارة الأنابيب",
+        "sector": "الصناعة والمقاولات",
+        "s1_dropdown": null,
+        "s2_canonical_live": 9.48,
+        "s3_consolidated_v3": 9.79,
+        "s4_precomputed_rankings": 9.79,
+        "s5_production_db": 9.48,
+        "has_conflict": true,
+        "variance_pct": 3.27
+      },
+      {
+        "ticker": "RMDA.CA",
+        "name_ar": "العاشر من رمضان للصناعات الدوائية (راميدا)",
+        "sector": "الرعاية الصحية والأدوية",
+        "s1_dropdown": null,
+        "s2_canonical_live": 5.24,
+        "s3_consolidated_v3": 5.41,
+        "s4_precomputed_rankings": 5.41,
+        "s5_production_db": 5.24,
+        "has_conflict": true,
+        "variance_pct": 3.24
+      },
+      {
+        "ticker": "PRMH.CA",
+        "name_ar": "برايم القابضة للاستثمارات المالية",
+        "sector": "الخدمات المالية والبنوك",
+        "s1_dropdown": null,
+        "s2_canonical_live": 2.17,
+        "s3_consolidated_v3": 2.24,
+        "s4_precomputed_rankings": 2.24,
+        "s5_production_db": 2.17,
+        "has_conflict": true,
+        "variance_pct": 3.23
+      },
+      {
+        "ticker": "ATQA.CA",
+        "name_ar": "مصر الوطنية للصلب (عتاقة)",
+        "sector": "الموارد الأساسية والكيماويات",
+        "s1_dropdown": null,
+        "s2_canonical_live": 11.88,
+        "s3_consolidated_v3": 12.25,
+        "s4_precomputed_rankings": 12.25,
+        "s5_production_db": 11.88,
+        "has_conflict": true,
+        "variance_pct": 3.11
+      },
+      {
+        "ticker": "OCDI.CA",
+        "name_ar": "سوديك - السادس من أكتوبر للتنمية والاستثمار",
+        "sector": "التطوير العقاري",
+        "s1_dropdown": null,
+        "s2_canonical_live": 26.5,
+        "s3_consolidated_v3": 27.32,
+        "s4_precomputed_rankings": 27.32,
+        "s5_production_db": 26.5,
+        "has_conflict": true,
+        "variance_pct": 3.09
+      },
+      {
+        "ticker": "GDWA.CA",
+        "name_ar": "جدوى للتنمية الصناعية",
+        "sector": "التطوير العقاري",
+        "s1_dropdown": null,
+        "s2_canonical_live": 0.65,
+        "s3_consolidated_v3": 0.67,
+        "s4_precomputed_rankings": 0.67,
+        "s5_production_db": 0.65,
+        "has_conflict": true,
+        "variance_pct": 3.08
+      },
+      {
+        "ticker": "ELSH.CA",
+        "name_ar": "الشمس للإسكان والتعمير",
+        "sector": "التطوير العقاري",
+        "s1_dropdown": null,
+        "s2_canonical_live": 11.72,
+        "s3_consolidated_v3": 12.08,
+        "s4_precomputed_rankings": 12.08,
+        "s5_production_db": 11.72,
+        "has_conflict": true,
+        "variance_pct": 3.07
+      },
+      {
+        "ticker": "FAIT.CA",
+        "name_ar": "بنك فيصل الإسلامي المصري (جنيه)",
+        "sector": "الخدمات المالية والبنوك",
+        "s1_dropdown": null,
+        "s2_canonical_live": 44.25,
+        "s3_consolidated_v3": 45.59,
+        "s4_precomputed_rankings": 45.59,
+        "s5_production_db": 44.25,
+        "has_conflict": true,
+        "variance_pct": 3.03
+      },
+      {
+        "ticker": "ZMID.CA",
+        "name_ar": "زهراء المعادي للاستثمار والتعمير",
+        "sector": "التطوير العقاري",
+        "s1_dropdown": null,
+        "s2_canonical_live": 7.31,
+        "s3_consolidated_v3": 7.53,
+        "s4_precomputed_rankings": 7.53,
+        "s5_production_db": 7.31,
+        "has_conflict": true,
+        "variance_pct": 3.01
+      },
+      {
+        "ticker": "CERA.CA",
+        "name_ar": "العز للسيراميك والبورسلين (الجوهرة)",
+        "sector": "الصناعة والمقاولات",
+        "s1_dropdown": null,
+        "s2_canonical_live": 1.34,
+        "s3_consolidated_v3": 1.38,
+        "s4_precomputed_rankings": 1.38,
+        "s5_production_db": 1.34,
+        "has_conflict": true,
+        "variance_pct": 2.99
+      },
+      {
+        "ticker": "MEPA.CA",
+        "name_ar": "مرسى علم للتنمية السياحية",
+        "sector": "السياحة والترفيه",
+        "s1_dropdown": null,
+        "s2_canonical_live": 1.67,
+        "s3_consolidated_v3": 1.72,
+        "s4_precomputed_rankings": 1.72,
+        "s5_production_db": 1.67,
+        "has_conflict": true,
+        "variance_pct": 2.99
+      },
+      {
+        "ticker": "POUL.CA",
+        "name_ar": "القاهرة للدواجن",
+        "sector": "الأغذية والمشروبات",
+        "s1_dropdown": null,
+        "s2_canonical_live": 9.7,
+        "s3_consolidated_v3": 9.99,
+        "s4_precomputed_rankings": 9.99,
+        "s5_production_db": 9.7,
+        "has_conflict": true,
+        "variance_pct": 2.99
+      },
+      {
+        "ticker": "ALUM.CA",
+        "name_ar": "الألومنيوم العربية",
+        "sector": "الموارد الأساسية والكيماويات",
+        "s1_dropdown": null,
+        "s2_canonical_live": 22.85,
+        "s3_consolidated_v3": 23.53,
+        "s4_precomputed_rankings": 23.53,
+        "s5_production_db": 22.85,
+        "has_conflict": true,
+        "variance_pct": 2.98
+      },
+      {
+        "ticker": "EFIH.CA",
+        "name_ar": "إي فاينانس للاستثمارات المالية والرقمية",
+        "sector": "تكنولوجيا المدفوعات",
+        "s1_dropdown": 24.5,
+        "s2_canonical_live": 24.5,
+        "s3_consolidated_v3": 25.23,
+        "s4_precomputed_rankings": 25.23,
+        "s5_production_db": 24.5,
+        "has_conflict": true,
+        "variance_pct": 2.98
+      },
+      {
+        "ticker": "SVCE.CA",
+        "name_ar": "جنوب الوادي للأسمنت",
+        "sector": "مواد البناء والتشييد",
+        "s1_dropdown": null,
+        "s2_canonical_live": 10.1,
+        "s3_consolidated_v3": 10.4,
+        "s4_precomputed_rankings": 10.4,
+        "s5_production_db": 10.1,
+        "has_conflict": true,
+        "variance_pct": 2.97
+      },
+      {
+        "ticker": "HRHO.CA",
+        "name_ar": "مجموعة إي إف جي القابضة (هيرميس)",
+        "sector": "الخدمات المالية غير المصرفية",
+        "s1_dropdown": 26.3,
+        "s2_canonical_live": 25.81,
+        "s3_consolidated_v3": 26.57,
+        "s4_precomputed_rankings": 26.57,
+        "s5_production_db": 25.81,
+        "has_conflict": true,
+        "variance_pct": 2.94
+      },
+      {
+        "ticker": "MENA.CA",
+        "name_ar": "مينا للاستثمار السياحي والعقاري",
+        "sector": "التطوير العقاري",
+        "s1_dropdown": null,
+        "s2_canonical_live": 6.55,
+        "s3_consolidated_v3": 6.74,
+        "s4_precomputed_rankings": 6.74,
+        "s5_production_db": 6.55,
+        "has_conflict": true,
+        "variance_pct": 2.9
+      },
+      {
+        "ticker": "EDFM.CA",
+        "name_ar": "مطاحن شرق الدلتا",
+        "sector": "الأغذية والمشروبات والتبغ",
+        "s1_dropdown": null,
+        "s2_canonical_live": 398.5,
+        "s3_consolidated_v3": 410.0,
+        "s4_precomputed_rankings": 410.0,
+        "s5_production_db": 398.5,
+        "has_conflict": true,
+        "variance_pct": 2.89
+      },
+      {
+        "ticker": "EGAL.CA",
+        "name_ar": "مصر للألومنيوم",
+        "sector": "الموارد الأساسية والكيماويات",
+        "s1_dropdown": 330.0,
+        "s2_canonical_live": 335.06,
+        "s3_consolidated_v3": 339.4,
+        "s4_precomputed_rankings": 339.4,
+        "s5_production_db": 335.06,
+        "has_conflict": true,
+        "variance_pct": 2.85
+      },
+      {
+        "ticker": "ENGC.CA",
+        "name_ar": "الهندسية للصناعات التشييدية",
+        "sector": "الصناعة والمقاولات",
+        "s1_dropdown": null,
+        "s2_canonical_live": 36.0,
+        "s3_consolidated_v3": 37.0,
+        "s4_precomputed_rankings": 37.0,
+        "s5_production_db": 36.0,
+        "has_conflict": true,
+        "variance_pct": 2.78
+      },
+      {
+        "ticker": "MIPH.CA",
+        "name_ar": "مصر لصناعة الفوسفات",
+        "sector": "الموارد الأساسية والكيماويات",
+        "s1_dropdown": null,
+        "s2_canonical_live": 805.0,
+        "s3_consolidated_v3": 827.0,
+        "s4_precomputed_rankings": 827.0,
+        "s5_production_db": 805.0,
+        "has_conflict": true,
+        "variance_pct": 2.73
+      },
+      {
+        "ticker": "MTIE.CA",
+        "name_ar": "إم إم جروب للصناعة والتجارة العالمية",
+        "sector": "التجارة والموزعون",
+        "s1_dropdown": null,
+        "s2_canonical_live": 7.85,
+        "s3_consolidated_v3": 8.06,
+        "s4_precomputed_rankings": 8.06,
+        "s5_production_db": 7.85,
+        "has_conflict": true,
+        "variance_pct": 2.68
+      },
+      {
+        "ticker": "NCCW.CA",
+        "name_ar": "النصر للأعمال المدنية",
+        "sector": "التطوير العقاري",
+        "s1_dropdown": null,
+        "s2_canonical_live": 6.84,
+        "s3_consolidated_v3": 7.02,
+        "s4_precomputed_rankings": 7.02,
+        "s5_production_db": 6.84,
+        "has_conflict": true,
+        "variance_pct": 2.63
+      },
+      {
+        "ticker": "PIOH.CA",
+        "name_ar": "بايونيرز بروبرتيز للتنمية العمرانية",
+        "sector": "الخدمات المالية والبنوك",
+        "s1_dropdown": null,
+        "s2_canonical_live": 6.93,
+        "s3_consolidated_v3": 7.11,
+        "s4_precomputed_rankings": 7.11,
+        "s5_production_db": 6.93,
+        "has_conflict": true,
+        "variance_pct": 2.6
+      },
+      {
+        "ticker": "PRDC.CA",
+        "name_ar": "رواد السياحة (رواد)",
+        "sector": "السياحة والترفيه",
+        "s1_dropdown": null,
+        "s2_canonical_live": 6.93,
+        "s3_consolidated_v3": 7.11,
+        "s4_precomputed_rankings": 7.11,
+        "s5_production_db": 6.93,
+        "has_conflict": true,
+        "variance_pct": 2.6
+      },
+      {
+        "ticker": "GSSC.CA",
+        "name_ar": "العامة للصوامع والتخزين",
+        "sector": "خدمات النقل والشحن واللوجستيات",
+        "s1_dropdown": null,
+        "s2_canonical_live": 277.71,
+        "s3_consolidated_v3": 284.89,
+        "s4_precomputed_rankings": 284.89,
+        "s5_production_db": 277.71,
+        "has_conflict": true,
+        "variance_pct": 2.59
+      },
+      {
+        "ticker": "SPIN.CA",
+        "name_ar": "الإسكندرية للغزل والنسيج",
+        "sector": "المنسوجات والسلع الاستهلاكية",
+        "s1_dropdown": null,
+        "s2_canonical_live": 15.9,
+        "s3_consolidated_v3": 16.31,
+        "s4_precomputed_rankings": 16.31,
+        "s5_production_db": 15.9,
+        "has_conflict": true,
+        "variance_pct": 2.58
+      },
+      {
+        "ticker": "CICH.CA",
+        "name_ar": "سي آي كابيتال القابضة",
+        "sector": "الخدمات المالية والاستثمار",
+        "s1_dropdown": null,
+        "s2_canonical_live": 11.8,
+        "s3_consolidated_v3": 12.1,
+        "s4_precomputed_rankings": 12.1,
+        "s5_production_db": 11.8,
+        "has_conflict": true,
+        "variance_pct": 2.54
+      },
+      {
+        "ticker": "ISMA.CA",
+        "name_ar": "الإسماعيلية مصر للدواجن",
+        "sector": "الأغذية والمشروبات والتبغ",
+        "s1_dropdown": null,
+        "s2_canonical_live": 24.98,
+        "s3_consolidated_v3": 25.6,
+        "s4_precomputed_rankings": 25.6,
+        "s5_production_db": 24.98,
+        "has_conflict": true,
+        "variance_pct": 2.48
+      },
+      {
+        "ticker": "ODIN.CA",
+        "name_ar": "أودن للاستثمارات المالية",
+        "sector": "الخدمات المالية والبنوك",
+        "s1_dropdown": null,
+        "s2_canonical_live": 2.47,
+        "s3_consolidated_v3": 2.53,
+        "s4_precomputed_rankings": 2.53,
+        "s5_production_db": 2.47,
+        "has_conflict": true,
+        "variance_pct": 2.43
+      },
+      {
+        "ticker": "CLHO.CA",
+        "name_ar": "مستشفى كليوباترا",
+        "sector": "الرعاية الصحية والأدوية",
+        "s1_dropdown": null,
+        "s2_canonical_live": 14.99,
+        "s3_consolidated_v3": 15.35,
+        "s4_precomputed_rankings": 15.35,
+        "s5_production_db": 14.99,
+        "has_conflict": true,
+        "variance_pct": 2.4
+      },
+      {
+        "ticker": "AIH.CA",
+        "name_ar": "العروبة للتجارة والتعدين والتوريدات",
+        "sector": "التطوير العقاري",
+        "s1_dropdown": null,
+        "s2_canonical_live": 0.86,
+        "s3_consolidated_v3": 0.84,
+        "s4_precomputed_rankings": 0.84,
+        "s5_production_db": 0.86,
+        "has_conflict": true,
+        "variance_pct": 2.38
+      },
+      {
+        "ticker": "SKPC.CA",
+        "name_ar": "سيدي كرير للبتروكيماويات (سيدبك)",
+        "sector": "البتروكيماويات والطاقة",
+        "s1_dropdown": null,
+        "s2_canonical_live": 15.82,
+        "s3_consolidated_v3": 16.19,
+        "s4_precomputed_rankings": 16.19,
+        "s5_production_db": 15.82,
+        "has_conflict": true,
+        "variance_pct": 2.34
+      },
+      {
+        "ticker": "MBSC.CA",
+        "name_ar": "مصر لأسمنت المنيا",
+        "sector": "مواد البناء والتشييد",
+        "s1_dropdown": null,
+        "s2_canonical_live": 368.5,
+        "s3_consolidated_v3": 377.0,
+        "s4_precomputed_rankings": 377.0,
+        "s5_production_db": 368.5,
+        "has_conflict": true,
+        "variance_pct": 2.31
+      },
+      {
+        "ticker": "ORWE.CA",
+        "name_ar": "النساجون الشرقيون للسجاد",
+        "sector": "المنسوجات والسلع الاستهلاكية",
+        "s1_dropdown": null,
+        "s2_canonical_live": 26.55,
+        "s3_consolidated_v3": 27.14,
+        "s4_precomputed_rankings": 27.14,
+        "s5_production_db": 26.55,
+        "has_conflict": true,
+        "variance_pct": 2.22
+      },
+      {
+        "ticker": "VALU.CA",
+        "name_ar": "يو جي إكس / فاليو للتمويل الاستهلاكي",
+        "sector": "الخدمات المالية والبنوك",
+        "s1_dropdown": null,
+        "s2_canonical_live": 11.01,
+        "s3_consolidated_v3": 11.24,
+        "s4_precomputed_rankings": 11.24,
+        "s5_production_db": 11.01,
+        "has_conflict": true,
+        "variance_pct": 2.09
+      },
+      {
+        "ticker": "ICID.CA",
+        "name_ar": "الصناعات الكيماوية المصرية (سيد)",
+        "sector": "الرعاية الصحية والأدوية",
+        "s1_dropdown": null,
+        "s2_canonical_live": 17.8,
+        "s3_consolidated_v3": 18.17,
+        "s4_precomputed_rankings": 18.17,
+        "s5_production_db": 17.8,
+        "has_conflict": true,
+        "variance_pct": 2.08
+      },
+      {
+        "ticker": "MOSC.CA",
+        "name_ar": "مصر لصناعة الأجهزة والمبردات",
+        "sector": "السلع المعمرة والإلكترونيات",
+        "s1_dropdown": null,
+        "s2_canonical_live": 273.0,
+        "s3_consolidated_v3": 278.65,
+        "s4_precomputed_rankings": 278.65,
+        "s5_production_db": 273.0,
+        "has_conflict": true,
+        "variance_pct": 2.07
+      },
+      {
+        "ticker": "FAITA.CA",
+        "name_ar": "بنك فيصل الإسلامي المصري (دولار)",
+        "sector": "الخدمات المالية والبنوك",
+        "s1_dropdown": null,
+        "s2_canonical_live": 0.99,
+        "s3_consolidated_v3": 1.01,
+        "s4_precomputed_rankings": 1.01,
+        "s5_production_db": 0.99,
+        "has_conflict": true,
+        "variance_pct": 2.02
+      },
+      {
+        "ticker": "ACAMD.CA",
+        "name_ar": "العربية لإدارة وتطوير الأصول",
+        "sector": "التطوير العقاري",
+        "s1_dropdown": null,
+        "s2_canonical_live": 2.01,
+        "s3_consolidated_v3": 2.05,
+        "s4_precomputed_rankings": 2.05,
+        "s5_production_db": 2.01,
+        "has_conflict": true,
+        "variance_pct": 1.99
+      },
+      {
+        "ticker": "ACAP.CA",
+        "name_ar": "أي كابيتال القابضة",
+        "sector": "الخدمات المالية والبنوك",
+        "s1_dropdown": null,
+        "s2_canonical_live": 8.05,
+        "s3_consolidated_v3": 8.21,
+        "s4_precomputed_rankings": 8.21,
+        "s5_production_db": 8.05,
+        "has_conflict": true,
+        "variance_pct": 1.99
+      },
+      {
+        "ticker": "ARCO.CA",
+        "name_ar": "العربية للأسمنت المسلح",
+        "sector": "مواد البناء والتشييد",
+        "s1_dropdown": null,
+        "s2_canonical_live": 2.01,
+        "s3_consolidated_v3": 2.05,
+        "s4_precomputed_rankings": 2.05,
+        "s5_production_db": 2.01,
+        "has_conflict": true,
+        "variance_pct": 1.99
+      },
+      {
+        "ticker": "SNFC.CA",
+        "name_ar": "الشرقية الوطنية للأمن الغذائي",
+        "sector": "الأغذية والمشروبات والتبغ",
+        "s1_dropdown": null,
+        "s2_canonical_live": 11.42,
+        "s3_consolidated_v3": 11.64,
+        "s4_precomputed_rankings": 11.64,
+        "s5_production_db": 11.42,
+        "has_conflict": true,
+        "variance_pct": 1.93
+      },
+      {
+        "ticker": "NEDA.CA",
+        "name_ar": "شمال الصعيد للتنمية والإنتاج الزراعي (نيوداب)",
+        "sector": "الأغذية والمشروبات والزراعة",
+        "s1_dropdown": null,
+        "s2_canonical_live": 2.6,
+        "s3_consolidated_v3": 2.65,
+        "s4_precomputed_rankings": 2.65,
+        "s5_production_db": 2.6,
+        "has_conflict": true,
+        "variance_pct": 1.92
+      },
+      {
+        "ticker": "SMPC.CA",
+        "name_ar": "شمال الصعيد للتنمية والإنتاج الزراعي (نيوداب)",
+        "sector": "الأغذية والمشروبات والتبغ",
+        "s1_dropdown": null,
+        "s2_canonical_live": 2.6,
+        "s3_consolidated_v3": 2.65,
+        "s4_precomputed_rankings": 2.65,
+        "s5_production_db": 2.6,
+        "has_conflict": true,
+        "variance_pct": 1.92
+      },
+      {
+        "ticker": "MEFM.CA",
+        "name_ar": "مطاحن مصر الوسطى",
+        "sector": "الأغذية والمشروبات والتبغ",
+        "s1_dropdown": null,
+        "s2_canonical_live": 135.24,
+        "s3_consolidated_v3": 137.8,
+        "s4_precomputed_rankings": 137.8,
+        "s5_production_db": 135.24,
+        "has_conflict": true,
+        "variance_pct": 1.89
+      },
+      {
+        "ticker": "UBEE.CA",
+        "name_ar": "بنك أبوظبي التجاري مصر",
+        "sector": "الخدمات المالية والبنوك",
+        "s1_dropdown": null,
+        "s2_canonical_live": 15.81,
+        "s3_consolidated_v3": 16.1,
+        "s4_precomputed_rankings": 16.1,
+        "s5_production_db": 15.81,
+        "has_conflict": true,
+        "variance_pct": 1.83
+      },
+      {
+        "ticker": "ASCM.CA",
+        "name_ar": "أسيك للتعدين (أسكوم)",
+        "sector": "الموارد الأساسية والكيماويات",
+        "s1_dropdown": null,
+        "s2_canonical_live": 56.51,
+        "s3_consolidated_v3": 57.53,
+        "s4_precomputed_rankings": 57.53,
+        "s5_production_db": 56.51,
+        "has_conflict": true,
+        "variance_pct": 1.8
+      },
+      {
+        "ticker": "DICE.CA",
+        "name_ar": "دايس للملابس الجاهزة",
+        "sector": "المنسوجات والسلع الاستهلاكية",
+        "s1_dropdown": null,
+        "s2_canonical_live": 1.67,
+        "s3_consolidated_v3": 1.7,
+        "s4_precomputed_rankings": 1.7,
+        "s5_production_db": 1.67,
+        "has_conflict": true,
+        "variance_pct": 1.8
+      },
+      {
+        "ticker": "DSCW.CA",
+        "name_ar": "دايس للملابس الجاهزة",
+        "sector": "السلع الاستهلاكية",
+        "s1_dropdown": null,
+        "s2_canonical_live": 1.67,
+        "s3_consolidated_v3": 1.7,
+        "s4_precomputed_rankings": 1.7,
+        "s5_production_db": 1.67,
+        "has_conflict": true,
+        "variance_pct": 1.8
+      },
+      {
+        "ticker": "EGCH.CA",
+        "name_ar": "الصناعات الكيماوية المصرية (كيما)",
+        "sector": "الموارد الأساسية والكيماويات",
+        "s1_dropdown": null,
+        "s2_canonical_live": 13.13,
+        "s3_consolidated_v3": 13.36,
+        "s4_precomputed_rankings": 13.36,
+        "s5_production_db": 13.13,
+        "has_conflict": true,
+        "variance_pct": 1.75
+      },
+      {
+        "ticker": "AJWA.CA",
+        "name_ar": "أجواء للصناعات الغذائية - مصر",
+        "sector": "الأغذية والمشروبات والتبغ",
+        "s1_dropdown": null,
+        "s2_canonical_live": 199.55,
+        "s3_consolidated_v3": 196.16,
+        "s4_precomputed_rankings": 196.16,
+        "s5_production_db": 199.55,
+        "has_conflict": true,
+        "variance_pct": 1.73
+      },
+      {
+        "ticker": "IFAP.CA",
+        "name_ar": "الدولية للأسمدة والكيماويات",
+        "sector": "الموارد الأساسية والكيماويات",
+        "s1_dropdown": null,
+        "s2_canonical_live": 19.08,
+        "s3_consolidated_v3": 19.4,
+        "s4_precomputed_rankings": 19.4,
+        "s5_production_db": 19.08,
+        "has_conflict": true,
+        "variance_pct": 1.68
+      },
+      {
+        "ticker": "MASR.CA",
+        "name_ar": "مدينة مصر للإسكان والتعمير (MNHD)",
+        "sector": "التطوير العقاري",
+        "s1_dropdown": null,
+        "s2_canonical_live": 7.73,
+        "s3_consolidated_v3": 7.86,
+        "s4_precomputed_rankings": 7.86,
+        "s5_production_db": 7.73,
+        "has_conflict": true,
+        "variance_pct": 1.68
+      },
+      {
+        "ticker": "MNHD.CA",
+        "name_ar": "مجموعة نماء للاستثمار",
+        "sector": "الخدمات المالية والبنوك",
+        "s1_dropdown": null,
+        "s2_canonical_live": 7.73,
+        "s3_consolidated_v3": 7.86,
+        "s4_precomputed_rankings": 7.86,
+        "s5_production_db": 7.73,
+        "has_conflict": true,
+        "variance_pct": 1.68
+      },
+      {
+        "ticker": "COMI.CA",
+        "name_ar": "البنك التجاري الدولي (CIB)",
+        "sector": "الخدمات المالية والبنوك",
+        "s1_dropdown": 124.65,
+        "s2_canonical_live": 122.7,
+        "s3_consolidated_v3": 124.65,
+        "s4_precomputed_rankings": 124.65,
+        "s5_production_db": 122.7,
+        "has_conflict": true,
+        "variance_pct": 1.59
+      },
+      {
+        "ticker": "EGSA.CA",
+        "name_ar": "العامة لمنتجات الخزف والصيني (شيني)",
+        "sector": "مواد البناء والتشييد",
+        "s1_dropdown": null,
+        "s2_canonical_live": 8.89,
+        "s3_consolidated_v3": 9.02,
+        "s4_precomputed_rankings": 9.02,
+        "s5_production_db": 8.89,
+        "has_conflict": true,
+        "variance_pct": 1.46
+      },
+      {
+        "ticker": "ADPC.CA",
+        "name_ar": "العربية لأنابيب البترول",
+        "sector": "الطاقة والخدمات البترولية",
+        "s1_dropdown": null,
+        "s2_canonical_live": 3.48,
+        "s3_consolidated_v3": 3.53,
+        "s4_precomputed_rankings": 3.53,
+        "s5_production_db": 3.48,
+        "has_conflict": true,
+        "variance_pct": 1.44
+      },
+      {
+        "ticker": "ETRS.CA",
+        "name_ar": "المصرية لخدمات النقل (إيجيترانس)",
+        "sector": "الخدمات المالية والبنوك",
+        "s1_dropdown": null,
+        "s2_canonical_live": 10.65,
+        "s3_consolidated_v3": 10.8,
+        "s4_precomputed_rankings": 10.8,
+        "s5_production_db": 10.65,
+        "has_conflict": true,
+        "variance_pct": 1.41
+      },
+      {
+        "ticker": "SAUD.CA",
+        "name_ar": "بنك البركة مصر",
+        "sector": "الخدمات المالية والبنوك",
+        "s1_dropdown": null,
+        "s2_canonical_live": 22.8,
+        "s3_consolidated_v3": 23.12,
+        "s4_precomputed_rankings": 23.12,
+        "s5_production_db": 22.8,
+        "has_conflict": true,
+        "variance_pct": 1.4
+      },
+      {
+        "ticker": "PHAR.CA",
+        "name_ar": "الإسكندرية للأدوية والصناعات الكيماوية",
+        "sector": "الرعاية الصحية والأدوية",
+        "s1_dropdown": null,
+        "s2_canonical_live": 112.54,
+        "s3_consolidated_v3": 114.1,
+        "s4_precomputed_rankings": 114.1,
+        "s5_production_db": 112.54,
+        "has_conflict": true,
+        "variance_pct": 1.39
+      },
+      {
+        "ticker": "EFID.CA",
+        "name_ar": "إيديتا للصناعات الغذائية",
+        "sector": "الأغذية والمشروبات والتبغ",
+        "s1_dropdown": null,
+        "s2_canonical_live": 18.81,
+        "s3_consolidated_v3": 19.07,
+        "s4_precomputed_rankings": 19.07,
+        "s5_production_db": 18.81,
+        "has_conflict": true,
+        "variance_pct": 1.38
+      },
+      {
+        "ticker": "MCQE.CA",
+        "name_ar": "أسمنت مصر بني سويف",
+        "sector": "مواد البناء والتشييد",
+        "s1_dropdown": null,
+        "s2_canonical_live": 194.05,
+        "s3_consolidated_v3": 196.73,
+        "s4_precomputed_rankings": 196.73,
+        "s5_production_db": 194.05,
+        "has_conflict": true,
+        "variance_pct": 1.38
+      },
+      {
+        "ticker": "RTVC.CA",
+        "name_ar": "رمكو لإنشاء القرى السياحية",
+        "sector": "السياحة والترفيه",
+        "s1_dropdown": null,
+        "s2_canonical_live": 3.63,
+        "s3_consolidated_v3": 3.68,
+        "s4_precomputed_rankings": 3.68,
+        "s5_production_db": 3.63,
+        "has_conflict": true,
+        "variance_pct": 1.38
+      },
+      {
+        "ticker": "UNIT.CA",
+        "name_ar": "المتحدة للإسكان والتعمير",
+        "sector": "التطوير العقاري",
+        "s1_dropdown": null,
+        "s2_canonical_live": 17.47,
+        "s3_consolidated_v3": 17.71,
+        "s4_precomputed_rankings": 17.71,
+        "s5_production_db": 17.47,
+        "has_conflict": true,
+        "variance_pct": 1.37
+      },
+      {
+        "ticker": "ALCN.CA",
+        "name_ar": "الإسكندرية لتداول الحاويات والبضائع",
+        "sector": "النقل واللوجستيات",
+        "s1_dropdown": null,
+        "s2_canonical_live": 33.1,
+        "s3_consolidated_v3": 33.55,
+        "s4_precomputed_rankings": 33.55,
+        "s5_production_db": 33.1,
+        "has_conflict": true,
+        "variance_pct": 1.36
+      },
+      {
+        "ticker": "ELNA.CA",
+        "name_ar": "النصر للملابس والمنسوجات (كابو)",
+        "sector": "المنسوجات والسلع المعمرة",
+        "s1_dropdown": null,
+        "s2_canonical_live": 33.9,
+        "s3_consolidated_v3": 34.35,
+        "s4_precomputed_rankings": 34.35,
+        "s5_production_db": 33.9,
+        "has_conflict": true,
+        "variance_pct": 1.33
+      },
+      {
+        "ticker": "CIEB.CA",
+        "name_ar": "بنك كريدي أجريكول مصر",
+        "sector": "الخدمات المالية والبنوك",
+        "s1_dropdown": null,
+        "s2_canonical_live": 23.69,
+        "s3_consolidated_v3": 24.0,
+        "s4_precomputed_rankings": 24.0,
+        "s5_production_db": 23.69,
+        "has_conflict": true,
+        "variance_pct": 1.31
+      },
+      {
+        "ticker": "EBSC.CA",
+        "name_ar": "المصرية للبطاقات الذكية وحلول الدفع",
+        "sector": "الاتصالات وتكنولوجيا المعلومات",
+        "s1_dropdown": null,
+        "s2_canonical_live": 1.76,
+        "s3_consolidated_v3": 1.78,
+        "s4_precomputed_rankings": 1.78,
+        "s5_production_db": 1.76,
+        "has_conflict": true,
+        "variance_pct": 1.14
+      },
+      {
+        "ticker": "WCDF.CA",
+        "name_ar": "مطاحن ومخابز الإسكندرية",
+        "sector": "الأغذية والمشروبات والتبغ",
+        "s1_dropdown": null,
+        "s2_canonical_live": 655.52,
+        "s3_consolidated_v3": 662.98,
+        "s4_precomputed_rankings": 662.98,
+        "s5_production_db": 655.52,
+        "has_conflict": true,
+        "variance_pct": 1.14
+      },
+      {
+        "ticker": "WDEH.CA",
+        "name_ar": "مطاحن وسط وغرب الدلتا",
+        "sector": "الأغذية والمشروبات والتبغ",
+        "s1_dropdown": null,
+        "s2_canonical_live": 655.52,
+        "s3_consolidated_v3": 662.98,
+        "s4_precomputed_rankings": 662.98,
+        "s5_production_db": 655.52,
+        "has_conflict": true,
+        "variance_pct": 1.14
+      },
+      {
+        "ticker": "MICH.CA",
+        "name_ar": "مصر للكيماويات",
+        "sector": "الموارد الأساسية والكيماويات",
+        "s1_dropdown": null,
+        "s2_canonical_live": 46.53,
+        "s3_consolidated_v3": 47.04,
+        "s4_precomputed_rankings": 47.04,
+        "s5_production_db": 46.53,
+        "has_conflict": true,
+        "variance_pct": 1.1
+      },
+      {
+        "ticker": "MCEG.CA",
+        "name_ar": "مطاحن ومخابز جنوب القاهرة والجيزة",
+        "sector": "الأغذية والمشروبات والتبغ",
+        "s1_dropdown": null,
+        "s2_canonical_live": 246.0,
+        "s3_consolidated_v3": 248.65,
+        "s4_precomputed_rankings": 248.65,
+        "s5_production_db": 246.0,
+        "has_conflict": true,
+        "variance_pct": 1.08
+      },
+      {
+        "ticker": "AMER.CA",
+        "name_ar": "مجموعة عامر القابضة (عامر جروب)",
+        "sector": "التطوير العقاري",
+        "s1_dropdown": null,
+        "s2_canonical_live": 4.98,
+        "s3_consolidated_v3": 5.03,
+        "s4_precomputed_rankings": 5.03,
+        "s5_production_db": 4.98,
+        "has_conflict": true,
+        "variance_pct": 1.0
+      },
+      {
+        "ticker": "TALM.CA",
+        "name_ar": "تعليم لخدمات الإدارة",
+        "sector": "خدمات تعليمية",
+        "s1_dropdown": null,
+        "s2_canonical_live": 21.5,
+        "s3_consolidated_v3": 21.71,
+        "s4_precomputed_rankings": 21.71,
+        "s5_production_db": 21.5,
+        "has_conflict": true,
+        "variance_pct": 0.98
+      },
+      {
+        "ticker": "AMIA.CA",
+        "name_ar": "العربية لإدارة وتطوير الأصول",
+        "sector": "التطوير العقاري",
+        "s1_dropdown": null,
+        "s2_canonical_live": 19.01,
+        "s3_consolidated_v3": 19.18,
+        "s4_precomputed_rankings": 19.18,
+        "s5_production_db": 19.01,
+        "has_conflict": true,
+        "variance_pct": 0.89
+      },
+      {
+        "ticker": "UEDA.CA",
+        "name_ar": "مطاحن مصر العليا",
+        "sector": "الأغذية والمشروبات والتبغ",
+        "s1_dropdown": null,
+        "s2_canonical_live": 515.79,
+        "s3_consolidated_v3": 520.0,
+        "s4_precomputed_rankings": 520.0,
+        "s5_production_db": 515.79,
+        "has_conflict": true,
+        "variance_pct": 0.82
+      },
+      {
+        "ticker": "ECAP.CA",
+        "name_ar": "العز لصناعة السيراميك والبورسلين (الجوهرة)",
+        "sector": "مواد البناء والتشييد",
+        "s1_dropdown": null,
+        "s2_canonical_live": 29.86,
+        "s3_consolidated_v3": 30.1,
+        "s4_precomputed_rankings": 30.1,
+        "s5_production_db": 29.86,
+        "has_conflict": true,
+        "variance_pct": 0.8
+      },
+      {
+        "ticker": "HDBK.CA",
+        "name_ar": "بنك التعمير والإسكان",
+        "sector": "الخدمات المالية والبنوك",
+        "s1_dropdown": null,
+        "s2_canonical_live": 107.01,
+        "s3_consolidated_v3": 107.79,
+        "s4_precomputed_rankings": 107.79,
+        "s5_production_db": 107.01,
+        "has_conflict": true,
+        "variance_pct": 0.73
+      },
+      {
+        "ticker": "CPCI.CA",
+        "name_ar": "القاهرة للأدوية والصناعات الكيماوية",
+        "sector": "الرعاية الصحية والأدوية",
+        "s1_dropdown": null,
+        "s2_canonical_live": 596.05,
+        "s3_consolidated_v3": 600.0,
+        "s4_precomputed_rankings": 600.0,
+        "s5_production_db": 596.05,
+        "has_conflict": true,
+        "variance_pct": 0.66
+      },
+      {
+        "ticker": "GMCI.CA",
+        "name_ar": "مطاحن ومخابز جنوب القاهرة والجيزة",
+        "sector": "الأغذية والمشروبات والسلع التموينية",
+        "s1_dropdown": null,
+        "s2_canonical_live": 80.6,
+        "s3_consolidated_v3": 80.11,
+        "s4_precomputed_rankings": 80.11,
+        "s5_production_db": 80.6,
+        "has_conflict": true,
+        "variance_pct": 0.61
+      },
+      {
+        "ticker": "ARCC.CA",
+        "name_ar": "الأسمنت العربية",
+        "sector": "مواد البناء والتشييد",
+        "s1_dropdown": null,
+        "s2_canonical_live": 70.65,
+        "s3_consolidated_v3": 71.07,
+        "s4_precomputed_rankings": 71.07,
+        "s5_production_db": 70.65,
+        "has_conflict": true,
+        "variance_pct": 0.59
+      },
+      {
+        "ticker": "BINV.CA",
+        "name_ar": "بي إنفستمنتس القابضة",
+        "sector": "الخدمات المالية والاستثمار",
+        "s1_dropdown": null,
+        "s2_canonical_live": 57.98,
+        "s3_consolidated_v3": 58.26,
+        "s4_precomputed_rankings": 58.26,
+        "s5_production_db": 57.98,
+        "has_conflict": true,
+        "variance_pct": 0.48
+      },
+      {
+        "ticker": "QNBA.CA",
+        "name_ar": "بنك قطر الوطني الأهلي (QNB)",
+        "sector": "الخدمات المالية والبنوك",
+        "s1_dropdown": null,
+        "s2_canonical_live": 58.54,
+        "s3_consolidated_v3": 58.26,
+        "s4_precomputed_rankings": 58.26,
+        "s5_production_db": 58.54,
+        "has_conflict": true,
+        "variance_pct": 0.48
+      },
+      {
+        "ticker": "KZPC.CA",
+        "name_ar": "كفر الزيات للمبيدات والكيماويات",
+        "sector": "الموارد الأساسية والكيماويات",
+        "s1_dropdown": null,
+        "s2_canonical_live": 13.23,
+        "s3_consolidated_v3": 13.17,
+        "s4_precomputed_rankings": 13.17,
+        "s5_production_db": 13.23,
+        "has_conflict": true,
+        "variance_pct": 0.46
+      },
+      {
+        "ticker": "AXPH.CA",
+        "name_ar": "الإسكندرية للأدوية والصناعات الكيماوية",
+        "sector": "الرعاية الصحية والأدوية",
+        "s1_dropdown": null,
+        "s2_canonical_live": 1499.67,
+        "s3_consolidated_v3": 1493.0,
+        "s4_precomputed_rankings": 1493.0,
+        "s5_production_db": 1499.67,
+        "has_conflict": true,
+        "variance_pct": 0.45
+      },
+      {
+        "ticker": "SUGR.CA",
+        "name_ar": "الدلتا للسكر",
+        "sector": "الأغذية والمشروبات والتبغ",
+        "s1_dropdown": null,
+        "s2_canonical_live": 56.01,
+        "s3_consolidated_v3": 55.76,
+        "s4_precomputed_rankings": 55.76,
+        "s5_production_db": 56.01,
+        "has_conflict": true,
+        "variance_pct": 0.45
+      },
+      {
+        "ticker": "MHOT.CA",
+        "name_ar": "مصر للفنادق",
+        "sector": "السياحة والترفيه",
+        "s1_dropdown": null,
+        "s2_canonical_live": 17.42,
+        "s3_consolidated_v3": 17.39,
+        "s4_precomputed_rankings": 17.39,
+        "s5_production_db": 17.42,
+        "has_conflict": true,
+        "variance_pct": 0.17
+      },
+      {
+        "ticker": "CSAG.CA",
+        "name_ar": "القناة للتوكيلات الملاحية",
+        "sector": "خدمات النقل والشحن واللوجستيات",
+        "s1_dropdown": null,
+        "s2_canonical_live": 36.77,
+        "s3_consolidated_v3": 36.73,
+        "s4_precomputed_rankings": 36.73,
+        "s5_production_db": 36.77,
+        "has_conflict": true,
+        "variance_pct": 0.11
+      }
+    ],
+    "text_contradictions": [
+      {
+        "category": "مكرر الربحية P/E Diagnosis Logic",
+        "location": "core/fundamental_data_engine.py:L324-339",
+        "issue": "مكرر الربحية المنخفض جداً (أقل من 4.0x مثل سهم CIB عند 3.91x) يسقط خارج شرط '4.0 <= val_pe <= 12.0' فيتحول تلقائياً إلى 'else:' ويتم تصنيفه على أنه 'مكرر ربحية مبالغ فيه قد يشكل فخ قيمة' وهو تناقض استثماري فادح حيث أن السهم رخيص وممتاز.",
+        "severity": "CRITICAL"
+      },
+      {
+        "category": "نسبة العائد للمخاطرة المقلوبة في بطاقة ثاندر",
+        "location": "templates/index.html:L5587, L5636, L5665 & consolidated_v3/03_thndr_daily_execution_cards.json",
+        "issue": "تسمية العمود والبطاقة هي 'العائد / المخاطرة' (Reward/Risk) ولكن الكود يعرض النسبة بصيغة '1 : 1.6' بدلاً من '1.6 : 1'، مما يوحي للمستثمر بأن المخاطرة 1.6 ضعف العائد المأمول.",
+        "severity": "HIGH"
+      },
+      {
+        "category": "تضارب سعر صرف الدولار (USD/EGP)",
+        "location": "templates/index.html:L1834 (50.20 ج.م) مقابل data/macro_economic_state.json:L44 (52.32 ج.م)",
+        "issue": "الواجهة تعرض رقماً ثابتاً قديماً 50.20 ج.م كافتراضي بينما محرك الماكرو ومصادر Yahoo Finance الرسمية تسجل 52.32 ج.م بفارق 2.12 جنيه.",
+        "severity": "HIGH"
+      },
+      {
+        "category": "تضارب قراءة مؤشر البورصة المصرية EGX30",
+        "location": "data/macro_economic_state.json:L115 (53,265.20) مقابل L94 (52,498.0) ومقابل cached_regime_state.json (52,494.0)",
+        "issue": "تضارب بين قراءة سياق السوق (53,265 نقطة) والمؤشر اللحظي المعتمد (52,498 نقطة) ومستوى الكاش المحفوظ (52,494 نقطة).",
+        "severity": "MEDIUM"
+      },
+      {
+        "category": "خلط عملة سهم القابضة المصرية الكويتية EKHO",
+        "location": "data/canonical_prices_live.json (35.0 ج.م) مقابل 0.67 دولار أمريكي في consolidated_v3",
+        "issue": "السهم مقوم ومدرج رسمياً بالدولار (0.67 USD)، ولكن في canonical_prices_live تم تسجيله بـ 35.0 ج.م مع قفزة بنسبة 5,123% دون تحويل عملة نظامي.",
+        "severity": "CRITICAL"
+      },
+      {
+        "category": "خطأ تسعير حديد عز ESRS الفادح",
+        "location": "data/canonical_prices_live.json (1250.0 ج.م) مقابل 128.50 ج.م في consolidated_v3",
+        "issue": "تسجيل سعر السهم بـ 1250 جنيه بدلاً من 128.5 جنيه مصري (زيادة تقارب 10 أضعاف بسبب خطأ إدخال/قراءة).",
+        "severity": "CRITICAL"
+      }
+    ]
+  },
+  "axis_3_market_drop_and_portfolio": {
+    "market_breadth": {
+      "advances_count": 97,
+      "declines_count": 148,
+      "unchanged_count": 25,
+      "adv_dec_ratio": 0.66,
+      "declines_percentage": 54.8,
+      "sentiment_summary_ar": "🔴 هبوط عام وتصحيح ضاغط — تراجع 148 سهماً (54.8% من السوق) بقيادة البنوك والعقارات والصناعة"
+    },
+    "worst_sectors": [
+      {
+        "sector": "مواد وبلاستيك",
+        "stocks_count": 1,
+        "avg_change_pct": -3.94
+      },
+      {
+        "sector": "البتروكيماويات والطاقة",
+        "stocks_count": 3,
+        "avg_change_pct": -2.95
+      },
+      {
+        "sector": "خدمات تعليمية",
+        "stocks_count": 2,
+        "avg_change_pct": -2.88
+      },
+      {
+        "sector": "المنسوجات والسلع الاستهلاكية",
+        "stocks_count": 4,
+        "avg_change_pct": -2.69
+      },
+      {
+        "sector": "تكنولوجيا المدفوعات",
+        "stocks_count": 2,
+        "avg_change_pct": -2.65
+      },
+      {
+        "sector": "السيارات والصناعة",
+        "stocks_count": 1,
+        "avg_change_pct": -2.42
+      }
+    ],
+    "top_declining_stocks": [
+      {
+        "ticker": "DEIN.CA",
+        "name": "الدلتا للتأمين",
+        "price": 10.35,
+        "prev": 12.42,
+        "change_pct": -16.67
+      },
+      {
+        "ticker": "ICMI.CA",
+        "name": "المجموعة المتكاملة للأعمال الهندسية",
+        "price": 0.67,
+        "prev": 0.73,
+        "change_pct": -8.22
+      },
+      {
+        "ticker": "BIOC.CA",
+        "name": "بيو فارما إيجيبت للأدوية",
+        "price": 306.0,
+        "prev": 330.0,
+        "change_pct": -7.27
+      },
+      {
+        "ticker": "GRCA.CA",
+        "name": "جراند كابيتال القابضة للاستثمارات",
+        "price": 35.21,
+        "prev": 37.7,
+        "change_pct": -6.6
+      },
+      {
+        "ticker": "TORA.CA",
+        "name": "أسمنت بورتلاند طرة المصرية",
+        "price": 63.02,
+        "prev": 67.11,
+        "change_pct": -6.09
+      },
+      {
+        "ticker": "TANM.CA",
+        "name": "تنمية للاستثمار العقاري والمقاولات",
+        "price": 6.16,
+        "prev": 6.55,
+        "change_pct": -5.95
+      },
+      {
+        "ticker": "HELI.CA",
+        "name": "مصر الجديدة للإسكان والتعمير",
+        "price": 7.06,
+        "prev": 7.49,
+        "change_pct": -5.74
+      },
+      {
+        "ticker": "IDRE.CA",
+        "name": "التنمية العمرانية الدولية",
+        "price": 47.37,
+        "prev": 50.1,
+        "change_pct": -5.45
+      },
+      {
+        "ticker": "ANFI.CA",
+        "name": "الإسكندرية للخدمات الطبية (المركز الطبي الجديد)",
+        "price": 43.83,
+        "prev": 46.35,
+        "change_pct": -5.44
+      },
+      {
+        "ticker": "CCRS.CA",
+        "name": "القاهرة للاستثمارات والتنمية",
+        "price": 2.2,
+        "prev": 2.32,
+        "change_pct": -5.17
+      }
+    ],
+    "portfolio_impact": {
+      "cash_egp": 1200.0,
+      "stocks_market_value": 12234.21,
+      "total_portfolio_equity": 13434.21,
+      "cost_basis": 13094.14,
+      "today_loss_egp": -224.35,
+      "today_loss_pct": -1.8,
+      "total_unrealized_pnl_egp": -859.93,
+      "total_unrealized_pnl_pct": -6.57,
+      "positions": [
+        {
+          "ticker": "COMI.CA",
+          "company_name": "البنك التجاري الدولي (CIB)",
+          "quantity": 45,
+          "entry_price": 134.26,
+          "yesterday_close": 124.65,
+          "today_close": 122.7,
+          "today_change_pct": -1.56,
+          "today_change_egp": -87.75,
+          "current_market_value": 5521.5,
+          "total_pnl_egp": -520.2,
+          "total_pnl_pct": -8.61
+        },
+        {
+          "ticker": "PHDC.CA",
+          "company_name": "بالم هيلز للتعمير",
+          "quantity": 162,
+          "entry_price": 13.46,
+          "yesterday_close": 12.93,
+          "today_close": 12.87,
+          "today_change_pct": -0.46,
+          "today_change_egp": -9.72,
+          "current_market_value": 2084.94,
+          "total_pnl_egp": -95.58,
+          "total_pnl_pct": -4.38
+        },
+        {
+          "ticker": "SWDY.CA",
+          "company_name": "السويدي إليكتريك",
+          "quantity": 13,
+          "entry_price": 115.83,
+          "yesterday_close": 116.0,
+          "today_close": 112.6,
+          "today_change_pct": -2.93,
+          "today_change_egp": -44.2,
+          "current_market_value": 1463.8,
+          "total_pnl_egp": -41.99,
+          "total_pnl_pct": -2.79
+        },
+        {
+          "ticker": "RAYA.CA",
+          "company_name": "راية القابضة",
+          "quantity": 159,
+          "entry_price": 7.57,
+          "yesterday_close": 6.6,
+          "today_close": 6.33,
+          "today_change_pct": -4.09,
+          "today_change_egp": -42.93,
+          "current_market_value": 1006.47,
+          "total_pnl_egp": -197.16,
+          "total_pnl_pct": -16.38
+        },
+        {
+          "ticker": "TMGH.CA",
+          "company_name": "مجموعة طلعت مصطفى",
+          "quantity": 25,
+          "entry_price": 86.5,
+          "yesterday_close": 87.89,
+          "today_close": 86.3,
+          "today_change_pct": -1.81,
+          "today_change_egp": -39.75,
+          "current_market_value": 2157.5,
+          "total_pnl_egp": -5.0,
+          "total_pnl_pct": -0.23
+        }
+      ]
+    },
+    "forensic_diagnosis": {
+      "status": "UNWARNED_BULLISH_BIAS_FAILURE",
+      "regime_state_observed": "STRONG_BULL",
+      "cash_reserve_pct_locked": 5.0,
+      "root_causes": [
+        {
+          "cause": "اعتماد المحرك على المتوسطات المتحركة المتأخرة تاريخياً (Lagged MAs)",
+          "technical_detail": "المتوسط المتحرك لـ 50 يوماً (49,998) ولـ 200 يوم (45,054) يقعان أدنى من المؤشر (52,494) بفارق شاسع يتراوح بين 2,500 و 7,400 نقطة بسبب صعود السوق الحاد منذ 2023. وطالما السعر أعلى من MA50 و MA200، تظل المعادلة تصنف السوق كـ STRONG_BULL."
+        },
+        {
+          "cause": "شرط التراجع قصير الأجل الصارم جداً (Strict Drawdown Thresholds)",
+          "technical_detail": "معادلة تصنيف الهبوط تشترط هبوطاً يتجاوز 7% خلال 20 جلسة لتفعيل BEAR_CORRECTION، أو هبوطاً 10% خلال 5 جلسات لتفعيل FLASH_CRASH. وبما أن تراجع المؤشر كان -0.76% فقط قبل الجلسة، لم يتم كسر هذا السقف إطلاقاً."
+        },
+        {
+          "cause": "غياب مؤشر اتساع السوق ومؤشرات التوزيع المؤسسي اللحظي (Market Breadth Blindspot)",
+          "technical_detail": "المنظومة تفحص مستويات مؤشر EGX30 فقط ولا تقيس معدل الصاعدين للهابطين (Advances vs Declines: 97 مقابل 148)، حيث هبطت 54.8% من أسهم السوق وهبطت كافة القياديات الأساسية (CIB -1.56%، السويدي -2.93%، طلعت مصطفى -1.81%، راية -4.09%) بينما المؤشر العام لم يعكس حجم التدهور."
+        },
+        {
+          "cause": "تجميد الكاش وتأكيد حالة الأمان في الذاكرة المخبأة (Stale Cache Lockout)",
+          "technical_detail": "تم حفظ ملف cached_regime_state.json بتاريخ 12 أكتوبر بحالة STRONG_BULL واحتياطي كاش 5% فقط، مما منع بطاقات ثاندر والتوصيات من التحول إلى موقف دفاعي أو رفع الكاش الإلزامي إلى 35% أو 40%."
+        }
+      ]
+    }
+  }
+}

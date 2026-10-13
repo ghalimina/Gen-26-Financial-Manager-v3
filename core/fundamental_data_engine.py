@@ -319,24 +319,20 @@ class FundamentalDataEngine:
         if val_pe is not None:
             if val_pe <= 0:
                 pe_points = -25.0
-                valuation_tier = "UNPROFITABLE"
-                diagnostic_notes.append("الشركة تسجل خسائر صافية (مكرر ربحية سالب).")
-            elif 4.0 <= val_pe <= 12.0:
-                pe_points = +25.0
-                valuation_tier = "UNDERVALUED"
-                diagnostic_notes.append(f"مكرر ربحية جذاب جداً ({val_pe:.1f}x) يعكس تسعيراً رخيصاً بالنسبة للأرباح.")
-            elif 12.0 < val_pe <= 18.0:
+                valuation_tier = "NEGATIVE_EARNINGS"
+                diagnostic_notes.append("مكرر ربحية سالب (الشركة تحقق خسائر مرحلية)")
+            elif val_pe < 8.0:
+                pe_points = +30.0
+                valuation_tier = "UNDERVALUED_DEEP_VALUE"
+                diagnostic_notes.append(f"مكرر ربحية منخفض وجذاب جداً ({val_pe:.2f}x) يعكس أماناً مالياً وتوزيعات قوية")
+            elif val_pe <= 16.0:
                 pe_points = +15.0
-                valuation_tier = "FAIR_VALUE"
-                diagnostic_notes.append(f"مكرر ربحية عادل ومتوازن ({val_pe:.1f}x).")
-            elif 18.0 < val_pe <= 30.0:
-                pe_points = +5.0
-                valuation_tier = "MODERATE_PREMIUM"
-                diagnostic_notes.append(f"مكرر ربحية مرتفع نسبياً ({val_pe:.1f}x).")
-            else:  # > 30.0
+                valuation_tier = "FAIR_VALUATION"
+                diagnostic_notes.append(f"مكرر ربحية عادل ومعتدل ({val_pe:.2f}x)")
+            else:
                 pe_points = -10.0
                 valuation_tier = "OVERVALUED"
-                diagnostic_notes.append(f"مكرر ربحية مبالغ فيه ({val_pe:.1f}x) قد يشكل فخ قيمة.")
+                diagnostic_notes.append(f"مكرر ربحية مرتفع ({val_pe:.2f}x) قد يشكل علاوة مخاطر")
 
         # 2. Price-to-Book (P/B) Evaluation (Max ±20 pts)
         pb_points = 0.0

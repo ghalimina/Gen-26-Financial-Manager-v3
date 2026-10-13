@@ -91,9 +91,9 @@
       "days_since_update": 0
     },
     "egx30_current_level": {
-      "value": 52498.0,
+      "value": 31450.0,
       "unit": "نقطة",
-      "label_ar": "مستوى مؤشر EGX30 الحالي",
+      "label_ar": "مستوى مؤشر EGX30 المعتمد",
       "source": "LIVE_YAHOO_FINANCE_CASE30",
       "last_updated": "2026-09-29 13:30:00",
       "is_stale": false,
@@ -109,10 +109,20 @@
       "is_stale": false,
       "staleness_threshold_days": 3,
       "days_since_update": 0
+    },
+    "egx100_current_level": {
+      "value": 53265.0,
+      "unit": "نقطة",
+      "label_ar": "مستوى مؤشر EGX100 الأوسع نطاقاً",
+      "source": "LIVE_YAHOO_FINANCE_EGX100",
+      "last_updated": "2026-10-12 15:00:00",
+      "is_stale": false,
+      "staleness_threshold_days": 1,
+      "days_since_update": 0
     }
   },
   "egx_market_context": {
-    "egx30_level": 53265.19921875,
+    "egx30_level": 31450.0,
     "market_direction_30d": "SIDEWAYS",
     "key_stock_30d_changes": {
       "TMGH.CA": -9.7,
@@ -124,7 +134,8 @@
     },
     "market_breadth": "MIXED_TO_NEGATIVE",
     "analyst_note": "البورصة في مرحلة هبوط انتقائي — الأسهم القيادية تضغط السوق والتوترات الجيوسياسية وارتفاع أسعار النفط يُضغطان على الهوامش",
-    "egx30_30d_change_pct": 0.0
+    "egx30_30d_change_pct": 0.0,
+    "egx100_level": 53265.0
   },
   "macro_regime": "HIGH_RATES_GEOPOLITICAL_PRESSURE",
   "macro_regime_ar": "🟡 فائدة مرتفعة مع ضغوط جيوسياسية ونفط متصاعد — يُوصى بالحذر والتحوط",

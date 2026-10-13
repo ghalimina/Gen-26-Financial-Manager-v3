@@ -1,11 +1,11 @@
 {
   "version": "3.0.0",
-  "total_funds": 76,
+  "total_funds": 77,
   "as_of": "2026-10-06",
   "categories": {
     "GOLD": 3,
     "MONEY_MARKET": 27,
-    "EQUITY": 22,
+    "EQUITY": 23,
     "ISLAMIC_SHARIA": 16,
     "BALANCED": 6,
     "ETF_AND_BONDS": 2
@@ -1606,6 +1606,27 @@
       "expense_ratio_pct": 1.7,
       "min_investment_egp": 200.0,
       "description_ar": "صندوق أسهم متوافق مع أحكام الشريعة الإسلامية يستثمر في محفظة منتقاة من الأسهم المصرية ذات الأداء المالي القوي."
+    },
+    {
+      "fund_id": "FUND_BELTONE_BMM",
+      "ticker": "BMM",
+      "name_ar": "صندوق بلتون مية مية (100/100) ذو العائد التراكمي للاستثمار في أسهم مؤشر EGX100",
+      "name_en": "Beltone Meya Meya (100/100) EGX100 Index Equity Fund",
+      "category": "EQUITY",
+      "category_ar": "صناديق المؤشرات والأسهم",
+      "manager": "بلتون لإدارة صناديق الاستثمار (Beltone)",
+      "sponsor": "بلتون القابضة",
+      "nav_egp": 2.42,
+      "ytd_return_pct": 28.5,
+      "annual_return_pct": 32.0,
+      "risk_level": "HIGH",
+      "risk_level_ar": "مرتفعة",
+      "liquidity": "WEEKLY_T2",
+      "liquidity_ar": "أسبوعي (T+2)",
+      "sharia_compliant": false,
+      "expense_ratio_pct": 1.25,
+      "min_investment_egp": 10.0,
+      "description_ar": "صندوق استثمار يتتبع أداء أعلى 100 شركة بالبورصة المصرية (EGX100) بعائد تراكمي، متاح على تطبيق ثاندر."
     }
   ]
 }

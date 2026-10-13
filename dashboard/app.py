@@ -125,7 +125,7 @@ from core.prediction_actual_tracker import PredictionActualTracker
 from core.feature_registry import FeatureRegistry
 from core.promotion_gate import PromotionGate
 
-app = Flask(__name__, template_folder="templates", static_folder="static")
+app = Flask(__name__, template_folder=os.path.join(_WORKSPACE_ROOT, "templates"), static_folder="static")
 
 def sanitize_numpy(obj):
     """Recursively converts NumPy scalar types and arrays into standard JSON-serializable Python types."""

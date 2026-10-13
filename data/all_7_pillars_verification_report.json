@@ -1,0 +1,593 @@
+{
+  "metadata": {
+    "suite_name": "GEN-26 v3.0 End-to-End 7-Pillars QA Suite",
+    "timestamp": "2026-10-10 18:25:35",
+    "platform": "Windows 11 / EGX Production",
+    "total_checks_target": 35,
+    "engine_version": "v3.0.0-PROD"
+  },
+  "pillars": {
+    "pillar_1_dashboard": {
+      "title": "📊 لوحة القيادة والمستشار (Dashboard & Advisor Hub)",
+      "items": [
+        {
+          "pillar_key": "pillar_1_dashboard",
+          "pillar_title": "📊 لوحة القيادة والمستشار (Dashboard & Advisor Hub)",
+          "item_num": 1,
+          "name": "بطاقة قرار ثاندر اليومية المعتمدة",
+          "status": "FAILED",
+          "status_label_ar": "فيها مشكلة ❌",
+          "data_summary": "السهم: SWDY.CA | سعر المزاد: 116.23 ج | نسبة العائد/المخاطرة: 1.0:1 | تحذير: أمر محدد إلزامي بالقرش",
+          "details": {
+            "allocation_pct": 0.0,
+            "auction_risk_score": 15.0,
+            "auction_trap_analysis": {
+              "action_advice_ar": "تنفيذ طبيعي وفق سعر العرض والطلب المعتمد أو استخدام أمر محدد.",
+              "ask_volume": 28000.0,
+              "auction_volume": 35058.0,
+              "bid_ask_imbalance": 0.034,
+              "bid_volume": 30000.0,
+              "expected_auction_vol": 49958.0,
+              "is_bear_trap": false,
+              "is_bull_trap": false,
+              "live_price": 116.0,
+              "open_price": 116.0,
+              "opening_gap_pct": -1.69,
+              "opening_volume_ratio": 0.7,
+              "previous_close": 118.0,
+              "safe_to_execute_thndr": true,
+              "ticker": "SWDY.CA",
+              "trap_risk_score": 15.0,
+              "verdict": "AUCTION_NORMAL",
+              "warning_message_ar": "🟢 مزاد طبيعي ومتوازن — يمكن التنفيذ وفق خطة الأوامر المحددة"
+            },
+            "breakeven_rule_ar": "⚠️ فور وصول السعر إلى الهدف الأول (121.80 ج.م)، قم برفع أمر وقف الخسارة فوراً إلى سعر الشراء (116.23 ج.م) لحجز الأرباح وتأمين الصفقة بنسبة مخاطرة 0%.",
+            "cooling_off": {
+              "is_locked": false,
+              "reason_ar": "",
+              "remaining_hours": 0.0
+            },
+            "current_price": 116.0,
+            "dqs_score": 85.0,
+            "execution_instruction_ar": "قم بفتح تطبيق ثاندر واطلب شراء 0 سهم بسعر 116.23 ج.م كأمر محدد.",
+            "expected_net_return_pct": 4.27,
+            "friction_pct": 0.94,
+            "is_golden_consensus": true,
+            "limit_order_warning_ar": "🔒 أمر محدد حصراً (Limit Order Only) - محظور كلياً الشراء بسعر السوق (Market Order) على ثاندر منعاً للانزلاق السعري والفجوات.",
+            "live_trading_blocked": true,
+            "live_trading_guard_ar": "حظر التداول الحقيقي الصارم (Live Trading Strictly Blocked)",
+            "live_trading_status": "Live Trading Strictly Blocked",
+            "market_regime": "صاعد مؤسسي (Bull Market)",
+            "name_ar": "السويدي إليكتريك",
+            "opening_auction_price": 116.23,
+            "opening_trap_verdict": "AUCTION_NORMAL",
+            "opening_trap_warning_ar": "🟢 مزاد طبيعي ومتوازن — يمكن التنفيذ وفق خطة الأوامر المحددة",
+            "opportunity_type": "PULLBACK_DIP",
+            "opportunity_type_ar": "شراء قاع هادئ وتصحيح (Pullback Dip)",
+            "order_value_egp": 0.0,
+            "rejection_reasons_ar": [],
+            "risk_reward_ratio": 1.0,
+            "round_trip_friction_pct": 0.94,
+            "sector_ar": "Industrial",
+            "stop_loss_price": 110.2,
+            "suggested_shares": 0,
+            "target_1_price": 121.8,
+            "target_2_price": 129.92,
+            "theories_passed_count": 5,
+            "thndr_order_type_ar": "أمر محدد (Limit Order) — مزاد الافتتاح 9:30 ص",
+            "ticker": "SWDY.CA",
+            "trailing_rule_ar": "اترك النصف المتبقي مع تتبع الوقف المتحرك (Trailing Stop) حتى الهدف الثاني.",
+            "verdict": "STRONG_BUY",
+            "verdict_badge_ar": "🟢 إجماع ذهبي معتمد (STRONG_BUY)"
+          }
+        },
+        {
+          "pillar_key": "pillar_1_dashboard",
+          "pillar_title": "📊 لوحة القيادة والمستشار (Dashboard & Advisor Hub)",
+          "item_num": 2,
+          "name": "ملخص السوق والصباح (Morning Briefing)",
+          "status": "PASSED",
+          "status_label_ar": "شغالة بنجاح ✅",
+          "data_summary": "تم استرجاع ملخص الجلسة الصباحية | عدد الأسهم الاستراتيجية: 0 | حالة الملخص: نشط ومعتمد",
+          "details": {
+            "keys": [
+              "headline",
+              "key_recommendations",
+              "market_regime",
+              "market_regime_label",
+              "status",
+              "summary_markdown"
+            ]
+          }
+        },
+        {
+          "pillar_key": "pillar_1_dashboard",
+          "pillar_title": "📊 لوحة القيادة والمستشار (Dashboard & Advisor Hub)",
+          "item_num": 3,
+          "name": "رادار تدوير القطاعات (Sector Rotation)",
+          "status": "FAILED",
+          "status_label_ar": "فيها مشكلة ❌",
+          "data_summary": "النظام:  | القطاعات المثقلة رابحة: 0 قطاعات (بتروكيماويات، صناعة، موارد)",
+          "details": {
+            "regime": "",
+            "overweight_count": 0
+          }
+        },
+        {
+          "pillar_key": "pillar_1_dashboard",
+          "pillar_title": "📊 لوحة القيادة والمستشار (Dashboard & Advisor Hub)",
+          "item_num": 4,
+          "name": "مؤشر التحوط التضخمي والدولاري",
+          "status": "PASSED",
+          "status_label_ar": "شغالة بنجاح ✅",
+          "data_summary": "درجة التحوط التضخمي: 78.5% | توصية الذهب: مفعلة بنجاح عبر صناديق ثاندر",
+          "details": {
+            "hedge_score": 78.5
+          }
+        },
+        {
+          "pillar_key": "pillar_1_dashboard",
+          "pillar_title": "📊 لوحة القيادة والمستشار (Dashboard & Advisor Hub)",
+          "item_num": 5,
+          "name": "شاشة الـ 12 فرصة السريعة (10D Screen)",
+          "status": "FAILED",
+          "status_label_ar": "فيها مشكلة ❌",
+          "data_summary": "إجمالي الفرص: 12/12 فرصة | المركز الأول: MFPC.CA باحتمالية 66.5% وهدف 15.64 ج",
+          "details": {
+            "count": 12,
+            "rank_1": "AMOC.CA",
+            "win_prob": 66.5
+          }
+        },
+        {
+          "pillar_key": "pillar_1_dashboard",
+          "pillar_title": "📊 لوحة القيادة والمستشار (Dashboard & Advisor Hub)",
+          "item_num": 6,
+          "name": "ماسح الألفا الذكي (Alpha Scanner)",
+          "status": "FAILED",
+          "status_label_ar": "فيها مشكلة ❌",
+          "data_summary": "الماسح يعمل بديناميكية | مفحوص: 270 سهم | خالي من التجميد وعزل الأسهم الراكدة",
+          "details": {
+            "count": 0,
+            "layers": [
+              "technical",
+              "relative_strength",
+              "fundamental",
+              "events",
+              "sentiment"
+            ]
+          }
+        },
+        {
+          "pillar_key": "pillar_1_dashboard",
+          "pillar_title": "📊 لوحة القيادة والمستشار (Dashboard & Advisor Hub)",
+          "item_num": 7,
+          "name": "ملف استخبارات السهم وقوائم جراهام",
+          "status": "PASSED",
+          "status_label_ar": "شغالة بنجاح ✅",
+          "data_summary": "سهم COMI.CA: السعر الحي 124.65 ج | مكرر الربحية P/E: 3.91 | مضاعف القيمة الدفترية P/B: 1.16",
+          "details": {
+            "price": 124.65,
+            "pe": 3.91,
+            "pb": 1.16
+          }
+        }
+      ]
+    },
+    "pillar_2_portfolio": {
+      "title": "💼 إدارة المحافظ والأموال (Portfolio & Wealth Management)",
+      "items": [
+        {
+          "pillar_key": "pillar_2_portfolio",
+          "pillar_title": "💼 إدارة المحافظ والأموال (Portfolio & Wealth Management)",
+          "item_num": 8,
+          "name": "المحفظة الحقيقية ومطابقة الحساب بالقرش",
+          "status": "PASSED",
+          "status_label_ar": "شغالة بنجاح ✅",
+          "data_summary": "القيمة الإجمالية: 13,658.56 ج (أسهم: 12,458.56 ج + كاش: 1,200.00 ج) | 5 مراكز",
+          "details": {
+            "total_equity": 13658.56,
+            "free_cash": 1200.0,
+            "holdings_count": 5
+          }
+        },
+        {
+          "pillar_key": "pillar_2_portfolio",
+          "pillar_title": "💼 إدارة المحافظ والأموال (Portfolio & Wealth Management)",
+          "item_num": 9,
+          "name": "مستشار السوينج لأسهم المحفظة الـ 5",
+          "status": "PASSED",
+          "status_label_ar": "شغالة بنجاح ✅",
+          "data_summary": "تغطية الـ 5 أسهم بمستويات القرش | COMI.CA: ارتكاز 125.07 ج، قاع 123.91 ج، قمة 126.23 ج، بيع 50% عند 134.60 ج",
+          "details": {
+            "recommendations_count": 5,
+            "comi_pivot": 125.07
+          }
+        },
+        {
+          "pillar_key": "pillar_2_portfolio",
+          "pillar_title": "💼 إدارة المحافظ والأموال (Portfolio & Wealth Management)",
+          "item_num": 10,
+          "name": "خارطة طريق استعادة الكاش (35% Floor)",
+          "status": "FAILED",
+          "status_label_ar": "فيها مشكلة ❌",
+          "data_summary": "خطة تسييل راية (79 سهم) وبالم هيلز (81 سهم) وتجاري (22 سهم) | كاش محرر: 0.00 ج ⬅️ الرصيد 0.00 ج (0% > 35%)",
+          "details": {
+            "steps_count": 0,
+            "recovered": 0,
+            "ratio": 0
+          }
+        },
+        {
+          "pillar_key": "pillar_2_portfolio",
+          "pillar_title": "💼 إدارة المحافظ والأموال (Portfolio & Wealth Management)",
+          "item_num": 11,
+          "name": "كتالوج صناديق ثاندر الـ 76 (Thndr Funds)",
+          "status": "PASSED",
+          "status_label_ar": "شغالة بنجاح ✅",
+          "data_summary": "إجمالي صناديق ثاندر: 76 صندوقاً عبر الفئات الست (ذهب، نقد 21%، أسهم، إسلامي، متوازن، دخل ثابت)",
+          "details": {
+            "funds_count": 76,
+            "categories": [
+              "أسواق نقد ودخل ثابت",
+              "ذهب ومعادن نفيسة",
+              "صناديق مؤشرات متداولة (ETF)",
+              "أسهم ونمو رأسمالي",
+              "أسهم إسلامية وشريعة",
+              "إسلامي متوافق مع الشريعة",
+              "سندات ودخل ثابت طويل الأجل",
+              "صناديق متوازنة (أسهم + سندات)"
+            ]
+          }
+        },
+        {
+          "pillar_key": "pillar_2_portfolio",
+          "pillar_title": "💼 إدارة المحافظ والأموال (Portfolio & Wealth Management)",
+          "item_num": 12,
+          "name": "أرباح السوينج المحققة وجدول التوزيعات",
+          "status": "PASSED",
+          "status_label_ar": "شغالة بنجاح ✅",
+          "data_summary": "أرباح السوينج المحققة المسجلة: +1,830.00 ج.م | أحداث وتوزيعات الأرباح المجدولة: 3 توزيعاً",
+          "details": {
+            "realized_profit": 1830.0,
+            "corp_actions": 3
+          }
+        }
+      ]
+    },
+    "pillar_3_intelligence": {
+      "title": "🔍 فحص الاستخبارات والمحركات الكمية (Quant Intelligence)",
+      "items": [
+        {
+          "pillar_key": "pillar_3_intelligence",
+          "pillar_title": "🔍 فحص الاستخبارات والمحركات الكمية (Quant Intelligence)",
+          "item_num": 13,
+          "name": "رادار تعاملات المطلعين ومجلس الإدارة",
+          "status": "PASSED",
+          "status_label_ar": "شغالة بنجاح ✅",
+          "data_summary": "رادار المطلعين نشط | الصفقات المفحوصة: 5 صفقة | مؤشر الشراء/البيع للمطلعين مستقر",
+          "details": {
+            "status": "SUCCESS"
+          }
+        },
+        {
+          "pillar_key": "pillar_3_intelligence",
+          "pillar_title": "🔍 فحص الاستخبارات والمحركات الكمية (Quant Intelligence)",
+          "item_num": 14,
+          "name": "رادار تدفقات المؤسسات والأموال الذكية",
+          "status": "PASSED",
+          "status_label_ar": "شغالة بنجاح ✅",
+          "data_summary": "مؤشر الأموال الذكية (SMI): 80.30 | صافي تعاملات المؤسسات مفروز مصريين وعرب وأجانب",
+          "details": {
+            "smi": 80.3
+          }
+        },
+        {
+          "pillar_key": "pillar_3_intelligence",
+          "pillar_title": "🔍 فحص الاستخبارات والمحركات الكمية (Quant Intelligence)",
+          "item_num": 15,
+          "name": "مراجحة شهادات الإيداع الدولية في لندن (GDR)",
+          "status": "PASSED",
+          "status_label_ar": "شغالة بنجاح ✅",
+          "data_summary": "فحص مراجحة أزواج لندن: 4 زوجاً | زوج CIB GDR بفارق سعري 1.15% متوازن",
+          "details": {
+            "pairs_count": 4,
+            "spread": 1.15
+          }
+        },
+        {
+          "pillar_key": "pillar_3_intelligence",
+          "pillar_title": "🔍 فحص الاستخبارات والمحركات الكمية (Quant Intelligence)",
+          "item_num": 16,
+          "name": "كاشف مصائد مزاد الافتتاح وعمق الأوامر",
+          "status": "PASSED",
+          "status_label_ar": "شغالة بنجاح ✅",
+          "data_summary": "كاشف مصيدة مزاد SWDY.CA: NO_TRAP_DETECTED | فحص عمق الأوامر والفجوة السعرية طبيعي وآمن",
+          "details": {
+            "status": "NO_TRAP_DETECTED"
+          }
+        }
+      ]
+    },
+    "pillar_4_ai_lab": {
+      "title": "🧪 فحص الذكاء الاصطناعي ومعمل الأبحاث (AI & Research Lab)",
+      "items": [
+        {
+          "pillar_key": "pillar_4_ai_lab",
+          "pillar_title": "🧪 فحص الذكاء الاصطناعي ومعمل الأبحاث (AI & Research Lab)",
+          "item_num": 17,
+          "name": "حلقة التغذية العكسية لتحليل الأخطاء ذاتياً",
+          "status": "PASSED",
+          "status_label_ar": "شغالة بنجاح ✅",
+          "data_summary": "حلقة التعلم الذاتي: نشطة ومعتمدة | مصفوفة الإسناد الرباعية: 4 عوامل كاملة (سيولة، مطلعين، بيتا، تذبذب)",
+          "details": {
+            "factors_count": 4
+          }
+        },
+        {
+          "pillar_key": "pillar_4_ai_lab",
+          "pillar_title": "🧪 فحص الذكاء الاصطناعي ومعمل الأبحاث (AI & Research Lab)",
+          "item_num": 18,
+          "name": "الأوزان التكيفية لدورة السوق (Regime Weights)",
+          "status": "PASSED",
+          "status_label_ar": "شغالة بنجاح ✅",
+          "data_summary": "نظام السوق: DEVALUATION_BOOM | أوزان الطبقات: 45% مالي ودولار، 25% قوة قطاعية، 15% فني، 15% محفزات ومعنويات",
+          "details": {
+            "regime": "DEVALUATION_BOOM",
+            "weights": {
+              "events": 0.08,
+              "fundamental": 0.45,
+              "relative_strength": 0.25,
+              "sentiment": 0.07,
+              "technical": 0.15
+            }
+          }
+        },
+        {
+          "pillar_key": "pillar_4_ai_lab",
+          "pillar_title": "🧪 فحص الذكاء الاصطناعي ومعمل الأبحاث (AI & Research Lab)",
+          "item_num": 19,
+          "name": "مقاييس المعايرة الاحتمالية (ECE & Brier)",
+          "status": "PASSED",
+          "status_label_ar": "شغالة بنجاح ✅",
+          "data_summary": "نسبة خطأ المعايرة الاحتمالية ECE: 0% | معايرة موثوقة ومتقاربة مع حركة السوق الفعلية",
+          "details": {
+            "ece_pct": 0
+          }
+        },
+        {
+          "pillar_key": "pillar_4_ai_lab",
+          "pillar_title": "🧪 فحص الذكاء الاصطناعي ومعمل الأبحاث (AI & Research Lab)",
+          "item_num": 20,
+          "name": "حالة محرك التحسين الذاتي (Self-Improving Engine)",
+          "status": "PASSED",
+          "status_label_ar": "شغالة بنجاح ✅",
+          "data_summary": "حالة المحرك: ACTIVE_LEARNING | جيل الخوارزمية: GEN-26 Alpha v3.5 | نسبة الفوز: 63.27% عبر 27 دورة تعلم",
+          "details": {
+            "status": "ACTIVE_LEARNING",
+            "win_rate": 63.27
+          }
+        }
+      ]
+    },
+    "pillar_5_risk_gates": {
+      "title": "🛡️ فحص صمامات الأمان والمخاطر (Risk Gates & Safety Invariants)",
+      "items": [
+        {
+          "pillar_key": "pillar_5_risk_gates",
+          "pillar_title": "🛡️ فحص صمامات الأمان والمخاطر (Risk Gates & Safety Invariants)",
+          "item_num": 21,
+          "name": "حظر التداول المباشر الصارم (Live Trading Blocked)",
+          "status": "PASSED",
+          "status_label_ar": "شغالة بنجاح ✅",
+          "data_summary": "حظر التداول المباشر: Live Trading Strictly Blocked (مفعل بنسبة 100% لمنع الصفقات غير المراجعة)",
+          "details": {
+            "status": "Live Trading Strictly Blocked"
+          }
+        },
+        {
+          "pillar_key": "pillar_5_risk_gates",
+          "pillar_title": "🛡️ فحص صمامات الأمان والمخاطر (Risk Gates & Safety Invariants)",
+          "item_num": 22,
+          "name": "صمامات أمان المحافظ التأسيسية (Frozen Invariants)",
+          "status": "PASSED",
+          "status_label_ar": "شغالة بنجاح ✅",
+          "data_summary": "صمام أمان الكاش الإلزامي: 35.0% | سقف الأسهم: 65.0% | سقف السهم: 10.0% | كلفة الدورة: 0.94%",
+          "details": {
+            "cash_floor": 35.0,
+            "stock_ceil": 65.0
+          }
+        },
+        {
+          "pillar_key": "pillar_5_risk_gates",
+          "pillar_title": "🛡️ فحص صمامات الأمان والمخاطر (Risk Gates & Safety Invariants)",
+          "item_num": 23,
+          "name": "محاكاة مونت كارلو للمخاطر (Monte Carlo 1000x)",
+          "status": "FAILED",
+          "status_label_ar": "فيها مشكلة ❌",
+          "data_summary": "خطأ: unsupported format string passed to dict.__format__",
+          "details": {}
+        },
+        {
+          "pillar_key": "pillar_5_risk_gates",
+          "pillar_title": "🛡️ فحص صمامات الأمان والمخاطر (Risk Gates & Safety Invariants)",
+          "item_num": 24,
+          "name": "سجل الإشارات وأرشيف الإشعارات الصادرة",
+          "status": "PASSED",
+          "status_label_ar": "شغالة بنجاح ✅",
+          "data_summary": "سجل الإشارات مؤرشف وموثق بالكامل | إجمالي الإشعارات المسجلة: 67 إشعاراً في قاعدة التدقيق",
+          "details": {
+            "notifications_count": 67
+          }
+        }
+      ]
+    },
+    "pillar_6_technical": {
+      "title": "🔬 فحص الرقابة الفنية والتداول (Technical Oversight & Execution)",
+      "items": [
+        {
+          "pillar_key": "pillar_6_technical",
+          "pillar_title": "🔬 فحص الرقابة الفنية والتداول (Technical Oversight & Execution)",
+          "item_num": 25,
+          "name": "خريطة حرارة السوق (Heatmap & Split Outliers)",
+          "status": "PASSED",
+          "status_label_ar": "شغالة بنجاح ✅",
+          "data_summary": "خريطة حرارة السوق منضبطة ضمن نطاق البورصة المصرية ±25% | تم استبعاد قفزات التجزئة الشاذة (GMCI/TOUR)",
+          "details": {
+            "stocks_count": 0,
+            "max_chg": 0
+          }
+        },
+        {
+          "pillar_key": "pillar_6_technical",
+          "pillar_title": "🔬 فحص الرقابة الفنية والتداول (Technical Oversight & Execution)",
+          "item_num": 26,
+          "name": "بث الأسعار والسيولة اللحظي (Realtime Stream)",
+          "status": "PASSED",
+          "status_label_ar": "شغالة بنجاح ✅",
+          "data_summary": "بث الأسعار اللحظي يستجيب بنجاح | التوقيت والتحديثات الحية متصلة بالواجهة وقاعدة البيانات",
+          "details": {
+            "status": "LIVE_STREAMING"
+          }
+        },
+        {
+          "pillar_key": "pillar_6_technical",
+          "pillar_title": "🔬 فحص الرقابة الفنية والتداول (Technical Oversight & Execution)",
+          "item_num": 27,
+          "name": "فحص وتغطية كون الأسهم الـ 270 (Universe Audit)",
+          "status": "PASSED",
+          "status_label_ar": "شغالة بنجاح ✅",
+          "data_summary": "تم التحقق من حصر أسهم البورصة المصرية الـ 270 سهماً بالكامل وعزل فئات السيولة والأشباح",
+          "details": {
+            "total_universe": 270
+          }
+        },
+        {
+          "pillar_key": "pillar_6_technical",
+          "pillar_title": "🔬 فحص الرقابة الفنية والتداول (Technical Oversight & Execution)",
+          "item_num": 28,
+          "name": "فحص سلامة كود الواجهة (HTML DOM & JS Syntax)",
+          "status": "PASSED",
+          "status_label_ar": "شغالة بنجاح ✅",
+          "data_summary": "فحص القالب بـ BeautifulSoup: تم التحقق من 22 تبويباً وتنعدم أخطاء الجافاسكريبت (Node Verified)",
+          "details": {
+            "nav_count": 22,
+            "js_syntax_clean": true
+          }
+        }
+      ]
+    },
+    "pillar_7_settings": {
+      "title": "⚙️ فحص الإعدادات وتخصيص المنظومة (System Settings & Macro)",
+      "items": [
+        {
+          "pillar_key": "pillar_7_settings",
+          "pillar_title": "⚙️ فحص الإعدادات وتخصيص المنظومة (System Settings & Macro)",
+          "item_num": 29,
+          "name": "شريط الاقتصاد الكلي ومؤشر EGX30",
+          "status": "PASSED",
+          "status_label_ar": "شغالة بنجاح ✅",
+          "data_summary": "الدولار: 52.32 ج | فائدة المركزي: 19.0% | التضخم: 14.5% | مؤشر EGX30: 31450.25 نقطة (مطابقة رسمية)",
+          "details": {
+            "usd": 52.32,
+            "cbe": 19.0,
+            "cpi": 14.5,
+            "egx30": 31450.25
+          }
+        },
+        {
+          "pillar_key": "pillar_7_settings",
+          "pillar_title": "⚙️ فحص الإعدادات وتخصيص المنظومة (System Settings & Macro)",
+          "item_num": 30,
+          "name": "إعدادات المنظومة والمحفظة (System Settings)",
+          "status": "PASSED",
+          "status_label_ar": "شغالة بنجاح ✅",
+          "data_summary": "قراءة إعدادات النظام بنجاح | الوسيط الافتراضي: Thndr (ثاندر) | وقف الخسارة: -7.0% | خيارات التخصيص نشطة",
+          "details": {
+            "broker": "Thndr (ثاندر)",
+            "default_stop_loss": -7.0
+          }
+        },
+        {
+          "pillar_key": "pillar_7_settings",
+          "pillar_title": "⚙️ فحص الإعدادات وتخصيص المنظومة (System Settings & Macro)",
+          "item_num": 31,
+          "name": "المساعد التفاعلي لتليجرام (Telegram Copilot)",
+          "status": "PASSED",
+          "status_label_ar": "شغالة بنجاح ✅",
+          "data_summary": "المساعد التفاعلي يستجيب فورياً: /price (124.65 ج) و /swing (أوامر 50%) و /portfolio (13,658.56 ج)",
+          "details": {
+            "commands_tested": [
+              "/price",
+              "/swing",
+              "/portfolio"
+            ]
+          }
+        },
+        {
+          "pillar_key": "pillar_7_settings",
+          "pillar_title": "⚙️ فحص الإعدادات وتخصيص المنظومة (System Settings & Macro)",
+          "item_num": 32,
+          "name": "اتساق قاعدة بيانات الإنتاج (SQLite DB Integrity)",
+          "status": "PASSED",
+          "status_label_ar": "شغالة بنجاح ✅",
+          "data_summary": "قاعدة البيانات SQLite سليمة | الشموع التاريخية: 173,654 شمعة | جدول الأسهم: 270 سهم",
+          "details": {
+            "bars": 173654,
+            "stocks": 270
+          }
+        },
+        {
+          "pillar_key": "pillar_7_settings",
+          "pillar_title": "⚙️ فحص الإعدادات وتخصيص المنظومة (System Settings & Macro)",
+          "item_num": 33,
+          "name": "مصفوفة تدوير القطاعات الاقتصادية (Sector Bias Matrix)",
+          "status": "PASSED",
+          "status_label_ar": "شغالة بنجاح ✅",
+          "data_summary": "نظام طفرة خفض الجنيه (Devaluation Boom): مضاعف الأسمدة 1.35x ومضاعف المقاولات 1.20x",
+          "details": {
+            "multipliers": {
+              "Fertilizers": 1.35,
+              "Basic Resources": 1.3,
+              "Industrials": 1.2,
+              "Banking": 1.05,
+              "Automotive": 0.7,
+              "Import Consumer": 0.65
+            }
+          }
+        },
+        {
+          "pillar_key": "pillar_7_settings",
+          "pillar_title": "⚙️ فحص الإعدادات وتخصيص المنظومة (System Settings & Macro)",
+          "item_num": 34,
+          "name": "محطة التنفيذ الخوارزمي (Execution EMS)",
+          "status": "PASSED",
+          "status_label_ar": "شغالة بنجاح ✅",
+          "data_summary": "محطة التنفيذ الخوارزمي (EMS) جاهزة ومنضبطة | سجل الأوامر المحفوظ: 50 أمر",
+          "details": {
+            "orders_count": 50
+          }
+        },
+        {
+          "pillar_key": "pillar_7_settings",
+          "pillar_title": "⚙️ فحص الإعدادات وتخصيص المنظومة (System Settings & Macro)",
+          "item_num": 35,
+          "name": "صمام أمان مزامنة Git السحابية (Dirty Tree Guard)",
+          "status": "PASSED",
+          "status_label_ar": "شغالة بنجاح ✅",
+          "data_summary": "صمام أمان Git نشط: يمنع تدمير التعديلات المحلية (SKIPPED_DIRTY_TREE) ويحمي ملفات المحفظة والإنتاج",
+          "details": {
+            "guard_active": true
+          }
+        }
+      ]
+    }
+  },
+  "summary": {
+    "total_tested_items": 35,
+    "passed_count": 29,
+    "failed_count": 6,
+    "success_rate_pct": 82.86,
+    "verdict": "ATTENTION_REQUIRED"
+  }
+}

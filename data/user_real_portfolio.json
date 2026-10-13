@@ -1,7 +1,7 @@
 {
   "portfolio_id": "REAL_PORTFOLIO_PRIMARY",
   "version": "3.0.0",
-  "last_updated": "2026-10-09T18:08:11.614627",
+  "last_updated": "2026-10-13T03:43:01.244031",
   "cash_egp": 1200.0,
   "holdings": [
     {
@@ -15,7 +15,9 @@
       "manual_notes": "",
       "created_at": "2026-09-29T01:42:35.051371",
       "updated_at": "2026-09-29T01:42:35.051371",
-      "active": true
+      "active": true,
+      "current_price": 122.7,
+      "current_market_value_egp": 5521.5
     },
     {
       "holding_id": "POS_PHDC_83b3b8",
@@ -28,7 +30,9 @@
       "manual_notes": "",
       "created_at": "2026-09-29T01:43:48.236455",
       "updated_at": "2026-09-29T01:43:48.236455",
-      "active": true
+      "active": true,
+      "current_price": 12.87,
+      "current_market_value_egp": 2084.94
     },
     {
       "holding_id": "POS_SWDY_a2361b",
@@ -41,7 +45,9 @@
       "manual_notes": "",
       "created_at": "2026-09-29T01:44:17.453107",
       "updated_at": "2026-09-29T01:44:17.453107",
-      "active": true
+      "active": true,
+      "current_price": 112.6,
+      "current_market_value_egp": 1463.8
     },
     {
       "holding_id": "POS_RAYA_8ee121",
@@ -54,7 +60,9 @@
       "manual_notes": "",
       "created_at": "2026-09-29T01:45:06.596822",
       "updated_at": "2026-09-29T01:45:06.596822",
-      "active": true
+      "active": true,
+      "current_price": 6.33,
+      "current_market_value_egp": 1006.47
     },
     {
       "holding_id": "POS_TMGH_af2ada",
@@ -67,7 +75,21 @@
       "manual_notes": "إعادة إدراج مركز طلعت مصطفى 25 سهماً",
       "created_at": "2026-10-08T03:28:37.612595",
       "updated_at": "2026-10-08T03:28:37.612595",
-      "active": true
+      "active": true,
+      "current_price": 86.3,
+      "current_market_value_egp": 2157.5
+    }
+  ],
+  "total_stocks_market_value_egp": 12234.21,
+  "total_portfolio_equity_egp": 13434.21,
+  "mutual_funds_holdings": [
+    {
+      "fund_ticker": "BMM",
+      "fund_name_ar": "صندوق بلتون مية مية (EGX100)",
+      "units_held": 0,
+      "avg_cost": 2.42,
+      "current_nav": 2.42,
+      "market_value_egp": 0.0
     }
   ]
 }

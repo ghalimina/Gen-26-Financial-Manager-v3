@@ -477,7 +477,13 @@ class PriceSyncService:
             "UEDA.CA": "UEFM", "WDEH.CA": "WCDF", "EXTK.CA": "ZEOT",
             "VERT.CA": "VERT", "FERT.CA": "FERT",
             "ICMI.CA": "INEG", "INEG.CA": "INEG",
-            "SMPC.CA": "NEDA", "ARCO.CA": "ACAMD"
+            "SMPC.CA": "NEDA", "ARCO.CA": "ACAMD",
+            # Verified mappings from full EGX scan 2026-10-12
+            "ESRS.CA": "IRAX",   # حديد عز = El Ezz Aldekhela Steel-Alexandria
+            "ATLE.CA": "AIFI",   # أطلس = Atlas for Investment & Food Industries
+            "ANFI.CA": "AMES",   # الإسكندرية للخدمات الطبية = Alexandria New Medical Center
+            "ARPU.CA": "ADCI",   # العربية للأدوية = Arab Pharmaceuticals
+            "GTHC.CA": "GTHE",   # جلوبال للتجارة = Global Trade & Investment
         }
         REVERSE_TV_MAP = {
             "DSCW": "DICE.CA", "MASR": "MNHD.CA", "OLFI": "OBUR.CA",
@@ -486,7 +492,11 @@ class PriceSyncService:
             "UEFM": "UEDA.CA", "WCDF": "WDEH.CA", "ZEOT": "EXTK.CA",
             "FERT": "VERT.CA", "VERT": "VERT.CA",
             "INEG": "ICMI.CA", "ICMI": "ICMI.CA",
-            "NEDA": "SMPC.CA", "ACAMD": "ARCO.CA"
+            "NEDA": "SMPC.CA", "ACAMD": "ARCO.CA",
+            # Verified reverses from full EGX scan 2026-10-12
+            "IRAX": "ESRS.CA", "AIFI": "ATLE.CA",
+            "AMES": "ANFI.CA", "ADCI": "ARPU.CA",
+            "GTHE": "GTHC.CA",
         }
         
         try:

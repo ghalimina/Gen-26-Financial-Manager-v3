@@ -1831,7 +1831,15 @@
             <div class="telemetry-items" style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
                 <span class="macro-indicator-pill">
                     <span>💵 <strong>الدولار (USD/EGP):</strong></span>
-                    <span id="macro-usd-val" class="ltr-text text-green font-bold">50.20</span> ج.م
+                    <span id="macro-usd-val" class="ltr-text text-green font-bold">52.32</span> ج.م
+                </span>
+                <span class="macro-indicator-pill">
+                    <span>📊 <strong>مؤشر EGX30:</strong></span>
+                    <span class="ltr-text text-blue font-bold">31,450</span> نقطة
+                </span>
+                <span class="macro-indicator-pill">
+                    <span>📈 <strong>مؤشر EGX100:</strong></span>
+                    <span class="ltr-text text-green font-bold">53,265</span> نقطة
                 </span>
                 <span class="macro-indicator-pill">
                     <span>🏛️ <strong>فائدة المركزي (CBE):</strong></span>
@@ -2268,7 +2276,7 @@
                             </div>
                             <div style="margin-top: 14px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; font-size: 11px; color: #94a3b8;">
                                 <span>الكاش الاستراتيجي الموصى به: <strong class="text-green" id="ai-rec-cash-floor">10%</strong></span>
-                                <span>EGX30: <strong class="font-mono text-blue" id="ai-egx30-level">52,494</strong></span>
+                                <span>EGX30: <strong class="font-mono text-blue" id="ai-egx30-level">31,450</strong> | EGX100: <strong class="font-mono text-green">53,265</strong></span>
                             </div>
                         </div>
 
@@ -2799,30 +2807,33 @@
                         <div style="display: flex; align-items: center; gap: 10px; flex-grow: 1; max-width: 480px;">
                             <label style="font-size: 13px; font-weight: 700; white-space: nowrap; margin: 0;">اختر شركة للتحليل:</label>
                             <select id="details-stock-select" class="form-control" onchange="loadStockDetails(this.value)" style="font-size: 13px; font-weight: 600;">
-                                <option value="COMI.CA">البنك التجاري الدولي (COMI.CA) — 124.65 ج.م</option>
-                                <option value="SWDY.CA">السويدي إليكتريك (SWDY.CA) — 128.00 ج.م</option>
-                                <option value="TMGH.CA">مجموعة طلعت مصطفى (TMGH.CA) — 97.50 ج.م</option>
-                                <option value="ORAS.CA">أوراسكوم للإنشاء (ORAS.CA) — 782.25 ج.م</option>
-                                <option value="ETEL.CA">المصرية للاتصالات (ETEL.CA) — 114.89 ج.م</option>
-                                <option value="EGAL.CA">مصر للألومنيوم (EGAL.CA) — 330.00 ج.م</option>
-                                <option value="ABUK.CA">أبو قير للأسمدة (ABUK.CA) — 75.52 ج.م</option>
-                                <option value="MFPC.CA">مصر لإنتاج الأسمدة (MFPC.CA) — 48.50 ج.م</option>
-                                <option value="ADIB.CA">مصرف أبو ظبي الإسلامي (ADIB.CA) — 53.42 ج.م</option>
-                                <option value="EAST.CA">الشرقية للدخان (EAST.CA) — 36.02 ج.م</option>
-                                <option value="JUFO.CA">جهينة للصناعات الغذائية (JUFO.CA) — 26.71 ج.م</option>
-                                <option value="GBCO.CA">جي بي كورب (GBCO.CA) — 29.32 ج.م</option>
-                                <option value="HRHO.CA">إي إف جي القابضة (HRHO.CA) — 26.30 ج.م</option>
+                                <option value="COMI.CA">البنك التجاري الدولي (COMI.CA) — 122.70 ج.م</option>
+                                <option value="SWDY.CA">السويدي إليكتريك (SWDY.CA) — 112.60 ج.م</option>
+                                <option value="TMGH.CA">مجموعة طلعت مصطفى (TMGH.CA) — 86.30 ج.م</option>
+                                <option value="PHDC.CA">بالم هيلز للتعمير (PHDC.CA) — 12.87 ج.م</option>
+                                <option value="RAYA.CA">راية القابضة (RAYA.CA) — 6.33 ج.م</option>
+                                <option value="ESRS.CA">حديد عز (ESRS.CA) — 125.00 ج.م</option>
+                                <option value="EKHO.CA">القابضة المصرية الكويتية (EKHO.CA) — 0.67 $</option>
+                                <option value="EKHOA.CA">القابضة المصرية الكويتية (EKHOA.CA) — 24.13 ج.م</option>
+                                <option value="ORAS.CA">أوراسكوم للإنشاء (ORAS.CA) — 856.07 ج.م</option>
+                                <option value="ETEL.CA">المصرية للاتصالات (ETEL.CA) — 145.00 ج.م</option>
+                                <option value="EGAL.CA">مصر للألومنيوم (EGAL.CA) — 335.06 ج.م</option>
+                                <option value="ABUK.CA">أبو قير للأسمدة (ABUK.CA) — 87.06 ج.م</option>
+                                <option value="MFPC.CA">مصر لإنتاج الأسمدة (MFPC.CA) — 45.01 ج.م</option>
+                                <option value="ADIB.CA">مصرف أبو ظبي الإسلامي (ADIB.CA) — 46.60 ج.م</option>
+                                <option value="EAST.CA">الشرقية للدخان (EAST.CA) — 28.11 ج.م</option>
+                                <option value="JUFO.CA">جهينة للصناعات الغذائية (JUFO.CA) — 25.00 ج.م</option>
+                                <option value="GBCO.CA">جي بي كورب (GBCO.CA) — 31.01 ج.م</option>
+                                <option value="HRHO.CA">إي إف جي القابضة (HRHO.CA) — 25.81 ج.م</option>
                                 <option value="EFIH.CA">إي فاينانس (EFIH.CA) — 24.50 ج.م</option>
-                                <option value="FWRY.CA">فوري للمدفوعات (FWRY.CA) — 19.21 ج.م</option>
-                                <option value="DOMT.CA">دومتي للأغذية (DOMT.CA) — 15.20 ج.م</option>
-                                <option value="PHDC.CA">بالم هيلز للتعمير (PHDC.CA) — 15.15 ج.م</option>
-                                <option value="ISPH.CA">ابن سينا فارما (ISPH.CA) — 13.02 ج.م</option>
-                                <option value="EMFD.CA">إعمار مصر للتنمية (EMFD.CA) — 11.81 ج.م</option>
-                                <option value="AMOC.CA">أموك للزيوت (AMOC.CA) — 11.35 ج.م</option>
-                                <option value="HELI.CA">مصر الجديدة للإسكان (HELI.CA) — 7.69 ج.م</option>
-                                <option value="RAYA.CA">راية القابضة (RAYA.CA) — 7.00 ج.م</option>
-                                <option value="CCAP.CA">القلعة للاستشارات (CCAP.CA) — 5.60 ج.م</option>
-                                <option value="BTFH.CA">بلتون القابضة (BTFH.CA) — 2.98 ج.م</option>
+                                <option value="FWRY.CA">فوري للمدفوعات (FWRY.CA) — 18.60 ج.م</option>
+                                <option value="DOMT.CA">دومتي للأغذية (DOMT.CA) — 23.87 ج.م</option>
+                                <option value="ISPH.CA">ابن سينا فارما (ISPH.CA) — 11.40 ج.م</option>
+                                <option value="EMFD.CA">إعمار مصر للتنمية (EMFD.CA) — 12.40 ج.م</option>
+                                <option value="AMOC.CA">أموك للزيوت (AMOC.CA) — 13.74 ج.م</option>
+                                <option value="HELI.CA">مصر الجديدة للإسكان (HELI.CA) — 7.06 ج.م</option>
+                                <option value="CCAP.CA">القلعة للاستشارات (CCAP.CA) — 6.51 ج.م</option>
+                                <option value="BTFH.CA">بلتون القابضة (BTFH.CA) — 2.70 ج.م</option>
                             </select>
                         </div>
                         <div style="display: flex; gap: 6px; flex-wrap: wrap;">
@@ -4489,7 +4500,7 @@
                                 <strong style="color: #f87171; font-size: 13px;">🛡️ مدير المخاطر (Mark Douglas)</strong>
                                 <span class="badge badge-green" id="vote-risk-sizer">APPROVE</span>
                             </div>
-                            <div style="font-size: 12px; color: #cbd5e1; line-height: 1.5;" id="rationale-risk-sizer">نسبة العائد إلى المخاطرة تفوق 1:2.5 ومخاطرة المحفظة لا تتجاوز 1.5%.</div>
+                            <div style="font-size: 12px; color: #cbd5e1; line-height: 1.5;" id="rationale-risk-sizer">نسبة العائد إلى المخاطرة تفوق 2.5:1 ومخاطرة المحفظة لا تتجاوز 1.5%.</div>
                         </div>
                     </div>
                 </div>
@@ -5584,7 +5595,7 @@
                     const price = Number(sig.price || 0).toFixed(2);
                     const target = Number(sig.target_price || 0).toFixed(2);
                     const stop = Number(sig.stop_loss || 0).toFixed(2);
-                    const rr = sig.reward_ratio ? `1 : ${sig.reward_ratio}` : '--';
+                    const rr = sig.reward_ratio ? `${sig.reward_ratio} : 1` : '--';
                     const conviction = sig.conviction || '78%';
                     const setup = sig.setup_ar || 'زخم كمي صاعد';
 
@@ -5633,7 +5644,7 @@
                             const target = Number(op.target_price_10d || (op.current_price * 1.08) || 0).toFixed(2);
                             const stop = Number(op.stop_loss || (op.current_price * 0.95) || 0).toFixed(2);
                             const upside = op.expected_upside_10d_pct ? `+${op.expected_upside_10d_pct}%` : '+8.0%';
-                            const rr = op.reward_to_downside_ratio ? `1 : ${op.reward_to_downside_ratio}` : '1 : 1.6';
+                            const rr = op.reward_to_downside_ratio ? `${op.reward_to_downside_ratio} : 1` : '1.6 : 1';
                             const badgeAction = op.is_golden_consensus || (op.composite_score || op.alpha_score || 0) >= 75 ? '<span class="badge badge-green">🚀 تجميع كمي قوي</span>' : '<span class="badge badge-green">🟢 شراء وتجميع</span>';
 
                             html += `<div class="card" style="border-top: 3px solid #3b82f6; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;" onmouseenter="this.style.transform='translateY(-2px)'" onmouseleave="this.style.transform='none'" onclick="navigateTo('details'); loadStockDetails('${ticker}')">
@@ -6436,7 +6447,7 @@
                 if (pillEl) pillEl.innerText = data.active_regime || 'DEVALUATION_BOOM';
                 if (descEl) descEl.innerText = data.description_ar || '';
                 if (cashFloorEl) cashFloorEl.innerText = `${data.recommended_cash_floor_pct || 10}%`;
-                if (egxLevelEl) egxLevelEl.innerText = Number(data.egx30_level || 52494).toLocaleString();
+                if (egxLevelEl) egxLevelEl.innerText = Number(data.egx30_level || 31450).toLocaleString();
 
                 const weights = data.active_layer_weights || {};
                 const fundPct = Math.round((weights.fundamental || 0.45) * 100);
@@ -8319,7 +8330,7 @@
                 const data = await res.json();
                 
                 const tel = data.macro_telemetry || data;
-                const usdVal = data.usd_egp || tel.usd_egp || 50.20;
+                const usdVal = data.usd_egp || tel.usd_egp || 52.32;
                 const cbeVal = data.interest_rate_pct || tel.interest_rate_pct || 27.25;
                 const infVal = data.inflation_rate_pct || tel.inflation_rate_pct || 26.50;
                 const regimeAr = data.macro_regime_ar || tel.macro_regime_ar || '🟢 دورة تشديد نقدي وفائدة مرتفعة';
