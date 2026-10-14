@@ -76,9 +76,19 @@
       "importance_std": 4e-05
     },
     {
-      "feature": "setup_encoded",
-      "importance_mean": 2e-05,
-      "importance_std": 1e-05
+      "feature": "macd_hist_lag1",
+      "importance_mean": 0.0,
+      "importance_std": 0.0
+    },
+    {
+      "feature": "obv_slope",
+      "importance_mean": 0.0,
+      "importance_std": 0.0
+    },
+    {
+      "feature": "atr_pct",
+      "importance_mean": 0.0,
+      "importance_std": 0.0
     },
     {
       "feature": "volatility_regime_encoded",
@@ -101,7 +111,7 @@
       "importance_std": 0.0
     },
     {
-      "feature": "beta_egx30",
+      "feature": "setup_encoded",
       "importance_mean": 0.0,
       "importance_std": 0.0
     },
