@@ -1,23 +1,34 @@
 {
   "status": "SUCCESS",
   "as_of": "2026-10-14 02:00:00",
-  "session_date": "2026-10-14",
+  "session_date": "2026-10-13",
   "currency": "EGP",
-  "market_turnover_m_egp": 4850.0,
-  "smart_money_index": 24.8,
-  "smi_regime_ar": "🔴 تخارج وتسييل وتصريف مؤسسي (Smart Money Distribution)",
+  "market_turnover_m_egp": 9840.79,
+  "smart_money_index": 18.2,
+  "smi_regime_ar": "🔴 تخارج وتسييل وتصريف مؤسسي عنيف (Smart Money Distribution)",
   "net_flows_summary_m_egp": {
-    "egyptian_institutions": -125.4,
-    "arab_institutions": -68.3,
-    "foreign_institutions": -92.5,
-    "retail_speculators": 286.2,
-    "total_smart_money_institutions": -286.2
+    "egyptian_institutions": -584.511972,
+    "arab_institutions": -10.77218,
+    "foreign_institutions": 45.735854,
+    "total_smart_money_institutions": -549.548298,
+    "retail_egyptians": 482.025862,
+    "retail_arabs": 54.574074,
+    "retail_foreigners": 12.948363,
+    "retail_speculators": 549.548299
+  },
+  "official_exact_flows_egp": {
+    "egyptian_institutions": -584511972,
+    "arab_institutions": -10772180,
+    "foreign_institutions": 45735854,
+    "total_institutions": -549548298,
+    "egyptian_retail": 482025862,
+    "arab_retail": 54574074,
+    "foreign_retail": 12948363,
+    "total_retail": 549548299
   },
   "investor_participation_pct": {
-    "egyptian_institutions": 38.5,
-    "arab_institutions": 16.2,
-    "foreign_institutions": 18.8,
-    "retail_speculators": 26.5
+    "institutions_net_flow_m_egp": -549.55,
+    "retail_net_flow_m_egp": 549.55
   },
   "sector_accumulation_matrix": [
     {

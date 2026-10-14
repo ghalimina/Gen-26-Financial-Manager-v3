@@ -3298,15 +3298,17 @@
                                     <th>الكمية</th>
                                     <th>سعر الشراء</th>
                                     <th>السعر اللحظي</th>
-                                    <th>القيمة الإجمالية</th>
+                                    <th>سعر التعادل الصافي (ممنوع البيع تحته)</th>
+                                    <th>هينزل لكام (قاع التجميع)</th>
+                                    <th>هيعلى لكام (قمة الارتداد)</th>
                                     <th>الربح / الخسارة</th>
-                                    <th>توصية الذكاء الاصطناعي</th>
+                                    <th>خطة التجميع والربح</th>
                                     <th>إجراء</th>
                                 </tr>
                             </thead>
                             <tbody id="real-portfolio-tbody">
                                 <tr>
-                                    <td colspan="8" style="text-align: center; color: var(--text-muted); padding: 20px;">لا توجد أسهم مضافة بعد. اضغط "إضافة سهم اشتريته" للبدء.</td>
+                                    <td colspan="10" style="text-align: center; color: var(--text-muted); padding: 20px;">لا توجد أسهم مضافة بعد. اضغط "إضافة سهم اشتريته" للبدء.</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -7521,9 +7523,10 @@
                         const z = parseFloat(p.z_score || p.spread_zscore || 0.0);
                         const isDiv = Math.abs(z) >= 1.5;
                         const badgeColor = isDiv ? 'badge-yellow' : 'badge-blue';
+                        const pairTitle = p.pair || (p.cairo_ticker ? (p.cairo_ticker + ' / ' + p.gdr_ticker) : ((p.ticker_a || p.ticker_A || 'سهم 1') + ' / ' + (p.ticker_b || p.ticker_B || 'سهم 2')));
                         return `
                             <div style="background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.25); border-radius: 6px; padding: 6px 10px; font-size: 11px; display: flex; justify-content: space-between; align-items: center;">
-                                <div><strong>${p.pair || p.ticker_a + ' / ' + p.ticker_b}</strong></div>
+                                <div><strong>${pairTitle}</strong></div>
                                 <span class="badge ${badgeColor}" style="font-size: 9px; font-family: monospace;">Z: ${z.toFixed(2)}</span>
                             </div>
                         `;
@@ -7883,6 +7886,11 @@
                                 recBadge = '<span class="badge badge-yellow">🟡 جني أرباح جزئي</span>';
                             }
 
+                            const netBe = parseFloat(p.net_breakeven_price || (entryPrice * 1.0094));
+                            const floorDisp = p.predicted_drop_floor_display || (p.predicted_drop_floor ? p.predicted_drop_floor.toFixed(2) : (currPrice * 0.95).toFixed(2));
+                            const ceilDisp = p.predicted_wave_ceiling_display || (p.predicted_wave_ceiling ? p.predicted_wave_ceiling.toFixed(2) : (currPrice * 1.10).toFixed(2));
+                            const accumPlan = p.accumulation_plan_ar || p.advisory_reason || 'تجميع تدريجي عند القيعان وحظر البيع تحت نقطة التعادل.';
+
                             return `
                                 <tr>
                                     <td>
@@ -7892,11 +7900,21 @@
                                     <td class="ltr-text font-bold font-mono" style="text-align: center;">${p.quantity.toLocaleString()}</td>
                                     <td><span class="ltr-text font-mono">${entryPrice.toFixed(2)}</span> <span style="font-size: 11px; color: var(--text-muted);">ج.م</span></td>
                                     <td><span class="ltr-text font-bold font-mono text-blue">${currPrice.toFixed(2)}</span> <span style="font-size: 11px; color: var(--text-muted);">ج.م</span></td>
-                                    <td><span class="ltr-text font-bold font-mono">${mktVal.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span> <span style="font-size: 11px; color: var(--text-muted);">ج.م</span></td>
-                                    <td class="${pnlClass} font-bold font-mono ltr-text">${pnlSign}${pnl.toFixed(2)} (${pnlSign}${pnlPct.toFixed(2)}%)</td>
                                     <td>
-                                        <div>${recBadge}</div>
-                                        <div style="font-size: 11px; color: var(--text-muted); margin-top: 3px;">${p.advisory_reason || ''}</div>
+                                        <span class="ltr-text font-bold font-mono text-yellow">${netBe.toFixed(2)} ج.م</span>
+                                        <div style="font-size: 10px; color: #f87171; font-weight: bold;">🛡️ ممنوع البيع تحته</div>
+                                    </td>
+                                    <td>
+                                        <span class="ltr-text font-bold font-mono text-green">${floorDisp} ج.م</span>
+                                        <div style="font-size: 10px; color: #34d399;">قاع التجميع</div>
+                                    </td>
+                                    <td>
+                                        <span class="ltr-text font-bold font-mono text-cyan">${ceilDisp} ج.م</span>
+                                        <div style="font-size: 10px; color: #38bdf8;">قمة الارتداد والربح</div>
+                                    </td>
+                                    <td class="${pnlClass} font-bold font-mono ltr-text">${pnlSign}${pnl.toFixed(2)} (${pnlSign}${pnlPct.toFixed(2)}%)</td>
+                                    <td style="max-width: 260px; font-size: 11.5px; line-height: 1.4; color: #e2e8f0;">
+                                        ${accumPlan}
                                     </td>
                                     <td>
                                         <div style="display: flex; gap: 6px;">
@@ -7908,7 +7926,7 @@
                             `;
                         }).join('');
                     } else {
-                        tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: var(--text-muted); padding: 30px;">💼 لا توجد أسهم مسجلة في محفظتك الحقيقية حالياً.<br><span style="font-size: 12px; color: #94a3b8;">اضغط على زر <strong>"إضافة سهم اشتريته"</strong> بالأعلى لتسجيل مشترياتك ومتابعة الأرباح ووقف الخسارة فوراً.</span></td></tr>`;
+                        tbody.innerHTML = `<tr><td colspan="10" style="text-align: center; color: var(--text-muted); padding: 30px;">💼 لا توجد أسهم مسجلة في محفظتك الحقيقية حالياً.<br><span style="font-size: 12px; color: #94a3b8;">اضغط على زر <strong>"إضافة سهم اشتريته"</strong> بالأعلى لتسجيل مشترياتك ومتابعة الأرباح ووقف الخسارة فوراً.</span></td></tr>`;
                     }
                 }
             } catch (err) {
@@ -8571,9 +8589,9 @@
                                     <div class="pair-header">
                                         <div>
                                             <span class="badge badge-blue" style="margin-bottom: 4px;">${p.sector_ar || 'قطاع البورصة'}</span>
-                                            <div class="pair-names">${p.name_A_ar || p.ticker_A} ⟷ ${p.name_B_ar || p.ticker_B}</div>
+                                            <div class="pair-names">${p.name_A_ar || p.name_ar || p.ticker_A || p.ticker_a || p.cairo_ticker} ⟷ ${p.name_B_ar || p.gdr_ticker || p.ticker_B || p.ticker_b}</div>
                                             <div style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: #94a3b8; margin-top: 2px;">
-                                                <span class="text-blue font-bold">${p.ticker_A}</span> / <span class="text-green font-bold">${p.ticker_B}</span>
+                                                <span class="text-blue font-bold">${p.ticker_A || p.ticker_a || p.cairo_ticker}</span> / <span class="text-green font-bold">${p.ticker_B || p.ticker_b || p.gdr_ticker}</span>
                                             </div>
                                         </div>
                                         <span class="badge ${isActionable ? 'badge-green badge-pulse' : 'badge-yellow'}">${zStatusText}</span>
@@ -8610,9 +8628,11 @@
                     } else {
                         overviewArbitrage.innerHTML = opps.slice(0, 2).map(p => {
                             const isActionable = p.is_actionable || Math.abs(p.z_score || 0) >= 2.0;
+                            const tA = p.ticker_A || p.ticker_a || p.cairo_ticker || "سهم 1";
+                            const tB = p.ticker_B || p.ticker_b || p.gdr_ticker || "سهم 2";
                             return `
                                 <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.25); padding: 6px 10px; border-radius: 6px; font-size: 12px;">
-                                    <span><strong>${p.ticker_A}</strong> vs <strong>${p.ticker_B}</strong></span>
+                                    <span><strong>${tA}</strong> vs <strong>${tB}</strong></span>
                                     <span class="badge ${isActionable ? 'badge-green' : 'badge-yellow'}">Z=${(p.z_score || 0).toFixed(1)}</span>
                                 </div>
                             `;

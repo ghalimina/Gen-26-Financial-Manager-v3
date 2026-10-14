@@ -15,6 +15,7 @@ import math
 import logging
 from typing import Dict, List, Any, Optional, Tuple, Union
 import numpy as np
+import pandas as pd
 try:
     import scipy.cluster.hierarchy as sch
     from scipy.spatial.distance import squareform
@@ -498,6 +499,7 @@ class HRPOptimizer:
         historical_daily_bars in gen26_production.db to eliminate synthetic proxies.
         """
         import sqlite3
+        import pandas as pd
         db_path = os.path.join(WORKSPACE, "data", "gen26_production.db")
         if not os.path.exists(db_path):
             raise RuntimeError("Empirical returns unavailable: Database missing at data/gen26_production.db.")

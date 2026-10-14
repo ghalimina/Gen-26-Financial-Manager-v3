@@ -1,6 +1,6 @@
 {
   "status": "SUCCESS",
-  "as_of": "2026-10-14 02:46:39",
+  "as_of": "2026-10-14 04:13:13",
   "total_funds": 83,
   "categories_summary": {
     "GOLD": 5,
@@ -10,6 +10,87 @@
     "BALANCED": 6,
     "ETF": 1,
     "FIXED_INCOME": 1
+  },
+  "top_recommended_funds": {
+    "user_holding_fund": {
+      "ticker": "BMM",
+      "name_ar": "صندوق بلتون مية مية للأسهم (Beltone Equity 100/100)",
+      "units_held": 1,
+      "avg_cost_egp": 2.42,
+      "current_nav_egp": 2.42,
+      "recommendation_ar": "الاحتفاظ بالوثيقة الواحدة بدون بيع لتكبير القيمة عند قمة موجة الارتداد المؤسسي."
+    },
+    "recommendations": [
+      {
+        "priority": 1,
+        "purpose": "LIQUIDITY_AND_CASH_MANAGEMENT",
+        "purpose_ar": "تشغيل الكاش الحر بعائد يومي تراكمي ~21-22.4% وسيولة فورية T+0",
+        "funds": [
+          {
+            "ticker": "AZS",
+            "name_ar": "صندوق أزيموت لادخار الكاش (AZ-Savings)",
+            "expected_annual_yield_pct": 22.4,
+            "liquidity": "T+0",
+            "risk": "VERY_LOW",
+            "rationale_ar": "أفضل أداة لركن الكاش والسيولة الناتجة من التخارج أو الأرباح مع احتساب عائد يومي مركب وتسييل فوري."
+          },
+          {
+            "ticker": "B-CASH",
+            "name_ar": "صندوق بلتون كاش اليومي (Beltone Cash)",
+            "expected_annual_yield_pct": 21.8,
+            "liquidity": "T+0",
+            "risk": "VERY_LOW",
+            "rationale_ar": "أداة حفظ القوة الشرائية للكاش اليومي بحساب عائد فوري ومشتريات بدون مصاريف."
+          }
+        ]
+      },
+      {
+        "priority": 2,
+        "purpose": "GOLD_HEDGING",
+        "purpose_ar": "التحوط من تضخم وتراجع الجنيه بالذهب الفعلي (+33.5% YTD)",
+        "funds": [
+          {
+            "ticker": "CIGOLD",
+            "name_ar": "صندوق سي آي كابيتال للذهب (CI-GOLD)",
+            "ytd_return_pct": 33.5,
+            "liquidity": "T+2",
+            "risk": "MEDIUM",
+            "rationale_ar": "تحوط مباشر بسبائك الذهب عيار 24 المؤمنة في إيجي كاش للاستفادة من موجات صعود المعدن الأصفر."
+          },
+          {
+            "ticker": "AZG",
+            "name_ar": "صندوق أزيموت للذهب (AZ-Gold)",
+            "ytd_return_pct": 34.5,
+            "liquidity": "T+2",
+            "risk": "MEDIUM",
+            "rationale_ar": "أعلى صناديق الذهب سيولة وحجم تداول في السوق المصري."
+          }
+        ]
+      },
+      {
+        "priority": 3,
+        "purpose": "EQUITY_REBOUND_AND_DIVIDENDS",
+        "purpose_ar": "اقتناص موجة الارتداد وتوزيعات الكوبونات عند استقرار المؤشرات",
+        "funds": [
+          {
+            "ticker": "MC-STARS",
+            "name_ar": "صندوق مصر كابيتال ستارز للأسهم القيادية (MC-STARS)",
+            "ytd_return_pct": 34.2,
+            "liquidity": "WEEKLY",
+            "risk": "HIGH",
+            "rationale_ar": "انتقاء الأسهم القيادية الأسرع صعوداً في موجات الارتداد بعد انتهاء التصريف."
+          },
+          {
+            "ticker": "AZD",
+            "name_ar": "صندوق أزيموت لفرص الكوبونات وتوزيعات الأرباح (AZD)",
+            "ytd_return_pct": 29.8,
+            "liquidity": "MONTHLY",
+            "risk": "MEDIUM_HIGH",
+            "rationale_ar": "تحقيق دخل دوري ثابت عبر التركيز على الشركات ذات أعلى عوائد توزيعات نقدية في البورصة."
+          }
+        ]
+      }
+    ]
   },
   "funds": [
     {

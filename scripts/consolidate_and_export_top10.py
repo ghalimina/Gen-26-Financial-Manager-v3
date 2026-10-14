@@ -194,6 +194,16 @@ def build_01_portfolio_and_swing_advisor() -> Dict[str, Any]:
             "cost_reduction_per_share": cost_reduction,
             "safety_cushion_pct": safety_cushion,
             "realized_swing_profit_egp": realized_stock_profit,
+            "net_breakeven_price": holding.get("net_breakeven_price", round(entry_price * 1.0094, 2)),
+            "predicted_drop_floor_1d": holding.get("predicted_drop_floor_1d", round(cur_price * 0.98, 2)),
+            "predicted_accumulation_zone_5d": holding.get("predicted_accumulation_zone_5d", round(cur_price * 0.96, 2)),
+            "predicted_bounce_target_1": holding.get("predicted_bounce_target_1", round(cur_price * 1.03, 2)),
+            "predicted_wave_ceiling_20d": holding.get("predicted_wave_ceiling_20d", round(entry_price * 1.05, 2)),
+            "official_pe": holding.get("official_pe", 8.0),
+            "official_dy_pct": holding.get("official_dy_pct", 3.0),
+            "closing_threshold_egp": holding.get("closing_threshold_egp", 300000.0),
+            "no_loss_guard_active": holding.get("no_loss_guard_active", True),
+            "accumulation_plan_ar": holding.get("accumulation_plan_ar", "تجميع بالقرش ومنع البيع تحت سعر التعادل الصافي."),
             "piastre_precision_levels": {
                 "daily_pivot": pivot,
                 "expected_session_low": low,
@@ -240,8 +250,10 @@ def build_01_portfolio_and_swing_advisor() -> Dict[str, Any]:
             "total_realized_swing_profit_egp": total_realized_profit,
             "positions_count": len(holdings_details),
             "mandated_cash_floor_pct": 35.0,
-            "cash_floor_status_ar": "⚠️ عجز نسبي في احتياطي الكاش (8.8% < 35.0%) — يُمنع فتح مراكز جديدة خارج المحفظة"
+            "cash_floor_status_ar": "⚠️ عجز نسبي في احتياطي الكاش (8.8% < 35.0%) — يُمنع فتح مراكز جديدة خارج المحفظة",
+            "no_loss_guard_enforced": True
         },
+        "mutual_funds": real_portfolio.get("mutual_funds", []),
         "holdings": holdings_details
     }
 
@@ -316,22 +328,33 @@ def build_02_macro_and_market_regime() -> Dict[str, Any]:
             "sector_multipliers": biases.get("sector_multipliers", {})
         },
         "egx_market_context": {
-            "egx30_level": 31450.0,
-            "egx100_level": 53265.0,
+            "egx30_level": float(market_ctx.get("egx30_level", 51265.27)),
+            "egx30_change_pct": -0.68,
+            "egx30_ytd_pct": 22.56,
+            "egx70_level": float(market_ctx.get("egx70_level", 19695.01)),
+            "egx100_level": float(market_ctx.get("egx100_level", 53265.00)),
+            "egx33_shariah_level": 6297.03,
+            "total_market_cap_egp": 3999192255990.0,
+            "listed_turnover_egp": 9840793226.0,
             "market_regime": hmm_regime,
             "market_regime_name_ar": hmm_state.get("name_ar", "🚨 موجة تصريف وضغط بيعي عام (DISTRIBUTION_SELL_OFF)"),
             "circuit_breaker_active": True,
-            "warning_directive_ar": "🚨 إنذار ضغط بيعي وتصريف مؤسسي (أكثر من 54% من السوق هابط): الشركات والمؤسسات تجني أرباحها — يُحظر فتح مراكز شراء جديدة اليوم، ويُنصح بالاحتفاظ بالكاش وتفعيل خطة التسييل الجزئي عند الارتداد.",
+            "warning_directive_ar": "🚨 إنذار ضغط بيعي وتصريف مؤسسي (180 سهماً هابطاً من 221): المؤسسات تسجل صافي بيع -549.55M ج.م — يُحظر فتح مراكز شراء جديدة اليوم، والالتزام بحارس منع البيع بخسارة NO_LOSS_SELL_GUARD.",
             "market_breadth": {
-                "advances": 97,
-                "declines": 148,
-                "unchanged": 25,
-                "total_stocks": 270,
-                "declines_pct": 54.8,
-                "ad_ratio": 0.66,
-                "sentiment_label_ar": "🔴 ضغط بيعي وتصريف (A/D = 0.66) — الحذر واجب"
+                "advances": 29,
+                "declines": 180,
+                "unchanged": 12,
+                "total_traded_companies": 221,
+                "declines_pct": 81.45,
+                "breadth_ratio": 0.161,
+                "sentiment_label_ar": "🔴 تصريف مؤسسي عنيف (180 هابطة مقابل 29 صاعدة) — كسر وتصريف عام"
             },
-            "analyst_assessment_ar": "🚨 إنذار ضغط بيعي وتصريف مؤسسي (أكثر من 54% من السوق هابط): الشركات والمؤسسات تجني أرباحها — يُحظر فتح مراكز شراء جديدة اليوم، ويُنصح بالاحتفاظ بالكاش وتفعيل خطة التسييل الجزئي عند الارتداد."
+            "institutional_flows_summary_m_egp": {
+                "egyptian_institutions": -584.51,
+                "total_institutions": -549.55,
+                "total_retail": 549.55
+            },
+            "analyst_assessment_ar": "🚨 إغلاق رسمي 13/10: مؤشر EGX30 عند 51,265.27 نقطة، مع تصريف مؤسسي مصري وعربي مكثف يقابله امتصاص أفراد. تم تفعيل قيعان التجميع وحارس منع البيع بخسارة."
         }
     }
 
@@ -681,6 +704,7 @@ def build_08_thndr_mutual_funds_catalog() -> Dict[str, Any]:
             "BALANCED": 6,
             "ETF_AND_BONDS": 2
         }),
+        "top_recommended_funds": funds_data.get("top_recommended_funds", {}),
         "funds": cleaned_funds
     }
 

@@ -6,8 +6,10 @@
 # =============================================================================
 
 import os
-import sys
-import yaml
+try:
+    import yaml
+except ImportError:
+    yaml = None
 import json
 import logging
 from datetime import datetime
@@ -91,7 +93,7 @@ class DataSourceRegistry:
         if cls._registry_data is not None:
             return cls._registry_data
 
-        if os.path.exists(REGISTRY_YAML_PATH):
+        if os.path.exists(REGISTRY_YAML_PATH) and yaml is not None:
             try:
                 with open(REGISTRY_YAML_PATH, "r", encoding="utf-8") as f:
                     cls._registry_data = yaml.safe_load(f) or DEFAULT_SOURCES_SPEC

@@ -14,7 +14,10 @@ import threading
 from typing import Dict, Any, Optional, Tuple, List
 import numpy as np
 import pandas as pd
-from sklearn.ensemble import GradientBoostingRegressor
+try:
+    from sklearn.ensemble import GradientBoostingRegressor
+except ImportError:
+    GradientBoostingRegressor = None
 
 WORKSPACE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if WORKSPACE not in sys.path:

@@ -1959,12 +1959,24 @@ def api_risk_compliance():
         return jsonify({"status": "ERROR", "message": str(err)}), 500
 
 
-# --- 6. Paper Portfolio ---
+# --- 6. Real Portfolio & Smart Accumulation Radar ---
 @app.route("/api/portfolio", methods=["GET"])
+@app.route("/api/portfolio/real", methods=["GET"])
 def api_portfolio():
     """Returns authoritative real portfolio holdings and risk analytics (Single Source of Truth)."""
     analysis = RealPortfolioTracker.analyze_real_portfolio()
     return jsonify(analysis)
+
+
+@app.route("/api/accumulation_radar", methods=["GET"])
+def api_accumulation_radar():
+    """Returns dynamic accumulation floors, bounce ceilings, and No-Loss Sell Guard status."""
+    try:
+        from core.smart_accumulation_engine import SmartAccumulationEngine
+        res = SmartAccumulationEngine.analyze_portfolio_accumulation()
+        return jsonify(res), 200
+    except Exception as e:
+        return jsonify({"status": "ERROR", "error": str(e)}), 500
 
 
 # --- 7. Real User Portfolio (Full CRUD) ---
@@ -2906,6 +2918,26 @@ def api_arbitrage_pairs():
         gdr_pairs = GDRArbitrageEngine.scan_all_gdr_pairs()
     except Exception:
         gdr_pairs = []
+    # Standardize opportunities items with lowercase ticker_a and ticker_b and pair
+    for opp in opportunities:
+        tA = opp.get("ticker_A") or opp.get("ticker_a")
+        tB = opp.get("ticker_B") or opp.get("ticker_b")
+        opp["ticker_a"] = tA
+        opp["ticker_b"] = tB
+        if "pair" not in opp or not opp["pair"]:
+            opp["pair"] = f"{tA} / {tB}"
+        if "spread_zscore" not in opp:
+            opp["spread_zscore"] = opp.get("z_score", 0.0)
+
+    # Standardize gdr_pairs
+    for g in gdr_pairs:
+        c_sym = g.get("cairo_ticker") or g.get("ticker_a")
+        g_sym = g.get("gdr_ticker") or g.get("ticker_b")
+        g["ticker_a"] = c_sym
+        g["ticker_b"] = g_sym
+        if "pair" not in g or not g["pair"]:
+            g["pair"] = f"{c_sym} / {g_sym} ({g.get('name_ar', '')})"
+
     return jsonify({
         "opportunities": opportunities,
         "gdr_pairs": gdr_pairs,

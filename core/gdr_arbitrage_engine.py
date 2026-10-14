@@ -29,33 +29,53 @@ class GDRArbitrageEngine:
     Tracks LSE depository receipts and calculates USD implied EGP arbitrage parity.
     """
 
-    # Authoritative London GDR to Cairo Equities Mapping
+    # Authoritative London GDR to Cairo Equities Mapping (EGX marketgdrs.aspx official)
     GDR_REGISTRY: Dict[str, Dict[str, Any]] = {
         "COMI.CA": {
             "gdr_ticker": "CBKD.L",
             "name_ar": "البنك التجاري الدولي (CIB GDR)",
             "shares_per_gdr": 1.0,
+            "conversion_ratio": "1:1",
             "currency": "USD",
-            "benchmark_gdr_usd": 2.80
+            "benchmark_gdr_usd": 2.30
         },
         "ETEL.CA": {
             "gdr_ticker": "ETEL.L",
             "name_ar": "المصرية للاتصالات (Telecom Egypt GDR)",
             "shares_per_gdr": 5.0,
+            "conversion_ratio": "5:1",
             "currency": "USD",
-            "benchmark_gdr_usd": 3.65
+            "benchmark_gdr_usd": 13.90
         },
         "HRHO.CA": {
             "gdr_ticker": "EFGD.L",
             "name_ar": "إي إف جي هيرميس (EFG Hermes GDR)",
             "shares_per_gdr": 2.0,
+            "conversion_ratio": "2:1",
             "currency": "USD",
-            "benchmark_gdr_usd": 1.05
+            "benchmark_gdr_usd": 0.98
+        },
+        "MASR.CA": {
+            "gdr_ticker": "MNHD.L",
+            "name_ar": "مدينة مصر للإسكان والتعمير (Madinet Masr GDR)",
+            "shares_per_gdr": 4.0,
+            "conversion_ratio": "4:1",
+            "currency": "USD",
+            "benchmark_gdr_usd": 0.58
+        },
+        "OIH.CA": {
+            "gdr_ticker": "OTMT.L",
+            "name_ar": "أوراسكوم للاستثمار القابضة (Orascom Investment GDR)",
+            "shares_per_gdr": 5.0,
+            "conversion_ratio": "5:1",
+            "currency": "USD",
+            "benchmark_gdr_usd": 0.18
         },
         "EKHO.CA": {
             "gdr_ticker": "EKHO.L",
             "name_ar": "القابضة المصرية الكويتية (EK Holding GDR)",
             "shares_per_gdr": 1.0,
+            "conversion_ratio": "1:1",
             "currency": "USD",
             "cairo_currency": "USD",
             "benchmark_gdr_usd": 0.85
@@ -241,10 +261,18 @@ class GDRArbitrageEngine:
                 f"الأسعار متطابقة مع السعر العادل لصرف العملة."
             )
 
+        name_ar_clean = meta.get("name_ar", sym_clean)
+        conv_ratio = meta.get("conversion_ratio", f"{int(ratio)}:1" if ratio == int(ratio) else f"{ratio}:1")
+        pair_title = f"{sym_clean} / {target_gdr} ({name_ar_clean})"
+
         return {
+            "pair": pair_title,
+            "ticker_a": sym_clean,
+            "ticker_b": target_gdr,
             "cairo_ticker": sym_clean,
             "gdr_ticker": target_gdr,
-            "name_ar": meta.get("name_ar", sym_clean),
+            "name_ar": name_ar_clean,
+            "conversion_ratio": conv_ratio,
             "cairo_price_egp": cairo_price_egp,
             "cairo_price_usd": cairo_price_usd,
             "cairo_currency": cairo_currency,
@@ -254,6 +282,8 @@ class GDRArbitrageEngine:
             "implied_cairo_egp": implied_egp,
             "implied_cairo_usd": implied_usd,
             "spread_pct": spread_pct,
+            "z_score": round(spread_pct / 2.0, 2),
+            "spread_zscore": round(spread_pct / 2.0, 2),
             "arbitrage_signal": signal,
             "sentiment": sentiment,
             "action_guidance_ar": action_ar

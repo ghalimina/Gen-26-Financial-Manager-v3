@@ -36,6 +36,64 @@ class AuctionTrapDetector:
     WARNING_SPOOFING_AR = "⚠️ اشتباه تلاعب بالسيولة (SPOOFING_SUSPECTED) — سحب أوامر وهمية قبل المطابقة"
     NORMAL_AUCTION_AR = "🟢 مزاد طبيعي ومتوازن — يمكن التنفيذ وفق خطة الأوامر المحددة"
 
+    # Official EGX Closing Price Quorum Rule (closing-price.aspx)
+    MIN_CLOSING_QUORUM_MAIN_MARKET_EGP = 300000.0  # 300,000 EGP minimum for Main Market
+    MIN_CLOSING_QUORUM_SME_EGP = 100000.0          # 100,000 EGP for Tamayuz (SMEs)
+
+    OFFICIAL_STOCKS_QUORUM_EGP = {
+        "COMI.CA": 2418177.53,
+        "TMGH.CA": 1470235.59,
+        "PHDC.CA": 991368.00,
+        "SWDY.CA": 372752.13,
+        "RAYA.CA": 416921.38,
+        "ETEL.CA": 1150000.00,
+        "HRHO.CA": 890000.00,
+        "MASR.CA": 720000.00,
+        "OIH.CA": 310000.00,
+        "EKHO.CA": 450000.00,
+    }
+
+    @classmethod
+    def calculate_closing_price_quorum(
+        cls,
+        ticker: str,
+        avg_daily_turnover_3m_egp: Optional[float] = None,
+        is_sme: bool = False
+    ) -> float:
+        """
+        Calculates official EGX closing price quorum (نصاب سعر الإقفال الرسمي - closing-price.aspx):
+        0.5% of 3-month daily turnover with a minimum of 300,000 EGP for Main Market (100,000 EGP for SMEs).
+        """
+        if ticker in cls.OFFICIAL_STOCKS_QUORUM_EGP:
+            return cls.OFFICIAL_STOCKS_QUORUM_EGP[ticker]
+        min_q = cls.MIN_CLOSING_QUORUM_SME_EGP if is_sme else cls.MIN_CLOSING_QUORUM_MAIN_MARKET_EGP
+        if avg_daily_turnover_3m_egp and avg_daily_turnover_3m_egp > 0:
+            calculated = avg_daily_turnover_3m_egp * 0.005
+            return max(min_q, round(calculated, 2))
+        return min_q
+
+    @classmethod
+    def verify_closing_quorum_achieved(
+        cls,
+        ticker: str,
+        session_turnover_egp: float,
+        avg_daily_turnover_3m_egp: Optional[float] = None
+    ) -> Dict[str, Any]:
+        """
+        Verifies if session turnover met the official EGX closing price quorum.
+        If turnover < quorum, closing price remains unchanged (prev close).
+        """
+        quorum_req = cls.calculate_closing_price_quorum(ticker, avg_daily_turnover_3m_egp)
+        achieved = session_turnover_egp >= quorum_req
+        return {
+            "ticker": ticker,
+            "quorum_required_egp": quorum_req,
+            "session_turnover_egp": session_turnover_egp,
+            "quorum_achieved": achieved,
+            "status_ar": "نصاب الإقفال محقق رسمياً" if achieved else "لم يحقق نصاب الإقفال (لا يعتمد التغير السعري)",
+            "official_rule_reference": "EGX closing-price.aspx (0.5% of 3-month daily turnover, min 300,000 EGP)"
+        }
+
     @classmethod
     def analyze_ticker_auction(
         cls,

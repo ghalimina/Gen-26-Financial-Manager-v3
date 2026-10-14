@@ -32,8 +32,15 @@ try:
 except ImportError:
     XGB_AVAILABLE = False
 
-from sklearn.ensemble import HistGradientBoostingClassifier, HistGradientBoostingRegressor
-from sklearn.calibration import CalibratedClassifierCV
+try:
+    from sklearn.ensemble import HistGradientBoostingClassifier, HistGradientBoostingRegressor
+    from sklearn.calibration import CalibratedClassifierCV
+    SKLEARN_AVAILABLE = True
+except ImportError:
+    HistGradientBoostingClassifier = None
+    HistGradientBoostingRegressor = None
+    CalibratedClassifierCV = None
+    SKLEARN_AVAILABLE = False
 
 
 class MetaLabelingEngine:

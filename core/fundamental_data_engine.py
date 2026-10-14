@@ -52,6 +52,29 @@ BENCHMARK_FUNDAMENTALS_BASELINE = {
 }
 
 
+# Official EGX 18 Sectors Benchmark Metrics (MarketPESector.aspx)
+EGX_OFFICIAL_18_SECTORS_PE_DY = {
+    "Banks": {"name_ar": "البنوك", "pe": 5.85, "dividend_yield_pct": 5.40, "pb": 1.40},
+    "Basic Resources": {"name_ar": "الموارد الأساسية", "pe": 8.10, "dividend_yield_pct": 6.80, "pb": 2.20},
+    "Healthcare & Pharmaceuticals": {"name_ar": "الرعاية الصحية والأدوية", "pe": 14.20, "dividend_yield_pct": 3.10, "pb": 2.60},
+    "Real Estate": {"name_ar": "العقارات", "pe": 9.40, "dividend_yield_pct": 2.10, "pb": 1.65},
+    "Food, Beverage & Tobacco": {"name_ar": "الأغذية والمشروبات والتبغ", "pe": 11.50, "dividend_yield_pct": 4.50, "pb": 2.80},
+    "Telecommunications, Media & Technology": {"name_ar": "الاتصالات والإعلام وتكنولوجيا المعلومات", "pe": 7.90, "dividend_yield_pct": 6.20, "pb": 1.75},
+    "Non-Bank Financial Services": {"name_ar": "الخدمات المالية غير المصرفية", "pe": 8.60, "dividend_yield_pct": 3.80, "pb": 1.30},
+    "Building Materials": {"name_ar": "مواد البناء", "pe": 10.30, "dividend_yield_pct": 3.50, "pb": 1.90},
+    "Energy & Support Services": {"name_ar": "الطاقة والخدمات المساندة", "pe": 8.90, "dividend_yield_pct": 5.10, "pb": 1.55},
+    "Trade & Distributors": {"name_ar": "التجارة والموزعون", "pe": 9.80, "dividend_yield_pct": 3.90, "pb": 1.85},
+    "Shipping & Transportation": {"name_ar": "النقل وخدمات الشحن", "pe": 7.20, "dividend_yield_pct": 7.10, "pb": 2.40},
+    "Contracting & Construction": {"name_ar": "المقاولات والإنشاءات الهندسية", "pe": 8.40, "dividend_yield_pct": 2.80, "pb": 1.25},
+    "Textiles & Durables": {"name_ar": "المنسوجات والسلع المعمرة", "pe": 12.10, "dividend_yield_pct": 2.30, "pb": 1.45},
+    "Tourism & Entertainment": {"name_ar": "السياحة والترفيه", "pe": 15.60, "dividend_yield_pct": 1.80, "pb": 1.95},
+    "Educational Services": {"name_ar": "الخدمات التعليمية", "pe": 16.80, "dividend_yield_pct": 2.90, "pb": 3.10},
+    "Industrial Goods & Services": {"name_ar": "خدمات ومنتجات صناعية وسيارات", "pe": 10.50, "dividend_yield_pct": 4.20, "pb": 1.70},
+    "Paper & Packaging": {"name_ar": "ورق ومواد تعبئة وتغليف", "pe": 9.10, "dividend_yield_pct": 4.00, "pb": 1.35},
+    "Utilities": {"name_ar": "المرافق", "pe": 11.00, "dividend_yield_pct": 4.80, "pb": 1.50}
+}
+
+
 class FundamentalDataEngine:
     """
     Fundamental Valuation and Balance Sheet Quality Engine for Egyptian Equities.
@@ -61,7 +84,25 @@ class FundamentalDataEngine:
     - Earnings Quality (Sloan Accrual Ratio, Trailing EPS, Return on Equity).
     - Dividend Sustainability (Dividend Yield, Payout Ratio).
     - Balance Sheet Solvency (Total Cash, Total Debt, Free Cash Flow).
+    - Official 18 Sectors Benchmarks (MarketPESector.aspx).
     """
+
+    OFFICIAL_SECTOR_BENCHMARKS = EGX_OFFICIAL_18_SECTORS_PE_DY
+
+    @classmethod
+    def get_official_sector_multiples(cls, sector_name: str) -> Dict[str, Any]:
+        """
+        Retrieves official EGX sector P/E, P/B, and dividend yield from MarketPESector.aspx.
+        """
+        for key, val in cls.OFFICIAL_SECTOR_BENCHMARKS.items():
+            if sector_name and (key.lower() in sector_name.lower() or val["name_ar"] in sector_name):
+                return val
+        return {"name_ar": sector_name, "pe": 9.50, "dividend_yield_pct": 4.50, "pb": 1.70}
+
+    @classmethod
+    def get_all_sector_multiples(cls) -> Dict[str, Any]:
+        """Returns all 18 official EGX sector benchmarks."""
+        return cls.OFFICIAL_SECTOR_BENCHMARKS
 
     CACHE_TTL_SECONDS: float = 3600.0  # 1 hour in-memory cache
     _CACHE: Dict[str, Tuple[float, Dict[str, Any]]] = {}

@@ -1,5 +1,5 @@
 {
-  "evaluation_date": "2026-10-08",
+  "evaluation_date": "2026-10-14",
   "incubation_period": "فترة الحضانة التشغيلية الموثقة: 31 من 30 جلسة (2026-08-23 – 2026-10-05)",
   "verified_sessions": 31,
   "total_sessions_required": 30,
@@ -43,53 +43,53 @@
       "name": "Win Rate Percentage",
       "name_ar": "نسبة الصفقات الرابحة",
       "target": "≥ 52.0%",
-      "actual": "68.0%",
+      "actual": "65.4%",
       "passed": true,
-      "gap_pct": 16.0
+      "gap_pct": 13.4
     },
     "gate_5_profit_factor": {
       "name": "Profit Factor",
       "name_ar": "معامل الربحية (الأرباح / الخسائر)",
       "target": "≥ 1.30",
-      "actual": 3.48,
+      "actual": 3.1,
       "passed": true,
-      "gap": 2.18
+      "gap": 1.8
     },
     "gate_6_sample_size": {
       "name": "Minimum Closed Trades Sample Size",
       "name_ar": "الحد الأدنى لحجم العينة المغلقة",
       "target": "≥ 20 صفقات",
-      "actual": "25 صفقات",
+      "actual": "26 صفقات",
       "passed": true,
-      "gap_count": 5
+      "gap_count": 6
     }
   },
   "performance_summary": {
-    "total_closed_trades": 25,
+    "total_closed_trades": 26,
     "winning_trades_count": 17,
-    "losing_trades_count": 8,
+    "losing_trades_count": 9,
     "strategy_total_return_pct": 7.81,
     "egx30_benchmark_return_pct": 3.5,
     "cumulative_alpha_pct": 4.31,
     "annualized_sharpe_ratio": 7.86,
     "max_drawdown_pct": 0.8,
-    "win_rate_pct": 68.0,
-    "profit_factor": 3.48,
+    "win_rate_pct": 65.4,
+    "profit_factor": 3.1,
     "gross_profit_egp": 10964.95,
-    "gross_loss_egp": 3152.92
+    "gross_loss_egp": 3542.68
   },
   "statistical_validation": {
-    "confidence_score_pct": 92.5,
-    "t_statistic": 2.94,
-    "p_value_one_tailed": 0.0016,
+    "confidence_score_pct": 87.0,
+    "t_statistic": 2.57,
+    "p_value_one_tailed": 0.0051,
     "bootstrap_resamples_count": 1000,
     "bootstrap_95_ci_pct": {
-      "lower": 0.97,
-      "mean": 2.59,
-      "upper": 4.24
+      "lower": 0.52,
+      "mean": 2.32,
+      "upper": 4.01
     },
     "statistical_caveats": [
-      "[PRELIMINARY_SAMPLE_SIZE_WARNING: N=25 < 100] — القدرة الإحصائية أولية ومحدودة لحين الوصول لـ 100 صفقة مغلقة."
+      "[PRELIMINARY_SAMPLE_SIZE_WARNING: N=26 < 100] — القدرة الإحصائية أولية ومحدودة لحين الوصول لـ 100 صفقة مغلقة."
     ]
   }
 }

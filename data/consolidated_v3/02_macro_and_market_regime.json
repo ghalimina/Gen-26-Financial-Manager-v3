@@ -1,6 +1,6 @@
 {
   "status": "SUCCESS",
-  "as_of": "2026-10-14 02:46:38",
+  "as_of": "2026-10-14 04:13:12",
   "macro_indicators": {
     "usd_egp": {
       "rate": 52.32,
@@ -14,11 +14,11 @@
       "status": "OFFICIAL_MONETARY_POLICY"
     },
     "cpi_inflation_yoy": {
-      "rate_pct": 14.5,
+      "rate_pct": 13.9,
       "label_ar": "معدل التضخم السنوي العام للحضر (الجهاز المركزي للتعبئة والإحصاء)",
       "status": "OFFICIAL_BULLETIN"
     },
-    "real_interest_rate_pct": 4.5
+    "real_interest_rate_pct": 5.1
   },
   "regime_classification": {
     "current_regime": "DEVALUATION_BOOM",
@@ -64,21 +64,32 @@
     }
   },
   "egx_market_context": {
-    "egx30_level": 31450.0,
+    "egx30_level": 51265.27,
+    "egx30_change_pct": -0.68,
+    "egx30_ytd_pct": 22.56,
+    "egx70_level": 19695.01,
     "egx100_level": 53265.0,
+    "egx33_shariah_level": 6297.03,
+    "total_market_cap_egp": 3999192255990.0,
+    "listed_turnover_egp": 9840793226.0,
     "market_regime": "DISTRIBUTION_SELL_OFF",
     "market_regime_name_ar": "🚨 موجة تصريف وضغط بيعي عام (DISTRIBUTION_SELL_OFF)",
     "circuit_breaker_active": true,
-    "warning_directive_ar": "🚨 إنذار ضغط بيعي وتصريف مؤسسي (أكثر من 54% من السوق هابط): الشركات والمؤسسات تجني أرباحها — يُحظر فتح مراكز شراء جديدة اليوم، ويُنصح بالاحتفاظ بالكاش وتفعيل خطة التسييل الجزئي عند الارتداد.",
+    "warning_directive_ar": "🚨 إنذار ضغط بيعي وتصريف مؤسسي (180 سهماً هابطاً من 221): المؤسسات تسجل صافي بيع -549.55M ج.م — يُحظر فتح مراكز شراء جديدة اليوم، والالتزام بحارس منع البيع بخسارة NO_LOSS_SELL_GUARD.",
     "market_breadth": {
-      "advances": 97,
-      "declines": 148,
-      "unchanged": 25,
-      "total_stocks": 270,
-      "declines_pct": 54.8,
-      "ad_ratio": 0.66,
-      "sentiment_label_ar": "🔴 ضغط بيعي وتصريف (A/D = 0.66) — الحذر واجب"
+      "advances": 29,
+      "declines": 180,
+      "unchanged": 12,
+      "total_traded_companies": 221,
+      "declines_pct": 81.45,
+      "breadth_ratio": 0.161,
+      "sentiment_label_ar": "🔴 تصريف مؤسسي عنيف (180 هابطة مقابل 29 صاعدة) — كسر وتصريف عام"
     },
-    "analyst_assessment_ar": "🚨 إنذار ضغط بيعي وتصريف مؤسسي (أكثر من 54% من السوق هابط): الشركات والمؤسسات تجني أرباحها — يُحظر فتح مراكز شراء جديدة اليوم، ويُنصح بالاحتفاظ بالكاش وتفعيل خطة التسييل الجزئي عند الارتداد."
+    "institutional_flows_summary_m_egp": {
+      "egyptian_institutions": -584.51,
+      "total_institutions": -549.55,
+      "total_retail": 549.55
+    },
+    "analyst_assessment_ar": "🚨 إغلاق رسمي 13/10: مؤشر EGX30 عند 51,265.27 نقطة، مع تصريف مؤسسي مصري وعربي مكثف يقابله امتصاص أفراد. تم تفعيل قيعان التجميع وحارس منع البيع بخسارة."
   }
 }
