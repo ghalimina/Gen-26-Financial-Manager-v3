@@ -174,7 +174,7 @@
   ],
   "insiders_and_dividends_radar": {
     "status": "SUCCESS",
-    "as_of": "2026-10-14 06:01:36",
+    "as_of": "2026-10-14 12:31:46",
     "market_portal": "https://www.egx.com.eg/ar/",
     "insider_transactions_count": 6,
     "dividend_stocks_count": 10,
@@ -182,7 +182,7 @@
       {
         "ticker": "CIEB.CA",
         "company_name": "بنك كريدي أجريكول مصر",
-        "current_price": 22.75,
+        "current_price": 22.98,
         "dividend_yield_pct": 14.48,
         "last_coupon_value_egp": 3.75,
         "cash_cow_grade": "A+",
@@ -192,7 +192,7 @@
       {
         "ticker": "MFPC.CA",
         "company_name": "مصر لإنتاج الأسمدة (موبكو)",
-        "current_price": 44.02,
+        "current_price": 44.01,
         "dividend_yield_pct": 9.01,
         "last_coupon_value_egp": 4.25,
         "cash_cow_grade": "A+",
@@ -202,7 +202,7 @@
       {
         "ticker": "OLFI.CA",
         "company_name": "عبور لاند للصناعات الغذائية",
-        "current_price": 20.23,
+        "current_price": 20.83,
         "dividend_yield_pct": 8.41,
         "last_coupon_value_egp": 1.15,
         "cash_cow_grade": "A",
@@ -212,7 +212,7 @@
       {
         "ticker": "CSAG.CA",
         "company_name": "القناة للتوكيلات الملاحية",
-        "current_price": 35.19,
+        "current_price": 35.86,
         "dividend_yield_pct": 8.31,
         "last_coupon_value_egp": 2.5,
         "cash_cow_grade": "A",
@@ -222,7 +222,7 @@
       {
         "ticker": "ARCC.CA",
         "company_name": "العربية للأسمنت",
-        "current_price": 66.0,
+        "current_price": 66.95,
         "dividend_yield_pct": 7.92,
         "last_coupon_value_egp": 1.1,
         "cash_cow_grade": "A",
@@ -232,7 +232,7 @@
       {
         "ticker": "EAST.CA",
         "company_name": "الشركة الشرقية (إيسترن كومباني)",
-        "current_price": 27.59,
+        "current_price": 27.77,
         "dividend_yield_pct": 5.3,
         "last_coupon_value_egp": 1.6,
         "cash_cow_grade": "A",
@@ -242,7 +242,7 @@
       {
         "ticker": "SAUD.CA",
         "company_name": "بنك البركة مصر",
-        "current_price": 21.5,
+        "current_price": 21.87,
         "dividend_yield_pct": 5.05,
         "last_coupon_value_egp": 0.85,
         "cash_cow_grade": "B+",
@@ -252,7 +252,7 @@
       {
         "ticker": "COMI.CA",
         "company_name": "البنك التجاري الدولي (CIB)",
-        "current_price": 121.0,
+        "current_price": 122.0,
         "dividend_yield_pct": 4.9,
         "last_coupon_value_egp": 5.5,
         "cash_cow_grade": "A+",
@@ -262,7 +262,7 @@
       {
         "ticker": "ABUK.CA",
         "company_name": "أبو قير للأسمدة والصناعات الكيماوية",
-        "current_price": 84.33,
+        "current_price": 84.34,
         "dividend_yield_pct": 4.6,
         "last_coupon_value_egp": 3.0,
         "cash_cow_grade": "A",
@@ -272,7 +272,7 @@
       {
         "ticker": "SWDY.CA",
         "company_name": "السويدي إليكتريك",
-        "current_price": 111.0,
+        "current_price": 114.0,
         "dividend_yield_pct": 1.65,
         "last_coupon_value_egp": 4.0,
         "cash_cow_grade": "B",
@@ -355,7 +355,7 @@
     "portfolio_holdings_memo": {
       "COMI.CA": {
         "ticker": "COMI.CA",
-        "current_price": 121.0,
+        "current_price": 122.0,
         "insider_profile": {
           "has_insider_activity": true,
           "insider_signal": "STRONG_INSIDER_BUYING",
@@ -391,11 +391,11 @@
       },
       "TMGH.CA": {
         "ticker": "TMGH.CA",
-        "current_price": 84.0,
+        "current_price": 83.94,
         "insider_profile": {
           "has_insider_activity": false,
           "insider_signal": "NEUTRAL",
-          "latest_transaction": "",
+          "latest_transaction": null,
           "score_boost": 0.0,
           "summary_ar": "لا توجد تعاملات معلنة لمجلس الإدارة أو الداخليين خلال آخر 30 يوماً."
         },
@@ -414,11 +414,11 @@
       },
       "PHDC.CA": {
         "ticker": "PHDC.CA",
-        "current_price": 12.79,
+        "current_price": 12.75,
         "insider_profile": {
           "has_insider_activity": false,
           "insider_signal": "NEUTRAL",
-          "latest_transaction": "",
+          "latest_transaction": null,
           "score_boost": 0.0,
           "summary_ar": "لا توجد تعاملات معلنة لمجلس الإدارة أو الداخليين خلال آخر 30 يوماً."
         },
@@ -437,7 +437,7 @@
       },
       "SWDY.CA": {
         "ticker": "SWDY.CA",
-        "current_price": 111.0,
+        "current_price": 114.0,
         "insider_profile": {
           "has_insider_activity": true,
           "insider_signal": "STRONG_INSIDER_BUYING",
@@ -477,7 +477,7 @@
         "insider_profile": {
           "has_insider_activity": false,
           "insider_signal": "NEUTRAL",
-          "latest_transaction": "",
+          "latest_transaction": null,
           "score_boost": 0.0,
           "summary_ar": "لا توجد تعاملات معلنة لمجلس الإدارة أو الداخليين خلال آخر 30 يوماً."
         },
@@ -501,7 +501,7 @@
     {
       "ticker": "CIEB.CA",
       "company_name": "بنك كريدي أجريكول مصر",
-      "current_price": 22.75,
+      "current_price": 22.98,
       "dividend_yield_pct": 14.48,
       "last_coupon_value_egp": 3.75,
       "cash_cow_grade": "A+",
@@ -511,7 +511,7 @@
     {
       "ticker": "MFPC.CA",
       "company_name": "مصر لإنتاج الأسمدة (موبكو)",
-      "current_price": 44.02,
+      "current_price": 44.01,
       "dividend_yield_pct": 9.01,
       "last_coupon_value_egp": 4.25,
       "cash_cow_grade": "A+",
@@ -521,7 +521,7 @@
     {
       "ticker": "OLFI.CA",
       "company_name": "عبور لاند للصناعات الغذائية",
-      "current_price": 20.23,
+      "current_price": 20.83,
       "dividend_yield_pct": 8.41,
       "last_coupon_value_egp": 1.15,
       "cash_cow_grade": "A",
@@ -531,7 +531,7 @@
     {
       "ticker": "CSAG.CA",
       "company_name": "القناة للتوكيلات الملاحية",
-      "current_price": 35.19,
+      "current_price": 35.86,
       "dividend_yield_pct": 8.31,
       "last_coupon_value_egp": 2.5,
       "cash_cow_grade": "A",
@@ -541,7 +541,7 @@
     {
       "ticker": "ARCC.CA",
       "company_name": "العربية للأسمنت",
-      "current_price": 66.0,
+      "current_price": 66.95,
       "dividend_yield_pct": 7.92,
       "last_coupon_value_egp": 1.1,
       "cash_cow_grade": "A",
@@ -551,7 +551,7 @@
     {
       "ticker": "EAST.CA",
       "company_name": "الشركة الشرقية (إيسترن كومباني)",
-      "current_price": 27.59,
+      "current_price": 27.77,
       "dividend_yield_pct": 5.3,
       "last_coupon_value_egp": 1.6,
       "cash_cow_grade": "A",
@@ -561,7 +561,7 @@
     {
       "ticker": "SAUD.CA",
       "company_name": "بنك البركة مصر",
-      "current_price": 21.5,
+      "current_price": 21.87,
       "dividend_yield_pct": 5.05,
       "last_coupon_value_egp": 0.85,
       "cash_cow_grade": "B+",
@@ -571,7 +571,7 @@
     {
       "ticker": "COMI.CA",
       "company_name": "البنك التجاري الدولي (CIB)",
-      "current_price": 121.0,
+      "current_price": 122.0,
       "dividend_yield_pct": 4.9,
       "last_coupon_value_egp": 5.5,
       "cash_cow_grade": "A+",
@@ -581,7 +581,7 @@
     {
       "ticker": "ABUK.CA",
       "company_name": "أبو قير للأسمدة والصناعات الكيماوية",
-      "current_price": 84.33,
+      "current_price": 84.34,
       "dividend_yield_pct": 4.6,
       "last_coupon_value_egp": 3.0,
       "cash_cow_grade": "A",
@@ -591,7 +591,7 @@
     {
       "ticker": "SWDY.CA",
       "company_name": "السويدي إليكتريك",
-      "current_price": 111.0,
+      "current_price": 114.0,
       "dividend_yield_pct": 1.65,
       "last_coupon_value_egp": 4.0,
       "cash_cow_grade": "B",
