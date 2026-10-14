@@ -136,6 +136,12 @@ jobs:
         run: |
           python core/smart_accumulation_engine.py
 
+      - name: 1.4 Official EGX Insiders & Cash Dividend Yields Radar
+        continue-on-error: true
+        timeout-minutes: 3
+        run: |
+          python core/egx_insiders_and_dividends_radar.py
+
       - name: 1.5 Automated Price Outlier & Reconciliation Guard
         continue-on-error: true
         timeout-minutes: 2

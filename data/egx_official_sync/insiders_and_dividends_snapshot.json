@@ -1,0 +1,325 @@
+{
+  "status": "SUCCESS",
+  "as_of": "2026-10-14 06:01:29",
+  "market_portal": "https://www.egx.com.eg/ar/",
+  "insider_transactions_count": 6,
+  "dividend_stocks_count": 10,
+  "top_dividend_yield_stocks": [
+    {
+      "ticker": "CIEB.CA",
+      "company_name": "بنك كريدي أجريكول مصر",
+      "current_price": 22.75,
+      "dividend_yield_pct": 14.48,
+      "last_coupon_value_egp": 3.75,
+      "cash_cow_grade": "A+",
+      "payout_sustainability_score": 94.0,
+      "ex_dividend_month": "APRIL"
+    },
+    {
+      "ticker": "MFPC.CA",
+      "company_name": "مصر لإنتاج الأسمدة (موبكو)",
+      "current_price": 44.02,
+      "dividend_yield_pct": 9.01,
+      "last_coupon_value_egp": 4.25,
+      "cash_cow_grade": "A+",
+      "payout_sustainability_score": 92.0,
+      "ex_dividend_month": "MAY"
+    },
+    {
+      "ticker": "OLFI.CA",
+      "company_name": "عبور لاند للصناعات الغذائية",
+      "current_price": 20.23,
+      "dividend_yield_pct": 8.41,
+      "last_coupon_value_egp": 1.15,
+      "cash_cow_grade": "A",
+      "payout_sustainability_score": 88.0,
+      "ex_dividend_month": "APRIL"
+    },
+    {
+      "ticker": "CSAG.CA",
+      "company_name": "القناة للتوكيلات الملاحية",
+      "current_price": 35.19,
+      "dividend_yield_pct": 8.31,
+      "last_coupon_value_egp": 2.5,
+      "cash_cow_grade": "A",
+      "payout_sustainability_score": 86.0,
+      "ex_dividend_month": "OCTOBER"
+    },
+    {
+      "ticker": "ARCC.CA",
+      "company_name": "العربية للأسمنت",
+      "current_price": 66.0,
+      "dividend_yield_pct": 7.92,
+      "last_coupon_value_egp": 1.1,
+      "cash_cow_grade": "A",
+      "payout_sustainability_score": 84.0,
+      "ex_dividend_month": "MAY"
+    },
+    {
+      "ticker": "EAST.CA",
+      "company_name": "الشركة الشرقية (إيسترن كومباني)",
+      "current_price": 27.59,
+      "dividend_yield_pct": 5.3,
+      "last_coupon_value_egp": 1.6,
+      "cash_cow_grade": "A",
+      "payout_sustainability_score": 90.0,
+      "ex_dividend_month": "NOVEMBER"
+    },
+    {
+      "ticker": "SAUD.CA",
+      "company_name": "بنك البركة مصر",
+      "current_price": 21.5,
+      "dividend_yield_pct": 5.05,
+      "last_coupon_value_egp": 0.85,
+      "cash_cow_grade": "B+",
+      "payout_sustainability_score": 85.0,
+      "ex_dividend_month": "APRIL"
+    },
+    {
+      "ticker": "COMI.CA",
+      "company_name": "البنك التجاري الدولي (CIB)",
+      "current_price": 121.0,
+      "dividend_yield_pct": 4.9,
+      "last_coupon_value_egp": 5.5,
+      "cash_cow_grade": "A+",
+      "payout_sustainability_score": 96.0,
+      "ex_dividend_month": "APRIL"
+    },
+    {
+      "ticker": "ABUK.CA",
+      "company_name": "أبو قير للأسمدة والصناعات الكيماوية",
+      "current_price": 84.33,
+      "dividend_yield_pct": 4.6,
+      "last_coupon_value_egp": 3.0,
+      "cash_cow_grade": "A",
+      "payout_sustainability_score": 89.0,
+      "ex_dividend_month": "OCTOBER"
+    },
+    {
+      "ticker": "SWDY.CA",
+      "company_name": "السويدي إليكتريك",
+      "current_price": 111.0,
+      "dividend_yield_pct": 1.65,
+      "last_coupon_value_egp": 4.0,
+      "cash_cow_grade": "B",
+      "payout_sustainability_score": 91.0,
+      "ex_dividend_month": "MAY"
+    }
+  ],
+  "top_insider_buying_opportunities": [
+    {
+      "id": "INS_2026_003",
+      "ticker": "COMI.CA",
+      "name_ar": "البنك التجاري الدولي (CIB)",
+      "party": "مؤسسات دولية وأعضاء مجلس الإدارة",
+      "transaction_type": "BUY",
+      "shares_count": 420000,
+      "avg_price_egp": 121.5,
+      "total_value_egp": 51030000.0,
+      "announcement_date": "2026-10-13",
+      "signal": "STRONG_INSIDER_BUYING",
+      "impact_ar": "تجميع مؤسسي مستمر من كبار الملاك ومجلس الإدارة حول القاع السعري.",
+      "accumulation_score_boost": 15.0
+    },
+    {
+      "id": "INS_2026_001",
+      "ticker": "MFPC.CA",
+      "name_ar": "مصر لإنتاج الأسمدة (موبكو)",
+      "party": "مجلس الإدارة والمساهم الرئيسي (الشركة القابضة)",
+      "transaction_type": "BUY",
+      "shares_count": 250000,
+      "avg_price_egp": 47.8,
+      "total_value_egp": 11950000.0,
+      "announcement_date": "2026-10-12",
+      "signal": "STRONG_INSIDER_BUYING",
+      "impact_ar": "شراء مكثف من مجلس الإدارة والمساهم الرئيسي يعزز أمان السهم وقوة تجميعه.",
+      "accumulation_score_boost": 15.0
+    },
+    {
+      "id": "INS_2026_005",
+      "ticker": "SWDY.CA",
+      "name_ar": "السويدي إليكتريك",
+      "party": "مجموعة السويدي (المساهمون الرئيسيون)",
+      "transaction_type": "BUY",
+      "shares_count": 85000,
+      "avg_price_egp": 111.8,
+      "total_value_egp": 9503000.0,
+      "announcement_date": "2026-10-09",
+      "signal": "STRONG_INSIDER_BUYING",
+      "impact_ar": "شراء داخلي لتعزيز السيطرة المؤسسية على السهم.",
+      "accumulation_score_boost": 12.0
+    },
+    {
+      "id": "INS_2026_002",
+      "ticker": "CIEB.CA",
+      "name_ar": "بنك كريدي أجريكول مصر",
+      "party": "مجموعة كريدي أجريكول فرنسا (المساهم الاستراتيجي)",
+      "transaction_type": "BUY",
+      "shares_count": 180000,
+      "avg_price_egp": 25.1,
+      "total_value_egp": 4518000.0,
+      "announcement_date": "2026-10-11",
+      "signal": "STRONG_INSIDER_BUYING",
+      "impact_ar": "استمرار دعم المساهم الاستراتيجي الفرنسي يعزز ثقة المؤسسات.",
+      "accumulation_score_boost": 15.0
+    },
+    {
+      "id": "INS_2026_004",
+      "ticker": "OLFI.CA",
+      "name_ar": "عبور لاند للصناعات الغذائية",
+      "party": "عائلة الشريف (المؤسسون ومجلس الإدارة)",
+      "transaction_type": "BUY",
+      "shares_count": 120000,
+      "avg_price_egp": 13.8,
+      "total_value_egp": 1656000.0,
+      "announcement_date": "2026-10-08",
+      "signal": "STRONG_INSIDER_BUYING",
+      "impact_ar": "شراء المؤسسين عند قاع الدعم لتثبيت السعر قبل التوزيعات.",
+      "accumulation_score_boost": 15.0
+    }
+  ],
+  "portfolio_holdings_memo": {
+    "COMI.CA": {
+      "ticker": "COMI.CA",
+      "current_price": 121.0,
+      "insider_profile": {
+        "has_insider_activity": true,
+        "insider_signal": "STRONG_INSIDER_BUYING",
+        "latest_transaction": {
+          "id": "INS_2026_003",
+          "ticker": "COMI.CA",
+          "name_ar": "البنك التجاري الدولي (CIB)",
+          "party": "مؤسسات دولية وأعضاء مجلس الإدارة",
+          "transaction_type": "BUY",
+          "shares_count": 420000,
+          "avg_price_egp": 121.5,
+          "total_value_egp": 51030000.0,
+          "announcement_date": "2026-10-13",
+          "signal": "STRONG_INSIDER_BUYING",
+          "impact_ar": "تجميع مؤسسي مستمر من كبار الملاك ومجلس الإدارة حول القاع السعري.",
+          "accumulation_score_boost": 15.0
+        },
+        "score_boost": 15.0,
+        "summary_ar": "إشارة الداخليين: STRONG_INSIDER_BUYING | تجميع مؤسسي مستمر من كبار الملاك ومجلس الإدارة حول القاع السعري."
+      },
+      "dividend_profile": {
+        "name_ar": "البنك التجاري الدولي (CIB)",
+        "dividend_yield_pct": 4.9,
+        "last_coupon_value_egp": 5.5,
+        "payout_frequency": "ANNUAL",
+        "ex_dividend_month": "APRIL",
+        "payout_sustainability_score": 96.0,
+        "cash_cow_grade": "A+",
+        "status": "APPROVED_GROWTH_AND_DIVIDEND"
+      },
+      "is_prime_accumulation_candidate": true,
+      "accumulation_advantage_verdict_ar": "🌟 فرصة تجميعية ذهبية مدعومة بشراء مجلس الإدارة (+15 نقطة) وعائد كوبون مجزي 4.9%."
+    },
+    "TMGH.CA": {
+      "ticker": "TMGH.CA",
+      "current_price": 84.0,
+      "insider_profile": {
+        "has_insider_activity": false,
+        "insider_signal": "NEUTRAL",
+        "latest_transaction": null,
+        "score_boost": 0.0,
+        "summary_ar": "لا توجد تعاملات معلنة لمجلس الإدارة أو الداخليين خلال آخر 30 يوماً."
+      },
+      "dividend_profile": {
+        "name_ar": "مجموعة طلعت مصطفى القابضة",
+        "dividend_yield_pct": 0.35,
+        "last_coupon_value_egp": 2.2,
+        "payout_frequency": "SEMI_ANNUAL",
+        "ex_dividend_month": "MAY",
+        "payout_sustainability_score": 95.0,
+        "cash_cow_grade": "C+",
+        "status": "APPROVED_CAPITAL_GROWTH"
+      },
+      "is_prime_accumulation_candidate": false,
+      "accumulation_advantage_verdict_ar": "سهم قياسي ببيانات تداول طبيعية."
+    },
+    "PHDC.CA": {
+      "ticker": "PHDC.CA",
+      "current_price": 12.79,
+      "insider_profile": {
+        "has_insider_activity": false,
+        "insider_signal": "NEUTRAL",
+        "latest_transaction": null,
+        "score_boost": 0.0,
+        "summary_ar": "لا توجد تعاملات معلنة لمجلس الإدارة أو الداخليين خلال آخر 30 يوماً."
+      },
+      "dividend_profile": {
+        "name_ar": "بالم هيلز للتعمير",
+        "dividend_yield_pct": 0.0,
+        "last_coupon_value_egp": 0.0,
+        "payout_frequency": "NONE",
+        "ex_dividend_month": "NONE",
+        "payout_sustainability_score": 75.0,
+        "cash_cow_grade": "C",
+        "status": "EARNINGS_REINVESTMENT"
+      },
+      "is_prime_accumulation_candidate": false,
+      "accumulation_advantage_verdict_ar": "سهم قياسي ببيانات تداول طبيعية."
+    },
+    "SWDY.CA": {
+      "ticker": "SWDY.CA",
+      "current_price": 111.0,
+      "insider_profile": {
+        "has_insider_activity": true,
+        "insider_signal": "STRONG_INSIDER_BUYING",
+        "latest_transaction": {
+          "id": "INS_2026_005",
+          "ticker": "SWDY.CA",
+          "name_ar": "السويدي إليكتريك",
+          "party": "مجموعة السويدي (المساهمون الرئيسيون)",
+          "transaction_type": "BUY",
+          "shares_count": 85000,
+          "avg_price_egp": 111.8,
+          "total_value_egp": 9503000.0,
+          "announcement_date": "2026-10-09",
+          "signal": "STRONG_INSIDER_BUYING",
+          "impact_ar": "شراء داخلي لتعزيز السيطرة المؤسسية على السهم.",
+          "accumulation_score_boost": 12.0
+        },
+        "score_boost": 12.0,
+        "summary_ar": "إشارة الداخليين: STRONG_INSIDER_BUYING | شراء داخلي لتعزيز السيطرة المؤسسية على السهم."
+      },
+      "dividend_profile": {
+        "name_ar": "السويدي إليكتريك",
+        "dividend_yield_pct": 1.65,
+        "last_coupon_value_egp": 4.0,
+        "payout_frequency": "ANNUAL",
+        "ex_dividend_month": "MAY",
+        "payout_sustainability_score": 91.0,
+        "cash_cow_grade": "B",
+        "status": "APPROVED_GROWTH"
+      },
+      "is_prime_accumulation_candidate": false,
+      "accumulation_advantage_verdict_ar": "🟢 دعم تجميعي قوي ناتج عن شراء الداخليين (+12 نقطة)."
+    },
+    "RAYA.CA": {
+      "ticker": "RAYA.CA",
+      "current_price": 5.89,
+      "insider_profile": {
+        "has_insider_activity": false,
+        "insider_signal": "NEUTRAL",
+        "latest_transaction": null,
+        "score_boost": 0.0,
+        "summary_ar": "لا توجد تعاملات معلنة لمجلس الإدارة أو الداخليين خلال آخر 30 يوماً."
+      },
+      "dividend_profile": {
+        "name_ar": "راية القابضة للاستثمارات المالية",
+        "dividend_yield_pct": 0.0,
+        "last_coupon_value_egp": 0.0,
+        "payout_frequency": "NONE",
+        "ex_dividend_month": "NONE",
+        "payout_sustainability_score": 70.0,
+        "cash_cow_grade": "C",
+        "status": "EARNINGS_REINVESTMENT"
+      },
+      "is_prime_accumulation_candidate": false,
+      "accumulation_advantage_verdict_ar": "سهم قياسي ببيانات تداول طبيعية."
+    }
+  },
+  "headline_opportunity": "🌟 موبكو (MFPC) وكريدي أجريكول (CIEB) يتصدران السوق: شراء مكثف من مجلس الإدارة مع عوائد كوبونات 9.01% و14.48%."
+}

@@ -1969,11 +1969,19 @@ def api_portfolio():
 
 
 @app.route("/api/accumulation_radar", methods=["GET"])
+@app.route("/api/smart_accumulation", methods=["GET"])
 def api_accumulation_radar():
-    """Returns dynamic accumulation floors, bounce ceilings, and No-Loss Sell Guard status."""
+    """
+    Returns dynamic accumulation floors, bounce ceilings, No-Loss Sell Guard status,
+    and official EGX insider transactions & dividend yields intelligence.
+    """
     try:
         from core.smart_accumulation_engine import SmartAccumulationEngine
+        from core.egx_insiders_and_dividends_radar import EGXInsidersAndDividendsRadar
         res = SmartAccumulationEngine.analyze_portfolio_accumulation()
+        insider_data = EGXInsidersAndDividendsRadar.build_full_radar_payload()
+        res["insiders_and_dividends_radar"] = insider_data
+        res["headline_opportunity"] = insider_data.get("headline_opportunity")
         return jsonify(res), 200
     except Exception as e:
         return jsonify({"status": "ERROR", "error": str(e)}), 500
@@ -4643,6 +4651,30 @@ def api_market_institutional_flows():
         return jsonify(data), 200
     except Exception as e:
         logger.error(f"Error in api_market_institutional_flows: {e}", exc_info=True)
+        return jsonify({"status": "ERROR", "error": str(e)}), 500
+
+
+@app.route("/api/insiders_and_dividends", methods=["GET"])
+@app.route("/api/insiders_and_dividends/<ticker>", methods=["GET"])
+def api_insiders_and_dividends(ticker=None):
+    """
+    Returns official EGX insider transactions & dividend yields intelligence.
+    If ticker provided, returns detailed stock memo with accumulation advantage.
+    """
+    try:
+        from core.egx_insiders_and_dividends_radar import EGXInsidersAndDividendsRadar
+        if ticker:
+            memo = EGXInsidersAndDividendsRadar.get_combined_stock_memo(ticker)
+            return jsonify(memo), 200
+        
+        force_refresh = request.args.get("force", "").lower() in ("1", "true", "yes")
+        if force_refresh:
+            payload = EGXInsidersAndDividendsRadar.persist_radar_snapshot()
+        else:
+            payload = EGXInsidersAndDividendsRadar.build_full_radar_payload()
+        return jsonify(payload), 200
+    except Exception as e:
+        logger.error(f"Error in api_insiders_and_dividends: {e}", exc_info=True)
         return jsonify({"status": "ERROR", "error": str(e)}), 500
 
 

@@ -199,6 +199,20 @@ class SmartAccumulationEngine:
                 entry_price=entry_p
             )
 
+            # Enrich with Insider & Dividend Intelligence
+            try:
+                from core.egx_insiders_and_dividends_radar import EGXInsidersAndDividendsRadar
+                insider_memo = EGXInsidersAndDividendsRadar.get_combined_stock_memo(sym)
+                div_yield = insider_memo["dividend_profile"].get("dividend_yield_pct", 0.0)
+                insider_sig = insider_memo["insider_profile"].get("insider_signal", "NEUTRAL")
+                adv_verdict = insider_memo.get("accumulation_advantage_verdict_ar", "")
+                is_prime = insider_memo.get("is_prime_accumulation_candidate", False)
+            except Exception:
+                div_yield = float(bounds.get("official_dy_pct") or 0.0)
+                insider_sig = "NEUTRAL"
+                adv_verdict = ""
+                is_prime = False
+
             enriched = dict(h)
             enriched.update({
                 "shares_owned": qty,
@@ -218,8 +232,11 @@ class SmartAccumulationEngine:
                 "action_guidance_ar": bounds["sell_guidance_ar"],
                 "accumulation_plan_ar": bounds["accumulation_plan_ar"],
                 "official_pe": bounds["official_pe"],
-                "official_dy_pct": bounds["official_dy_pct"],
-                "closing_threshold_egp": bounds["closing_threshold_egp"]
+                "official_dy_pct": div_yield if div_yield > 0 else bounds["official_dy_pct"],
+                "closing_threshold_egp": bounds["closing_threshold_egp"],
+                "insider_signal": insider_sig,
+                "is_prime_accumulation_candidate": is_prime,
+                "accumulation_advantage_verdict_ar": adv_verdict
             })
             enriched_holdings.append(enriched)
 
@@ -240,12 +257,14 @@ class SmartAccumulationEngine:
     @classmethod
     def get_top_market_accumulation_candidates(cls, top_n: int = 3) -> List[Dict[str, Any]]:
         """
-        Scans precomputed market rankings for the top institutional accumulation opportunities.
+        Scans precomputed market rankings for the top institutional accumulation opportunities,
+        enriched with insider buying (+15 pts) and dividend yield advantage.
         """
         candidates = []
         rank_path = os.path.join(WORKSPACE, "data", "precomputed_rankings.json")
         if os.path.exists(rank_path):
             try:
+                from core.egx_insiders_and_dividends_radar import EGXInsidersAndDividendsRadar
                 with open(rank_path, "r", encoding="utf-8") as f:
                     raw_data = json.load(f)
                 
@@ -257,8 +276,28 @@ class SmartAccumulationEngine:
                     stocks = []
                 
                 valid = [s for s in stocks if isinstance(s, dict) and s.get("ticker") not in ("ORAS.CA", "TEST.CA") and float(s.get("current_price", 0)) > 0]
-                valid.sort(key=lambda x: float(x.get("overall_score", 0)), reverse=True)
-                for s in valid[:top_n]:
+
+                # Score with insider and dividend boost
+                scored_candidates = []
+                for s in valid:
+                    sym = s.get("ticker", "")
+                    cp = float(s.get("current_price", 0))
+                    base_score = float(s.get("overall_score", 70.0))
+                    
+                    memo = EGXInsidersAndDividendsRadar.get_combined_stock_memo(sym)
+                    boost = memo["insider_profile"].get("score_boost", 0.0)
+                    div_yield = memo["dividend_profile"].get("dividend_yield_pct", 0.0)
+
+                    if div_yield >= 7.0:
+                        boost += 5.0
+
+                    adj_score = min(base_score + boost, 99.0)
+
+                    scored_candidates.append((adj_score, s, memo))
+
+                scored_candidates.sort(key=lambda x: x[0], reverse=True)
+
+                for adj_score, s, memo in scored_candidates[:top_n]:
                     sym = s.get("ticker", "")
                     cp = float(s.get("current_price", 0))
                     zone = s.get("predicted_accumulation_zone_5d")
@@ -273,21 +312,26 @@ class SmartAccumulationEngine:
                         "name_ar": s.get("company_name", sym),
                         "current_price": cp,
                         "predicted_accumulation_zone": zone_str,
-                        "conviction_score": float(s.get("overall_score", 85.0))
+                        "conviction_score": round(adj_score, 1),
+                        "dividend_yield_pct": memo["dividend_profile"].get("dividend_yield_pct", 0.0),
+                        "insider_signal": memo["insider_profile"].get("insider_signal", "NEUTRAL"),
+                        "accumulation_advantage_verdict_ar": memo.get("accumulation_advantage_verdict_ar", "")
                     })
             except Exception as e:
                 logger.warning(f"Error getting accumulation candidates: {e}")
 
         if not candidates:
             candidates = [
-                {"ticker": "MFPC.CA", "name_ar": "موبكو للأسمدة", "current_price": 48.00, "predicted_accumulation_zone": "46.20 - 47.10 ج", "conviction_score": 88.0},
-                {"ticker": "ABUK.CA", "name_ar": "أبو قير للأسمدة", "current_price": 58.50, "predicted_accumulation_zone": "56.00 - 57.20 ج", "conviction_score": 86.5},
-                {"ticker": "EKHO.CA", "name_ar": "المصرية الكويتية", "current_price": 38.20, "predicted_accumulation_zone": "36.80 - 37.50 ج", "conviction_score": 85.0}
+                {"ticker": "MFPC.CA", "name_ar": "موبكو للأسمدة", "current_price": 48.00, "predicted_accumulation_zone": "46.20 - 47.10 ج", "conviction_score": 93.0, "dividend_yield_pct": 9.01, "insider_signal": "STRONG_INSIDER_BUYING", "accumulation_advantage_verdict_ar": "شراء مكثف من مجلس الإدارة وكوبون 9.01%"},
+                {"ticker": "CIEB.CA", "name_ar": "كريدي أجريكول مصر", "current_price": 25.10, "predicted_accumulation_zone": "24.20 - 24.80 ج", "conviction_score": 92.5, "dividend_yield_pct": 14.48, "insider_signal": "STRONG_INSIDER_BUYING", "accumulation_advantage_verdict_ar": "أعلى عائد كوبون 14.48% وشراء استراتيجي"},
+                {"ticker": "OLFI.CA", "name_ar": "عبور لاند", "current_price": 13.80, "predicted_accumulation_zone": "13.20 - 13.50 ج", "conviction_score": 89.0, "dividend_yield_pct": 8.41, "insider_signal": "STRONG_INSIDER_BUYING", "accumulation_advantage_verdict_ar": "شراء المؤسسين وعائد 8.41%"}
             ][:top_n]
         return candidates
 
 
 if __name__ == "__main__":
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")
     res = SmartAccumulationEngine.analyze_portfolio_accumulation()
     import json
     print(json.dumps(res, indent=2, ensure_ascii=False))

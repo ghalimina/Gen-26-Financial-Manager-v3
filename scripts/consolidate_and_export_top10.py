@@ -648,11 +648,23 @@ def build_07_corporate_actions_and_dividends() -> Dict[str, Any]:
             "is_completed": bool(ev.get("is_completed", False))
         })
 
+    # Enrich with Insiders & Official Dividend Intelligence
+    radar_data = {}
+    try:
+        from core.egx_insiders_and_dividends_radar import EGXInsidersAndDividendsRadar
+        radar_data = EGXInsidersAndDividendsRadar.build_full_radar_payload()
+    except Exception as e:
+        print(f"  [Notice] Could not load insiders radar for 07: {e}")
+
     return {
         "status": "SUCCESS",
         "as_of": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "total_events": len(cleaned_events),
-        "corporate_actions": cleaned_events
+        "corporate_actions": cleaned_events,
+        "insiders_and_dividends_radar": radar_data,
+        "top_dividend_yield_stocks": radar_data.get("top_dividend_yield_stocks", []),
+        "recent_insider_transactions": radar_data.get("top_insider_buying_opportunities", []),
+        "headline_opportunity": radar_data.get("headline_opportunity", "")
     }
 
 
@@ -863,6 +875,13 @@ def run_consolidation_and_export():
         SmartAccumulationEngine.analyze_portfolio_accumulation()
     except Exception as e:
         print(f"  [Notice] Smart accumulation notice: {e}")
+
+    try:
+        from core.egx_insiders_and_dividends_radar import EGXInsidersAndDividendsRadar
+        print("  [Pre-Step] Refreshing EGX Insiders & Official Dividends Radar...")
+        EGXInsidersAndDividendsRadar.persist_radar_snapshot()
+    except Exception as e:
+        print(f"  [Notice] Insiders & dividends notice: {e}")
 
     files_builders = [
         ("01_portfolio_and_swing_advisor.json", build_01_portfolio_and_swing_advisor),
