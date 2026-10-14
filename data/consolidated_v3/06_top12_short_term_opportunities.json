@@ -1,6 +1,6 @@
 {
   "status": "SUCCESS",
-  "as_of": "2026-10-14 18:24:46",
+  "as_of": "2026-10-15 00:43:26",
   "time_horizon": "10 TRADING SESSIONS",
   "opportunities_count": 12,
   "target_rules": {
@@ -71,10 +71,10 @@
       "ticker": "ACRO.CA",
       "company_name": "مصر للأسمنت - قنا",
       "sector": "مواد البناء والتشييد",
-      "current_price": 54.0,
-      "target_price_10d": 58.32,
-      "target_price": 58.32,
-      "stop_loss": 51.3,
+      "current_price": 100.0,
+      "target_price_10d": 108.0,
+      "target_price": 108.0,
+      "stop_loss": 95.0,
       "expected_upside_10d_pct": 8.0,
       "risk_reward_ratio": 1.6,
       "alpha_score": 72.0,

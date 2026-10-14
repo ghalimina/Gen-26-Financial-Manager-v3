@@ -471,32 +471,78 @@ class PriceSyncService:
         quotes: Dict[str, Dict[str, Any]] = {}
         
         MAPPING_TO_TV = {
+            "EKHO.CA": "VLMR", "EKHOA.CA": "VLMRA",
+            "ESRS.CA": "IRAX", "QNBA.CA": "QNBE",
+            "NASR.CA": "ELNA", "EGTI.CA": "ETRS",
+            "ISMD.CA": "INFI", "MBEN.CA": "MBEG",
+            "LECI.CA": "LCSW", "MENG.CA": "MOIN",
+            "EMHA.CA": "CEFM", "EMMC.CA": "MILS",
+            "RACT.CA": "RAKT", "MINA.CA": "MENA",
+            "MAOT.CA": "MMAT", "SEMR.CA": "SMFR",
+            "NAEH.CA": "NAHO", "MILK.CA": "ADPC",
+            "BIPC.CA": "BIDI", "FPIH.CA": "AMPI",
+            "INVE.CA": "IBCT", "EIUD.CA": "IEEC",
+            "REAP.CA": "ROTO", "REAL.CA": "COPR",
+            "PORT.CA": "ARAB", "PRAP.CA": "PRMH",
+            "PRED.CA": "RKAZ", "OBAH.CA": "OCPH",
+            "EFRH.CA": "CRST", "KAMA.CA": "KZPC",
+            "ERES.CA": "EGTS", "GTFI.CA": "GTWL",
+            "ENAE.CA": "EDFM", "SDRE.CA": "UEGC",
+            "GOST.CA": "GPPL", "ACRO.CA": "ACRO",
             "DICE.CA": "DSCW", "MNHD.CA": "MASR", "OBUR.CA": "OLFI",
-            "GBCO.CA": "AUTO", "PIOH.CA": "PRDC", "QNBA.CA": "QNBE",
+            "GBCO.CA": "AUTO", "PIOH.CA": "PRDC",
             "MTRC.CA": "MILS", "MCEG.CA": "SCFM", "MEFM.CA": "CEFM",
             "UEDA.CA": "UEFM", "WDEH.CA": "WCDF", "EXTK.CA": "ZEOT",
             "VERT.CA": "VERT", "FERT.CA": "FERT",
             "ICMI.CA": "INEG", "INEG.CA": "INEG",
             "SMPC.CA": "NEDA", "ARCO.CA": "ACAMD",
-            # Verified mappings from full EGX scan 2026-10-12
-            "ESRS.CA": "IRAX",   # حديد عز = El Ezz Aldekhela Steel-Alexandria
-            "ATLE.CA": "AIFI",   # أطلس = Atlas for Investment & Food Industries
-            "ANFI.CA": "AMES",   # الإسكندرية للخدمات الطبية = Alexandria New Medical Center
-            "ARPU.CA": "ADCI",   # العربية للأدوية = Arab Pharmaceuticals
-            "GTHC.CA": "GTHE",   # جلوبال للتجارة = Global Trade & Investment
+            "ATLE.CA": "AIFI", "ANFI.CA": "AMES", "ARPU.CA": "ADCI", "GTHC.CA": "GTHE"
         }
         REVERSE_TV_MAP = {
+            "VLMR": "EKHO.CA", "VLMR.CA": "EKHO.CA",
+            "VLMRA": "EKHOA.CA", "VLMRA.CA": "EKHOA.CA",
+            "IRAX": "ESRS.CA", "IRAX.CA": "ESRS.CA",
+            "QNBE": "QNBA.CA", "QNBE.CA": "QNBA.CA",
+            "ELNA": "NASR.CA", "ELNA.CA": "NASR.CA",
+            "ETRS": "EGTI.CA", "ETRS.CA": "EGTI.CA",
+            "INFI": "ISMD.CA", "INFI.CA": "ISMD.CA",
+            "MBEG": "MBEN.CA", "MBEG.CA": "MBEN.CA",
+            "LCSW": "LECI.CA", "LCSW.CA": "LECI.CA",
+            "MOIN": "MENG.CA", "MOIN.CA": "MENG.CA",
+            "CEFM": "EMHA.CA", "CEFM.CA": "EMHA.CA",
+            "MILS": "EMMC.CA", "MILS.CA": "EMMC.CA",
+            "RAKT": "RACT.CA", "RAKT.CA": "RACT.CA",
+            "MENA": "MINA.CA", "MENA.CA": "MINA.CA",
+            "MMAT": "MAOT.CA", "MMAT.CA": "MAOT.CA",
+            "SMFR": "SEMR.CA", "SMFR.CA": "SEMR.CA",
+            "NAHO": "NAEH.CA", "NAHO.CA": "NAEH.CA",
+            "ADPC": "MILK.CA", "ADPC.CA": "MILK.CA",
+            "BIDI": "BIPC.CA", "BIDI.CA": "BIPC.CA",
+            "AMPI": "FPIH.CA", "AMPI.CA": "FPIH.CA",
+            "IBCT": "INVE.CA", "IBCT.CA": "INVE.CA",
+            "IEEC": "EIUD.CA", "IEEC.CA": "EIUD.CA",
+            "ROTO": "REAP.CA", "ROTO.CA": "REAP.CA",
+            "COPR": "REAL.CA", "COPR.CA": "REAL.CA",
+            "ARAB": "PORT.CA", "ARAB.CA": "PORT.CA",
+            "PRMH": "PRAP.CA", "PRMH.CA": "PRAP.CA",
+            "RKAZ": "PRED.CA", "RKAZ.CA": "PRED.CA",
+            "OCPH": "OBAH.CA", "OCPH.CA": "OBAH.CA",
+            "CRST": "EFRH.CA", "CRST.CA": "EFRH.CA",
+            "KZPC": "KAMA.CA", "KZPC.CA": "KAMA.CA",
+            "EGTS": "ERES.CA", "EGTS.CA": "ERES.CA",
+            "GTWL": "GTFI.CA", "GTWL.CA": "GTFI.CA",
+            "EDFM": "ENAE.CA", "EDFM.CA": "ENAE.CA",
+            "UEGC": "SDRE.CA", "UEGC.CA": "SDRE.CA",
+            "GPPL": "GOST.CA", "GPPL.CA": "GOST.CA",
+            "ACRO": "ACRO.CA", "ACRO.CA": "ACRO.CA",
             "DSCW": "DICE.CA", "MASR": "MNHD.CA", "OLFI": "OBUR.CA",
-            "AUTO": "GBCO.CA", "PRDC": "PIOH.CA", "QNBE": "QNBA.CA",
-            "MILS": "MTRC.CA", "SCFM": "MCEG.CA", "CEFM": "MEFM.CA",
+            "AUTO": "GBCO.CA", "PRDC": "PIOH.CA",
+            "MTRC": "MTRC.CA", "SCFM": "MCEG.CA",
             "UEFM": "UEDA.CA", "WCDF": "WDEH.CA", "ZEOT": "EXTK.CA",
             "FERT": "VERT.CA", "VERT": "VERT.CA",
             "INEG": "ICMI.CA", "ICMI": "ICMI.CA",
             "NEDA": "SMPC.CA", "ACAMD": "ARCO.CA",
-            # Verified reverses from full EGX scan 2026-10-12
-            "IRAX": "ESRS.CA", "AIFI": "ATLE.CA",
-            "AMES": "ANFI.CA", "ADCI": "ARPU.CA",
-            "GTHE": "GTHC.CA",
+            "AIFI": "ATLE.CA", "AMES": "ANFI.CA", "ADCI": "ARPU.CA", "GTHE": "GTHC.CA"
         }
         
         try:

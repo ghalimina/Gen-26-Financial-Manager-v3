@@ -1,6 +1,6 @@
 {
   "status": "SUCCESS",
-  "as_of": "2026-10-14 18:24:46",
+  "as_of": "2026-10-15 00:43:26",
   "total_events": 12,
   "corporate_actions": [
     {
@@ -174,7 +174,7 @@
   ],
   "insiders_and_dividends_radar": {
     "status": "SUCCESS",
-    "as_of": "2026-10-14 18:15:47",
+    "as_of": "2026-10-15 00:43:26",
     "market_portal": "https://www.egx.com.eg/ar/",
     "insider_transactions_count": 6,
     "dividend_stocks_count": 10,
@@ -395,7 +395,7 @@
         "insider_profile": {
           "has_insider_activity": false,
           "insider_signal": "NEUTRAL",
-          "latest_transaction": null,
+          "latest_transaction": "",
           "score_boost": 0.0,
           "summary_ar": "لا توجد تعاملات معلنة لمجلس الإدارة أو الداخليين خلال آخر 30 يوماً."
         },
@@ -418,7 +418,7 @@
         "insider_profile": {
           "has_insider_activity": false,
           "insider_signal": "NEUTRAL",
-          "latest_transaction": null,
+          "latest_transaction": "",
           "score_boost": 0.0,
           "summary_ar": "لا توجد تعاملات معلنة لمجلس الإدارة أو الداخليين خلال آخر 30 يوماً."
         },
@@ -477,7 +477,7 @@
         "insider_profile": {
           "has_insider_activity": false,
           "insider_signal": "NEUTRAL",
-          "latest_transaction": null,
+          "latest_transaction": "",
           "score_boost": 0.0,
           "summary_ar": "لا توجد تعاملات معلنة لمجلس الإدارة أو الداخليين خلال آخر 30 يوماً."
         },

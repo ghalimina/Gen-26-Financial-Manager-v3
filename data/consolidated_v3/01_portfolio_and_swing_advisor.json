@@ -2,7 +2,7 @@
   "status": "SUCCESS",
   "portfolio_id": "GEN26_REAL_USER_PORTFOLIO",
   "currency": "EGP",
-  "as_of": "2026-10-14 18:24:39",
+  "as_of": "2026-10-15 00:43:20",
   "summary": {
     "total_portfolio_equity_egp": 13272.51,
     "free_cash_egp": 1200.0,
@@ -172,8 +172,8 @@
       "accumulation_plan_ar": "التقاط سريع في نطاق 12.35 - 12.55 ج، استهداف التعادل والربح الأولي عند 13.70 - 13.96 ج، ولا بيع تحت 13.59 ج.",
       "piastre_precision_levels": {
         "daily_pivot": 12.72,
-        "expected_session_low": 12.56,
-        "expected_session_high": 12.88,
+        "expected_session_low": 12.57,
+        "expected_session_high": 12.87,
         "session_direction_ar": "هابط 🔴",
         "dip_rebuy_level": 12.5,
         "peak_resistance_sell_50": 13.7,

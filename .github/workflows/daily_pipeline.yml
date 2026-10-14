@@ -118,11 +118,11 @@ jobs:
         timeout-minutes: 3
         run: python scripts/ingest_daily_news_rss.py
 
-      - name: 1. Live Market Price Sync (SSOT Pipeline)
+      - name: 1. Live Market Price Sync (SSOT Pipeline — TradingView Thndr-Matched)
         continue-on-error: true
         timeout-minutes: 5
         run: |
-          python -c "from core.price_sync_service import PriceSyncService; meta = PriceSyncService.sync_all_prices(); print('Price Sync Result:', meta)"
+          python scripts/unify_ssot_prices.py
 
       - name: 1.2 Official EGX 24-Portal Harvester (Indices, Flows, P/E, Precious Metals)
         continue-on-error: true
@@ -130,19 +130,25 @@ jobs:
         run: |
           python core/egx_official_harvester.py
 
-      - name: 1.3 Smart Accumulation Floor/Ceiling Engine & No-Loss Guard
-        continue-on-error: true
-        timeout-minutes: 3
-        run: |
-          python core/smart_accumulation_engine.py
-
-      - name: 1.4 Official EGX Insiders & Cash Dividend Yields Radar
+      - name: 1.3 Official EGX Insiders & Cash Dividend Yields Radar
         continue-on-error: true
         timeout-minutes: 3
         run: |
           python core/egx_insiders_and_dividends_radar.py
 
-      - name: 1.5 Automated Price Outlier & Reconciliation Guard
+      - name: 1.4 Smart Accumulation Floor/Ceiling Engine & No-Loss Guard
+        continue-on-error: true
+        timeout-minutes: 3
+        run: |
+          python core/smart_accumulation_engine.py
+
+      - name: 1.5 Consolidated Top-10 Datasets & GitHub Pages Exporter
+        continue-on-error: true
+        timeout-minutes: 3
+        run: |
+          python scripts/consolidate_and_export_top10.py
+
+      - name: 1.6 Automated Price Outlier & Reconciliation Guard
         continue-on-error: true
         timeout-minutes: 2
         run: |

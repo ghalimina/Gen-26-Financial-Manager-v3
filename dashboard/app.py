@@ -519,18 +519,30 @@ def api_overview():
         port_summary = {
             "total_portfolio_equity_egp": 13274.93,
             "total_stocks_market_value_egp": 12072.51,
+            "total_cost_basis_egp": 13094.21,
             "free_cash_egp": 1200.0,
             "total_mutual_funds_market_value_egp": 2.42,
-            "holdings_count": 5
+            "holdings_count": 5,
+            "realized_pnl_egp": 1830.00,
+            "unrealized_pnl_egp": -1021.70,
+            "unrealized_pnl_pct": -7.80,
+            "net_total_profit_including_rotations_egp": 808.30,
+            "net_total_profit_pct": 6.17
         }
         if os.path.exists(port_file):
             with open(port_file, "r", encoding="utf-8") as f:
                 p_data = json.load(f)
                 port_summary["total_portfolio_equity_egp"] = p_data.get("total_portfolio_equity_egp", 13274.93)
                 port_summary["total_stocks_market_value_egp"] = p_data.get("total_stocks_market_value_egp", 12072.51)
+                port_summary["total_cost_basis_egp"] = p_data.get("total_cost_basis_egp", 13094.21)
                 port_summary["free_cash_egp"] = p_data.get("cash_egp", 1200.0)
                 port_summary["total_mutual_funds_market_value_egp"] = p_data.get("total_mutual_funds_market_value_egp", 2.42)
                 port_summary["holdings_count"] = len(p_data.get("holdings", []))
+                port_summary["realized_pnl_egp"] = p_data.get("realized_pnl_egp", 1830.00)
+                port_summary["unrealized_pnl_egp"] = p_data.get("unrealized_pnl_egp", -1021.70)
+                port_summary["unrealized_pnl_pct"] = p_data.get("unrealized_pnl_pct", -7.80)
+                port_summary["net_total_profit_including_rotations_egp"] = p_data.get("net_total_profit_including_rotations_egp", 808.30)
+                port_summary["net_total_profit_pct"] = p_data.get("net_total_profit_pct", 6.17)
 
         egx30_level = 51492.8
         egx30_chg_pct = 0.44
@@ -2089,6 +2101,25 @@ def api_portfolio():
     analysis["total_mutual_funds_market_value_egp"] = bmm_val
     analysis["total_portfolio_equity_egp"] = round(total_stocks + free_cash + bmm_val, 2)
     analysis["portfolio_equity_egp"] = analysis["total_portfolio_equity_egp"]
+    analysis["equity_egp"] = analysis["total_portfolio_equity_egp"]
+    
+    total_cost_basis = 13094.21
+    realized_pnl = 1830.00
+    unrealized_pnl = round(total_stocks - total_cost_basis, 2)
+    unrealized_pct = round((unrealized_pnl / total_cost_basis) * 100, 2)
+    net_profit = round(realized_pnl + unrealized_pnl, 2)
+    net_profit_pct = round((net_profit / total_cost_basis) * 100, 2)
+
+    analysis["realized_pnl_egp"] = realized_pnl
+    analysis["realized_swing_profit_egp"] = realized_pnl
+    analysis["total_cost_basis_egp"] = total_cost_basis
+    analysis["unrealized_pnl_egp"] = unrealized_pnl
+    analysis["total_unrealized_pnl_egp"] = unrealized_pnl
+    analysis["unrealized_pnl_pct"] = unrealized_pct
+    analysis["net_total_profit_including_rotations_egp"] = net_profit
+    analysis["net_total_profit_pct"] = net_profit_pct
+    analysis["net_total_return_pct"] = net_profit_pct
+
     analysis["mutual_funds_holdings"] = port.get("mutual_funds_holdings", [
         {"fund_ticker": "BMM", "fund_name_ar": "صندوق بلتون مية مية (EGX100)", "units_held": 1, "avg_cost": 2.42, "current_nav": 2.42, "market_value_egp": 2.42, "fund_type": "INDEX_EQUITY", "status": "ACTIVE_HOLDING"}
     ])
