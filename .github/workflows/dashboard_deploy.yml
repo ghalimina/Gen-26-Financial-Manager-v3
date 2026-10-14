@@ -6,6 +6,7 @@ on:
     paths:
       - 'dashboard/**'
       - 'reports/**'
+      - 'data/consolidated_v3/**'
   workflow_dispatch:
 
 permissions:
@@ -34,6 +35,10 @@ jobs:
           cp -r dashboard/* _site/
           mkdir -p _site/reports
           cp -r reports/* _site/reports/ || true
+          mkdir -p _site/data/consolidated_v3
+          cp -r data/consolidated_v3/* _site/data/consolidated_v3/ || true
+          mkdir -p _site/data/egx_official_sync
+          cp -r data/egx_official_sync/* _site/data/egx_official_sync/ || true
 
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3

@@ -353,6 +353,70 @@ def get_daily_swing_ranges_report() -> str:
         return ""
 
 
+def get_smart_accumulation_radar_report() -> str:
+    """
+    Builds the executive Smart Accumulation Radar section:
+    🎯 رادار التجميع الذكي وتوقع القاع والقمة (حارس منع البيع بخسارة مفعّل)
+    Displays the 5 holdings (COMI.CA, TMGH.CA, PHDC.CA, SWDY.CA, RAYA.CA) + BMM fund unit,
+    with current price, expected drop floor (هينزل لكام), expected bounce target (هيعلى لكام),
+    and net breakeven price (+0.94% friction).
+    Also displays top 3 accumulation opportunities and recommended funds (AZ-Savings T+0, CI-GOLD).
+    """
+    lines = [
+        "🎯 <b>رادار التجميع الذكي وتوقع القاع والقمة (حارس منع البيع بخسارة مفعّل):</b>",
+        "🛡️ <i>قاعدة الحماية: يُمنع البيع نهائياً تحت سعر التعادل الصافي (Net Breakeven)</i>\n"
+    ]
+    try:
+        from core.smart_accumulation_engine import SmartAccumulationEngine
+        res = SmartAccumulationEngine.analyze_portfolio_accumulation()
+        holdings = res.get("enriched_holdings", [])
+
+        for h in holdings:
+            sym = h.get("ticker", "").replace(".CA", "")
+            name = h.get("company_name", sym)
+            cp = float(h.get("current_price", 0.0))
+            be = float(h.get("net_breakeven_price", 0.0))
+            floor = float(h.get("predicted_drop_floor_1d", 0.0))
+            ceil = float(h.get("predicted_bounce_target_1", 0.0))
+            qty = h.get("shares_owned", 0)
+            lines.append(
+                f"• <b>{name}</b> (<code>{sym}</code> | {qty} سهم):\n"
+                f"   السعر: <code>{cp:.2f} ج</code> | 📉 قاع التجميع (هينزل لكام): <code>{floor:.2f} ج</code>\n"
+                f"   📈 قمة الارتداد (هيعلى لكام): <code>{ceil:.2f} ج</code> | 🔒 سعر التعادل الصافي: <code>{be:.2f} ج</code>"
+            )
+
+        # Mutual fund BMM
+        m_funds = res.get("mutual_funds", [])
+        for mf in m_funds:
+            m_ticker = mf.get("ticker", "BMM")
+            m_name = mf.get("name_ar", "صندوق بلتون مية مية")
+            m_nav = float(mf.get("current_nav", 2.42))
+            lines.append(
+                f"• 💰 <b>{m_name}</b> (<code>{m_ticker}</code> | 1 وثيقة):\n"
+                f"   سعر الوثيقة الحالي: <code>{m_nav:.2f} ج</code> | القرار: احتفاظ بدون بيع لقمة الموجة."
+            )
+
+        # Top 3 market accumulation opportunities
+        top3_acc = SmartAccumulationEngine.get_top_market_accumulation_candidates(top_n=3)
+        if top3_acc:
+            lines.append("\n🌟 <b>أفضل 3 فرص تجميعية مؤسسية بالسوق:</b>")
+            for opp in top3_acc:
+                o_sym = opp.get("ticker", "").replace(".CA", "")
+                o_name = opp.get("name_ar", o_sym)
+                o_zone = opp.get("predicted_accumulation_zone", "")
+                o_score = opp.get("conviction_score", 0.0)
+                lines.append(f"   • <code>{o_sym}</code> ({o_name}): نطاق التجميع: <code>{o_zone}</code> (ثقة: {o_score:.0f}%)")
+
+        lines.append("\n💰 <b>أفضل الصناديق الاستثمارية المرشحة (ثاندر):</b>")
+        lines.append("   • 🟢 <b>AZ-Savings / بلتون كاش:</b> تشغيل الكاش بعائد مركب ~21.8-22.4% وسيولة فورية T+0.")
+        lines.append("   • 🟡 <b>CI-GOLD / أزيموت للذهب:</b> تحوط مباشر بسبائك الذهب عيار 24 (+33.5% YTD).")
+        lines.append("━━━━━━━━━━━━━━━━━━━━\n")
+        return "\n".join(lines) + "\n"
+    except Exception as e:
+        print(f"[WARN] Error in get_smart_accumulation_radar_report: {e}")
+        return ""
+
+
 def get_cairo_time() -> Tuple[str, str]:
     """Calculates accurate Cairo date and time taking into account Egypt daylight saving time."""
     try:
@@ -473,6 +537,7 @@ def build_concise_reports(regime_data: Dict[str, Any], macro_data: Dict[str, Any
         )
 
     portfolio_section = alerts_section + swing_ranges_section
+    accumulation_section = get_smart_accumulation_radar_report()
 
     # 3. Smart Cash Radar Summary (Mutual Funds)
     radar_section = ""
@@ -504,14 +569,16 @@ def build_concise_reports(regime_data: Dict[str, Any], macro_data: Dict[str, Any
     stock_cards = [format_compact_stock(s, i) for i, s in enumerate(top_stocks[:3], start=1)]
     core_section = "📊 <b>أبرز 3 فرص استراتيجية بالكون الاستثماري:</b>\n" + "\n\n────────────────────\n\n".join(stock_cards)
 
-    full_message = header + thndr_section + portfolio_section + radar_section + sector_rotation_section + core_section
+    full_message = header + thndr_section + portfolio_section + accumulation_section + radar_section + sector_rotation_section + core_section
 
     if len(full_message) <= 3900:
         return [full_message]
 
-    # Split cleanly if needed
-    part1 = header + thndr_section + portfolio_section + radar_section + sector_rotation_section
-    part2 = "📊 <b>أبرز الفرص الاستراتيجية بالكون الاستثماري:</b>\n━━━━━━━━━━━━━━━━━━━━\n\n" + core_section
+    # Split cleanly if needed into 2 parts under 4000 characters
+    part1 = header + thndr_section + portfolio_section + accumulation_section
+    part2 = radar_section + sector_rotation_section + core_section
+    if not part2.strip():
+        return [part1]
     return [part1, part2]
 
 

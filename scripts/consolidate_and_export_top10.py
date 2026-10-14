@@ -849,6 +849,21 @@ def run_consolidation_and_export():
     print(f"Target Directory: {OUTPUT_DIR}")
     print("=" * 75)
 
+    # Automatically ensure fresh EGX Official data and Smart Accumulation Radar telemetry
+    try:
+        from core.egx_official_harvester import EGXOfficialHarvester
+        print("  [Pre-Step] Refreshing official EGX master telemetry snapshot...")
+        EGXOfficialHarvester.run_full_harvest_cycle()
+    except Exception as e:
+        print(f"  [Notice] EGX harvester notice: {e}")
+
+    try:
+        from core.smart_accumulation_engine import SmartAccumulationEngine
+        print("  [Pre-Step] Refreshing Smart Accumulation & No-Loss Guard predictions...")
+        SmartAccumulationEngine.analyze_portfolio_accumulation()
+    except Exception as e:
+        print(f"  [Notice] Smart accumulation notice: {e}")
+
     files_builders = [
         ("01_portfolio_and_swing_advisor.json", build_01_portfolio_and_swing_advisor),
         ("02_macro_and_market_regime.json", build_02_macro_and_market_regime),

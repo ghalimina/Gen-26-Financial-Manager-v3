@@ -7,6 +7,7 @@
 
 from typing import Dict, List, Any, Optional
 import numpy as np
+import pandas as pd
 try:
     from scipy import stats
 except ImportError:

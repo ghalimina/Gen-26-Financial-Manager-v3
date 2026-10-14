@@ -17,6 +17,8 @@ WORKSPACE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if WORKSPACE not in sys.path:
     sys.path.insert(0, WORKSPACE)
 
+from core.market_price_service import MarketPriceService
+
 CANONICAL_PRICES_PATH = os.path.join(WORKSPACE, "data", "canonical_prices_live.json")
 SWING_ADVISOR_PATH = os.path.join(WORKSPACE, "data", "consolidated_v3", "01_portfolio_and_swing_advisor.json")
 TOP12_OPPORTUNITIES_PATH = os.path.join(WORKSPACE, "data", "consolidated_v3", "06_top12_short_term_opportunities.json")
@@ -44,6 +46,8 @@ class TelegramInteractiveCopilot:
 
         if cmd in ["/start", "/help"]:
             return cls.cmd_help()
+        elif cmd in ["/accumulate", "/predict", "/acc"]:
+            return cls.cmd_accumulate(arg)
         elif cmd in ["/price", "/p", "/quote"]:
             return cls.cmd_price(arg)
         elif cmd in ["/swing", "/swings", "/orders"]:
@@ -66,13 +70,14 @@ class TelegramInteractiveCopilot:
             "🤖 *مساعد GEN-26 الذكي للتداول الكمي (EGX Copilot)*\n"
             "━━━━━━━━━━━━━━━━━━━━\n"
             "📌 *الأوامر السريعة المتاحة (قراءة خلال 10 ثوانٍ):*\n\n"
+            "🔹 `/accumulate [السهم]` أو `/predict <السهم>` — توقع القاع والقمة، وسعر التعادل الصافي، وحارس منع البيع بخسارة.\n"
             "🔹 `/price <السهم>` — السعر اللحظي، ومسافة الهدف بالقرش، والوقف، وسمية VPIN.\n"
             "🔹 `/swing` — مستويات السوينج بالقرش لأسهم المحفظة الـ 5 لتطبيق ثاندر.\n"
             "🔹 `/portfolio` — ملخص المحفظة (13,658.56 ج)، والكاش الحر، والأرباح المحققة.\n"
             "🔹 `/trap <السهم>` — كشف مصيدة مزاد الافتتاح والسيولة الزائفة.\n"
             "🔹 `/top` — أفضل 5 فرص كمية معتمدة للشراء الفوري.\n"
             "━━━━━━━━━━━━━━━━━━━━\n"
-            "💡 *أمثلة:* `/price COMI` أو `/trap RAYA` أو `/swing`"
+            "💡 *أمثلة:* `/predict COMI` أو `/accumulate` أو `/price SWDY` أو `/swing`"
         )
 
     @classmethod
@@ -83,6 +88,124 @@ class TelegramInteractiveCopilot:
         if not t.endswith(".CA") and len(t) <= 5:
             return f"{t}.CA"
         return t
+
+    @classmethod
+    def cmd_accumulate(cls, ticker: str = "") -> str:
+        """
+        /accumulate [ticker] or /predict [ticker]
+        Provides expected drop floor (هينزل لكام), bounce target (هيعلى لكام),
+        net breakeven (+0.94% Thndr fees), and NO_LOSS_SELL_GUARD status.
+        If no ticker provided, outputs full 5-position portfolio accumulation radar.
+        """
+        from core.smart_accumulation_engine import SmartAccumulationEngine
+        raw_ticker = (ticker or "").strip()
+
+        if not raw_ticker:
+            # Full portfolio accumulation radar
+            radar = SmartAccumulationEngine.analyze_portfolio_accumulation()
+            holdings = radar.get("enriched_holdings", [])
+            lines = [
+                "🎯 *رادار التجميع الذكي وتوقع القاع والقمة (GEN-26)*",
+                "🛡️ *حارس منع البيع بخسارة مفعّل (NO_LOSS_SELL_GUARD)*",
+                "━━━━━━━━━━━━━━━━━━━━"
+            ]
+            for h in holdings:
+                sym = h.get("ticker", "").replace(".CA", "")
+                name = h.get("company_name", sym)
+                cp = float(h.get("current_price", 0.0))
+                floor = float(h.get("predicted_drop_floor_1d", 0.0))
+                ceil = float(h.get("predicted_bounce_target_1", 0.0))
+                be = float(h.get("net_breakeven_price", 0.0))
+                qty = h.get("shares_owned", 0)
+                lines.append(
+                    f"📌 *{name}* (`{sym}` | {qty} سهم):\n"
+                    f"   • السعر: `{cp:.2f} ج` | التعادل الصافي: `{be:.2f} ج`\n"
+                    f"   • 📉 قاع التجميع (هينزل لكام): `{floor:.2f} ج`\n"
+                    f"   • 📈 قمة الارتداد (هيعلى لكام): `{ceil:.2f} ج`"
+                )
+
+            # BMM Fund
+            lines.append(
+                "• 💰 *صندوق بلتون مية مية* (`BMM` | 1 وثيقة):\n"
+                "   سعر الوثيقة: `2.42 ج` | احتفاظ لقمة الموجة."
+            )
+
+            # Top 3
+            top3 = SmartAccumulationEngine.get_top_market_accumulation_candidates(3)
+            if top3:
+                lines.append("\n🌟 *أفضل 3 فرص تجميعية بالسوق:*")
+                for opp in top3:
+                    o_sym = opp.get("ticker", "").replace(".CA", "")
+                    lines.append(f"   • `{o_sym}` ({opp.get('name_ar', '')}): نطاق التجميع `{opp.get('predicted_accumulation_zone', '')}`")
+
+            lines.append("━━━━━━━━━━━━━━━━━━━━")
+            lines.append("📱 *التنفيذ على ثاندر:* ضع أمر شراء محدد (Limit Order) عند قاع التجميع فقط، وتجنب بيع الأسهم الأصلية قبل التعادل الصافي.")
+            return "\n".join(lines)
+
+        # Single ticker prediction
+        sym = cls._normalize_ticker(raw_ticker)
+        canonical = MarketPriceService.get_canonical_price_record(sym)
+        cp = float(canonical.get("price", 0.0)) if canonical else 0.0
+
+        if cp <= 0:
+            # Fallback lookup in precomputed_rankings.json
+            rank_path = os.path.join(WORKSPACE, "data", "precomputed_rankings.json")
+            if os.path.exists(rank_path):
+                try:
+                    with open(rank_path, "r", encoding="utf-8") as f:
+                        stocks = json.load(f)
+                        for s in stocks:
+                            if s.get("ticker") == sym:
+                                cp = float(s.get("current_price", 0.0))
+                                break
+                except Exception:
+                    pass
+
+        if cp <= 0:
+            return f"❌ لم يتم العثور على بيانات تسعير للسهم: `{sym}`. تأكد من الرمز (مثل: COMI, TMGH, PHDC)."
+
+        # Check if held in portfolio for entry price
+        entry_price = None
+        portfolio_file = os.path.join(WORKSPACE, "data", "user_real_portfolio.json")
+        if os.path.exists(portfolio_file):
+            try:
+                with open(portfolio_file, "r", encoding="utf-8") as f:
+                    pdata = json.load(f)
+                    for pos in (pdata.get("positions") or pdata.get("holdings", [])):
+                        if pos.get("ticker") == sym:
+                            entry_price = float(pos.get("average_entry_price", 0.0))
+                            break
+            except Exception:
+                pass
+
+        bounds = SmartAccumulationEngine.calculate_price_boundaries(sym, current_price=cp, entry_price=entry_price)
+        name = canonical.get("company_name", sym)
+
+        floor_1d = bounds["predicted_drop_floor_1d"]
+        accum_zone = bounds["predicted_accumulation_zone_5d"]
+        bounce_1 = bounds["predicted_bounce_target_1"]
+        wave_ceil = bounds["predicted_wave_ceiling_20d"]
+        be_price = bounds["net_breakeven_price"]
+        guard = "🔒 مفعّل (ممنوع البيع بخسارة)" if bounds["no_loss_guard_active"] else "غير مفعّل"
+
+        entry_line = f"• *متوسط الشراء:* `{entry_price:.2f} ج`\n" if entry_price else ""
+
+        return (
+            f"🎯 *توقع القاع والقمة والتجميع الذكي — {name} (`{sym}`)*\n"
+            f"━━━━━━━━━━━━━━━━━━━━\n"
+            f"💵 *السعر الحالي:* `{cp:.2f} ج.م`\n"
+            f"{entry_line}"
+            f"🔒 *سعر التعادل الصافي (شامل 0.94% ثاندر):* `{be_price:.2f} ج.م`\n"
+            f"━━━━━━━━━━━━━━━━━━━━\n"
+            f"📉 *هينزل لكام (قاع التجميع اللحظي):* `{floor_1d:.2f} ج.م`\n"
+            f"🟡 *منطقة التجميع الذهبية (5 أيام):* `{accum_zone:.2f} ج.م`\n"
+            f"📈 *هيعلى لكام (قمة الارتداد الأولى):* `{bounce_1:.2f} ج.م`\n"
+            f"🚀 *قمة الموجة لجني الأرباح (20 يوماً):* `{wave_ceil:.2f} ج.م`\n"
+            f"━━━━━━━━━━━━━━━━━━━━\n"
+            f"🛡️ *حارس منع البيع بخسارة:* {guard}\n"
+            f"💡 *الخطة المقترحة:* {bounds['sell_guidance_ar']}\n"
+            f"📱 *نصيحة ثاندر:* ضع أوامر شراء محددة (Limit Orders) داخل نطاق `{accum_zone:.2f} - {floor_1d:.2f}` ج.م فقط."
+        )
 
     @classmethod
     def cmd_price(cls, ticker: str) -> str:

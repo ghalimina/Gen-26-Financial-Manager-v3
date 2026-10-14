@@ -181,6 +181,13 @@ class EGXOfficialHarvester:
         snapshot = cls.get_master_snapshot()
         return snapshot.get("institutional_investor_flows", {})
 
+    @classmethod
+    def run_full_harvest_cycle(cls) -> Dict[str, Any]:
+        """
+        Executes a harvest cycle from official EGX portal with baseline fallback.
+        """
+        return cls.get_master_snapshot(force_refresh=True)
+
 
 if __name__ == "__main__":
     snap = EGXOfficialHarvester.get_master_snapshot(force_refresh=True)

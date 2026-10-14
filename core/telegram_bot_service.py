@@ -49,6 +49,8 @@ class TelegramBotService:
 
         if cmd in ["/start", "/help"]:
             return cls._cmd_help()
+        elif cmd in ["/accumulate", "/predict", "/acc"]:
+            return cls._cmd_accumulate(arg)
         elif cmd in ["/scan", "/scanner", "/alpha"]:
             return cls._cmd_scan()
         elif cmd in ["/analysis", "/dossier", "/memo", "/stock"]:
@@ -67,6 +69,7 @@ class TelegramBotService:
         return (
             "🤖 *مساعد التداول الكمي الذكي لمنظومة GEN-26 (البورصة المصرية)*\n\n"
             "📋 *الأوامر المتاحة:*\n"
+            "• `/accumulate [سهم]` أو `/predict <سهم>` — توقع القاع والقمة، وسعر التعادل الصافي، وحارس منع البيع بخسارة.\n"
             "• `/scan` — مسح السوق وجلب أفضل فرص الألفا اليومية.\n"
             "• `/analysis <كود السهم>` — تقرير تحليلي كمي شامل (مثال: `/analysis COMI`).\n"
             "• `/price <كود السهم>` — السعر اللحظي ونطاق الدخول ووقف الخسارة.\n"
@@ -74,6 +77,17 @@ class TelegramBotService:
             "• `/status` — حالة المنظومة والنظام الاقتصادي للبنك المركزي.\n"
             "• `/help` — عرض هذه القائمة الإرشادية."
         )
+
+    @classmethod
+    def _cmd_accumulate(cls, ticker: str = "") -> str:
+        """
+        Handles /accumulate or /predict <ticker> using TelegramInteractiveCopilot.
+        """
+        try:
+            from core.telegram_interactive_copilot import TelegramInteractiveCopilot
+            return TelegramInteractiveCopilot.cmd_accumulate(ticker)
+        except Exception as e:
+            return f"⚠️ خطأ أثناء حساب مستويات التجميع والقاع والقمة: {e}"
 
     @classmethod
     def _cmd_scan(cls) -> str:
