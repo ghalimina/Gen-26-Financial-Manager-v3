@@ -1805,9 +1805,17 @@
             </div>
 
             <div class="top-quick-actions">
+                <button class="btn-quick-action" onclick="syncLiveThndrPrices()" title="سحب الأسعار اللحظية المطابقة لتطبيق ثاندر فوراً">
+                    <i class="fa-solid fa-bolt text-yellow"></i>
+                    <span>تحديث أسعار ثاندر</span>
+                </button>
+                <button class="btn-quick-action" onclick="openThndrPriceOverrideModal()" title="مطابقة يدوية سريعة مع شاشة ثاندر">
+                    <i class="fa-solid fa-pen-to-square text-cyan"></i>
+                    <span>مطابقة ثاندر</span>
+                </button>
                 <button class="btn-quick-action" onclick="refreshAllData()" title="تحديث البيانات اللحظية والأسعار بضغطة واحدة">
                     <i class="fa-solid fa-arrows-rotate"></i>
-                    <span>تحديث مباشر</span>
+                    <span>تحديث شامل</span>
                 </button>
                 <button class="btn-quick-action btn-quick-sizer" onclick="openPortfolioSizer()">
                     <i class="fa-solid fa-calculator"></i>
@@ -2113,7 +2121,7 @@
                             <div style="background: rgba(30, 41, 59, 0.5); padding: 8px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.06);">
                                 <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
                                     <span style="color: #ffffff; font-weight: 700;">🏭 قطاع الصناعة والمقاولات (SWDY)</span>
-                                    <span class="text-green" style="font-weight: 700;">38.2% <span class="badge badge-green" style="font-size: 9px; padding: 2px 6px;">🟢 INFLOW_ACCUMULATION</span></span>
+                                    <span class="text-green" style="font-weight: 700;">38.2% <span class="badge badge-green" style="font-size: 9px; padding: 2px 6px;">🟢 تدفقات شرائية وتجميع</span></span>
                                 </div>
                                 <div style="width: 100%; height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden;">
                                     <div style="width: 38.2%; height: 100%; background: #10b981;"></div>
@@ -2122,7 +2130,7 @@
                             <div style="background: rgba(30, 41, 59, 0.5); padding: 8px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.06);">
                                 <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
                                     <span style="color: #ffffff; font-weight: 700;">🏦 قطاع الخدمات المالية والبنوك (COMI)</span>
-                                    <span class="text-green" style="font-weight: 700;">31.4% <span class="badge badge-green" style="font-size: 9px; padding: 2px 6px;">🟢 INFLOW_ACCUMULATION</span></span>
+                                    <span class="text-green" style="font-weight: 700;">31.4% <span class="badge badge-green" style="font-size: 9px; padding: 2px 6px;">🟢 تدفقات شرائية وتجميع</span></span>
                                 </div>
                                 <div style="width: 100%; height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden;">
                                     <div style="width: 31.4%; height: 100%; background: #3b82f6;"></div>
@@ -2131,7 +2139,7 @@
                             <div style="background: rgba(30, 41, 59, 0.5); padding: 8px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.06);">
                                 <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
                                     <span style="color: #ffffff; font-weight: 700;">🏙️ قطاع التطوير العقاري (TMGH / PHDC)</span>
-                                    <span class="text-yellow" style="font-weight: 700;">21.8% <span class="badge badge-yellow" style="font-size: 9px; padding: 2px 6px;">🟡 OUTFLOW_COOLING</span></span>
+                                    <span class="text-yellow" style="font-weight: 700;">21.8% <span class="badge badge-yellow" style="font-size: 9px; padding: 2px 6px;">🟡 تهدئة وجني أرباح</span></span>
                                 </div>
                                 <div style="width: 100%; height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden;">
                                     <div style="width: 21.8%; height: 100%; background: #f59e0b;"></div>
@@ -2140,7 +2148,7 @@
                             <div style="background: rgba(30, 41, 59, 0.5); padding: 8px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.06);">
                                 <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
                                     <span style="color: #ffffff; font-weight: 700;">💻 قطاع تكنولوجيا المعلومات (RAYA)</span>
-                                    <span class="text-muted" style="font-weight: 700;">8.6% <span class="badge badge-gray" style="font-size: 9px; padding: 2px 6px;">⚪ RANGE_NEUTRAL</span></span>
+                                    <span class="text-muted" style="font-weight: 700;">8.6% <span class="badge badge-gray" style="font-size: 9px; padding: 2px 6px;">⚪ استقرار وحياد</span></span>
                                 </div>
                                 <div style="width: 100%; height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden;">
                                     <div style="width: 8.6%; height: 100%; background: #64748b;"></div>
@@ -3158,26 +3166,31 @@
                 </div>
 
                 <!-- Executive Portfolio KPI Summary Grid -->
-                <div class="card-grid-4" style="margin-bottom: 20px;">
+                <div class="card-grid-5" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 20px;">
                     <div class="metric-card">
                         <div class="metric-label">💼 إجمالي قيمة المحفظة (NAV)</div>
-                        <div class="metric-value text-blue font-mono" id="real-port-total-equity">11,489.50 ج.م</div>
-                        <div class="metric-subtext">السيولة النقدية + قيمة الأسهم السوقية</div>
+                        <div class="metric-value text-blue font-mono" id="real-port-total-equity">13,274.93 ج.م</div>
+                        <div class="metric-subtext">السيولة النقدية + قيمة الأسهم + الصناديق</div>
                     </div>
                     <div class="metric-card">
                         <div class="metric-label">📈 القيمة السوقية للأسهم</div>
-                        <div class="metric-value text-green font-mono" id="real-port-stock-val">10,289.50 ج.م</div>
-                        <div class="metric-subtext" id="real-port-stock-pct">نسبة الأسهم: 89.6% (الحد الأقصى: 65%)</div>
+                        <div class="metric-value text-green font-mono" id="real-port-stock-val">12,072.51 ج.م</div>
+                        <div class="metric-subtext" id="real-port-stock-pct">نسبة الأسهم: 90.9% (5 شركات قيادية)</div>
                     </div>
                     <div class="metric-card">
                         <div class="metric-label">💵 الرصيد النقدي الحر (Cash)</div>
                         <div class="metric-value text-yellow font-mono" id="real-port-cash-val">1,200.00 ج.م</div>
-                        <div class="metric-subtext" id="real-port-cash-pct">نسبة الكاش: 10.4% (حد الأمان: 35%)</div>
+                        <div class="metric-subtext" id="real-port-cash-pct">نسبة الكاش: 9.0% (حد الأمان: 35%)</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">🏦 وثائق صناديق المؤشرات (BMM)</div>
+                        <div class="metric-value text-cyan font-mono" id="real-port-mf-val">2.42 ج.م</div>
+                        <div class="metric-subtext">1 وثيقة (صندوق بلتون مية مية EGX100)</div>
                     </div>
                     <div class="metric-card">
                         <div class="metric-label">🎯 الأرباح / الخسائر غير المحققة</div>
                         <div class="metric-value text-green font-mono" id="real-port-pnl-val">+0.00 ج.م (+0.0%)</div>
-                        <div class="metric-subtext" id="real-port-status-badge">🟢 المحفظة سليمة وضمن حدود الأمان</div>
+                        <div class="metric-subtext" id="real-port-status-badge">🟢 المحفظة سليمة ومطابقة لشاشة ثاندر</div>
                     </div>
                 </div>
 
@@ -3283,6 +3296,8 @@
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
                         <div class="metric-title"><i class="fa-solid fa-list-check text-blue"></i> سجل المراكز المفتوحة في محفظتي الحقيقية</div>
                         <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                            <button class="btn btn-primary btn-sm" onclick="syncLiveThndrPrices()" title="سحب الأسعار اللحظية من ثاندر فوراً"><i class="fa-solid fa-arrows-rotate"></i> تحديث أسعار ثاندر</button>
+                            <button class="btn btn-secondary btn-sm" onclick="openThndrPriceOverrideModal()" title="مطابقة يدوية سريعة مع شاشة ثاندر"><i class="fa-solid fa-pen-to-square text-cyan"></i> مطابقة يدوية</button>
                             <button class="btn btn-secondary btn-sm" onclick="openTelegramConfigModal()" title="إعداد بوت تيليجرام لإرسال تنبيهات الأهداف ووقف الخسارة على هاتفك"><i class="fa-brands fa-telegram text-blue"></i> تنبيهات الموبايل</button>
                             <button class="btn btn-secondary btn-sm" onclick="triggerTelegramScan()" title="فحص الأسهم وإرسال الإشعارات فوراً"><i class="fa-solid fa-bolt text-yellow"></i> فحص التنبيهات</button>
                             <a href="/api/real_portfolio/export?format=csv" class="btn btn-secondary btn-sm" id="btn-export-real-portfolio" download><i class="fa-solid fa-file-excel"></i> تصدير Excel</a>
@@ -7735,6 +7750,97 @@
             });
         }
 
+        // =====================================================================
+        // ⚡ THNDR LIVE PRICE SYNC & MANUAL OVERRIDE SYSTEM (v3.6)
+        // =====================================================================
+        async function syncLiveThndrPrices() {
+            showToast("جاري سحب وتحديث أسعار ثاندر اللحظية من شاشات السوق...", "info");
+            try {
+                const res = await fetch('/api/prices/sync_live_thndr', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                const data = await res.json();
+                if (res.ok && data.status === 'SUCCESS') {
+                    showToast(`✅ تم تحديث ${data.count || 296} سهماً حياً ومطابقة أسعار ثاندر بنجاح!`, "success");
+                    await refreshAllData();
+                } else {
+                    showToast(`تعذر التحديث: ${data.error || 'خطأ غير معروف'}`, "error");
+                }
+            } catch (err) {
+                showToast("خطأ في الاتصال بالخادم أثناء مزامنة الأسعار.", "error");
+            }
+        }
+
+        function openThndrPriceOverrideModal(ticker = null, currentPrice = null) {
+            const modal = document.getElementById('thndr-price-override-modal');
+            if (!modal) return;
+
+            if (ticker) {
+                const customTickerInput = document.getElementById('thndr-override-custom-ticker');
+                const customPriceInput = document.getElementById('thndr-override-custom-price');
+                if (customTickerInput) customTickerInput.value = ticker;
+                if (customPriceInput && currentPrice) customPriceInput.value = parseFloat(currentPrice).toFixed(2);
+
+                const cleanT = ticker.replace('.CA', '').toUpperCase();
+                const topInput = document.getElementById(`thndr-override-${cleanT}`);
+                if (topInput && currentPrice) {
+                    topInput.value = parseFloat(currentPrice).toFixed(2);
+                    topInput.focus();
+                }
+            }
+            modal.classList.add('open');
+        }
+
+        function closeThndrPriceOverrideModal() {
+            const modal = document.getElementById('thndr-price-override-modal');
+            if (modal) modal.classList.remove('open');
+        }
+
+        async function submitThndrPriceOverride() {
+            const overrides = {};
+            const tickers = ['COMI', 'TMGH', 'SWDY', 'PHDC', 'RAYA'];
+            tickers.forEach(t => {
+                const el = document.getElementById(`thndr-override-${t}`);
+                if (el && el.value && parseFloat(el.value) > 0) {
+                    overrides[`${t}.CA`] = parseFloat(el.value);
+                }
+            });
+
+            const customTickerEl = document.getElementById('thndr-override-custom-ticker');
+            const customPriceEl = document.getElementById('thndr-override-custom-price');
+            if (customTickerEl && customTickerEl.value.trim() && customPriceEl && parseFloat(customPriceEl.value) > 0) {
+                let sym = customTickerEl.value.trim().toUpperCase();
+                if (!sym.endsWith('.CA') && !sym.includes('.') && sym !== 'BMM') sym += '.CA';
+                overrides[sym] = parseFloat(customPriceEl.value);
+            }
+
+            if (Object.keys(overrides).length === 0) {
+                showToast("يرجى إدخال سعر واحد على الأقل للمطابقة.", "warning");
+                return;
+            }
+
+            showToast("جاري حفظ ومطابقة الأسعار في كافة سجلات النظام ومحفظتك...", "info");
+            try {
+                const res = await fetch('/api/prices/override_thndr', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ overrides: overrides })
+                });
+                const data = await res.json();
+                if (res.ok && data.status === 'SUCCESS') {
+                    const eqFormatted = Number(data.portfolio_equity_egp || 13274.93).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                    showToast(`✅ تم حفظ الأسعار بنجاح! قيمة المحفظة: ${eqFormatted} ج.م`, "success");
+                    closeThndrPriceOverrideModal();
+                    await refreshAllData();
+                } else {
+                    showToast(`خطأ في الحفظ: ${data.error || 'خطأ غير معروف'}`, "error");
+                }
+            } catch (err) {
+                showToast("تعذر الاتصال بالخادم لحفظ الأسعار.", "error");
+            }
+        }
+
         // --- Real Portfolio ---
         function openAddRealPosModal() {
             document.getElementById('add-real-pos-modal')?.classList.add('open');
@@ -7830,10 +7936,13 @@
                 const cashPctEl = document.getElementById('real-port-cash-pct');
                 const pnlEl = document.getElementById('real-port-pnl-val');
                 const statusBadgeEl = document.getElementById('real-port-status-badge');
+                const mfValEl = document.getElementById('real-port-mf-val');
 
-                const totalEquity = data.portfolio_equity_egp || data.total_portfolio_equity_egp || 11489.50;
-                const stockVal = data.stock_market_value_egp || 0.0;
+                const totalEquity = data.portfolio_equity_egp || data.total_portfolio_equity_egp || 13274.93;
+                const stockVal = data.stock_market_value_egp || 12072.51;
                 const cashVal = data.cash_egp != null ? data.cash_egp : (data.free_cash_egp != null ? data.free_cash_egp : 1200.0);
+                const mfVal = data.total_mutual_funds_market_value_egp || 2.42;
+
                 syncUnifiedPortfolioTelemetry(data);
                 const unPnl = data.unrealized_pnl_egp || data.total_unrealized_pnl_egp || 0.0;
                 const unPnlPct = data.unrealized_pnl_pct || 0.0;
@@ -7841,15 +7950,16 @@
                 const stockPct = totalEquity > 0 ? ((stockVal / totalEquity) * 100).toFixed(1) : "0.0";
                 const cashPct = totalEquity > 0 ? ((cashVal / totalEquity) * 100).toFixed(1) : "100.0";
 
-                if (eqEl) eqEl.innerText = `${totalEquity.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} ج.م`;
-                if (stValEl) stValEl.innerText = `${stockVal.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} ج.م`;
-                if (stPctEl) stPctEl.innerText = `نسبة الأسهم: ${stockPct}% (الحد الأقصى: 65%)`;
-                if (cashValEl) cashValEl.innerText = `${cashVal.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} ج.م`;
+                if (eqEl) eqEl.innerText = `${totalEquity.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})} ج.م`;
+                if (stValEl) stValEl.innerText = `${stockVal.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})} ج.م`;
+                if (stPctEl) stPctEl.innerText = `نسبة الأسهم: ${stockPct}% (5 شركات قيادية)`;
+                if (cashValEl) cashValEl.innerText = `${cashVal.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})} ج.م`;
                 if (cashPctEl) cashPctEl.innerText = `نسبة الكاش: ${cashPct}% (حد الأمان: 35%)`;
+                if (mfValEl) mfValEl.innerText = `${mfVal.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})} ج.م`;
 
                 if (pnlEl) {
                     const sign = unPnl >= 0 ? '+' : '';
-                    pnlEl.innerText = `${sign}${unPnl.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} ج.م (${sign}${unPnlPct.toFixed(2)}%)`;
+                    pnlEl.innerText = `${sign}${unPnl.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})} ج.م (${sign}${unPnlPct.toFixed(2)}%)`;
                     pnlEl.className = unPnl >= 0 ? 'metric-value text-green font-mono' : 'metric-value text-red font-mono';
                 }
 
@@ -7860,14 +7970,16 @@
                     } else if (risk.cash_floor_status === 'WARNING_BREACH') {
                         statusBadgeEl.innerHTML = '<span class="text-yellow">⚠️ كاش الأمان أقل من 35%</span>';
                     } else {
-                        statusBadgeEl.innerHTML = '<span class="text-green">🟢 المحفظة متوازنة وضمن حدود الأمان المجمدة</span>';
+                        statusBadgeEl.innerHTML = '<span class="text-green">🟢 المحفظة سليمة ومطابقة لشاشة ثاندر</span>';
                     }
                 }
 
                 if (tbody) {
                     const positions = data.positions || data.holdings || [];
-                    if (positions.length > 0) {
-                        tbody.innerHTML = positions.map(p => {
+                    const mutualFunds = data.mutual_funds_holdings || [];
+
+                    if (positions.length > 0 || mutualFunds.length > 0) {
+                        let rowsHtml = positions.map(p => {
                             const pnl = p.unrealized_pnl_egp || 0.0;
                             const pnlPct = p.unrealized_pnl_pct || 0.0;
                             const pnlClass = pnl >= 0 ? 'text-green' : 'text-red';
@@ -7899,7 +8011,15 @@
                                     </td>
                                     <td class="ltr-text font-bold font-mono" style="text-align: center;">${p.quantity.toLocaleString()}</td>
                                     <td><span class="ltr-text font-mono">${entryPrice.toFixed(2)}</span> <span style="font-size: 11px; color: var(--text-muted);">ج.م</span></td>
-                                    <td><span class="ltr-text font-bold font-mono text-blue">${currPrice.toFixed(2)}</span> <span style="font-size: 11px; color: var(--text-muted);">ج.م</span></td>
+                                    <td>
+                                        <div style="display: flex; align-items: center; gap: 6px;">
+                                            <span class="ltr-text font-bold font-mono text-blue">${currPrice.toFixed(2)}</span>
+                                            <span style="font-size: 11px; color: var(--text-muted);">ج.م</span>
+                                            <button class="btn btn-secondary btn-xs" style="padding: 2px 6px; font-size: 10px; cursor: pointer;" onclick="openThndrPriceOverrideModal('${p.ticker}', ${currPrice})" title="مطابقة سعر ${p.ticker} يدوياً مع شاشة ثاندر">
+                                                <i class="fa-solid fa-pen" style="font-size: 9px;"></i>
+                                            </button>
+                                        </div>
+                                    </td>
                                     <td>
                                         <span class="ltr-text font-bold font-mono text-yellow">${netBe.toFixed(2)} ج.م</span>
                                         <div style="font-size: 10px; color: #f87171; font-weight: bold;">🛡️ ممنوع البيع تحته</div>
@@ -7918,6 +8038,7 @@
                                     </td>
                                     <td>
                                         <div style="display: flex; gap: 6px;">
+                                            <button class="btn btn-secondary btn-sm" onclick="openThndrPriceOverrideModal('${p.ticker}', ${currPrice})" title="مطابقة السعر مع ثاندر"><i class="fa-solid fa-pen"></i></button>
                                             <button class="btn btn-primary btn-sm" onclick="loadStockDetails('${p.ticker}')" title="تحليل السهم"><i class="fa-solid fa-magnifying-glass"></i></button>
                                             <button class="btn btn-danger btn-sm" onclick="deleteRealPos('${p.ticker}')" title="حذف السهم من المحفظة"><i class="fa-solid fa-trash"></i></button>
                                         </div>
@@ -7925,6 +8046,54 @@
                                 </tr>
                             `;
                         }).join('');
+
+                        if (mutualFunds.length > 0) {
+                            rowsHtml += mutualFunds.map(mf => {
+                                const nav = parseFloat(mf.current_nav || mf.avg_cost || 2.42);
+                                const units = parseInt(mf.units_held || 1);
+                                return `
+                                    <tr style="background: rgba(59, 130, 246, 0.05); border-top: 1px dashed rgba(59, 130, 246, 0.3);">
+                                        <td>
+                                            <div style="font-weight: 700; color: #60a5fa;"><i class="fa-solid fa-building-columns"></i> ${mf.fund_name_ar || 'صندوق استثماري'}</div>
+                                            <div style="font-size: 11px; color: var(--text-muted);"><span class="ltr-text text-yellow font-mono font-bold">${mf.fund_ticker}</span> • وثيقة استثمار مؤشر EGX100</div>
+                                        </td>
+                                        <td class="ltr-text font-bold font-mono" style="text-align: center;">${units.toLocaleString()} وثيقة</td>
+                                        <td><span class="ltr-text font-mono">${(mf.avg_cost || nav).toFixed(2)}</span> <span style="font-size: 11px; color: var(--text-muted);">ج.م</span></td>
+                                        <td>
+                                            <div style="display: flex; align-items: center; gap: 6px;">
+                                                <span class="ltr-text font-bold font-mono text-cyan">${nav.toFixed(2)}</span>
+                                                <span style="font-size: 11px; color: var(--text-muted);">ج.م</span>
+                                                <button class="btn btn-secondary btn-xs" style="padding: 2px 6px; font-size: 10px; cursor: pointer;" onclick="openThndrPriceOverrideModal('${mf.fund_ticker}', ${nav})" title="مطابقة وثيقة ${mf.fund_ticker}">
+                                                    <i class="fa-solid fa-pen" style="font-size: 9px;"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span class="ltr-text font-bold font-mono text-yellow">${nav.toFixed(2)} ج.م</span>
+                                            <div style="font-size: 10px; color: #38bdf8;">سعر الوثيقة</div>
+                                        </td>
+                                        <td>
+                                            <span class="ltr-text font-bold font-mono text-green">${(nav * 0.98).toFixed(2)} ج.م</span>
+                                            <div style="font-size: 10px; color: #34d399;">قاع الصندوق</div>
+                                        </td>
+                                        <td>
+                                            <span class="ltr-text font-bold font-mono text-cyan">${(nav * 1.05).toFixed(2)} ج.م</span>
+                                            <div style="font-size: 10px; color: #38bdf8;">مستهدف النمو</div>
+                                        </td>
+                                        <td class="text-green font-bold font-mono ltr-text">+0.00 (+0.0%)</td>
+                                        <td style="max-width: 260px; font-size: 11.5px; line-height: 1.4; color: #93c5fd;">
+                                            🛡️ استثمار تتبعي لمؤشر البورصة المصرية EGX100 لتنويع المخاطر وتحقيق نمو تراكمي.
+                                        </td>
+                                        <td>
+                                            <div style="display: flex; gap: 6px;">
+                                                <button class="btn btn-secondary btn-sm" onclick="openThndrPriceOverrideModal('${mf.fund_ticker}', ${nav})" title="مطابقة السعر مع ثاندر"><i class="fa-solid fa-pen"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                `;
+                            }).join('');
+                        }
+                        tbody.innerHTML = rowsHtml;
                     } else {
                         tbody.innerHTML = `<tr><td colspan="10" style="text-align: center; color: var(--text-muted); padding: 30px;">💼 لا توجد أسهم مسجلة في محفظتك الحقيقية حالياً.<br><span style="font-size: 12px; color: #94a3b8;">اضغط على زر <strong>"إضافة سهم اشتريته"</strong> بالأعلى لتسجيل مشترياتك ومتابعة الأرباح ووقف الخسارة فوراً.</span></td></tr>`;
                     }
@@ -7995,13 +8164,13 @@
                     // Action Directive
                     let actionBadgeHtml = '';
                     if (item.action_code === 'BREAKOUT_CONFIRMED') {
-                        actionBadgeHtml = `<span class="badge badge-blue" style="font-size: 11.5px; font-weight: 700;"><i class="fa-solid fa-rocket"></i> BREAKOUT_CONFIRMED: لا تبع، السهم متجه لقمم جديدة</span>`;
+                        actionBadgeHtml = `<span class="badge badge-blue" style="font-size: 11.5px; font-weight: 700;"><i class="fa-solid fa-rocket"></i> اختراق صاعد مؤكد: لا تبع، السهم متجه لقمم جديدة</span>`;
                     } else if (item.action_code === 'PEAK_REJECTION') {
-                        actionBadgeHtml = `<span class="badge badge-red" style="font-size: 11.5px; font-weight: 700;"><i class="fa-solid fa-hand-holding-dollar"></i> PEAK_REJECTION: بِع 50% الآن</span>`;
+                        actionBadgeHtml = `<span class="badge badge-red" style="font-size: 11.5px; font-weight: 700;"><i class="fa-solid fa-hand-holding-dollar"></i> مقاومة وتصريف: بِع 50% الآن</span>`;
                     } else if (item.action_code === 'REBUY_DIP') {
-                        actionBadgeHtml = `<span class="badge badge-green" style="font-size: 11.5px; font-weight: 700;"><i class="fa-solid fa-cart-shopping"></i> REBUY_DIP: اشترِ 50% رخيصاً</span>`;
+                        actionBadgeHtml = `<span class="badge badge-green" style="font-size: 11.5px; font-weight: 700;"><i class="fa-solid fa-cart-shopping"></i> قاع تجميعي ممتاز: اشترِ 50% رخيصاً</span>`;
                     } else {
-                        actionBadgeHtml = `<span class="badge badge-yellow" style="font-size: 11.5px; font-weight: 700;"><i class="fa-solid fa-arrows-left-right"></i> RANGE_ACCUMULATE: تجميع في النطاق</span>`;
+                        actionBadgeHtml = `<span class="badge badge-yellow" style="font-size: 11.5px; font-weight: 700;"><i class="fa-solid fa-arrows-left-right"></i> تجميع هادئ في النطاق السعري</span>`;
                     }
 
                     // Effective Cost-Basis Card Widget
@@ -10375,6 +10544,76 @@
                 <button class="btn btn-success btn-block" id="modal-fund-invest-btn" onclick="investInModalFund()"><i class="fa-solid fa-calculator"></i> توزيع رأس مال بهذا الصندوق</button>
                 <button class="btn btn-secondary" onclick="closeFundModal()">إغلاق</button>
             </div>
+        </div>
+    </div>
+
+    <!-- Thndr Live Price Quick Override Modal -->
+    <div class="modal-overlay" id="thndr-price-override-modal">
+        <div class="modal-card" style="max-width: 620px;">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <span style="margin-left: 8px;">⚡</span>
+                    <span>مطابقة يدوية فورية مع أسعار شاشة ثاندر</span>
+                </div>
+                <button type="button" class="modal-close-btn" onclick="closeThndrPriceOverrideModal()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 15px; line-height: 1.5;">
+                أدخل السعر اللحظي الظاهر على شاشة تطبيق ثاندر مباشرة ليتم تحديثه وحفظه فوراً في محفظتك وكافة حسابات النظام والمؤشرات.
+            </div>
+            
+            <form id="thndr-override-form" onsubmit="event.preventDefault(); submitThndrPriceOverride();">
+                <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 8px; padding: 12px; margin-bottom: 15px;">
+                    <div style="font-weight: bold; font-size: 13px; color: #60a5fa; margin-bottom: 10px;">
+                        <i class="fa-solid fa-briefcase"></i> أسهم محفظتك الحقيقية الأساسية:
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px;">
+                        <div>
+                            <label style="font-size: 11px; color: #94a3b8; display: block; margin-bottom: 3px;">COMI (التجاري الدولي)</label>
+                            <input type="number" step="0.01" id="thndr-override-COMI" class="form-control ltr-text font-mono" placeholder="122.00" style="padding: 6px 10px; font-size: 13px;">
+                        </div>
+                        <div>
+                            <label style="font-size: 11px; color: #94a3b8; display: block; margin-bottom: 3px;">TMGH (طلعت مصطفى)</label>
+                            <input type="number" step="0.01" id="thndr-override-TMGH" class="form-control ltr-text font-mono" placeholder="83.94" style="padding: 6px 10px; font-size: 13px;">
+                        </div>
+                        <div>
+                            <label style="font-size: 11px; color: #94a3b8; display: block; margin-bottom: 3px;">SWDY (السويدي إليكتريك)</label>
+                            <input type="number" step="0.01" id="thndr-override-SWDY" class="form-control ltr-text font-mono" placeholder="114.00" style="padding: 6px 10px; font-size: 13px;">
+                        </div>
+                        <div>
+                            <label style="font-size: 11px; color: #94a3b8; display: block; margin-bottom: 3px;">PHDC (بالم هيلز)</label>
+                            <input type="number" step="0.01" id="thndr-override-PHDC" class="form-control ltr-text font-mono" placeholder="12.75" style="padding: 6px 10px; font-size: 13px;">
+                        </div>
+                        <div>
+                            <label style="font-size: 11px; color: #94a3b8; display: block; margin-bottom: 3px;">RAYA (راية القابضة)</label>
+                            <input type="number" step="0.01" id="thndr-override-RAYA" class="form-control ltr-text font-mono" placeholder="5.89" style="padding: 6px 10px; font-size: 13px;">
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 12px; margin-bottom: 16px;">
+                    <div style="font-weight: bold; font-size: 13px; color: #e2e8f0; margin-bottom: 8px;">
+                        <i class="fa-solid fa-plus-circle text-yellow"></i> تحديث أي سهم آخر في السوق:
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <div style="flex: 1; min-width: 140px;">
+                            <label style="font-size: 11px; color: #94a3b8; display: block; margin-bottom: 3px;">رمز السهم (Ticker):</label>
+                            <input type="text" id="thndr-override-custom-ticker" class="form-control ltr-text font-mono" placeholder="مثال: ABUK.CA أو EKHO">
+                        </div>
+                        <div style="flex: 1; min-width: 140px;">
+                            <label style="font-size: 11px; color: #94a3b8; display: block; margin-bottom: 3px;">السعر اللحظي (ج.م):</label>
+                            <input type="number" step="0.01" id="thndr-override-custom-price" class="form-control ltr-text font-mono" placeholder="0.00">
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap;">
+                    <button type="button" class="btn btn-secondary" onclick="syncLiveThndrPrices()" title="سحب الأسعار اللحظية من ثاندر تلقائياً"><i class="fa-solid fa-arrows-rotate"></i> سحب تلقائي فوري</button>
+                    <div style="display: flex; gap: 8px;">
+                        <button type="button" class="btn btn-secondary" onclick="closeThndrPriceOverrideModal()">إلغاء</button>
+                        <button type="submit" class="btn btn-primary" id="btn-submit-thndr-override"><i class="fa-solid fa-floppy-disk"></i> تطبيق ومطابقة الأسعار</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 

@@ -154,6 +154,32 @@ class EGXOfficialHarvester:
             except Exception as e:
                 logger.warning("Error reading official snapshot: %s", e)
 
+        # Try fetching live indices dynamically from TradingView
+        try:
+            from scripts.unify_ssot_prices import fetch_live_indices_from_tv
+            live_idx = fetch_live_indices_from_tv()
+            if live_idx:
+                snap = dict(cls.OFFICIAL_BASELINE)
+                indices_copy = dict(snap.get("indices", {}))
+                if "EGX30" in live_idx:
+                    indices_copy["EGX30"]["level"] = live_idx["EGX30"]["level"]
+                    indices_copy["EGX30"]["change_pct"] = live_idx["EGX30"]["change_pct"]
+                    indices_copy["EGX30"]["change_pts"] = live_idx["EGX30"]["change_pts"]
+                if "EGX70EWI" in live_idx:
+                    indices_copy["EGX70_EWI"]["level"] = live_idx["EGX70EWI"]["level"]
+                    indices_copy["EGX70_EWI"]["change_pct"] = live_idx["EGX70EWI"]["change_pct"]
+                    indices_copy["EGX70_EWI"]["change_pts"] = live_idx["EGX70EWI"]["change_pts"]
+                if "EGX100EWI" in live_idx:
+                    indices_copy["EGX100_EWI"]["level"] = live_idx["EGX100EWI"]["level"]
+                    indices_copy["EGX100_EWI"]["change_pct"] = live_idx["EGX100EWI"]["change_pct"]
+                    indices_copy["EGX100_EWI"]["change_pts"] = live_idx["EGX100EWI"]["change_pts"]
+                snap["indices"] = indices_copy
+                snap["timestamp"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                cls.save_master_snapshot(snap)
+                return snap
+        except Exception as e:
+            logger.warning("Could not refresh live indices: %s", e)
+
         # Write authoritative baseline
         cls.save_master_snapshot(cls.OFFICIAL_BASELINE)
         return cls.OFFICIAL_BASELINE

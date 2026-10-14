@@ -393,6 +393,11 @@ class RealPortfolioTracker:
                 proposed_action = "🔵 احتفاظ ومراقبة"
                 reason_detail = "المركز مستقر ضمن نطاق الحركة الطبيعي."
 
+            net_be = round(entry_p * 1.0094, 2)
+            atr = round(cp * 0.025, 2)
+            floor_p = round(max(0.01, cp - 0.85 * atr), 2)
+            ceil_p = round(max(net_be * 1.02, cp + 2.50 * atr), 2)
+
             analyzed_positions.append({
                 "holding_id": h.get("holding_id", f"POS_{sym}"),
                 "ticker": sym,
@@ -402,11 +407,16 @@ class RealPortfolioTracker:
                 "quantity": qty,
                 "average_entry_price": entry_p,
                 "avg_entry_price": entry_p,
+                "net_breakeven_price": net_be,
                 "current_price": cp,
                 "cost_basis_egp": round(cost_basis, 2),
                 "market_value_egp": round(market_val, 2),
                 "unrealized_pnl_egp": round(unrealized_pnl, 2),
                 "unrealized_pnl_pct": round(unrealized_pnl_pct, 2),
+                "predicted_drop_floor": floor_p,
+                "predicted_drop_floor_display": f"{floor_p:.2f}",
+                "predicted_wave_ceiling": ceil_p,
+                "predicted_wave_ceiling_display": f"{ceil_p:.2f}",
                 "target_price": target_p,
                 "target_return_pct": 15.0,
                 "stop_loss": stop_p,

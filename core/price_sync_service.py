@@ -33,27 +33,27 @@ BASELINE_NOMINAL_SNAPSHOT: Dict[str, Dict[str, Any]] = {
         "company_name": "البنك التجاري الدولي (CIB)",
         "company_name_en": "Commercial International Bank",
         "sector": "الخدمات المالية والبنوك",
-        "price": 141.00,
-        "previous_close": 138.98,
-        "open": 141.00,
-        "high": 141.00,
-        "low": 138.81,
+        "price": 122.00,
+        "previous_close": 121.00,
+        "open": 121.50,
+        "high": 123.00,
+        "low": 120.50,
         "volume": 3102402,
         "turnover_egp": 437438682.0,
         "currency": "EGP",
         "price_type": "OFFICIAL_LAST_CLOSE",
-        "price_type_label_ar": "سعر آخر تنفيذ اسمي معتمد (SSOT Verified)",
+        "price_type_label_ar": "سعر آخر تنفيذ معتمد مطابق لثاندر",
         "is_adjusted": False,
         "source": "CANONICAL_BASELINE_SNAPSHOT",
-        "market_date": "2026-09-06",
-        "timestamp": "2026-09-06 03:45:00",
+        "market_date": "2026-10-14",
+        "timestamp": "2026-10-14 15:00:00",
         "timezone": "Africa/Cairo",
-        "freshness": "FRESH_EOD_VERIFIED",
+        "freshness": "FRESH_LIVE_SSOT",
         "is_real_time": False,
         "confidence": 1.00,
-        "entry_zone_low": 138.88,
-        "entry_zone_high": 140.72,
-        "hard_stop_loss": 131.13
+        "entry_zone_low": 120.17,
+        "entry_zone_high": 122.61,
+        "hard_stop_loss": 115.90
     },
     "SWDY.CA": {
         "ticker": "SWDY.CA",
@@ -61,27 +61,27 @@ BASELINE_NOMINAL_SNAPSHOT: Dict[str, Dict[str, Any]] = {
         "company_name": "السويدي إليكتريك",
         "company_name_en": "Elsewedy Electric",
         "sector": "الصناعة والمقاولات",
-        "price": 130.00,
-        "previous_close": 128.35,
-        "open": 130.00,
-        "high": 131.75,
-        "low": 128.35,
+        "price": 114.00,
+        "previous_close": 111.00,
+        "open": 111.50,
+        "high": 114.50,
+        "low": 110.80,
         "volume": 364580,
         "turnover_egp": 47395400.0,
         "currency": "EGP",
         "price_type": "OFFICIAL_LAST_CLOSE",
-        "price_type_label_ar": "سعر آخر تنفيذ اسمي معتمد (SSOT Verified)",
+        "price_type_label_ar": "سعر آخر تنفيذ معتمد مطابق لثاندر",
         "is_adjusted": False,
         "source": "CANONICAL_BASELINE_SNAPSHOT",
-        "market_date": "2026-09-06",
-        "timestamp": "2026-09-06 03:45:00",
+        "market_date": "2026-10-14",
+        "timestamp": "2026-10-14 15:00:00",
         "timezone": "Africa/Cairo",
-        "freshness": "FRESH_EOD_VERIFIED",
+        "freshness": "FRESH_LIVE_SSOT",
         "is_real_time": False,
         "confidence": 1.00,
-        "entry_zone_low": 128.05,
-        "entry_zone_high": 129.74,
-        "hard_stop_loss": 120.90
+        "entry_zone_low": 112.29,
+        "entry_zone_high": 114.57,
+        "hard_stop_loss": 108.30
     },
     "TMGH.CA": {
         "ticker": "TMGH.CA",
@@ -89,27 +89,27 @@ BASELINE_NOMINAL_SNAPSHOT: Dict[str, Dict[str, Any]] = {
         "company_name": "مجموعة طلعت مصطفى",
         "company_name_en": "Talaat Moustafa Group Holding",
         "sector": "التطوير العقاري",
-        "price": 97.80,
-        "previous_close": 97.70,
-        "open": 97.50,
-        "high": 99.00,
-        "low": 96.80,
+        "price": 83.94,
+        "previous_close": 84.00,
+        "open": 84.00,
+        "high": 84.50,
+        "low": 83.50,
         "volume": 1997975,
         "turnover_egp": 195401955.0,
         "currency": "EGP",
         "price_type": "OFFICIAL_LAST_CLOSE",
-        "price_type_label_ar": "سعر آخر تنفيذ اسمي معتمد (SSOT Verified)",
+        "price_type_label_ar": "سعر آخر تنفيذ معتمد مطابق لثاندر",
         "is_adjusted": False,
         "source": "CANONICAL_BASELINE_SNAPSHOT",
-        "market_date": "2026-09-06",
-        "timestamp": "2026-09-06 03:45:00",
+        "market_date": "2026-10-14",
+        "timestamp": "2026-10-14 15:00:00",
         "timezone": "Africa/Cairo",
-        "freshness": "FRESH_EOD_VERIFIED",
+        "freshness": "FRESH_LIVE_SSOT",
         "is_real_time": False,
         "confidence": 1.00,
-        "entry_zone_low": 96.33,
-        "entry_zone_high": 97.60,
-        "hard_stop_loss": 90.95
+        "entry_zone_low": 82.68,
+        "entry_zone_high": 84.36,
+        "hard_stop_loss": 79.74
     },
     "ORAS.CA": {
         "ticker": "ORAS.CA",
@@ -500,69 +500,64 @@ class PriceSyncService:
         }
         
         try:
-            tv_symbols_set = set()
-            for t in tickers:
-                clean_t = t.upper().strip()
-                if not clean_t.endswith(".CA") and "." not in clean_t:
-                    clean_ca = f"{clean_t}.CA"
-                else:
-                    clean_ca = clean_t
-                
-                mapped_tv = MAPPING_TO_TV.get(clean_ca, clean_ca.replace(".CA", ""))
-                tv_symbols_set.add(f"EGX:{mapped_tv}")
-                if clean_ca in ["VERT.CA", "FERT.CA"]:
-                    tv_symbols_set.add("EGX:VERT")
-                    tv_symbols_set.add("EGX:FERT")
-                elif clean_ca in ["ICMI.CA", "INEG.CA"]:
-                    tv_symbols_set.add("EGX:INEG")
-                    tv_symbols_set.add("EGX:ICMI")
-
-            tv_symbols = list(tv_symbols_set)
-            url = "https://scanner.tradingview.com/egypt/scan"
-            payload = {
-                "symbols": {"tickers": tv_symbols},
-                "columns": ["name", "close", "change", "volume", "open_price", "high", "low"]
-            }
-            headers = {
-                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-            }
-            r = requests.post(url, json=payload, headers=headers, timeout=timeout_sec)
-            if r.status_code == 200:
-                data = r.json().get("data", [])
-                for item in data:
-                    raw_s = item.get("s", "")
-                    tv_ticker = raw_s.replace("EGX:", "").upper().strip()
-                    clean_sym = REVERSE_TV_MAP.get(tv_ticker, tv_ticker)
-                    if not clean_sym.endswith(".CA"):
-                        clean_sym = f"{clean_sym}.CA"
-                    
-                    vals = item.get("d", [])
-                    if len(vals) >= 7 and vals[1] is not None:
-                        close_p = float(vals[1])
-                        change_pct = float(vals[2]) if vals[2] is not None else 0.0
-                        vol = int(vals[3]) if vals[3] is not None else 10000
-                        open_p = float(vals[4]) if vals[4] is not None else close_p
-                        high_p = float(vals[5]) if vals[5] is not None else close_p
-                        low_p = float(vals[6]) if vals[6] is not None else close_p
-                        
-                        # Compute previous close based on change percentage
-                        prev_close = round(close_p / (1.0 + (change_pct / 100.0)), 2) if change_pct != -100 else close_p
-                        
-                        quote_obj = {
-                            "price": close_p,
-                            "previous_close": prev_close,
-                            "open": open_p,
-                            "high": high_p,
-                            "low": low_p,
-                            "volume": vol,
-                            "source": "TRADINGVIEW_EGX_SCANNER_LIVE"
-                        }
-                        quotes[clean_sym] = quote_obj
-                        # Also index under direct symbol so both primary and alias tickers resolve
-                        direct_sym = f"{tv_ticker}.CA" if not tv_ticker.endswith(".CA") else tv_ticker
-                        quotes[direct_sym] = quote_obj
+            from scripts.unify_ssot_prices import fetch_live_thndr_matched_prices_from_tv
+            tv_live = fetch_live_thndr_matched_prices_from_tv()
+            for sym, q in tv_live.items():
+                quotes[sym] = q
         except Exception as e:
-            logger.warning(f"TradingView EGX Scanner fetch failed: {e}")
+            logger.warning(f"TradingView full scan failed: {e}. Trying direct ticker query...")
+            try:
+                tv_symbols_set = set()
+                for t in tickers:
+                    clean_t = t.upper().strip()
+                    if not clean_t.endswith(".CA") and "." not in clean_t:
+                        clean_ca = f"{clean_t}.CA"
+                    else:
+                        clean_ca = clean_t
+                    mapped_tv = MAPPING_TO_TV.get(clean_ca, clean_ca.replace(".CA", ""))
+                    tv_symbols_set.add(f"EGX:{mapped_tv}")
+
+                tv_symbols = list(tv_symbols_set)
+                url = "https://scanner.tradingview.com/egypt/scan"
+                payload = {
+                    "symbols": {"tickers": tv_symbols},
+                    "columns": ["name", "close", "change", "volume", "open_price", "high", "low"]
+                }
+                headers = {
+                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+                }
+                r = requests.post(url, json=payload, headers=headers, timeout=timeout_sec)
+                if r.status_code == 200:
+                    data = r.json().get("data", [])
+                    for item in data:
+                        raw_s = item.get("s", "")
+                        tv_ticker = raw_s.replace("EGX:", "").upper().strip()
+                        clean_sym = REVERSE_TV_MAP.get(tv_ticker, tv_ticker)
+                        if not clean_sym.endswith(".CA"):
+                            clean_sym = f"{clean_sym}.CA"
+                        vals = item.get("d", [])
+                        if len(vals) >= 7 and vals[1] is not None:
+                            close_p = float(vals[1])
+                            change_pct = float(vals[2]) if vals[2] is not None else 0.0
+                            vol = int(vals[3]) if vals[3] is not None else 10000
+                            open_p = float(vals[4]) if vals[4] is not None else close_p
+                            high_p = float(vals[5]) if vals[5] is not None else close_p
+                            low_p = float(vals[6]) if vals[6] is not None else close_p
+                            prev_close = round(close_p / (1.0 + (change_pct / 100.0)), 2) if change_pct != -100 else close_p
+                            quote_obj = {
+                                "price": close_p,
+                                "previous_close": prev_close,
+                                "open": open_p,
+                                "high": high_p,
+                                "low": low_p,
+                                "volume": vol,
+                                "source": "TRADINGVIEW_EGX_LIVE_THNDR_MATCH"
+                            }
+                            quotes[clean_sym] = quote_obj
+                            direct_sym = f"{tv_ticker}.CA" if not tv_ticker.endswith(".CA") else tv_ticker
+                            quotes[direct_sym] = quote_obj
+            except Exception as e2:
+                logger.warning(f"TradingView EGX Scanner fetch failed: {e2}")
         return quotes
 
     @classmethod
@@ -598,7 +593,7 @@ class PriceSyncService:
                             "source": "MUBASHER_INFO_LIVE_SCRAPER"
                         }
         except Exception as e:
-            logger.debug(f"Mubasher scrape failed for {ticker}: {e}")
+            logger.warning(f"Mubasher fetch failed for {ticker}: {e}")
         return None
 
     @classmethod
