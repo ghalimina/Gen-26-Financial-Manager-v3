@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منظومة GEN-26 v3.0 — المستشار المالي والمنصة الكمية للبورصة المصرية</title>
+    <title>منظومة GEN-26 v3.8 — المستشار المالي والمنصة الكمية الذكية (Quantum Terminal)</title>
     
     
-    <!-- TailwindCSS v3 CDN & Configuration -->
     <!-- TailwindCSS v3 CDN & Configuration -->
     <script src="https://cdn.tailwindcss.com" defer></script>
     <script>
@@ -37,10 +36,10 @@
         });
     </script>
     
-    <!-- Google Fonts: Cairo & JetBrains Mono -->
+    <!-- Google Fonts: Cairo, Tajawal & JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Tajawal:wght@400;500;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -920,30 +919,45 @@
             box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
         }
 
-        /* Tables */
+        /* Tables with Sticky Headers & Tabular Numbers */
         table {
             width: 100%;
-            border-collapse: collapse;
+            border-collapse: separate;
+            border-spacing: 0;
             font-size: 12.5px;
         }
 
         th, td {
             text-align: right;
-            padding: 11px 14px;
+            padding: 12px 14px;
             border-bottom: 1px solid var(--border);
         }
 
         th {
+            position: sticky;
+            top: 0;
+            z-index: 10;
             color: var(--text-muted);
-            font-size: 11px;
-            font-weight: 700;
+            font-size: 11.5px;
+            font-weight: 800;
             text-transform: uppercase;
-            background: rgba(15, 23, 42, 0.7);
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             letter-spacing: 0.3px;
+            border-bottom: 2px solid var(--border-highlight);
+        }
+
+        td {
+            font-variant-numeric: tabular-nums;
+        }
+
+        tr {
+            transition: background 0.15s ease;
         }
 
         tr:hover td {
-            background: rgba(255, 255, 255, 0.02);
+            background: rgba(59, 130, 246, 0.05);
         }
 
         .ltr-text {
@@ -951,12 +965,274 @@
             direction: ltr;
             display: inline-block;
             text-align: left;
+            font-variant-numeric: tabular-nums;
         }
 
-        .text-green { color: #34d399 !important; }
-        .text-yellow { color: #fbbf24 !important; }
-        .text-red { color: #f87171 !important; }
-        .text-blue { color: #60a5fa !important; }
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace !important;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .text-green { color: #10b981 !important; }
+        .text-yellow { color: #f59e0b !important; }
+        .text-red { color: #f43f5e !important; }
+        .text-blue { color: #3b82f6 !important; }
+        .text-cyan { color: #06b6d4 !important; }
+
+        /* Quantum Dark Glassmorphic Enhancements */
+        .card, .metric-card {
+            background: linear-gradient(145deg, rgba(15, 23, 42, 0.90), rgba(30, 41, 59, 0.75)) !important;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(148, 163, 184, 0.15) !important;
+            border-radius: 16px !important;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5) !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card:hover, .metric-card:hover {
+            border-color: rgba(59, 130, 246, 0.4) !important;
+            box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.65), 0 0 20px rgba(59, 130, 246, 0.15) !important;
+            transform: translateY(-2px);
+        }
+
+        /* Dual Theme: Crisp Institutional Light Mode */
+        body.light-mode {
+            --bg-base: #f8fafc;
+            --bg-surface: #ffffff;
+            --bg-card: rgba(255, 255, 255, 0.95);
+            --bg-card-hover: #f1f5f9;
+            --border: rgba(203, 213, 225, 0.9);
+            --border-highlight: rgba(37, 99, 235, 0.5);
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --text-dim: #64748b;
+            background-color: #f1f5f9 !important;
+            color: #0f172a !important;
+        }
+
+        body.light-mode .main-content {
+            background: #f8fafc !important;
+        }
+
+        body.light-mode .card,
+        body.light-mode .metric-card,
+        body.light-mode .stock-card {
+            background: rgba(255, 255, 255, 0.98) !important;
+            border: 1px solid rgba(203, 213, 225, 0.95) !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06) !important;
+            color: #0f172a !important;
+        }
+
+        body.light-mode .card:hover,
+        body.light-mode .metric-card:hover {
+            border-color: rgba(37, 99, 235, 0.6) !important;
+            box-shadow: 0 8px 30px rgba(37, 99, 235, 0.12) !important;
+        }
+
+        body.light-mode th {
+            background: #e2e8f0 !important;
+            color: #1e293b !important;
+            border-bottom: 2px solid #94a3b8 !important;
+        }
+
+        body.light-mode td {
+            color: #0f172a !important;
+            border-bottom: 1px solid #e2e8f0 !important;
+        }
+
+        body.light-mode tr:hover td {
+            background: #f1f5f9 !important;
+        }
+
+        body.light-mode .top-bar {
+            background: rgba(255, 255, 255, 0.95) !important;
+            border-bottom: 1px solid #cbd5e1 !important;
+        }
+
+        body.light-mode .sidebar {
+            background: #ffffff !important;
+            border-left: 1px solid #cbd5e1 !important;
+        }
+
+        body.light-mode .top-title,
+        body.light-mode .brand-title,
+        body.light-mode .metric-value,
+        body.light-mode h2,
+        body.light-mode strong {
+            color: #0f172a !important;
+        }
+
+        body.light-mode .telemetry-banner,
+        body.light-mode .macro-barometer-banner {
+            background: #ffffff !important;
+            border: 1px solid #cbd5e1 !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04) !important;
+        }
+
+        body.light-mode .ticker-tape-container {
+            background: #ffffff !important;
+            border-bottom: 1px solid #e2e8f0 !important;
+        }
+
+        body.light-mode .ticker-item {
+            color: #334155 !important;
+        }
+
+        body.light-mode .ticker-sym {
+            color: #0f172a !important;
+        }
+
+        body.light-mode .form-control {
+            background: #ffffff !important;
+            border-color: #cbd5e1 !important;
+            color: #0f172a !important;
+        }
+
+        /* Live Ticker Tape Styles */
+        .ticker-tape-container {
+            background: rgba(10, 15, 29, 0.94);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+            display: flex;
+            align-items: center;
+            height: 38px;
+            font-size: 12px;
+            z-index: 25;
+            direction: ltr;
+        }
+
+        .ticker-tape-label {
+            background: linear-gradient(135deg, #1e3a8a 0%, #0284c7 100%);
+            color: #ffffff;
+            font-weight: 800;
+            padding: 0 16px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+            z-index: 2;
+            box-shadow: 4px 0 12px rgba(0,0,0,0.4);
+            direction: rtl;
+        }
+
+        .ticker-tape-track {
+            display: inline-flex;
+            align-items: center;
+            gap: 24px;
+            padding-left: 24px;
+            animation: tickerScroll 48s linear infinite;
+        }
+
+        .ticker-tape-track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes tickerScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .ticker-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #cbd5e1;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-variant-numeric: tabular-nums;
+            text-decoration: none;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .ticker-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #38bdf8;
+            transform: scale(1.03);
+        }
+
+        .ticker-sym {
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        .ticker-price {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+        }
+
+        .ticker-change.up {
+            color: #10b981;
+            font-weight: 700;
+        }
+
+        .ticker-change.down {
+            color: #f43f5e;
+            font-weight: 700;
+        }
+
+        /* Thndr Order & Breakeven Simulator Component Styles */
+        .thndr-simulator-card {
+            background: linear-gradient(145deg, rgba(15, 23, 42, 0.94), rgba(30, 41, 59, 0.85)) !important;
+            border: 1px solid rgba(16, 185, 129, 0.35) !important;
+            box-shadow: 0 10px 32px rgba(0, 0, 0, 0.45), 0 0 25px rgba(16, 185, 129, 0.12) !important;
+            border-radius: 16px;
+            padding: 22px;
+            margin-bottom: 24px;
+        }
+
+        .sim-kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 14px;
+            margin-top: 18px;
+        }
+
+        .sim-kpi-box {
+            background: rgba(0, 0, 0, 0.38);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 14px 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.25s ease;
+        }
+
+        .sim-kpi-box:hover {
+            border-color: rgba(59, 130, 246, 0.45);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+        }
+
+        .sim-kpi-title {
+            font-size: 11.5px;
+            font-weight: 700;
+            color: #94a3b8;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .sim-kpi-val {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 19px;
+            font-weight: 900;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .sim-kpi-sub {
+            font-size: 11px;
+            color: #64748b;
+            margin-top: 4px;
+        }
 
         /* Beginner Guide Box */
         .beginner-guide-box {
@@ -1738,8 +2014,8 @@
             <div class="sidebar-brand">
                 <div class="brand-icon">🏛️</div>
                 <div>
-                    <div class="brand-title">منظومة GEN-26 v3.0</div>
-                    <div class="brand-subtitle">المستشار الكمي والذكاء الاصطناعي</div>
+                    <div class="brand-title">منظومة GEN-26 v3.8</div>
+                    <div class="brand-subtitle">المستشار المالي الكمي (Quantum Terminal)</div>
                 </div>
             </div>
         </div>
@@ -1829,8 +2105,39 @@
                     <i class="fa-solid fa-gear text-blue"></i>
                     <span>إعدادات النظام</span>
                 </button>
+                <button class="btn-quick-action" id="theme-toggle-btn" onclick="toggleQuantumTheme()" title="تبديل المظهر بين الداكن والفاتح">
+                    <i class="fa-solid fa-moon text-cyan" id="theme-toggle-icon"></i>
+                    <span id="theme-toggle-text">المظهر</span>
+                </button>
                 <span class="badge badge-green" id="scheduler-badge">🟢 جلسة البورصة المصرية</span>
                 <span class="badge badge-red">🛡️ التداول الحقيقي محظور بأمان</span>
+            </div>
+        </div>
+
+        <!-- 🚀 Live EGX & Portfolio Ticker Tape (Sticky Marquee) -->
+        <div id="live-egx-ticker-tape" class="ticker-tape-container">
+            <div class="ticker-tape-label">
+                <span class="live-dot-pulse"></span>
+                <i class="fa-solid fa-bolt"></i> أسعار البورصة اللحظية:
+            </div>
+            <div class="ticker-tape-track" id="ticker-tape-track">
+                <span class="ticker-item"><span class="ticker-sym">🇪🇬 EGX30</span> <span class="ticker-price" id="tape-egx30">51,492.80</span> <span class="ticker-change up">▲ +0.82%</span></span>
+                <span class="ticker-item"><span class="ticker-sym">📊 EGX70</span> <span class="ticker-price" id="tape-egx70">18,330.80</span> <span class="ticker-change up">▲ +1.15%</span></span>
+                <span class="ticker-item"><span class="ticker-sym">📈 EGX100</span> <span class="ticker-price" id="tape-egx100">30,735.60</span> <span class="ticker-change up">▲ +0.94%</span></span>
+                <span class="ticker-item" onclick="navigateTo('real_portfolio')"><span class="ticker-sym">💼 محفظة ثاندر</span> <span class="ticker-price text-green" id="tape-equity">13,274.93 ج.م</span> <span class="ticker-change up">(صافي أرباح: +808.30 ج.م / +6.17%)</span></span>
+                <span class="ticker-item" onclick="loadStockDetails('COMI.CA')"><span class="ticker-sym">🏦 COMI</span> <span class="ticker-price" id="tape-COMI">122.00</span> ج.م</span>
+                <span class="ticker-item" onclick="loadStockDetails('SWDY.CA')"><span class="ticker-sym">⚡ SWDY</span> <span class="ticker-price" id="tape-SWDY">114.00</span> ج.م</span>
+                <span class="ticker-item" onclick="loadStockDetails('TMGH.CA')"><span class="ticker-sym">🏢 TMGH</span> <span class="ticker-price" id="tape-TMGH">83.94</span> ج.م</span>
+                <span class="ticker-item" onclick="loadStockDetails('PHDC.CA')"><span class="ticker-sym">🏗️ PHDC</span> <span class="ticker-price" id="tape-PHDC">12.75</span> ج.م</span>
+                <span class="ticker-item" onclick="loadStockDetails('RAYA.CA')"><span class="ticker-sym">💻 RAYA</span> <span class="ticker-price" id="tape-RAYA">5.89</span> ج.م</span>
+                <span class="ticker-item" onclick="loadStockDetails('MFPC.CA')"><span class="ticker-sym">🌾 MFPC</span> <span class="ticker-price" id="tape-MFPC">48.95</span> ج.م</span>
+                <span class="ticker-item" onclick="loadStockDetails('ABUK.CA')"><span class="ticker-sym">🧪 ABUK</span> <span class="ticker-price" id="tape-ABUK">78.50</span> ج.م</span>
+                <span class="ticker-item" onclick="loadStockDetails('AMOC.CA')"><span class="ticker-sym">🛢️ AMOC</span> <span class="ticker-price" id="tape-AMOC">9.85</span> ج.م</span>
+                <span class="ticker-item" onclick="loadStockDetails('FWRY.CA')"><span class="ticker-sym">💳 FWRY</span> <span class="ticker-price" id="tape-FWRY">6.95</span> ج.م</span>
+                <span class="ticker-item" onclick="loadStockDetails('ETEL.CA')"><span class="ticker-sym">📞 ETEL</span> <span class="ticker-price" id="tape-ETEL">145.00</span> ج.م</span>
+                <span class="ticker-item" onclick="loadStockDetails('ORAS.CA')"><span class="ticker-sym">🏗️ ORAS</span> <span class="ticker-price" id="tape-ORAS">907.00</span> ج.م</span>
+                <span class="ticker-item"><span class="ticker-sym">🥇 ذهب عيار 24</span> <span class="ticker-price" id="tape-gold">4,180</span> ج.م</span>
+                <span class="ticker-item"><span class="ticker-sym">💵 USD/EGP</span> <span class="ticker-price" id="tape-usd">52.32</span> ج.م</span>
             </div>
         </div>
 
@@ -1843,11 +2150,11 @@
                 </span>
                 <span class="macro-indicator-pill">
                     <span>📊 <strong>مؤشر EGX30:</strong></span>
-                    <span class="ltr-text text-blue font-bold">31,450</span> نقطة
+                    <span id="macro-egx30-val" class="ltr-text text-blue font-bold">51,492.80</span> نقطة
                 </span>
                 <span class="macro-indicator-pill">
-                    <span>📈 <strong>مؤشر EGX100:</strong></span>
-                    <span class="ltr-text text-green font-bold">53,265</span> نقطة
+                    <span>📈 <strong>مؤشر EGX70:</strong></span>
+                    <span id="macro-egx70-val" class="ltr-text text-green font-bold">18,330.80</span> نقطة
                 </span>
                 <span class="macro-indicator-pill">
                     <span>🏛️ <strong>فائدة المركزي (CBE):</strong></span>
@@ -2319,7 +2626,7 @@
                             </div>
                             <div style="margin-top: 14px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; font-size: 11px; color: #94a3b8;">
                                 <span>الكاش الاستراتيجي الموصى به: <strong class="text-green" id="ai-rec-cash-floor">10%</strong></span>
-                                <span>EGX30: <strong class="font-mono text-blue" id="ai-egx30-level">31,450</strong> | EGX100: <strong class="font-mono text-green">53,265</strong></span>
+                                <span>EGX30: <strong class="font-mono text-blue" id="ai-egx30-level">51,492.80</strong> | EGX70: <strong class="font-mono text-green" id="ai-egx70-level">18,330.80</strong></span>
                             </div>
                         </div>
 
@@ -2850,11 +3157,11 @@
                         <div style="display: flex; align-items: center; gap: 10px; flex-grow: 1; max-width: 480px;">
                             <label style="font-size: 13px; font-weight: 700; white-space: nowrap; margin: 0;">اختر شركة للتحليل:</label>
                             <select id="details-stock-select" class="form-control" onchange="loadStockDetails(this.value)" style="font-size: 13px; font-weight: 600;">
-                                <option value="COMI.CA">البنك التجاري الدولي (COMI.CA) — 122.70 ج.م</option>
-                                <option value="SWDY.CA">السويدي إليكتريك (SWDY.CA) — 112.60 ج.م</option>
-                                <option value="TMGH.CA">مجموعة طلعت مصطفى (TMGH.CA) — 86.30 ج.م</option>
-                                <option value="PHDC.CA">بالم هيلز للتعمير (PHDC.CA) — 12.87 ج.م</option>
-                                <option value="RAYA.CA">راية القابضة (RAYA.CA) — 6.33 ج.م</option>
+                                <option value="COMI.CA">البنك التجاري الدولي (COMI.CA) — 122.00 ج.م</option>
+                                <option value="SWDY.CA">السويدي إليكتريك (SWDY.CA) — 114.00 ج.م</option>
+                                <option value="TMGH.CA">مجموعة طلعت مصطفى (TMGH.CA) — 83.94 ج.م</option>
+                                <option value="PHDC.CA">بالم هيلز للتعمير (PHDC.CA) — 12.75 ج.م</option>
+                                <option value="RAYA.CA">راية القابضة (RAYA.CA) — 5.89 ج.م</option>
                                 <option value="ESRS.CA">حديد عز (ESRS.CA) — 125.00 ج.م</option>
                                 <option value="EKHO.CA">القابضة المصرية الكويتية (EKHO.CA) — 0.67 $</option>
                                 <option value="EKHOA.CA">القابضة المصرية الكويتية (EKHOA.CA) — 24.13 ج.م</option>
@@ -3192,6 +3499,103 @@
                         <div class="metric-value text-green font-mono" id="real-port-pnl-val">+808.30 ج.م (+6.17%)</div>
                         <div class="metric-subtext" id="real-port-status-badge">
                             🟢 أرباح تدوير محققة: <strong class="text-green">+1,830.00 ج.م</strong> | تراجع ورقي: <span class="text-yellow">-1,021.70 ج.م (-7.80%)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 🧮 حاسبة أوامر ثاندر الذكية لتعديل المتوسط وتكبير الأسهم (شاملة عمولة 0.94%) -->
+                <div class="thndr-simulator-card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+                        <div>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <span style="font-size: 24px;">🧮</span>
+                                <h3 style="font-size: 18px; font-weight: 800; color: #ffffff; margin: 0;">
+                                    حاسبة أوامر ثاندر الذكية لتعديل المتوسط وتكبير الأسهم (شاملة عمولة 0.94%)
+                                </h3>
+                                <span class="badge badge-green" style="font-size: 11px;">محاكاة تفاعلية فورية</span>
+                            </div>
+                            <div style="font-size: 12.5px; color: var(--text-muted); margin-top: 4px;">
+                                احسب بدقة كمية الأسهم الإضافية، وسعر التعادل الصافي بعد العملية (شامل عمولة الشراء والبيع 0.94%)، ومقدار خفض متوسط الشراء وربحك المتوقع عند أول ارتداد.
+                            </div>
+                        </div>
+                        <button class="btn btn-secondary btn-sm" onclick="copyThndrSimOrderToClipboard()">
+                            <i class="fa-solid fa-copy text-cyan"></i>
+                            <span>نسخ تفاصيل أمر الشراء لتطبيق ثاندر</span>
+                        </button>
+                    </div>
+
+                    <!-- Input Controls Row -->
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; background: rgba(0,0,0,0.25); padding: 16px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.06);">
+                        <div>
+                            <label style="font-size: 12px; font-weight: 700; color: #cbd5e1; margin-bottom: 6px; display: block;">
+                                🏢 اختر السهم من محفظتك:
+                            </label>
+                            <select id="sim-stock-select" class="form-control" onchange="onSimStockChange()" style="font-weight: 700; font-size: 13.5px;">
+                                <option value="COMI.CA">🏦 البنك التجاري الدولي (COMI.CA) — ملكية: 50 سهم @ 120.83 ج.م</option>
+                                <option value="SWDY.CA" selected>⚡ السويدي إليكتريك (SWDY.CA) — ملكية: 14 سهم @ 107.56 ج.م</option>
+                                <option value="TMGH.CA">🏢 مجموعة طلعت مصطفى (TMGH.CA) — ملكية: 26 سهم @ 83.17 ج.م</option>
+                                <option value="PHDC.CA">🏗️ بالم هيلز للتعمير (PHDC.CA) — ملكية: 180 سهم @ 12.11 ج.م</option>
+                                <option value="RAYA.CA">💻 راية القابضة (RAYA.CA) — ملكية: 220 سهم @ 5.47 ج.م</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label style="font-size: 12px; font-weight: 700; color: #cbd5e1; margin-bottom: 6px; display: flex; justify-content: space-between;">
+                                <span>💵 مبلغ الشراء المتاح بالجنيه:</span>
+                                <span class="text-yellow" style="cursor: pointer;" onclick="document.getElementById('sim-amount-input').value = 1200; calculateThndrOrderSimulation();">(استخدم الكاش الحر: 1,200 ج.م)</span>
+                            </label>
+                            <input type="number" id="sim-amount-input" class="form-control font-mono" value="1200" min="10" step="50" oninput="calculateThndrOrderSimulation()" style="font-weight: 800; font-size: 15px; color: #fbbf24;">
+                        </div>
+
+                        <div>
+                            <label style="font-size: 12px; font-weight: 700; color: #cbd5e1; margin-bottom: 6px; display: flex; justify-content: space-between;">
+                                <span>🎯 سعر الشراء المستهدف في ثاندر (Limit Order):</span>
+                                <span id="sim-floor-hint" class="text-green" style="font-size: 11px;">قاع التجميع: 112.50 ج.م</span>
+                            </label>
+                            <input type="number" id="sim-target-price-input" class="form-control font-mono" value="112.50" min="0.01" step="0.05" oninput="calculateThndrOrderSimulation()" style="font-weight: 800; font-size: 15px; color: #38bdf8;">
+                        </div>
+                    </div>
+
+                    <!-- 4 Glowing KPI Boxes -->
+                    <div class="sim-kpi-grid">
+                        <!-- Box 1: Additional Shares & Remaining Cash -->
+                        <div class="sim-kpi-box" style="border-right: 3px solid #3b82f6;">
+                            <div class="sim-kpi-title">
+                                <i class="fa-solid fa-cart-plus text-blue"></i>
+                                <span>الأسهم الإضافية المشتراة</span>
+                            </div>
+                            <div class="sim-kpi-val text-blue" id="sim-res-shares">10 أسهم</div>
+                            <div class="sim-kpi-sub" id="sim-res-cash-left">الكاش المتبقي: 69.69 ج.م (شامل عمولة 0.47%)</div>
+                        </div>
+
+                        <!-- Box 2: New Average Cost -->
+                        <div class="sim-kpi-box" style="border-right: 3px solid #10b981;">
+                            <div class="sim-kpi-title">
+                                <i class="fa-solid fa-arrow-down-wide-short text-green"></i>
+                                <span>متوسط السعر الجديد (خفض التكلفة)</span>
+                            </div>
+                            <div class="sim-kpi-val text-green" id="sim-res-avg-cost">109.62 ج.م</div>
+                            <div class="sim-kpi-sub" id="sim-res-reduction">من 107.56 ج.م ⬅️ إلى 109.62 ج.م</div>
+                        </div>
+
+                        <!-- Box 3: New Net Breakeven Price -->
+                        <div class="sim-kpi-box" style="border-right: 3px solid #f59e0b;">
+                            <div class="sim-kpi-title">
+                                <i class="fa-solid fa-shield-halved text-yellow"></i>
+                                <span>سعر التعادل الصافي الجديد (عمولة 0.94%)</span>
+                            </div>
+                            <div class="sim-kpi-val text-yellow" id="sim-res-breakeven">110.65 ج.م</div>
+                            <div class="sim-kpi-sub text-yellow">🛡️ ممنوع بيع أي سهم تحت هذا السعر مطلقاً</div>
+                        </div>
+
+                        <!-- Box 4: Expected Profit at Bounce -->
+                        <div class="sim-kpi-box" style="border-right: 3px solid #06b6d4;">
+                            <div class="sim-kpi-title">
+                                <i class="fa-solid fa-chart-line-up text-cyan"></i>
+                                <span>ربح تدوير الكمية الجديدة عند قمة الارتداد</span>
+                            </div>
+                            <div class="sim-kpi-val text-cyan" id="sim-res-profit">+105.50 ج.م (+9.3%)</div>
+                            <div class="sim-kpi-sub" id="sim-res-bounce-target">مستهدف الارتداد الأول: 123.12 ج.م</div>
                         </div>
                     </div>
                 </div>
@@ -4392,6 +4796,111 @@
                         </table>
                     </div>
                 </div>
+
+                <!-- 💰 رادار أعلى عوائد الكوبونات والتوزيعات النقدية في البورصة المصرية -->
+                <div class="card" style="margin-top: 20px; border-top: 3px solid #10b981;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+                        <div>
+                            <div class="metric-title" style="font-size: 16px; margin-bottom: 2px;">
+                                <i class="fa-solid fa-coins text-green"></i>
+                                <span>أعلى عوائد الكوبونات النقدية وتوزيعات الأرباح (High Cash Dividend Yields Radar):</span>
+                            </div>
+                            <div style="font-size: 12px; color: var(--text-muted);">
+                                قائمة الشركات القيادية ذات أعلى عائد توزيع نقدي سنوي مع تقييم استدامة التوزيع وجودة التدفقات الحرة (Cash Cow Grade A+).
+                            </div>
+                        </div>
+                        <span class="badge badge-green">محدث وفق الإفصاحات الرسمية للبورصة</span>
+                    </div>
+
+                    <div style="overflow-x: auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>الشركة والرمز</th>
+                                    <th>السعر اللحظي</th>
+                                    <th>عائد التوزيع النقدي (%)</th>
+                                    <th>قيمة آخر كوبون</th>
+                                    <th>تصنيف التدفق (Cash Cow)</th>
+                                    <th>مؤشر استدامة التوزيع</th>
+                                    <th>شهر استحقاق الكوبون</th>
+                                    <th>الإجراء الاستثماري</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>بنك كريدي أجريكول مصر</strong> <span class="badge badge-blue font-mono">CIEB.CA</span></td>
+                                    <td class="font-mono">22.98 ج.م</td>
+                                    <td><strong class="text-green font-mono" style="font-size: 14px;">14.48%</strong></td>
+                                    <td class="font-mono">3.75 ج.م</td>
+                                    <td><span class="badge badge-green">A+ استثنائي</span></td>
+                                    <td><div style="display: flex; align-items: center; gap: 6px;"><div style="flex: 1; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px;"><div style="width: 94%; height: 100%; background: #10b981; border-radius: 3px;"></div></div><span class="font-mono text-green">94%</span></div></td>
+                                    <td>أبريل (سنوي)</td>
+                                    <td><span class="badge badge-green">شراء عائد نقدي قوي</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>مصر لإنتاج الأسمدة (موبكو)</strong> <span class="badge badge-blue font-mono">MFPC.CA</span></td>
+                                    <td class="font-mono">48.95 ج.م</td>
+                                    <td><strong class="text-green font-mono" style="font-size: 14px;">9.01%</strong></td>
+                                    <td class="font-mono">4.25 ج.م</td>
+                                    <td><span class="badge badge-green">A+ استثنائي</span></td>
+                                    <td><div style="display: flex; align-items: center; gap: 6px;"><div style="flex: 1; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px;"><div style="width: 92%; height: 100%; background: #10b981; border-radius: 3px;"></div></div><span class="font-mono text-green">92%</span></div></td>
+                                    <td>مايو (سنوي)</td>
+                                    <td><span class="badge badge-green">تحوط تصديري + كوبون</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>عبور لاند للصناعات الغذائية</strong> <span class="badge badge-blue font-mono">OLFI.CA</span></td>
+                                    <td class="font-mono">20.83 ج.م</td>
+                                    <td><strong class="text-green font-mono" style="font-size: 14px;">8.41%</strong></td>
+                                    <td class="font-mono">1.15 ج.م</td>
+                                    <td><span class="badge badge-green">A ممتاز</span></td>
+                                    <td><div style="display: flex; align-items: center; gap: 6px;"><div style="flex: 1; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px;"><div style="width: 88%; height: 100%; background: #10b981; border-radius: 3px;"></div></div><span class="font-mono text-green">88%</span></div></td>
+                                    <td>أبريل (سنوي)</td>
+                                    <td><span class="badge badge-green">دفاعي استهلاكي</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>القناة للتوكيلات الملاحية</strong> <span class="badge badge-blue font-mono">CSAG.CA</span></td>
+                                    <td class="font-mono">35.86 ج.م</td>
+                                    <td><strong class="text-green font-mono" style="font-size: 14px;">8.31%</strong></td>
+                                    <td class="font-mono">2.50 ج.م</td>
+                                    <td><span class="badge badge-green">A ممتاز</span></td>
+                                    <td><div style="display: flex; align-items: center; gap: 6px;"><div style="flex: 1; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px;"><div style="width: 86%; height: 100%; background: #10b981; border-radius: 3px;"></div></div><span class="font-mono text-green">86%</span></div></td>
+                                    <td>أكتوبر (سنوي)</td>
+                                    <td><span class="badge badge-green">عائد نقدي دوري</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>العربية للأسمنت</strong> <span class="badge badge-blue font-mono">ARCC.CA</span></td>
+                                    <td class="font-mono">66.95 ج.م</td>
+                                    <td><strong class="text-green font-mono" style="font-size: 14px;">7.92%</strong></td>
+                                    <td class="font-mono">1.10 ج.م</td>
+                                    <td><span class="badge badge-green">A ممتاز</span></td>
+                                    <td><div style="display: flex; align-items: center; gap: 6px;"><div style="flex: 1; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px;"><div style="width: 84%; height: 100%; background: #10b981; border-radius: 3px;"></div></div><span class="font-mono text-green">84%</span></div></td>
+                                    <td>مايو (سنوي)</td>
+                                    <td><span class="badge badge-blue">مستقر</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>الشركة الشرقية (إيسترن كومباني)</strong> <span class="badge badge-blue font-mono">EAST.CA</span></td>
+                                    <td class="font-mono">28.11 ج.م</td>
+                                    <td><strong class="text-green font-mono" style="font-size: 14px;">5.30%</strong></td>
+                                    <td class="font-mono">2.15 ج.م</td>
+                                    <td><span class="badge badge-green">A كاش قوي</span></td>
+                                    <td><div style="display: flex; align-items: center; gap: 6px;"><div style="flex: 1; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px;"><div style="width: 90%; height: 100%; background: #10b981; border-radius: 3px;"></div></div><span class="font-mono text-green">90%</span></div></td>
+                                    <td>نوفمبر (سنوي)</td>
+                                    <td><span class="badge badge-green">سيولة دفاعية عالية</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>البنك التجاري الدولي</strong> <span class="badge badge-blue font-mono">COMI.CA</span></td>
+                                    <td class="font-mono">122.00 ج.م</td>
+                                    <td><strong class="text-green font-mono" style="font-size: 14px;">4.90%</strong></td>
+                                    <td class="font-mono">5.50 ج.م</td>
+                                    <td><span class="badge badge-green">A+ مؤسسي</span></td>
+                                    <td><div style="display: flex; align-items: center; gap: 6px;"><div style="flex: 1; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px;"><div style="width: 96%; height: 100%; background: #10b981; border-radius: 3px;"></div></div><span class="font-mono text-green">96%</span></div></td>
+                                    <td>مارس (سنوي)</td>
+                                    <td><span class="badge badge-green">سهم قيادي أساسي</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
 
             <!-- ============================================================= -->
@@ -4420,6 +4929,67 @@
                         • <strong>Z-Score ≥ +2.0:</strong> السهم (A) متضخم جداً مقارنة بـ (B) ← التوصية: <strong>بيع A / شراء B</strong>.<br>
                         • <strong>Z-Score ≤ -2.0:</strong> السهم (A) مقيم بأقل من قيمته العادلة مقابل (B) ← التوصية: <strong>شراء A / بيع B</strong>.<br>
                         • <strong>-2.0 < Z-Score < +2.0:</strong> الفارق السعري ضمن النطاق الطبيعي المتوازن ← التوصية: <strong>منطقة توازن محايدة</strong>.
+                    </div>
+                </div>
+
+                <!-- 🌍 شاشة مراجحة شهادات الإيداع الدولية في بورصة لندن (EGX vs London GDR Arbitrage Pairs) -->
+                <div class="card" style="margin-top: 20px; border-top: 3px solid #3b82f6;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+                        <div>
+                            <div class="metric-title" style="font-size: 15px; margin-bottom: 2px;">
+                                <i class="fa-solid fa-globe text-blue"></i>
+                                <span>مراجحة شهادات الإيداع الدولية في بورصة لندن (EGX vs London GDRs):</span>
+                            </div>
+                            <div style="font-size: 12px; color: var(--text-muted);">
+                                مقارنة السعر المحلي بالجنيه المصري مقابل سعر شهادة الإيداع في لندن بالدولار الأمريكي لرصد سعر الصرف الضمني وفرص المراجحة.
+                            </div>
+                        </div>
+                        <span class="badge badge-blue">سعر الدولار الرسمي: 52.32 ج.م</span>
+                    </div>
+
+                    <div style="overflow-x: auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>السهم المحلي</th>
+                                    <th>سعر البورصة المصرية (EGP)</th>
+                                    <th>شهادة الإيداع بلندن (GDR)</th>
+                                    <th>سعر لندن (USD)</th>
+                                    <th>سعر الدولار الضمني (Implied USD)</th>
+                                    <th>علاوة / خصم السعر (%)</th>
+                                    <th>حالة المراجحة والفرصة</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>البنك التجاري الدولي</strong> <span class="badge badge-blue font-mono">COMI.CA</span></td>
+                                    <td class="font-mono">122.00 ج.م</td>
+                                    <td><strong>CIB London GDR</strong> <span class="badge badge-purple font-mono">CBKD.L (1:1)</span></td>
+                                    <td class="font-mono">$2.33</td>
+                                    <td class="font-mono text-green font-bold">52.36 ج.م/$</td>
+                                    <td><span class="badge badge-green font-mono">+0.08%</span></td>
+                                    <td><span class="badge badge-blue">تطابق شبه تام (توازن عادل)</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>المصرية للاتصالات</strong> <span class="badge badge-blue font-mono">ETEL.CA</span></td>
+                                    <td class="font-mono">145.00 ج.م</td>
+                                    <td><strong>Telecom Egypt GDR</strong> <span class="badge badge-purple font-mono">TEEG.L (1:5)</span></td>
+                                    <td class="font-mono">$13.82</td>
+                                    <td class="font-mono text-green font-bold">52.46 ج.م/$</td>
+                                    <td><span class="badge badge-green font-mono">+0.27%</span></td>
+                                    <td><span class="badge badge-blue">منطقة توازن سيولة دولية</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>أوراسكوم للإنشاء</strong> <span class="badge badge-blue font-mono">ORAS.CA</span></td>
+                                    <td class="font-mono">907.00 ج.م</td>
+                                    <td><strong>Orascom Construction</strong> <span class="badge badge-purple font-mono">OC.L (1:1)</span></td>
+                                    <td class="font-mono">$17.30</td>
+                                    <td class="font-mono text-green font-bold">52.43 ج.م/$</td>
+                                    <td><span class="badge badge-green font-mono">+0.21%</span></td>
+                                    <td><span class="badge badge-blue">منطقة تكافؤ سعري محايدة</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -5151,11 +5721,11 @@
                         <div>
                             <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
                                 <span style="font-size: 28px;">🏦</span>
-                                <h2 style="font-size: 22px; font-weight: 900; color: #fff; margin: 0;">دليل صناديق الاستثمار الشامل في مصر (Thndr 76 Funds)</h2>
-                                <span class="badge badge-green" style="font-size: 11px;">محدث ومكتمل بالكامل (76 صندوقاً)</span>
+                                <h2 style="font-size: 22px; font-weight: 900; color: #fff; margin: 0;">دليل صناديق الاستثمار الشامل في مصر (Thndr 83 Funds)</h2>
+                                <span class="badge badge-green" style="font-size: 11px;">محدث ومكتمل بالكامل (83 صندوقاً + وثيقة BMM)</span>
                             </div>
                             <div style="font-size: 13.5px; color: #cbd5e1; max-width: 820px; line-height: 1.6;">
-                                تغطية حصرية لكافة الـ <strong>76 صندوقاً استثمارياً</strong> المرخصة من الهيئة العامة للرقابة المالية (FRA) والمتاحة للشراء المباشر على منصة ثاندر (Thndr). تصنيف احترافي عبر 7 فئات أصول، ومتابعة فورية لصافي قيمة الوثيقة (NAV)، العائد السنوي، ومستوى المخاطرة.
+                                تغطية حصرية لكافة الـ <strong>83 صندوقاً استثمارياً</strong> المرخصة من الهيئة العامة للرقابة المالية (FRA) والمتاحة للشراء المباشر على منصة ثاندر (Thndr). تصنيف احترافي عبر 7 فئات أصول، ومتابعة فورية لصافي قيمة الوثيقة (NAV)، العائد السنوي، ومستوى المخاطرة.
                             </div>
                         </div>
                         <div style="display: flex; gap: 10px;">
@@ -5172,23 +5742,76 @@
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 20px;">
                         <div style="background: rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-sm); padding: 12px 14px;">
                             <div style="font-size: 11px; color: var(--text-muted);">إجمالي الصناديق المتوفرة</div>
-                            <div id="kpi-funds-total" style="font-size: 20px; font-weight: 900; color: #fff; font-family: 'JetBrains Mono', monospace;">76 <span style="font-size: 12px; color: #94a3b8;">صندوقاً</span></div>
+                            <div id="kpi-funds-total" style="font-size: 20px; font-weight: 900; color: #fff; font-family: 'JetBrains Mono', monospace;">83 <span style="font-size: 12px; color: #94a3b8;">صندوقاً</span></div>
                         </div>
                         <div style="background: rgba(0,0,0,0.35); border: 1px solid rgba(245,158,11,0.2); border-radius: var(--radius-sm); padding: 12px 14px;">
                             <div style="font-size: 11px; color: #fbbf24;">🥇 صناديق الذهب والمعادن</div>
-                            <div id="kpi-funds-gold" style="font-size: 20px; font-weight: 900; color: #fbbf24; font-family: 'JetBrains Mono', monospace;">3 <span style="font-size: 12px; color: #94a3b8;">(AZG, B-Gold, Dahab)</span></div>
+                            <div id="kpi-funds-gold" style="font-size: 20px; font-weight: 900; color: #fbbf24; font-family: 'JetBrains Mono', monospace;">3 <span style="font-size: 12px; color: #94a3b8;">(AZG, B-Gold, CI-GOLD)</span></div>
                         </div>
                         <div style="background: rgba(0,0,0,0.35); border: 1px solid rgba(16,185,129,0.2); border-radius: var(--radius-sm); padding: 12px 14px;">
                             <div style="font-size: 11px; color: #34d399;">💵 أسواق النقد والسيولة اليومية</div>
-                            <div id="kpi-funds-mm" style="font-size: 20px; font-weight: 900; color: #34d399; font-family: 'JetBrains Mono', monospace;">27 <span style="font-size: 12px; color: #94a3b8;">صندوقاً نقدياً</span></div>
+                            <div id="kpi-funds-mm" style="font-size: 20px; font-weight: 900; color: #34d399; font-family: 'JetBrains Mono', monospace;">28 <span style="font-size: 12px; color: #94a3b8;">صندوقاً نقدياً</span></div>
                         </div>
                         <div style="background: rgba(0,0,0,0.35); border: 1px solid rgba(59,130,246,0.2); border-radius: var(--radius-sm); padding: 12px 14px;">
                             <div style="font-size: 11px; color: #60a5fa;">📈 صناديق الأسهم والشريعة</div>
-                            <div id="kpi-funds-equity" style="font-size: 20px; font-weight: 900; color: #60a5fa; font-family: 'JetBrains Mono', monospace;">38 <span style="font-size: 12px; color: #94a3b8;">(22 أسهم + 16 شريعة)</span></div>
+                            <div id="kpi-funds-equity" style="font-size: 20px; font-weight: 900; color: #60a5fa; font-family: 'JetBrains Mono', monospace;">42 <span style="font-size: 12px; color: #94a3b8;">(24 أسهم + 18 شريعة)</span></div>
                         </div>
                         <div style="background: rgba(0,0,0,0.35); border: 1px solid rgba(139,92,246,0.2); border-radius: var(--radius-sm); padding: 12px 14px;">
                             <div style="font-size: 11px; color: #c084fc;">⚖️ صناديق متوازنة ومؤشرات</div>
-                            <div id="kpi-funds-balanced" style="font-size: 20px; font-weight: 900; color: #c084fc; font-family: 'JetBrains Mono', monospace;">8 <span style="font-size: 12px; color: #94a3b8;">(6 متوازنة + 2 سندات/مؤشر)</span></div>
+                            <div id="kpi-funds-balanced" style="font-size: 20px; font-weight: 900; color: #c084fc; font-family: 'JetBrains Mono', monospace;">10 <span style="font-size: 12px; color: #94a3b8;">(وثيقة BMM + مؤشرات)</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 🌟 Top Recommended Funds Showcase Card -->
+                <div class="card" style="margin-bottom: 22px; border: 1px solid rgba(245, 158, 11, 0.35); background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.95) 100%);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <span style="font-size: 22px;">⭐</span>
+                            <div style="font-size: 16px; font-weight: 800; color: #fbbf24;">أفضل الصناديق الاستثمارية المرشحة حالياً في ثاندر (Top Recommended Picks)</div>
+                        </div>
+                        <span class="badge badge-yellow">معدلات عائد تاريخية وتوزيعات دورية</span>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px;">
+                        <!-- Pick 1: AZ-Savings -->
+                        <div style="background: rgba(0,0,0,0.35); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px; padding: 14px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                                <strong style="color: #34d399; font-size: 14px;">AZ-Savings (أزيموت ادخار)</strong>
+                                <span class="badge badge-green">T+0 يومي فوري</span>
+                            </div>
+                            <div style="font-size: 20px; font-weight: 900; color: #fff; font-family: 'JetBrains Mono', monospace;">~21.8% <span style="font-size: 11px; color: #94a3b8;">عائد سنوي مركب</span></div>
+                            <div style="font-size: 11.5px; color: #cbd5e1; margin-top: 4px;">الخيار الأول لتشغيل رصيد الكاش الحر اليومي وتحقيق عائد تراكمي فوري.</div>
+                        </div>
+
+                        <!-- Pick 2: Beltone Cash -->
+                        <div style="background: rgba(0,0,0,0.35); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px; padding: 14px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                                <strong style="color: #34d399; font-size: 14px;">Beltone Cash (بلتون كاش)</strong>
+                                <span class="badge badge-green">T+0 يومي فوري</span>
+                            </div>
+                            <div style="font-size: 20px; font-weight: 900; color: #fff; font-family: 'JetBrains Mono', monospace;">~22.4% <span style="font-size: 11px; color: #94a3b8;">عائد سنوي مركب</span></div>
+                            <div style="font-size: 11.5px; color: #cbd5e1; margin-top: 4px;">عائد نقدية مرتفع معفى من الضرائب وسيولة سحب وإيداع يومية سريعة.</div>
+                        </div>
+
+                        <!-- Pick 3: CI-GOLD -->
+                        <div style="background: rgba(0,0,0,0.35); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 12px; padding: 14px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                                <strong style="color: #fbbf24; font-size: 14px;">CI-GOLD (صندوق سي آي جولد)</strong>
+                                <span class="badge badge-yellow">تحوط ذهب نفيس</span>
+                            </div>
+                            <div style="font-size: 20px; font-weight: 900; color: #fbbf24; font-family: 'JetBrains Mono', monospace;">+33.5% <span style="font-size: 11px; color: #94a3b8;">عائد سنوي</span></div>
+                            <div style="font-size: 11.5px; color: #cbd5e1; margin-top: 4px;">أداة تحوط ممتازة لحماية رأس المال من انخفاض القوة الشرائية وتقلبات الصرف.</div>
+                        </div>
+
+                        <!-- Pick 4: MC-STARS & BMM -->
+                        <div style="background: rgba(0,0,0,0.35); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 12px; padding: 14px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                                <strong style="color: #60a5fa; font-size: 14px;">MC-STARS & بلتون (BMM)</strong>
+                                <span class="badge badge-blue">أسهم قيادية + مؤشرات</span>
+                            </div>
+                            <div style="font-size: 20px; font-weight: 900; color: #60a5fa; font-family: 'JetBrains Mono', monospace;">+34.2% <span style="font-size: 11px; color: #94a3b8;">نمو رأسمالي</span></div>
+                            <div style="font-size: 11.5px; color: #cbd5e1; margin-top: 4px;">نمو قوي مع الشركات المصرية الكبرى + وثيقة BMM بالمحفظة (2.42 ج.م).</div>
                         </div>
                     </div>
                 </div>
@@ -5198,12 +5821,12 @@
                     <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
                         <!-- Category Pills -->
                         <div style="display: flex; gap: 8px; flex-wrap: wrap;" id="funds-category-pills">
-                            <button id="pill-fund-ALL" class="btn btn-sm fund-filter-chip active" onclick="filterFundsByCategory('ALL', this)">🏦 الكل (76)</button>
+                            <button id="pill-fund-ALL" class="btn btn-sm fund-filter-chip active" onclick="filterFundsByCategory('ALL', this)">🏦 الكل (83)</button>
                             <button id="pill-fund-GOLD" class="btn btn-sm fund-filter-chip" onclick="filterFundsByCategory('GOLD', this)">🥇 ذهب (3)</button>
-                            <button id="pill-fund-MONEY_MARKET" class="btn btn-sm fund-filter-chip" onclick="filterFundsByCategory('MONEY_MARKET', this)">💵 نقدية وسيولة (27)</button>
-                            <button id="pill-fund-EQUITY" class="btn btn-sm fund-filter-chip" onclick="filterFundsByCategory('EQUITY', this)">📈 أسهم (22)</button>
-                            <button id="pill-fund-ISLAMIC_SHARIA" class="btn btn-sm fund-filter-chip" onclick="filterFundsByCategory('ISLAMIC_SHARIA', this)">🌙 شريعة إسلامية (16)</button>
-                            <button id="pill-fund-BALANCED" class="btn btn-sm fund-filter-chip" onclick="filterFundsByCategory('BALANCED', this)">⚖️ متوازنة (6)</button>
+                            <button id="pill-fund-MONEY_MARKET" class="btn btn-sm fund-filter-chip" onclick="filterFundsByCategory('MONEY_MARKET', this)">💵 نقدية وسيولة (28)</button>
+                            <button id="pill-fund-EQUITY" class="btn btn-sm fund-filter-chip" onclick="filterFundsByCategory('EQUITY', this)">📈 أسهم (24)</button>
+                            <button id="pill-fund-ISLAMIC_SHARIA" class="btn btn-sm fund-filter-chip" onclick="filterFundsByCategory('ISLAMIC_SHARIA', this)">🌙 شريعة إسلامية (18)</button>
+                            <button id="pill-fund-BALANCED" class="btn btn-sm fund-filter-chip" onclick="filterFundsByCategory('BALANCED', this)">⚖️ متوازنة (8)</button>
                             <button id="pill-fund-ETF" class="btn btn-sm fund-filter-chip" onclick="filterFundsByCategory('ETF', this)">📊 مؤشرات وسندات (2)</button>
                         </div>
 
@@ -6502,7 +7125,10 @@
                 if (pillEl) pillEl.innerText = data.active_regime || 'DEVALUATION_BOOM';
                 if (descEl) descEl.innerText = data.description_ar || '';
                 if (cashFloorEl) cashFloorEl.innerText = `${data.recommended_cash_floor_pct || 10}%`;
-                if (egxLevelEl) egxLevelEl.innerText = Number(data.egx30_level || 31450).toLocaleString();
+                const lvl = Number(data.egx30_level || 51492.80);
+                if (egxLevelEl) egxLevelEl.innerText = lvl.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                const macroEgx30 = document.getElementById('macro-egx30-val');
+                if (macroEgx30) macroEgx30.innerText = lvl.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
 
                 const weights = data.active_layer_weights || {};
                 const fundPct = Math.round((weights.fundamental || 0.45) * 100);
@@ -10415,6 +11041,12 @@
             const initialHash = window.location.hash.replace('#', '') || 'overview';
             switchTab(initialHash);
 
+            // 🌓 Initialize Quantum Theme (Dark / Crisp Institutional Light)
+            try { initQuantumTheme(); } catch(e) {}
+
+            // 🧮 Initialize Thndr Order Simulation
+            try { calculateThndrOrderSimulation(); } catch(e) {}
+
             // Execute initial data fetchers in isolated asynchronous blocks
             setTimeout(() => {
                 try { fetchThndrDailyCard(); } catch(e) {}
@@ -10444,6 +11076,144 @@
                 try { loadSystemSettings(); } catch(e) {}
             }, 150);
         });
+
+        // =====================================================================
+        // 🌓 QUANTUM DUAL-THEME ENGINE (DARK / CRISP LIGHT MODE)
+        // =====================================================================
+        function initQuantumTheme() {
+            const savedTheme = localStorage.getItem('gen26_theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-mode');
+                updateThemeButton(true);
+            } else {
+                document.body.classList.remove('light-mode');
+                updateThemeButton(false);
+            }
+        }
+
+        function toggleQuantumTheme() {
+            const isLight = document.body.classList.toggle('light-mode');
+            localStorage.setItem('gen26_theme', isLight ? 'light' : 'dark');
+            updateThemeButton(isLight);
+        }
+
+        function updateThemeButton(isLight) {
+            const icon = document.getElementById('theme-toggle-icon');
+            const text = document.getElementById('theme-toggle-text');
+            if (icon) {
+                icon.className = isLight ? 'fa-solid fa-sun text-yellow' : 'fa-solid fa-moon text-cyan';
+            }
+            if (text) {
+                text.innerText = isLight ? 'نهاري' : 'المظهر';
+            }
+        }
+
+        // =====================================================================
+        // 🧮 INTERACTIVE THNDR ORDER & BREAKEVEN SIMULATOR
+        // =====================================================================
+        const THNDR_SIM_PORTFOLIO = {
+            'COMI.CA': { name: 'البنك التجاري الدولي', shares: 50, avg: 120.83, curr: 122.00, dropFloor: 118.00, bounceTarget: 128.50 },
+            'SWDY.CA': { name: 'السويدي إليكتريك', shares: 14, avg: 107.56, curr: 114.00, dropFloor: 112.50, bounceTarget: 123.12 },
+            'TMGH.CA': { name: 'مجموعة طلعت مصطفى', shares: 26, avg: 83.17, curr: 83.94, dropFloor: 81.00, bounceTarget: 91.50 },
+            'PHDC.CA': { name: 'بالم هيلز للتعمير', shares: 180, avg: 12.11, curr: 12.75, dropFloor: 12.20, bounceTarget: 13.90 },
+            'RAYA.CA': { name: 'راية القابضة', shares: 220, avg: 5.47, curr: 5.89, dropFloor: 5.60, bounceTarget: 6.45 }
+        };
+
+        function onSimStockChange() {
+            const sel = document.getElementById('sim-stock-select');
+            if (!sel) return;
+            const ticker = sel.value;
+            const stock = THNDR_SIM_PORTFOLIO[ticker];
+            if (stock) {
+                const priceInput = document.getElementById('sim-target-price-input');
+                const floorHint = document.getElementById('sim-floor-hint');
+                if (priceInput) priceInput.value = stock.dropFloor.toFixed(2);
+                if (floorHint) floorHint.innerText = `قاع التجميع: ${stock.dropFloor.toFixed(2)} ج.م`;
+            }
+            calculateThndrOrderSimulation();
+        }
+
+        function calculateThndrOrderSimulation() {
+            const sel = document.getElementById('sim-stock-select');
+            const amtInput = document.getElementById('sim-amount-input');
+            const priceInput = document.getElementById('sim-target-price-input');
+            if (!sel || !amtInput || !priceInput) return;
+
+            const ticker = sel.value;
+            const stock = THNDR_SIM_PORTFOLIO[ticker] || { shares: 0, avg: 0, bounceTarget: 0 };
+            const budget = parseFloat(amtInput.value) || 0;
+            const targetPrice = parseFloat(priceInput.value) || 0.01;
+
+            if (targetPrice <= 0 || budget <= 0) return;
+
+            // Thndr buy commission rate ~0.47% (0.0047), roundtrip ~0.94% (0.0094)
+            const buyCommRate = 0.0047;
+            const roundtripCommRate = 0.0094;
+            const effPerShareCost = targetPrice * (1 + buyCommRate);
+
+            const addShares = Math.floor(budget / effPerShareCost);
+            const actualSpent = addShares * effPerShareCost;
+            const cashRemaining = Math.max(0, budget - actualSpent);
+
+            const currTotalShares = stock.shares;
+            const currTotalCost = currTotalShares * stock.avg;
+
+            const newTotalShares = currTotalShares + addShares;
+            const newTotalCost = currTotalCost + (addShares * targetPrice);
+            const newAvgCost = newTotalShares > 0 ? (newTotalCost / newTotalShares) : targetPrice;
+            const newBreakeven = newAvgCost * (1 + roundtripCommRate);
+
+            // Potential bounce profit
+            const bounceTarget = stock.bounceTarget || (targetPrice * 1.10);
+            const bounceProceeds = addShares * bounceTarget * (1 - buyCommRate);
+            const bounceProfit = addShares > 0 ? (bounceProceeds - actualSpent) : 0;
+            const bounceProfitPct = actualSpent > 0 ? (bounceProfit / actualSpent) * 100 : 0;
+
+            // Update UI elements
+            const resShares = document.getElementById('sim-res-shares');
+            const resCashLeft = document.getElementById('sim-res-cash-left');
+            const resAvgCost = document.getElementById('sim-res-avg-cost');
+            const resReduction = document.getElementById('sim-res-reduction');
+            const resBreakeven = document.getElementById('sim-res-breakeven');
+            const resProfit = document.getElementById('sim-res-profit');
+            const resBounce = document.getElementById('sim-res-bounce-target');
+
+            if (resShares) resShares.innerText = `${addShares.toLocaleString()} سهم`;
+            if (resCashLeft) resCashLeft.innerText = `الكاش المتبقي: ${cashRemaining.toFixed(2)} ج.م (عمولة الشراء: ${(addShares * targetPrice * buyCommRate).toFixed(2)} ج.م)`;
+            if (resAvgCost) resAvgCost.innerText = `${newAvgCost.toFixed(2)} ج.م`;
+            if (resReduction) {
+                const diff = newAvgCost - stock.avg;
+                const sign = diff <= 0 ? '⬇️ انخفاض' : '⬆️ زيادة';
+                resReduction.innerText = `من ${stock.avg.toFixed(2)} ⬅️ إلى ${newAvgCost.toFixed(2)} ج.م (${sign} ${(Math.abs(diff)).toFixed(2)} ج.م)`;
+            }
+            if (resBreakeven) resBreakeven.innerText = `${newBreakeven.toFixed(2)} ج.م`;
+            if (resProfit) {
+                const pSign = bounceProfit >= 0 ? '+' : '';
+                resProfit.innerText = `${pSign}${bounceProfit.toFixed(2)} ج.م (${pSign}${bounceProfitPct.toFixed(1)}%)`;
+                resProfit.className = bounceProfit >= 0 ? 'sim-kpi-val text-cyan' : 'sim-kpi-val text-red';
+            }
+            if (resBounce) resBounce.innerText = `مستهدف الارتداد المحسوب: ${bounceTarget.toFixed(2)} ج.م`;
+        }
+
+        function copyThndrSimOrderToClipboard() {
+            const sel = document.getElementById('sim-stock-select');
+            const priceInput = document.getElementById('sim-target-price-input');
+            const ticker = sel ? sel.value : 'SWDY.CA';
+            const price = priceInput ? priceInput.value : '112.50';
+            const resShares = document.getElementById('sim-res-shares');
+            const shares = resShares ? resShares.innerText : '10 أسهم';
+
+            const text = `أمر شراء مقترح في ثاندر (GEN-26 v3.8):\n• السهم: ${ticker}\n• نوع الأمر: أمر محدد (Limit Order)\n• الكمية: ${shares}\n• سعر التنفيذ الأقصى: ${price} ج.م\n• الاستراتيجية: تجميع تراجعي عند قاع الموجة لخفض متوسط التكلفة.`;
+            navigator.clipboard.writeText(text).then(() => {
+                if (typeof showToastNotification === 'function') {
+                    showToastNotification('✅ تم نسخ تفاصيل الأمر إلى الحافظة للإدخال في ثاندر!', 'success');
+                } else {
+                    alert('✅ تم نسخ تفاصيل الأمر إلى الحافظة للإدخال في ثاندر!');
+                }
+            }).catch(() => {
+                alert(text);
+            });
+        }
     </script>
 
     <!-- ============================================================= -->
