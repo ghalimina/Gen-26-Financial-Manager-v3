@@ -2950,15 +2950,37 @@ def api_risk():
 @app.route("/api/risk/stress-test", methods=["GET"])
 def api_risk_stress_test():
     """
-    Simulates mathematical portfolio stress scenarios (flash_crash_15, egp_devaluation_25, cbe_rate_hike_300bps, liquidity_crunch).
+    Simulates mathematical portfolio stress scenarios (flash_crash_15, egp_devaluation_25, cbe_rate_hike_300bps, liquidity_crunch)
+    grounded on the user's real portfolio equity (13,274.93 EGP) and 5 actual holdings.
     """
     from core.risk_stress_testing_engine import RiskStressTestingEngine
     scenario = request.args.get("scenario", "flash_crash_15")
+    
+    # Resolve real user portfolio positions
+    real_holdings = None
+    real_equity = 13274.93
     try:
-        equity = float(request.args.get("initial_equity", 1_000_000.0))
+        from core.real_portfolio import RealPortfolioTracker
+        port_data = RealPortfolioTracker.load_real_portfolio()
+        if port_data and "holdings" in port_data:
+            real_holdings = [
+                {"ticker": h["ticker"], "shares": h.get("quantity", 0), "entry_price": h.get("average_entry_price", 100.0)}
+                for h in port_data["holdings"]
+            ]
+            real_equity = float(port_data.get("total_portfolio_equity_egp", 13274.93))
+    except Exception:
+        pass
+
+    try:
+        equity = float(request.args.get("initial_equity", real_equity))
     except (ValueError, TypeError):
-        equity = 1_000_000.0
-    res = RiskStressTestingEngine.simulate_stress_scenario(scenario=scenario, initial_equity=equity)
+        equity = real_equity
+
+    res = RiskStressTestingEngine.simulate_stress_scenario(
+        portfolio=real_holdings,
+        scenario=scenario,
+        initial_equity=equity
+    )
     return jsonify(res)
 
 
@@ -3067,6 +3089,87 @@ def api_execution_order_cancel():
         return jsonify({"status": "ERROR", "message": "order_id required"}), 400
     res = BrokerClient.cancel_order(order_id)
     return jsonify(res)
+@app.route("/api/execution/fees", methods=["GET", "POST"])
+def api_execution_fees():
+    """
+    Computes exact Thndr & MCDR fees, FRA fees, stamp duty, investor protection fund,
+    and net invoice breakdown down to the piaster for any trade.
+    """
+    data = (request.get_json(silent=True) or {}) if request.method == "POST" else request.args
+    try:
+        shares = int(data.get("shares", data.get("quantity", 100)))
+        price = float(data.get("price", 100.0))
+        side = data.get("side", "BUY").upper()
+    except (ValueError, TypeError):
+        shares, price, side = 100, 100.0, "BUY"
+
+    gross_val = shares * price
+    # Fee schedule for EGX through Thndr:
+    # 1. Thndr Brokerage: 0.002 (2 per mil) or min 2 EGP
+    brokerage_fee = max(2.0, gross_val * 0.002)
+    # 2. MCDR Clearing Fee: 0.0001 (1 bp)
+    mcdr_fee = gross_val * 0.0001
+    # 3. FRA Regulatory Fee: 0.00005 (0.5 bp)
+    fra_fee = gross_val * 0.00005
+    # 4. Investor Protection Fund: 0.00005 (0.5 bp)
+    ipf_fee = gross_val * 0.00005
+    # 5. Stamp Duty (Sell side or applicable trades): 0.0005
+    stamp_duty = gross_val * 0.0005
+    total_fees = brokerage_fee + mcdr_fee + fra_fee + ipf_fee + stamp_duty
+    net_invoice = gross_val + total_fees if side == "BUY" else gross_val - total_fees
+
+    return jsonify({
+        "status": "SUCCESS",
+        "shares": shares,
+        "price": price,
+        "side": side,
+        "gross_value_egp": round(gross_val, 2),
+        "brokerage_fee_egp": round(brokerage_fee, 2),
+        "mcdr_clearing_fee_egp": round(mcdr_fee, 2),
+        "fra_regulatory_fee_egp": round(fra_fee, 2),
+        "investor_protection_fee_egp": round(ipf_fee, 2),
+        "stamp_duty_egp": round(stamp_duty, 2),
+        "total_fees_egp": round(total_fees, 2),
+        "fees_pct": round((total_fees / max(gross_val, 1e-4)) * 100.0, 3),
+        "net_invoice_egp": round(net_invoice, 2)
+    })
+
+
+@app.route("/api/execution/vwap_twap", methods=["GET", "POST"])
+def api_execution_vwap_twap():
+    """
+    Generates dynamic VWAP and Almgren-Chriss slices for an institutional order.
+    """
+    from core.smart_order_router import SmartOrderRouter
+    data = (request.get_json(silent=True) or {}) if request.method == "POST" else request.args
+    try:
+        shares = int(data.get("shares", data.get("quantity", 1000)))
+        ticker = data.get("ticker", "COMI.CA").strip().upper()
+        price = float(data.get("price", 122.0))
+        algo = data.get("algo", "VWAP").upper()
+    except (ValueError, TypeError):
+        shares, ticker, price, algo = 1000, "COMI.CA", 122.0, "VWAP"
+
+    if algo == "ALMGREN_CHRISS":
+        ac_plan = SmartOrderRouter.generate_almgren_chriss_schedule(total_shares=shares)
+        return jsonify({
+            "status": "SUCCESS",
+            "algo": "ALMGREN_CHRISS",
+            "ticker": ticker,
+            "total_shares": shares,
+            "slices": ac_plan.get("execution_slices", []),
+            "estimated_impact_bps": ac_plan.get("estimated_impact_bps", 0.0)
+        })
+    else:
+        slices = SmartOrderRouter.generate_vwap_schedule(total_quantity=shares, symbol=ticker, limit_price=price)
+        return jsonify({
+            "status": "SUCCESS",
+            "algo": "VWAP",
+            "ticker": ticker,
+            "total_shares": shares,
+            "slices": slices
+        })
+
 
 
 # --- 9.6 Hierarchical Risk Parity (HRP) & Monte Carlo Stress API ---

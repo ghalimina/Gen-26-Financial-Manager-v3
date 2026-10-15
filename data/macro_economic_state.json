@@ -1,7 +1,7 @@
 {
   "indicators": {
     "cbe_deposit_rate_pct": {
-      "value": 19.25,
+      "value": 19.0,
       "unit": "%",
       "label_ar": "سعر الفائدة على الإيداع لليلة واحدة (البنك المركزي المصري)",
       "source": "CENTRAL_BANK_OF_EGYPT_OFFICIAL",
@@ -31,7 +31,7 @@
       "days_since_update": 0
     },
     "cpi_inflation_yoy_pct": {
-      "value": 14.9,
+      "value": 14.5,
       "unit": "%",
       "label_ar": "معدل التضخم السنوي العام للحضر (الجهاز المركزي للتعبئة والإحصاء)",
       "source": "CAPMAS_MONTHLY_BULLETIN",
@@ -41,7 +41,7 @@
       "days_since_update": 19
     },
     "usd_egp_rate": {
-      "value": 53.38,
+      "value": 52.32,
       "unit": "EGP",
       "label_ar": "سعر صرف الجنيه أمام الدولار الأمريكي",
       "source": "EGX_OFFICIAL_HARVESTER_AND_YAHOO",
@@ -121,7 +121,7 @@
       "days_since_update": 0
     },
     "egx30_current_level": {
-      "value": 51265.27,
+      "value": 51492.8,
       "unit": "نقطة",
       "label_ar": "مستوى مؤشر EGX30 الرسمي المعتمد من البورصة المصرية",
       "source": "EGX_OFFICIAL_INDICES_ASPX",
@@ -134,7 +134,7 @@
       "usd_denominated_level": 3293.0
     },
     "egx70_current_level": {
-      "value": 19695.01,
+      "value": 18330.8,
       "unit": "نقطة",
       "label_ar": "مستوى مؤشر EGX70 EWI الرسمي متساوي الأوزان",
       "source": "EGX_OFFICIAL_INDICES_ASPX",
@@ -190,8 +190,8 @@
     }
   },
   "egx_market_context": {
-    "egx30_level": 52273.30078125,
-    "egx70_level": 19695.01,
+    "egx30_level": 51492.8,
+    "egx70_level": 18330.8,
     "egx100_level": 53265.0,
     "total_market_cap_egp": 3999192255990.0,
     "listed_equities_turnover_egp": 9840793226.0,
