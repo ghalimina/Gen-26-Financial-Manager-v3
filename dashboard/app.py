@@ -22,9 +22,10 @@ _WORKSPACE_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 _ENV_FILE = os.path.join(_WORKSPACE_ROOT, ".env")
 if os.path.exists(_ENV_FILE):
     try:
-        from dotenv import load_dotenv
-        load_dotenv(_ENV_FILE)
-    except ImportError:
+        import importlib
+        _dotenv = importlib.import_module("dotenv")
+        _dotenv.load_dotenv(_ENV_FILE)
+    except Exception:
         try:
             with open(_ENV_FILE, "r", encoding="utf-8") as _ef:
                 for _line in _ef:

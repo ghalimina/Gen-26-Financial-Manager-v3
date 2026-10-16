@@ -4,6 +4,9 @@
     "${workspaceFolder}",
     "${workspaceFolder}/core",
     "${workspaceFolder}/dashboard",
-    "C:\\Python312\\Lib\\site-packages"
-  ]
+    "C:\\Python312\\Lib\\site-packages",
+    "c:\\Users\\Administrator\\venv\\Lib\\site-packages"
+  ],
+  "yaml.validate": false,
+  "github-actions.validation.enabled": false
 }
