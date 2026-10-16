@@ -2189,6 +2189,10 @@
                     <i class="fa-solid fa-arrows-rotate"></i>
                     <span>تحديث شامل</span>
                 </button>
+                <button class="btn-quick-action" id="macro-banner-toggle-btn" onclick="toggleMacroEconomicBanner()" title="إظهار أو إخفاء شريط المؤشرات الاقتصادية والذهب">
+                    <i class="fa-solid fa-coins text-yellow" id="macro-banner-toggle-icon"></i>
+                    <span id="macro-banner-toggle-text">المؤشرات والذهب</span>
+                </button>
                 <button class="btn-quick-action btn-quick-sizer" onclick="openPortfolioSizer()">
                     <i class="fa-solid fa-calculator"></i>
                     <span>توزيع ميزانيتي الذكي</span>
@@ -2277,6 +2281,10 @@
                 <button id="macro-toggle-breadth-btn" class="btn btn-secondary btn-sm" onclick="toggleEntireMarketBreadthBanner()" style="display: inline-flex; align-items: center; gap: 6px; font-size: 11px; padding: 5px 12px; border-radius: 6px; background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.35); color: #93c5fd; cursor: pointer; transition: all 0.2s ease;" title="إظهار أو إخفاء مؤشر اتساع السوق وصمام الأمان بالكامل">
                     <i class="fa-solid fa-gauge-high" id="macro-toggle-breadth-icon"></i>
                     <span id="macro-toggle-breadth-text">إظهار اتساع السوق (270 سهم)</span>
+                </button>
+                <button id="btn-hide-macro-banner" class="btn btn-secondary btn-sm" onclick="toggleMacroEconomicBanner()" style="display: inline-flex; align-items: center; gap: 6px; font-size: 11px; padding: 5px 12px; border-radius: 6px; background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.4); color: #fecaca; cursor: pointer; transition: all 0.2s ease;" title="إخفاء شريط المؤشرات الاقتصادية والذهب بالكامل">
+                    <i class="fa-solid fa-eye-slash"></i>
+                    <span>إخفاء هذا الشريط</span>
                 </button>
                 <span class="badge badge-green" id="macro-freshness-badge">🟢 بيانات حية معتمدة 100%</span>
                 <button class="btn btn-secondary btn-sm" onclick="fetchMacroTelemetry(true)" title="تحديث المؤشرات الاقتصادية"><i class="fa-solid fa-arrows-rotate"></i></button>
@@ -9626,6 +9634,55 @@
         // =====================================================================
         // 👁️ MARKET BREADTH & ALERT TOGGLE ENGINE (FULL BANNER TOGGLE)
         // =====================================================================
+        
+        // =====================================================================
+        // 🥇 MACRO-ECONOMIC BAROMETER & GOLD TOGGLE ENGINE
+        // =====================================================================
+        function toggleMacroEconomicBanner() {
+            const banner = document.getElementById('macro-risk-banner');
+            const topBtnText = document.getElementById('macro-banner-toggle-text');
+            const topBtnIcon = document.getElementById('macro-banner-toggle-icon');
+            if (!banner) return;
+
+            const isCurrentlyHidden = banner.style.display === 'none' || window.getComputedStyle(banner).display === 'none';
+
+            if (isCurrentlyHidden) {
+                // Show banner
+                banner.style.display = 'flex';
+                if (topBtnText) topBtnText.innerText = 'إخفاء المؤشرات والذهب';
+                if (topBtnIcon) topBtnIcon.className = 'fa-solid fa-eye-slash text-yellow';
+                localStorage.setItem('gen26_macro_banner_visible', 'true');
+            } else {
+                // Hide banner
+                banner.style.display = 'none';
+                if (topBtnText) topBtnText.innerText = 'إظهار المؤشرات والذهب';
+                if (topBtnIcon) topBtnIcon.className = 'fa-solid fa-eye text-yellow';
+                localStorage.setItem('gen26_macro_banner_visible', 'false');
+            }
+        }
+
+        function initMacroBannerVisibility() {
+            try {
+                const banner = document.getElementById('macro-risk-banner');
+                const topBtnText = document.getElementById('macro-banner-toggle-text');
+                const topBtnIcon = document.getElementById('macro-banner-toggle-icon');
+                
+                const saved = localStorage.getItem('gen26_macro_banner_visible');
+                // If user previously hid it, respect it
+                if (saved === 'false' && banner) {
+                    banner.style.display = 'none';
+                    if (topBtnText) topBtnText.innerText = 'إظهار المؤشرات والذهب';
+                    if (topBtnIcon) topBtnIcon.className = 'fa-solid fa-eye text-yellow';
+                } else if (banner) {
+                    banner.style.display = 'flex';
+                    if (topBtnText) topBtnText.innerText = 'المؤشرات والذهب';
+                    if (topBtnIcon) topBtnIcon.className = 'fa-solid fa-coins text-yellow';
+                }
+            } catch (err) {
+                console.warn("Macro banner visibility init error:", err);
+            }
+        }
+
         function toggleEntireMarketBreadthBanner() {
             const banner = document.getElementById('market-breadth-circuit-breaker-banner');
             const macroBtnText = document.getElementById('macro-toggle-breadth-text');
@@ -11529,6 +11586,7 @@
             // 🌓 Initialize Quantum Theme (Dark / Crisp Institutional Light)
             try { initQuantumTheme(); } catch(e) {}
             try { initMarketBreadthVisibility(); } catch(e) {}
+            try { initMacroBannerVisibility(); } catch(e) {}
 
             // 🧮 Initialize Thndr Order Simulation
             try { calculateThndrOrderSimulation(); } catch(e) {}
