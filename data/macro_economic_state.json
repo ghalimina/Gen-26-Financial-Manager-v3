@@ -41,7 +41,7 @@
       "days_since_update": 19
     },
     "usd_egp_rate": {
-      "value": 53.4,
+      "value": 52.32,
       "unit": "EGP",
       "label_ar": "سعر صرف الجنيه أمام الدولار الأمريكي",
       "source": "EGX_OFFICIAL_HARVESTER_AND_YAHOO",
@@ -146,7 +146,7 @@
       "ytd_pct": 34.12
     },
     "egx100_current_level": {
-      "value": 53265.0,
+      "value": 30735.6,
       "unit": "نقطة",
       "label_ar": "مستوى مؤشر EGX100 EWI الأوسع نطاقاً المعتمد",
       "source": "EGX_OFFICIAL_INDICES_ASPX",
@@ -190,9 +190,9 @@
     }
   },
   "egx_market_context": {
-    "egx30_level": 52273.30078125,
+    "egx30_level": 51492.8,
     "egx70_level": 18330.8,
-    "egx100_level": 53265.0,
+    "egx100_level": 30735.6,
     "total_market_cap_egp": 3999192255990.0,
     "listed_equities_turnover_egp": 9840793226.0,
     "advancing_count": 29,

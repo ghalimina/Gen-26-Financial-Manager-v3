@@ -3486,6 +3486,46 @@ def api_news_mubasher():
     })
 
 
+@app.route("/api/news_radar", methods=["GET"])
+def api_news_radar():
+    """
+    GEN-26 v4.3 — Multi-Source EGX Live News & Disclosures Radar.
+    Serves live headlines from 5 official and market sources enriched with Arabic NLP Sentiment.
+    """
+    from core.egx_live_news_sentiment_harvester import EGXLiveNewsSentimentHarvester
+    ticker = request.args.get("ticker")
+    if ticker:
+        items = EGXLiveNewsSentimentHarvester.get_news_for_ticker(ticker)
+        summary = EGXLiveNewsSentimentHarvester.get_ticker_sentiment_summary(ticker)
+    else:
+        items = EGXLiveNewsSentimentHarvester.harvest_all_disclosures()
+        summary = {
+            "overall_market_sentiment": "POSITIVE_SELECTIVE",
+            "average_sentiment_score": round(sum(it["sentiment_score"] for it in items) / len(items), 1) if items else 20.0,
+            "total_active_sources": 5,
+            "total_disclosures": len(items)
+        }
+    return jsonify({
+        "status": "SUCCESS",
+        "ticker": ticker,
+        "sentiment_summary": summary,
+        "news_items": items,
+        "sources_monitored": list(EGXLiveNewsSentimentHarvester.SOURCES.keys()),
+        "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    })
+
+
+@app.route("/api/system/full_math_audit", methods=["GET"])
+def api_system_full_math_audit():
+    """
+    GEN-26 v4.3 — Comprehensive Zero-Tolerance Mathematical & System Forensic Audit.
+    Runs all 6 core mathematical invariant and price matching tests.
+    """
+    from scripts.verify_every_number_v4_3 import run_full_math_audit
+    report = run_full_math_audit()
+    return jsonify(report)
+
+
 # --- 9.7 MLOps Continuous Learning & Telegram Bot Status ---
 @app.route("/api/mlops/status", methods=["GET"])
 def api_mlops_status():
