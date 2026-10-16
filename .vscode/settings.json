@@ -3,6 +3,7 @@
   "python.analysis.extraPaths": [
     "${workspaceFolder}",
     "${workspaceFolder}/core",
-    "${workspaceFolder}/dashboard"
+    "${workspaceFolder}/dashboard",
+    "C:\\Python312\\Lib\\site-packages"
   ]
 }
