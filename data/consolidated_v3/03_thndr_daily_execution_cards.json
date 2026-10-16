@@ -1,6 +1,6 @@
 {
   "status": "SUCCESS",
-  "as_of": "2026-10-16 05:58:28",
+  "as_of": "2026-10-16 16:25:32",
   "approved_stock": "SWDY.CA",
   "thndr_daily_card": {
     "ticker": "SWDY.CA",
@@ -35,7 +35,7 @@
     "stock_market_value_egp": 12072.51,
     "cash_reserve_pct": 9.04,
     "mandatory_cash_floor_pct": 35.0,
-    "mandatory_cash_floor_egp": 4780.5,
+    "mandatory_cash_floor_egp": 4646.23,
     "investable_surplus_cash": 0.0,
     "cash_floor_status": "CASH_FLOOR_DEFICIT",
     "recommended_funds": [

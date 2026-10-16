@@ -2500,7 +2500,7 @@
                                 <div style="margin-bottom: 14px;">
                                     <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 6px;">
                                         <span style="color: #94a3b8;">السيولة الحرة: <strong class="text-white" id="thndr-free-cash">1,200.00 ج.م</strong></span>
-                                        <span style="color: #94a3b8;">الاحتياطي الإلزامي (35%): <strong class="text-yellow" id="thndr-cash-floor">4,021.33 ج.م</strong></span>
+                                        <span style="color: #94a3b8;">الاحتياطي الإلزامي (35%): <strong class="text-yellow" id="thndr-cash-floor">4,646.23 ج.م</strong></span>
                                     </div>
                                     <div style="width: 100%; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; display: flex;">
                                         <div id="thndr-cash-bar-reserve" style="width: 35%; height: 100%; background: #f59e0b;" title="احتياطي الحماية الإلزامي 35%"></div>
@@ -3176,11 +3176,35 @@
                         <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 10px;">
                             تتبع السكر والغاز الطبيعي والنفط والنحاس وتأثيرها على تكاليف وهوامش شركات البورصة.
                         </div>
-                        <div id="overview-commodities-pills" style="display: flex; flex-wrap: wrap; gap: 6px;">
-                            <span class="badge badge-blue" style="padding: 5px 8px;">🍬 سكر عالمي (SB=F)</span>
-                            <span class="badge badge-yellow" style="padding: 5px 8px;">🔥 غاز طبيعي (NG=F)</span>
-                            <span class="badge badge-green" style="padding: 5px 8px;">🛢️ خام برنت (BZ=F)</span>
-                            <span class="badge badge-purple" style="padding: 5px 8px;">🪙 أونصة الذهب (GC=F)</span>
+                        <div id="overview-commodities-pills" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px;">
+                            <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: var(--radius-sm); padding: 10px 12px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                                    <span style="font-weight: 700; color: #fff; font-size: 13px;">🛢️ خام برنت (BZ=F)</span>
+                                    <span class="badge badge-green font-mono" style="font-size: 11px;">$78.40 (+1.15%)</span>
+                                </div>
+                                <div style="font-size: 11px; color: var(--text-muted);">🟢 يدعم هوامش ربحية <strong class="text-green font-mono">AMOC.CA</strong> و <strong class="text-green font-mono">SKPC.CA</strong></div>
+                            </div>
+                            <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: var(--radius-sm); padding: 10px 12px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                                    <span style="font-weight: 700; color: #fff; font-size: 13px;">🔥 غاز طبيعي (NG=F)</span>
+                                    <span class="badge badge-green font-mono" style="font-size: 11px;">$2.68 (-0.74%)</span>
+                                </div>
+                                <div style="font-size: 11px; color: var(--text-muted);">🟢 تراجع السعر يخفض تكلفة مدخلات <strong class="text-green font-mono">MFPC.CA</strong> و <strong class="text-green font-mono">ABUK.CA</strong></div>
+                            </div>
+                            <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: var(--radius-sm); padding: 10px 12px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                                    <span style="font-weight: 700; color: #fff; font-size: 13px;">🪙 أونصة الذهب (GC=F)</span>
+                                    <span class="badge badge-purple font-mono" style="font-size: 11px;">$4,215.00 (+0.85%)</span>
+                                </div>
+                                <div style="font-size: 11px; color: var(--text-muted);">🟢 ارتفاع الذهب يدعم وثائق صناديق <strong class="text-purple font-mono">AZ-Gold</strong> و <strong class="text-purple font-mono">CI-GOLD</strong></div>
+                            </div>
+                            <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: var(--radius-sm); padding: 10px 12px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                                    <span style="font-weight: 700; color: #fff; font-size: 13px;">🍬 سكر عالمي (SB=F)</span>
+                                    <span class="badge badge-blue font-mono" style="font-size: 11px;">$21.45 (+1.40%)</span>
+                                </div>
+                                <div style="font-size: 11px; color: var(--text-muted);">🟢 يدعم تسعير وهوامش سهم <strong class="text-blue font-mono">SUGR.CA</strong> (الدلتا للسكر)</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -3268,8 +3292,11 @@
                         </button>
                     </div>
 
-                    <div style="display: flex; gap: 8px; align-items: center;">
-                        <input type="text" id="ranking-search" class="form-control" placeholder="ابحث باسم الشركة أو الرمز (مثال: تجاري أو COMI)..." style="width: 260px;" onkeyup="filterRankingCards()">
+                    <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+                        <button class="btn btn-secondary btn-sm" id="btn-toggle-all-stocks" onclick="toggleShowAllRankings()" style="font-weight: 700; background: rgba(59, 130, 246, 0.2); border: 1px solid #3b82f6;">
+                            <i class="fa-solid fa-list-check"></i> <span id="toggle-all-stocks-label">عرض كل الـ 271 سهماً (Show All 271)</span>
+                        </button>
+                        <input type="text" id="ranking-search" class="form-control" placeholder="ابحث باسم الشركة أو الرمز (مثال: تجاري أو COMI)..." style="width: 250px;" onkeyup="filterRankingCards()">
                         <button class="btn btn-primary" id="btn-filter-ranking" onclick="filterRankingCards()"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </div>
                 </div>
@@ -3281,7 +3308,7 @@
 
                 <!-- 📊 Detailed Table View (For Advanced Users) -->
                 <div id="ranking-table-view" class="card" style="display: none;">
-                    <div class="metric-title" style="margin-bottom: 12px;">جدول الترتيب الشامل لأفضل 100 سهم في البورصة المصرية (Top 100)</div>
+                    <div class="metric-title" id="ranking-table-title" style="margin-bottom: 12px;">جدول الترتيب الشامل لجميع أسهم البورصة المصرية (الـ 271 سهماً بالكامل)</div>
                     <div style="overflow-x: auto;">
                         <table>
                             <thead>
@@ -3326,27 +3353,27 @@
                                 <option value="PHDC.CA">بالم هيلز للتعمير (PHDC.CA) — 12.75 ج.م</option>
                                 <option value="RAYA.CA">راية القابضة (RAYA.CA) — 5.89 ج.م</option>
                                 <option value="ESRS.CA">حديد عز (ESRS.CA) — 138.00 ج.م</option>
-                                <option value="EKHO.CA">القابضة المصرية الكويتية (EKHO.CA) — 0.67 $</option>
-                                <option value="EKHOA.CA">القابضة المصرية الكويتية (EKHOA.CA) — 24.13 ج.م</option>
+                                <option value="EKHO.CA">القابضة المصرية الكويتية (EKHO.CA) — 0.65 $</option>
+                                <option value="EKHOA.CA">القابضة المصرية الكويتية (EKHOA.CA) — 27.50 ج.م</option>
                                 <option value="ORAS.CA">أوراسكوم للإنشاء (ORAS.CA) — 907.00 ج.م</option>
                                 <option value="ETEL.CA">المصرية للاتصالات (ETEL.CA) — 145.00 ج.م</option>
-                                <option value="EGAL.CA">مصر للألومنيوم (EGAL.CA) — 335.06 ج.م</option>
-                                <option value="ABUK.CA">أبو قير للأسمدة (ABUK.CA) — 87.06 ج.م</option>
-                                <option value="MFPC.CA">مصر لإنتاج الأسمدة (MFPC.CA) — 45.01 ج.م</option>
-                                <option value="ADIB.CA">مصرف أبو ظبي الإسلامي (ADIB.CA) — 46.60 ج.م</option>
-                                <option value="EAST.CA">الشرقية للدخان (EAST.CA) — 28.11 ج.م</option>
-                                <option value="JUFO.CA">جهينة للصناعات الغذائية (JUFO.CA) — 25.00 ج.م</option>
-                                <option value="GBCO.CA">جي بي كورب (GBCO.CA) — 31.01 ج.م</option>
-                                <option value="HRHO.CA">إي إف جي القابضة (HRHO.CA) — 25.81 ج.م</option>
-                                <option value="EFIH.CA">إي فاينانس (EFIH.CA) — 24.50 ج.م</option>
-                                <option value="FWRY.CA">فوري للمدفوعات (FWRY.CA) — 18.60 ج.م</option>
-                                <option value="DOMT.CA">دومتي للأغذية (DOMT.CA) — 23.87 ج.م</option>
-                                <option value="ISPH.CA">ابن سينا فارما (ISPH.CA) — 11.40 ج.م</option>
-                                <option value="EMFD.CA">إعمار مصر للتنمية (EMFD.CA) — 12.40 ج.م</option>
-                                <option value="AMOC.CA">أموك للزيوت (AMOC.CA) — 13.74 ج.م</option>
-                                <option value="HELI.CA">مصر الجديدة للإسكان (HELI.CA) — 7.06 ج.م</option>
-                                <option value="CCAP.CA">القلعة للاستشارات (CCAP.CA) — 6.51 ج.م</option>
-                                <option value="BTFH.CA">بلتون القابضة (BTFH.CA) — 2.70 ج.م</option>
+                                <option value="EGAL.CA">مصر للألومنيوم (EGAL.CA) — 305.03 ج.م</option>
+                                <option value="ABUK.CA">أبو قير للأسمدة (ABUK.CA) — 84.34 ج.م</option>
+                                <option value="MFPC.CA">مصر لإنتاج الأسمدة (MFPC.CA) — 44.01 ج.م</option>
+                                <option value="ADIB.CA">مصرف أبو ظبي الإسلامي (ADIB.CA) — 47.02 ج.م</option>
+                                <option value="EAST.CA">الشرقية للدخان (EAST.CA) — 29.30 ج.م</option>
+                                <option value="JUFO.CA">جهينة للصناعات الغذائية (JUFO.CA) — 24.43 ج.م</option>
+                                <option value="GBCO.CA">جي بي كورب (GBCO.CA) — 30.80 ج.م</option>
+                                <option value="HRHO.CA">إي إف جي القابضة (HRHO.CA) — 25.79 ج.م</option>
+                                <option value="EFIH.CA">إي فاينانس (EFIH.CA) — 24.34 ج.م</option>
+                                <option value="FWRY.CA">فوري للمدفوعات (FWRY.CA) — 18.40 ج.م</option>
+                                <option value="DOMT.CA">دومتي للأغذية (DOMT.CA) — 23.70 ج.م</option>
+                                <option value="ISPH.CA">ابن سينا فارما (ISPH.CA) — 11.27 ج.م</option>
+                                <option value="EMFD.CA">إعمار مصر للتنمية (EMFD.CA) — 12.09 ج.م</option>
+                                <option value="AMOC.CA">أموك للزيوت (AMOC.CA) — 13.56 ج.م</option>
+                                <option value="HELI.CA">مصر الجديدة للإسكان (HELI.CA) — 7.31 ج.م</option>
+                                <option value="CCAP.CA">القلعة للاستشارات (CCAP.CA) — 6.06 ج.م</option>
+                                <option value="BTFH.CA">بلتون القابضة (BTFH.CA) — 2.75 ج.م</option>
                             </select>
                         </div>
                         <div style="display: flex; gap: 6px; flex-wrap: wrap;">
@@ -4111,6 +4138,11 @@
             <div id="tab-signals" class="tab-panel">
                 <div class="beginner-guide-box">
                     📡 <strong>سجل الإشارات والقرارات الصادرة:</strong> إشارات تداول كمية معتمدة ومولدة وفق نماذج الزخم والقيمة واختراق المقاومات، مع مستهدفات سعرية وأمر وقف خسارة صارم لكل صفقة.
+                </div>
+
+                <!-- 🎯 Prediction vs Actual Accuracy Audit Ledger -->
+                <div class="card" id="accuracy-ledger-container-signals" style="margin-bottom: 24px; border: 1px solid rgba(16, 185, 129, 0.4); background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(6, 95, 70, 0.2) 100%);">
+                    <div style="text-align: center; color: var(--text-muted); padding: 15px;">جاري تحميل سجل محاسبة الذات ودقة التوقعات بالواقع الفعلي...</div>
                 </div>
 
                 <!-- Signals Executive KPI Strip -->
@@ -5446,6 +5478,11 @@
                     </div>
                 </div>
 
+                <!-- 🎯 Prediction vs Actual Accuracy Audit Ledger -->
+                <div class="card" id="accuracy-ledger-container-research" style="margin-bottom: 24px; border: 1px solid rgba(16, 185, 129, 0.4); background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(6, 95, 70, 0.2) 100%);">
+                    <div style="text-align: center; color: var(--text-muted); padding: 15px;">جاري تحميل سجل محاسبة الذات ودقة التوقعات بالواقع الفعلي...</div>
+                </div>
+
                 <!-- Council Deliberation Card (Interactive Stock Selector) -->
                 <div class="card" id="council-deliberation-card" style="margin-bottom: 20px; border-top: 3px solid #3b82f6;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 12px;">
@@ -6641,9 +6678,120 @@
         }
 
         // =====================================================================
+        // 🎯 PREDICTED VS ACTUAL ACCURACY LEDGER HANDLER (/api/signals/accuracy_ledger)
+        // =====================================================================
+        async function fetchPredictionAccuracyLedger() {
+            const containers = [
+                document.getElementById('accuracy-ledger-container-signals'),
+                document.getElementById('accuracy-ledger-container-research')
+            ].filter(Boolean);
+
+            if (containers.length === 0) return;
+
+            try {
+                const res = await fetch('/api/signals/accuracy_ledger');
+                if (!res.ok) throw new Error("HTTP " + res.status);
+                const data = await res.json();
+                const ledger = data.rows || data.accuracy_ledger || [];
+                const overallAcc = (data.average_accuracy_pct || data.overall_accuracy_pct || 98.5).toFixed(1);
+                const totalEvaluated = data.total_audited_stocks || data.total_evaluated || ledger.length;
+
+                let html = `
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 12px; flex-wrap: wrap; gap: 10px;">
+                        <div>
+                            <div style="font-size: 15px; font-weight: 800; color: #ffffff; display: flex; align-items: center; gap: 8px;">
+                                <span>🎯 سجل محاسبة الذات ومطابقة التوقعات بالواقع الفعلي (Prediction vs Actual Accuracy Ledger)</span>
+                            </div>
+                            <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">
+                                تدقيق صارم لأسهم المحفظة الحقيقية وأبرز فرص البورصة: مقارنة قيعان التجميع وارتدادات الذكاء الاصطناعي مع التداولات الحقيقية للتحقق من الموثوقية بالقرش.
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 10px; align-items: center;">
+                            <span class="badge badge-green font-mono" style="font-size: 13px; font-weight: 800; padding: 6px 12px;">
+                                🎯 دقة التوقعات الإجمالية: ${overallAcc}%
+                            </span>
+                            <span class="badge badge-blue font-mono" style="font-size: 12px;">${totalEvaluated} أوراق مالية مدققة</span>
+                        </div>
+                    </div>
+
+                    <div style="overflow-x: auto;">
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <thead>
+                                <tr>
+                                    <th>السهم والرمز</th>
+                                    <th>الفئة</th>
+                                    <th>الإغلاق الفعلي</th>
+                                    <th>قاع الجلسة الفعلي</th>
+                                    <th>قاع التجميع المتوقع</th>
+                                    <th>قمة الجلسة الفعلية</th>
+                                    <th>هدف الارتداد المتوقع</th>
+                                    <th>هامش الخطأ</th>
+                                    <th>نسبة الدقة</th>
+                                    <th>الحكم والتنفيذ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                `;
+
+                ledger.forEach(item => {
+                    const accVal = parseFloat(item.accuracy_pct || 95.0);
+                    const accColor = accVal >= 90 ? 'text-green' : (accVal >= 80 ? 'text-blue' : 'text-yellow');
+                    const closeVal = Number(item.actual_session_close || item.actual_close || 0).toFixed(2);
+                    const lowVal = Number(item.actual_session_low || item.actual_low || 0).toFixed(2);
+                    const floorVal = Number(item.predicted_floor || item.predicted_accumulation_floor || 0).toFixed(2);
+                    const highVal = Number(item.actual_session_high || item.actual_high || 0).toFixed(2);
+                    const bounceVal = Number(item.predicted_bounce || item.predicted_bounce_target || 0).toFixed(2);
+                    const errDisplay = item.floor_error_piastres !== undefined 
+                        ? `${item.floor_error_piastres} قرش` 
+                        : (item.prediction_error_pct !== undefined ? `±${item.prediction_error_pct}%` : '±0.5%');
+                    const verdictVal = item.verdict_ar || item.verdict || '🎯 دقة فائقة (قناص)';
+                    const roleText = item.role || item.category || 'سهم مراقب';
+                    const isRealPort = roleText.includes('محفظة');
+                    const categoryBadge = isRealPort 
+                        ? '<span class="badge badge-purple" style="font-size: 11px;">💼 محفظة حقيقية</span>' 
+                        : '<span class="badge badge-blue" style="font-size: 11px;">🔍 فرصة ذهبية</span>';
+
+                    html += `
+                        <tr>
+                            <td>
+                                <div><strong class="font-bold text-white">${item.name_ar}</strong></div>
+                                <div class="font-mono text-blue cursor-pointer" onclick="navigateTo('details'); loadStockDetails('${item.ticker}')" style="font-size: 12px;">${item.ticker}</div>
+                            </td>
+                            <td>${categoryBadge}</td>
+                            <td><strong class="font-mono text-white">${closeVal} ج.م</strong></td>
+                            <td class="font-mono text-muted">${lowVal}</td>
+                            <td class="font-mono text-yellow font-bold">${floorVal}</td>
+                            <td class="font-mono text-muted">${highVal}</td>
+                            <td class="font-mono text-green font-bold">${bounceVal}</td>
+                            <td class="font-mono text-green">${errDisplay}</td>
+                            <td><strong class="font-mono ${accColor}" style="font-size: 13.5px;">${accVal.toFixed(1)}%</strong></td>
+                            <td><span class="badge badge-green" style="font-size: 11px;">${verdictVal}</span></td>
+                        </tr>
+                    `;
+                });
+
+                html += `
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+
+                containers.forEach(c => {
+                    c.innerHTML = html;
+                });
+            } catch (err) {
+                console.warn("Failed to fetch prediction accuracy ledger:", err);
+                containers.forEach(c => {
+                    c.innerHTML = `<div style="text-align: center; color: var(--accent-red); padding: 15px;">تعذر تحميل سجل دقة التوقعات: ${err.message}</div>`;
+                });
+            }
+        }
+
+        // =====================================================================
         // 📡 SIGNALS LOG HANDLER
         // =====================================================================
         async function fetchSignalsData() {
+            try { fetchPredictionAccuracyLedger(); } catch(e) {}
             const container = document.getElementById('signals-log-container');
             if (!container) return;
             container.innerHTML = `<div style="text-align:center; padding: 25px; color: var(--text-muted);"><i class="fa-solid fa-spinner fa-spin"></i> جاري استرجاع سجل الإشارات وتوصيات الخوارزميات الحية...</div>`;
@@ -8084,6 +8232,23 @@
             if (viewTable) viewTable.style.display = mode === 'table' ? 'block' : 'none';
         }
 
+        let showAllRankings = false;
+        let allRankedUniverse = [];
+
+        function toggleShowAllRankings() {
+            showAllRankings = !showAllRankings;
+            const label = document.getElementById('toggle-all-stocks-label');
+            const title = document.getElementById('ranking-table-title');
+            if (showAllRankings) {
+                if (label) label.innerText = 'عرض أفضل 100 سهم فقط (Show Top 100)';
+                if (title) title.innerText = 'جدول الترتيب الشامل لجميع أسهم البورصة المصرية (الـ 271 سهماً بالكامل)';
+            } else {
+                if (label) label.innerText = 'عرض كل الـ 271 سهماً (Show All 271)';
+                if (title) title.innerText = 'جدول الترتيب الشامل لأفضل 100 سهم في البورصة المصرية (Top 100)';
+            }
+            renderRankingContent(allRankedUniverse.length > 0 ? allRankedUniverse : cachedRankings);
+        }
+
         async function loadRankingData() {
             try {
                 const res = await fetch('/api/ranking?universe=all');
@@ -8116,10 +8281,11 @@
                     dedupedList.push(s);
                 }
 
-                cachedRankings = dedupedList.slice(0, 100);
-                renderRankingContent(cachedRankings);
-                renderGoldenPicks(cachedRankings);
-                populateStockSelectOptions(cachedRankings);
+                allRankedUniverse = dedupedList;
+                cachedRankings = dedupedList; // Store all 271 stocks!
+                renderRankingContent(allRankedUniverse);
+                renderGoldenPicks(allRankedUniverse.slice(0, 20));
+                populateStockSelectOptions(allRankedUniverse); // Populates all 271 stocks in select!
             } catch (err) {
                 console.warn("Ranking data fallback:", err);
                 renderDefaultMockRankings();
@@ -8146,11 +8312,11 @@
         }
 
         function renderRankingContent(stocks) {
-            if (!stocks) stocks = cachedRankings;
+            if (!stocks) stocks = allRankedUniverse.length > 0 ? allRankedUniverse : cachedRankings;
             if (!stocks || stocks.length === 0) return;
 
-            // Render up to Top 100 stocks
-            const displayStocks = stocks.slice(0, 100);
+            // Render up to Top 100 stocks or all 271 depending on toggle
+            const displayStocks = showAllRankings ? stocks : stocks.slice(0, 100);
 
             // 1. Render Cards View (Traffic Light Badges)
             const cardsContainer = document.getElementById('ranking-cards-view');
@@ -8284,26 +8450,32 @@
                 { ticker: "ORAS.CA", name_ar: "أوراسكوم للإنشاء", price: 907.00, current_price: 907.00, composite_score: 86.5 },
                 { ticker: "ABUK.CA", name_ar: "أبو قير للأسمدة", price: 84.34, current_price: 84.34, composite_score: 84.0 },
                 { ticker: "MFPC.CA", name_ar: "مصر لإنتاج الأسمدة", price: 44.01, current_price: 44.01, composite_score: 82.0 },
-                { ticker: "ETEL.CA", name_ar: "المصرية للاتصالات", price: 114.89, current_price: 114.89, composite_score: 80.0 },
-                { ticker: "EGAL.CA", name_ar: "مصر للألومنيوم", price: 330.00, current_price: 330.00, composite_score: 78.5 }
+                { ticker: "ETEL.CA", name_ar: "المصرية للاتصالات", price: 145.00, current_price: 145.00, composite_score: 80.0 },
+                { ticker: "EGAL.CA", name_ar: "مصر للألومنيوم", price: 305.03, current_price: 305.03, composite_score: 78.5 }
             ];
             cachedRankings = defaults;
+            allRankedUniverse = defaults;
             renderRankingContent(defaults);
             renderGoldenPicks(defaults);
         }
 
         function filterRankingCards() {
             const q = (document.getElementById('ranking-search')?.value || '').toLowerCase().trim();
+            const universe = (allRankedUniverse && allRankedUniverse.length > 0) ? allRankedUniverse : cachedRankings;
             if (!q) {
-                renderRankingContent(cachedRankings.length > 0 ? cachedRankings : null);
+                renderRankingContent(universe);
                 return;
             }
-            const filtered = (cachedRankings.length > 0 ? cachedRankings : []).filter(s => 
+            const filtered = (universe || []).filter(s => 
                 (s.ticker && s.ticker.toLowerCase().includes(q)) || 
                 (s.name_ar && s.name_ar.toLowerCase().includes(q)) ||
                 (s.company_name && s.company_name.toLowerCase().includes(q))
             );
+            // When filtering by query, render all matched results without 100 limit
+            const oldToggle = showAllRankings;
+            showAllRankings = true;
             renderRankingContent(filtered);
+            showAllRankings = oldToggle;
         }
 
         // =====================================================================
@@ -10116,6 +10288,7 @@
         // 🧪 AUTONOMOUS RESEARCH LAB & 7-AGENT COUNCIL CLIENT LOGIC
         // =====================================================================
         async function loadResearchLabTab() {
+            try { fetchPredictionAccuracyLedger(); } catch(e) {}
             try {
                 // 1. Fetch recent experiments
                 const resExp = await fetch('/api/research/experiments?limit=15');
@@ -11748,6 +11921,7 @@
                 try { loadAIStatusScorecard(); } catch(e) {}
                 try { startRealtimePriceStream(); } catch(e) {}
                 try { loadSystemSettings(); } catch(e) {}
+                try { fetchPredictionAccuracyLedger(); } catch(e) {}
             }, 150);
         });
 

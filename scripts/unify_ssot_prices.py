@@ -721,6 +721,10 @@ def unify_all_ssot_data():
             cash_radar["free_cash_egp"] = cash_egp
             cash_radar["stock_market_value_egp"] = round(total_stocks_mv, 2)
             cash_radar["cash_reserve_pct"] = round((cash_egp / total_portfolio_equity) * 100, 2)
+            cash_radar["mandatory_cash_floor_pct"] = 35.0
+            cash_radar["mandatory_cash_floor_egp"] = round(total_portfolio_equity * 0.35, 2)
+            cash_radar["investable_surplus_cash"] = max(0.0, round(cash_egp - (total_portfolio_equity * 0.35), 2))
+            cash_radar["cash_floor_status"] = "PROTECTED_SAFE" if cash_egp >= (total_portfolio_equity * 0.35) else "CASH_FLOOR_DEFICIT"
 
         tcard["as_of"] = now_str
         with open(THNDR_CARD_PATH, "w", encoding="utf-8") as f:

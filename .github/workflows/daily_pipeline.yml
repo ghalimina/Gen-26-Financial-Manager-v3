@@ -154,6 +154,12 @@ jobs:
         run: |
           python scripts/verify_daily_price_outliers.py
 
+      - name: 1.7 Intraday Sniper Dip-Buy & Breakeven Profit Alert Engine
+        continue-on-error: true
+        timeout-minutes: 3
+        run: |
+          python scripts/intraday_sniper_alerts.py
+
       - name: 2. Multi-Horizon Factor Forecasting & Stock Ranking Engine
         continue-on-error: true
         timeout-minutes: 5
