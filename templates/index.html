@@ -2304,26 +2304,38 @@
                     <span class="badge badge-red" style="font-size: 11px; padding: 4px 10px;">
                         🛡️ صمام الأمان: الشراء الجديد مجمّد
                     </span>
+                    <button id="toggle-breadth-btn" class="btn btn-secondary btn-sm" onclick="toggleMarketBreadthAlert()" style="display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; padding: 5px 12px; border-radius: 6px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); color: #e2e8f0; cursor: pointer; transition: all 0.2s ease;" title="إخفاء أو إظهار تفاصيل اتساع السوق والإنذار">
+                        <i class="fa-solid fa-eye-slash" id="toggle-breadth-icon"></i>
+                        <span id="toggle-breadth-text">إخفاء التفاصيل والإنذار</span>
+                    </button>
                     <button class="btn btn-secondary btn-sm" onclick="fetchMarketBreadthTelemetry(true)" title="تحديث اتساع السوق وصمام الأمان"><i class="fa-solid fa-arrows-rotate"></i></button>
                 </div>
             </div>
-            <!-- Alert Directive Box -->
-            <!-- Dual-Color Visual Market Breadth Progress Bar -->
-            <div style="margin: 10px 0 6px 0;">
-                <div style="display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 4px;">
-                    <span style="color: #34d399; font-weight: 700;">🟢 الصاعد (36%)</span>
-                    <span style="color: #cbd5e1; font-weight: 700;">⚪ المستقر (9%)</span>
-                    <span style="color: #f87171; font-weight: 700;">🔴 الهابط (55%)</span>
+            <!-- Collapsible Breadth Details & Warning Box -->
+            <div id="market-breadth-collapsible-section" style="transition: max-height 0.35s ease, opacity 0.3s ease; display: flex; flex-direction: column; gap: 8px;">
+                <!-- Dual-Color Visual Market Breadth Progress Bar -->
+                <div style="margin: 6px 0 2px 0;">
+                    <div style="display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 4px;">
+                        <span style="color: #34d399; font-weight: 700;">🟢 الصاعد (36%)</span>
+                        <span style="color: #cbd5e1; font-weight: 700;">⚪ المستقر (9%)</span>
+                        <span style="color: #f87171; font-weight: 700;">🔴 الهابط (55%)</span>
+                    </div>
+                    <div class="breadth-progress-bar" style="display: flex; height: 10px; width: 100%; border-radius: 6px; overflow: hidden; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1);">
+                        <div id="breadth-bar-green" style="background: #10b981; width: 36%; transition: width 0.4s ease;" title="الصاعد: 97 سهماً"></div>
+                        <div id="breadth-bar-gray" style="background: #64748b; width: 9%; transition: width 0.4s ease;" title="المستقر: 25 سهماً"></div>
+                        <div id="breadth-bar-red" style="background: #ef4444; width: 55%; transition: width 0.4s ease;" title="الهابط: 148 سهماً"></div>
+                    </div>
                 </div>
-                <div class="breadth-progress-bar" style="display: flex; height: 10px; width: 100%; border-radius: 6px; overflow: hidden; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1);">
-                    <div id="breadth-bar-green" style="background: #10b981; width: 36%; transition: width 0.4s ease;" title="الصاعد: 97 سهماً"></div>
-                    <div id="breadth-bar-gray" style="background: #64748b; width: 9%; transition: width 0.4s ease;" title="المستقر: 25 سهماً"></div>
-                    <div id="breadth-bar-red" style="background: #ef4444; width: 55%; transition: width 0.4s ease;" title="الهابط: 148 سهماً"></div>
+                <div id="circuit-breaker-warning-box" style="background: rgba(239, 68, 68, 0.12); border-right: 4px solid #ef4444; border-radius: 6px; padding: 10px 14px; font-size: 13px; font-weight: 700; color: #fecaca; line-height: 1.6; display: flex; align-items: center; justify-content: space-between; gap: 10px;">
+                    <div style="display: flex; align-items: center; gap: 10px; flex: 1;">
+                        <i class="fa-solid fa-triangle-exclamation" style="font-size: 18px; color: #ef4444; flex-shrink: 0;"></i>
+                        <span id="circuit-breaker-directive-text">🚨 إنذار ضغط بيعي وتصريف مؤسسي (أكثر من 54% من السوق هابط): الشركات والمؤسسات تجني أرباحها — يُحظر فتح مراكز شراء جديدة اليوم، ويُنصح بالاحتفاظ بالكاش وتفعيل خطة التسييل الجزئي عند الارتداد.</span>
+                    </div>
+                    <button onclick="toggleCircuitBreakerWarningOnly()" style="background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.4); color: #fca5a5; border-radius: 4px; padding: 3px 8px; font-size: 11px; cursor: pointer; display: flex; align-items: center; gap: 4px; flex-shrink: 0;" title="إخفاء نص الإنذار">
+                        <i class="fa-solid fa-xmark"></i>
+                        <span>إخفاء</span>
+                    </button>
                 </div>
-            </div>
-            <div id="circuit-breaker-warning-box" style="background: rgba(239, 68, 68, 0.12); border-right: 4px solid #ef4444; border-radius: 6px; padding: 10px 14px; font-size: 13px; font-weight: 700; color: #fecaca; line-height: 1.6; display: flex; align-items: center; gap: 10px;">
-                <i class="fa-solid fa-triangle-exclamation" style="font-size: 18px; color: #ef4444; flex-shrink: 0;"></i>
-                <span id="circuit-breaker-directive-text">🚨 إنذار ضغط بيعي وتصريف مؤسسي (أكثر من 54% من السوق هابط): الشركات والمؤسسات تجني أرباحها — يُحظر فتح مراكز شراء جديدة اليوم، ويُنصح بالاحتفاظ بالكاش وتفعيل خطة التسييل الجزئي عند الارتداد.</span>
             </div>
         </div>
 
@@ -9606,6 +9618,60 @@
         // =====================================================================
         // 📊 MARKET BREADTH & DISTRIBUTION CIRCUIT BREAKER TELEMETRY (/api/market_breadth)
         // =====================================================================
+        async 
+        // =====================================================================
+        // 👁️ MARKET BREADTH & ALERT TOGGLE ENGINE
+        // =====================================================================
+        function toggleMarketBreadthAlert() {
+            const sec = document.getElementById('market-breadth-collapsible-section');
+            const icon = document.getElementById('toggle-breadth-icon');
+            const text = document.getElementById('toggle-breadth-text');
+            if (!sec) return;
+
+            const isCurrentlyHidden = sec.style.display === 'none';
+            if (isCurrentlyHidden) {
+                // Show
+                sec.style.display = 'flex';
+                const warnBox = document.getElementById('circuit-breaker-warning-box');
+                if (warnBox) warnBox.style.display = 'flex';
+                if (icon) icon.className = 'fa-solid fa-eye-slash';
+                if (text) text.innerText = 'إخفاء التفاصيل والإنذار';
+                localStorage.setItem('gen26_breadth_alert_visible', 'true');
+            } else {
+                // Hide
+                sec.style.display = 'none';
+                if (icon) icon.className = 'fa-solid fa-eye';
+                if (text) text.innerText = 'إظهار التفاصيل والإنذار';
+                localStorage.setItem('gen26_breadth_alert_visible', 'false');
+            }
+        }
+
+        function toggleCircuitBreakerWarningOnly() {
+            const warnBox = document.getElementById('circuit-breaker-warning-box');
+            if (!warnBox) return;
+            warnBox.style.display = 'none';
+            const text = document.getElementById('toggle-breadth-text');
+            const icon = document.getElementById('toggle-breadth-icon');
+            if (text) text.innerText = 'إظهار الإنذار الكامل';
+            if (icon) icon.className = 'fa-solid fa-eye';
+        }
+
+        function initMarketBreadthVisibility() {
+            try {
+                const saved = localStorage.getItem('gen26_breadth_alert_visible');
+                if (saved === 'false') {
+                    const sec = document.getElementById('market-breadth-collapsible-section');
+                    const icon = document.getElementById('toggle-breadth-icon');
+                    const text = document.getElementById('toggle-breadth-text');
+                    if (sec) sec.style.display = 'none';
+                    if (icon) icon.className = 'fa-solid fa-eye';
+                    if (text) text.innerText = 'إظهار التفاصيل والإنذار';
+                }
+            } catch (err) {
+                console.warn("Market breadth visibility init error:", err);
+            }
+        }
+
         async function fetchMarketBreadthTelemetry(force = false) {
             try {
                 const res = await fetch('/api/market_breadth');
@@ -11430,6 +11496,7 @@
 
             // 🌓 Initialize Quantum Theme (Dark / Crisp Institutional Light)
             try { initQuantumTheme(); } catch(e) {}
+            try { initMarketBreadthVisibility(); } catch(e) {}
 
             // 🧮 Initialize Thndr Order Simulation
             try { calculateThndrOrderSimulation(); } catch(e) {}
