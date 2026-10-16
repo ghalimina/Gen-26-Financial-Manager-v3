@@ -169,9 +169,9 @@ class RegimeHMMEngine:
                         price = cached_price
             except Exception:
                 pass
-        # 3. Hard fallback — use 52494 (real Sept 2026 level)
+        # 3. Hard fallback — use 51492.80 (SSoT EGX30 level)
         if price is None:
-            price = 52494.0
+            price = 51492.80
 
         cls._cached_base_level = price
         cls._last_base_level_time = now
@@ -218,7 +218,7 @@ class RegimeHMMEngine:
                     'description_ar': weights_info['description_ar'],
                     'regime_name_ar': weights_info['name_ar'],
                     'name_ar': weights_info['name_ar'],
-                    'current_price': float(cached.get('egx30_level', 52494.0)),
+                    'current_price': float(cached.get('egx30_level', 51492.80)),
                     'ma_50': float(cached.get('ma_50', 52000.0)),
                     'ma_200': float(cached.get('ma_200', 48000.0)),
                     'drawdown_20d_pct': float(cached.get('drawdown_20d_pct', 0.0)),

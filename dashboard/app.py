@@ -3904,25 +3904,6 @@ def api_morning_briefing():
             ]
 
         rec_state = get_unified_pipeline_recommendations()
-        if not rec_state.get("is_market_bull"):
-            return jsonify({
-                "status": "CASH_PRESERVATION",
-                "market_regime": "CASH_PRESERVATION",
-                "market_regime_label": "🛡️ حماية السيولة والكاش (Cash Preservation)",
-                "headline": "وضع الحفاظ على السيولة: السوق في مرحلة تصحيحية وحماية رأس المال أولوية",
-                "summary_markdown": "بناءً على قراءة دورة السوق والمؤشرات الكلية، يُوصى بالاحتفاظ بنسبة سيولة نقدية مرتفعة لحين ظهور إشارات انعكاس واضحة، مع إمكانية التحوط في صندوق الذهب AZG.",
-                "key_recommendations": [
-                    {
-                        "ticker": "AZG",
-                        "company_name": "صندوق أزيموت للذهب (AZ Gold)",
-                        "action": "تحوط بالذهب والسيولة 100%",
-                        "target_price": "24.85 ج.م",
-                        "stop_loss": "-",
-                        "score": 95.0,
-                        "reason": "ملاذ آمن للتحوط ضد تقلبات السوق والحفاظ على القوة الشرائية للسيولة النقدية."
-                    }
-                ]
-            }), 200
 
         from core.real_portfolio import RealPortfolioTracker
         from core.market_price_service import MarketPriceService
@@ -4007,10 +3988,10 @@ def api_morning_briefing():
         today_str = datetime.date.today().isoformat()
         return jsonify({
             "status": "SUCCESS",
-            "market_regime": "BULLISH_TREND",
-            "market_regime_label": "🟢 اتجاه صاعد (Bull Market)",
+            "market_regime": "DISTRIBUTION_SELL_OFF",
+            "market_regime_label": "🟡 حذر وضغط بيعي مؤسسي — تجميد الشراء العشوائي والتقاط انتقائي عند قاع التجميع فقط (حارس منع البيع بخسارة مفعّل)",
             "headline": f"التقرير الصباحي الكمي لجلسة تداول البورصة المصرية — {today_str}",
-            "summary_markdown": f"تظهر المؤشرات الكمية زخماً شرائياً في قطاعات قيادية بالبورصة المصرية، متصدرة باختيارات ألفا المؤسسية وعلى رأسها {top_name} ({top_t})، مع استمرار دورة التداول النشطة ومراعاة قواعد إدارة المخاطر ونسبة الكاش الاحتياطي المحددة بـ 35%.",
+            "summary_markdown": f"تظهر المؤشرات الكمية ضغطاً بيعياً مؤسسياً يستوجب الحذر وتجميد الشراء العشوائي، مع تفعيل حارس منع البيع بخسارة، والتركيز فقط على الالتقاط الانتقائي عند قيعان التجميع المؤسسي في أسهم الملاءة المالية مثل {top_name} ({top_t}) ومحفظة الذهب.",
             "key_recommendations": key_recs
         }), 200
 

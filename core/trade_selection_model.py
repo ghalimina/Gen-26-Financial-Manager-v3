@@ -42,13 +42,13 @@ class TradeSelectionModel:
                 from core.regime_hmm_engine import RegimeHMMEngine
                 r_state = RegimeHMMEngine.detect_latent_regime()
                 if egx30_price is None:
-                    egx30_price = float(r_state.get("current_price", 52494.0))
+                    egx30_price = float(r_state.get("current_price", 51492.80))
                 if egx30_ma50 is None:
                     egx30_ma50 = float(r_state.get("ma_50", 52000.0))
                 if regime is None:
                     regime = str(r_state.get("regime", "SIDEWAYS_CHOP"))
             except Exception:
-                egx30_price = egx30_price or 52494.0
+                egx30_price = egx30_price or 51492.80
                 egx30_ma50 = egx30_ma50 or 52000.0
                 regime = regime or "SIDEWAYS_CHOP"
 

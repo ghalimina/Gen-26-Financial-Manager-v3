@@ -163,7 +163,7 @@ class RegimeAdaptiveWeights:
         profile = cls.REGIME_WEIGHT_PROFILES.get(active_regime, cls.REGIME_WEIGHT_PROFILES[cls.REGIME_DEVALUATION_BOOM])
 
         # Read EGX30 level if cached
-        egx30_level = 52494.0
+        egx30_level = 51492.80
         drawdown_20d = -0.76
         if os.path.exists(REGIME_CACHE_FILE):
             try:

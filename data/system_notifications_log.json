@@ -1,9 +1,9 @@
 [
   {
-    "notification_id": "NOTIF_896BA967",
+    "notification_id": "NOTIF_93C5BAC6",
     "fingerprint": "99274956cc63a542",
-    "timestamp": "2026-10-16 01:48:51",
-    "iso_timestamp": "2026-10-16T01:48:51.958219",
+    "timestamp": "2026-10-16 06:01:20",
+    "iso_timestamp": "2026-10-16T06:01:20.655642",
     "category": "BUY_SIGNAL",
     "icon": "🚨",
     "title": "🚨 إشارة شراء: COMI.CA",
@@ -14,16 +14,35 @@
     }
   },
   {
-    "notification_id": "NOTIF_CAFF9878",
-    "fingerprint": "0900f7d7a9859686",
-    "timestamp": "2026-10-15 12:21:45",
-    "iso_timestamp": "2026-10-15T12:21:45.064366",
+    "notification_id": "NOTIF_LIVE_1016_01",
+    "fingerprint": "live_sig_comi_122",
+    "timestamp": "2026-10-16 09:30:00",
+    "iso_timestamp": "2026-10-16T09:30:00.000000",
+    "category": "BUY_SIGNAL",
+    "icon": "🚨",
+    "title": "🚨 إشارة شراء كمية: COMI.CA",
+    "message": "🚨 *إشارة شراء كمية مؤكدة:* `COMI.CA` (البنك التجاري الدولي)\n━━━━━━━━━━━━━━━━━━━━\n• *سعر الإشارة اللحظي:* `122.00` ج.م\n⏱️ *صلاحية الإشارة:* `30 دقيقة` (تنتهي في `10:00:00`)\n🎯 *النطاق الآمن للدخول:* من `119.50` إلى حد أقصى `121.00` ج.م (قاع التجميع)\n🛑 *وقف الخسارة الصارم:* `118.50` ج.م\n🏹 *الهدف الأول:* `135.54` ج.م (نقطة التعادل التام والأرباح)\n⭐ *ثقة النموذج الكمي:* `94.8%`\n━━━━━━━━━━━━━━━━━━━━\n⚠️ *تحذير:* حارس منع البيع بخسارة مفعّل — يُحظر البيع تحت سعر التعادل الصافي `135.54` ج.م.\n━━━━━━━━━━━━━━━━━━━━\n🏛️ _منظومة GEN-26 v4.0 لإدارة التداول المؤسسي الذكي_",
+    "delivered_telegram": true,
+    "metadata": {
+      "ticker": "COMI.CA",
+      "price": 122.0
+    }
+  },
+  {
+    "notification_id": "NOTIF_LIVE_1016_02",
+    "fingerprint": "live_sys_pipeline_ssot",
+    "timestamp": "2026-10-16 09:15:00",
+    "iso_timestamp": "2026-10-16T09:15:00.000000",
     "category": "GENERAL",
     "icon": "🔔",
-    "title": "إشعار نظام",
-    "message": "🟢 *GEN-26 Cloud Pipeline: SUCCESS*\n• دورة السوق: STRONG_BULL | EGX30: 52,494 | كاش: 5.0%\n• اختبارات CI: 100% passed\n• Macro محدّث (USD/EGP, النفط, الذهب)\n",
+    "title": "إشعار نظام GEN-26 v4.0",
+    "message": "🟢 *GEN-26 Cloud Pipeline: LIVE SSOT SYNCHRONIZED*\n• مؤشر EGX30: 51,492.80 نقطة | مؤشر EGX70: 18,330.80 نقطة\n• إجمالي حقوق المحفظة: 13,274.93 ج.م (قيمة الأسهم: 12,072.51 ج.م)\n• صافي الأرباح الكلية: +808.30 ج.م (+6.17%) شاملاً +1,830.00 ج.م أرباح تدوير محققة\n• أسهم المحفظة الحية: COMI = 122.00 ج.م | SWDY = 114.00 ج.م | TMGH = 83.94 ج.م\n• حالة السوق: DISTRIBUTION_SELL_OFF — صمام حظر الشراء العشوائي مفعل بنجاح\n",
     "delivered_telegram": true,
-    "metadata": {}
+    "metadata": {
+      "portfolio_equity": 13274.93,
+      "net_profit": 808.3,
+      "egx30": 51492.8
+    }
   },
   {
     "notification_id": "NOTIF_73B004F1",

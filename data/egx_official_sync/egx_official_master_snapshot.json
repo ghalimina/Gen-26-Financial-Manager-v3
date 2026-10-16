@@ -1,11 +1,11 @@
 {
   "market_date": "2026-10-14",
   "session_status": "CLOSED_OFFICIAL_SETTLEMENT",
-  "timestamp": "2026-10-16 03:21:59",
+  "timestamp": "2026-10-16 05:58:18",
   "indices": {
     "EGX30": {
       "name": "EGX30 (المؤشر الرئيسي)",
-      "level": 52273.3,
+      "level": 51492.8,
       "change_pts": 780.5,
       "change_pct": 1.52,
       "ytd_pct": 22.56,

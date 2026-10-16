@@ -1,6 +1,6 @@
 {
   "status": "SUCCESS",
-  "as_of": "2026-10-16 03:22:00",
+  "as_of": "2026-10-16 05:58:19",
   "market_portal": "https://www.egx.com.eg/ar/",
   "insider_transactions_count": 6,
   "dividend_stocks_count": 10,
@@ -18,7 +18,7 @@
     {
       "ticker": "MFPC.CA",
       "company_name": "مصر لإنتاج الأسمدة (موبكو)",
-      "current_price": 43.91,
+      "current_price": 44.01,
       "dividend_yield_pct": 9.01,
       "last_coupon_value_egp": 4.25,
       "cash_cow_grade": "A+",
@@ -78,7 +78,7 @@
     {
       "ticker": "COMI.CA",
       "company_name": "البنك التجاري الدولي (CIB)",
-      "current_price": 125.0,
+      "current_price": 122.0,
       "dividend_yield_pct": 4.9,
       "last_coupon_value_egp": 5.5,
       "cash_cow_grade": "A+",
@@ -88,7 +88,7 @@
     {
       "ticker": "ABUK.CA",
       "company_name": "أبو قير للأسمدة والصناعات الكيماوية",
-      "current_price": 87.68,
+      "current_price": 84.34,
       "dividend_yield_pct": 4.6,
       "last_coupon_value_egp": 3.0,
       "cash_cow_grade": "A",
@@ -98,7 +98,7 @@
     {
       "ticker": "SWDY.CA",
       "company_name": "السويدي إليكتريك",
-      "current_price": 113.08,
+      "current_price": 114.0,
       "dividend_yield_pct": 1.65,
       "last_coupon_value_egp": 4.0,
       "cash_cow_grade": "B",
@@ -181,7 +181,7 @@
   "portfolio_holdings_memo": {
     "COMI.CA": {
       "ticker": "COMI.CA",
-      "current_price": 125.0,
+      "current_price": 122.0,
       "insider_profile": {
         "has_insider_activity": true,
         "insider_signal": "STRONG_INSIDER_BUYING",
@@ -217,7 +217,7 @@
     },
     "TMGH.CA": {
       "ticker": "TMGH.CA",
-      "current_price": 84.75,
+      "current_price": 83.94,
       "insider_profile": {
         "has_insider_activity": false,
         "insider_signal": "NEUTRAL",
@@ -240,7 +240,7 @@
     },
     "PHDC.CA": {
       "ticker": "PHDC.CA",
-      "current_price": 12.83,
+      "current_price": 12.75,
       "insider_profile": {
         "has_insider_activity": false,
         "insider_signal": "NEUTRAL",
@@ -263,7 +263,7 @@
     },
     "SWDY.CA": {
       "ticker": "SWDY.CA",
-      "current_price": 113.08,
+      "current_price": 114.0,
       "insider_profile": {
         "has_insider_activity": true,
         "insider_signal": "STRONG_INSIDER_BUYING",
@@ -299,7 +299,7 @@
     },
     "RAYA.CA": {
       "ticker": "RAYA.CA",
-      "current_price": 5.97,
+      "current_price": 5.89,
       "insider_profile": {
         "has_insider_activity": false,
         "insider_signal": "NEUTRAL",
