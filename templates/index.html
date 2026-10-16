@@ -2274,13 +2274,17 @@
                 </span>
             </div>
             <div style="display: flex; gap: 8px; align-items: center;">
+                <button id="macro-toggle-breadth-btn" class="btn btn-secondary btn-sm" onclick="toggleEntireMarketBreadthBanner()" style="display: inline-flex; align-items: center; gap: 6px; font-size: 11px; padding: 5px 12px; border-radius: 6px; background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.35); color: #93c5fd; cursor: pointer; transition: all 0.2s ease;" title="إظهار أو إخفاء مؤشر اتساع السوق وصمام الأمان بالكامل">
+                    <i class="fa-solid fa-gauge-high" id="macro-toggle-breadth-icon"></i>
+                    <span id="macro-toggle-breadth-text">إظهار اتساع السوق (270 سهم)</span>
+                </button>
                 <span class="badge badge-green" id="macro-freshness-badge">🟢 بيانات حية معتمدة 100%</span>
                 <button class="btn btn-secondary btn-sm" onclick="fetchMacroTelemetry(true)" title="تحديث المؤشرات الاقتصادية"><i class="fa-solid fa-arrows-rotate"></i></button>
             </div>
         </div>
 
         <!-- Live Market Breadth Meter & Institutional Distribution Circuit Breaker Banner -->
-        <div id="market-breadth-circuit-breaker-banner" class="macro-barometer-banner" style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.16) 0%, rgba(15, 23, 42, 0.95) 45%, rgba(30, 41, 59, 0.90) 100%); border: 1.5px solid rgba(239, 68, 68, 0.5); border-radius: var(--radius-md); padding: 12px 18px; margin: 8px 20px 14px 20px; box-shadow: 0 6px 28px rgba(239, 68, 68, 0.22); display: flex; flex-direction: column; gap: 10px;">
+        <div id="market-breadth-circuit-breaker-banner" class="macro-barometer-banner" style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.16) 0%, rgba(15, 23, 42, 0.95) 45%, rgba(30, 41, 59, 0.90) 100%); border: 1.5px solid rgba(239, 68, 68, 0.5); border-radius: var(--radius-md); padding: 12px 18px; margin: 8px 20px 14px 20px; box-shadow: 0 6px 28px rgba(239, 68, 68, 0.22); display: none; flex-direction: column; gap: 10px;">
             <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
                 <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
                     <span style="display: flex; align-items: center; gap: 6px; font-weight: 800; font-size: 14px; color: #f87171;">
@@ -2304,9 +2308,9 @@
                     <span class="badge badge-red" style="font-size: 11px; padding: 4px 10px;">
                         🛡️ صمام الأمان: الشراء الجديد مجمّد
                     </span>
-                    <button id="toggle-breadth-btn" class="btn btn-secondary btn-sm" onclick="toggleMarketBreadthAlert()" style="display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; padding: 5px 12px; border-radius: 6px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); color: #e2e8f0; cursor: pointer; transition: all 0.2s ease;" title="إخفاء أو إظهار تفاصيل اتساع السوق والإنذار">
-                        <i class="fa-solid fa-eye-slash" id="toggle-breadth-icon"></i>
-                        <span id="toggle-breadth-text">إخفاء التفاصيل والإنذار</span>
+                    <button id="toggle-breadth-btn" class="btn btn-secondary btn-sm" onclick="toggleEntireMarketBreadthBanner()" style="display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; padding: 5px 12px; border-radius: 6px; background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.4); color: #fecaca; cursor: pointer; transition: all 0.2s ease;" title="إخفاء مؤشر اتساع السوق بالكامل">
+                        <i class="fa-solid fa-xmark"></i>
+                        <span>إخفاء هذا الشريط بالكامل</span>
                     </button>
                     <button class="btn btn-secondary btn-sm" onclick="fetchMarketBreadthTelemetry(true)" title="تحديث اتساع السوق وصمام الأمان"><i class="fa-solid fa-arrows-rotate"></i></button>
                 </div>
@@ -9620,52 +9624,80 @@
         // =====================================================================
         async 
         // =====================================================================
-        // 👁️ MARKET BREADTH & ALERT TOGGLE ENGINE
+        // 👁️ MARKET BREADTH & ALERT TOGGLE ENGINE (FULL BANNER TOGGLE)
         // =====================================================================
-        function toggleMarketBreadthAlert() {
-            const sec = document.getElementById('market-breadth-collapsible-section');
-            const icon = document.getElementById('toggle-breadth-icon');
-            const text = document.getElementById('toggle-breadth-text');
-            if (!sec) return;
+        function toggleEntireMarketBreadthBanner() {
+            const banner = document.getElementById('market-breadth-circuit-breaker-banner');
+            const macroBtnText = document.getElementById('macro-toggle-breadth-text');
+            const macroBtnIcon = document.getElementById('macro-toggle-breadth-icon');
+            const macroBtn = document.getElementById('macro-toggle-breadth-btn');
+            if (!banner) return;
 
-            const isCurrentlyHidden = sec.style.display === 'none';
+            const isCurrentlyHidden = banner.style.display === 'none' || window.getComputedStyle(banner).display === 'none';
+
             if (isCurrentlyHidden) {
-                // Show
-                sec.style.display = 'flex';
-                const warnBox = document.getElementById('circuit-breaker-warning-box');
-                if (warnBox) warnBox.style.display = 'flex';
-                if (icon) icon.className = 'fa-solid fa-eye-slash';
-                if (text) text.innerText = 'إخفاء التفاصيل والإنذار';
-                localStorage.setItem('gen26_breadth_alert_visible', 'true');
+                // Show banner
+                banner.style.display = 'flex';
+                if (macroBtnText) macroBtnText.innerText = 'إخفاء اتساع السوق';
+                if (macroBtnIcon) macroBtnIcon.className = 'fa-solid fa-gauge-high text-red';
+                if (macroBtn) {
+                    macroBtn.style.background = 'rgba(239, 68, 68, 0.15)';
+                    macroBtn.style.borderColor = 'rgba(239, 68, 68, 0.35)';
+                    macroBtn.style.color = '#fca5a5';
+                }
+                localStorage.setItem('gen26_breadth_banner_visible', 'true');
             } else {
-                // Hide
-                sec.style.display = 'none';
-                if (icon) icon.className = 'fa-solid fa-eye';
-                if (text) text.innerText = 'إظهار التفاصيل والإنذار';
-                localStorage.setItem('gen26_breadth_alert_visible', 'false');
+                // Hide banner
+                banner.style.display = 'none';
+                if (macroBtnText) macroBtnText.innerText = 'إظهار اتساع السوق (270 سهم)';
+                if (macroBtnIcon) macroBtnIcon.className = 'fa-solid fa-gauge-high text-blue';
+                if (macroBtn) {
+                    macroBtn.style.background = 'rgba(59, 130, 246, 0.15)';
+                    macroBtn.style.borderColor = 'rgba(59, 130, 246, 0.35)';
+                    macroBtn.style.color = '#93c5fd';
+                }
+                localStorage.setItem('gen26_breadth_banner_visible', 'false');
             }
         }
 
+        // Backward compatibility helper
+        function toggleMarketBreadthAlert() {
+            toggleEntireMarketBreadthBanner();
+        }
+
         function toggleCircuitBreakerWarningOnly() {
-            const warnBox = document.getElementById('circuit-breaker-warning-box');
-            if (!warnBox) return;
-            warnBox.style.display = 'none';
-            const text = document.getElementById('toggle-breadth-text');
-            const icon = document.getElementById('toggle-breadth-icon');
-            if (text) text.innerText = 'إظهار الإنذار الكامل';
-            if (icon) icon.className = 'fa-solid fa-eye';
+            toggleEntireMarketBreadthBanner();
         }
 
         function initMarketBreadthVisibility() {
             try {
-                const saved = localStorage.getItem('gen26_breadth_alert_visible');
-                if (saved === 'false') {
-                    const sec = document.getElementById('market-breadth-collapsible-section');
-                    const icon = document.getElementById('toggle-breadth-icon');
-                    const text = document.getElementById('toggle-breadth-text');
-                    if (sec) sec.style.display = 'none';
-                    if (icon) icon.className = 'fa-solid fa-eye';
-                    if (text) text.innerText = 'إظهار التفاصيل والإنذار';
+                const banner = document.getElementById('market-breadth-circuit-breaker-banner');
+                const macroBtnText = document.getElementById('macro-toggle-breadth-text');
+                const macroBtnIcon = document.getElementById('macro-toggle-breadth-icon');
+                const macroBtn = document.getElementById('macro-toggle-breadth-btn');
+                
+                const saved = localStorage.getItem('gen26_breadth_banner_visible');
+                // Default to hidden ('false') as requested by user
+                const shouldBeVisible = (saved === 'true');
+
+                if (!shouldBeVisible && banner) {
+                    banner.style.display = 'none';
+                    if (macroBtnText) macroBtnText.innerText = 'إظهار اتساع السوق (270 سهم)';
+                    if (macroBtnIcon) macroBtnIcon.className = 'fa-solid fa-gauge-high text-blue';
+                    if (macroBtn) {
+                        macroBtn.style.background = 'rgba(59, 130, 246, 0.15)';
+                        macroBtn.style.borderColor = 'rgba(59, 130, 246, 0.35)';
+                        macroBtn.style.color = '#93c5fd';
+                    }
+                } else if (banner) {
+                    banner.style.display = 'flex';
+                    if (macroBtnText) macroBtnText.innerText = 'إخفاء اتساع السوق';
+                    if (macroBtnIcon) macroBtnIcon.className = 'fa-solid fa-gauge-high text-red';
+                    if (macroBtn) {
+                        macroBtn.style.background = 'rgba(239, 68, 68, 0.15)';
+                        macroBtn.style.borderColor = 'rgba(239, 68, 68, 0.35)';
+                        macroBtn.style.color = '#fca5a5';
+                    }
                 }
             } catch (err) {
                 console.warn("Market breadth visibility init error:", err);
