@@ -7331,7 +7331,8 @@
             'insider_radar', 'insider', 'arbitrage_monitor', 'arbitrage', 'signals',
             'risk_center', 'stress_center', 'paper_vs_bt', 'paper_vs_backtest', 'observatory',
             'universe_audit', 'universe', 'health', 'execution', 'research_lab', 'research-lab', 'lab',
-            'trading_agents', 'tribunal', 'system_settings', 'settings'
+            'trading_agents', 'tribunal', 'system_settings', 'settings',
+            'simulator', 'time_machine', 'time-machine'
         ];
 
         const TITLE_MAP = {
@@ -7529,6 +7530,10 @@
                     fetchRiskComplianceData();
                 } else if (tabId === 'stress_center') {
                     runMonteCarloSim(60);
+                } else if (tabId === 'simulator') {
+                    if (typeof runSimulation === 'function') {
+                        runSimulation();
+                    }
                 }
             } catch (tabErr) {
                 console.warn("Tab loader execution warning:", tabErr);
