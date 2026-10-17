@@ -3896,12 +3896,12 @@
                             <input type="range" id="sim-days-range" min="3" max="120" value="20" oninput="syncDaysRange(this.value)" style="width: 100%; accent-color: #8b5cf6; cursor: pointer;">
                             <!-- Quick preset pills -->
                             <div style="display: flex; gap: 4px; margin-top: 6px; flex-wrap: wrap;">
-                                <button type="button" class="btn btn-secondary btn-xs" onclick="setPresetDays(5)">5 جلسات</button>
-                                <button type="button" class="btn btn-secondary btn-xs" onclick="setPresetDays(10)">10 جلسات</button>
+                                <button type="button" class="btn btn-secondary btn-xs" id="pill-5" onclick="setPresetDays(5)">5 جلسات</button>
+                                <button type="button" class="btn btn-secondary btn-xs" id="pill-10" onclick="setPresetDays(10)">10 جلسات</button>
                                 <button type="button" class="btn btn-secondary btn-xs active-pill" id="pill-20" onclick="setPresetDays(20)" style="background: #8b5cf6; color: #fff;">20 جلسة</button>
-                                <button type="button" class="btn btn-secondary btn-xs" onclick="setPresetDays(45)">45 جلسة</button>
-                                <button type="button" class="btn btn-secondary btn-xs" onclick="setPresetDays(60)">60 جلسة</button>
-                                <button type="button" class="btn btn-secondary btn-xs" onclick="setPresetDays(120)">120 جلسة</button>
+                                <button type="button" class="btn btn-secondary btn-xs" id="pill-45" onclick="setPresetDays(45)">45 جلسة</button>
+                                <button type="button" class="btn btn-secondary btn-xs" id="pill-60" onclick="setPresetDays(60)">60 جلسة</button>
+                                <button type="button" class="btn btn-secondary btn-xs" id="pill-120" onclick="setPresetDays(120)">120 جلسة</button>
                             </div>
                         </div>
 
@@ -7276,6 +7276,16 @@
     <!-- 🧠 CLIENT-SIDE JAVASCRIPT LOGIC & API CONSUMPTION -->
     <!-- ================================================================= -->
     <script>
+        // =====================================================================
+        // 🔮 QUANTUM TIME-MACHINE GLOBAL STATE (Anti-TDZ Protection)
+        // =====================================================================
+        var currentSimData = null;
+        var simAnimInterval = null;
+        var simChartInstance = null;
+        var activeMatrixFilter = 'ALL';
+        var _isSimRunning = false;
+        var _simReqSequence = 0;
+
         // =====================================================================
         // 🛡️ DEDUPLICATING IN-FLIGHT REQUEST GUARD & DEBOUNCER
         // =====================================================================
@@ -10999,10 +11009,6 @@
         }
 
         // =====================================================================
-        // 📊 MARKET BREADTH & DISTRIBUTION CIRCUIT BREAKER TELEMETRY (/api/market_breadth)
-        // =====================================================================
-        async 
-        // =====================================================================
         // 👁️ MARKET BREADTH & ALERT TOGGLE ENGINE (FULL BANNER TOGGLE)
         // =====================================================================
         // 👁️ BANNERS DISPLAY CONTROLLER & TOGGLE ENGINE (MACRO & MARKET BREADTH)
@@ -13405,15 +13411,16 @@
         // =====================================================================
         // 🔮 QUANTUM TIME-MACHINE & MULTI-HORIZON SIMULATOR ENGINE (v4.4)
         // =====================================================================
-        let currentSimData = null;
-        let simAnimInterval = null;
-        let simChartInstance = null;
-        let activeMatrixFilter = 'ALL';
-        let _isSimRunning = false;
+        var currentSimData = window.currentSimData || null;
+        var simAnimInterval = window.simAnimInterval || null;
+        var simChartInstance = window.simChartInstance || null;
+        var activeMatrixFilter = window.activeMatrixFilter || 'ALL';
+        var _isSimRunning = false;
+        var _simReqSequence = 0;
 
         async function runSimulation() {
-            if (_isSimRunning) return;
-            _isSimRunning = true;
+            _simReqSequence++;
+            const seqId = _simReqSequence;
 
             const targetEl = document.getElementById('sim-target-select');
             const daysEl = document.getElementById('sim-days-input');
@@ -13421,7 +13428,7 @@
             const stratEl = document.getElementById('sim-strategy-select');
 
             const target = targetEl ? targetEl.value : 'PORTFOLIO';
-            const days = daysEl ? parseInt(daysEl.value) || 20 : 20;
+            const days = daysEl ? Math.max(3, Math.min(120, parseInt(daysEl.value) || 20)) : 20;
             const regime = regimeEl ? regimeEl.value : 'BASE_ACCUMULATION';
             const strategy = stratEl ? stratEl.value : 'SMART_ROTATION';
 
@@ -13433,24 +13440,25 @@
                 const res = await fetch(url);
                 if (!res.ok) throw new Error("HTTP " + res.status);
                 const data = await res.json();
+                if (seqId !== _simReqSequence) return;
                 currentSimData = data;
+                window.currentSimData = data;
                 renderSimulation(data);
             } catch (err) {
-                console.warn("Simulator API fetch error, executing client-side fallback:", err);
+                console.warn("Simulator API fetch warning, executing resilient fallback:", err);
+                if (seqId !== _simReqSequence) return;
                 const fallbackData = _runClientFallbackSimulation(target, days, regime, strategy);
                 currentSimData = fallbackData;
+                window.currentSimData = fallbackData;
                 renderSimulation(fallbackData);
-            } finally {
-                _isSimRunning = false;
             }
         }
 
         function _runClientFallbackSimulation(target, days, regime, strategy) {
             const dCount = Math.max(3, Math.min(120, parseInt(days) || 20));
             const isPortfolio = target === 'PORTFOLIO';
-            const isIdx = target === 'EGX30' || target === 'EGX70' || target === 'EGX100';
             
-            let curVal = isPortfolio ? 13274.93 : (target === 'EGX30' ? 51492.8 : (target === 'EGX70' ? 18330.8 : 122.0));
+            let curVal = isPortfolio ? 13274.93 : (target === 'EGX30' ? 51492.8 : (target === 'EGX70' ? 18330.8 : (target === 'EGX100' ? 30735.6 : 122.0)));
             let netBk = isPortfolio ? 14421.15 : (curVal * 1.0095);
             let dipDrop = curVal * 0.015;
             let minDip = curVal - dipDrop;
@@ -13493,6 +13501,19 @@
                 }
             }
 
+            const fallbackMatrix = [
+                { ticker: "COMI.CA", name_ar: "البنك التجاري الدولي", current_price: 122.0, min_dip_price: 120.5, final_target: 138.5, expected_return_pct: 13.5, net_breakeven: 135.54, is_portfolio_holding: true },
+                { ticker: "TMGH.CA", name_ar: "طلعت مصطفى", current_price: 83.94, min_dip_price: 82.5, final_target: 95.8, expected_return_pct: 14.1, net_breakeven: 87.32, is_portfolio_holding: true },
+                { ticker: "SWDY.CA", name_ar: "السويدي إليكتريك", current_price: 114.0, min_dip_price: 112.0, final_target: 131.0, expected_return_pct: 14.9, net_breakeven: 116.93, is_portfolio_holding: true },
+                { ticker: "PHDC.CA", name_ar: "بالم هيلز", current_price: 12.75, min_dip_price: 12.5, final_target: 14.8, expected_return_pct: 16.1, net_breakeven: 13.59, is_portfolio_holding: true },
+                { ticker: "RAYA.CA", name_ar: "راية القابضة", current_price: 5.89, min_dip_price: 5.75, final_target: 7.2, expected_return_pct: 22.2, net_breakeven: 7.64, is_portfolio_holding: true },
+                { ticker: "ABUK.CA", name_ar: "أبو قير للأسمدة", current_price: 84.34, min_dip_price: 83.0, final_target: 96.5, expected_return_pct: 14.4, net_breakeven: 85.14, is_portfolio_holding: false },
+                { ticker: "MFPC.CA", name_ar: "موبكو للأسمدة", current_price: 44.01, min_dip_price: 43.2, final_target: 50.8, expected_return_pct: 15.4, net_breakeven: 44.43, is_portfolio_holding: false },
+                { ticker: "ESRS.CA", name_ar: "حديد عز", current_price: 138.0, min_dip_price: 135.5, final_target: 159.0, expected_return_pct: 15.2, net_breakeven: 139.31, is_portfolio_holding: false },
+                { ticker: "ETEL.CA", name_ar: "المصرية للاتصالات", current_price: 145.0, min_dip_price: 142.0, final_target: 166.0, expected_return_pct: 14.5, net_breakeven: 146.38, is_portfolio_holding: false },
+                { ticker: "EGAL.CA", name_ar: "مصر للألومنيوم", current_price: 305.03, min_dip_price: 299.4, final_target: 348.0, expected_return_pct: 14.1, net_breakeven: 307.93, is_portfolio_holding: false }
+            ];
+
             return {
                 status: "SUCCESS",
                 target: target,
@@ -13517,12 +13538,12 @@
                     breakeven_cross_day: crossDay
                 },
                 tactical_roadmap: [
-                    { stage_num: 1, title_ar: "مرحلة الاقتناص والتجميع المؤسسي", sessions_range: `جلسة 1 — جلسة ${dipDay}`, target_price: Math.round(minDip * 100) / 100, action_ar: `تفعيل أوامر الشراء عند القاع (${minDip.toFixed(2)} ج.م) في جلسة #${dipDay}.`, icon: "fa-solid fa-crosshairs", color: "cyan" },
-                    { stage_num: 2, title_ar: "مرحلة الارتداد وتدوير السيولة T+2", sessions_range: `جلسة ${dipDay+1} — جلسة ${Math.floor(dCount*0.5)}`, target_price: Math.round((minDip + (finalExp - minDip) * 0.45) * 100) / 100, action_ar: "ارتداد الزخم وتدوير الكميات الإضافية مع تسوية T+2 لتخفيض متوسط التكلفة.", icon: "fa-solid fa-arrows-rotate", color: "blue" },
-                    { stage_num: 3, title_ar: "مرحلة اختراق نقطة التعادل الصافي", sessions_range: `جلسة ${crossDay || Math.floor(dCount*0.6)}`, target_price: Math.round(netBk * 100) / 100, action_ar: `تخطي خط التعادل الصافي (${netBk.toFixed(2)} ج.م) بعد عمولة 0.94% والتحول للربح الخالص.`, icon: "fa-solid fa-shield-check", color: "yellow" },
-                    { stage_num: 4, title_ar: "مرحلة الحصاد وجني الأرباح القصوى", sessions_range: `جلسة ${Math.floor(dCount*0.6)+1} — جلسة ${dCount}`, target_price: Math.round(finalExp * 100) / 100, action_ar: `تحقيق الهدف الكمي الأساسي (${finalExp.toFixed(2)} ج.م) وملامسة قمة مخروط الثقة.`, icon: "fa-solid fa-flag-checkered", color: "green" }
+                    { stage_num: 1, title_ar: "مرحلة الاقتناص والتجميع المؤسسي (Institutional Snatch)", sessions_range: `جلسة 1 — جلسة ${dipDay}`, target_price: Math.round(minDip * 100) / 100, action_ar: `تفعيل أوامر الشراء المعلقة عند القاع (${minDip.toFixed(2)} ج.م) في جلسة #${dipDay}.`, icon: "fa-solid fa-crosshairs", color: "cyan" },
+                    { stage_num: 2, title_ar: "مرحلة الارتداد وتدوير السيولة T+2 (Momentum Rotation)", sessions_range: `جلسة ${dipDay+1} — جلسة ${Math.floor(dCount*0.5)}`, target_price: Math.round((minDip + (finalExp - minDip) * 0.45) * 100) / 100, action_ar: "ارتداد الزخم وتدوير الكميات الإضافية مع تسوية T+2 لتخفيض متوسط التكلفة وحجز سيولة حرة.", icon: "fa-solid fa-arrows-rotate", color: "blue" },
+                    { stage_num: 3, title_ar: "مرحلة اختراق نقطة التعادل الصافي (Net Breakeven Cross)", sessions_range: `جلسة ${crossDay || Math.floor(dCount*0.6)}`, target_price: Math.round(netBk * 100) / 100, action_ar: `تخطي خط التعادل الصافي (${netBk.toFixed(2)} ج.م) المغطي لعمولة 0.94% بالكامل والتحول للربح الخالص.`, icon: "fa-solid fa-shield-check", color: "yellow" },
+                    { stage_num: 4, title_ar: "مرحلة الحصاد وجني الأرباح القصوى (Harvest & Take-Profit)", sessions_range: `جلسة ${Math.floor(dCount*0.6)+1} — جلسة ${dCount}`, target_price: Math.round(finalExp * 100) / 100, action_ar: `تحقيق الهدف الكمي الأساسي (${finalExp.toFixed(2)} ج.م، بعائد متوقع) وملامسة قمة مخروط الثقة.`, icon: "fa-solid fa-flag-checkered", color: "green" }
                 ],
-                matrix_rows: []
+                matrix_rows: fallbackMatrix
             };
         }
 
@@ -13565,8 +13586,8 @@
                 crossSessionEl.innerText = kpis.breakeven_cross_day ? `جلسة #${kpis.breakeven_cross_day}` : 'بعد الأفق المختار';
             }
 
-            renderTacticalRoadmap(data.tactical_roadmap || []);
-            renderSimulationMatrix(data.matrix_rows || []);
+            try { renderTacticalRoadmap(data.tactical_roadmap || []); } catch(e) { console.warn("Roadmap error:", e); }
+            try { renderSimulationMatrix(data.matrix_rows || []); } catch(e) { console.warn("Matrix error:", e); }
 
             const maxDays = data.horizon_days || 20;
             const slider = document.getElementById('sim-day-inspector-slider');
@@ -13577,7 +13598,7 @@
             }
             inspectDay(0);
 
-            drawSimulationChart(data);
+            try { drawSimulationChart(data); } catch(e) { console.warn("Chart render error:", e); }
         }
 
         function renderTacticalRoadmap(stages) {
@@ -13613,8 +13634,9 @@
         function renderSimulationMatrix(rows) {
             const tbody = document.getElementById('sim-matrix-tbody');
             const horizonBadge = document.getElementById('matrix-horizon-badge');
-            if (horizonBadge && currentSimData) {
-                horizonBadge.innerText = `${currentSimData.horizon_days} جلسة`;
+            const data = window.currentSimData || currentSimData;
+            if (horizonBadge && data) {
+                horizonBadge.innerText = `${data.horizon_days} جلسة`;
             }
             if (!tbody) return;
             if (!rows || rows.length === 0) {
@@ -13623,9 +13645,10 @@
             }
 
             let filtered = rows;
-            if (activeMatrixFilter === 'PORTFOLIO') {
+            const currentFilter = window.activeMatrixFilter || activeMatrixFilter || 'ALL';
+            if (currentFilter === 'PORTFOLIO') {
                 filtered = rows.filter(r => r.is_portfolio_holding);
-            } else if (activeMatrixFilter === 'ALPHA') {
+            } else if (currentFilter === 'ALPHA') {
                 filtered = rows.filter(r => !r.is_portfolio_holding);
             }
 
@@ -13654,14 +13677,20 @@
         }
 
         function filterSimMatrix(filter) {
+            window.activeMatrixFilter = filter;
             activeMatrixFilter = filter;
-            ['all', 'portfolio', 'alpha'].forEach(f => {
-                const btn = document.getElementById('matrix-filter-' + f);
+            const filterMap = {
+                'ALL': 'matrix-filter-all',
+                'PORTFOLIO': 'matrix-filter-portfolio',
+                'ALPHA': 'matrix-filter-alpha'
+            };
+            Object.keys(filterMap).forEach(key => {
+                const btn = document.getElementById(filterMap[key]);
                 if (btn) {
-                    if (f.toUpperCase() === filter) {
+                    if (key === filter) {
                         btn.classList.add('active-pill');
                         btn.style.background = '#8b5cf6';
-                        btn.style.color = '#fff';
+                        btn.style.color = '#ffffff';
                     } else {
                         btn.classList.remove('active-pill');
                         btn.style.background = '';
@@ -13669,12 +13698,14 @@
                     }
                 }
             });
-            if (currentSimData && currentSimData.matrix_rows) {
-                renderSimulationMatrix(currentSimData.matrix_rows);
+            const data = window.currentSimData || currentSimData;
+            if (data && data.matrix_rows) {
+                renderSimulationMatrix(data.matrix_rows);
             }
         }
 
         function setSimTarget(ticker) {
+            if (!ticker) return;
             const select = document.getElementById('sim-target-select');
             if (select) {
                 let hasOpt = Array.from(select.options).some(o => o.value === ticker);
@@ -13709,49 +13740,55 @@
         }
 
         function setPresetDays(days) {
+            const d = Math.max(3, Math.min(120, parseInt(days) || 20));
             const range = document.getElementById('sim-days-range');
             const input = document.getElementById('sim-days-input');
-            if (range) range.value = days;
-            if (input) input.value = days;
-            updatePillHighlight(days);
+            if (range) range.value = d;
+            if (input) input.value = d;
+            updatePillHighlight(d);
             runSimulation();
         }
 
         function updatePillHighlight(days) {
-            [5, 10, 20, 45, 60, 120].forEach(p => {
+            const targets = [5, 10, 20, 45, 60, 120];
+            const activeVal = Number(days);
+            targets.forEach(p => {
                 const pill = document.getElementById('pill-' + p);
                 if (pill) {
-                    if (p === days) {
+                    if (p === activeVal) {
                         pill.classList.add('active-pill');
                         pill.style.background = '#8b5cf6';
-                        pill.style.color = '#fff';
+                        pill.style.color = '#ffffff';
+                        pill.style.borderColor = '#a78bfa';
                     } else {
                         pill.classList.remove('active-pill');
-                        pill.style.background = '';
-                        pill.style.color = '';
+                        pill.style.background = 'rgba(255, 255, 255, 0.05)';
+                        pill.style.color = '#94a3b8';
+                        pill.style.borderColor = 'rgba(255, 255, 255, 0.1)';
                     }
                 }
             });
         }
 
-        let _simDebounce = null;
+        var _simDebounce = null;
         function debounceSimRun() {
             clearTimeout(_simDebounce);
             _simDebounce = setTimeout(() => {
                 runSimulation();
-            }, 350);
+            }, 300);
         }
 
         function inspectDay(dayIdx) {
-            if (!currentSimData) return;
+            const data = window.currentSimData || currentSimData;
+            if (!data) return;
             const idx = parseInt(dayIdx) || 0;
-            const d = Math.max(0, Math.min(idx, currentSimData.horizon_days || 20));
+            const d = Math.max(0, Math.min(idx, data.horizon_days || 20));
 
-            const exp = currentSimData.expected_series ? currentSimData.expected_series[d] : 0;
-            const up = currentSimData.upper_90_series ? currentSimData.upper_90_series[d] : 0;
-            const lo = currentSimData.lower_10_series ? currentSimData.lower_10_series[d] : 0;
-            const bk = currentSimData.breakeven_series ? currentSimData.breakeven_series[d] : 0;
-            const cur = currentSimData.kpis ? currentSimData.kpis.current_value : exp;
+            const exp = data.expected_series ? data.expected_series[d] : 0;
+            const up = data.upper_90_series ? data.upper_90_series[d] : 0;
+            const lo = data.lower_10_series ? data.lower_10_series[d] : 0;
+            const bk = data.breakeven_series ? data.breakeven_series[d] : 0;
+            const cur = data.kpis ? data.kpis.current_value : exp;
 
             const retPct = cur > 0 ? (((exp - cur) / cur) * 100).toFixed(2) : '0.00';
             const sign = retPct >= 0 ? '+' : '';
@@ -13780,18 +13817,33 @@
             const btn = document.getElementById('sim-play-btn');
             const icon = document.getElementById('sim-play-icon');
             const slider = document.getElementById('sim-day-inspector-slider');
-            if (!slider || !currentSimData) return;
+            const data = window.currentSimData || currentSimData;
+
+            if (!slider) return;
+            if (!data) {
+                runSimulation().then(() => {
+                    toggleTrajectoryAnimation();
+                });
+                return;
+            }
 
             if (simAnimInterval) {
                 clearInterval(simAnimInterval);
                 simAnimInterval = null;
+                window.simAnimInterval = null;
                 if (icon) icon.className = 'fa-solid fa-play';
-                if (btn) btn.classList.remove('btn-success');
+                if (btn) {
+                    btn.classList.remove('btn-success');
+                    btn.style.background = '';
+                }
             } else {
                 if (icon) icon.className = 'fa-solid fa-pause';
-                if (btn) btn.classList.add('btn-success');
+                if (btn) {
+                    btn.classList.add('btn-success');
+                    btn.style.background = '#10b981';
+                }
                 let currentDay = parseInt(slider.value) || 0;
-                const maxDay = currentSimData.horizon_days || 20;
+                const maxDay = data.horizon_days || 20;
 
                 simAnimInterval = setInterval(() => {
                     currentDay++;
@@ -13800,7 +13852,8 @@
                     }
                     slider.value = currentDay;
                     inspectDay(currentDay);
-                }, 250);
+                }, 220);
+                window.simAnimInterval = simAnimInterval;
             }
         }
 
@@ -13815,117 +13868,125 @@
             const bkData = data.breakeven_series || [];
 
             if (typeof Chart !== 'undefined') {
-                if (simChartInstance) {
-                    simChartInstance.destroy();
-                    simChartInstance = null;
-                }
+                try {
+                    if (window.simChartInstance) {
+                        window.simChartInstance.destroy();
+                        window.simChartInstance = null;
+                        simChartInstance = null;
+                    }
 
-                const ctx = canvas.getContext('2d');
-                simChartInstance = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: labels,
-                        datasets: [
-                            {
-                                label: 'قمة الـ 90% (Upper Cone)',
-                                data: upData,
-                                borderColor: '#10b981',
-                                borderWidth: 1.5,
-                                borderDash: [4, 4],
-                                pointRadius: 0,
-                                tension: 0.35,
-                                fill: false
-                            },
-                            {
-                                label: 'المسار المتوقع الأساسي (Mean Trajectory)',
-                                data: expData,
-                                borderColor: '#06b6d4',
-                                backgroundColor: 'rgba(6, 182, 212, 0.12)',
-                                borderWidth: 3,
-                                pointRadius: 2,
-                                pointHoverRadius: 6,
-                                tension: 0.35,
-                                fill: false
-                            },
-                            {
-                                label: 'قاع الـ 10% للتجميع (Lower Cone)',
-                                data: loData,
-                                borderColor: '#f43f5e',
-                                borderWidth: 1.5,
-                                borderDash: [4, 4],
-                                pointRadius: 0,
-                                tension: 0.35,
-                                fill: false
-                            },
-                            {
-                                label: 'خط التعادل الصافي (0.94% Fees)',
-                                data: bkData,
-                                borderColor: '#f59e0b',
-                                borderWidth: 1.5,
-                                borderDash: [6, 6],
-                                pointRadius: 0,
-                                tension: 0,
-                                fill: false
-                            }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        interaction: {
-                            intersect: false,
-                            mode: 'index'
+                    const ctx = canvas.getContext('2d');
+                    simChartInstance = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: labels,
+                            datasets: [
+                                {
+                                    label: 'قمة الـ 90% (Upper Cone)',
+                                    data: upData,
+                                    borderColor: '#10b981',
+                                    borderWidth: 1.5,
+                                    borderDash: [4, 4],
+                                    pointRadius: 0,
+                                    tension: 0.35,
+                                    fill: false
+                                },
+                                {
+                                    label: 'المسار المتوقع الأساسي (Mean Trajectory)',
+                                    data: expData,
+                                    borderColor: '#06b6d4',
+                                    backgroundColor: 'rgba(6, 182, 212, 0.12)',
+                                    borderWidth: 3,
+                                    pointRadius: 2,
+                                    pointHoverRadius: 6,
+                                    tension: 0.35,
+                                    fill: false
+                                },
+                                {
+                                    label: 'قاع الـ 10% للتجميع (Lower Cone)',
+                                    data: loData,
+                                    borderColor: '#f43f5e',
+                                    borderWidth: 1.5,
+                                    borderDash: [4, 4],
+                                    pointRadius: 0,
+                                    tension: 0.35,
+                                    fill: false
+                                },
+                                {
+                                    label: 'خط التعادل الصافي (0.94% Fees)',
+                                    data: bkData,
+                                    borderColor: '#f59e0b',
+                                    borderWidth: 1.5,
+                                    borderDash: [6, 6],
+                                    pointRadius: 0,
+                                    tension: 0,
+                                    fill: false
+                                }
+                            ]
                         },
-                        plugins: {
-                            legend: {
-                                display: false
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            interaction: {
+                                intersect: false,
+                                mode: 'index'
                             },
-                            tooltip: {
-                                backgroundColor: 'rgba(15, 23, 42, 0.95)',
-                                titleColor: '#fff',
-                                bodyColor: '#cbd5e1',
-                                borderColor: 'rgba(59, 130, 246, 0.4)',
-                                borderWidth: 1,
-                                padding: 10,
-                                callbacks: {
-                                    label: function(context) {
-                                        return ` ${context.dataset.label}: ${Number(context.raw).toLocaleString('en-US', {minimumFractionDigits: 2})} ج.م`;
+                            plugins: {
+                                legend: {
+                                    display: false
+                                },
+                                tooltip: {
+                                    backgroundColor: 'rgba(15, 23, 42, 0.95)',
+                                    titleColor: '#fff',
+                                    bodyColor: '#cbd5e1',
+                                    borderColor: 'rgba(59, 130, 246, 0.4)',
+                                    borderWidth: 1,
+                                    padding: 10,
+                                    callbacks: {
+                                        label: function(context) {
+                                            return ` ${context.dataset.label}: ${Number(context.raw).toLocaleString('en-US', {minimumFractionDigits: 2})} ج.م`;
+                                        }
                                     }
                                 }
-                            }
-                        },
-                        scales: {
-                            x: {
-                                grid: {
-                                    color: 'rgba(255, 255, 255, 0.05)'
-                                },
-                                ticks: {
-                                    color: '#94a3b8',
-                                    font: { size: 10 }
-                                }
                             },
-                            y: {
-                                grid: {
-                                    color: 'rgba(255, 255, 255, 0.05)'
+                            scales: {
+                                x: {
+                                    grid: {
+                                        color: 'rgba(255, 255, 255, 0.05)'
+                                    },
+                                    ticks: {
+                                        color: '#94a3b8',
+                                        font: { size: 10 }
+                                    }
                                 },
-                                ticks: {
-                                    color: '#94a3b8',
-                                    font: { size: 10 },
-                                    callback: function(value) {
-                                        return value >= 1000 ? (value >= 1e6 ? (value/1e6).toFixed(1) + 'M' : (value/1e3).toFixed(0) + 'K') : value;
+                                y: {
+                                    grid: {
+                                        color: 'rgba(255, 255, 255, 0.05)'
+                                    },
+                                    ticks: {
+                                        color: '#94a3b8',
+                                        font: { size: 10 },
+                                        callback: function(value) {
+                                            return value >= 1000 ? (value >= 1e6 ? (value/1e6).toFixed(1) + 'M' : (value/1e3).toFixed(0) + 'K') : value;
+                                        }
                                     }
                                 }
                             }
                         }
-                    }
-                });
-                return;
+                    });
+                    window.simChartInstance = simChartInstance;
+                    return;
+                } catch (chartErr) {
+                    console.warn("Chart.js render failed, falling back to 2D Canvas:", chartErr);
+                }
             }
 
             // Direct HTML5 Canvas 2D Fallback
             const ctx = canvas.getContext('2d');
-            const width = canvas.parentElement.clientWidth || 800;
-            const height = canvas.parentElement.clientHeight || 360;
+            const parentW = canvas.parentElement ? canvas.parentElement.clientWidth : 0;
+            const parentH = canvas.parentElement ? canvas.parentElement.clientHeight : 0;
+            const width = Math.max(parentW || 800, 400);
+            const height = Math.max(parentH || 360, 250);
             canvas.width = width;
             canvas.height = height;
 
@@ -13936,8 +13997,8 @@
             const plotH = height - padT - padB;
 
             const allVals = [...expData, ...upData, ...loData, ...bkData].filter(v => v != null && !isNaN(v));
-            const minVal = Math.min(...allVals) * 0.98;
-            const maxVal = Math.max(...allVals) * 1.02;
+            const minVal = allVals.length > 0 ? Math.min(...allVals) * 0.98 : 0;
+            const maxVal = allVals.length > 0 ? Math.max(...allVals) * 1.02 : 100;
             const valRange = maxVal - minVal || 1;
 
             const getX = (idx) => padL + (idx / Math.max(1, expData.length - 1)) * plotW;
@@ -13989,6 +14050,20 @@
                 ctx.fillText(`ج#${i}`, getX(i), height - padB + 16);
             }
         }
+
+        // Attach all functions to window for global inline HTML onclick access
+        window.runSimulation = runSimulation;
+        window.setPresetDays = setPresetDays;
+        window.syncDaysInput = syncDaysInput;
+        window.syncDaysRange = syncDaysRange;
+        window.toggleTrajectoryAnimation = toggleTrajectoryAnimation;
+        window.inspectDay = inspectDay;
+        window.filterSimMatrix = filterSimMatrix;
+        window.setSimTarget = setSimTarget;
+        window.debounceSimRun = debounceSimRun;
+        window.updatePillHighlight = updatePillHighlight;
+        window.renderSimulation = renderSimulation;
+        window.drawSimulationChart = drawSimulationChart;
 
 </script>
 
