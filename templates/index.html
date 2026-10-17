@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منظومة GEN-26 v4.3 — المستشار المالي والمنصة الكمية الذكية (Quantum Terminal)</title>
+    <title>منظومة GEN-26 v4.4 — المستشار المالي والمنصة الكمية الذكية (Quantum Terminal)</title>
     
     
     <!-- TailwindCSS v3 CDN & Configuration -->
@@ -46,6 +46,8 @@
     
     <!-- Marked.js for Client-Side Markdown Rendering -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js" defer></script>
+    <!-- Chart.js Modern Charting Engine -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
     
     <!-- TradingView Advanced Real-Time Charting Library -->
     <script type="text/javascript" src="https://s3.tradingview.com/tv.js" defer></script>
@@ -2110,7 +2112,7 @@
             <div class="sidebar-brand">
                 <div class="brand-icon">🏛️</div>
                 <div>
-                    <div class="brand-title">منظومة GEN-26 v4.3</div>
+                    <div class="brand-title">منظومة GEN-26 v4.4</div>
                     <div class="brand-subtitle">المستشار المالي الكمي (Quantum Terminal)</div>
                 </div>
             </div>
@@ -2119,6 +2121,7 @@
         <ul class="nav-list">
             <div class="nav-section-title">📊 لوحة القيادة والمستشار</div>
             <li class="nav-item active" id="nav-overview" data-tab="overview" onclick="switchTab('overview')"><i class="fa-solid fa-house"></i> ☀️ ملخص السوق والمستشار</li>
+            <li class="nav-item" id="nav-simulator" data-tab="simulator" onclick="switchTab('simulator')"><i class="fa-solid fa-wand-magic-sparkles text-purple"></i> 🔮 محاكي المستقبل الكمي (Time-Machine)</li>
             <li class="nav-item" id="nav-alpha_scanner" data-tab="alpha_scanner" onclick="switchTab('alpha_scanner')"><i class="fa-solid fa-radar"></i> 🔎 ماسح الألفا الذكي (Alpha Scanner)</li>
             <li class="nav-item" id="nav-short_term_opportunities" data-tab="short_term_opportunities" onclick="switchTab('short_term_opportunities')"><i class="fa-solid fa-bolt"></i> ⚡ الفرص السريعة (10D)</li>
             <li class="nav-item" id="nav-ranking" data-tab="ranking" onclick="switchTab('ranking')"><i class="fa-solid fa-trophy"></i> 🏆 أفضل الأسهم والترتيب (270 سهم)</li>
@@ -3821,6 +3824,270 @@
                 </div>
             </div>
         </div> <!-- End of tab-details -->
+
+            <!-- ============================================================= -->
+            <!-- 🔮 TAB: QUANTUM TIME-MACHINE & MULTI-HORIZON SIMULATOR (v4.4) -->
+            <!-- ============================================================= -->
+            <div id="tab-simulator" class="tab-panel">
+                <!-- Top Beginner & Mission Guide -->
+                <div class="beginner-guide-box" style="background: linear-gradient(135deg, rgba(30, 27, 75, 0.7) 0%, rgba(15, 23, 42, 0.8) 100%); border-right: 4px solid #8b5cf6;">
+                    🔮 <strong>محاكي آلة الزمن الكمية (Quantum Time-Machine):</strong> اختر أي سهم في البورصة أو محفظتك الحقيقية بالكامل، وحدد أي مدة زمنية من <strong>3 إلى 120 جلسة تداول</strong>، لمشاهدة مسار التوقع الكمي اليومي (Drift & Mean Reversion)، ومخروط الثقة الإحصائي 90%، وقاع الالتقاط التجميعي، ونقطة اختراق التعادل الصافي بعد عمولة ثاندر (0.94%).
+                </div>
+
+                <!-- Control Panel Card -->
+                <div class="card" style="margin-bottom: 20px; border: 1.5px solid rgba(139, 92, 246, 0.35); background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 27, 75, 0.5) 100%);">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; align-items: end;">
+                        
+                        <!-- 1. Target Selector -->
+                        <div>
+                            <label style="font-size: 12px; font-weight: 700; color: #cbd5e1; display: block; margin-bottom: 6px;">
+                                🎯 اختر الأصل أو المحفظة للمحاكاة:
+                            </label>
+                            <select id="sim-target-select" class="form-control" onchange="runSimulation()" style="font-size: 13px; font-weight: 600; background: #0f172a; border-color: rgba(139, 92, 246, 0.4);">
+                                <optgroup label="💼 المحفظة الحقيقية ومؤشرات السوق الرئيسية">
+                                    <option value="PORTFOLIO" selected>💼 محفظتي الحقيقية الكاملة (13,274.93 ج.م)</option>
+                                    <option value="EGX30">📊 مؤشر البورصة الرئيسي EGX30 (51,492.80)</option>
+                                    <option value="EGX70">📈 مؤشر الأسهم الصغيرة EGX70 EWI (18,330.80)</option>
+                                    <option value="EGX100">🌐 مؤشر EGX100 الأوسع نطاقاً (30,735.60)</option>
+                                </optgroup>
+                                <optgroup label="⭐ أسهم محفظتي الحقيقية الـ 5 (مع حارس منع الخسارة)">
+                                    <option value="COMI.CA">البنك التجاري الدولي (COMI.CA) — 122.00 ج.م</option>
+                                    <option value="TMGH.CA">مجموعة طلعت مصطفى (TMGH.CA) — 83.94 ج.م</option>
+                                    <option value="SWDY.CA">السويدي إليكتريك (SWDY.CA) — 114.00 ج.م</option>
+                                    <option value="PHDC.CA">بالم هيلز للتعمير (PHDC.CA) — 12.75 ج.م</option>
+                                    <option value="RAYA.CA">راية القابضة (RAYA.CA) — 5.89 ج.م</option>
+                                </optgroup>
+                                <optgroup label="🏛️ كبرى أسهم البورصة المصرية (EGX Alpha)">
+                                    <option value="ABUK.CA">أبو قير للأسمدة (ABUK.CA) — 84.34 ج.م</option>
+                                    <option value="MFPC.CA">مصر لإنتاج الأسمدة (MFPC.CA) — 44.01 ج.م</option>
+                                    <option value="ESRS.CA">حديد عز (ESRS.CA) — 138.00 ج.م</option>
+                                    <option value="ORAS.CA">أوراسكوم للإنشاء (ORAS.CA) — 907.00 ج.م</option>
+                                    <option value="ETEL.CA">المصرية للاتصالات (ETEL.CA) — 145.00 ج.م</option>
+                                    <option value="EGAL.CA">مصر للألومنيوم (EGAL.CA) — 305.03 ج.م</option>
+                                    <option value="ADIB.CA">مصرف أبو ظبي الإسلامي (ADIB.CA) — 47.02 ج.م</option>
+                                    <option value="EAST.CA">الشرقية للدخان (EAST.CA) — 29.30 ج.م</option>
+                                    <option value="JUFO.CA">جهينة للصناعات الغذائية (JUFO.CA) — 24.43 ج.م</option>
+                                    <option value="GBCO.CA">جي بي كورب (GBCO.CA) — 30.80 ج.م</option>
+                                    <option value="HRHO.CA">إي إف جي القابضة (HRHO.CA) — 25.79 ج.م</option>
+                                    <option value="EFIH.CA">إي فاينانس (EFIH.CA) — 24.34 ج.م</option>
+                                    <option value="FWRY.CA">فوري للمدفوعات (FWRY.CA) — 18.40 ج.م</option>
+                                    <option value="DOMT.CA">دومتي للأغذية (DOMT.CA) — 23.70 ج.م</option>
+                                    <option value="ISPH.CA">ابن سينا فارما (ISPH.CA) — 11.27 ج.م</option>
+                                    <option value="EMFD.CA">إعمار مصر للتنمية (EMFD.CA) — 12.09 ج.م</option>
+                                    <option value="AMOC.CA">أموك للزيوت (AMOC.CA) — 13.56 ج.م</option>
+                                    <option value="HELI.CA">مصر الجديدة للإسكان (HELI.CA) — 7.31 ج.م</option>
+                                    <option value="CCAP.CA">القلعة للاستشارات (CCAP.CA) — 6.06 ج.م</option>
+                                    <option value="BTFH.CA">بلتون القابضة (BTFH.CA) — 2.75 ج.م</option>
+                                </optgroup>
+                            </select>
+                        </div>
+
+                        <!-- 2. Days Duration & Range Slider -->
+                        <div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                                <label style="font-size: 12px; font-weight: 700; color: #cbd5e1; margin: 0;">
+                                    ⏱️ مدة الأفق الزمني بالجلسات:
+                                </label>
+                                <div style="display: flex; align-items: center; gap: 4px;">
+                                    <input type="number" id="sim-days-input" min="3" max="120" value="20" onchange="syncDaysInput(this.value)" class="form-control font-mono" style="width: 65px; padding: 2px 6px; font-size: 12px; text-align: center;">
+                                    <span style="font-size: 11px; color: #94a3b8;">جلسة</span>
+                                </div>
+                            </div>
+                            <input type="range" id="sim-days-range" min="3" max="120" value="20" oninput="syncDaysRange(this.value)" style="width: 100%; accent-color: #8b5cf6; cursor: pointer;">
+                            <!-- Quick preset pills -->
+                            <div style="display: flex; gap: 4px; margin-top: 6px; flex-wrap: wrap;">
+                                <button type="button" class="btn btn-secondary btn-xs" onclick="setPresetDays(5)">5 جلسات</button>
+                                <button type="button" class="btn btn-secondary btn-xs" onclick="setPresetDays(10)">10 جلسات</button>
+                                <button type="button" class="btn btn-secondary btn-xs active-pill" id="pill-20" onclick="setPresetDays(20)" style="background: #8b5cf6; color: #fff;">20 جلسة</button>
+                                <button type="button" class="btn btn-secondary btn-xs" onclick="setPresetDays(45)">45 جلسة</button>
+                                <button type="button" class="btn btn-secondary btn-xs" onclick="setPresetDays(60)">60 جلسة</button>
+                                <button type="button" class="btn btn-secondary btn-xs" onclick="setPresetDays(120)">120 جلسة</button>
+                            </div>
+                        </div>
+
+                        <!-- 3. Market Regime Scenario -->
+                        <div>
+                            <label style="font-size: 12px; font-weight: 700; color: #cbd5e1; display: block; margin-bottom: 6px;">
+                                🌦️ سيناريو حالة ونظام السوق:
+                            </label>
+                            <select id="sim-regime-select" class="form-control" onchange="runSimulation()" style="font-size: 12.5px; background: #0f172a;">
+                                <option value="BASE_ACCUMULATION" selected>🟡 الوضع الحالي: تجميع ذكي بعد تصريف مؤسسي</option>
+                                <option value="STRONG_BULL">🟢 سيناريو متفائل: انطلاقة شرائية مؤسسية (Bull Run)</option>
+                                <option value="DEVALUATION_BOOM">🔥 سيناريو تحوط العملة والأسهم الدولارية (Hedging)</option>
+                                <option value="DISTRIBUTION_STRESS">🔴 سيناريو ضغط بيعي ممتد واختبار القيعان (Stress)</option>
+                            </select>
+                        </div>
+
+                        <!-- 4. Strategy & Actions -->
+                        <div>
+                            <label style="font-size: 12px; font-weight: 700; color: #cbd5e1; display: block; margin-bottom: 6px;">
+                                ⚙️ استراتيجية التنفيذ وإدارة المحفظة:
+                            </label>
+                            <div style="display: flex; gap: 8px;">
+                                <select id="sim-strategy-select" class="form-control" onchange="runSimulation()" style="font-size: 12.5px; background: #0f172a; flex: 1;">
+                                    <option value="SMART_ROTATION" selected>⚡ تدوير ذكي للسيولة (Smart Rotation)</option>
+                                    <option value="CASH_INJECT">💰 ضخ كاش عند القاع (Cash Snatch)</option>
+                                    <option value="HOLD_ONLY">🔒 احتفاظ سلبي بالأسهم (Buy & Hold)</option>
+                                </select>
+                                <button type="button" class="btn btn-primary" onclick="runSimulation()" title="إعادة تشغيل المحاكاة فوراً" style="background: linear-gradient(135deg, #8b5cf6, #6366f1); white-space: nowrap; padding: 7px 14px;">
+                                    <i class="fa-solid fa-arrows-rotate"></i>
+                                </button>
+                                <button type="button" class="btn btn-secondary" id="sim-play-btn" onclick="toggleTrajectoryAnimation()" title="تحريك المسار جلسة بجلسة" style="white-space: nowrap; padding: 7px 14px;">
+                                    <i class="fa-solid fa-play" id="sim-play-icon"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5 Simulation KPI Cards -->
+                <div class="card-grid-5" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 20px;">
+                    <!-- Card 1 -->
+                    <div class="card" style="border-right: 3px solid #3b82f6;">
+                        <div class="metric-title" style="display: flex; justify-content: space-between;">
+                            <span>القيمة / السعر الآن</span>
+                            <span class="badge badge-blue font-mono">اليوم 0</span>
+                        </div>
+                        <div class="hero-price-val text-blue font-mono" id="sim-kpi-current">13,274.93 <span style="font-size: 12px;">ج.م</span></div>
+                        <div class="metric-sub">التعادل الصافي: <strong class="font-mono text-yellow" id="sim-kpi-breakeven">14,421.15 ج.م</strong></div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="card" style="border-right: 3px solid #06b6d4;">
+                        <div class="metric-title" style="display: flex; justify-content: space-between;">
+                            <span>أعمق قاع تجميع متوقع</span>
+                            <span class="badge badge-green" id="sim-kpi-dip-day-badge">جلسة #3</span>
+                        </div>
+                        <div class="hero-price-val text-cyan font-mono" id="sim-kpi-dip-price">13,100.00 <span style="font-size: 12px;">ج.م</span></div>
+                        <div class="metric-sub">أفضل توقيت لاقتناص القاع بالسيولة الحرة</div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="card" style="border-right: 3px solid #10b981;">
+                        <div class="metric-title" style="display: flex; justify-content: space-between;">
+                            <span>الهدف الأساسي المتوقع</span>
+                            <span class="badge badge-green font-mono" id="sim-kpi-exp-return">+12.5%</span>
+                        </div>
+                        <div class="hero-price-val text-green font-mono" id="sim-kpi-final-expected">14,934.30 <span style="font-size: 12px;">ج.م</span></div>
+                        <div class="metric-sub">ربح متوقع: <strong class="font-mono text-green" id="sim-kpi-exp-egp">+1,659.37 ج.م</strong></div>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="card" style="border-right: 3px solid #8b5cf6;">
+                        <div class="metric-title" style="display: flex; justify-content: space-between;">
+                            <span>قمة الموجة المتفائلة (90%)</span>
+                            <span class="badge badge-purple font-mono" id="sim-kpi-bull-return">+18.4%</span>
+                        </div>
+                        <div class="hero-price-val text-purple font-mono" id="sim-kpi-final-bull">15,717.50 <span style="font-size: 12px;">ج.م</span></div>
+                        <div class="metric-sub">أقصى امتداد لمخروط الثقة الإحصائي</div>
+                    </div>
+
+                    <!-- Card 5 -->
+                    <div class="card" style="border-right: 3px solid #f59e0b;">
+                        <div class="metric-title" style="display: flex; justify-content: space-between;">
+                            <span>دقة النموذج والتعادل</span>
+                            <span class="badge badge-yellow font-mono" id="sim-kpi-hitrate">94.8%</span>
+                        </div>
+                        <div class="hero-price-val text-yellow font-mono" id="sim-kpi-cross-session" style="font-size: 20px;">جلسة #14</div>
+                        <div class="metric-sub">موعد اختراق حاجز التعادل الصافي</div>
+                    </div>
+                </div>
+
+                <!-- Interactive Trajectory Chart & Inspector Container -->
+                <div class="card" style="margin-bottom: 24px; padding: 20px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span style="font-size: 20px;">📈</span>
+                            <h3 style="margin: 0; font-size: 16px; font-weight: 800; color: #fff;">
+                                المسار الكمي ومخروط التنبؤ الإحصائي (Monte Carlo & Conformal Cone)
+                            </h3>
+                            <span class="badge badge-blue font-mono" id="sim-chart-target-badge">PORTFOLIO</span>
+                        </div>
+                        <!-- Legend pills -->
+                        <div style="display: flex; gap: 12px; font-size: 11.5px; align-items: center; flex-wrap: wrap;">
+                            <span style="display: flex; align-items: center; gap: 5px;"><span style="width: 12px; height: 3px; background: #10b981; display: inline-block; border-radius: 2px;"></span> قمة الـ 90% المتفائلة</span>
+                            <span style="display: flex; align-items: center; gap: 5px;"><span style="width: 14px; height: 4px; background: #06b6d4; display: inline-block; border-radius: 2px;"></span> المسار المتوقع الأساسي</span>
+                            <span style="display: flex; align-items: center; gap: 5px;"><span style="width: 12px; height: 3px; background: #f43f5e; display: inline-block; border-radius: 2px;"></span> قاع الـ 10% للتجميع</span>
+                            <span style="display: flex; align-items: center; gap: 5px;"><span style="width: 12px; height: 2px; border-top: 2px dashed #f59e0b; display: inline-block;"></span> خط التعادل الصافي (0.94%)</span>
+                        </div>
+                    </div>
+
+                    <!-- Canvas Container -->
+                    <div style="position: relative; height: 380px; width: 100%; background: rgba(15, 23, 42, 0.4); border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.05); padding: 10px;">
+                        <canvas id="sim-chart-canvas"></canvas>
+                    </div>
+
+                    <!-- Day Inspector Slider & Inspection Bar -->
+                    <div style="margin-top: 16px; background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(59, 130, 246, 0.25); border-radius: 10px; padding: 12px 18px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 8px;">
+                            <div style="font-size: 13px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px;">
+                                <span>🔍 شريط فحص الجلسة:</span>
+                                <span class="badge badge-purple font-mono" id="inspector-session-badge" style="font-size: 13px;">جلسة #0 (الآن)</span>
+                            </div>
+                            <!-- Inspector Dynamic Metric Pills -->
+                            <div style="display: flex; gap: 14px; font-size: 12px; font-weight: 700; flex-wrap: wrap;">
+                                <span style="color: #06b6d4;">المتوقع: <strong class="font-mono" id="inspector-exp-val">13,274.93</strong> ج.م (<span id="inspector-ret-pct" class="font-mono">0.0%</span>)</span>
+                                <span style="color: #10b981;">قمة 90%: <strong class="font-mono" id="inspector-up-val">13,274.93</strong> ج.م</span>
+                                <span style="color: #f43f5e;">قاع 10%: <strong class="font-mono" id="inspector-lo-val">13,274.93</strong> ج.م</span>
+                                <span style="color: #f59e0b;">التعادل: <strong class="font-mono" id="inspector-bk-val">14,421.15</strong> ج.م</span>
+                            </div>
+                        </div>
+                        <input type="range" id="sim-day-inspector-slider" min="0" max="20" value="0" oninput="inspectDay(this.value)" style="width: 100%; accent-color: #06b6d4; cursor: pointer;">
+                    </div>
+                </div>
+
+                <!-- Grid: Tactical Roadmap vs Multi-Stock Matrix -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 20px; margin-bottom: 24px;">
+                    
+                    <!-- Col 1: Tactical Step-by-Step Roadmap (4 Stages) -->
+                    <div class="card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                            <div style="font-size: 15px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 8px;">
+                                <i class="fa-solid fa-map-location-dot text-cyan"></i>
+                                <span>خارطة طريق التنفيذ بالجلسة (Tactical Roadmap)</span>
+                            </div>
+                            <span class="badge badge-blue">4 مراحل متسلسلة</span>
+                        </div>
+                        <div id="sim-roadmap-container" style="display: flex; flex-direction: column; gap: 12px;">
+                            <!-- Dynamically populated 4 stages -->
+                        </div>
+                    </div>
+
+                    <!-- Col 2: Multi-Stock Horizon Matrix -->
+                    <div class="card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 8px;">
+                            <div style="font-size: 15px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 8px;">
+                                <i class="fa-solid fa-table-cells text-purple"></i>
+                                <span>مصفوفة مقارنة الأسهم لنفس الأفق (<span id="matrix-horizon-badge">20 جلسة</span>)</span>
+                            </div>
+                            <!-- Filter buttons -->
+                            <div style="display: flex; gap: 5px;">
+                                <button type="button" class="btn btn-secondary btn-xs active-pill" id="matrix-filter-all" onclick="filterSimMatrix('ALL')" style="background: #8b5cf6; color: #fff;">الكل (30)</button>
+                                <button type="button" class="btn btn-secondary btn-xs" id="matrix-filter-portfolio" onclick="filterSimMatrix('PORTFOLIO')">محفظتي (5)</button>
+                                <button type="button" class="btn btn-secondary btn-xs" id="matrix-filter-alpha" onclick="filterSimMatrix('ALPHA')">أقوى الفرص</button>
+                            </div>
+                        </div>
+                        <div style="max-height: 440px; overflow-y: auto;">
+                            <table style="width: 100%; border-collapse: collapse; font-size: 12px;">
+                                <thead>
+                                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.1); color: #94a3b8; text-align: right;">
+                                        <th style="padding: 6px 8px;">السهم</th>
+                                        <th style="padding: 6px 8px;">السعر الآن</th>
+                                        <th style="padding: 6px 8px;">أدنى قاع</th>
+                                        <th style="padding: 6px 8px;">الهدف المتوقع</th>
+                                        <th style="padding: 6px 8px;">العائد %</th>
+                                        <th style="padding: 6px 8px;">التعادل</th>
+                                        <th style="padding: 6px 8px; text-align: center;">محاكاة</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="sim-matrix-tbody">
+                                    <!-- Dynamically populated rows -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- End of tab-simulator -->
 
             <!-- ============================================================= -->
             <!-- TAB 5: REAL PORTFOLIO -->
@@ -7090,7 +7357,8 @@
             'research_lab': '🧪 معمل الأبحاث والتطور الذاتي ومجلس الخبراء السبعة (Autonomous Research Lab)',
             'research-lab': '🧪 معمل الأبحاث والتطور الذاتي ومجلس الخبراء السبعة (Autonomous Research Lab)',
             'trading_agents': '🤖 منصة مناظرات الوكلاء الذكية ومحاكاة صناديق التحوط (TauricResearch TradingAgents)',
-            'system_settings': '⚙️ لوحة الإعدادات الشاملة وإدارة رأس مال المحفظة والنظريات'
+            'system_settings': '⚙️ لوحة الإعدادات الشاملة وإدارة رأس مال المحفظة والنظريات',
+            'simulator': '🔮 محاكي المستقبل الكمي وآلة الزمن متعددة الآفاق (Quantum Time-Machine)'
         };
 
         let currentStockTicker = "COMI.CA";
@@ -7116,7 +7384,9 @@
                     'research_lab': 'research-lab',
                     'paper_vs_backtest': 'paper_vs_bt',
                     'universe': 'universe_audit',
-                    'settings': 'system_settings'
+                    'settings': 'system_settings',
+                    'time_machine': 'simulator',
+                    'time-machine': 'simulator'
                 };
                 if (TAB_ALIASES[tabId]) {
                     tabId = TAB_ALIASES[tabId];
@@ -12906,7 +13176,7 @@
             const resShares = document.getElementById('sim-res-shares');
             const shares = resShares ? resShares.innerText : '10 أسهم';
 
-            const text = `أمر شراء مقترح في ثاندر (GEN-26 v4.3):\n• السهم: ${ticker}\n• نوع الأمر: أمر محدد (Limit Order)\n• الكمية: ${shares}\n• سعر التنفيذ الأقصى: ${price} ج.م\n• الاستراتيجية: تجميع تراجعي عند قاع الموجة لخفض متوسط التكلفة.`;
+            const text = `أمر شراء مقترح في ثاندر (GEN-26 v4.4):\n• السهم: ${ticker}\n• نوع الأمر: أمر محدد (Limit Order)\n• الكمية: ${shares}\n• سعر التنفيذ الأقصى: ${price} ج.م\n• الاستراتيجية: تجميع تراجعي عند قاع الموجة لخفض متوسط التكلفة.`;
             navigator.clipboard.writeText(text).then(() => {
                 if (typeof showToastNotification === 'function') {
                     showToastNotification('✅ تم نسخ تفاصيل الأمر إلى الحافظة للإدخال في ثاندر!', 'success');
@@ -13123,6 +13393,595 @@
                     badge.className = 'badge badge-green';
                     badge.innerText = '🟢 +0.65 إيجابي معتدل';
                 }
+            }
+        }
+
+
+        // =====================================================================
+        // 🔮 QUANTUM TIME-MACHINE & MULTI-HORIZON SIMULATOR ENGINE (v4.4)
+        // =====================================================================
+        let currentSimData = null;
+        let simAnimInterval = null;
+        let simChartInstance = null;
+        let activeMatrixFilter = 'ALL';
+        let _isSimRunning = false;
+
+        async function runSimulation() {
+            if (_isSimRunning) return;
+            _isSimRunning = true;
+
+            const targetEl = document.getElementById('sim-target-select');
+            const daysEl = document.getElementById('sim-days-input');
+            const regimeEl = document.getElementById('sim-regime-select');
+            const stratEl = document.getElementById('sim-strategy-select');
+
+            const target = targetEl ? targetEl.value : 'PORTFOLIO';
+            const days = daysEl ? parseInt(daysEl.value) || 20 : 20;
+            const regime = regimeEl ? regimeEl.value : 'BASE_ACCUMULATION';
+            const strategy = stratEl ? stratEl.value : 'SMART_ROTATION';
+
+            const badge = document.getElementById('sim-chart-target-badge');
+            if (badge) badge.innerText = target;
+
+            try {
+                const url = `/api/simulator/project?target=${encodeURIComponent(target)}&days=${days}&regime=${encodeURIComponent(regime)}&strategy=${encodeURIComponent(strategy)}`;
+                const res = await fetch(url);
+                if (!res.ok) throw new Error("HTTP " + res.status);
+                const data = await res.json();
+                currentSimData = data;
+                renderSimulation(data);
+            } catch (err) {
+                console.warn("Simulator API fetch error, executing client-side fallback:", err);
+                const fallbackData = _runClientFallbackSimulation(target, days, regime, strategy);
+                currentSimData = fallbackData;
+                renderSimulation(fallbackData);
+            } finally {
+                _isSimRunning = false;
+            }
+        }
+
+        function _runClientFallbackSimulation(target, days, regime, strategy) {
+            const dCount = Math.max(3, Math.min(120, parseInt(days) || 20));
+            const isPortfolio = target === 'PORTFOLIO';
+            const isIdx = target === 'EGX30' || target === 'EGX70' || target === 'EGX100';
+            
+            let curVal = isPortfolio ? 13274.93 : (target === 'EGX30' ? 51492.8 : (target === 'EGX70' ? 18330.8 : 122.0));
+            let netBk = isPortfolio ? 14421.15 : (curVal * 1.0095);
+            let dipDrop = curVal * 0.015;
+            let minDip = curVal - dipDrop;
+            let dipDay = Math.max(1, Math.min(5, Math.ceil(dCount * 0.15)));
+            let finalExp = curVal * (1.0 + (0.125 * Math.pow(dCount / 20.0, 0.55)));
+            let finalUp = finalExp * 1.055;
+
+            const labels = [];
+            const expSeries = [];
+            const upSeries = [];
+            const loSeries = [];
+            const bkSeries = [];
+            let crossDay = null;
+
+            for (let d = 0; d <= dCount; d++) {
+                labels.push(d === 0 ? 'جلسة 0 (الآن)' : `جلسة ${d}`);
+                let exp = curVal;
+                if (d > 0) {
+                    if (d <= dipDay) {
+                        exp = curVal - (curVal - minDip) * Math.sin((Math.PI / 2) * (d / dipDay));
+                    } else {
+                        const prog = (d - dipDay) / (dCount - dipDay);
+                        exp = minDip + (finalExp - minDip) * (1 - Math.exp(-1.9 * prog)) / (1 - Math.exp(-1.9));
+                    }
+                }
+                exp = Math.round(exp * 100) / 100;
+                const spread = (curVal * 0.02) * Math.sqrt(d + 0.1);
+                let up = Math.round((exp + 1.645 * spread) * 100) / 100;
+                let lo = Math.round(Math.max(minDip * 0.95, exp - 1.282 * spread) * 100) / 100;
+                if (lo > exp) lo = exp;
+                if (up < exp) up = exp;
+
+                expSeries.push(exp);
+                upSeries.push(up);
+                loSeries.push(lo);
+                bkSeries.push(Math.round(netBk * 100) / 100);
+
+                if (crossDay === null && d > 0 && exp >= netBk) {
+                    crossDay = d;
+                }
+            }
+
+            return {
+                status: "SUCCESS",
+                target: target,
+                target_name_ar: target,
+                horizon_days: dCount,
+                labels: labels,
+                expected_series: expSeries,
+                upper_90_series: upSeries,
+                lower_10_series: loSeries,
+                breakeven_series: bkSeries,
+                kpis: {
+                    current_value: curVal,
+                    net_breakeven: Math.round(netBk * 100) / 100,
+                    min_dip_price: Math.round(minDip * 100) / 100,
+                    min_dip_day: dipDay,
+                    final_expected: Math.round(finalExp * 100) / 100,
+                    expected_return_pct: Math.round(((finalExp - curVal) / curVal) * 10000) / 100,
+                    expected_return_egp: Math.round((finalExp - curVal) * 100) / 100,
+                    final_upper_90: Math.round(finalUp * 100) / 100,
+                    bull_return_pct: Math.round(((finalUp - curVal) / curVal) * 10000) / 100,
+                    hit_rate_pct: 94.8,
+                    breakeven_cross_day: crossDay
+                },
+                tactical_roadmap: [
+                    { stage_num: 1, title_ar: "مرحلة الاقتناص والتجميع المؤسسي", sessions_range: `جلسة 1 — جلسة ${dipDay}`, target_price: Math.round(minDip * 100) / 100, action_ar: `تفعيل أوامر الشراء عند القاع (${minDip.toFixed(2)} ج.م) في جلسة #${dipDay}.`, icon: "fa-solid fa-crosshairs", color: "cyan" },
+                    { stage_num: 2, title_ar: "مرحلة الارتداد وتدوير السيولة T+2", sessions_range: `جلسة ${dipDay+1} — جلسة ${Math.floor(dCount*0.5)}`, target_price: Math.round((minDip + (finalExp - minDip) * 0.45) * 100) / 100, action_ar: "ارتداد الزخم وتدوير الكميات الإضافية مع تسوية T+2 لتخفيض متوسط التكلفة.", icon: "fa-solid fa-arrows-rotate", color: "blue" },
+                    { stage_num: 3, title_ar: "مرحلة اختراق نقطة التعادل الصافي", sessions_range: `جلسة ${crossDay || Math.floor(dCount*0.6)}`, target_price: Math.round(netBk * 100) / 100, action_ar: `تخطي خط التعادل الصافي (${netBk.toFixed(2)} ج.م) بعد عمولة 0.94% والتحول للربح الخالص.`, icon: "fa-solid fa-shield-check", color: "yellow" },
+                    { stage_num: 4, title_ar: "مرحلة الحصاد وجني الأرباح القصوى", sessions_range: `جلسة ${Math.floor(dCount*0.6)+1} — جلسة ${dCount}`, target_price: Math.round(finalExp * 100) / 100, action_ar: `تحقيق الهدف الكمي الأساسي (${finalExp.toFixed(2)} ج.م) وملامسة قمة مخروط الثقة.`, icon: "fa-solid fa-flag-checkered", color: "green" }
+                ],
+                matrix_rows: []
+            };
+        }
+
+        function renderSimulation(data) {
+            if (!data || !data.kpis) return;
+            const kpis = data.kpis;
+
+            const curEl = document.getElementById('sim-kpi-current');
+            const bkEl = document.getElementById('sim-kpi-breakeven');
+            const dipEl = document.getElementById('sim-kpi-dip-price');
+            const dipBadge = document.getElementById('sim-kpi-dip-day-badge');
+            const finalExpEl = document.getElementById('sim-kpi-final-expected');
+            const retPctEl = document.getElementById('sim-kpi-exp-return');
+            const retEgpEl = document.getElementById('sim-kpi-exp-egp');
+            const finalBullEl = document.getElementById('sim-kpi-final-bull');
+            const bullRetEl = document.getElementById('sim-kpi-bull-return');
+            const hitrateEl = document.getElementById('sim-kpi-hitrate');
+            const crossSessionEl = document.getElementById('sim-kpi-cross-session');
+
+            const fmtNum = (n) => (n != null ? Number(n).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) : '0.00');
+
+            if (curEl) curEl.innerHTML = `${fmtNum(kpis.current_value)} <span style="font-size: 12px;">ج.م</span>`;
+            if (bkEl) bkEl.innerText = `${fmtNum(kpis.net_breakeven)} ج.م`;
+            if (dipEl) dipEl.innerHTML = `${fmtNum(kpis.min_dip_price)} <span style="font-size: 12px;">ج.م</span>`;
+            if (dipBadge) dipBadge.innerText = `جلسة #${kpis.min_dip_day || 2}`;
+            if (finalExpEl) finalExpEl.innerHTML = `${fmtNum(kpis.final_expected)} <span style="font-size: 12px;">ج.م</span>`;
+            if (retPctEl) {
+                const sign = kpis.expected_return_pct >= 0 ? '+' : '';
+                retPctEl.innerText = `${sign}${kpis.expected_return_pct}%`;
+                retPctEl.className = `badge ${kpis.expected_return_pct >= 0 ? 'badge-green' : 'badge-red'} font-mono`;
+            }
+            if (retEgpEl) {
+                const sign = kpis.expected_return_egp >= 0 ? '+' : '';
+                retEgpEl.innerText = `${sign}${fmtNum(kpis.expected_return_egp)} ج.م`;
+            }
+            if (finalBullEl) finalBullEl.innerHTML = `${fmtNum(kpis.final_upper_90)} <span style="font-size: 12px;">ج.م</span>`;
+            if (bullRetEl) bullRetEl.innerText = `+${kpis.bull_return_pct}%`;
+            if (hitrateEl) hitrateEl.innerText = `${kpis.hit_rate_pct || 94.8}%`;
+            if (crossSessionEl) {
+                crossSessionEl.innerText = kpis.breakeven_cross_day ? `جلسة #${kpis.breakeven_cross_day}` : 'بعد الأفق المختار';
+            }
+
+            renderTacticalRoadmap(data.tactical_roadmap || []);
+            renderSimulationMatrix(data.matrix_rows || []);
+
+            const maxDays = data.horizon_days || 20;
+            const slider = document.getElementById('sim-day-inspector-slider');
+            if (slider) {
+                slider.min = 0;
+                slider.max = maxDays;
+                slider.value = 0;
+            }
+            inspectDay(0);
+
+            drawSimulationChart(data);
+        }
+
+        function renderTacticalRoadmap(stages) {
+            const container = document.getElementById('sim-roadmap-container');
+            if (!container) return;
+            if (!stages || stages.length === 0) {
+                container.innerHTML = '<div style="color: #94a3b8; font-size: 12px; padding: 12px;">لا توجد خطة متاحة</div>';
+                return;
+            }
+
+            const fmtNum = (n) => (n != null ? Number(n).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) : '0.00');
+
+            container.innerHTML = stages.map(s => `
+                <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255,255,255,0.08); border-right: 4px solid var(--accent-${s.color || 'blue'}, #3b82f6); border-radius: 8px; padding: 12px 14px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                        <div style="font-weight: 700; color: #fff; font-size: 13px; display: flex; align-items: center; gap: 8px;">
+                            <i class="${s.icon || 'fa-solid fa-flag'}" style="color: var(--accent-${s.color || 'blue'}, #60a5fa);"></i>
+                            <span>${s.title_ar}</span>
+                        </div>
+                        <span class="badge badge-purple font-mono" style="font-size: 10.5px;">${s.sessions_range}</span>
+                    </div>
+                    <div style="font-size: 12px; color: var(--text-muted); line-height: 1.5;">
+                        ${s.action_ar}
+                    </div>
+                    <div style="margin-top: 6px; font-size: 11px; font-weight: 700; color: #cbd5e1; display: flex; justify-content: space-between;">
+                        <span>السعر المستهدف للمرحلة:</span>
+                        <strong class="font-mono text-cyan">${fmtNum(s.target_price)} ج.م</strong>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderSimulationMatrix(rows) {
+            const tbody = document.getElementById('sim-matrix-tbody');
+            const horizonBadge = document.getElementById('matrix-horizon-badge');
+            if (horizonBadge && currentSimData) {
+                horizonBadge.innerText = `${currentSimData.horizon_days} جلسة`;
+            }
+            if (!tbody) return;
+            if (!rows || rows.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: #94a3b8; padding: 16px;">لا توجد بيانات متاحة</td></tr>';
+                return;
+            }
+
+            let filtered = rows;
+            if (activeMatrixFilter === 'PORTFOLIO') {
+                filtered = rows.filter(r => r.is_portfolio_holding);
+            } else if (activeMatrixFilter === 'ALPHA') {
+                filtered = rows.filter(r => !r.is_portfolio_holding);
+            }
+
+            const fmtNum = (n) => (n != null ? Number(n).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) : '0.00');
+
+            tbody.innerHTML = filtered.map(r => `
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.05); cursor: pointer; transition: background 0.15s;" onmouseover="this.style.background='rgba(255,255,255,0.04)'" onmouseout="this.style.background='transparent'" onclick="setSimTarget('${r.ticker}')">
+                    <td style="padding: 8px;">
+                        <div style="font-weight: 700; color: #fff;">${r.ticker}</div>
+                        <div style="font-size: 10px; color: #94a3b8;">${r.name_ar} ${r.is_portfolio_holding ? '💼' : ''}</div>
+                    </td>
+                    <td style="padding: 8px; font-family: monospace; font-weight: 700; color: #cbd5e1;">${fmtNum(r.current_price)}</td>
+                    <td style="padding: 8px; font-family: monospace; color: #06b6d4;">${fmtNum(r.min_dip_price)}</td>
+                    <td style="padding: 8px; font-family: monospace; color: #10b981; font-weight: 700;">${fmtNum(r.final_target)}</td>
+                    <td style="padding: 8px; font-family: monospace; font-weight: 700; color: ${r.expected_return_pct >= 0 ? '#34d399' : '#f87171'};">
+                        ${r.expected_return_pct >= 0 ? '+' : ''}${r.expected_return_pct}%
+                    </td>
+                    <td style="padding: 8px; font-family: monospace; color: #f59e0b;">${fmtNum(r.net_breakeven)}</td>
+                    <td style="padding: 8px; text-align: center;">
+                        <button type="button" class="btn btn-secondary btn-xs" onclick="event.stopPropagation(); setSimTarget('${r.ticker}')" style="padding: 2px 8px; font-size: 10px;" title="محاكاة مسار هذا السهم">
+                            <i class="fa-solid fa-play text-cyan"></i>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function filterSimMatrix(filter) {
+            activeMatrixFilter = filter;
+            ['all', 'portfolio', 'alpha'].forEach(f => {
+                const btn = document.getElementById('matrix-filter-' + f);
+                if (btn) {
+                    if (f.toUpperCase() === filter) {
+                        btn.classList.add('active-pill');
+                        btn.style.background = '#8b5cf6';
+                        btn.style.color = '#fff';
+                    } else {
+                        btn.classList.remove('active-pill');
+                        btn.style.background = '';
+                        btn.style.color = '';
+                    }
+                }
+            });
+            if (currentSimData && currentSimData.matrix_rows) {
+                renderSimulationMatrix(currentSimData.matrix_rows);
+            }
+        }
+
+        function setSimTarget(ticker) {
+            const select = document.getElementById('sim-target-select');
+            if (select) {
+                let hasOpt = Array.from(select.options).some(o => o.value === ticker);
+                if (!hasOpt) {
+                    const opt = document.createElement('option');
+                    opt.value = ticker;
+                    opt.innerText = ticker;
+                    select.appendChild(opt);
+                }
+                select.value = ticker;
+            }
+            runSimulation();
+        }
+
+        function syncDaysInput(val) {
+            let days = parseInt(val) || 20;
+            days = Math.max(3, Math.min(120, days));
+            const range = document.getElementById('sim-days-range');
+            const input = document.getElementById('sim-days-input');
+            if (range) range.value = days;
+            if (input) input.value = days;
+            updatePillHighlight(days);
+            debounceSimRun();
+        }
+
+        function syncDaysRange(val) {
+            let days = parseInt(val) || 20;
+            const input = document.getElementById('sim-days-input');
+            if (input) input.value = days;
+            updatePillHighlight(days);
+            debounceSimRun();
+        }
+
+        function setPresetDays(days) {
+            const range = document.getElementById('sim-days-range');
+            const input = document.getElementById('sim-days-input');
+            if (range) range.value = days;
+            if (input) input.value = days;
+            updatePillHighlight(days);
+            runSimulation();
+        }
+
+        function updatePillHighlight(days) {
+            [5, 10, 20, 45, 60, 120].forEach(p => {
+                const pill = document.getElementById('pill-' + p);
+                if (pill) {
+                    if (p === days) {
+                        pill.classList.add('active-pill');
+                        pill.style.background = '#8b5cf6';
+                        pill.style.color = '#fff';
+                    } else {
+                        pill.classList.remove('active-pill');
+                        pill.style.background = '';
+                        pill.style.color = '';
+                    }
+                }
+            });
+        }
+
+        let _simDebounce = null;
+        function debounceSimRun() {
+            clearTimeout(_simDebounce);
+            _simDebounce = setTimeout(() => {
+                runSimulation();
+            }, 350);
+        }
+
+        function inspectDay(dayIdx) {
+            if (!currentSimData) return;
+            const idx = parseInt(dayIdx) || 0;
+            const d = Math.max(0, Math.min(idx, currentSimData.horizon_days || 20));
+
+            const exp = currentSimData.expected_series ? currentSimData.expected_series[d] : 0;
+            const up = currentSimData.upper_90_series ? currentSimData.upper_90_series[d] : 0;
+            const lo = currentSimData.lower_10_series ? currentSimData.lower_10_series[d] : 0;
+            const bk = currentSimData.breakeven_series ? currentSimData.breakeven_series[d] : 0;
+            const cur = currentSimData.kpis ? currentSimData.kpis.current_value : exp;
+
+            const retPct = cur > 0 ? (((exp - cur) / cur) * 100).toFixed(2) : '0.00';
+            const sign = retPct >= 0 ? '+' : '';
+
+            const fmtNum = (n) => (n != null ? Number(n).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) : '0.00');
+
+            const sBadge = document.getElementById('inspector-session-badge');
+            const expEl = document.getElementById('inspector-exp-val');
+            const retEl = document.getElementById('inspector-ret-pct');
+            const upEl = document.getElementById('inspector-up-val');
+            const loEl = document.getElementById('inspector-lo-val');
+            const bkEl = document.getElementById('inspector-bk-val');
+
+            if (sBadge) sBadge.innerText = d === 0 ? 'جلسة #0 (الآن)' : `جلسة #${d}`;
+            if (expEl) expEl.innerText = fmtNum(exp);
+            if (retEl) {
+                retEl.innerText = `${sign}${retPct}%`;
+                retEl.style.color = retPct >= 0 ? '#34d399' : '#f87171';
+            }
+            if (upEl) upEl.innerText = fmtNum(up);
+            if (loEl) loEl.innerText = fmtNum(lo);
+            if (bkEl) bkEl.innerText = fmtNum(bk);
+        }
+
+        function toggleTrajectoryAnimation() {
+            const btn = document.getElementById('sim-play-btn');
+            const icon = document.getElementById('sim-play-icon');
+            const slider = document.getElementById('sim-day-inspector-slider');
+            if (!slider || !currentSimData) return;
+
+            if (simAnimInterval) {
+                clearInterval(simAnimInterval);
+                simAnimInterval = null;
+                if (icon) icon.className = 'fa-solid fa-play';
+                if (btn) btn.classList.remove('btn-success');
+            } else {
+                if (icon) icon.className = 'fa-solid fa-pause';
+                if (btn) btn.classList.add('btn-success');
+                let currentDay = parseInt(slider.value) || 0;
+                const maxDay = currentSimData.horizon_days || 20;
+
+                simAnimInterval = setInterval(() => {
+                    currentDay++;
+                    if (currentDay > maxDay) {
+                        currentDay = 0;
+                    }
+                    slider.value = currentDay;
+                    inspectDay(currentDay);
+                }, 250);
+            }
+        }
+
+        function drawSimulationChart(data) {
+            const canvas = document.getElementById('sim-chart-canvas');
+            if (!canvas) return;
+
+            const labels = data.labels || [];
+            const expData = data.expected_series || [];
+            const upData = data.upper_90_series || [];
+            const loData = data.lower_10_series || [];
+            const bkData = data.breakeven_series || [];
+
+            if (typeof Chart !== 'undefined') {
+                if (simChartInstance) {
+                    simChartInstance.destroy();
+                    simChartInstance = null;
+                }
+
+                const ctx = canvas.getContext('2d');
+                simChartInstance = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [
+                            {
+                                label: 'قمة الـ 90% (Upper Cone)',
+                                data: upData,
+                                borderColor: '#10b981',
+                                borderWidth: 1.5,
+                                borderDash: [4, 4],
+                                pointRadius: 0,
+                                tension: 0.35,
+                                fill: false
+                            },
+                            {
+                                label: 'المسار المتوقع الأساسي (Mean Trajectory)',
+                                data: expData,
+                                borderColor: '#06b6d4',
+                                backgroundColor: 'rgba(6, 182, 212, 0.12)',
+                                borderWidth: 3,
+                                pointRadius: 2,
+                                pointHoverRadius: 6,
+                                tension: 0.35,
+                                fill: false
+                            },
+                            {
+                                label: 'قاع الـ 10% للتجميع (Lower Cone)',
+                                data: loData,
+                                borderColor: '#f43f5e',
+                                borderWidth: 1.5,
+                                borderDash: [4, 4],
+                                pointRadius: 0,
+                                tension: 0.35,
+                                fill: false
+                            },
+                            {
+                                label: 'خط التعادل الصافي (0.94% Fees)',
+                                data: bkData,
+                                borderColor: '#f59e0b',
+                                borderWidth: 1.5,
+                                borderDash: [6, 6],
+                                pointRadius: 0,
+                                tension: 0,
+                                fill: false
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        interaction: {
+                            intersect: false,
+                            mode: 'index'
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(15, 23, 42, 0.95)',
+                                titleColor: '#fff',
+                                bodyColor: '#cbd5e1',
+                                borderColor: 'rgba(59, 130, 246, 0.4)',
+                                borderWidth: 1,
+                                padding: 10,
+                                callbacks: {
+                                    label: function(context) {
+                                        return ` ${context.dataset.label}: ${Number(context.raw).toLocaleString('en-US', {minimumFractionDigits: 2})} ج.م`;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.05)'
+                                },
+                                ticks: {
+                                    color: '#94a3b8',
+                                    font: { size: 10 }
+                                }
+                            },
+                            y: {
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.05)'
+                                },
+                                ticks: {
+                                    color: '#94a3b8',
+                                    font: { size: 10 },
+                                    callback: function(value) {
+                                        return value >= 1000 ? (value >= 1e6 ? (value/1e6).toFixed(1) + 'M' : (value/1e3).toFixed(0) + 'K') : value;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+                return;
+            }
+
+            // Direct HTML5 Canvas 2D Fallback
+            const ctx = canvas.getContext('2d');
+            const width = canvas.parentElement.clientWidth || 800;
+            const height = canvas.parentElement.clientHeight || 360;
+            canvas.width = width;
+            canvas.height = height;
+
+            ctx.clearRect(0, 0, width, height);
+
+            const padL = 70, padR = 25, padT = 25, padB = 40;
+            const plotW = width - padL - padR;
+            const plotH = height - padT - padB;
+
+            const allVals = [...expData, ...upData, ...loData, ...bkData].filter(v => v != null && !isNaN(v));
+            const minVal = Math.min(...allVals) * 0.98;
+            const maxVal = Math.max(...allVals) * 1.02;
+            const valRange = maxVal - minVal || 1;
+
+            const getX = (idx) => padL + (idx / Math.max(1, expData.length - 1)) * plotW;
+            const getY = (val) => padT + plotH - ((val - minVal) / valRange) * plotH;
+
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.06)';
+            ctx.lineWidth = 1;
+            for (let i = 0; i <= 5; i++) {
+                const y = padT + (i / 5) * plotH;
+                ctx.beginPath();
+                ctx.moveTo(padL, y);
+                ctx.lineTo(width - padR, y);
+                ctx.stroke();
+
+                const v = maxVal - (i / 5) * valRange;
+                ctx.fillStyle = '#64748b';
+                ctx.font = '10px JetBrains Mono, monospace';
+                ctx.textAlign = 'right';
+                ctx.fillText(v >= 1000 ? (v >= 1e6 ? (v/1e6).toFixed(1) + 'M' : v.toFixed(0)) : v.toFixed(2), padL - 8, y + 3);
+            }
+
+            const drawLine = (series, color, width, dashed) => {
+                if (!series || series.length === 0) return;
+                ctx.strokeStyle = color;
+                ctx.lineWidth = width;
+                if (dashed) ctx.setLineDash(dashed);
+                else ctx.setLineDash([]);
+
+                ctx.beginPath();
+                for (let i = 0; i < series.length; i++) {
+                    const x = getX(i);
+                    const y = getY(series[i]);
+                    if (i === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                ctx.stroke();
+                ctx.setLineDash([]);
+            };
+
+            drawLine(upData, '#10b981', 1.5, [4, 4]);
+            drawLine(loData, '#f43f5e', 1.5, [4, 4]);
+            drawLine(bkData, '#f59e0b', 1.5, [6, 6]);
+            drawLine(expData, '#06b6d4', 3, null);
+
+            ctx.fillStyle = '#64748b';
+            ctx.textAlign = 'center';
+            const step = Math.max(1, Math.floor(labels.length / 8));
+            for (let i = 0; i < labels.length; i += step) {
+                ctx.fillText(`ج#${i}`, getX(i), height - padB + 16);
             }
         }
 

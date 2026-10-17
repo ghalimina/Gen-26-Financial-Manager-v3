@@ -3526,6 +3526,39 @@ def api_system_full_math_audit():
     return jsonify(report)
 
 
+@app.route("/api/simulator/project", methods=["GET", "POST"])
+def api_simulator_project():
+    """
+    GEN-26 v4.4 — Interactive Quantum Time-Machine & Multi-Horizon Simulator.
+    Simulates dynamic price and equity trajectories across 3-120 trading sessions.
+    """
+    if request.method == "POST":
+        req_data = request.get_json(silent=True) or {}
+        target = req_data.get("target") or request.args.get("target", "PORTFOLIO")
+        days = req_data.get("days") or request.args.get("days", 20)
+        regime = req_data.get("regime") or request.args.get("regime", "BASE_ACCUMULATION")
+        strategy = req_data.get("strategy") or request.args.get("strategy", "SMART_ROTATION")
+    else:
+        target = request.args.get("target", "PORTFOLIO")
+        days = request.args.get("days", 20)
+        regime = request.args.get("regime", "BASE_ACCUMULATION")
+        strategy = request.args.get("strategy", "SMART_ROTATION")
+
+    try:
+        days_int = int(days)
+    except (ValueError, TypeError):
+        days_int = 20
+
+    from core.quantum_time_simulator import QuantumTimeSimulator
+    sim_result = QuantumTimeSimulator.simulate_trajectory(
+        target_id=target,
+        horizon_days=days_int,
+        regime=regime,
+        strategy=strategy
+    )
+    return jsonify(sim_result)
+
+
 # --- 9.7 MLOps Continuous Learning & Telegram Bot Status ---
 @app.route("/api/mlops/status", methods=["GET"])
 def api_mlops_status():
