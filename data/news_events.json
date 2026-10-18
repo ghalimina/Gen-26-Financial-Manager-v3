@@ -1,6 +1,6 @@
 {
-  "last_sync": "2026-10-18 14:57:49",
-  "total_events": 340,
+  "last_sync": "2026-10-18 16:03:58",
+  "total_events": 342,
   "events": [
     {
       "news_id": "RSS_EGX30_b1d3cb399544",
@@ -20,6 +20,25 @@
       "headline": "لماذا فقدت البورصة المصرية 159 مليار جنيه من قيمتها السوقية اليوم 18 أكتوبر 2026؟ - https://www.youlyou.com/",
       "alpha_shock_pct": 0.0,
       "created_at": "2026-10-18 14:57:49"
+    },
+    {
+      "news_id": "RSS_EGX30_fb7cd8f95c7c",
+      "source": "جريدة البورصة",
+      "url": "https://www.alborsaanews.com/2026/10/18/2000138",
+      "published_at": "2026-10-18 14:43:41",
+      "retrieved_at": "2026-10-18 16:03:58",
+      "company": "المؤشر الرئيسي للبورصة المصرية EGX30",
+      "ticker": "EGX30.CA",
+      "sector": "Index & Macro",
+      "country": "EG",
+      "event_type": "REGULATORY",
+      "sentiment": "NEUTRAL",
+      "sentiment_confidence": 0.7,
+      "importance": "LOW",
+      "language": "ar",
+      "headline": "وزير الاستثمار: 48 مليار دولار صادرات مصر السلعية غير البترولية بنهاية 2025",
+      "alpha_shock_pct": 0.0,
+      "created_at": "2026-10-18 16:03:58"
     },
     {
       "news_id": "RSS_EGX30_8d50b9cbad71",
@@ -324,6 +343,25 @@
       "headline": "قطاع البنوك يستحوذ على 4.98% من سيولة البورصة المصرية بجلسة الأحد 18 أكتوبر.. التداولات تتجاوز 389 مليون جنيه - بنكي",
       "alpha_shock_pct": 0.0,
       "created_at": "2026-10-18 14:57:49"
+    },
+    {
+      "news_id": "RSS_EGX30_63ba34d9c3e9",
+      "source": "رادار البورصة المصرية",
+      "url": "https://news.google.com/rss/articles/CBMi9wJBVV95cUxPRVl5aW1scktxRlhSS2ctY2lEZWxkaWpvSHNTVjBNa2x6NEpWM2tHbUg4WXBvZkQ4YkRyZ25pYV9pNDVwUlJoTmFyOGNrNVJCaXhPN1BiVHFVRmFGYVZsQmNsNTVOSS1QR2h6UlBGeVBlc2ZRaHZpN19TVHEwZUpVUnZjT1kzZlVadGRCS3FGOWlWQTFnZy1CellEaXdCN1hYUUlKV3ZoTG5SMGRPeDM4dTQtR3VSTWNLc2tYcnlDNHhaZVluRnN4SmZqX1VpQ3B6WnAwb0F3aW1YeWludUZzbkpoWlVNS2ptTEZqZGhMdlRnUTFaQnJjdVlEQ0pfTmVpUHZBUy1weV9TbWRhajU0dTRKdHdKTmh5RHZRc0hhRFBqdnJiZFU1bG84dk1MU01Fa19OQUdRWE5QRjhNdUFDVm1iTkFHcTNMWWdJUldpZi11Z05ocGJiZDI4MEpma09hRlRScDdZRzBlY3JBb0xDNjZFQlItaDA?oc=5",
+      "published_at": "2026-10-18 13:26:07",
+      "retrieved_at": "2026-10-18 16:03:58",
+      "company": "المؤشر الرئيسي للبورصة المصرية EGX30",
+      "ticker": "EGX30.CA",
+      "sector": "Index & Macro",
+      "country": "EG",
+      "event_type": "REGULATORY",
+      "sentiment": "NEUTRAL",
+      "sentiment_confidence": 0.7,
+      "importance": "LOW",
+      "language": "ar",
+      "headline": "البورصة المصرية توقع 8 بروتوكولات تعاون لنشر الثقافة المالية وتعتمد 7 سفراء بالجامعات - جريدة المال",
+      "alpha_shock_pct": 0.0,
+      "created_at": "2026-10-18 16:03:58"
     },
     {
       "news_id": "RSS_EGX30_cb46ede744af",
@@ -911,44 +949,6 @@
       "importance": "LOW",
       "language": "ar",
       "headline": "البورصة المصرية تحدد 20 أكتوبر موعداً لبدء التداول على أسهم \"إم إن تي حالا\" - ايكونومي بلس",
-      "alpha_shock_pct": 0.0,
-      "created_at": "2026-10-18 11:48:49"
-    },
-    {
-      "news_id": "RSS_EGX30_754181e81990",
-      "source": "رادار البورصة المصرية",
-      "url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE0tSEc3UzVNSmxGS0hEanB4VmQzVVFkbHpGblZBakpEY1ZjVlJDb3B4cVZOX3RVS1V5T21HNVlHSjFEYzUtYkxWOTZya0E?oc=5",
-      "published_at": "2026-10-18 11:23:21",
-      "retrieved_at": "2026-10-18 14:57:49",
-      "company": "المؤشر الرئيسي للبورصة المصرية EGX30",
-      "ticker": "EGX30.CA",
-      "sector": "Index & Macro",
-      "country": "EG",
-      "event_type": "REGULATORY",
-      "sentiment": "NEUTRAL",
-      "sentiment_confidence": 0.7,
-      "importance": "LOW",
-      "language": "ar",
-      "headline": "البورصة المصرية تحتفل بالأسبوع العالمي للمستثمر وتوقع 8 بروتوكولات تعاون - جريدة النهار المصرية",
-      "alpha_shock_pct": 0.0,
-      "created_at": "2026-10-18 14:57:49"
-    },
-    {
-      "news_id": "RSS_EGX30_47d13b2153a4",
-      "source": "رادار البورصة المصرية",
-      "url": "https://news.google.com/rss/articles/CBMi1wJBVV95cUxQeGgzaF9HUV9tRzRWTjN4M2FBVFdDTm8yeHEtWjhlMUFlOGFOelpPZmVjOVdOM29xcVVRUS03elg3MlZfcElLdHBndjVrWGp2Y1FPcDNWQzdIRHNCWThGRi1BYVRKdWRlM1RsTWdscGlSTXlSeWRkeEtYTThxRm5iWDV3VXZTaHNPcm95TFRuZjNsN1FYNXZzLW5HSVpVSDNtaDVaLS1KNkhsUm53bjdBZUZMbmpCa05YVE85MmdyRlBGNVNkUTBxbHh0aXNrX2ZuLW9Pam9GQWVWWDhyOVBodXFZeW5tOVJlUXE2RXlhSld5WFdkT3o4c2JNQlUxajU1WFE5aWRLS3A1cThMclhpZUVLb3dXOVNjTTBMNHZDejZIZ19lc2d4S0dJT2R0QWp1NVpRQS10SWhpQ01yVXlOMGFLWHBtLUdsNG4tRms2Mk9WQ2E0ZG5z?oc=5",
-      "published_at": "2026-10-18 11:23:13",
-      "retrieved_at": "2026-10-18 11:48:49",
-      "company": "المؤشر الرئيسي للبورصة المصرية EGX30",
-      "ticker": "EGX30.CA",
-      "sector": "Index & Macro",
-      "country": "EG",
-      "event_type": "REGULATORY",
-      "sentiment": "NEUTRAL",
-      "sentiment_confidence": 0.7,
-      "importance": "LOW",
-      "language": "ar",
-      "headline": "البورصة المصرية تحدد 20 أكتوبر لبدء التداول على أسهم «إم إن تي تك» بسعر 24.5 جنيه - أموال الغد",
       "alpha_shock_pct": 0.0,
       "created_at": "2026-10-18 11:48:49"
     }
