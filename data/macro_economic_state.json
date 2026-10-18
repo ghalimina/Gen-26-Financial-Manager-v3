@@ -41,11 +41,11 @@
       "days_since_update": 19
     },
     "usd_egp_rate": {
-      "value": 52.32,
+      "value": 53.4,
       "unit": "EGP",
       "label_ar": "سعر صرف الجنيه أمام الدولار الأمريكي",
       "source": "EGX_OFFICIAL_HARVESTER_AND_YAHOO",
-      "last_updated": "2026-10-16 16:07:39",
+      "last_updated": "2026-10-18 11:48:47",
       "is_stale": false,
       "staleness_threshold_days": 2,
       "days_since_update": 0
@@ -61,11 +61,11 @@
       "days_since_update": 0
     },
     "brent_oil_usd": {
-      "value": 106.96,
+      "value": 109.86,
       "unit": "USD/bbl",
       "label_ar": "سعر خام برنت العالمي للنفط — ارتفاع ملحوظ بسبب توترات الشرق الأوسط",
       "source": "LIVE_YAHOO_FINANCE_BZ_F",
-      "last_updated": "2026-10-16 16:07:39",
+      "last_updated": "2026-10-18 11:48:47",
       "is_stale": false,
       "staleness_threshold_days": 2,
       "days_since_update": 0
@@ -190,7 +190,7 @@
     }
   },
   "egx_market_context": {
-    "egx30_level": 51492.8,
+    "egx30_level": 50896.19921875,
     "egx70_level": 18330.8,
     "egx100_level": 30735.6,
     "total_market_cap_egp": 3999192255990.0,
@@ -207,7 +207,7 @@
   },
   "macro_regime": "DISTRIBUTION_SELL_OFF",
   "macro_regime_ar": "🚨 إنذار ضغط بيعي وتصريف مؤسسي (أكثر من 81% من الأسهم المتداولة هابطة) — حظر الشراء الجديد",
-  "last_sync_timestamp": "2026-10-16 16:07:39",
+  "last_sync_timestamp": "2026-10-18 11:48:47",
   "staleness_warnings_count": 0,
   "stale_indicators": []
 }

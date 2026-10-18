@@ -1,6 +1,6 @@
 {
   "status": "SUCCESS",
-  "as_of": "2026-10-17 02:17:54",
+  "as_of": "2026-10-18 11:48:58",
   "macro_indicators": {
     "usd_egp": {
       "rate": 52.32,
@@ -14,7 +14,7 @@
       "status": "OFFICIAL_MONETARY_POLICY"
     },
     "cpi_inflation_yoy": {
-      "rate_pct": 14.5,
+      "rate_pct": 13.9,
       "label_ar": "معدل التضخم السنوي العام للحضر (الجهاز المركزي للتعبئة والإحصاء)",
       "status": "OFFICIAL_BULLETIN"
     },
@@ -64,11 +64,11 @@
     }
   },
   "egx_market_context": {
-    "egx30_level": 52273.3008,
+    "egx30_level": 50896.1992,
     "egx30_change_pct": -0.68,
     "egx30_ytd_pct": 22.56,
     "egx70_level": 18330.8,
-    "egx100_level": 53265.0,
+    "egx100_level": 30735.6,
     "egx33_shariah_level": 6297.03,
     "total_market_cap_egp": 3999192255990.0,
     "listed_turnover_egp": 9840793226.0,

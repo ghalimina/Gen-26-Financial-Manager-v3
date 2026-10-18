@@ -1,29 +1,29 @@
 {
   "market_date": "2026-10-14",
   "session_status": "CLOSED_OFFICIAL_SETTLEMENT",
-  "timestamp": "2026-10-17 02:17:45",
+  "timestamp": "2026-10-18 11:48:57",
   "indices": {
     "EGX30": {
       "name": "EGX30 (المؤشر الرئيسي)",
       "level": 51492.8,
-      "change_pts": 780.5,
-      "change_pct": 1.52,
+      "change_pts": -1377.1,
+      "change_pct": -2.63,
       "ytd_pct": 22.56,
       "level_usd": 3293.0,
       "previous_close_07_10": 53265.16
     },
     "EGX70_EWI": {
       "name": "EGX70 EWI (مؤشر الشركات الصغيرة والمتوسطة متساوي الأوزان)",
-      "level": 18481.5,
-      "change_pts": 150.7,
-      "change_pct": 0.82,
+      "level": 17265.7,
+      "change_pts": -1215.8,
+      "change_pct": -6.58,
       "ytd_pct": 34.12
     },
     "EGX100_EWI": {
       "name": "EGX100 EWI (المؤشر الأوسع نطاقاً)",
-      "level": 24607.4,
-      "change_pts": 194.1,
-      "change_pct": 0.8,
+      "level": 23193.6,
+      "change_pts": -1413.8,
+      "change_pct": -5.75,
       "ytd_pct": 28.45
     },
     "EGX33_SHARIAH": {
