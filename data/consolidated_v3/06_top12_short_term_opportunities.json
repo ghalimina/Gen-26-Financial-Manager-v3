@@ -1,6 +1,6 @@
 {
   "status": "SUCCESS",
-  "as_of": "2026-10-18 11:48:58",
+  "as_of": "2026-10-18 14:57:58",
   "time_horizon": "10 TRADING SESSIONS",
   "opportunities_count": 12,
   "target_rules": {
@@ -223,10 +223,10 @@
       "ticker": "BINV.CA",
       "company_name": "بي إنفستمنتس القابضة",
       "sector": "الخدمات المالية غير المصرفية",
-      "current_price": 58.18,
-      "target_price_10d": 62.83,
-      "target_price": 62.83,
-      "stop_loss": 55.27,
+      "current_price": 58.39,
+      "target_price_10d": 63.06,
+      "target_price": 63.06,
+      "stop_loss": 55.47,
       "expected_upside_10d_pct": 8.0,
       "risk_reward_ratio": 1.6,
       "alpha_score": 65.5,
