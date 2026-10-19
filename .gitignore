@@ -64,3 +64,9 @@ Thumbs.db
 # Node modules
 node_modules/
 package-lock.json
+
+# Temp test & audit patterns
+audit_*.json
+task-*.log
+*_cdp.py
+*.tmp

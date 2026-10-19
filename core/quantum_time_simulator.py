@@ -36,8 +36,11 @@ class QuantumTimeSimulator:
     PORTFOLIO_STOCKS_VALUE: float = 12072.51
     PORTFOLIO_CASH_VALUE: float = 1200.00
     PORTFOLIO_BMM_VALUE: float = 2.42
-    PORTFOLIO_NET_BREAKEVEN: float = 14421.15  # Sum of break-even holdings + cash + BMM
-    THNDR_FEE_MULTIPLIER: float = 1.0095       # 0.94% broker fee + exchange clearance
+    PORTFOLIO_NET_BREAKEVEN: float = 14421.15  # Sum of break-even holdings (13,218.53) + cash (1,200.00) + BMM (2.42)
+    PORTFOLIO_CAPITAL_BREAKEVEN: float = 12466.63  # Original invested capital
+    PORTFOLIO_REALIZED_PROFIT: float = 1830.00     # Prior realized swing profits
+    PORTFOLIO_NET_PROFIT_TOTAL: float = 808.30     # Current equity 13,274.93 - 12,466.63 = +808.30 (+6.17%)
+    THNDR_FEE_MULTIPLIER: float = 1.0095           # 0.94% broker fee + exchange clearance
 
     INDEX_BENCHMARKS = {
         "EGX30": {
@@ -175,7 +178,10 @@ class QuantumTimeSimulator:
         target_id: str = "PORTFOLIO",
         horizon_days: int = 20,
         regime: str = "BASE_ACCUMULATION",
-        strategy: str = "SMART_ROTATION"
+        strategy: str = "SMART_ROTATION",
+        filter_mode: str = "TOP_30",
+        sector: Optional[str] = None,
+        search_query: Optional[str] = None
     ) -> Dict[str, Any]:
         """
         Calculates daily simulation trajectory from day=0 to day=horizon_days.
@@ -423,7 +429,9 @@ class QuantumTimeSimulator:
             horizon_days=days,
             regime=regime_norm,
             strategy=strategy_norm,
-            filter_mode="TOP_30"
+            filter_mode=filter_mode,
+            sector=sector,
+            search_query=search_query
         )
 
         return {
@@ -450,7 +458,18 @@ class QuantumTimeSimulator:
                 "bull_return_pct": bull_ret_pct,
                 "hit_rate_pct": hit_rate_pct,
                 "breakeven_cross_day": breakeven_cross_day,
-                "breakeven_cross_text": bk_cross_text
+                "breakeven_cross_text": bk_cross_text,
+                "is_portfolio": is_portfolio,
+                "capital_breakeven_egp": cls.PORTFOLIO_CAPITAL_BREAKEVEN if is_portfolio else None,
+                "capital_breakeven_status": "محقق بالفعل ✅ رابح +808.30 ج.م (+6.17%)" if is_portfolio else None,
+                "open_positions_zero_loss_target_egp": cls.PORTFOLIO_NET_BREAKEVEN if is_portfolio else None,
+                "open_positions_cost_egp": 13094.14 if is_portfolio else None,
+                "open_positions_fee_breakeven_egp": 13218.53 if is_portfolio else None,
+                "cash_and_bmm_egp": 1202.42 if is_portfolio else None,
+                "breakeven_explanation_ar": (
+                    "🛡️ تعادل رأس المال الكلي: 12,466.63 ج.م (محقق بالفعل ✅ رابح +808.30 ج.م بما يشمل +1,830.00 ج.م أرباح تدوير سابقة). "
+                    "🎯 هدف تصفير الخسارة الدفترية للـ 5 مراكز المفتوحة: 14,421.15 ج.م (يغطي 13,094.14 ج.م تكلفة + عمولة 0.94% = 13,218.53 ج.م + 1,202.42 ج.م كاش ووثيقة)."
+                ) if is_portfolio else f"سعر التعادل الصافي بعد خصم عمولة التداول (0.94%): {net_breakeven:.2f} ج.م"
             },
             "tactical_roadmap": tactical_roadmap,
             "matrix_rows": matrix_rows
@@ -462,19 +481,31 @@ class QuantumTimeSimulator:
         horizon_days: int = 20,
         regime: str = "BASE_ACCUMULATION",
         strategy: str = "SMART_ROTATION",
-        filter_mode: str = "TOP_30"
+        filter_mode: str = "TOP_30",
+        sector: Optional[str] = None,
+        search_query: Optional[str] = None
     ) -> List[Dict[str, Any]]:
         """
         Generates comparison matrix rows for the 5 real portfolio holdings
-        plus the top institutional Alpha opportunities.
+        plus the institutional universe (top opportunities or all 271 stocks).
         """
         days = max(3, min(120, int(horizon_days)))
         canonical_prices = cls._load_canonical_prices()
         rankings = cls._load_rankings()
         rows = []
 
+        clean_sector = sector.strip() if sector and sector.strip().upper() != "ALL" else None
+        clean_q = search_query.strip().lower() if search_query and search_query.strip() else None
+
         # 1. Add the 5 Real Portfolio Holdings first
         for ticker, spec in cls.PORTFOLIO_HOLDINGS_SPECS.items():
+            sec = spec["sector"]
+            name_ar = spec["name_ar"]
+            if clean_sector and clean_sector.lower() not in sec.lower():
+                continue
+            if clean_q and clean_q not in ticker.lower() and clean_q not in name_ar.lower():
+                continue
+
             cur_p = canonical_prices.get(ticker, spec["current_price"])
             net_bk = spec["net_breakeven"]
             dip_floor = spec["predicted_drop_floor"]
@@ -497,8 +528,8 @@ class QuantumTimeSimulator:
 
             rows.append({
                 "ticker": ticker,
-                "name_ar": spec["name_ar"],
-                "sector": spec["sector"],
+                "name_ar": name_ar,
+                "sector": sec,
                 "current_price": cur_p,
                 "net_breakeven": net_bk,
                 "min_dip_price": dip_floor,
@@ -512,15 +543,17 @@ class QuantumTimeSimulator:
                 "is_portfolio_holding": True
             })
 
-        # 2. Add Top Market Alpha Opportunities
-        top_market = [
+        # 2. Add Top Market Alpha Opportunities or ALL 271 Equities
+        market_equities = [
             r for r in rankings
             if r.get("ticker") not in cls.PORTFOLIO_HOLDINGS_SPECS
         ]
         # Sort by alpha_score descending
-        top_market.sort(key=lambda x: float(x.get("alpha_score") or x.get("composite_score") or 0.0), reverse=True)
+        market_equities.sort(key=lambda x: float(x.get("alpha_score") or x.get("composite_score") or 0.0), reverse=True)
 
-        for item in top_market[:25]:
+        target_pool = market_equities if str(filter_mode).upper() == "ALL" else market_equities[:25]
+
+        for item in target_pool:
             t = item.get("ticker", "").upper()
             if not t:
                 continue
@@ -528,7 +561,14 @@ class QuantumTimeSimulator:
             if cur_p <= 0:
                 continue
             name_ar = item.get("name_ar") or item.get("name") or t
-            sector = item.get("sector_ar") or item.get("sector") or "الخدمات المالية"
+            sec = item.get("sector_ar") or item.get("sector") or "الخدمات المالية"
+
+            # Apply sector and search filters
+            if clean_sector and clean_sector.lower() not in sec.lower():
+                continue
+            if clean_q and clean_q not in t.lower() and clean_q not in name_ar.lower():
+                continue
+
             atr = float(item.get("atr_14") or item.get("atr") or (cur_p * 0.028))
             net_bk = round(cur_p * cls.THNDR_FEE_MULTIPLIER, 2)
             dip_floor = float(item.get("predicted_drop_floor_1d") or (cur_p - 0.85 * atr))
@@ -543,7 +583,7 @@ class QuantumTimeSimulator:
             rows.append({
                 "ticker": t,
                 "name_ar": name_ar,
-                "sector": sector,
+                "sector": sec,
                 "current_price": cur_p,
                 "net_breakeven": net_bk,
                 "min_dip_price": round(dip_floor, 2),

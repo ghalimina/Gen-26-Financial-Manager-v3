@@ -27,7 +27,8 @@ CORE_TEST_FILES = [
     "tests/test_direct_feed_and_anomaly.py",
     "tests/test_forensic_audit_remediation.py",
     "tests/test_paper_trading_orchestrator.py",
-    "tests/test_quantum_simulator.py"
+    "tests/test_quantum_simulator.py",
+    "tests/test_v45_strategic_engines.py"
 ]
 
 

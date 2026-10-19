@@ -433,6 +433,13 @@ if not os.environ.get("FLASK_TESTING"):
     except Exception as e:
         print(f"Startup auto-sync notice: {e}")
 
+    try:
+        from core.price_sync_service import PriceSyncService
+        PriceSyncService.sync_latest_cloud_snapshots_on_startup(force=False)
+    except Exception as e:
+        print(f"Startup price snapshot hydration notice: {e}")
+
+
 
 
 # =============================================================================
@@ -3114,13 +3121,27 @@ def api_theories_scan():
 
 
 
-# --- 8. Paper Trading Sessions Progress ---
+# --- 8. Paper Trading Sessions Progress & Full Portfolio ---
 @app.route("/api/paper", methods=["GET"])
 @app.route("/api/progress", methods=["GET"])
 def api_paper_progress():
     """Returns 30-day paper trading progress (3/30)."""
     state = PaperTradingStateManager.load_state()
     return jsonify(state.get("session_progress", {}))
+
+
+@app.route("/api/paper_portfolio", methods=["GET"])
+def api_paper_portfolio():
+    """Returns complete verified paper trading portfolio, positions, closed trades, and metrics."""
+    state = PaperTradingStateManager.load_state()
+    return jsonify({
+        "success": True,
+        "portfolio": state.get("portfolio", {}),
+        "performance": state.get("performance", {}),
+        "session_progress": state.get("session_progress", {}),
+        "verified_session_history": state.get("verified_session_history", []),
+        "risk_and_quality": state.get("risk_and_quality", {})
+    })
 
 
 # --- 9. Risk & Frozen Invariants ---
@@ -3529,8 +3550,9 @@ def api_system_full_math_audit():
 @app.route("/api/simulator/project", methods=["GET", "POST"])
 def api_simulator_project():
     """
-    GEN-26 v4.4 — Interactive Quantum Time-Machine & Multi-Horizon Simulator.
+    GEN-26 v4.5 — Interactive Quantum Time-Machine & Multi-Horizon Simulator.
     Simulates dynamic price and equity trajectories across 3-120 trading sessions.
+    Supports full 271-stock EGX universe matrix filtering by sector and ticker search.
     """
     if request.method == "POST":
         req_data = request.get_json(silent=True) or {}
@@ -3538,11 +3560,17 @@ def api_simulator_project():
         days = req_data.get("days") or request.args.get("days", 20)
         regime = req_data.get("regime") or request.args.get("regime", "BASE_ACCUMULATION")
         strategy = req_data.get("strategy") or request.args.get("strategy", "SMART_ROTATION")
+        filter_mode = req_data.get("filter_mode") or request.args.get("filter_mode", "WATCHLIST")
+        sector = req_data.get("sector") or request.args.get("sector")
+        search = req_data.get("search") or req_data.get("search_query") or request.args.get("search") or request.args.get("search_query")
     else:
         target = request.args.get("target", "PORTFOLIO")
         days = request.args.get("days", 20)
         regime = request.args.get("regime", "BASE_ACCUMULATION")
         strategy = request.args.get("strategy", "SMART_ROTATION")
+        filter_mode = request.args.get("filter_mode", "WATCHLIST")
+        sector = request.args.get("sector")
+        search = request.args.get("search") or request.args.get("search_query")
 
     try:
         days_int = int(days)
@@ -3554,9 +3582,75 @@ def api_simulator_project():
         target_id=target,
         horizon_days=days_int,
         regime=regime,
-        strategy=strategy
+        strategy=strategy,
+        filter_mode=filter_mode,
+        sector=sector,
+        search_query=search
     )
     return jsonify(sim_result)
+
+
+# --- GEN-26 v4.5 Strategic Quantitative Engines Endpoints ---
+
+@app.route("/api/portfolio/recovery_plan", methods=["GET"])
+def api_portfolio_recovery_plan():
+    """Returns the 5-stage cascade breakeven recovery plan with dynamic cash recycling."""
+    from core.breakeven_recovery_solver import get_portfolio_recovery_plan
+    cash_param = request.args.get("cash")
+    cash_val = None
+    if cash_param is not None:
+        try:
+            cash_val = float(cash_param)
+        except (ValueError, TypeError):
+            cash_val = None
+    plan = get_portfolio_recovery_plan(cash=cash_val)
+    return jsonify(plan)
+
+
+@app.route("/api/market/session_clock", methods=["GET"])
+def api_market_session_clock():
+    """Returns real-time EGX session clock and trading phase in Cairo timezone."""
+    from core.intraday_session_clock import get_egx_session_clock
+    clock_data = get_egx_session_clock()
+    return jsonify(clock_data)
+
+
+@app.route("/api/news/catalysts", methods=["GET"])
+def api_news_catalysts():
+    """Returns high-impact market catalysts sorted by conviction and impact."""
+    from core.live_news_catalyst_engine import get_catalyst_radar
+    min_impact = request.args.get("min_impact", 0.0)
+    try:
+        min_impact_f = float(min_impact)
+    except (ValueError, TypeError):
+        min_impact_f = 0.0
+    radar = get_catalyst_radar(min_impact=min_impact_f)
+    return jsonify(radar)
+
+
+@app.route("/api/news/catalysts/<ticker>", methods=["GET"])
+def api_news_catalysts_ticker(ticker):
+    """Returns specific news catalysts for a ticker."""
+    from core.live_news_catalyst_engine import get_ticker_catalysts
+    data = get_ticker_catalysts(ticker)
+    return jsonify(data)
+
+
+@app.route("/api/alerts/sniper_triggers", methods=["GET"])
+def api_alerts_sniper_triggers():
+    """Returns real-time intraday sniper alerts (Camarilla S3 rebound, volume surge, etc.)."""
+    from core.intraday_sniper_alerts import get_sniper_triggers
+    alerts = get_sniper_triggers()
+    return jsonify(alerts)
+
+
+@app.route("/api/audit/prediction_scorecard", methods=["GET"])
+def api_audit_prediction_scorecard():
+    """Returns transparent audit scorecard comparing AI predictions against actual price history."""
+    from core.prediction_scorecard_auditor import get_prediction_scorecard
+    scorecard = get_prediction_scorecard()
+    return jsonify(scorecard)
+
 
 
 # --- 9.7 MLOps Continuous Learning & Telegram Bot Status ---

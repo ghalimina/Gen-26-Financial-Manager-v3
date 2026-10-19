@@ -1055,8 +1055,51 @@ class PriceSyncService:
                 }
         return snapshot
 
+    @classmethod
+    def sync_latest_cloud_snapshots_on_startup(cls, force: bool = False) -> Dict[str, Any]:
+        """
+        Safely hydrates canonical prices and cloud snapshots on application startup.
+        Guarantees ZERO modifications to binary database (data/gen26_production.db)
+        to prevent git working tree dirty conflicts during Git operations.
+        """
+        logger.info("Executing sync_latest_cloud_snapshots_on_startup...")
+        start_t = time.time()
+        try:
+            # Check existing file
+            prices = cls.load_canonical_prices()
+            count = len(prices)
+            needs_sync = force or count < 10
+
+            if needs_sync:
+                sync_res = cls.sync_all_prices(force=force, universe="all")
+                count = sync_res.get("total_constituents", len(prices))
+                status = "SYNCED_FRESH"
+            else:
+                status = "CACHED_READY"
+
+            elapsed = round(time.time() - start_t, 3)
+            return {
+                "status": status,
+                "synced_stocks_count": count,
+                "duration_seconds": elapsed,
+                "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                "db_protected": True
+            }
+        except Exception as e:
+            logger.error(f"Error in sync_latest_cloud_snapshots_on_startup: {e}")
+            return {
+                "status": "FALLBACK_USED",
+                "error": str(e),
+                "synced_stocks_count": len(cls.BASELINE_NOMINAL_SNAPSHOT),
+                "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                "db_protected": True
+            }
+
 
 # Module-level convenience functions
+def sync_latest_cloud_snapshots_on_startup(force: bool = False) -> Dict[str, Any]:
+    return PriceSyncService.sync_latest_cloud_snapshots_on_startup(force=force)
+
 def sync_all_prices(force: bool = False, universe: str = "all") -> Dict[str, Any]:
     return PriceSyncService.sync_all_prices(force=force, universe=universe)
 
@@ -1068,6 +1111,7 @@ def get_price_record(ticker: str) -> Optional[Dict[str, Any]]:
 
 def get_price(ticker: str) -> float:
     return PriceSyncService.get_price(ticker)
+
 
 
 if __name__ == "__main__":

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import os, json, logging, time
+import os, json, logging, time, math
 from typing import Dict, List, Any, Optional
 from concurrent.futures import ThreadPoolExecutor
 
@@ -11,13 +11,24 @@ from .alpha_scorer import AlphaScorer
 
 logger = logging.getLogger("GEN26.OpportunityRanker")
 
+def _clean_nan(obj: Any) -> Any:
+    if isinstance(obj, float):
+        if math.isnan(obj) or math.isinf(obj):
+            return 0.0
+        return obj
+    elif isinstance(obj, dict):
+        return {k: _clean_nan(v) for k, v in obj.items()}
+    elif isinstance(obj, list):
+        return [_clean_nan(v) for v in obj]
+    return obj
+
 class OpportunityRanker:
     """
     Parallel Universe Scanner & Opportunity Ranking Engine for EGX Equities.
     """
 
     @classmethod
-    def evaluate_stock_scan(cls, ticker: str, regime: str = "BULL_EXPANSION") -> Optional[Dict[str, Any]]:
+    def evaluate_stock_scan(cls, ticker: str, regime: str = "BULL_EXPANSION", include_details: bool = True) -> Optional[Dict[str, Any]]:
         rec = MarketPriceService.get_canonical_price_record(ticker)
         stock_rec = MultiLayerScanner.get_stock_ranking_record(ticker)
 
@@ -44,7 +55,7 @@ class OpportunityRanker:
             market_regime=regime
         )
 
-        return {
+        res = {
             "ticker": ticker,
             "name_ar": name_ar,
             "company_name": name_ar,
@@ -62,9 +73,10 @@ class OpportunityRanker:
             "tier_ar": scored_res["tier_ar"],
             "action_verdict": scored_res["action_verdict"],
             "is_tradeable": bool(trade_gate.get("is_tradeable", scored_res["alpha_score"] >= 65.0)),
-            "layer_scores": scored_res["layer_scores"],
-            "scan_details": scan_res
+            "layer_scores": _clean_nan(scored_res["layer_scores"]),
+            "scan_details": _clean_nan(scan_res) if include_details else None
         }
+        return _clean_nan(res)
 
     _SCAN_CACHE: Dict[str, Dict[str, Any]] = {}
     _LAST_SCAN_TIME: float = 0.0
@@ -86,7 +98,7 @@ class OpportunityRanker:
         results = []
         for t in tickers:
             try:
-                res = cls.evaluate_stock_scan(t, regime=regime)
+                res = cls.evaluate_stock_scan(t, regime=regime, include_details=False)
                 if res:
                     results.append(res)
             except Exception as e:
