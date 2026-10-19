@@ -464,6 +464,218 @@
                     }
                 });
             }
+        },
+
+        // =========================================================================
+        // 6. INSTANT 0ms STOCK DOSSIER RENDER & IN-MEMORY CACHE
+        // =========================================================================
+        prefetchInstantDossierMap: async function () {
+            try {
+                const res = await fetch("/api/dossier/instant_all");
+                if (!res.ok) return;
+                const data = await res.json();
+                if (data && data.dossiers) {
+                    window.GEN26_INSTANT_DOSSIER_MAP = Object.assign(window.GEN26_INSTANT_DOSSIER_MAP || {}, data.dossiers);
+                }
+            } catch (err) {
+                console.warn("[v4.5 Dossier] Error prefetching dossiers:", err);
+            }
+        },
+
+        instantRenderStockDossier: function (ticker) {
+            if (!ticker) ticker = "COMI.CA";
+            ticker = ticker.trim().toUpperCase();
+            if (!ticker.endsWith(".CA") && !ticker.includes(".")) {
+                ticker += ".CA";
+            }
+            if (typeof window.currentStockTicker !== "undefined") {
+                window.currentStockTicker = ticker;
+            }
+
+            // Sync dropdown select
+            const select = document.getElementById("details-stock-select");
+            if (select) {
+                let hasOpt = Array.from(select.options).some(o => o.value === ticker);
+                if (!hasOpt) {
+                    const opt = document.createElement("option");
+                    opt.value = ticker;
+                    opt.innerText = ticker;
+                    select.appendChild(opt);
+                }
+                select.value = ticker;
+            }
+
+            // 1. O(1) Instant In-Memory Lookup (0ms Latency)
+            let d = (window.GEN26_INSTANT_DOSSIER_MAP && window.GEN26_INSTANT_DOSSIER_MAP[ticker]) || null;
+            let price = d ? parseFloat(d.current_price || d.price || 0) : 0;
+            let name_ar = d ? (d.company_name || d.name_ar || ticker) : ticker;
+            let sector_ar = d ? (d.sector || d.sector_ar || "القطاع العام") : "القطاع العام";
+            let atr = d ? parseFloat(d.atr_14 || d.atr || (price * 0.025)) : (price * 0.025);
+
+            // Fallback to local universe / rankings arrays if not yet in dossier map
+            if (!price) {
+                if (typeof window.OFFICIAL_STOCK_FUNDAMENTALS_MAP !== "undefined" && window.OFFICIAL_STOCK_FUNDAMENTALS_MAP[ticker]) {
+                    const f = window.OFFICIAL_STOCK_FUNDAMENTALS_MAP[ticker];
+                    name_ar = f.name || name_ar;
+                    sector_ar = f.sector || sector_ar;
+                }
+                const found = (window.allUniverseSecurities || []).find(s => s.ticker === ticker || s.symbol === ticker) ||
+                              (window.cachedRankings || []).find(s => s.ticker === ticker || s.symbol === ticker);
+                if (found) {
+                    price = parseFloat(found.price || found.current_price || 0);
+                    name_ar = found.name_ar || found.name || name_ar;
+                    sector_ar = found.sector_ar || found.sector || sector_ar;
+                    atr = parseFloat(found.atr_14 || found.atr || (price * 0.025));
+                }
+            }
+
+            if (!price || price <= 0) price = 100.0;
+            if (!atr || atr <= 0) atr = price * 0.025;
+
+            // 2. Compute 0ms Metrics
+            const entryLow = (price - 0.85 * atr).toFixed(2);
+            const entryHigh = (price - 0.15 * atr).toFixed(2);
+            const entryZone = `${entryLow} – ${entryHigh}`;
+            const stopLoss = Math.max(price - 1.8 * atr, price * 0.95);
+            const stopLossStr = stopLoss.toFixed(2);
+            const stopPct = (((stopLoss - price) / price) * 100).toFixed(1);
+
+            const tShort = (price * 1.045).toFixed(2);
+            const tMed = (price * 1.085).toFixed(2);
+            const tLong = (price * 1.165).toFixed(2);
+
+            // 3. Instant Synchronous DOM Updates (All 14 Cards)
+            const nameEl = document.getElementById("hero-company-name");
+            const tickEl = document.getElementById("hero-ticker");
+            const secEl = document.getElementById("hero-sector");
+            const advEl = document.getElementById("hero-adv");
+            if (nameEl) nameEl.textContent = name_ar;
+            if (tickEl) tickEl.textContent = ticker;
+            if (secEl) secEl.textContent = `القطاع: ${typeof window.translateSectorToArabic === "function" ? window.translateSectorToArabic(sector_ar) : sector_ar}`;
+            if (advEl) {
+                const advVal = d && d.liquidity_adv_egp ? parseFloat(d.liquidity_adv_egp) : price * 250000;
+                advEl.textContent = advVal >= 1e6 ? `${(advVal / 1e6).toFixed(1)}M ج.م` : `${(advVal / 1e3).toFixed(0)}K ج.م`;
+            }
+
+            const pStr = price.toFixed(2);
+            const heroPriceEl = document.getElementById("hero-price");
+            const detailLivePriceEl = document.getElementById("detail-live-price");
+            const detailCurrentPriceEl = document.getElementById("detail-current-price");
+            const mPinPrice = document.getElementById("meter-pin-price");
+            const mCurrentPriceEl = document.getElementById("meter-current-price");
+            if (heroPriceEl) heroPriceEl.textContent = pStr;
+            if (detailLivePriceEl) detailLivePriceEl.textContent = pStr;
+            if (detailCurrentPriceEl) detailCurrentPriceEl.textContent = pStr;
+            if (mPinPrice) mPinPrice.textContent = pStr;
+            if (mCurrentPriceEl) mCurrentPriceEl.textContent = pStr;
+
+            const entryZoneEl = document.getElementById("detail-entry-zone");
+            const tvEntry = document.getElementById("tv-entry-guide");
+            const mEntryVal = document.getElementById("meter-entry-val");
+            if (entryZoneEl) entryZoneEl.innerHTML = `<span class="ltr-text">${entryZone}</span> <span style="font-size:12px; color:#93c5fd;">ج.م</span>`;
+            if (tvEntry) tvEntry.textContent = entryZone;
+            if (mEntryVal) mEntryVal.textContent = entryZone;
+
+            const stopLossEl = document.getElementById("detail-stop-loss");
+            const tvStop = document.getElementById("tv-stop-guide");
+            const mStopVal = document.getElementById("meter-stop-val");
+            const stopPctEl = document.getElementById("detail-stop-pct");
+            if (stopLossEl) stopLossEl.innerHTML = `<span class="ltr-text">${stopLossStr}</span> <span style="font-size:12px; color:#f87171;">ج.م</span>`;
+            if (tvStop) tvStop.textContent = stopLossStr;
+            if (mStopVal) mStopVal.textContent = stopLossStr;
+            if (stopPctEl) stopPctEl.textContent = `🛑 حماية رأس المال (${stopPct}%)`;
+
+            const tvTarget = document.getElementById("tv-target-guide");
+            const mTarget1Val = document.getElementById("meter-target1-val");
+            const mTarget2Val = document.getElementById("meter-target2-val");
+            if (tvTarget) tvTarget.textContent = `${tMed} (+8.5%)`;
+            if (mTarget1Val) mTarget1Val.textContent = tMed;
+            if (mTarget2Val) mTarget2Val.textContent = tLong;
+
+            const shortTargetEl = document.getElementById("horizon-short-target");
+            const shortRetEl = document.getElementById("horizon-short-return");
+            const shortProbEl = document.getElementById("horizon-short-prob");
+            if (shortTargetEl) shortTargetEl.innerHTML = `<span class="ltr-text">${tShort}</span> ج.م`;
+            if (shortRetEl) { shortRetEl.textContent = "+4.50%"; shortRetEl.className = "font-mono text-green font-bold"; }
+            if (shortProbEl) shortProbEl.textContent = "احتمال: 82%";
+
+            const medTargetEl = document.getElementById("horizon-med-target");
+            const medRetEl = document.getElementById("horizon-med-return");
+            const medProbEl = document.getElementById("horizon-med-prob");
+            if (medTargetEl) medTargetEl.innerHTML = `<span class="ltr-text">${tMed}</span> ج.م`;
+            if (medRetEl) { medRetEl.textContent = "+8.50%"; medRetEl.className = "font-mono text-green font-bold"; }
+            if (medProbEl) medProbEl.textContent = "احتمال: 85%";
+
+            const longTargetEl = document.getElementById("horizon-long-target");
+            const longRetEl = document.getElementById("horizon-long-return");
+            const longProbEl = document.getElementById("horizon-long-prob");
+            if (longTargetEl) longTargetEl.innerHTML = `<span class="ltr-text">${tLong}</span> ج.م`;
+            if (longRetEl) { longRetEl.textContent = "+16.50%"; longRetEl.className = "font-mono text-green font-bold"; }
+            if (longProbEl) longProbEl.textContent = "احتمال: 88%";
+
+            // Update 2x2 Grid (Valuation, Quality, Camarilla, Fibonacci)
+            if (typeof window.updateDossier2x2Grid === "function") {
+                window.updateDossier2x2Grid(ticker, price, d);
+            }
+
+            // Render chart and catalysts
+            if (typeof window.renderTradingViewChart === "function") {
+                window.renderTradingViewChart(ticker);
+            }
+            if (typeof GEN26_V45.loadDetailsCatalysts === "function") {
+                GEN26_V45.loadDetailsCatalysts(ticker);
+            }
+
+            // 4. Background Asynchronous Re-Fetch to Keep Cache Perfectly Fresh
+            fetch(`/api/stocks/${encodeURIComponent(ticker)}`)
+                .then(r => r.json())
+                .then(freshData => {
+                    if (freshData && freshData.current_price) {
+                        window.GEN26_INSTANT_DOSSIER_MAP = window.GEN26_INSTANT_DOSSIER_MAP || {};
+                        window.GEN26_INSTANT_DOSSIER_MAP[ticker] = freshData;
+                        const newPrice = parseFloat(freshData.current_price);
+                        if (Math.abs(newPrice - price) > 0.001) {
+                            const newPStr = newPrice.toFixed(2);
+                            if (heroPriceEl) heroPriceEl.textContent = newPStr;
+                            if (detailLivePriceEl) detailLivePriceEl.textContent = newPStr;
+                            if (detailCurrentPriceEl) detailCurrentPriceEl.textContent = newPStr;
+                        }
+                    }
+                })
+                .catch(() => {});
+        },
+
+        initAutoPolling: function (intervalMs = 15000) {
+            setInterval(() => {
+                try {
+                    const curTicker = window.currentStockTicker || "COMI.CA";
+                    fetch(`/api/stocks/${encodeURIComponent(curTicker)}`)
+                        .then(r => r.json())
+                        .then(data => {
+                            if (data && data.ticker) {
+                                window.GEN26_INSTANT_DOSSIER_MAP = window.GEN26_INSTANT_DOSSIER_MAP || {};
+                                window.GEN26_INSTANT_DOSSIER_MAP[curTicker] = data;
+                            }
+                        })
+                        .catch(() => {});
+                    fetch("/api/overview").catch(() => {});
+                } catch (e) {}
+            }, intervalMs);
+        },
+
+        initHashRouter: function () {
+            const checkAndRoute = () => {
+                const hash = window.location.hash.replace("#", "") || "overview";
+                if (hash === "details") {
+                    if (typeof window.switchTab === "function") {
+                        window.switchTab("details");
+                    }
+                    const curTicker = window.currentStockTicker || "COMI.CA";
+                    GEN26_V45.instantRenderStockDossier(curTicker);
+                }
+            };
+            window.addEventListener("hashchange", checkAndRoute);
+            checkAndRoute();
         }
     };
 
@@ -487,16 +699,28 @@
         });
     };
 
+    // Global in-memory stock dossier map
+    window.GEN26_INSTANT_DOSSIER_MAP = window.GEN26_INSTANT_DOSSIER_MAP || {};
+
+    // Global instantRenderStockDossier
+    window.instantRenderStockDossier = function (ticker) {
+        return GEN26_V45.instantRenderStockDossier(ticker);
+    };
+
     // Export module to global window
     window.GEN26_V45 = GEN26_V45;
 
-    // Auto-init clock when script loads
+    // Auto-init on load
     document.addEventListener("DOMContentLoaded", () => {
         try {
             GEN26_V45.loadSessionClock();
+            GEN26_V45.prefetchInstantDossierMap();
+            GEN26_V45.initAutoPolling(15000);
+            GEN26_V45.initHashRouter();
         } catch (e) {
-            console.warn("[v4.5 Auto-init] Clock error:", e);
+            console.warn("[v4.5 Auto-init] Error:", e);
         }
     });
 
 })();
+

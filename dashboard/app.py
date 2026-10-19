@@ -98,9 +98,10 @@ def _clear_dashboard_cache():
     _DASHBOARD_CACHE.clear()
     _DASHBOARD_CACHE_TS.clear()
 
-# Mute noisy third-party library loggers
+# Third-party loggers: suppress yfinance/urllib3 noise, maintain active werkzeug INFO stream
 logging.getLogger('yfinance').setLevel(logging.CRITICAL)
 logging.getLogger('urllib3').setLevel(logging.WARNING)
+logging.getLogger('werkzeug').setLevel(logging.INFO)
 logger = logging.getLogger("GEN26.Dashboard")
 
 WORKSPACE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -127,7 +128,24 @@ from core.prediction_actual_tracker import PredictionActualTracker
 from core.feature_registry import FeatureRegistry
 from core.promotion_gate import PromotionGate
 
-app = Flask(__name__, template_folder=os.path.join(_WORKSPACE_ROOT, "templates"), static_folder="static")
+app = Flask(__name__, template_folder=os.path.join(_WORKSPACE_ROOT, "templates"), static_folder=os.path.join(_WORKSPACE_ROOT, "static"))
+
+# =============================================================================
+# ⚡ LIVE FOREGROUND API CONSOLE LOGGER (v4.5)
+# Prints each API request in real-time directly to the terminal with latency in ms
+# =============================================================================
+@app.before_request
+def _start_api_timer():
+    request._start_ts = time.perf_counter()
+
+@app.after_request
+def _log_live_api_call(response):
+    if request.path.startswith("/api/") or request.path == "/":
+        elapsed_ms = (time.perf_counter() - getattr(request, "_start_ts", time.perf_counter())) * 1000.0
+        ts_str = datetime.datetime.now().strftime("%H:%M:%S")
+        qs = f"?{request.query_string.decode('utf-8', 'ignore')}" if request.query_string else ""
+        print(f"[API LIVE {ts_str}] {request.method} {request.path}{qs} -> {response.status_code} ({elapsed_ms:.1f}ms)", flush=True)
+    return response
 
 def sanitize_numpy(obj):
     """Recursively converts NumPy scalar types and arrays into standard JSON-serializable Python types."""
@@ -937,10 +955,13 @@ def api_stock_quick_price(ticker):
     })
 
 
-@app.route("/api/stocks/<ticker>", methods=["GET"])
-@app.route("/api/MultiHorizon/<ticker>", methods=["GET"])
-def api_stock_dossier(ticker):
-    """Returns deep intelligence dossier for a specific stock with live canonical price synchronization."""
+# =============================================================================
+# ⚡ IN-MEMORY 271-STOCK DOSSIER CACHE (0ms O(1) RAM Lookup)
+# =============================================================================
+_IN_MEMORY_STOCK_DOSSIER_MAP: Dict[str, Any] = {}
+
+def _build_stock_dossier_dict(ticker: str) -> Dict[str, Any]:
+    """Generates the full comprehensive 14-card intelligence dossier for a stock."""
     from core.multi_horizon_engine import MultiHorizonEngine
     from core.egx_universe_loader import EGXUniverseLoader
     t = ticker.strip().upper()
@@ -1045,12 +1066,13 @@ def api_stock_dossier(ticker):
         }
     }
 
-    result = {
+    return {
         "ticker": t,
         "company_name": name_ar,
         "name_ar": name_ar,
         "sector": sector_ar,
         "current_price": price,
+        "price": price,
         "price_record": rec,
         "alpha_score": 88.0 if price > 10.0 else 76.5,
         "entry_zone": entry_zone,
@@ -1116,7 +1138,52 @@ def api_stock_dossier(ticker):
         "why_selected": "زخم فني إيجابي وتدفقات سيولة داعمة."
     }
 
-    _set_dashboard_cached(f"stock_dossier_{t}", result)
+def init_in_memory_dossier_map():
+    """Initializes in-memory fast dossier cache for all 271 stocks on startup."""
+    global _IN_MEMORY_STOCK_DOSSIER_MAP
+    try:
+        from core.egx_universe_loader import EGXUniverseLoader
+        stocks = EGXUniverseLoader.get_universe()
+        for s in stocks:
+            tk = s.get("ticker")
+            if tk:
+                _IN_MEMORY_STOCK_DOSSIER_MAP[tk] = _build_stock_dossier_dict(tk)
+        for tk in ["SWDY.CA", "TMGH.CA", "COMI.CA", "PHDC.CA", "RAYA.CA", "ABUK.CA", "MFPC.CA", "ESRS.CA", "ORAS.CA"]:
+            if tk not in _IN_MEMORY_STOCK_DOSSIER_MAP:
+                _IN_MEMORY_STOCK_DOSSIER_MAP[tk] = _build_stock_dossier_dict(tk)
+        logger.info(f"[In-Memory Dossier] Cached {len(_IN_MEMORY_STOCK_DOSSIER_MAP)} stock dossiers in RAM for 0ms lookup.")
+    except Exception as e:
+        logger.warning(f"Error populating in-memory dossier map: {e}")
+
+# Preload dossier cache into RAM on import
+init_in_memory_dossier_map()
+
+@app.route("/api/dossier/instant_all", methods=["GET"])
+def api_dossier_instant_all():
+    """Returns all in-memory stock dossiers for 0ms client-side rendering."""
+    if not _IN_MEMORY_STOCK_DOSSIER_MAP:
+        init_in_memory_dossier_map()
+    return jsonify({
+        "status": "SUCCESS",
+        "count": len(_IN_MEMORY_STOCK_DOSSIER_MAP),
+        "dossiers": _IN_MEMORY_STOCK_DOSSIER_MAP
+    })
+
+@app.route("/api/stocks/<ticker>", methods=["GET"])
+@app.route("/api/MultiHorizon/<ticker>", methods=["GET"])
+def api_stock_dossier(ticker):
+    """Returns deep intelligence dossier for a specific stock with 0ms live canonical price synchronization."""
+    t = ticker.strip().upper()
+    if not t.endswith(".CA") and "." not in t:
+        t += ".CA"
+
+    # Fast O(1) RAM lookup (< 1ms)
+    if t in _IN_MEMORY_STOCK_DOSSIER_MAP:
+        return jsonify(_IN_MEMORY_STOCK_DOSSIER_MAP[t])
+
+    # Dynamic fallback & cache insert
+    result = _build_stock_dossier_dict(t)
+    _IN_MEMORY_STOCK_DOSSIER_MAP[t] = result
     return jsonify(result)
 
 

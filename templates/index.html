@@ -9741,7 +9741,13 @@
         async function loadStockDetails(ticker) {
             if (!ticker) ticker = 'COMI.CA';
             ticker = ticker.trim().toUpperCase();
+            if (!ticker.endsWith('.CA') && !ticker.includes('.')) ticker += '.CA';
             currentStockTicker = ticker;
+
+            // ⚡ 0ms Synchronous In-Memory Instant Render
+            if (typeof window.instantRenderStockDossier === 'function') {
+                try { window.instantRenderStockDossier(ticker); } catch(e) {}
+            }
 
             const select = document.getElementById('details-stock-select');
             if (select) {
