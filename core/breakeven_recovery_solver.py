@@ -100,8 +100,8 @@ class BreakevenRecoverySolver:
                 "default_qty": 45,
                 "default_entry": 134.26,
                 "default_cur": 122.00,
-                "dip_discount": 0.016,   # Buy dip at 120.00
-                "exit_target_mult": 1.133  # Target exit at 136.00
+                "dip_discount": 0.016,   # Buy dip at 120.05
+                "exit_target_mult": 1.053728  # Target exit at 126.50 (First resistance rebound <= 132.72 net breakeven)
             },
             {
                 "ticker": "RAYA.CA",
@@ -110,7 +110,7 @@ class BreakevenRecoverySolver:
                 "default_entry": 7.57,
                 "default_cur": 5.89,
                 "dip_discount": 0.015,   # Buy dip at 5.80
-                "exit_target_mult": 1.146  # Target exit at 6.65
+                "exit_target_mult": 1.112  # Target exit at 6.45 (First resistance rebound <= 6.51 net breakeven)
             }
         ]
 
@@ -150,8 +150,14 @@ class BreakevenRecoverySolver:
             new_full_position_net_breakeven = round(raw_weighted_avg * 1.0095, 2)
             breakeven_reduction_pct = round(((breakeven_price - new_full_position_net_breakeven) / breakeven_price) * 100, 2)
 
-            # 3. Satellite swing exit target (recycled shares only) upon first rebound (+4.5%)
-            satellite_swing_exit_target = round(dip_price * cand.get("exit_target_mult", 1.045), 2)
+            # 3. Satellite swing exit target (recycled shares only) upon first rebound
+            # For distant centers (e.g. COMI/RAYA), satellite target must always be <= new_full_position_net_breakeven
+            raw_target = round(dip_price * cand.get("exit_target_mult", 1.045), 2)
+            if dist_pct > 10.0 and raw_target > new_full_position_net_breakeven:
+                satellite_swing_exit_target = new_full_position_net_breakeven
+            else:
+                satellite_swing_exit_target = raw_target
+
             exit_proceeds = round(buy_shares * satellite_swing_exit_target * (1 - THNDR_FEE_RATE / 2), 2)
             stage_profit = round(exit_proceeds - actual_buy_cost, 2)
             total_projected_profit += stage_profit
