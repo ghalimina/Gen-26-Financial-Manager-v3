@@ -1,6 +1,6 @@
 {
   "status": "SUCCESS",
-  "as_of": "2026-10-19 06:53:12",
+  "as_of": "2026-10-19 14:07:23",
   "market_portal": "https://www.egx.com.eg/ar/",
   "insider_transactions_count": 6,
   "dividend_stocks_count": 10,
@@ -8,7 +8,7 @@
     {
       "ticker": "CIEB.CA",
       "company_name": "بنك كريدي أجريكول مصر",
-      "current_price": 21.97,
+      "current_price": 22.04,
       "dividend_yield_pct": 14.48,
       "last_coupon_value_egp": 3.75,
       "cash_cow_grade": "A+",
@@ -28,7 +28,7 @@
     {
       "ticker": "OLFI.CA",
       "company_name": "عبور لاند للصناعات الغذائية",
-      "current_price": 20.19,
+      "current_price": 20.07,
       "dividend_yield_pct": 8.41,
       "last_coupon_value_egp": 1.15,
       "cash_cow_grade": "A",
@@ -38,7 +38,7 @@
     {
       "ticker": "CSAG.CA",
       "company_name": "القناة للتوكيلات الملاحية",
-      "current_price": 34.79,
+      "current_price": 33.97,
       "dividend_yield_pct": 8.31,
       "last_coupon_value_egp": 2.5,
       "cash_cow_grade": "A",
@@ -48,7 +48,7 @@
     {
       "ticker": "ARCC.CA",
       "company_name": "العربية للأسمنت",
-      "current_price": 65.39,
+      "current_price": 65.54,
       "dividend_yield_pct": 7.92,
       "last_coupon_value_egp": 1.1,
       "cash_cow_grade": "A",
@@ -58,7 +58,7 @@
     {
       "ticker": "EAST.CA",
       "company_name": "الشركة الشرقية (إيسترن كومباني)",
-      "current_price": 28.43,
+      "current_price": 28.8,
       "dividend_yield_pct": 5.3,
       "last_coupon_value_egp": 1.6,
       "cash_cow_grade": "A",
@@ -68,7 +68,7 @@
     {
       "ticker": "SAUD.CA",
       "company_name": "بنك البركة مصر",
-      "current_price": 21.0,
+      "current_price": 20.57,
       "dividend_yield_pct": 5.05,
       "last_coupon_value_egp": 0.85,
       "cash_cow_grade": "B+",
