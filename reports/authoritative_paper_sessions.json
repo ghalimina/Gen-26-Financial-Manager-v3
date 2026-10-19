@@ -382,5 +382,13 @@
     "start_time": "2026-10-19T14:13:28.524747",
     "error": "PORTFOLIO_CONSTRUCTION_INVALID",
     "failed_at": "2026-10-19T14:13:28.550419"
+  },
+  {
+    "session_id": "SESS_20261019_049",
+    "date": "2026-10-19",
+    "status": "FAILED",
+    "start_time": "2026-10-19T18:55:06.048529",
+    "error": "PORTFOLIO_CONSTRUCTION_INVALID",
+    "failed_at": "2026-10-19T18:55:06.066266"
   }
 ]
