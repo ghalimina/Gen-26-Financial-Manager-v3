@@ -1,5 +1,5 @@
 {
-  "evaluation_date": "2026-10-14",
+  "evaluation_date": "2026-10-19",
   "incubation_period": "فترة الحضانة التشغيلية الموثقة: 31 من 30 جلسة (2026-08-23 – 2026-10-05)",
   "verified_sessions": 31,
   "total_sessions_required": 30,
@@ -43,53 +43,53 @@
       "name": "Win Rate Percentage",
       "name_ar": "نسبة الصفقات الرابحة",
       "target": "≥ 52.0%",
-      "actual": "65.4%",
+      "actual": "64.3%",
       "passed": true,
-      "gap_pct": 13.4
+      "gap_pct": 12.3
     },
     "gate_5_profit_factor": {
       "name": "Profit Factor",
       "name_ar": "معامل الربحية (الأرباح / الخسائر)",
       "target": "≥ 1.30",
-      "actual": 3.1,
+      "actual": 2.24,
       "passed": true,
-      "gap": 1.8
+      "gap": 0.94
     },
     "gate_6_sample_size": {
       "name": "Minimum Closed Trades Sample Size",
       "name_ar": "الحد الأدنى لحجم العينة المغلقة",
       "target": "≥ 20 صفقات",
-      "actual": "26 صفقات",
+      "actual": "28 صفقات",
       "passed": true,
-      "gap_count": 6
+      "gap_count": 8
     }
   },
   "performance_summary": {
-    "total_closed_trades": 26,
-    "winning_trades_count": 17,
-    "losing_trades_count": 9,
+    "total_closed_trades": 28,
+    "winning_trades_count": 18,
+    "losing_trades_count": 10,
     "strategy_total_return_pct": 7.81,
     "egx30_benchmark_return_pct": 3.5,
     "cumulative_alpha_pct": 4.31,
     "annualized_sharpe_ratio": 7.86,
     "max_drawdown_pct": 0.8,
-    "win_rate_pct": 65.4,
-    "profit_factor": 3.1,
-    "gross_profit_egp": 10964.95,
-    "gross_loss_egp": 3542.68
+    "win_rate_pct": 64.3,
+    "profit_factor": 2.24,
+    "gross_profit_egp": 11268.58,
+    "gross_loss_egp": 5030.96
   },
   "statistical_validation": {
-    "confidence_score_pct": 87.0,
-    "t_statistic": 2.57,
-    "p_value_one_tailed": 0.0051,
+    "confidence_score_pct": 79.1,
+    "t_statistic": 1.95,
+    "p_value_one_tailed": 0.0257,
     "bootstrap_resamples_count": 1000,
     "bootstrap_95_ci_pct": {
-      "lower": 0.52,
-      "mean": 2.32,
-      "upper": 4.01
+      "lower": 0.02,
+      "mean": 1.91,
+      "upper": 3.68
     },
     "statistical_caveats": [
-      "[PRELIMINARY_SAMPLE_SIZE_WARNING: N=26 < 100] — القدرة الإحصائية أولية ومحدودة لحين الوصول لـ 100 صفقة مغلقة."
+      "[PRELIMINARY_SAMPLE_SIZE_WARNING: N=28 < 100] — القدرة الإحصائية أولية ومحدودة لحين الوصول لـ 100 صفقة مغلقة."
     ]
   }
 }

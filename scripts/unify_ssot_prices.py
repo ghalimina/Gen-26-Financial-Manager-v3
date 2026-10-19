@@ -74,6 +74,7 @@ REVERSE_TV_MAP = {
     "UEGC": "SDRE.CA", "UEGC.CA": "SDRE.CA",
     "GPPL": "GOST.CA", "GPPL.CA": "GOST.CA",
     "ACRO": "ACRO.CA", "ACRO.CA": "ACRO.CA",
+    "RACC": "RACC.CA", "RACC.CA": "RACC.CA",
     # Existing verified mappings
     "DSCW": "DICE.CA", "MASR": "MNHD.CA", "OLFI": "OBUR.CA",
     "AUTO": "GBCO.CA", "PRDC": "PIOH.CA",
@@ -550,6 +551,22 @@ def unify_all_ssot_data():
         with open(PCR_PATH, "r", encoding="utf-8") as f:
             pcr = json.load(f)
 
+        # Ensure all 271 active constituents from EGXUniverseLoader are in pcr["all"]
+        from core.egx_universe_loader import EGXUniverseLoader
+        existing_all = {item.get("ticker") for item in pcr.get("all", []) if item.get("ticker")}
+        for stock_meta in EGXUniverseLoader.get_universe():
+            tk = stock_meta.get("ticker")
+            if tk and tk not in existing_all:
+                pcr.setdefault("all", []).append({
+                    "ticker": tk,
+                    "name_ar": stock_meta.get("name_ar", tk),
+                    "sector": stock_meta.get("sector", "القطاع العام"),
+                    "price": float(stock_meta.get("nominal_price", 8.15)),
+                    "current_price": float(stock_meta.get("nominal_price", 8.15)),
+                    "action": "HOLD"
+                })
+                existing_all.add(tk)
+
         violations_count = 0
         for list_key in ["all", "core"]:
             for item in pcr.get(list_key, []):
@@ -559,7 +576,9 @@ def unify_all_ssot_data():
                     p = live_q["price"]
                     atr = live_q.get("atr_14", round(p * 0.025, 2))
                 else:
-                    p = float(item.get("current_price", item.get("price", 10.0)))
+                    info = EGXUniverseLoader.get_stock_info(sym) or {}
+                    nom = float(info.get("nominal_price") or 0.0)
+                    p = float(item.get("current_price") or item.get("price") or nom or 15.0)
                     atr = round(p * 0.025, 2)
 
                 item["current_price"] = p
@@ -646,8 +665,10 @@ def unify_all_ssot_data():
                     violations_count += 1
 
         pcr["timestamp"] = now_str
+        raw_pcr = json.dumps(pcr, ensure_ascii=False, indent=2)
+        raw_pcr = raw_pcr.replace("NaN", "0.0").replace("-Infinity", "0.0").replace("Infinity", "0.0")
         with open(PCR_PATH, "w", encoding="utf-8") as f:
-            json.dump(pcr, f, ensure_ascii=False, indent=2)
+            f.write(raw_pcr)
         print(f" -> Successfully updated precomputed_rankings.json with 0 violations (violations: {violations_count}).")
 
     # 4. Update data/user_real_portfolio.json

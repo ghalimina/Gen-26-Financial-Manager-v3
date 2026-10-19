@@ -411,5 +411,345 @@
         "action_guidance_ar": "🟢 فجوة صاعدة متوقعة لافتتاح القاهرة (+26.9%): شهادة لندن تتداول بعلاوة سعرية (معادل 44.83 ج.م مقابل 0.67 $ (معادل 35.34 ج.م) في القاهرة)؛ فرصة شراء على الافتتاح."
       }
     ]
+  },
+  {
+    "sync_timestamp": "2026-10-19 06:07:49",
+    "cairo_time": "18:30:00 (LSE Evening Close)",
+    "official_usd_egp": 53.5,
+    "records": [
+      {
+        "cairo_ticker": "COMI.CA",
+        "gdr_ticker": "CBKD.L",
+        "name_ar": "البنك التجاري الدولي (CIB GDR)",
+        "lse_close_usd": 2.255,
+        "cairo_close_egp": 122.0,
+        "official_usd_egp": 53.5,
+        "implied_gdr_usd_egp": 54.1,
+        "arbitrage_spread_pct": -1.11,
+        "next_morning_gap_direction": "NEUTRAL_OPEN",
+        "next_morning_gap_label_ar": "افتتاح مستقر (-1.1%)",
+        "action_guidance_ar": "⚪ توازن سعري بين بورصتي القاهرة ولندن (الفارق -1.1%): الأسعار متطابقة مع السعر العادل لصرف العملة."
+      },
+      {
+        "cairo_ticker": "ETEL.CA",
+        "gdr_ticker": "ETEL.L",
+        "name_ar": "المصرية للاتصالات (Telecom Egypt GDR)",
+        "lse_close_usd": 13.9,
+        "cairo_close_egp": 145.0,
+        "official_usd_egp": 53.5,
+        "implied_gdr_usd_egp": 52.16,
+        "arbitrage_spread_pct": 2.57,
+        "next_morning_gap_direction": "BULLISH_GAP",
+        "next_morning_gap_label_ar": "فجوة افتتاح صاعدة (+2.6%)",
+        "action_guidance_ar": "🟢 فجوة صاعدة متوقعة لافتتاح القاهرة (+2.6%): شهادة لندن تتداول بعلاوة سعرية (معادل 148.73 ج.م مقابل 145.00 ج.م في القاهرة)؛ فرصة شراء على الافتتاح."
+      },
+      {
+        "cairo_ticker": "HRHO.CA",
+        "gdr_ticker": "EFGD.L",
+        "name_ar": "إي إف جي هيرميس (EFG Hermes GDR)",
+        "lse_close_usd": 1.0,
+        "cairo_close_egp": 24.03,
+        "official_usd_egp": 53.5,
+        "implied_gdr_usd_egp": 48.06,
+        "arbitrage_spread_pct": 11.32,
+        "next_morning_gap_direction": "BULLISH_GAP",
+        "next_morning_gap_label_ar": "فجوة افتتاح صاعدة (+11.3%)",
+        "action_guidance_ar": "🟢 فجوة صاعدة متوقعة لافتتاح القاهرة (+11.3%): شهادة لندن تتداول بعلاوة سعرية (معادل 26.75 ج.م مقابل 24.03 ج.م في القاهرة)؛ فرصة شراء على الافتتاح."
+      },
+      {
+        "cairo_ticker": "MASR.CA",
+        "gdr_ticker": "MNHD.L",
+        "name_ar": "مدينة مصر للإسكان والتعمير (Madinet Masr GDR)",
+        "lse_close_usd": 0.58,
+        "cairo_close_egp": 7.04,
+        "official_usd_egp": 53.5,
+        "implied_gdr_usd_egp": 48.55,
+        "arbitrage_spread_pct": 10.23,
+        "next_morning_gap_direction": "BULLISH_GAP",
+        "next_morning_gap_label_ar": "فجوة افتتاح صاعدة (+10.2%)",
+        "action_guidance_ar": "🟢 فجوة صاعدة متوقعة لافتتاح القاهرة (+10.2%): شهادة لندن تتداول بعلاوة سعرية (معادل 7.76 ج.م مقابل 7.04 ج.م في القاهرة)؛ فرصة شراء على الافتتاح."
+      },
+      {
+        "cairo_ticker": "OIH.CA",
+        "gdr_ticker": "OTMT.L",
+        "name_ar": "أوراسكوم للاستثمار القابضة (Orascom Investment GDR)",
+        "lse_close_usd": 0.18,
+        "cairo_close_egp": 1.78,
+        "official_usd_egp": 53.5,
+        "implied_gdr_usd_egp": 49.44,
+        "arbitrage_spread_pct": 8.43,
+        "next_morning_gap_direction": "BULLISH_GAP",
+        "next_morning_gap_label_ar": "فجوة افتتاح صاعدة (+8.4%)",
+        "action_guidance_ar": "🟢 فجوة صاعدة متوقعة لافتتاح القاهرة (+8.4%): شهادة لندن تتداول بعلاوة سعرية (معادل 1.93 ج.م مقابل 1.78 ج.م في القاهرة)؛ فرصة شراء على الافتتاح."
+      },
+      {
+        "cairo_ticker": "EKHO.CA",
+        "gdr_ticker": "EKHO.L",
+        "name_ar": "القابضة المصرية الكويتية (EK Holding GDR)",
+        "lse_close_usd": 0.85,
+        "cairo_close_egp": 34.77,
+        "official_usd_egp": 53.5,
+        "implied_gdr_usd_egp": 40.91,
+        "arbitrage_spread_pct": 30.77,
+        "next_morning_gap_direction": "BULLISH_GAP",
+        "next_morning_gap_label_ar": "فجوة افتتاح صاعدة (+30.8%)",
+        "action_guidance_ar": "🟢 فجوة صاعدة متوقعة لافتتاح القاهرة (+30.8%): شهادة لندن تتداول بعلاوة سعرية (معادل 45.48 ج.م مقابل 0.65 $ (معادل 34.77 ج.م) في القاهرة)؛ فرصة شراء على الافتتاح."
+      }
+    ]
+  },
+  {
+    "sync_timestamp": "2026-10-19 06:07:49",
+    "cairo_time": "18:30:00 (LSE Evening Close)",
+    "official_usd_egp": 53.5,
+    "records": [
+      {
+        "cairo_ticker": "COMI.CA",
+        "gdr_ticker": "CBKD.L",
+        "name_ar": "البنك التجاري الدولي (CIB GDR)",
+        "lse_close_usd": 2.255,
+        "cairo_close_egp": 122.0,
+        "official_usd_egp": 53.5,
+        "implied_gdr_usd_egp": 54.1,
+        "arbitrage_spread_pct": -1.11,
+        "next_morning_gap_direction": "NEUTRAL_OPEN",
+        "next_morning_gap_label_ar": "افتتاح مستقر (-1.1%)",
+        "action_guidance_ar": "⚪ توازن سعري بين بورصتي القاهرة ولندن (الفارق -1.1%): الأسعار متطابقة مع السعر العادل لصرف العملة."
+      },
+      {
+        "cairo_ticker": "ETEL.CA",
+        "gdr_ticker": "ETEL.L",
+        "name_ar": "المصرية للاتصالات (Telecom Egypt GDR)",
+        "lse_close_usd": 13.9,
+        "cairo_close_egp": 145.0,
+        "official_usd_egp": 53.5,
+        "implied_gdr_usd_egp": 52.16,
+        "arbitrage_spread_pct": 2.57,
+        "next_morning_gap_direction": "BULLISH_GAP",
+        "next_morning_gap_label_ar": "فجوة افتتاح صاعدة (+2.6%)",
+        "action_guidance_ar": "🟢 فجوة صاعدة متوقعة لافتتاح القاهرة (+2.6%): شهادة لندن تتداول بعلاوة سعرية (معادل 148.73 ج.م مقابل 145.00 ج.م في القاهرة)؛ فرصة شراء على الافتتاح."
+      },
+      {
+        "cairo_ticker": "HRHO.CA",
+        "gdr_ticker": "EFGD.L",
+        "name_ar": "إي إف جي هيرميس (EFG Hermes GDR)",
+        "lse_close_usd": 1.0,
+        "cairo_close_egp": 24.03,
+        "official_usd_egp": 53.5,
+        "implied_gdr_usd_egp": 48.06,
+        "arbitrage_spread_pct": 11.32,
+        "next_morning_gap_direction": "BULLISH_GAP",
+        "next_morning_gap_label_ar": "فجوة افتتاح صاعدة (+11.3%)",
+        "action_guidance_ar": "🟢 فجوة صاعدة متوقعة لافتتاح القاهرة (+11.3%): شهادة لندن تتداول بعلاوة سعرية (معادل 26.75 ج.م مقابل 24.03 ج.م في القاهرة)؛ فرصة شراء على الافتتاح."
+      },
+      {
+        "cairo_ticker": "MASR.CA",
+        "gdr_ticker": "MNHD.L",
+        "name_ar": "مدينة مصر للإسكان والتعمير (Madinet Masr GDR)",
+        "lse_close_usd": 0.58,
+        "cairo_close_egp": 7.04,
+        "official_usd_egp": 53.5,
+        "implied_gdr_usd_egp": 48.55,
+        "arbitrage_spread_pct": 10.23,
+        "next_morning_gap_direction": "BULLISH_GAP",
+        "next_morning_gap_label_ar": "فجوة افتتاح صاعدة (+10.2%)",
+        "action_guidance_ar": "🟢 فجوة صاعدة متوقعة لافتتاح القاهرة (+10.2%): شهادة لندن تتداول بعلاوة سعرية (معادل 7.76 ج.م مقابل 7.04 ج.م في القاهرة)؛ فرصة شراء على الافتتاح."
+      },
+      {
+        "cairo_ticker": "OIH.CA",
+        "gdr_ticker": "OTMT.L",
+        "name_ar": "أوراسكوم للاستثمار القابضة (Orascom Investment GDR)",
+        "lse_close_usd": 0.18,
+        "cairo_close_egp": 1.78,
+        "official_usd_egp": 53.5,
+        "implied_gdr_usd_egp": 49.44,
+        "arbitrage_spread_pct": 8.43,
+        "next_morning_gap_direction": "BULLISH_GAP",
+        "next_morning_gap_label_ar": "فجوة افتتاح صاعدة (+8.4%)",
+        "action_guidance_ar": "🟢 فجوة صاعدة متوقعة لافتتاح القاهرة (+8.4%): شهادة لندن تتداول بعلاوة سعرية (معادل 1.93 ج.م مقابل 1.78 ج.م في القاهرة)؛ فرصة شراء على الافتتاح."
+      },
+      {
+        "cairo_ticker": "EKHO.CA",
+        "gdr_ticker": "EKHO.L",
+        "name_ar": "القابضة المصرية الكويتية (EK Holding GDR)",
+        "lse_close_usd": 0.85,
+        "cairo_close_egp": 34.77,
+        "official_usd_egp": 53.5,
+        "implied_gdr_usd_egp": 40.91,
+        "arbitrage_spread_pct": 30.77,
+        "next_morning_gap_direction": "BULLISH_GAP",
+        "next_morning_gap_label_ar": "فجوة افتتاح صاعدة (+30.8%)",
+        "action_guidance_ar": "🟢 فجوة صاعدة متوقعة لافتتاح القاهرة (+30.8%): شهادة لندن تتداول بعلاوة سعرية (معادل 45.48 ج.م مقابل 0.65 $ (معادل 34.77 ج.م) في القاهرة)؛ فرصة شراء على الافتتاح."
+      }
+    ]
+  },
+  {
+    "sync_timestamp": "2026-10-19 06:22:49",
+    "cairo_time": "18:30:00 (LSE Evening Close)",
+    "official_usd_egp": 53.5,
+    "records": [
+      {
+        "cairo_ticker": "COMI.CA",
+        "gdr_ticker": "CBKD.L",
+        "name_ar": "البنك التجاري الدولي (CIB GDR)",
+        "lse_close_usd": 2.255,
+        "cairo_close_egp": 122.0,
+        "official_usd_egp": 53.5,
+        "implied_gdr_usd_egp": 54.1,
+        "arbitrage_spread_pct": -1.11,
+        "next_morning_gap_direction": "NEUTRAL_OPEN",
+        "next_morning_gap_label_ar": "افتتاح مستقر (-1.1%)",
+        "action_guidance_ar": "⚪ توازن سعري بين بورصتي القاهرة ولندن (الفارق -1.1%): الأسعار متطابقة مع السعر العادل لصرف العملة."
+      },
+      {
+        "cairo_ticker": "ETEL.CA",
+        "gdr_ticker": "ETEL.L",
+        "name_ar": "المصرية للاتصالات (Telecom Egypt GDR)",
+        "lse_close_usd": 13.9,
+        "cairo_close_egp": 145.0,
+        "official_usd_egp": 53.5,
+        "implied_gdr_usd_egp": 52.16,
+        "arbitrage_spread_pct": 2.57,
+        "next_morning_gap_direction": "BULLISH_GAP",
+        "next_morning_gap_label_ar": "فجوة افتتاح صاعدة (+2.6%)",
+        "action_guidance_ar": "🟢 فجوة صاعدة متوقعة لافتتاح القاهرة (+2.6%): شهادة لندن تتداول بعلاوة سعرية (معادل 148.73 ج.م مقابل 145.00 ج.م في القاهرة)؛ فرصة شراء على الافتتاح."
+      },
+      {
+        "cairo_ticker": "HRHO.CA",
+        "gdr_ticker": "EFGD.L",
+        "name_ar": "إي إف جي هيرميس (EFG Hermes GDR)",
+        "lse_close_usd": 1.0,
+        "cairo_close_egp": 24.03,
+        "official_usd_egp": 53.5,
+        "implied_gdr_usd_egp": 48.06,
+        "arbitrage_spread_pct": 11.32,
+        "next_morning_gap_direction": "BULLISH_GAP",
+        "next_morning_gap_label_ar": "فجوة افتتاح صاعدة (+11.3%)",
+        "action_guidance_ar": "🟢 فجوة صاعدة متوقعة لافتتاح القاهرة (+11.3%): شهادة لندن تتداول بعلاوة سعرية (معادل 26.75 ج.م مقابل 24.03 ج.م في القاهرة)؛ فرصة شراء على الافتتاح."
+      },
+      {
+        "cairo_ticker": "MASR.CA",
+        "gdr_ticker": "MNHD.L",
+        "name_ar": "مدينة مصر للإسكان والتعمير (Madinet Masr GDR)",
+        "lse_close_usd": 0.58,
+        "cairo_close_egp": 7.04,
+        "official_usd_egp": 53.5,
+        "implied_gdr_usd_egp": 48.55,
+        "arbitrage_spread_pct": 10.23,
+        "next_morning_gap_direction": "BULLISH_GAP",
+        "next_morning_gap_label_ar": "فجوة افتتاح صاعدة (+10.2%)",
+        "action_guidance_ar": "🟢 فجوة صاعدة متوقعة لافتتاح القاهرة (+10.2%): شهادة لندن تتداول بعلاوة سعرية (معادل 7.76 ج.م مقابل 7.04 ج.م في القاهرة)؛ فرصة شراء على الافتتاح."
+      },
+      {
+        "cairo_ticker": "OIH.CA",
+        "gdr_ticker": "OTMT.L",
+        "name_ar": "أوراسكوم للاستثمار القابضة (Orascom Investment GDR)",
+        "lse_close_usd": 0.18,
+        "cairo_close_egp": 1.78,
+        "official_usd_egp": 53.5,
+        "implied_gdr_usd_egp": 49.44,
+        "arbitrage_spread_pct": 8.43,
+        "next_morning_gap_direction": "BULLISH_GAP",
+        "next_morning_gap_label_ar": "فجوة افتتاح صاعدة (+8.4%)",
+        "action_guidance_ar": "🟢 فجوة صاعدة متوقعة لافتتاح القاهرة (+8.4%): شهادة لندن تتداول بعلاوة سعرية (معادل 1.93 ج.م مقابل 1.78 ج.م في القاهرة)؛ فرصة شراء على الافتتاح."
+      },
+      {
+        "cairo_ticker": "EKHO.CA",
+        "gdr_ticker": "EKHO.L",
+        "name_ar": "القابضة المصرية الكويتية (EK Holding GDR)",
+        "lse_close_usd": 0.85,
+        "cairo_close_egp": 34.77,
+        "official_usd_egp": 53.5,
+        "implied_gdr_usd_egp": 40.91,
+        "arbitrage_spread_pct": 30.77,
+        "next_morning_gap_direction": "BULLISH_GAP",
+        "next_morning_gap_label_ar": "فجوة افتتاح صاعدة (+30.8%)",
+        "action_guidance_ar": "🟢 فجوة صاعدة متوقعة لافتتاح القاهرة (+30.8%): شهادة لندن تتداول بعلاوة سعرية (معادل 45.48 ج.م مقابل 0.65 $ (معادل 34.77 ج.م) في القاهرة)؛ فرصة شراء على الافتتاح."
+      }
+    ]
+  },
+  {
+    "sync_timestamp": "2026-10-19 06:22:49",
+    "cairo_time": "18:30:00 (LSE Evening Close)",
+    "official_usd_egp": 53.5,
+    "records": [
+      {
+        "cairo_ticker": "COMI.CA",
+        "gdr_ticker": "CBKD.L",
+        "name_ar": "البنك التجاري الدولي (CIB GDR)",
+        "lse_close_usd": 2.255,
+        "cairo_close_egp": 122.0,
+        "official_usd_egp": 53.5,
+        "implied_gdr_usd_egp": 54.1,
+        "arbitrage_spread_pct": -1.11,
+        "next_morning_gap_direction": "NEUTRAL_OPEN",
+        "next_morning_gap_label_ar": "افتتاح مستقر (-1.1%)",
+        "action_guidance_ar": "⚪ توازن سعري بين بورصتي القاهرة ولندن (الفارق -1.1%): الأسعار متطابقة مع السعر العادل لصرف العملة."
+      },
+      {
+        "cairo_ticker": "ETEL.CA",
+        "gdr_ticker": "ETEL.L",
+        "name_ar": "المصرية للاتصالات (Telecom Egypt GDR)",
+        "lse_close_usd": 13.9,
+        "cairo_close_egp": 145.0,
+        "official_usd_egp": 53.5,
+        "implied_gdr_usd_egp": 52.16,
+        "arbitrage_spread_pct": 2.57,
+        "next_morning_gap_direction": "BULLISH_GAP",
+        "next_morning_gap_label_ar": "فجوة افتتاح صاعدة (+2.6%)",
+        "action_guidance_ar": "🟢 فجوة صاعدة متوقعة لافتتاح القاهرة (+2.6%): شهادة لندن تتداول بعلاوة سعرية (معادل 148.73 ج.م مقابل 145.00 ج.م في القاهرة)؛ فرصة شراء على الافتتاح."
+      },
+      {
+        "cairo_ticker": "HRHO.CA",
+        "gdr_ticker": "EFGD.L",
+        "name_ar": "إي إف جي هيرميس (EFG Hermes GDR)",
+        "lse_close_usd": 1.0,
+        "cairo_close_egp": 24.03,
+        "official_usd_egp": 53.5,
+        "implied_gdr_usd_egp": 48.06,
+        "arbitrage_spread_pct": 11.32,
+        "next_morning_gap_direction": "BULLISH_GAP",
+        "next_morning_gap_label_ar": "فجوة افتتاح صاعدة (+11.3%)",
+        "action_guidance_ar": "🟢 فجوة صاعدة متوقعة لافتتاح القاهرة (+11.3%): شهادة لندن تتداول بعلاوة سعرية (معادل 26.75 ج.م مقابل 24.03 ج.م في القاهرة)؛ فرصة شراء على الافتتاح."
+      },
+      {
+        "cairo_ticker": "MASR.CA",
+        "gdr_ticker": "MNHD.L",
+        "name_ar": "مدينة مصر للإسكان والتعمير (Madinet Masr GDR)",
+        "lse_close_usd": 0.58,
+        "cairo_close_egp": 7.04,
+        "official_usd_egp": 53.5,
+        "implied_gdr_usd_egp": 48.55,
+        "arbitrage_spread_pct": 10.23,
+        "next_morning_gap_direction": "BULLISH_GAP",
+        "next_morning_gap_label_ar": "فجوة افتتاح صاعدة (+10.2%)",
+        "action_guidance_ar": "🟢 فجوة صاعدة متوقعة لافتتاح القاهرة (+10.2%): شهادة لندن تتداول بعلاوة سعرية (معادل 7.76 ج.م مقابل 7.04 ج.م في القاهرة)؛ فرصة شراء على الافتتاح."
+      },
+      {
+        "cairo_ticker": "OIH.CA",
+        "gdr_ticker": "OTMT.L",
+        "name_ar": "أوراسكوم للاستثمار القابضة (Orascom Investment GDR)",
+        "lse_close_usd": 0.18,
+        "cairo_close_egp": 1.78,
+        "official_usd_egp": 53.5,
+        "implied_gdr_usd_egp": 49.44,
+        "arbitrage_spread_pct": 8.43,
+        "next_morning_gap_direction": "BULLISH_GAP",
+        "next_morning_gap_label_ar": "فجوة افتتاح صاعدة (+8.4%)",
+        "action_guidance_ar": "🟢 فجوة صاعدة متوقعة لافتتاح القاهرة (+8.4%): شهادة لندن تتداول بعلاوة سعرية (معادل 1.93 ج.م مقابل 1.78 ج.م في القاهرة)؛ فرصة شراء على الافتتاح."
+      },
+      {
+        "cairo_ticker": "EKHO.CA",
+        "gdr_ticker": "EKHO.L",
+        "name_ar": "القابضة المصرية الكويتية (EK Holding GDR)",
+        "lse_close_usd": 0.85,
+        "cairo_close_egp": 34.77,
+        "official_usd_egp": 53.5,
+        "implied_gdr_usd_egp": 40.91,
+        "arbitrage_spread_pct": 30.77,
+        "next_morning_gap_direction": "BULLISH_GAP",
+        "next_morning_gap_label_ar": "فجوة افتتاح صاعدة (+30.8%)",
+        "action_guidance_ar": "🟢 فجوة صاعدة متوقعة لافتتاح القاهرة (+30.8%): شهادة لندن تتداول بعلاوة سعرية (معادل 45.48 ج.م مقابل 0.65 $ (معادل 34.77 ج.م) في القاهرة)؛ فرصة شراء على الافتتاح."
+      }
+    ]
   }
 ]

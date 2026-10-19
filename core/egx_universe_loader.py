@@ -515,6 +515,20 @@ class EGXUniverseLoader:
             "beta_egx30": 0.65,
             "is_active": True
         },
+        "RACC.CA": {
+            "ticker": "RACC.CA",
+            "name_ar": "راية لخدمات مراكز الاتصالات",
+            "name_en": "Raya Contact Center",
+            "sector": "تكنولوجيا المعلومات والاتصالات",
+            "sector_en": "Technology & Telecom",
+            "isin": "EGS745E1C013",
+            "index_membership": ["EGX70", "EGX100"],
+            "market_cap_tier": "MID_CAP",
+            "nominal_price": 8.15,
+            "adv20_egp": 5510000.0,
+            "beta_egx30": 0.95,
+            "is_active": True
+        },
         "ORHD.CA": {
             "ticker": "ORHD.CA",
             "name_ar": "أوراسكوم للتنمية مصر",

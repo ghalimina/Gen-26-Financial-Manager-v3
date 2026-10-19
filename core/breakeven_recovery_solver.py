@@ -138,16 +138,21 @@ class BreakevenRecoverySolver:
             buy_shares = max(1, int(rolling_cash // effective_cost_per_share))
             actual_buy_cost = round(buy_shares * effective_cost_per_share, 2)
 
-            # New blended average cost
+            # Strict Quantitative Invariant (v4.6):
+            # 1. New weighted average cost across all shares (core + newly accumulated satellite)
             total_shares_after = qty + buy_shares
-            total_invested = (qty * entry_price) + (buy_shares * dip_price)
-            new_blended_entry = round(total_invested / total_shares_after, 2)
-            new_blended_breakeven = round(new_blended_entry * (1 + THNDR_FEE_RATE), 2)
-            breakeven_reduction_pct = round(((breakeven_price - new_blended_breakeven) / breakeven_price) * 100, 2)
+            raw_invested = (qty * entry_price) + (buy_shares * dip_price)
+            raw_weighted_avg = raw_invested / total_shares_after
+            new_weighted_avg_cost = round(((qty * entry_price) + (buy_shares * effective_cost_per_share)) / total_shares_after, 2)
 
-            # Target exit for the recycled portion
-            target_exit_price = round(dip_price * cand["exit_target_mult"], 2)
-            exit_proceeds = round(buy_shares * target_exit_price * (1 - THNDR_FEE_RATE / 2), 2)
+            # 2. Net breakeven for the entire position (NO_LOSS_SELL_GUARD)
+            # Must cover full Thndr round-trip brokerage (1.0095x multiplier)
+            new_full_position_net_breakeven = round(raw_weighted_avg * 1.0095, 2)
+            breakeven_reduction_pct = round(((breakeven_price - new_full_position_net_breakeven) / breakeven_price) * 100, 2)
+
+            # 3. Satellite swing exit target (recycled shares only) upon first rebound (+4.5%)
+            satellite_swing_exit_target = round(dip_price * cand.get("exit_target_mult", 1.045), 2)
+            exit_proceeds = round(buy_shares * satellite_swing_exit_target * (1 - THNDR_FEE_RATE / 2), 2)
             stage_profit = round(exit_proceeds - actual_buy_cost, 2)
             total_projected_profit += stage_profit
 
@@ -156,9 +161,10 @@ class BreakevenRecoverySolver:
 
             # Action plan text in Arabic
             action_plan_ar = (
-                f"المرحلة {idx} ({cand['name_ar']}): تخصيص {actual_buy_cost:,.2f} ج لشراء {buy_shares} سهم بسعر {dip_price:,.2f} ج. "
-                f"ينخفض سعر التعادل من {breakeven_price:,.2f} ج إلى {new_blended_breakeven:,.2f} ج (انخفاض {breakeven_reduction_pct}%). "
-                f"بيع كمية التدوير عند {target_exit_price:,.2f} ج لجني ربح {stage_profit:,.2f} ج وتحرير {freed_cash:,.2f} ج للمرحلة التالية."
+                f"المرحلة {idx} ({cand['name_ar']}): تخصيص {actual_buy_cost:,.2f} ج لشراء {buy_shares} سهم تجميعي (Satellite) بسعر {dip_price:,.2f} ج. "
+                f"ينخفض سعر تعادل كامل المركز ({total_shares_after} سهم) من {breakeven_price:,.2f} ج إلى {new_full_position_net_breakeven:,.2f} ج (انخفاض {breakeven_reduction_pct}%). "
+                f"يتم بيع أسهم التجميع ({buy_shares} سهم) فقط عند ارتداد السوينج {satellite_swing_exit_target:,.2f} ج لجني ربح {stage_profit:,.2f} ج وتحرير {freed_cash:,.2f} ج للمرحلة التالية، "
+                f"مع حظر بيع الأسهم الأصلية ({qty} سهم) تحت حاجز الأمان {new_full_position_net_breakeven:,.2f} ج (NO_LOSS_SELL_GUARD)."
             )
 
             stage_info = {
@@ -168,17 +174,28 @@ class BreakevenRecoverySolver:
                 "current_quantity": qty,
                 "current_price": cur_price,
                 "current_breakeven": breakeven_price,
+                "current_breakeven_price": breakeven_price,
                 "distance_to_breakeven_pct": dist_pct,
                 "allocated_cash": actual_buy_cost,
                 "buy_price": dip_price,
                 "buy_shares": buy_shares,
+                "satellite_shares": buy_shares,
+                "satellite_buy_price": dip_price,
+                "satellite_swing_exit_target": satellite_swing_exit_target,
+                "satellite_stage_net_profit": stage_profit,
+                "core_shares_retained": qty,
                 "total_shares_after": total_shares_after,
-                "new_blended_entry": new_blended_entry,
-                "new_blended_breakeven": new_blended_breakeven,
+                "new_weighted_avg_cost": new_weighted_avg_cost,
+                "new_blended_entry": new_weighted_avg_cost,
+                "new_full_position_net_breakeven": new_full_position_net_breakeven,
+                "new_blended_breakeven": new_full_position_net_breakeven,
+                "new_breakeven_price": new_full_position_net_breakeven,
+                "no_loss_sell_guard_price": new_full_position_net_breakeven,
                 "breakeven_reduction_pct": breakeven_reduction_pct,
-                "target_exit_price": target_exit_price,
+                "target_exit_price": satellite_swing_exit_target,
                 "expected_exit_proceeds": exit_proceeds,
                 "stage_net_profit": stage_profit,
+                "expected_profit_egp": stage_profit,
                 "released_cash_for_next": freed_cash,
                 "action_plan_ar": action_plan_ar
             }

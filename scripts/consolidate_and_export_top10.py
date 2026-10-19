@@ -883,6 +883,35 @@ def run_consolidation_and_export():
     except Exception as e:
         print(f"  [Notice] Insiders & dividends notice: {e}")
 
+    # v4.5/v4.6 Strategic Engines execution
+    try:
+        from core.breakeven_recovery_solver import BreakevenRecoverySolver
+        print("  [Pre-Step] Refreshing Breakeven Recovery Solver (Satellite & Full Breakeven)...")
+        BreakevenRecoverySolver.calculate_recovery_plan(1200.0)
+    except Exception as e:
+        print(f"  [Notice] Breakeven recovery notice: {e}")
+
+    try:
+        from core.live_news_catalyst_engine import LiveNewsCatalystEngine
+        print("  [Pre-Step] Refreshing Live News Catalyst Engine...")
+        LiveNewsCatalystEngine.get_all_catalysts()
+    except Exception as e:
+        print(f"  [Notice] News catalyst notice: {e}")
+
+    try:
+        from core.intraday_sniper_alerts import IntradaySniperAlerts
+        print("  [Pre-Step] Refreshing Intraday Sniper Alerts Engine...")
+        IntradaySniperAlerts.get_sniper_triggers()
+    except Exception as e:
+        print(f"  [Notice] Sniper alerts notice: {e}")
+
+    try:
+        from core.prediction_scorecard_auditor import PredictionScorecardAuditor
+        print("  [Pre-Step] Refreshing Prediction Scorecard Auditor...")
+        PredictionScorecardAuditor.audit_all_predictions()
+    except Exception as e:
+        print(f"  [Notice] Scorecard auditor notice: {e}")
+
     files_builders = [
         ("01_portfolio_and_swing_advisor.json", build_01_portfolio_and_swing_advisor),
         ("02_macro_and_market_regime.json", build_02_macro_and_market_regime),

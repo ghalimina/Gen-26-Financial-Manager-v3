@@ -78,7 +78,10 @@ class TestInstitutionalUpgrades(unittest.TestCase):
 
     def test_quant_reasoning_agent(self):
         """Certify QuantReasoningAgent generates complete investment memos."""
-        memo = QuantReasoningAgent.generate_stock_dossier_memo("COMI.CA")
+        import warnings
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            memo = QuantReasoningAgent.generate_stock_dossier_memo("COMI.CA")
         self.assertEqual(memo["status"], "SUCCESS")
         self.assertEqual(memo["ticker"], "COMI.CA")
         self.assertIn("conformal_target_q50", memo)

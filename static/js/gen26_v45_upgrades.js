@@ -149,16 +149,16 @@
                                 <div style="font-weight: 700; color: #38bdf8;">${stg.allocated_cash.toLocaleString()} ج</div>
                             </div>
                             <div>
-                                <span style="color: #94a3b8;">شراء قاع التدوير:</span>
+                                <span style="color: #94a3b8;">شراء قاع التدوير (Satellite):</span>
                                 <div style="font-weight: 700; color: #10b981;">${stg.buy_shares} سهم @ ${stg.buy_price.toFixed(2)} ج</div>
                             </div>
                             <div>
-                                <span style="color: #94a3b8;">التعادل الجديد بعد الخفض:</span>
-                                <div style="font-weight: 800; color: #a78bfa;">${stg.new_blended_breakeven.toFixed(2)} ج (-${stg.breakeven_reduction_pct}%)</div>
+                                <span style="color: #94a3b8;">تعادل كامل المركز (حاجز الأمان):</span>
+                                <div style="font-weight: 800; color: #a78bfa;">${(stg.new_full_position_net_breakeven || stg.new_blended_breakeven).toFixed(2)} ج (-${stg.breakeven_reduction_pct}%)</div>
                             </div>
                             <div>
-                                <span style="color: #94a3b8;">هدف البيع والربح:</span>
-                                <div style="font-weight: 700; color: #34d399;">${stg.target_exit_price.toFixed(2)} ج (+${stg.stage_net_profit.toFixed(2)} ج)</div>
+                                <span style="color: #94a3b8;">هدف بيع أسهم التدوير فقط:</span>
+                                <div style="font-weight: 700; color: #34d399;">${(stg.satellite_swing_exit_target || stg.target_exit_price).toFixed(2)} ج (+${stg.stage_net_profit.toFixed(2)} ج)</div>
                             </div>
                             <div>
                                 <span style="color: #94a3b8;">السيولة المحررة للمرحلة التالية:</span>

@@ -323,12 +323,20 @@ class MarketPriceService:
         with DatabaseManager.get_connection() as conn:
             cursor = conn.cursor()
             for rec in canonical_prices:
+                if not isinstance(rec, dict):
+                    continue
+                sym = rec.get("ticker") or rec.get("symbol")
+                if not sym or sym.startswith("_") or sym == "CASH_EGP":
+                    continue
+                if not sym.endswith(".CA") and "." not in sym:
+                    sym += ".CA"
+
                 cursor.execute("""
                 INSERT OR IGNORE INTO stocks (ticker, company_name, sector, isin, status, is_core, created_at)
                 VALUES (?, ?, ?, ?, ?, ?, ?);
                 """, (
-                    rec["ticker"],
-                    rec.get("company_name", rec["ticker"]),
+                    sym,
+                    rec.get("company_name", sym),
                     rec.get("sector", "General"),
                     rec.get("isin", ""),
                     "TRADABLE",
@@ -344,7 +352,7 @@ class MarketPriceService:
                 INSERT OR REPLACE INTO market_prices (ticker, market_date, open_price, high_price, low_price, close_price, volume, adv_20d, created_at)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
                 """, (
-                    rec["ticker"],
+                    sym,
                     rec.get("market_date") or datetime.datetime.now().strftime("%Y-%m-%d"),
                     float(rec.get("open") or p_val or 0.0),
                     float(rec.get("high") or p_val or 0.0),

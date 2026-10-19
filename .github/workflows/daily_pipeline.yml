@@ -158,7 +158,19 @@ jobs:
         continue-on-error: true
         timeout-minutes: 3
         run: |
-          python scripts/intraday_sniper_alerts.py
+          python -c "from core.intraday_sniper_alerts import IntradaySniperAlerts; r = IntradaySniperAlerts.get_sniper_triggers(); print('Sniper triggers count:', len(r.get('sniper_alerts', [])))"
+
+      - name: 1.8 Cascade Breakeven Recovery Solver & Cash Recycling Engine (v4.6)
+        continue-on-error: true
+        timeout-minutes: 3
+        run: |
+          python -c "from core.breakeven_recovery_solver import BreakevenRecoverySolver; plan = BreakevenRecoverySolver.calculate_recovery_plan(1200.0); print('Recovery plan stages:', len(plan.get('stages', [])))"
+
+      - name: 1.9 Live News Catalyst & Sentiment Intelligence Engine (v4.5)
+        continue-on-error: true
+        timeout-minutes: 3
+        run: |
+          python -c "from core.live_news_catalyst_engine import LiveNewsCatalystEngine; r = LiveNewsCatalystEngine.get_all_catalysts(); print('Active news catalysts:', len(r.get('catalysts', [])))"
 
       - name: 2. Multi-Horizon Factor Forecasting & Stock Ranking Engine
         continue-on-error: true
@@ -224,6 +236,12 @@ jobs:
           except Exception as e:
               print(f'Telemetry step error: {e}')
           "
+
+      - name: 2.8 Prediction Scorecard Auditor & Historical Model Verification (v4.5)
+        continue-on-error: true
+        timeout-minutes: 3
+        run: |
+          python -c "from core.prediction_scorecard_auditor import PredictionScorecardAuditor; r = PredictionScorecardAuditor.audit_all_predictions(); print('Scorecard audit status:', r.get('status'), '| Total evaluated:', r.get('summary', {}).get('total_predictions_evaluated', 0))"
 
       - name: 3. Autonomous Paper Trading Incubation (Standby / Active Gate)
         continue-on-error: true

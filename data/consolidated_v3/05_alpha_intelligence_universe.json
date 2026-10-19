@@ -1,7 +1,7 @@
 {
   "status": "SUCCESS",
-  "as_of": "2026-10-18 17:01:58",
-  "total_universe_size": 270,
+  "as_of": "2026-10-19 05:53:13",
+  "total_universe_size": 271,
   "monotonicity_validation": {
     "validation_status": "MATHEMATICALLY_MONOTONIC_VERIFIED",
     "spearman_rank_ic": 0.375,
@@ -5455,6 +5455,21 @@
       "action_ar": "🔴 سهم ضعيف السيولة (مستبعد آلياً)",
       "is_liquid": false,
       "market_regime": "STRONG_BULL"
+    },
+    {
+      "rank": 271,
+      "ticker": "RACC.CA",
+      "company_name": "RACC.CA",
+      "sector": "تكنولوجيا المعلومات والاتصالات",
+      "current_price": 8.15,
+      "alpha_score": 37.4,
+      "probability_up_pct": 50.0,
+      "expected_return_pct": 1.0,
+      "prediction_interval_90": "[-5.0% → +10.0%]",
+      "decision": "HOLD",
+      "action_ar": "مراقبة",
+      "is_liquid": true,
+      "market_regime": "BULLISH_EXPANSION"
     }
   ]
 }

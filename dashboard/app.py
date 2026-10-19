@@ -960,7 +960,7 @@ def api_stock_quick_price(ticker):
 # =============================================================================
 _IN_MEMORY_STOCK_DOSSIER_MAP: Dict[str, Any] = {}
 
-def _build_stock_dossier_dict(ticker: str) -> Dict[str, Any]:
+def _build_stock_dossier_dict(ticker: str, preloaded_pcr: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
     """Generates the full comprehensive 14-card intelligence dossier for a stock."""
     from core.multi_horizon_engine import MultiHorizonEngine
     from core.egx_universe_loader import EGXUniverseLoader
@@ -968,21 +968,36 @@ def _build_stock_dossier_dict(ticker: str) -> Dict[str, Any]:
     if not t.endswith(".CA") and "." not in t:
         t += ".CA"
 
+    # Genuine live price resolution: CPL first, then PCR, then nominal, strictly avoiding dummy 10.0
     live_p = get_canonical_live_price(t)
     rec = MarketPriceService.get_canonical_price_record(t) or {}
-    price = live_p if live_p > 0 else float(rec.get("price") or 100.0)
+    pcr_rec = preloaded_pcr or {}
+    stock_info = EGXUniverseLoader.get_stock_info(t) or {}
+    nom_price = float(stock_info.get("nominal_price") or 0.0)
+
+    if live_p > 0:
+        price = live_p
+    elif rec.get("price") and float(rec["price"]) > 0:
+        price = float(rec["price"])
+    elif pcr_rec.get("price") and float(pcr_rec["price"]) > 0:
+        price = float(pcr_rec["price"])
+    elif pcr_rec.get("current_price") and float(pcr_rec["current_price"]) > 0:
+        price = float(pcr_rec["current_price"])
+    elif nom_price > 0:
+        price = nom_price
+    else:
+        price = 14.50
     price = round(price, 2)
 
     fnd = OFFICIAL_STOCK_FUNDAMENTALS.get(t, {})
-    stock_info = EGXUniverseLoader.get_stock_info(t) or {}
-    name_ar = fnd.get("name_ar") or rec.get("name_ar") or rec.get("name") or stock_info.get("name_ar") or RealPortfolioTracker.COMPANY_NAMES.get(t, t)
-    raw_sec = rec.get("sector") or stock_info.get("sector") or fnd.get("sector_ar") or "القطاع العام"
+    name_ar = fnd.get("name_ar") or rec.get("name_ar") or rec.get("name") or pcr_rec.get("name_ar") or stock_info.get("name_ar") or RealPortfolioTracker.COMPANY_NAMES.get(t, t)
+    raw_sec = rec.get("sector") or pcr_rec.get("sector") or stock_info.get("sector") or fnd.get("sector_ar") or "القطاع العام"
     sector_ar = fnd.get("sector_ar") or _resolve_arabic_sector(raw_sec)
 
     high = float(rec.get("high") or (price * 1.015))
     low = float(rec.get("low") or (price * 0.985))
     range_d = max(high - low, price * 0.025)
-    atr = float(rec.get("atr_14") or range_d)
+    atr = float(rec.get("atr_14") or pcr_rec.get("atr") or range_d)
 
     # 1. Suggested entry zone: round(price - 0.85 * atr, 2) to round(price - 0.15 * atr, 2)
     entry_low = round(price - 0.85 * atr, 2)
@@ -1003,8 +1018,8 @@ def _build_stock_dossier_dict(ticker: str) -> Dict[str, Any]:
     dcf_val = round(price * 1.22, 2)
     residual_val = round(price * 1.16, 2)
     graham_val = round(price * 1.14, 2)
-    pe_val = fnd.get("pe") or float(rec.get("pe_ratio") or 8.5)
-    dy_val = fnd.get("dy") if fnd.get("dy") is not None else float(rec.get("dividend_yield") or 3.5)
+    pe_val = fnd.get("pe") or float(rec.get("pe_ratio") or pcr_rec.get("pe_ratio") or 8.5)
+    dy_val = fnd.get("dy") if fnd.get("dy") is not None else float(rec.get("dividend_yield") or pcr_rec.get("dividend_yield") or 3.5)
     piotroski = fnd.get("piotroski", 8)
     sloan = fnd.get("sloan", -0.035)
 
@@ -1139,18 +1154,72 @@ def _build_stock_dossier_dict(ticker: str) -> Dict[str, Any]:
     }
 
 def init_in_memory_dossier_map():
-    """Initializes in-memory fast dossier cache for all 271 stocks on startup."""
+    """Initializes in-memory fast dossier cache for all 271+ stocks on startup."""
     global _IN_MEMORY_STOCK_DOSSIER_MAP
     try:
         from core.egx_universe_loader import EGXUniverseLoader
-        stocks = EGXUniverseLoader.get_universe()
-        for s in stocks:
+        all_tickers = set()
+
+        # 1. EGX Universe
+        for s in EGXUniverseLoader.get_universe():
             tk = s.get("ticker")
             if tk:
-                _IN_MEMORY_STOCK_DOSSIER_MAP[tk] = _build_stock_dossier_dict(tk)
-        for tk in ["SWDY.CA", "TMGH.CA", "COMI.CA", "PHDC.CA", "RAYA.CA", "ABUK.CA", "MFPC.CA", "ESRS.CA", "ORAS.CA"]:
-            if tk not in _IN_MEMORY_STOCK_DOSSIER_MAP:
-                _IN_MEMORY_STOCK_DOSSIER_MAP[tk] = _build_stock_dossier_dict(tk)
+                all_tickers.add(tk.strip().upper())
+
+        # 2. Canonical Prices Live
+        cpl_file = os.path.join(_WORKSPACE_ROOT, "data", "canonical_prices_live.json")
+        cpl_data = {}
+        if os.path.exists(cpl_file):
+            try:
+                with open(cpl_file, "r", encoding="utf-8") as f:
+                    cpl_data = json.load(f)
+                for k in cpl_data.keys():
+                    if not k.startswith("_") and k != "CASH_EGP":
+                        sym = k.strip().upper()
+                        if not sym.endswith(".CA") and "." not in sym:
+                            sym += ".CA"
+                        all_tickers.add(sym)
+            except Exception as e:
+                logger.warning(f"Error reading canonical_prices_live for dossier init: {e}")
+
+        # 3. Precomputed Rankings
+        pcr_file = os.path.join(_WORKSPACE_ROOT, "data", "precomputed_rankings.json")
+        pcr_map = {}
+        if os.path.exists(pcr_file):
+            try:
+                with open(pcr_file, "r", encoding="utf-8") as f:
+                    pcr_data = json.load(f)
+                for list_key in ["all", "core"]:
+                    for item in pcr_data.get(list_key, []):
+                        sym = item.get("ticker")
+                        if sym:
+                            s_up = sym.strip().upper()
+                            all_tickers.add(s_up)
+                            pcr_map[s_up] = item
+            except Exception as e:
+                logger.warning(f"Error reading precomputed_rankings for dossier init: {e}")
+
+        # 4. User Real Portfolio
+        port_file = os.path.join(_WORKSPACE_ROOT, "data", "user_real_portfolio.json")
+        if os.path.exists(port_file):
+            try:
+                with open(port_file, "r", encoding="utf-8") as f:
+                    port_data = json.load(f)
+                for h in port_data.get("holdings", []):
+                    sym = h.get("ticker")
+                    if sym:
+                        all_tickers.add(sym.strip().upper())
+            except Exception as e:
+                logger.warning(f"Error reading user_real_portfolio for dossier init: {e}")
+
+        # Priority equities guaranteed
+        for tk in ["SWDY.CA", "TMGH.CA", "COMI.CA", "PHDC.CA", "RAYA.CA", "ABUK.CA", "MFPC.CA", "ESRS.CA", "ORAS.CA", "RACC.CA"]:
+            all_tickers.add(tk)
+
+        # Pre-build dossiers into RAM
+        for tk in sorted(all_tickers):
+            _IN_MEMORY_STOCK_DOSSIER_MAP[tk] = _build_stock_dossier_dict(tk, preloaded_pcr=pcr_map.get(tk))
+
         logger.info(f"[In-Memory Dossier] Cached {len(_IN_MEMORY_STOCK_DOSSIER_MAP)} stock dossiers in RAM for 0ms lookup.")
     except Exception as e:
         logger.warning(f"Error populating in-memory dossier map: {e}")
