@@ -15,6 +15,7 @@ import time
 import datetime
 import logging
 from functools import wraps
+from typing import Dict, Any, List, Optional
 from flask import Flask, render_template, jsonify, request, Response, send_file
 
 # Load environment variables from .env if present
