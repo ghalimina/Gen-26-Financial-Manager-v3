@@ -1,22 +1,22 @@
 {
   "status": "BACKTEST_COMPLETED",
   "lookback_period": "Last 250 Trading Days (1 Year Historical Vectorized Simulation)",
-  "total_trades": 110,
-  "winning_trades": 49,
-  "losing_trades": 61,
-  "hit_rate_pct": 44.5,
-  "profit_factor": 3.54,
+  "total_trades": 99,
+  "winning_trades": 46,
+  "losing_trades": 53,
+  "hit_rate_pct": 46.5,
+  "profit_factor": 3.8,
   "min_profit_factor_threshold": 1.2,
   "is_edge_valid": true,
   "warning": null,
-  "max_drawdown_pct": -5.63,
-  "average_trade_return_pct": 4.48,
-  "annualized_sharpe_ratio": 1.88,
+  "max_drawdown_pct": -4.82,
+  "average_trade_return_pct": 4.38,
+  "annualized_sharpe_ratio": 1.93,
   "calibrated_weights_applied": {
     "w_fundamental": 0.25,
     "w_technical": 0.25,
     "w_flow": 0.25,
     "w_rs": 0.25
   },
-  "verdict_ar": "🟢 تم إثبات الحافة الإحصائية تجريبياً (Profit Factor = 3.54 > 1.20 | Hit Rate = 44.5%)"
+  "verdict_ar": "🟢 تم إثبات الحافة الإحصائية تجريبياً (Profit Factor = 3.80 > 1.20 | Hit Rate = 46.5%)"
 }
