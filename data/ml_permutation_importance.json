@@ -71,43 +71,43 @@
       "importance_std": 0.0
     },
     {
-      "feature": "roc_20d",
-      "importance_mean": -0.00024,
-      "importance_std": 0.00012
-    },
-    {
       "feature": "volatility_regime_encoded",
-      "importance_mean": -0.00028,
-      "importance_std": 0.00023
-    },
-    {
-      "feature": "roc_1d_lag1",
-      "importance_mean": -0.0004,
-      "importance_std": 3e-05
-    },
-    {
-      "feature": "setup_encoded",
-      "importance_mean": -0.00044,
-      "importance_std": 2e-05
+      "importance_mean": 0.0,
+      "importance_std": 0.0
     },
     {
       "feature": "ocf_to_ni_ratio",
-      "importance_mean": -0.00047,
+      "importance_mean": 0.0,
       "importance_std": 0.0
     },
     {
       "feature": "cbe_corridor_rate_pct",
-      "importance_mean": -0.00047,
+      "importance_mean": 0.0,
       "importance_std": 0.0
     },
     {
       "feature": "usd_egp_rate",
-      "importance_mean": -0.00047,
+      "importance_mean": 0.0,
+      "importance_std": 0.0
+    },
+    {
+      "feature": "setup_encoded",
+      "importance_mean": 0.0,
+      "importance_std": 0.0
+    },
+    {
+      "feature": "roc_1d_lag1",
+      "importance_mean": 0.0,
+      "importance_std": 0.0
+    },
+    {
+      "feature": "roc_20d",
+      "importance_mean": 0.0,
       "importance_std": 0.0
     },
     {
       "feature": "beta_egx30",
-      "importance_mean": -0.00047,
+      "importance_mean": 0.0,
       "importance_std": 0.0
     }
   ],

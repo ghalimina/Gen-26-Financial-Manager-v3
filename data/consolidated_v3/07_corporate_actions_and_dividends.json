@@ -1,6 +1,6 @@
 {
   "status": "SUCCESS",
-  "as_of": "2026-10-20 17:26:29",
+  "as_of": "2026-10-20 18:13:22",
   "total_events": 12,
   "corporate_actions": [
     {
@@ -174,7 +174,7 @@
   ],
   "insiders_and_dividends_radar": {
     "status": "SUCCESS",
-    "as_of": "2026-10-20 17:26:29",
+    "as_of": "2026-10-20 18:13:22",
     "market_portal": "https://www.egx.com.eg/ar/",
     "insider_transactions_count": 6,
     "dividend_stocks_count": 10,
