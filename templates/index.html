@@ -10372,10 +10372,10 @@
         }
 
         // =====================================================================
-        // ⚡ THNDR LIVE PRICE SYNC & MANUAL OVERRIDE SYSTEM (v3.6)
+        // ⚡ THNDR LIVE PRICE SYNC & MANUAL OVERRIDE SYSTEM (v4.7)
         // =====================================================================
         async function syncLiveThndrPrices() {
-            showToast("جاري سحب وتحديث أسعار ثاندر اللحظية من شاشات السوق...", "info");
+            showToast("جاري سحب وتحديث أسعار ثاندر اللحظية من شاشات TradingView...", "info");
             try {
                 const res = await fetch('/api/prices/sync_live_thndr', {
                     method: 'POST',
@@ -10383,10 +10383,51 @@
                 });
                 const data = await res.json();
                 if (res.ok && data.status === 'SUCCESS') {
-                    showToast(`✅ تم تحديث ${data.count || 296} سهماً حياً ومطابقة أسعار ثاندر بنجاح!`, "success");
+                    // 1. Immediately refresh in-memory client dossiers
+                    try {
+                        const dRes = await fetch(`/api/dossier/instant_all?_t=${Date.now()}`);
+                        const dData = await dRes.json();
+                        if (dData && dData.dossiers) {
+                            window.GEN26_INSTANT_DOSSIER_MAP = Object.assign(window.GEN26_INSTANT_DOSSIER_MAP || {}, dData.dossiers);
+                        }
+                    } catch (e) {
+                        console.warn("Could not prefetch instant dossiers:", e);
+                    }
+
+                    // 2. Refresh all live data endpoints and UI stores
+                    try {
+                        const [pRes] = await Promise.all([
+                            fetch(`/api/real_portfolio?_t=${Date.now()}`),
+                            fetch(`/api/overview?_t=${Date.now()}`),
+                            fetch(`/api/ranking?universe=all&_t=${Date.now()}`),
+                            fetch(`/api/thndr_daily_card?_t=${Date.now()}`),
+                            fetch(`/api/portfolio/recovery_plan?cash=1200&_t=${Date.now()}`)
+                        ]);
+                        if (pRes.ok) {
+                            const pData = await pRes.json();
+                            syncUnifiedPortfolioTelemetry(pData);
+                        }
+                    } catch (e) {
+                        console.warn("Error refreshing synced endpoints:", e);
+                    }
+
                     await refreshAllData();
+
+                    // 3. Re-render currently viewed stock dossier if present
+                    const curTicker = window.currentTicker || 'COMI.CA';
+                    if (typeof window.instantRenderStockDossier === 'function') {
+                        try { window.instantRenderStockDossier(curTicker); } catch (e) {}
+                    }
+
+                    // 4. Surface rich live telemetry toast
+                    const s = data.sample_portfolio_prices || {};
+                    const eqStr = Number(data.portfolio_equity_egp || 0).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                    const toastMsg = `✅ تم تحديث ${data.stocks_updated_count || 271} سهماً حياً بنجاح!\n` +
+                        `💼 رأس مال المحفظة: ${eqStr} ج.م\n` +
+                        `• CIB: ${s['COMI.CA'] || '-'} | طلعت: ${s['TMGH.CA'] || '-'} | السويدي: ${s['SWDY.CA'] || '-'} | بالم: ${s['PHDC.CA'] || '-'} | راية: ${s['RAYA.CA'] || '-'}`;
+                    showToast(toastMsg, "success");
                 } else {
-                    showToast(`تعذر التحديث: ${data.error || 'خطأ غير معروف'}`, "error");
+                    showToast(`تعذر التحديث: ${data.message || data.error || 'خطأ غير معروف'}`, "error");
                 }
             } catch (err) {
                 showToast("خطأ في الاتصال بالخادم أثناء مزامنة الأسعار.", "error");
@@ -10450,7 +10491,7 @@
                 });
                 const data = await res.json();
                 if (res.ok && data.status === 'SUCCESS') {
-                    const eqFormatted = Number(data.portfolio_equity_egp || 13274.93).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                    const eqFormatted = Number(data.portfolio_equity_egp || window.userPortfolioEquity || 0).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
                     showToast(`✅ تم حفظ الأسعار بنجاح! قيمة المحفظة: ${eqFormatted} ج.م`, "success");
                     closeThndrPriceOverrideModal();
                     await refreshAllData();
@@ -10559,8 +10600,8 @@
                 const statusBadgeEl = document.getElementById('real-port-status-badge');
                 const mfValEl = document.getElementById('real-port-mf-val');
 
-                const totalEquity = data.portfolio_equity_egp || data.total_portfolio_equity_egp || 13274.93;
-                const stockVal = data.stock_market_value_egp || 12072.51;
+                const totalEquity = data.portfolio_equity_egp || data.total_portfolio_equity_egp || window.userPortfolioEquity || 0;
+                const stockVal = data.stock_market_value_egp || data.total_stocks_market_value_egp || 0;
                 const cashVal = data.cash_egp != null ? data.cash_egp : (data.free_cash_egp != null ? data.free_cash_egp : 1200.0);
                 const mfVal = data.total_mutual_funds_market_value_egp || 2.42;
 
@@ -12749,8 +12790,8 @@
         // =====================================================================
         function syncUnifiedPortfolioTelemetry(data) {
             if (!data) return;
-            const totalEquity = data.portfolio_equity_egp || data.total_portfolio_equity_egp || 13274.93;
-            const stockVal = data.stock_market_value_egp || 12072.51;
+            const totalEquity = data.portfolio_equity_egp || data.total_portfolio_equity_egp || window.userPortfolioEquity || 0;
+            const stockVal = data.stock_market_value_egp || data.total_stocks_market_value_egp || 0;
             const cashVal = data.cash_egp != null ? data.cash_egp : (data.free_cash_egp != null ? data.free_cash_egp : 1200.0);
             const stockPct = totalEquity > 0 ? ((stockVal / totalEquity) * 100).toFixed(1) : "90.9";
             const cashPct = totalEquity > 0 ? ((cashVal / totalEquity) * 100).toFixed(1) : "9.0";
@@ -12779,14 +12820,36 @@
             if (thndrFree) thndrFree.innerText = `${cashVal.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} ج.م`;
             if (thndrFloor) thndrFloor.innerText = `${(totalEquity * 0.35).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} ج.م`;
 
-            // 4. Daily Human Snapshot Card 1
+            // 4. Daily Human Snapshot Card 1 & Tape
             const topPortVal = document.getElementById('top-real-port-val');
             const topPortPnl = document.getElementById('top-real-port-pnl');
             if (topPortVal) topPortVal.innerText = `${totalEquity.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} ج.م`;
+            
+            const netProfit = data.net_total_profit_including_rotations_egp != null ? data.net_total_profit_including_rotations_egp : (data.realized_pnl_egp != null && data.unrealized_pnl_egp != null ? (data.realized_pnl_egp + data.unrealized_pnl_egp) : 808.30);
+            const netProfitPct = data.net_total_profit_pct != null ? data.net_total_profit_pct : (data.net_total_return_pct != null ? data.net_total_return_pct : ((netProfit / 12466.63) * 100));
+            const netProfitSign = netProfit >= 0 ? '+' : '';
+            const netPctSign = netProfitPct >= 0 ? '+' : '';
+
             if (topPortPnl) {
-                const netProfit = data.net_total_profit_including_rotations_egp != null ? data.net_total_profit_including_rotations_egp : 808.30;
-                const netProfitSign = netProfit >= 0 ? '+' : '';
-                topPortPnl.innerText = `5 أسهم • صافي الأرباح الكلية: ${netProfitSign}${netProfit.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} ج.م (+6.17%) • كاش: ${cashVal.toLocaleString()} ج.م`;
+                topPortPnl.innerText = `5 أسهم • صافي الأرباح الكلية: ${netProfitSign}${netProfit.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} ج.م (${netPctSign}${Number(netProfitPct).toFixed(2)}%) • كاش: ${cashVal.toLocaleString()} ج.م`;
+            }
+
+            // 5. Header Ticker Tape Equity
+            const tapeEq = document.getElementById('tape-equity');
+            if (tapeEq) {
+                tapeEq.innerText = `${totalEquity.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} ج.م`;
+                const tapeChange = tapeEq.parentElement ? tapeEq.parentElement.querySelector('.ticker-change') : null;
+                if (tapeChange) {
+                    tapeChange.className = `ticker-change ${netProfit >= 0 ? 'up' : 'down'}`;
+                    tapeChange.innerText = `(صافي أرباح: ${netProfitSign}${netProfit.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} ج.م / ${netPctSign}${Number(netProfitPct).toFixed(2)}%)`;
+                }
+            }
+
+            // 6. Real Portfolio tab P&L KPI card
+            const realPnlVal = document.getElementById('real-port-pnl-val');
+            if (realPnlVal) {
+                realPnlVal.innerText = `${netProfitSign}${netProfit.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} ج.م (${netPctSign}${Number(netProfitPct).toFixed(2)}%)`;
+                realPnlVal.className = `metric-value font-mono ${netProfit >= 0 ? 'text-green' : 'text-red'}`;
             }
         }
 
@@ -13659,7 +13722,7 @@
             const dCount = Math.max(3, Math.min(120, parseInt(days) || 20));
             const isPortfolio = target === 'PORTFOLIO';
             
-            let curVal = isPortfolio ? 13274.93 : (target === 'EGX30' ? 51492.8 : (target === 'EGX70' ? 18330.8 : (target === 'EGX100' ? 30735.6 : 122.0)));
+            let curVal = isPortfolio ? (window.userPortfolioEquity || 13000.0) : (target === 'EGX30' ? (window.egx30Level || 51000.0) : (target === 'EGX70' ? 18330.8 : (target === 'EGX100' ? 30735.6 : 122.0)));
             let netBk = isPortfolio ? 14421.15 : (curVal * 1.0095);
             let dipDrop = curVal * 0.015;
             let minDip = curVal - dipDrop;

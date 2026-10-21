@@ -147,20 +147,21 @@ class RegimeHMMEngine:
             return cls._cached_base_level
 
         price = None
-        # 1. Try yfinance
+        # 1. Try from live macro state file (updated directly by TradingView live feed)
         try:
-            import yfinance as yf
-            d = yf.download('^CASE30', period='1d', interval='1d', progress=False, timeout=5)
-            if d is not None and not d.empty:
-                val = float(d['Close'].iloc[-1]) if not hasattr(d['Close'].iloc[-1], '__len__') else float(d['Close'].squeeze().iloc[-1])
-                if val > 10000:
-                    price = val
+            macro_path = os.path.join(WORKSPACE, "data", "macro_economic_state.json")
+            if os.path.exists(macro_path):
+                with open(macro_path, "r", encoding="utf-8") as f:
+                    macro_data = json.load(f)
+                idx_level = float(macro_data.get("indices", {}).get("EGX30", {}).get("level", 0))
+                if idx_level > 10000:
+                    price = idx_level
         except Exception:
             pass
+
         # 2. Try from cached regime file
         if price is None:
             try:
-                import json
                 if os.path.exists(cls._REGIME_CACHE_PATH):
                     with open(cls._REGIME_CACHE_PATH, 'r', encoding='utf-8') as f:
                         cached = json.load(f)
@@ -169,7 +170,8 @@ class RegimeHMMEngine:
                         price = cached_price
             except Exception:
                 pass
-        # 3. Hard fallback — use 51492.80 (SSoT EGX30 level)
+
+        # 3. Fast fallback — use 51492.80 (SSoT EGX30 level)
         if price is None:
             price = 51492.80
 

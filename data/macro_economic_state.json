@@ -209,5 +209,57 @@
   "macro_regime_ar": "🚨 إنذار ضغط بيعي وتصريف مؤسسي (أكثر من 81% من الأسهم المتداولة هابطة) — حظر الشراء الجديد",
   "last_sync_timestamp": "2026-10-20 18:13:10",
   "staleness_warnings_count": 0,
-  "stale_indicators": []
+  "stale_indicators": [],
+  "indices": {
+    "EGX30": {
+      "name": "EGX 30 Index",
+      "level": 52089.0,
+      "change_pct": 1.94,
+      "change_pts": 990.2,
+      "high": 52089.1,
+      "low": 51098.8,
+      "open": 51214.7,
+      "volume": 220951000
+    },
+    "EGX70EWI": {
+      "name": "EGX 70 EWI Index",
+      "level": 17903.7,
+      "change_pct": 2.17,
+      "change_pts": 380.8,
+      "high": 17903.7,
+      "low": 17522.9,
+      "open": 17552.4,
+      "volume": 906073000
+    },
+    "EGX100EWI": {
+      "name": "EGX 100 EWI Index",
+      "level": 24013.0,
+      "change_pct": 2.24,
+      "change_pts": 525.7,
+      "high": 24013.0,
+      "low": 23487.3,
+      "open": 23528.7,
+      "volume": 1127020000
+    },
+    "EGX70": {
+      "name": "EGX 70 EWI Index",
+      "level": 17903.7,
+      "change_pct": 2.17,
+      "change_pts": 380.8,
+      "high": 17903.7,
+      "low": 17522.9,
+      "open": 17552.4,
+      "volume": 906073000
+    },
+    "EGX100": {
+      "name": "EGX 100 EWI Index",
+      "level": 24013.0,
+      "change_pct": 2.24,
+      "change_pts": 525.7,
+      "high": 24013.0,
+      "low": 23487.3,
+      "open": 23528.7,
+      "volume": 1127020000
+    }
+  }
 }

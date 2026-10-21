@@ -360,23 +360,20 @@ class SmartAccumulationEngine:
         if wave_ceiling_20d < target_price:
             wave_ceiling_20d = target_price
 
-        # Special Exact Calibration for PORT.CA (Porto Group)
-        if sym == "PORT.CA":
-            cp = 0.27
-            drop_floor_1d = 0.27
-            accum_floor_5d = 0.27
-            stop_loss = 0.26
-            target_price = 0.30
-            wave_ceiling_20d = 0.32
-
         # Verify strict invariant assertion
         if not (stop_loss < accum_floor_5d <= drop_floor_1d <= cp < target_price <= wave_ceiling_20d):
             # Emergency mathematical clamping
-            drop_floor_1d = round(cp - 0.01, 2)
-            accum_floor_5d = round(drop_floor_1d, 2)
-            stop_loss = round(accum_floor_5d - 0.01, 2)
-            target_price = round(cp * 1.085, 2)
-            wave_ceiling_20d = round(target_price * 1.05, 2)
+            drop_floor_1d = round(max(0.01, cp - max(0.01, round(eff_atr * 0.45, 2))), 2)
+            if drop_floor_1d >= cp:
+                drop_floor_1d = round(max(0.01, cp - 0.01), 2)
+            accum_floor_5d = round(max(0.01, drop_floor_1d), 2)
+            stop_loss = round(max(0.005, accum_floor_5d - max(0.01, round(eff_atr * 0.50, 2))), 2)
+            if stop_loss >= accum_floor_5d:
+                stop_loss = round(max(0.005, accum_floor_5d - 0.01), 2)
+            target_price = round(min(cp * 1.35, max(cp + 0.01, round(cp * 1.085, 2))), 2)
+            if target_price <= cp:
+                target_price = round(cp + 0.01, 2)
+            wave_ceiling_20d = round(max(target_price, round(target_price * 1.05, 2)), 2)
 
         upside_pct = round(((target_price - cp) / cp) * 100.0, 1)
         bounce_target_1 = target_price

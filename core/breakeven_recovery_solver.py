@@ -216,6 +216,9 @@ class BreakevenRecoverySolver:
             f"إلى السهم التالي بحجم سيولة متزايد حتى تحرير {rolling_cash:,.2f} ج وتحقيق ربح صافٍ قدره {total_projected_profit:,.2f} ج."
         )
 
+        dyn_net_profit = float(portfolio.get("net_total_profit_including_rotations_egp", NET_CAPITAL_GAIN_EGP))
+        dyn_net_pct = float(portfolio.get("net_total_profit_pct", NET_CAPITAL_GAIN_PCT))
+
         return {
             "status": "OPTIMAL_RECOVERY_SOLVED",
             "summary": {
@@ -226,8 +229,8 @@ class BreakevenRecoverySolver:
                 "capital_breakeven_status": "ALREADY_ACHIEVED",
                 "portfolio_capital_breakeven_egp": CAPITAL_BREAKEVEN_EGP,
                 "realized_profit_achieved_egp": REALIZED_PROFIT_EGP,
-                "net_capital_gain_egp": NET_CAPITAL_GAIN_EGP,
-                "net_capital_gain_pct": NET_CAPITAL_GAIN_PCT,
+                "net_capital_gain_egp": round(dyn_net_profit, 2),
+                "net_capital_gain_pct": round(dyn_net_pct, 2),
                 "open_positions_zero_loss_target_egp": OPEN_POSITIONS_ZERO_LOSS_TARGET_EGP,
                 "explanation_ar": explanation_ar
             },

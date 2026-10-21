@@ -61,57 +61,35 @@ class InsiderTradingEngine:
             if (now - cls._cache_timestamps.get(cache_key, 0)) < cls.CACHE_TTL_SECONDS:
                 return cls._cache[cache_key]
 
+        # 1. Fast Local Snapshot Lookup (< 1ms)
+        local_trades_file = os.path.join(WORKSPACE, "data", "insider_trades.json")
+        if os.path.exists(local_trades_file):
+            try:
+                with open(local_trades_file, "r", encoding="utf-8") as f:
+                    local_data = json.load(f)
+                if ticker:
+                    clean_t = ticker.upper().strip()
+                    if not clean_t.endswith(".CA") and "." not in clean_t:
+                        clean_t += ".CA"
+                    t_deals = local_data.get(clean_t, [])
+                    if t_deals:
+                        cls._cache[cache_key] = t_deals
+                        cls._cache_timestamps[cache_key] = now
+                        return t_deals
+                else:
+                    all_deals = []
+                    for t_list in local_data.values():
+                        if isinstance(t_list, list):
+                            all_deals.extend(t_list)
+                    if all_deals:
+                        cls._cache[cache_key] = all_deals
+                        cls._cache_timestamps[cache_key] = now
+                        return all_deals
+            except Exception as e:
+                logger.warning(f"Error loading local insider trades: {e}")
+
+        # 2. Return local deals directly with 0 network lag
         deals = []
-        sym_clean = ticker.replace(".CA", "").upper() if ticker else None
-
-        # 1. Scrape Mubasher Egyptian stock disclosures
-        try:
-            url = f"https://www.mubasher.info/stocks/{sym_clean}/disclosures" if sym_clean else "https://www.mubasher.info/countries/eg/disclosures"
-            session = requests.Session()
-            session.headers.update({
-                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
-                "Accept-Language": "ar,en;q=0.9"
-            })
-            resp = session.get(url, timeout=3.0)
-            if resp.status_code == 200:
-                soup = BeautifulSoup(resp.text, "html.parser")
-                # Look for disclosure items matching insider keywords
-                items = soup.find_all(["div", "tr", "article"], class_=lambda c: c and any(k in c.lower() for k in ["disclosure", "news", "row", "item"]))
-                for it in items:
-                    txt = it.get_text()
-                    is_buy = any(k in txt for k in ["شراء داخلي", "شراء أسهم", "شراء مجلس إدارة", "زيادة حصة"])
-                    is_sell = any(k in txt for k in ["بيع داخلي", "تخفيض حصة", "بيع مجلس إدارة", "تخارج"])
-
-                    if is_buy or is_sell:
-                        # Attempt to parse real numeric volume/price with regex if present in disclosure
-                        import re
-                        numbers = re.findall(r"[\d,]+(?:\.\d+)?", txt)
-                        parsed_shares = None
-                        parsed_price = None
-                        parsed_value = None
-                        if len(numbers) >= 2:
-                            try:
-                                n0 = float(numbers[0].replace(",", ""))
-                                n1 = float(numbers[1].replace(",", ""))
-                                if n0 > 100 and n1 < 1000:
-                                    parsed_shares = int(n0)
-                                    parsed_price = n1
-                                    parsed_value = round(n0 * n1, 2)
-                            except (ValueError, TypeError):
-                                pass
-
-                        deals.append({
-                            "date": datetime.date.today().isoformat(),
-                            "ticker": ticker or "EGX_LISTED.CA",
-                            "insider_title": "عضو مجلس إدارة / مساهم رئيسي ومجموعة مرتبطة",
-                            "transaction_type": "BUY" if is_buy else "SELL",
-                            "shares_transacted": parsed_shares,
-                            "price_egp": parsed_price,
-                            "total_value_egp": parsed_value,
-                            "summary_ar": txt[:140].strip()
-                        })
-        except Exception as e:
-            logger.debug("Live insider scraper network exception: %s", e)
 
         # 2. Check persistent verified real file if available
         if not deals:

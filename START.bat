@@ -1,79 +1,48 @@
 @echo off
-title GEN-26 QUANTUM TERMINAL (v4.5) — LIVE THNDR & EGX ENGINE
+setlocal EnableExtensions
+chcp 65001 >nul 2>&1
+title GEN-26 QUANTUM TERMINAL (v4.7) - LIVE THNDR ^& EGX ENGINE
+color 0B
+
 cd /d "%~dp0"
+set "PYTHONPATH=%~dp0"
+set "PYTHONUTF8=1"
+set "PYTHONIOENCODING=utf-8"
+set "FLASK_APP=dashboard/app.py"
 
 echo ======================================================================
-echo  GEN-26 QUANTUM TERMINAL (v4.5) — LIVE THNDR & EGX ENGINE
-echo    Mode: HIGH-SPEED QUANTUM MONITORING & INTRADAY EXECUTION
-echo    Port: 5000 (Auto-Killing Any Zombie Port 5000 Processes)
+echo   GEN-26 QUANTUM TERMINAL (v4.7) - LIVE THNDR ^& EGX ENGINE
+echo   Workspace : %~dp0
+echo   URL       : http://127.0.0.1:5000
 echo ======================================================================
 echo.
 
-REM -----------------------------------------------------------------------
-REM  1. AUTO-KILL ZOMBIE PYTHON PROCESSES ON PORT 5000
-REM -----------------------------------------------------------------------
-echo [0/3] Purging any zombie processes on port 5000...
-for /f "tokens=5" %%a in ('netstat -aon ^| find ":5000" ^| find "LISTENING"') do (
-    echo [CLEANUP] Terminating zombie process on port 5000 (PID: %%a)...
-    taskkill /F /PID %%a >nul 2>&1
-)
-timeout /t 1 /nobreak >nul
-
-REM -----------------------------------------------------------------------
-REM  2. SMART PYTHON RESOLVER (Priority: C:\Python312 -> C:\Python315 -> PATH)
-REM -----------------------------------------------------------------------
-set PYTHON_EXE=
-
-if exist "C:\Python312\python.exe" (
-    echo [INFO] Using Python: C:\Python312\python.exe
-    set PYTHON_EXE=C:\Python312\python.exe
-) else if exist "C:\Python315\python.exe" (
-    echo [INFO] Using Python: C:\Python315\python.exe
-    set PYTHON_EXE=C:\Python315\python.exe
-) else (
-    where python >nul 2>nul
-    if %errorlevel% neq 0 (
-        echo [ERROR] Python was not found. Please install Python and try again.
-        pause
-        exit /b 1
+echo [1/3] Safely cleaning up any old server process on port 5000...
+powershell -NoProfile -ExecutionPolicy Bypass -Command "Get-NetTCPConnection -LocalPort 5000 -State Listen -ErrorAction SilentlyContinue | ForEach-Object { if ($_.OwningProcess -gt 4) { Stop-Process -Id $_.OwningProcess -Force -ErrorAction SilentlyContinue } }" >nul 2>&1
+for /f "tokens=5" %%a in ('netstat -ano -p tcp ^| findstr /c:":5000 " ^| findstr /i "LISTENING"') do (
+    if not "%%a"=="0" if not "%%a"=="4" (
+        echo       Stopping old PID %%a on port 5000...
+        taskkill /F /PID %%a >nul 2>&1
     )
-    echo [INFO] Using Python from system PATH
-    set PYTHON_EXE=python
 )
 
-REM -----------------------------------------------------------------------
-REM  3. VERIFY REQUIRED PACKAGES
-REM -----------------------------------------------------------------------
-%PYTHON_EXE% -c "import flask" >nul 2>nul
-if %errorlevel% neq 0 (
-    echo [WARNING] Flask not found on %PYTHON_EXE%. Installing required packages...
-    %PYTHON_EXE% -m pip install flask pandas numpy scipy beautifulsoup4 requests yfinance plotly apscheduler scikit-learn xgboost lxml pytz --quiet
-    if %errorlevel% neq 0 (
-        echo [ERROR] Failed to install Flask. Check internet connection.
-        pause
-        exit /b 1
-    )
-    echo [OK] Dependencies installed successfully.
+set "PY_EXE=C:\Python312\python.exe"
+if not exist "%PY_EXE%" (
+    set "PY_EXE=python"
 )
-
-REM -----------------------------------------------------------------------
-REM  4. LAUNCH BROWSER IN BACKGROUND AFTER 2 SECONDS DELAY
-REM -----------------------------------------------------------------------
-echo [1/2] Opening default browser at http://127.0.0.1:5000 ...
-start "" cmd /c "timeout /t 2 /nobreak >nul && start http://127.0.0.1:5000"
-
-REM -----------------------------------------------------------------------
-REM  5. RUN FLASK SERVER IN FOREGROUND WITH LIVE TERMINAL API LOGGING
-REM -----------------------------------------------------------------------
-echo [2/2] Booting GEN-26 Quantum Terminal v4.5 Server in foreground...
-echo ======================================================================
-echo  LIVE TERMINAL ACTIVE — Streaming all [API LIVE] requests in real time
-echo  Press Ctrl+C to gracefully stop the server.
+echo [2/3] Using Python Interpreter: %PY_EXE%
+echo [2.5/3] Fast-syncing live TradingView market prices...
+"%PY_EXE%" "%~dp0scripts\unify_ssot_prices.py"
+echo.
+echo [3/3] Starting GEN-26 Live Server ^& Opening Browser (http://127.0.0.1:5000)...
+echo       Keep this window OPEN to view live [API LIVE] requests in real time.
 echo ======================================================================
 echo.
 
-%PYTHON_EXE% dashboard\app.py
+"%PY_EXE%" "%~dp0dashboard\app.py"
 
 echo.
-echo [SERVER STOPPED] Press any key to exit.
+echo ======================================================================
+echo [NOTICE] Server process ended (Exit Code: %ERRORLEVEL%).
+echo Press any key to close this window...
 pause >nul

@@ -96,12 +96,33 @@ def run_full_daily_simulation():
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="GEN-26 Master Production Fund Launcher")
-    parser.add_argument("--check-only", action="store_true", help="Run pre-flight checks only")
-    parser.add_argument("--simulate", action="store_true", default=True, help="Run complete daily cycle simulation")
-    args = parser.parse_args()
+    import webbrowser
+    import traceback
 
-    if args.check_only:
+    try:
+        parser = argparse.ArgumentParser(description="GEN-26 Master Production Fund Launcher")
+        parser.add_argument("--check-only", action="store_true", help="Run pre-flight checks only")
+        parser.add_argument("--simulate", action="store_true", default=False, help="Run complete daily cycle simulation")
+        parser.add_argument("--dashboard", action="store_true", default=True, help="Launch dashboard server in foreground")
+        args, _ = parser.parse_known_args()
+
         verify_system_readiness()
-    else:
-        run_full_daily_simulation()
+        if args.simulate:
+            run_full_daily_simulation()
+
+        if not args.check_only:
+            print("\n🚀 Starting GEN-26 Live Dashboard & Opening Browser...")
+            try:
+                webbrowser.open("http://127.0.0.1:5000")
+            except Exception:
+                pass
+            from dashboard.app import app
+            app.run(host="0.0.0.0", port=5000, debug=False, use_reloader=False, threaded=True)
+    except Exception as exc:
+        print(f"\n❌ Error encountered during launcher execution: {exc}")
+        traceback.print_exc()
+        try:
+            input("\nPress Enter to exit...")
+        except Exception:
+            pass
+        sys.exit(1)

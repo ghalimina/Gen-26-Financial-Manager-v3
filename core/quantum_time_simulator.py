@@ -133,6 +133,44 @@ class QuantumTimeSimulator:
     _CACHED_RANKINGS: Optional[List[Dict[str, Any]]] = None
 
     @classmethod
+    def reset_cache(cls):
+        """Invalidates in-memory caches when live prices are synchronized."""
+        cls._CACHED_CANONICAL_PRICES = None
+        cls._CACHED_RANKINGS = None
+
+    @classmethod
+    def _load_real_portfolio(cls) -> Dict[str, Any]:
+        path = os.path.join(WORKSPACE, "data", "user_real_portfolio.json")
+        try:
+            if os.path.exists(path):
+                with open(path, "r", encoding="utf-8") as f:
+                    return json.load(f)
+        except Exception as e:
+            logger.warning(f"Failed to load real portfolio: {e}")
+        return {}
+
+    @classmethod
+    def _get_live_index_level(cls, index_name: str, fallback_level: float) -> float:
+        macro_path = os.path.join(WORKSPACE, "data", "macro_economic_state.json")
+        try:
+            if os.path.exists(macro_path):
+                with open(macro_path, "r", encoding="utf-8") as f:
+                    macro = json.load(f)
+                    indices = macro.get("indices", {})
+                    if index_name in indices and "level" in indices[index_name]:
+                        val = float(indices[index_name]["level"])
+                        if val > 0:
+                            return val
+                    alt_key = index_name + "EWI" if not index_name.endswith("EWI") else index_name
+                    if alt_key in indices and "level" in indices[alt_key]:
+                        val = float(indices[alt_key]["level"])
+                        if val > 0:
+                            return val
+        except Exception:
+            pass
+        return fallback_level
+
+    @classmethod
     def _load_canonical_prices(cls) -> Dict[str, float]:
         if cls._CACHED_CANONICAL_PRICES is not None:
             return cls._CACHED_CANONICAL_PRICES
@@ -243,20 +281,20 @@ class QuantumTimeSimulator:
 
         if is_portfolio:
             target_name_ar = "💼 المحفظة الحقيقية الكاملة (GEN-26 Portfolio)"
-            current_value = cls.PORTFOLIO_TOTAL_EQUITY
-            net_breakeven = cls.PORTFOLIO_NET_BREAKEVEN
-            typical_atr = 115.0  # Daily ATR for aggregate portfolio value
+            port_data = cls._load_real_portfolio()
+            current_value = float(port_data.get("total_portfolio_equity_egp", cls.PORTFOLIO_TOTAL_EQUITY))
+            net_breakeven = float(port_data.get("total_cost_basis_egp", cls.PORTFOLIO_NET_BREAKEVEN))
+            typical_atr = round(current_value * 0.012, 2)
             predicted_drop_floor = round(current_value - 1.20 * typical_atr, 2)
-            # Base 20-day target is +12.5% in base accumulation
             target_price = round(current_value * (1.0 + (0.125 * (days / 20.0) ** 0.65)), 2)
             hit_rate_pct = 94.8
 
         elif is_index:
             idx_spec = cls.INDEX_BENCHMARKS[target_raw]
             target_name_ar = idx_spec["name_ar"]
-            current_value = idx_spec["current_level"]
+            current_value = cls._get_live_index_level(target_raw, idx_spec["current_level"])
             net_breakeven = round(current_value * cls.THNDR_FEE_MULTIPLIER, 2)
-            typical_atr = idx_spec["typical_atr"]
+            typical_atr = round(current_value * 0.010, 2)
             predicted_drop_floor = round(current_value - 1.50 * typical_atr, 2)
             base_t_pct = idx_spec["target_20d_pct"] * (days / 20.0) ** 0.60
             target_price = round(current_value * (1.0 + base_t_pct / 100.0), 2)
@@ -265,11 +303,12 @@ class QuantumTimeSimulator:
         elif is_holding:
             h_spec = cls.PORTFOLIO_HOLDINGS_SPECS[target_raw]
             target_name_ar = h_spec["name_ar"]
-            current_value = canonical_prices.get(target_raw, h_spec["current_price"])
+            live_p = canonical_prices.get(target_raw, 0.0)
+            current_value = live_p if live_p > 0 else h_spec["current_price"]
             net_breakeven = h_spec["net_breakeven"]
-            typical_atr = h_spec["typical_atr"]
-            predicted_drop_floor = h_spec["predicted_drop_floor"]
-            target_price = h_spec["target_price"]
+            typical_atr = round(current_value * 0.025, 2)
+            predicted_drop_floor = round(current_value - 0.85 * typical_atr, 2)
+            target_price = round(current_value * 1.10, 2)
             hit_rate_pct = h_spec["hit_rate_pct"]
 
         else:
@@ -461,13 +500,15 @@ class QuantumTimeSimulator:
                 "breakeven_cross_text": bk_cross_text,
                 "is_portfolio": is_portfolio,
                 "capital_breakeven_egp": cls.PORTFOLIO_CAPITAL_BREAKEVEN if is_portfolio else None,
-                "capital_breakeven_status": "محقق بالفعل ✅ رابح +808.30 ج.م (+6.17%)" if is_portfolio else None,
+                "capital_breakeven_status": (
+                    f"محقق بالفعل ✅ رابح {'+' if float(port_data.get('net_total_profit_including_rotations_egp', 808.30)) >= 0 else ''}{float(port_data.get('net_total_profit_including_rotations_egp', 808.30)):,.2f} ج.م ({'+' if float(port_data.get('net_total_profit_pct', 6.17)) >= 0 else ''}{float(port_data.get('net_total_profit_pct', 6.17)):.2f}%)"
+                ) if is_portfolio else None,
                 "open_positions_zero_loss_target_egp": cls.PORTFOLIO_NET_BREAKEVEN if is_portfolio else None,
                 "open_positions_cost_egp": 13094.14 if is_portfolio else None,
                 "open_positions_fee_breakeven_egp": 13218.53 if is_portfolio else None,
                 "cash_and_bmm_egp": 1202.42 if is_portfolio else None,
                 "breakeven_explanation_ar": (
-                    "🛡️ تعادل رأس المال الكلي: 12,466.63 ج.م (محقق بالفعل ✅ رابح +808.30 ج.م بما يشمل +1,830.00 ج.م أرباح تدوير سابقة). "
+                    f"🛡️ تعادل رأس المال الكلي: 12,466.63 ج.م (محقق بالفعل ✅ رابح {'+' if float(port_data.get('net_total_profit_including_rotations_egp', 808.30)) >= 0 else ''}{float(port_data.get('net_total_profit_including_rotations_egp', 808.30)):,.2f} ج.م بما يشمل +1,830.00 ج.م أرباح تدوير سابقة). "
                     "🎯 هدف تصفير الخسارة الدفترية للـ 5 مراكز المفتوحة: 14,421.15 ج.م (يغطي 13,094.14 ج.م تكلفة + عمولة 0.94% = 13,218.53 ج.م + 1,202.42 ج.م كاش ووثيقة)."
                 ) if is_portfolio else f"سعر التعادل الصافي بعد خصم عمولة التداول (0.94%): {net_breakeven:.2f} ج.م"
             },

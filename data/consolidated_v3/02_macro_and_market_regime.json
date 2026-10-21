@@ -1,6 +1,6 @@
 {
   "status": "SUCCESS",
-  "as_of": "2026-10-20 18:13:22",
+  "as_of": "2026-10-21 02:52:42",
   "macro_indicators": {
     "usd_egp": {
       "rate": 52.32,
@@ -14,11 +14,11 @@
       "status": "OFFICIAL_MONETARY_POLICY"
     },
     "cpi_inflation_yoy": {
-      "rate_pct": 13.9,
+      "rate_pct": 14.5,
       "label_ar": "معدل التضخم السنوي العام للحضر (الجهاز المركزي للتعبئة والإحصاء)",
       "status": "OFFICIAL_BULLETIN"
     },
-    "real_interest_rate_pct": 5.1
+    "real_interest_rate_pct": 4.5
   },
   "regime_classification": {
     "current_regime": "DEVALUATION_BOOM",
@@ -64,7 +64,7 @@
     }
   },
   "egx_market_context": {
-    "egx30_level": 52089.0,
+    "egx30_level": 50896.1992,
     "egx30_change_pct": -0.68,
     "egx30_ytd_pct": 22.56,
     "egx70_level": 18330.8,
@@ -72,8 +72,8 @@
     "egx33_shariah_level": 6297.03,
     "total_market_cap_egp": 3999192255990.0,
     "listed_turnover_egp": 9840793226.0,
-    "market_regime": "STRONG_BULL",
-    "market_regime_name_ar": "🟢 اتجاه صاعد قوي وزخم استثماري (STRONG_BULL)",
+    "market_regime": "DISTRIBUTION_SELL_OFF",
+    "market_regime_name_ar": "🚨 موجة تصريف وضغط بيعي عام (DISTRIBUTION_SELL_OFF)",
     "circuit_breaker_active": true,
     "warning_directive_ar": "🚨 إنذار ضغط بيعي وتصريف مؤسسي (180 سهماً هابطاً من 221): المؤسسات تسجل صافي بيع -549.55M ج.م — يُحظر فتح مراكز شراء جديدة اليوم، والالتزام بحارس منع البيع بخسارة NO_LOSS_SELL_GUARD.",
     "market_breadth": {

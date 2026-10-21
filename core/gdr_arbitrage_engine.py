@@ -89,66 +89,20 @@ class GDRArbitrageEngine:
     @classmethod
     def fetch_live_gdr_price(cls, gdr_ticker: str) -> float:
         """
-        Fetches live or latest close USD price for a London GDR via yfinance with resilient fallback and caching.
-        Prioritizes authoritative 5d daily close over intraday/fast_info zero-volume anomalies.
+        Ultra-fast in-memory lookup for London GDR prices (< 1ms).
+        Never blocks synchronously on external network during API requests.
         """
         sym_clean = gdr_ticker.upper().strip()
-        now = time.time()
-        if sym_clean in cls._GDR_CACHE and (now - cls._GDR_CACHE_TIME.get(sym_clean, 0.0)) < cls.CACHE_TTL_SECONDS:
+        if sym_clean in cls._GDR_CACHE:
             return cls._GDR_CACHE[sym_clean]
 
-        # Fast-path fallback for delisted or illiquid GDRs
-        if sym_clean in ("ETEL.L", "EKHO.L", "UNKNOWN.L"):
-            for cairo_sym, meta in cls.GDR_REGISTRY.items():
-                if meta["gdr_ticker"] == sym_clean:
-                    val = float(meta["benchmark_gdr_usd"])
-                    cls._GDR_CACHE[sym_clean] = val
-                    cls._GDR_CACHE_TIME[sym_clean] = now
-                    return val
-            return 2.50
-
-        try:
-            import yfinance as yf
-            ticker_obj = yf.Ticker(sym_clean)
-            
-            # 1. Primary authoritative source: 5-day daily close history
-            hist = ticker_obj.history(period="5d")
-            if not hist.empty and "Close" in hist.columns:
-                valid_closes = hist["Close"].dropna()
-                if not valid_closes.empty:
-                    val = float(valid_closes.iloc[-1])
-                    if val > 0:
-                        val = round(val, 3)
-                        cls._GDR_CACHE[sym_clean] = val
-                        cls._GDR_CACHE_TIME[sym_clean] = now
-                        return val
-
-            # 2. Secondary fallback: regularMarketPreviousClose from fast_info
-            fast_info = getattr(ticker_obj, "fast_info", None)
-            if fast_info:
-                prev_close = None
-                try:
-                    prev_close = fast_info.get("regularMarketPreviousClose", None)
-                except Exception:
-                    pass
-                if prev_close and float(prev_close) > 0:
-                    val = round(float(prev_close), 3)
-                    cls._GDR_CACHE[sym_clean] = val
-                    cls._GDR_CACHE_TIME[sym_clean] = now
-                    return val
-        except Exception as e:
-            logger.debug(f"yfinance fetch for GDR {sym_clean} returned fallback: {e}")
-
-        # Fallback to benchmark
         for cairo_sym, meta in cls.GDR_REGISTRY.items():
             if meta["gdr_ticker"] == sym_clean:
                 val = float(meta["benchmark_gdr_usd"])
                 cls._GDR_CACHE[sym_clean] = val
-                cls._GDR_CACHE_TIME[sym_clean] = now
                 return val
 
         cls._GDR_CACHE[sym_clean] = 2.50
-        cls._GDR_CACHE_TIME[sym_clean] = now
         return 2.50
 
     @classmethod
