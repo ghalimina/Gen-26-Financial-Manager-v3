@@ -1,6 +1,6 @@
 {
   "status": "SUCCESS",
-  "as_of": "2026-10-21 03:03:50",
+  "as_of": "2026-10-21 12:30:48",
   "approved_stock": "SWDY.CA",
   "thndr_daily_card": {
     "ticker": "SWDY.CA",
@@ -10,11 +10,11 @@
     "verdict": "BUY_ON_DIP",
     "verdict_badge_ar": "🟢 شراء تراجعي عند قاع التجميع",
     "opportunity_type_ar": "حماية رأس المال وتجميد الشراء الجديد",
-    "current_price": 111.0,
-    "opening_auction_price": 111.0,
-    "target_1_price": 119.88,
-    "target_2_price": 127.65,
-    "stop_loss_price": 105.45,
+    "current_price": 110.1,
+    "opening_auction_price": 110.1,
+    "target_1_price": 118.91,
+    "target_2_price": 126.61,
+    "stop_loss_price": 104.59,
     "risk_reward_ratio": 1.6,
     "suggested_shares": 0,
     "order_value_egp": 0.0,
@@ -30,12 +30,12 @@
     "live_trading_guard_ar": "حظر التداول الحقيقي الصارم (Live Trading Strictly Blocked)"
   },
   "smart_cash_radar": {
-    "total_equity_egp": 13463.43,
+    "total_equity_egp": 13738.54,
     "free_cash_egp": 1200.0,
-    "stock_market_value_egp": 12261.01,
-    "cash_reserve_pct": 8.91,
+    "stock_market_value_egp": 12536.12,
+    "cash_reserve_pct": 8.73,
     "mandatory_cash_floor_pct": 35.0,
-    "mandatory_cash_floor_egp": 4712.2,
+    "mandatory_cash_floor_egp": 4808.49,
     "investable_surplus_cash": 0.0,
     "cash_floor_status": "CASH_FLOOR_DEFICIT",
     "recommended_funds": [
