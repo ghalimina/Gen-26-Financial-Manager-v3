@@ -2,7 +2,7 @@
   "status": "SUCCESS",
   "portfolio_id": "GEN26_REAL_USER_PORTFOLIO",
   "currency": "EGP",
-  "as_of": "2026-10-22 04:48:47",
+  "as_of": "2026-10-22 05:25:10",
   "summary": {
     "total_portfolio_equity_egp": 13736.12,
     "free_cash_egp": 1200.0,
@@ -31,7 +31,7 @@
       "cost_reduction_per_share": 11.56,
       "safety_cushion_pct": 8.61,
       "realized_swing_profit_egp": 520.0,
-      "net_breakeven_price": 135.52,
+      "net_breakeven_price": 135.54,
       "predicted_drop_floor_1d": 127.85,
       "predicted_accumulation_zone_5d": 123.84,
       "predicted_bounce_target_1": 132.82,
@@ -86,8 +86,8 @@
       "accumulation_plan_ar": "قاع التجميع المؤسسي 108.50 - 110.20 ج، الهدف الأول 117.80 ج، قمة الموجة 125.28 - 135.00 ج، حظر البيع تحت 116.93 ج.",
       "piastre_precision_levels": {
         "daily_pivot": 111.24,
-        "expected_session_low": 109.39,
-        "expected_session_high": 113.1,
+        "expected_session_low": 109.35,
+        "expected_session_high": 113.14,
         "session_direction_ar": "هابط 🔴",
         "dip_rebuy_level": 115.5,
         "peak_resistance_sell_50": 125.5,

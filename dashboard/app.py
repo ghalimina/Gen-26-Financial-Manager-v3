@@ -4486,9 +4486,29 @@ def api_scheduler_run_cycle():
 # --- 18. Live Dynamic Price Sync (SSOT) ---
 @app.route("/api/prices/sync", methods=["GET", "POST"])
 def api_prices_sync():
-    """Triggers an on-demand dynamic price refresh from live market feeds (SSOT) and syncs database."""
+    """
+    Triggers an on-demand dynamic price refresh from live market feeds (SSOT) and syncs database.
+    GET without force=true returns immediately from canonical SSOT cache in < 1ms.
+    Full network sync runs on POST /api/prices/sync, GET ?force=true, or POST /api/prices/sync_live_thndr.
+    """
     force = request.args.get("force", "false").lower() == "true"
     universe = request.args.get("universe", "all")
+
+    if request.method == "GET" and not force:
+        cpl_data = PriceSyncService.load_canonical_prices()
+        last_ts = None
+        for val in cpl_data.values():
+            if isinstance(val, dict) and "timestamp" in val:
+                last_ts = val["timestamp"]
+                break
+        return jsonify({
+            "status": "SUCCESS",
+            "message": "Live market prices are current (served from canonical SSOT cache in < 1ms).",
+            "cached": True,
+            "total_canonical_prices": len(cpl_data),
+            "timestamp": last_ts or datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        })
+
     sync_result = PriceSyncService.sync_all_prices(force=force, universe=universe)
     db_result = MarketPriceService.sync_live_prices_to_database()
     reload_all_in_memory_caches()

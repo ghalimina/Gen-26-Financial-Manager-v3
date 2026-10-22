@@ -675,7 +675,7 @@ def unify_all_ssot_data(run_consolidate: bool = True):
             qty = int(h.get("quantity", 0))
             entry_p = float(h.get("average_entry_price", cp))
             NET_BREAKEVEN_MAP = {
-                "COMI.CA": 135.52,
+                "COMI.CA": 135.54,
                 "TMGH.CA": 87.32,
                 "PHDC.CA": 13.59,
                 "SWDY.CA": 116.93,
@@ -747,6 +747,7 @@ def unify_all_ssot_data(run_consolidate: bool = True):
         port["total_stocks_market_value_egp"] = total_stocks_mv
         port["total_mutual_funds_market_value_egp"] = total_mutual_funds_mv
         port["total_portfolio_equity_egp"] = total_portfolio_equity
+        port["positions"] = list(holdings)
         port["last_updated"] = datetime.datetime.now().isoformat()
 
         with open(PORTFOLIO_PATH, "w", encoding="utf-8") as f:

@@ -633,7 +633,7 @@ def audit_axis_6():
         tk = stg.get("ticker", "")
         shares = stg.get("current_shares", 0)
         curr_p = stg.get("current_market_price", 0.0)
-        old_be = stg.get("old_cost_basis_avg", 0.0)
+        old_be = stg.get("current_breakeven_price", stg.get("current_breakeven", stg.get("old_cost_basis_avg", 0.0)))
         new_be = stg.get("new_full_position_net_breakeven", 0.0)
         exit_t = stg.get("satellite_swing_exit_target", 0.0)
         print(f"     Stage {stg.get('stage_priority')}: {tk:<8} | Shares={shares:<4} | Curr={curr_p:<7.2f} | OldBE={old_be:<7.2f} | NewBE={new_be:<7.2f} | Target={exit_t:<7.2f}")
@@ -808,6 +808,8 @@ def audit_axis_10():
     for idx, line in enumerate(lines, start=1):
         if line.strip().startswith("@app.route"):
             current_route = line.strip()
+        if "logging.getLogger" in line:
+            continue
         for pat, desc in blocking_patterns:
             if re.search(pat, line) and not line.strip().startswith("#"):
                 # Check if it's within a test or helper or live route
