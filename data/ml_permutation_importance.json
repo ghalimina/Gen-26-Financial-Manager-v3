@@ -56,6 +56,16 @@
       "importance_std": 1e-05
     },
     {
+      "feature": "sector_neutral_rsi",
+      "importance_mean": 7e-05,
+      "importance_std": 3e-05
+    },
+    {
+      "feature": "roc_1d_lag1",
+      "importance_mean": 6e-05,
+      "importance_std": 3e-05
+    },
+    {
       "feature": "finbert_sentiment_score",
       "importance_mean": 4e-05,
       "importance_std": 1e-05

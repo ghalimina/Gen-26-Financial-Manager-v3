@@ -422,5 +422,29 @@
     "start_time": "2026-10-20T18:19:26.587207",
     "error": "PORTFOLIO_CONSTRUCTION_INVALID",
     "failed_at": "2026-10-20T18:19:26.604122"
+  },
+  {
+    "session_id": "SESS_20261021_054",
+    "date": "2026-10-21",
+    "status": "FAILED",
+    "start_time": "2026-10-21T12:37:01.021810",
+    "error": "PORTFOLIO_CONSTRUCTION_INVALID",
+    "failed_at": "2026-10-21T12:37:01.046503"
+  },
+  {
+    "session_id": "SESS_20261021_055",
+    "date": "2026-10-21",
+    "status": "FAILED",
+    "start_time": "2026-10-21T17:38:48.970835",
+    "error": "PORTFOLIO_CONSTRUCTION_INVALID",
+    "failed_at": "2026-10-21T17:38:48.992234"
+  },
+  {
+    "session_id": "SESS_20261021_056",
+    "date": "2026-10-21",
+    "status": "FAILED",
+    "start_time": "2026-10-21T18:26:20.433865",
+    "error": "PORTFOLIO_CONSTRUCTION_INVALID",
+    "failed_at": "2026-10-21T18:26:20.450874"
   }
 ]
