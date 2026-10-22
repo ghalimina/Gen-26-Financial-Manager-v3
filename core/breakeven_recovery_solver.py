@@ -155,72 +155,40 @@ class BreakevenRecoverySolver:
             # Grounded stage calculations matching exact quantitative specifications
             if sym == "SWDY.CA":
                 dip_buy_price = 108.50
-                buy_cost_per_share = round(dip_buy_price * (1.0 + THNDR_FEE_RATE / 2), 4)
-                buy_shares = 11
-                actual_buy_cost = 1199.11
-                total_shares_after = qty + buy_shares
-                new_full_position_net_breakeven = 113.23
-                new_weighted_avg_cost = round(new_full_position_net_breakeven / (1.0 + THNDR_FEE_RATE / 2), 2)
-                satellite_swing_exit_target = 113.23
-                breakeven_reduction_pct = round(((breakeven_price - new_full_position_net_breakeven) / breakeven_price) * 100, 2)
-                exit_proceeds = round(buy_shares * satellite_swing_exit_target * (1.0 - THNDR_FEE_RATE / 2), 2)
-                stage_profit = round(exit_proceeds - actual_buy_cost, 2)
-                freed_cash = round((max(0.0, rolling_cash - actual_buy_cost)) + exit_proceeds, 2)
+                target_exit = 113.23
             elif sym == "PHDC.CA":
                 dip_buy_price = 12.85
-                buy_cost_per_share = round(dip_buy_price * (1.0 + THNDR_FEE_RATE / 2), 4)
-                buy_shares = 96
-                actual_buy_cost = round(buy_shares * buy_cost_per_share, 2)
-                total_shares_after = qty + buy_shares
-                new_full_position_net_breakeven = 13.32
-                new_weighted_avg_cost = round(new_full_position_net_breakeven / (1.0 + THNDR_FEE_RATE / 2), 2)
-                satellite_swing_exit_target = 13.32
-                breakeven_reduction_pct = round(((breakeven_price - new_full_position_net_breakeven) / breakeven_price) * 100, 2)
-                exit_proceeds = round(buy_shares * satellite_swing_exit_target * (1.0 - THNDR_FEE_RATE / 2), 2)
-                stage_profit = round(exit_proceeds - actual_buy_cost, 2)
-                freed_cash = round((max(0.0, rolling_cash - actual_buy_cost)) + exit_proceeds, 2)
+                target_exit = 13.32
             elif sym == "COMI.CA":
                 dip_buy_price = 127.20
-                buy_shares = 10
-                actual_buy_cost = 1273.88
-                total_shares_after = qty + buy_shares
-                new_full_position_net_breakeven = 134.02
-                new_weighted_avg_cost = round(new_full_position_net_breakeven / (1.0 + THNDR_FEE_RATE / 2), 2)
-                satellite_swing_exit_target = 131.80
-                breakeven_reduction_pct = round(((breakeven_price - new_full_position_net_breakeven) / breakeven_price) * 100, 2)
-                exit_proceeds = round(buy_shares * satellite_swing_exit_target * (1.0 - THNDR_FEE_RATE / 2), 2)
-                stage_profit = round(exit_proceeds - actual_buy_cost, 2)
-                freed_cash = round((max(0.0, rolling_cash - actual_buy_cost)) + exit_proceeds, 2)
+                target_exit = 131.80
             elif sym == "RAYA.CA":
                 dip_buy_price = 5.72
-                buy_shares = 230
-                buy_cost_per_share = round(dip_buy_price * (1.0 + THNDR_FEE_RATE / 2), 4)
-                actual_buy_cost = round(buy_shares * buy_cost_per_share, 2)
-                total_shares_after = qty + buy_shares
-                new_full_position_net_breakeven = 6.52
-                new_weighted_avg_cost = round(new_full_position_net_breakeven / (1.0 + THNDR_FEE_RATE / 2), 2)
-                satellite_swing_exit_target = 6.07
-                breakeven_reduction_pct = round(((breakeven_price - new_full_position_net_breakeven) / breakeven_price) * 100, 2)
-                exit_proceeds = round(buy_shares * satellite_swing_exit_target * (1.0 - THNDR_FEE_RATE / 2), 2)
-                stage_profit = round(exit_proceeds - actual_buy_cost, 2)
-                freed_cash = round((max(0.0, rolling_cash - actual_buy_cost)) + exit_proceeds, 2)
+                target_exit = 6.07
             else:
                 dip_buy_price = round(cur_price - 0.55 * atr_14, 2)
-                buy_cost_per_share = round(dip_buy_price * (1.0 + THNDR_FEE_RATE / 2), 4)
-                buy_shares = max(1, int(rolling_cash // buy_cost_per_share)) if rolling_cash > 0 else 1
+                target_exit = None
+
+            buy_cost_per_share = round(dip_buy_price * (1.0 + THNDR_FEE_RATE / 2), 4)
+            buy_shares = max(1, int(rolling_cash // buy_cost_per_share)) if rolling_cash > 0 else 1
+            actual_buy_cost = round(buy_shares * buy_cost_per_share, 2)
+
+            # Invariant: actual_buy_cost must never exceed rolling_cash by even 1 cent
+            if actual_buy_cost > rolling_cash and buy_shares > 1:
+                buy_shares -= 1
                 actual_buy_cost = round(buy_shares * buy_cost_per_share, 2)
-                total_shares_after = qty + buy_shares
-                new_weighted_avg_cost = round(((qty * entry_price) + (buy_shares * dip_buy_price * (1.0 + THNDR_FEE_RATE / 2))) / total_shares_after, 2)
-                new_full_position_net_breakeven = round(new_weighted_avg_cost * (1.0 + THNDR_FEE_RATE / 2), 2)
-                breakeven_reduction_pct = round(((breakeven_price - new_full_position_net_breakeven) / breakeven_price) * 100, 2)
+
+            unspent_cash = round(max(0.0, rolling_cash - actual_buy_cost), 2)
+            total_shares_after = qty + buy_shares
+            new_weighted_avg_cost = round(((qty * entry_price) + actual_buy_cost) / total_shares_after, 2)
+            new_full_position_net_breakeven = round(new_weighted_avg_cost * (1.0 + THNDR_FEE_RATE / 2), 2)
+            breakeven_reduction_pct = round(((breakeven_price - new_full_position_net_breakeven) / breakeven_price) * 100, 2)
+
+            if target_exit is not None:
+                satellite_swing_exit_target = target_exit
+            else:
                 raw_target = round(min(new_full_position_net_breakeven, max(cur_price * 1.035, dip_buy_price * 1.055)), 2)
                 satellite_swing_exit_target = round(max(cur_price + 0.02, min(new_full_position_net_breakeven, raw_target)), 2)
-                exit_proceeds = round(buy_shares * satellite_swing_exit_target * (1.0 - THNDR_FEE_RATE / 2), 2)
-                stage_profit = round(exit_proceeds - actual_buy_cost, 2)
-                freed_cash = round((max(0.0, rolling_cash - actual_buy_cost)) + exit_proceeds, 2)
-
-            total_capital_outlay += actual_buy_cost
-            total_projected_profit += stage_profit
 
             # Strict Invariant Verification
             assert dip_buy_price < cur_price < satellite_swing_exit_target, (
@@ -231,10 +199,10 @@ class BreakevenRecoverySolver:
             # Proceeds from selling satellite shares upon swing target hit (0.47% sell fee)
             exit_proceeds = round(buy_shares * satellite_swing_exit_target * (1.0 - THNDR_FEE_RATE / 2), 2)
             stage_profit = round(exit_proceeds - actual_buy_cost, 2)
-            total_projected_profit += stage_profit
+            freed_cash = round(unspent_cash + exit_proceeds, 2)
 
-            # Freed cash for the next stage = unused cash + exit proceeds
-            freed_cash = round((max(0.0, rolling_cash - actual_buy_cost)) + exit_proceeds, 2)
+            total_capital_outlay += actual_buy_cost
+            total_projected_profit += stage_profit
 
             action_plan_ar = (
                 f"المرحلة {current_stage_idx} ({cand['name_ar']}): تخصيص {actual_buy_cost:,.2f} ج لشراء {buy_shares} سهم تجميعي (Satellite) بسعر {dip_buy_price:,.2f} ج (قاع القنص التجميعي). "
