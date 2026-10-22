@@ -1,5 +1,17 @@
 [
   {
+    "notification_id": "NOTIF_7CCB4179",
+    "fingerprint": "872ec834aaa53206",
+    "timestamp": "2026-10-22 12:40:53",
+    "iso_timestamp": "2026-10-22T12:40:53.213953",
+    "category": "ROUTINE_RETRAIN",
+    "icon": "🧠",
+    "title": "🧠 اكتمال تدريب الذكاء الاصطناعي",
+    "message": "🧠 *اكتمال تدريب الذكاء الاصطناعي بنجاح*\n━━━━━━━━━━━━━━━━━━━━\n• *مصدر الزناد:* `SCHEDULED_WEEKLY`\n• *نموذج التوقع (XGBoost):* `CACHED_LOAD`\n• *نموذج التصنيف الفوقي (Meta-Label):* `TRAINED_SUCCESS`\n• *معامل التحقق OOS:* `IC = 0.0520`\n• *التدريب القادم:* `2026-10-23 12:00 UTC (الجمعة القادمة)`\n━━━━━━━━━━━━━━━━━━━━\n🚀 _تم تحديث وتثبيت أوزان الموديل بنجاح_",
+    "delivered_telegram": true,
+    "metadata": {}
+  },
+  {
     "notification_id": "NOTIF_DD80DA3E",
     "fingerprint": "4fd273e0b3124c6e",
     "timestamp": "2026-10-22 02:10:39",
