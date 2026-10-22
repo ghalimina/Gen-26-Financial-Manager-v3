@@ -32,34 +32,34 @@ class QuantumTimeSimulator:
     Quantum Time-Machine Simulator for 271 EGX Equities, Real Portfolio, and Market Indices.
     """
 
-    PORTFOLIO_TOTAL_EQUITY: float = 13274.93
-    PORTFOLIO_STOCKS_VALUE: float = 12072.51
+    PORTFOLIO_TOTAL_EQUITY: float = 13463.43
+    PORTFOLIO_STOCKS_VALUE: float = 12261.01
     PORTFOLIO_CASH_VALUE: float = 1200.00
     PORTFOLIO_BMM_VALUE: float = 2.42
     PORTFOLIO_NET_BREAKEVEN: float = 14421.15  # Sum of break-even holdings (13,218.53) + cash (1,200.00) + BMM (2.42)
     PORTFOLIO_CAPITAL_BREAKEVEN: float = 12466.63  # Original invested capital
     PORTFOLIO_REALIZED_PROFIT: float = 1830.00     # Prior realized swing profits
-    PORTFOLIO_NET_PROFIT_TOTAL: float = 808.30     # Current equity 13,274.93 - 12,466.63 = +808.30 (+6.17%)
+    PORTFOLIO_NET_PROFIT_TOTAL: float = 996.87     # Current equity 13,463.43 - 12,466.63 = +996.87 (+8.00%)
     THNDR_FEE_MULTIPLIER: float = 1.0095           # 0.94% broker fee + exchange clearance
 
     INDEX_BENCHMARKS = {
         "EGX30": {
             "name_ar": "مؤشر البورصة المصرية الرئيسي EGX30",
-            "current_level": 51492.80,
+            "current_level": 52089.00,
             "typical_atr": 420.0,
             "target_20d_pct": 5.8,
             "hit_rate_pct": 92.4
         },
         "EGX70": {
             "name_ar": "مؤشر الشركات الصغيرة والمتوسطة EGX70 EWI",
-            "current_level": 18330.80,
+            "current_level": 17903.70,
             "typical_atr": 185.0,
             "target_20d_pct": 7.2,
             "hit_rate_pct": 91.0
         },
         "EGX100": {
             "name_ar": "مؤشر EGX100 EWI الأوسع نطاقاً",
-            "current_level": 30735.60,
+            "current_level": 24013.00,
             "typical_atr": 280.0,
             "target_20d_pct": 6.5,
             "hit_rate_pct": 91.8
@@ -71,9 +71,9 @@ class QuantumTimeSimulator:
             "name_ar": "البنك التجاري الدولي (CIB)",
             "quantity": 45,
             "average_entry": 134.26,
-            "current_price": 122.00,
+            "current_price": 125.90,
             "net_breakeven": 135.54,
-            "predicted_drop_floor": 120.84,
+            "predicted_drop_floor": 122.50,
             "target_price": 138.23,
             "typical_atr": 3.80,
             "hit_rate_pct": 94.8,
@@ -83,7 +83,7 @@ class QuantumTimeSimulator:
             "name_ar": "مجموعة طلعت مصطفى",
             "quantity": 25,
             "average_entry": 86.50,
-            "current_price": 83.94,
+            "current_price": 84.79,
             "net_breakeven": 87.32,
             "predicted_drop_floor": 82.90,
             "target_price": 89.72,
@@ -95,7 +95,7 @@ class QuantumTimeSimulator:
             "name_ar": "بالم هيلز للتعمير",
             "quantity": 162,
             "average_entry": 13.46,
-            "current_price": 12.75,
+            "current_price": 12.93,
             "net_breakeven": 13.59,
             "predicted_drop_floor": 12.56,
             "target_price": 13.86,
@@ -107,10 +107,10 @@ class QuantumTimeSimulator:
             "name_ar": "السويدي إليكتريك",
             "quantity": 13,
             "average_entry": 115.83,
-            "current_price": 114.00,
+            "current_price": 111.00,
             "net_breakeven": 116.93,
-            "predicted_drop_floor": 111.44,
-            "target_price": 128.22,
+            "predicted_drop_floor": 108.50,
+            "target_price": 124.50,
             "typical_atr": 3.60,
             "hit_rate_pct": 94.8,
             "sector": "Industrial"
@@ -119,7 +119,7 @@ class QuantumTimeSimulator:
             "name_ar": "راية القابضة",
             "quantity": 159,
             "average_entry": 7.57,
-            "current_price": 5.89,
+            "current_price": 5.90,
             "net_breakeven": 7.64,
             "predicted_drop_floor": 5.75,
             "target_price": 7.79,

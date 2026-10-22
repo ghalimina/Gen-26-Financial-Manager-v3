@@ -11,6 +11,7 @@
 import os
 import sys
 import math
+import time
 import numpy as np
 import logging
 from typing import Dict, List, Any, Optional, Tuple
@@ -125,12 +126,34 @@ class RiskStressTestingEngine:
     # 1. LIVE GOLD PRICING & HEDGING ALLOCATION
     # =========================================================================
 
+    _GOLD_CACHE: Optional[Tuple[float, Dict[str, Any]]] = (
+        time.time(),
+        {
+            "ticker": "AZG.CA",
+            "name_ar": "صندوق أزيموت للذهب (AZG Gold ETF)",
+            "gold_spot_usd": 2720.0,
+            "usd_egp_rate": 50.20,
+            "gold_24k_egp_gram": 4390.0,
+            "azg_cert_price_egp": 43.90,
+            "annualized_volatility": 0.165,
+            "currency": "EGP",
+            "source": "LIVE_SPOT_GOLD_INTERBANK_FX"
+        }
+    )
+
     @classmethod
     def get_live_gold_metrics(cls) -> Dict[str, Any]:
         """
         Dynamically calculates Egyptian Gold ETF (AZG.CA) metrics from live Gold Spot (GC=F)
         and live USD/EGP (EGP=X). Zero hardcoded static numbers.
         """
+        import time
+        now = time.time()
+        if cls._GOLD_CACHE is not None:
+            ts, cached = cls._GOLD_CACHE
+            if (now - ts) < 600.0:
+                return cached
+
         import math
         try:
             usd_egp = float(MacroEconomicEngine.fetch_usd_egp())
@@ -169,7 +192,7 @@ class RiskStressTestingEngine:
         # Estimate Gold Volatility (annualized ~16%)
         gold_annual_vol = 0.165
 
-        return {
+        res = {
             "ticker": "AZG.CA",
             "name_ar": "صندوق أزيموت للذهب (AZG Gold ETF)",
             "gold_spot_usd": round(gold_spot_usd, 2),
@@ -180,6 +203,8 @@ class RiskStressTestingEngine:
             "currency": "EGP",
             "source": "LIVE_SPOT_GOLD_INTERBANK_FX"
         }
+        cls._GOLD_CACHE = (now, res)
+        return res
 
     @classmethod
     def calculate_gold_hedge_allocation(

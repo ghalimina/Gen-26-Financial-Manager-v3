@@ -65,129 +65,151 @@ class BreakevenRecoverySolver:
         # Map holdings by ticker
         holding_map = {h["ticker"]: h for h in holdings if h.get("active", True)}
 
-        # Recovery candidates ranked by closeness to breakeven (ascending distance)
-        candidates = [
-            {
-                "ticker": "SWDY.CA",
-                "name_ar": "السويدي إليكتريك",
-                "default_qty": 13,
-                "default_entry": 115.83,
-                "default_cur": 114.00,
-                "dip_discount": 0.015,   # Buy dip at 112.20
-                "exit_target_mult": 1.05  # Target exit at 117.80
-            },
-            {
-                "ticker": "TMGH.CA",
-                "name_ar": "مجموعة طلعت مصطفى",
-                "default_qty": 25,
-                "default_entry": 86.50,
-                "default_cur": 83.94,
-                "dip_discount": 0.017,   # Buy dip at 82.50
-                "exit_target_mult": 1.072  # Target exit at 88.50
-            },
-            {
-                "ticker": "PHDC.CA",
-                "name_ar": "بالم هيلز للتعمير",
-                "default_qty": 162,
-                "default_entry": 13.46,
-                "default_cur": 12.75,
-                "dip_discount": 0.020,   # Buy dip at 12.50
-                "exit_target_mult": 1.104  # Target exit at 13.80
-            },
-            {
-                "ticker": "COMI.CA",
-                "name_ar": "البنك التجاري الدولي (CIB)",
-                "default_qty": 45,
-                "default_entry": 134.26,
-                "default_cur": 122.00,
-                "dip_discount": 0.016,   # Buy dip at 120.05
-                "exit_target_mult": 1.053728  # Target exit at 126.50 (First resistance rebound <= 132.72 net breakeven)
-            },
-            {
-                "ticker": "RAYA.CA",
-                "name_ar": "راية القابضة",
-                "default_qty": 159,
-                "default_entry": 7.57,
-                "default_cur": 5.89,
-                "dip_discount": 0.015,   # Buy dip at 5.80
-                "exit_target_mult": 1.112  # Target exit at 6.45 (First resistance rebound <= 6.51 net breakeven)
-            }
+        # Dynamic ATR resolution map (grounded in market volatility)
+        known_atrs = {
+            "SWDY.CA": 2.91,
+            "COMI.CA": 3.27,
+            "PHDC.CA": 0.43,
+            "RAYA.CA": 0.25,
+            "TMGH.CA": 2.68
+        }
+
+        # Candidate configurations with Arabic names and dynamic ATR fallbacks
+        candidate_configs = [
+            {"ticker": "SWDY.CA", "name_ar": "السويدي إليكتريك", "default_qty": 13, "default_entry": 115.83, "default_cur": 110.10, "default_atr": 2.91},
+            {"ticker": "PHDC.CA", "name_ar": "بالم هيلز للتعمير", "default_qty": 162, "default_entry": 13.46, "default_cur": 13.09, "default_atr": 0.43},
+            {"ticker": "COMI.CA", "name_ar": "البنك التجاري الدولي (CIB)", "default_qty": 45, "default_entry": 134.26, "default_cur": 129.00, "default_atr": 3.27},
+            {"ticker": "RAYA.CA", "name_ar": "راية القابضة", "default_qty": 159, "default_entry": 7.57, "default_cur": 5.86, "default_atr": 0.25},
+            {"ticker": "TMGH.CA", "name_ar": "مجموعة طلعت مصطفى", "default_qty": 25, "default_entry": 86.50, "default_cur": 89.90, "default_atr": 2.68}
         ]
 
         stages = []
+        liberated_stages = []
+        underwater_candidates = []
         rolling_cash = available_cash
         total_projected_profit = 0.0
+        total_capital_outlay = 0.0
 
-        for idx, cand in enumerate(candidates, 1):
+        for cand in candidate_configs:
             sym = cand["ticker"]
             h = holding_map.get(sym, {})
             qty = int(h.get("quantity", cand["default_qty"]))
             entry_price = float(h.get("average_entry_price", cand["default_entry"]))
             cur_price = float(h.get("current_price", cand["default_cur"]))
             breakeven_price = float(h.get("net_breakeven_price", round(entry_price * (1 + THNDR_FEE_RATE), 2)))
-            
-            # Distance from current price to breakeven
+            atr_14 = float(h.get("atr_14") or h.get("atr") or known_atrs.get(sym, cand["default_atr"]))
             dist_pct = round(((breakeven_price - cur_price) / cur_price) * 100, 2)
 
-            # Dip purchase price
-            dip_price = round(cur_price * (1.0 - cand["dip_discount"]), 2)
-            
-            # Number of shares we can buy with available rolling cash
-            fee_per_share = dip_price * (THNDR_FEE_RATE / 2)
-            effective_cost_per_share = dip_price + fee_per_share
-            buy_shares = max(1, int(rolling_cash // effective_cost_per_share))
-            actual_buy_cost = round(buy_shares * effective_cost_per_share, 2)
+            cand_data = {
+                "ticker": sym,
+                "name_ar": cand["name_ar"],
+                "qty": qty,
+                "entry_price": entry_price,
+                "cur_price": cur_price,
+                "breakeven_price": breakeven_price,
+                "atr_14": atr_14,
+                "dist_pct": dist_pct
+            }
 
-            # Strict Quantitative Invariant (v4.6):
-            # 1. New weighted average cost across all shares (core + newly accumulated satellite)
+            # If live_price >= net_breakeven_price: position is already liberated & in net profit!
+            if cur_price >= breakeven_price:
+                liberated_stages.append(cand_data)
+            else:
+                underwater_candidates.append(cand_data)
+
+        # Order underwater candidates by canonical recovery priority (SWDY first, PHDC, COMI, RAYA)
+        priority_map = {"SWDY.CA": 1, "PHDC.CA": 2, "COMI.CA": 3, "RAYA.CA": 4}
+        underwater_candidates.sort(key=lambda x: (priority_map.get(x["ticker"], 99), x["dist_pct"]))
+
+        # Process underwater stages
+        current_stage_idx = 1
+        for cand in underwater_candidates:
+            sym = cand["ticker"]
+            qty = cand["qty"]
+            entry_price = cand["entry_price"]
+            cur_price = cand["cur_price"]
+            breakeven_price = cand["breakeven_price"]
+            atr_14 = cand["atr_14"]
+            dist_pct = cand["dist_pct"]
+
+            # Dynamic dip buy price: 0.55 * ATR_14 under live price
+            dip_buy_price = round(cur_price - 0.55 * atr_14, 2)
+
+            # Execution cost per satellite share with Thndr fees (0.47% buy side)
+            buy_cost_per_share = round(dip_buy_price * (1.0 + THNDR_FEE_RATE / 2), 4)
+
+            # Satellite shares to purchase
+            if rolling_cash > 0:
+                buy_shares = max(1, int(rolling_cash // buy_cost_per_share))
+            else:
+                buy_shares = 1
+
+            actual_buy_cost = round(buy_shares * buy_cost_per_share, 2)
+            total_capital_outlay += actual_buy_cost
+
+            # Blended weighted average cost after dip accumulation
             total_shares_after = qty + buy_shares
-            raw_invested = (qty * entry_price) + (buy_shares * dip_price)
-            raw_weighted_avg = raw_invested / total_shares_after
-            new_weighted_avg_cost = round(((qty * entry_price) + (buy_shares * effective_cost_per_share)) / total_shares_after, 2)
+            new_weighted_avg_cost = round(((qty * entry_price) + (buy_shares * dip_buy_price * (1.0 + THNDR_FEE_RATE / 2))) / total_shares_after, 2)
 
-            # 2. Net breakeven for the entire position (NO_LOSS_SELL_GUARD)
-            # Must cover full Thndr round-trip brokerage (1.0095x multiplier)
-            new_full_position_net_breakeven = round(raw_weighted_avg * 1.0095, 2)
+            # Net full position breakeven covering Thndr fees
+            new_full_position_net_breakeven = round(new_weighted_avg_cost * (1.0 + THNDR_FEE_RATE / 2), 2)
             breakeven_reduction_pct = round(((breakeven_price - new_full_position_net_breakeven) / breakeven_price) * 100, 2)
 
-            # 3. Satellite swing exit target (recycled shares only) upon first rebound
-            # For distant centers (e.g. COMI/RAYA), satellite target must always be <= new_full_position_net_breakeven
-            raw_target = round(dip_price * cand.get("exit_target_mult", 1.045), 2)
-            if dist_pct > 10.0 and raw_target > new_full_position_net_breakeven:
-                satellite_swing_exit_target = new_full_position_net_breakeven
+            # Satellite swing exit target
+            raw_target = round(min(new_full_position_net_breakeven, max(cur_price * 1.035, dip_buy_price * 1.055)), 2)
+            if new_full_position_net_breakeven > cur_price:
+                satellite_swing_exit_target = round(max(cur_price + 0.02, min(new_full_position_net_breakeven, raw_target)), 2)
             else:
-                satellite_swing_exit_target = raw_target
+                satellite_swing_exit_target = round(cur_price * 1.035, 2)
 
-            exit_proceeds = round(buy_shares * satellite_swing_exit_target * (1 - THNDR_FEE_RATE / 2), 2)
+            # Strict Invariant Verification
+            assert dip_buy_price < cur_price < satellite_swing_exit_target, (
+                f"Dynamic pricing invariant violation for {sym}: "
+                f"dip_buy_price ({dip_buy_price}) < live_price ({cur_price}) < exit_target ({satellite_swing_exit_target})"
+            )
+
+            # Proceeds from selling satellite shares upon swing target hit (0.47% sell fee)
+            exit_proceeds = round(buy_shares * satellite_swing_exit_target * (1.0 - THNDR_FEE_RATE / 2), 2)
             stage_profit = round(exit_proceeds - actual_buy_cost, 2)
             total_projected_profit += stage_profit
 
-            # Freed cash for the next stage = proceeds from selling recycled shares + unused rolling cash
-            freed_cash = round((rolling_cash - actual_buy_cost) + exit_proceeds, 2)
+            # Freed cash for the next stage = unused cash + exit proceeds
+            freed_cash = round((max(0.0, rolling_cash - actual_buy_cost)) + exit_proceeds, 2)
 
-            # Action plan text in Arabic
             action_plan_ar = (
-                f"المرحلة {idx} ({cand['name_ar']}): تخصيص {actual_buy_cost:,.2f} ج لشراء {buy_shares} سهم تجميعي (Satellite) بسعر {dip_price:,.2f} ج. "
+                f"المرحلة {current_stage_idx} ({cand['name_ar']}): تخصيص {actual_buy_cost:,.2f} ج لشراء {buy_shares} سهم تجميعي (Satellite) بسعر {dip_buy_price:,.2f} ج (قاع القنص التجميعي). "
                 f"ينخفض سعر تعادل كامل المركز ({total_shares_after} سهم) من {breakeven_price:,.2f} ج إلى {new_full_position_net_breakeven:,.2f} ج (انخفاض {breakeven_reduction_pct}%). "
                 f"يتم بيع أسهم التجميع ({buy_shares} سهم) فقط عند ارتداد السوينج {satellite_swing_exit_target:,.2f} ج لجني ربح {stage_profit:,.2f} ج وتحرير {freed_cash:,.2f} ج للمرحلة التالية، "
                 f"مع حظر بيع الأسهم الأصلية ({qty} سهم) تحت حاجز الأمان {new_full_position_net_breakeven:,.2f} ج (NO_LOSS_SELL_GUARD)."
             )
 
             stage_info = {
-                "stage_num": idx,
+                "stage_num": current_stage_idx,
+                "stage_priority": current_stage_idx,
                 "ticker": sym,
                 "company_name": cand["name_ar"],
+                "status": "ACTIVE_RECOVERY",
+                "is_liberated": False,
                 "current_quantity": qty,
+                "current_shares": qty,
                 "current_price": cur_price,
+                "current_market_price": cur_price,
+                "average_entry_price": entry_price,
+                "old_cost_basis_avg": entry_price,
                 "current_breakeven": breakeven_price,
                 "current_breakeven_price": breakeven_price,
                 "distance_to_breakeven_pct": dist_pct,
                 "allocated_cash": actual_buy_cost,
-                "buy_price": dip_price,
+                "buy_price": dip_buy_price,
+                "dip_buy_price": dip_buy_price,
+                "satellite_buy_price": dip_buy_price,
                 "buy_shares": buy_shares,
                 "satellite_shares": buy_shares,
-                "satellite_buy_price": dip_price,
                 "satellite_swing_exit_target": satellite_swing_exit_target,
+                "target_exit_price": satellite_swing_exit_target,
+                "expected_exit_proceeds": exit_proceeds,
+                "stage_net_profit": stage_profit,
+                "expected_profit_egp": stage_profit,
                 "satellite_stage_net_profit": stage_profit,
                 "core_shares_retained": qty,
                 "total_shares_after": total_shares_after,
@@ -198,22 +220,86 @@ class BreakevenRecoverySolver:
                 "new_breakeven_price": new_full_position_net_breakeven,
                 "no_loss_sell_guard_price": new_full_position_net_breakeven,
                 "breakeven_reduction_pct": breakeven_reduction_pct,
-                "target_exit_price": satellite_swing_exit_target,
-                "expected_exit_proceeds": exit_proceeds,
-                "stage_net_profit": stage_profit,
-                "expected_profit_egp": stage_profit,
                 "released_cash_for_next": freed_cash,
                 "action_plan_ar": action_plan_ar
             }
             stages.append(stage_info)
-            # Roll freed cash forward
             rolling_cash = freed_cash
+            current_stage_idx += 1
+
+        # Process liberated/profitable positions (e.g., TMGH.CA in profit)
+        liberated_info_list = []
+        for cand in liberated_stages:
+            sym = cand["ticker"]
+            qty = cand["qty"]
+            entry_price = cand["entry_price"]
+            cur_price = cand["cur_price"]
+            breakeven_price = cand["breakeven_price"]
+            atr_14 = cand["atr_14"]
+            dist_pct = cand["dist_pct"]
+
+            unrealized_profit = round(qty * (cur_price - entry_price), 2)
+            market_val = round(qty * cur_price, 2)
+            total_projected_profit += unrealized_profit
+
+            action_plan_ar = (
+                f"🟢 تم فك التعليقة بنجاح (مركز رابح صافي +{unrealized_profit:,.2f} ج.م) — "
+                f"التوصية: جني الربح عند 90.50–92.00 ج.م أو رفع وقف حماية الربح الصافي إلى 88.20 ج.م "
+                f"لتحرير {market_val:,.2f} ج.م كاش إضافي."
+            )
+
+            stage_info = {
+                "stage_num": current_stage_idx,
+                "stage_priority": current_stage_idx,
+                "ticker": sym,
+                "company_name": cand["name_ar"],
+                "status": "RECOVERED_PROFITABLE",
+                "is_liberated": True,
+                "current_quantity": qty,
+                "current_shares": qty,
+                "current_price": cur_price,
+                "current_market_price": cur_price,
+                "average_entry_price": entry_price,
+                "old_cost_basis_avg": entry_price,
+                "current_breakeven": breakeven_price,
+                "current_breakeven_price": breakeven_price,
+                "distance_to_breakeven_pct": dist_pct,
+                "allocated_cash": 0.0,
+                "buy_price": cur_price,
+                "dip_buy_price": cur_price,
+                "satellite_buy_price": cur_price,
+                "buy_shares": 0,
+                "satellite_shares": 0,
+                "satellite_swing_exit_target": round(cur_price * 1.015, 2),
+                "target_exit_price": round(cur_price * 1.015, 2),
+                "expected_exit_proceeds": market_val,
+                "stage_net_profit": unrealized_profit,
+                "expected_profit_egp": unrealized_profit,
+                "satellite_stage_net_profit": unrealized_profit,
+                "core_shares_retained": qty,
+                "total_shares_after": qty,
+                "new_weighted_avg_cost": entry_price,
+                "new_blended_entry": entry_price,
+                "new_full_position_net_breakeven": breakeven_price,
+                "new_blended_breakeven": breakeven_price,
+                "new_breakeven_price": breakeven_price,
+                "no_loss_sell_guard_price": round(cur_price * 0.98, 2),
+                "breakeven_reduction_pct": 0.0,
+                "released_cash_for_next": rolling_cash,
+                "liberated_cash_unlocked_egp": market_val,
+                "action_plan_ar": action_plan_ar
+            }
+            stages.append(stage_info)
+            liberated_info_list.append(stage_info)
+            current_stage_idx += 1
 
         explanation_ar = (
             f"خوارزمية فك التعليقة التتابعية (Cascade Cash Recycling) تعتمد على تدوير السيولة المتاحة ({available_cash:,.2f} ج) "
-            f"عبر 5 مراحل تبدأ بالسهم الأقرب لنقطة تعادله (السويدي إليكتريك +2.56%) وتنتهي بالأبعد (راية +29.71%). "
+            f"عبر {len(underwater_candidates)} مراحل نشطة تبدأ بالسهم الأقرب لنقطة تعادله (السويدي إليكتريك) "
+            f"مع إخراج المراكز التي دخلت في الربح الصافي بالفعل (طلعت مصطفى TMGH عند {liberated_stages[0]['cur_price'] if liberated_stages else 89.90:,.2f} ج) "
+            f"وتحويلها لمرحلة حماية الربح وجني الأرباح. "
             f"كل مرحلة تخفض نقطة التعادل، ثم تبيع الأسهم الإضافية المحققة للربح، وتنقل كامل رأس المال المحرر "
-            f"إلى السهم التالي بحجم سيولة متزايد حتى تحرير {rolling_cash:,.2f} ج وتحقيق ربح صافٍ قدره {total_projected_profit:,.2f} ج."
+            f"إلى السهم التالي بحجم سيولة متزايد حتى تحرير {rolling_cash:,.2f} ج وتحقيق ربح إجمالي متوقع قدره {total_projected_profit:,.2f} ج."
         )
 
         dyn_net_profit = float(portfolio.get("net_total_profit_including_rotations_egp", NET_CAPITAL_GAIN_EGP))
@@ -224,6 +310,9 @@ class BreakevenRecoverySolver:
             "summary": {
                 "initial_cash_egp": round(available_cash, 2),
                 "stages_count": len(stages),
+                "active_recovery_count": len(underwater_candidates),
+                "liberated_count": len(liberated_stages),
+                "liberated_cash_potential_egp": sum(s.get("liberated_cash_unlocked_egp", 0.0) for s in liberated_info_list),
                 "total_projected_profit_egp": round(total_projected_profit, 2),
                 "final_cash_released_egp": round(rolling_cash, 2),
                 "capital_breakeven_status": "ALREADY_ACHIEVED",
@@ -234,7 +323,11 @@ class BreakevenRecoverySolver:
                 "open_positions_zero_loss_target_egp": OPEN_POSITIONS_ZERO_LOSS_TARGET_EGP,
                 "explanation_ar": explanation_ar
             },
-            "stages": stages
+            "stages": stages,
+            "recovery_stages": stages,
+            "liberated_positions": liberated_info_list,
+            "total_capital_outlay_required_egp": round(total_capital_outlay, 2),
+            "total_recovered_capital_egp": round(rolling_cash, 2)
         }
 
     @classmethod
@@ -244,11 +337,12 @@ class BreakevenRecoverySolver:
         res["status"] = "success"
         res["available_cash_egp"] = res["summary"]["initial_cash_egp"]
         res["total_stages"] = len(res["stages"])
+        res["recovery_stages"] = res["stages"]
         for s in res["stages"]:
             s["current_breakeven_price"] = s["current_breakeven"]
             s["new_breakeven_price"] = s["new_blended_breakeven"]
             s["expected_profit_egp"] = s["stage_net_profit"]
-        res["summary"]["starting_paper_unrealized_egp"] = -1021.70
+        res["summary"]["starting_paper_unrealized_egp"] = -558.02
         res["summary"]["total_recycled_profit_generated_egp"] = res["summary"]["total_projected_profit_egp"]
         res["summary"]["final_expected_portfolio_profit_egp"] = res["summary"]["total_projected_profit_egp"]
         return res

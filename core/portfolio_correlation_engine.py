@@ -69,6 +69,14 @@ class PortfolioCorrelationEngine:
             return float(info["beta_egx30"])
         return 1.00
 
+    _SECTOR_MAP: Optional[Dict[str, str]] = None
+
+    @classmethod
+    def _get_sector(cls, ticker: str) -> str:
+        if cls._SECTOR_MAP is None:
+            cls._SECTOR_MAP = {x["ticker"]: x.get("sector", "عام") for x in EGXUniverseLoader.get_universe("all")}
+        return cls._SECTOR_MAP.get(ticker, "عام")
+
     @classmethod
     def compute_pairwise_correlation(cls, ticker1: str, ticker2: str) -> float:
         """Computes pairwise correlation between two equities."""
@@ -78,10 +86,9 @@ class PortfolioCorrelationEngine:
         if s1 == s2:
             return 1.00
 
-        # Retrieve sectors
-        u = EGXUniverseLoader.get_universe("all")
-        sec1 = next((x["sector"] for x in u if x["ticker"] == s1), "عام")
-        sec2 = next((x["sector"] for x in u if x["ticker"] == s2), "عام")
+        # Retrieve sectors via O(1) map
+        sec1 = cls._get_sector(s1)
+        sec2 = cls._get_sector(s2)
 
         # Intra-sector check
         if sec1 == sec2 and sec1 in cls._SECTOR_CORRELATIONS:

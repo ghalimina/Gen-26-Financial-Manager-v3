@@ -2,8 +2,8 @@
   "status": "CALIBRATED_OPTIMAL",
   "optimization_method": "SciPy SLSQP Maximize Sharpe Ratio (Top-Quintile Basket)",
   "lookback_months": 12,
-  "sample_size": 176456,
-  "optimal_sharpe_ratio": 0.706,
+  "sample_size": 176727,
+  "optimal_sharpe_ratio": 0.705,
   "weights": {
     "w_fundamental": 0.25,
     "w_technical": 0.25,

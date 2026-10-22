@@ -12,7 +12,7 @@
 # 5. SQLite Persistence & Report Generation
 # =============================================================================
 
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List, Optional, Tuple
 import json
 import datetime
 import sqlite3
@@ -186,14 +186,46 @@ class TradingAgentsOrchestrator:
         except Exception as e:
             print(f"[WARN] Failed to persist TradingAgents session: {e}")
 
+    _SCAN_CACHE: Optional[Tuple[float, List[Dict[str, Any]]]] = None
+
     @classmethod
-    def run_universe_scan(cls, tickers: Optional[List[str]] = None) -> List[Dict[str, Any]]:
-        """Runs multi-agent scan across focus equities."""
+    def run_universe_scan(cls, tickers: Optional[List[str]] = None, force_recompute: bool = False) -> List[Dict[str, Any]]:
+        """Runs multi-agent scan across focus equities with sub-10ms cached response."""
+        import time
+        now = time.time()
+        if not force_recompute and cls._SCAN_CACHE is not None:
+            ts, cached = cls._SCAN_CACHE
+            if (now - ts) < 300.0:
+                return cached
+
         target_list = tickers or ["COMI.CA", "SWDY.CA", "TMGH.CA", "MFPC.CA", "ETEL.CA", "FWRY.CA"]
         results = []
+
+        # Fast lookup from SQLite persisted sessions
+        if not force_recompute:
+            try:
+                from core.database_engine import SQLiteDatabaseEngine
+                db_path = SQLiteDatabaseEngine.DEFAULT_DB_PATH
+                if os.path.exists(db_path):
+                    conn = sqlite3.connect(db_path)
+                    cur = conn.cursor()
+                    db_results = []
+                    for sym in target_list:
+                        cur.execute("SELECT full_payload FROM trading_agents_debates WHERE ticker = ? ORDER BY timestamp DESC LIMIT 1", (sym,))
+                        row = cur.fetchone()
+                        if row and row[0]:
+                            db_results.append(json.loads(row[0]))
+                    conn.close()
+                    if len(db_results) >= len(target_list) or len(db_results) >= 3:
+                        cls._SCAN_CACHE = (now, db_results)
+                        return db_results
+            except Exception:
+                pass
+
         for sym in target_list:
             res = cls.run_stock_deliberation(sym, persist=True)
             results.append(res)
+        cls._SCAN_CACHE = (now, results)
         return results
 
 

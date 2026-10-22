@@ -505,14 +505,14 @@ def unify_all_ssot_data(run_consolidate: bool = True):
         vol = q["volume"]
 
         # Update or insert market_prices
-        cur.execute("SELECT id FROM market_prices WHERE ticker = ?", (ticker,))
+        cur.execute("SELECT id FROM market_prices WHERE ticker = ? AND market_date = ?", (ticker, today_str))
         row = cur.fetchone()
         if row:
             cur.execute("""
                 UPDATE market_prices 
-                SET close_price = ?, open_price = ?, high_price = ?, low_price = ?, volume = ?, market_date = ?, created_at = ?
-                WHERE ticker = ?
-            """, (p, op, hp, lp, vol, today_str, now_str, ticker))
+                SET close_price = ?, open_price = ?, high_price = ?, low_price = ?, volume = ?, created_at = ?
+                WHERE id = ?
+            """, (p, op, hp, lp, vol, now_str, row[0]))
         else:
             cur.execute("""
                 INSERT INTO market_prices (ticker, market_date, open_price, high_price, low_price, close_price, volume, adv_20d, created_at)
@@ -624,6 +624,7 @@ def unify_all_ssot_data(run_consolidate: bool = True):
                 item["stop_loss"] = stop_loss
                 item["target_price"] = target_price
                 item["expected_upside_pct"] = upside_pct
+                item["target_expected_return_pct"] = upside_pct
                 item["sl_pct"] = sl_pct
                 item["predicted_drop_floor_1d"] = drop_floor_1d
                 item["predicted_accumulation_zone_5d"] = accum_zone_5d

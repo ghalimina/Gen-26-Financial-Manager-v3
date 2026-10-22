@@ -263,11 +263,20 @@ class DataQualityEngine:
         }
 
     @classmethod
-    def compute_universe_data_quality_scores(cls) -> Dict[str, Dict[str, Any]]:
+    def compute_universe_data_quality_scores(cls, force_recompute: bool = False) -> Dict[str, Dict[str, Any]]:
         """
         Computes Data Quality Scores across all equities stored in historical_daily_bars.
         Saves snapshot to data/data_quality_scores.json.
         """
+        if not force_recompute and os.path.exists(DQS_CACHE_FILE):
+            try:
+                with open(DQS_CACHE_FILE, "r", encoding="utf-8") as f:
+                    cached_data = json.load(f)
+                    if cached_data and len(cached_data) > 0:
+                        return cached_data
+            except Exception:
+                pass
+
         results: Dict[str, Dict[str, Any]] = {}
         if not os.path.exists(DB_PATH):
             return results

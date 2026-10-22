@@ -1,5 +1,61 @@
 [
   {
+    "notification_id": "NOTIF_DD80DA3E",
+    "fingerprint": "4fd273e0b3124c6e",
+    "timestamp": "2026-10-22 02:10:39",
+    "iso_timestamp": "2026-10-22T02:10:39.116970",
+    "category": "BUY_SIGNAL",
+    "icon": "🚨",
+    "title": "🚨 إشارة شراء: COMI.CA",
+    "message": "🚨 *إشارة شراء مؤكدة:* `COMI.CA` (البنك التجاري الدولي)\n━━━━━━━━━━━━━━━━━━━━\n• *سعر الإشارة اللحظي:* `140.00` ج.م\n⏱️ *صلاحية الإشارة:* `30 دقيقة` (تنتهي في `14:30:00`)\n🎯 *النطاق الآمن للدخول:* من `138.00` إلى حد أقصى `140.70` ج.م\n🛑 *وقف الخسارة الصارم:* `130.20` ج.م\n🏹 *الهدف الأول:* `148.50` ج.م\n⭐ *ثقة النموذج الكمي:* `89.5%`\n━━━━━━━━━━━━━━━━━━━━\n⚠️ *تحذير:* يُمنع الشراء إذا تجاوز السعر `140.70` ج.م للحفاظ على إدارة المخاطر.\n━━━━━━━━━━━━━━━━━━━━\n🏛️ _منظومة GEN-26 لإدارة التداول اليدوي الذكي (Human-in-the-Loop)_",
+    "delivered_telegram": true,
+    "metadata": {
+      "ticker": "COMI.CA"
+    }
+  },
+  {
+    "notification_id": "NOTIF_A8138C41",
+    "fingerprint": "9b5924d22aa8e3b9",
+    "timestamp": "2026-10-22 02:08:24",
+    "iso_timestamp": "2026-10-22T02:08:24.753091",
+    "category": "RESEARCH_PROMOTION",
+    "icon": "🚀",
+    "title": "🚀 ترقية استراتيجية جديدة (EXP_20261022_020824_70fa)",
+    "message": "🚀 *[ترقية استراتيجية جديدة]* نجح العميل الباحث في ترقية استراتيجية جديدة `EXP_20261022_020824_70fa`: *Multi-Factor EGX Alpha Multiplier [BULL_TREND_HIGH_VOL]* بنسبة Sharpe خارج العينة = `1.99` (مقابل داخل العينة `2.45`) وتراجع أقصى = `8.4%` بعد اجتياز فحص العميل الناقد واقتطاع 0.35% عمولات تداول و10% ضريبة الأرباح الرأسمالية (CGT).\n━━━━━━━━━━━━━━━━━━━━\n• *كود التجربة:* `EXP_20261022_020824_70fa`\n• *حالة الترقية:* `PROMOTED TO PRODUCTION`\n• *المعايرة الآلية:* `تم تحديث أوزان الإنتاج بنجاح دون الإخلال بحدود المخاطر`\n━━━━━━━━━━━━━━━━━━━━\n🧪 _معمل الأبحاث والتطور الكمي المستقل (Autonomous Quant Research Lab)_",
+    "delivered_telegram": true,
+    "metadata": {}
+  },
+  {
+    "notification_id": "NOTIF_08A573F4",
+    "fingerprint": "faf37e83429a5a39",
+    "timestamp": "2026-10-22 02:08:24",
+    "iso_timestamp": "2026-10-22T02:08:24.301261",
+    "category": "GENERAL",
+    "icon": "🔔",
+    "title": "🔔 إشعار: GENERAL",
+    "message": "🔔 *GEN-26 Quant Terminal Live Telemetry Active*\n• 6-Pillar Ensemble Engine: `ONLINE`\n• London GDR Parity: `TRACKING`",
+    "delivered_telegram": true,
+    "metadata": {}
+  },
+  {
+    "notification_id": "NOTIF_B23979D8",
+    "fingerprint": "f018950aa908e235",
+    "timestamp": "2026-10-22 02:07:16",
+    "iso_timestamp": "2026-10-22T02:07:16.428841",
+    "category": "BREAKEVEN_PROFIT_ALERT",
+    "icon": "fa-circle-check",
+    "title": "🎉 سهم مجموعة طلعت مصطفى (TMGH.CA) تخطى نقطة التعادل الصافي بعد العمولة!",
+    "message": "🎉 سهم مجموعة طلعت مصطفى (TMGH.CA) تخطى نقطة التعادل الصافي بعد احتساب عمولة ثاندر (0.94%) مسجلاً 89.90 ج.م (سعر التعادل: 87.31 ج.م) وأصبح في منطقة الربح الصافي (+2.97%)!",
+    "delivered_telegram": true,
+    "metadata": {
+      "ticker": "TMGH.CA",
+      "current_price": 89.9,
+      "net_breakeven": 87.31,
+      "gain_pct": 2.97,
+      "alert_type": "BREAKEVEN_PROFIT_ALERT"
+    }
+  },
+  {
     "notification_id": "NOTIF_CA4C7417",
     "fingerprint": "13dd83ac87a075f6",
     "timestamp": "2026-10-21 02:59:09",

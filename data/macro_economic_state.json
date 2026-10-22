@@ -213,53 +213,53 @@
   "indices": {
     "EGX30": {
       "name": "EGX 30 Index",
-      "level": 52089.0,
-      "change_pct": 1.94,
-      "change_pts": 990.2,
-      "high": 52089.1,
-      "low": 51098.8,
-      "open": 51214.7,
-      "volume": 220951000
+      "level": 52854.9,
+      "change_pct": 1.47,
+      "change_pts": 765.9,
+      "high": 52910.4,
+      "low": 52089.0,
+      "open": 52636.9,
+      "volume": 178413000
     },
     "EGX70EWI": {
       "name": "EGX 70 EWI Index",
-      "level": 17903.7,
-      "change_pct": 2.17,
-      "change_pts": 380.8,
-      "high": 17903.7,
-      "low": 17522.9,
-      "open": 17552.4,
-      "volume": 906073000
+      "level": 17732.6,
+      "change_pct": -0.96,
+      "change_pts": -171.1,
+      "high": 18085.7,
+      "low": 17706.2,
+      "open": 17947.9,
+      "volume": 773656000
     },
     "EGX100EWI": {
       "name": "EGX 100 EWI Index",
-      "level": 24013.0,
-      "change_pct": 2.24,
-      "change_pts": 525.7,
-      "high": 24013.0,
-      "low": 23487.3,
-      "open": 23528.7,
-      "volume": 1127020000
+      "level": 23881.7,
+      "change_pct": -0.55,
+      "change_pts": -131.3,
+      "high": 24240.5,
+      "low": 23818.8,
+      "open": 24101.2,
+      "volume": 952069000
     },
     "EGX70": {
       "name": "EGX 70 EWI Index",
-      "level": 17903.7,
-      "change_pct": 2.17,
-      "change_pts": 380.8,
-      "high": 17903.7,
-      "low": 17522.9,
-      "open": 17552.4,
-      "volume": 906073000
+      "level": 17732.6,
+      "change_pct": -0.96,
+      "change_pts": -171.1,
+      "high": 18085.7,
+      "low": 17706.2,
+      "open": 17947.9,
+      "volume": 773656000
     },
     "EGX100": {
       "name": "EGX 100 EWI Index",
-      "level": 24013.0,
-      "change_pct": 2.24,
-      "change_pts": 525.7,
-      "high": 24013.0,
-      "low": 23487.3,
-      "open": 23528.7,
-      "volume": 1127020000
+      "level": 23881.7,
+      "change_pct": -0.55,
+      "change_pts": -131.3,
+      "high": 24240.5,
+      "low": 23818.8,
+      "open": 24101.2,
+      "volume": 952069000
     }
   }
 }

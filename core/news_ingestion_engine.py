@@ -272,8 +272,31 @@ class NewsIngestionEngine:
         if not sym.endswith(".CA") and "." not in sym:
             sym += ".CA"
 
-        # 1. Try live feed first
-        live_items = [n for n in cls.fetch_live_news_feed() if n.get("ticker") == sym]
+        # 1. Check in-memory cache or local pre-computed snapshot first
+        if not cls._CACHE_NEWS:
+            n_file = os.path.join(WORKSPACE, "data", "news_events.json")
+            if os.path.exists(n_file):
+                try:
+                    with open(n_file, "r", encoding="utf-8") as f:
+                        data = json.load(f)
+                        raw_ev = data.get("events", [])
+                        items = []
+                        for ev in raw_ev:
+                            items.append({
+                                "news_id": ev.get("news_id"),
+                                "ticker": ev.get("ticker"),
+                                "headline_ar": ev.get("headline"),
+                                "source": ev.get("source"),
+                                "published_at": ev.get("published_at"),
+                                "is_mock": False
+                            })
+                        if items:
+                            cls._CACHE_NEWS = items
+                            cls._CACHE_TIMESTAMP = time.time()
+                except Exception:
+                    pass
+
+        live_items = [n for n in cls._CACHE_NEWS if n.get("ticker") == sym]
         if live_items:
             return live_items[:max_items]
 

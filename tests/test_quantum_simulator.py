@@ -39,7 +39,7 @@ class TestQuantumSimulator(unittest.TestCase):
         port_file = os.path.join(WORKSPACE, "data", "user_real_portfolio.json")
         if os.path.exists(port_file):
             with open(port_file, "r", encoding="utf-8") as f:
-                expected_equity = float(json.load(f).get("total_portfolio_equity_egp", 13274.93))
+                expected_equity = float(json.load(f).get("total_portfolio_equity_egp", 13463.43))
             self.assertAlmostEqual(data["kpis"]["current_value"], expected_equity, places=2)
         else:
             self.assertGreater(data["kpis"]["current_value"], 0)

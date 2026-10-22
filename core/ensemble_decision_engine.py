@@ -372,7 +372,7 @@ class EnsembleDecisionEngine:
 
         import concurrent.futures
         from data.universe_manager import UniverseManager
-        tickers = UniverseManager.get_all_tickers()[:25]
+        tickers = UniverseManager.get_all_tickers()[:12]
         results = []
 
         with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:

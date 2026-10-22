@@ -253,6 +253,20 @@ class MetaLabelingEngine:
             "permutation_importance": perm_metrics
         }
 
+        # Persist trained model to disk cache for instantaneous future loads
+        try:
+            import pickle
+            cache_path = os.path.join(WORKSPACE, "data", "cached_meta_models.pkl")
+            with open(cache_path, "wb") as f:
+                pickle.dump({
+                    "meta_classifier": cls._meta_classifier,
+                    "vol_regressor": cls._vol_regressor,
+                    "meta_feature_importances": cls._meta_feature_importances,
+                    "training_metadata": cls._training_metadata
+                }, f)
+        except Exception:
+            pass
+
         return {
             "status": "TRAINED_SUCCESS",
             "is_trained": True,
@@ -305,6 +319,25 @@ class MetaLabelingEngine:
         }
 
     @classmethod
+    def _load_cached_models(cls) -> bool:
+        if cls._is_trained and cls._meta_classifier is not None:
+            return True
+        cache_path = os.path.join(WORKSPACE, "data", "cached_meta_models.pkl")
+        if os.path.exists(cache_path):
+            try:
+                import pickle
+                with open(cache_path, "rb") as f:
+                    data = pickle.load(f)
+                    cls._meta_classifier = data.get("meta_classifier")
+                    cls._vol_regressor = data.get("vol_regressor")
+                    cls._meta_feature_importances = data.get("meta_feature_importances", {})
+                    cls._is_trained = True
+                    return True
+            except Exception:
+                pass
+        return False
+
+    @classmethod
     def evaluate_meta_label(
         cls,
         ticker: str,
@@ -316,7 +349,8 @@ class MetaLabelingEngine:
         Enforces Hard Ban Rule: E[R_net] <= 0.50% -> Zero BUY Signal.
         """
         if not cls._is_trained:
-            cls.train_meta_models()
+            if not cls._load_cached_models():
+                cls.train_meta_models()
 
         vec, feat_dict = cls.extract_meta_feature_vector(ticker, current_price)
 

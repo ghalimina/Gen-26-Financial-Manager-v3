@@ -7,14 +7,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "ABUK.CA": {
     "ticker": "ABUK.CA",
@@ -30,8 +30,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1653,
-    "latest_date": "2026-10-21"
+    "bar_count": 1654,
+    "latest_date": "2026-10-22"
   },
   "ACAMD.CA": {
     "ticker": "ACAMD.CA",
@@ -41,15 +41,15 @@
     "health": "FAIL",
     "data_health": "FAIL",
     "issues": [
-      "Missing data gaps: Insufficient history: 27 bars < 40",
+      "Missing data gaps: Insufficient history: 28 bars < 40",
       "Open price outside [Low, High] range in 2 bars"
     ],
     "can_trade": false,
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 27,
-    "latest_date": "2026-10-21"
+    "bar_count": 28,
+    "latest_date": "2026-10-22"
   },
   "ACAP.CA": {
     "ticker": "ACAP.CA",
@@ -63,8 +63,8 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 70,
-    "latest_date": "2026-10-21"
+    "bar_count": 71,
+    "latest_date": "2026-10-22"
   },
   "ACFR.CA": {
     "ticker": "ACFR.CA",
@@ -74,14 +74,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "ACGC.CA": {
     "ticker": "ACGC.CA",
@@ -91,14 +91,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "ACRO.CA": {
     "ticker": "ACRO.CA",
@@ -114,8 +114,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 61,
-    "latest_date": "2026-10-21"
+    "bar_count": 62,
+    "latest_date": "2026-10-22"
   },
   "ACTF.CA": {
     "ticker": "ACTF.CA",
@@ -125,14 +125,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "ADCI.CA": {
     "ticker": "ADCI.CA",
@@ -142,14 +142,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "ADIB.CA": {
     "ticker": "ADIB.CA",
@@ -166,8 +166,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1656,
-    "latest_date": "2026-10-21"
+    "bar_count": 1657,
+    "latest_date": "2026-10-22"
   },
   "ADPC.CA": {
     "ticker": "ADPC.CA",
@@ -184,8 +184,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "ADRI.CA": {
     "ticker": "ADRI.CA",
@@ -195,14 +195,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "AFDI.CA": {
     "ticker": "AFDI.CA",
@@ -212,14 +212,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "AFMC.CA": {
     "ticker": "AFMC.CA",
@@ -229,15 +229,15 @@
     "health": "FAIL",
     "data_health": "FAIL",
     "issues": [
-      "Missing data gaps: Insufficient history: 27 bars < 40",
+      "Missing data gaps: Insufficient history: 28 bars < 40",
       "Open price outside [Low, High] range in 3 bars"
     ],
     "can_trade": false,
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 27,
-    "latest_date": "2026-10-21"
+    "bar_count": 28,
+    "latest_date": "2026-10-22"
   },
   "AIDC.CA": {
     "ticker": "AIDC.CA",
@@ -247,14 +247,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "AIFI.CA": {
     "ticker": "AIFI.CA",
@@ -272,8 +272,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1657,
-    "latest_date": "2026-10-21"
+    "bar_count": 1658,
+    "latest_date": "2026-10-22"
   },
   "AIH.CA": {
     "ticker": "AIH.CA",
@@ -289,8 +289,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 70,
-    "latest_date": "2026-10-21"
+    "bar_count": 71,
+    "latest_date": "2026-10-22"
   },
   "AJWA.CA": {
     "ticker": "AJWA.CA",
@@ -304,8 +304,8 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "ALCN.CA": {
     "ticker": "ALCN.CA",
@@ -322,8 +322,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "ALCO.CA": {
     "ticker": "ALCO.CA",
@@ -333,14 +333,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "ALEX.CA": {
     "ticker": "ALEX.CA",
@@ -354,8 +354,8 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 70,
-    "latest_date": "2026-10-21"
+    "bar_count": 71,
+    "latest_date": "2026-10-22"
   },
   "ALUM.CA": {
     "ticker": "ALUM.CA",
@@ -372,8 +372,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "ALXD.CA": {
     "ticker": "ALXD.CA",
@@ -383,14 +383,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "AMER.CA": {
     "ticker": "AMER.CA",
@@ -407,8 +407,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "AMES.CA": {
     "ticker": "AMES.CA",
@@ -418,14 +418,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "AMIA.CA": {
     "ticker": "AMIA.CA",
@@ -441,8 +441,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "AMII.CA": {
     "ticker": "AMII.CA",
@@ -452,14 +452,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "AMOC.CA": {
     "ticker": "AMOC.CA",
@@ -476,8 +476,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1653,
-    "latest_date": "2026-10-21"
+    "bar_count": 1654,
+    "latest_date": "2026-10-22"
   },
   "AMPI.CA": {
     "ticker": "AMPI.CA",
@@ -487,14 +487,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "ANCC.CA": {
     "ticker": "ANCC.CA",
@@ -504,14 +504,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "ANFI.CA": {
     "ticker": "ANFI.CA",
@@ -525,8 +525,8 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 61,
-    "latest_date": "2026-10-21"
+    "bar_count": 62,
+    "latest_date": "2026-10-22"
   },
   "APEX.CA": {
     "ticker": "APEX.CA",
@@ -536,14 +536,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "APPC.CA": {
     "ticker": "APPC.CA",
@@ -553,14 +553,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "APSW.CA": {
     "ticker": "APSW.CA",
@@ -570,14 +570,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "AQUA.CA": {
     "ticker": "AQUA.CA",
@@ -587,14 +587,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "ARAB.CA": {
     "ticker": "ARAB.CA",
@@ -610,8 +610,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1655,
-    "latest_date": "2026-10-21"
+    "bar_count": 1656,
+    "latest_date": "2026-10-22"
   },
   "ARCC.CA": {
     "ticker": "ARCC.CA",
@@ -628,8 +628,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "ARCO.CA": {
     "ticker": "ARCO.CA",
@@ -643,8 +643,8 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 70,
-    "latest_date": "2026-10-21"
+    "bar_count": 71,
+    "latest_date": "2026-10-22"
   },
   "AREH.CA": {
     "ticker": "AREH.CA",
@@ -662,8 +662,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "ARPU.CA": {
     "ticker": "ARPU.CA",
@@ -679,8 +679,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 61,
-    "latest_date": "2026-10-21"
+    "bar_count": 62,
+    "latest_date": "2026-10-22"
   },
   "ARTI.CA": {
     "ticker": "ARTI.CA",
@@ -690,15 +690,15 @@
     "health": "FAIL",
     "data_health": "FAIL",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40",
+      "Missing data gaps: Insufficient history: 26 bars < 40",
       "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze"
     ],
     "can_trade": false,
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "ARVA.CA": {
     "ticker": "ARVA.CA",
@@ -712,8 +712,8 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 70,
-    "latest_date": "2026-10-21"
+    "bar_count": 71,
+    "latest_date": "2026-10-22"
   },
   "ASCM.CA": {
     "ticker": "ASCM.CA",
@@ -729,8 +729,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 72,
-    "latest_date": "2026-10-21"
+    "bar_count": 73,
+    "latest_date": "2026-10-22"
   },
   "ASPI.CA": {
     "ticker": "ASPI.CA",
@@ -746,8 +746,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 72,
-    "latest_date": "2026-10-21"
+    "bar_count": 73,
+    "latest_date": "2026-10-22"
   },
   "ATLC.CA": {
     "ticker": "ATLC.CA",
@@ -757,14 +757,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "ATLE.CA": {
     "ticker": "ATLE.CA",
@@ -778,8 +778,8 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 61,
-    "latest_date": "2026-10-21"
+    "bar_count": 62,
+    "latest_date": "2026-10-22"
   },
   "ATQA.CA": {
     "ticker": "ATQA.CA",
@@ -795,8 +795,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 72,
-    "latest_date": "2026-10-21"
+    "bar_count": 73,
+    "latest_date": "2026-10-22"
   },
   "AUTO.CA": {
     "ticker": "AUTO.CA",
@@ -806,14 +806,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "AXPH.CA": {
     "ticker": "AXPH.CA",
@@ -830,8 +830,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1655,
-    "latest_date": "2026-10-21"
+    "bar_count": 1656,
+    "latest_date": "2026-10-22"
   },
   "BIDI.CA": {
     "ticker": "BIDI.CA",
@@ -841,14 +841,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "BIGP.CA": {
     "ticker": "BIGP.CA",
@@ -858,15 +858,15 @@
     "health": "FAIL",
     "data_health": "FAIL",
     "issues": [
-      "Missing data gaps: Insufficient history: 27 bars < 40",
+      "Missing data gaps: Insufficient history: 28 bars < 40",
       "Open price outside [Low, High] range in 1 bars"
     ],
     "can_trade": false,
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 27,
-    "latest_date": "2026-10-21"
+    "bar_count": 28,
+    "latest_date": "2026-10-22"
   },
   "BINV.CA": {
     "ticker": "BINV.CA",
@@ -883,8 +883,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1653,
-    "latest_date": "2026-10-21"
+    "bar_count": 1654,
+    "latest_date": "2026-10-22"
   },
   "BIOC.CA": {
     "ticker": "BIOC.CA",
@@ -901,8 +901,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "BIPC.CA": {
     "ticker": "BIPC.CA",
@@ -912,15 +912,15 @@
     "health": "FAIL",
     "data_health": "FAIL",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40",
+      "Missing data gaps: Insufficient history: 26 bars < 40",
       "Extreme price jumps (>35%) detected: 1 bars"
     ],
     "can_trade": false,
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "BOCM.CA": {
     "ticker": "BOCM.CA",
@@ -934,8 +934,8 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 61,
-    "latest_date": "2026-10-21"
+    "bar_count": 62,
+    "latest_date": "2026-10-22"
   },
   "BONY.CA": {
     "ticker": "BONY.CA",
@@ -945,14 +945,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "BTFH.CA": {
     "ticker": "BTFH.CA",
@@ -969,8 +969,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1527,
-    "latest_date": "2026-10-21"
+    "bar_count": 1528,
+    "latest_date": "2026-10-22"
   },
   "CAED.CA": {
     "ticker": "CAED.CA",
@@ -980,14 +980,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "CANA.CA": {
     "ticker": "CANA.CA",
@@ -997,15 +997,15 @@
     "health": "FAIL",
     "data_health": "FAIL",
     "issues": [
-      "Missing data gaps: Insufficient history: 27 bars < 40",
+      "Missing data gaps: Insufficient history: 28 bars < 40",
       "Open price outside [Low, High] range in 3 bars"
     ],
     "can_trade": false,
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 27,
-    "latest_date": "2026-10-21"
+    "bar_count": 28,
+    "latest_date": "2026-10-22"
   },
   "CASH.CA": {
     "ticker": "CASH.CA",
@@ -1015,14 +1015,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "CCAP.CA": {
     "ticker": "CCAP.CA",
@@ -1038,8 +1038,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "CCRS.CA": {
     "ticker": "CCRS.CA",
@@ -1056,8 +1056,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "CEFM.CA": {
     "ticker": "CEFM.CA",
@@ -1067,14 +1067,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "CERA.CA": {
     "ticker": "CERA.CA",
@@ -1090,8 +1090,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "CFGH.CA": {
     "ticker": "CFGH.CA",
@@ -1101,14 +1101,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "CICH.CA": {
     "ticker": "CICH.CA",
@@ -1124,8 +1124,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1653,
-    "latest_date": "2026-10-21"
+    "bar_count": 1654,
+    "latest_date": "2026-10-22"
   },
   "CID.CA": {
     "ticker": "CID.CA",
@@ -1135,14 +1135,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "CIEB.CA": {
     "ticker": "CIEB.CA",
@@ -1158,8 +1158,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "CIRA.CA": {
     "ticker": "CIRA.CA",
@@ -1175,8 +1175,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "CLHO.CA": {
     "ticker": "CLHO.CA",
@@ -1192,8 +1192,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1653,
-    "latest_date": "2026-10-21"
+    "bar_count": 1654,
+    "latest_date": "2026-10-22"
   },
   "CNFN.CA": {
     "ticker": "CNFN.CA",
@@ -1209,8 +1209,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "COMI.CA": {
     "ticker": "COMI.CA",
@@ -1226,8 +1226,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1653,
-    "latest_date": "2026-10-21"
+    "bar_count": 1654,
+    "latest_date": "2026-10-22"
   },
   "COPR.CA": {
     "ticker": "COPR.CA",
@@ -1237,14 +1237,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "COSG.CA": {
     "ticker": "COSG.CA",
@@ -1254,14 +1254,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "CPCI.CA": {
     "ticker": "CPCI.CA",
@@ -1278,8 +1278,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "CPME.CA": {
     "ticker": "CPME.CA",
@@ -1289,14 +1289,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "CRST.CA": {
     "ticker": "CRST.CA",
@@ -1306,14 +1306,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "CSAG.CA": {
     "ticker": "CSAG.CA",
@@ -1330,8 +1330,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "DAPH.CA": {
     "ticker": "DAPH.CA",
@@ -1348,8 +1348,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "DCCC.CA": {
     "ticker": "DCCC.CA",
@@ -1359,14 +1359,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "DCRC.CA": {
     "ticker": "DCRC.CA",
@@ -1376,14 +1376,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "DEIN.CA": {
     "ticker": "DEIN.CA",
@@ -1393,17 +1393,17 @@
     "health": "FAIL",
     "data_health": "FAIL",
     "issues": [
-      "Missing data gaps: Insufficient history: 27 bars < 40",
+      "Missing data gaps: Insufficient history: 28 bars < 40",
       "Open price outside [Low, High] range in 1 bars",
       "Close price outside [Low, High] range in 1 bars",
-      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze, Zero volume on 88.9% of sessions"
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze, Zero volume on 89.3% of sessions"
     ],
     "can_trade": false,
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 27,
-    "latest_date": "2026-10-21"
+    "bar_count": 28,
+    "latest_date": "2026-10-22"
   },
   "DGTZ.CA": {
     "ticker": "DGTZ.CA",
@@ -1413,14 +1413,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "DICE.CA": {
     "ticker": "DICE.CA",
@@ -1434,8 +1434,8 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 70,
-    "latest_date": "2026-10-21"
+    "bar_count": 71,
+    "latest_date": "2026-10-22"
   },
   "DOMT.CA": {
     "ticker": "DOMT.CA",
@@ -1453,8 +1453,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1653,
-    "latest_date": "2026-10-21"
+    "bar_count": 1654,
+    "latest_date": "2026-10-22"
   },
   "DSCW.CA": {
     "ticker": "DSCW.CA",
@@ -1470,8 +1470,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1527,
-    "latest_date": "2026-10-21"
+    "bar_count": 1528,
+    "latest_date": "2026-10-22"
   },
   "DTPP.CA": {
     "ticker": "DTPP.CA",
@@ -1481,14 +1481,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "EALR.CA": {
     "ticker": "EALR.CA",
@@ -1498,15 +1498,15 @@
     "health": "FAIL",
     "data_health": "FAIL",
     "issues": [
-      "Missing data gaps: Insufficient history: 27 bars < 40",
+      "Missing data gaps: Insufficient history: 28 bars < 40",
       "Open price outside [Low, High] range in 3 bars"
     ],
     "can_trade": false,
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 27,
-    "latest_date": "2026-10-21"
+    "bar_count": 28,
+    "latest_date": "2026-10-22"
   },
   "EASB.CA": {
     "ticker": "EASB.CA",
@@ -1516,14 +1516,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "EAST.CA": {
     "ticker": "EAST.CA",
@@ -1537,8 +1537,8 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "EBSC.CA": {
     "ticker": "EBSC.CA",
@@ -1548,15 +1548,15 @@
     "health": "FAIL",
     "data_health": "FAIL",
     "issues": [
-      "Missing data gaps: Insufficient history: 27 bars < 40",
+      "Missing data gaps: Insufficient history: 28 bars < 40",
       "Open price outside [Low, High] range in 2 bars"
     ],
     "can_trade": false,
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 27,
-    "latest_date": "2026-10-21"
+    "bar_count": 28,
+    "latest_date": "2026-10-22"
   },
   "ECAP.CA": {
     "ticker": "ECAP.CA",
@@ -1566,15 +1566,15 @@
     "health": "FAIL",
     "data_health": "FAIL",
     "issues": [
-      "Missing data gaps: Insufficient history: 27 bars < 40",
+      "Missing data gaps: Insufficient history: 28 bars < 40",
       "Open price outside [Low, High] range in 2 bars"
     ],
     "can_trade": false,
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 27,
-    "latest_date": "2026-10-21"
+    "bar_count": 28,
+    "latest_date": "2026-10-22"
   },
   "EDBM.CA": {
     "ticker": "EDBM.CA",
@@ -1608,8 +1608,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "EEII.CA": {
     "ticker": "EEII.CA",
@@ -1619,14 +1619,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "EEP.CA": {
     "ticker": "EEP.CA",
@@ -1636,14 +1636,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "EFAC.CA": {
     "ticker": "EFAC.CA",
@@ -1653,14 +1653,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "EFIC.CA": {
     "ticker": "EFIC.CA",
@@ -1676,8 +1676,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "EFID.CA": {
     "ticker": "EFID.CA",
@@ -1695,8 +1695,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "EFIH.CA": {
     "ticker": "EFIH.CA",
@@ -1712,8 +1712,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1220,
-    "latest_date": "2026-10-21"
+    "bar_count": 1221,
+    "latest_date": "2026-10-22"
   },
   "EFRH.CA": {
     "ticker": "EFRH.CA",
@@ -1723,7 +1723,7 @@
     "health": "FAIL",
     "data_health": "FAIL",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40",
+      "Missing data gaps: Insufficient history: 26 bars < 40",
       "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze",
       "Extreme price jumps (>35%) detected: 1 bars"
     ],
@@ -1731,8 +1731,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "EGAL.CA": {
     "ticker": "EGAL.CA",
@@ -1748,8 +1748,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "EGAS.CA": {
     "ticker": "EGAS.CA",
@@ -1759,14 +1759,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "EGBE.CA": {
     "ticker": "EGBE.CA",
@@ -1785,8 +1785,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1658,
-    "latest_date": "2026-10-21"
+    "bar_count": 1659,
+    "latest_date": "2026-10-22"
   },
   "EGCH.CA": {
     "ticker": "EGCH.CA",
@@ -1802,8 +1802,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "EGEL.CA": {
     "ticker": "EGEL.CA",
@@ -1817,8 +1817,8 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 61,
-    "latest_date": "2026-10-21"
+    "bar_count": 62,
+    "latest_date": "2026-10-22"
   },
   "EGID.CA": {
     "ticker": "EGID.CA",
@@ -1862,14 +1862,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "EGREF.CA": {
     "ticker": "EGREF.CA",
@@ -1879,14 +1879,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "EGS30AJ1C016-EGP.CA": {
     "ticker": "EGS30AJ1C016-EGP.CA",
@@ -1896,14 +1896,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "EGS370O1C013.CA": {
     "ticker": "EGS370O1C013.CA",
@@ -1913,14 +1913,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "EGS3E071C013-EGP.CA": {
     "ticker": "EGS3E071C013-EGP.CA",
@@ -1930,14 +1930,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "EGS3I0S1C019.CA": {
     "ticker": "EGS3I0S1C019.CA",
@@ -1947,14 +1947,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "EGS48271C018-EGP.CA": {
     "ticker": "EGS48271C018-EGP.CA",
@@ -1964,14 +1964,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "EGS65101C015.CA": {
     "ticker": "EGS65101C015.CA",
@@ -1981,14 +1981,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "EGS65621C012.CA": {
     "ticker": "EGS65621C012.CA",
@@ -1998,14 +1998,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "EGS65861C014.CA": {
     "ticker": "EGS65861C014.CA",
@@ -2015,14 +2015,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "EGS659O1C015.CA": {
     "ticker": "EGS659O1C015.CA",
@@ -2032,14 +2032,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "EGS72L31C011.CA": {
     "ticker": "EGS72L31C011.CA",
@@ -2049,14 +2049,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "EGSA.CA": {
     "ticker": "EGSA.CA",
@@ -2074,8 +2074,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1655,
-    "latest_date": "2026-10-21"
+    "bar_count": 1656,
+    "latest_date": "2026-10-22"
   },
   "EGTI.CA": {
     "ticker": "EGTI.CA",
@@ -2091,8 +2091,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 61,
-    "latest_date": "2026-10-21"
+    "bar_count": 62,
+    "latest_date": "2026-10-22"
   },
   "EGTS.CA": {
     "ticker": "EGTS.CA",
@@ -2102,14 +2102,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "EGWA.CA": {
     "ticker": "EGWA.CA",
@@ -2119,14 +2119,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "EHCA.CA": {
     "ticker": "EHCA.CA",
@@ -2136,14 +2136,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "EITP.CA": {
     "ticker": "EITP.CA",
@@ -2153,14 +2153,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "EIUD.CA": {
     "ticker": "EIUD.CA",
@@ -2176,8 +2176,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 70,
-    "latest_date": "2026-10-21"
+    "bar_count": 71,
+    "latest_date": "2026-10-22"
   },
   "EKHO.CA": {
     "ticker": "EKHO.CA",
@@ -2193,8 +2193,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 70,
-    "latest_date": "2026-10-21"
+    "bar_count": 71,
+    "latest_date": "2026-10-22"
   },
   "EKHOA.CA": {
     "ticker": "EKHOA.CA",
@@ -2208,8 +2208,8 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 70,
-    "latest_date": "2026-10-21"
+    "bar_count": 71,
+    "latest_date": "2026-10-22"
   },
   "ELAB.CA": {
     "ticker": "ELAB.CA",
@@ -2219,14 +2219,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "ELEC.CA": {
     "ticker": "ELEC.CA",
@@ -2243,8 +2243,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "ELKA.CA": {
     "ticker": "ELKA.CA",
@@ -2262,8 +2262,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "ELNA.CA": {
     "ticker": "ELNA.CA",
@@ -2281,8 +2281,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "ELSH.CA": {
     "ticker": "ELSH.CA",
@@ -2292,15 +2292,15 @@
     "health": "FAIL",
     "data_health": "FAIL",
     "issues": [
-      "Missing data gaps: Insufficient history: 27 bars < 40",
+      "Missing data gaps: Insufficient history: 28 bars < 40",
       "Open price outside [Low, High] range in 1 bars"
     ],
     "can_trade": false,
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 27,
-    "latest_date": "2026-10-21"
+    "bar_count": 28,
+    "latest_date": "2026-10-22"
   },
   "ELWA.CA": {
     "ticker": "ELWA.CA",
@@ -2318,8 +2318,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "EMFD.CA": {
     "ticker": "EMFD.CA",
@@ -2335,8 +2335,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "EMHA.CA": {
     "ticker": "EMHA.CA",
@@ -2346,15 +2346,15 @@
     "health": "FAIL",
     "data_health": "FAIL",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40",
+      "Missing data gaps: Insufficient history: 26 bars < 40",
       "Extreme price jumps (>35%) detected: 1 bars"
     ],
     "can_trade": false,
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "EMMC.CA": {
     "ticker": "EMMC.CA",
@@ -2364,15 +2364,15 @@
     "health": "FAIL",
     "data_health": "FAIL",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40",
+      "Missing data gaps: Insufficient history: 26 bars < 40",
       "Extreme price jumps (>35%) detected: 1 bars"
     ],
     "can_trade": false,
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "ENAE.CA": {
     "ticker": "ENAE.CA",
@@ -2382,15 +2382,15 @@
     "health": "FAIL",
     "data_health": "FAIL",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40",
+      "Missing data gaps: Insufficient history: 26 bars < 40",
       "Extreme price jumps (>35%) detected: 1 bars"
     ],
     "can_trade": false,
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "ENGC.CA": {
     "ticker": "ENGC.CA",
@@ -2400,15 +2400,15 @@
     "health": "FAIL",
     "data_health": "FAIL",
     "issues": [
-      "Missing data gaps: Insufficient history: 27 bars < 40",
+      "Missing data gaps: Insufficient history: 28 bars < 40",
       "Open price outside [Low, High] range in 5 bars"
     ],
     "can_trade": false,
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 27,
-    "latest_date": "2026-10-21"
+    "bar_count": 28,
+    "latest_date": "2026-10-22"
   },
   "ENPI.CA": {
     "ticker": "ENPI.CA",
@@ -2418,14 +2418,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "EOSB.CA": {
     "ticker": "EOSB.CA",
@@ -2435,14 +2435,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "EPCO.CA": {
     "ticker": "EPCO.CA",
@@ -2459,8 +2459,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "EPPK.CA": {
     "ticker": "EPPK.CA",
@@ -2476,8 +2476,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1656,
-    "latest_date": "2026-10-21"
+    "bar_count": 1657,
+    "latest_date": "2026-10-22"
   },
   "ERES.CA": {
     "ticker": "ERES.CA",
@@ -2493,8 +2493,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 61,
-    "latest_date": "2026-10-21"
+    "bar_count": 62,
+    "latest_date": "2026-10-22"
   },
   "ESRS.CA": {
     "ticker": "ESRS.CA",
@@ -2510,8 +2510,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1324,
-    "latest_date": "2026-10-21"
+    "bar_count": 1325,
+    "latest_date": "2026-10-22"
   },
   "ETEL.CA": {
     "ticker": "ETEL.CA",
@@ -2527,8 +2527,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1653,
-    "latest_date": "2026-10-21"
+    "bar_count": 1654,
+    "latest_date": "2026-10-22"
   },
   "ETRS.CA": {
     "ticker": "ETRS.CA",
@@ -2545,8 +2545,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "EUBR.CA": {
     "ticker": "EUBR.CA",
@@ -2560,8 +2560,8 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 61,
-    "latest_date": "2026-10-21"
+    "bar_count": 62,
+    "latest_date": "2026-10-22"
   },
   "EXPA.CA": {
     "ticker": "EXPA.CA",
@@ -2577,8 +2577,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1653,
-    "latest_date": "2026-10-21"
+    "bar_count": 1654,
+    "latest_date": "2026-10-22"
   },
   "EXTK.CA": {
     "ticker": "EXTK.CA",
@@ -2592,8 +2592,8 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 70,
-    "latest_date": "2026-10-21"
+    "bar_count": 71,
+    "latest_date": "2026-10-22"
   },
   "FAHR.CA": {
     "ticker": "FAHR.CA",
@@ -2607,8 +2607,8 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 61,
-    "latest_date": "2026-10-21"
+    "bar_count": 62,
+    "latest_date": "2026-10-22"
   },
   "FAIT.CA": {
     "ticker": "FAIT.CA",
@@ -2624,8 +2624,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "FAITA.CA": {
     "ticker": "FAITA.CA",
@@ -2643,8 +2643,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "FERC.CA": {
     "ticker": "FERC.CA",
@@ -2654,14 +2654,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "FIRE.CA": {
     "ticker": "FIRE.CA",
@@ -2671,14 +2671,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "FITA.CA": {
     "ticker": "FITA.CA",
@@ -2688,14 +2688,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "FNAR.CA": {
     "ticker": "FNAR.CA",
@@ -2705,14 +2705,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "FPIH.CA": {
     "ticker": "FPIH.CA",
@@ -2722,7 +2722,7 @@
     "health": "FAIL",
     "data_health": "FAIL",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40",
+      "Missing data gaps: Insufficient history: 26 bars < 40",
       "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze",
       "Extreme price jumps (>35%) detected: 1 bars"
     ],
@@ -2730,8 +2730,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "FTNS.CA": {
     "ticker": "FTNS.CA",
@@ -2741,14 +2741,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "FTRP.CA": {
     "ticker": "FTRP.CA",
@@ -2758,14 +2758,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "FWRY.CA": {
     "ticker": "FWRY.CA",
@@ -2781,8 +2781,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1653,
-    "latest_date": "2026-10-21"
+    "bar_count": 1654,
+    "latest_date": "2026-10-22"
   },
   "GBCO.CA": {
     "ticker": "GBCO.CA",
@@ -2798,8 +2798,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1653,
-    "latest_date": "2026-10-21"
+    "bar_count": 1654,
+    "latest_date": "2026-10-22"
   },
   "GDWA.CA": {
     "ticker": "GDWA.CA",
@@ -2815,8 +2815,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 72,
-    "latest_date": "2026-10-21"
+    "bar_count": 73,
+    "latest_date": "2026-10-22"
   },
   "GEOS.CA": {
     "ticker": "GEOS.CA",
@@ -2826,14 +2826,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "GGCC.CA": {
     "ticker": "GGCC.CA",
@@ -2849,8 +2849,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "GGRN.CA": {
     "ticker": "GGRN.CA",
@@ -2860,14 +2860,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "GIHD.CA": {
     "ticker": "GIHD.CA",
@@ -2877,14 +2877,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "GMCG.CA": {
     "ticker": "GMCG.CA",
@@ -2898,8 +2898,8 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 61,
-    "latest_date": "2026-10-21"
+    "bar_count": 62,
+    "latest_date": "2026-10-22"
   },
   "GMCI.CA": {
     "ticker": "GMCI.CA",
@@ -2909,15 +2909,15 @@
     "health": "FAIL",
     "data_health": "FAIL",
     "issues": [
-      "Missing data gaps: Insufficient history: 27 bars < 40",
+      "Missing data gaps: Insufficient history: 28 bars < 40",
       "Open price outside [Low, High] range in 3 bars"
     ],
     "can_trade": false,
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 27,
-    "latest_date": "2026-10-21"
+    "bar_count": 28,
+    "latest_date": "2026-10-22"
   },
   "GOST.CA": {
     "ticker": "GOST.CA",
@@ -2927,7 +2927,7 @@
     "health": "FAIL",
     "data_health": "FAIL",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40",
+      "Missing data gaps: Insufficient history: 26 bars < 40",
       "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze",
       "Extreme price jumps (>35%) detected: 1 bars"
     ],
@@ -2935,8 +2935,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "GOUR.CA": {
     "ticker": "GOUR.CA",
@@ -2946,14 +2946,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "GPHI.CA": {
     "ticker": "GPHI.CA",
@@ -2967,8 +2967,8 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 61,
-    "latest_date": "2026-10-21"
+    "bar_count": 62,
+    "latest_date": "2026-10-22"
   },
   "GPIM.CA": {
     "ticker": "GPIM.CA",
@@ -2978,14 +2978,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "GPPL.CA": {
     "ticker": "GPPL.CA",
@@ -2995,15 +2995,15 @@
     "health": "FAIL",
     "data_health": "FAIL",
     "issues": [
-      "Missing data gaps: Insufficient history: 27 bars < 40",
-      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze, Zero volume on 92.6% of sessions"
+      "Missing data gaps: Insufficient history: 28 bars < 40",
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze, Zero volume on 92.9% of sessions"
     ],
     "can_trade": false,
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 27,
-    "latest_date": "2026-10-21"
+    "bar_count": 28,
+    "latest_date": "2026-10-22"
   },
   "GRCA.CA": {
     "ticker": "GRCA.CA",
@@ -3013,15 +3013,15 @@
     "health": "FAIL",
     "data_health": "FAIL",
     "issues": [
-      "Missing data gaps: Insufficient history: 27 bars < 40",
+      "Missing data gaps: Insufficient history: 28 bars < 40",
       "Open price outside [Low, High] range in 1 bars"
     ],
     "can_trade": false,
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 27,
-    "latest_date": "2026-10-21"
+    "bar_count": 28,
+    "latest_date": "2026-10-22"
   },
   "GROV.CA": {
     "ticker": "GROV.CA",
@@ -3031,14 +3031,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "GSSC.CA": {
     "ticker": "GSSC.CA",
@@ -3055,8 +3055,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "GTEX.CA": {
     "ticker": "GTEX.CA",
@@ -3066,14 +3066,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "GTFI.CA": {
     "ticker": "GTFI.CA",
@@ -3083,15 +3083,15 @@
     "health": "FAIL",
     "data_health": "FAIL",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40",
+      "Missing data gaps: Insufficient history: 26 bars < 40",
       "Extreme price jumps (>35%) detected: 1 bars"
     ],
     "can_trade": false,
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "GTHC.CA": {
     "ticker": "GTHC.CA",
@@ -3105,8 +3105,8 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 61,
-    "latest_date": "2026-10-21"
+    "bar_count": 62,
+    "latest_date": "2026-10-22"
   },
   "GTHE.CA": {
     "ticker": "GTHE.CA",
@@ -3120,8 +3120,8 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 70,
-    "latest_date": "2026-10-21"
+    "bar_count": 71,
+    "latest_date": "2026-10-22"
   },
   "GTWL.CA": {
     "ticker": "GTWL.CA",
@@ -3131,14 +3131,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "GYPT.CA": {
     "ticker": "GYPT.CA",
@@ -3148,14 +3148,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "HALN.CA": {
     "ticker": "HALN.CA",
@@ -3165,14 +3165,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 5 bars < 40"
+      "Missing data gaps: Insufficient history: 4 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 5,
-    "latest_date": "2026-10-19"
+    "bar_count": 4,
+    "latest_date": "2026-10-18"
   },
   "HBCO.CA": {
     "ticker": "HBCO.CA",
@@ -3182,14 +3182,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "HDBK.CA": {
     "ticker": "HDBK.CA",
@@ -3206,8 +3206,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1655,
-    "latest_date": "2026-10-21"
+    "bar_count": 1656,
+    "latest_date": "2026-10-22"
   },
   "HDST.CA": {
     "ticker": "HDST.CA",
@@ -3217,14 +3217,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "HECA.CA": {
     "ticker": "HECA.CA",
@@ -3234,14 +3234,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "HELI.CA": {
     "ticker": "HELI.CA",
@@ -3258,8 +3258,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1653,
-    "latest_date": "2026-10-21"
+    "bar_count": 1654,
+    "latest_date": "2026-10-22"
   },
   "HOPL.CA": {
     "ticker": "HOPL.CA",
@@ -3269,14 +3269,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "HRHO.CA": {
     "ticker": "HRHO.CA",
@@ -3292,8 +3292,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1653,
-    "latest_date": "2026-10-21"
+    "bar_count": 1654,
+    "latest_date": "2026-10-22"
   },
   "IBAG.CA": {
     "ticker": "IBAG.CA",
@@ -3303,14 +3303,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "IBCT.CA": {
     "ticker": "IBCT.CA",
@@ -3320,14 +3320,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "ICFC.CA": {
     "ticker": "ICFC.CA",
@@ -3337,14 +3337,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "ICID.CA": {
     "ticker": "ICID.CA",
@@ -3360,8 +3360,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 72,
-    "latest_date": "2026-10-21"
+    "bar_count": 73,
+    "latest_date": "2026-10-22"
   },
   "ICLE.CA": {
     "ticker": "ICLE.CA",
@@ -3371,14 +3371,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "ICMI.CA": {
     "ticker": "ICMI.CA",
@@ -3392,8 +3392,8 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 70,
-    "latest_date": "2026-10-21"
+    "bar_count": 71,
+    "latest_date": "2026-10-22"
   },
   "IDRE.CA": {
     "ticker": "IDRE.CA",
@@ -3409,8 +3409,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 72,
-    "latest_date": "2026-10-21"
+    "bar_count": 73,
+    "latest_date": "2026-10-22"
   },
   "IEEC.CA": {
     "ticker": "IEEC.CA",
@@ -3420,14 +3420,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "IFAP.CA": {
     "ticker": "IFAP.CA",
@@ -3443,8 +3443,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 72,
-    "latest_date": "2026-10-21"
+    "bar_count": 73,
+    "latest_date": "2026-10-22"
   },
   "INBK.CA": {
     "ticker": "INBK.CA",
@@ -3454,14 +3454,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "INCO.CA": {
     "ticker": "INCO.CA",
@@ -3488,14 +3488,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "INFI.CA": {
     "ticker": "INFI.CA",
@@ -3505,14 +3505,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "INTP.CA": {
     "ticker": "INTP.CA",
@@ -3522,14 +3522,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "INVE.CA": {
     "ticker": "INVE.CA",
@@ -3539,15 +3539,15 @@
     "health": "FAIL",
     "data_health": "FAIL",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40",
+      "Missing data gaps: Insufficient history: 26 bars < 40",
       "Extreme price jumps (>35%) detected: 1 bars"
     ],
     "can_trade": false,
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "IRAX.CA": {
     "ticker": "IRAX.CA",
@@ -3557,14 +3557,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "IRON.CA": {
     "ticker": "IRON.CA",
@@ -3580,8 +3580,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 72,
-    "latest_date": "2026-10-21"
+    "bar_count": 73,
+    "latest_date": "2026-10-22"
   },
   "ISMA.CA": {
     "ticker": "ISMA.CA",
@@ -3597,8 +3597,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 72,
-    "latest_date": "2026-10-21"
+    "bar_count": 73,
+    "latest_date": "2026-10-22"
   },
   "ISMD.CA": {
     "ticker": "ISMD.CA",
@@ -3614,8 +3614,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 61,
-    "latest_date": "2026-10-21"
+    "bar_count": 62,
+    "latest_date": "2026-10-22"
   },
   "ISMQ.CA": {
     "ticker": "ISMQ.CA",
@@ -3625,14 +3625,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "ISPH.CA": {
     "ticker": "ISPH.CA",
@@ -3648,8 +3648,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1653,
-    "latest_date": "2026-10-21"
+    "bar_count": 1654,
+    "latest_date": "2026-10-22"
   },
   "JUFO.CA": {
     "ticker": "JUFO.CA",
@@ -3665,8 +3665,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1653,
-    "latest_date": "2026-10-21"
+    "bar_count": 1654,
+    "latest_date": "2026-10-22"
   },
   "KABO.CA": {
     "ticker": "KABO.CA",
@@ -3683,8 +3683,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1527,
-    "latest_date": "2026-10-21"
+    "bar_count": 1528,
+    "latest_date": "2026-10-22"
   },
   "KAMA.CA": {
     "ticker": "KAMA.CA",
@@ -3694,14 +3694,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "KNGC.CA": {
     "ticker": "KNGC.CA",
@@ -3711,14 +3711,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "KORA.CA": {
     "ticker": "KORA.CA",
@@ -3728,14 +3728,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "KRDI.CA": {
     "ticker": "KRDI.CA",
@@ -3751,8 +3751,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 70,
-    "latest_date": "2026-10-21"
+    "bar_count": 71,
+    "latest_date": "2026-10-22"
   },
   "KRRE.CA": {
     "ticker": "KRRE.CA",
@@ -3766,8 +3766,8 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 61,
-    "latest_date": "2026-10-21"
+    "bar_count": 62,
+    "latest_date": "2026-10-22"
   },
   "KRTE.CA": {
     "ticker": "KRTE.CA",
@@ -3781,8 +3781,8 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 61,
-    "latest_date": "2026-10-21"
+    "bar_count": 62,
+    "latest_date": "2026-10-22"
   },
   "KWIN.CA": {
     "ticker": "KWIN.CA",
@@ -3792,14 +3792,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "KZPC.CA": {
     "ticker": "KZPC.CA",
@@ -3815,8 +3815,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 72,
-    "latest_date": "2026-10-21"
+    "bar_count": 73,
+    "latest_date": "2026-10-22"
   },
   "LCSW.CA": {
     "ticker": "LCSW.CA",
@@ -3826,14 +3826,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "LECI.CA": {
     "ticker": "LECI.CA",
@@ -3843,15 +3843,15 @@
     "health": "FAIL",
     "data_health": "FAIL",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40",
+      "Missing data gaps: Insufficient history: 26 bars < 40",
       "Extreme price jumps (>35%) detected: 1 bars"
     ],
     "can_trade": false,
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "LKGP.CA": {
     "ticker": "LKGP.CA",
@@ -3861,14 +3861,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "LOGI.CA": {
     "ticker": "LOGI.CA",
@@ -3878,14 +3878,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "LUTS.CA": {
     "ticker": "LUTS.CA",
@@ -3895,14 +3895,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "MAAL.CA": {
     "ticker": "MAAL.CA",
@@ -3912,15 +3912,15 @@
     "health": "FAIL",
     "data_health": "FAIL",
     "issues": [
-      "Missing data gaps: Insufficient history: 27 bars < 40",
+      "Missing data gaps: Insufficient history: 28 bars < 40",
       "Open price outside [Low, High] range in 3 bars"
     ],
     "can_trade": false,
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 27,
-    "latest_date": "2026-10-21"
+    "bar_count": 28,
+    "latest_date": "2026-10-22"
   },
   "MAOT.CA": {
     "ticker": "MAOT.CA",
@@ -3930,15 +3930,15 @@
     "health": "FAIL",
     "data_health": "FAIL",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40",
+      "Missing data gaps: Insufficient history: 26 bars < 40",
       "Extreme price jumps (>35%) detected: 1 bars"
     ],
     "can_trade": false,
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "MASG.CA": {
     "ticker": "MASG.CA",
@@ -3952,8 +3952,8 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 61,
-    "latest_date": "2026-10-21"
+    "bar_count": 62,
+    "latest_date": "2026-10-22"
   },
   "MASR.CA": {
     "ticker": "MASR.CA",
@@ -3969,8 +3969,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1653,
-    "latest_date": "2026-10-21"
+    "bar_count": 1654,
+    "latest_date": "2026-10-22"
   },
   "MBEG.CA": {
     "ticker": "MBEG.CA",
@@ -3980,14 +3980,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "MBEN.CA": {
     "ticker": "MBEN.CA",
@@ -4003,8 +4003,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 61,
-    "latest_date": "2026-10-21"
+    "bar_count": 62,
+    "latest_date": "2026-10-22"
   },
   "MBSC.CA": {
     "ticker": "MBSC.CA",
@@ -4020,8 +4020,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 72,
-    "latest_date": "2026-10-21"
+    "bar_count": 73,
+    "latest_date": "2026-10-22"
   },
   "MCEG.CA": {
     "ticker": "MCEG.CA",
@@ -4035,8 +4035,8 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 70,
-    "latest_date": "2026-10-21"
+    "bar_count": 71,
+    "latest_date": "2026-10-22"
   },
   "MCQE.CA": {
     "ticker": "MCQE.CA",
@@ -4052,8 +4052,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "MCRO.CA": {
     "ticker": "MCRO.CA",
@@ -4063,14 +4063,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "MEFM.CA": {
     "ticker": "MEFM.CA",
@@ -4084,8 +4084,8 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 70,
-    "latest_date": "2026-10-21"
+    "bar_count": 71,
+    "latest_date": "2026-10-22"
   },
   "MEGM.CA": {
     "ticker": "MEGM.CA",
@@ -4095,14 +4095,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "MENA.CA": {
     "ticker": "MENA.CA",
@@ -4118,8 +4118,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "MENG.CA": {
     "ticker": "MENG.CA",
@@ -4129,14 +4129,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "MEPA.CA": {
     "ticker": "MEPA.CA",
@@ -4146,15 +4146,15 @@
     "health": "FAIL",
     "data_health": "FAIL",
     "issues": [
-      "Missing data gaps: Insufficient history: 27 bars < 40",
+      "Missing data gaps: Insufficient history: 28 bars < 40",
       "Open price outside [Low, High] range in 2 bars"
     ],
     "can_trade": false,
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 27,
-    "latest_date": "2026-10-21"
+    "bar_count": 28,
+    "latest_date": "2026-10-22"
   },
   "MERT.CA": {
     "ticker": "MERT.CA",
@@ -4164,14 +4164,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "MFPC.CA": {
     "ticker": "MFPC.CA",
@@ -4188,8 +4188,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1653,
-    "latest_date": "2026-10-21"
+    "bar_count": 1654,
+    "latest_date": "2026-10-22"
   },
   "MFSC.CA": {
     "ticker": "MFSC.CA",
@@ -4199,15 +4199,15 @@
     "health": "FAIL",
     "data_health": "FAIL",
     "issues": [
-      "Missing data gaps: Insufficient history: 27 bars < 40",
+      "Missing data gaps: Insufficient history: 28 bars < 40",
       "Open price outside [Low, High] range in 3 bars"
     ],
     "can_trade": false,
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 27,
-    "latest_date": "2026-10-21"
+    "bar_count": 28,
+    "latest_date": "2026-10-22"
   },
   "MHOT.CA": {
     "ticker": "MHOT.CA",
@@ -4217,15 +4217,15 @@
     "health": "FAIL",
     "data_health": "FAIL",
     "issues": [
-      "Missing data gaps: Insufficient history: 27 bars < 40",
+      "Missing data gaps: Insufficient history: 28 bars < 40",
       "Open price outside [Low, High] range in 5 bars"
     ],
     "can_trade": false,
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 27,
-    "latest_date": "2026-10-21"
+    "bar_count": 28,
+    "latest_date": "2026-10-22"
   },
   "MICH.CA": {
     "ticker": "MICH.CA",
@@ -4242,8 +4242,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1656,
-    "latest_date": "2026-10-21"
+    "bar_count": 1657,
+    "latest_date": "2026-10-22"
   },
   "MILK.CA": {
     "ticker": "MILK.CA",
@@ -4253,14 +4253,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "MILS.CA": {
     "ticker": "MILS.CA",
@@ -4270,14 +4270,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "MINA.CA": {
     "ticker": "MINA.CA",
@@ -4287,15 +4287,15 @@
     "health": "FAIL",
     "data_health": "FAIL",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40",
+      "Missing data gaps: Insufficient history: 26 bars < 40",
       "Extreme price jumps (>35%) detected: 1 bars"
     ],
     "can_trade": false,
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "MIPH.CA": {
     "ticker": "MIPH.CA",
@@ -4312,8 +4312,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "MISR.CA": {
     "ticker": "MISR.CA",
@@ -4323,15 +4323,15 @@
     "health": "FAIL",
     "data_health": "FAIL",
     "issues": [
-      "Missing data gaps: Insufficient history: 27 bars < 40",
-      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze, Zero volume on 92.6% of sessions"
+      "Missing data gaps: Insufficient history: 28 bars < 40",
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze, Zero volume on 92.9% of sessions"
     ],
     "can_trade": false,
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 27,
-    "latest_date": "2026-10-21"
+    "bar_count": 28,
+    "latest_date": "2026-10-22"
   },
   "MITR.CA": {
     "ticker": "MITR.CA",
@@ -4341,14 +4341,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "MLIC.CA": {
     "ticker": "MLIC.CA",
@@ -4358,14 +4358,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "MMAT.CA": {
     "ticker": "MMAT.CA",
@@ -4375,14 +4375,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "MMHC.CA": {
     "ticker": "MMHC.CA",
@@ -4392,14 +4392,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "MNHD.CA": {
     "ticker": "MNHD.CA",
@@ -4413,8 +4413,8 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 70,
-    "latest_date": "2026-10-21"
+    "bar_count": 71,
+    "latest_date": "2026-10-22"
   },
   "MOED.CA": {
     "ticker": "MOED.CA",
@@ -4424,14 +4424,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "MOFD.CA": {
     "ticker": "MOFD.CA",
@@ -4462,8 +4462,8 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 61,
-    "latest_date": "2026-10-21"
+    "bar_count": 62,
+    "latest_date": "2026-10-22"
   },
   "MOIL.CA": {
     "ticker": "MOIL.CA",
@@ -4480,8 +4480,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "MOIN.CA": {
     "ticker": "MOIN.CA",
@@ -4491,14 +4491,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "MOSC.CA": {
     "ticker": "MOSC.CA",
@@ -4515,8 +4515,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1655,
-    "latest_date": "2026-10-21"
+    "bar_count": 1656,
+    "latest_date": "2026-10-22"
   },
   "MPCI.CA": {
     "ticker": "MPCI.CA",
@@ -4534,8 +4534,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "MPCO.CA": {
     "ticker": "MPCO.CA",
@@ -4551,8 +4551,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "MPNZ.CA": {
     "ticker": "MPNZ.CA",
@@ -4562,14 +4562,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "MPRC.CA": {
     "ticker": "MPRC.CA",
@@ -4579,14 +4579,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "MSEA.CA": {
     "ticker": "MSEA.CA",
@@ -4596,14 +4596,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "MTIE.CA": {
     "ticker": "MTIE.CA",
@@ -4613,15 +4613,15 @@
     "health": "FAIL",
     "data_health": "FAIL",
     "issues": [
-      "Missing data gaps: Insufficient history: 27 bars < 40",
+      "Missing data gaps: Insufficient history: 28 bars < 40",
       "Open price outside [Low, High] range in 2 bars"
     ],
     "can_trade": false,
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 27,
-    "latest_date": "2026-10-21"
+    "bar_count": 28,
+    "latest_date": "2026-10-22"
   },
   "MTRC.CA": {
     "ticker": "MTRC.CA",
@@ -4635,8 +4635,8 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 70,
-    "latest_date": "2026-10-21"
+    "bar_count": 71,
+    "latest_date": "2026-10-22"
   },
   "NAEH.CA": {
     "ticker": "NAEH.CA",
@@ -4646,15 +4646,15 @@
     "health": "FAIL",
     "data_health": "FAIL",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40",
+      "Missing data gaps: Insufficient history: 26 bars < 40",
       "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze"
     ],
     "can_trade": false,
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "NAHO.CA": {
     "ticker": "NAHO.CA",
@@ -4672,8 +4672,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "NAMI.CA": {
     "ticker": "NAMI.CA",
@@ -4683,14 +4683,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "NARE.CA": {
     "ticker": "NARE.CA",
@@ -4700,14 +4700,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "NASR.CA": {
     "ticker": "NASR.CA",
@@ -4717,14 +4717,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "NATP.CA": {
     "ticker": "NATP.CA",
@@ -4738,8 +4738,8 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 61,
-    "latest_date": "2026-10-21"
+    "bar_count": 62,
+    "latest_date": "2026-10-22"
   },
   "NBCC.CA": {
     "ticker": "NBCC.CA",
@@ -4749,14 +4749,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "NBKE.CA": {
     "ticker": "NBKE.CA",
@@ -4766,14 +4766,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "NCCW.CA": {
     "ticker": "NCCW.CA",
@@ -4789,8 +4789,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "NCGC.CA": {
     "ticker": "NCGC.CA",
@@ -4800,14 +4800,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "NCOI.CA": {
     "ticker": "NCOI.CA",
@@ -4817,14 +4817,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "NDRL.CA": {
     "ticker": "NDRL.CA",
@@ -4834,14 +4834,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "NEDA.CA": {
     "ticker": "NEDA.CA",
@@ -4851,7 +4851,7 @@
     "health": "FAIL",
     "data_health": "FAIL",
     "issues": [
-      "Missing data gaps: Insufficient history: 27 bars < 40",
+      "Missing data gaps: Insufficient history: 28 bars < 40",
       "Open price outside [Low, High] range in 3 bars",
       "Close price outside [Low, High] range in 2 bars"
     ],
@@ -4859,8 +4859,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 27,
-    "latest_date": "2026-10-21"
+    "bar_count": 28,
+    "latest_date": "2026-10-22"
   },
   "NFCI.CA": {
     "ticker": "NFCI.CA",
@@ -4870,14 +4870,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "NHPS.CA": {
     "ticker": "NHPS.CA",
@@ -4887,14 +4887,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "NINH.CA": {
     "ticker": "NINH.CA",
@@ -4904,14 +4904,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "NIPH.CA": {
     "ticker": "NIPH.CA",
@@ -4929,8 +4929,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "NMIN.CA": {
     "ticker": "NMIN.CA",
@@ -4940,14 +4940,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "NMTC.CA": {
     "ticker": "NMTC.CA",
@@ -4957,14 +4957,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "OBAH.CA": {
     "ticker": "OBAH.CA",
@@ -4974,15 +4974,15 @@
     "health": "FAIL",
     "data_health": "FAIL",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40",
+      "Missing data gaps: Insufficient history: 26 bars < 40",
       "Extreme price jumps (>35%) detected: 1 bars"
     ],
     "can_trade": false,
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "OBRI.CA": {
     "ticker": "OBRI.CA",
@@ -4992,14 +4992,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "OBUR.CA": {
     "ticker": "OBUR.CA",
@@ -5013,8 +5013,8 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 70,
-    "latest_date": "2026-10-21"
+    "bar_count": 71,
+    "latest_date": "2026-10-22"
   },
   "OCAP.CA": {
     "ticker": "OCAP.CA",
@@ -5024,14 +5024,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "OCDI.CA": {
     "ticker": "OCDI.CA",
@@ -5049,8 +5049,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "OCPH.CA": {
     "ticker": "OCPH.CA",
@@ -5060,14 +5060,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "ODIN.CA": {
     "ticker": "ODIN.CA",
@@ -5085,8 +5085,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1656,
-    "latest_date": "2026-10-21"
+    "bar_count": 1657,
+    "latest_date": "2026-10-22"
   },
   "OFH.CA": {
     "ticker": "OFH.CA",
@@ -5102,8 +5102,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 72,
-    "latest_date": "2026-10-21"
+    "bar_count": 73,
+    "latest_date": "2026-10-22"
   },
   "OIBK.CA": {
     "ticker": "OIBK.CA",
@@ -5117,8 +5117,8 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 61,
-    "latest_date": "2026-10-21"
+    "bar_count": 62,
+    "latest_date": "2026-10-22"
   },
   "OIH.CA": {
     "ticker": "OIH.CA",
@@ -5134,8 +5134,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 72,
-    "latest_date": "2026-10-21"
+    "bar_count": 73,
+    "latest_date": "2026-10-22"
   },
   "OLFI.CA": {
     "ticker": "OLFI.CA",
@@ -5151,8 +5151,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 72,
-    "latest_date": "2026-10-21"
+    "bar_count": 73,
+    "latest_date": "2026-10-22"
   },
   "ORAS.CA": {
     "ticker": "ORAS.CA",
@@ -5162,7 +5162,7 @@
     "health": "FAIL",
     "data_health": "FAIL",
     "issues": [
-      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze, Zero volume on 94.3% of sessions",
+      "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze, Zero volume on 94.2% of sessions",
       "Extreme price jumps (>35%) detected: 5 bars",
       "Known historical dual-currency USD/EGP reporting discrepancy (EGP/USD translation gap)"
     ],
@@ -5170,8 +5170,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1270,
-    "latest_date": "2026-10-21"
+    "bar_count": 1271,
+    "latest_date": "2026-10-22"
   },
   "ORHD.CA": {
     "ticker": "ORHD.CA",
@@ -5188,8 +5188,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1527,
-    "latest_date": "2026-10-21"
+    "bar_count": 1528,
+    "latest_date": "2026-10-22"
   },
   "ORWE.CA": {
     "ticker": "ORWE.CA",
@@ -5205,8 +5205,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1653,
-    "latest_date": "2026-10-21"
+    "bar_count": 1654,
+    "latest_date": "2026-10-22"
   },
   "PACH.CA": {
     "ticker": "PACH.CA",
@@ -5220,8 +5220,8 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 70,
-    "latest_date": "2026-10-21"
+    "bar_count": 71,
+    "latest_date": "2026-10-22"
   },
   "PHAR.CA": {
     "ticker": "PHAR.CA",
@@ -5231,15 +5231,15 @@
     "health": "FAIL",
     "data_health": "FAIL",
     "issues": [
-      "Missing data gaps: Insufficient history: 27 bars < 40",
+      "Missing data gaps: Insufficient history: 28 bars < 40",
       "Open price outside [Low, High] range in 2 bars"
     ],
     "can_trade": false,
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 27,
-    "latest_date": "2026-10-21"
+    "bar_count": 28,
+    "latest_date": "2026-10-22"
   },
   "PHDC.CA": {
     "ticker": "PHDC.CA",
@@ -5255,8 +5255,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1653,
-    "latest_date": "2026-10-21"
+    "bar_count": 1654,
+    "latest_date": "2026-10-22"
   },
   "PHGC.CA": {
     "ticker": "PHGC.CA",
@@ -5266,14 +5266,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "PHTV.CA": {
     "ticker": "PHTV.CA",
@@ -5283,14 +5283,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "PIOH.CA": {
     "ticker": "PIOH.CA",
@@ -5304,8 +5304,8 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 70,
-    "latest_date": "2026-10-21"
+    "bar_count": 71,
+    "latest_date": "2026-10-22"
   },
   "PLST.CA": {
     "ticker": "PLST.CA",
@@ -5315,14 +5315,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "PMSC.CA": {
     "ticker": "PMSC.CA",
@@ -5332,14 +5332,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "POCO.CA": {
     "ticker": "POCO.CA",
@@ -5349,14 +5349,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "PORT.CA": {
     "ticker": "PORT.CA",
@@ -5372,8 +5372,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 61,
-    "latest_date": "2026-10-21"
+    "bar_count": 62,
+    "latest_date": "2026-10-22"
   },
   "POUL.CA": {
     "ticker": "POUL.CA",
@@ -5390,8 +5390,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 72,
-    "latest_date": "2026-10-21"
+    "bar_count": 73,
+    "latest_date": "2026-10-22"
   },
   "PRAP.CA": {
     "ticker": "PRAP.CA",
@@ -5401,7 +5401,7 @@
     "health": "FAIL",
     "data_health": "FAIL",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40",
+      "Missing data gaps: Insufficient history: 26 bars < 40",
       "Liquidity/freeze anomaly: 10+ consecutive bars unchanged price freeze",
       "Extreme price jumps (>35%) detected: 1 bars"
     ],
@@ -5409,8 +5409,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "PRCL.CA": {
     "ticker": "PRCL.CA",
@@ -5426,8 +5426,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 72,
-    "latest_date": "2026-10-21"
+    "bar_count": 73,
+    "latest_date": "2026-10-22"
   },
   "PRDC.CA": {
     "ticker": "PRDC.CA",
@@ -5443,8 +5443,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 72,
-    "latest_date": "2026-10-21"
+    "bar_count": 73,
+    "latest_date": "2026-10-22"
   },
   "PRED.CA": {
     "ticker": "PRED.CA",
@@ -5454,14 +5454,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "PRMG.CA": {
     "ticker": "PRMG.CA",
@@ -5471,14 +5471,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "PRMH.CA": {
     "ticker": "PRMH.CA",
@@ -5495,8 +5495,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "PTIT.CA": {
     "ticker": "PTIT.CA",
@@ -5506,14 +5506,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "QNBA.CA": {
     "ticker": "QNBA.CA",
@@ -5527,8 +5527,8 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 70,
-    "latest_date": "2026-10-21"
+    "bar_count": 71,
+    "latest_date": "2026-10-22"
   },
   "QNBE.CA": {
     "ticker": "QNBE.CA",
@@ -5538,14 +5538,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "RACC.CA": {
     "ticker": "RACC.CA",
@@ -5555,14 +5555,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "RACT.CA": {
     "ticker": "RACT.CA",
@@ -5572,14 +5572,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "RAKT.CA": {
     "ticker": "RAKT.CA",
@@ -5589,14 +5589,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "RAPA.CA": {
     "ticker": "RAPA.CA",
@@ -5606,14 +5606,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "RAYA.CA": {
     "ticker": "RAYA.CA",
@@ -5631,8 +5631,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "RDIN.CA": {
     "ticker": "RDIN.CA",
@@ -5642,14 +5642,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "REAL.CA": {
     "ticker": "REAL.CA",
@@ -5659,15 +5659,15 @@
     "health": "FAIL",
     "data_health": "FAIL",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40",
+      "Missing data gaps: Insufficient history: 26 bars < 40",
       "Extreme price jumps (>35%) detected: 1 bars"
     ],
     "can_trade": false,
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "REAP.CA": {
     "ticker": "REAP.CA",
@@ -5677,14 +5677,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "RITV.CA": {
     "ticker": "RITV.CA",
@@ -5711,14 +5711,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "RMDA.CA": {
     "ticker": "RMDA.CA",
@@ -5734,8 +5734,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1633,
-    "latest_date": "2026-10-21"
+    "bar_count": 1634,
+    "latest_date": "2026-10-22"
   },
   "RMTV.CA": {
     "ticker": "RMTV.CA",
@@ -5745,14 +5745,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "ROBO.CA": {
     "ticker": "ROBO.CA",
@@ -5762,14 +5762,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "ROTO.CA": {
     "ticker": "ROTO.CA",
@@ -5779,14 +5779,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "ROWG.CA": {
     "ticker": "ROWG.CA",
@@ -5800,8 +5800,8 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 61,
-    "latest_date": "2026-10-21"
+    "bar_count": 62,
+    "latest_date": "2026-10-22"
   },
   "RREC.CA": {
     "ticker": "RREC.CA",
@@ -5815,8 +5815,8 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 61,
-    "latest_date": "2026-10-21"
+    "bar_count": 62,
+    "latest_date": "2026-10-22"
   },
   "RREI.CA": {
     "ticker": "RREI.CA",
@@ -5833,8 +5833,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1527,
-    "latest_date": "2026-10-21"
+    "bar_count": 1528,
+    "latest_date": "2026-10-22"
   },
   "RTVC.CA": {
     "ticker": "RTVC.CA",
@@ -5850,8 +5850,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "RUBX.CA": {
     "ticker": "RUBX.CA",
@@ -5868,8 +5868,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "SAIB.CA": {
     "ticker": "SAIB.CA",
@@ -5885,8 +5885,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1659,
-    "latest_date": "2026-10-21"
+    "bar_count": 1660,
+    "latest_date": "2026-10-22"
   },
   "SAUD.CA": {
     "ticker": "SAUD.CA",
@@ -5903,8 +5903,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "SCEM.CA": {
     "ticker": "SCEM.CA",
@@ -5921,8 +5921,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "SCFM.CA": {
     "ticker": "SCFM.CA",
@@ -5932,14 +5932,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "SCTS.CA": {
     "ticker": "SCTS.CA",
@@ -5949,14 +5949,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "SDRE.CA": {
     "ticker": "SDRE.CA",
@@ -5966,14 +5966,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "SDTI.CA": {
     "ticker": "SDTI.CA",
@@ -5989,8 +5989,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1462,
-    "latest_date": "2026-10-21"
+    "bar_count": 1463,
+    "latest_date": "2026-10-22"
   },
   "SEIG.CA": {
     "ticker": "SEIG.CA",
@@ -6000,14 +6000,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "SEIGA.CA": {
     "ticker": "SEIGA.CA",
@@ -6017,14 +6017,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "SEMR.CA": {
     "ticker": "SEMR.CA",
@@ -6034,15 +6034,15 @@
     "health": "FAIL",
     "data_health": "FAIL",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40",
+      "Missing data gaps: Insufficient history: 26 bars < 40",
       "Extreme price jumps (>35%) detected: 1 bars"
     ],
     "can_trade": false,
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "SICO.CA": {
     "ticker": "SICO.CA",
@@ -6052,14 +6052,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "SIEG.CA": {
     "ticker": "SIEG.CA",
@@ -6069,14 +6069,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "SILK.CA": {
     "ticker": "SILK.CA",
@@ -6086,31 +6086,32 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "SINA.CA": {
     "ticker": "SINA.CA",
-    "dqs": 80.0,
-    "score": 80.0,
-    "tier": "DATA_WARNING",
-    "health": "WARN",
-    "data_health": "WARN",
+    "dqs": 55.0,
+    "score": 55.0,
+    "tier": "DATA_UNUSABLE",
+    "health": "FAIL",
+    "data_health": "FAIL",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40",
+      "Liquidity/freeze anomaly: Zero volume on 30.8% of sessions"
     ],
-    "can_trade": true,
-    "position_size_multiplier": 0.5,
-    "action_restriction": "REDUCE_SIZE_50_PCT",
-    "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "can_trade": false,
+    "position_size_multiplier": 0.0,
+    "action_restriction": "PROHIBITED_BUY_BAN",
+    "is_usable": false,
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "SIPC.CA": {
     "ticker": "SIPC.CA",
@@ -6120,14 +6121,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "SKPC.CA": {
     "ticker": "SKPC.CA",
@@ -6143,8 +6144,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1653,
-    "latest_date": "2026-10-21"
+    "bar_count": 1654,
+    "latest_date": "2026-10-22"
   },
   "SMFR.CA": {
     "ticker": "SMFR.CA",
@@ -6154,14 +6155,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "SMPC.CA": {
     "ticker": "SMPC.CA",
@@ -6175,8 +6176,8 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 70,
-    "latest_date": "2026-10-21"
+    "bar_count": 71,
+    "latest_date": "2026-10-22"
   },
   "SMPP.CA": {
     "ticker": "SMPP.CA",
@@ -6190,8 +6191,8 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 70,
-    "latest_date": "2026-10-21"
+    "bar_count": 71,
+    "latest_date": "2026-10-22"
   },
   "SNFC.CA": {
     "ticker": "SNFC.CA",
@@ -6208,8 +6209,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "SNFI.CA": {
     "ticker": "SNFI.CA",
@@ -6219,14 +6220,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "SOLR.CA": {
     "ticker": "SOLR.CA",
@@ -6236,14 +6237,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "SOMP.CA": {
     "ticker": "SOMP.CA",
@@ -6253,14 +6254,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "SPHT.CA": {
     "ticker": "SPHT.CA",
@@ -6270,14 +6271,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "SPIN.CA": {
     "ticker": "SPIN.CA",
@@ -6294,8 +6295,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "SPMD.CA": {
     "ticker": "SPMD.CA",
@@ -6311,8 +6312,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1433,
-    "latest_date": "2026-10-21"
+    "bar_count": 1434,
+    "latest_date": "2026-10-22"
   },
   "SREC.CA": {
     "ticker": "SREC.CA",
@@ -6322,14 +6323,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "SUCE.CA": {
     "ticker": "SUCE.CA",
@@ -6339,14 +6340,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "SUGR.CA": {
     "ticker": "SUGR.CA",
@@ -6362,8 +6363,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "SVCE.CA": {
     "ticker": "SVCE.CA",
@@ -6380,8 +6381,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "SWDY.CA": {
     "ticker": "SWDY.CA",
@@ -6398,8 +6399,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1653,
-    "latest_date": "2026-10-21"
+    "bar_count": 1654,
+    "latest_date": "2026-10-22"
   },
   "TALM.CA": {
     "ticker": "TALM.CA",
@@ -6415,8 +6416,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 72,
-    "latest_date": "2026-10-21"
+    "bar_count": 73,
+    "latest_date": "2026-10-22"
   },
   "TANM.CA": {
     "ticker": "TANM.CA",
@@ -6430,8 +6431,8 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 70,
-    "latest_date": "2026-10-21"
+    "bar_count": 71,
+    "latest_date": "2026-10-22"
   },
   "TAPH.CA": {
     "ticker": "TAPH.CA",
@@ -6441,14 +6442,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "TAQA.CA": {
     "ticker": "TAQA.CA",
@@ -6462,8 +6463,8 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 70,
-    "latest_date": "2026-10-21"
+    "bar_count": 71,
+    "latest_date": "2026-10-22"
   },
   "TECH.CA": {
     "ticker": "TECH.CA",
@@ -6473,14 +6474,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "TERA.CA": {
     "ticker": "TERA.CA",
@@ -6490,14 +6491,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "TMGH.CA": {
     "ticker": "TMGH.CA",
@@ -6513,8 +6514,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1653,
-    "latest_date": "2026-10-21"
+    "bar_count": 1654,
+    "latest_date": "2026-10-22"
   },
   "TORA.CA": {
     "ticker": "TORA.CA",
@@ -6528,25 +6529,26 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 70,
-    "latest_date": "2026-10-21"
+    "bar_count": 71,
+    "latest_date": "2026-10-22"
   },
   "TOUR.CA": {
     "ticker": "TOUR.CA",
-    "dqs": 80.0,
-    "score": 80.0,
-    "tier": "DATA_WARNING",
-    "health": "WARN",
-    "data_health": "WARN",
+    "dqs": 55.0,
+    "score": 55.0,
+    "tier": "DATA_UNUSABLE",
+    "health": "FAIL",
+    "data_health": "FAIL",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40",
+      "Liquidity/freeze anomaly: Zero volume on 30.8% of sessions"
     ],
-    "can_trade": true,
-    "position_size_multiplier": 0.5,
-    "action_restriction": "REDUCE_SIZE_50_PCT",
-    "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "can_trade": false,
+    "position_size_multiplier": 0.0,
+    "action_restriction": "PROHIBITED_BUY_BAN",
+    "is_usable": false,
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "TRCO.CA": {
     "ticker": "TRCO.CA",
@@ -6556,14 +6558,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "TRTO.CA": {
     "ticker": "TRTO.CA",
@@ -6573,14 +6575,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "TWSA.CA": {
     "ticker": "TWSA.CA",
@@ -6590,14 +6592,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "TYCN.CA": {
     "ticker": "TYCN.CA",
@@ -6607,14 +6609,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "UBEE.CA": {
     "ticker": "UBEE.CA",
@@ -6624,14 +6626,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "UEDA.CA": {
     "ticker": "UEDA.CA",
@@ -6645,8 +6647,8 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 70,
-    "latest_date": "2026-10-21"
+    "bar_count": 71,
+    "latest_date": "2026-10-22"
   },
   "UEFM.CA": {
     "ticker": "UEFM.CA",
@@ -6656,14 +6658,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "UEGC.CA": {
     "ticker": "UEGC.CA",
@@ -6679,8 +6681,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "UNAT.CA": {
     "ticker": "UNAT.CA",
@@ -6711,8 +6713,8 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 61,
-    "latest_date": "2026-10-21"
+    "bar_count": 62,
+    "latest_date": "2026-10-22"
   },
   "UNIP.CA": {
     "ticker": "UNIP.CA",
@@ -6729,8 +6731,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "UNIT.CA": {
     "ticker": "UNIT.CA",
@@ -6744,8 +6746,8 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "UPMS.CA": {
     "ticker": "UPMS.CA",
@@ -6755,14 +6757,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "UTOP.CA": {
     "ticker": "UTOP.CA",
@@ -6772,14 +6774,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "VALU.CA": {
     "ticker": "VALU.CA",
@@ -6793,8 +6795,8 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 70,
-    "latest_date": "2026-10-21"
+    "bar_count": 71,
+    "latest_date": "2026-10-22"
   },
   "VERT.CA": {
     "ticker": "VERT.CA",
@@ -6808,8 +6810,8 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 61,
-    "latest_date": "2026-10-21"
+    "bar_count": 62,
+    "latest_date": "2026-10-22"
   },
   "VITA.CA": {
     "ticker": "VITA.CA",
@@ -6819,14 +6821,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "VLMR.CA": {
     "ticker": "VLMR.CA",
@@ -6836,14 +6838,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "VLMRA.CA": {
     "ticker": "VLMRA.CA",
@@ -6853,14 +6855,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "WATA.CA": {
     "ticker": "WATA.CA",
@@ -6870,14 +6872,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "WATP.CA": {
     "ticker": "WATP.CA",
@@ -6893,8 +6895,8 @@
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 70,
-    "latest_date": "2026-10-21"
+    "bar_count": 71,
+    "latest_date": "2026-10-22"
   },
   "WBCO.CA": {
     "ticker": "WBCO.CA",
@@ -6904,14 +6906,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "WCDF.CA": {
     "ticker": "WCDF.CA",
@@ -6928,8 +6930,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "WDEH.CA": {
     "ticker": "WDEH.CA",
@@ -6943,8 +6945,8 @@
     "position_size_multiplier": 1.0,
     "action_restriction": "NORMAL_TRADING",
     "is_usable": true,
-    "bar_count": 70,
-    "latest_date": "2026-10-21"
+    "bar_count": 71,
+    "latest_date": "2026-10-22"
   },
   "WETH.CA": {
     "ticker": "WETH.CA",
@@ -6954,14 +6956,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 25 bars < 40"
+      "Missing data gaps: Insufficient history: 26 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 25,
-    "latest_date": "2026-10-21"
+    "bar_count": 26,
+    "latest_date": "2026-10-22"
   },
   "WKOL.CA": {
     "ticker": "WKOL.CA",
@@ -6971,14 +6973,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "YAYT.CA": {
     "ticker": "YAYT.CA",
@@ -6988,14 +6990,14 @@
     "health": "WARN",
     "data_health": "WARN",
     "issues": [
-      "Missing data gaps: Insufficient history: 7 bars < 40"
+      "Missing data gaps: Insufficient history: 8 bars < 40"
     ],
     "can_trade": true,
     "position_size_multiplier": 0.5,
     "action_restriction": "REDUCE_SIZE_50_PCT",
     "is_usable": true,
-    "bar_count": 7,
-    "latest_date": "2026-10-21"
+    "bar_count": 8,
+    "latest_date": "2026-10-22"
   },
   "ZEOT.CA": {
     "ticker": "ZEOT.CA",
@@ -7012,8 +7014,8 @@
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 1654,
-    "latest_date": "2026-10-21"
+    "bar_count": 1655,
+    "latest_date": "2026-10-22"
   },
   "ZMID.CA": {
     "ticker": "ZMID.CA",
@@ -7023,14 +7025,14 @@
     "health": "FAIL",
     "data_health": "FAIL",
     "issues": [
-      "Missing data gaps: Insufficient history: 27 bars < 40",
+      "Missing data gaps: Insufficient history: 28 bars < 40",
       "Open price outside [Low, High] range in 1 bars"
     ],
     "can_trade": false,
     "position_size_multiplier": 0.0,
     "action_restriction": "PROHIBITED_BUY_BAN",
     "is_usable": false,
-    "bar_count": 27,
-    "latest_date": "2026-10-21"
+    "bar_count": 28,
+    "latest_date": "2026-10-22"
   }
 }

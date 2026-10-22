@@ -499,7 +499,8 @@ class AIPredictionModel:
         Returns expected 10-day residual alpha, AI confidence score, and top 3 feature drivers.
         """
         if not cls._is_trained:
-            cls.train_model()
+            if not cls.load_cached_model():
+                cls.train_model()
 
         vec, feat_dict = cls.extract_feature_vector(ticker, current_price)
         X_in = vec.reshape(1, -1)
