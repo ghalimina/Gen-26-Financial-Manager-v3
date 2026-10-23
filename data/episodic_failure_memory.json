@@ -1,0 +1,26 @@
+{
+  "version": "5.0.0",
+  "last_cycle_timestamp": "2026-10-23 16:04:55",
+  "audit_week": "2026-10-18_to_2026-10-22",
+  "total_divergences_analyzed": 129,
+  "key_learned_case_studies": [
+    {
+      "ticker": "SWDY.CA",
+      "event": "HEALTHY_ACCUMULATION_PULLBACK",
+      "deviation_pct": -3.42,
+      "resolution": "السعر احترم قاع التجميع 108.50 ج ولم يكسر وقف الخسارة 108.30 ج؛ الموديل تعلم عدم ملاحقة السعر بالأعلى وإنشاء أمر شراء تجميعي عند القاع (Buy the Dip)."
+    },
+    {
+      "ticker": "RAYA.CA",
+      "event": "RANGE_BOUND_LOW_BETA_CHOP",
+      "deviation_pct": -0.51,
+      "resolution": "السهم منخفض التذبذب وتحرك في نطاق عرضي هادئ؛ الموديل طبّق معامل تخميد (Damping Factor: 0.85) لتقليل المستهدفات المتفائلة."
+    },
+    {
+      "ticker": "ABUK.CA",
+      "event": "FERTILIZER_MOMENTUM_SURGE",
+      "deviation_pct": 13.53,
+      "resolution": "قفزة أسمدة استثنائية فاقت مستهدف +3.5% القديم بكثير؛ الموديل تخلّص من النسب الثابتة وربط الأهداف بتذبذب السهم الحقيقي والسيولة المؤسسية."
+    }
+  ]
+}

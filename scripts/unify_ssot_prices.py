@@ -989,6 +989,15 @@ def unify_all_ssot_data(run_consolidate: bool = True):
     else:
         print("\n -> Skipping synchronous consolidate_and_export_top10.py (ultra-fast < 3s sync mode).")
 
+    # 7. Closed-Loop AI Weekly Error Learning Trigger
+    try:
+        from core.weekly_error_learning_loop import WeeklyErrorLearningLoop
+        print("\n--- [ Running AI Closed-Loop Weekly Error Learning Cycle ] ---")
+        learn_res = WeeklyErrorLearningLoop.run_weekly_learning_cycle()
+        print(f" -> AI Learning Loop Active: Realized Hit-Rate {learn_res['realized_metrics']['directional_hit_rate_pct']}%, Weights Recalibrated.")
+    except Exception as e:
+        print(f" -> AI Learning Loop notice: {e}")
+
     print("\n✅ [SUCCESS] ALL 6 DATA STORES FULLY SYNCHRONIZED WITH LIVE THNDR PRICES!\n")
     return live_map
 

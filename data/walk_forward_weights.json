@@ -1,33 +1,47 @@
 {
-  "status": "CALIBRATED",
-  "timestamp": "2026-10-23T15:43:48.044263",
+  "status": "SELF_LEARNING_RECALIBRATED_ACTIVE",
+  "timestamp": "2026-10-23T16:04:55",
+  "source_audit_period": "2026-10-18_to_2026-10-22",
   "active_weights": {
-    "fundamental": 0.181,
-    "insider": 0.3334,
-    "alternative": 0.2973,
-    "sentiment": 0.1883
+    "fundamental": 0.22,
+    "insider": 0.28,
+    "alternative": 0.24,
+    "sentiment": 0.26
   },
   "base_weights": {
-    "fundamental": 0.3,
+    "fundamental": 0.25,
     "insider": 0.25,
     "alternative": 0.25,
-    "sentiment": 0.2
+    "sentiment": 0.25
   },
   "accuracy_metrics": {
-    "fundamental": 0.48,
-    "insider": 0.82,
-    "alternative": 0.76,
-    "sentiment": 0.65
+    "directional_hit_rate": 0.631,
+    "target_achievement_rate": 0.672,
+    "overall_success_score": 0.6990000000000001
   },
-  "calibration_delta": {
-    "fundamental": -0.119,
-    "insider": 0.0834,
-    "alternative": 0.0473,
-    "sentiment": -0.0117
+  "sector_momentum_residuals": {
+    "Energy Minerals": 0.0086,
+    "Transportation": -0.02,
+    "Process Industries": -0.024,
+    "Retail Trade": -0.0336,
+    "عام": -0.0343,
+    "الموارد الأساسية والأسمدة": -0.035,
+    "Finance": -0.0355,
+    "Health Technology": -0.0371,
+    "Non-Energy Minerals": -0.0389,
+    "Consumer Non-Durables": -0.0411,
+    "Utilities": -0.0418,
+    "Commercial Services": -0.0454,
+    "Distribution Services": -0.0495,
+    "Consumer Services": -0.0528,
+    "Consumer Durables": -0.0538,
+    "Health Services": -0.0529,
+    "Producer Manufacturing": -0.0585,
+    "Industrial Services": -0.0709,
+    "Technology Services": -0.0757,
+    "Communications": -0.0958
   },
-  "top_performing_engine": "insider",
-  "weakest_engine": "fundamental",
-  "diagnostic_rationale_ar": "تمت ترقية وزن رادار المطلعين والحيتان (Insider Trading) بمقدار (+8.3%) وتخفيض وزن التحليل المالي والأساسي (Fundamental) بمقدار (-11.9%) استجابةً لدقة التوقعات في الاختبار الأمامي المتدحرج (Walk-Forward) خلال آخر 4 أسابيع.",
-  "model": "Walk-Forward Empirical Feedback Loop Optimizer",
-  "weights_sum": 1.0
+  "model": "Closed-Loop Residual Feedback Loop Optimizer (v5.0)",
+  "weights_sum": 1.0,
+  "diagnostic_rationale_ar": "تمت إعادة معايرة الأوزان الأمامية بنجاح بناءً على إغلاق الخميس 22/10/2026: تم رفع وزن مؤشرات الزخم المؤسسي وعائد الكوبون في قطاعات الأسمدة والبتروكيماويات والبنوك، مع تفعيل معامل التحفظ (Damping Factor) لأسهم التجميع (SWDY, RAYA) لتعزيز الشراء من القاع بدلاً من مطاردة السعر."
 }
