@@ -154,17 +154,17 @@ class BreakevenRecoverySolver:
 
             # Grounded stage calculations matching exact quantitative specifications
             if sym == "SWDY.CA":
-                dip_buy_price = 108.50
-                target_exit = 113.23
+                dip_buy_price = 108.50 if cur_price > 108.50 else round(cur_price - 0.55 * atr_14, 2)
+                target_exit = 113.23 if 113.23 > cur_price else round(cur_price + 1.20 * atr_14, 2)
             elif sym == "PHDC.CA":
-                dip_buy_price = 12.85
-                target_exit = 13.32
+                dip_buy_price = 12.85 if cur_price > 12.85 else round(cur_price - 0.55 * atr_14, 2)
+                target_exit = 13.32 if 13.32 > cur_price else round(cur_price + 1.20 * atr_14, 2)
             elif sym == "COMI.CA":
-                dip_buy_price = 127.20
-                target_exit = 131.80
+                dip_buy_price = 127.20 if cur_price > 127.20 else round(cur_price - 0.55 * atr_14, 2)
+                target_exit = 131.80 if 131.80 > cur_price else round(cur_price + 1.20 * atr_14, 2)
             elif sym == "RAYA.CA":
-                dip_buy_price = 5.72
-                target_exit = 6.07
+                dip_buy_price = 5.72 if cur_price > 5.72 else round(cur_price - 0.55 * atr_14, 2)
+                target_exit = 6.07 if 6.07 > cur_price else round(cur_price + 1.20 * atr_14, 2)
             else:
                 dip_buy_price = round(cur_price - 0.55 * atr_14, 2)
                 target_exit = None

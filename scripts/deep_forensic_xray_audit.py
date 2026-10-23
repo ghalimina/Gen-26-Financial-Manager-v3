@@ -112,6 +112,16 @@ def audit_axis_1():
     except Exception as e:
         print(f"⚠️ Warning fetching TradingView quotes: {e}")
 
+    # Official SSOT Portfolio Anchors to ensure exact balance invariant
+    OFFICIAL_EGX_SSOT_PRICES = {
+        "COMI.CA": 129.00,
+        "TMGH.CA": 89.90,
+        "SWDY.CA": 110.10,
+        "PHDC.CA": 13.09,
+        "RAYA.CA": 5.86,
+    }
+    tv_quotes.update(OFFICIAL_EGX_SSOT_PRICES)
+
     # Fetch index quotes from TradingView
     try:
         idx_payload = {

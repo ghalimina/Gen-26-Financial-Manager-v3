@@ -1,7 +1,7 @@
 {
   "agent_generation": "GEN-26 Quant Alpha v3.5 (Self-Improving)",
-  "total_learning_cycles": 56,
-  "cumulative_evaluated_signals": 14282,
+  "total_learning_cycles": 61,
+  "cumulative_evaluated_signals": 15637,
   "all_time_win_rate_pct": 63.3,
   "patterns_corrected_count": 6,
   "history": [
@@ -18,6 +18,36 @@
       "regime": "STRONG_BULL"
     },
     {
+      "date": "2026-10-23",
+      "win_rate_pct": 63.27,
+      "buy_signals": 0,
+      "regime": "STRONG_BULL"
+    },
+    {
+      "date": "2026-10-23",
+      "win_rate_pct": 63.27,
+      "buy_signals": 0,
+      "regime": "STRONG_BULL"
+    },
+    {
+      "date": "2026-10-23",
+      "win_rate_pct": 63.27,
+      "buy_signals": 0,
+      "regime": "STRONG_BULL"
+    },
+    {
+      "date": "2026-10-23",
+      "win_rate_pct": 63.27,
+      "buy_signals": 0,
+      "regime": "STRONG_BULL"
+    },
+    {
+      "date": "2026-10-23",
+      "win_rate_pct": 63.27,
+      "buy_signals": 0,
+      "regime": "STRONG_BULL"
+    },
+    {
       "date": "2026-10-22",
       "win_rate_pct": 63.27,
       "buy_signals": 0,
@@ -154,37 +184,7 @@
       "win_rate_pct": 63.27,
       "buy_signals": 0,
       "regime": "DISTRIBUTION_SELL_OFF"
-    },
-    {
-      "date": "2026-10-19",
-      "win_rate_pct": 63.27,
-      "buy_signals": 0,
-      "regime": "DISTRIBUTION_SELL_OFF"
-    },
-    {
-      "date": "2026-10-19",
-      "win_rate_pct": 63.27,
-      "buy_signals": 0,
-      "regime": "DISTRIBUTION_SELL_OFF"
-    },
-    {
-      "date": "2026-10-14",
-      "win_rate_pct": 63.27,
-      "buy_signals": 0,
-      "regime": "DISTRIBUTION_SELL_OFF"
-    },
-    {
-      "date": "2026-10-14",
-      "win_rate_pct": 63.27,
-      "buy_signals": 0,
-      "regime": "DISTRIBUTION_SELL_OFF"
-    },
-    {
-      "date": "2026-10-08",
-      "win_rate_pct": 63.99,
-      "buy_signals": 0,
-      "regime": "STRONG_BULL"
     }
   ],
-  "last_updated": "2026-10-23 14:07:18"
+  "last_updated": "2026-10-23 15:43:45"
 }
