@@ -6281,6 +6281,44 @@ def api_insiders_and_dividends(ticker=None):
         return jsonify({"status": "ERROR", "error": str(e)}), 500
 
 
+@app.route("/api/audit/immutable_vault", methods=["GET"])
+@app.route("/api/audit/immutable_vault/<ticker>", methods=["GET"])
+def api_audit_immutable_vault(ticker=None):
+    """
+    Returns the cryptographically sealed immutable pre-session forecast vault.
+    If ticker provided, returns the locked baseline & prediction alongside current market actuals
+    and SHA-256 integrity seal.
+    """
+    try:
+        from core.immutable_forecast_vault import ImmutableForecastVault
+        if ticker:
+            data = ImmutableForecastVault.get_stock_vault_card(ticker)
+            return jsonify(data), 200
+
+        ledger = ImmutableForecastVault.load_ledger()
+        summary = {
+            "version": ledger.get("version", "5.1.0"),
+            "ledger_title": ledger.get("ledger_title"),
+            "total_batches": len(ledger.get("batches", {})),
+            "batches": {}
+        }
+        for bid, binfo in ledger.get("batches", {}).items():
+            summary["batches"][bid] = {
+                "batch_id": binfo.get("batch_id"),
+                "title": binfo.get("title"),
+                "locked_at_timestamp": binfo.get("locked_at_timestamp"),
+                "valid_until": binfo.get("valid_until"),
+                "batch_root_hash": binfo.get("batch_root_hash"),
+                "total_forecasts": binfo.get("total_forecasts"),
+                "audit_summary": binfo.get("audit_summary"),
+                "metadata": binfo.get("metadata")
+            }
+        return jsonify(summary), 200
+    except Exception as e:
+        logger.error(f"Error in api_audit_immutable_vault: {e}", exc_info=True)
+        return jsonify({"status": "ERROR", "error": str(e)}), 500
+
+
 @app.route("/favicon.ico")
 def favicon():
     return "", 204

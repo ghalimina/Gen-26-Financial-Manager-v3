@@ -167,3 +167,42 @@ class TestStartupPriceSync:
         result = PriceSyncService.sync_latest_cloud_snapshots_on_startup()
         assert "status" in result
         assert result["status"] in ["CACHED_READY", "SUCCESS", "NOOP", "FAILED", "success", "noop", "failed"]
+
+
+class TestImmutableForecastVault:
+    """Tests for ImmutableForecastVault and Anti-Lookahead pre-session lock."""
+
+    def test_vault_ledger_batches_and_sha256(self):
+        from core.immutable_forecast_vault import ImmutableForecastVault
+        ledger = ImmutableForecastVault.load_ledger()
+        assert "batches" in ledger
+        assert "BATCH_20261023_PRE_SESSION_OCT25" in ledger["batches"]
+        b2 = ledger["batches"]["BATCH_20261023_PRE_SESSION_OCT25"]
+        assert b2["total_forecasts"] >= 270
+        assert "batch_root_hash" in b2
+        assert len(b2["batch_root_hash"]) == 64
+
+    def test_stock_vault_card_integrity(self):
+        from core.immutable_forecast_vault import ImmutableForecastVault
+        card = ImmutableForecastVault.get_stock_vault_card("COMI.CA")
+        assert card["ticker"] == "COMI.CA"
+        assert card["vault_active"] is True
+        assert card["active_batch"]["baseline_price"] == 129.00
+        assert card["active_batch"]["predicted_target_5d"] > 129.00
+        assert "sha256_hash" in card["active_batch"]
+        assert len(card["active_batch"]["sha256_hash"]) == 64
+
+    def test_vault_api_endpoints(self):
+        from dashboard.app import app
+        client = app.test_client()
+        r1 = client.get("/api/audit/immutable_vault")
+        assert r1.status_code == 200
+        data1 = r1.get_json()
+        assert data1["total_batches"] >= 2
+
+        r2 = client.get("/api/audit/immutable_vault/MFPC.CA")
+        assert r2.status_code == 200
+        data2 = r2.get_json()
+        assert data2["ticker"] == "MFPC.CA"
+        assert data2["active_batch"]["baseline_price"] == 47.60
+
