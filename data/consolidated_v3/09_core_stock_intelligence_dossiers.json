@@ -1,6 +1,6 @@
 {
   "status": "SUCCESS",
-  "as_of": "2026-10-23 16:09:49",
+  "as_of": "2026-10-23 16:46:02",
   "dossiers_count": 6,
   "dossiers": {
     "COMI.CA": {
@@ -136,7 +136,7 @@
       "ticker": "MFPC.CA",
       "company_name_ar": "مصر لإنتاج الأسمدة (موبكو)",
       "sector": "الموارد الأساسية والكيماويات",
-      "current_live_price": 45.31,
+      "current_live_price": 47.6,
       "valuation_multiples": {
         "pe_ratio": 7.1,
         "pb_ratio": 2.8,
@@ -153,19 +153,19 @@
         "horizon_5d": {
           "days": 5,
           "target_price": 47.94,
-          "expected_gain_pct": 5.8,
+          "expected_gain_pct": 0.71,
           "label_ar": "المدى القصير (5 أيام)"
         },
         "horizon_20d": {
           "days": 20,
           "target_price": 50.22,
-          "expected_gain_pct": 10.84,
+          "expected_gain_pct": 5.5,
           "label_ar": "المدى المتوسط (20 يوماً - سوينج)"
         },
         "horizon_60d": {
           "days": 60,
           "target_price": 54.09,
-          "expected_gain_pct": 19.38,
+          "expected_gain_pct": 13.63,
           "label_ar": "المدى الاستثماري (60 يوماً)"
         }
       },

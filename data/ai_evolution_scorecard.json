@@ -1,15 +1,29 @@
 {
   "agent_generation": "GEN-26 Quant Alpha v5.0 (Closed-Loop Self-Improving)",
-  "total_learning_cycles": 63,
-  "cumulative_evaluated_signals": 15637,
+  "total_learning_cycles": 66,
+  "cumulative_evaluated_signals": 15908,
   "all_time_win_rate_pct": 63.3,
   "patterns_corrected_count": 6,
   "history": [
     {
+      "date": "2026-10-23",
+      "win_rate_pct": 63.27,
+      "buy_signals": 0,
+      "regime": "DISTRIBUTION_SELL_OFF"
+    },
+    {
       "date": "2026-10-22",
       "win_rate_pct": 63.1,
       "target_hit_pct": 67.2,
-      "overall_score_pct": 69.9,
+      "overall_score_pct": 69.6,
+      "cycle_description": "Post-Mortem Weekly Forecast vs Reality Audit across 271 stocks",
+      "regime": "SELECTIVE_BULL_ROTATION"
+    },
+    {
+      "date": "2026-10-22",
+      "win_rate_pct": 63.1,
+      "target_hit_pct": 67.2,
+      "overall_score_pct": 69.6,
       "cycle_description": "Post-Mortem Weekly Forecast vs Reality Audit across 271 stocks",
       "regime": "SELECTIVE_BULL_ROTATION"
     },
@@ -22,6 +36,14 @@
       "regime": "SELECTIVE_BULL_ROTATION"
     },
     {
+      "date": "2026-10-22",
+      "win_rate_pct": 63.1,
+      "target_hit_pct": 67.2,
+      "overall_score_pct": 69.9,
+      "cycle_description": "Post-Mortem Weekly Forecast vs Reality Audit across 271 stocks",
+      "regime": "SELECTIVE_BULL_ROTATION"
+    },
+    {
       "date": "2026-10-23",
       "win_rate_pct": 63.27,
       "buy_signals": 0,
@@ -170,38 +192,8 @@
       "win_rate_pct": 63.27,
       "buy_signals": 0,
       "regime": "STRONG_BULL"
-    },
-    {
-      "date": "2026-10-21",
-      "win_rate_pct": 63.27,
-      "buy_signals": 0,
-      "regime": "DISTRIBUTION_SELL_OFF"
-    },
-    {
-      "date": "2026-10-21",
-      "win_rate_pct": 63.27,
-      "buy_signals": 0,
-      "regime": "DISTRIBUTION_SELL_OFF"
-    },
-    {
-      "date": "2026-10-21",
-      "win_rate_pct": 63.27,
-      "buy_signals": 0,
-      "regime": "DISTRIBUTION_SELL_OFF"
-    },
-    {
-      "date": "2026-10-19",
-      "win_rate_pct": 63.27,
-      "buy_signals": 0,
-      "regime": "DISTRIBUTION_SELL_OFF"
-    },
-    {
-      "date": "2026-10-19",
-      "win_rate_pct": 63.27,
-      "buy_signals": 0,
-      "regime": "DISTRIBUTION_SELL_OFF"
     }
   ],
-  "last_updated": "2026-10-23 15:43:45",
-  "last_learning_timestamp": "2026-10-23 16:04:55"
+  "last_updated": "2026-10-23 16:46:56",
+  "last_learning_timestamp": "2026-10-23 16:45:51"
 }

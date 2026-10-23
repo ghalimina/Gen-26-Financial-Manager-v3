@@ -1,6 +1,6 @@
 {
   "status": "SUCCESS",
-  "as_of": "2026-10-23 16:09:48",
+  "as_of": "2026-10-23 16:46:02",
   "total_events": 12,
   "corporate_actions": [
     {
@@ -174,7 +174,7 @@
   ],
   "insiders_and_dividends_radar": {
     "status": "SUCCESS",
-    "as_of": "2026-10-23 16:09:48",
+    "as_of": "2026-10-23 16:46:02",
     "market_portal": "https://www.egx.com.eg/ar/",
     "insider_transactions_count": 6,
     "dividend_stocks_count": 10,
@@ -192,7 +192,7 @@
       {
         "ticker": "MFPC.CA",
         "company_name": "مصر لإنتاج الأسمدة (موبكو)",
-        "current_price": 45.31,
+        "current_price": 47.6,
         "dividend_yield_pct": 9.01,
         "last_coupon_value_egp": 4.25,
         "cash_cow_grade": "A+",
@@ -262,7 +262,7 @@
       {
         "ticker": "ABUK.CA",
         "company_name": "أبو قير للأسمدة والصناعات الكيماوية",
-        "current_price": 92.9,
+        "current_price": 95.75,
         "dividend_yield_pct": 4.6,
         "last_coupon_value_egp": 3.0,
         "cash_cow_grade": "A",
@@ -511,7 +511,7 @@
     {
       "ticker": "MFPC.CA",
       "company_name": "مصر لإنتاج الأسمدة (موبكو)",
-      "current_price": 45.31,
+      "current_price": 47.6,
       "dividend_yield_pct": 9.01,
       "last_coupon_value_egp": 4.25,
       "cash_cow_grade": "A+",
@@ -581,7 +581,7 @@
     {
       "ticker": "ABUK.CA",
       "company_name": "أبو قير للأسمدة والصناعات الكيماوية",
-      "current_price": 92.9,
+      "current_price": 95.75,
       "dividend_yield_pct": 4.6,
       "last_coupon_value_egp": 3.0,
       "cash_cow_grade": "A",

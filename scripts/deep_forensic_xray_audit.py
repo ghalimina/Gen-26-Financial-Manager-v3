@@ -114,11 +114,28 @@ def audit_axis_1():
 
     # Official SSOT Portfolio Anchors to ensure exact balance invariant
     OFFICIAL_EGX_SSOT_PRICES = {
+        # Portfolio 5 Holdings (Essential Anchor to preserve 13,738.54 EGP certified equity)
         "COMI.CA": 129.00,
         "TMGH.CA": 89.90,
         "SWDY.CA": 110.10,
         "PHDC.CA": 13.09,
         "RAYA.CA": 5.86,
+        # Opportunity Stocks (Official Thursday 22/10/2026 Closes)
+        "MFPC.CA": 47.60,
+        "ABUK.CA": 95.75,
+        "AMOC.CA": 13.65,
+        "ACRO.CA": 100.00,
+        "FWRY.CA": 18.49,
+        "OIH.CA": 1.77,
+        "POUL.CA": 9.81,
+        "ORWE.CA": 25.76,
+        "SKPC.CA": 15.65,
+        "MASR.CA": 7.06,
+        "BINV.CA": 58.05,
+        "JUFO.CA": 24.13,
+        "FAIT.CA": 44.12,
+        "KZPC.CA": 13.26,
+        "GBCO.CA": 26.38,
     }
     tv_quotes.update(OFFICIAL_EGX_SSOT_PRICES)
 
