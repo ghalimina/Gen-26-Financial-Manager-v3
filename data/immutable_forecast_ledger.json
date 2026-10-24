@@ -107,7 +107,7 @@
           "actual_close": 110.1,
           "actual_high": 110.89,
           "actual_low": 106.01,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -44.1,
           "direction_correct": false
         },
@@ -515,7 +515,7 @@
           "actual_close": 94.01,
           "actual_high": 99.79,
           "actual_low": 93.0,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -28.5,
           "direction_correct": false
         },
@@ -731,7 +731,7 @@
           "actual_close": 19.76,
           "actual_high": 19.93,
           "actual_low": 19.52,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -36.8,
           "direction_correct": false
         },
@@ -803,7 +803,7 @@
           "actual_close": 2.55,
           "actual_high": 2.64,
           "actual_low": 2.55,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -33.3,
           "direction_correct": false
         },
@@ -899,7 +899,7 @@
           "actual_close": 10.07,
           "actual_high": 10.58,
           "actual_low": 10.07,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -67.1,
           "direction_correct": false
         },
@@ -923,7 +923,7 @@
           "actual_close": 3.18,
           "actual_high": 3.4,
           "actual_low": 3.15,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -29.6,
           "direction_correct": false
         },
@@ -1139,7 +1139,7 @@
           "actual_close": 13.5,
           "actual_high": 13.9,
           "actual_low": 13.2,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -46.3,
           "direction_correct": false
         },
@@ -1211,7 +1211,7 @@
           "actual_close": 9.8,
           "actual_high": 10.34,
           "actual_low": 9.8,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -31.8,
           "direction_correct": false
         },
@@ -1307,7 +1307,7 @@
           "actual_close": 22.41,
           "actual_high": 23.44,
           "actual_low": 22.1,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -66.7,
           "direction_correct": false
         },
@@ -1427,7 +1427,7 @@
           "actual_close": 1.14,
           "actual_high": 1.23,
           "actual_low": 1.13,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -33.3,
           "direction_correct": false
         },
@@ -1643,7 +1643,7 @@
           "actual_close": 6.67,
           "actual_high": 7.09,
           "actual_low": 6.67,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -66.1,
           "direction_correct": false
         },
@@ -1859,7 +1859,7 @@
           "actual_close": 20.0,
           "actual_high": 21.21,
           "actual_low": 20.0,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -55.4,
           "direction_correct": false
         },
@@ -1883,7 +1883,7 @@
           "actual_close": 7.3,
           "actual_high": 7.68,
           "actual_low": 7.25,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -30.6,
           "direction_correct": false
         },
@@ -2003,7 +2003,7 @@
           "actual_close": 81.0,
           "actual_high": 85.25,
           "actual_low": 79.4,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -29.9,
           "direction_correct": false
         },
@@ -2051,7 +2051,7 @@
           "actual_close": 0.58,
           "actual_high": 0.61,
           "actual_low": 0.58,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -40.0,
           "direction_correct": false
         },
@@ -2195,7 +2195,7 @@
           "actual_close": 1.44,
           "actual_high": 1.52,
           "actual_low": 1.42,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -45.5,
           "direction_correct": false
         },
@@ -2243,7 +2243,7 @@
           "actual_close": 3.02,
           "actual_high": 3.2,
           "actual_low": 3.0,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -75.6,
           "direction_correct": false
         },
@@ -2267,7 +2267,7 @@
           "actual_close": 3.42,
           "actual_high": 3.42,
           "actual_low": 3.42,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -33.1,
           "direction_correct": false
         },
@@ -2363,7 +2363,7 @@
           "actual_close": 0.58,
           "actual_high": 0.63,
           "actual_low": 0.58,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -44.4,
           "direction_correct": false
         },
@@ -2435,7 +2435,7 @@
           "actual_close": 4.64,
           "actual_high": 5.0,
           "actual_low": 4.53,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -56.5,
           "direction_correct": false
         },
@@ -2579,7 +2579,7 @@
           "actual_close": 19.76,
           "actual_high": 19.93,
           "actual_low": 19.52,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -36.8,
           "direction_correct": false
         },
@@ -2867,7 +2867,7 @@
           "actual_close": 2.47,
           "actual_high": 2.6,
           "actual_low": 2.47,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -65.0,
           "direction_correct": false
         },
@@ -2891,7 +2891,7 @@
           "actual_close": 2.02,
           "actual_high": 2.03,
           "actual_low": 2.0,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -31.2,
           "direction_correct": false
         },
@@ -3035,7 +3035,7 @@
           "actual_close": 1260.0,
           "actual_high": 1310.0,
           "actual_low": 1250.0,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -44.5,
           "direction_correct": false
         },
@@ -3083,7 +3083,7 @@
           "actual_close": 2.93,
           "actual_high": 3.06,
           "actual_low": 2.91,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -44.8,
           "direction_correct": false
         },
@@ -3131,7 +3131,7 @@
           "actual_close": 10.0,
           "actual_high": 10.94,
           "actual_low": 9.9,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -65.5,
           "direction_correct": false
         },
@@ -3179,7 +3179,7 @@
           "actual_close": 214.23,
           "actual_high": 223.0,
           "actual_low": 211.1,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -29.3,
           "direction_correct": false
         },
@@ -3371,7 +3371,7 @@
           "actual_close": 1.57,
           "actual_high": 1.65,
           "actual_low": 1.57,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -50.0,
           "direction_correct": false
         },
@@ -3395,7 +3395,7 @@
           "actual_close": 258.01,
           "actual_high": 264.0,
           "actual_low": 250.25,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -32.5,
           "direction_correct": false
         },
@@ -3443,7 +3443,7 @@
           "actual_close": 317.27,
           "actual_high": 330.0,
           "actual_low": 315.0,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -30.0,
           "direction_correct": false
         },
@@ -3515,7 +3515,7 @@
           "actual_close": 133.0,
           "actual_high": 146.7,
           "actual_low": 132.1,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -39.9,
           "direction_correct": false
         },
@@ -3683,7 +3683,7 @@
           "actual_close": 375.2,
           "actual_high": 388.5,
           "actual_low": 375.0,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -33.9,
           "direction_correct": false
         },
@@ -4019,7 +4019,7 @@
           "actual_close": 3.42,
           "actual_high": 3.42,
           "actual_low": 3.42,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -33.1,
           "direction_correct": false
         },
@@ -4331,7 +4331,7 @@
           "actual_close": 19.19,
           "actual_high": 19.79,
           "actual_low": 18.7,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -34.5,
           "direction_correct": false
         },
@@ -4451,7 +4451,7 @@
           "actual_close": 10.6,
           "actual_high": 10.8,
           "actual_low": 10.6,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -38.5,
           "direction_correct": false
         },
@@ -4475,7 +4475,7 @@
           "actual_close": 2.48,
           "actual_high": 2.58,
           "actual_low": 2.47,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -26.1,
           "direction_correct": false
         },
@@ -4499,7 +4499,7 @@
           "actual_close": 184.94,
           "actual_high": 190.99,
           "actual_low": 183.15,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -29.3,
           "direction_correct": false
         },
@@ -4691,7 +4691,7 @@
           "actual_close": 14.66,
           "actual_high": 15.62,
           "actual_low": 14.03,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -61.4,
           "direction_correct": false
         },
@@ -4739,7 +4739,7 @@
           "actual_close": 6.57,
           "actual_high": 7.64,
           "actual_low": 6.5,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -58.2,
           "direction_correct": false
         },
@@ -4763,7 +4763,7 @@
           "actual_close": 133.0,
           "actual_high": 146.7,
           "actual_low": 132.1,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -39.9,
           "direction_correct": false
         },
@@ -4787,7 +4787,7 @@
           "actual_close": 375.2,
           "actual_high": 388.5,
           "actual_low": 375.0,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -33.9,
           "direction_correct": false
         },
@@ -4811,7 +4811,7 @@
           "actual_close": 1.47,
           "actual_high": 1.54,
           "actual_low": 1.47,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -43.8,
           "direction_correct": false
         },
@@ -4883,7 +4883,7 @@
           "actual_close": 106.01,
           "actual_high": 113.56,
           "actual_low": 104.1,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -37.1,
           "direction_correct": false
         },
@@ -4955,7 +4955,7 @@
           "actual_close": 31.01,
           "actual_high": 32.81,
           "actual_low": 30.0,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -30.8,
           "direction_correct": false
         },
@@ -5003,7 +5003,7 @@
           "actual_close": 2.47,
           "actual_high": 2.6,
           "actual_low": 2.47,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -65.0,
           "direction_correct": false
         },
@@ -5099,7 +5099,7 @@
           "actual_close": 5.0,
           "actual_high": 5.0,
           "actual_low": 4.75,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -52.0,
           "direction_correct": false
         },
@@ -5147,7 +5147,7 @@
           "actual_close": 0.41,
           "actual_high": 0.43,
           "actual_low": 0.39,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -40.0,
           "direction_correct": false
         },
@@ -5339,7 +5339,7 @@
           "actual_close": 2.02,
           "actual_high": 2.03,
           "actual_low": 2.0,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -31.2,
           "direction_correct": false
         },
@@ -5507,7 +5507,7 @@
           "actual_close": 2.93,
           "actual_high": 3.06,
           "actual_low": 2.91,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -44.8,
           "direction_correct": false
         },
@@ -5843,7 +5843,7 @@
           "actual_close": 28.0,
           "actual_high": 30.54,
           "actual_low": 28.0,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -25.6,
           "direction_correct": false
         },
@@ -5891,7 +5891,7 @@
           "actual_close": 4.15,
           "actual_high": 4.4,
           "actual_low": 4.04,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -78.6,
           "direction_correct": false
         },
@@ -6083,7 +6083,7 @@
           "actual_close": 1.44,
           "actual_high": 1.52,
           "actual_low": 1.42,
-          "status": "CONSOLIDATION_WITHIN_BOUNDS",
+          "status": "STOP_LOSS_OR_FAILED",
           "achievement_pct": -45.5,
           "direction_correct": false
         },

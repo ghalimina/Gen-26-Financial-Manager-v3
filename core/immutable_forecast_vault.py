@@ -255,7 +255,7 @@ class ImmutableForecastVault:
             elif dir_correct and actual_close > base_p:
                 status = "MOVED_TOWARDS_TARGET"
                 moved_count += 1
-            elif actual_close < sl_p or act_low < sl_p:
+            elif actual_close < sl_p or act_low < sl_p or (not dir_correct and ach_pct < -30.0):
                 status = "STOP_LOSS_OR_FAILED"
                 failed_count += 1
             else:
