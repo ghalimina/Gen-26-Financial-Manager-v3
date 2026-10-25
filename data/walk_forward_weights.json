@@ -1,6 +1,6 @@
 {
   "status": "SELF_LEARNING_RECALIBRATED_ACTIVE",
-  "timestamp": "2026-10-23T16:30:33",
+  "timestamp": "2026-10-25T12:10:24",
   "source_audit_period": "2026-10-18_to_2026-10-22",
   "active_weights": {
     "fundamental": 0.22,
@@ -15,31 +15,31 @@
     "sentiment": 0.25
   },
   "accuracy_metrics": {
-    "directional_hit_rate": 0.631,
+    "directional_hit_rate": 0.387,
     "target_achievement_rate": 0.672,
-    "overall_success_score": 0.696
+    "overall_success_score": 0.552
   },
   "sector_momentum_residuals": {
     "Energy Minerals": 0.0195,
-    "Process Industries": -0.02,
-    "Transportation": -0.02,
-    "Retail Trade": -0.0336,
     "عام": -0.0343,
-    "Finance": -0.0341,
     "الموارد الأساسية والأسمدة": -0.035,
-    "Health Technology": -0.0371,
-    "Non-Energy Minerals": -0.0389,
-    "Consumer Non-Durables": -0.0391,
-    "Distribution Services": -0.0412,
-    "Utilities": -0.0418,
-    "Commercial Services": -0.0454,
-    "Consumer Durables": -0.0496,
-    "Consumer Services": -0.0528,
-    "Health Services": -0.0529,
-    "Producer Manufacturing": -0.0585,
-    "Technology Services": -0.0677,
-    "Industrial Services": -0.0709,
-    "Communications": -0.0958
+    "Consumer Services": -0.0724,
+    "Process Industries": -0.0894,
+    "Technology Services": -0.0946,
+    "Transportation": -0.0948,
+    "Finance": -0.1009,
+    "Consumer Non-Durables": -0.1047,
+    "Non-Energy Minerals": -0.1075,
+    "Communications": -0.1127,
+    "Distribution Services": -0.1303,
+    "Utilities": -0.1307,
+    "Health Technology": -0.1349,
+    "Commercial Services": -0.1374,
+    "Health Services": -0.1432,
+    "Producer Manufacturing": -0.147,
+    "Retail Trade": -0.1619,
+    "Consumer Durables": -0.1702,
+    "Industrial Services": -0.1783
   },
   "model": "Closed-Loop Residual Feedback Loop Optimizer (v5.0)",
   "weights_sum": 1.0,

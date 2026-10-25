@@ -1,6 +1,6 @@
 {
   "status": "SUCCESS",
-  "as_of": "2026-10-23 16:30:35",
+  "as_of": "2026-10-25 12:10:26",
   "macro_indicators": {
     "usd_egp": {
       "rate": 55.25,
@@ -64,7 +64,7 @@
     }
   },
   "egx_market_context": {
-    "egx30_level": 51052.3008,
+    "egx30_level": 49234.3008,
     "egx30_change_pct": -0.68,
     "egx30_ytd_pct": 22.56,
     "egx70_level": 18330.8,

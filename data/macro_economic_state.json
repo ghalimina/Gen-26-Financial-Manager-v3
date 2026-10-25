@@ -45,7 +45,7 @@
       "unit": "EGP",
       "label_ar": "سعر صرف الجنيه أمام الدولار الأمريكي",
       "source": "EGX_OFFICIAL_HARVESTER_AND_YAHOO",
-      "last_updated": "2026-10-23 16:30:26",
+      "last_updated": "2026-10-25 12:10:17",
       "is_stale": false,
       "staleness_threshold_days": 2,
       "days_since_update": 0
@@ -61,11 +61,11 @@
       "days_since_update": 0
     },
     "brent_oil_usd": {
-      "value": 111.97,
+      "value": 111.7,
       "unit": "USD/bbl",
       "label_ar": "سعر خام برنت العالمي للنفط — ارتفاع ملحوظ بسبب توترات الشرق الأوسط",
       "source": "LIVE_YAHOO_FINANCE_BZ_F",
-      "last_updated": "2026-10-23 16:30:26",
+      "last_updated": "2026-10-25 12:10:17",
       "is_stale": false,
       "staleness_threshold_days": 2,
       "days_since_update": 0
@@ -190,7 +190,7 @@
     }
   },
   "egx_market_context": {
-    "egx30_level": 51052.30078125,
+    "egx30_level": 49234.30078125,
     "egx70_level": 18330.8,
     "egx100_level": 30735.6,
     "total_market_cap_egp": 3999192255990.0,
@@ -207,59 +207,59 @@
   },
   "macro_regime": "DISTRIBUTION_SELL_OFF",
   "macro_regime_ar": "🚨 إنذار ضغط بيعي وتصريف مؤسسي (أكثر من 81% من الأسهم المتداولة هابطة) — حظر الشراء الجديد",
-  "last_sync_timestamp": "2026-10-23 16:30:26",
+  "last_sync_timestamp": "2026-10-25 12:10:17",
   "staleness_warnings_count": 0,
   "stale_indicators": [],
   "indices": {
     "EGX30": {
       "name": "EGX 30 Index",
-      "level": 51052.3,
-      "change_pct": -3.41,
-      "change_pts": -1802.6,
-      "high": 52867.6,
-      "low": 51020.2,
-      "open": 52865.7,
-      "volume": 229367000
+      "level": 49234.3,
+      "change_pct": -3.56,
+      "change_pts": -1818.0,
+      "high": 51072.3,
+      "low": 48268.0,
+      "open": 51038.1,
+      "volume": 262595000
     },
     "EGX70EWI": {
       "name": "EGX 70 EWI Index",
-      "level": 17184.3,
-      "change_pct": -3.09,
-      "change_pts": -548.3,
-      "high": 17738.3,
-      "low": 17151.2,
-      "open": 17734.3,
-      "volume": 841895000
+      "level": 15282.6,
+      "change_pct": -11.07,
+      "change_pts": -1901.7,
+      "high": 17191.5,
+      "low": 15126.5,
+      "open": 17185.3,
+      "volume": 1034430000
     },
     "EGX100EWI": {
       "name": "EGX 100 EWI Index",
-      "level": 23117.5,
-      "change_pct": -3.2,
-      "change_pts": -764.2,
-      "high": 23891.1,
-      "low": 23117.5,
-      "open": 23887.4,
-      "volume": 1071260000
+      "level": 21064.5,
+      "change_pct": -8.88,
+      "change_pts": -2053.0,
+      "high": 23124.0,
+      "low": 20771.5,
+      "open": 23113.6,
+      "volume": 1297020000
     },
     "EGX70": {
       "name": "EGX 70 EWI Index",
-      "level": 17184.3,
-      "change_pct": -3.09,
-      "change_pts": -548.3,
-      "high": 17738.3,
-      "low": 17151.2,
-      "open": 17734.3,
-      "volume": 841895000
+      "level": 15282.6,
+      "change_pct": -11.07,
+      "change_pts": -1901.7,
+      "high": 17191.5,
+      "low": 15126.5,
+      "open": 17185.3,
+      "volume": 1034430000
     },
     "EGX100": {
       "name": "EGX 100 EWI Index",
-      "level": 23117.5,
-      "change_pct": -3.2,
-      "change_pts": -764.2,
-      "high": 23891.1,
-      "low": 23117.5,
-      "open": 23887.4,
-      "volume": 1071260000
+      "level": 21064.5,
+      "change_pct": -8.88,
+      "change_pts": -2053.0,
+      "high": 23124.0,
+      "low": 20771.5,
+      "open": 23113.6,
+      "volume": 1297020000
     }
   }
 }
