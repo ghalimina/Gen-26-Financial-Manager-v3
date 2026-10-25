@@ -1,6 +1,6 @@
 {
   "status": "SUCCESS",
-  "as_of": "2026-10-25 12:10:26",
+  "as_of": "2026-10-25 16:41:51",
   "market_portal": "https://www.egx.com.eg/ar/",
   "insider_transactions_count": 6,
   "dividend_stocks_count": 10,
@@ -8,7 +8,7 @@
     {
       "ticker": "CIEB.CA",
       "company_name": "بنك كريدي أجريكول مصر",
-      "current_price": 21.41,
+      "current_price": 21.42,
       "dividend_yield_pct": 14.48,
       "last_coupon_value_egp": 3.75,
       "cash_cow_grade": "A+",

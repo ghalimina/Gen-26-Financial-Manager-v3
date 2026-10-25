@@ -1,14 +1,14 @@
 {
   "version": "v5.0",
   "audit_period": "2026-10-18 to 2026-10-22",
-  "execution_timestamp": "2026-10-25 12:10:24",
+  "execution_timestamp": "2026-10-25 16:41:50",
   "total_stocks_evaluated": 271,
   "realized_metrics": {
     "directional_hit_rate_pct": 38.7,
     "target_achievement_rate_pct": 67.2,
     "floor_respect_rate_pct": 10.8,
     "stop_loss_survival_rate_pct": 41.0,
-    "mean_absolute_percentage_error_pct": 11.54,
+    "mean_absolute_percentage_error_pct": 11.53,
     "overall_system_success_score_pct": 55.2
   },
   "portfolio_five_audit": [
@@ -426,28 +426,19 @@
     {
       "sector": "Consumer Services",
       "stocks_count": 8,
-      "avg_chg_pct": -3.78,
+      "avg_chg_pct": -4.73,
       "directional_hit_rate": 37.5,
       "target_hit_rate": 75.0,
-      "avg_residual": -0.0724,
+      "avg_residual": -0.0819,
       "flow_status": "OUTFLOW_PULLBACK"
     },
     {
       "sector": "Process Industries",
       "stocks_count": 42,
-      "avg_chg_pct": -5.22,
+      "avg_chg_pct": -5.56,
       "directional_hit_rate": 33.3,
       "target_hit_rate": 90.5,
-      "avg_residual": -0.0894,
-      "flow_status": "OUTFLOW_PULLBACK"
-    },
-    {
-      "sector": "Technology Services",
-      "stocks_count": 5,
-      "avg_chg_pct": -5.94,
-      "directional_hit_rate": 20.0,
-      "target_hit_rate": 60.0,
-      "avg_residual": -0.0946,
+      "avg_residual": -0.0928,
       "flow_status": "OUTFLOW_PULLBACK"
     },
     {
@@ -460,30 +451,39 @@
       "flow_status": "OUTFLOW_PULLBACK"
     },
     {
+      "sector": "Technology Services",
+      "stocks_count": 5,
+      "avg_chg_pct": -6.09,
+      "directional_hit_rate": 20.0,
+      "target_hit_rate": 60.0,
+      "avg_residual": -0.0961,
+      "flow_status": "OUTFLOW_PULLBACK"
+    },
+    {
       "sector": "Finance",
       "stocks_count": 68,
-      "avg_chg_pct": -6.65,
+      "avg_chg_pct": -6.58,
       "directional_hit_rate": 26.5,
       "target_hit_rate": 82.4,
-      "avg_residual": -0.1009,
+      "avg_residual": -0.1002,
       "flow_status": "OUTFLOW_PULLBACK"
     },
     {
       "sector": "Consumer Non-Durables",
       "stocks_count": 15,
-      "avg_chg_pct": -6.98,
+      "avg_chg_pct": -7.18,
       "directional_hit_rate": 13.3,
       "target_hit_rate": 73.3,
-      "avg_residual": -0.1047,
+      "avg_residual": -0.1067,
       "flow_status": "OUTFLOW_PULLBACK"
     },
     {
       "sector": "Non-Energy Minerals",
       "stocks_count": 13,
-      "avg_chg_pct": -7.25,
+      "avg_chg_pct": -7.28,
       "directional_hit_rate": 30.8,
       "target_hit_rate": 84.6,
-      "avg_residual": -0.1075,
+      "avg_residual": -0.1078,
       "flow_status": "OUTFLOW_PULLBACK"
     },
     {
@@ -496,12 +496,21 @@
       "flow_status": "OUTFLOW_PULLBACK"
     },
     {
-      "sector": "Distribution Services",
+      "sector": "Commercial Services",
+      "stocks_count": 1,
+      "avg_chg_pct": -8.71,
+      "directional_hit_rate": 0.0,
+      "target_hit_rate": 100.0,
+      "avg_residual": -0.1227,
+      "flow_status": "OUTFLOW_PULLBACK"
+    },
+    {
+      "sector": "Health Technology",
       "stocks_count": 9,
-      "avg_chg_pct": -9.46,
-      "directional_hit_rate": 22.2,
-      "target_hit_rate": 88.9,
-      "avg_residual": -0.1303,
+      "avg_chg_pct": -9.23,
+      "directional_hit_rate": 0.0,
+      "target_hit_rate": 100.0,
+      "avg_residual": -0.1273,
       "flow_status": "OUTFLOW_PULLBACK"
     },
     {
@@ -514,21 +523,12 @@
       "flow_status": "OUTFLOW_PULLBACK"
     },
     {
-      "sector": "Health Technology",
+      "sector": "Distribution Services",
       "stocks_count": 9,
-      "avg_chg_pct": -9.99,
-      "directional_hit_rate": 0.0,
-      "target_hit_rate": 100.0,
-      "avg_residual": -0.1349,
-      "flow_status": "OUTFLOW_PULLBACK"
-    },
-    {
-      "sector": "Commercial Services",
-      "stocks_count": 1,
-      "avg_chg_pct": -10.18,
-      "directional_hit_rate": 0.0,
-      "target_hit_rate": 100.0,
-      "avg_residual": -0.1374,
+      "avg_chg_pct": -10.24,
+      "directional_hit_rate": 22.2,
+      "target_hit_rate": 88.9,
+      "avg_residual": -0.1381,
       "flow_status": "OUTFLOW_PULLBACK"
     },
     {
@@ -543,28 +543,28 @@
     {
       "sector": "Producer Manufacturing",
       "stocks_count": 9,
-      "avg_chg_pct": -11.18,
+      "avg_chg_pct": -11.03,
       "directional_hit_rate": 0.0,
       "target_hit_rate": 88.9,
-      "avg_residual": -0.147,
+      "avg_residual": -0.1455,
       "flow_status": "OUTFLOW_PULLBACK"
     },
     {
       "sector": "Retail Trade",
       "stocks_count": 4,
-      "avg_chg_pct": -12.7,
+      "avg_chg_pct": -12.6,
       "directional_hit_rate": 0.0,
       "target_hit_rate": 75.0,
-      "avg_residual": -0.1619,
+      "avg_residual": -0.1609,
       "flow_status": "OUTFLOW_PULLBACK"
     },
     {
       "sector": "Consumer Durables",
       "stocks_count": 6,
-      "avg_chg_pct": -13.53,
+      "avg_chg_pct": -13.58,
       "directional_hit_rate": 16.7,
       "target_hit_rate": 100.0,
-      "avg_residual": -0.1702,
+      "avg_residual": -0.1707,
       "flow_status": "OUTFLOW_PULLBACK"
     },
     {
@@ -693,25 +693,6 @@
       "ai_lesson_ar": "تجاوز السهم مستهدف 5D بقوة؛ تم رفع معامل ألفا والزخم المؤسسي وإلغاء السقف الثابت."
     },
     {
-      "ticker": "RACT.CA",
-      "name_ar": "راكتا",
-      "sector": "Process Industries",
-      "base_price": 21.0,
-      "pred_5d": 21.73,
-      "actual_price": 23.06,
-      "actual_high": 23.16,
-      "actual_low": 20.96,
-      "chg_pct": 9.81,
-      "dir_hit": true,
-      "target_hit": true,
-      "floor_respected": true,
-      "sl_survived": true,
-      "weekly_residual": 0.0633,
-      "ape_pct": 5.77,
-      "learning_tag": "ALPHA_OUTPERFORMER_SURGE",
-      "ai_lesson_ar": "تجاوز السهم مستهدف 5D بقوة؛ تم رفع معامل ألفا والزخم المؤسسي وإلغاء السقف الثابت."
-    },
-    {
       "ticker": "MFPC.CA",
       "name_ar": "موبكو",
       "sector": "Process Industries",
@@ -767,6 +748,25 @@
       "ape_pct": 3.68,
       "learning_tag": "ALPHA_OUTPERFORMER_SURGE",
       "ai_lesson_ar": "تجاوز السهم مستهدف 5D بقوة؛ تم رفع معامل ألفا والزخم المؤسسي وإلغاء السقف الثابت."
+    },
+    {
+      "ticker": "TMGH.CA",
+      "name_ar": "طلعت مصطفى",
+      "sector": "Finance",
+      "base_price": 83.94,
+      "pred_5d": 88.5,
+      "actual_price": 89.9,
+      "actual_high": 93.0,
+      "actual_low": 80.01,
+      "chg_pct": 7.1,
+      "dir_hit": true,
+      "target_hit": true,
+      "floor_respected": true,
+      "sl_survived": true,
+      "weekly_residual": 0.0167,
+      "ape_pct": 1.56,
+      "learning_tag": "ALPHA_OUTPERFORMER_SURGE",
+      "ai_lesson_ar": "تجاوز السهم مستهدف 5D بقوة؛ تم رفع معامل ألفا والزخم المؤسسي وإلغاء السقف الثابت."
     }
   ],
   "worst_10_divergences": [
@@ -814,16 +814,16 @@
       "sector": "Consumer Durables",
       "base_price": 3.3,
       "pred_5d": 3.42,
-      "actual_price": 2.44,
+      "actual_price": 2.43,
       "actual_high": 3.6,
       "actual_low": 2.42,
-      "chg_pct": -26.06,
+      "chg_pct": -26.36,
       "dir_hit": false,
       "target_hit": true,
       "floor_respected": false,
       "sl_survived": false,
-      "weekly_residual": -0.297,
-      "ape_pct": 40.16,
+      "weekly_residual": -0.3,
+      "ape_pct": 40.74,
       "learning_tag": "TARGET_MET_EXACT",
       "ai_lesson_ar": "أصاب الموديل الهدف بدقة؛ تثبيت أوزان العوامل الأساسية والفنية."
     },
@@ -963,7 +963,7 @@
   ],
   "ai_self_learning": {
     "status": "SUCCESS_ACTIVE",
-    "cycles_completed": 69,
+    "cycles_completed": 70,
     "walk_forward_weights_updated": true,
     "scorecard_updated": true,
     "episodic_memory_updated": true,
