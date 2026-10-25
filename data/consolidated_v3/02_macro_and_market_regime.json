@@ -1,9 +1,9 @@
 {
   "status": "SUCCESS",
-  "as_of": "2026-10-25 16:41:51",
+  "as_of": "2026-10-25 17:20:50",
   "macro_indicators": {
     "usd_egp": {
-      "rate": 55.7,
+      "rate": 55.77,
       "currency": "EGP",
       "label_ar": "سعر صرف الجنيه أمام الدولار الأمريكي (Interbank / Live SSoT)",
       "status": "VERIFIED_LIVE"
