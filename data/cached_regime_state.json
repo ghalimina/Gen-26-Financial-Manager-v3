@@ -2,10 +2,10 @@
   "regime": "DISTRIBUTION_SELL_OFF",
   "cash_reserve_pct": 45.0,
   "circuit_breaker_active": true,
-  "egx30_level": 49234.3,
+  "egx30_level": 48416.9,
   "egx100_level": 53265.0,
-  "ma_50": 46894.16,
-  "ma_200": 42256.89,
+  "ma_50": 46115.61,
+  "ma_200": 41555.33,
   "drawdown_20d_pct": -0.76,
-  "saved_at": "2026-10-25 17:31:21"
+  "saved_at": "2026-10-26 13:49:10"
 }
