@@ -1,5 +1,29 @@
 [
   {
+    "notification_id": "NOTIF_C0C9FA03",
+    "fingerprint": "b52db702384da6c7",
+    "timestamp": "2026-10-27 13:00:27",
+    "iso_timestamp": "2026-10-27T13:00:27.324417",
+    "category": "GENERAL",
+    "icon": "🔔",
+    "title": "إشعار نظام",
+    "message": "🟢 *GEN-26 Cloud Pipeline: SUCCESS*\n• دورة السوق: DISTRIBUTION_SELL_OFF | EGX30: 50,105 | كاش: 45.0%\n• اختبارات CI: 100% passed\n• Macro محدّث (USD/EGP, النفط, الذهب)\n",
+    "delivered_telegram": true,
+    "metadata": {}
+  },
+  {
+    "notification_id": "NOTIF_BC72C861",
+    "fingerprint": "1853ccbfb6619481",
+    "timestamp": "2026-10-27 12:55:09",
+    "iso_timestamp": "2026-10-27T12:55:09.410447",
+    "category": "ROUTINE_RETRAIN",
+    "icon": "🧠",
+    "title": "🧠 اكتمال تدريب الذكاء الاصطناعي",
+    "message": "🧠 *اكتمال تدريب الذكاء الاصطناعي بنجاح*\n━━━━━━━━━━━━━━━━━━━━\n• *مصدر الزناد:* `SCHEDULED_WEEKLY`\n• *نموذج التوقع (XGBoost):* `CACHED_LOAD`\n• *نموذج التصنيف الفوقي (Meta-Label):* `TRAINED_SUCCESS`\n• *معامل التحقق OOS:* `IC = 0.0520`\n• *التدريب القادم:* `2026-10-30 12:00 UTC (الجمعة القادمة)`\n━━━━━━━━━━━━━━━━━━━━\n🚀 _تم تحديث وتثبيت أوزان الموديل بنجاح_",
+    "delivered_telegram": true,
+    "metadata": {}
+  },
+  {
     "notification_id": "NOTIF_E437F707",
     "fingerprint": "93e8a89f782b169c",
     "timestamp": "2026-10-26 13:49:10",
