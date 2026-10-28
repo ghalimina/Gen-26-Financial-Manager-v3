@@ -1,6 +1,6 @@
 {
-  "last_sync": "2026-10-28 18:26:56",
-  "total_events": 905,
+  "last_sync": "2026-10-28 19:13:18",
+  "total_events": 908,
   "events": [
     {
       "news_id": "RSS_EGX30_36fb04b8ad16",
@@ -115,6 +115,25 @@
       "headline": "وزارة العمل تدعو المصريين في لبنان لتسوية أوضاعهم قبل 29 يناير 2027 - معلومات مباشر",
       "alpha_shock_pct": 0.0,
       "created_at": "2026-10-28 18:26:56"
+    },
+    {
+      "news_id": "RSS_EGX30_4f74f905f018",
+      "source": "رادار البورصة المصرية",
+      "url": "https://news.google.com/rss/articles/CBMirwRBVV95cUxPNFlzUTZVVmFaOVFlTVdGNDIwbXRnZGN5ZTNVUTh6LWhLT2YwX0o5ei1mOW4yZENOUFhjZWMzckxJOWE1akFaVDRaQzExY0VTV3dvMTZtRGFRM2ZhcC1jZW5VWEdSeE9KcXV2Z1hrZ1dTS2hGMzJiRnJ4enFsbllLNnhwMnZEb1VYUEtpaklTNUpVc2hjZUQtcXhBYUw2T010dVFxbExzU0tWbUdmd0h3Wld4WmYwWVRhSUVVVFN3UmFsVnJ2aHJrLUo0ZzVqT05ac0xsY09lWndtX2JLQ00tTzF0NHRWdmhKN29nT1dveDlHX2VyMmZHSklhNVcyUWJDWlZ3WnkwOUNOOFo0VEoxNUZFSGtJUUV6NkEtNTZ6dEtXOVFkRDlOc216QW5hd25ieUF0RlFYWFJBZ0FLaFB4ZzRWMndRc2x2eVpSdVQyVTZaZHBxVG1zaG1PMkFiZGNUSDRxd0JQc2hyaWloa2hxcl9CUFJVU2ctMnQ4QUIxQ1dVMmFhUlFQU3pDV0l4akppWF9Da3c3Rl96anlKQ3Nka1UxYWRBNFZiQVFzejhXRTRXVk1mMTdtTEowUFNuNzZ1VzllZXVYVURFWWdUb21KUU50OEtzbWRGUS00bXJVLVdfaXAxcjlBMFlLYWNwSmE0cE04YlBtSXpZelBNYjRYMHB6V2Q1SGx6b0FUTjh5ZkRWTXNKM1hTckNQR3FsTGNQZ2d5MGljOC1kMU5Xc3BV?oc=5",
+      "published_at": "2026-10-28 13:47:47",
+      "retrieved_at": "2026-10-28 19:13:18",
+      "company": "المؤشر الرئيسي للبورصة المصرية EGX30",
+      "ticker": "EGX30.CA",
+      "sector": "Index & Macro",
+      "country": "EG",
+      "event_type": "REGULATORY",
+      "sentiment": "NEUTRAL",
+      "sentiment_confidence": 0.7,
+      "importance": "LOW",
+      "language": "ar",
+      "headline": "البورصة المصرية تعلن تغطية الطرح العام لبنك القاهرة 27 مرة | أموال الغد - اخبارك نت",
+      "alpha_shock_pct": 0.0,
+      "created_at": "2026-10-28 19:13:18"
     },
     {
       "news_id": "RSS_EGX30_1520267b714d",
@@ -305,6 +324,25 @@
       "headline": "البورصة المصرية تعلن تغطية الطرح العام لبنك القاهرة 27 مرة | أموال الغد - اخبارك نت",
       "alpha_shock_pct": 0.0,
       "created_at": "2026-10-28 13:38:12"
+    },
+    {
+      "news_id": "RSS_EGX30_d3a093e16ac1",
+      "source": "رادار البورصة المصرية",
+      "url": "https://news.google.com/rss/articles/CBMi2AVBVV95cUxNTTNlWnZvNUxBLVZhNG8xWktEc29PbXVaQmFZTVlLMGNqazJlM3dKV29yQ1Y5bkt3TXp6OU5yLTB6MjhNR25HYm5CZloxWkFnMVZSQnZsN2ZYdGhoakxrRWhYOHJFbTVJTjV2OEhJMjlWYlN2MmtmTWZnT0tmSGY3YmNCTUQ3YmZwd0JHdTBwekpWeTExeDJ1UW5zZVZZeUVDb2ZrSFU5VmI1RW1IeHh2X1JObEVib1FnTWVjaFVNbUg1eENqREh0eVRiZ1ZrbTUxSUhOeFRENll4WWxXaHlMUjMtYi16XzlqcG5La0NYU19Sck4wRU5HUXlqQkZCUW5mWWI2bXdFYWFyanpVQjRHYmh4M3FEOXUtdmRiem9icmV2a3dQR3hKRlh6R2d5dUczTGtJMUtVbG5id2xpSU1aWHFyZ042MHNNLTc4cVZXYk5WMFhJWDd6eXhUMmotbFhfMG9teENjYnA1QjJkaE9Ud3RqX3JobWFYTUJBUE1DbmIwc3ZoSFp4ajBxUF83T21DdDFzbzlMejBnYTNGT0hmT2NPTmd4YmJrYlZxZG93Y3N4N0djTm1lOU5KSVFtOE5ZVklUR2w5UWpyMFNwV3RjREY3Nm1nVmRzeW1fd2RQejM2cHZwYTk4UmNUdm9vWlN5bVBlWTRBQkgtUVRMLWIyNlRIeHkxVFdXRW8wZkJuWlZTZDlIUUdwODhsRllmU2pQMTg2VHpSZGl5T0paemxRd0ZSYVVPY1UyUG44TUx0aW9fdTFGTkNSdXd1U0VRX2M4WjNLU0pYZWtxM3VlbWZiT3MxN1M4eExSRlRzM3d1cUY5anMtZG1yX2trSVMwSGM5ZnpUVjFpOEh2c2VramtQUGNHNXgtYmdZRUliU1p4blZIX2k5aVpjU2JhV01nT0g5eUl6WmpHbjRwQmllZmlqcWRHTVhMQVNjV2VxelBWcmRhZTNNZllKOA?oc=5",
+      "published_at": "2026-10-28 12:48:24",
+      "retrieved_at": "2026-10-28 19:13:18",
+      "company": "المؤشر الرئيسي للبورصة المصرية EGX30",
+      "ticker": "EGX30.CA",
+      "sector": "Index & Macro",
+      "country": "EG",
+      "event_type": "CAPITAL_INCREASE",
+      "sentiment": "NEUTRAL",
+      "sentiment_confidence": 0.7,
+      "importance": "MEDIUM",
+      "language": "ar",
+      "headline": "اتجاه البورصة المصرية يترقب تأثير اكتتاب بنك القاهرة وسط ضغوط البيع وضعف السيولة | أموال الغد - اخبارك نت",
+      "alpha_shock_pct": 0.0,
+      "created_at": "2026-10-28 19:13:18"
     },
     {
       "news_id": "RSS_ADIB_163636c0efc5",
@@ -913,44 +951,6 @@
       "headline": "أسعار الأسهم بالبورصة المصرية اليوم الثلاثاء 27-10-2026 - اليوم السابع",
       "alpha_shock_pct": 0.0,
       "created_at": "2026-10-28 13:38:12"
-    },
-    {
-      "news_id": "RSS_EGX30_b9066d77e9ec",
-      "source": "رادار البورصة المصرية",
-      "url": "https://news.google.com/rss/articles/CBMinAVBVV95cUxNY01nYmVyOGF5TGwxWVVoOWk1UWJwX0xSdnJ6MzlEWkpHbWtUUVZRY3RPQk1fRGEtWXQ4OEFVZVN2OGlxdkdIZWM1bFhPeDRJT1QwaDM0WmV1Zjg0TE5KM0JDYjBNWHFfcFdwTzc2bkZTT1JBQmVnXzR6dFJGMFR6S3BmMmtMcnJkUDZzcFY4ZGV4Rm5qVGlzMkJfdjlXVDVYOV9oRVdvSEdMbWlXQndnWjQxWVAtcnBIbk5HRF8zYm9teVVnVEdCc1RPYzRLeWViTXhVbW0xbmZiUTlEai1WWHpCNVFEY241UEM5YlBwUTJ5QkNxVC1CTExTNmxOUHpTck1IRTBVWDlab2ttQk5Od05kYnkwckJXYUZxU2pYUF8wYWptNFZ6S2FyYnV4Nk0tSUpOM0FfSlVBV19tSk9WUGtpdUoxWG14VHphaXJGdGVnM2R0LW1ucUR5UDJpdXZ4Qkd3dkNGME5WSk1NLVpOMWVxcnpWVEs2ZlVqZ19pTWFBQUp3UWRIWVNxZnpRY3lNRmNUYk1DejJGUnBheGZaMkp3TXg2bWRGWWFBVFlCY1lodnYtbll4MVIyamZmMnFNajhFVGNuUTd5cGR1a1BkbkxHY0dqZmFsQlNLenVsY1NaUHFzbmkwZmpLSWVoTFNyRkx0UmFEY1hrUVFfWl94RmdnNm1iNW9iVmNXeTNHZUtINTE3SEprLXJ6elpGUTZjekdzQ0RVMnlHQWRKcU1lMVRsQUd0Y29yUzZrSk01V3FOVUdpaU5ZX1oxbS1LYk1NM0w5S1pycDhnU3FyNThkdGV6Q0lHQ1A3bWxVX2xPY2lKU0VqZ3B1cTFGQ2lpUTVpRjlxZHFaTTVuQU1MOHJQV3YzNEVPMkpna3ppLQ?oc=5",
-      "published_at": "2026-10-27 18:41:58",
-      "retrieved_at": "2026-10-27 19:08:50",
-      "company": "المؤشر الرئيسي للبورصة المصرية EGX30",
-      "ticker": "EGX30.CA",
-      "sector": "Index & Macro",
-      "country": "EG",
-      "event_type": "REGULATORY",
-      "sentiment": "NEUTRAL",
-      "sentiment_confidence": 0.7,
-      "importance": "LOW",
-      "language": "ar",
-      "headline": "البورصة المصرية.. أسعار الأسهم الأكثر ارتفاعًا وانخفاضًا اليوم الثلاثاء 27-10-2026 | أموال الغد - اخبارك نت",
-      "alpha_shock_pct": 0.0,
-      "created_at": "2026-10-27 19:08:50"
-    },
-    {
-      "news_id": "RSS_EGX30_145f71f0b3bf",
-      "source": "جريدة البورصة",
-      "url": "https://www.alborsaanews.com/2026/10/27/2002390",
-      "published_at": "2026-10-27 17:39:01",
-      "retrieved_at": "2026-10-27 19:08:50",
-      "company": "المؤشر الرئيسي للبورصة المصرية EGX30",
-      "ticker": "EGX30.CA",
-      "sector": "Index & Macro",
-      "country": "EG",
-      "event_type": "REGULATORY",
-      "sentiment": "POSITIVE",
-      "sentiment_confidence": 0.85,
-      "importance": "HIGH",
-      "language": "ar",
-      "headline": "تيسير القيد والحوافز يفتحان أبواب البورصة أمام الشركات الصغيرة والمتوسطة",
-      "alpha_shock_pct": 1.87,
-      "created_at": "2026-10-27 19:08:50"
     }
   ]
 }
