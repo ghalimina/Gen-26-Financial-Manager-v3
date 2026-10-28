@@ -1,6 +1,6 @@
 {
   "status": "SUCCESS",
-  "as_of": "2026-10-28 13:38:20",
+  "as_of": "2026-10-28 18:27:06",
   "audit_certification": {
     "overall_status": "CERTIFIED_PASS_100_PERCENT",
     "passed_checks": 10,
@@ -23,7 +23,7 @@
     "validation_engine": "Purged & Embargoed Rolling Walk-Forward (Ensemble XGB 60% + LGBM 40%)"
   },
   "notifications_telemetry": {
-    "total_clean_notifications": 42,
+    "total_clean_notifications": 45,
     "fake_notifications_found": 0,
     "telegram_bridge_status": "READY_AND_ARMED"
   },
