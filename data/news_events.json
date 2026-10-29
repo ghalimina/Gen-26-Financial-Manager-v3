@@ -1,7 +1,26 @@
 {
-  "last_sync": "2026-10-29 18:36:40",
-  "total_events": 974,
+  "last_sync": "2026-10-29 19:22:34",
+  "total_events": 975,
   "events": [
+    {
+      "news_id": "RSS_EGX30_5ca82fc52bf4",
+      "source": "رادار البورصة المصرية",
+      "url": "https://news.google.com/rss/articles/CBMixgJBVV95cUxOX2QyYW5jN2dQenNNbUNlMXFZLXJjRk15Y3ZpcHk2QXFaQmJwMUx0LTU4NUxhZS1aVDgzUHpXZWZ3enpBUWJGeTNOazlNcE9VN2ttRHFnaW0wLXRQMU5IdlhlUzhQYzFDMm1xZWpvZWpWdG54Wi1ObWdjcUplSjVHRDdKYV9xZWpxanpubU9fMEQxWElqTVh0THZmaTVoaGZHQkNzLTJnYlFTT2tiaXlNUTE4YWxIR0dXQmNQS1JXUEVybzNDOWJOdGw2YzV2X0wweXFpeWdwUVp3OHBuUU5FdDNfOUFwbjB5TGkzM1JiaTk1MjlxWElaam1QWnJoUXdrS18tdzc4czMxWk9oSU8tT0NlNWhvOHR0Y3Rrb2FPT2NBOV9xUi1qaW1aSXhsRVFQUUhQbVFVc2NZWU9xTXNkbU9LRURrZw?oc=5",
+      "published_at": "2026-10-29 19:03:01",
+      "retrieved_at": "2026-10-29 19:22:34",
+      "company": "المؤشر الرئيسي للبورصة المصرية EGX30",
+      "ticker": "EGX30.CA",
+      "sector": "Index & Macro",
+      "country": "EG",
+      "event_type": "REGULATORY",
+      "sentiment": "POSITIVE",
+      "sentiment_confidence": 0.8,
+      "importance": "MEDIUM",
+      "language": "ar",
+      "headline": "سامح هلال: رفع الفائدة قد يدفع البورصة المصرية لاستكمال التصحيح جلستين قبل استئناف الصعود - جريدة المال",
+      "alpha_shock_pct": 1.43,
+      "created_at": "2026-10-29 19:22:34"
+    },
     {
       "news_id": "RSS_EGX30_b688fae59ca6",
       "source": "رادار البورصة المصرية",
@@ -930,25 +949,6 @@
       "importance": "LOW",
       "language": "ar",
       "headline": "صندوق EGX30 يضيف 65 ألف وثيقة جديدة بعد التسوية - معلومات مباشر",
-      "alpha_shock_pct": 0.0,
-      "created_at": "2026-10-29 13:47:38"
-    },
-    {
-      "news_id": "RSS_CCAP_14c06ee6da4e",
-      "source": "رادار البورصة المصرية",
-      "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBBMFcxdE40b0JqRlBhUEZ2Q3ZNY3JZRFFNMWt5Y1lhN0dPT3RZZWJsejJjalM1d0x4UDFKUjE1MUhGZWFYVDVscVBiVGRYYmUzSGFfa1kwa0M0Zjg?oc=5",
-      "published_at": "2026-10-29 08:44:00",
-      "retrieved_at": "2026-10-29 13:47:38",
-      "company": "شركة القلعة للاستشارات المالية",
-      "ticker": "CCAP.CA",
-      "sector": "Financial Services",
-      "country": "EG",
-      "event_type": "CAPITAL_INCREASE",
-      "sentiment": "NEUTRAL",
-      "sentiment_confidence": 0.7,
-      "importance": "MEDIUM",
-      "language": "ar",
-      "headline": "عمومية \"القلعة\" تُقر زيادة رأسمالها ورفع حصتها بـ\"المصرية للتكرير\" و\"طاقة عربية\" - جريدة البورصة",
       "alpha_shock_pct": 0.0,
       "created_at": "2026-10-29 13:47:38"
     }
