@@ -1,10 +1,18 @@
 {
   "agent_generation": "GEN-26 Quant Alpha v5.0 (Closed-Loop Self-Improving)",
-  "total_learning_cycles": 80,
+  "total_learning_cycles": 81,
   "cumulative_evaluated_signals": 16179,
-  "all_time_win_rate_pct": 49.7,
+  "all_time_win_rate_pct": 49.9,
   "patterns_corrected_count": 6,
   "history": [
+    {
+      "date": "2026-10-22",
+      "win_rate_pct": 52.0,
+      "target_hit_pct": 67.5,
+      "overall_score_pct": 59.6,
+      "cycle_description": "Post-Mortem Weekly Forecast vs Reality Audit across 271 stocks",
+      "regime": "SELECTIVE_BULL_ROTATION"
+    },
     {
       "date": "2026-10-22",
       "win_rate_pct": 47.2,
@@ -299,5 +307,5 @@
     }
   ],
   "last_updated": "2026-10-23 17:22:39",
-  "last_learning_timestamp": "2026-10-28 19:13:26"
+  "last_learning_timestamp": "2026-10-29 13:47:45"
 }

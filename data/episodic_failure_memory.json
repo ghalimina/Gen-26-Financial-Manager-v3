@@ -1,8 +1,8 @@
 {
   "version": "5.0.0",
-  "last_cycle_timestamp": "2026-10-28 19:13:26",
+  "last_cycle_timestamp": "2026-10-29 13:47:45",
   "audit_week": "2026-10-18_to_2026-10-22",
-  "total_divergences_analyzed": 179,
+  "total_divergences_analyzed": 181,
   "key_learned_case_studies": [
     {
       "ticker": "SWDY.CA",
